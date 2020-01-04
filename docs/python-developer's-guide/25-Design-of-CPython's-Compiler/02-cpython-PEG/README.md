@@ -1,0 +1,3 @@
+Guido-van-Rossum-PEG-parser-series中所描述的是python之父[Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum)关于重写python parser的文章，他的计划是采用PEG ([Parsing Expression Grammars](https://en.wikipedia.org/wiki/Parsing_expression_grammar))来替代现在的python语法，并使用 **PEG** **parser**。
+
+目前python的最新版本还没有采纳[Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum)的上述计划，目前python的语法还是使用的被[Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum)称为EBNF-like grammar ，所使用的parser还是[LL(1) parser](https://en.wikipedia.org/wiki/LL_parser)。
