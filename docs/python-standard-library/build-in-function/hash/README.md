@@ -23,3 +23,27 @@
 
 
 # [Making a python user-defined class sortable, hashable](https://stackoverflow.com/questions/7152497/making-a-python-user-defined-class-sortable-hashable)
+
+
+
+
+
+# [TypeError: unhashable type: 'list'](http://net-informations.com/python/iq/unhashable.htm)
+
+
+
+# [[Tutor] how to understand unhashable type: 'list'](https://mail.python.org/pipermail/tutor/2011-November/086761.html)
+
+
+
+
+
+# [Python, TypeError: unhashable type: 'list'](https://stackoverflow.com/questions/19371358/python-typeerror-unhashable-type-list)
+
+
+
+`hash`(*object*)[¶](https://docs.python.org/3/library/functions.html#hash)
+
+
+
+`object.__hash__`(*self*)[¶](https://docs.python.org/3/reference/datamodel.html#object.__hash__)
