@@ -296,3 +296,196 @@ The `tokenize` module is written in pure Python and is located in [`Lib/tokenize
 
 > **Important:** There are two tokenizers in the CPython source code: one written in Python, demonstrated here, and another written in C. The tokenizer written in Python is meant as a utility, and the one written in C is used by the Python compiler. They have identical output and behavior. The version written in C is designed for performance and the module in Python is designed for debugging.
 
+> NOTE: The tokenizer written in C is in dir `Parser`.
+
+Now that you have an overview of the Python grammar and the relationship between tokens and statements, there is a way to convert the `pgen` output into an interactive graph.
+
+Here is a screenshot of the Python 3.8a2 grammar:
+
+[![Python 3.8 DFA node graph](https://files.realpython.com/media/Screen_Shot_2019-03-12_at_2.31.16_pm.f36c3e99b8b4.png)](https://files.realpython.com/media/Screen_Shot_2019-03-12_at_2.31.16_pm.f36c3e99b8b4.png)
+
+The Python package used to generate this graph, `instaviz`, will be covered in a later chapter.
+
+
+
+### Memory Management in CPython
+
+Throughout this article, you will see references to a [`PyArena`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/pyarena.c#L128) object. The arena is one of CPython’s memory management structures. The code is within `Python/pyarena.c` and contains a wrapper around C’s memory allocation and deallocation functions.
+
+In a traditionally written C program, the developer *should* allocate memory for data structures before writing into that data. This allocation marks the memory as belonging to the process with the operating system.
+
+Python takes that responsibility away from the programmer and uses two algorithms: [a reference counter and a garbage collector](https://realpython.com/python-memory-management/).
+
+Whenever an interpreter is instantiated, a [`PyArena`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/pyarena.c#L128) is created and attached one of the fields in the interpreter. During the lifecycle of a CPython interpreter, many arenas could be allocated. They are connected with a linked list. The arena stores a **list** of pointers to Python Objects as a `PyListObject`. Whenever a new Python object is created, a pointer to it is added using [`PyArena_AddPyObject()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/pyarena.c#L203). This function call stores a pointer in the arena’s list, `a_objects`.
+
+> Even though Python doesn’t have pointers, there are some [interesting techniques](https://realpython.com/pointers-in-python/) to simulate the behavior of pointers.
+
+The `PyArena` serves a second function, which is to allocate and reference a list of raw memory blocks. For example, a `PyList` would need extra memory if you added thousands of additional values. The `PyList` object’s C code does not allocate memory directly. The object gets raw blocks of memory from the `PyArena` by calling [`PyArena_Malloc()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/pyarena.c#L180) from the `PyObject` with the required memory size. This task is completed by another abstraction in `Objects/obmalloc.c`. In the object allocation module, memory can be allocated, freed, and reallocated for a Python Object.
+
+A linked list of allocated blocks is stored inside the arena, so that when an interpreter is stopped, all managed memory blocks can be deallocated in one go using [`PyArena_Free()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/pyarena.c#L157).
+
+Take the `PyListObject` example. If you were to `.append()` an object to the end of a Python list, you don’t need to reallocate the memory used in the existing list beforehand. The `.append()` method calls [`list_resize()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/listobject.c#L36) which handles memory allocation for lists. Each list object keeps a list of the amount of memory allocated. If the item you’re appending will fit inside the existing free memory, it is simply added. If the list needs more memory space, it is expanded. Lists are expanded in length as 0, 4, 8, 16, 25, 35, 46, 58, 72, 88.
+
+[`PyMem_Realloc()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/obmalloc.c#L618) is called to expand the memory allocated in a list. [`PyMem_Realloc()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/obmalloc.c#L618) is an API wrapper for [`pymalloc_realloc()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/obmalloc.c#L1913).
+
+Python also has a special wrapper for the C call `malloc()`, which sets the max size of the memory allocation to help prevent buffer overflow errors (See [`PyMem_RawMalloc()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Modules/overlapped.c#L28)).
+
+In summary:
+
+- Allocation of raw memory blocks is done via `PyMem_RawAlloc()`.
+- The pointers to Python objects are stored within the `PyArena`.
+- `PyArena` also stores a linked-list of allocated memory blocks.
+
+More information on the API is detailed on the [CPython documentation](https://docs.python.org/3/c-api/memory.html).
+
+#### Reference Counting
+
+To create a variable in Python, you have to assign a value to a *uniquely* named variable:
+
+```
+my_variable = 180392
+```
+
+Whenever a value is assigned to a variable in Python, the name of the variable is checked within the locals and globals scope to see if it already exists.
+
+Because `my_variable` is not already within the `locals()` or `globals()` dictionary, this new object is created, and the value is assigned as being the numeric constant `180392`.
+
+There is now one reference to `my_variable`, so the reference counter for `my_variable` is incremented by 1.
+
+You will see function calls [`Py_INCREF()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/object.c#L239) and [`Py_DECREF()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/object.c#L245) throughout the C source code for CPython. These functions increment and decrement the count of references to that object.
+
+References to an object are decremented when a variable falls outside of the scope in which it was declared. Scope in Python can refer to a function or method, a comprehension, or a lambda function. These are some of the more literal scopes, but there are many other implicit scopes, like passing variables to a function call.
+
+The handling of incrementing and decrementing references based on the language is built into the CPython compiler and the core execution loop, `ceval.c`, which we will cover in detail later in this article.
+
+Whenever `Py_DECREF()` is called, and the counter becomes 0, the [`PyObject_Free()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/obmalloc.c#L707) function is called. For that object [`PyArena_Free()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/pyarena.c#L157) is called for all of the memory that was allocated.
+
+#### Garbage Collection
+
+How often does your garbage get collected? Weekly, or fortnightly?
+
+When you’re finished with something, you discard it and throw it in the trash. But that trash won’t get collected straight away. You need to wait for the garbage trucks to come and pick it up.
+
+CPython has the same principle, using a garbage collection algorithm. CPython’s garbage collector is enabled by default, happens in the background and works to deallocate memory that’s been used for objects which are no longer in use.
+
+Because the garbage collection algorithm is a lot more complex than the reference counter, it doesn’t happen all the time, otherwise, it would consume a huge amount of CPU resources. It happens periodically, after a set number of operations.
+
+CPython’s standard library comes with a Python module to interface with the arena and the garbage collector, the `gc` module. Here’s how to use the `gc` module in debug mode:
+
+```
+>>> import gc
+>>> gc.set_debug(gc.DEBUG_STATS)
+```
+
+This will print the statistics whenever the garbage collector is run.
+
+You can get the threshold after which the garbage collector is run by calling `get_threshold()`:
+
+```
+>>> gc.get_threshold()
+(700, 10, 10)
+```
+
+You can also get the current threshold counts:
+
+```
+>>> gc.get_count()
+(688, 1, 1)
+```
+
+Lastly, you can run the collection algorithm manually:
+
+```
+>>> gc.collect()
+24
+```
+
+This will call [`collect()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Modules/gcmodule.c#L987) inside the `Modules/gcmodule.c` file which contains the implementation of the garbage collector algorithm.
+
+### Conclusion
+
+In Part 1, you covered the structure of the source code repository, how to compile from source, and the Python language specification. These core concepts will be critical in Part 2 as you dive deeper into the Python interpreter process.
+
+## Part 2: The Python Interpreter Process
+
+Now that you’ve seen the Python grammar and memory management, you can follow the process from typing `python` to the part where your code is executed.
+
+There are five ways the `python` binary can be called:
+
+1. To run a single command with `-c` and a Python command
+2. To start a module with `-m` and the name of a module
+3. To run a file with the filename
+4. To run the `stdin` input using a shell pipe
+5. To start the REPL and execute commands one at a time
+
+
+
+The three source files you need to inspect to see this process are:
+
+1. **`Programs/python.c`** is a simple entry point.
+2. **`Modules/main.c`** contains the code to bring together the whole process, loading configuration, executing code and clearing up memory.
+3. **`Python/initconfig.c`** loads the configuration from the system environment and merges it with any command-line flags.
+
+This diagram shows how each of those functions is called:
+
+[![Python run swim lane diagram](https://files.realpython.com/media/swim-lanes-chart-1.9fb3000aad85.png)](https://files.realpython.com/media/swim-lanes-chart-1.9fb3000aad85.png)
+
+The execution mode is determined from the configuration.
+
+> **The CPython source code style:**
+>
+> Similar to the [PEP8 style guide for Python code](https://realpython.com/courses/writing-beautiful-python-code-pep-8/), there is an [official style guide](https://www.python.org/dev/peps/pep-0007/) for the CPython C code, designed originally in 2001 and updated for modern versions.
+>
+> There are some naming standards which help when navigating the source code:
+>
+> - Use a `Py` prefix for public functions, never for static functions. The `Py_` prefix is reserved for global service routines like `Py_FatalError`. Specific groups of routines (like specific object type APIs) use a longer prefix, such as `PyString_` for string functions.
+> - Public functions and variables use MixedCase with underscores, like this: [`PyObject_GetAttr`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/object.c#L924), [`Py_BuildValue`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Include/modsupport.h#L20), `PyExc_TypeError`.
+> - Occasionally an “internal” function has to be visible to the loader. We use the `_Py` prefix for this, for example, [`_PyObject_Dump`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/object.c#L464).
+> - Macros should have a MixedCase prefix and then use upper case, for example `PyString_AS_STRING`, `Py_PRINT_RAW`.
+
+### Establishing Runtime Configuration
+
+In the swimlanes, you can see that before any Python code is executed, the runtime first establishes the configuration. The configuration of the runtime is a data structure defined in `Include/cpython/initconfig.h` named [`PyConfig`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Include/cpython/initconfig.h#L407).
+
+The configuration data structure includes things like:
+
+- Runtime flags for various modes like debug and optimized mode
+- The execution mode, such as whether a filename was passed, `stdin` was provided or a module name
+- Extended option, specified by `-X `
+- Environment variables for runtime settings
+
+The configuration data is primarily used by the CPython runtime to enable and disable various features.
+
+Python also comes with several [Command Line Interface Options](https://docs.python.org/3/using/cmdline.html). In Python you can enable verbose mode with the `-v` flag. In verbose mode, Python will print messages to the screen when modules are loaded:
+
+```
+python -v -c "print('hello world')"
+```
+
+You will see a hundred lines or more with all the imports of your user site-packages and anything else in the system environment.
+
+You can see the definition of this flag within `Include/cpython/initconfig.h` inside the `struct` for [`PyConfig`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Include/cpython/initconfig.h#L407):
+
+```
+/* --- PyConfig ---------------------------------------------- */
+
+typedef struct {
+    int _config_version;  /* Internal configuration version,
+                             used for ABI compatibility */
+    int _config_init;     /* _PyConfigInitEnum value */
+
+    ...
+
+    /* If greater than 0, enable the verbose mode: print a message each time a
+       module is initialized, showing the place (filename or built-in module)
+       from which it is loaded.
+
+       If greater or equal to 2, print a message for each file that is checked
+       for when searching for a module. Also provides information on module
+       cleanup at exit.
+
+       Incremented by the -v option. Set by the PYTHONVERBOSE environment
+       variable. If set to -1 (default), inherit Py_VerboseFlag value. */
+    int verbose;
+```
+

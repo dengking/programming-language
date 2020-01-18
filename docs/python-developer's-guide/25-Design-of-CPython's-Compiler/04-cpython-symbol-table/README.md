@@ -9,3 +9,4 @@
 - [Python internals: Symbol tables, part 1](https://eli.thegreenplace.net/2010/09/18/python-internals-symbol-tables-part-1)
 - [Python internals: Symbol tables, part 2](https://eli.thegreenplace.net/2010/09/20/python-internals-symbol-tables-part-2)
 - Design of CPython’s Compiler[¶](https://devguide.python.org/compiler/#design-of-cpython-s-compiler)
+
