@@ -15,3 +15,11 @@
 
 
 `Makefile.pre`是由`configure`生成的。
+
+## `pyconfig.h`
+
+```c
+/* pyconfig.h.  Generated from pyconfig.h.in by configure.  /
+/ pyconfig.h.in.  Generated from configure.ac by autoheader.  */
+```
+
