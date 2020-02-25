@@ -47,3 +47,7 @@
 
 
 `object.__hash__`(*self*)[¶](https://docs.python.org/3/reference/datamodel.html#object.__hash__)
+
+
+
+# [Why does Python's hash of infinity have the digits of π?](https://stackoverflow.com/questions/56227419/why-does-pythons-hash-of-infinity-have-the-digits-of-π)

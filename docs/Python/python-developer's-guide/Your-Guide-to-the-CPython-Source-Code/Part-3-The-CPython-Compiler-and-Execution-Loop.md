@@ -97,8 +97,8 @@ Inside [`PyAST_CompileObject()`](https://github.com/python/cpython/blob/d93605de
 2. Create an empty `__annotations__` property to the module if it doesn’t exist.
 3. Set the filename of the **global compiler state** to the filename argument.
 4. Set the memory allocation arena for the compiler to the one used by the interpreter.
-5. Copy any `__future__` flags in the module to the future flags in the compiler.
-6. Merge runtime flags provided by the command-line or environment variables.
+5. Copy any `__future__` flags in the module to the **future flags** in the compiler.
+6. Merge **runtime flags** provided by the command-line or environment variables.
 7. Enable any `__future__` features in the compiler.
 8. Set the **optimization level** to the provided argument, or default.
 9. Build a **symbol table** from the module object.
@@ -186,7 +186,7 @@ The code after this statement might use unresolved type hints, so the `__future_
 
 The other compiler flags are specific to the environment, so they might change the way the code executes or the way the compiler runs, but they shouldn’t link to the source in the same way that `__future__` statements do.
 
-One example of a compiler flag would be the [`-O` flag for optimizing the use of `assert` statements](https://docs.python.org/3/using/cmdline.html#cmdoption-o). This flag disables any `assert` statements, which may have been put in the code for [debugging purposes](https://realpython.com/python-debugging-pdb/). It can also be enabled with the `PYTHONOPTIMIZE=1` environment variable setting.
+One example of a **compiler flag** would be the [`-O` flag for optimizing the use of `assert` statements](https://docs.python.org/3/using/cmdline.html#cmdoption-o). This flag disables any `assert` statements, which may have been put in the code for [debugging purposes](https://realpython.com/python-debugging-pdb/). It can also be enabled with the `PYTHONOPTIMIZE=1` environment variable setting.
 
 
 
@@ -197,6 +197,8 @@ One example of a compiler flag would be the [`-O` flag for optimizing the use of
 In [`PyAST_CompileObject()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L312) there was a reference to a `symtable` and a call to [`PySymtable_BuildObject()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/symtable.c#L262) with the module to be executed.
 
 The purpose of the **symbol table** is to provide a list of namespaces, globals, and locals for the compiler to use for referencing and resolving scopes.
+
+> NOTE: scope在这里的含义是？
 
 The `symtable` structure in `Include/symtable.h` is well documented, so it’s clear what each of the fields is for. There should be one **symtable instance** for the compiler, so **namespacing** becomes essential.
 
@@ -238,11 +240,7 @@ Looping over the elements in the table we can see some of the public and private
 [{'_Symbol__name': 'b', '_Symbol__flags': 6160, '_Symbol__scope': 3, '_Symbol__namespaces': ()}]
 ```
 
-
-
 The C code behind this is all within `Python/symtable.c` and the primary interface is the [`PySymtable_BuildObject()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/symtable.c#L262) function.
-
-
 
 Similar to the top-level AST function we covered earlier, the [`PySymtable_BuildObject()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/symtable.c#L262) function switches between the `mod_ty` possible types (Module, Expression, Interactive, Suite, FunctionType), and visits each of the statements inside them.
 
@@ -393,6 +391,335 @@ If you import `dis` and give the `dis()` function the code object’s `co_code` 
 `LOAD_NAME`, `LOAD_CONST`, `BINARY_ADD`, and `RETURN_VALUE` are all bytecode instructions. They’re called bytecode because, in binary form, they were a byte long. However, since Python 3.6 the storage format was changed to a `word`, so now they’re technically wordcode, not bytecode.
 
 The [full list of bytecode instructions](https://docs.python.org/3/library/dis.html#python-bytecode-instructions) is available for each version of Python, and it does change between versions. For example, in Python 3.7, some new bytecode instructions were introduced to speed up execution of specific method calls.
+
+In an earlier section, we explored the `instaviz` package. This included a visualization of the code object type by running the compiler. It also displays the Bytecode operations inside the code objects.
+
+Execute instaviz again to see the code object and bytecode for a function defined on the REPL:
+
+```python
+>>> import instaviz
+>>> def example():
+       a = 1
+       b = a + 1
+       return b
+>>> instaviz.show(example)
+```
+
+If we now jump into [`compiler_mod()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L1782), a function used to switch to different compiler functions depending on the **module type**. We’ll assume that `mod` is a `Module`. The module is compiled into the **compiler state** and then [`assemble()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L5971) is run to create a [`PyCodeObject`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Include/code.h#L69).
+
+The new code object is returned back to [`PyAST_CompileObject()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L312) and sent on for execution:
+
+```c
+static PyCodeObject *
+compiler_mod(struct compiler *c, mod_ty mod)
+{
+    PyCodeObject *co;
+    int addNone = 1;
+    static PyObject *module;
+    ...
+    switch (mod->kind) {
+    case Module_kind:
+        if (!compiler_body(c, mod->v.Module.body)) {
+            compiler_exit_scope(c);
+            return 0;
+        }
+        break;
+    case Interactive_kind:
+        ...
+    case Expression_kind:
+        ...
+    case Suite_kind:
+        ...
+    ...
+    co = assemble(c, addNone);
+    compiler_exit_scope(c);
+    return co;
+}
+```
+
+
+
+The [`compiler_body()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L1743) function has some optimization flags and then loops over each statement in the module and visits it, similar to how the `symtable` functions worked:
+
+```c
+static int
+compiler_body(struct compiler *c, asdl_seq *stmts)
+{
+    int i = 0;
+    stmt_ty st;
+    PyObject *docstring;
+    ...
+    for (; i < asdl_seq_LEN(stmts); i++)
+        VISIT(c, stmt, (stmt_ty)asdl_seq_GET(stmts, i));
+    return 1;
+}
+```
+
+The statement type is determined through a call to the [`asdl_seq_GET()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Include/asdl.h#L32) function, which looks at the AST node’s type.
+
+Through some smart macros, `VISIT` calls a function in `Python/compile.c` for each statement type:
+
+```c
+#define VISIT(C, TYPE, V) {\
+    if (!compiler_visit_ ## TYPE((C), (V))) \
+        return 0; \
+}
+```
+
+For a `stmt` (the category for a statement) the **compiler** will then drop into [`compiler_visit_stmt()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L3310) and switch through all of the potential statement types found in `Parser/Python.asdl`:
+
+```c
+static int
+compiler_visit_stmt(struct compiler *c, stmt_ty s)
+{
+    Py_ssize_t i, n;
+
+    /* Always assign a lineno to the next instruction for a stmt. */
+    c->u->u_lineno = s->lineno;
+    c->u->u_col_offset = s->col_offset;
+    c->u->u_lineno_set = 0;
+
+    switch (s->kind) {
+    case FunctionDef_kind:
+        return compiler_function(c, s, 0);
+    case ClassDef_kind:
+        return compiler_class(c, s);
+    ...
+    case For_kind:
+        return compiler_for(c, s);
+    ...
+    }
+
+    return 1;
+}
+```
+
+As an example, let’s focus on the `For` statement, in Python is the:
+
+```python
+for i in iterable:
+    # block
+else:  # optional if iterable is False
+    # block
+```
+
+If the statement is a `For` type, it calls [`compiler_for()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L2651). There is an equivalent `compiler_*()` function for all of the statement and expression types. The more straightforward types create the bytecode instructions inline, some of the more complex statement types call other functions.
+
+Many of the statements can have **sub-statements**. A `for` loop has a body, but you can also have complex expressions in the assignment and the iterator.
+
+The compiler’s `compiler_` statements sends **blocks** to the **compiler state**. These blocks contain instructions, the instruction data structure in `Python/compile.c` has the opcode, any arguments, and the target block (if this is a jump instruction), it also contains the line number.
+
+For **jump statements**, they can either be absolute or relative jump statements. **Jump statements** are used to “jump” from one operation to another. **Absolute jump statements** specify the exact operation number in the compiled code object, whereas **relative jump statements** specify the jump target relative to another operation:
+
+```c
+struct instr {
+    unsigned i_jabs : 1;
+    unsigned i_jrel : 1;
+    unsigned char i_opcode;
+    int i_oparg;
+    struct basicblock_ *i_target; /* target block (if jump instruction) */
+    int i_lineno;
+};
+```
+
+So a frame block (of type `basicblock`), contains the following fields:
+
+- A `b_list` pointer, the link to a list of blocks for the **compiler state**
+- A list of instructions `b_instr`, with both the allocated list size `b_ialloc`, and the number used `b_iused`
+- The next block after this one `b_next`
+- Whether the block has been “seen” by the assembler when traversing depth-first
+- If this block has a `RETURN_VALUE` opcode (`b_return`)
+- The depth of the stack when this block was entered (`b_startdepth`)
+- The instruction offset for the assembler
+
+```c
+typedef struct basicblock_ {
+    /* Each basicblock in a compilation unit is linked via b_list in the
+       reverse order that the block are allocated.  b_list points to the next
+       block, not to be confused with b_next, which is next by control flow. */
+    struct basicblock_ *b_list;
+    /* number of instructions used */
+    int b_iused;
+    /* length of instruction array (b_instr) */
+    int b_ialloc;
+    /* pointer to an array of instructions, initially NULL */
+    struct instr *b_instr;
+    /* If b_next is non-NULL, it is a pointer to the next
+       block reached by normal control flow. */
+    struct basicblock_ *b_next;
+    /* b_seen is used to perform a DFS of basicblocks. */
+    unsigned b_seen : 1;
+    /* b_return is true if a RETURN_VALUE opcode is inserted. */
+    unsigned b_return : 1;
+    /* depth of stack upon entry of block, computed by stackdepth() */
+    int b_startdepth;
+    /* instruction offset for block, computed by assemble_jump_offsets() */
+    int b_offset;
+} basicblock;
+```
+
+The `For` statement is somewhere in the middle in terms of complexity. There are 15 steps in the compilation of a `For` statement with the `for  in :` syntax:
+
+1. Create a new code block called `start`, this allocates memory and creates a `basicblock` pointer
+2. Create a new code block called `cleanup`
+3. Create a new code block called `end`
+4. Push a frame block of type `FOR_LOOP` to the stack with `start` as the entry block and `end` as the exit block
+5. Visit the iterator expression, which adds any operations for the iterator
+6. Add the `GET_ITER` operation to the compiler state
+7. Switch to the `start` block
+8. Call `ADDOP_JREL` which calls [`compiler_addop_j()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L1413) to add the `FOR_ITER` operation with an argument of the `cleanup` block
+9. Visit the `target` and add any special code, like tuple unpacking, to the `start` block
+10. Visit each statement in the body of the for loop
+11. Call `ADDOP_JABS` which calls [`compiler_addop_j()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L1413) to add the `JUMP_ABSOLUTE` operation which indicates after the body is executed, jumps back to the start of the loop
+12. Move to the `cleanup` block
+13. Pop the `FOR_LOOP` frame block off the stack
+14. Visit the statements inside the `else` section of the for loop
+15. Use the `end` block
+
+Referring back to the `basicblock` structure. You can see how in the compilation of the for statement, the various blocks are created and pushed into the compiler’s frame block and stack:
+
+```c
+static int
+compiler_for(struct compiler *c, stmt_ty s)
+{
+    basicblock *start, *cleanup, *end;
+
+    start = compiler_new_block(c);                       // 1.
+    cleanup = compiler_new_block(c);                     // 2.
+    end = compiler_new_block(c);                         // 3.
+    if (start == NULL || end == NULL || cleanup == NULL)
+        return 0;
+
+    if (!compiler_push_fblock(c, FOR_LOOP, start, end))  // 4.
+        return 0;
+
+    VISIT(c, expr, s->v.For.iter);                       // 5.
+    ADDOP(c, GET_ITER);                                  // 6.
+    compiler_use_next_block(c, start);                   // 7.
+    ADDOP_JREL(c, FOR_ITER, cleanup);                    // 8.
+    VISIT(c, expr, s->v.For.target);                     // 9.
+    VISIT_SEQ(c, stmt, s->v.For.body);                   // 10.
+    ADDOP_JABS(c, JUMP_ABSOLUTE, start);                 // 11.
+    compiler_use_next_block(c, cleanup);                 // 12.
+
+    compiler_pop_fblock(c, FOR_LOOP, start);             // 13.
+
+    VISIT_SEQ(c, stmt, s->v.For.orelse);                 // 14.
+    compiler_use_next_block(c, end);                     // 15.
+    return 1;
+}
+```
+
+Depending on the type of operation, there are different arguments required. For example, we used `ADDOP_JABS` and `ADDOP_JREL` here, which refer to “**ADD** **O**peration with **J**ump to a **REL**ative position” and “**ADD** **O**peration with **J**ump to an **ABS**olute position”. This is referring to the `APPOP_JREL` and `ADDOP_JABS` macros which call `compiler_addop_j(struct compiler *c, int opcode, basicblock *b, int absolute)` and set the `absolute` argument to 0 and 1 respectively.
+
+There are some other macros, like `ADDOP_I` calls [`compiler_addop_i()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L1383) which add an operation with an integer argument, or `ADDOP_O` calls [`compiler_addop_o()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L1345) which adds an operation with a `PyObject` argument.
+
+Once these stages have completed, the compiler has a list of frame blocks, each containing a list of instructions and a pointer to the next block.
+
+#### Assembly
+
+With the compiler state, the assembler performs a “depth-first-search” of the blocks and merge the instructions into a single bytecode sequence. The assembler state is declared in `Python/compile.c`:
+
+```c
+struct assembler {
+    PyObject *a_bytecode;  /* string containing bytecode */
+    int a_offset;              /* offset into bytecode */
+    int a_nblocks;             /* number of reachable blocks */
+    basicblock **a_postorder; /* list of blocks in dfs postorder */
+    PyObject *a_lnotab;    /* string containing lnotab */
+    int a_lnotab_off;      /* offset into lnotab */
+    int a_lineno;              /* last lineno of emitted instruction */
+    int a_lineno_off;      /* bytecode offset of last lineno */
+};
+```
+
+The `assemble()` function has a few tasks:
+
+- Calculate the number of blocks for memory allocation
+- Ensure that every block that falls off the end returns `None`, this is why every function returns `None`, whether or not a `return` statement exists
+- Resolve any jump statements offsets that were marked as relative
+- Call `dfs()` to perform a depth-first-search of the blocks
+- Emit all the instructions to the compiler
+- Call [`makecode()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L5854) with the compiler state to generate the `PyCodeObject`
+
+```c
+static PyCodeObject *
+assemble(struct compiler *c, int addNone)
+{
+    basicblock *b, *entryblock;
+    struct assembler a;
+    int i, j, nblocks;
+    PyCodeObject *co = NULL;
+
+    /* Make sure every block that falls off the end returns None.
+       XXX NEXT_BLOCK() isn't quite right, because if the last
+       block ends with a jump or return b_next shouldn't set.
+     */
+    if (!c->u->u_curblock->b_return) {
+        NEXT_BLOCK(c);
+        if (addNone)
+            ADDOP_LOAD_CONST(c, Py_None);
+        ADDOP(c, RETURN_VALUE);
+    }
+    ...
+    dfs(c, entryblock, &a, nblocks);
+
+    /* Can't modify the bytecode after computing jump offsets. */
+    assemble_jump_offsets(&a, c);
+
+    /* Emit code in reverse postorder from dfs. */
+    for (i = a.a_nblocks - 1; i >= 0; i--) {
+        b = a.a_postorder[i];
+        for (j = 0; j < b->b_iused; j++)
+            if (!assemble_emit(&a, &b->b_instr[j]))
+                goto error;
+    }
+    ...
+
+    co = makecode(c, &a);
+ error:
+    assemble_free(&a);
+    return co;
+}
+```
+
+The depth-first-search is performed by the [`dfs()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L5397) function in `Python/compile.c`, which follows the the `b_next` pointers in each of the blocks, marks them as seen by toggling `b_seen` and then adds them to the assemblers `**a_postorder` list in reverse order.
+
+The function loops back over the assembler’s post-order list and for each block, if it has a jump operation, recursively call [`dfs()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L5397) for that jump:
+
+```c
+static void
+dfs(struct compiler *c, basicblock *b, struct assembler *a, int end)
+{
+    int i, j;
+
+    /* Get rid of recursion for normal control flow.
+       Since the number of blocks is limited, unused space in a_postorder
+       (from a_nblocks to end) can be used as a stack for still not ordered
+       blocks. */
+    for (j = end; b && !b->b_seen; b = b->b_next) {
+        b->b_seen = 1;
+        assert(a->a_nblocks < j);
+        a->a_postorder[--j] = b;
+    }
+    while (j < end) {
+        b = a->a_postorder[j++];
+        for (i = 0; i < b->b_iused; i++) {
+            struct instr *instr = &b->b_instr[i];
+            if (instr->i_jrel || instr->i_jabs)
+                dfs(c, instr->i_target, a, j);
+        }
+        assert(a->a_nblocks < j);
+        a->a_postorder[a->a_nblocks++] = b;
+    }
+}
+```
+
+#### Creating a Code Object
+
+The task of [`makecode()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Python/compile.c#L5854) is to go through the compiler state, some of the assembler’s properties and to put these into a `PyCodeObject` by calling [`PyCode_New()`](https://github.com/python/cpython/blob/d93605de7232da5e6a182fd1d5c220639e900159/Objects/codeobject.c#L246):
+
+
 
 
 

@@ -2,7 +2,7 @@ This record my exploration the implementation of [cpython](https://github.com/py
 
 
 
-关于cpython的实现的介绍非常多，本节将从软件工程的角度来分析cpython的实现。它作为一个非常成功的大型软件，其实现方式是值的软件工程师学习的，除此之外，其软件工程是也是非常值的学习的。
+关于cpython的实现的介绍非常多，本节将从软件工程的角度来分析cpython的实现。它作为一个非常成功的大型软件，其实现方式是值的软件工程师学习的，除此之外，其管理方式，质量保证等方面也是非常值得学习的。
 
 cpython的实现可以作为一个成功的软件工程典范来进行学习：
 
@@ -59,9 +59,18 @@ cpython的实现可以作为一个成功的软件工程典范来进行学习：
 
 ## cpython实现分析
 
-沿着python程序的执行来逐步进行分析
+### 架构
+
+compiler + [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing))/[virtual machine](https://en.wikipedia.org/wiki/Virtual_machine)
+
+两者之间的接口是Python bytecode：
+
+- [`dis`](https://docs.python.org/3/library/dis.html#module-dis) — Disassembler for Python bytecode[¶](https://docs.python.org/3/library/dis.html#module-dis)
+- [Bytecode](https://en.wikipedia.org/wiki/Bytecode)
 
 ### 入口
+
+沿着python程序的执行来逐步进行分析
 
 参见[Part 2: The Python Interpreter Process](https://realpython.com/cpython-source-code-guide/#part-2-the-python-interpreter-process)
 
@@ -79,7 +88,7 @@ cpython的实现可以作为一个成功的软件工程典范来进行学习：
 
 
 
-# reading the code
+
 
 
 
