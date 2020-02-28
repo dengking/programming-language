@@ -1,4 +1,5 @@
 nav:
     - Home: index.md
     - Programming-language: Programming-language.md
+    - Common: Common.md
     - Theory: Theory
