@@ -1,0 +1,58 @@
+edit_uri: ''
+extra_css:
+- css/extra.css
+extra_javascript:
+- https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+google_analytics:
+- UA-27795084-5
+- mkdocs.org
+markdown_extensions:
+- admonition
+- def_list
+- mdx_gh_links:
+    repo: mkdocs
+    user: mkdocs
+- pymdownx.arithmatex
+- pymdownx.betterem:
+    smart_enable: all
+- pymdownx.caret
+- pymdownx.critic
+- pymdownx.details
+- pymdownx.emoji:
+    emoji_generator: '!!python/name:pymdownx.emoji.to_svg'
+- pymdownx.inlinehilite
+- pymdownx.magiclink
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.superfences
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.tilde
+nav:
+- Home: index.md
+- Programming-language: Programming-language.md
+- Common: Common.md
+- Theory:
+  - Introduction: Theory/index.md
+  - Type-system:
+    - Type-system: Theory/Type-system/Type-system.md
+    - Type-safety: Theory/Type-system/Type-safety.md
+    - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
+  - Programming-paradigm:
+    - Introduction: Theory/Programming-paradigm/index.md
+    - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
+    - Object-oriented-programming:
+      - Object-oriented-programming: Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming.md
+      - Thinking-in-java:
+        - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/index.md
+        - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
+      - Glossary: Theory/Programming-paradigm/Object-oriented-programming/Glossary.md
+plugins:
+- search
+repo_url: https://github.com/dengking/programming-language
+site_author: DengKing
+site_description: Project documentation with Markdown.
+site_name: programming-language
+site_url: https://dengking.github.io/programming-language
+theme:
+  name: material
