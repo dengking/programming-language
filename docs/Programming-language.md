@@ -6,7 +6,7 @@
 
 - 工程[automata-and-formal-language](https://dengking.github.io/automata-and-formal-language)
 
-- 文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)的[Abstraction in programming language](https://dengking.github.io/Post/Abstraction/Abstraction/#abstraction-in-programming-language)段
+- 文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)的[Abstraction in programming language](https://dengking.github.io/Post/Abstraction/Abstraction/#abstraction-in-programming-language)小节
 
 
 

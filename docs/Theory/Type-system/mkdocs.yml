@@ -1,4 +1,5 @@
 nav:
     - Type-system: Type-system
-    - Static-vs-dynamic-typing: Static-vs-dynamic-typing.md
     - Type-safety: Type-safety.md
+    - Static-vs-dynamic-typing: Static-vs-dynamic-typing.md
+    
