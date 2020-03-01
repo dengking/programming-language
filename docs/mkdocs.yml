@@ -3,3 +3,5 @@ nav:
     - Programming-language: Programming-language.md
     - Common: Common.md
     - Theory: Theory
+    - Python: Python
+    - C++: C++

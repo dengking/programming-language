@@ -48,6 +48,44 @@ nav:
         - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
         - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object.md
       - Glossary: Theory/Programming-paradigm/Object-oriented-programming/Glossary.md
+- Python:
+  - Language:
+    - Language-reference:
+      - Introduction: Python/Language/Language-reference/index.md
+    - Developer's-guide:
+      - Introduction: Python/Language/Developer's-guide/index.md
+  - Library-Reference:
+    - Build-in-function:
+      - Summary-of-python-build-in-function: Python/Library-Reference/build-in-function/summary-of-python-build-in-function.md
+      - Hash:
+        - Introduction: Python/Library-Reference/build-in-function/hash/index.md
+  - Philosophy:
+    - The-Zen-of-Python: Python/Philosophy/The-Zen-of- Python.md
+  - Style-guide:
+    - Style-Guide-for-Python-Code: Python/Style-guide/Style-Guide-for-Python-Code.md
+  - Paradigm:
+    - Functional-programming: Python/Paradigm/Functional-programming.md
+    - Meta-programming:
+      - Reflective:
+        - Python-reflection: Python/Paradigm/Meta-programming/Reflective/Python-reflection.md
+  - How-to:
+    - Lazy-import:
+      - Lazy-importing: Python/How-to/Lazy-import/Lazy-importing.md
+  - Software:
+    - Introduction: Python/Software/index.md
+  - Glossary:
+    - Abstract-base-class: Python/Glossary/Abstract-base-class.md
+    - Argument-and-parameter: Python/Glossary/Argument-and-parameter.md
+- C++:
+  - Language:
+    - Language-reference:
+      - index: C++/Language/Language-reference/index.md
+    - Idiom:
+      - Introduction: C++/Language/Idiom/index.md
+  - Pattern:
+    - Introduction: C++/Pattern/index.md
+  - Paradigm:
+    - Introduction: C++/Paradigm/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/programming-language

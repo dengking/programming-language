@@ -7,7 +7,7 @@ our language … we cannot talk at all except by subscribing to the organization
 
 The genesis（起源） of the computer revolution was in a machine. The genesis of our programming languages thus tends to look like that machine.
 
-> NOTE: “The genesis of our programming languages thus tends to look like that machine”的意思是：起初的programming language是非常类似于machine的。熟悉programming language的history的话，知道早先的programming language是machine language。
+> NOTE: “The genesis of our programming languages thus tends to look like that machine”的意思是：起初的programming language是非常类似于machine的。作者此处所表达的意思，早期的programming language主要是为了“描述”machine。关于“描述”参见文章[Language](https://dengking.github.io/Post/Language/Language/)。
 
 But computers are not so much machines as they are mind amplification（放大） tools (“bicycles for the mind,” as Steve Jobs is fond of saying) and a different kind of **expressive medium**. As a result, the tools are beginning to look less like machines and more like parts of our **minds**, and also like other forms of **expression** such as writing, painting, sculpture, animation, and filmmaking. **[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)** (OOP) is part of this movement toward using the computer as an **expressive medium**.
 
