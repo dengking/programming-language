@@ -1,0 +1,1856 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/programming-language/Python/TODO/python-TODO/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>python TODO - programming-language</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-27795084-5", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#python" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              programming-language
+            </span>
+            <span class="md-header-nav__topic">
+              
+                python TODO
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    programming-language
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../Programming-language/" title="Programming-language" class="md-nav__link">
+      Programming-language
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../Common/" title="Common" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Theory
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Theory
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Type-system/Type-safety/" title="Type-safety" class="md-nav__link">
+      Type-safety
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Type-system/Static-vs-dynamic-typing/" title="Static-vs-dynamic-typing" class="md-nav__link">
+      Static-vs-dynamic-typing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Programming-paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Programming-paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/Programming-paradigm/" title="Programming-paradigm" class="md-nav__link">
+      Programming-paradigm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Object-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Object-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming/" title="Object-oriented-programming" class="md-nav__link">
+      Object-oriented-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-2" type="checkbox" id="nav-4-3-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-3-2">
+      Thinking-in-java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-3-2">
+        Thinking-in-java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects/" title="Introduction-to-Objects" class="md-nav__link">
+      Introduction-to-Objects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object/" title="Everything-is-an-object" class="md-nav__link">
+      Everything-is-an-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Theory/Programming-paradigm/Object-oriented-programming/Glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1" type="checkbox" id="nav-5-1-1">
+    
+    <label class="md-nav__link" for="nav-5-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Language/Language-reference/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      Developer's-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        Developer's-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Language/Developer's-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Library-Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Library-Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1" type="checkbox" id="nav-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1">
+      Build-in-function
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-1">
+        Build-in-function
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Library-Reference/build-in-function/summary-of-python-build-in-function/" title="Summary-of-python-build-in-function" class="md-nav__link">
+      Summary-of-python-build-in-function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2" type="checkbox" id="nav-5-2-1-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2">
+      Hash
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-2">
+        Hash
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Library-Reference/build-in-function/hash/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Philosophy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Philosophy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Philosophy/The-Zen-of-Python/" title="The-Zen-of-Python" class="md-nav__link">
+      The-Zen-of-Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Style-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Style-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Style-guide/Style-Guide-for-Python-Code/" title="Style-Guide-for-Python-Code" class="md-nav__link">
+      Style-Guide-for-Python-Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Paradigm/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2" type="checkbox" id="nav-5-5-2">
+    
+    <label class="md-nav__link" for="nav-5-5-2">
+      Meta-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-5-2">
+        Meta-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2-1" type="checkbox" id="nav-5-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-5-2-1">
+      Reflective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-5-2-1">
+        Reflective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Paradigm/Meta-programming/Reflective/Python-reflection/" title="Python-reflection" class="md-nav__link">
+      Python-reflection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6-1" type="checkbox" id="nav-5-6-1">
+    
+    <label class="md-nav__link" for="nav-5-6-1">
+      Lazy-import
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-6-1">
+        Lazy-import
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../How-to/Lazy-import/Lazy-importing/" title="Lazy-importing" class="md-nav__link">
+      Lazy-importing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Software/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+    
+    <label class="md-nav__link" for="nav-5-8">
+      Glossary
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-8">
+        Glossary
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Glossary/Abstract-base-class/" title="Abstract-base-class" class="md-nav__link">
+      Abstract-base-class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Glossary/Argument-and-parameter/" title="Argument-and-parameter" class="md-nav__link">
+      Argument-and-parameter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1" type="checkbox" id="nav-6-1-1">
+    
+    <label class="md-nav__link" for="nav-6-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Language/Language-reference/" title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-2" type="checkbox" id="nav-6-1-2">
+    
+    <label class="md-nav__link" for="nav-6-1-2">
+      Idiom
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-2">
+        Idiom
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Language/Idiom/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div class="toc">
+<ul>
+<li><a href="#python">python 多继承</a></li>
+<li><a href="#python-lazy-loading-module">python lazy-loading module</a></li>
+<li><a href="#python-dir">python dir()</a></li>
+<li><a href="#what-is-__future__-in-python-used-for-and-howwhen-to-use-it-and-how-it-works">What is __future__ in Python used for and how/when to use it, and how it works</a></li>
+<li><a href="#python-with">python with</a></li>
+<li><a href="#_1">增强系统的可扩展性</a></li>
+<li><a href="#c-named-requirement-and-python-protocol">c++ named requirement and python protocol</a></li>
+<li><a href="#pythonlanguage-referenceclanguage-reference">对比python的language reference和c++的language reference</a></li>
+<li><a href="#iterator-generator">iterator generator</a></li>
+<li><a href="#iterable-awaitable">iterable, awaitable</a></li>
+<li><a href="#python-class-attribute-and-instance-attribute-and-attribute-reference">python class attribute and instance attribute and attribute reference</a></li>
+<li><a href="#python-exception">python exception</a></li>
+<li><a href="#python-yield">python 中yield的准确含义，到底是**产生**，还是**让渡**</a></li>
+<li><a href="#python-dict">python dict</a><ul>
+<li><a href="#python-combine-two-dict">python combine two dict</a></li>
+<li><a href="#python-assign-the-same-value-to-a-dict">python assign the same value to a dict</a></li>
+</ul>
+</li>
+<li><a href="#python-use-member-variable-as-default-argument-of-member-function">python use member variable as default argument of member function</a></li>
+<li><a href="#python-cache">python cache</a></li>
+<li><a href="#python-list">python 构造list的方法对比</a></li>
+<li><a href="#python-0o">python 中的创建文件的时候的权限字段为什么是0o即八进制呢？</a></li>
+<li><a href="#getpassgetuser">getpass.getuser()文档中的一些内容</a></li>
+<li><a href="#osmakedirs">os.makedirs</a></li>
+<li><a href="#automated-testing">automated testing</a></li>
+<li><a href="#python-determine-the-size-of-object">python-determine-the-size-of-object</a></li>
+<li><a href="#_2"></a></li>
+<li><a href="#six-and-2to3">six and 2to3</a></li>
+<li><a href="#default-arguments">DEFAULT ARGUMENTS</a></li>
+<li><a href="#legb">LEGB</a></li>
+<li><a href="#understanding-unboundlocalerror-in-python">Understanding UnboundLocalError in Python</a></li>
+<li><a href="#what-are-metaclasses-in-python">What are metaclasses in Python?</a></li>
+<li><a href="#python-object-type">python object 和 type</a></li>
+<li><a href="#debug-in-python">debug in python</a></li>
+<li><a href="#python-reflection">python reflection</a></li>
+<li><a href="#python-__builtin__">python __builtin__</a></li>
+<li><a href="#classscope">class的scope</a></li>
+<li><a href="#python-programmingmetaclasses">Python Programming/Metaclasses</a></li>
+<li><a href="#python-tuple">python tuple</a><ul>
+<li><a href="#why-should-you-use-namedtuple-instead-of-a-tuple">Why should you use namedtuple instead of a tuple?</a></li>
+</ul>
+</li>
+<li><a href="#python-execution-model-and-variable-and-scope">python execution model and variable and scope</a></li>
+<li><a href="#python-setinterval">python setInterval</a></li>
+<li><a href="#python-ajax-equivalent">python ajax equivalent</a></li>
+<li><a href="#ajax-and-promise">ajax and promise</a></li>
+<li><a href="#python-classmethod-property">python classmethod property</a></li>
+<li><a href="#_3">静态成员变量的容器</a></li>
+<li><a href="#jsondumps-vs-flaskjsonify">json.dumps vs flask.jsonify</a></li>
+<li><a href="#python-interpretercompile-function">python interpreter是如何了来compile function的？</a></li>
+<li><a href="#pythondynamic">python的dynamic</a><ul>
+<li><a href="#_4">一个小例子</a></li>
+</ul>
+</li>
+<li><a href="#rebind-argument-in-function-body">rebind argument in function body</a></li>
+<li><a href="#functools-higher-order-functions-and-operations-on-callable-objects">functools — Higher-order functions and operations on callable objects¶</a></li>
+<li><a href="#redis-in-python-how-do-you-close-the-connection">Redis in python, how do you close the connection?</a></li>
+<li><a href="#how-to-flatten-nested-python-dictionaries">How to flatten nested python dictionaries?</a></li>
+<li><a href="#python-type-system">python type system</a><ul>
+<li><a href="#20190429">20190429</a></li>
+</ul>
+</li>
+<li><a href="#python-debugger">python debugger</a></li>
+<li><a href="#python-build_in-format-input">python build_in format input</a></li>
+<li><a href="#operation-with-transaction">operation with transaction</a></li>
+<li><a href="#build_in-print-repr-and-special-method-__str__-and-__repr__">build_in print, repr and special method __str__ and __repr__</a></li>
+<li><a href="#listappendstock_market">list().append(stock_market)</a></li>
+<li><a href="#python-iter-and-getitem">python iter and getitem</a></li>
+<li><a href="#python_1">python中的并发方式</a></li>
+<li><a href="#how-to-make-a-flat-list-out-of-list-of-lists">How to make a flat list out of list of lists?</a></li>
+<li><a href="#value-type-of-a-dict-is-list-raise-error">value type of a dict is list raise error</a></li>
+<li><a href="#python-find-in-list">Python: Find in list</a></li>
+<li><a href="#for">for语句的执行</a></li>
+<li><a href="#python-str-to-float">python str to float</a></li>
+<li><a href="#for-and">for and 三元表达式</a></li>
+<li><a href="#python-iterable-and-iteration">python iterable and iteration</a></li>
+<li><a href="#iteration-and-deletion">iteration and deletion</a></li>
+<li><a href="#python-min-and-max-of-integer">python min and max of integer</a></li>
+</ul>
+</div>
+<h1 id="python">python 多继承</h1>
+<p>多继承的时候，子类<code>__init__</code>函数如何来调用基类的<code>__init__</code>函数</p>
+<h1 id="python-lazy-loading-module">python lazy-loading module</h1>
+<p>在GitHub python-in-action中已经创建了源代码，在本地的<code>programming-language-python/pattern/lazy_import/</code>中，还有一些理论知识需要学习；</p>
+<h1 id="python-dir">python <code>dir()</code></h1>
+<p><a href="https://docs.python.org/3/library/functions.html#dir">https://docs.python.org/3/library/functions.html#dir</a></p>
+<h1 id="what-is-__future__-in-python-used-for-and-howwhen-to-use-it-and-how-it-works">What is <code>__future__</code> in Python used for and how/when to use it, and how it works</h1>
+<p><a href="https://stackoverflow.com/questions/7075082/what-is-future-in-python-used-for-and-how-when-to-use-it-and-how-it-works">https://stackoverflow.com/questions/7075082/what-is-future-in-python-used-for-and-how-when-to-use-it-and-how-it-works</a></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820023084e5263fe54fde4e4e8616597058cc4ba1000">https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820023084e5263fe54fde4e4e8616597058cc4ba1000</a></p>
+<h1 id="python-with">python <code>with</code></h1>
+<ul>
+<li>python <code>with</code> and scope</li>
+</ul>
+<p>以下面的代码为例：
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">37.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">23.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_uniform</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">init_op</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">initializer</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+  <span class="c1"># Run the initializer on `w`.</span>
+  <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init_op</span><span class="p">)</span>
+
+  <span class="c1"># Evaluate `output`. `sess.run(output)` will return a NumPy array containing</span>
+  <span class="c1"># the result of the computation.</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+
+  <span class="c1"># Evaluate `y` and `output`. Note that `y` will only be computed once, and its</span>
+  <span class="c1"># result used both to return `y_val` and as an input to the `tf.nn.softmax()`</span>
+  <span class="c1"># op. Both `y_val` and `output_val` will be NumPy arrays.</span>
+  <span class="n">y_val</span><span class="p">,</span> <span class="n">output_val</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">output</span><span class="p">])</span>
+</pre></div>
+其实在<code>with</code>的外层是可以访问在<code>with</code>中定义的变量的，但是在<code>c++</code>中，比如是<code>for</code>，则在<code>for</code>的外层是无法访问到在<code>for</code>内部定义的变量的；</p>
+<h1 id="_1">增强系统的可扩展性</h1>
+<p><a href="https://www.tensorflow.org/api_docs/python/tf/register_tensor_conversion_function">tf.register_tensor_conversion_function</a></p>
+<p>记得在<code>py-mysql</code>中也有类似的函数。</p>
+<h1 id="c-named-requirement-and-python-protocol"><code>c++</code> named requirement and python protocol</h1>
+<h1 id="pythonlanguage-referenceclanguage-reference">对比python的language reference和<code>c++</code>的language reference</h1>
+<ul>
+<li>python expression和<code>c++</code> expression</li>
+<li>python statement and <code>c++</code> expression</li>
+</ul>
+<h1 id="iterator-generator">iterator generator</h1>
+<h1 id="iterable-awaitable">iterable, awaitable</h1>
+<h1 id="python-class-attribute-and-instance-attribute-and-attribute-reference">python class attribute and instance attribute and attribute reference</h1>
+<div class="highlight"><pre><span></span>In [11]: class Test:
+    ...:     t=1
+    ...:     def __init__(self,t=None):
+    ...:         print(self.t)
+    ...:         print(id(self.t))
+    ...:         self.t=t if t else self.t
+    ...:         print(self.t)
+    ...:         print(id(self.t))
+    ...:         
+    ...:         
+
+In [12]: t=Test(4)
+1
+139713319475648
+4
+139713319475744
+
+In [13]: t=Test(4)
+1
+139713319475648
+4
+139713319475744
+
+In [9]: t.t
+Out[9]: 4
+
+In [10]: Test.t
+Out[10]: 1
+</pre></div>
+
+<p>上述例子体现了python中的attribute reference 和 class attribute 和 instance attribute之间的关系；</p>
+<h1 id="python-exception">python exception</h1>
+<h1 id="python-yield">python 中<code>yield</code>的准确含义，到底是**产生**，还是**让渡**</h1>
+<h1 id="python-dict">python dict</h1>
+<h2 id="python-combine-two-dict">python combine two dict</h2>
+<p><a href="https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression">https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression</a></p>
+<h2 id="python-assign-the-same-value-to-a-dict">python assign the same value to a dict</h2>
+<p><a href="https://stackoverflow.com/questions/2974022/is-it-possible-to-assign-the-same-value-to-multiple-keys-in-a-dict-object-at-onc">https://stackoverflow.com/questions/2974022/is-it-possible-to-assign-the-same-value-to-multiple-keys-in-a-dict-object-at-onc</a></p>
+<h1 id="python-use-member-variable-as-default-argument-of-member-function">python use member variable as default argument of member function</h1>
+<p><a href="https://nikos7am.com/posts/mutable-default-arguments/">https://nikos7am.com/posts/mutable-default-arguments/</a></p>
+<h1 id="python-cache">python cache</h1>
+<h1 id="python-list">python 构造list的方法对比</h1>
+<p><code>list(1)</code>会抛出异常<code>TypeError: 'int' object is not iterable</code>，但是<code>[1]</code>却能够正常；如果没有记错的话，第二种方法叫做display;</p>
+<h1 id="python-0o">python 中的创建文件的时候的权限字段为什么是<code>0o</code>即八进制呢？</h1>
+<h1 id="getpassgetuser">getpass.getuser()文档中的一些内容</h1>
+<p><a href="https://docs.python.org/3/library/getpass.html">https://docs.python.org/3/library/getpass.html</a></p>
+<h1 id="osmakedirs">os.makedirs</h1>
+<p><a href="https://docs.python.org/3/library/os.html#os.makedirs">https://docs.python.org/3/library/os.html#os.makedirs</a></p>
+<p><a href="https://stackoverflow.com/questions/5210778/elegant-way-to-make-all-dirs-in-a-path">https://stackoverflow.com/questions/5210778/elegant-way-to-make-all-dirs-in-a-path</a></p>
+<h1 id="automated-testing">automated testing</h1>
+<p>python如何实现automated testing</p>
+<h1 id="python-determine-the-size-of-object">python-determine-the-size-of-object</h1>
+<p><a href="https://stackoverflow.com/questions/449560/how-do-i-determine-the-size-of-an-object-in-python">https://stackoverflow.com/questions/449560/how-do-i-determine-the-size-of-an-object-in-python</a></p>
+<h1 id="_2"></h1>
+<p>keyword-only arguments, chained exceptions, yield from, and enums.</p>
+<h1 id="six-and-2to3">six and 2to3</h1>
+<h1 id="default-arguments">DEFAULT ARGUMENTS</h1>
+<p>SMARTER DEFAULT ARGUMENTS (PYTHON RECIPE)</p>
+<p><a href="http://code.activestate.com/recipes/577786-smarter-default-arguments/">http://code.activestate.com/recipes/577786-smarter-default-arguments/</a></p>
+<h1 id="legb">LEGB</h1>
+<h1 id="understanding-unboundlocalerror-in-python">Understanding UnboundLocalError in Python</h1>
+<p><a href="https://eli.thegreenplace.net/2011/05/15/understanding-unboundlocalerror-in-python">https://eli.thegreenplace.net/2011/05/15/understanding-unboundlocalerror-in-python</a></p>
+<h1 id="what-are-metaclasses-in-python"><a href="https://stackoverflow.com/questions/100003/what-are-metaclasses-in-python">What are metaclasses in Python?</a></h1>
+<h1 id="python-object-type">python <code>object</code> 和 <code>type</code></h1>
+<div class="highlight"><pre><span></span>class T:
+    pass
+</pre></div>
+
+<div class="highlight"><pre><span></span>T.__bases__
+Out[22]: (object,)
+</pre></div>
+
+<div class="highlight"><pre><span></span>T.__class__
+Out[14]: type
+</pre></div>
+
+<div class="highlight"><pre><span></span>i=T()
+
+i.__class__
+Out[16]: __main__.T
+</pre></div>
+
+<h1 id="debug-in-python">debug in python</h1>
+<p><a href="https://stackoverflow.com/questions/16867347/step-by-step-debugging-with-ipython">https://stackoverflow.com/questions/16867347/step-by-step-debugging-with-ipython</a></p>
+<p>本地已经收录了IPython-debug</p>
+<p><a href="https://github.com/cool-RR/PySnooper">https://github.com/cool-RR/PySnooper</a></p>
+<h1 id="python-reflection">python reflection</h1>
+<p><a href="https://www.bnmetrics.com/blog/introspection-reflection-in-python">https://www.bnmetrics.com/blog/introspection-reflection-in-python</a></p>
+<p><a href="https://www.geeksforgeeks.org/reflection-in-python/">https://www.geeksforgeeks.org/reflection-in-python/</a></p>
+<p><a href="https://docs.python.org/3.7/c-api/reflection.html">https://docs.python.org/3.7/c-api/reflection.html</a></p>
+<h1 id="python-__builtin__">python <code>__builtin__</code></h1>
+<p>这涉及到了：</p>
+<ul>
+<li>python 2中的<code>__builtin__</code>模块</li>
+<li><code>dir()</code>返回的成员中包含有<code>__builtins__</code></li>
+</ul>
+<p>在这篇文章中给出了解答</p>
+<p><a href="https://stackoverflow.com/questions/9047745/where-is-the-builtin-module-in-python3-why-was-it-renamed">Where is the <code>__builtin__</code> module in Python3? Why was it renamed?</a></p>
+<h1 id="classscope">class的scope</h1>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PredictionField</span><span class="p">:</span>
+    <span class="n">PREDICT_TIME</span> <span class="o">=</span> <span class="s1">&#39;predict_time&#39;</span>
+    <span class="n">PREDICT_VALUE</span> <span class="o">=</span> <span class="s1">&#39;predict_value&#39;</span>
+    <span class="n">PREDICT_PROB_RISE</span> <span class="o">=</span> <span class="s1">&#39;predict_prob_rise&#39;</span>
+    <span class="n">PREDICT_PROB_FALL</span> <span class="o">=</span> <span class="s1">&#39;predict_prob_fall&#39;</span>
+    <span class="n">PREDICT_PROB_FLAT</span> <span class="o">=</span> <span class="s1">&#39;predict_prob_flat&#39;</span>
+
+    <span class="n">ALL_FIELDS</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">PredictionField</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">PredictionField</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)]</span>
+</pre></div>
+
+<p>报错如下：
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">edae3ab18252</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">PredictionField</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="k">class</span> <span class="nc">PredictionField</span><span class="p">:</span>
+      <span class="mi">2</span>     <span class="n">PREDICT_TIME</span> <span class="o">=</span> <span class="s1">&#39;predict_time&#39;</span>
+<span class="o">----&gt;</span> <span class="mi">3</span>     <span class="n">ALL_FIELDS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">PredictionField</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">PredictionField</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;PREDICT&quot;</span><span class="p">))</span>
+      <span class="mi">4</span> 
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;PredictionField&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div></p>
+<h1 id="python-programmingmetaclasses">Python Programming/Metaclasses</h1>
+<p><a href="https://en.wikibooks.org/wiki/Python_Programming/Metaclasses">https://en.wikibooks.org/wiki/Python_Programming/Metaclasses</a></p>
+<h1 id="python-tuple">python <code>tuple</code></h1>
+<div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">24</span><span class="o">-</span><span class="mf">3e233</span><span class="n">cfc2777</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">()</span> <span class="n">takes</span> <span class="n">at</span> <span class="n">most</span> <span class="mi">1</span> <span class="n">argument</span> <span class="p">(</span><span class="mi">3</span> <span class="n">given</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="why-should-you-use-namedtuple-instead-of-a-tuple"><a href="https://pythontips.com/2015/06/06/why-should-you-use-namedtuple-instead-of-a-tuple/">Why should you use namedtuple instead of a tuple?</a></h2>
+<h1 id="python-execution-model-and-variable-and-scope">python execution model and variable and scope</h1>
+<div class="highlight"><pre><span></span>def outer():
+    a = 9
+    def inner():
+        print(a)
+    inner()
+    print(a)
+</pre></div>
+
+<div class="highlight"><pre><span></span>def outer():
+    a = 9
+    def inner():
+
+        a = 10
+        print(a)
+    inner()
+    print(a)
+</pre></div>
+
+<div class="highlight"><pre><span></span>def outer():
+    a = 9
+    def inner():
+        print(a)
+        a = 10
+    inner()
+    print(a)
+</pre></div>
+
+<div class="highlight"><pre><span></span>def outer():
+    def inner():
+        a = 10
+    print(a)
+</pre></div>
+
+<p>思考一个问题：python解释器在编译函数的时候，是否会将该函数的所有local variable都保存到该函数的namespace中？</p>
+<h1 id="python-setinterval">python setInterval</h1>
+<p>python setinterval equivalent</p>
+<p>celery中的Periodic Tasks<a href="http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html#periodic-tasks">¶</a> 也是一种setinterval</p>
+<h1 id="python-ajax-equivalent">python ajax equivalent</h1>
+<p>ajax本质来说是一种异步，是一种promise；python中应该有</p>
+<h1 id="ajax-and-promise">ajax and promise</h1>
+<h1 id="python-classmethod-property">python classmethod property</h1>
+<h1 id="_3">静态成员变量的容器</h1>
+<p><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PredictionField</span><span class="p">:</span>
+    <span class="n">PREDICT_TIME</span> <span class="o">=</span> <span class="s1">&#39;predict_time&#39;</span>
+    <span class="n">PREDICT_VALUE</span> <span class="o">=</span> <span class="s1">&#39;predict_value&#39;</span>
+    <span class="n">PREDICT_PROB_RISE</span> <span class="o">=</span> <span class="s1">&#39;predict_prob_rise&#39;</span>
+    <span class="n">PREDICT_PROB_FALL</span> <span class="o">=</span> <span class="s1">&#39;predict_prob_fall&#39;</span>
+    <span class="n">PREDICT_PROB_FLAT</span> <span class="o">=</span> <span class="s1">&#39;predict_prob_flat&#39;</span>
+
+    <span class="n">ALL_FIELDS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">PredictionField</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">PredictionField</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;PREDICT&quot;</span><span class="p">))</span>
+</pre></div>
+上述代码是存在错误的，但是我想要实现类似上述的效果；</p>
+<p>回忆起之前使用SQLalchemy的经验，SQLalchemy中在定义表格的时候，肯定会有类似于上面的需求，即获取所有的类成员变量；</p>
+<h1 id="jsondumps-vs-flaskjsonify">json.dumps vs flask.jsonify</h1>
+<p><a href="https://stackoverflow.com/questions/7907596/json-dumps-vs-flask-jsonify">https://stackoverflow.com/questions/7907596/json-dumps-vs-flask-jsonify</a></p>
+<p><a href="http://flask.pocoo.org/docs/1.0/api/#module-flask.json">http://flask.pocoo.org/docs/1.0/api/#module-flask.json</a></p>
+<h1 id="python-interpretercompile-function">python interpreter是如何了来compile function的？</h1>
+<p>函数的local variable是否会保存到function的namespace中？</p>
+<h1 id="pythondynamic">python的dynamic</h1>
+<p>需要总结python的dynamic特性</p>
+<p>google <strong>python dynamic</strong></p>
+<p><a href="https://stackoverflow.com/a/2829588">https://stackoverflow.com/a/2829588</a></p>
+<p><a href="https://pythonconquerstheuniverse.wordpress.com/2009/10/03/static-vs-dynamic-typing-of-programming-languages/">https://pythonconquerstheuniverse.wordpress.com/2009/10/03/static-vs-dynamic-typing-of-programming-languages/</a></p>
+<p><a href="https://wiki.python.org/moin/Why%20is%20Python%20a%20dynamic%20language%20and%20also%20a%20strongly%20typed%20language">https://wiki.python.org/moin/Why%20is%20Python%20a%20dynamic%20language%20and%20also%20a%20strongly%20typed%20language</a></p>
+<h2 id="_4">一个小例子</h2>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">p</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">p</span><span class="p">()</span>
+</pre></div>
+
+<h1 id="rebind-argument-in-function-body">rebind argument in function body</h1>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="n">quote_df</span><span class="p">,</span> <span class="n">data_window</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">quote_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">data_window</span><span class="p">:</span>
+            <span class="n">quote_df</span> <span class="o">=</span> <span class="n">quote_df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">data_window</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">quote_df</span>
+</pre></div>
+
+<h1 id="functools-higher-order-functions-and-operations-on-callable-objects"><a href="https://docs.python.org/3/library/functools.html#module-functools"><code>functools</code></a> — Higher-order functions and operations on callable objects<a href="https://docs.python.org/3/library/functools.html#module-functools">¶</a></h1>
+<h1 id="redis-in-python-how-do-you-close-the-connection"><a href="https://stackoverflow.com/questions/24875806/redis-in-python-how-do-you-close-the-connection">Redis in python, how do you close the connection?</a></h1>
+<h1 id="how-to-flatten-nested-python-dictionaries"><a href="https://stackoverflow.com/questions/39135433/how-to-flatten-nested-python-dictionaries">How to flatten nested python dictionaries?</a></h1>
+<p>[Aggregate Python lists stored as values in a nested dictionary into one list for arbitrary levels <a href="https://stackoverflow.com/questions/51426716/aggregate-python-lists-stored-as-values-in-a-nested-dictionary-into-one-list-for">duplicate]</a></p>
+<h1 id="python-type-system">python type system</h1>
+<p><a href="https://docs.python.org/3.7/glossary.html#term-duck-typing"><strong>duck-typing</strong></a></p>
+<p>既然python是duck-type，那么为什么python还要提供<a href="https://docs.python.org/3.7/glossary.html#term-abstract-base-class">ABC</a>呢？</p>
+<p>在 <a href="https://docs.python.org/3.7/glossary.html#term-abstract-base-class"><strong>abstract base class</strong></a>已经将这个问题说清了</p>
+<p><a href="https://docs.python.org/3.7/library/collections.abc.html">https://docs.python.org/3.7/library/collections.abc.html</a></p>
+<h2 id="20190429">20190429</h2>
+<p>python的动态特性所带来的问题：比如在编写一个函数的时候，由于python lack declaration，所以我们压根就不知道入参的类型是什么，只有到运行的时候，我们才能够知道入参的准确类型，才能够对其进行准确的运用，而在programming阶段，对其完全都是按照心中的预期进行programming的，所以python程序必须要进行完整的测试；</p>
+<p>并且python的这种动态特性，带来了大量的类似下面这样的代码：</p>
+<div class="highlight"><pre><span></span>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">redis_conn</span><span class="p">,</span> <span class="n">ml_model_sub_name</span><span class="p">,</span> <span class="n">stock_market</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data_range</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+             <span class="n">predict_time_as_index</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param redis_conn:</span>
+<span class="sd">        :param ml_model_sub_name:</span>
+<span class="sd">        :param stock_market:</span>
+<span class="sd">        :param reverse 参见`class RedisStructureIOBase` doc</span>
+<span class="sd">        :param fields 参见`class PredictionField`</span>
+<span class="sd">        :param data_range 参见`class RedisStructureIOBase` doc</span>
+<span class="sd">        :param window 参见`class RedisStructureIOBase` doc</span>
+<span class="sd">        :param predict_time_as_index:将predict_time字段作为索引</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data_range</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert_data_range</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">,</span> <span class="n">data_range</span><span class="o">=</span><span class="n">data_range</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">PredictionField</span><span class="o">.</span><span class="n">PREDICT_VALUE</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">PredictionField</span><span class="o">.</span><span class="n">PREDICT_TIME</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+            <span class="n">fields</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">PredictionField</span><span class="o">.</span><span class="n">PREDICT_TIME</span><span class="p">)</span>
+</pre></div>
+
+<p>重点看最后两行，我的目的是如果<code>fields</code>中包含<code>PredictionField.PREDICT_TIME</code>，则就需要将其remove掉，但是如果用户传入的是<code>tuple</code>，则必须要先将其转换为<code>list</code>，然后才能够调用remove，因为tuple 是unmutable的，故其没有<code>remove</code>方法；</p>
+<p>显然，如果在静态语言的话，则当我们在函数声明中，指定了入参的类型，则就不会出现这样的事情了；</p>
+<p>由此可见，动态也有动态的弊端。</p>
+<h1 id="python-debugger">python debugger</h1>
+<p><a href="https://docs.python.org/3/library/pdb.html#module-pdb"><code>pdb</code></a> — The Python Debugger<a href="https://docs.python.org/3/library/pdb.html#module-pdb">¶</a></p>
+<p><a href="https://stackoverflow.com/questions/5967241/how-to-execute-multi-line-statements-within-pythons-own-debugger-pdb">How to execute multi-line statements within Python's own debugger (PDB)</a></p>
+<h1 id="python-build_in-format-input">python build_in <code>format</code> <code>input</code></h1>
+<p><a href="https://docs.python.org/3/library/functions.html#input">https://docs.python.org/3/library/functions.html#input</a></p>
+<h1 id="operation-with-transaction">operation with transaction</h1>
+<p>在向database中加入批量数据的时候，有时候是需要实现transaction的，即如果在添加过程中出现了错误，在需要rollback；只有确保无误后才能够commit；</p>
+<h1 id="build_in-print-repr-and-special-method-__str__-and-__repr__"><strong>build_in</strong> <code>print</code>, <code>repr</code> and special method <code>__str__</code> and <code>__repr__</code></h1>
+<p><a href="https://stackoverflow.com/questions/1535327/how-to-print-objects-of-class-using-print">How to print objects of class using print()?</a></p>
+<h1 id="listappendstock_market"><code>list().append(stock_market)</code></h1>
+<p>为什么上述代码没有返回一个<code>list</code>？</p>
+<h1 id="python-iter-and-getitem">python <code>iter</code> and <code>getitem</code></h1>
+<p>今天在使用<code>to_list</code>功能的时候碰到了这样的一个问题：</p>
+<div class="highlight"><pre><span></span>In [14]: to_list(QuoteTable.Price)
+---------------------------------------------------------------------------
+NotImplementedError                       Traceback (most recent call last)
+&lt;ipython-input-14-b4f3918eec14&gt; in &lt;module&gt;()
+----&gt; 1 to_list(QuoteTable.Price)
+
+/home/quotepredict/workspace/AIServer/data_util/type_conversion.py in to_list(original)
+     23             l.append(original)
+     24         else:
+---&gt; 25             l.extend(item for item in original)
+     26     except TypeError as e:
+     27         l.append(original)
+
+/home/quotepredict/workspace/AIServer/data_util/type_conversion.py in &lt;genexpr&gt;(.0)
+     23             l.append(original)
+     24         else:
+---&gt; 25             l.extend(item for item in original)
+     26     except TypeError as e:
+     27         l.append(original)
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/operators.py in __getitem__(self, index)
+    409 
+    410         &quot;&quot;&quot;
+--&gt; 411         return self.operate(getitem, index)
+    412 
+    413     def __lshift__(self, other):
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/orm/attributes.py in operate(self, op, *other, **kwargs)
+    178 
+    179     def operate(self, op, *other, **kwargs):
+--&gt; 180         return op(self.comparator, *other, **kwargs)
+    181 
+    182     def reverse_operate(self, op, other, **kwargs):
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/operators.py in __getitem__(self, index)
+    409 
+    410         &quot;&quot;&quot;
+--&gt; 411         return self.operate(getitem, index)
+    412 
+    413     def __lshift__(self, other):
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/orm/properties.py in operate(self, op, *other, **kwargs)
+    268 
+    269         def operate(self, op, *other, **kwargs):
+--&gt; 270             return op(self.__clause_element__(), *other, **kwargs)
+    271 
+    272         def reverse_operate(self, op, other, **kwargs):
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/operators.py in __getitem__(self, index)
+    409 
+    410         &quot;&quot;&quot;
+--&gt; 411         return self.operate(getitem, index)
+    412 
+    413     def __lshift__(self, other):
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/elements.py in operate(self, op, *other, **kwargs)
+    690 
+    691     def operate(self, op, *other, **kwargs):
+--&gt; 692         return op(self.comparator, *other, **kwargs)
+    693 
+    694     def reverse_operate(self, op, other, **kwargs):
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/operators.py in __getitem__(self, index)
+    409 
+    410         &quot;&quot;&quot;
+--&gt; 411         return self.operate(getitem, index)
+    412 
+    413     def __lshift__(self, other):
+
+&lt;string&gt; in &lt;lambda&gt;(self, op, *other, **kwargs)
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/type_api.py in operate(self, default_comparator, op, *other, **kwargs)
+     61         def operate(self, default_comparator, op, *other, **kwargs):
+     62             o = default_comparator.operator_lookup[op.__name__]
+---&gt; 63             return o[0](self.expr, op, *(other + o[1:]), **kwargs)
+     64 
+     65         @util.dependencies(&#39;sqlalchemy.sql.default_comparator&#39;)
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/default_comparator.py in _getitem_impl(expr, op, other, **kw)
+    190         return _binary_operate(expr, op, other, **kw)
+    191     else:
+--&gt; 192         _unsupported_impl(expr, op, other, **kw)
+    193 
+    194 
+
+/usr/anaconda3/lib/python3.6/site-packages/sqlalchemy/sql/default_comparator.py in _unsupported_impl(expr, op, *arg, **kw)
+    195 def _unsupported_impl(expr, op, *arg, **kw):
+    196     raise NotImplementedError(&quot;Operator &#39;%s&#39; is not supported on &quot;
+--&gt; 197                               &quot;this expression&quot; % op.__name__)
+    198 
+    199 
+
+NotImplementedError: Operator &#39;getitem&#39; is not supported on this expression
+</pre></div>
+
+<p><code>QuoteTable.Price</code>是可以<code>iter</code> 的，但是当将其置于<code>for in</code>中时，它就跑出来上述异常；</p>
+<h1 id="python_1">python中的并发方式</h1>
+<p>**gunicorn**的文档中的并发方式的总结是非常好的，它同样适合于celery</p>
+<p><a href="http://docs.gunicorn.org/en/stable/design.html#">http://docs.gunicorn.org/en/stable/design.html#</a></p>
+<h1 id="how-to-make-a-flat-list-out-of-list-of-lists">How to make a flat list out of list of lists?</h1>
+<p><a href="https://stackoverflow.com/questions/952914/how-to-make-a-flat-list-out-of-list-of-lists">https://stackoverflow.com/questions/952914/how-to-make-a-flat-list-out-of-list-of-lists</a></p>
+<h1 id="value-type-of-a-dict-is-list-raise-error">value type of a dict is list raise error</h1>
+<h1 id="python-find-in-list">Python: Find in list</h1>
+<p><a href="https://stackoverflow.com/questions/9542738/python-find-in-list">https://stackoverflow.com/questions/9542738/python-find-in-list</a></p>
+<h1 id="for">for语句的执行</h1>
+<div class="highlight"><pre><span></span>In [9]: for index, word in enumerate([]):
+   ...:     print(index)
+   ...:     
+
+In [10]: index
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-10-caf7e7bf96a7&gt; in &lt;module&gt;()
+----&gt; 1 index
+
+NameError: name &#39;index&#39; is not defined
+</pre></div>
+
+<h1 id="python-str-to-float">python str to float</h1>
+<p><a href="https://stackoverflow.com/questions/40097590/detect-whether-a-python-string-is-a-number-or-a-letter">https://stackoverflow.com/questions/40097590/detect-whether-a-python-string-is-a-number-or-a-letter</a></p>
+<p><a href="https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float">https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float</a></p>
+<p><a href="https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float">https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float</a></p>
+<h1 id="for-and">for and 三元表达式</h1>
+<div class="highlight"><pre><span></span>fen_zi_word_list=&#39;abc&#39;
+
+similar_words={&#39;a&#39;:&#39;1&#39;, &#39;b&#39;:&#39;2&#39;, &#39;c&#39;:&#39;3&#39;}
+
+&#39;&#39;.join(similar_words[word] if word in similar_words else word for word in fen_zi_word_list)
+Out[9]: &#39;123&#39;
+</pre></div>
+
+<h1 id="python-iterable-and-iteration">python iterable and iteration</h1>
+<p>python中的支持算法的build-in function，都是基于iterable的，所以搞清楚它是非常主要的；</p>
+<p><a href="https://stackoverflow.com/questions/19151/build-a-basic-python-iterator">https://stackoverflow.com/questions/19151/build-a-basic-python-iterator</a></p>
+<p><a href="https://www.programiz.com/python-programming/iterator">https://www.programiz.com/python-programming/iterator</a></p>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__iter">https://docs.python.org/3/reference/datamodel.html#object.__iter</a>__</p>
+<p><a href="https://diveintopython3.net/iterators.html">https://diveintopython3.net/iterators.html</a></p>
+<h1 id="iteration-and-deletion">iteration and deletion</h1>
+<p><a href="https://thispointer.com/python-different-ways-to-iterate-over-a-list-in-reverse-order/">https://thispointer.com/python-different-ways-to-iterate-over-a-list-in-reverse-order/</a></p>
+<p>其实这种算法应该大多数是不好的，一遍遍历，还一边进行删除，这会导致一定的问题，应该尽可能地将循环的判断条件转换一下</p>
+<h1 id="python-min-and-max-of-integer">python min and max of integer</h1>
+<p><a href="https://stackoverflow.com/questions/7604966/maximum-and-minimum-values-for-ints">https://stackoverflow.com/questions/7604966/maximum-and-minimum-values-for-ints</a></p>
+<p><a href="https://stackoverflow.com/questions/7604966/maximum-and-minimum-values-for-ints">https://stackoverflow.com/questions/7604966/maximum-and-minimum-values-for-ints</a></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

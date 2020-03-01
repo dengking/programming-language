@@ -1,0 +1,1502 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/programming-language/Python/Language/Developer's-guide/25-Design-of-CPython's-Compiler/02-cpython-PEG/python-3.8-pgen/pgen/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Pgen - programming-language</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../../../../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-27795084-5", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              programming-language
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Pgen
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    programming-language
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Programming-language/" title="Programming-language" class="md-nav__link">
+      Programming-language
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Common/" title="Common" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Theory
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Theory
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Type-system/Type-safety/" title="Type-safety" class="md-nav__link">
+      Type-safety
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Type-system/Static-vs-dynamic-typing/" title="Static-vs-dynamic-typing" class="md-nav__link">
+      Static-vs-dynamic-typing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Programming-paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Programming-paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Programming-paradigm/" title="Programming-paradigm" class="md-nav__link">
+      Programming-paradigm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Object-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Object-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming/" title="Object-oriented-programming" class="md-nav__link">
+      Object-oriented-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-2" type="checkbox" id="nav-4-3-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-3-2">
+      Thinking-in-java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-3-2">
+        Thinking-in-java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects/" title="Introduction-to-Objects" class="md-nav__link">
+      Introduction-to-Objects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object/" title="Everything-is-an-object" class="md-nav__link">
+      Everything-is-an-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1" type="checkbox" id="nav-5-1-1">
+    
+    <label class="md-nav__link" for="nav-5-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Language-reference/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      Developer's-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        Developer's-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Library-Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Library-Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1" type="checkbox" id="nav-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1">
+      Build-in-function
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-1">
+        Build-in-function
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Library-Reference/build-in-function/summary-of-python-build-in-function/" title="Summary-of-python-build-in-function" class="md-nav__link">
+      Summary-of-python-build-in-function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2" type="checkbox" id="nav-5-2-1-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2">
+      Hash
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-2">
+        Hash
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Library-Reference/build-in-function/hash/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Philosophy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Philosophy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Philosophy/The-Zen-of-Python/" title="The-Zen-of-Python" class="md-nav__link">
+      The-Zen-of-Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Style-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Style-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Style-guide/Style-Guide-for-Python-Code/" title="Style-Guide-for-Python-Code" class="md-nav__link">
+      Style-Guide-for-Python-Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Paradigm/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2" type="checkbox" id="nav-5-5-2">
+    
+    <label class="md-nav__link" for="nav-5-5-2">
+      Meta-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-5-2">
+        Meta-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2-1" type="checkbox" id="nav-5-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-5-2-1">
+      Reflective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-5-2-1">
+        Reflective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Paradigm/Meta-programming/Reflective/Python-reflection/" title="Python-reflection" class="md-nav__link">
+      Python-reflection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6-1" type="checkbox" id="nav-5-6-1">
+    
+    <label class="md-nav__link" for="nav-5-6-1">
+      Lazy-import
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-6-1">
+        Lazy-import
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../How-to/Lazy-import/Lazy-importing/" title="Lazy-importing" class="md-nav__link">
+      Lazy-importing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Software/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+    
+    <label class="md-nav__link" for="nav-5-8">
+      Glossary
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-8">
+        Glossary
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Glossary/Abstract-base-class/" title="Abstract-base-class" class="md-nav__link">
+      Abstract-base-class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Glossary/Argument-and-parameter/" title="Argument-and-parameter" class="md-nav__link">
+      Argument-and-parameter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1" type="checkbox" id="nav-6-1-1">
+    
+    <label class="md-nav__link" for="nav-6-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Language/Language-reference/" title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-2" type="checkbox" id="nav-6-1-2">
+    
+    <label class="md-nav__link" for="nav-6-1-2">
+      Idiom
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-2">
+        Idiom
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Language/Idiom/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div class="toc">
+<ul>
+<li><a href="#_1">需要掌握的理论知识</a></li>
+<li><a href="#_2">综述</a></li>
+<li><a href="#_3">实现细节</a><ul>
+<li><a href="#metaparserpy">metaparser.py</a><ul>
+<li><a href="#class-grammarparser">class GrammarParser</a><ul>
+<li><a href="#parse">parse</a><ul>
+<li><a href="#python-grammargrammar-meta-grammar">描述python grammar的grammar: meta-grammar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#automatapy">automata.py</a><ul>
+<li><a href="#nfa">NFA</a></li>
+<li><a href="#dfa">DFA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1">需要掌握的理论知识</h1>
+<p>我认为， 要想理解cpython的<code>pgen</code>，你需要掌握一定的compiler的front end的原理，以dragon book来说的话，你至少要掌握了如下章节的内容：</p>
+<ul>
+<li>Chapter 3 Lexical Analysis</li>
+<li>3.6 Finite Automata</li>
+<li>3.7 From Regular Expressions to Automata</li>
+<li>Chapter 4 Syntax Analysis</li>
+<li>4.2 Context-Free Grammars</li>
+<li>4.4 Top-Down Parsing</li>
+</ul>
+<h1 id="_2">综述</h1>
+<p>Full Grammar specification of python is <a href="https://docs.python.org/3/reference/grammar.html">here</a>，它被<a href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido van Rossum</a>称为EBNF-like grammar . EBNF-like grammar所扩展的其实就是对regular expression中的一些标记的支持，所以它的语法看起来和正则表达式比较类似，下面会进行说明. Full Grammar specification is a file, which is human-readable, the task of <code>pgen</code> is reading the file, parsing it and constructing predictive parsing table. 下面将对整个<code>pgen</code>的实现原理进行概括性的描述，然后分章节对具体的实现细节进行描述。</p>
+<p>EBNF-like grammar的每条语法是以<a href="https://en.wikipedia.org/wiki/Production_(computer_science)">production</a>的方式来描述的，对于我们而言，首先需要能够理解这些grammar，如下是grammar中中一些特殊符号的含义：</p>
+<ul>
+<li><code>[]</code>表示可选，optional</li>
+<li><code>|</code>表示或，or</li>
+<li><code>+</code>表示大于等于1，more than 1</li>
+<li><code>*</code>表示任意多个，any</li>
+</ul>
+<p>在将grammar file读入内存后，<code>pgen</code>使用<code>tokenize</code>模块的<code>generate_tokens</code>来将grammar file中的内容转换为stream of token，所以后续对grammar file的解析就是基于这个stream of token的。正如前面所说的，python的EBNF-like grammar非常类似于regular expression，也就是说我们使用regular expression来描述python的语法，也就是说regular expression是python语法的meta-grammar。为什么要强调呢？因为<code>pgen</code>要想实现parsing grammar的任务，就必须知道meta-grammar。现在我们已经知道了meta-grammar是regular expression，所以<code>pgen</code>就可以按照regular expression的语法来进行解析。通常，可以根据regular expression构造出对应的DFA，<code>pgen</code>中就是采取的这种方式，程序内部使用DFA来表示production的body（regular expression）。根据regular expression来构建DFA，所采用的是如下算法：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Function</th>
+<th>Chapter in dragon book</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Thompson's_construction">Thompson's construction algorithm</a></td>
+<td>transforming a <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> into an equivalent <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">nondeterministic finite automaton</a> (NFA)</td>
+<td>3.7.4 Construction of an NFA from a Regular Expression</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Subset_construction_algorithm">subset construction algorithm</a></td>
+<td><a href="https://en.wikipedia.org/wiki/Automata_construction">converting</a> a <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">nondeterministic finite automaton</a> (NFA) into a <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a> (DFA) which recognizes the same <a href="https://en.wikipedia.org/wiki/Formal_language">formal language</a></td>
+<td>3.7.1 Conversion of an NFA to a DFA</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/DFA_minimization">DFA minimization</a></td>
+<td>transforming a given <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a> (DFA) into an equivalent DFA that has a minimum number of states.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>在解析完grammar后，<code>pgen</code>就得到了使用<code>DFA</code>表示的语法了（每条语法对应一个<code>DFA</code>），接着<code>pgen</code>就根据这些<code>DFA</code>来构造predictive parsing table，所采用的是Algorithm 4.31 described in chapter 4.4.3 LL(1) Grammars of dragon book ，在此不对此算法进行赘述。</p>
+<h1 id="_3">实现细节</h1>
+<h2 id="metaparserpy"><code>metaparser.py</code></h2>
+<p>实现对grammar的parse。</p>
+<h3 id="class-grammarparser"><code>class GrammarParser</code></h3>
+<h4 id="parse"><code>parse</code></h4>
+<p>使用<a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">Thompson's construction algorithm</a>来将每个产生式（一条grammar）的body转换为一个DFA(在<code>automata.py</code>中定义，参见下一节)，成员变量<code>_current_rule_name</code>对应的是产生式的头。在grammar文件中定义了多条grammar，所以<code>parse</code>方法每次处理一条grammar，并<code>yield</code>该grammar对应的DFA对象，也就是说，<code>parse</code>方法是一个generator。</p>
+<p><code>parse</code>采用<a href="https://en.wikipedia.org/wiki/Stream_(computing)">stream</a>处理的方式：一次处理一个token。</p>
+<p><code>_parse_rhs</code>中<code>rhs</code>的含义是right hand side的含义，对于一个production而言，它的right hand side就是它的body。</p>
+<p>EBNF-like grammar中包含有如下括号：</p>
+<ul>
+<li><code>[]</code></li>
+<li><code>()</code></li>
+</ul>
+<p>显然，<code>GrammarParser</code>的需要处理的一个问题就是括号的匹配，本程序中，实现括号的匹配所使用的是隐式的<a href="https://en.wikipedia.org/wiki/Call_stack">calling stack</a>，而不是使用一个显式的堆栈。</p>
+<p>几个辅助函数如下：</p>
+<p><code>_gettoken</code>获取下一个token信息，并将它保存在成员变量<code>self.type, self.value, self.begin, self.end, self.line</code>中</p>
+<p><code>_expect</code>比较当前成员变量与入参值，然后调用<code>_gettoken</code></p>
+<h5 id="python-grammargrammar-meta-grammar">描述python grammar的grammar: meta-grammar</h5>
+<p>正如在<a href="#综述">综述</a>章节中所描述的，python grammar的meta-grammar是regular expression，所以对grammar的解析是按照解析regular expression的方式来实现的，具体来说，就是使用的用<a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">Thompson's construction algorithm</a>算法。</p>
+<p><code>class GrammarParser</code>对<a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">Thompson's construction algorithm</a>算法的使用是非常清晰的，它给出了语法的通用格式如下：</p>
+<p><code>rule-&gt;rhs-&gt;items-&gt;item-&gt;atom</code> </p>
+<p>下面使用类似于正则表达式的方式对上述结构中的每一层进行解释：</p>
+<ul>
+<li>
+<p><code>rule: NAME ':' rhs NEWLINE</code> </p>
+</li>
+<li>
+<p><code>rhs: items ('|' items)*</code></p>
+</li>
+<li>
+<p><code>items: item+</code></p>
+</li>
+<li>
+<p><code>item: '[' rhs ']' | atom ['+' | '*']</code></p>
+</li>
+<li>
+<p><code>atom: '(' rhs ')' | NAME | STRING</code></p>
+</li>
+</ul>
+<p>可以看出，上诉语法描述出了python grammar的结构，<code>class GrammarParser</code>就是沿着上诉hierarchy进行逐层解析的，下面的表格是根据上述hierarchy而画出的，每一列分别对应一层，在第三行添加了解析该层的对应的函数。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>rule</th>
+<th><code>rhs</code></th>
+<th>items</th>
+<th>item</th>
+<th>atom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语法</td>
+<td><code>rule: NAME ':' rhs NEWLINE</code></td>
+<td><code>rhs: items ('|' items)*</code></td>
+<td><code>items: item+</code></td>
+<td><code>item: '[' rhs ']' | atom ['+' | '*']</code></td>
+<td><code>atom: '(' rhs ')'</code></td>
+</tr>
+<tr>
+<td>函数</td>
+<td><code>parse</code></td>
+<td><code>_parse_rhs</code></td>
+<td><code>_parse_items</code></td>
+<td><code>_parse_item</code></td>
+<td><code>_parse_atom</code></td>
+</tr>
+</tbody>
+</table>
+<p>从上述表格可以看出，<code>class GrammarParser</code>的代码结构是非常清晰的，它的实现也是简洁易懂的。</p>
+<h2 id="automatapy"><code>automata.py</code></h2>
+<p>The implementation of converting the body of the production to a DFA is in <code>automata.py</code></p>
+<p>automata也是图，如何来表示node（state）和edge（transition），下面是automata和graph之间的对应关系</p>
+<table>
+<thead>
+<tr>
+<th>graph</th>
+<th>automata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node</td>
+<td>state</td>
+</tr>
+<tr>
+<td>edge</td>
+<td>transition</td>
+</tr>
+</tbody>
+</table>
+<p>在<code>automata.py</code>中定义了两种automata：</p>
+<ul>
+<li>NFA</li>
+<li>DFA</li>
+</ul>
+<h3 id="nfa">NFA</h3>
+<p><code>class NFAArc</code></p>
+<p>表示图的边</p>
+<p><code>class NFAState</code></p>
+<p>表示图的节点</p>
+<p><code>class NFA</code></p>
+<p>一个NFA其实是一张有向图，每个NFA有一个起始状态和一个终止状态，分别对应了成员变量<code>start</code>和<code>end</code>。</p>
+<h3 id="dfa">DFA</h3>
+<p><code>class DFA</code></p>
+<p>类方法<code>from_nfa</code>是一个工厂方法，它使用<a href="https://en.wikipedia.org/wiki/Subset_construction_algorithm">subset construction algorithm</a>，根据一个NFA构造一个DFA。</p>
+<p><code>class DFAState</code></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../../../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

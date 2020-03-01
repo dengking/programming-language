@@ -1,0 +1,2072 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/programming-language/Theory/Type-system/Type-system/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Type-system - programming-language</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-27795084-5", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#type-system" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              programming-language
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Type-system
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    programming-language
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../Programming-language/" title="Programming-language" class="md-nav__link">
+      Programming-language
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../Common/" title="Common" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Theory
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Theory
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" checked>
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Type-system
+      </label>
+    
+    <a href="./" title="Type-system" class="md-nav__link md-nav__link--active">
+      Type-system
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage-overview" class="md-nav__link">
+    Usage overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentals" class="md-nav__link">
+    Fundamentals
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-errors" class="md-nav__link">
+    Type errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-checking" class="md-nav__link">
+    Type checking
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-type-checking" class="md-nav__link">
+    Static type checking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-type-checking-and-runtime-type-information" class="md-nav__link">
+    Dynamic type checking and runtime type information
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-static-and-dynamic-type-checkingedit" class="md-nav__link">
+    Combining static and dynamic type checking[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-and-dynamic-type-checking-in-practice" class="md-nav__link">
+    Static and dynamic type checking in practice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-and-weak-type-systemsedit" class="md-nav__link">
+    Strong and weak type systems[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-safety-and-memory-safetyedit" class="md-nav__link">
+    Type safety and memory safety[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-levels-of-type-checkingedit" class="md-nav__link">
+    Variable levels of type checking[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-type-systemsedit" class="md-nav__link">
+    Optional type systems[edit]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polymorphism-and-typesedit" class="md-nav__link">
+    Polymorphism and types[edit]
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#duck-typingedit" class="md-nav__link">
+    Duck typing[edit]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specialized-type-systemsedit" class="md-nav__link">
+    Specialized type systems[edit]
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependent-typesedit" class="md-nav__link">
+    Dependent types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-typesedit" class="md-nav__link">
+    Linear types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection-typesedit" class="md-nav__link">
+    Intersection types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union-typesedit" class="md-nav__link">
+    Union types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existential-typesedit" class="md-nav__link">
+    Existential types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradual-typingedit" class="md-nav__link">
+    Gradual typing[edit]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-or-implicit-declaration-and-inference" class="md-nav__link">
+    Explicit or implicit declaration and inference
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unified-type-systemedit" class="md-nav__link">
+    Unified type system[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-equivalence-and-subtypingedit" class="md-nav__link">
+    Compatibility: equivalence and subtyping[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notesedit" class="md-nav__link">
+    Notes[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-alsoedit" class="md-nav__link">
+    See also[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencesedit" class="md-nav__link">
+    References[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    Further reading
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Type-safety/" title="Type-safety" class="md-nav__link">
+      Type-safety
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Static-vs-dynamic-typing/" title="Static-vs-dynamic-typing" class="md-nav__link">
+      Static-vs-dynamic-typing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Programming-paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Programming-paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/Programming-paradigm/" title="Programming-paradigm" class="md-nav__link">
+      Programming-paradigm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Object-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Object-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/Object-oriented-programming/Object-oriented-programming/" title="Object-oriented-programming" class="md-nav__link">
+      Object-oriented-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-2" type="checkbox" id="nav-4-3-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-3-2">
+      Thinking-in-java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-3-2">
+        Thinking-in-java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/Object-oriented-programming/Thinking-in-java/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects/" title="Introduction-to-Objects" class="md-nav__link">
+      Introduction-to-Objects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object/" title="Everything-is-an-object" class="md-nav__link">
+      Everything-is-an-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Programming-paradigm/Object-oriented-programming/Glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1" type="checkbox" id="nav-5-1-1">
+    
+    <label class="md-nav__link" for="nav-5-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Language/Language-reference/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      Developer's-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        Developer's-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Language/Developer's-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Library-Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Library-Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1" type="checkbox" id="nav-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1">
+      Build-in-function
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-1">
+        Build-in-function
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Library-Reference/build-in-function/summary-of-python-build-in-function/" title="Summary-of-python-build-in-function" class="md-nav__link">
+      Summary-of-python-build-in-function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2" type="checkbox" id="nav-5-2-1-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2">
+      Hash
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-2">
+        Hash
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Library-Reference/build-in-function/hash/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Philosophy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Philosophy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Philosophy/The-Zen-of-Python/" title="The-Zen-of-Python" class="md-nav__link">
+      The-Zen-of-Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Style-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Style-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Style-guide/Style-Guide-for-Python-Code/" title="Style-Guide-for-Python-Code" class="md-nav__link">
+      Style-Guide-for-Python-Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Paradigm/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2" type="checkbox" id="nav-5-5-2">
+    
+    <label class="md-nav__link" for="nav-5-5-2">
+      Meta-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-5-2">
+        Meta-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2-1" type="checkbox" id="nav-5-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-5-2-1">
+      Reflective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-5-2-1">
+        Reflective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Paradigm/Meta-programming/Reflective/Python-reflection/" title="Python-reflection" class="md-nav__link">
+      Python-reflection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6-1" type="checkbox" id="nav-5-6-1">
+    
+    <label class="md-nav__link" for="nav-5-6-1">
+      Lazy-import
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-6-1">
+        Lazy-import
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/How-to/Lazy-import/Lazy-importing/" title="Lazy-importing" class="md-nav__link">
+      Lazy-importing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Software/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+    
+    <label class="md-nav__link" for="nav-5-8">
+      Glossary
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-8">
+        Glossary
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Glossary/Abstract-base-class/" title="Abstract-base-class" class="md-nav__link">
+      Abstract-base-class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/Glossary/Argument-and-parameter/" title="Argument-and-parameter" class="md-nav__link">
+      Argument-and-parameter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1" type="checkbox" id="nav-6-1-1">
+    
+    <label class="md-nav__link" for="nav-6-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Language/Language-reference/" title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-2" type="checkbox" id="nav-6-1-2">
+    
+    <label class="md-nav__link" for="nav-6-1-2">
+      Idiom
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-2">
+        Idiom
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Language/Idiom/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../C++/Paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage-overview" class="md-nav__link">
+    Usage overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentals" class="md-nav__link">
+    Fundamentals
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-errors" class="md-nav__link">
+    Type errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-checking" class="md-nav__link">
+    Type checking
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-type-checking" class="md-nav__link">
+    Static type checking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-type-checking-and-runtime-type-information" class="md-nav__link">
+    Dynamic type checking and runtime type information
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-static-and-dynamic-type-checkingedit" class="md-nav__link">
+    Combining static and dynamic type checking[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-and-dynamic-type-checking-in-practice" class="md-nav__link">
+    Static and dynamic type checking in practice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-and-weak-type-systemsedit" class="md-nav__link">
+    Strong and weak type systems[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-safety-and-memory-safetyedit" class="md-nav__link">
+    Type safety and memory safety[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-levels-of-type-checkingedit" class="md-nav__link">
+    Variable levels of type checking[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-type-systemsedit" class="md-nav__link">
+    Optional type systems[edit]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polymorphism-and-typesedit" class="md-nav__link">
+    Polymorphism and types[edit]
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#duck-typingedit" class="md-nav__link">
+    Duck typing[edit]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specialized-type-systemsedit" class="md-nav__link">
+    Specialized type systems[edit]
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependent-typesedit" class="md-nav__link">
+    Dependent types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-typesedit" class="md-nav__link">
+    Linear types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection-typesedit" class="md-nav__link">
+    Intersection types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union-typesedit" class="md-nav__link">
+    Union types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existential-typesedit" class="md-nav__link">
+    Existential types[edit]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradual-typingedit" class="md-nav__link">
+    Gradual typing[edit]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-or-implicit-declaration-and-inference" class="md-nav__link">
+    Explicit or implicit declaration and inference
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unified-type-systemedit" class="md-nav__link">
+    Unified type system[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-equivalence-and-subtypingedit" class="md-nav__link">
+    Compatibility: equivalence and subtyping[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notesedit" class="md-nav__link">
+    Notes[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-alsoedit" class="md-nav__link">
+    See also[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencesedit" class="md-nav__link">
+    References[edit]
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    Further reading
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <p>在编程过程中，少不了跟**类型**打交道：我们会创建一个类型（如定义一个类），我们会对不同类型的数据进行运算，等等。如果对数据的类型认识不够，则会导致<a href="https://en.wikipedia.org/wiki/Type_error">类型错误</a>这种常见的编程错误。所以对**编程语言**的**类型系统**有一个完整深刻的认知非常重要。我在编程过程中也曾陷入混淆、误用类型的深渊，为此搜寻对**编程语言**的**类型系统**有完整介绍的文章，下面这篇文章我觉得非常好，源自维基百科，原文是全英的，我自己在阅读过程中添加了一些注释和翻译。</p>
+<h1 id="type-system"><a href="https://en.wikipedia.org/wiki/Type_system">Type system</a></h1>
+<p>This article is about type systems from the point-of-view of computer programming. For a theoretical formulation(阐述), see <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a>.</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Programming_language">programming languages</a>, a <strong>type system</strong> is a set of rules that assigns a property called <a href="https://en.wikipedia.org/wiki/Type_(computer_science)">type</a> to the various constructs(组成部分) of a <a href="https://en.wikipedia.org/wiki/Computer_program">computer program</a>, such as <a href="https://en.wikipedia.org/wiki/Variable_(computer_science)">variables</a>, <a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">expressions</a>, <a href="https://en.wikipedia.org/wiki/Function_(computer_science)">functions</a> or <a href="https://en.wikipedia.org/wiki/Modular_programming">modules</a>(将类型作为一个属性).[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTEPierce20021-1">1]</a> These types formalize and enforce the otherwise implicit categories the programmer uses for data structures and components (e.g. "string", "array of float", "function returning boolean")(这段话中“the programmer uses for data structures and components ”是定语，修饰categories，字面意思是：类型形式化并强制执行程序员用于数据结构和组件的隐式类别。各种编程语言中都会提供基本类型，如int，float等，也会提供一些复合类型，如容器string等。显然这些复合类型的定义是离不开基本类型的。). The main purpose of a type system is to reduce possibilities for <a href="https://en.wikipedia.org/wiki/Bug_(computer_programming)">bugs</a> in computer programs[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTECardelli20041-2">2]</a> by defining interfaces between different parts of a computer program, and then checking that the parts have been connected in a consistent way. <strong>This checking</strong> can happen statically (at <a href="https://en.wikipedia.org/wiki/Compile_time">compile time</a>), dynamically (at <a href="https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)">run time</a>), or as a combination of static and dynamic checking. Type systems have other purposes as well, such as expressing business rules(表达业务规则), enabling certain compiler optimizations, allowing for <a href="https://en.wikipedia.org/wiki/Multiple_dispatch">multiple dispatch</a>(允许多级调用), providing a form of documentation, etc.</p>
+<p>A type system <strong>associates</strong> a type with each computed value and, by examining the flow of these values, <strong>attempts</strong> to ensure or prove that no <a href="https://en.wikipedia.org/wiki/Type_error">type errors</a> can occur. The given type system in question determines exactly what constitutes(构成) a type error, but in general the aim is to prevent operations expecting a certain kind of value from being used with values for which that operation does not make sense (<a href="https://en.wikipedia.org/wiki/Logic_error">logic errors</a>). Type systems are often specified as part of <a href="https://en.wikipedia.org/wiki/Programming_language">programming languages</a>, and built into the interpreters and compilers for them; although the type system of a language can be extended by <a href="https://en.wikipedia.org/wiki/Extended_static_checking">optional tools</a> that perform added kinds of checks using the language's original type syntax and grammar.</p>
+<p>总结：前面这段文字主要阐述了这些内容：</p>
+<ul>
+<li>什么是类型</li>
+<li>编程语言中为什么要使用类型即使用类型能够为编程语言带来什么好处</li>
+<li>类型系统的组成</li>
+</ul>
+<p><strong>Q&amp;A</strong>:</p>
+<p>运行时类型检查是什么？是和多态有关的吗？</p>
+<h2 id="usage-overview">Usage overview</h2>
+<p>An example of a simple type system is that of the <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C language</a>. The portions(组成部分) of a C program are the <a href="https://en.wikipedia.org/wiki/Subroutine">function</a> definitions. One function is invoked by another function. The <strong>interface</strong> of a function states the name of the function and a list of values that are passed to the function's code. The code of an invoking function states the name of the invoked, along with the names of variables that hold values to pass to it. During execution, the values are placed into <strong>temporary storage</strong>, then execution jumps to the code of the invoked function. The invoked function's code accesses the values and makes use of them. If the <strong>instructions</strong> inside the function are written with the assumption of receiving an <strong>integer</strong> value, but the calling code passed a <strong>floating-point</strong> value, then the wrong result will be computed by the invoked function. The <strong>C compiler</strong> checks the type declared for each variable sent, against the type declared for each variable in the interface of the invoked function(C编译器会检查函数形参的类型，以及调用函数时候传入的实参的类型). If the types do not match, the compiler throws a compile-time error(如果类型不匹配，则编译器在编译阶段就会抛出一个编译错误).</p>
+<p>总结：这段话以C编译器的**静态类型检查**为例来说明类型的一个作用</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Compiler">compiler</a> may also use the static type of a value to optimize the storage it needs and the choice of algorithms for operations on the value. In many <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a> compilers the <em>float</em> <a href="https://en.wikipedia.org/wiki/Data_type">data type</a>, for example, is represented in 32 <a href="https://en.wikipedia.org/wiki/Bit">bits</a>, in accord with(与什么一致) the <a href="https://en.wikipedia.org/wiki/IEEE_754-2008">IEEE specification for single-precision floating point numbers</a>. They will thus use floating-point-specific <a href="https://en.wikipedia.org/wiki/Instruction_set">microprocessor operations</a> on those values (floating-point addition, multiplication, etc.)(它们将对这些值使用浮点特定的微处理器操作（浮点加法，乘法等），这是一种优化).</p>
+<p>总结：这段胡以float类型的数据为例来说明：编译器在汇编阶段可以根据value的static type来优化对该value的存储以及选择处理该value的指令。</p>
+<p>The depth of type constraints(类型限制) and the manner of their evaluation(类型推断) affect the <em>typing</em> of the language. A <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a> may further associate an operation with various resolutions for each type, in the case of <a href="https://en.wikipedia.org/wiki/Type_polymorphism">type polymorphism</a>(在类型多态性的情况下，编程语言可以进一步将操作与每种类型的各种分辨率相关联。此处将resolutions翻译为分辨率，感觉是不对的). <a href="https://en.wikipedia.org/wiki/Type_theory">Type theory</a> is the study of type systems. The concrete types of some programming languages, such as integers and strings, depend on practical issues of computer architecture, compiler implementation, and language design.</p>
+<h2 id="fundamentals">Fundamentals</h2>
+<p>Formally, <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a> studies type systems. A programming language must have occurrence to type check using the <em>type system</em> whether at compile time or runtime, manually annotated or automatically inferred. </p>
+<p>总结：无论是在编译时还是在运行时，手动注释或自动推断，编程语言都必须使用类型系统进行类型检查。</p>
+<p>As <a href="https://en.wikipedia.org/w/index.php?title=Mark_Manasse&amp;action=edit&amp;redlink=1">Mark Manasse</a> concisely put it:[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTEPierce2002208-3">3]</a></p>
+<blockquote>
+<p>The fundamental problem addressed by a type theory is to ensure that programs have meaning. The fundamental problem caused by a type theory is that meaningful programs may not have meanings ascribed to（归属于） them. The quest for richer type systems results from this tension.</p>
+</blockquote>
+<p>总结：Mark Manasse的观点是**类型**使程序具有**意义**，下面的话对这个观点进行了阐述：</p>
+<p>Assigning a data type, termed <em>typing</em>, gives <strong>meaning</strong> to a sequence of <a href="https://en.wikipedia.org/wiki/Bit">bits</a> such as a value in <a href="https://en.wikipedia.org/wiki/Computer_memory">memory</a> or some <a href="https://en.wikipedia.org/wiki/Object_(computer_science)">object</a> such as a <a href="https://en.wikipedia.org/wiki/Variable_(computer_science)">variable</a>. The <strong>hardware</strong> of a <a href="https://en.wikipedia.org/wiki/General_purpose_computer">general purpose computer</a> is unable to discriminate(区分) between for example a <a href="https://en.wikipedia.org/wiki/Memory_address">memory address</a> and an <a href="https://en.wikipedia.org/wiki/Instruction_code_(programming)">instruction code</a>(指令代码), or between a <a href="https://en.wikipedia.org/wiki/Character_(computing)">character</a>, an <a href="https://en.wikipedia.org/wiki/Integer">integer</a>, or a <a href="https://en.wikipedia.org/wiki/Floating-point_number">floating-point number</a>, because it makes no intrinsic distinction(区分) between any of the possible values that a sequence of bits might <em>mean</em>(这段话的意思是当我们将高级语言所编写的程序翻译成二进制程序后，硬件层，比如CPU，在执行这些二进制程序的时候，并不会关心这些二进制数据所代表的含义（这些数据表示的是内存地址，还是指令码，等等），也就是硬件层压根就没有类型的概念，对它们而言，所有的一切都是二进制数).[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-Burroughs-4">note 1]</a> Associating a sequence of bits with a type conveys that <a href="https://en.wiktionary.org/wiki/meaning">meaning</a> to the programmable hardware to form a <em>symbolic system</em> composed of that hardware and some program(将二进制串和类型相关联能够将类型的意义传递到可编程硬件，这样可以实现由硬件和程序组成的symbolic system).</p>
+<p>A program associates each value with at least one specific type, but it also can occur that one value is associated with many <a href="https://en.wikipedia.org/wiki/Subtype">subtypes</a>. Other entities, such as <a href="https://en.wikipedia.org/wiki/Object_(computer_science)">objects</a>, <a href="https://en.wikipedia.org/wiki/Module_(programming)">modules</a>, communication channels, and <a href="https://en.wikipedia.org/wiki/Dependency_(computer_science)">dependencies</a> can become associated with a type. Even a type can become associated with a type. An implementation of a <em>type system</em> could in theory associate identifications called <em>data type</em> (a type of a value), <em>class</em> (a type of an object), and <em>kind</em> (a <em>type of a type</em>, or <strong>metatype</strong>). These are the abstractions that typing can go through, on a hierarchy of levels contained in a system.</p>
+<p>总结：程序为每个value关联一个类型，有可能出现的一种情况是一个value可以关联多个子类型。其他程序组成部分，比如object，module，等等，也都可以和一个类型相关联。显然类型系统中可以包含的类型是非常比较多，比较复杂的。类型系统一种理论上的实现方式是以hierarchy即层的方式来对各种类型进行定义。</p>
+<p>When a programming language evolves a more elaborate(复杂) type system, it gains a more finely grained(细化) rule set than basic type checking, but this comes at a price when the type inferences (and other properties) become <a href="https://en.wikipedia.org/wiki/Undecidable_problem">undecidable</a>(不可判定), and when more attention must be paid by the programmer to annotate(注释) code or to consider computer-related operations and functioning. It is challenging to find a sufficiently expressive type system that satisfies all programming practices in a <a href="https://en.wikipedia.org/wiki/Type_safe">type safe</a> manner.</p>
+<p>总结：随着编程语言的进化，类型系统也会变得更加复杂，除了最基本的type checking，类型系统将会包含更加细化的规则集，但是更加细化的规则集也意味着类型推导可能变得不确定，也意味着程序员需要花费更多的精力在对代码进行注释，思考与计算机相关的操作，功能等。所以寻找到一个既类型安全，有满足所有编程最佳实践的，并且具有足够表达力的类型系统是具有挑战性的。</p>
+<p>The more type restrictions that are imposed by the compiler, the more <em>strongly typed</em> a programming language is. <strong>Strongly typed languages</strong>(强类型语言) often require the programmer to make explicit conversions(显示类型转换) in contexts where an implicit conversion would cause no harm(强类型语言通常需要程序员在隐式转换不会造成伤害的上下文中进行显式转换). Pascal's type system has been described as "too strong" because, for example, the size of an array or string is part of its type, making some programming tasks difficult.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-5">4]</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-6">5]</a> <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a> is also strongly typed but its types are automatically inferred(类型是自动推导的) so that explicit conversions are often (but not always) unnecessary.</p>
+<p>总结：如果从类型限制的强弱来判定编程语言的话，那些类型限制较强的语言就可以称之为“强类型语言”。从作者所列举的**Pascal**和**Haskell**的例子来看，编程语言如何为程序员减低编程的工作量是非常重要的，两者同为强类型语言，但是Haskell的自动类型推导机制显然减低了其编程的工作量。</p>
+<p>A programming language compiler can also implement a <em>dependent type</em> or an <em>effect system</em>, which enables even more program specifications to be verified by a type checker. Beyond simple value-type pairs, a virtual "region" of code is associated with an "effect" component describing <em>what</em> is being done <em>with what</em>, and enabling for example to "throw" an error report. Thus the symbolic system may be a <em>type and effect system</em>, which endows it with more safety checking than type checking alone.</p>
+<p>总结：编程语言编译器也可以实现dependent type或effect system，这使type checker可以验证更多的程序规范。 除简单的value-type对之外，代码的虚拟“region”可以和一个"effect"**组件**相关联，这个**组件**能够描述正在做什么、“抛出”错误报告。 因此，symbolic system 可能是一个*type and effect system*，即除了type，它还涉及effect，它比单纯的类型检查赋予它更多的安全检查。</p>
+<p>Whether automated by the compiler or specified by a <strong>programmer</strong>, a type system makes program behavior illegal if outside the type-system rules(类型系统无论是由编译器自动执行还是由程序员指定，如果程序不符合类型系统的规则，则程序行为就有可能变得非法). Advantages provided by programmer-specified type systems include:</p>
+<ul>
+<li><em>Abstraction</em> (or <em>modularity</em>) – Types enable programmers to think at a higher level than the bit or byte, not bothering with low-level implementation. For example, programmers can begin to think of a string as a set of character values instead of as a mere array of bytes. Higher still, types enable programmers to think about and express <a href="https://en.wikipedia.org/wiki/Interface_(computer_science)">interfaces</a> between two of <em>any</em>-sized subsystems. This enables more levels of localization so that the definitions required for interoperability of the subsystems remain consistent when those two subsystems communicate.</li>
+<li><em>Documentation</em> – In more expressive type systems, types can serve as a form of <a href="https://en.wikipedia.org/wiki/Documentation">documentation</a> clarifying the intent of the programmer. For example, if a programmer declares a function as returning a timestamp type, this documents the function when the timestamp type can be explicitly declared deeper in the code to be an integer type.</li>
+</ul>
+<p>Advantages provided by compiler-specified type systems include:</p>
+<ul>
+<li><em>Optimization</em> – Static type-checking may provide useful compile-time information. For example, if a type requires that a value must align in memory at a multiple of four bytes, the compiler may be able to use more efficient machine instructions.</li>
+<li><em>Safety</em> – A type system enables the <a href="https://en.wikipedia.org/wiki/Compiler">compiler</a> to detect meaningless or probably invalid code. For example, we can identify an expression <code>3 / "Hello, World"</code> as invalid, when the rules do not specify how to divide an <a href="https://en.wikipedia.org/wiki/Integer">integer</a> by a <a href="https://en.wikipedia.org/wiki/String_(computer_science)">string</a>. Strong typing offers more safety, but cannot guarantee complete <em>type safety</em>.</li>
+</ul>
+<p>总结：类型系统可以由编译器来实现（这是主流0），当然也可以由程序员来进行指定，无论是有谁，如果查询不符合类型规则，则程序的行为都可能是非法的。并且上面的内容还讨论了programmer-specified type systems和compiler-specified type systems各自的优势。</p>
+<h3 id="type-errors">Type errors</h3>
+<p>A type error is an unintended condition which might manifest(出现) in multiple stages of a program's development. Thus a facility for detection of the error is needed in the <strong>type system</strong>. In some languages, such as Haskell, for which <a href="https://en.wikipedia.org/wiki/Type_inference">type inference</a> is automated, <a href="https://en.wikipedia.org/wiki/Lint_(software)">lint</a> might be available to its compiler to aid in the detection of error.</p>
+<p><strong>Type safety</strong> contributes to <a href="https://en.wikipedia.org/wiki/Program_correctness">program correctness</a>, but can only guarantee correctness at the cost of making the type checking itself an <a href="https://en.wikipedia.org/wiki/Undecidable_problem">undecidable problem</a>.In a <em>type system</em> with automated type checking a program may prove to run incorrectly yet be safely typed, and produce no compiler errors. <a href="https://en.wikipedia.org/wiki/Division_by_zero">Division by zero</a> is an unsafe and incorrect operation, but a type checker running at <a href="https://en.wikipedia.org/wiki/Compile_time">compile time</a> only doesn't scan for division by zero in most languages, and then it is left as a <a href="https://en.wikipedia.org/wiki/Runtime_error">runtime error</a>. To prove the absence of these more-general-than-types defects, other kinds of <a href="https://en.wikipedia.org/wiki/Formal_method">formal methods</a>, collectively known as <a href="https://en.wikipedia.org/wiki/Program_analysis_(computer_science)">program analyses</a>, are in common use. Alternatively, a sufficiently expressive type system, such as in dependently typed languages, can prevent these kinds of errors (for example, expressing <em>the type of non-zero numbers</em>). In addition <a href="https://en.wikipedia.org/wiki/Software_testing">software testing</a> is an <a href="https://en.wikipedia.org/wiki/Empirical">empirical</a> method for finding errors that the type checker cannot detect.</p>
+<h2 id="type-checking">Type checking</h2>
+<p>The process of verifying and enforcing the constraints of types—<em>type checking</em>—may occur either at <a href="https://en.wikipedia.org/wiki/Compile-time">compile-time</a> (a static check) or at <a href="https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)">run-time</a>. If a language specification(语言规范) requires its typing rules strongly (i.e., more or less allowing only those automatic type conversions that do not lose information(即或多或少只允许那些不会丢失信息的自动类型转换)), one can refer to the process as <em>strongly typed</em>, if not, as <em>weakly typed</em>. The terms are not usually used in a strict sense.</p>
+<p><strong>Q&amp;A</strong>:</p>
+<p>哪些类型之间是能够进行自动类型转换的呢？</p>
+<h3 id="static-type-checking">Static type checking</h3>
+<p><strong>Static type checking</strong> is the process of verifying the <a href="https://en.wikipedia.org/wiki/Type_safety">type safety</a> of a program based on analysis of a program's text (source code). If a program passes a static type checker, then the program is guaranteed to satisfy some set of type safety properties for all possible inputs.</p>
+<p><strong>Static type checking</strong> can be considered a limited form of <a href="https://en.wikipedia.org/wiki/Program_verification">program verification</a> (see <a href="https://en.wikipedia.org/wiki/Type_safety">type safety</a>), and in a type-safe language, can be considered also an optimization. If a compiler can prove that a program is well-typed, then it does not need to emit <strong>dynamic safety checks</strong>, allowing the resulting compiled binary to run faster and to be smaller.</p>
+<p><strong>Static type checking</strong> for <strong>Turing-complete languages</strong> is inherently(本质上) conservative. That is, if a <strong>type system</strong> is both <em>sound</em> (meaning that it rejects all incorrect programs) and <em>decidable</em> (meaning that it is possible to write an algorithm that determines whether a program is well-typed), then it must be <em>incomplete</em> (meaning there are correct programs, which are also rejected, even though they do not encounter runtime errors).[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-7">6]</a> </p>
+<p>总结：上面三段话对静态类型检查进行了介绍，其中第一段话和第二段话是比较好理解的，比较难理解的是第三段话。其实如果结合下面 这个例子的话，第三段话的含义也是可以倒推出来的。第三段话的意思是：对于**Turing-complete languages** 而言，静态类型检查是保守的。如果一个类型系统是sound和decidable的，那么它一定是incomplete的（意味着一个正确的程序，即使它不会产生运行时错误，但是静态类型检查还是会认为它是错误的而拒绝它）。比如下面的这个例子，如果<code>complex text</code>永远是<code>true</code>，则<code>else</code>分支将永远都不会被执行到，那么<code>else</code>分支中的代码就不会产生运行时错误，但是大多数type checker是会拒绝这个代码的。</p>
+<p>For example, consider a program containing the code:</p>
+<p><code>if &lt;complex test&gt; then &lt;do something&gt; else &lt;generate type error&gt;</code></p>
+<p>Even if the expression <code>&lt;complex test&gt;</code> always evaluates to <code>true</code> at run-time, most <strong>type checkers</strong> will reject the program as ill-typed, because it is difficult (if not impossible) for a <strong>static analyzer</strong> to determine that the <code>else</code> branch will not be taken.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTEPierce2002-8">7]</a> Conversely, a <strong>static type checker</strong> will quickly detect type errors in rarely used code paths. Without <strong>static type checking</strong>, even <a href="https://en.wikipedia.org/wiki/Code_coverage">code coverage</a> tests with 100% coverage may be unable to find such type errors. The tests(指前面提到的code coverage tests ) may fail to detect such type errors, because the combination of all places where values are created and all places where a certain value is used must be taken into account.</p>
+<p>总结：这段话是结合上面的那个小程序对type checker进行了一个辩证地分析。</p>
+<p>A number of useful and common programming language features cannot be checked statically, such as <a href="https://en.wikipedia.org/wiki/Downcasting">downcasting</a>. Thus, many languages will have both static and dynamic type checking; the static type checker verifies what it can, and dynamic checks verify the rest.</p>
+<p>Many languages with <strong>static type checking</strong> provide a way to bypass(绕过) the <strong>type checker</strong>. Some languages allow programmers to choose between static and dynamic type safety. For example, <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)">C#</a> distinguishes between <em>statically-typed</em> and <em>dynamically-typed</em> variables. Uses of the former are checked statically, whereas uses of the latter are checked dynamically. Other languages allow writing code that is not type-safe. For example, in <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a>, programmers can freely cast a value between any two types that have the same size.</p>
+<p>总结：一些非常有用的语言特性是无法进行静态检查的，所以很多编程语言既有静态类型检查又有动态类型检查。并且结合前面的那个对静态类型检查进行分析的例子，可以看出有时候是不需要进行静态类型检查的，所以有的编程语言就允许由程序员来指定是否进行静态类型检查和动态类型检查，比如<code>C#</code>，来决定程序是否满足**静态类型安全性**和**动态类型安全性**；甚至有的语言并不要求类型安全，比如<code>C</code>语言，它允许对相同大小的类型进行转换。请参照下面这个链接来看哪些语言是会进行静态类型检查的。</p>
+<p>For a list of languages with static type checking, see <a href="https://en.wikipedia.org/wiki/Category:Statically_typed_programming_languages">the category for statically typed languages</a>.</p>
+<h3 id="dynamic-type-checking-and-runtime-type-information">Dynamic type checking and runtime type information</h3>
+<p><strong>Dynamic type checking</strong> is the process of verifying the <strong>type safety</strong> of a program at runtime. Implementations of <strong>dynamically type-checked languages</strong> generally associate each runtime object with a  <strong>type tag</strong>  (i.e., a reference to a type) containing its <strong>type information</strong>. This runtime type information (<strong>RTTI</strong>) can also be used to implement <a href="https://en.wikipedia.org/wiki/Dynamic_dispatch">dynamic dispatch</a>, <a href="https://en.wikipedia.org/wiki/Late_binding">late binding</a>, <a href="https://en.wikipedia.org/wiki/Downcasting">downcasting</a>, <a href="https://en.wikipedia.org/wiki/Reflection_(computer_programming)">reflection</a>, and similar features.</p>
+<p>总结：这段话给出了**Dynamic type checking** 即动态类型检查的含义的解释，以及其实现方式：RTTI，并且这里还提到了RTTI处理可以用于**Dynamic type checking** 外，还可以用于实现 <a href="https://en.wikipedia.org/wiki/Dynamic_dispatch">dynamic dispatch</a>, <a href="https://en.wikipedia.org/wiki/Late_binding">late binding</a>, <a href="https://en.wikipedia.org/wiki/Downcasting">downcasting</a>, <a href="https://en.wikipedia.org/wiki/Reflection_(computer_programming)">reflection</a>, and similar features.</p>
+<p>Most <strong>type-safe languages</strong> include some form of <strong>dynamic type checking</strong>, even if they also have a static type checker. The reason for this is that many useful features or properties are difficult or impossible to verify statically. For example, suppose that a program defines two types, A and B, where B is a <strong>subtype</strong> of A. If the program tries to convert a value of type A to type B, which is known as <a href="https://en.wikipedia.org/wiki/Downcasting">downcasting</a>, then the operation is legal only if the value being converted is actually a value of type B(如果用python来解释的话就是type()==B). Thus, a dynamic check is needed to verify that the operation is safe. This requirement is one of the criticisms(批评) of <strong>downcasting</strong>.</p>
+<p>总结：这段话以**downcasting**为例说明了为什么编程语言需要**dynamic type checking**。</p>
+<p>By definition, <strong>dynamic type checking</strong> may cause a program to fail at runtime. In some programming languages, it is possible to anticipate and recover from these failures. In others, type-checking errors are considered fatal.</p>
+<p>Programming languages that include <strong>dynamic type checking</strong> but not <strong>static type checking</strong> are often called "<strong>dynamically typed programming languages</strong>". For a list of such languages, see <a href="https://en.wikipedia.org/wiki/Category:Dynamically_typed_programming_languages">the category for dynamically typed programming languages</a>.</p>
+<p>总结：这里给出了**dynamically typed programming languages**的正确的定义。python就是一门**dynamically typed programming language**</p>
+<h3 id="combining-static-and-dynamic-type-checkingedit">Combining static and dynamic type checking[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=6">edit</a>]</h3>
+<p>Some languages allow both static and dynamic typing (type checking), sometimes called <em>soft</em> typing. For example, Java and some other ostensibly statically typed languages support <a href="https://en.wikipedia.org/wiki/Downcasting">downcasting</a> types to their <a href="https://en.wikipedia.org/wiki/Subtypes">subtypes</a>, querying an object to discover its <strong>dynamic type,</strong> and other type operations that depend on <strong>runtime type information</strong>. More generally, most programming languages include mechanisms for dispatching over different 'kinds' of data, such as <a href="https://en.wikipedia.org/wiki/Disjoint_union">disjoint unions</a>, <a href="https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming">subtype polymorphism</a>, and <a href="https://en.wikipedia.org/wiki/Variant_type">variant types</a>. Even when not interacting with type annotations or type checking, such mechanisms are materially similar to dynamic typing implementations. See <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a> for more discussion of the interactions between static and dynamic typing.</p>
+<p>Objects in <strong>object-oriented languages</strong> are usually accessed by a reference whose <strong>static target type</strong> (or <strong>manifest type</strong>(表面类型)) is equal to either the object's <strong>run-time type</strong> (its <strong>latent type</strong>(潜藏类型)) or a supertype thereof. This is conformant with the <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution principle</a>, which states that all operations performed on an instance of a given type can also be performed on an instance of a <strong>subtype</strong>. This concept is also known as <strong>subsumption</strong>. In some languages subtypes may also possess <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">covariant or contravariant</a> return types and argument types respectively.</p>
+<p>Certain languages, for example <a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a>, <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, or <a href="https://en.wikipedia.org/wiki/Cython">Cython</a> are dynamically type-checked by default, but allow programs to opt into static type checking by providing optional <strong>annotations</strong>. One reason to use such hints would be to optimize the performance of critical sections of a program. This is formalized by <a href="https://en.wikipedia.org/wiki/Type_system#Gradual_typing">gradual typing</a>. The programming environment <em>DrRacket</em>, a pedagogic environment based on Lisp, and a precursor of the language <a href="https://en.wikipedia.org/wiki/Racket_(programming_language)#Development">Racket</a> was also soft-typed.</p>
+<p>Conversely, as of version 4.0, the C# language provides a way to indicate that a variable should not be statically type-checked. A variable whose type is <code>dynamic</code> will not be subject to static type checking. Instead, the program relies on runtime type information to determine how the variable may be used.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-9">8]</a></p>
+<h3 id="static-and-dynamic-type-checking-in-practice">Static and dynamic type checking in practice</h3>
+<p>The choice between static and dynamic typing requires certain <a href="https://en.wikipedia.org/wiki/Trade-off">trade-offs</a>.</p>
+<p>Static typing can find type errors reliably at compile time, which should increase the reliability of the delivered program. However, programmers disagree over how commonly type errors occur, resulting in further disagreements over the proportion of those bugs that are coded that would be caught by appropriately representing the designed types in code.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-10">9]</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-11">10]</a> Static typing advocates[<em>who?</em>] believe programs are more reliable when they have been well type-checked, whereas dynamic-typing advocates[<em>who?</em>] point to distributed code that has proven reliable and to small bug databases.[<em>citation needed</em>] The value of static typing, then, presumably[<em>vague</em>]increases as the strength of the type system is increased. Advocates of <a href="https://en.wikipedia.org/wiki/Dependent_type">dependent typing</a>,[<em>who?</em>] implemented in languages such as <a href="https://en.wikipedia.org/wiki/Dependent_ML">Dependent ML</a> and <a href="https://en.wikipedia.org/wiki/Epigram_(programming_language)">Epigram</a>, have suggested that almost all bugs can be considered type errors, if the types used in a program are properly declared by the programmer or correctly inferred by the compiler.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-12">11]</a></p>
+<p>Static typing usually results in compiled code that executes faster. When the compiler knows the exact data types that are in use (which is necessary for static verification, either through declaration or inference) it can produce optimized machine code. Some dynamically typed languages such as <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a> allow optional type declarations for optimization for this reason.</p>
+<p>By contrast, dynamic typing may allow compilers to run faster and <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">interpreters</a> to dynamically load new code, because changes to source code in dynamically typed languages may result in less checking to perform and less code to revisit.[<em>clarification needed</em>] This too may reduce the edit-compile-test-debug cycle.</p>
+<p>Statically typed languages that lack <a href="https://en.wikipedia.org/wiki/Type_inference">type inference</a> (such as <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a> and <a href="https://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>) require that programmers declare the types that a method or function must use. This can serve as added program documentation, that is active and dynamic, instead of static. This allows a compiler to prevent it from drifting out of synchrony, and from being ignored by programmers. However, a language can be statically typed without requiring type declarations (examples include <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>, <a href="https://en.wikipedia.org/wiki/Scala_(programming_language)">Scala</a>, <a href="https://en.wikipedia.org/wiki/OCaml">OCaml</a>, <a href="https://en.wikipedia.org/wiki/F_Sharp_(programming_language)">F#</a>, and to a lesser extent <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)">C#</a> and <a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a>), so explicit type declaration is not a necessary requirement for static typing in all languages.</p>
+<p>Dynamic typing allows constructs that some static type checking would reject as illegal. For example, <em>eval</em> functions, which execute arbitrary data as code, become possible. An <em>eval</em> function is possible with static typing, but requires advanced uses of <a href="https://en.wikipedia.org/wiki/GADT">algebraic data types</a>. Further, dynamic typing better accommodates transitional code and prototyping, such as allowing a placeholder data structure (<a href="https://en.wikipedia.org/wiki/Mock_object">mock object</a>) to be transparently used in place of a full data structure (usually for the purposes of experimentation and testing).</p>
+<p>Dynamic typing typically allows <a href="https://en.wikipedia.org/wiki/Duck_typing">duck typing</a> (which enables <a href="https://en.wikipedia.org/wiki/Duck_typing#Comparison_with_other_type_systems">easier code reuse</a>). Many[<em>specify</em>] languages with static typing also feature <a href="https://en.wikipedia.org/wiki/Duck_typing#In_statically_typed_languages">duck typing</a> or other mechanisms like <a href="https://en.wikipedia.org/wiki/Generic_programming">generic programming</a> that also enable easier code reuse.</p>
+<p>Dynamic typing typically makes <a href="https://en.wikipedia.org/wiki/Metaprogramming">metaprogramming</a> easier to use. For example, <a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a> <a href="https://en.wikipedia.org/wiki/Template_(programming)">templates</a> are typically more cumbersome to write than the equivalent <a href="https://en.wikipedia.org/wiki/Ruby_(programming_language)">Ruby</a> or <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> code since <a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a> has stronger rules regarding type definitions (for both functions and variables). This forces a developer to write more boilerplate code for a template than a Python developer would need to. More advanced run-time constructs such as <a href="https://en.wikipedia.org/wiki/Metaclass">metaclasses</a> and <a href="https://en.wikipedia.org/wiki/Introspection_(computer_science)">introspection</a> are often harder to use in statically typed languages. In some languages, such features may also be used e.g. to generate new types and behaviors on the fly, based on run-time data. Such advanced constructs are often provided by <a href="https://en.wikipedia.org/wiki/Dynamic_programming_language">dynamic programming languages</a>; many of these are dynamically typed, although <em>dynamic typing</em> need not be related to <em>dynamic programming languages</em>.</p>
+<h3 id="strong-and-weak-type-systemsedit">Strong and weak type systems[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=8">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Strong_and_weak_typing">Strong and weak typing</a></p>
+<p>Languages are often colloquially referred to as <em>strongly typed</em> or <em>weakly typed</em>. In fact, there is no universally accepted definition of what these terms mean. In general, there are more precise terms to represent the differences between type systems that lead people to call them "strong" or "weak".</p>
+<h3 id="type-safety-and-memory-safetyedit">Type safety and memory safety[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=9">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Type_safety">Type safety</a></p>
+<p>A third way of categorizing the type system of a programming language uses the safety of typed <strong>operations</strong> and <strong>conversions</strong>. Computer scientists consider a language "type-safe" if it does not allow operations or conversions that violate the rules of the type system.</p>
+<p>Some observers use the term <em>memory-safe language</em> (or just <em>safe language</em>) to describe languages that do not allow programs to access memory that has not been assigned for their use. For example, a memory-safe language will <a href="https://en.wikipedia.org/wiki/Bounds_checking">check array bounds</a>, or else statically guarantee (i.e., at compile time before execution) that array accesses out of the array boundaries will cause compile-time and perhaps runtime errors.</p>
+<p>Consider the following program of a language that is both <strong>type-safe</strong> and <strong>memory-safe</strong>:[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-13">12]</a></p>
+<div class="highlight"><pre><span></span>1 var x := 5;     
+2 var y := &quot;37&quot;;  
+3 var z := x + y;
+</pre></div>
+
+<p>In this example, the variable <code>z</code> will have the value 42. Although this may not be what the programmer anticipated, it is a well-defined result. If <code>y</code> were a different string, one that could not be converted to a number (e.g. "Hello World"), the result would be well-defined as well. Note that a program can be type-safe or memory-safe and still crash on an invalid operation; in fact, if a program encounters an operation that is not type-safe, terminating the program is often the only option.</p>
+<p>Now consider a similar example in C:</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="mi">2</span> <span class="kt">char</span> <span class="n">y</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;37&quot;</span><span class="p">;</span>
+<span class="mi">3</span> <span class="kt">char</span><span class="o">*</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+</pre></div>
+
+<p>In this example <code>z</code> will point to a memory address five characters beyond <code>y</code>, equivalent to three characters after the terminating zero character of the string pointed to by <code>y</code>. This is memory that the program is not expected to access. It may contain garbage data, and it certainly doesn't contain anything useful. As this example shows, C is neither a <strong>memory-safe</strong> nor a <strong>type-safe</strong> language.</p>
+<p>In general, <strong>type-safety</strong> and <strong>memory-safety</strong> go hand in hand. For example, a language that supports <strong>pointer arithmetic</strong> and <strong>number-to-pointer conversions</strong> (like C) is neither <strong>memory-safe</strong> nor <strong>type-safe</strong>, because it allows arbitrary memory to be accessed as if it were valid memory of any type.</p>
+<p>For more information, see <a href="https://en.wikipedia.org/wiki/Memory_safety">memory safety</a>.</p>
+<h3 id="variable-levels-of-type-checkingedit">Variable levels of type checking[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=10">edit</a>]</h3>
+<p>Some languages allow different levels of checking to apply to different regions of code. Examples include:</p>
+<ul>
+<li>The <code>use strict</code> directive in <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-14">13]</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-15">14]</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-16">15]</a> and <a href="https://en.wikipedia.org/wiki/Perl">Perl</a> applies stronger checking.</li>
+<li>The <code>declare(strict_types=1)</code> in <a href="https://en.wikipedia.org/wiki/PHP">PHP</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-17">16]</a> on a per-file basis allows only a variable of exact type of the type declaration will be accepted, or a <code>TypeError</code> will be thrown.</li>
+<li>The <code>Option Strict On</code> in <a href="https://en.wikipedia.org/wiki/VB.NET">VB.NET</a> allows the compiler to require a conversion between objects.</li>
+</ul>
+<p>Additional tools such as <a href="https://en.wikipedia.org/wiki/Lint_(software)">lint</a> and <a href="https://en.wikipedia.org/wiki/IBM_Rational_Purify">IBM Rational Purify</a> can also be used to achieve a higher level of strictness.</p>
+<h3 id="optional-type-systemsedit">Optional type systems[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=11">edit</a>]</h3>
+<p>It has been proposed, chiefly by <a href="https://en.wikipedia.org/wiki/Gilad_Bracha">Gilad Bracha</a>, that the choice of type system be made independent of choice of language; that a type system should be a module that can be <em>plugged</em> into a language as needed. He believes this is advantageous, because what he calls mandatory type systems make languages less expressive and code more fragile.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-18">17]</a> The requirement that types do not affect the semantics of the language is difficult to fulfill.</p>
+<p>Optional typing is related to <a href="https://en.wikipedia.org/wiki/Gradual_typing">gradual typing</a>, but still distinct from it.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-19">18]</a>[<em>better source needed</em>]</p>
+<h2 id="polymorphism-and-typesedit">Polymorphism and types[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=12">edit</a>]</h2>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">Polymorphism (computer science)</a></p>
+<p>The term <em>polymorphism</em> refers to the ability of code (especially, functions or classes) to act on values of multiple types, or to the ability of different instances of the same data structure to contain elements of different types. Type systems that allow polymorphism generally do so in order to improve the potential for code re-use: in a language with polymorphism, programmers need only implement a data structure such as a list or an <a href="https://en.wikipedia.org/wiki/Associative_array">associative array</a> once, rather than once for each type of element with which they plan to use it. For this reason computer scientists sometimes call the use of certain forms of polymorphism <em>generic programming</em>. The type-theoretic foundations of polymorphism are closely related to those of <a href="https://en.wikipedia.org/wiki/Abstraction_(computer_science)">abstraction</a>, <a href="https://en.wikipedia.org/wiki/Module_(programming)">modularity</a> and (in some cases) <a href="https://en.wikipedia.org/wiki/Subtype">subtyping</a>.</p>
+<h3 id="duck-typingedit">Duck typing[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=13">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Duck_typing">Duck typing</a></p>
+<p>In <em>duck typing</em>,[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-20">19]</a> a statement calling a <a href="https://en.wikipedia.org/wiki/Method_(computer_science)">method</a> <code>m</code> on an object does not rely on the declared type of the object; only that the object, of whatever type, must supply an implementation of the method called, when called, at run-time.</p>
+<p>Duck typing differs from <a href="https://en.wikipedia.org/wiki/Structural_type_system">structural typing</a> in that, if the <em>part</em> (of the whole module structure) needed for a given local computation is present <em>at runtime</em>, the duck type system is satisfied in its type identity analysis. On the other hand, a structural type system would require the analysis of the whole module structure at compile time to determine type identity or type dependence.</p>
+<p>Duck typing differs from a <a href="https://en.wikipedia.org/wiki/Nominative_type_system">nominative type system</a> in a number of aspects. The most prominent ones are that for duck typing, type information is determined at runtime (as contrasted to compile time), and the name of the type is irrelevant to determine type identity or type dependence; only partial structure information is required for that for a given point in the program execution.</p>
+<p>Duck typing uses the premise that (referring to a value) "if it walks like a duck, and quacks like a duck, then it is a duck" (this is a reference to the <a href="https://en.wikipedia.org/wiki/Duck_test">duck test</a> that is attributed to <a href="https://en.wikipedia.org/wiki/James_Whitcomb_Riley">James Whitcomb Riley</a>). The term may have been coined[<em>citation needed</em>] by <a href="https://en.wikipedia.org/wiki/Alex_Martelli">Alex Martelli</a> in a 2000 message[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-21">20]</a> to the comp.lang.python <a href="https://en.wikipedia.org/wiki/Newsgroup">newsgroup</a> (see <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>).</p>
+<p>While one controlled experiment showed an increase in developer productivity for duck typing in single developer projects,[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-22">21]</a> other controlled experiments on API usability show the opposite.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-23">22]</a>[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-24">23]</a></p>
+<h2 id="specialized-type-systemsedit">Specialized type systems[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=14">edit</a>]</h2>
+<p>Many type systems have been created that are specialized for use in certain environments with certain types of data, or for out-of-band <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static program analysis</a>. Frequently, these are based on ideas from formal <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a> and are only available as part of prototype research systems.</p>
+<h3 id="dependent-typesedit">Dependent types[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=15">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Dependent_type">Dependent type</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Dependent_type">Dependent types</a> are based on the idea of using scalars or values to more precisely describe the type of some other value. For example, {\displaystyle \mathrm {matrix} (3,3)}<img alt="{\displaystyle \mathrm {matrix} (3,3)}" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/04b6df3034e02a45990859737da4794e846b8c08" /> might be the type of a {\displaystyle 3\times 3}<img alt="3 \times 3" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ddc0d4d6106875f8006be1d898512ca5843bad8e" /> matrix. We can then define typing rules such as the following rule for matrix multiplication:</p>
+<p>{\displaystyle \mathrm {matrix} _{\mathrm {multiply} }:\mathrm {matrix} (k,m)\times \mathrm {matrix} (m,n)\to \mathrm {matrix} (k,n)}<img alt="{\displaystyle \mathrm {matrix} _{\mathrm {multiply} }:\mathrm {matrix} (k,m)\times \mathrm {matrix} (m,n)\to \mathrm {matrix} (k,n)}" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a9b5ca3ad745c07126727667fefc60055f0549ff" /></p>
+<p>where {\displaystyle k}<img alt="k" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3c9a2c7b599b37105512c5d570edc034056dd40" />, {\displaystyle m}<img alt="m" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0a07d98bb302f3856cbabc47b2b9016692e3f7bc" />, {\displaystyle n}<img alt="n" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" /> are arbitrary positive integer values. A variant of <a href="https://en.wikipedia.org/wiki/ML_(programming_language)">ML</a> called <a href="https://en.wikipedia.org/wiki/Dependent_ML">Dependent ML</a> has been created based on this type system, but because type checking for conventional dependent types is <a href="https://en.wikipedia.org/wiki/Decidable_set">undecidable</a>, not all programs using them can be type-checked without some kind of limits. Dependent ML limits the sort of equality it can decide to <a href="https://en.wikipedia.org/wiki/Presburger_arithmetic">Presburger arithmetic</a>.</p>
+<p>Other languages such as <a href="https://en.wikipedia.org/wiki/Epigram_(programming_language)">Epigram</a> make the value of all expressions in the language decidable so that type checking can be decidable. However, in general <a href="https://en.wikipedia.org/wiki/Halting_Problem">proof of decidability is undecidable</a>, so many programs require hand-written annotations that may be very non-trivial. As this impedes the development process, many language implementations provide an easy way out in the form of an option to disable this condition. This, however, comes at the cost of making the type-checker run in an <a href="https://en.wikipedia.org/wiki/Infinite_loop">infinite loop</a> when fed programs that do not type-check, causing the compilation to fail.</p>
+<h3 id="linear-typesedit">Linear types[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=16">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Linear_type">Linear type</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Linear_type">Linear types</a>, based on the theory of <a href="https://en.wikipedia.org/wiki/Linear_logic">linear logic</a>, and closely related to <a href="https://en.wikipedia.org/wiki/Uniqueness_type">uniqueness types</a>, are types assigned to values having the property that they have one and only one reference to them at all times. These are valuable for describing large <a href="https://en.wikipedia.org/wiki/Immutable_value">immutable values</a> such as files, strings, and so on, because any operation that simultaneously destroys a linear object and creates a similar object (such as '<code>str= str + "a"</code>') can be optimized "under the hood" into an in-place mutation. Normally this is not possible, as such mutations could cause side effects on parts of the program holding other references to the object, violating <a href="https://en.wikipedia.org/wiki/Referential_transparency_(computer_science)">referential transparency</a>. They are also used in the prototype operating system <a href="https://en.wikipedia.org/wiki/Singularity_(operating_system)">Singularity</a> for interprocess communication, statically ensuring that processes cannot share objects in shared memory in order to prevent race conditions. The <a href="https://en.wikipedia.org/wiki/Clean_(programming_language)">Clean</a> language (a <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>-like language) uses this type system in order to gain a lot of speed (compared to performing a deep copy) while remaining safe.</p>
+<h3 id="intersection-typesedit">Intersection types[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=17">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Intersection_type">Intersection type</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Intersection_type">Intersection types</a> are types describing values that belong to <em>both</em> of two other given types with overlapping value sets. For example, in most implementations of C the signed char has range -128 to 127 and the unsigned char has range 0 to 255, so the intersection type of these two types would have range 0 to 127. Such an intersection type could be safely passed into functions expecting <em>either</em> signed or unsigned chars, because it is compatible with both types.</p>
+<p>Intersection types are useful for describing overloaded function types: For example, if "<code>int</code> → <code>int</code>" is the type of functions taking an integer argument and returning an integer, and "<code>float</code> → <code>float</code>" is the type of functions taking a float argument and returning a float, then the intersection of these two types can be used to describe functions that do one or the other, based on what type of input they are given. Such a function could be passed into another function expecting an "<code>int</code> → <code>int</code>" function safely; it simply would not use the "<code>float</code> → <code>float</code>" functionality.</p>
+<p>In a subclassing hierarchy, the intersection of a type and an ancestor type (such as its parent) is the most derived type. The intersection of sibling types is empty.</p>
+<p>The Forsythe language includes a general implementation of intersection types. A restricted form is <a href="https://en.wikipedia.org/wiki/Refinement_type">refinement types</a>.</p>
+<h3 id="union-typesedit">Union types[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=18">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Union_type">Union type</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Union_type">Union types</a> are types describing values that belong to <em>either</em> of two types. For example, in C, the signed char has a -128 to 127 range, and the unsigned char has a 0 to 255 range, so the union of these two types would have an overall "virtual" range of -128 to 255 that may be used partially depending on which union member is accessed. Any function handling this union type would have to deal with integers in this complete range. More generally, the only valid operations on a union type are operations that are valid on <em>both</em> types being unioned. C's "union" concept is similar to union types, but is not typesafe, as it permits operations that are valid on <em>either*type, rather than *both</em>. Union types are important in program analysis, where they are used to represent symbolic values whose exact nature (e.g., value or type) is not known.</p>
+<p>In a subclassing hierarchy, the union of a type and an ancestor type (such as its parent) is the ancestor type. The union of sibling types is a subtype of their common ancestor (that is, all operations permitted on their common ancestor are permitted on the union type, but they may also have other valid operations in common).</p>
+<h3 id="existential-typesedit">Existential types[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=19">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Existential_quantifier">Existential quantifier</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Existential_quantifier">Existential</a> types are frequently used in connection with <a href="https://en.wikipedia.org/wiki/Record_(computer_science)">record types</a> to represent <a href="https://en.wikipedia.org/wiki/Module_(programming)">modules</a> and <a href="https://en.wikipedia.org/wiki/Abstract_data_type">abstract data types</a>, due to their ability to separate implementation from interface. For example, the type "T = ∃X { a: X; f: (X → int); }" describes a module interface that has a data member named <em>a</em> of type <em>X</em> and a function named <em>f</em> that takes a parameter of the <em>same</em> type <em>X</em> and returns an integer. This could be implemented in different ways; for example:</p>
+<ul>
+<li>intT = { a: int; f: (int → int); }</li>
+<li>floatT = { a: float; f: (float → int); }</li>
+</ul>
+<p>These types are both subtypes of the more general existential type T and correspond to concrete implementation types, so any value of one of these types is a value of type T. Given a value "t" of type "T", we know that "t.f(t.a)" is well-typed, regardless of what the abstract type <em>X</em> is. This gives flexibility for choosing types suited to a particular implementation while clients that use only values of the interface type—the existential type—are isolated from these choices.</p>
+<p>In general it's impossible for the typechecker to infer which existential type a given module belongs to. In the above example intT { a: int; f: (int → int); } could also have the type ∃X { a: X; f: (int → int); }. The simplest solution is to annotate every module with its intended type, e.g.:</p>
+<ul>
+<li>intT = { a: int; f: (int → int); } <strong>as</strong> ∃X { a: X; f: (X → int); }</li>
+</ul>
+<p>Although abstract data types and modules had been implemented in programming languages for quite some time, it wasn't until 1988 that <a href="https://en.wikipedia.org/wiki/John_C._Mitchell">John C. Mitchell</a> and <a href="https://en.wikipedia.org/wiki/Gordon_Plotkin">Gordon Plotkin</a> established the formal theory under the slogan: "Abstract [data] types have existential type".[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-25">24]</a> The theory is a second-order <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed lambda calculus</a>similar to <a href="https://en.wikipedia.org/wiki/System_F">System F</a>, but with existential instead of universal quantification.</p>
+<h3 id="gradual-typingedit">Gradual typing[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=20">edit</a>]</h3>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Gradual_typing">Gradual typing</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Gradual_typing">Gradual typing</a> is a type system in which variables may be typed either at <a href="https://en.wikipedia.org/wiki/Compile-time">compile-time</a> (which is static typing) or at <a href="https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)">run-time</a> (which is dynamic typing), allowing software developers to choose either type paradigm as appropriate, from within a single language.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-26">25]</a> In particular, gradual typing uses a special type named <em>dynamic*to represent statically-unknown types, and gradual typing replaces the notion of type equality with a new relation called *consistency</em> that relates the dynamic type to every other type. The consistency relation is symmetric but not transitive.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-27">26]</a></p>
+<h2 id="explicit-or-implicit-declaration-and-inference">Explicit or implicit declaration and inference</h2>
+<p>Further information: <a href="https://en.wikipedia.org/wiki/Type_inference">Type inference</a></p>
+<p>Many static type systems, such as those of C and Java, require <em>type declarations</em>: The programmer must explicitly associate each variable with a specific type. Others, such as Haskell's, perform <em>type inference</em>: The compiler draws conclusions about the types of variables based on how programmers use those variables. For example, given a function <code>f(x, y)</code> that adds <code>x</code> and <code>y</code> together, the compiler can infer that <code>x</code> and <code>y</code> must be numbers – since addition is only defined for numbers. Thus, any call to <code>f</code> elsewhere in the program that specifies a non-numeric type (such as a string or list) as an argument would signal an error.</p>
+<p>Numerical and string constants and expressions in code can and often do imply type in a particular context. For example, an expression <code>3.14</code> might imply a type of <a href="https://en.wikipedia.org/wiki/Floating-point">floating-point</a>, while <code>[1, 2, 3]</code> might imply a list of integers – typically an <a href="https://en.wikipedia.org/wiki/Array_data_structure">array</a>.</p>
+<p>Type inference is in general possible, if it is <a href="https://en.wikipedia.org/wiki/Decidability_(logic)">decidable</a> in the type theory in question. Moreover, even if inference is undecidable in general for a given type theory, inference is often possible for a large subset of real-world programs. Haskell's type system, a version of <a href="https://en.wikipedia.org/wiki/Type_inference#Hindley%E2%80%93Milner_type_inference_algorithm">Hindley–Milner</a>, is a restriction of <a href="https://en.wikipedia.org/wiki/System_F-omega">System Fω</a> to so-called rank-1 polymorphic types, in which type inference is decidable. Most Haskell compilers allow arbitrary-rank polymorphism as an extension, but this makes type inference undecidable. (Type checking is decidable, however, and rank-1 programs still have type inference; higher rank polymorphic programs are rejected unless given explicit type annotations.)</p>
+<h2 id="unified-type-systemedit">Unified type system[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=22">edit</a>]</h2>
+<p>Some languages like <a href="https://en.wikipedia.org/wiki/Perl_6">Perl 6</a> or <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)">C#</a> have a unified type system.[<a href="https://en.wikipedia.org/wiki/Type_system#cite_note-28">27]</a> This means that all <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)">C#</a> types including primitive types inherit from a single root object. Every type in <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)">C#</a> inherits from the Object class. <a href="https://en.wikipedia.org/wiki/Java_(programming_language)">Java</a> has several primitive types that are not objects. Java provides wrapper object types that exist together with the primitive types so developers can use either the wrapper object types or the simpler non-object primitive types.</p>
+<h2 id="compatibility-equivalence-and-subtypingedit">Compatibility: equivalence and subtyping[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=23">edit</a>]</h2>
+<p>A type-checker for a statically typed language must verify that the type of any <a href="https://en.wikipedia.org/wiki/Expression_(programming)">expression</a> is consistent with the type expected by the context in which that expression appears. For example, in an <a href="https://en.wikipedia.org/wiki/Assignment_statement">assignment statement</a> of the form <code>x := *e*</code>, the inferred type of the expression <em>e</em> must be consistent with the declared or inferred type of the variable <code>x</code>. This notion of consistency, called <em>compatibility</em>, is specific to each programming language.</p>
+<p>If the type of <em>e</em> and the type of <code>x</code> are the same, and assignment is allowed for that type, then this is a valid expression. Thus, in the simplest type systems, the question of whether two types are compatible reduces to that of whether they are <em>equal</em> (or <em>equivalent</em>). Different languages, however, have different criteria for when two type expressions are understood to denote the same type. These different <em>equational theories</em> of types vary widely, two extreme cases being <em>structural type systems</em>, in which any two types that describe values with the same structure are equivalent, and <em>nominative type systems</em>, in which no two syntactically distinct type expressions denote the same type (<em>i.e.</em>, types must have the same "name" in order to be equal).</p>
+<p>In languages with <a href="https://en.wikipedia.org/wiki/Subtype">subtyping</a>, the compatibility relation is more complex. In particular, if <code>A</code> is a subtype of <code>B</code>, then a value of type <code>A</code> can be used in a context where one of type <code>B</code> is expected, even if the reverse is not true. Like equivalence, the subtype relation is defined differently for each programming language, with many variations possible. The presence of parametric or ad hoc <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a> in a language may also have implications for type compatibility.</p>
+<h2 id="notesedit">Notes[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=24">edit</a>]</h2>
+<ol>
+<li><strong>Jump up^</strong> The Burroughs ALGOL computer line determined a memory location's contents by its flag bits. Flag bits specify the contents of a memory location. Instruction, data type, and functions are specified by a 3 bit code in addition to its 48 bit contents. Only the MCP (Master Control Program) could write to the flag code bits.</li>
+</ol>
+<h2 id="see-alsoedit">See also[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=25">edit</a>]</h2>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/File:8bit-dynamiclist_(reversed).gif"><img alt="icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/8bit-dynamiclist_%28reversed%29.gif/28px-8bit-dynamiclist_%28reversed%29.gif" /></a><a href="https://en.wikipedia.org/wiki/Portal:Computer_programming">Computer programming portal</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_type_systems">Comparison of type systems</a></p>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">Covariance and contravariance (computer science)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming">Polymorphism in object-oriented programming</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_rules">Type rules</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_signature">Type signature</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_theory">Type theory</a></li>
+</ul>
+<h2 id="referencesedit">References[<a href="https://en.wikipedia.org/w/index.php?title=Type_system&amp;action=edit&amp;section=26">edit</a>]</h2>
+<ol>
+<li><strong>Jump up^</strong> <a href="https://en.wikipedia.org/wiki/Type_system#CITEREFPierce2002">Pierce 2002</a>, p. 1: "A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute."</li>
+<li><strong>Jump up^</strong> <a href="https://en.wikipedia.org/wiki/Type_system#CITEREFCardelli2004">Cardelli 2004</a>, p. 1: "The fundamental purpose of a type system is to prevent the occurrence of execution errors during the running of a program."</li>
+<li><strong>Jump up^</strong> <a href="https://en.wikipedia.org/wiki/Type_system#CITEREFPierce2002">Pierce 2002</a>, p. 208.</li>
+<li><strong>Jump up^</strong> <a href="https://books.google.com/books?id=7i8EAAAAMBAJ&amp;pg=PA66">Infoworld 25 April 1983</a></li>
+<li><strong>Jump up^</strong> <a href="https://en.wikipedia.org/wiki/Brian_Kernighan">Brian Kernighan</a>: <em>Why Pascal is not my favorite language</em></li>
+<li><strong>Jump up^</strong> "... any sound, decidable type system must be incomplete" —D. Remy (2017). p. 29, Remy, Didier. <a href="http://gallium.inria.fr/~remy/mpri/cours1.pdf">"Type systems for programming languages"</a> (PDF). Retrieved 26 May2013.</li>
+<li><strong>Jump up^</strong> <a href="https://en.wikipedia.org/wiki/Type_system#CITEREFPierce2002">Pierce 2002</a>.</li>
+<li><strong>Jump up^</strong> <a href="http://msdn.microsoft.com/en-us/library/dd264741.aspx">"dynamic (C# Reference)"</a>. <em>MSDN Library</em>. Microsoft. Retrieved 14 January 2014.</li>
+<li><strong>Jump up^</strong> Meijer, Erik; Drayton, Peter. <a href="http://research.microsoft.com/en-us/um/people/emeijer/Papers/RDL04Meijer.pdf">"Static Typing Where Possible, Dynamic Typing When Needed: The End of the Cold War Between Programming Languages"</a> (PDF). <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> Corporation.</li>
+<li><strong>Jump up^</strong> Laucher, Amanda; Snively, Paul. <a href="http://www.infoq.com/presentations/Types-Tests">"Types vs Tests"</a>. InfoQ.</li>
+<li><strong>Jump up^</strong> Xi, Hongwei; Scott, Dana (1998). "Dependent Types in Practical Programming". <em>Proceedings of ACM SIGPLAN Symposium on Principles of Programming Languages</em>. ACM Press: 214–227. <a href="https://en.wikipedia.org/wiki/CiteSeerX">CiteSeerX</a> <a href="https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.548">10.1.1.41.548</a> <img alt="Freely accessible" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/9px-Lock-green.svg.png" />.</li>
+<li><strong>Jump up^</strong> <a href="https://en.wikipedia.org/wiki/Visual_Basic">Visual Basic</a> is an example of a language that is both type-safe and memory-safe.</li>
+<li><strong>Jump up^</strong> <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">Standard ECMA-262</a>. Ecma-international.org. Retrieved on 2013-07-17.</li>
+<li><strong>Jump up^</strong> <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict mode - JavaScript | MDN</a>. Developer.mozilla.org (2013-07-03). Retrieved on 2013-07-17.</li>
+<li><strong>Jump up^</strong> <a href="http://msdn.microsoft.com/en-us/library/ie/br230269(v=vs.94).aspx">Strict Mode (JavaScript)</a>. Msdn.microsoft.com. Retrieved on 2013-07-17.</li>
+<li><strong>Jump up^</strong> <a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict">Strict typing</a></li>
+<li><strong>Jump up^</strong> <a href="http://bracha.org/pluggableTypesPosition.pdf">Bracha, G.: <em>Pluggable Types</em></a></li>
+<li><strong>Jump up^</strong> <a href="https://stackoverflow.com/a/13414347/975097">https://stackoverflow.com/a/13414347/975097</a></li>
+<li><strong>Jump up^</strong> Rozsnyai, S.; Schiefer, J.; Schatten, A. (2007). "Concepts and models for typing events for event-based systems". <em>Proceedings of the 2007 inaugural international conference on Distributed event-based systems – DEBS '07</em>. p. 62. <a href="https://en.wikipedia.org/wiki/Digital_object_identifier">doi</a>:<a href="https://doi.org/10.1145%2F1266894.1266904">10.1145/1266894.1266904</a>. <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number">ISBN</a> <a href="https://en.wikipedia.org/wiki/Special:BookSources/9781595936653">9781595936653</a>.</li>
+<li><strong>Jump up^</strong> Martelli, Alex (26 July 2000). <a href="http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835?hl=en&amp;">"Re: polymorphism (was Re: Type checking in python?)"</a>. <a href="https://en.wikipedia.org/wiki/Usenet">Usenet:</a> <a href="news:8lmvn6017l@news1.newsguy.com">8lmvn6017l@news1.newsguy.com</a>.</li>
+<li><strong>Jump up^</strong> Stefan Hanenberg. ”An experiment about static and dynamic type systems: doubts about the positive impact of static type systems on development time“. OOPSLA 2010.</li>
+<li><strong>Jump up^</strong> Kleinschmager, Hanenberg, Robbes, Tanter, Stefik: Do static type systems improve the maintainability of software systems? An empirical study. ICPC 2012</li>
+<li><strong>Jump up^</strong> Hanenberg, Kleinschmager, S.Robbes, R.Tanter, Stefik: An empirical study on the impact of static typing on software maintainability, ESE 2014</li>
+<li><strong>Jump up^</strong> Mitchell, John C.; Plotkin, Gordon D.; <a href="http://theory.stanford.edu/~jcm/papers/mitch-plotkin-88.pdf"><em>Abstract Types Have Existential Type</em></a>, ACM Transactions on Programming Languages and Systems, Vol. 10, No. 3, July 1988, pp. 470–502</li>
+<li><strong>Jump up^</strong> Siek, Jeremy. <a href="http://homes.soic.indiana.edu/jsiek/what-is-gradual-typing/">"What is gradual typing?"</a>.</li>
+<li><strong>Jump up^</strong> Siek, Jeremy; Taha, Walid (September 2006). <a href="http://scheme2006.cs.uchicago.edu/13-siek.pdf"><em>Gradual Typing for Functional Languages</em></a> (PDF). <em>Scheme and Functional Programming 2006</em>. <a href="https://en.wikipedia.org/wiki/University_of_Chicago">University of Chicago</a>. pp. 81–92.</li>
+<li><strong>Jump up^</strong> <a href="http://www.ecma-international.org/publications/standards/Ecma-334.htm">Standard ECMA-334</a>, 8.2.4 Type system unification.</li>
+</ol>
+<h2 id="further-reading">Further reading</h2>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduction
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Type-safety/" title="Type-safety" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Type-safety
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

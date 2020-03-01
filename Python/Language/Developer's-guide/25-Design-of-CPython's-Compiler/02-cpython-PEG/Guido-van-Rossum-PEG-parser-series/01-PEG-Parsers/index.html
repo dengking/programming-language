@@ -1,0 +1,1383 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/programming-language/Python/Language/Developer's-guide/25-Design-of-CPython's-Compiler/02-cpython-PEG/Guido-van-Rossum-PEG-parser-series/01-PEG-Parsers/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>[PEG Parsers](https://medium.com/@gvanrossum_83706/peg-parsers-7ed72462f97c) - programming-language</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../../../../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-27795084-5", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#peg-parsers" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              programming-language
+            </span>
+            <span class="md-header-nav__topic">
+              
+                [PEG Parsers](https://medium.com/@gvanrossum_83706/peg-parsers-7ed72462f97c)
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    programming-language
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Programming-language/" title="Programming-language" class="md-nav__link">
+      Programming-language
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Common/" title="Common" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Theory
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Theory
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Type-system/Type-safety/" title="Type-safety" class="md-nav__link">
+      Type-safety
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Type-system/Static-vs-dynamic-typing/" title="Static-vs-dynamic-typing" class="md-nav__link">
+      Static-vs-dynamic-typing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Programming-paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Programming-paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Programming-paradigm/" title="Programming-paradigm" class="md-nav__link">
+      Programming-paradigm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Object-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Object-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming/" title="Object-oriented-programming" class="md-nav__link">
+      Object-oriented-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-2" type="checkbox" id="nav-4-3-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-3-2">
+      Thinking-in-java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-3-2">
+        Thinking-in-java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects/" title="Introduction-to-Objects" class="md-nav__link">
+      Introduction-to-Objects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object/" title="Everything-is-an-object" class="md-nav__link">
+      Everything-is-an-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../Theory/Programming-paradigm/Object-oriented-programming/Glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1" type="checkbox" id="nav-5-1-1">
+    
+    <label class="md-nav__link" for="nav-5-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Language-reference/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      Developer's-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        Developer's-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Library-Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Library-Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1" type="checkbox" id="nav-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1">
+      Build-in-function
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-1">
+        Build-in-function
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Library-Reference/build-in-function/summary-of-python-build-in-function/" title="Summary-of-python-build-in-function" class="md-nav__link">
+      Summary-of-python-build-in-function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2" type="checkbox" id="nav-5-2-1-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2">
+      Hash
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-2">
+        Hash
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Library-Reference/build-in-function/hash/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Philosophy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Philosophy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Philosophy/The-Zen-of-Python/" title="The-Zen-of-Python" class="md-nav__link">
+      The-Zen-of-Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Style-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Style-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Style-guide/Style-Guide-for-Python-Code/" title="Style-Guide-for-Python-Code" class="md-nav__link">
+      Style-Guide-for-Python-Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Paradigm/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2" type="checkbox" id="nav-5-5-2">
+    
+    <label class="md-nav__link" for="nav-5-5-2">
+      Meta-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-5-2">
+        Meta-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2-1" type="checkbox" id="nav-5-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-5-2-1">
+      Reflective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-5-2-1">
+        Reflective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Paradigm/Meta-programming/Reflective/Python-reflection/" title="Python-reflection" class="md-nav__link">
+      Python-reflection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6-1" type="checkbox" id="nav-5-6-1">
+    
+    <label class="md-nav__link" for="nav-5-6-1">
+      Lazy-import
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-6-1">
+        Lazy-import
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../How-to/Lazy-import/Lazy-importing/" title="Lazy-importing" class="md-nav__link">
+      Lazy-importing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Software/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+    
+    <label class="md-nav__link" for="nav-5-8">
+      Glossary
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-8">
+        Glossary
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Glossary/Abstract-base-class/" title="Abstract-base-class" class="md-nav__link">
+      Abstract-base-class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Glossary/Argument-and-parameter/" title="Argument-and-parameter" class="md-nav__link">
+      Argument-and-parameter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1" type="checkbox" id="nav-6-1-1">
+    
+    <label class="md-nav__link" for="nav-6-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Language/Language-reference/" title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-2" type="checkbox" id="nav-6-1-2">
+    
+    <label class="md-nav__link" for="nav-6-1-2">
+      Idiom
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-2">
+        Idiom
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Language/Idiom/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../../C++/Paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="peg-parsers"><a href="https://medium.com/@gvanrossum_83706/peg-parsers-7ed72462f97c">PEG Parsers</a></h1>
+<p>Some years ago someone asked whether it would make sense to switch Python to a <strong>PEG parser</strong>. (Or a PEG grammar; I don’t recall exactly what was said by whom, or when.) I looked into it a bit and wasn’t sure what to think, so I dropped the subject. Recently I’ve learned more about PEG (<a href="https://en.wikipedia.org/wiki/Parsing_expression_grammar">Parsing Expression Grammars</a>), and I now think it’s an interesting alternative to the home-grown parser generator that I developed 30 years ago when I started working on Python. (That parser generator, dubbed “pgen”, was just about the first piece of code I wrote for Python.)</p>
+<p>[This is part 1 of my PEG series. See the <a href="https://medium.com/@gvanrossum_83706/peg-parsing-series-de5d41b2ed60?sk=0a7ce9003b13aae8126a4a23812eb035">Series Overview</a> for the rest.]</p>
+<p>The reason I’m now interested in PEG parsing is that I’ve become somewhat annoyed with pgen’s limitations. It uses a variant of LL(1) parsing that I cooked up myself — I didn’t like grammar rules that could produce the empty string, so I disallowed that, thereby simplifying the algorithm for producing parsing tables somewhat. I also invented my own EBNF-like grammar notation, which I still like very much.</p>
+<p>Here are some of the issues with pgen that annoy me. The “1” in the LL(1) moniker implies that it uses only a single token lookahead, and this limits our ability of writing nice grammar rules. For example, a Python statement can be an expression or an assignment (or other things, but those all start with a dedicated keyword like <code>if</code> or <code>def</code>). We’d like to write this syntax as follows using the pgen notation. (Note that this example describes a toy language that is a tiny subset of Python, as is traditional in writing about language design.)</p>
+<div class="highlight"><pre><span></span>statement: assignment | expr | if_statement
+expr: expr &#39;+&#39; term | expr &#39;-&#39; term | term
+term: term &#39;*&#39; atom | term &#39;/&#39; atom | atom
+atom: NAME | NUMBER | &#39;(&#39; expr &#39;)&#39;
+assignment: target &#39;=&#39; expr
+target: NAME
+if_statement: &#39;if&#39; expr &#39;:&#39; statement
+</pre></div>
+
+<p>A few words about the notation: <code>NAME</code> and <code>NUMBER</code> are tokens and predefined outside the grammar. Strings in quotes like <code>'+'</code> or <code>'if'</code> are are also tokens. (I should talk about tokens some other time.) Grammar rules start with a rule name followed by <code>:</code>, followed by one or more alternatives separated by <code>|</code>.</p>
+<p>The problem is that if you write the grammar like this, the parser does not work, and pgen will complain. One of the issues is that some rules (<code>expr</code> and <code>term</code>) are <strong>left-recursive</strong>, and pgen isn’t smart enough to do the right thing here. This is typically solved by rewriting those rules, for example (leaving the other rules unchanged):</p>
+<div class="highlight"><pre><span></span>expr: term (&#39;+&#39; term | &#39;-&#39; term)*
+term: atom (&#39;*&#39; atom | &#39;/&#39; atom)*
+</pre></div>
+
+<p>This reveals a few bits of pgen’s EBNF capabilities: you can nest alternatives inside parentheses, and you can create repetitions by placing <code>*</code> after an item, so the rule for <code>expr</code> here means “it’s a term, followed by zero or more repetitions of plus followed by a term or minus followed by a term”. This grammar accepts the same language as the first version, but it doesn’t reflect the intent of the language designer as well — in particular, it doesn’t show that the operators are <strong>left-binding</strong>, which is important when you are trying to generate code.</p>
+<p>But there’s another annoying problem in this toy language (and in Python). Because of the single-token lookahead, the parser cannot determine whether it is looking at the start of an expression or an assignment. At the beginning of a statement, the parser needs to decide what alternative for <code>statement</code> it is seeing from the first token it sees. (Why? This is how pgen’s parsing automation works.) Let’s say our program is this:</p>
+<div class="highlight"><pre><span></span>answer = 42
+</pre></div>
+
+<p>This program is tokenized into three tokens:<code>NAME</code> (with value <code>answer</code>), <code>'='</code>, and <code>NUMBER</code> (with value <code>42</code>). The only lookahead we have at the start of the program is the first token, <code>NAME</code>. The rule we are trying to satisfy at this point is <code>statement</code> (the grammar’s start symbol). This rule has three alternatives: <code>expr</code>, <code>assignment</code>, and <code>if_statement</code>. We can rule out <code>if_statement</code>, because the lookahead token isn’t <code>'if'</code>. But both <code>expr</code> and <code>assignment</code> (can) start with a <code>NAME</code> token, and because of this pgen rejects our grammar as being ambiguous.</p>
+<p>(That’s not entirely correct, since technically the <em>grammar</em> isn’t ambiguous per se; but we’ll ignore this because I don’t know if there’s a better word. And how does pgen decide this? It computes something called the FIRST set for each grammar rule, and it complains if the FIRST sets of the choices at any given point overlap.)</p>
+<p>So couldn’t we solve this annoyance by giving the parser a larger lookahead buffer? For our toy example, a second lookahead token would be enough, since in this grammar the second token of an assignment must be <code>'='</code>. But in a more realistic language like Python, you may need an unlimited lookahead buffer, since the stuff to the left of the <code>'='</code> token may be arbitrarily complex, for example:</p>
+<div class="highlight"><pre><span></span>table[index + 1].name.first = &#39;Steven&#39;
+</pre></div>
+
+<p>That’s already ten tokens before we encounter the <code>'='</code> token, and I could cook up arbitrary long examples if challenged. What we’ve done to solve this in pgen is to change the grammar to accept some illegal programs, adding an extra check in a later pass that generates a <code>SyntaxError</code> if it finds an invalid left-hand side for an assignment. For our toy language, this comes down to writing the following:</p>
+<div class="highlight"><pre><span></span>statement: assignment_or_expr | if_statement
+assignment_or_expr: expr [&#39;=&#39; expr]
+</pre></div>
+
+<p>(The square brackets indicate an optional part.) And then in a subsequent compiler pass (say, when generating bytecode) we check whether there’s an <code>'='</code> or not, and if there is, we check that the left-hand side follows the syntax for <code>target</code>.</p>
+<p>There’s a similar annoyance around keyword arguments in function calls. We would <em>like</em> to write something like this (again, a simplified version of Python’s call syntax):</p>
+<div class="highlight"><pre><span></span>call: atom &#39;(&#39; arguments &#39;)&#39;
+arguments: arg (&#39;,&#39; arg)*
+arg: posarg | kwarg
+posarg: expr
+kwarg: NAME &#39;=&#39; expr
+</pre></div>
+
+<p>But the single-token lookahead can’t to tell the parser whether a <code>NAME</code> at the start of an argument is the beginning of <code>posarg</code> (since <code>expr</code> may start with <code>NAME</code>) or the beginning of <code>kwarg</code>. Again, Python’s current parser solves this by essentially stating</p>
+<div class="highlight"><pre><span></span>arg: expr [&#39;=&#39; expr]
+</pre></div>
+
+<p>and then sorting out the cases in a subsequent compiler pass. (We even got this slightly wrong and allowed things like <code>foo((a)=1)</code>, giving it the same meaning as <code>foo(a=1)</code>, until we fixed it in Python 3.8.)</p>
+<p>So how does a <strong>PEG parser</strong> solve these annoyances? By using an <strong>infinite lookahead buffer</strong>! The typical implementation of a PEG parser uses something called “packrat parsing”, which not only loads the entire program in memory before parsing it, but also allows the parser to backtrack arbitrarily. While the term PEG primarily refers to the <em>grammar</em> notation, the <em>parsers</em> generated from PEG grammars are typically recursive-descent parsers with unlimited backtracking, and packrat parsing makes this efficient by memoizing the rules already matched for each position.</p>
+<p>This makes everything easy, but of course there’s a cost: memory. Thirty years ago, I had a good reason to use a parsing technology with a single token lookahead: memory was expensive. LL(1) parsing (and other technologies like LALR(1), made famous by YACC) uses a state machine and a stack (a “push-down automaton”) to construct a parse tree efficiently.</p>
+<p>Fortunately the computers on which CPython runs have a lot more memory than 30 years ago, and keeping the entire file in memory really isn’t much of a burden any more. For example, the largest non-test file in the stdlib that I could find is <code>_pydecimal.py</code>, which clocks in at around 223 kilobytes. In a Gigabyte world, that’s essentially nothing. And that’s what led me to have another look at parsing technology.</p>
+<p>But there’s another thing about CPython’s current parser that bugs me. Compilers are complicated things, and CPython’s is no exception: while the output of the pgen-generated parser is a <strong>parse tree</strong>, this <strong>parse tree</strong> is not directly used as the input to the <strong>code generator</strong>: first it is transformed to an <em>abstract syntax tree</em> (AST), and then that <strong>AST</strong> is compiled into <strong>bytecode</strong>. (There’s more to it, but that’s not my focus here.)</p>
+<p>Why not compile from the <strong>parse tree</strong>? That is how it originally worked, but about 15 years ago we found that the compiler was complicated by the structure of the <strong>parse tree</strong>, and we introduced a separate AST, and a separate translation phase from <strong>parse tree</strong> to AST. As Python evolves, the <strong>AST</strong> is more stable than the <strong>parse tree</strong>, so this reduces the opportunity for bugs in the compiler.</p>
+<p>The AST is also easier to work with for third-party code that wants to inspect Python code, and is exposed through the popular <code>ast</code> module. This module also lets you construct AST nodes from scratch and modify existing AST nodes, and you can compile the new nodes to bytecode. The latter has enabled an entire cottage industry of language extensions for Python. (The parse tree is <em>also</em> exposed to Python users, via the <code>parser</code> module, but it is much more cumbersome to work with; therefore it has gone out of style in favor of the <code>ast</code> module.)</p>
+<p>My idea now, putting these things together, is to see if we can create a new parser for CPython that uses PEG and packrat parsing to construct the AST directly during parsing, thereby skipping the intermediate parse tree construction, possibly <em>saving</em> memory despite using an infinite lookahead buffer. I’m not there yet, but I have a prototype that can compile a subset of Python into an AST at about the same speed as CPython’s current parser. It uses more memory, however, and I expect that extending the subset to the full language will slow down the PEG parser. But I also haven’t done anything to optimize it, so I am hopeful.</p>
+<p>A final advantage of switching to PEG is that it provides more flexibility for future evolution of the language. In the past it’s been said that pgen’s LL(1) restrictions have helped Python’s grammar stay simple. That may well be so, but we have plenty of other processes in place to prevent unchecked growth of the language (mainly the PEP process, aided by very strict backwards compatibility requirements and the new governance structure). So I’m not worried.</p>
+<p>I have a lot more to write about PEG parsing and my specific implementation, but I’ll write about that in a <a href="https://medium.com/@gvanrossum_83706/building-a-peg-parser-d4869b5958fb">later post</a>, after I’ve cleaned up the code.</p>
+<p>License for this article and the code shown: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../../../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

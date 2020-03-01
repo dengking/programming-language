@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Type-system: Type-system
+    - Programming-paradigm: Programming-paradigm
