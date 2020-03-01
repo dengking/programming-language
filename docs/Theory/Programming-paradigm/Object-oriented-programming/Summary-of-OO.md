@@ -38,3 +38,7 @@ c++并非一切皆对象。
 最终的执行都是user-defined action是subroutine，使用self、this来指向object。
 
 从type system来看，class就是一种type，是一种概念，一种抽象。
+
+
+
+我们使用语言来描述世界，OO是一种更加强大的描述方式，但是使用OO编写的program的运行原理是一致的。
