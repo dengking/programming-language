@@ -60,7 +60,7 @@ nav:
       - Hash:
         - Introduction: Python/Library-Reference/build-in-function/hash/index.md
   - Philosophy:
-    - The-Zen-of-Python: Python/Philosophy/The-Zen-of- Python.md
+    - The-Zen-of-Python: Python/Philosophy/The-Zen-of-Python.md
   - Style-guide:
     - Style-Guide-for-Python-Code: Python/Style-guide/Style-Guide-for-Python-Code.md
   - Paradigm:
