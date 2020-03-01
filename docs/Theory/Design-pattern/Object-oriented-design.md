@@ -1,0 +1,1 @@
+# [Object-oriented design](https://en.wikipedia.org/wiki/Object-oriented_design)

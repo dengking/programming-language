@@ -4,4 +4,4 @@
 
 - 维基百科[Software design patterns](https://en.wikipedia.org/wiki/Software_design_pattern)
 - [w3sdesign](http://w3sdesign.com/index0100.php)
-- [Dive Into DESIGN PATTERNS](https://refactoring.guru/design-patterns/book)
+- [Refactoring.Guru](https://refactoring.guru/)
