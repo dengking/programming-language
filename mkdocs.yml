@@ -46,6 +46,7 @@ nav:
       - Thinking-in-java:
         - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/index.md
         - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
+        - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object.md
       - Glossary: Theory/Programming-paradigm/Object-oriented-programming/Glossary.md
 plugins:
 - search
