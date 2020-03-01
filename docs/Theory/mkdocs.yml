@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Type-system: Type-system
     - Programming-paradigm: Programming-paradigm
+    - Design-pattern: Design-pattern

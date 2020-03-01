@@ -11,7 +11,9 @@ The genesis（起源） of the computer revolution was in a **machine**. The gen
 
 But computers are not so much machines as they are mind amplification（放大） tools (“bicycles for the mind,” as Steve Jobs is fond of saying) and a different kind of **expressive medium**. As a result, the tools are beginning to look less like machines and more like parts of our **minds**, and also like other forms of **expression** such as writing, painting, sculpture, animation, and filmmaking. **[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)** (OOP) is part of this movement toward using the computer as an **expressive medium**.
 
-> NOTE: 
+> NOTE: 上面这段表达的意思是programming language的发展趋势是“描述” mind。显然OOP就是在这种浪潮下诞生的。
+>
+> 关于programming language，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)的[Abstraction in programming language](https://dengking.github.io/Post/Abstraction/Abstraction/#abstraction-in-programming-language)章节。
 
 This chapter will introduce you to the basic concepts of OOP, including an overview of development methods. 
 
@@ -19,7 +21,7 @@ This chapter is background and supplementary material. Many people do not feel c
 
 ## The progress of abstraction
 
-> NOTE: 本节主要描述OO思想
+> NOTE: 本节主要描述OO思想。
 
 All programming languages provide **abstractions**. It can be argued that the complexity of the problems you’re able to solve is directly related to the **kind** and **quality** of abstraction. By “kind” I mean, “What is it that you are abstracting?” **Assembly language** is a small abstraction of the underlying machine. Many so-called “imperative” languages that followed (such as FORTRAN, BASIC, and C) were **abstractions** of **assembly language**. These languages are big improvements over assembly language, but their primary abstraction still requires you to think in terms of the structure of the computer rather than the structure of the problem you are trying to solve（也就是说，它们还不够抽象，还是太底层了）. The programmer must establish the association between the machine model (in the “**solution space**,” which is the place where you’re implementing that solution, such as a computer) and the model of the problem that is actually being solved (in the “**problem space**,” which is the place where the problem exists, such as a business). The effort required to perform this mapping, and the fact that it is extrinsic to the programming language, produces programs that are difficult to write and expensive to maintain, and as a side effect created the entire “programming methods” industry.
 
@@ -43,7 +45,9 @@ Alan Kay summarized five basic characteristics of [Smalltalk](https://en.wikiped
 
 2. **A program is a bunch of objects telling each other what to do by sending messages. To make a request of an object, you “send a message” to that object**. More concretely, you can think of a message as a request to call a method that belongs to a particular object.
 
-  > NOTE: 牢记“send a message”和"make a request“，后面会频繁出现，在下一节会描述如何来实现“send a message”。
+  > NOTE: 上面这段话总结从OOP的角度来描述程序的运行。
+  >
+  > 牢记“send a message”和"make a request“，后面会频繁出现，在下一节会描述如何来实现“send a message”。
 
 3. **Each object has its own memory made up of other objects**. Put another way, you create a new kind of object by making a package containing existing objects. Thus, you can build complexity into a program while hiding it behind the simplicity of objects.
 
