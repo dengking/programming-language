@@ -17,10 +17,10 @@ theme:
 nav: None
 
 markdown_extensions:
-    #- toc:
+    - toc:
     #    baselevel: 1
     #    permalink: '#'
-    #    separator: -
+        separator: -
     - admonition
     - def_list
     - mdx_gh_links:

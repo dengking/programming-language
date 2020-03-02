@@ -1,5 +1,3 @@
-[TOC]
-
 # Built-in Functions[¶](https://docs.python.org/3/library/functions.html#built-in-functions)
 
  ## 分类
