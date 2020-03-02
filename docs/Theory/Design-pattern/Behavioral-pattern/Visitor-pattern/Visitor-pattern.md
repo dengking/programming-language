@@ -35,3 +35,14 @@
 其实原文的Intent章节中的配图已经形象的地展示出了visitor pattern。在原文的Applicability章节对此进行了总结。
 
 不可能完全不修改node classes，而是少量修改，可控修改。
+
+
+
+
+
+## Example
+
+在维基百科[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节，总结了 [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) 在compiler的实现中的应用：
+
+> Because the compiler traverses the tree several times to determine syntactic correctness, it is important to make traversing the tree a simple operation. The compiler executes a specific set of operations, depending on the type of each node, upon reaching it, so it often makes sense to use the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern).
+
