@@ -22,6 +22,10 @@
 
 参见 abstraction，language。
 
+
+
+我们使用`class`来描述概念，对象是运行时的概念，运行时才会创建对象。
+
 ## Python VS c++ 面向对象的实现
 
 Python中一切皆对象，它的class是由对象来进行描述。Python中面向对象特性的实现：attribute lookup，`__dict__`。Python program会被翻译为byte code由interpreter来执行。
@@ -42,3 +46,25 @@ c++并非一切皆对象。
 
 
 我们使用语言来描述世界，OO是一种更加强大的描述方式，但是使用OO编写的program的运行原理是一致的。
+
+
+
+
+
+## [object-oriented programming](https://www.pcmag.com/encyclopedia/term/object-oriented-programming)
+
+```
+ OOP           Traditional Programming
+
+ class         define data + processing
+
+ object        data + processing
+
+ attribute     data (a field)
+
+ method        function
+
+ message       function call
+
+ instantiate   allocate a structure
+```
