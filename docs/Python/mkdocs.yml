@@ -2,7 +2,7 @@ nav:
     # 描述语言的一些原理
     - Language: Language
     # 描述编程相关的内容
-    - Library-Reference: Library-Reference
+    - Library: Library
     - Philosophy: Philosophy
     - Style-guide: Style-guide
     - Paradigm: Paradigm

@@ -62,8 +62,14 @@
 
 
 
-## Run model
+## Linter
+
+
+
+
+
+## Run time
+
+前面都是language的静态时，还需要对run time进行分析，比如data model等。
 
 程序的运行模型
-
-## Linter

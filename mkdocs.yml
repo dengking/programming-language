@@ -7,6 +7,8 @@ google_analytics:
 - UA-27795084-5
 - mkdocs.org
 markdown_extensions:
+- toc:
+    separator: '-'
 - admonition
 - def_list
 - mdx_gh_links:
@@ -48,17 +50,26 @@ nav:
         - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
         - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object.md
       - Glossary: Theory/Programming-paradigm/Object-oriented-programming/Glossary.md
+  - Design-pattern:
+    - Introduction: Theory/Design-pattern/index.md
+    - SOLID:
+      - SOLID: Theory/Design-pattern/SOLID/SOLID.md
+      - "Open\u2013closed-principle": "Theory/Design-pattern/SOLID/Open\u2013closed-principle.md"
+      - Liskov-substitution-principle: Theory/Design-pattern/SOLID/Liskov-substitution-principle.md
+      - Inversion-of-control: Theory/Design-pattern/SOLID/Inversion-of-control.md
+    - Software-design-pattern: Theory/Design-pattern/Software-design-pattern.md
+    - Visitor-pattern: Theory/Design-pattern/Visitor-pattern.md
 - Python:
   - Language:
     - Language-reference:
       - Introduction: Python/Language/Language-reference/index.md
     - Developer's-guide:
       - Introduction: Python/Language/Developer's-guide/index.md
-  - Library-Reference:
+  - Library:
     - Build-in-function:
-      - Summary-of-python-build-in-function: Python/Library-Reference/build-in-function/summary-of-python-build-in-function.md
+      - Summary-of-python-build-in-function: Python/Library/build-in-function/summary-of-python-build-in-function.md
       - Hash:
-        - Introduction: Python/Library-Reference/build-in-function/hash/index.md
+        - Introduction: Python/Library/build-in-function/hash/index.md
   - Philosophy:
     - The-Zen-of-Python: Python/Philosophy/The-Zen-of-Python.md
   - Style-guide:

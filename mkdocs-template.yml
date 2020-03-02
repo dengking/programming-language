@@ -18,9 +18,7 @@ nav: None
 
 markdown_extensions:
     - toc:
-    #    baselevel: 1
-    #    permalink: '#'
-        separator: -
+        separator: '-'
     - admonition
     - def_list
     - mdx_gh_links:
