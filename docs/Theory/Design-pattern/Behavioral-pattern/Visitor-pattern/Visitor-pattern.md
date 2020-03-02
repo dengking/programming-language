@@ -18,21 +18,25 @@
 - The primary job of these classes was to work with geodata. The XML export behavior would look alien there.
 - to provide the ability to export into a different format
 
+
+
 原文的Solution章节描述了如何使用visitor patter够解决上述问题。
 
-需要解决的一个问题是：如何构建node class到export方法的映射。原文给出了两种方式：
+需要解决的一个问题是：如何构建node class到export方法的映射，即为不同的node class指定对应的export方法。原文给出了两种方式：
 
-- conditional
+- conditional，即通过`if else`语句来实现映射
 - [Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
 
 显然[Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)有着明显优势。
 
-在原文的Problem章节提出的问题和Real-World Analogy章节提出的例子，存在着一定的共性，通过两者我们可以总结适合使用visitor pattern来解决的问题：
+在原文的Problem章节提出的问题和Real-World Analogy章节提出的例子之间存在着一定的共性，通过两者我们可以总结适合使用visitor pattern来解决的问题：
 
 - 需要遍历不同类型的object
 - 对不同类型的object需要执行特定的操作
 
 其实原文的Intent章节中的配图已经形象的地展示出了visitor pattern。在原文的Applicability章节对此进行了总结。
+
+
 
 不可能完全不修改node classes，而是少量修改，可控修改。
 
@@ -42,7 +46,11 @@
 
 ## Example
 
+### In compiler
+
 在维基百科[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节，总结了 [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) 在compiler的实现中的应用：
 
 > Because the compiler traverses the tree several times to determine syntactic correctness, it is important to make traversing the tree a simple operation. The compiler executes a specific set of operations, depending on the type of each node, upon reaching it, so it often makes sense to use the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern).
+
+这段话中的“the tree”只的是compiler构造的abstract syntax tree。compiler需要多次遍历这棵树，每次遍历执行一些操作，显然，这种场景是非常适合于使用visitor pattern的。
 
