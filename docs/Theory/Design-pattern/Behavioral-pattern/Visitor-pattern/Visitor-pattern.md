@@ -2,15 +2,19 @@
 
 “visitor”的意思是“访问者”，在Visitor pattern中，有专门的class来“扮演” “visitor”的角色。
 
-## 维基百科-[Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)
+## 维基百科的[Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)
 
 > It is one way to follow the [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle).
 
 这句话提示我们visitor pattern的终极目标所在，即遵循 [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)。
 
-## [Refactoring.Guru](https://refactoring.guru/)-[Visitor](https://refactoring.guru/design-patterns/visitor)
+## [Refactoring.Guru](https://refactoring.guru/)的[Visitor](https://refactoring.guru/design-patterns/visitor)
 
 > **Visitor** is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
+
+在原文的Solution章节告诉了我们：由visitor类来实现“algorithm”
+
+> The Visitor pattern suggests that you place the new behavior into a separate class called *visitor*, instead of trying to integrate it into existing classes. 
 
 原文在Problem章节给出了不允许修改node classes的原因：
 
