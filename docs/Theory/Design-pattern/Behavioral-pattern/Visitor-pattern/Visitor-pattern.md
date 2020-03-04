@@ -8,6 +8,20 @@
 
 这句话提示我们visitor pattern的终极目标所在，即遵循 [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)。
 
+### [C++ example](https://en.wikipedia.org/wiki/Visitor_pattern#C++_example)
+
+在阅读这段的例子的时候，我想到了一个问题：
+
+`ArchivedFile`、`SplitFile`、`ExtractedFile`都是`File`的子类，它们都override了基类的`Accept`方法，可以看到它们的`Accept`方法的实现都是：
+
+```c++
+  void Accept(AbstractDispatcher& dispatcher) override {
+    dispatcher.Dispatch(*this);
+  }
+```
+
+那能否将这个方法放到基类中呢？应该是不能的，这就是double dispatch所解决的问题。
+
 ## [Refactoring.Guru](https://refactoring.guru/)的[Visitor](https://refactoring.guru/design-patterns/visitor)
 
 > **Visitor** is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
@@ -31,7 +45,37 @@
 - conditional，即通过`if else`语句来实现映射
 - [Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
 
-显然[Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)有着明显优势。
+显然[Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)有着明显优势，下面对此进行分析
+
+
+
+### Double dispatch
+
+> Instead of letting the client select a proper version of the method to call, how about we delegate this choice to objects we’re passing to the visitor as an argument? Since the objects know their own classes, they’ll be able to pick a proper method on the visitor less awkwardly. They “accept” a visitor and tell it what visiting method should be executed.
+
+```pseudocode
+// Client code
+foreach (Node node in graph)
+    node.accept(exportVisitor)
+
+// City
+class City is
+    method accept(Visitor v) is
+        v.doForCity(this)
+    // ...
+
+// Industry
+class Industry is
+    method accept(Visitor v) is
+        v.doForIndustry(this)
+    // ...
+```
+
+
+
+
+
+### Applicability
 
 在原文的Problem章节提出的问题和Real-World Analogy章节提出的例子之间存在着一定的共性，通过两者我们可以总结适合使用visitor pattern来解决的问题：
 
@@ -44,10 +88,6 @@
 
 不可能完全不修改node classes，而是少量修改，可控修改。
 
-
-
-
-
 ## Example
 
 ### In compiler
@@ -58,3 +98,11 @@
 
 这段话中的“the tree”只的是compiler构造的abstract syntax tree。compiler需要多次遍历这棵树，每次遍历执行一些操作，显然，这种场景是非常适合于使用visitor pattern的。
 
+### Hierarchy structure
+
+对具有hierarchy structure的数据进行操作，都可以使用visitor pattern。
+
+比如
+
+- [JSqlParser](https://github.com/JSQLParser/JSqlParser/wiki)
+- [Mach7](https://github.com/solodon4/Mach7)
