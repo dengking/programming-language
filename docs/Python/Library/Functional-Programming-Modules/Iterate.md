@@ -4,7 +4,7 @@
 
 ## Python语言提供的service
 
-- [**iterator**](https://docs.python.org/3/glossary.html#term-iterator)
+- [Iterator](https://docs.python.org/3/glossary.html#term-iterator)
 - [Iterator Types](https://docs.python.org/3/library/stdtypes.html#typeiter)
 
 - [`itertools`](https://docs.python.org/3/library/itertools.html#module-itertools) — Functions creating iterators for efficient looping[¶](https://docs.python.org/3/library/itertools.html#module-itertools)
