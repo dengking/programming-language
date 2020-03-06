@@ -72,4 +72,7 @@
 
 前面都是language的静态时，还需要对run time进行分析，比如data model等。
 
-程序的运行模型
+程序的运行模型等。
+
+比如python的标准库提供了Python Runtime Services[¶](https://docs.python.org/3/library/python.html#python-runtime-services)来供用户进行run time。
+
