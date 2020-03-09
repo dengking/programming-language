@@ -76,3 +76,10 @@
 
 比如python的标准库提供了Python Runtime Services[¶](https://docs.python.org/3/library/python.html#python-runtime-services)来供用户进行run time。
 
+
+
+# [Programming language implementation](https://en.wikipedia.org/wiki/Programming_language_implementation)
+
+## Abstract machines
+
+# [Stack machine](https://en.wikipedia.org/wiki/Stack_machine)

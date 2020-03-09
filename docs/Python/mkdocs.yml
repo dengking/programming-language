@@ -3,8 +3,10 @@ nav:
     - Language: Language
     # 描述编程相关的内容
     - Library: Library
+    # python的哲学
     - Philosophy: Philosophy
     - Style-guide: Style-guide
+    # python的编程范式
     - Paradigm: Paradigm
     - How-to: How-to
     - Software: Software

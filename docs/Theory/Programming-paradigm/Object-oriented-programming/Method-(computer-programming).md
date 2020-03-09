@@ -1,0 +1,1 @@
+# [Method (computer programming)](https://en.wikipedia.org/wiki/Method_(computer_programming))
