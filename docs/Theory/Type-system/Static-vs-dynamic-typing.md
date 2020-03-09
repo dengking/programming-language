@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 ## [Static vs. dynamic typing of programming languages](https://pythonconquerstheuniverse.wordpress.com/2009/10/03/static-vs-dynamic-typing-of-programming-languages/)
 
 *Updated 2010-10-20 — added a bit more information about Boo’s type inferencing.*

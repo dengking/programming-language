@@ -4,7 +4,18 @@
 
 ## 3.3.1. Basic customization[¶](https://docs.python.org/3/reference/datamodel.html#basic-customization)
 
-
+| 名称                                                         |      |      |      |
+| ------------------------------------------------------------ | ---- | ---- | ---- |
+| `object.__new__(cls[, ...])`[¶](https://docs.python.org/3/reference/datamodel.html#object.__new__) |      |      |      |
+| `object.__init__(self[, ...])`[¶](https://docs.python.org/3/reference/datamodel.html#object.__init__) |      |      |      |
+| `object.__del__(self)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__del__) |      |      |      |
+| `object.__repr__(self)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__repr__) |      |      |      |
+| `object.__str__(self)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__str__) |      |      |      |
+| `object.__bytes__(self)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__bytes__) |      |      |      |
+| `object.__format__(self, format_spec)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__format__) |      |      |      |
+| `object.__lt__(self, other)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__lt__)<br>`object.__le__(self, other)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__le__)<br>`object.__eq__(self, other)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__eq__)<br>`object.__ne__(self, other)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__ne__)<br>`object.__gt__(self, other)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__gt__)<br>`object.__ge__(self, other)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__ge__)<br> |      |      |      |
+| `object.__hash__(self)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__hash__) |      |      |      |
+| `object.__bool__(self)`[¶](https://docs.python.org/3/reference/datamodel.html#object.__bool__) |      |      |      |
 
 
 
