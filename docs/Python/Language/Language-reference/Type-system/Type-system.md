@@ -4,6 +4,8 @@
 
 ## Duck type
 
+[duck-typing](https://docs.python.org/3/glossary.html#term-duck-typing)
+
 为各种操作都指定special method。
 
 ### python duck type的实现
