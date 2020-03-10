@@ -73,4 +73,6 @@ The most commonly recognized major classes of polymorphism are:
 | [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) |
 |        [Static/early binding](Static/early binding )         | [Late/dynamic binding](https://en.wikipedia.org/wiki/Late_binding) |
 
+## Polymorphism的本质
 
+我觉得Polymorphism的本质是描述了一种one-to-many关系。

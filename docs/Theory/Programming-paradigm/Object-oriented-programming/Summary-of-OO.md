@@ -1,4 +1,6 @@
-# 从面向过程到面向对象
+# Summary of OO
+
+## 从面向过程到面向对象
 
 有了[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)和[Language](https://dengking.github.io/Post/Language/Language/)的概念，再来阅读[Thinking-in-java](./Thinking-in-java/Introduction-to-Objects.md)中OO理论的说明就非常容易了。
 
