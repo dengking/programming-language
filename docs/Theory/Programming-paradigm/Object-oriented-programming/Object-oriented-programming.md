@@ -66,3 +66,5 @@ Subclasses can override the methods defined by superclasses.
 Concerning the degree of **object orientation**, the following distinctions can be made:
 
 - Languages called "pure" OO languages, because everything in them is treated consistently as an **object**, from primitives such as characters and punctuation, all the way up to whole classes, prototypes, blocks, modules, etc. They were designed specifically to facilitate, even enforce, OO methods. Examples: [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+- Languages designed mainly for OO programming, but with some procedural elements. Examples: [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B)
+

@@ -20,6 +20,10 @@ Junade Ali, *Mastering PHP Design Patterns*
 
 ### Inheritance
 
+
+
+
+
 ## 三大特性
 
 我们平时所说的“面向对象编程”的三大特性，更加严格地说应该是class-based OOP的三大特性。这三大特性貌似并没有形式化地定义，应该是约定俗成的一种说法。

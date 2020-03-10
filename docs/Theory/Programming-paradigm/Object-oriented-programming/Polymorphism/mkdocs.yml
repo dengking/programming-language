@@ -3,3 +3,4 @@ nav:
     - Polymorphism: Polymorphism.md
     - Ad-hoc-polymorphism: Ad-hoc-polymorphism.md
     - Parametric-polymorphism: Parametric-polymorphism.md
+    - Subtyping-polymorphism: Subtyping-polymorphism
