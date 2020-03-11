@@ -82,7 +82,9 @@
 
 ## Run model
 
-需要对程序的run model进行分析。
+需要对程序的run model进行分析。run model其实可以看做是abstract machine，比如在cppreference的[Memory model](https://en.cppreference.com/w/cpp/language/memory_model)中有这样的描述：
+
+> Defines the semantics of computer memory storage for the purpose of the C++ abstract machine.
 
 ### Abstract machines
 
