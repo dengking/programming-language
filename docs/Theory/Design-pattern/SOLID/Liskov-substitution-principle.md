@@ -4,7 +4,7 @@
 
 ## 维基百科[Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
 
-
+> NOTE: Liskov substitution principle与[subtype polymorphism](https://en.wikipedia.org/wiki/Subtype)密切相关
 
 
 

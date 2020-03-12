@@ -72,4 +72,20 @@
 
 前面都是language的静态时，还需要对run time进行分析，比如data model等。
 
-程序的运行模型
+程序的运行模型等。
+
+比如python的标准库提供了Python Runtime Services[¶](https://docs.python.org/3/library/python.html#python-runtime-services)来供用户进行run time。
+
+
+
+## [Programming language implementation](https://en.wikipedia.org/wiki/Programming_language_implementation)
+
+## Run model
+
+需要对程序的run model进行分析。run model其实可以看做是abstract machine，比如在cppreference的[Memory model](https://en.cppreference.com/w/cpp/language/memory_model)中有这样的描述：
+
+> Defines the semantics of computer memory storage for the purpose of the C++ abstract machine.
+
+### Abstract machines
+
+### [Stack machine](https://en.wikipedia.org/wiki/Stack_machine)
