@@ -76,7 +76,9 @@
 
 比如python的标准库提供了Python Runtime Services[¶](https://docs.python.org/3/library/python.html#python-runtime-services)来供用户进行run time。
 
+## Compile-time and run time
 
+在学习一门语言的时候，从compile time和run time来分析各种概念是非常重要的。
 
 ## [Programming language implementation](https://en.wikipedia.org/wiki/Programming_language_implementation)
 
