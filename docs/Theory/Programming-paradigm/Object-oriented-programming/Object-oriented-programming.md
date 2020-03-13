@@ -68,3 +68,14 @@ Concerning the degree of **object orientation**, the following distinctions can 
 - Languages called "pure" OO languages, because everything in them is treated consistently as an **object**, from primitives such as characters and punctuation, all the way up to whole classes, prototypes, blocks, modules, etc. They were designed specifically to facilitate, even enforce, OO methods. Examples: [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 - Languages designed mainly for OO programming, but with some procedural elements. Examples: [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B)
 
+
+
+## Class-based vs prototype-based
+
+关于Class-based vs prototype-based，在维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)的[Class-based vs prototype-based](https://en.wikipedia.org/wiki/Object-oriented_programming#Class-based_vs_prototype-based)段中有总结。下面是我根据自己的一些经验所总结的：
+
+### 从type system的角度来进行对比
+
+OOP的class-based流派，每个class对应一种类型，往往是强类型语言使用，比如c++，Java等。
+
+OOP的prototype-based流派，并没有class的概念，往往是weak类型语言使用，比如JavaScript。
