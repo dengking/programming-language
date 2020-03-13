@@ -1,11 +1,11 @@
 # Object-oriented programming
 
-本文主要基于维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)，维基百科的这篇文章总结地还可以，如果有一定的编程经验的话，可以较好理解。如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
+本文主要基于维基百科[Object-oriented programming。如果有一定的编程经验的话，可以较好理解，如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
 
 - [Class-based programming](https://en.wikipedia.org/wiki/Class-based_programming)，典型代表有C++、Java、Python
 - [Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming)，典型代表就是 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) 
 
-在本章，我们主要关注的是[class-based](https://en.wikipedia.org/wiki/Class-based_programming) OOP。
+
 
 ## 维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)
 
