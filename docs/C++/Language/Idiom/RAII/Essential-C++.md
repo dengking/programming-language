@@ -4,7 +4,7 @@
 
 ## [FinallyScopeExit](https://www.programming-books.io/essential/cpp/finallyscopeexit-1dbb211071c841878da40d3afa71d1d8)
 
-
+本质是当退出scope的时候，执行某个函数，这个函数一般是释放资源的函数。
 
 [The simplest and neatest c++11 ScopeGuard](https://stackoverflow.com/questions/10270328/the-simplest-and-neatest-c11-scopeguard)
 
