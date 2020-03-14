@@ -91,3 +91,7 @@
 ### Abstract machines
 
 ### [Stack machine](https://en.wikipedia.org/wiki/Stack_machine)
+
+
+
+### [Memory model (programming)](https://en.wikipedia.org/wiki/Memory_model_(programming))
