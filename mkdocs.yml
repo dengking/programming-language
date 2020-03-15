@@ -108,6 +108,7 @@ nav:
             subscribe-pattern/Publish\u2013subscribe-pattern.md"
       - Strategy-pattern:
         - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
+    - Separation-of-container-and-algorithm: Theory/Design-pattern/Separation-of-container-and-algorithm.md
   - Comparison-of-programming-language: Theory/Comparison-of-programming-language.md
 - Python:
   - Language:
