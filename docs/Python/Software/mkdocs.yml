@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - Software-event-driven-programming: Software-event-driven-programming
+    - Software-concurrency: Software-concurrency
