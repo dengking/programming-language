@@ -3,3 +3,5 @@ nav:
     - Pattern: Pattern
     - Paradigm: Paradigm
     - Stype-guide: Stype-guide
+    - Book: Book.md
+    - How-to: How-to

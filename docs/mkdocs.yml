@@ -5,5 +5,6 @@ nav:
     - Theory: Theory
     - Python: Python
     - C++: C++
+    - C: C
     - JavaScript: JavaScript
     - Code-refactoring: Code-refactoring
