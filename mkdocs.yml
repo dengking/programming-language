@@ -45,11 +45,24 @@ nav:
     - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
     - Object-oriented-programming:
       - Object-oriented-programming: Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming.md
-      - Thinking-in-java:
-        - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/index.md
-        - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
-        - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object.md
+      - Class-based-OOP:
+        - Class-based-OOP: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Class-based-OOP.md
+        - Thinking-in-java:
+          - About-this-chapter: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/index.md
+          - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction.md
+          - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction-to-Objects.md
+          - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Everything-is-an-object.md
+      - Polymorphism:
+        - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/index.md
+        - Polymorphism: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Polymorphism.md
+        - Ad-hoc-polymorphism: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Ad-hoc-polymorphism.md
+        - Parametric-polymorphism: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Parametric-polymorphism.md
+        - Subtyping-polymorphism:
+          - Dispatch: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Dispatch.md
+          - Multiple-dispatch: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch.md
+        - Code: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Code.md
       - Glossary: Theory/Programming-paradigm/Object-oriented-programming/Glossary.md
+      - Summary-of-OO: Theory/Programming-paradigm/Object-oriented-programming/Summary-of-OO.md
   - Design-pattern:
     - Introduction: Theory/Design-pattern/index.md
     - SOLID:
@@ -59,17 +72,47 @@ nav:
       - Inversion-of-control: Theory/Design-pattern/SOLID/Inversion-of-control.md
     - Software-design-pattern: Theory/Design-pattern/Software-design-pattern.md
     - Visitor-pattern: Theory/Design-pattern/Visitor-pattern.md
+  - Type-system: Type-system
+  - Comparison-of-programming-language: Theory/Comparison-of-programming-language.md
 - Python:
   - Language:
     - Language-reference:
       - Introduction: Python/Language/Language-reference/index.md
+      - Data-model:
+        - Introduction: Python/Language/Language-reference/Data-model/index.md
+        - The-standard-type-hierarchy: Python/Language/Language-reference/Data-model/The-standard-type-hierarchy.md
+        - Special-method-names: Python/Language/Language-reference/Data-model/Special-method-names.md
+        - Special-attribute-names: Python/Language/Language-reference/Data-model/Special-attribute-names.md
+        - Coroutines: Python/Language/Language-reference/Data-model/Coroutines.md
+      - Execution-model:
+        - Execution-model: Python/Language/Language-reference/Execution-model/Execution-model.md
+        - Python-GC: Python/Language/Language-reference/Execution-model/Python-GC.md
+        - Python-GIL: Python/Language/Language-reference/Execution-model/Python-GIL.md
+        - Python-interpreter-stack: Python/Language/Language-reference/Execution-model/Python-interpreter-stack.md
+      - Type-system:
+        - Type-system: Python/Language/Language-reference/Type-system/Type-system.md
     - Developer's-guide:
       - Introduction: Python/Language/Developer's-guide/index.md
   - Library:
-    - Build-in-function:
-      - Summary-of-python-build-in-function: Python/Library/build-in-function/summary-of-python-build-in-function.md
-      - Hash:
-        - Introduction: Python/Library/build-in-function/hash/index.md
+    - Built-in:
+      - Introduction: Python/Library/Built-in/index.md
+      - Built-in-Functions:
+        - Summary-of-python-build-in-function: Python/Library/Built-in/Built-in-Functions/summary-of-python-build-in-function.md
+        - Hash:
+          - Introduction: Python/Library/Built-in/Built-in-Functions/hash/index.md
+      - Built-in-Constants:
+        - Introduction: Python/Library/Built-in/Built-in-Constants/index.md
+      - Built-in-Types:
+        - Introduction: Python/Library/Built-in/Built-in-Types/index.md
+      - Built-in-Exceptions:
+        - Introduction: Python/Library/Built-in/Built-in-Exceptions/index.md
+    - Functional-Programming-Modules:
+      - Introduction: Python/Library/Functional-Programming-Modules/index.md
+      - Iterate: Python/Library/Functional-Programming-Modules/Iterate.md
+    - Python-Runtime-Services:
+      - Introduction: Python/Library/Python-Runtime-Services/index.md
+      - "inspect\u2014Inspect-live-objects": "Python/Library/Python-Runtime-Services/inspect\u2014\
+          Inspect-live-objects.md"
   - Philosophy:
     - The-Zen-of-Python: Python/Philosophy/The-Zen-of-Python.md
   - Style-guide:
@@ -80,10 +123,20 @@ nav:
       - Reflective:
         - Python-reflection: Python/Paradigm/Meta-programming/Reflective/Python-reflection.md
   - How-to:
+    - Iterate:
+      - Introduction: Python/How-to/Iterate/Iterate.md
     - Lazy-import:
       - Lazy-importing: Python/How-to/Lazy-import/Lazy-importing.md
   - Software:
     - Introduction: Python/Software/index.md
+    - Software-event-driven-programming:
+      - Eventlet:
+        - Eventlet: Python/Software/Software-event-driven-programming/Eventlet/Eventlet.md
+      - Eevent:
+        - Gevent: Python/Software/Software-event-driven-programming/Eevent/Gevent.md
+    - Software-concurrency:
+      - Greenlet:
+        - Greenlet: Python/Software/Software-concurrency/Greenlet/Greenlet.md
   - Glossary:
     - Abstract-base-class: Python/Glossary/Abstract-base-class.md
     - Argument-and-parameter: Python/Glossary/Argument-and-parameter.md
@@ -91,12 +144,29 @@ nav:
   - Language:
     - Language-reference:
       - index: C++/Language/Language-reference/index.md
+      - Data-model:
+        - Introduction: C++/Language/Language-reference/Data-model/index.md
+      - Initialization:
+        - Introduction: C++/Language/Language-reference/Initialization/index.md
+      - Classes:
+        - Introduction: C++/Language/Language-reference/Classes/index.md
+        - Class: C++/Language/Language-reference/Classes/Class.md
+        - Constructor:
+          - Introduction: C++/Language/Language-reference/Classes/Constructor/index.md
+          - Constructor: C++/Language/Language-reference/Classes/Constructor/Constructor.md
+          - Code-example: C++/Language/Language-reference/Classes/Constructor/Code-example.md
     - Idiom:
       - Introduction: C++/Language/Idiom/index.md
   - Pattern:
     - Introduction: C++/Pattern/index.md
   - Paradigm:
     - Introduction: C++/Paradigm/index.md
+  - Stype-guide:
+    - Cpp-stype-guide: C++/Stype-guide/Cpp-stype-guide.md
+- JavaScript:
+  - Introduction: JavaScript/index.md
+- Code-refactoring:
+  - Introduction: Code-refactoring/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/programming-language
