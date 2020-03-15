@@ -175,8 +175,4 @@ In addition, systems such as Node.js are also event-driven.
 
 ### Framework/library
 
-非常多的成熟的框架，进行了非常抽象、封装，最终user只需要指定event和event handler之间的映射关系即可。
-
-比如flask、libevent、libuv。
-
-web framework都可以看做是event-driven model的实现。
+参见[Event-library.md](./Library/Event-library.md)。
