@@ -2,7 +2,7 @@
 
 ## 从面向过程到面向对象
 
-有了[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)和[Language](https://dengking.github.io/Post/Language/Language/)的概念，再来阅读[Thinking-in-java](./Thinking-in-java/Introduction-to-Objects.md)中OO理论的说明就非常容易了。
+有了[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)和[Language](https://dengking.github.io/Post/Language/Language/)的概念，再来阅读[Thinking-in-java](./Class-based-OOP/Thinking-in-java/Introduction-to-Objects.md)中OO理论的说明就非常容易了。
 
 我们使用语言来描述这个世界，面向过程语言如c，使用一个一个过程。面向对象语言更加expressive，能够更好地描述抽象概念，类的继承关系和概念之间的关系。更加易于理解。
 

@@ -1,6 +1,6 @@
 # Object-oriented programming
 
-本文主要基于维基百科[Object-oriented programming。如果有一定的编程经验的话，可以较好理解，如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
+本文主要基于维基百科[Object-oriented programming。如果有一定的编程经验的话，可以较好理解，如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Class-based-OOP/Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
 
 - [Class-based programming](https://en.wikipedia.org/wiki/Class-based_programming)，典型代表有C++、Java、Python
 - [Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming)，典型代表就是 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) 
@@ -15,11 +15,11 @@
 
 ### [Features](https://en.wikipedia.org/wiki/Object-oriented_programming#Features)
 
-> NOTE: 原文的本段说明非常多我们平时所听到的与OOP相关的概念。我将与class-base OOP相关的内容放到了[Class-based OOP](./Class-based-OOP.md)中。
+> NOTE: 原文的本段说明非常多我们平时所听到的与OOP相关的概念。我将与class-base OOP相关的内容放到了[Class-based OOP](./Class-based-OOP/Class-based-OOP.md)中。
 
 #### [Objects and classes](https://en.wikipedia.org/wiki/Object-oriented_programming#Objects_and_classes)
 
-> NOTE: 在[Class-based OOP](./Class-based-OOP.md)中会对此进行介绍。
+> NOTE: 在[Class-based OOP](./Class-based-OOP/Class-based-OOP.md)中会对此进行介绍。
 
 #### [Class-based vs prototype-based](https://en.wikipedia.org/wiki/Object-oriented_programming#Class-based_vs_prototype-based)
 
