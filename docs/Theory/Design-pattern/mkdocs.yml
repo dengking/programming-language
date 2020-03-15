@@ -6,3 +6,4 @@ nav:
     - Books: Books.md
     - Creational: Creational
     - Behavioral-pattern: Behavioral-pattern
+    - Separation-of-container-and-algorithm: Separation-of-container-and-algorithm.md
