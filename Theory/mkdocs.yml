@@ -2,3 +2,5 @@ nav:
     - Introduction: index.md
     - Type-system: Type-system
     - Programming-paradigm: Programming-paradigm
+    - Design-pattern: Design-pattern
+    - Comparison-of-programming-language: Comparison-of-programming-language.md

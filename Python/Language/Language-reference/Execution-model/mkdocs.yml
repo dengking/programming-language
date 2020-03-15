@@ -1,0 +1,5 @@
+nav:
+    - Execution-model: Execution-model.md
+    - Python-GC: Python-GC.md
+    - Python-GIL: Python-GIL.md
+    - Python-interpreter-stack: Python-interpreter-stack.md

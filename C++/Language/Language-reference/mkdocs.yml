@@ -1,2 +1,5 @@
 nav:
     - index: index.md
+    - Data-model: Data-model
+    - Initialization: Initialization
+    - Classes: Classes

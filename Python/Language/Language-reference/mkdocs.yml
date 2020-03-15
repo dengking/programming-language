@@ -1,2 +1,5 @@
 nav:
     - Introduction: index.md
+    - Data-model: Data-model
+    - Execution-model: Execution-model
+    - Type-system: Type-system

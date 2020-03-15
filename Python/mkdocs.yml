@@ -2,10 +2,16 @@ nav:
     # 描述语言的一些原理
     - Language: Language
     # 描述编程相关的内容
-    - Library-Reference: Library-Reference
+    - Library: Library
+    # python的哲学
     - Philosophy: Philosophy
     - Style-guide: Style-guide
+    # python的编程范式
     - Paradigm: Paradigm
+    # python设计模式
+    - Pattern: Pattern
+    # 编程工具
+    - Programming-tool: Programming-tool
     - How-to: How-to
     - Software: Software
     - Glossary: Glossary

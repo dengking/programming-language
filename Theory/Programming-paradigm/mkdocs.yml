@@ -2,3 +2,7 @@ nav:
     - Introduction: index.md
     - Programming-paradigm: Programming-paradigm.md
     - Object-oriented-programming: Object-oriented-programming
+    - Aspect-oriented-programming: Aspect-oriented-programming
+    - Functional-programming: Functional-programming
+    - Event-driven-programming: Event-driven-programming
+    - Summary-of-paradigm: Summary-of-paradigm.md

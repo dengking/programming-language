@@ -1,0 +1,4498 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Multiple-dispatch - programming-language</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../../../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-27795084-5", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#a-polyglots-guide-to-multiple-dispatch" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              programming-language
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Multiple-dispatch
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    programming-language
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Programming-language/" title="Programming-language" class="md-nav__link">
+      Programming-language
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Common/" title="Common" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Theory
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Theory
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Type-system/Type/" title="Type" class="md-nav__link">
+      Type
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Type-system/Type-safety/" title="Type-safety" class="md-nav__link">
+      Type-safety
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Type-system/Static-vs-dynamic-typing/" title="Static-vs-dynamic-typing" class="md-nav__link">
+      Static-vs-dynamic-typing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Type-system/Class-and-type/" title="Class-and-type" class="md-nav__link">
+      Class-and-type
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Type-system/Subtyping/" title="Subtyping" class="md-nav__link">
+      Subtyping
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Programming-paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Programming-paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Programming-paradigm/" title="Programming-paradigm" class="md-nav__link">
+      Programming-paradigm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Object-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Object-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Object-oriented-programming/" title="Object-oriented-programming" class="md-nav__link">
+      Object-oriented-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-2" type="checkbox" id="nav-4-3-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-3-2">
+      Class-based-OOP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-3-2">
+        Class-based-OOP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Class-based-OOP/Class-based-OOP/" title="Class-based-OOP" class="md-nav__link">
+      Class-based-OOP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-2-2" type="checkbox" id="nav-4-3-3-2-2">
+    
+    <label class="md-nav__link" for="nav-4-3-3-2-2">
+      Thinking-in-java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-3-3-2-2">
+        Thinking-in-java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Class-based-OOP/Thinking-in-java/" title="About-this-chapter" class="md-nav__link">
+      About-this-chapter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Class-based-OOP/Thinking-in-java/Introduction/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Class-based-OOP/Thinking-in-java/Introduction-to-Objects/" title="Introduction-to-Objects" class="md-nav__link">
+      Introduction-to-Objects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Class-based-OOP/Thinking-in-java/Everything-is-an-object/" title="Everything-is-an-object" class="md-nav__link">
+      Everything-is-an-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-3" type="checkbox" id="nav-4-3-3-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-3-3">
+      Polymorphism
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-3-3">
+        Polymorphism
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Polymorphism/" title="Polymorphism" class="md-nav__link">
+      Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Ad-hoc-polymorphism/" title="Ad-hoc-polymorphism" class="md-nav__link">
+      Ad-hoc-polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Parametric-polymorphism/" title="Parametric-polymorphism" class="md-nav__link">
+      Parametric-polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3-3-5" type="checkbox" id="nav-4-3-3-3-5" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-3-3-5">
+      Subtyping-polymorphism
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-3-3-3-5">
+        Subtyping-polymorphism
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Dispatch/" title="Dispatch" class="md-nav__link">
+      Dispatch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Multiple-dispatch
+      </label>
+    
+    <a href="./" title="Multiple-dispatch" class="md-nav__link md-nav__link--active">
+      Multiple-dispatch
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-polyglots-guide-to-multiple-dispatch" class="md-nav__link">
+    A polyglot's guide to multiple dispatch
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#polymorphism-single-dispatch-multiple-dispatch" class="md-nav__link">
+    Polymorphism, single dispatch, multiple dispatch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-failed-attempt-in-c" class="md-nav__link">
+    A failed attempt in C++
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-dispatch-in-c-with-the-visitor-pattern" class="md-nav__link">
+    Multiple dispatch in C++ with the visitor pattern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry-and-base-class-defaults" class="md-nav__link">
+    Symmetry and base-class defaults
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-with-the-visitor-based-approach" class="md-nav__link">
+    The problem with the visitor-based approach
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Summary-of-OO/" title="Summary-of-OO" class="md-nav__link">
+      Summary-of-OO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4">
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Aspect-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Aspect-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Aspect-oriented-programming/Aspect-oriented-programming/" title="Aspect-oriented-programming" class="md-nav__link">
+      Aspect-oriented-programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      Functional-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        Functional-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Functional-programming/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-6" type="checkbox" id="nav-4-3-6">
+    
+    <label class="md-nav__link" for="nav-4-3-6">
+      Event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-6">
+        Event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/Event-driven-model/" title="Event-driven-model" class="md-nav__link">
+      Event-driven-model
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-6-3" type="checkbox" id="nav-4-3-6-3">
+    
+    <label class="md-nav__link" for="nav-4-3-6-3">
+      Event-loop
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-6-3">
+        Event-loop
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/Event-loop/Event-loop/" title="Event-loop" class="md-nav__link">
+      Event-loop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/Event-loop/JavaScript-event-loop/" title="JavaScript-event-loop" class="md-nav__link">
+      JavaScript-event-loop
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/Event-message-passing/" title="Event-message-passing" class="md-nav__link">
+      Event-message-passing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/Event-VS-exception-VS-signal/" title="Event-VS-exception-VS-signal" class="md-nav__link">
+      Event-VS-exception-VS-signal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-6-6" type="checkbox" id="nav-4-3-6-6">
+    
+    <label class="md-nav__link" for="nav-4-3-6-6">
+      Library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-3-6-6">
+        Library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Event-driven-programming/Library/Event-library/" title="Event-library" class="md-nav__link">
+      Event-library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Summary-of-paradigm/" title="Summary-of-paradigm" class="md-nav__link">
+      Summary-of-paradigm
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+    
+    <label class="md-nav__link" for="nav-4-4">
+      Design-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-4">
+        Design-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-2" type="checkbox" id="nav-4-4-2">
+    
+    <label class="md-nav__link" for="nav-4-4-2">
+      SOLID
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-4-2">
+        SOLID
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/SOLID/SOLID/" title="SOLID" class="md-nav__link">
+      SOLID
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/SOLID/Open–closed-principle/" title="Open–closed-principle" class="md-nav__link">
+      Open–closed-principle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/SOLID/Liskov-substitution-principle/" title="Liskov-substitution-principle" class="md-nav__link">
+      Liskov-substitution-principle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/SOLID/Inversion-of-control/" title="Inversion-of-control" class="md-nav__link">
+      Inversion-of-control
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Software-design-pattern/" title="Software-design-pattern" class="md-nav__link">
+      Software-design-pattern
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Object-oriented-design/" title="Object-oriented-design" class="md-nav__link">
+      Object-oriented-design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Books/" title="Books" class="md-nav__link">
+      Books
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-6" type="checkbox" id="nav-4-4-6">
+    
+    <label class="md-nav__link" for="nav-4-4-6">
+      Creational
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-4-6">
+        Creational
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Creational/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-6-2" type="checkbox" id="nav-4-4-6-2">
+    
+    <label class="md-nav__link" for="nav-4-4-6-2">
+      Singleton-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-4-6-2">
+        Singleton-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Creational/Singleton-pattern/Singleton-pattern/" title="Singleton-pattern" class="md-nav__link">
+      Singleton-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-7" type="checkbox" id="nav-4-4-7">
+    
+    <label class="md-nav__link" for="nav-4-4-7">
+      Behavioral-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-4-7">
+        Behavioral-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-7-1" type="checkbox" id="nav-4-4-7-1">
+    
+    <label class="md-nav__link" for="nav-4-4-7-1">
+      Visitor-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-4-7-1">
+        Visitor-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern/" title="Visitor-pattern" class="md-nav__link">
+      Visitor-pattern
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Behavioral-pattern/Visitor-pattern/Code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-7-2" type="checkbox" id="nav-4-4-7-2">
+    
+    <label class="md-nav__link" for="nav-4-4-7-2">
+      Iterator-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-4-7-2">
+        Iterator-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern/" title="Iterator-pattern" class="md-nav__link">
+      Iterator-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-7-3" type="checkbox" id="nav-4-4-7-3">
+    
+    <label class="md-nav__link" for="nav-4-4-7-3">
+      Observer-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-4-7-3">
+        Observer-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern/" title="Observer-pattern" class="md-nav__link">
+      Observer-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-7-4" type="checkbox" id="nav-4-4-7-4">
+    
+    <label class="md-nav__link" for="nav-4-4-7-4">
+      Publish–subscribe-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-4-7-4">
+        Publish–subscribe-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Behavioral-pattern/Publish–subscribe-pattern/Publish–subscribe-pattern/" title="Publish–subscribe-pattern" class="md-nav__link">
+      Publish–subscribe-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-7-5" type="checkbox" id="nav-4-4-7-5">
+    
+    <label class="md-nav__link" for="nav-4-4-7-5">
+      Strategy-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-4-7-5">
+        Strategy-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern/" title="Strategy-pattern" class="md-nav__link">
+      Strategy-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Design-pattern/Separation-of-container-and-algorithm/" title="Separation-of-container-and-algorithm" class="md-nav__link">
+      Separation-of-container-and-algorithm
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../Comparison-of-programming-language/" title="Comparison-of-programming-language" class="md-nav__link">
+      Comparison-of-programming-language
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1" type="checkbox" id="nav-5-1-1">
+    
+    <label class="md-nav__link" for="nav-5-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1-2" type="checkbox" id="nav-5-1-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-1-2">
+      Data-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-1-2">
+        Data-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Data-model/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Data-model/The-standard-type-hierarchy/" title="The-standard-type-hierarchy" class="md-nav__link">
+      The-standard-type-hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Data-model/Special-method-names/" title="Special-method-names" class="md-nav__link">
+      Special-method-names
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Data-model/Special-attribute-names/" title="Special-attribute-names" class="md-nav__link">
+      Special-attribute-names
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Data-model/Coroutines/" title="Coroutines" class="md-nav__link">
+      Coroutines
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1-3" type="checkbox" id="nav-5-1-1-3">
+    
+    <label class="md-nav__link" for="nav-5-1-1-3">
+      Execution-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-1-3">
+        Execution-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Execution-model/Execution-model/" title="Execution-model" class="md-nav__link">
+      Execution-model
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Execution-model/Python-GC/" title="Python-GC" class="md-nav__link">
+      Python-GC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Execution-model/Python-GIL/" title="Python-GIL" class="md-nav__link">
+      Python-GIL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Execution-model/Python-interpreter-stack/" title="Python-interpreter-stack" class="md-nav__link">
+      Python-interpreter-stack
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-1-4" type="checkbox" id="nav-5-1-1-4">
+    
+    <label class="md-nav__link" for="nav-5-1-1-4">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-1-4">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Language-reference/Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      Developer's-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        Developer's-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Language/Developer's-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1" type="checkbox" id="nav-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1">
+      Built-in
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-1">
+        Built-in
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Built-in/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2" type="checkbox" id="nav-5-2-1-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2">
+      Built-in-Functions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-2">
+        Built-in-Functions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Built-in/Built-in-Functions/summary-of-python-build-in-function/" title="Summary-of-python-build-in-function" class="md-nav__link">
+      Summary-of-python-build-in-function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2-2" type="checkbox" id="nav-5-2-1-2-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2-2">
+      Hash
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-5-2-1-2-2">
+        Hash
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Built-in/Built-in-Functions/hash/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-3" type="checkbox" id="nav-5-2-1-3">
+    
+    <label class="md-nav__link" for="nav-5-2-1-3">
+      Built-in-Constants
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-3">
+        Built-in-Constants
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Built-in/Built-in-Constants/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-4" type="checkbox" id="nav-5-2-1-4">
+    
+    <label class="md-nav__link" for="nav-5-2-1-4">
+      Built-in-Types
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-4">
+        Built-in-Types
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Built-in/Built-in-Types/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-5" type="checkbox" id="nav-5-2-1-5">
+    
+    <label class="md-nav__link" for="nav-5-2-1-5">
+      Built-in-Exceptions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-5">
+        Built-in-Exceptions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Built-in/Built-in-Exceptions/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-2" type="checkbox" id="nav-5-2-2">
+    
+    <label class="md-nav__link" for="nav-5-2-2">
+      Functional-Programming-Modules
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-2">
+        Functional-Programming-Modules
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Functional-Programming-Modules/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Functional-Programming-Modules/Iterate/" title="Iterate" class="md-nav__link">
+      Iterate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3">
+    
+    <label class="md-nav__link" for="nav-5-2-3">
+      Python-Runtime-Services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-3">
+        Python-Runtime-Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Python-Runtime-Services/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Library/Python-Runtime-Services/inspect—Inspect-live-objects/" title="inspect—Inspect-live-objects" class="md-nav__link">
+      inspect—Inspect-live-objects
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Philosophy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Philosophy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Philosophy/The-Zen-of-Python/" title="The-Zen-of-Python" class="md-nav__link">
+      The-Zen-of-Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Style-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Style-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Style-guide/Style-Guide-for-Python-Code/" title="Style-Guide-for-Python-Code" class="md-nav__link">
+      Style-Guide-for-Python-Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Paradigm/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2" type="checkbox" id="nav-5-5-2">
+    
+    <label class="md-nav__link" for="nav-5-5-2">
+      Meta-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-5-2">
+        Meta-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5-2-1" type="checkbox" id="nav-5-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-5-2-1">
+      Reflective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-5-2-1">
+        Reflective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Paradigm/Meta-programming/Reflective/Python-reflection/" title="Python-reflection" class="md-nav__link">
+      Python-reflection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Programming-tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Programming-tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7-1" type="checkbox" id="nav-5-7-1">
+    
+    <label class="md-nav__link" for="nav-5-7-1">
+      Lint
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-7-1">
+        Lint
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Programming-tool/Lint/Python-lints/" title="Python-lints" class="md-nav__link">
+      Python-lints
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Programming-tool/Lint/Pylint/" title="Pylint" class="md-nav__link">
+      Pylint
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+    
+    <label class="md-nav__link" for="nav-5-8">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-8">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8-1" type="checkbox" id="nav-5-8-1">
+    
+    <label class="md-nav__link" for="nav-5-8-1">
+      Iterate
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-8-1">
+        Iterate
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/How-to/Iterate/Iterate/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8-2" type="checkbox" id="nav-5-8-2">
+    
+    <label class="md-nav__link" for="nav-5-8-2">
+      Lazy-import
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-8-2">
+        Lazy-import
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/How-to/Lazy-import/Lazy-importing/" title="Lazy-importing" class="md-nav__link">
+      Lazy-importing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
+    
+    <label class="md-nav__link" for="nav-5-9">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-9">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-2" type="checkbox" id="nav-5-9-2">
+    
+    <label class="md-nav__link" for="nav-5-9-2">
+      Software-event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-9-2">
+        Software-event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/Software-event-driven-programming/" title="Introduciton" class="md-nav__link">
+      Introduciton
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-2-2" type="checkbox" id="nav-5-9-2-2">
+    
+    <label class="md-nav__link" for="nav-5-9-2-2">
+      Eventlet
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-9-2-2">
+        Eventlet
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/Software-event-driven-programming/Eventlet/Eventlet/" title="Eventlet" class="md-nav__link">
+      Eventlet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-2-3" type="checkbox" id="nav-5-9-2-3">
+    
+    <label class="md-nav__link" for="nav-5-9-2-3">
+      Eevent
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-9-2-3">
+        Eevent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/Software-event-driven-programming/Eevent/Gevent/" title="Gevent" class="md-nav__link">
+      Gevent
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-3" type="checkbox" id="nav-5-9-3">
+    
+    <label class="md-nav__link" for="nav-5-9-3">
+      Software-concurrency
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-9-3">
+        Software-concurrency
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-3-1" type="checkbox" id="nav-5-9-3-1">
+    
+    <label class="md-nav__link" for="nav-5-9-3-1">
+      Greenlet
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-9-3-1">
+        Greenlet
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/Software-concurrency/Greenlet/Greenlet/" title="Greenlet" class="md-nav__link">
+      Greenlet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-4" type="checkbox" id="nav-5-9-4">
+    
+    <label class="md-nav__link" for="nav-5-9-4">
+      Software-pallets
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-9-4">
+        Software-pallets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-4-1" type="checkbox" id="nav-5-9-4-1">
+    
+    <label class="md-nav__link" for="nav-5-9-4-1">
+      Flask
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-9-4-1">
+        Flask
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-4-1-1" type="checkbox" id="nav-5-9-4-1-1">
+    
+    <label class="md-nav__link" for="nav-5-9-4-1-1">
+      Deployment-Options
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-5-9-4-1-1">
+        Deployment-Options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/software-pallets/flask/Deployment-Options/flask-Deployment-Options/" title="flask-Deployment-Options" class="md-nav__link">
+      flask-Deployment-Options
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9-5" type="checkbox" id="nav-5-9-5">
+    
+    <label class="md-nav__link" for="nav-5-9-5">
+      Software-static-web-generator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-9-5">
+        Software-static-web-generator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Software/software-static-web-generator/static-web-generator/" title="Static-web-generator" class="md-nav__link">
+      Static-web-generator
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-10" type="checkbox" id="nav-5-10">
+    
+    <label class="md-nav__link" for="nav-5-10">
+      Glossary
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-10">
+        Glossary
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Glossary/Abstract-base-class/" title="Abstract-base-class" class="md-nav__link">
+      Abstract-base-class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Python/Glossary/Argument-and-parameter/" title="Argument-and-parameter" class="md-nav__link">
+      Argument-and-parameter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1" type="checkbox" id="nav-6-1-1">
+    
+    <label class="md-nav__link" for="nav-6-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/" title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1-2" type="checkbox" id="nav-6-1-1-2">
+    
+    <label class="md-nav__link" for="nav-6-1-1-2">
+      Data-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-1-2">
+        Data-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Data-model/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1-2-2" type="checkbox" id="nav-6-1-1-2-2">
+    
+    <label class="md-nav__link" for="nav-6-1-1-2-2">
+      Memory-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-6-1-1-2-2">
+        Memory-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Data-model/Memory-model/Memory-model/" title="Memory-model" class="md-nav__link">
+      Memory-model
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1-3" type="checkbox" id="nav-6-1-1-3">
+    
+    <label class="md-nav__link" for="nav-6-1-1-3">
+      Initialization
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-1-3">
+        Initialization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Initialization/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1-4" type="checkbox" id="nav-6-1-1-4">
+    
+    <label class="md-nav__link" for="nav-6-1-1-4">
+      Classes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-1-4">
+        Classes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Classes/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Classes/Class/" title="Class" class="md-nav__link">
+      Class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-1-4-3" type="checkbox" id="nav-6-1-1-4-3">
+    
+    <label class="md-nav__link" for="nav-6-1-1-4-3">
+      Constructor
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-6-1-1-4-3">
+        Constructor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Classes/Constructor/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Classes/Constructor/Constructor/" title="Constructor" class="md-nav__link">
+      Constructor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Language-reference/Classes/Constructor/Code-example/" title="Code-example" class="md-nav__link">
+      Code-example
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-2" type="checkbox" id="nav-6-1-2">
+    
+    <label class="md-nav__link" for="nav-6-1-2">
+      Idiom
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-2">
+        Idiom
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Idiom/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-2-2" type="checkbox" id="nav-6-1-2-2">
+    
+    <label class="md-nav__link" for="nav-6-1-2-2">
+      RAII
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-2-2">
+        RAII
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Idiom/RAII/RAII/" title="RAII" class="md-nav__link">
+      RAII
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Language/Idiom/RAII/Essential-C++/" title="Essential-C++" class="md-nav__link">
+      Essential-C++
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
+    
+    <label class="md-nav__link" for="nav-6-4">
+      Stype-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        Stype-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Stype-guide/Cpp-stype-guide/" title="Cpp-stype-guide" class="md-nav__link">
+      Cpp-stype-guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/Book/" title="Book" class="md-nav__link">
+      Book
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-6" type="checkbox" id="nav-6-6">
+    
+    <label class="md-nav__link" for="nav-6-6">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-6">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-6-1" type="checkbox" id="nav-6-6-1">
+    
+    <label class="md-nav__link" for="nav-6-6-1">
+      Concurrency
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-6-1">
+        Concurrency
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/How-to/Concurrency/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-6-1-2" type="checkbox" id="nav-6-6-1-2">
+    
+    <label class="md-nav__link" for="nav-6-6-1-2">
+      CCiA
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-6-1-2">
+        CCiA
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/How-to/Concurrency/CCiA/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-6-2" type="checkbox" id="nav-6-6-2">
+    
+    <label class="md-nav__link" for="nav-6-6-2">
+      Memory-leak
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-6-2">
+        Memory-leak
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/How-to/Memory-leak/Tools/" title="Tools" class="md-nav__link">
+      Tools
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/How-to/Memory-leak/数组越界/" title="数组越界" class="md-nav__link">
+      数组越界
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C++/How-to/Memory-leak/内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出/" title="内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出" class="md-nav__link">
+      内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      C
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        C
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      Data-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        Data-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Data-model/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Data-model/creference-Objects and alignment/" title="creference-Objects and alignment" class="md-nav__link">
+      creference-Objects and alignment
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+    
+    <label class="md-nav__link" for="nav-7-2-1">
+      Software-event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-7-2-1">
+        Software-event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1-1" type="checkbox" id="nav-7-2-1-1">
+    
+    <label class="md-nav__link" for="nav-7-2-1-1">
+      Software-libevent
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-7-2-1-1">
+        Software-libevent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Software/Software-event-driven-programming/Software-libevent/libevent/" title="libevent" class="md-nav__link">
+      libevent
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1-2" type="checkbox" id="nav-7-2-1-2">
+    
+    <label class="md-nav__link" for="nav-7-2-1-2">
+      Software-libuv
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-7-2-1-2">
+        Software-libuv
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Software/Software-event-driven-programming/Software-libuv/libuv/" title="libuv" class="md-nav__link">
+      libuv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1-2-2" type="checkbox" id="nav-7-2-1-2-2">
+    
+    <label class="md-nav__link" for="nav-7-2-1-2-2">
+      Doc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-7-2-1-2-2">
+        Doc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Software/Software-event-driven-programming/Software-libuv/Doc/Design-overview/" title="Design-overview" class="md-nav__link">
+      Design-overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1-2-2-2" type="checkbox" id="nav-7-2-1-2-2-2">
+    
+    <label class="md-nav__link" for="nav-7-2-1-2-2-2">
+      User-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-7-2-1-2-2-2">
+        User-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv/" title="Basics-of-libuv" class="md-nav__link">
+      Basics-of-libuv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1-2-2-2-2" type="checkbox" id="nav-7-2-1-2-2-2-2">
+    
+    <label class="md-nav__link" for="nav-7-2-1-2-2-2-2">
+      Utilities
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="7">
+      <label class="md-nav__title" for="nav-7-2-1-2-2-2-2">
+        Utilities
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      JavaScript
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        JavaScript
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../JavaScript/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2" type="checkbox" id="nav-8-2">
+    
+    <label class="md-nav__link" for="nav-8-2">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-2">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2-1" type="checkbox" id="nav-8-2-1">
+    
+    <label class="md-nav__link" for="nav-8-2-1">
+      Software-event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-8-2-1">
+        Software-event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2-1-1" type="checkbox" id="nav-8-2-1-1">
+    
+    <label class="md-nav__link" for="nav-8-2-1-1">
+      Software-node.js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-8-2-1-1">
+        Software-node.js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-About Node.js/" title="Node.js-About Node.js" class="md-nav__link">
+      Node.js-About Node.js
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2-1-1-2" type="checkbox" id="nav-8-2-1-1-2">
+    
+    <label class="md-nav__link" for="nav-8-2-1-1-2">
+      Node.js-core-concepts
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-8-2-1-1-2">
+        Node.js-core-concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-How-does-Node.js-manage-timers-internally/" title="Node.js-How-does-Node.js-manage-timers-internally" class="md-nav__link">
+      Node.js-How-does-Node.js-manage-timers-internally
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-Overview-of-Blocking-vs-Non-Blocking/" title="Node.js-Overview-of-Blocking-vs-Non-Blocking" class="md-nav__link">
+      Node.js-Overview-of-Blocking-vs-Non-Blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()/" title="Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()" class="md-nav__link">
+      Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Code-refactoring
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Code-refactoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../Code-refactoring/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-polyglots-guide-to-multiple-dispatch" class="md-nav__link">
+    A polyglot's guide to multiple dispatch
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#polymorphism-single-dispatch-multiple-dispatch" class="md-nav__link">
+    Polymorphism, single dispatch, multiple dispatch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-failed-attempt-in-c" class="md-nav__link">
+    A failed attempt in C++
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-dispatch-in-c-with-the-visitor-pattern" class="md-nav__link">
+    Multiple dispatch in C++ with the visitor pattern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry-and-base-class-defaults" class="md-nav__link">
+    Symmetry and base-class defaults
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-with-the-visitor-based-approach" class="md-nav__link">
+    The problem with the visitor-based approach
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Multiple-dispatch</h1>
+                
+                <h2 id="a-polyglots-guide-to-multiple-dispatch"><a href="https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/">A polyglot's guide to multiple dispatch</a></h2>
+<h3 id="polymorphism-single-dispatch-multiple-dispatch">Polymorphism, single dispatch, multiple dispatch</h3>
+<p>A natural extension of this idea is <em>multiple dispatch</em>, wherein the decision which function to call is based on the <strong>runtime types</strong> of <em>multiple</em> objects. Why is this useful? It's not a tool programmers reach for very often, but when it <em>is</em> appropriate, alternatives（可选方案） tend to be cumbersome and repetitive（重复的）. A telling sign that <strong>multiple dispatch</strong> may be in order is when you have some operation that involves more than one class and there is no single obvious class where this operation belongs. Think of simulating a sound when a drumstick（鸡腿） hits a drum. There are many kinds of drumsticks, and many kinds of drums; their <strong>combinations</strong> produce different sounds. Say we want to write a function (or family of functions) that determines which sound is produced. Should this function be a method of the <code>Drum</code> class or the <code>DrumStick</code> class? Forcing this decision is one of the follies（罪恶） of classical OOP, and <strong>multiple dispatch</strong> helps us solve it naturally without adding a kludg（组装）e into our design.</p>
+<blockquote>
+<p>NOTE: 当出现组合的情况时，multiple dispatch就非常有效。</p>
+</blockquote>
+<p>A simpler and more canonical example is computing intersections（交集） of shapes - maybe for computer graphics, or for simulation, or other use cases. A generic shape intersection computation can be complex to implement, but in many specific cases it's easy. For example, computing intersections of rectangles with rectangles is trivial; same for circles and ellipses; rectangles with triangles may be a tiny bit harder, but still much simpler than artibrary polygons, and so on [<a href="https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/#id7">2]</a>.</p>
+<p>How do we write code to handle all these cases? All in all, we just need an <code>intersect</code> function that takes two shapes and computes an intersection. This function may have a whole bunch of special cases inside for different combinations of shapes it knows how to do easily, before it resorts to some heavy-handed generic polygon intersection approach. Such code, however, would be gross to develop and maintain. Wouldn't it be nice if we could have:</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ellipse</span><span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// implement intersection of rectangle with ellipse</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// implement intersection of rectangle with another rectangle</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// implement interesction of two generic shapes</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>And then the call <code>Intersect(some_shape, other_shape)</code> would just magically dispatch to the right function? This capability is what's most often referred to by <em>multiple dispatch</em> in programming language parlance [<a href="https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/#id8">3]</a>.</p>
+<h3 id="a-failed-attempt-in-c">A failed attempt in C++</h3>
+<p>You may be tempted to come up with the following "trivial" solution in C++:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Shape</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">).</span><span class="n">name</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{};</span>
+
+<span class="k">class</span> <span class="nc">Ellipse</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{};</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{};</span>
+
+<span class="c1">// Overloaded Intersect methods.</span>
+<span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ellipse</span><span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Rectangle x Ellipse [names r=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;, e=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Rectangle x Rectangle [names r1=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r1</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;, r2=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r2</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Fallback to shapes</span>
+<span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Shape x Shape [names s1=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;, s2=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s2</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Now in <code>main</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">;</span>
+<span class="n">Ellipse</span> <span class="n">e</span><span class="p">;</span>
+<span class="n">Triangle</span> <span class="n">t</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Static type dispatch</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">Intersect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">r1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+<span class="n">Intersect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">r1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r2</span><span class="p">);</span>
+<span class="n">Intersect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">r1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+</pre></div>
+
+<p>We'll see:</p>
+<div class="highlight"><pre><span></span>Static type dispatch
+Rectangle x Ellipse [names r=9Rectangle, e=7Ellipse]
+Rectangle x Rectangle [names r1=9Rectangle, r2=9Rectangle]
+Shape x Shape [names s1=9Rectangle, s2=8Triangle]
+</pre></div>
+
+<p>Note how the intersections get dispatched to <strong>specialized functions</strong> when these exist and to a <strong>generic</strong> catch-all <code>Shape x Shape</code> handler when there is no specialized function.</p>
+<blockquote>
+<p>NOTE: specialized and generic catch-all</p>
+</blockquote>
+<p>So that's it, multiple dispatch works out of the box? Not so fast... What we see here is just C++ <strong>function overloading</strong> in action. The compiler knows the <strong>static, compile-time types</strong> of the pointers passed to the <code>Intersect</code> calls, so it just emits the right call. Function overloading is great and useful, but this is not the general problem we're trying to solve. In a realistic code-base, you won't be passing pointers to concrete subclasses of <code>Shape</code> around. You are almost certainly going to be dealing with pointers to the <code>Shape</code> base class（<a href="https://en.wikipedia.org/wiki/Design_by_contract">Design by contract</a>）. Let's try to see how the code in the previous sample works with <strong>dynamic types</strong>:</p>
+<div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pr1</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pr2</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pe</span><span class="p">(</span><span class="k">new</span> <span class="n">Ellipse</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pt</span><span class="p">(</span><span class="k">new</span> <span class="n">Triangle</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Dynamic type dispatch</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">Intersect</span><span class="p">(</span><span class="n">pr1</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">pe</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="n">Intersect</span><span class="p">(</span><span class="n">pr1</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">pr2</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="n">Intersect</span><span class="p">(</span><span class="n">pr1</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">pt</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+</pre></div>
+
+<p>Prints:</p>
+<div class="highlight"><pre><span></span>Dynamic type dispatch
+Shape x Shape [names s1=9Rectangle, s2=7Ellipse]
+Shape x Shape [names s1=9Rectangle, s2=9Rectangle]
+Shape x Shape [names s1=9Rectangle, s2=8Triangle]
+</pre></div>
+
+<p>Yeah... that's not good. All calls were dispatched to the generic <code>Shape x Shape</code> handler, even though the <strong>runtime types</strong> of the objects are different (see the names gathered from <code>typeid</code>). This is hardly surprising, because when the compiler sees <code>Intersect(pr1.get(), pr2.get())</code>, the <strong>static types</strong> for the two arguments are <code>Shape*</code> and <code>Shape*</code>. You could be forgiven for thinking that the compiler may invoke <strong>virtual dispatch</strong> here, but <strong>virtual dispatch</strong> in C++ doesn't work this way. It only works when <em>a virtual method is called on a pointer to a base object</em>, which is not what's happening here.</p>
+<blockquote>
+<p>NOTE: 最后一句的意思是，使用一个static type为基类的指针来调用一个virtual method时，才会触发virtual dispatch。</p>
+</blockquote>
+<h3 id="multiple-dispatch-in-c-with-the-visitor-pattern">Multiple dispatch in C++ with the visitor pattern</h3>
+<p>I'll admit I'm calling this approach "the visitor pattern" only because this is how it's called <a href="https://en.wikipedia.org/wiki/Double_dispatch#Double_dispatch_in_C">elsewhere</a> and because I don't have a better name for it. In fact, it's probably closer to an "inverted" visitor pattern, and in general the pattern name may obscure the code more than help. So forget about the name, and just study the code.</p>
+<p>The last paragraph of the previous section ended with an important observation: virtual dispatch in C++ kicks in <em>only</em> when a virtual method is called on a pointer to a base object. Let's leverage this idea to simulate <strong>double dispatch</strong> on our hierarchy of shapes. The plan is to arrange <code>Intersect</code> to hop through virtual dispatches on both its arguments to get to the right method for their runtime types.</p>
+<blockquote>
+<p>NOTE: 最后一句的意思是：通过在两个arguments上都使用virtual dispatch来实现为runtime type调用正确的method。</p>
+</blockquote>
+<p>We'll start by defining <code>Shape</code> like this:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Shape</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">).</span><span class="n">name</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Dispatcher that should be called by clients to intersect different shapes.</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// Specific interesection methods implemented by subclasses. If subclass A</span>
+  <span class="c1">// has a special way to intersect with subclass B, it should implement</span>
+  <span class="c1">// InteresectWith(const B*).</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Ellipse</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span> <span class="p">{}</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>The <code>Intersect</code> method is what the users of the code will invoke. To be able to make use of <strong>virtual dispatches</strong>, we are forced to turn a two-argument call <code>Intersect(A*, B*)</code> to a method call <code>A-&gt;Intersect(B)</code>. The <code>IntersectWith</code> methods are concrete implementations of intersections the code will dispatch to and should be implemented by subclasses on a case-per-case basis.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rectangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">s</span><span class="o">-&gt;</span><span class="n">IntersectWith</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Rectangle x Shape [names this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot;, s=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Rectangle x Rectangle [names this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot;, r=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Ellipse</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">s</span><span class="o">-&gt;</span><span class="n">IntersectWith</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Ellipse x Rectangle [names this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot;, r=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pr1</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pr2</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span> <span class="n">pe</span><span class="p">(</span><span class="k">new</span> <span class="n">Ellipse</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Dynamic type dispatch</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">pr1</span><span class="o">-&gt;</span><span class="n">Intersect</span><span class="p">(</span><span class="n">pe</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="n">pr1</span><span class="o">-&gt;</span><span class="n">Intersect</span><span class="p">(</span><span class="n">pr2</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+</pre></div>
+
+<p>Will now print:</p>
+<div class="highlight"><pre><span></span>Dynamic type dispatch
+Ellipse x Rectangle [names this=7Ellipse, r=9Rectangle]
+Rectangle x Rectangle [names this=9Rectangle, r=9Rectangle]
+</pre></div>
+
+<p>Success! Even though we're dealing solely in pointers to <code>Shape</code>, the right intersections are computed. Why does this work?</p>
+<p>As I've mentioned before, the key here is use C++'s <strong>virtual function dispatch capability</strong>, <strong>twice</strong>. Let's trace through one execution to see what's going on. We have:</p>
+<div class="highlight"><pre><span></span><span class="n">pr1</span><span class="o">-&gt;</span><span class="n">Intersect</span><span class="p">(</span><span class="n">pe</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+</pre></div>
+
+<p><code>pr1</code> is a pointer to <code>Shape</code>, and <code>Intersect</code> is a <strong>virtual method</strong>. Therefore, the <strong>runtime type</strong>'s <code>Intersect</code> is called here, which is <code>Rectangle::Intersect</code>. The argument passed into the method is another pointer to <code>Shape</code> which at runtime points to an <code>Ellipse</code> (<code>pe</code>). <code>Rectangle::Intersect</code> calls <code>s-&gt;IntersectWith(this)</code>. The compiler sees that <code>s</code> is a <code>Shape*</code>, and <code>IntersectWith</code> is a <strong>virtual method</strong>, so this is <em>another</em> virtual dispatch. What gets called is <code>Ellipse::IntersectWith</code>. But which overload of this method is called?</p>
+<blockquote>
+<p>NOTE: 上面这段话详细介绍了两次dispatch发生的详细情况。</p>
+</blockquote>
+<p>This is an extremely crucial point in the explanation, so please focus :-) Here is <code>Rectangle::Intersect</code> again:</p>
+<div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Intersect</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">s</span><span class="o">-&gt;</span><span class="n">IntersectWith</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><code>s-&gt;IntersectWith</code> is called with <code>this</code>, which the compiler knows is a pointer to <code>Rectangle</code>, <em>statically</em>. If you wondered why I define <code>Intersect</code> in each subclass rather than doing it once in <code>Shape</code>, even though its code is exactly the same for each subclass, this is the reason. Had I defined it in <code>Shape</code>, the compiler would think the type of <code>this</code> is <code>Shape*</code> and would always dispatch to the <code>IntersectWith(const Shape*)</code> overload. Defining this method in each subclass helps the compiler leverage overloading to call the right method.</p>
+<p>What happens eventually is that the call <code>pr1-&gt;Intersect(pe.get())</code> gets routed to <code>Ellipse::IntersectWith(const Rectangle*)</code>, thanks to two virtual dispatches and one use of method overloading. The end result is double dispatch! [<a href="https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/#id9">4]</a></p>
+<p>But wait a second, how did we end up with <code>Ellipse::IntersectWith(Rectangle)</code>? Shouldn't <code>pr1-&gt;Intersect(pe.get())</code> go to <code>Rectangle::IntersectWith(Ellipse)</code> instead? Well, yes and no. Yes because this is what you'd expect from how the call is syntactically structured. No because you almost certainly want double dispatches to be symmetric. I'll discuss this and other related issues in the next section.</p>
+<h3 id="symmetry-and-base-class-defaults">Symmetry and base-class defaults</h3>
+<p>When we come up with ways to do multiple dispatch, whether in C++ or in other languages, there are two aspects of the solution we should always keep in mind:</p>
+<ol>
+<li>Does it permit symmetry? In other words, does the order of objects dispatched upon matters? And if it doesn't, how much extra code is needed to express this fact.</li>
+<li>Does base-class default dispatch work as expected? Suppose we create a new subclass of <code>Rectangle</code>, called <code>Square</code> and we don't explicitly create an <code>IntersectWith</code> method for <code>Square</code> and <code>Ellipse</code>. Will the right thing happen and the intersection between a <code>Rectangle</code> and <code>Ellipse</code> be invoked when we ask for <code>Square x Ellipse</code>? This is the right thing because this is what we've come to expect from class hierarchies in object-oriented languages.</li>
+</ol>
+<p>In the visitor-based solution presented above, both aspects will work, though symmetry needs a bit of extra code. The full code sample is <a href="https://github.com/eliben/code-for-blog/blob/master/2016/multiple-dispatch/c%2B%2B/visitor_full.h">available here</a> (and the accompanying <code>.cpp</code> file). It's conceptually similar to the code shown above, but with a bit more details. In particular, it implements symmetry between rectangle and ellipse intersections as follows:</p>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+
+<span class="c1">// All intersections between rectangles and ellipses dispatch here.</span>
+<span class="kt">void</span> <span class="n">SymmetricIntersectRectangleEllipse</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ellipse</span><span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;IntersectRectangleEllipse [names r=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;, e=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Rectangle</span><span class="o">::</span><span class="n">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Ellipse</span><span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">SymmetricIntersectRectangleEllipse</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Ellipse</span><span class="o">::</span><span class="n">IntersectWith</span><span class="p">(</span><span class="k">const</span> <span class="n">Rectangle</span><span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">SymmetricIntersectRectangleEllipse</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>This ensures that both <code>rectangle-&gt;Intersect(ellipse)</code> and <code>ellipse-&gt;Intersect(rectangle)</code> end up in the same function. As far as I know there's not way to do this automatically in the visitor approach, so a bit of extra coding is due when <strong>symmetry</strong> between subclasses is desired.</p>
+<p>Note also that this method doesn't <em>force</em> symmetry either. If some form of dispatch is order-dependent, it's easy to express.</p>
+<h2 id="the-problem-with-the-visitor-based-approach">The problem with the visitor-based approach</h2>
+<p>Although the visitor-based approach works, enables fairly clean client code and is efficient (constant time - two virtual calls), there's a glaring issue with it that's apparent with the most cursory look at the code: it's very intrusive（侵入的）, and hence hard to maintain.</p>
+<p>Imagine we want to add a new kind of shape - a <code>HyperFrob</code>. Suppose also that there's an efficient algorithm for intersecting a <code>HyperFrob</code> with an <code>Ellipse</code>. Ideally, we'd only have to write code for the new functionality:</p>
+<ol>
+<li>Define the new <code>HyperFrob</code> class deriving from <code>Shape</code>.</li>
+<li>Implement the generic <code>HyperFrob x Shape</code> intersection algorithm.</li>
+<li>Implement the specific <code>HyperFrom x Ellipse</code> algorithm.</li>
+</ol>
+<p>But in reality, we're forced to modify the definition of the base class <code>Shape</code> to add an overload of <code>IntersectWith</code> for <code>HyperFrob</code>. Moreover, if we want intersections between <code>HyperFrob</code> and <code>Ellipse</code> to be symmetric (which we almost certainly do), we'll have to modify <code>Ellipse</code> as well to add the same overload.</p>
+<p>If we don't control the <code>Shape</code> base class at all, we're in real trouble. This is an instance of the <a href="https://en.wikipedia.org/wiki/Expression_problem">expression problem</a>. I'll have more to say about the expression problem in a future post, but for now the Wikipedia link will have to do. It's not an easy problem to solve in C++, and the approaches to implement multiple dispatch should be judged by how flexible they are in this respect, along with the other considerations.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Dispatch/" title="Dispatch" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Dispatch
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../Code/" title="Code" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Code
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
