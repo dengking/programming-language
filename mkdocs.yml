@@ -78,6 +78,8 @@ nav:
         - JavaScript-event-loop: Theory/Programming-paradigm/Event-driven-programming/Event-loop/JavaScript-event-loop.md
       - Event-message-passing: Theory/Programming-paradigm/Event-driven-programming/Event-message-passing.md
       - Event-VS-exception-VS-signal: Theory/Programming-paradigm/Event-driven-programming/Event-VS-exception-VS-signal.md
+      - Library:
+        - Event-library: Theory/Programming-paradigm/Event-driven-programming/Library/Event-library.md
     - Summary-of-paradigm: Theory/Programming-paradigm/Summary-of-paradigm.md
   - Design-pattern:
     - Introduction: Theory/Design-pattern/index.md
@@ -106,7 +108,6 @@ nav:
             subscribe-pattern/Publish\u2013subscribe-pattern.md"
       - Strategy-pattern:
         - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
-  - Type-system: Type-system
   - Comparison-of-programming-language: Theory/Comparison-of-programming-language.md
 - Python:
   - Language:
@@ -156,6 +157,12 @@ nav:
     - Meta-programming:
       - Reflective:
         - Python-reflection: Python/Paradigm/Meta-programming/Reflective/Python-reflection.md
+  - Pattern:
+    - Introduction: Python/Pattern/index.md
+  - Programming-tool:
+    - Lint:
+      - Python-lints: Python/Programming-tool/Lint/Python-lints.md
+      - Pylint: Python/Programming-tool/Lint/Pylint.md
   - How-to:
     - Iterate:
       - Introduction: Python/How-to/Iterate/Iterate.md
@@ -164,6 +171,7 @@ nav:
   - Software:
     - Introduction: Python/Software/index.md
     - Software-event-driven-programming:
+      - Introduciton: Python/Software/Software-event-driven-programming/index.md
       - Eventlet:
         - Eventlet: Python/Software/Software-event-driven-programming/Eventlet/Eventlet.md
       - Eevent:
@@ -212,6 +220,15 @@ nav:
   - How-to:
     - Concurrency:
       - Introduction: C++/How-to/Concurrency/index.md
+      - CCiA:
+        - Introduction: C++/How-to/Concurrency/CCiA/index.md
+    - Memory-leak:
+      - Tools: C++/How-to/Memory-leak/Tools.md
+      - "\u6570\u7EC4\u8D8A\u754C": "C++/How-to/Memory-leak/\u6570\u7EC4\u8D8A\u754C\
+          .md"
+      - "\u5185\u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA": "C++/How-to/Memory-leak/\u5185\
+          \u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\
+          \u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA.md"
 - C:
   - Data-model:
     - Introduction: C/Data-model/index.md

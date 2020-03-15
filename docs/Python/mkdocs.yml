@@ -8,6 +8,10 @@ nav:
     - Style-guide: Style-guide
     # python的编程范式
     - Paradigm: Paradigm
+    # python设计模式
+    - Pattern: Pattern
+    # 编程工具
+    - Programming-tool: Programming-tool
     - How-to: How-to
     - Software: Software
     - Glossary: Glossary

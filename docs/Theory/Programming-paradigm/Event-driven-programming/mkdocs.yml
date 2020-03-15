@@ -4,3 +4,5 @@ nav:
     - Event-loop: Event-loop
     - Event-message-passing: Event-message-passing.md
     - Event-VS-exception-VS-signal: Event-VS-exception-VS-signal.md
+    # event library
+    - Library: Library
