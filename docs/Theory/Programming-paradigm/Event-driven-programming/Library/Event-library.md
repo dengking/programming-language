@@ -10,17 +10,16 @@ web framework都可以看做是event-driven model的实现。
 
 [gevent](https://blog.gevent.org/)
 
-
-
-## event loop模型
+## C
 
 有非常多的基于event loop模型的software
 
-- redis
-- node.js
-- JavaScript
-- libevent
-- libuv
+- [redis](https://redis.io/)
+- [libevent](http://libevent.org/)
+- [libuv](https://libuv.org/)
 
+## JavaScript
 
-Concurrency model 
+- [node.js](https://nodejs.org/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)
+
