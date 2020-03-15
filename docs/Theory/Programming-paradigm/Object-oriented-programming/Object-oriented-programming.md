@@ -1,11 +1,11 @@
 # Object-oriented programming
 
-本文主要基于维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)，维基百科的这篇文章总结地还可以，如果有一定的编程经验的话，可以较好理解。如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
+本文主要基于维基百科[Object-oriented programming。如果有一定的编程经验的话，可以较好理解，如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
 
 - [Class-based programming](https://en.wikipedia.org/wiki/Class-based_programming)，典型代表有C++、Java、Python
 - [Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming)，典型代表就是 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) 
 
-在本章，我们主要关注的是[class-based](https://en.wikipedia.org/wiki/Class-based_programming) OOP。
+
 
 ## 维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)
 
@@ -68,3 +68,14 @@ Concerning the degree of **object orientation**, the following distinctions can 
 - Languages called "pure" OO languages, because everything in them is treated consistently as an **object**, from primitives such as characters and punctuation, all the way up to whole classes, prototypes, blocks, modules, etc. They were designed specifically to facilitate, even enforce, OO methods. Examples: [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 - Languages designed mainly for OO programming, but with some procedural elements. Examples: [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B)
 
+
+
+## Class-based vs prototype-based
+
+关于Class-based vs prototype-based，在维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)的[Class-based vs prototype-based](https://en.wikipedia.org/wiki/Object-oriented_programming#Class-based_vs_prototype-based)段中有总结。下面是我根据自己的一些经验所总结的：
+
+### 从type system的角度来进行对比
+
+OOP的class-based流派，每个class对应一种类型，往往是强类型语言使用，比如c++，Java等。
+
+OOP的prototype-based流派，并没有class的概念，往往是weak类型语言使用，比如JavaScript。
