@@ -38,8 +38,11 @@ nav:
   - Introduction: Theory/index.md
   - Type-system:
     - Type-system: Theory/Type-system/Type-system.md
+    - Type: Theory/Type-system/Type.md
     - Type-safety: Theory/Type-system/Type-safety.md
     - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
+    - Class-and-type: Theory/Type-system/Class-and-type.md
+    - Subtyping: Theory/Type-system/Subtyping.md
   - Programming-paradigm:
     - Introduction: Theory/Programming-paradigm/index.md
     - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
@@ -63,6 +66,19 @@ nav:
         - Code: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Code.md
       - Glossary: Theory/Programming-paradigm/Object-oriented-programming/Glossary.md
       - Summary-of-OO: Theory/Programming-paradigm/Object-oriented-programming/Summary-of-OO.md
+    - Aspect-oriented-programming:
+      - Aspect-oriented-programming: Theory/Programming-paradigm/Aspect-oriented-programming/Aspect-oriented-programming.md
+    - Functional-programming:
+      - Functional-programming: Theory/Programming-paradigm/Functional-programming/Functional-programming.md
+    - Event-driven-programming:
+      - Introduction: Theory/Programming-paradigm/Event-driven-programming/index.md
+      - Event-driven-model: Theory/Programming-paradigm/Event-driven-programming/Event-driven-model.md
+      - Event-loop:
+        - Event-loop: Theory/Programming-paradigm/Event-driven-programming/Event-loop/Event-loop.md
+        - JavaScript-event-loop: Theory/Programming-paradigm/Event-driven-programming/Event-loop/JavaScript-event-loop.md
+      - Event-message-passing: Theory/Programming-paradigm/Event-driven-programming/Event-message-passing.md
+      - Event-VS-exception-VS-signal: Theory/Programming-paradigm/Event-driven-programming/Event-VS-exception-VS-signal.md
+    - Summary-of-paradigm: Theory/Programming-paradigm/Summary-of-paradigm.md
   - Design-pattern:
     - Introduction: Theory/Design-pattern/index.md
     - SOLID:
@@ -71,7 +87,25 @@ nav:
       - Liskov-substitution-principle: Theory/Design-pattern/SOLID/Liskov-substitution-principle.md
       - Inversion-of-control: Theory/Design-pattern/SOLID/Inversion-of-control.md
     - Software-design-pattern: Theory/Design-pattern/Software-design-pattern.md
-    - Visitor-pattern: Theory/Design-pattern/Visitor-pattern.md
+    - Object-oriented-design: Theory/Design-pattern/Object-oriented-design.md
+    - Books: Theory/Design-pattern/Books.md
+    - Creational:
+      - Introduction: Theory/Design-pattern/Creational/index.md
+      - Singleton-pattern:
+        - Singleton-pattern: Theory/Design-pattern/Creational/Singleton-pattern/Singleton-pattern.md
+    - Behavioral-pattern:
+      - Visitor-pattern:
+        - Visitor-pattern: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern.md
+        - Code: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Code.md
+      - Iterator-pattern:
+        - Iterator-pattern: Theory/Design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern.md
+      - Observer-pattern:
+        - Observer-pattern: Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
+      - "Publish\u2013subscribe-pattern":
+        - "Publish\u2013subscribe-pattern": "Theory/Design-pattern/Behavioral-pattern/Publish\u2013\
+            subscribe-pattern/Publish\u2013subscribe-pattern.md"
+      - Strategy-pattern:
+        - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
   - Type-system: Type-system
   - Comparison-of-programming-language: Theory/Comparison-of-programming-language.md
 - Python:
@@ -137,6 +171,12 @@ nav:
     - Software-concurrency:
       - Greenlet:
         - Greenlet: Python/Software/Software-concurrency/Greenlet/Greenlet.md
+    - Software-pallets:
+      - Flask:
+        - Deployment-Options:
+          - flask-Deployment-Options: Python/Software/software-pallets/flask/Deployment-Options/flask-Deployment-Options.md
+    - Software-static-web-generator:
+      - Static-web-generator: Python/Software/software-static-web-generator/static-web-generator.md
   - Glossary:
     - Abstract-base-class: Python/Glossary/Abstract-base-class.md
     - Argument-and-parameter: Python/Glossary/Argument-and-parameter.md
@@ -146,6 +186,8 @@ nav:
       - index: C++/Language/Language-reference/index.md
       - Data-model:
         - Introduction: C++/Language/Language-reference/Data-model/index.md
+        - Memory-model:
+          - Memory-model: C++/Language/Language-reference/Data-model/Memory-model/Memory-model.md
       - Initialization:
         - Introduction: C++/Language/Language-reference/Initialization/index.md
       - Classes:
@@ -157,14 +199,46 @@ nav:
           - Code-example: C++/Language/Language-reference/Classes/Constructor/Code-example.md
     - Idiom:
       - Introduction: C++/Language/Idiom/index.md
+      - RAII:
+        - RAII: C++/Language/Idiom/RAII/RAII.md
+        - Essential-C++: C++/Language/Idiom/RAII/Essential-C++.md
   - Pattern:
     - Introduction: C++/Pattern/index.md
   - Paradigm:
     - Introduction: C++/Paradigm/index.md
   - Stype-guide:
     - Cpp-stype-guide: C++/Stype-guide/Cpp-stype-guide.md
+  - Book: C++/Book.md
+  - How-to:
+    - Concurrency:
+      - Introduction: C++/How-to/Concurrency/index.md
+- C:
+  - Data-model:
+    - Introduction: C/Data-model/index.md
+    - creference-Objects and alignment: C/Data-model/creference-Objects and alignment.md
+  - Software:
+    - Software-event-driven-programming:
+      - Software-libevent:
+        - libevent: C/Software/Software-event-driven-programming/Software-libevent/libevent.md
+      - Software-libuv:
+        - libuv: C/Software/Software-event-driven-programming/Software-libuv/libuv.md
+        - Doc:
+          - Design-overview: C/Software/Software-event-driven-programming/Software-libuv/Doc/Design-overview.md
+          - User-guide:
+            - Basics-of-libuv: C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv.md
+            - Utilities:
+              - Utilities: C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities.md
 - JavaScript:
   - Introduction: JavaScript/index.md
+  - Software:
+    - Software-event-driven-programming:
+      - Software-node.js:
+        - Node.js-About Node.js: JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-About
+            Node.js.md
+        - Node.js-core-concepts:
+          - Node.js-How-does-Node.js-manage-timers-internally: JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-How-does-Node.js-manage-timers-internally.md
+          - Node.js-Overview-of-Blocking-vs-Non-Blocking: JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-Overview-of-Blocking-vs-Non-Blocking.md
+          - Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick(): JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick().md
 - Code-refactoring:
   - Introduction: Code-refactoring/index.md
 plugins:

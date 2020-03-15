@@ -2,4 +2,7 @@ nav:
     - Introduction: index.md
     - SOLID: SOLID
     - Software-design-pattern: Software-design-pattern.md
-    - Visitor-pattern: Visitor-pattern.md
+    - Object-oriented-design: Object-oriented-design.md
+    - Books: Books.md
+    - Creational: Creational
+    - Behavioral-pattern: Behavioral-pattern
