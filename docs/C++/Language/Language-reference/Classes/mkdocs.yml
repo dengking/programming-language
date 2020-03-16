@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - Class: Class.md
-    - Constructor: Constructor
+    - Magic-function: Magic-function
