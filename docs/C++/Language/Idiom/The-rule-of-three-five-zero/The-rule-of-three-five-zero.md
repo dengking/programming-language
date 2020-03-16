@@ -2,6 +2,14 @@
 
 
 
+## drdobbs [C++ Made Easier: The Rule of Three](https://www.drdobbs.com/c-made-easier-the-rule-of-three/184401400)
+
+### An Example and a Misconception
+
+[example code](./Code/drdobbs/IntVec-Misconception.cpp)
+
+> NOTE: 原文给出的这个例子是非常具有代表性的。
+
 ## cppreference [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
 ### Rule of three
@@ -12,4 +20,10 @@ If a class requires a user-defined [destructor](https://en.cppreference.com/w/cp
 
 
 
-[example code](./rule_of_three.cpp)
+[example code](./Code/cppreference/rule_of_three.cpp)
+
+
+
+Classes that manage non-copyable resources through copyable handles may have to declare **copy assignment** and **copy constructor** private and not provide their definitions or define them as deleted. This is another application of the rule of three: deleting one and leaving the other to be implicitly-defined will most likely result in errors.
+
+> NOTE: 原文的这段话要如何理解？
