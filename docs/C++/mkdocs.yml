@@ -1,5 +1,6 @@
 nav:
     - Language: Language
+    - Library: Library
     - Pattern: Pattern
     - Paradigm: Paradigm
     - Stype-guide: Stype-guide
