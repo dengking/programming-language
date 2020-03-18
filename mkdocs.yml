@@ -218,6 +218,7 @@ nav:
             - Converting-constructor: C++/Language/Language-reference/Classes/Magic-function/Constructor/Converting-constructor.md
           - Destructor:
             - Destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Destructor.md
+            - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md
           - Assignment:
             - Assignment: C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment.md
     - Idiom:
