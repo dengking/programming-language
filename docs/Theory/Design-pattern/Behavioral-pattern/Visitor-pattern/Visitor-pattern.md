@@ -6,7 +6,7 @@
 
 > It is one way to follow the [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle).
 
-这句话提示我们visitor pattern的终极目标所在，即遵循 [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)。
+这句话提示我们visitor pattern的终极目标所在，即遵循 [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)，visitor pattern中，open的是可以添加新的visitor，即实现新的algorithm，close的是对element的修改，即添加新的algorithm，不会导致element的变更。
 
 ### [C++ example](https://en.wikipedia.org/wiki/Visitor_pattern#C++_example)
 
@@ -178,15 +178,40 @@ class Industry is
 
 不可能完全不修改node classes，而是少量修改，可控修改。
 
+
+
+## [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)
+
+### [A](https://stackoverflow.com/a/28321270)
+
+这个回答是非常好的，在[Summary-of-design-pattern](../../Summary-of-design-pattern.md)中对它进行了分析。
+
+## Visitor pattern and double dispatch
+
+在visitor pattern中，由于存在着多种element，存在着多种visitor，所以最终到底要调用哪个algorithm，依赖于这两者，在文章[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)中对此进行了详细的分析。在[Multiple-dispatch](../../../Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch.md)中对此文章进行了收录。
+
 ## Example
 
 ### In compiler
+
+#### 维基百科[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节
 
 在维基百科[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节，总结了 [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) 在compiler的实现中的应用：
 
 > Because the compiler traverses the tree several times to determine syntactic correctness, it is important to make traversing the tree a simple operation. The compiler executes a specific set of operations, depending on the type of each node, upon reaching it, so it often makes sense to use the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern).
 
 这段话中的“the tree”只的是compiler构造的abstract syntax tree。compiler需要多次遍历这棵树，每次遍历执行一些操作，显然，这种场景是非常适合于使用visitor pattern的。
+
+
+
+#### [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)的[A](https://stackoverflow.com/a/37236417)
+
+在这回答中给出了:
+
+- LLVM [source code](http://llvm.org/docs/doxygen/html/InstVisitor_8h_source.html) 
+- CPython  AST 
+
+The other good example I know of shows up in abstract syntax tree manipulations. CPython and LLVM both use visitors. Using a visitor here prevents code that manipulates certain AST nodes from needing to know how to iterate over all the various AST nodes that might branch in complicated ways. 
 
 ### Hierarchy structure
 
