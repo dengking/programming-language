@@ -9,6 +9,8 @@
 [example code](./Code/drdobbs/IntVec-Misconception.cpp)
 
 > NOTE: 原文给出的这个例子是非常具有代表性的。
+>
+> 这个例子，导致错误是double free
 
 ## cppreference [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
