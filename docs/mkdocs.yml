@@ -1,7 +1,7 @@
 nav:
     - Home: index.md
     - Programming-language: Programming-language.md
-    - Common: Common.md
+    - Master-programming-language: Master-programming-language
     - Theory: Theory
     - Python: Python
     - C++: C++

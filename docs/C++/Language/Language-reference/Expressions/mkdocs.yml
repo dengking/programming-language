@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Expressions: Expressions.md
     - Memory-allocation: Memory-allocation

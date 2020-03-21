@@ -2,5 +2,8 @@ nav:
     - index: index.md
     - Data-model: Data-model
     - Expressions: Expressions
+    - Declarations: Declarations
     - Initialization: Initialization
+    - Functions: Functions
     - Classes: Classes
+    - Guide: Guide
