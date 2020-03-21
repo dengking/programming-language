@@ -1,6 +1,6 @@
 nav:
     - index: index.md
-    - Data-model: Data-model
+    - Basic-concept: Basic-concept
     - Expressions: Expressions
     - Declarations: Declarations
     - Initialization: Initialization
