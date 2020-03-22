@@ -28,10 +28,15 @@ For simple data types (like integers), copy and direct initialization are essent
 
 
 
+## Initialization VS assignment
+
+两者之间的相同点是都会改变object的值。
+
 
 
 ## cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization)
 
 *Initialization* of a variable provides its initial value at the time of construction.
 
-> 这是
+> NOTE: 
+

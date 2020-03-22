@@ -69,7 +69,7 @@ declaration和definition是两个非常接近且容易混淆的概念，在此�
 - C++ RAII
 - python with
 
-
+在工程[Linux-OS](https://dengking.github.io/Linux-OS/)的[Linux-OS's-multitasking](https://dengking.github.io/Linux-OS/Kernel/Guide/Linux-OS's-multitasking/00-Multitask/)中的process-resource章节对此进行了描述。
 
 ## magic function的使用
 
@@ -177,5 +177,6 @@ pMeanRate = tanhx(pMeanRate, 2);
 
 ## specifier
 
-python中基本上没有什么specifier，但是在`c++`和c中存在着大量的specifier。
+python中基本上没有什么specifier，但是在`c++`和`c`中存在着大量的specifier。
 
+为什么呢？因为c++和c是system language，它们需要对process运行的底层细节进行描述、进行控制，这些specifier就是出于此目的的。
