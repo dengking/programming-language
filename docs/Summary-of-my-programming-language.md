@@ -175,8 +175,3 @@ pMeanRate = tanhx(pMeanRate, 2);
 ```
 这段代码在`c++`中是非常好理解的：`pMeanRate`是一个左值，所以它既能够被read，也能够被write；但是在python中，`=`所表示的是name bind；
 
-## specifier
-
-python中基本上没有什么specifier，但是在`c++`和`c`中存在着大量的specifier。
-
-为什么呢？因为c++和c是system language，它们需要对process运行的底层细节进行描述、进行控制，这些specifier就是出于此目的的。

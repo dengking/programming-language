@@ -23,7 +23,6 @@ The most commonly recognized major classes of polymorphism are:
 | a single [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to entities of different [types](https://en.wikipedia.org/wiki/Data_type) | [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) |
 | a single symbol to represent multiple different types        | [Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) |
 
-
 [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)
 
 - [Function overloading](https://en.wikipedia.org/wiki/Function_overloading)
@@ -73,6 +72,15 @@ The most commonly recognized major classes of polymorphism are:
 | [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) |
 |        [Static/early binding](Static/early binding )         | [Late/dynamic binding](https://en.wikipedia.org/wiki/Late_binding) |
 
+[Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)和[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)都属于[Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)，而[Subtyping](https://en.wikipedia.org/wiki/Subtyping)则属于[dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)。
+
+
+
 ## Polymorphism的本质
 
 我觉得Polymorphism的本质是描述了一种one-to-many关系。
+
+
+
+
+

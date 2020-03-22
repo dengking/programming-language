@@ -40,3 +40,18 @@ For simple data types (like integers), copy and direct initialization are essent
 
 > NOTE: 
 
+
+
+## TO READ
+
+learncpp [1.6 — Uninitialized variables and undefined behavior](https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/)
+
+learncpp [8.5b — Non-static member initialization](https://www.learncpp.com/cpp-programming/8-5b-non-static-member-initialization/)
+
+learncpp [8.5a — Constructor member initializer lists](https://www.learncpp.com/cpp-tutorial/8-5a-constructor-member-initializer-lists/)
+
+learncpp [11.4 — Constructors and initialization of derived classes](https://www.learncpp.com/cpp-tutorial/114-constructors-and-initialization-of-derived-classes/)
+
+learncpp [10.7 — std::initializer_list](https://www.learncpp.com/cpp-tutorial/10-7-stdinitializer_list/)
+
+learncpp [9.12 — Copy initialization](https://www.learncpp.com/cpp-tutorial/9-12-copy-initialization/)

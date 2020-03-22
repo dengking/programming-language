@@ -1,0 +1,3 @@
+nav:
+    - Manual-memory-management: Manual-memory-management.md
+    - C-dynamic-memory-allocation: C-dynamic-memory-allocation.md
