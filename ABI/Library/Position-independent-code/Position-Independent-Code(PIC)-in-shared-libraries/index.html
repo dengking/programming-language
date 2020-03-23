@@ -1,0 +1,6574 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/programming-language/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Position-Independent-Code(PIC)-in-shared-libraries - programming-language</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-27795084-5", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#position-independent-code-pic-in-shared-libraries" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              programming-language
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Position-Independent-Code(PIC)-in-shared-libraries
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/programming-language" title="programming-language" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    programming-language
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/programming-language" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Theory
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Theory
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Programming-language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Programming-language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Programming-language/" title="Programming-language" class="md-nav__link">
+      Programming-language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2-2" type="checkbox" id="nav-2-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2-2">
+      Scripting-language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-2-2">
+        Scripting-language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Scripting-language/Scripting-language/" title="Scripting-language" class="md-nav__link">
+      Scripting-language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Scripting-language/Read–eval–print-loop/" title="Read–eval–print-loop" class="md-nav__link">
+      Read–eval–print-loop
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2-3" type="checkbox" id="nav-2-2-3">
+    
+    <label class="md-nav__link" for="nav-2-2-3">
+      Master-programming-language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-2-3">
+        Master-programming-language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Master-programming-language/How-to-master-programming-language/" title="How-to-master-programming-language" class="md-nav__link">
+      How-to-master-programming-language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Master-programming-language/Reading-language-reference/" title="Reading-language-reference" class="md-nav__link">
+      Reading-language-reference
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Expressive-of-programming-language/" title="Expressive-of-programming-language" class="md-nav__link">
+      Expressive-of-programming-language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-language/Comparison-of-programming-language/" title="Comparison-of-programming-language" class="md-nav__link">
+      Comparison-of-programming-language
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Type-system/Type/" title="Type" class="md-nav__link">
+      Type
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Type-system/Type-safety/" title="Type-safety" class="md-nav__link">
+      Type-safety
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Type-system/Static-vs-dynamic-typing/" title="Static-vs-dynamic-typing" class="md-nav__link">
+      Static-vs-dynamic-typing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Type-system/Class-and-type/" title="Class-and-type" class="md-nav__link">
+      Class-and-type
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Type-system/Subtyping/" title="Subtyping" class="md-nav__link">
+      Subtyping
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      Programming-paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        Programming-paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Programming-paradigm/" title="Programming-paradigm" class="md-nav__link">
+      Programming-paradigm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-3" type="checkbox" id="nav-2-4-3">
+    
+    <label class="md-nav__link" for="nav-2-4-3">
+      Object-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-4-3">
+        Object-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming/" title="Object-oriented-programming" class="md-nav__link">
+      Object-oriented-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-3-2" type="checkbox" id="nav-2-4-3-2">
+    
+    <label class="md-nav__link" for="nav-2-4-3-2">
+      Class-based-OOP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-4-3-2">
+        Class-based-OOP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Class-based-OOP/" title="Class-based-OOP" class="md-nav__link">
+      Class-based-OOP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-3-2-2" type="checkbox" id="nav-2-4-3-2-2">
+    
+    <label class="md-nav__link" for="nav-2-4-3-2-2">
+      Thinking-in-java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-4-3-2-2">
+        Thinking-in-java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/" title="About-this-chapter" class="md-nav__link">
+      About-this-chapter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction-to-Objects/" title="Introduction-to-Objects" class="md-nav__link">
+      Introduction-to-Objects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Everything-is-an-object/" title="Everything-is-an-object" class="md-nav__link">
+      Everything-is-an-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-3-3" type="checkbox" id="nav-2-4-3-3">
+    
+    <label class="md-nav__link" for="nav-2-4-3-3">
+      Polymorphism
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-4-3-3">
+        Polymorphism
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Polymorphism/" title="Polymorphism" class="md-nav__link">
+      Polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Ad-hoc-polymorphism/" title="Ad-hoc-polymorphism" class="md-nav__link">
+      Ad-hoc-polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Parametric-polymorphism/" title="Parametric-polymorphism" class="md-nav__link">
+      Parametric-polymorphism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-3-3-5" type="checkbox" id="nav-2-4-3-3-5">
+    
+    <label class="md-nav__link" for="nav-2-4-3-3-5">
+      Subtyping-polymorphism
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-4-3-3-5">
+        Subtyping-polymorphism
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Dispatch/" title="Dispatch" class="md-nav__link">
+      Dispatch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch/" title="Multiple-dispatch" class="md-nav__link">
+      Multiple-dispatch
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Object-oriented-programming/Summary-of-OO/" title="Summary-of-OO" class="md-nav__link">
+      Summary-of-OO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-4" type="checkbox" id="nav-2-4-4">
+    
+    <label class="md-nav__link" for="nav-2-4-4">
+      Aspect-oriented-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-4-4">
+        Aspect-oriented-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Aspect-oriented-programming/Aspect-oriented-programming/" title="Aspect-oriented-programming" class="md-nav__link">
+      Aspect-oriented-programming
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-5" type="checkbox" id="nav-2-4-5">
+    
+    <label class="md-nav__link" for="nav-2-4-5">
+      Functional-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-4-5">
+        Functional-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Functional-programming/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Functional-programming/Function-object/" title="Function-object" class="md-nav__link">
+      Function-object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-6" type="checkbox" id="nav-2-4-6">
+    
+    <label class="md-nav__link" for="nav-2-4-6">
+      Event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-4-6">
+        Event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/Event-driven-model/" title="Event-driven-model" class="md-nav__link">
+      Event-driven-model
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-6-3" type="checkbox" id="nav-2-4-6-3">
+    
+    <label class="md-nav__link" for="nav-2-4-6-3">
+      Event-loop
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-4-6-3">
+        Event-loop
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/Event-loop/Event-loop/" title="Event-loop" class="md-nav__link">
+      Event-loop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/Event-loop/JavaScript-event-loop/" title="JavaScript-event-loop" class="md-nav__link">
+      JavaScript-event-loop
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/Event-message-passing/" title="Event-message-passing" class="md-nav__link">
+      Event-message-passing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/Event-VS-exception-VS-signal/" title="Event-VS-exception-VS-signal" class="md-nav__link">
+      Event-VS-exception-VS-signal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-6-6" type="checkbox" id="nav-2-4-6-6">
+    
+    <label class="md-nav__link" for="nav-2-4-6-6">
+      Library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-4-6-6">
+        Library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Event-driven-programming/Library/Event-library/" title="Event-library" class="md-nav__link">
+      Event-library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Programming-paradigm/Summary-of-paradigm/" title="Summary-of-paradigm" class="md-nav__link">
+      Summary-of-paradigm
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Design-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Design-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-2" type="checkbox" id="nav-2-5-2">
+    
+    <label class="md-nav__link" for="nav-2-5-2">
+      SOLID
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-5-2">
+        SOLID
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/SOLID/SOLID/" title="SOLID" class="md-nav__link">
+      SOLID
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/SOLID/Open–closed-principle/" title="Open–closed-principle" class="md-nav__link">
+      Open–closed-principle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/SOLID/Liskov-substitution-principle/" title="Liskov-substitution-principle" class="md-nav__link">
+      Liskov-substitution-principle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/SOLID/Inversion-of-control/" title="Inversion-of-control" class="md-nav__link">
+      Inversion-of-control
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Software-design-pattern/" title="Software-design-pattern" class="md-nav__link">
+      Software-design-pattern
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Object-oriented-design/" title="Object-oriented-design" class="md-nav__link">
+      Object-oriented-design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Books/" title="Books" class="md-nav__link">
+      Books
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-6" type="checkbox" id="nav-2-5-6">
+    
+    <label class="md-nav__link" for="nav-2-5-6">
+      Creational
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-5-6">
+        Creational
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Creational/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-6-2" type="checkbox" id="nav-2-5-6-2">
+    
+    <label class="md-nav__link" for="nav-2-5-6-2">
+      Singleton-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-5-6-2">
+        Singleton-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Creational/Singleton-pattern/Singleton-pattern/" title="Singleton-pattern" class="md-nav__link">
+      Singleton-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7" type="checkbox" id="nav-2-5-7">
+    
+    <label class="md-nav__link" for="nav-2-5-7">
+      Behavioral-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-5-7">
+        Behavioral-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-1" type="checkbox" id="nav-2-5-7-1">
+    
+    <label class="md-nav__link" for="nav-2-5-7-1">
+      Visitor-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-5-7-1">
+        Visitor-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern/" title="Visitor-pattern" class="md-nav__link">
+      Visitor-pattern
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-1-2" type="checkbox" id="nav-2-5-7-1-2">
+    
+    <label class="md-nav__link" for="nav-2-5-7-1-2">
+      Code
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-5-7-1-2">
+        Code
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-2" type="checkbox" id="nav-2-5-7-2">
+    
+    <label class="md-nav__link" for="nav-2-5-7-2">
+      Iterator-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-5-7-2">
+        Iterator-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern/" title="Iterator-pattern" class="md-nav__link">
+      Iterator-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-3" type="checkbox" id="nav-2-5-7-3">
+    
+    <label class="md-nav__link" for="nav-2-5-7-3">
+      Observer-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-5-7-3">
+        Observer-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern/" title="Observer-pattern" class="md-nav__link">
+      Observer-pattern
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-3-2" type="checkbox" id="nav-2-5-7-3-2">
+    
+    <label class="md-nav__link" for="nav-2-5-7-3-2">
+      Code
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-5-7-3-2">
+        Code
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Code/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-4" type="checkbox" id="nav-2-5-7-4">
+    
+    <label class="md-nav__link" for="nav-2-5-7-4">
+      Publish–subscribe-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-5-7-4">
+        Publish–subscribe-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Publish–subscribe-pattern/Publish–subscribe-pattern/" title="Publish–subscribe-pattern" class="md-nav__link">
+      Publish–subscribe-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5-7-5" type="checkbox" id="nav-2-5-7-5">
+    
+    <label class="md-nav__link" for="nav-2-5-7-5">
+      Strategy-pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-5-7-5">
+        Strategy-pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern/" title="Strategy-pattern" class="md-nav__link">
+      Strategy-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Separation-of-container-and-algorithm/" title="Separation-of-container-and-algorithm" class="md-nav__link">
+      Separation-of-container-and-algorithm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Design-pattern/Summary-of-design-pattern/" title="Summary-of-design-pattern" class="md-nav__link">
+      Summary-of-design-pattern
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      Resource-management
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        Resource-management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Resource-management/Resource-management/" title="Resource-management" class="md-nav__link">
+      Resource-management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6-2" type="checkbox" id="nav-2-6-2">
+    
+    <label class="md-nav__link" for="nav-2-6-2">
+      Memory-management
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-6-2">
+        Memory-management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Resource-management/Memory-management/Memory-management/" title="Memory-management" class="md-nav__link">
+      Memory-management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6-2-2" type="checkbox" id="nav-2-6-2-2">
+    
+    <label class="md-nav__link" for="nav-2-6-2-2">
+      Manual-memory-management
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-6-2-2">
+        Manual-memory-management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Resource-management/Memory-management/Manual-memory-management/Manual-memory-management/" title="Manual-memory-management" class="md-nav__link">
+      Manual-memory-management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Resource-management/Memory-management/Manual-memory-management/C-dynamic-memory-allocation/" title="C-dynamic-memory-allocation" class="md-nav__link">
+      C-dynamic-memory-allocation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6-2-3" type="checkbox" id="nav-2-6-2-3">
+    
+    <label class="md-nav__link" for="nav-2-6-2-3">
+      Automatic-memory-management
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-6-2-3">
+        Automatic-memory-management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Resource-management/Memory-management/Automatic-memory-management/Automatic-memory-management/" title="Automatic-memory-management" class="md-nav__link">
+      Automatic-memory-management
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Resource-management/Memory-management/C-dynamic-memory-allocation.md" title="C-dynamic-memory-allocation" class="md-nav__link">
+      C-dynamic-memory-allocation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Runtime/" title="Runtime" class="md-nav__link">
+      Runtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Code-refactoring
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Code-refactoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Theory/Code-refactoring/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Language
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Language
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1-1" type="checkbox" id="nav-3-1-1">
+    
+    <label class="md-nav__link" for="nav-3-1-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-1-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1-1-2" type="checkbox" id="nav-3-1-1-2">
+    
+    <label class="md-nav__link" for="nav-3-1-1-2">
+      Data-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-1-1-2">
+        Data-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Data-model/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Data-model/The-standard-type-hierarchy/" title="The-standard-type-hierarchy" class="md-nav__link">
+      The-standard-type-hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Data-model/Special-method-names/" title="Special-method-names" class="md-nav__link">
+      Special-method-names
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Data-model/Special-attribute-names/" title="Special-attribute-names" class="md-nav__link">
+      Special-attribute-names
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Data-model/Coroutines/" title="Coroutines" class="md-nav__link">
+      Coroutines
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1-1-3" type="checkbox" id="nav-3-1-1-3">
+    
+    <label class="md-nav__link" for="nav-3-1-1-3">
+      Execution-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-1-1-3">
+        Execution-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Execution-model/Execution-model/" title="Execution-model" class="md-nav__link">
+      Execution-model
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Execution-model/Python-GC/" title="Python-GC" class="md-nav__link">
+      Python-GC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Execution-model/Python-GIL/" title="Python-GIL" class="md-nav__link">
+      Python-GIL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Execution-model/Python-interpreter-stack/" title="Python-interpreter-stack" class="md-nav__link">
+      Python-interpreter-stack
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1-1-4" type="checkbox" id="nav-3-1-1-4">
+    
+    <label class="md-nav__link" for="nav-3-1-1-4">
+      Type-system
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-1-1-4">
+        Type-system
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Language-reference/Type-system/Type-system/" title="Type-system" class="md-nav__link">
+      Type-system
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1-2" type="checkbox" id="nav-3-1-2">
+    
+    <label class="md-nav__link" for="nav-3-1-2">
+      Developer's-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-1-2">
+        Developer's-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Language/Developer's-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-1" type="checkbox" id="nav-3-2-1">
+    
+    <label class="md-nav__link" for="nav-3-2-1">
+      Built-in
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-2-1">
+        Built-in
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Built-in/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-1-2" type="checkbox" id="nav-3-2-1-2">
+    
+    <label class="md-nav__link" for="nav-3-2-1-2">
+      Built-in-Functions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-2-1-2">
+        Built-in-Functions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Built-in/Built-in-Functions/summary-of-python-build-in-function/" title="Summary-of-python-build-in-function" class="md-nav__link">
+      Summary-of-python-build-in-function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-1-2-2" type="checkbox" id="nav-3-2-1-2-2">
+    
+    <label class="md-nav__link" for="nav-3-2-1-2-2">
+      Hash
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-3-2-1-2-2">
+        Hash
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Built-in/Built-in-Functions/hash/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-1-3" type="checkbox" id="nav-3-2-1-3">
+    
+    <label class="md-nav__link" for="nav-3-2-1-3">
+      Built-in-Constants
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-2-1-3">
+        Built-in-Constants
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Built-in/Built-in-Constants/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-1-4" type="checkbox" id="nav-3-2-1-4">
+    
+    <label class="md-nav__link" for="nav-3-2-1-4">
+      Built-in-Types
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-2-1-4">
+        Built-in-Types
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Built-in/Built-in-Types/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-1-5" type="checkbox" id="nav-3-2-1-5">
+    
+    <label class="md-nav__link" for="nav-3-2-1-5">
+      Built-in-Exceptions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-2-1-5">
+        Built-in-Exceptions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Built-in/Built-in-Exceptions/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-2" type="checkbox" id="nav-3-2-2">
+    
+    <label class="md-nav__link" for="nav-3-2-2">
+      Functional-Programming-Modules
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-2-2">
+        Functional-Programming-Modules
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Functional-Programming-Modules/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Functional-Programming-Modules/Iterate/" title="Iterate" class="md-nav__link">
+      Iterate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2-3" type="checkbox" id="nav-3-2-3">
+    
+    <label class="md-nav__link" for="nav-3-2-3">
+      Python-Runtime-Services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-2-3">
+        Python-Runtime-Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Python-Runtime-Services/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Library/Python-Runtime-Services/inspect—Inspect-live-objects/" title="inspect—Inspect-live-objects" class="md-nav__link">
+      inspect—Inspect-live-objects
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Philosophy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Philosophy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Philosophy/The-Zen-of-Python/" title="The-Zen-of-Python" class="md-nav__link">
+      The-Zen-of-Python
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Style-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        Style-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Style-guide/Style-Guide-for-Python-Code/" title="Style-Guide-for-Python-Code" class="md-nav__link">
+      Style-Guide-for-Python-Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Paradigm/Functional-programming/" title="Functional-programming" class="md-nav__link">
+      Functional-programming
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-5-2" type="checkbox" id="nav-3-5-2">
+    
+    <label class="md-nav__link" for="nav-3-5-2">
+      Meta-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-5-2">
+        Meta-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-5-2-1" type="checkbox" id="nav-3-5-2-1">
+    
+    <label class="md-nav__link" for="nav-3-5-2-1">
+      Reflective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-5-2-1">
+        Reflective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Paradigm/Meta-programming/Reflective/Python-reflection/" title="Python-reflection" class="md-nav__link">
+      Python-reflection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6">
+    
+    <label class="md-nav__link" for="nav-3-6">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7">
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Programming-tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        Programming-tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-7-1" type="checkbox" id="nav-3-7-1">
+    
+    <label class="md-nav__link" for="nav-3-7-1">
+      Lint
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-7-1">
+        Lint
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Programming-tool/Lint/Python-lints/" title="Python-lints" class="md-nav__link">
+      Python-lints
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Programming-tool/Lint/Pylint/" title="Pylint" class="md-nav__link">
+      Pylint
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8">
+    
+    <label class="md-nav__link" for="nav-3-8">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-8-1" type="checkbox" id="nav-3-8-1">
+    
+    <label class="md-nav__link" for="nav-3-8-1">
+      Iterate
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-8-1">
+        Iterate
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/How-to/Iterate/Iterate/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-8-2" type="checkbox" id="nav-3-8-2">
+    
+    <label class="md-nav__link" for="nav-3-8-2">
+      Lazy-import
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-8-2">
+        Lazy-import
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/How-to/Lazy-import/Lazy-importing/" title="Lazy-importing" class="md-nav__link">
+      Lazy-importing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9">
+    
+    <label class="md-nav__link" for="nav-3-9">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-2" type="checkbox" id="nav-3-9-2">
+    
+    <label class="md-nav__link" for="nav-3-9-2">
+      Software-event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-9-2">
+        Software-event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/Software-event-driven-programming/" title="Introduciton" class="md-nav__link">
+      Introduciton
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-2-2" type="checkbox" id="nav-3-9-2-2">
+    
+    <label class="md-nav__link" for="nav-3-9-2-2">
+      Eventlet
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-9-2-2">
+        Eventlet
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/Software-event-driven-programming/Eventlet/Eventlet/" title="Eventlet" class="md-nav__link">
+      Eventlet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-2-3" type="checkbox" id="nav-3-9-2-3">
+    
+    <label class="md-nav__link" for="nav-3-9-2-3">
+      Eevent
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-9-2-3">
+        Eevent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/Software-event-driven-programming/Eevent/Gevent/" title="Gevent" class="md-nav__link">
+      Gevent
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-3" type="checkbox" id="nav-3-9-3">
+    
+    <label class="md-nav__link" for="nav-3-9-3">
+      Software-concurrency
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-9-3">
+        Software-concurrency
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-3-1" type="checkbox" id="nav-3-9-3-1">
+    
+    <label class="md-nav__link" for="nav-3-9-3-1">
+      Greenlet
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-9-3-1">
+        Greenlet
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/Software-concurrency/Greenlet/Greenlet/" title="Greenlet" class="md-nav__link">
+      Greenlet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-4" type="checkbox" id="nav-3-9-4">
+    
+    <label class="md-nav__link" for="nav-3-9-4">
+      Software-pallets
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-9-4">
+        Software-pallets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-4-1" type="checkbox" id="nav-3-9-4-1">
+    
+    <label class="md-nav__link" for="nav-3-9-4-1">
+      Flask
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-3-9-4-1">
+        Flask
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-4-1-1" type="checkbox" id="nav-3-9-4-1-1">
+    
+    <label class="md-nav__link" for="nav-3-9-4-1-1">
+      Deployment-Options
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-3-9-4-1-1">
+        Deployment-Options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/software-pallets/flask/Deployment-Options/flask-Deployment-Options/" title="flask-Deployment-Options" class="md-nav__link">
+      flask-Deployment-Options
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-9-5" type="checkbox" id="nav-3-9-5">
+    
+    <label class="md-nav__link" for="nav-3-9-5">
+      Software-static-web-generator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-9-5">
+        Software-static-web-generator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Software/software-static-web-generator/static-web-generator/" title="Static-web-generator" class="md-nav__link">
+      Static-web-generator
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-10" type="checkbox" id="nav-3-10">
+    
+    <label class="md-nav__link" for="nav-3-10">
+      Glossary
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-10">
+        Glossary
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Glossary/Abstract-base-class/" title="Abstract-base-class" class="md-nav__link">
+      Abstract-base-class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Glossary/Argument-and-parameter/" title="Argument-and-parameter" class="md-nav__link">
+      Argument-and-parameter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Python/Books/" title="Books" class="md-nav__link">
+      Books
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/C++/" title="C++" class="md-nav__link">
+      C++
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      C++Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        C++Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1" type="checkbox" id="nav-4-2-1">
+    
+    <label class="md-nav__link" for="nav-4-2-1">
+      Language-reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-1">
+        Language-reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/" title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-2" type="checkbox" id="nav-4-2-1-2">
+    
+    <label class="md-nav__link" for="nav-4-2-1-2">
+      Basic-concept
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-2">
+        Basic-concept
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Basic-concept/Basic-concepts/" title="Basic-concepts" class="md-nav__link">
+      Basic-concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-2-2" type="checkbox" id="nav-4-2-1-2-2">
+    
+    <label class="md-nav__link" for="nav-4-2-1-2-2">
+      Data-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-2-2">
+        Data-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Basic-concept/Data-model/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Basic-concept/Data-model/Object/" title="Object" class="md-nav__link">
+      Object
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Basic-concept/Data-model/Object-storage/" title="Object-storage" class="md-nav__link">
+      Object-storage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-2-2-4" type="checkbox" id="nav-4-2-1-2-2-4">
+    
+    <label class="md-nav__link" for="nav-4-2-1-2-2-4">
+      Memory-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-4-2-1-2-2-4">
+        Memory-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model/" title="Memory-model" class="md-nav__link">
+      Memory-model
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Basic-concept/Variable/" title="Variable" class="md-nav__link">
+      Variable
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-3" type="checkbox" id="nav-4-2-1-3">
+    
+    <label class="md-nav__link" for="nav-4-2-1-3">
+      Expressions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-3">
+        Expressions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Expressions/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Expressions/Expressions/" title="Expressions" class="md-nav__link">
+      Expressions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-3-3" type="checkbox" id="nav-4-2-1-3-3">
+    
+    <label class="md-nav__link" for="nav-4-2-1-3-3">
+      Memory-allocation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-3-3">
+        Memory-allocation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Expressions/Memory-allocation/Memory-allocation/" title="Memory-allocation" class="md-nav__link">
+      Memory-allocation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-3-4" type="checkbox" id="nav-4-2-1-3-4">
+    
+    <label class="md-nav__link" for="nav-4-2-1-3-4">
+      Operator-overloading
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-3-4">
+        Operator-overloading
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Expressions/Operator-overloading/Operator-overloading/" title="Operator-overloading" class="md-nav__link">
+      Operator-overloading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-4" type="checkbox" id="nav-4-2-1-4">
+    
+    <label class="md-nav__link" for="nav-4-2-1-4">
+      Declarations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-4">
+        Declarations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-4-1" type="checkbox" id="nav-4-2-1-4-1">
+    
+    <label class="md-nav__link" for="nav-4-2-1-4-1">
+      Declarators
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-4-1">
+        Declarators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-4-1-1" type="checkbox" id="nav-4-2-1-4-1-1">
+    
+    <label class="md-nav__link" for="nav-4-2-1-4-1-1">
+      Pointer-declaration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-4-2-1-4-1-1">
+        Pointer-declaration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Declarations/Declarators/Pointer-declaration/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-5" type="checkbox" id="nav-4-2-1-5">
+    
+    <label class="md-nav__link" for="nav-4-2-1-5">
+      Statements
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-5">
+        Statements
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-5-1" type="checkbox" id="nav-4-2-1-5-1">
+    
+    <label class="md-nav__link" for="nav-4-2-1-5-1">
+      Iteration-statements
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-5-1">
+        Iteration-statements
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-5-1-1" type="checkbox" id="nav-4-2-1-5-1-1">
+    
+    <label class="md-nav__link" for="nav-4-2-1-5-1-1">
+      For
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-4-2-1-5-1-1">
+        For
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Statements/Iteration-statements/For/For/" title="For" class="md-nav__link">
+      For
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-6" type="checkbox" id="nav-4-2-1-6">
+    
+    <label class="md-nav__link" for="nav-4-2-1-6">
+      Initialization
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-6">
+        Initialization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Initialization/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Initialization/Initialization/" title="Initialization" class="md-nav__link">
+      Initialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-7" type="checkbox" id="nav-4-2-1-7">
+    
+    <label class="md-nav__link" for="nav-4-2-1-7">
+      Functions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-7">
+        Functions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-7-1" type="checkbox" id="nav-4-2-1-7-1">
+    
+    <label class="md-nav__link" for="nav-4-2-1-7-1">
+      Operator-overloading
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-7-1">
+        Operator-overloading
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Functions/Operator-overloading/Operator-overloading/" title="Operator-overloading" class="md-nav__link">
+      Operator-overloading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-8" type="checkbox" id="nav-4-2-1-8">
+    
+    <label class="md-nav__link" for="nav-4-2-1-8">
+      Classes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-8">
+        Classes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Class/" title="Class" class="md-nav__link">
+      Class
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-8-3" type="checkbox" id="nav-4-2-1-8-3">
+    
+    <label class="md-nav__link" for="nav-4-2-1-8-3">
+      Magic-function
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-8-3">
+        Magic-function
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-8-3-2" type="checkbox" id="nav-4-2-1-8-3-2">
+    
+    <label class="md-nav__link" for="nav-4-2-1-8-3-2">
+      Constructor
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-4-2-1-8-3-2">
+        Constructor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Constructor/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Constructor/Constructor/" title="Constructor" class="md-nav__link">
+      Constructor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Constructor/Code-example/" title="Code-example" class="md-nav__link">
+      Code-example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Constructor/Converting-constructor/" title="Converting-constructor" class="md-nav__link">
+      Converting-constructor
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-8-3-3" type="checkbox" id="nav-4-2-1-8-3-3">
+    
+    <label class="md-nav__link" for="nav-4-2-1-8-3-3">
+      Destructor
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-4-2-1-8-3-3">
+        Destructor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Destructor/Destructor/" title="Destructor" class="md-nav__link">
+      Destructor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md" title="Virtual-destructor" class="md-nav__link">
+      Virtual-destructor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructor/" title="Virtual-destructor" class="md-nav__link">
+      Virtual-destructor
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-8-3-4" type="checkbox" id="nav-4-2-1-8-3-4">
+    
+    <label class="md-nav__link" for="nav-4-2-1-8-3-4">
+      Assignment
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-4-2-1-8-3-4">
+        Assignment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment/" title="Assignment" class="md-nav__link">
+      Assignment
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Magic-function/Implicitly-defined/" title="Implicitly-defined" class="md-nav__link">
+      Implicitly-defined
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-8-4" type="checkbox" id="nav-4-2-1-8-4">
+    
+    <label class="md-nav__link" for="nav-4-2-1-8-4">
+      Members
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-1-8-4">
+        Members
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Members/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Classes/Members/Static-members/" title="Static-members" class="md-nav__link">
+      Static-members
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1-9" type="checkbox" id="nav-4-2-1-9">
+    
+    <label class="md-nav__link" for="nav-4-2-1-9">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-1-9">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Language-reference/Guide/Operator-overloading/" title="Operator-overloading" class="md-nav__link">
+      Operator-overloading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-2" type="checkbox" id="nav-4-2-2">
+    
+    <label class="md-nav__link" for="nav-4-2-2">
+      Named-requirements
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-2">
+        Named-requirements
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Named-requirements/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3" type="checkbox" id="nav-4-2-3">
+    
+    <label class="md-nav__link" for="nav-4-2-3">
+      Idiom
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-3">
+        Idiom
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Idiom/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3-2" type="checkbox" id="nav-4-2-3-2">
+    
+    <label class="md-nav__link" for="nav-4-2-3-2">
+      RAII
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-3-2">
+        RAII
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Idiom/RAII/RAII/" title="RAII" class="md-nav__link">
+      RAII
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Idiom/RAII/Essential-C++/" title="Essential-C++" class="md-nav__link">
+      Essential-C++
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3-3" type="checkbox" id="nav-4-2-3-3">
+    
+    <label class="md-nav__link" for="nav-4-2-3-3">
+      The-rule-of-three-five-zero
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-3-3">
+        The-rule-of-three-five-zero
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero/" title="The-rule-of-three-five-zero" class="md-nav__link">
+      The-rule-of-three-five-zero
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Idiom/Summary-of-C++-idiom/" title="Summary-of-C++-idiom" class="md-nav__link">
+      Summary-of-C++-idiom
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-4" type="checkbox" id="nav-4-2-4">
+    
+    <label class="md-nav__link" for="nav-4-2-4">
+      Library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-4">
+        Library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-4-1" type="checkbox" id="nav-4-2-4-1">
+    
+    <label class="md-nav__link" for="nav-4-2-4-1">
+      STL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-4-1">
+        STL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Library/STL/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Library/STL/STL/" title="STL" class="md-nav__link">
+      STL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Library/STL/Design-pattern-of-STL/" title="Design-pattern-of-STL" class="md-nav__link">
+      Design-pattern-of-STL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-4-1-4" type="checkbox" id="nav-4-2-4-1-4">
+    
+    <label class="md-nav__link" for="nav-4-2-4-1-4">
+      Containers-library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-4-2-4-1-4">
+        Containers-library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Language/Library/STL/Containers-library/Containers-library/" title="Containers-library" class="md-nav__link">
+      Containers-library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Pattern
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Pattern
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Pattern/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+    
+    <label class="md-nav__link" for="nav-4-4">
+      Paradigm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-4">
+        Paradigm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Paradigm/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+    
+    <label class="md-nav__link" for="nav-4-5">
+      Stype-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-5">
+        Stype-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Stype-guide/Cpp-stype-guide/" title="Cpp-stype-guide" class="md-nav__link">
+      Cpp-stype-guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/Book/" title="Book" class="md-nav__link">
+      Book
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7-1" type="checkbox" id="nav-4-7-1">
+    
+    <label class="md-nav__link" for="nav-4-7-1">
+      Concurrency
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-7-1">
+        Concurrency
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Concurrency/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7-1-2" type="checkbox" id="nav-4-7-1-2">
+    
+    <label class="md-nav__link" for="nav-4-7-1-2">
+      CCiA
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-7-1-2">
+        CCiA
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Concurrency/CCiA/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7-2" type="checkbox" id="nav-4-7-2">
+    
+    <label class="md-nav__link" for="nav-4-7-2">
+      Memory-leak
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-7-2">
+        Memory-leak
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Memory-leak/Tools/" title="Tools" class="md-nav__link">
+      Tools
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Memory-leak/数组越界/" title="数组越界" class="md-nav__link">
+      数组越界
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Memory-leak/内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出/" title="内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出" class="md-nav__link">
+      内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7-3" type="checkbox" id="nav-4-7-3">
+    
+    <label class="md-nav__link" for="nav-4-7-3">
+      Command-line
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-7-3">
+        Command-line
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Command-line/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C++/How-to/Command-line/Command-line-arguments-parsing/" title="Command-line-arguments-parsing" class="md-nav__link">
+      Command-line-arguments-parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      C
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        C
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Data-model
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        Data-model
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Data-model/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Data-model/creference-Objects and alignment/" title="creference-Objects and alignment" class="md-nav__link">
+      creference-Objects and alignment
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1" type="checkbox" id="nav-5-2-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1">
+      Software-event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-1">
+        Software-event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-1" type="checkbox" id="nav-5-2-1-1">
+    
+    <label class="md-nav__link" for="nav-5-2-1-1">
+      Software-libevent
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-1">
+        Software-libevent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Software/Software-event-driven-programming/Software-libevent/libevent/" title="libevent" class="md-nav__link">
+      libevent
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2" type="checkbox" id="nav-5-2-1-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2">
+      Software-libuv
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-1-2">
+        Software-libuv
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Software/Software-event-driven-programming/Software-libuv/libuv/" title="libuv" class="md-nav__link">
+      libuv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2-2" type="checkbox" id="nav-5-2-1-2-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2-2">
+      Doc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-5-2-1-2-2">
+        Doc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Software/Software-event-driven-programming/Software-libuv/Doc/Design-overview/" title="Design-overview" class="md-nav__link">
+      Design-overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2-2-2" type="checkbox" id="nav-5-2-1-2-2-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2-2-2">
+      User-guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
+      <label class="md-nav__title" for="nav-5-2-1-2-2-2">
+        User-guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv/" title="Basics-of-libuv" class="md-nav__link">
+      Basics-of-libuv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-1-2-2-2-2" type="checkbox" id="nav-5-2-1-2-2-2-2">
+    
+    <label class="md-nav__link" for="nav-5-2-1-2-2-2-2">
+      Utilities
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="7">
+      <label class="md-nav__title" for="nav-5-2-1-2-2-2-2">
+        Utilities
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      JavaScript
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        JavaScript
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../JavaScript/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-1" type="checkbox" id="nav-6-2-1">
+    
+    <label class="md-nav__link" for="nav-6-2-1">
+      Software-event-driven-programming
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-1">
+        Software-event-driven-programming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-1-1" type="checkbox" id="nav-6-2-1-1">
+    
+    <label class="md-nav__link" for="nav-6-2-1-1">
+      Software-node.js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-2-1-1">
+        Software-node.js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-About Node.js/" title="Node.js-About Node.js" class="md-nav__link">
+      Node.js-About Node.js
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-1-1-2" type="checkbox" id="nav-6-2-1-1-2">
+    
+    <label class="md-nav__link" for="nav-6-2-1-1-2">
+      Node.js-core-concepts
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
+      <label class="md-nav__title" for="nav-6-2-1-1-2">
+        Node.js-core-concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-How-does-Node.js-manage-timers-internally/" title="Node.js-How-does-Node.js-manage-timers-internally" class="md-nav__link">
+      Node.js-How-does-Node.js-manage-timers-internally
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-Overview-of-Blocking-vs-Non-Blocking/" title="Node.js-Overview-of-Blocking-vs-Non-Blocking" class="md-nav__link">
+      Node.js-Overview-of-Blocking-vs-Non-Blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()/" title="Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()" class="md-nav__link">
+      Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Java/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../Summary-of-my-programming-language/" title="Summary-of-my-programming-language" class="md-nav__link">
+      Summary-of-my-programming-language
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+    
+    <label class="md-nav__link" for="nav-9">
+      ABI
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        ABI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Application-binary-interface/" title="Application-binary-interface" class="md-nav__link">
+      Application-binary-interface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3">
+    
+    <label class="md-nav__link" for="nav-9-3">
+      Alignment
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-3">
+        Alignment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Alignment/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3-2" type="checkbox" id="nav-9-3-2">
+    
+    <label class="md-nav__link" for="nav-9-3-2">
+      Data-structure-alignment
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-3-2">
+        Data-structure-alignment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Alignment/Data-structure-alignment/Data-structure-alignment/" title="Data-structure-alignment" class="md-nav__link">
+      Data-structure-alignment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Alignment/Data-structure-alignment/The-Lost-Art-of-Structure-Packing/" title="The-Lost-Art-of-Structure-Packing" class="md-nav__link">
+      The-Lost-Art-of-Structure-Packing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Alignment/Data-structure-alignment/Data-alignment/" title="Data-alignment" class="md-nav__link">
+      Data-alignment
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
+    
+    <label class="md-nav__link" for="nav-9-4">
+      Call-convention
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-4">
+        Call-convention
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Call-convention/Calling-convention/" title="Calling-convention" class="md-nav__link">
+      Calling-convention
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Call-convention/Calling-Conventions-Demystified/" title="Calling-Conventions-Demystified" class="md-nav__link">
+      Calling-Conventions-Demystified
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-5" type="checkbox" id="nav-9-5" checked>
+    
+    <label class="md-nav__link" for="nav-9-5">
+      Library
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-5">
+        Library
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Library(computing)/" title="Library(computing)" class="md-nav__link">
+      Library(computing)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-5-2" type="checkbox" id="nav-9-5-2" checked>
+    
+    <label class="md-nav__link" for="nav-9-5-2">
+      Position-independent-code
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-5-2">
+        Position-independent-code
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Position-independent-code/" title="Position-independent-code" class="md-nav__link">
+      Position-independent-code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Position-Independent-Code(PIC)-in-shared-libraries
+      </label>
+    
+    <a href="./" title="Position-Independent-Code(PIC)-in-shared-libraries" class="md-nav__link md-nav__link--active">
+      Position-Independent-Code(PIC)-in-shared-libraries
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#some-problems-of-load-time-relocation" class="md-nav__link">
+    Some problems of load-time relocation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic-introduction" class="md-nav__link">
+    PIC - introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-insight-1-offset-between-text-and-data-sections" class="md-nav__link">
+    Key insight #1 - offset between text and data sections
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-insight-2-making-an-ip-relative-offset-work-on-x86" class="md-nav__link">
+    Key insight #2 - making an IP-relative offset work on x86
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-global-offset-table-got" class="md-nav__link">
+    The Global Offset Table (GOT)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic-with-data-references-through-got-an-example" class="md-nav__link">
+    PIC with data references through GOT - an example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-calls-in-pic" class="md-nav__link">
+    Function calls in PIC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-lazy-binding-optimization" class="md-nav__link">
+    The lazy binding optimization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-procedure-linkage-table-plt" class="md-nav__link">
+    The Procedure Linkage Table (PLT)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic-with-function-calls-through-plt-and-got-an-example" class="md-nav__link">
+    PIC with function calls through PLT and GOT - an example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-if-and-when-the-resolution-is-done-by-the-loader" class="md-nav__link">
+    Controlling if and when the resolution is done by the loader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-costs-of-pic" class="md-nav__link">
+    The costs of PIC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-5-3" type="checkbox" id="nav-9-5-3">
+    
+    <label class="md-nav__link" for="nav-9-5-3">
+      Relocation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-5-3">
+        Relocation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Relocation/Relocation(computing)/" title="Relocation(computing)" class="md-nav__link">
+      Relocation(computing)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6" type="checkbox" id="nav-9-6">
+    
+    <label class="md-nav__link" for="nav-9-6">
+      Name-mangling
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-6">
+        Name-mangling
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Name-mangling/Name-mangling/" title="Name-mangling" class="md-nav__link">
+      Name-mangling
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-7" type="checkbox" id="nav-9-7">
+    
+    <label class="md-nav__link" for="nav-9-7">
+      Book-x86-Disassembly
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-7">
+        Book-x86-Disassembly
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Book-x86-Disassembly/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#some-problems-of-load-time-relocation" class="md-nav__link">
+    Some problems of load-time relocation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic-introduction" class="md-nav__link">
+    PIC - introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-insight-1-offset-between-text-and-data-sections" class="md-nav__link">
+    Key insight #1 - offset between text and data sections
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-insight-2-making-an-ip-relative-offset-work-on-x86" class="md-nav__link">
+    Key insight #2 - making an IP-relative offset work on x86
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-global-offset-table-got" class="md-nav__link">
+    The Global Offset Table (GOT)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic-with-data-references-through-got-an-example" class="md-nav__link">
+    PIC with data references through GOT - an example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-calls-in-pic" class="md-nav__link">
+    Function calls in PIC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-lazy-binding-optimization" class="md-nav__link">
+    The lazy binding optimization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-procedure-linkage-table-plt" class="md-nav__link">
+    The Procedure Linkage Table (PLT)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic-with-function-calls-through-plt-and-got-an-example" class="md-nav__link">
+    PIC with function calls through PLT and GOT - an example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-if-and-when-the-resolution-is-done-by-the-loader" class="md-nav__link">
+    Controlling if and when the resolution is done by the loader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-costs-of-pic" class="md-nav__link">
+    The costs of PIC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div class="toc">
+<ul>
+<li><a href="#position-independent-code-pic-in-shared-libraries">Position Independent Code (PIC) in shared libraries</a><ul>
+<li><a href="#some-problems-of-load-time-relocation">Some problems of load-time relocation</a></li>
+<li><a href="#pic-introduction">PIC - introduction</a></li>
+<li><a href="#key-insight-1-offset-between-text-and-data-sections">Key insight #1 - offset between text and data sections</a></li>
+<li><a href="#key-insight-2-making-an-ip-relative-offset-work-on-x86">Key insight #2 - making an IP-relative offset work on x86</a></li>
+<li><a href="#the-global-offset-table-got">The Global Offset Table (GOT)</a></li>
+<li><a href="#pic-with-data-references-through-got-an-example">PIC with data references through GOT - an example</a></li>
+<li><a href="#function-calls-in-pic">Function calls in PIC</a></li>
+<li><a href="#the-lazy-binding-optimization">The lazy binding optimization</a></li>
+<li><a href="#the-procedure-linkage-table-plt">The Procedure Linkage Table (PLT)</a></li>
+<li><a href="#pic-with-function-calls-through-plt-and-got-an-example">PIC with function calls through PLT and GOT - an example</a></li>
+<li><a href="#controlling-if-and-when-the-resolution-is-done-by-the-loader">Controlling if and when the resolution is done by the loader</a></li>
+<li><a href="#the-costs-of-pic">The costs of PIC</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="position-independent-code-pic-in-shared-libraries"><a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries">Position Independent Code (PIC) in shared libraries</a></h1>
+<p>I've described the need for special handling of <strong>shared libraries</strong> while loading them into the process's <strong>address space</strong> in a <a href="http://eli.thegreenplace.net/2011/08/25/load-time-relocation-of-shared-libraries/">previous article</a>. Briefly, when the linker creates a shared library, it doesn't know in advance where it might be loaded. This creates a problem for the <strong>data</strong> and <strong>code</strong> references within the library, which should be somehow made to point to the correct memory locations.</p>
+<p>There are two main approaches to solve this problem in Linux ELF shared libraries:</p>
+<ol>
+<li>Load-time relocation</li>
+<li>Position independent code (PIC)</li>
+</ol>
+<p>Load-time relocation was <a href="http://eli.thegreenplace.net/2011/08/25/load-time-relocation-of-shared-libraries/">already covered</a>. Here, I want to explain the second approach - PIC.</p>
+<p>I originally planned to focus on both x86 and x64 (a.k.a. x86-64) in this article, but as it grew longer and longer I decided it won't be practical. So, it will explain only how PIC works on x86, picking this older architecture specifically because (unlike x64) it wasn't designed with PIC in mind, so implementing PIC on it is a bit trickier. A future (hopefully much shorter) article will build upon the foundation of this one to explain how PIC is implemented on x64.</p>
+<h3 id="some-problems-of-load-time-relocation">Some problems of load-time relocation</h3>
+<p>As we've seen in the previous article, load-time relocation is a fairly straightforward method, and it works. PIC, however, is much more popular nowadays, and is usually the recommended method of building shared libraries. Why is this so?</p>
+<p>Load-time relocation has a couple of problems: it takes time to perform, and it makes the text section of the library non-shareable.</p>
+<p>First, the performance problem. If a shared library was linked with load-time relocation entries, it will take some time to actually perform these relocations when the application is loaded. You may think that the cost shouldn't be too large - after all, the loader doesn't have to scan through the whole text section - it should only look at the relocation entries. But if a complex piece of software loads multiple large shared libraries at start-up, and each shared library must first have its load-time relocations applied, these costs can build up and result in a noticeable delay in the start-up time of the application.</p>
+<p>Second, the non-shareable text section problem, which is somewhat more serious. One of the main points of having shared libraries in the first place, is saving RAM. Some common shared libraries are used by multiple applications. If the text section (where the code is) of the shared library can only be loaded into memory once (and then mapped into the virtual memories of many processes), considerable amounts of RAM can be saved. But this is not possible with load-time relocation, since when using this technique the text section has to be modified at load-time to apply the relocations. Therefore, for each application that loaded this shared library, it will have to be wholly placed in RAM again [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id9">1]</a>. Different applications won't be able to really share it.</p>
+<p>Moreover, having a writable text section (it must be kept writable, to allow the dynamic loader to perform the relocations) poses a security risk, making it easier to exploit the application.</p>
+<p>As we'll see in this article, PIC mostly mitigates these problems.</p>
+<h3 id="pic-introduction">PIC - introduction</h3>
+<p>The idea behind PIC is simple - add an additional level of indirection to all global data and function references in the code. By cleverly utilizing some artifacts of the linking and loading processes, it's possible to make the text section of the shared library truly <em>position independent</em>, in the sense that it can be easily mapped into different memory addresses without needing to change one bit. In the next few sections I will explain in detail how this feat is achieved.</p>
+<h3 id="key-insight-1-offset-between-text-and-data-sections">Key insight <a class="gh-link gh-issue" href="https://github.com/mkdocs/mkdocs/issues/1" title="GitHub Issue mkdocs/mkdocs #1">#1</a> - offset between text and data sections</h3>
+<p>One of the key insights on which PIC relies is the offset between the text and data sections, known to the linker <em>at link-time</em>. When the linker combines several object files together, it collects their sections (for example, all text sections get unified into a single large text section). Therefore, the linker knows both about the sizes of the sections and about their relative locations.</p>
+<p>For example, the text section may be immediately followed by the data section, so the offset from any given instruction in the text section to the beginning of the data section is just the size of the text section minus the offset of the instruction from the beginning of the text section - and both these quantities are known to the linker.</p>
+<p>In the diagram above, the code section was loaded into some address (unknown at link-time) 0xXXXX0000 (the X-es literally mean "don't care"), and the data section right after it at offset 0xXXXXF000. Then, if some instruction at offset 0x80 in the code section wants to reference stuff in the data section, the linker knows the relative offset (0xEF80 in this case) and can encode it in the instruction.</p>
+<p>Note that it wouldn't matter if another section was placed between the code and data sections, or if the data section preceded the code section. Since the linker knows the sizes of all sections and decides where to place them, the insight holds.</p>
+<h3 id="key-insight-2-making-an-ip-relative-offset-work-on-x86">Key insight <a class="gh-link gh-issue" href="https://github.com/mkdocs/mkdocs/issues/2" title="GitHub Issue mkdocs/mkdocs #2">#2</a> - making an IP-relative offset work on x86</h3>
+<p>The above is only useful if we can actually put the relative offset to work. But data references (i.e. in the <code>mov</code>instruction) on x86 require absolute addresses. So, what can we do?</p>
+<p>If we have a relative address and need an absolute address, what's missing is the value of the instruction pointer (since, by definition, the <em>relative</em> address is relative to the instruction's location). There's no instruction to obtain the value of the instruction pointer on x86, but we can use a simple trick to get it. Here's some assembly pseudo-code that demonstrates it:</p>
+<div class="highlight"><pre><span></span>    call TMPLABEL
+TMPLABEL:
+    pop ebx
+</pre></div>
+
+<p>What happens here is:</p>
+<ol>
+<li>The CPU executes <code>call TMPLABEL</code>, which causes it to save the address of the next instruction (the <code>pop ebx</code>) on stack and jump to the label.</li>
+<li>Since the instruction at the label is <code>pop ebx</code>, it gets executed next. It pops a value from the stack into <code>ebx</code>. But this value is the address of the instruction itself, so <code>ebx</code> now effectively contains the value of the instruction pointer.</li>
+</ol>
+<h3 id="the-global-offset-table-got">The Global Offset Table (GOT)</h3>
+<p>With this at hand, we can finally get to the implementation of position-independent data addressing on x86. It is accomplished by means of a "global offset table", or in short GOT.</p>
+<p>A GOT is simply a table of addresses, residing in the data section. Suppose some instruction in the code section wants to refer to a variable. Instead of referring to it directly by absolute address (which would require a relocation), it refers to an entry in the GOT. Since the GOT is in a known place in the data section, this reference is relative and known to the linker. The GOT entry, in turn, will contain the absolute address of the variable:</p>
+<p>In pseudo-assembly, we replace an absolute addressing instruction:</p>
+<div class="highlight"><pre><span></span>; Place the value of the variable in edx
+mov edx, [ADDR_OF_VAR]
+</pre></div>
+
+<p>With displacement addressing from a register, along with an extra indirection:</p>
+<div class="highlight"><pre><span></span>; 1. Somehow get the address of the GOT into ebx
+lea ebx, ADDR_OF_GOT
+
+; 2. Suppose ADDR_OF_VAR is stored at offset 0x10
+;    in the GOT. Then this will place ADDR_OF_VAR
+;    into edx.
+mov edx, DWORD PTR [ebx + 0x10]
+
+; 3. Finally, access the variable and place its
+;    value into edx.
+mov edx, DWORD PTR [edx]
+</pre></div>
+
+<p>So, we've gotten rid of a relocation in the code section by redirecting variable references through the GOT. But we've also created a relocation in the data section. Why? Because the GOT still has to contain the absolute address of the variable for the scheme described above to work. So what have we gained?</p>
+<p>A lot, it turns out. A relocation in the data section is much less problematic than one in the code section, for two reasons (which directly address the two main problems of load-time relocation of code described in the beginning of the article):</p>
+<ol>
+<li>Relocations in the code section are required <em>per variable reference</em>, while in the GOT we only need to relocate once <em>per variable</em>. There are likely much more references to variables than variables, so this is more efficient.</li>
+<li>The data section is writable and not shared between processes anyway, so adding relocations to it does no harm. Moving relocations from the code section, however, allows to make it read-only and share it between processes.</li>
+</ol>
+<h3 id="pic-with-data-references-through-got-an-example">PIC with data references through GOT - an example</h3>
+<p>I will now show a complete example that demonstrates the mechanics of PIC:</p>
+<div class="highlight"><pre><span></span>int myglob = 42;
+
+int ml_func(int a, int b)
+{
+    return myglob + a + b;
+}
+</pre></div>
+
+<p>This chunk of code will be compiled into a shared library (using the <code>-fpic</code> and <code>-shared</code> flags as appropriate) named <code>libmlpic_dataonly.so</code>.</p>
+<p>Let's take a look at its disassembly, focusing on the <code>ml_func</code> function:</p>
+<div class="highlight"><pre><span></span>0000043c &lt;ml_func&gt;:
+ 43c:   55                      push   ebp
+ 43d:   89 e5                   mov    ebp,esp
+ 43f:   e8 16 00 00 00          call   45a &lt;__i686.get_pc_thunk.cx&gt;
+ 444:   81 c1 b0 1b 00 00       add    ecx,0x1bb0
+ 44a:   8b 81 f0 ff ff ff       mov    eax,DWORD PTR [ecx-0x10]
+ 450:   8b 00                   mov    eax,DWORD PTR [eax]
+ 452:   03 45 08                add    eax,DWORD PTR [ebp+0x8]
+ 455:   03 45 0c                add    eax,DWORD PTR [ebp+0xc]
+ 458:   5d                      pop    ebp
+ 459:   c3                      ret
+
+0000045a &lt;__i686.get_pc_thunk.cx&gt;:
+ 45a:   8b 0c 24                mov    ecx,DWORD PTR [esp]
+ 45d:   c3                      ret
+</pre></div>
+
+<p>I'm going to refer to instructions by their addresses (the left-most number in the disassembly). This address is the offset from the load address of the shared library.</p>
+<ul>
+<li>At <code>43f</code>, the address of the next instruction is placed into <code>ecx</code>, by means of the technique described in the "key insight <a class="gh-link gh-issue" href="https://github.com/mkdocs/mkdocs/issues/2" title="GitHub Issue mkdocs/mkdocs #2">#2</a>" section above.</li>
+<li>At <code>444</code>, a known constant offset from the instruction to the place where the GOT is located is added to <code>ecx</code>. So <code>ecx</code> now serves as a base pointer to GOT.</li>
+<li>At <code>44a</code>, a value is taken from <code>[ecx - 0x10]</code>, which is a GOT entry, and placed into <code>eax</code>. This is the address of <code>myglob</code>.</li>
+<li>At <code>450</code> the indirection is done, and the <em>value</em> of <code>myglob</code> is placed into <code>eax</code>.</li>
+<li>Later the parameters <code>a</code> and <code>b</code> are added to <code>myglob</code> and the value is returned (by keeping it in <code>eax</code>).</li>
+</ul>
+<p>We can also query the shared library with <code>readelf -S</code> to see where the GOT section was placed:</p>
+<div class="highlight"><pre><span></span>Section Headers:
+  [Nr] Name     Type            Addr     Off    Size   ES Flg Lk Inf Al
+  &lt;snip&gt;
+  [19] .got     PROGBITS        00001fe4 000fe4 000010 04  WA  0   0  4
+  [20] .got.plt PROGBITS        00001ff4 000ff4 000014 04  WA  0   0  4
+  &lt;snip&gt;
+</pre></div>
+
+<p>Let's do some math to check the computation done by the compiler to find <code>myglob</code>. As I mentioned above, the call to <code>__i686.get_pc_thunk.cx</code> places the address of the next instruction into <code>ecx</code>. That address is <code>0x444</code> [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id10">2]</a>. The next instruction then adds <code>0x1bb0</code> to it, and the result in <code>ecx</code> is going to be <code>0x1ff4</code>. Finally, to actually obtain the GOT entry holding the address of <code>myglob</code>, displacement addressing is used - <code>[ecx - 0x10]</code>, so the entry is at <code>0x1fe4</code>, which is the first entry in the GOT according to the section header.</p>
+<p>Why there's another section whose name starts with <code>.got</code> will be explained later in the article [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id11">3]</a>. Note that the compiler chooses to point <code>ecx</code> to after the GOT and then use negative offsets to obtain entries. This is fine, as long as the math works out. And so far it does.</p>
+<p>There's something we're still missing, however. How does the address of <code>myglob</code> actually get into the GOT slot at <code>0x1fe4</code>? Recall that I mentioned a relocation, so let's find it:</p>
+<div class="highlight"><pre><span></span>&gt; readelf -r libmlpic_dataonly.so
+
+Relocation section &#39;.rel.dyn&#39; at offset 0x2dc contains 5 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name
+00002008  00000008 R_386_RELATIVE
+00001fe4  00000406 R_386_GLOB_DAT    0000200c   myglob
+&lt;snip&gt;
+</pre></div>
+
+<p>Note the relocation section for <code>myglob</code>, pointing to address <code>0x1fe4</code>, as expected. The relocation is of type <code>R_386_GLOB_DAT</code>, which simply tells the dynamic loader - "put the actual value of the symbol (i.e. its address) into that offset". So everything works out nicely. All that's left is to check how it actually looks when the library is loaded. We can do this by writing a simple "driver" executable that links to <code>libmlpic_dataonly.so</code> and calls <code>ml_func</code>, and then running it through GDB.</p>
+<div class="highlight"><pre><span></span>&gt; gdb driver
+[...] skipping output
+(gdb) set environment LD_LIBRARY_PATH=.
+(gdb) break ml_func
+[...]
+(gdb) run
+Starting program: [...]pic_tests/driver
+
+Breakpoint 1, ml_func (a=1, b=1) at ml_reloc_dataonly.c:5
+5         return myglob + a + b;
+(gdb) set disassembly-flavor intel
+(gdb) disas ml_func
+Dump of assembler code for function ml_func:
+   0x0013143c &lt;+0&gt;:   push   ebp
+   0x0013143d &lt;+1&gt;:   mov    ebp,esp
+   0x0013143f &lt;+3&gt;:   call   0x13145a &lt;__i686.get_pc_thunk.cx&gt;
+   0x00131444 &lt;+8&gt;:   add    ecx,0x1bb0
+=&gt; 0x0013144a &lt;+14&gt;:  mov    eax,DWORD PTR [ecx-0x10]
+   0x00131450 &lt;+20&gt;:  mov    eax,DWORD PTR [eax]
+   0x00131452 &lt;+22&gt;:  add    eax,DWORD PTR [ebp+0x8]
+   0x00131455 &lt;+25&gt;:  add    eax,DWORD PTR [ebp+0xc]
+   0x00131458 &lt;+28&gt;:  pop    ebp
+   0x00131459 &lt;+29&gt;:  ret
+End of assembler dump.
+(gdb) i registers
+eax            0x1    1
+ecx            0x132ff4       1257460
+[...] skipping output
+</pre></div>
+
+<p>The debugger has entered <code>ml_func</code>, and stopped at IP <code>0x0013144a</code> [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id12">4]</a>. We see that <code>ecx</code> holds the value <code>0x132ff4</code>(which is the address of the instruction plus <code>0x1bb0</code>, as explained before). Note that at this point, at runtime, these are absolute addresses - the shared library has already been loaded into the address space of the process.</p>
+<p>So, the GOT entry for <code>myglob</code> is at <code>[ecx - 0x10]</code>. Let's check what's there:</p>
+<div class="highlight"><pre><span></span>(gdb) x 0x132fe4
+0x132fe4:     0x0013300c
+</pre></div>
+
+<p>So, we'd expect <code>0x0013300c</code> to be the address of <code>myglob</code>. Let's verify:</p>
+<div class="highlight"><pre><span></span>(gdb) p &amp;myglob
+$1 = (int *) 0x13300c
+</pre></div>
+
+<p>Indeed, it is!</p>
+<h3 id="function-calls-in-pic">Function calls in PIC</h3>
+<p>Alright, so this is how data addressing works in position independent code. But what about function calls? Theoretically, the exact same approach could work for function calls as well. Instead of <code>call</code> actually containing the address of the function to call, let it contain the address of a known GOT entry, and fill in that entry during loading.</p>
+<p>But this is <em>not</em> how function calls work in PIC. What actually happens is a bit more complicated. Before I explain how it's done, a few words about the motivation for such a mechanism.</p>
+<h3 id="the-lazy-binding-optimization">The lazy binding optimization</h3>
+<p>When a shared library refers to some function, the real address of that function is not known until load time. Resolving this address is called <em>binding</em>, and it's something the dynamic loader does when it loads the shared library into the process's memory space. This binding process is non-trivial, since the loader has to actually <em>look up</em> the function symbol in special tables [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id13">5]</a>.</p>
+<p>So, resolving each function takes time. Not a lot of time, but it adds up since the amount of functions in libraries is typically much larger than the amount of global variables. Moreover, most of these resolutions are done in vain, because in a typical run of a program only a fraction of functions actually get called (think about various functions handling error and special conditions, which typically don't get called at all).</p>
+<p>So, to speed up this process, a clever lazy binding scheme was devised. "Lazy" is a generic name for a family of optimizations in computer programming, where work is delayed until the last moment when it's actually needed, with the intention of avoiding doing this work if its results are never required during a specific run of a program. Good examples of laziness are <a href="http://en.wikipedia.org/wiki/Copy-on-write">copy-on-write</a> and <a href="http://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>.</p>
+<p>This lazy binding scheme is attained by adding yet another level of indirection - the PLT.</p>
+<h3 id="the-procedure-linkage-table-plt">The Procedure Linkage Table (PLT)</h3>
+<p>The PLT is part of the executable text section, consisting of a set of entries (one for each external function the shared library calls). Each PLT entry is a short chunk of executable code. Instead of calling the function directly, the code calls an entry in the PLT, which then takes care to call the actual function. This arrangement is sometimes called a "<a href="http://en.wikipedia.org/wiki/Trampoline_%28computing%29">trampoline</a>". Each PLT entry also has a corresponding entry in the GOT which contains the actual offset to the function, but only when the dynamic loader resolves it. I know this is confusing, but hopefully it will be come clearer once I explain the details in the next few paragraphs and diagrams.</p>
+<p>As the previous section mentioned, PLTs allow lazy resolution of functions. When the shared library is first loaded, the function calls have not been resolved yet:</p>
+<p>Explanation:</p>
+<ul>
+<li>In the code, a function <code>func</code> is called. The compiler translates it to a call to <code>func@plt</code>, which is some N-th entry in the PLT.</li>
+<li>The PLT consists of a special first entry, followed by a bunch of identically structured entries, one for each function needing resolution.</li>
+<li>Each PLT entry but the first consists of these parts:</li>
+<li>A jump to a location which is specified in a corresponding GOT entry</li>
+<li>Preparation of arguments for a "resolver" routine</li>
+<li>Call to the resolver routine, which resides in the first entry of the PLT</li>
+<li>The first PLT entry is a call to a resolver routine, which is located in the dynamic loader itself [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id14">6]</a>. This routine resolves the actual address of the function. More on its action a bit later.</li>
+<li>Before the function's actual address has been resolved, the Nth GOT entry just points to after the jump. This is why this arrow in the diagram is colored differently - it's not an actual jump, just a pointer.</li>
+</ul>
+<p>What happens when <code>func</code> is called for the first time is this:</p>
+<ul>
+<li><code>PLT[n]</code> is called and jumps to the address pointed to in <code>GOT[n]</code>.</li>
+<li>This address points into <code>PLT[n]</code> itself, to the preparation of arguments for the resolver.</li>
+<li>The resolver is then called.</li>
+<li>The resolver performs resolution of the actual address of <code>func</code>, places its actual address into <code>GOT[n]</code> and calls <code>func</code>.</li>
+</ul>
+<p>After the first call, the diagram looks a bit differently:</p>
+<p>Note that <code>GOT[n]</code> now points to the actual <code>func</code> [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id15">7]</a> instead of back into the PLT. So, when <code>func</code> is called again:</p>
+<ul>
+<li><code>PLT[n]</code> is called and jumps to the address pointed to in <code>GOT[n]</code>.</li>
+<li><code>GOT[n]</code> points to <code>func</code>, so this just transfers control to <code>func</code>.</li>
+</ul>
+<p>In other words, now <code>func</code> is being actually called, without going through the resolver, at the cost of one additional jump. That's all there is to it, really. This mechanism allows lazy resolution of functions, and no resolution at all for functions that aren't actually called.</p>
+<p>It also leaves the code/text section of the library completely position independent, since the only place where an absolute address is used is the GOT, which resides in the data section and will be relocated by the dynamic loader. Even the PLT itself is PIC, so it can live in the read-only text section.</p>
+<p>I didn't get into much details regarding the resolver, but it's really not important for our purpose here. The resolver is simply a chunk of low-level code in the loader that does symbol resolution. The arguments prepared for it in each PLT entry, along with a suitable relocation entry, help it know about the symbol that needs resolution and about the GOT entry to update.</p>
+<h3 id="pic-with-function-calls-through-plt-and-got-an-example">PIC with function calls through PLT and GOT - an example</h3>
+<p>Once again, to fortify the hard-learned theory with a practical demonstration, here's a complete example showing function call resolution using the mechanism described above. I'll be moving forward a bit faster this time.</p>
+<p>Here's the code for the shared library:</p>
+<div class="highlight"><pre><span></span>int myglob = 42;
+
+int ml_util_func(int a)
+{
+    return a + 1;
+}
+
+int ml_func(int a, int b)
+{
+    int c = b + ml_util_func(a);
+    myglob += c;
+    return b + myglob;
+}
+</pre></div>
+
+<p>This code will be compiled into <code>libmlpic.so</code>, and the focus is going to be on the call to <code>ml_util_func</code> from <code>ml_func</code>. Let's first disassemble <code>ml_func</code>:</p>
+<div class="highlight"><pre><span></span>00000477 &lt;ml_func&gt;:
+ 477:   55                      push   ebp
+ 478:   89 e5                   mov    ebp,esp
+ 47a:   53                      push   ebx
+ 47b:   83 ec 24                sub    esp,0x24
+ 47e:   e8 e4 ff ff ff          call   467 &lt;__i686.get_pc_thunk.bx&gt;
+ 483:   81 c3 71 1b 00 00       add    ebx,0x1b71
+ 489:   8b 45 08                mov    eax,DWORD PTR [ebp+0x8]
+ 48c:   89 04 24                mov    DWORD PTR [esp],eax
+ 48f:   e8 0c ff ff ff          call   3a0 &lt;ml_util_func@plt&gt;
+ &lt;... snip more code&gt;
+</pre></div>
+
+<p>The interesting part is the call to <code>ml_util_func@plt</code>. Note also that the address of GOT is in <code>ebx</code>. Here's what <code>ml_util_func@plt</code> looks like (it's in an executable section called <code>.plt</code>):</p>
+<div class="highlight"><pre><span></span>000003a0 &lt;ml_util_func@plt&gt;:
+ 3a0:   ff a3 14 00 00 00       jmp    DWORD PTR [ebx+0x14]
+ 3a6:   68 10 00 00 00          push   0x10
+ 3ab:   e9 c0 ff ff ff          jmp    370 &lt;_init+0x30&gt;
+</pre></div>
+
+<p>Recall that each PLT entry consists of three parts:</p>
+<ul>
+<li>A jump to an address specified in GOT (this is the jump to <code>[ebx+0x14]</code>)</li>
+<li>Preparation of arguments for the resolver</li>
+<li>Call to the resolver</li>
+</ul>
+<p>The resolver (PLT entry 0) resides at address <code>0x370</code>, but it's of no interest to us here. What's more interesting is to see what the GOT contains. For that, we first have to do some math.</p>
+<p>The "get IP" trick in <code>ml_func</code> was done on address <code>0x483</code>, to which <code>0x1b71</code> is added. So the base of the GOT is at <code>0x1ff4</code>. We can take a peek at the GOT contents with <code>readelf</code> [<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id16">8]</a>:</p>
+<div class="highlight"><pre><span></span>&gt; readelf -x .got.plt libmlpic.so
+
+Hex dump of section &#39;.got.plt&#39;:
+  0x00001ff4 241f0000 00000000 00000000 86030000 $...............
+  0x00002004 96030000 a6030000                   ........
+</pre></div>
+
+<p>The GOT entry <code>ml_util_func@plt</code> looks at is at offset <code>+0x14</code>, or <code>0x2008</code>. From above, the word at that location is <code>0x3a6</code>, which is the address of the <code>push</code> instruction in <code>ml_util_func@plt</code>.</p>
+<p>To help the dynamic loader do its job, a relocation entry is also added and specifies which place in the GOT to relocate for <code>ml_util_func</code>:</p>
+<div class="highlight"><pre><span></span>&gt; readelf -r libmlpic.so
+[...] snip output
+
+Relocation section &#39;.rel.plt&#39; at offset 0x328 contains 3 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name
+00002000  00000107 R_386_JUMP_SLOT   00000000   __cxa_finalize
+00002004  00000207 R_386_JUMP_SLOT   00000000   __gmon_start__
+00002008  00000707 R_386_JUMP_SLOT   0000046c   ml_util_func
+</pre></div>
+
+<p>The last line means that the dynamic loader should place the value (address) of symbol <code>ml_util_func</code> into <code>0x2008</code> (which, recall, is the GOT entry for this function).</p>
+<p>It would be interesting to see this GOT entry modification actually happen after the first call. Let's once again use GDB for the inspection.</p>
+<div class="highlight"><pre><span></span>&gt; gdb driver
+[...] skipping output
+(gdb) set environment LD_LIBRARY_PATH=.
+(gdb) break ml_func
+Breakpoint 1 at 0x80483c0
+(gdb) run
+Starting program: /pic_tests/driver
+
+Breakpoint 1, ml_func (a=1, b=1) at ml_main.c:10
+10        int c = b + ml_util_func(a);
+(gdb)
+</pre></div>
+
+<p>We're now before the first call to <code>ml_util_func</code>. Recall that GOT is pointed to by <code>ebx</code> in this code. Let's see what's in it:</p>
+<div class="highlight"><pre><span></span>(gdb) i registers ebx
+ebx            0x132ff4
+</pre></div>
+
+<p>And the offset to the entry we need is at <code>[ebx+0x14]</code>:</p>
+<div class="highlight"><pre><span></span>(gdb) x/w 0x133008
+0x133008:     0x001313a6
+</pre></div>
+
+<p>Yep, the <code>0x3a6</code> ending, looks right. Now, let's step until after the call to <code>ml_util_func</code> and check again:</p>
+<div class="highlight"><pre><span></span>(gdb) step
+ml_util_func (a=1) at ml_main.c:5
+5         return a + 1;
+(gdb) x/w 0x133008
+0x133008:     0x0013146c
+</pre></div>
+
+<p>The value at <code>0x133008</code> was changed. Hence, <code>0x0013146c</code> should be the real address of <code>ml_util_func</code>, placed in there by the dynamic loader:</p>
+<div class="highlight"><pre><span></span>(gdb) p &amp;ml_util_func
+$1 = (int (*)(int)) 0x13146c &lt;ml_util_func&gt;
+</pre></div>
+
+<p>Just as expected.</p>
+<h3 id="controlling-if-and-when-the-resolution-is-done-by-the-loader">Controlling if and when the resolution is done by the loader</h3>
+<p>This would be a good place to mention that the process of lazy symbol resolution performed by the dynamic loader can be configured with some environment variables (and corresponding flags to <code>ld</code> when linking the shared library). This is sometimes useful for special performance requirements or debugging.</p>
+<p>The <code>LD_BIND_NOW</code> env var, when defined, tells the dynamic loader to always perform the resolution for all symbols at start-up time, and not lazily. You can easily verify this in action by setting this env var and re-running the previous sample with GDB. You'll see that the GOT entry for <code>ml_util_func</code> contains its real address even before the first call to the function.</p>
+<p>Conversely, the <code>LD_BIND_NOT</code> env var tells the dynamic loader not to update the GOT entry at all. Each call to an external function will then go through the dynamic loader and be resolved anew.</p>
+<p>The dynamic loader is configurable by other flags as well. I encourage you to go over <code>man ld.so</code> - it contains some interesting information.</p>
+<h3 id="the-costs-of-pic">The costs of PIC</h3>
+<p>This article started by stating the problems of load-time relocation and how the PIC approach fixes them. But PIC is also not without problems. One immediately apparent cost is the extra indirection required for all external references to data and code in PIC. That's an extra memory load for each reference to a global variable, and for each call to a function. How problematic this is in practice depends on the compiler, the CPU architecture and the particular application.</p>
+<p>Another, less apparent cost, is the increased register usage required to implement PIC. In order to avoid locating the GOT too frequently, it makes sense for the compiler to generate code that keeps its address in a register (usually <code>ebx</code>). But that ties down a whole register just for the sake of GOT. While not a big problem for RISC architectures that tend to have a lot of general purposes registers, it presents a performance problem for architectures like x86, which has a small amount of registers. PIC means having one general purpose register less, which adds up indirect costs since now more memory references have to be made.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This article explained what position independent code is, and how it helps create shared libraries with shareable read-only text sections. There are some tradeoffs when choosing between PIC and its alternative (load-time relocation), and the eventual outcome really depends on a lot of factors, like the CPU architecture on which the program is going to run.</p>
+<p>That said, PIC is becoming more and more popular. Some non-Intel architectures like SPARC64 force PIC-only code for shared libraries, and many others (for example, ARM) include IP-relative addressing modes to make PIC more efficient. Both are true for the successor of x86, the x64 architecture. I will discuss PIC on x64 in a future article.</p>
+<p>The focus of this article, however, has not been on performance considerations or architectural decisions. My aim was to explain, given that PIC is used, <em>how it works</em>. If the explanation wasn't clear enough - please let me know in the comments and I will try to provide more information.</p>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id1">1]</a></th>
+<th>Unless all applications load this library into the exact same virtual memory address. But this usually isn't done on Linux.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id2">2]</a></th>
+<th><code>0x444</code> (and all other addresses mentioned in this computation) is relative to the load address of the shared library, which is unknown until an executable actually loads it at runtime. Note how it doesn't matter in the code since it only juggles <em>relative</em> addresses.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id3">3]</a></th>
+<th>The astute reader may wonder why <code>.got</code> is a separate section at all. Didn't I just show in the diagrams that it's located in the data section? In practice, it is. I don't want to get into the distinction between ELF sections and segments here, since that would take use too far away from the point. But briefly, any number of "data" sections can be defined for a library and mapped into a read-write segment. This doesn't really matter, as long as the ELF file is organized correctly. Separating the data segment into different logical sections provides modularity and makes the linker's job easier.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id4">4]</a></th>
+<th>Note that <code>gdb</code> skipped the part where <code>ecx</code> is assigned. That's because it's kind-of considered to be part of the function's prolog (the real reason is in the way <code>gcc</code> structures its debug info, of course). Several references to global data and functions are made inside a function, and a register pointing to GOT can serve all of them.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id5">5]</a></th>
+<th>Shared library ELF objects actually come with special hash table sections for this purpose.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id6">6]</a></th>
+<th>The dynamic loader on Linux is just another shared library which gets loaded into the address space of all running processes.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id7">7]</a></th>
+<th>I placed <code>func</code> in a separate code section, although in theory this could be the same one where the call to <code>func</code> is made (i.e. in the same shared library). The "extra credit" section of <a href="http://eli.thegreenplace.net/2011/08/25/load-time-relocation-of-shared-libraries/">this article</a> has information about why a call to an external function in the same shared library needs PIC (or relocation) as well.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>[<a href="https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries/#id8">8]</a></th>
+<th>Recall that in the data reference example I promised to explain why there are apparently two GOT sections in the object: <code>.got</code> and <code>.got.plt</code>. Now it should become obvious that this is just to conveniently split the GOT entries required for global data from GOT entries required for the PLT. This is also why when the GOT offset is computed in functions, it points to <code>.got.plt</code>, which comes right after <code>.got</code>. This way, negative offsets lead us to <code>.got</code>, while positive offsets lead us to <code>.got.plt</code>. While convenient, such an arrangement is by no means compulsory. Both parts could be placed into a single <code>.got</code> section.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Position-independent-code/" title="Position-independent-code" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Position-independent-code
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../Relocation/Relocation(computing)/" title="Relocation(computing)" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Relocation(computing)
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

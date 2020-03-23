@@ -1,5 +1,6 @@
 nav:
-    - Language: Language
+    - C++: C++.md
+    - C++Reference: Language
     - Pattern: Pattern
     - Paradigm: Paradigm
     - Stype-guide: Stype-guide
