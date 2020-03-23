@@ -98,17 +98,24 @@ nav:
     - Behavioral-pattern:
       - Visitor-pattern:
         - Visitor-pattern: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern.md
-        - Code: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Code.md
+        - Code:
+          - Code: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code.md
       - Iterator-pattern:
         - Iterator-pattern: Theory/Design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern.md
       - Observer-pattern:
         - Observer-pattern: Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
+        - Code:
+          - Introduction: Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Code/index.md
       - "Publish\u2013subscribe-pattern":
         - "Publish\u2013subscribe-pattern": "Theory/Design-pattern/Behavioral-pattern/Publish\u2013\
             subscribe-pattern/Publish\u2013subscribe-pattern.md"
       - Strategy-pattern:
         - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
     - Separation-of-container-and-algorithm: Theory/Design-pattern/Separation-of-container-and-algorithm.md
+  - Scripting-language:
+    - Scripting-language: Theory/Scripting-language/Scripting-language.md
+    - "Read\u2013eval\u2013print-loop": "Theory/Scripting-language/Read\u2013eval\u2013\
+        print-loop.md"
   - Comparison-of-programming-language: Theory/Comparison-of-programming-language.md
 - Python:
   - Language:
@@ -189,6 +196,7 @@ nav:
   - Glossary:
     - Abstract-base-class: Python/Glossary/Abstract-base-class.md
     - Argument-and-parameter: Python/Glossary/Argument-and-parameter.md
+  - Books: Python/Books.md
 - C++:
   - Language:
     - Language-reference:
@@ -202,15 +210,28 @@ nav:
       - Classes:
         - Introduction: C++/Language/Language-reference/Classes/index.md
         - Class: C++/Language/Language-reference/Classes/Class.md
-        - Constructor:
-          - Introduction: C++/Language/Language-reference/Classes/Constructor/index.md
-          - Constructor: C++/Language/Language-reference/Classes/Constructor/Constructor.md
-          - Code-example: C++/Language/Language-reference/Classes/Constructor/Code-example.md
+        - Magic-function:
+          - Constructor:
+            - Introduction: C++/Language/Language-reference/Classes/Magic-function/Constructor/index.md
+            - Constructor: C++/Language/Language-reference/Classes/Magic-function/Constructor/Constructor.md
+            - Code-example: C++/Language/Language-reference/Classes/Magic-function/Constructor/Code-example.md
+            - Converting-constructor: C++/Language/Language-reference/Classes/Magic-function/Constructor/Converting-constructor.md
+          - Destructor:
+            - Destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Destructor.md
+            - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md
+          - Assignment:
+            - Assignment: C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment.md
     - Idiom:
       - Introduction: C++/Language/Idiom/index.md
       - RAII:
         - RAII: C++/Language/Idiom/RAII/RAII.md
         - Essential-C++: C++/Language/Idiom/RAII/Essential-C++.md
+      - The-rule-of-three-five-zero:
+        - The-rule-of-three-five-zero: C++/Language/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero.md
+      - Summary-of-C++-idiom: C++/Language/Idiom/Summary-of-C++-idiom.md
+  - Library:
+    - Iterator-library:
+      - Iterator-library: C++/Library/Iterator-library/Iterator-library.md
   - Pattern:
     - Introduction: C++/Pattern/index.md
   - Paradigm:
@@ -230,6 +251,8 @@ nav:
       - "\u5185\u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA": "C++/How-to/Memory-leak/\u5185\
           \u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\
           \u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA.md"
+    - Command-line:
+      - Introduction: C++/How-to/Command-line/index.md
 - C:
   - Data-model:
     - Introduction: C/Data-model/index.md

@@ -1,6 +1,11 @@
 nav:
     - Introduction: index.md
+    # 首先描述programming language的概念，然后抛出问题：面对如此之多的programming language，我们如何来进行掌握
+    - Programming-language: Programming-language
+    # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
     - Programming-paradigm: Programming-paradigm
     - Design-pattern: Design-pattern
-    - Comparison-of-programming-language: Comparison-of-programming-language.md
+    - Resource-management: Resource-management
+    - Runtime: Runtime.md
+    - Code-refactoring: Code-refactoring
