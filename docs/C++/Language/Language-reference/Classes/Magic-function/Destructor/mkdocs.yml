@@ -1,3 +1,4 @@
 nav:
     - Destructor: Destructor.md
     - Virtual-destructor: Virtual-destructors.md
+    - Virtual-destructor: Virtual-destructor.md

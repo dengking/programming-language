@@ -122,6 +122,7 @@ nav:
       - Strategy-pattern:
         - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
     - Separation-of-container-and-algorithm: Theory/Design-pattern/Separation-of-container-and-algorithm.md
+    - Summary-of-design-pattern: Theory/Design-pattern/Summary-of-design-pattern.md
   - Resource-management:
     - Resource-management: Theory/Resource-management/Resource-management.md
     - Memory-management:
@@ -224,19 +225,29 @@ nav:
         - Basic-concepts: C++/Language/Language-reference/Basic-concept/Basic-concepts.md
         - Data-model:
           - Introduction: C++/Language/Language-reference/Basic-concept/Data-model/index.md
+          - Object: C++/Language/Language-reference/Basic-concept/Data-model/Object.md
+          - Object-storage: C++/Language/Language-reference/Basic-concept/Data-model/Object-storage.md
           - Memory-model:
             - Memory-model: C++/Language/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model.md
+        - Variable: C++/Language/Language-reference/Basic-concept/Variable.md
       - Expressions:
         - Introduction: C++/Language/Language-reference/Expressions/index.md
         - Expressions: C++/Language/Language-reference/Expressions/Expressions.md
         - Memory-allocation:
           - Memory-allocation: C++/Language/Language-reference/Expressions/Memory-allocation/Memory-allocation.md
+        - Operator-overloading:
+          - Operator-overloading: C++/Language/Language-reference/Expressions/Operator-overloading/Operator-overloading.md
       - Declarations:
         - Declarators:
           - Pointer-declaration:
             - Introduction: C++/Language/Language-reference/Declarations/Declarators/Pointer-declaration/index.md
+      - Statements:
+        - Iteration-statements:
+          - For:
+            - For: C++/Language/Language-reference/Statements/Iteration-statements/For/For.md
       - Initialization:
         - Introduction: C++/Language/Language-reference/Initialization/index.md
+        - Initialization: C++/Language/Language-reference/Initialization/Initialization.md
       - Functions:
         - Operator-overloading:
           - Operator-overloading: C++/Language/Language-reference/Functions/Operator-overloading/Operator-overloading.md
@@ -244,6 +255,7 @@ nav:
         - Introduction: C++/Language/Language-reference/Classes/index.md
         - Class: C++/Language/Language-reference/Classes/Class.md
         - Magic-function:
+          - Introduction: C++/Language/Language-reference/Classes/Magic-function/index.md
           - Constructor:
             - Introduction: C++/Language/Language-reference/Classes/Magic-function/Constructor/index.md
             - Constructor: C++/Language/Language-reference/Classes/Magic-function/Constructor/Constructor.md
@@ -252,8 +264,10 @@ nav:
           - Destructor:
             - Destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Destructor.md
             - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md
+            - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructor.md
           - Assignment:
             - Assignment: C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment.md
+          - Implicitly-defined: C++/Language/Language-reference/Classes/Magic-function/Implicitly-defined.md
         - Members:
           - Introduction: C++/Language/Language-reference/Classes/Members/index.md
           - Static-members: C++/Language/Language-reference/Classes/Members/Static-members.md
@@ -273,6 +287,7 @@ nav:
       - STL:
         - Introduction: C++/Language/Library/STL/index.md
         - STL: C++/Language/Library/STL/STL.md
+        - Design-pattern-of-STL: C++/Language/Library/STL/Design-pattern-of-STL.md
         - Containers-library:
           - Containers-library: C++/Language/Library/STL/Containers-library/Containers-library.md
   - Pattern:
@@ -296,6 +311,7 @@ nav:
           \u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA.md"
     - Command-line:
       - Introduction: C++/How-to/Command-line/index.md
+      - Command-line-arguments-parsing: C++/How-to/Command-line/Command-line-arguments-parsing.md
 - C:
   - Data-model:
     - Introduction: C/Data-model/index.md

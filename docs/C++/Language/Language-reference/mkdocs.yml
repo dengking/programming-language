@@ -3,6 +3,7 @@ nav:
     - Basic-concept: Basic-concept
     - Expressions: Expressions
     - Declarations: Declarations
+    - Statements: Statements
     - Initialization: Initialization
     - Functions: Functions
     - Classes: Classes
