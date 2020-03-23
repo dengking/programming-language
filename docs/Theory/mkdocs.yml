@@ -4,8 +4,12 @@ nav:
     - Programming-language: Programming-language
     # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
+    # 编程范式
     - Programming-paradigm: Programming-paradigm
+    # 设计模式
     - Design-pattern: Design-pattern
+    # 每种语言中都会设计到resource management
     - Resource-management: Resource-management
     - Runtime: Runtime.md
     - Code-refactoring: Code-refactoring
+    
