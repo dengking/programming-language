@@ -1,13 +1,12 @@
 nav:
     - Home: index.md
     - Theory: Theory
-    - Master-programming-language: Master-programming-language
-    
     # 各种具体的programming  language
     - Python: Python
     - C++: C++
     - C: C
     - JavaScript: JavaScript
     - Java: Java
+    - Summary-of-my-programming-language: Summary-of-my-programming-language.md
     # ABI
     - ABI: ABI

@@ -32,10 +32,19 @@ markdown_extensions:
 - pymdownx.tilde
 nav:
 - Home: index.md
-- Programming-language: Programming-language.md
-- Common: Common.md
 - Theory:
   - Introduction: Theory/index.md
+  - Programming-language:
+    - Programming-language: Theory/Programming-language/Programming-language.md
+    - Scripting-language:
+      - Scripting-language: Theory/Programming-language/Scripting-language/Scripting-language.md
+      - "Read\u2013eval\u2013print-loop": "Theory/Programming-language/Scripting-language/Read\u2013\
+          eval\u2013print-loop.md"
+    - Master-programming-language:
+      - How-to-master-programming-language: Theory/Programming-language/Master-programming-language/How-to-master-programming-language.md
+      - Reading-language-reference: Theory/Programming-language/Master-programming-language/Reading-language-reference.md
+    - Expressive-of-programming-language: Theory/Programming-language/Expressive-of-programming-language.md
+    - Comparison-of-programming-language: Theory/Programming-language/Comparison-of-programming-language.md
   - Type-system:
     - Type-system: Theory/Type-system/Type-system.md
     - Type: Theory/Type-system/Type.md
@@ -70,6 +79,7 @@ nav:
       - Aspect-oriented-programming: Theory/Programming-paradigm/Aspect-oriented-programming/Aspect-oriented-programming.md
     - Functional-programming:
       - Functional-programming: Theory/Programming-paradigm/Functional-programming/Functional-programming.md
+      - Function-object: Theory/Programming-paradigm/Functional-programming/Function-object.md
     - Event-driven-programming:
       - Introduction: Theory/Programming-paradigm/Event-driven-programming/index.md
       - Event-driven-model: Theory/Programming-paradigm/Event-driven-programming/Event-driven-model.md
@@ -112,11 +122,19 @@ nav:
       - Strategy-pattern:
         - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
     - Separation-of-container-and-algorithm: Theory/Design-pattern/Separation-of-container-and-algorithm.md
-  - Scripting-language:
-    - Scripting-language: Theory/Scripting-language/Scripting-language.md
-    - "Read\u2013eval\u2013print-loop": "Theory/Scripting-language/Read\u2013eval\u2013\
-        print-loop.md"
-  - Comparison-of-programming-language: Theory/Comparison-of-programming-language.md
+  - Resource-management:
+    - Resource-management: Theory/Resource-management/Resource-management.md
+    - Memory-management:
+      - Memory-management: Theory/Resource-management/Memory-management/Memory-management.md
+      - Manual-memory-management:
+        - Manual-memory-management: Theory/Resource-management/Memory-management/Manual-memory-management/Manual-memory-management.md
+        - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/Manual-memory-management/C-dynamic-memory-allocation.md
+      - Automatic-memory-management:
+        - Automatic-memory-management: Theory/Resource-management/Memory-management/Automatic-memory-management/Automatic-memory-management.md
+      - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/C-dynamic-memory-allocation.md
+  - Runtime: Theory/Runtime.md
+  - Code-refactoring:
+    - Introduction: Theory/Code-refactoring/index.md
 - Python:
   - Language:
     - Language-reference:
@@ -198,15 +216,30 @@ nav:
     - Argument-and-parameter: Python/Glossary/Argument-and-parameter.md
   - Books: Python/Books.md
 - C++:
-  - Language:
+  - C++: C++/C++.md
+  - C++Reference:
     - Language-reference:
       - index: C++/Language/Language-reference/index.md
-      - Data-model:
-        - Introduction: C++/Language/Language-reference/Data-model/index.md
-        - Memory-model:
-          - Memory-model: C++/Language/Language-reference/Data-model/Memory-model/Memory-model.md
+      - Basic-concept:
+        - Basic-concepts: C++/Language/Language-reference/Basic-concept/Basic-concepts.md
+        - Data-model:
+          - Introduction: C++/Language/Language-reference/Basic-concept/Data-model/index.md
+          - Memory-model:
+            - Memory-model: C++/Language/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model.md
+      - Expressions:
+        - Introduction: C++/Language/Language-reference/Expressions/index.md
+        - Expressions: C++/Language/Language-reference/Expressions/Expressions.md
+        - Memory-allocation:
+          - Memory-allocation: C++/Language/Language-reference/Expressions/Memory-allocation/Memory-allocation.md
+      - Declarations:
+        - Declarators:
+          - Pointer-declaration:
+            - Introduction: C++/Language/Language-reference/Declarations/Declarators/Pointer-declaration/index.md
       - Initialization:
         - Introduction: C++/Language/Language-reference/Initialization/index.md
+      - Functions:
+        - Operator-overloading:
+          - Operator-overloading: C++/Language/Language-reference/Functions/Operator-overloading/Operator-overloading.md
       - Classes:
         - Introduction: C++/Language/Language-reference/Classes/index.md
         - Class: C++/Language/Language-reference/Classes/Class.md
@@ -221,6 +254,13 @@ nav:
             - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md
           - Assignment:
             - Assignment: C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment.md
+        - Members:
+          - Introduction: C++/Language/Language-reference/Classes/Members/index.md
+          - Static-members: C++/Language/Language-reference/Classes/Members/Static-members.md
+      - Guide:
+        - Operator-overloading: C++/Language/Language-reference/Guide/Operator-overloading.md
+    - Named-requirements:
+      - Introduction: C++/Language/Named-requirements/index.md
     - Idiom:
       - Introduction: C++/Language/Idiom/index.md
       - RAII:
@@ -229,9 +269,12 @@ nav:
       - The-rule-of-three-five-zero:
         - The-rule-of-three-five-zero: C++/Language/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero.md
       - Summary-of-C++-idiom: C++/Language/Idiom/Summary-of-C++-idiom.md
-  - Library:
-    - Iterator-library:
-      - Iterator-library: C++/Library/Iterator-library/Iterator-library.md
+    - Library:
+      - STL:
+        - Introduction: C++/Language/Library/STL/index.md
+        - STL: C++/Language/Library/STL/STL.md
+        - Containers-library:
+          - Containers-library: C++/Language/Library/STL/Containers-library/Containers-library.md
   - Pattern:
     - Introduction: C++/Pattern/index.md
   - Paradigm:
@@ -280,8 +323,32 @@ nav:
           - Node.js-How-does-Node.js-manage-timers-internally: JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-How-does-Node.js-manage-timers-internally.md
           - Node.js-Overview-of-Blocking-vs-Non-Blocking: JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-Overview-of-Blocking-vs-Non-Blocking.md
           - Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick(): JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick().md
-- Code-refactoring:
-  - Introduction: Code-refactoring/index.md
+- Java:
+  - Introduction: Java/index.md
+- Summary-of-my-programming-language: Summary-of-my-programming-language.md
+- ABI:
+  - Introduction: ABI/index.md
+  - Application-binary-interface: ABI/Application-binary-interface.md
+  - Alignment:
+    - Introduction: ABI/Alignment/index.md
+    - Data-structure-alignment:
+      - Data-structure-alignment: ABI/Alignment/Data-structure-alignment/Data-structure-alignment.md
+      - The-Lost-Art-of-Structure-Packing: ABI/Alignment/Data-structure-alignment/The-Lost-Art-of-Structure-Packing.md
+      - Data-alignment: ABI/Alignment/Data-structure-alignment/Data-alignment.md
+  - Call-convention:
+    - Calling-convention: ABI/Call-convention/Calling-convention.md
+    - Calling-Conventions-Demystified: ABI/Call-convention/Calling-Conventions-Demystified.md
+  - Library:
+    - Library(computing): ABI/Library/Library(computing).md
+    - Position-independent-code:
+      - Position-independent-code: ABI/Library/Position-independent-code/Position-independent-code.md
+      - Position-Independent-Code(PIC)-in-shared-libraries: ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries.md
+    - Relocation:
+      - Relocation(computing): ABI/Library/Relocation/Relocation(computing).md
+  - Name-mangling:
+    - Name-mangling: ABI/Name-mangling/Name-mangling.md
+  - Book-x86-Disassembly:
+    - Introduction: ABI/Book-x86-Disassembly/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/programming-language
