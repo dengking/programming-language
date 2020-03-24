@@ -2,14 +2,23 @@ nav:
     - Introduction: index.md
     # 首先描述programming language的概念，然后抛出问题：面对如此之多的programming language，我们如何来进行掌握
     - Programming-language: Programming-language
+    # 程序的lifetime
+    - Lifetime: Lifetime
     # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
+    # 当今大多数高级programming language都支持exception
+    - Exception: Exception
     # 编程范式
     - Programming-paradigm: Programming-paradigm
     # 设计模式
     - Design-pattern: Design-pattern
     # 每种语言中都会设计到resource management
     - Resource-management: Resource-management
+    # 在programming language中普遍存在的一种情况
+    - Aliase: Aliase
+    # 
+    - Invariant: Invariant
     - Runtime: Runtime.md
+    # 如何进行代码重构
     - Code-refactoring: Code-refactoring
     
