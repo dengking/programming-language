@@ -179,3 +179,12 @@ pMeanRate = tanhx(pMeanRate, 2);
 ```
 这段代码在`c++`中是非常好理解的：`pMeanRate`是一个左值，所以它既能够被read，也能够被write；但是在python中，`=`所表示的是name bind；
 
+
+
+## C++17 [Structured binding](https://en.cppreference.com/w/cpp/language/structured_binding) 和 python [Assignment](https://docs.python.org/3/reference/simple_stmts.html#assignment-statements) 
+
+初次接触c++ 17引入的structured binding特性，我第一想法就是它非常类似于python的tuple assignment。
+
+## C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python for
+
+C++11中引入的range-for非常类似于python中的`for`。

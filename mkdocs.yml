@@ -45,6 +45,9 @@ nav:
       - Reading-language-reference: Theory/Programming-language/Master-programming-language/Reading-language-reference.md
     - Expressive-of-programming-language: Theory/Programming-language/Expressive-of-programming-language.md
     - Comparison-of-programming-language: Theory/Programming-language/Comparison-of-programming-language.md
+  - Lifetime:
+    - Program-lifecycle: Theory/Lifetime/Program-lifecycle.md
+    - Object-lifetime: Theory/Lifetime/Object-lifetime.md
   - Type-system:
     - Type-system: Theory/Type-system/Type-system.md
     - Type: Theory/Type-system/Type.md
@@ -52,18 +55,20 @@ nav:
     - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
     - Class-and-type: Theory/Type-system/Class-and-type.md
     - Subtyping: Theory/Type-system/Subtyping.md
+  - Exception:
+    - Exception-handling: Theory/Exception/Exception-handling.md
   - Programming-paradigm:
     - Introduction: Theory/Programming-paradigm/index.md
     - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
     - Object-oriented-programming:
       - Object-oriented-programming: Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming.md
+      - Thinking-in-java:
+        - About-this-chapter: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/index.md
+        - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction.md
+        - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
+        - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object.md
       - Class-based-OOP:
         - Class-based-OOP: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Class-based-OOP.md
-        - Thinking-in-java:
-          - About-this-chapter: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/index.md
-          - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction.md
-          - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction-to-Objects.md
-          - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Everything-is-an-object.md
       - Polymorphism:
         - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/index.md
         - Polymorphism: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Polymorphism.md
@@ -130,9 +135,15 @@ nav:
       - Manual-memory-management:
         - Manual-memory-management: Theory/Resource-management/Memory-management/Manual-memory-management/Manual-memory-management.md
         - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/Manual-memory-management/C-dynamic-memory-allocation.md
+        - Static-variable: Theory/Resource-management/Memory-management/Manual-memory-management/Static-variable.md
+        - Non-local-variable: Theory/Resource-management/Memory-management/Manual-memory-management/Non-local-variable.md
       - Automatic-memory-management:
         - Automatic-memory-management: Theory/Resource-management/Memory-management/Automatic-memory-management/Automatic-memory-management.md
       - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/C-dynamic-memory-allocation.md
+  - Aliase:
+    - Aliasing(computing): Theory/Aliase/Aliasing(computing).md
+  - Invariant:
+    - Invariant: Theory/Invariant/Invariant.md
   - Runtime: Theory/Runtime.md
   - Code-refactoring:
     - Introduction: Theory/Code-refactoring/index.md
@@ -271,8 +282,6 @@ nav:
         - Members:
           - Introduction: C++/Language/Language-reference/Classes/Members/index.md
           - Static-members: C++/Language/Language-reference/Classes/Members/Static-members.md
-      - Guide:
-        - Operator-overloading: C++/Language/Language-reference/Guide/Operator-overloading.md
     - Named-requirements:
       - Introduction: C++/Language/Named-requirements/index.md
     - Idiom:
@@ -290,6 +299,16 @@ nav:
         - Design-pattern-of-STL: C++/Language/Library/STL/Design-pattern-of-STL.md
         - Containers-library:
           - Containers-library: C++/Language/Library/STL/Containers-library/Containers-library.md
+          - Map:
+            - Operation: C++/Language/Library/STL/Containers-library/Map/Operation.md
+      - Atomic-operations-library:
+        - Atomic-operations-library: C++/Language/Library/Atomic-operations-library/Atomic-operations-library.md
+    - Guide:
+      - Operator-overloading: C++/Language/Guide/Operator-overloading.md
+      - Resource-management:
+        - Resource-management: C++/Language/Guide/Resource-management/Resource-management.md
+      - Exception:
+        - Exception: C++/Language/Guide/Exception/Exception.md
   - Pattern:
     - Introduction: C++/Pattern/index.md
   - Paradigm:
@@ -341,6 +360,8 @@ nav:
           - Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick(): JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick().md
 - Java:
   - Introduction: Java/index.md
+- Eiffel:
+  - Eiffel: Eiffel/Eiffel.md
 - Summary-of-my-programming-language: Summary-of-my-programming-language.md
 - ABI:
   - Introduction: ABI/index.md

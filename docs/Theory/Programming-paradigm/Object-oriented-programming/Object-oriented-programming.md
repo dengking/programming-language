@@ -17,6 +17,8 @@
 
 > NOTE: 原文的本段说明非常多我们平时所听到的与OOP相关的概念。我将与class-base OOP相关的内容放到了[Class-based OOP](./Class-based-OOP/Class-based-OOP.md)中。
 
+#### [Shared with non-OOP predecessor languages](https://en.wikipedia.org/wiki/Object-oriented_programming#Shared_with_non-OOP_predecessor_languages)
+
 #### [Objects and classes](https://en.wikipedia.org/wiki/Object-oriented_programming#Objects_and_classes)
 
 > NOTE: 在[Class-based OOP](./Class-based-OOP/Class-based-OOP.md)中会对此进行介绍。
@@ -76,6 +78,6 @@ Concerning the degree of **object orientation**, the following distinctions can 
 
 ### 从type system的角度来进行对比
 
-OOP的class-based流派，每个class对应一种类型，往往是强类型语言使用，比如c++，Java等。
+OOP的class-based流派，每个**class**对应一种**类型**，往往是**强类型**语言使用，比如c++，Java等。
 
 OOP的prototype-based流派，并没有class的概念，往往是weak类型语言使用，比如JavaScript。
