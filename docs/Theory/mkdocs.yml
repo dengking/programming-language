@@ -16,8 +16,11 @@ nav:
     - Resource-management: Resource-management
     # 在programming language中普遍存在的一种情况
     - Aliase: Aliase
-    # 
+    # 基本上所有的programming language都使用了subroutine的概念
+    - Subroutine: Subroutine
+    # Invariant是进行判别的一个非常重要的概念
     - Invariant: Invariant
+    # 
     - Runtime: Runtime.md
     # 如何进行代码重构
     - Code-refactoring: Code-refactoring
