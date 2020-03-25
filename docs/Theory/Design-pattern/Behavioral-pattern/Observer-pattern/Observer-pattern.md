@@ -58,6 +58,16 @@ The Observer pattern describes how to solve such problems:
 
 
 
+
+
+## refactoring [Observer](https://refactoring.guru/design-patterns/observer)
+
+> NOTE: 前面给出的示例都没有准确描述对不同类型的时间，执行不同的函数，而本文的示例则展示了这一点。它的代码也是值得阅读的https://refactoring.guru/design-patterns
+
+
+
+## cpppatterns [Observer](https://cpppatterns.com/patterns/observer.html) 
+
 ## TODO
 
 observer pattern VS publish subscribe pattern
