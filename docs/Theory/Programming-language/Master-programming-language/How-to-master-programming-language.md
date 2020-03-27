@@ -20,7 +20,7 @@
 
 ## Language reference
 
-（基本上）每种programming language都会有它的Language reference，programming language虽然多，但是其实它们的Language reference会涉及很多相同的内容，所以如果我们对这些common有一定的了解，那么掌握一门programming language会变得相对容易。
+（基本上）每种programming language都会有它的Language reference，programming language虽然多，但是其实它们的Language reference会涉及很多相同的主题，所以如果我们对这些common主题有一定的了解，那么掌握一门programming language会变得相对容易。
 
 ### Syntax 
 
@@ -41,6 +41,12 @@ expression、statement等都是属于此范轴。
 参见维基百科[Semantics (computer science)](https://en.wikipedia.org/wiki/Semantics_(computer_science))。
 
 
+
+### Type system
+
+语言的设计者，需要考虑这门语言的type system，参见[Type system](../../Type-system/Type-system.md)。
+
+语言的设计者还会向开发者提供对type system进行操作的接口，比如c++提供了`typeid`，`dynamic_cast`，python提供了`isinstance`，Java提供了`isinstanceof`。
 
 ### Runtime model
 
@@ -70,17 +76,35 @@ expression、statement等都是属于此范轴。
 
 
 
+
+
 ## Library
 
 各种programming language都提供了大量的library，所以在学习一门programming language的时候，尤其需要注意其standard library。
 
 一般standard library都会涉及到如下内容：
 
-### container
+### Container
 
-TODO
+container指各种常见的数据结构，一般programming language的standard library都会包含这部分内容。
 
-### Run time info
+
+
+### Language support library
+
+这是我在阅读[cppreference](https://en.cppreference.com/w/cpp/)的时候发现的一个概念，其中给出的[Language support library](https://en.cppreference.com/w/cpp/utility#Language_support)解释如下：
+
+> Language support libraries provide classes and functions that interact closely with language features and support common language idioms.
+
+依据此，python标准库中的很多library都可以归入此范轴：
+
+- [Python Language Services](https://docs.python.org/3/library/language.html)
+- [Python Runtime Services](https://docs.python.org/3/library/python.html)
+- built-in
+
+
+
+#### Run time info
 
 比如python的标准库提供了Python Runtime Services[¶](https://docs.python.org/3/library/python.html#python-runtime-services)来供用户进行run time。
 
@@ -89,14 +113,6 @@ TODO
 ## Philosophy
 
 programming language的设计者往往是遵循着一定的philosophy来设计这门语言的，作为使用者，了解这门语言的philosophy，也有助于我们对它的掌握。
-
-
-
-## Type system
-
-语言的设计者，需要考虑这门语言的type system，参见[Type system](../../Type-system/Type-system.md)。
-
-
 
 
 

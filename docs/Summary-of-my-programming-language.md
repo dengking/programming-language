@@ -188,3 +188,13 @@ pMeanRate = tanhx(pMeanRate, 2);
 ## C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python for
 
 C++11中引入的range-for非常类似于python中的`for`。
+
+
+
+## C++ 的“静” VS python的“动”
+
+C++的compile保证进行了严格的检查
+
+python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
+
+参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
