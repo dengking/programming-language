@@ -185,9 +185,11 @@ pMeanRate = tanhx(pMeanRate, 2);
 
 初次接触c++ 17引入的structured binding特性，我第一想法就是它非常类似于python的tuple assignment。
 
-## C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python for
+## C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python `for`
 
 C++11中引入的range-for非常类似于python中的`for`。
+
+
 
 
 
@@ -198,3 +200,14 @@ C++的compile保证进行了严格的检查
 python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
 
 参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
+
+
+
+## c++ iteration vs python iteration
+
+python通过magic function `__next__`、`__iter__`来支持iterator，c++显式定义了iterator类。
+
+### reverse iteration
+
+c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
+

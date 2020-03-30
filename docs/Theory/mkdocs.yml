@@ -4,6 +4,8 @@ nav:
     - Programming-language: Programming-language
     # 程序的lifetime
     - Lifetime: Lifetime
+    # 基本上所有的programming language都会涉及到Syntax
+    - Syntax: Syntax
     # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
     # 当今大多数高级programming language都支持exception
