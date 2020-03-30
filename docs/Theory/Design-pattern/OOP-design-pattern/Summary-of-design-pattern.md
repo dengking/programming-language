@@ -201,3 +201,30 @@ The other good example I know of shows up in abstract syntax tree manipulations.
 [Combination of visitor and iterator pattern](https://softwareengineering.stackexchange.com/questions/386077/combination-of-visitor-and-iterator-pattern)
 
 [Iterator vs Visitor Design Pattern and How](https://stackoverflow.com/questions/21933629/iterator-vs-visitor-design-pattern-and-how)
+
+
+
+## Observer pattern and visitor pattern
+
+### Observer pattern + Visitor pattern for message system
+
+https://stackoverflow.com/questions/32079697/observer-pattern-visitor-pattern-for-message-system
+
+
+
+## Design pattern让我们避免使用if-else分支
+
+“Design pattern让我们避免使用if-else分支”，这是我学习了各种各样的设计模式后，产生的一种想法，在下面文章中，都谈到了这一点：
+
+- [Java设计模式——状态模式（STATE PATTERN）](https://blog.csdn.net/u012401711/article/details/52675873)
+- [Refactoring.Guru](https://refactoring.guru/)的[Visitor](https://refactoring.guru/design-patterns/visitor)
+
+这让我反思，使用if-else的坏处：
+
+- 如果情况少，还比较好处理，一旦情况非常多，那么无论是编程、还是维护都非常难
+- 使用if是不好扩展的
+- 性能（这一点需要证明），使用if条件判断，是否有dynamic dispatch或者static dispatch性能好呢？
+
+
+
+design pattern充分利用dynamic dispatch和static dispatch，主要我们遵循design-by-context，那么就可以在不修改的design（抽象模型）的情况下，进行扩展，或者所，dispatch是建立抽象与具体的桥梁。

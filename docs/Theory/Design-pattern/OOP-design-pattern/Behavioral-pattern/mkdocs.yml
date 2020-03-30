@@ -4,3 +4,4 @@ nav:
     - Observer-pattern: Observer-pattern
     - Publish–subscribe-pattern: Publish–subscribe-pattern
     - Strategy-pattern: Strategy-pattern
+    - State-pattern: State-pattern

@@ -12,7 +12,7 @@ In [software engineering](https://en.wikipedia.org/wiki/Software_engineering), a
 
 
 
-## Practice
+### Practice
 
 Design patterns can speed up the development process by providing tested, proven development paradigms. Effective software design requires considering issues that may not become visible until later in the implementation. Freshly written code can often have hidden subtle issues that take time to be detected, issues that sometimes can cause major problems down the road. Reusing design patterns helps to prevent such subtle issues , and it also improves code readability for coders and architects who are familiar with the patterns.
 
@@ -30,11 +30,11 @@ Software design techniques are difficult to apply to a broader range of problems
 
 
 
-## Classification and list
+### Classification and list
 
 **Design patterns** were originally grouped into the categories: [creational patterns](https://en.wikipedia.org/wiki/Creational_pattern), [structural patterns](https://en.wikipedia.org/wiki/Structural_pattern), and [behavioral patterns](https://en.wikipedia.org/wiki/Behavioral_pattern), and described using the concepts of [delegation](https://en.wikipedia.org/wiki/Delegation_(programming)), [aggregation](https://en.wikipedia.org/wiki/Aggregation_(object-oriented_programming)), and [consultation](https://en.wikipedia.org/w/index.php?title=Consultation_(object-oriented_programming)&action=edit&redlink=1). For further background on object-oriented design, see [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_science)) and [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)), [inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science)), [interface](https://en.wikipedia.org/wiki/Interface_(object-oriented_programming)), and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming). Another classification has also introduced the notion of [architectural design pattern](https://en.wikipedia.org/wiki/Architectural_pattern) that may be applied at the architecture level of the software such as the [Model–View–Controller](https://en.wikipedia.org/wiki/Model–View–Controller) pattern. 
 
-### [Creational patterns](https://en.wikipedia.org/wiki/Creational_pattern)
+#### [Creational patterns](https://en.wikipedia.org/wiki/Creational_pattern)
 
 | Name                                                         | Description                                                  | In *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))* | In *[Code Complete](https://en.wikipedia.org/wiki/Code_Complete)* | Other |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----- |
@@ -53,7 +53,7 @@ Software design techniques are difficult to apply to a broader range of problems
 
 
 
-### [Concurrency patterns](https://en.wikipedia.org/wiki/Concurrency_pattern)
+#### [Concurrency patterns](https://en.wikipedia.org/wiki/Concurrency_pattern)
 
 | Name                                                         | Description                                                  | In *[POSA2](https://en.wikipedia.org/w/index.php?title=Pattern-Oriented_Software_Architecture&action=edit&redlink=1)* | Other |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----- |
