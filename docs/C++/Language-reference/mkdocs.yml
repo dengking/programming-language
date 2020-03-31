@@ -1,0 +1,14 @@
+nav:
+    - index: index.md
+    # basic concept非常重要，照应全局
+    - Basic-concept: Basic-concept
+    # 下面三者是基本上所有的语言中都会涉及到的问题
+    - Declarations: Declarations
+    - Statements: Statements
+    - Expressions: Expressions
+    # 如何进行初始化，这在c++中非常重要
+    - Initialization: Initialization
+    # function是programming language中都会涉及的一个问题
+    - Functions: Functions
+    # 如何使用oop？
+    - Classes: Classes
