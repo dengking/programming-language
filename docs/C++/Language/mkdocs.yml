@@ -1,7 +1,0 @@
-nav:
-
-    - Idiom: Idiom
-    # c++中的库
-    - Library: Library
-    # 对c++中的一些专题进行介绍
-    - Guide: Guide
