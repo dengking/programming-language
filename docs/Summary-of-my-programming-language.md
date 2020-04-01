@@ -144,7 +144,15 @@ c语言即非type safe也非memory safe；
 
 `c`和`c++`所采用的是static check，而python所采用的是dynamic type；
 
+### type operation
 
+programming language需要提供interface来供用户对type进行operate，下面总结一下常见的type operation。
+
+#### [Type introspection](https://en.wikipedia.org/wiki/Type_introspection)
+
+其实简单来说， 就是instance of，即object确定它的type，这也叫做introspection。
+
+#### type conversion and type cast
 
 
 
@@ -193,14 +201,6 @@ C++11中引入的range-for非常类似于python中的`for`。
 
 
 
-## C++ 的“静” VS python的“动”
-
-C++的compile保证进行了严格的检查
-
-python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
-
-参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
-
 
 
 ## c++ iteration vs python iteration
@@ -210,4 +210,28 @@ python通过magic function `__next__`、`__iter__`来支持iterator，c++显式�
 ### reverse iteration
 
 c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
+
+
+
+## 语言的标准与实现
+
+一种标准可以有多种实现。
+
+python和c++的实现方式是完全不同的，python是解释执行的，而c++是直接执行的。这就注定了Python的很多事情是interpreter完成的，而c++的很多事情是compiler完成的。前者是静态的，后者是动态的。可以看到，Python的指令是非常抽象的。python中由interpreter来选择magic function，而c++中由compiler来选择magic function。
+
+### C++ 的“静” VS python的“动”
+
+C++的compile保证进行了严格的检查
+
+python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
+
+参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
+
+
+
+## function and `->`
+
+python的Function definitions[¶](https://docs.python.org/3/reference/compound_stmts.html#function-definitions)和c++的[Function declaration](https://en.cppreference.com/w/cpp/language/function)中，都引入了`->`符合，两种语言中`->`的一个共性是：`->`对函数的返回类型进行说明，c++中将此称为“ Trailing return type”，python中将此称为 	““return” annotation”。
+
+与此类似的是，JavaScript中有`=>`符合，参见维基百科[JavaScript](https://en.wikipedia.org/wiki/JavaScript)。
 

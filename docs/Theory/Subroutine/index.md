@@ -12,8 +12,9 @@
 - 维基百科[Closure](https://en.wikipedia.org/wiki/Closure_(computer_science))
 - 维基百科[Callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) 
 - 维基百科[First-class function](https://en.wikipedia.org/wiki/First-class_function)
+- ......
 
-
+在维基百科的[Category:Subroutines](https://en.wikipedia.org/wiki/Category:Subroutines)中总结了与subroutine相关的内容。
 
 ## Subroutine VS function VS method
 

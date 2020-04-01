@@ -1,3 +1,7 @@
+# Iterator primer
+
+下面这篇文章是我阅读过的关于c++ iterator介绍地比较好的文章，可以作为c++ iterator的入门读物。
+
 # [C++ Iterators](https://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-iterators.html)
 
 This is a quick summary of **iterators** in the Standard Template Library. For information on defining iterators for new containers, see [here](https://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-iterator-define.html).
@@ -37,6 +41,8 @@ In this case, `v` and `l` are some STL containers and `begin()` and `end()` are 
 
 Iterators are divided into classes. These are not real C++ **classes**, but simply **categories** of kind of iterators. Each category specifies the **operations** the iterator supports. For example, some iterators support incrementing but not decrementing, some support dereferencing for getting data but not for storing data, some support scalar arithmetic, i.e., adding `n`, and some don't. Each STL container defines what class of iterators it can return. Each **algorithm** specifies what class of iterators it requires(如何来实现). The more powerful iterator classes are usually subclasses of the weaker ones, so if an algorithm requires a minimal iterator, it will work just fine with an iterator with more power.
 
+> NOTE: 不支持decrement的典型例子就是单向链表。
+
 ### `InputIterator`
 
 `InputIterator` is a useful but limited class of iterators. If `iter` is an `InputIterator`, you can use:
@@ -65,7 +71,7 @@ This is called an input iterator because you can only use it to "read" data from
 *iter = 4;
 ```
 
-is illegal if `iter` is no more than an input iterator. It will work for the iterator above because vectors return iterators more powerful than just input iterators. But if `iter` were an istream iterator (discussed shortly), then the above restriction would apply.
+is illegal if `iter` is no more than an input iterator. It will work for the iterator above because vectors return iterators more powerful than just input iterators. But if `iter` were an `istream` iterator (discussed shortly), then the above restriction would apply.
 
 ### `OutputIterator`
 
@@ -81,7 +87,7 @@ It may seem like an iterator you can only write to, not read from, is about as s
 - insert operators
 - ostream iterators
 
-***SUMMARY*** : output即输出，即write，所以`OutputIterator`能够被写;input即输入，即read，所以`InputIterator`能够被读。
+> NOTE: output即输出，即write，所以`OutputIterator`能够被写;input即输入，即read，所以`InputIterator`能够被读。
 
 ### Insert Iterators
 
@@ -93,7 +99,7 @@ Insert iterators let you "point" to some location in a container and insert elem
 
 This *inserts* the value in the **place** pointed to by the iterator. If you assign again, a new value will be inserted. Whether value goes before or after the previous value depends on what kind of insert operator you've created. Notice that you don't need to increment the iterator. You just keep assigning.
 
-You create an insert iterator with one of the following:
+You create an **insert iterator** with one of the following:
 
 - `back_inserter<`*container*`>` returns an `OutputIterator` pointing to the **end** of the container. Output to this iterator gets added to the end of the container, using the container's `push_back()` operation.
 - `front_inserter<`*container*`>` returns an `OutputIterator` pointing to the **front** of the container. Output to this iterator gets added to the front of the container, using the container's `push_front()` operation.
@@ -115,7 +121,7 @@ copy( v.begin(), v.end(), outIter );
 
 The first line defines `outIter` to be an ostream iterator for integers. The `" "` means "put a space between each integer." If we'd said `"\n"` then `outIter` would put a newline between each integer. The second line uses the generic algorithm `copy()` to copy our vector `v` from beginning to end to `cout`. Note how much simpler this is than the equivalent `for` loop with `cout` and `<<`.
 
-***SUMMARY***:往输出流中写
+> NOTE:往输出流中写
 
 ### `Istream InputIterator`
 
@@ -129,7 +135,7 @@ copy( istream_iterator<int>( cin ),
 
 The first argument to copy calls an istream iterator constructor that simply points to the input stream `cin`. The second argument calls a special constructor that creates a pointer to "the end of the input." What this actually means, especially for terminal input, depends on your operating system. So the above says "copy from the current item in the input sream to the end of the input stream into the container v."
 
-***SUMMARY***:从输入流中读
+> NOTE:从输入流中读
 
 ### `ForwardIterator`
 
@@ -146,7 +152,7 @@ cout << "Previous element is " << (*iterSaved) << endl;
 cout << "Current element is " << (*iter) << endl; 
 ```
 
-This will work if the iterators are` ForwardIterator`'s. Note that it can't work for `InputIterator`'s and `OutputIterator`'s, such as istream and ostream iterators. I/O streams such as standard input and output don't support backing up and starting over.
+This will work if the iterators are` ForwardIterator`'s. Note that it can't work for `InputIterator`'s and `OutputIterator`'s, such as istream and ostream iterators. I/O streams such as standard input and output don't support backing up and starting over（重新启动）.
 
 > **Note:** A saved iterator is only valid if the underlying container is not modified. If you insert elements or otherwise change the container, using a saved iterator will have undefined behavior.
 

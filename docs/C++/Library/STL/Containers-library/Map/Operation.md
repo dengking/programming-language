@@ -168,3 +168,13 @@ int main() {
 ```
 
 这种写法有些类似于函数式编程。
+
+
+
+## 删除map中符合条件的元素
+
+https://www.cnblogs.com/dabaopku/p/3912662.html
+
+https://bbs.csdn.net/topics/391899953
+
+https://blog.csdn.net/tieshuxianrezhang/article/details/79221646
