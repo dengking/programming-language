@@ -14,6 +14,9 @@ nav:
     - Library: Library
     # c++的设计模式
     - Pattern: Pattern
+    - IDE: IDE.md
+    # 如何进行注释，如何根据注释生成文档
+    - Comment: Comment
     # 对c++中的一些专题进行介绍
     - Guide: Guide
     - Book: Book.md

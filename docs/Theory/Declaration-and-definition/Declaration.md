@@ -1,0 +1,13 @@
+[TOC]
+
+
+
+# [Declaration (computer programming)](https://en.wikipedia.org/wiki/Declaration_(computer_programming))
+
+
+  
+
+In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), a **declaration** is a [language construct](https://en.wikipedia.org/wiki/Language_construct) that specifies properties of an [identifier](https://en.wikipedia.org/wiki/Identifier_(computer_programming)): it declares what a word (identifier) "means".[[1\]](https://en.wikipedia.org/wiki/Declaration_(computer_programming)#cite_note-c11-1) Declarations are most commonly used for [functions](https://en.wikipedia.org/wiki/Subroutine), [variables](https://en.wikipedia.org/wiki/Variable_(computer_science)), [constants](https://en.wikipedia.org/wiki/Constant_(computer_programming)), and [classes](https://en.wikipedia.org/wiki/Class_(computer_programming)), but can also be used for other entities such as enumerations and type definitions.[[1\]](https://en.wikipedia.org/wiki/Declaration_(computer_programming)#cite_note-c11-1) Beyond the name (the identifier itself) and the kind of entity (function, variable, etc.), declarations typically specify the [data type](https://en.wikipedia.org/wiki/Data_type) (for variables and constants), or the [type signature](https://en.wikipedia.org/wiki/Type_signature) (for functions); types may also include dimensions, such as for arrays. A declaration is used to announce the existence of the entity to the [compiler](https://en.wikipedia.org/wiki/Compiler); this is important in those [strongly typed](https://en.wikipedia.org/wiki/Strongly_typed) languages that require functions, variables, and constants, and their types to be specified with a declaration before use, and is used in [forward declaration](https://en.wikipedia.org/wiki/Forward_declaration).[[2\]](https://en.wikipedia.org/wiki/Declaration_(computer_programming)#cite_note-2) The term "declaration" is frequently contrasted with the term "definition",[[1\]](https://en.wikipedia.org/wiki/Declaration_(computer_programming)#cite_note-c11-1) but meaning and usage varies significantly between languages; see below.
+
+Declarations are particularly prominent in languages in the [ALGOL](https://en.wikipedia.org/wiki/ALGOL) tradition, including the [BCPL](https://en.wikipedia.org/wiki/BCPL) family, most prominently [C](https://en.wikipedia.org/wiki/C_(programming_language)) and [C++](https://en.wikipedia.org/wiki/C%2B%2B), and also [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)). [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) uses the term "declaration", though Java does not have separate declarations and definitions.
+

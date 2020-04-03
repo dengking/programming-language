@@ -4,6 +4,7 @@
 
 - 我觉得它对C++语言总结地非常好，如果能够充分地理解它，就能够建立起对c++语言的高屋建瓴的视角
 - 我觉得如果有compiler principle（参见工程[**compiler principle**](https://dengking.github.io/compiler-principle/)）、programming language的基础知识，那么理解起来会更加容易
+- 需要将它和c语言的[Basic concepts](https://en.cppreference.com/w/c/language/basic_concepts)对比起来看
 
 ## cppreference [Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)
 
@@ -38,6 +39,8 @@ The *entities* of a C++ program are values, [objects](https://en.cppreference.co
 > 需要注意的是，entity是c++ program的组成单位，它是一个编译时的概念，它需要由compiler来进行“理解”（参见工程[compiler-principle](https://dengking.github.io/compiler-principle/)的[Chapter 7 Run-Time Environments](https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/)）。
 >
 > 经过上面的分析，我们已经清楚了entity的概念，现在我们思考这样的一个问题：这些entity之间的关系是怎样的？关于这个问题，参见文章[**C++ Entities and Relationships**](https://scottmcpeak.com/elkhound/sources/elsa/doc/cpp_er.html)。
+>
+> entity也可以看做是[Language construct](https://en.wikipedia.org/wiki/Language_construct)。
 
 
 
@@ -74,4 +77,19 @@ Each object, reference, function, expression in C++ is associated with a [type](
 
 
 Declared objects and declared references that are not [non-static data members](https://en.cppreference.com/w/cpp/language/data_members) are *variables*.
+
+
+
+## word、identifier、name、variable
+
+如果从语言学的角度来看的话，我们编写的program其实就相当于一篇文章，和我们平时写的文章一样，program也可以看做是由一个一个的word组成，这就是word的含义。显然，program中的word包括了两大类：
+
+- 由program language保留的，如keyword、operator等等
+- 由用户创建的：identifier
+
+至于name了，我觉得它和identifier的含义基本类似，按照上面的介绍，它主要是和declaration、entity、scope相关联，我觉得这个可以这样认为：name概念是和entity概念相关联，或者说，每个entity都有一个name。
+
+总的来说：word、identifier、name，都是静态概念，都是有compiler来进行理解的。
+
+variable则是一个动态概念、是一个运行时概念，它所表示的含义有：memory。
 

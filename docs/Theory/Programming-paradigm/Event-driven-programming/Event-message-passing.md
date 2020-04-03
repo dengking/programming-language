@@ -1,4 +1,4 @@
-# Message/event passing
+# Event/message passing
 
 要实现event passing，是有多种方式可选的。
 

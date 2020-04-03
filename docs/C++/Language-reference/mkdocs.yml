@@ -12,3 +12,5 @@ nav:
     - Functions: Functions
     # 如何使用oop？
     - Classes: Classes
+    # Array
+    - Array: Array

@@ -91,4 +91,4 @@ OOP中，则完全不同，OOP中，整个程序是object之间的交互，objec
 
 ### OOP VS FP
 
-OOP是有state的，FP是没有state的。
+OOP是有state的，FP（functional programming）是没有state的。

@@ -235,3 +235,27 @@ python的Function definitions[¶](https://docs.python.org/3/reference/compound_s
 
 与此类似的是，JavaScript中有`=>`符合，参见维基百科[JavaScript](https://en.wikipedia.org/wiki/JavaScript)。
 
+
+
+## specifier
+
+python中基本上没有什么specifier，但是在`c++`和`c`中存在着大量的specifier，为什么呢？
+
+因为c++和c是system language，它们需要对process运行的底层细节进行描述、进行控制，这些specifier就是出于此目的的。
+
+如下是对specifier的分类：
+
+- [Access modifiers](https://en.wikipedia.org/wiki/Access_modifiers)
+- [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
+- [inline specifier](https://en.cppreference.com/w/cpp/language/inline)
+- storage class specifiers
+
+使用specifier来对某一方面进行描述。
+
+
+
+## name
+
+在cppreference [Declarations](https://en.cppreference.com/w/cpp/language/declarations)中关于“name”的描述
+
+> *Declarations* introduce (or re-introduce) names into the C++ program. 	
