@@ -18,6 +18,8 @@ nav:
     - Type-system: Type-system
     # 很多programming language都支持reflection，reflection和type system密切相关，两者最好放在一起
     - Reflection: Reflection
+###################################################重要概念################################################    
+    - First-class-citizen: First-class-citizen.md
 ###################################################大多数programming language都会提供的construct################################################    
     # 基本的programming language construct
     - Basic-Language-construct: Basic-Language-construct
