@@ -38,8 +38,7 @@ nav:
     - Programming-language: Theory/Programming-language/Programming-language.md
     - Scripting-language:
       - Scripting-language: Theory/Programming-language/Scripting-language/Scripting-language.md
-      - "Read\u2013eval\u2013print-loop": "Theory/Programming-language/Scripting-language/Read\u2013\
-          eval\u2013print-loop.md"
+      - Read-eval-print-loop: Theory/Programming-language/Scripting-language/Read-eval-print-loop.md
     - Master-programming-language:
       - How-to-master-programming-language: Theory/Programming-language/Master-programming-language/How-to-master-programming-language.md
       - Reading-language-reference: Theory/Programming-language/Master-programming-language/Reading-language-reference.md
@@ -129,8 +128,7 @@ nav:
       - Introduction: Theory/Design-pattern/OOP-design-pattern/index.md
       - SOLID:
         - SOLID: Theory/Design-pattern/OOP-design-pattern/SOLID/SOLID.md
-        - "Open\u2013closed-principle": "Theory/Design-pattern/OOP-design-pattern/SOLID/Open\u2013\
-            closed-principle.md"
+        - Open-closed-principle: Theory/Design-pattern/OOP-design-pattern/SOLID/Open-closed-principle.md
         - Liskov-substitution-principle: Theory/Design-pattern/OOP-design-pattern/SOLID/Liskov-substitution-principle.md
         - Inversion-of-control: Theory/Design-pattern/OOP-design-pattern/SOLID/Inversion-of-control.md
       - Software-design-pattern: Theory/Design-pattern/OOP-design-pattern/Software-design-pattern.md
@@ -151,9 +149,8 @@ nav:
           - Observer-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
           - Code:
             - Introduction: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Observer-pattern/Code/index.md
-        - "Publish\u2013subscribe-pattern":
-          - "Publish\u2013subscribe-pattern": "Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Publish\u2013\
-              subscribe-pattern/Publish\u2013subscribe-pattern.md"
+        - Publish-subscribe-pattern:
+          - Publish-subscribe-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Publish-subscribe-pattern/Publish-subscribe-pattern.md
         - Strategy-pattern:
           - Strategy-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
         - State-pattern:
@@ -218,8 +215,7 @@ nav:
       - Iterate: Python/Library/Functional-Programming-Modules/Iterate.md
     - Python-Runtime-Services:
       - Introduction: Python/Library/Python-Runtime-Services/index.md
-      - "inspect\u2014Inspect-live-objects": "Python/Library/Python-Runtime-Services/inspect\u2014\
-          Inspect-live-objects.md"
+      - inspect-Inspect-live-objects: Python/Library/Python-Runtime-Services/inspect-Inspect-live-objects.md
   - Philosophy:
     - The-Zen-of-Python: Python/Philosophy/The-Zen-of-Python.md
   - Style-guide:
@@ -332,9 +328,8 @@ nav:
       - Essential-C++: C++/Idiom/RAII/Essential-C++.md
     - The-rule-of-three-five-zero:
       - The-rule-of-three-five-zero: C++/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero.md
-    - "Erase\u2013remove-idiom":
-      - "Erase\u2013remove-idiom": "C++/Idiom/Erase\u2013remove-idiom/Erase\u2013\
-          remove-idiom.md"
+    - Erase-remove-idiom:
+      - Erase-remove-idiom: C++/Idiom/Erase-remove-idiom/Erase-remove-idiom.md
     - Summary-of-C++-idiom: C++/Idiom/Summary-of-C++-idiom.md
   - Stype-guide:
     - Cpp-stype-guide: C++/Stype-guide/Cpp-stype-guide.md
@@ -369,12 +364,8 @@ nav:
     - Resource-management:
       - Resource-management: C++/Guide/Resource-management/Resource-management.md
       - Memory-leak:
+        - Memory-leak: C++/Guide/Resource-management/Memory-leak/Memory-leak.md
         - Tools: C++/Guide/Resource-management/Memory-leak/Tools.md
-        - "\u6570\u7EC4\u8D8A\u754C": "C++/Guide/Resource-management/Memory-leak/\u6570\
-            \u7EC4\u8D8A\u754C.md"
-        - "\u5185\u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA": "C++/Guide/Resource-management/Memory-leak/\u5185\
-            \u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\
-            \u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA.md"
     - Concurrency:
       - Introduction: C++/Guide/Concurrency/index.md
       - CCiA:
