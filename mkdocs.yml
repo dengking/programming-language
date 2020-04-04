@@ -69,6 +69,7 @@ nav:
     - Reflection: Theory/Reflection/Reflection.md
     - Type-introspection: Theory/Reflection/Type-introspection.md
     - Summary: Theory/Reflection/Summary.md
+  - First-class-citizen: Theory/First-class-citizen.md
   - Basic-Language-construct:
     - Introduction: Theory/Basic-Language-construct/index.md
     - Operator-expression-statement: Theory/Basic-Language-construct/Operator-expression-statement.md
