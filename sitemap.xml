@@ -2,682 +2,837 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://dengking.github.io/programming-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Programming-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Scripting-language/Scripting-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Scripting-language/Read–eval–print-loop/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Scripting-language/Read-eval-print-loop/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Master-programming-language/How-to-master-programming-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Master-programming-language/Reading-language-reference/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Expressive-of-programming-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-language/Comparison-of-programming-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Lifetime/Program-lifecycle/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Lifetime/Object-lifetime/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Syntax/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Name/Name/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Aliase/Aliasing(computing)/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Declaration-and-definition/Declaration/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Declaration-and-definition/Declaration-and-definition/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Declaration-and-definition/Forward-declaration/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Declaration-and-definition/What-declaration-and-definition-mean-for-compiler/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Type-system/Type-system/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Type-system/Type/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Type-system/Type-safety/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Type-system/Static-vs-dynamic-typing/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Type-system/Class-and-type/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Type-system/Subtyping/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Reflection/Reflection/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Reflection/Type-introspection/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Reflection/Summary/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/First-class-citizen/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Basic-Language-construct/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Basic-Language-construct/Operator-expression-statement/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Basic-Language-construct/Operator/Operator-associativity/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Basic-Language-construct/Operator/Operator-precedence/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Subroutine/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Subroutine/Function-object/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Subroutine/First-class-function/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Subroutine/Variadic-function/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Coroutine/Coroutine/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Exception/Exception-handling/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Programming-paradigm/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Class-based-OOP/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction-to-Objects/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Everything-is-an-object/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Polymorphism/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Ad-hoc-polymorphism/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Parametric-polymorphism/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Dispatch/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Code/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Glossary/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Summary-of-OO/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Aspect-oriented-programming/Aspect-oriented-programming/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Functional-programming/Functional-programming/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Functional-programming/Function-object/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Event-driven-model/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Event-loop/Event-loop/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Event-loop/JavaScript-event-loop/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Event-message-passing/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Event-VS-exception-VS-signal/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Library/Event-library/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Summary-of-paradigm/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Programming-paradigm/Event-driven-programming/Event-stream-processing/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/SOLID/SOLID/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/SOLID/Open–closed-principle/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/SOLID/Liskov-substitution-principle/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/SOLID/Inversion-of-control/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Software-design-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Object-oriented-design/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/SOLID/SOLID/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Books/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/SOLID/Open-closed-principle/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Creational/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/SOLID/Liskov-substitution-principle/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Creational/Singleton-pattern/Singleton-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/SOLID/Inversion-of-control/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Object-oriented-design/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Books/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Creational/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Creational/Singleton-pattern/Singleton-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Code/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Publish–subscribe-pattern/Publish–subscribe-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Separation-of-container-and-algorithm/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/Summary-of-design-pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Observer-pattern/Code/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Publish-subscribe-pattern/Publish-subscribe-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/State-pattern/State-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Separation-of-container-and-algorithm/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Design-pattern/OOP-design-pattern/Summary-of-design-pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Resource-management/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/Memory-management/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/Manual-memory-management/Manual-memory-management/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/Manual-memory-management/C-dynamic-memory-allocation/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/Manual-memory-management/Static-variable/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/Manual-memory-management/Non-local-variable/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/Automatic-memory-management/Automatic-memory-management/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc></loc>
      
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Serialization/Serialization/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Serialization/Library/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Invariant/Invariant/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Theory/Invariant/Class-invariant/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Runtime/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Theory/Code-refactoring/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Data-model/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Data-model/The-standard-type-hierarchy/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Data-model/Special-method-names/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Data-model/Special-attribute-names/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Data-model/Coroutines/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Execution-model/Execution-model/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Execution-model/Python-GC/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Execution-model/Python-GIL/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Execution-model/Python-interpreter-stack/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Language-reference/Type-system/Type-system/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Language/Developer's-guide/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Built-in/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Built-in/Built-in-Functions/summary-of-python-build-in-function/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Built-in/Built-in-Functions/hash/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Built-in/Built-in-Constants/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Built-in/Built-in-Types/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Built-in/Built-in-Exceptions/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Functional-Programming-Modules/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Functional-Programming-Modules/Iterate/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Library/Python-Runtime-Services/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/Python/Library/Python-Runtime-Services/inspect—Inspect-live-objects/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/Python/Library/Python-Runtime-Services/inspect-Inspect-live-objects/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Philosophy/The-Zen-of-Python/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Style-guide/Style-Guide-for-Python-Code/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Paradigm/Functional-programming/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Paradigm/Meta-programming/Reflective/Python-reflection/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Programming-tool/Lint/Python-lints/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Programming-tool/Lint/Pylint/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/How-to/Iterate/Iterate/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/How-to/Lazy-import/Lazy-importing/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/Software-event-driven-programming/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/Software-event-driven-programming/Eventlet/Eventlet/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/Software-event-driven-programming/Eevent/Gevent/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/Software-concurrency/Greenlet/Greenlet/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/software-pallets/flask/Deployment-Options/flask-Deployment-Options/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Software/software-static-web-generator/static-web-generator/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Glossary/Abstract-base-class/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Glossary/Argument-and-parameter/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Python/Books/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/C++/C++/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/What-is-new-in-C++/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Basic-concept/Basic-concepts/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Basic-concept/Data-model/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Basic-concepts/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Basic-concept/Data-model/Object/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Data-model/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Basic-concept/Data-model/Object-storage/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Data-model/Object/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Data-model/Object-storage/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Basic-concept/Variable/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Expressions/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Variable/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Expressions/Expressions/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Type-system/Type-system/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Expressions/Memory-allocation/Memory-allocation/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Type-system/Const/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Expressions/Operator-overloading/Operator-overloading/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Declarations/Declarators/Pointer-declaration/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Declarations/Declarators/Pointer-declaration/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Basic-concept/Named-requirements/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Statements/Iteration-statements/For/For/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Expressions/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Initialization/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Expressions/Expressions/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Initialization/Initialization/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Expressions/Memory-allocation/Memory-allocation/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Functions/Operator-overloading/Operator-overloading/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Expressions/Operator-overloading/Operator-overloading/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Statements/Iteration-statements/For/For/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Class/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Functions/Operator-overloading/Operator-overloading/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Constructor/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Class/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Constructor/Constructor/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Constructor/Code-example/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Constructor/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Constructor/Converting-constructor/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Constructor/Constructor/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Destructor/Destructor/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Constructor/Code-example/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Constructor/Converting-constructor/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Destructor/Destructor/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -686,278 +841,418 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructor/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Destructor/Virtual-destructor/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Assignment/Assignment/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Magic-function/Implicitly-defined/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Magic-function/Implicitly-defined/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Members/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Members/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Classes/Members/Static-members/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Classes/Members/Static-members/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Language-reference/Guide/Operator-overloading/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Array/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Named-requirements/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Exception/Exception/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Idiom/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Initialization/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Idiom/RAII/RAII/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Language-reference/Initialization/Initialization/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Idiom/RAII/Essential-C++/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Idiom/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Idiom/RAII/RAII/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Idiom/Summary-of-C++-idiom/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Idiom/RAII/Essential-C++/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Library/STL/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Library/STL/STL/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Idiom/Erase-remove-idiom/Erase-remove-idiom/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Library/STL/Design-pattern-of-STL/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/C++/Language/Library/STL/Containers-library/Containers-library/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/C++/Pattern/</loc>
-     <lastmod>2020-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/programming-language/C++/Paradigm/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C++/Idiom/Summary-of-C++-idiom/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/C++/Stype-guide/Cpp-stype-guide/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/STL/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Design-pattern-of-STL/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Containers-library/Containers-library/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Containers-library/Map/Operation/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Containers-library/List/Operation/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Containers-library/Emplace_back/Emplace_back/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Iterator-library/Iterator-primer/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Iterator-library/Iterator-library/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Iterator-library/Iterator-hierarchy/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Iterator-library/Iterator-invalidation/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/STL/Algorithm/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/Atomic-operations-library/Atomic-operations-library/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/A-list-of-open-source-Cpp-libraries/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/Evented-IO-library/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/Plugin-system/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Library/Abseil/Abseil/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Resource-management/Resource-management/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Resource-management/Memory-leak/Memory-leak/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Resource-management/Memory-leak/Tools/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Concurrency/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Concurrency/CCiA/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Serialization/Serialization/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Command-line/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Guide/Command-line/Command-line-arguments-parsing/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/IDE/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C++/Comment/Comment/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/C++/Book/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Concurrency/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/C/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Concurrency/CCiA/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/What-is-new-in-C/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Memory-leak/Tools/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Language-reference/Basic-concept/Data-model/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Memory-leak/数组越界/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Language-reference/Basic-concept/Data-model/Objects-and-alignment/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Memory-leak/内存溢出、内存泄露、内存越界、缓冲区溢出、栈溢出/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Language-reference/Array/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Command-line/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Idiom/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C++/How-to/Command-line/Command-line-arguments-parsing/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Stype-guide/C-stype-guide/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Data-model/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Library/A-list-of-open-source-C-libraries/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Data-model/creference-Objects and alignment/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Library/Event-driven-programming/Software-libevent/libevent/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Software/Software-event-driven-programming/Software-libevent/libevent/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Library/Event-driven-programming/Software-libuv/libuv/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Software/Software-event-driven-programming/Software-libuv/libuv/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Library/Event-driven-programming/Software-libuv/Doc/Design-overview/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Software/Software-event-driven-programming/Software-libuv/Doc/Design-overview/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Library/Event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Library/Event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/programming-language/C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <loc>https://dengking.github.io/programming-language/C/Pattern/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C/Guide/</loc>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/C/Book/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/JavaScript/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-About Node.js/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-How-does-Node.js-manage-timers-internally/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-Overview-of-Blocking-vs-Non-Blocking/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick()/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Java/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/programming-language/Eiffel/Eiffel/</loc>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/Summary-of-my-programming-language/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Application-binary-interface/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Alignment/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Alignment/Data-structure-alignment/Data-structure-alignment/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Alignment/Data-structure-alignment/The-Lost-Art-of-Structure-Packing/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Alignment/Data-structure-alignment/Data-alignment/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Call-convention/Calling-convention/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Call-convention/Calling-Conventions-Demystified/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Library/Library(computing)/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Library/Position-independent-code/Position-independent-code/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Library/Relocation/Relocation(computing)/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Name-mangling/Name-mangling/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/programming-language/ABI/Book-x86-Disassembly/</loc>
-     <lastmod>2020-03-23</lastmod>
+     <lastmod>2020-04-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

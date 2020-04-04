@@ -1,5 +1,0 @@
-nav:
-    - SOLID: SOLID.md
-    - Open–closed-principle: Open–closed-principle.md
-    - Liskov-substitution-principle: Liskov-substitution-principle.md
-    - Inversion-of-control: Inversion-of-control.md

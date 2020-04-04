@@ -1,0 +1,20 @@
+nav:
+    - index: index.md
+###################################################basic concept非常重要，照应全局################################################    
+    - Basic-concept: Basic-concept
+###################################################programming language construct################################################    
+    # 下面三者是基本上所有的语言中都会涉及到的问题
+    - Expressions: Expressions
+    # 
+    - Statements: Statements
+    # function是programming language中都会涉及的一个问题
+    - Functions: Functions
+    # 如何使用oop？
+    - Classes: Classes
+    # Array
+    - Array: Array
+    # 异常机制
+    - Exception: Exception
+###################################################这是在使用language过程中会涉及到的一些问题################################################    
+    # 如何进行初始化，这在c++中非常重要
+    - Initialization: Initialization
