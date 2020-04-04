@@ -2,4 +2,3 @@ nav:
     - Memory-management: Memory-management.md
     - Manual-memory-management: Manual-memory-management
     - Automatic-memory-management: Automatic-memory-management
-    - C-dynamic-memory-allocation: C-dynamic-memory-allocation.md
