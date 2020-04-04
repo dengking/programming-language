@@ -3,3 +3,5 @@ nav:
     - Data-model: Data-model
     - Variable: Variable.md
     - Type-system: Type-system
+    - Declarations: Declarations
+    - Named-requirements: Named-requirements
