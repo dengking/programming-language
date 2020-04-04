@@ -9,3 +9,4 @@ Forward declaration is used in languages that require declaration before use; it
 In other languages forward declarations are not necessary, which generally requires instead a [multi-pass compiler](https://en.wikipedia.org/wiki/Multi-pass_compiler) and for some compilation to be deferred to [link time](https://en.wikipedia.org/wiki/Link_time). In these cases identifiers must be defined (variables initialized, functions defined) before they are used in execution, but do not need to be defined before they are used in source code for compilation or interpretation: identifiers do not need to be immediately resolved to an existing entity.
 
 ***SUMMARY*** : 显然forward declaration是compiler需要的，而linker是不需要的
+

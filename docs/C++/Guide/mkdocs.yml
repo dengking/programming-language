@@ -1,6 +1,5 @@
 nav:
     - Resource-management: Resource-management
-    - Exception: Exception
     - Concurrency: Concurrency
     - Serialization: Serialization
     - Command-line: Command-line

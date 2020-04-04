@@ -4,3 +4,4 @@ nav:
     - A-list-of-open-source-Cpp-libraries: A-list-of-open-source-Cpp-libraries.md
     - Evented-IO-library: Evented-IO-library.md
     - Plugin-system: Plugin-system.md
+    - Abseil: Abseil
