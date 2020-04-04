@@ -144,7 +144,15 @@ c语言即非type safe也非memory safe；
 
 `c`和`c++`所采用的是static check，而python所采用的是dynamic type；
 
+### type operation
 
+programming language需要提供interface来供用户对type进行operate，下面总结一下常见的type operation。
+
+#### [Type introspection](https://en.wikipedia.org/wiki/Type_introspection)
+
+其实简单来说， 就是instance of，即object确定它的type，这也叫做introspection。
+
+#### type conversion and type cast
 
 
 
@@ -179,3 +187,75 @@ pMeanRate = tanhx(pMeanRate, 2);
 ```
 这段代码在`c++`中是非常好理解的：`pMeanRate`是一个左值，所以它既能够被read，也能够被write；但是在python中，`=`所表示的是name bind；
 
+
+
+## C++17 [Structured binding](https://en.cppreference.com/w/cpp/language/structured_binding) 和 python [Assignment](https://docs.python.org/3/reference/simple_stmts.html#assignment-statements) 
+
+初次接触c++ 17引入的structured binding特性，我第一想法就是它非常类似于python的tuple assignment。
+
+## C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python `for`
+
+C++11中引入的range-for非常类似于python中的`for`。
+
+
+
+
+
+
+
+## c++ iteration vs python iteration
+
+python通过magic function `__next__`、`__iter__`来支持iterator，c++显式定义了iterator类。
+
+### reverse iteration
+
+c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
+
+
+
+## 语言的标准与实现
+
+一种标准可以有多种实现。
+
+python和c++的实现方式是完全不同的，python是解释执行的，而c++是直接执行的。这就注定了Python的很多事情是interpreter完成的，而c++的很多事情是compiler完成的。前者是静态的，后者是动态的。可以看到，Python的指令是非常抽象的。python中由interpreter来选择magic function，而c++中由compiler来选择magic function。
+
+### C++ 的“静” VS python的“动”
+
+C++的compile保证进行了严格的检查
+
+python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
+
+参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
+
+
+
+## function and `->`
+
+python的Function definitions[¶](https://docs.python.org/3/reference/compound_stmts.html#function-definitions)和c++的[Function declaration](https://en.cppreference.com/w/cpp/language/function)中，都引入了`->`符合，两种语言中`->`的一个共性是：`->`对函数的返回类型进行说明，c++中将此称为“ Trailing return type”，python中将此称为 	““return” annotation”。
+
+与此类似的是，JavaScript中有`=>`符合，参见维基百科[JavaScript](https://en.wikipedia.org/wiki/JavaScript)。
+
+
+
+## specifier
+
+python中基本上没有什么specifier，但是在`c++`和`c`中存在着大量的specifier，为什么呢？
+
+因为c++和c是system language，它们需要对process运行的底层细节进行描述、进行控制，这些specifier就是出于此目的的。
+
+如下是对specifier的分类：
+
+- [Access modifiers](https://en.wikipedia.org/wiki/Access_modifiers)
+- [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
+- [inline specifier](https://en.cppreference.com/w/cpp/language/inline)
+- storage class specifiers
+
+使用specifier来对某一方面进行描述。
+
+
+
+## name
+
+在cppreference [Declarations](https://en.cppreference.com/w/cpp/language/declarations)中关于“name”的描述
+
+> *Declarations* introduce (or re-introduce) names into the C++ program. 	

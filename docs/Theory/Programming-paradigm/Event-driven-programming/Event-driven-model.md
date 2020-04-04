@@ -85,7 +85,7 @@ Event-driven model肯定需要记录下event和event handler之间的映射关�
 
 
 
-##### Dispatcher
+#### Dispatcher
 
 所谓的event dispatcher是指当event发生时，event-driven model将event传递到executor，通知executor执行对应的handler。Dispatcher的实现方式是有executor决定的， 在下一节对此进行具体情况具体说明。
 

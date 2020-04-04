@@ -45,6 +45,20 @@ nav:
       - Reading-language-reference: Theory/Programming-language/Master-programming-language/Reading-language-reference.md
     - Expressive-of-programming-language: Theory/Programming-language/Expressive-of-programming-language.md
     - Comparison-of-programming-language: Theory/Programming-language/Comparison-of-programming-language.md
+  - Lifetime:
+    - Program-lifecycle: Theory/Lifetime/Program-lifecycle.md
+    - Object-lifetime: Theory/Lifetime/Object-lifetime.md
+  - Syntax:
+    - Introduction: Theory/Syntax/index.md
+  - Name:
+    - Name: Theory/Name/Name.md
+  - Aliase:
+    - Aliasing(computing): Theory/Aliase/Aliasing(computing).md
+  - Declaration-and-definition:
+    - Declaration: Theory/Declaration-and-definition/Declaration.md
+    - Declaration-and-definition: Theory/Declaration-and-definition/Declaration-and-definition.md
+    - Forward-declaration: Theory/Declaration-and-definition/Forward-declaration.md
+    - What-declaration-and-definition-mean-for-compiler: Theory/Declaration-and-definition/What-declaration-and-definition-mean-for-compiler.md
   - Type-system:
     - Type-system: Theory/Type-system/Type-system.md
     - Type: Theory/Type-system/Type.md
@@ -52,18 +66,36 @@ nav:
     - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
     - Class-and-type: Theory/Type-system/Class-and-type.md
     - Subtyping: Theory/Type-system/Subtyping.md
+  - Reflection:
+    - Reflection: Theory/Reflection/Reflection.md
+    - Type-introspection: Theory/Reflection/Type-introspection.md
+  - Basic-Language-construct:
+    - Introduction: Theory/Basic-Language-construct/index.md
+    - Operator-expression-statement: Theory/Basic-Language-construct/Operator-expression-statement.md
+    - Operator:
+      - Operator-associativity: Theory/Basic-Language-construct/Operator/Operator-associativity.md
+      - Operator-precedence: Theory/Basic-Language-construct/Operator/Operator-precedence.md
+  - Subroutine:
+    - Introduction: Theory/Subroutine/index.md
+    - Function-object: Theory/Subroutine/Function-object.md
+    - First-class-function: Theory/Subroutine/First-class-function.md
+    - Variadic-function: Theory/Subroutine/Variadic-function.md
+  - Coroutine:
+    - Coroutine: Theory/Coroutine/Coroutine.md
+  - Exception:
+    - Exception-handling: Theory/Exception/Exception-handling.md
   - Programming-paradigm:
     - Introduction: Theory/Programming-paradigm/index.md
     - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
     - Object-oriented-programming:
       - Object-oriented-programming: Theory/Programming-paradigm/Object-oriented-programming/Object-oriented-programming.md
+      - Thinking-in-java:
+        - About-this-chapter: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/index.md
+        - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction.md
+        - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-Objects.md
+        - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Everything-is-an-object.md
       - Class-based-OOP:
         - Class-based-OOP: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Class-based-OOP.md
-        - Thinking-in-java:
-          - About-this-chapter: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/index.md
-          - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction.md
-          - Introduction-to-Objects: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Introduction-to-Objects.md
-          - Everything-is-an-object: Theory/Programming-paradigm/Object-oriented-programming/Class-based-OOP/Thinking-in-java/Everything-is-an-object.md
       - Polymorphism:
         - Introduction: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/index.md
         - Polymorphism: Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/Polymorphism.md
@@ -79,7 +111,6 @@ nav:
       - Aspect-oriented-programming: Theory/Programming-paradigm/Aspect-oriented-programming/Aspect-oriented-programming.md
     - Functional-programming:
       - Functional-programming: Theory/Programming-paradigm/Functional-programming/Functional-programming.md
-      - Function-object: Theory/Programming-paradigm/Functional-programming/Function-object.md
     - Event-driven-programming:
       - Introduction: Theory/Programming-paradigm/Event-driven-programming/index.md
       - Event-driven-model: Theory/Programming-paradigm/Event-driven-programming/Event-driven-model.md
@@ -90,39 +121,45 @@ nav:
       - Event-VS-exception-VS-signal: Theory/Programming-paradigm/Event-driven-programming/Event-VS-exception-VS-signal.md
       - Library:
         - Event-library: Theory/Programming-paradigm/Event-driven-programming/Library/Event-library.md
-    - Summary-of-paradigm: Theory/Programming-paradigm/Summary-of-paradigm.md
+      - Event-stream-processing: Theory/Programming-paradigm/Event-driven-programming/Event-stream-processing.md
   - Design-pattern:
     - Introduction: Theory/Design-pattern/index.md
-    - SOLID:
-      - SOLID: Theory/Design-pattern/SOLID/SOLID.md
-      - "Open\u2013closed-principle": "Theory/Design-pattern/SOLID/Open\u2013closed-principle.md"
-      - Liskov-substitution-principle: Theory/Design-pattern/SOLID/Liskov-substitution-principle.md
-      - Inversion-of-control: Theory/Design-pattern/SOLID/Inversion-of-control.md
     - Software-design-pattern: Theory/Design-pattern/Software-design-pattern.md
-    - Object-oriented-design: Theory/Design-pattern/Object-oriented-design.md
-    - Books: Theory/Design-pattern/Books.md
-    - Creational:
-      - Introduction: Theory/Design-pattern/Creational/index.md
-      - Singleton-pattern:
-        - Singleton-pattern: Theory/Design-pattern/Creational/Singleton-pattern/Singleton-pattern.md
-    - Behavioral-pattern:
-      - Visitor-pattern:
-        - Visitor-pattern: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern.md
-        - Code:
-          - Code: Theory/Design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code.md
-      - Iterator-pattern:
-        - Iterator-pattern: Theory/Design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern.md
-      - Observer-pattern:
-        - Observer-pattern: Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
-        - Code:
-          - Introduction: Theory/Design-pattern/Behavioral-pattern/Observer-pattern/Code/index.md
-      - "Publish\u2013subscribe-pattern":
-        - "Publish\u2013subscribe-pattern": "Theory/Design-pattern/Behavioral-pattern/Publish\u2013\
-            subscribe-pattern/Publish\u2013subscribe-pattern.md"
-      - Strategy-pattern:
-        - Strategy-pattern: Theory/Design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
-    - Separation-of-container-and-algorithm: Theory/Design-pattern/Separation-of-container-and-algorithm.md
-    - Summary-of-design-pattern: Theory/Design-pattern/Summary-of-design-pattern.md
+    - OOP-design-pattern:
+      - Introduction: Theory/Design-pattern/OOP-design-pattern/index.md
+      - SOLID:
+        - SOLID: Theory/Design-pattern/OOP-design-pattern/SOLID/SOLID.md
+        - "Open\u2013closed-principle": "Theory/Design-pattern/OOP-design-pattern/SOLID/Open\u2013\
+            closed-principle.md"
+        - Liskov-substitution-principle: Theory/Design-pattern/OOP-design-pattern/SOLID/Liskov-substitution-principle.md
+        - Inversion-of-control: Theory/Design-pattern/OOP-design-pattern/SOLID/Inversion-of-control.md
+      - Software-design-pattern: Theory/Design-pattern/OOP-design-pattern/Software-design-pattern.md
+      - Object-oriented-design: Theory/Design-pattern/OOP-design-pattern/Object-oriented-design.md
+      - Books: Theory/Design-pattern/OOP-design-pattern/Books.md
+      - Creational:
+        - Introduction: Theory/Design-pattern/OOP-design-pattern/Creational/index.md
+        - Singleton-pattern:
+          - Singleton-pattern: Theory/Design-pattern/OOP-design-pattern/Creational/Singleton-pattern/Singleton-pattern.md
+      - Behavioral-pattern:
+        - Visitor-pattern:
+          - Visitor-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Visitor-pattern/Visitor-pattern.md
+          - Code:
+            - Code: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code.md
+        - Iterator-pattern:
+          - Iterator-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Iterator-pattern/Iterator-pattern.md
+        - Observer-pattern:
+          - Observer-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
+          - Code:
+            - Introduction: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Observer-pattern/Code/index.md
+        - "Publish\u2013subscribe-pattern":
+          - "Publish\u2013subscribe-pattern": "Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Publish\u2013\
+              subscribe-pattern/Publish\u2013subscribe-pattern.md"
+        - Strategy-pattern:
+          - Strategy-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/Strategy-pattern/Strategy-pattern.md
+        - State-pattern:
+          - State-pattern: Theory/Design-pattern/OOP-design-pattern/Behavioral-pattern/State-pattern/State-pattern.md
+      - Separation-of-container-and-algorithm: Theory/Design-pattern/OOP-design-pattern/Separation-of-container-and-algorithm.md
+      - Summary-of-design-pattern: Theory/Design-pattern/OOP-design-pattern/Summary-of-design-pattern.md
   - Resource-management:
     - Resource-management: Theory/Resource-management/Resource-management.md
     - Memory-management:
@@ -130,9 +167,17 @@ nav:
       - Manual-memory-management:
         - Manual-memory-management: Theory/Resource-management/Memory-management/Manual-memory-management/Manual-memory-management.md
         - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/Manual-memory-management/C-dynamic-memory-allocation.md
+        - Static-variable: Theory/Resource-management/Memory-management/Manual-memory-management/Static-variable.md
+        - Non-local-variable: Theory/Resource-management/Memory-management/Manual-memory-management/Non-local-variable.md
       - Automatic-memory-management:
         - Automatic-memory-management: Theory/Resource-management/Memory-management/Automatic-memory-management/Automatic-memory-management.md
       - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/C-dynamic-memory-allocation.md
+  - Serialization:
+    - Serialization: Theory/Serialization/Serialization.md
+    - Library: Theory/Serialization/Library.md
+  - Invariant:
+    - Invariant: Theory/Invariant/Invariant.md
+    - Class-invariant: Theory/Invariant/Class-invariant.md
   - Runtime: Theory/Runtime.md
   - Code-refactoring:
     - Introduction: Theory/Code-refactoring/index.md
@@ -218,116 +263,165 @@ nav:
   - Books: Python/Books.md
 - C++:
   - C++: C++/C++.md
-  - C++Reference:
-    - Language-reference:
-      - index: C++/Language/Language-reference/index.md
-      - Basic-concept:
-        - Basic-concepts: C++/Language/Language-reference/Basic-concept/Basic-concepts.md
-        - Data-model:
-          - Introduction: C++/Language/Language-reference/Basic-concept/Data-model/index.md
-          - Object: C++/Language/Language-reference/Basic-concept/Data-model/Object.md
-          - Object-storage: C++/Language/Language-reference/Basic-concept/Data-model/Object-storage.md
-          - Memory-model:
-            - Memory-model: C++/Language/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model.md
-        - Variable: C++/Language/Language-reference/Basic-concept/Variable.md
-      - Expressions:
-        - Introduction: C++/Language/Language-reference/Expressions/index.md
-        - Expressions: C++/Language/Language-reference/Expressions/Expressions.md
-        - Memory-allocation:
-          - Memory-allocation: C++/Language/Language-reference/Expressions/Memory-allocation/Memory-allocation.md
-        - Operator-overloading:
-          - Operator-overloading: C++/Language/Language-reference/Expressions/Operator-overloading/Operator-overloading.md
+  - What-is-new-in-C++: C++/What-is-new-in-C++.md
+  - Language-reference:
+    - index: C++/Language-reference/index.md
+    - Basic-concept:
+      - Basic-concepts: C++/Language-reference/Basic-concept/Basic-concepts.md
+      - Data-model:
+        - Introduction: C++/Language-reference/Basic-concept/Data-model/index.md
+        - Object: C++/Language-reference/Basic-concept/Data-model/Object.md
+        - Object-storage: C++/Language-reference/Basic-concept/Data-model/Object-storage.md
+        - Memory-model:
+          - Memory-model: C++/Language-reference/Basic-concept/Data-model/Memory-model/Memory-model.md
+      - Variable: C++/Language-reference/Basic-concept/Variable.md
+      - Type-system:
+        - Type-system: C++/Language-reference/Basic-concept/Type-system/Type-system.md
+        - Const: C++/Language-reference/Basic-concept/Type-system/Const.md
       - Declarations:
         - Declarators:
           - Pointer-declaration:
-            - Introduction: C++/Language/Language-reference/Declarations/Declarators/Pointer-declaration/index.md
-      - Statements:
-        - Iteration-statements:
-          - For:
-            - For: C++/Language/Language-reference/Statements/Iteration-statements/For/For.md
-      - Initialization:
-        - Introduction: C++/Language/Language-reference/Initialization/index.md
-        - Initialization: C++/Language/Language-reference/Initialization/Initialization.md
-      - Functions:
-        - Operator-overloading:
-          - Operator-overloading: C++/Language/Language-reference/Functions/Operator-overloading/Operator-overloading.md
-      - Classes:
-        - Introduction: C++/Language/Language-reference/Classes/index.md
-        - Class: C++/Language/Language-reference/Classes/Class.md
-        - Magic-function:
-          - Introduction: C++/Language/Language-reference/Classes/Magic-function/index.md
-          - Constructor:
-            - Introduction: C++/Language/Language-reference/Classes/Magic-function/Constructor/index.md
-            - Constructor: C++/Language/Language-reference/Classes/Magic-function/Constructor/Constructor.md
-            - Code-example: C++/Language/Language-reference/Classes/Magic-function/Constructor/Code-example.md
-            - Converting-constructor: C++/Language/Language-reference/Classes/Magic-function/Constructor/Converting-constructor.md
-          - Destructor:
-            - Destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Destructor.md
-            - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md
-            - Virtual-destructor: C++/Language/Language-reference/Classes/Magic-function/Destructor/Virtual-destructor.md
-          - Assignment:
-            - Assignment: C++/Language/Language-reference/Classes/Magic-function/Assignment/Assignment.md
-          - Implicitly-defined: C++/Language/Language-reference/Classes/Magic-function/Implicitly-defined.md
-        - Members:
-          - Introduction: C++/Language/Language-reference/Classes/Members/index.md
-          - Static-members: C++/Language/Language-reference/Classes/Members/Static-members.md
-      - Guide:
-        - Operator-overloading: C++/Language/Language-reference/Guide/Operator-overloading.md
-    - Named-requirements:
-      - Introduction: C++/Language/Named-requirements/index.md
-    - Idiom:
-      - Introduction: C++/Language/Idiom/index.md
-      - RAII:
-        - RAII: C++/Language/Idiom/RAII/RAII.md
-        - Essential-C++: C++/Language/Idiom/RAII/Essential-C++.md
-      - The-rule-of-three-five-zero:
-        - The-rule-of-three-five-zero: C++/Language/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero.md
-      - Summary-of-C++-idiom: C++/Language/Idiom/Summary-of-C++-idiom.md
-    - Library:
-      - STL:
-        - Introduction: C++/Language/Library/STL/index.md
-        - STL: C++/Language/Library/STL/STL.md
-        - Design-pattern-of-STL: C++/Language/Library/STL/Design-pattern-of-STL.md
-        - Containers-library:
-          - Containers-library: C++/Language/Library/STL/Containers-library/Containers-library.md
-  - Pattern:
-    - Introduction: C++/Pattern/index.md
-  - Paradigm:
-    - Introduction: C++/Paradigm/index.md
+            - Introduction: C++/Language-reference/Basic-concept/Declarations/Declarators/Pointer-declaration/index.md
+      - Named-requirements:
+        - Introduction: C++/Language-reference/Basic-concept/Named-requirements/index.md
+    - Expressions:
+      - Introduction: C++/Language-reference/Expressions/index.md
+      - Expressions: C++/Language-reference/Expressions/Expressions.md
+      - Memory-allocation:
+        - Memory-allocation: C++/Language-reference/Expressions/Memory-allocation/Memory-allocation.md
+      - Operator-overloading:
+        - Operator-overloading: C++/Language-reference/Expressions/Operator-overloading/Operator-overloading.md
+    - Statements:
+      - Iteration-statements:
+        - For:
+          - For: C++/Language-reference/Statements/Iteration-statements/For/For.md
+    - Functions:
+      - Operator-overloading:
+        - Operator-overloading: C++/Language-reference/Functions/Operator-overloading/Operator-overloading.md
+    - Classes:
+      - Introduction: C++/Language-reference/Classes/index.md
+      - Class: C++/Language-reference/Classes/Class.md
+      - Magic-function:
+        - Introduction: C++/Language-reference/Classes/Magic-function/index.md
+        - Constructor:
+          - Introduction: C++/Language-reference/Classes/Magic-function/Constructor/index.md
+          - Constructor: C++/Language-reference/Classes/Magic-function/Constructor/Constructor.md
+          - Code-example: C++/Language-reference/Classes/Magic-function/Constructor/Code-example.md
+          - Converting-constructor: C++/Language-reference/Classes/Magic-function/Constructor/Converting-constructor.md
+        - Destructor:
+          - Destructor: C++/Language-reference/Classes/Magic-function/Destructor/Destructor.md
+          - Virtual-destructor: C++/Language-reference/Classes/Magic-function/Destructor/Virtual-destructors.md
+          - Virtual-destructor: C++/Language-reference/Classes/Magic-function/Destructor/Virtual-destructor.md
+        - Assignment:
+          - Assignment: C++/Language-reference/Classes/Magic-function/Assignment/Assignment.md
+        - Implicitly-defined: C++/Language-reference/Classes/Magic-function/Implicitly-defined.md
+      - Members:
+        - Introduction: C++/Language-reference/Classes/Members/index.md
+        - Static-members: C++/Language-reference/Classes/Members/Static-members.md
+    - Array:
+      - Introduction: C++/Language-reference/Array/index.md
+    - Exception:
+      - Exception: C++/Language-reference/Exception/Exception.md
+    - Initialization:
+      - Introduction: C++/Language-reference/Initialization/index.md
+      - Initialization: C++/Language-reference/Initialization/Initialization.md
+  - Idiom:
+    - Introduction: C++/Idiom/index.md
+    - RAII:
+      - RAII: C++/Idiom/RAII/RAII.md
+      - Essential-C++: C++/Idiom/RAII/Essential-C++.md
+    - The-rule-of-three-five-zero:
+      - The-rule-of-three-five-zero: C++/Idiom/The-rule-of-three-five-zero/The-rule-of-three-five-zero.md
+    - "Erase\u2013remove-idiom":
+      - "Erase\u2013remove-idiom": "C++/Idiom/Erase\u2013remove-idiom/Erase\u2013\
+          remove-idiom.md"
+    - Summary-of-C++-idiom: C++/Idiom/Summary-of-C++-idiom.md
   - Stype-guide:
     - Cpp-stype-guide: C++/Stype-guide/Cpp-stype-guide.md
-  - Book: C++/Book.md
-  - How-to:
+  - Library:
+    - STL:
+      - Introduction: C++/Library/STL/index.md
+      - STL: C++/Library/STL/STL.md
+      - Design-pattern-of-STL: C++/Library/STL/Design-pattern-of-STL.md
+      - Containers-library:
+        - Containers-library: C++/Library/STL/Containers-library/Containers-library.md
+        - Map:
+          - Operation: C++/Library/STL/Containers-library/Map/Operation.md
+        - List:
+          - Operation: C++/Library/STL/Containers-library/List/Operation.md
+        - Emplace_back:
+          - Emplace_back: C++/Library/STL/Containers-library/Emplace_back/Emplace_back.md
+      - Iterator-library:
+        - Iterator-primer: C++/Library/STL/Iterator-library/Iterator-primer.md
+        - Iterator-library: C++/Library/STL/Iterator-library/Iterator-library.md
+        - Iterator-hierarchy: C++/Library/STL/Iterator-library/Iterator-hierarchy.md
+        - Iterator-invalidation: C++/Library/STL/Iterator-library/Iterator-invalidation.md
+      - Algorithm:
+        - Introduction: C++/Library/STL/Algorithm/index.md
+    - Atomic-operations-library:
+      - Atomic-operations-library: C++/Library/Atomic-operations-library/Atomic-operations-library.md
+    - A-list-of-open-source-Cpp-libraries: C++/Library/A-list-of-open-source-Cpp-libraries.md
+    - Evented-IO-library: C++/Library/Evented-IO-library.md
+    - Plugin-system: C++/Library/Plugin-system.md
+    - Abseil:
+      - Abseil: C++/Library/Abseil/Abseil.md
+  - Guide:
+    - Resource-management:
+      - Resource-management: C++/Guide/Resource-management/Resource-management.md
+      - Memory-leak:
+        - Tools: C++/Guide/Resource-management/Memory-leak/Tools.md
+        - "\u6570\u7EC4\u8D8A\u754C": "C++/Guide/Resource-management/Memory-leak/\u6570\
+            \u7EC4\u8D8A\u754C.md"
+        - "\u5185\u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA": "C++/Guide/Resource-management/Memory-leak/\u5185\
+            \u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\
+            \u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA.md"
     - Concurrency:
-      - Introduction: C++/How-to/Concurrency/index.md
+      - Introduction: C++/Guide/Concurrency/index.md
       - CCiA:
-        - Introduction: C++/How-to/Concurrency/CCiA/index.md
-    - Memory-leak:
-      - Tools: C++/How-to/Memory-leak/Tools.md
-      - "\u6570\u7EC4\u8D8A\u754C": "C++/How-to/Memory-leak/\u6570\u7EC4\u8D8A\u754C\
-          .md"
-      - "\u5185\u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA": "C++/How-to/Memory-leak/\u5185\
-          \u5B58\u6EA2\u51FA\u3001\u5185\u5B58\u6CC4\u9732\u3001\u5185\u5B58\u8D8A\
-          \u754C\u3001\u7F13\u51B2\u533A\u6EA2\u51FA\u3001\u6808\u6EA2\u51FA.md"
+        - Introduction: C++/Guide/Concurrency/CCiA/index.md
+    - Serialization:
+      - Serialization: C++/Guide/Serialization/Serialization.md
     - Command-line:
-      - Introduction: C++/How-to/Command-line/index.md
-      - Command-line-arguments-parsing: C++/How-to/Command-line/Command-line-arguments-parsing.md
+      - Introduction: C++/Guide/Command-line/index.md
+      - Command-line-arguments-parsing: C++/Guide/Command-line/Command-line-arguments-parsing.md
+  - Pattern:
+    - Introduction: C++/Pattern/index.md
+  - IDE: C++/IDE.md
+  - Comment:
+    - Comment: C++/Comment/Comment.md
+  - Book: C++/Book.md
 - C:
-  - Data-model:
-    - Introduction: C/Data-model/index.md
-    - creference-Objects and alignment: C/Data-model/creference-Objects and alignment.md
-  - Software:
-    - Software-event-driven-programming:
+  - C: C/C.md
+  - What-is-new-in-C: C/What-is-new-in-C.md
+  - Language-reference:
+    - Basic-concept:
+      - Data-model:
+        - Introduction: C/Language-reference/Basic-concept/Data-model/index.md
+        - Objects-and-alignment: C/Language-reference/Basic-concept/Data-model/Objects-and-alignment.md
+    - Array:
+      - Introduction: C/Language-reference/Array/index.md
+  - Idiom:
+    - Introduction: C/Idiom/index.md
+  - Stype-guide:
+    - C-stype-guide: C/Stype-guide/C-stype-guide.md
+  - Library:
+    - A-list-of-open-source-C-libraries: C/Library/A-list-of-open-source-C-libraries.md
+    - Event-driven-programming:
       - Software-libevent:
-        - libevent: C/Software/Software-event-driven-programming/Software-libevent/libevent.md
+        - libevent: C/Library/Event-driven-programming/Software-libevent/libevent.md
       - Software-libuv:
-        - libuv: C/Software/Software-event-driven-programming/Software-libuv/libuv.md
+        - libuv: C/Library/Event-driven-programming/Software-libuv/libuv.md
         - Doc:
-          - Design-overview: C/Software/Software-event-driven-programming/Software-libuv/Doc/Design-overview.md
+          - Design-overview: C/Library/Event-driven-programming/Software-libuv/Doc/Design-overview.md
           - User-guide:
-            - Basics-of-libuv: C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv.md
+            - Basics-of-libuv: C/Library/Event-driven-programming/Software-libuv/Doc/User-guide/Basics-of-libuv.md
             - Utilities:
-              - Utilities: C/Software/Software-event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities.md
+              - Utilities: C/Library/Event-driven-programming/Software-libuv/Doc/User-guide/Utilities/Utilities.md
+  - Pattern:
+    - Introduction: C/Pattern/index.md
+  - Guide:
+    - Introduction: C/Guide/index.md
+  - Book: C/Book.md
 - JavaScript:
   - Introduction: JavaScript/index.md
   - Software:
@@ -341,6 +435,8 @@ nav:
           - Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick(): JavaScript/Software/Software-event-driven-programming/Software-node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick().md
 - Java:
   - Introduction: Java/index.md
+- Eiffel:
+  - Eiffel: Eiffel/Eiffel.md
 - Summary-of-my-programming-language: Summary-of-my-programming-language.md
 - ABI:
   - Introduction: ABI/index.md

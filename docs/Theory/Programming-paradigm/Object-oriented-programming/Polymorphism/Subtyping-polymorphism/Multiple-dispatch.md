@@ -1,6 +1,6 @@
 # Multiple dispatch
 
-
+关于multiple dispatch，下面这篇文章的分析是非常到位的。
 
 ## [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)
 
@@ -120,6 +120,8 @@ Shape x Shape [names s1=9Rectangle, s2=8Triangle]
 Yeah... that's not good. All calls were dispatched to the generic `Shape x Shape` handler, even though the **runtime types** of the objects are different (see the names gathered from `typeid`). This is hardly surprising, because when the compiler sees `Intersect(pr1.get(), pr2.get())`, the **static types** for the two arguments are `Shape*` and `Shape*`. You could be forgiven for thinking that the compiler may invoke **virtual dispatch** here, but **virtual dispatch** in C++ doesn't work this way. It only works when *a virtual method is called on a pointer to a base object*, which is not what's happening here.
 
 > NOTE: 最后一句的意思是，使用一个static type为基类的指针来调用一个virtual method时，才会触发virtual dispatch。
+
+> NOTE: static type和runtime type是c++ type system中的一个非常重要的概念，参见cppreference [Type](https://en.cppreference.com/w/cpp/language/type)。
 
 ### Multiple dispatch in C++ with the visitor pattern
 
