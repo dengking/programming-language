@@ -168,7 +168,6 @@ nav:
         - Non-local-variable: Theory/Resource-management/Memory-management/Manual-memory-management/Non-local-variable.md
       - Automatic-memory-management:
         - Automatic-memory-management: Theory/Resource-management/Memory-management/Automatic-memory-management/Automatic-memory-management.md
-      - C-dynamic-memory-allocation: Theory/Resource-management/Memory-management/C-dynamic-memory-allocation.md
   - Serialization:
     - Serialization: Theory/Serialization/Serialization.md
     - Library: Theory/Serialization/Library.md
