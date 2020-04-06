@@ -1,5 +1,10 @@
 nav:
     - Introduction: index.md
+    - Subroutine: Subroutine.md
+    - Argument-and-parameter: Argument-and-parameter.md
+    - Call-subroutine: Call-subroutine
+    - Activation-tree: Activation-tree.md
+    - Evaluation-strategy: Evaluation-strategy
     - Function-object: Function-object.md
     - First-class-function: First-class-function.md
     - Variadic-function: Variadic-function.md

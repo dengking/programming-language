@@ -1,0 +1,18 @@
+nav:
+    # 本章的总体思路是：对program的organization可以看做是对name的organization，所以首先描述name的概念
+    # 然后引出各种programming language中普遍采用的namespace和unit
+    # 显然，按照前面描述的机制，program被分解了，那这引出了一个问题是：如何进行相互的引用，显然引用就是按照前面描述的
+    # 的机制来实现的，这就是namelookup。
+    - Introduction: index.md
+    # 首先描述name的概念
+    - Name: Name.md
+    # 然后描述programming language普遍采用的组织机制：
+    # file organization 和 namespace机制
+    - Organization: Organization.md
+    # 编译的单元
+    - Translation-unit: Translation-unit.md
+    # 此处讨论name lookup
+    - Name-look-up: Name-look-up.md
+    # 拓展目光
+    - Organization-is-everywhere: Organization-is-everywhere.md
+    

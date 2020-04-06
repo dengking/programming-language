@@ -1,0 +1,6 @@
+# 关于本章
+
+对于大型项目，如何进行组织？本章对这个问题进行探讨。本章的编写思路如下：我们使用一种programming language编写program的过程可以看做是使用这门programming language所提供的各种construct（或者说是entity）进行定义、引用的过程，在进行定义的时候，我们会指定一个“name”，然后通过这个name来引用这个定义好的construct。对于大型的project，可以预知的是，它会涉及到成千上万的name，那如何来对这些name进行组织管理呢？其实这就是本章所要讨论的对program的组织，可以认为它是对program中所定义的name进行组织。本章首先讨论name的概念，然后讨论各种programming language中使用到的管理方式。
+
+
+

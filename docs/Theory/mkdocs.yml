@@ -7,10 +7,6 @@ nav:
 ###################################################syntax相关内容，静态的，compiler处理的################################################
     # 基本上所有的programming language都会涉及到Syntax
     - Syntax: Syntax
-    # 在阅读language reference的时候，常常会碰到Name这个词语，有必要对它进行总结。
-    - Name: Name
-    # 在programming language中普遍存在的一种情况
-    - Aliase: Aliase
     # 使用专业的术语来描述“描述”
     - Declaration-and-definition: Declaration-and-definition
 ###################################################type system相关内容################################################
@@ -18,8 +14,6 @@ nav:
     - Type-system: Type-system
     # 很多programming language都支持reflection，reflection和type system密切相关，两者最好放在一起
     - Reflection: Reflection
-###################################################重要概念################################################    
-    - First-class-citizen: First-class-citizen.md
 ###################################################大多数programming language都会提供的construct################################################    
     # 基本的programming language construct
     - Basic-Language-construct: Basic-Language-construct
@@ -29,6 +23,13 @@ nav:
     - Coroutine: Coroutine
     # 当今大多数高级programming language都支持exception
     - Exception: Exception
+###################################################如何来组织大型project的各种construct################################################    
+    # 如何来对program进行组织
+    - Organization: Organization
+    # 在programming language中普遍存在的一种情况
+    - Aliase: Aliase
+###################################################重要概念################################################    
+    - First-class-citizen: First-class-citizen.md
 ###################################################################################################    
     # 编程范式
     - Programming-paradigm: Programming-paradigm

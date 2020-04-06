@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - Class: Class.md
+    - Access-specifiers: Access-specifiers.md
+    - Magic-function: Magic-function
+    - Members: Members

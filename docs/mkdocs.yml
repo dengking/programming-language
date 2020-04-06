@@ -3,8 +3,7 @@ nav:
     - Theory: Theory
     # 各种具体的programming  language
     - Python: Python
-    - C++: C++
-    - C: C
+    - C-family-language: C-family-language
     - JavaScript: JavaScript
     - Java: Java
     - Eiffel: Eiffel
