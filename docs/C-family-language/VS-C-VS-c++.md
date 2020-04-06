@@ -1,5 +1,29 @@
 # VS C VS C++
 
+## 思路
+
+c++在c上所增强的，主要方面：
+
+### OOP
+
+
+
+### Type safety
+
+new和malloc
+
+string literal：c中的类型`char *`，c++中是`const char *`。
+
+### Generic programming
+
+主要是template
+
+### Library
+
+c++的standard library提供的功能过多。
+
+
+
 ## name space and scope
 
 `c++`中可以显式定义name space，`c`中的name space是隐式的；
