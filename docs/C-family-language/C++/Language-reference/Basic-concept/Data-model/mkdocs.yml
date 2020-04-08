@@ -3,3 +3,4 @@ nav:
     - Object: Object.md
     - Object-storage: Object-storage.md
     - Memory-model: Memory-model
+    - Variable: Variable.md

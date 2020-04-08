@@ -3,6 +3,7 @@ nav:
     - STL: STL.md
     - Design-pattern-of-STL: Design-pattern-of-STL.md
     - Containers-library: Containers-library
+    - String: String
     - Iterator-library: Iterator-library
     - Algorithm: Algorithm
     

@@ -1,5 +1,11 @@
 # Array
 
+
+
+## cppreference [Array declaration](https://en.cppreference.com/w/cpp/language/array)
+
+
+
 ## TODO
 
 [2 Dimensional Char Array C++](https://stackoverflow.com/questions/27697879/2-dimensional-char-array-c)

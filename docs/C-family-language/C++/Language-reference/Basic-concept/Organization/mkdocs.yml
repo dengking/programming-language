@@ -1,4 +1,5 @@
 nav:
+    - Name-and-identifiers: Name-and-identifiers.md
     - Scope: Scope.md
     - Namespace: Namespace.md
     - Name-lookup: Name-lookup.md
