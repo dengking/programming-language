@@ -5,3 +5,4 @@ nav:
     - Evented-IO-library: Evented-IO-library.md
     - Plugin-system: Plugin-system.md
     - Abseil: Abseil
+    - Log: Log
