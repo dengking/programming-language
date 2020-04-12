@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Data-model: Data-model.md
+    - Dynamic-emory-management: Dynamic-emory-management.md

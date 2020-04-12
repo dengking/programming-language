@@ -1,5 +1,5 @@
 nav:
-    - STL: STL
+    - Standard-library: Standard-library
     - Atomic-operations-library: Atomic-operations-library
     - A-list-of-open-source-Cpp-libraries: A-list-of-open-source-Cpp-libraries.md
     - Evented-IO-library: Evented-IO-library.md
