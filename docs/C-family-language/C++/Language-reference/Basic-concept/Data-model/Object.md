@@ -30,7 +30,7 @@ The following entities are not objects: value, reference, function, enumerator, 
 
 A *variable* is an object or a reference that is not a non-static data member, that is introduced by a [declaration](https://en.cppreference.com/w/cpp/language/declarations).
 
-> NOTE: 这段话和上面的描述是矛盾的，上面的这段话指出
+> NOTE: “ a reference that is not a non-static data member”这段话是比较绕的，“non-static data member”指的是class的哪些没有使用`static`修饰的data member，“not a non-static data member”就相当于是否定的否定是肯定，即是static data member，则它的意思是：variable可以是static data member。
 
 ### Object representation and value representation
 

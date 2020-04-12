@@ -52,25 +52,25 @@ Objects are created by [declarations](https://en.cppreference.com/w/c/language/d
 
 Except for [bit fields](https://en.cppreference.com/w/c/language/bit_field), objects are composed of **contiguous** sequences of one or more bytes, each consisting of [CHAR_BIT](https://en.cppreference.com/w/c/types/limits) bits, and can be copied with [memcpy](https://en.cppreference.com/w/c/string/byte/memcpy) into an object of type `unsigned char[n]`, where `n` is the **size** of the object. The contents of the resulting array are known as *object representation*.
 
-***SUMMARY*** : 在[Memory model](https://en.cppreference.com/w/c/language/memory_model)中也提及了上面这一段中的观点；c中使用`unsigned char[n]`来表示object，在其他更加高级的语言中也都提供了类似的功能，如：python的Binary Sequence Types — [`bytes`](https://docs.python.org/3/library/stdtypes.html#bytes), [`bytearray`](https://docs.python.org/3/library/stdtypes.html#bytearray), [`memoryview`](https://docs.python.org/3/library/stdtypes.html#memoryview)[¶](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview)
+> NOTE: 在[Memory model](https://en.cppreference.com/w/c/language/memory_model)中也提及了上面这一段中的观点；c中使用`unsigned char[n]`来表示object，在其他更加高级的语言中也都提供了类似的功能，如：python的Binary Sequence Types — [`bytes`](https://docs.python.org/3/library/stdtypes.html#bytes), [`bytearray`](https://docs.python.org/3/library/stdtypes.html#bytearray), [`memoryview`](https://docs.python.org/3/library/stdtypes.html#memoryview)[¶](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview)
 
-***SUMMARY*** : 这篇文章也描述了类似的问题[Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
+> NOTE: 这篇文章也描述了类似的问题[Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
 
-***SUMMARY*** : 上面这一段中的`n`是否等于`sizeof`呢？
+> NOTE: 上面这一段中的`n`是否等于`sizeof`呢？是的
 
 If two objects have the same **object representation**, they compare equal (except if they are floating-point `NaN`s). The opposite is not true: two objects that compare equal may have different **object representations** because not every bit of the **object representation** needs to participate in the **value**. Such bits may be used for padding to satisfy alignment requirement, for parity checks, to indicate trap representations, etc.
 
-***SUMMARY*** : 上面这段话提及了object representation和value之间的关系；
+> NOTE: 上面这段话提及了object representation和value之间的关系，其实很明显，两者是关联的， 在c++的[Object](https://en.cppreference.com/w/cpp/language/object)的对应段落中，这一段的名称叫做[Object representation and value representation](https://en.cppreference.com/w/cpp/language/object)。
 
-***SUMMARY*** : 关于padding to satisfy alignment requirement，参见[Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment)
+> NOTE : 关于padding to satisfy alignment requirement，参见[Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment)
 
-***SUMMARY*** : 关于parity checks, 参见[Parity bit](https://en.wikipedia.org/wiki/Parity_bit)
+> NOTE: 关于parity checks, 参见[Parity bit](https://en.wikipedia.org/wiki/Parity_bit)
 
-***SUMMARY*** : 关于trap representation，参见[trap representation](https://stackoverflow.com/questions/6725809/trap-representation) 
+> NOTE: 关于trap representation，参见[trap representation](https://stackoverflow.com/questions/6725809/trap-representation) 
 
 If an **object representation** does not represent any value of  **the object type**, it is known as *trap representation*. Accessing a **trap representation** in any way other than reading it through an **lvalue expression** of character type is **undefined behavior**. The value of a structure or union is never a **trap representation** even if any particular member is one.
 
-***SUMMARY*** : 关于**the object type**，在[Type](https://en.cppreference.com/w/c/language/type)的Type groups章节中有给出其定义；
+> NOTE: 关于**the object type**，在[Type](https://en.cppreference.com/w/c/language/type)的Type groups章节中有给出其定义；
 
 For the objects of type `char`, `signed char`, and `unsigned char`, every bit of the **object representation** is required to participate in the **value representation** and each possible bit pattern represents a distinct value (no padding, trap bits, or multiple representations allowed).
 
