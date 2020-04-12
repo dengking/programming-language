@@ -1,6 +1,6 @@
 nav:
     - C++: C++
     - C: C
-    - C-VS-c++: C-VS-c++
+    - C-and-c++: C-and-c++
     - VS-inline-VS-marco: VS-inline-VS-marco.md
     - Undefined-behavior: Undefined-behavior
