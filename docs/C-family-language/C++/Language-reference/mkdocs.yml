@@ -21,6 +21,8 @@ nav:
     - Namespace: Namespace
     # 枚举相关的问题
     - Enum: Enum
+    # 模板
+    - Template: Template
 ###################################################这是在使用language过程中会涉及到的一些问题################################################    
     # 如何进行初始化，这在c++中非常重要
     - Initialization: Initialization
