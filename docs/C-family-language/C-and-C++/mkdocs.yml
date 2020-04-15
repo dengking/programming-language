@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
 ##########C和C++中都会涉及到的概念的对比##########
+    - Linkage: Linkage.md
     - VS-C-VS-C++: VS-C-VS-c++.md
     - Type-system: Type-system.md
     - Data-model: Data-model
