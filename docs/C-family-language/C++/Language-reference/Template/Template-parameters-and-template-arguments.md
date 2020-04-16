@@ -28,6 +28,10 @@ Each parameter in *parameter-list* may be:
 
 
 
+> NOTE: Non-type template parameter即非类型模板参数，关于它的例子参见：
+>
+> https://stackoverflow.com/questions/45559355/how-do-you-pass-a-templated-class-instance-as-a-template-parameter-to-another-te
+
 
 
 #### Type template parameter

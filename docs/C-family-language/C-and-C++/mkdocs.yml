@@ -12,5 +12,7 @@ nav:
     - VS-inline-VS-marco: VS-inline-VS-marco.md
 ##########C和C++中都会涉及到Preprocessor##########    
     - Preprocessor: Preprocessor
+##########C和C++语言的实现##########    
+    - Implementation: Implementation    
     
     

@@ -1,27 +1,14 @@
 # String
 
+## cppreference [string library](https://en.cppreference.com/w/cpp/string)
+
+The C++ strings library includes support for three general types of strings:
+
+- [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string) - a templated class designed to manipulate strings of any character type.
+- [std::basic_string_view](https://en.cppreference.com/w/cpp/string/basic_string_view) (C++17) - a lightweight non-owning read-only view into a subsequence of a string.
+- Null-terminated strings - arrays of characters terminated by a special *null* character.
+
+> NOTE: 上述三者是c++语言的string
 
 
-## Operation
-
-### Upper Case
-
-[Converting to uppercase in C++](https://stackoverflow.com/questions/8693990/converting-to-uppercase-in-c)
-
-[Convert a String In C++ To Upper Case](https://stackoverflow.com/questions/735204/convert-a-string-in-c-to-upper-case)
-
-```c++
-#include "ctype.h"
-#include <algorithm>
-#include <iterator>
-#include <string>
-
-namespace StringUtil
-{
-static void ToUpper(std::string& S)
-{
-	std::transform(S.begin(), S.end(), S.begin(), ::toupper);
-}
-}
-```
 
