@@ -54,6 +54,10 @@ Each parameter in *parameter-list* may be:
 
 
 
+## modernescpp [Types-, Non-Types, and Templates as Template Parameters](https://www.modernescpp.com/index.php/types-non-types-and-templates-as-template-parameters)
+
+这篇文章不错，其实的例子非常好。
+
 ## 一些问题
 
 ### Container as template parameter

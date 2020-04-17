@@ -32,3 +32,12 @@ using TT = T;
 int main(){}
 ```
 
+## typedef for partial templates
+
+https://stackoverflow.com/questions/2996914/c-typedef-for-partial-templates
+
+https://probablydance.com/2014/01/16/alias-templates-with-partial-specialization-sfinae-and-everything/
+
+https://www.drdobbs.com/the-new-c-typedef-templates/184403850
+
+https://en.cppreference.com/w/cpp/language/type_alias

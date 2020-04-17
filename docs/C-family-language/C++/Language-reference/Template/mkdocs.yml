@@ -2,3 +2,4 @@ nav:
     - Templates: Templates.md
     - Template-parameters-and-template-arguments: Template-parameters-and-template-arguments.md
     - Class-template: Class-template
+    - Specialization: Specialization

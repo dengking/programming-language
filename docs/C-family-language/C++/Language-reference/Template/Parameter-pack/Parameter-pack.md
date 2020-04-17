@@ -50,3 +50,27 @@ https://stackoverflow.com/questions/41847828/c-passing-parameter-pack-to-class
 
 https://en.cppreference.com/w/cpp/language/parameter_pack
 
+
+
+## mix parameter pack and single template parameter
+
+```c++
+template<typename CHSInsRspQryOrderField,
+		typename CHSInsRspQryTradeField,typename ...Args>
+class C
+{
+
+};
+
+
+int main
+{
+
+C<int, int, int> c;
+
+
+}
+
+```
+
+需要注意的是：参数包‘Args’必须出现在模板形参表末尾。
