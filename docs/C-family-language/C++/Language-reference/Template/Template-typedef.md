@@ -41,3 +41,27 @@ https://probablydance.com/2014/01/16/alias-templates-with-partial-specialization
 https://www.drdobbs.com/the-new-c-typedef-templates/184403850
 
 https://en.cppreference.com/w/cpp/language/type_alias
+
+
+
+## [C++ keywords: using](https://en.cppreference.com/w/cpp/keyword/using)
+
+
+
+### declaration of ... shadows template parm ...
+
+http://cplusplus.com/forum/general/33886/
+
+http://forums.codeguru.com/showthread.php?475292-template-error-shadows-template-parm
+
+https://stackoverflow.com/questions/20875033/clang-vs-vcerror-declaration-of-t-shadows-template-parameter
+
+
+
+## [What is the difference between 'typedef' and 'using' in C++11?](https://stackoverflow.com/questions/10747810/what-is-the-difference-between-typedef-and-using-in-c11)
+
+https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c
+
+## friend template
+
+https://stackoverflow.com/questions/8967521/class-template-with-template-class-friend-whats-really-going-on-here

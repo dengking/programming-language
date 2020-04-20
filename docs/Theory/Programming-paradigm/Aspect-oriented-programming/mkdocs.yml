@@ -1,2 +1,4 @@
 nav:
     - Aspect-oriented-programming: Aspect-oriented-programming.md
+    - Cross-cutting-concern: Cross-cutting-concern.md
+    - Separation-of-concerns: Separation-of-concerns.md
