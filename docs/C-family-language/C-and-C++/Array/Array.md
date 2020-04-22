@@ -1,0 +1,1 @@
+# [Get length of array in C and C++](https://iq.opengenus.org/length-of-array-in-c/)
