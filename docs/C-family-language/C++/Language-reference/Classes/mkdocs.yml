@@ -4,4 +4,5 @@ nav:
     - Access-specifiers: Access-specifiers.md
     - Magic-function: Magic-function
     - Members: Members
-    - Special-member-functions
+    - Special-member-functions: 
+    - Inheritance: Inheritance

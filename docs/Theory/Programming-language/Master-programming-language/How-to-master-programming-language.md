@@ -66,7 +66,7 @@ expression、statement等都是属于此范轴。
 
 在The Python Language Reference[¶](https://docs.python.org/3/reference/index.html#the-python-language-reference)的Execution model[¶](https://docs.python.org/3/reference/executionmodel.html#execution-model)中对python程序的run model进行了描述。
 
-需要对程序的run model进行分析。
+
 
 ##### Abstract machines
 
@@ -106,6 +106,26 @@ container指各种常见的数据结构，一般programming language的standard 
 
 比如python的标准库提供了Python Runtime Services[¶](https://docs.python.org/3/library/python.html#python-runtime-services)来供用户进行run time。
 
+
+
+
+
+## [Programming language implementation](https://en.wikipedia.org/wiki/Programming_language_implementation)
+
+在programming language中，也涉及标准与实现的问题，一种语言标准，可能有多种实现。
+
+
+
+### Compiler and interpreter
+
+目前主流的programming language都会涉及compile过程，所以它们的实现都会涉及compiler，一些语言（如python、java）运行于interpreter，关于compiler和 interpreter，可以参见工程[compiler-principle](https://dengking.github.io/compiler-principle/)。
+
+#### Compile-time and run time
+
+在学习一门语言的时候，从compile time和run time来分析各种概念是非常重要的。
+
+
+
 ## Declaration and definition
 
 在文章[language](https://dengking.github.io/Post/Language/Language/)中，我们已经总结了，我们作为programmer在使用programming language来“描述”世界，这里的描述，使用更加专业的属于是declaration 和 definition，大多数programming language都会涉及到definition的概念，像c和c++这样的语言，区分declaration和definition，而像python和c++这样的语言，则不区分，是否区分，有利有弊，后面我们会进行分析。
@@ -130,18 +150,6 @@ programming language的设计者往往是遵循着一定的philosophy来设计�
 有很多语言都号称是支持“multiple [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigms)”，我们有必要了解programming paradigm的知识，参见[Programming paradigm](../../Programming-paradigm/index.md)。
 
 
-
-## [Programming language implementation](https://en.wikipedia.org/wiki/Programming_language_implementation)
-
-在programming language中，也涉及标准与实现的问题，一种语言标准，可能有多种实现。
-
-### Compiler and interpreter
-
-目前主流的programming language都会涉及compile过程，所以它们的实现都会涉及compiler，一些语言（如python、java）运行于interpreter，关于compiler和 interpreter，可以参见工程[compiler-principle](https://dengking.github.io/compiler-principle/)。
-
-#### Compile-time and run time
-
-在学习一门语言的时候，从compile time和run time来分析各种概念是非常重要的。
 
 
 
