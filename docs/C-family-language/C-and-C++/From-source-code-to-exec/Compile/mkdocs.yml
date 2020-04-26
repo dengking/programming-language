@@ -1,2 +1,3 @@
 nav:
-    - Separate-compilation-model: Separate-compilation-model.md
+    - Introduction: index.md
+    - Compilation-model: Compilation-model.md

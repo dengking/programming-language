@@ -9,7 +9,7 @@
 
 ## [Why can templates only be implemented in the header file?](https://stackoverflow.com/questions/495021/why-can-templates-only-be-implemented-in-the-header-file)
 
-
+20200427: 对这个问题的分析，需要从compiler的compile model入手，在Why can’t I separate the definition of my templates class from its declaration and put it inside a .cpp file? [¶](https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl) [Δ](https://isocpp.org/wiki/faq/templates#)中对此的分析是非常好的。
 
 ## [C++: “undefined reference to” templated class function](https://bytefreaks.net/programming-2/c/c-undefined-reference-to-templated-class-function)
 

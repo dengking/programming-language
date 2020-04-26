@@ -4,3 +4,4 @@
 
 
 
+本章所讨论的内容是建立在多种programming language之上的、通用的内容，关于各种programming language的具体的内容，在各个语言的章节中，会进行具体的分析。
