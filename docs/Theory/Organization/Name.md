@@ -14,11 +14,9 @@ python是一门解释型语言，正如在，中所述：everything in python is
 
 c++是一门编译型语言，在cppreference c++的[Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)中，提出了entity的概念，其实，此处的entity就是c++programming language所提供的construct，我们在编写c++ program的过程，就是使用使用这些entity进行定义、引用的过程，通过name来refer to entity，这些entity是由compiler来进行翻译、转换的。c++中，通过declaration来引入entity。
 
+## Thoughts
 
-
-name的scope。
-
-每种programming language。
+与name相关的问题有：name的scope。
 
 在python中，每个scope都可以认为有一个namespace。
 

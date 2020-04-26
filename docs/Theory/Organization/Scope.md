@@ -1,4 +1,8 @@
-# [Scope (computer science)](https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping)
+# Scope
+
+
+
+## 维基百科[Scope (computer science)](https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping)
 
 In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), the **scope** of a [name binding](https://en.wikipedia.org/wiki/Name_binding) – an association of a name to an entity, such as a [variable](https://en.wikipedia.org/wiki/Variable_(programming)) – is the region of a [computer program](https://en.wikipedia.org/wiki/Computer_program) where the binding is valid: where the **name** can be used to refer to the **entity**. Such a **region** is referred to as a **scope block**. In other parts of the program the **name** may refer to a different **entity** (it may have a different binding), or to nothing at all (it may be unbound).
 

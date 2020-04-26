@@ -6,13 +6,16 @@ nav:
     - Introduction: index.md
     # 首先描述name的概念
     - Name: Name.md
+    # name的scope也是organization的非常重要的一个方面
+    - Scope: Scope.md
     # 然后描述programming language普遍采用的组织机制：
     # file organization 和 namespace机制
     - Organization: Organization.md
     # 编译的单元
     - Translation-unit: Translation-unit.md
     # 此处讨论name lookup
-    - Name-look-up: Name-look-up.md
+    - Name-lookup: Name-lookup.md    
     # 拓展目光
     - Organization-is-everywhere: Organization-is-everywhere.md
+    
     

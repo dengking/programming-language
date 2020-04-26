@@ -1,4 +1,4 @@
-# Name look up
+# Name lookup
 
 前面，我们已经讨论了organization的问题，知道了program的organization的重要性，我们往往是按照此对我们的project进行组织，我们的program是需要经过compile后，才能够被执行的，我们需要知道的一个非常重要的事实是：compiler的编译单位是source file（也就是我们在上篇中提及的file unit），即compiler一次只编译一个source file，在c++中，这被称为translation unit。compiler在编译一个source file的时候，需要知道它所碰到的每个name到底是什么，即找到这个name的declaration或者definition，这就是[Name binding](https://en.wikipedia.org/wiki/Name_binding)，这个查找的过程就是所谓的name look up。所以在各种programming language中，我们需要在source file中，说明清楚每个name的信息，以供compiler能够将它bind到正确的entity。
 
