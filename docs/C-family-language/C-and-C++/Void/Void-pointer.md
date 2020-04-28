@@ -104,3 +104,4 @@ alignment如何保证？`void*`应该具备最大的alignment。
 
 
 
+## [Why type cast a void pointer?](https://stackoverflow.com/questions/16986214/why-type-cast-a-void-pointer)
