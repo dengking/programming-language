@@ -1,6 +1,10 @@
 nav:
+#################### 首先介绍programming language的概念####################
     - Programming-language: Programming-language.md
+#################### 脚本型语言是一类非常重要的语言####################    
     - Scripting-language: Scripting-language
+#################### 如何来掌握programming language，这是本章的核心思想##################    
     - Master-programming-language: Master-programming-language
+#################### expressive是我们使用programming language来描述世界的最终目的####################    
     - Expressive-of-programming-language: Expressive-of-programming-language.md
     - Comparison-of-programming-language: Comparison-of-programming-language.md

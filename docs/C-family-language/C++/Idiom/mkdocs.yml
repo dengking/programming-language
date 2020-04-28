@@ -2,6 +2,9 @@ nav:
     - Introduction: index.md
     - RAII: RAII
     - The-rule-of-three-five-zero: The-rule-of-three-five-zero
-    - Erase-remove-idiom: Erase-remove-idiom
+    - 24-Erase-remove: 24-Erase-remove
+    - 27-Expression-Template: 27-Expression-Template
+    - 56-Recursive-Type-Composition: 56-Recursive-Type-Composition
     - 66-Smart-Pointer: 66-Smart-Pointer
+    - 75-Virtual-Friend-Function: 75-Virtual-Friend-Function
     - Summary-of-C++-idiom: Summary-of-C++-idiom.md
