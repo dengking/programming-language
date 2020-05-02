@@ -63,3 +63,9 @@ for human，其实就是user-friend的含义:
 ## From expressive programming language to readable program
 
 expressive programming language让我们能够编写更加readable、更加domain-specific的programming language。
+
+
+
+## Thoughts
+
+越expressive的语言不通你越觉得就像是在进行配置一样

@@ -18,7 +18,7 @@ The most commonly recognized major classes of polymorphism are:
 - *[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)* 
 - *[Subtyping](https://en.wikipedia.org/wiki/Subtyping)*  (also called *subtype polymorphism* or *inclusion polymorphism*)
 
-|                                                              |                                                              |
+|                                                              | 类型                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | a single [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to entities of different [types](https://en.wikipedia.org/wiki/Data_type) | [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) |
 | a single symbol to represent multiple different types        | [Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) |
@@ -78,7 +78,7 @@ The most commonly recognized major classes of polymorphism are:
 
 ## Polymorphism的本质
 
-我觉得Polymorphism的本质是描述了一种one-to-many关系。
+我觉得Polymorphism的本质是描述了一种one-to-many关系，实现了一种映射，这种映射是由programming language实现来提供的。多态，让我们不用写一对的if-else判断。
 
 
 

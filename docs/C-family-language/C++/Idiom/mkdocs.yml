@@ -2,9 +2,11 @@ nav:
     - Introduction: index.md
     - RAII: RAII
     - The-rule-of-three-five-zero: The-rule-of-three-five-zero
-    - 24-Erase-remove: 24-Erase-remove
-    - 27-Expression-Template: 27-Expression-Template
-    - 56-Recursive-Type-Composition: 56-Recursive-Type-Composition
-    - 66-Smart-Pointer: 66-Smart-Pointer
-    - 75-Virtual-Friend-Function: 75-Virtual-Friend-Function
+    - Copy-and-swap: Copy-and-swap
+    - Erase-remove: Erase-remove
+    - Expression-Template: Expression-Template
+    - Non-throwing-swap: Non-throwing-swap
+    - Recursive-Type-Composition: Recursive-Type-Composition
+    - Smart-Pointer: Smart-Pointer
+    - Virtual-Friend-Function: Virtual-Friend-Function
     - Summary-of-C++-idiom: Summary-of-C++-idiom.md

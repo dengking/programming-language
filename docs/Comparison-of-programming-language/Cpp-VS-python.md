@@ -75,6 +75,8 @@ declaration和definition是两个非常接近且容易混淆的概念，在此�
 
 思考：可以看到，无论python还是c++，resource management方案都是涉及一对相反的操作，c++的resource management方案使用的基于scope的，而python的scope非常简单，所以它使用的是magic function的方式。
 
+python、java的resource management所采用的是[Dispose pattern](https://en.wikipedia.org/wiki/Dispose_pattern)。
+
 ## magic function的使用
 
 c中压根就没有magic function，c compiler在编译source code的时候，无需为其生成或者选择指定的函数；

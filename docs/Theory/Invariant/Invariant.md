@@ -1,6 +1,10 @@
 # Invariant
 
+什么是invariant？
 
+如何来校验invariant？
+
+如何来维护invariant？
 
 ## [Invariant (mathematics)](https://en.wikipedia.org/wiki/Invariant_(mathematics))
 
