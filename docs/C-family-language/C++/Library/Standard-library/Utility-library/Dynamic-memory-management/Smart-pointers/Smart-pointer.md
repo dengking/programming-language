@@ -53,4 +53,16 @@ p2.reset();  // Deletes the memory, since no one else owns the memory.
 
 
 
+
+
+
+
+## internalpointers [A beginner's look at smart pointers in modern C++](https://www.internalpointers.com/post/beginner-s-look-smart-pointers-modern-c)
+
+
+
 ## [intro/smart pointers](https://en.cppreference.com/book/intro/smart_pointers)
+
+
+
+## [What is a smart pointer and when should I use one?](https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one)
