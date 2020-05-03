@@ -4,9 +4,12 @@ nav:
     - The-rule-of-three-five-zero: The-rule-of-three-five-zero
     - Copy-and-swap: Copy-and-swap
     - Erase-remove: Erase-remove
-    - Expression-Template: Expression-Template
     - Non-throwing-swap: Non-throwing-swap
     - Recursive-Type-Composition: Recursive-Type-Composition
     - Smart-Pointer: Smart-Pointer
     - Virtual-Friend-Function: Virtual-Friend-Function
+#################### template相关####################    
+    - Curiously-recurring-template-pattern: Curiously-recurring-template-pattern
+    - Expression-Template: Expression-Template
+#################### Summary####################    
     - Summary-of-C++-idiom: Summary-of-C++-idiom.md

@@ -20,3 +20,7 @@ process在其生命周期内会占用一定的system resource，所以它就涉�
 > Resources other than memory, such as [network sockets](https://en.wikipedia.org/wiki/Network_socket), database [handles](https://en.wikipedia.org/wiki/Handle_(computing)), [user interaction windows](https://en.wikipedia.org/wiki/Window_(computing)), [file](https://en.wikipedia.org/wiki/File_(computing)) and device descriptors, are not typically handled by garbage collection.
 
 不同语言的resource management策略也是不同的。
+
+
+
+### [Dispose of pattern](https://en.wikipedia.org/wiki/Dispose_pattern)

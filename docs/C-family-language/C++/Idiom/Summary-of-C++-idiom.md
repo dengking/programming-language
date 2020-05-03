@@ -14,7 +14,15 @@ RAII
 
 [Handle Body](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Handle_Body)<-[Non-throwing swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap)<- [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) 
 
+### Idiom about pointer
 
+[Handle Body](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Handle_Body)->Smart Pointer 
 
 ## Idiom about template
+
+Curiously recurring template pattern
+
+expression template
+
+
 

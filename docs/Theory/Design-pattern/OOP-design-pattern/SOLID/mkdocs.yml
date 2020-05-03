@@ -3,3 +3,5 @@ nav:
     - Open-closed-principle: Open-closed-principle.md
     - Liskov-substitution-principle: Liskov-substitution-principle.md
     - Inversion-of-control: Inversion-of-control.md
+#################### 其他的一些设计思想####################     
+    - Design-by-contract: Design-by-contract.md

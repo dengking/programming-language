@@ -1,0 +1,4 @@
+nav:
+    - Variable: Variable.md
+    - Static-variable: Static-variable.md
+    - Non-local-variable: Non-local-variable.md
