@@ -1,2 +1,6 @@
 nav:
     - Smart-pointer: Smart-pointer.md
+    - unique_ptr: unique_ptr.md
+    - shared_ptr: shared_ptr.md
+    - weak_ptr: weak_ptr.md
+    - auto_ptr: auto_ptr.md

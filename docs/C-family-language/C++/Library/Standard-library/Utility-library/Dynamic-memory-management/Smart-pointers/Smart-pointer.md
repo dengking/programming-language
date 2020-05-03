@@ -47,3 +47,10 @@ p1.reset();  // Memory still exists, due to p2.
 p2.reset();  // Deletes the memory, since no one else owns the memory.
 ```
 
+
+
+## cppreference [Smart pointers](https://en.cppreference.com/w/cpp/memory)
+
+
+
+## [intro/smart pointers](https://en.cppreference.com/book/intro/smart_pointers)
