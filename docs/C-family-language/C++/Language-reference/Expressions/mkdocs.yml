@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
     - Expressions: Expressions.md
+    - Full-expression: Full-expression.md
     - Value-categories: Value-categories
 #################### operator相关 ####################    
     - Operators: Operators
