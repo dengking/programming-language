@@ -30,18 +30,34 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 ### Operators
 
-> NOTE: 原文对c++语言中的operator的分类方法如下：
+> NOTE: 
+>
+> 原文对c++语言中的operator的分类方法如下：
 >
 > operator可以分为两大类：
 >
 > - Common operators
 > - Special operators
 >
-> Special operators可以分为：
+> Special operators可以进一步细分为：
 >
 > - Conversions
 > - Memory allocation
 > - Other
+>
+> 对c++语言中的operator的还可以采用另外的分类方法：
+>
+> 根据compile-time或run-time来对operator进行分类：
+>
+> compile-time operator：
+>
+> - `sizeof`
+>
+> - `decltype`
+>
+>   ......
+>
+>   在原文的[Unevaluated expressions](https://en.cppreference.com/w/cpp/language/expressions)章节对此进行了说明。
 
 #### Common operators
 
@@ -130,13 +146,41 @@ Any expression in parentheses is also classified as a **primary expression**: th
 
 The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/language/typeid), [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof), [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept), and [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) (since C++11) are expressions that are not evaluated (unless they are **polymorphic glvalues** and are the operands of `typeid`), since these operators only query the **compile-time** properties of their operands. Thus, `std::size_t n = sizeof(std::cout << 42);` does not perform console output.
 
-The unevaluated operands are considered to be *full expressions* even though they are syntactically operands in a larger expression (for example, this means that `sizeof(T())` requires an accessible `T::~T`)
+> NOTE: 由于`typeid`、`sizeof`、`noexcept`、`decltype`都是compile-time operator（ `typeid`比较特殊，上面这段话对此进行了补充说明），所以当它们的operand是expression的时候，这些operator仅仅会使用expression的compile-time property，所以这些expression是不会被evaluate的，这就是本节所描述的unevaluated expressions。
+>
+> 我们可以从对立面来理解它，以function-call operator为例：
+>
+> ```c++
+> #include <iostream>
+> int i = 1;
+> void F(int i)
+> {
+> std::cout<<i<<std::endl;
+> }
+> int main()
+> {
+> int i = 1;
+> F(i+1);
+> }
+> ```
+>
+> 上述程序的输出为`2`，显然function-call operator的operand `i+1`被evaluated了，它是run-time的。
 
-The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) are also unevaluated expressions. An invocation of an [immediate function](https://en.cppreference.com/w/cpp/language/consteval) is always evaluated, even in an unevaluated operand.
+> NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将次作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
+
+The unevaluated operands are considered to be *full expressions* even though they are syntactically operands in a larger expression (for example, this means that `sizeof(T())` requires an accessible `T::~T`). (since C++14)
+
+> NOTE: “for example, this means that `sizeof(T())` requires an accessible `T::~T`”没有搞懂。
+
+The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) are also unevaluated expressions. An invocation of an [immediate function](https://en.cppreference.com/w/cpp/language/consteval) is always evaluated, even in an unevaluated operand.(since C++20)
+
+> NOTE: 各种特殊的规则，使得c++语言比较复杂。
 
 ### Discarded-value expressions
 
 A *discarded-value expression* is an expression that is used for its side-effects only. The value calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the built-in comma operator, or the argument of a cast-expression that casts to the type void.
+
+> NOTE: 没有搞懂
 
 Array-to-pointer and function-to-pointer **conversions** are never applied to the **value** calculated by a **discarded-value expression**. The **lvalue-to-rvalue conversion** is applied if and only if the expression is a [volatile-qualified](https://en.cppreference.com/w/cpp/language/cv) glvalue and has one of the following forms (built-in meaning required, possibly parenthesized)
 
