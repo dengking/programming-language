@@ -1,61 +1,59 @@
-[TOC]
+# Expressions
 
-# [Expressions](https://en.cppreference.com/w/cpp/language/expressions)
+
+
+## cppreference [Expressions](https://en.cppreference.com/w/cpp/language/expressions)
 
 An expression is a sequence of *operators* and their *operands*, that specifies a **computation**.
 
-**Expression evaluation** may produce a **result** (e.g., evaluation of 2+2 produces the result 4) and may generate **side-effects** (e.g. evaluation of [std::printf](http://en.cppreference.com/w/cpp/io/c/fprintf)("%d",4) prints the character '4' on the standard output).
+> NOTE: 上诉定义是从数学expression的角度出发来给出的定义，关于此可以参见`Theory\Programming-language-construct\Basic-Language-construct\Operator-expression-statement.md`，其中对这个话题进行了详细分析。
+>
+> 那c++语言中的expression是否仅限于此呢？不是的，在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中给出了详细的说明：
+>
+> Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (an operator with its operands, a literal, a variable name, etc.) 
+>
+> 显然，在c++中，我们可以将literal、variable name都看做是expression。
 
-#### General
+
+
+### General
 
 - [value categories](https://en.cppreference.com/w/cpp/language/value_category) (lvalue, rvalue, glvalue, prvalue, xvalue) classify expressions by their values
 - [order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order) of arguments and subexpressions specify the order in which intermediate results are obtained
-
-***SUMMARY*** : python中没有value categories一说
-
-### Operators
-
-#### **Common operators**
-
-| [assignment](https://en.cppreference.com/w/cpp/language/operator_assignment) | [increment decrement](https://en.cppreference.com/w/cpp/language/operator_incdec) | [arithmetic](https://en.cppreference.com/w/cpp/language/operator_arithmetic) | [logical](https://en.cppreference.com/w/cpp/language/operator_logical) | [comparison](https://en.cppreference.com/w/cpp/language/operator_comparison) | [member access](https://en.cppreference.com/w/cpp/language/operator_member_access) | [other](https://en.cppreference.com/w/cpp/language/operator_other) |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ```a = b a += b a -= b a *= b a /= b a %= b a &= b a |= b a ^= b a <<= b a >>= b``` | `++a --a a++ a--`                                            | `+a -a a + b a - b a * b a / b a % b ~a a & b a | b a ^ b a << b a >> b` | `!a a && b a || b`                                           | `a == b a != b a < b a > b a <= b a >= b a <=> b`            | a[b], *a &a a->b a.b a->*b a.*b``                            | `a(...) a, b ? :`                                            |
-
-***SUMMARY*** ： python中assignment的含义是bind
-
-***SUMMARY*** : python中叫做Attribute references[¶](https://docs.python.org/3.3/reference/expressions.html#attribute-references)，`c++`中叫做member access。
-
-#### **Special operators**
-
-[`static_cast`](https://en.cppreference.com/w/cpp/language/static_cast) converts one type to another **related type** 
-[`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) converts within inheritance hierarchies 
-
-***SUMMARY*** : 让我想起来python中的[type() and isinstance()](https://stackoverflow.com/questions/1549801/what-are-the-differences-between-type-and-isinstance)
-
-[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) adds or removes [cv](https://en.cppreference.com/w/cpp/language/cv) qualifiers
-[`reinterpret_cast`](https://en.cppreference.com/w/cpp/language/reinterpret_cast) converts type to unrelated type
-[C-style cast](https://en.cppreference.com/w/cpp/language/explicit_cast) converts one type to another by a mix of `static_cast`, `const_cast`, and `reinterpret_cast` 
-
-***SUMMARY*** : 上述为与type conversion相关的函数，在下面的[Conversions](#Conversions)章节也进行了重复
-
-[`new`](https://en.cppreference.com/w/cpp/language/new) creates objects with dynamic storage duration
-[`delete`](https://en.cppreference.com/w/cpp/language/delete) destructs objects previously created by the new expression and releases obtained memory area
-
-***SUMMARY*** : [Memory allocation](#Memory allocation)
-
-[`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof) queries the size of a type
-[`sizeof...`](https://en.cppreference.com/w/cpp/language/sizeof...) queries the size of a [parameter pack](https://en.cppreference.com/w/cpp/language/parameter_pack) (since C++11)
-[`typeid`](https://en.cppreference.com/w/cpp/language/typeid) queries the type information of a type
-[`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept) checks if an expression can throw an exception (since C++11)
-[`alignof`](https://en.cppreference.com/w/cpp/language/alignof) queries alignment requirements of a type (since C++11)
-
-
-
 - [operator precedence](https://en.cppreference.com/w/cpp/language/operator_precedence) defines the order in which operators are bound to their arguments
 - [alternative representations](https://en.cppreference.com/w/cpp/language/operator_alternative) are alternative spellings for some operators
 - [operator overloading](https://en.cppreference.com/w/cpp/language/operators) makes it possible to specify the behavior of the operators with user-defined classes.
 
-#### Conversions
+> NOTE: python中没有value categories一说，先比之下，python的data model是简单地多的。其他的相关问题，python中都有。
+
+> NOTE: 上述后三条在原文中和前两条不在一起，我觉得它们是所有的operator都会涉及到的问题，所以我将它们放到了一起。
+
+### Operators
+
+> NOTE: 原文对c++语言中的operator的分类方法如下：
+>
+> operator可以分为两大类：
+>
+> - Common operators
+> - Special operators
+>
+> Special operators可以分为：
+>
+> - Conversions
+> - Memory allocation
+> - Other
+
+#### Common operators
+
+> NOTE： python中assignment的含义是bind。
+
+> NOTE : python中叫做Attribute references[¶](https://docs.python.org/3.3/reference/expressions.html#attribute-references)，`c++`中叫做member access。
+
+#### Special operators
+
+> NOTE: 下面是对special operator的分类。
+
+##### Conversions
 
 - [standard conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion) implicit(隐式) conversions from one type to another
 - [`const_cast` conversion](https://en.cppreference.com/w/cpp/language/const_cast)
@@ -67,14 +65,14 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 
 
-#### Memory allocation
+##### Memory allocation
 
 - [new expression](https://en.cppreference.com/w/cpp/language/new) allocates memory dynamically
 - [delete expression](https://en.cppreference.com/w/cpp/language/delete) deallocates memory dynamically
 
 
 
-#### Other
+##### Other
 
 - [constant expressions ](https://en.cppreference.com/w/cpp/language/constant_expression)can be evaluated at compile time and used in compile-time context (template arguments, array sizes, etc)
 - [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof)
@@ -88,7 +86,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 The operands of any operator may be other **expressions** or **primary expressions** (e.g. in `1+2*3`, the operands of operator `+` are the subexpression `2*3` and the **primary expression** `1`).
 
-***SUMMARY*** : python expression中也有Primaries[¶](https://docs.python.org/3.3/reference/expressions.html#primaries)
+> NOTE: python expression中也有Primaries[¶](https://docs.python.org/3.3/reference/expressions.html#primaries)的概念
 
 Primary expressions are any of the following:
 
@@ -124,7 +122,7 @@ Any expression in parentheses is also classified as a **primary expression**: th
 - [`nullptr`](https://en.cppreference.com/w/cpp/language/nullptr) is the pointer literal which specifies a null pointer value (since C++11)
 - [user-defined literals](https://en.cppreference.com/w/cpp/language/user_literal) are constant values of user-specified type (since C++11)
 
-***SUMMARY*** : python expression中也有Literals[¶](https://docs.python.org/3.3/reference/expressions.html#literals)
+> NOTE: python expression中也有Literals[¶](https://docs.python.org/3.3/reference/expressions.html#literals)
 
 
 
@@ -134,7 +132,7 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 
 The unevaluated operands are considered to be *full expressions* even though they are syntactically operands in a larger expression (for example, this means that `sizeof(T())` requires an accessible `T::~T`)
 
-The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) are also unevaluated expressions.An invocation of an [immediate function](https://en.cppreference.com/w/cpp/language/consteval) is always evaluated, even in an unevaluated operand.
+The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) are also unevaluated expressions. An invocation of an [immediate function](https://en.cppreference.com/w/cpp/language/consteval) is always evaluated, even in an unevaluated operand.
 
 ### Discarded-value expressions
 
