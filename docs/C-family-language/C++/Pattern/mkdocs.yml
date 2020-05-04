@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - Books: Books.md
+    - Singleton: Singleton

@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - Type-conversion: Type-conversion.md
+    - User-defined-conversion: User-defined-conversion.md

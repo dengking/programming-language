@@ -2,7 +2,9 @@ nav:
     - C++: C++.md
 ###################################################c++的发展，演进################################################    
     # c++的发展，演进
-    - What-is-new-in-C++: What-is-new-in-C++.md
+    - What-is-new-in-C++: What-is-new-in-C++
+    # cppreference中给出的c++的useful resource
+    - Useful-resources: Useful-resources.md
 ###################################################理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识################################################      
     # Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
     - Language-reference: Language-reference
@@ -13,10 +15,11 @@ nav:
     - Library: Library
     # 
     - Idiom: Idiom
-    # 代码风格
-    - Stype-guide: Stype-guide
     # c++的设计模式
     - Pattern: Pattern
+    # 代码风格
+    - Stype-guide: Stype-guide
+    # 
     - IDE: IDE.md
     # 对c++中的一些专题进行介绍
     - Guide: Guide

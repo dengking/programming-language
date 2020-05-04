@@ -1,10 +1,9 @@
 nav:
     - Introduction: index.md
     - Expressions: Expressions.md
+    - Value-categories: Value-categories
 #################### operator相关 ####################    
     - Operators: Operators
+    - Literals: Literals
     
-#################### operator相关 ####################
-    
-    - Constant-expressions: Constant-expressions
     
