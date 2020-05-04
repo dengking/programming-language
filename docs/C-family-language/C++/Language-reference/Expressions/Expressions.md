@@ -178,21 +178,31 @@ The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraint
 
 ### Discarded-value expressions
 
-A *discarded-value expression* is an expression that is used for its side-effects only. The value calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the built-in comma operator, or the argument of a cast-expression that casts to the type void.
+A *discarded-value expression* is an expression that is used for its side-effects only. The value calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the [built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator), or the argument of a cast-expression that casts to the type `void`.
 
-> NOTE: 没有搞懂
+> NOTE: 没有搞懂，没有具体例子，不容易理解
 
 Array-to-pointer and function-to-pointer **conversions** are never applied to the **value** calculated by a **discarded-value expression**. The **lvalue-to-rvalue conversion** is applied if and only if the expression is a [volatile-qualified](https://en.cppreference.com/w/cpp/language/cv) glvalue and has one of the following forms (built-in meaning required, possibly parenthesized)
 
-- id-expression
+- [id-expression](https://en.cppreference.com/w/cpp/language/identifiers)
 - array subscript expression
 - class member access expression
-- indirection
+- [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator)
 - pointer-to-member operation
 - conditional expression where both the second and the third operands are one of these expressions,
 - comma expression where the right operand is one of these expressions.
 
 In addition, if the lvalue is of volatile-qualified class type, a volatile copy-constructor is required to initialize the resulting **rvalue temporary**.
 
-***SUMMARY*** : 上面这段话中的几个conversion，都是standard conversion。
+> NOTE: 没有搞懂，没有具体例子，不容易理解
+
+
+
+## Full list of c++ operator
+
+c++中有哪些operator？下面对此进行枚举：
+
+在cppreference [C++ Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence)中枚举了几乎所有的c++ operator。下面是在阅读cppreference时遇到的，需要进行补充的：
+
+- [id-expression](https://en.cppreference.com/w/cpp/language/identifiers)，此处的id的含义是identifier
 
