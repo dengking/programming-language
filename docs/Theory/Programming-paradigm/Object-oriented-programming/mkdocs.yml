@@ -7,6 +7,7 @@ nav:
     - Class-based-OOP: Class-based-OOP
 #################### 多态是面向对象的核心####################    
     - Polymorphism: Polymorphism
-    
+#################### fluent api在OOP中有着官方的应用####################
+    - Flunt-API: Flunt-API.md
     - Glossary: Glossary
     - Summary-of-OO: Summary-of-OO.md

@@ -1,0 +1,3 @@
+nav:
+    - Raw_pointer_cast: Raw_pointer_cast.md
+    - Smart_pointer_cast: Smart_pointer_cast.md

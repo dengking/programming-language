@@ -4,7 +4,7 @@ How to copy an object that is accessible only by an interface that it implements
 
 
 
-## fluentcpp Polymorphic clones in modern C++
+## fluentcpp [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)
 
 ### The classical problem
 

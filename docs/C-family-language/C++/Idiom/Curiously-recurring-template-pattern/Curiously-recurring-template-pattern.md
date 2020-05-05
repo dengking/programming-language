@@ -1,6 +1,6 @@
 # Curiously recurring template pattern
 
-模板递归模式
+模板递归模式，它在c++中有着广泛的用途。
 
 ## 维基百科[Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
 
@@ -219,7 +219,7 @@ int main()
 
 ### Polymorphic copy construction
 
-When using polymorphism, one sometimes needs to create copies of objects by the base class pointer. A commonly used idiom for this is adding a virtual clone function that is defined in every derived class. The CRTP can be used to avoid having to duplicate that function or other similar functions in every derived class.
+When using polymorphism, one sometimes needs to create copies of objects by the base class pointer. A commonly used idiom for this is adding a virtual `clone` function that is defined in every derived class. The CRTP can be used to avoid having to duplicate that function or other similar functions in every derived class.
 
 ```c++
 // Base class has a pure virtual function for cloning
@@ -234,7 +234,9 @@ template <typename Derived>
 class Shape : public AbstractShape {
 public:
     std::unique_ptr<AbstractShape> clone() const override {
-        return std::make_unique<Derived>(static_cast<Derived const&>(*this));
+        // 调用基类的copy constructor，所以必须要将this转换为子类的类型，这就是
+        // static_cast<Derived const&>(*this) 的意图，否则代码是无法编译通过的。
+        return std::make_unique<Derived>(static_cast<Derived const&>(*this)); 
     }
 
 protected:
@@ -252,7 +254,23 @@ class Circle : public Shape<Circle>{};
 
 This allows obtaining copies of squares, circles or any other shapes by `shapePtr->clone()`.
 
-# thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)
+
+
+> NOTE: 这叫做Virtual Constructor Idiom，参见`C++\Idiom\Virtual-Constructor\Virtual-Constructor.md`
+>
+> 另外，与上述写法相关的有：
+>
+> [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)，收录于`C++\Idiom\Virtual-Constructor\Virtual-Constructor.md`
+>
+> [How to Return a Smart Pointer AND Use Covariance](https://www.fluentcpp.com/2017/09/12/how-to-return-a-smart-pointer-and-use-covariance/)，收录于`C++\Idiom\Covariant-Return-Types\Return-a-Smart-Pointer-AND-Use-Covariance.md`
+>
+> 它们的实现依赖于static、dynamic的结合：
+>
+> static部分是`class Shape`是模板类
+>
+> dynamic部分是`clone()`是virtual method
+
+## thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)
 
 ```c++
 #include <iostream>
@@ -477,3 +495,8 @@ Boost also uses CRTP for its [Iterator Facade](http://www.boost.org/doc/libs/1_4
 
 And finally, Microsoft's Active Template Library (ATL) uses CRTP comprehensively. See, for example, the [CWindowImpl template](http://msdn.microsoft.com/en-us/library/h4616bh2(v=vs.80).aspx).
 
+
+
+
+
+## fluentcpp [The Curiously Recurring Template Pattern (CRTP)](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)

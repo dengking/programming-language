@@ -1,2 +1,3 @@
 nav:
     - Covariant-Return-Types: Covariant-Return-Types.md
+    - Return-a-Smart-Pointer-AND-Use-Covariance: Return-a-Smart-Pointer-AND-Use-Covariance.md

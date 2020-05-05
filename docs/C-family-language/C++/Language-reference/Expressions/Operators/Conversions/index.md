@@ -1,0 +1,1 @@
+type conversion operator的内容都放到了`C++\Language-reference\Basic-concept\Type-system\Type-conversion`章节中。

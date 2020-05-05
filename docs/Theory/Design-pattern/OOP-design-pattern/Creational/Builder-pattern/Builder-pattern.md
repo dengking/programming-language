@@ -4,6 +4,131 @@
 
 ## [When would you use the Builder Pattern?](https://stackoverflow.com/questions/328496/when-would-you-use-the-builder-pattern)
 
+原文的[这个回答](https://stackoverflow.com/a/1953567)非常好，下面是java版的代码
+
+```c++
+public class Pizza {
+  private int size;
+  private boolean cheese;
+  private boolean pepperoni;
+  private boolean bacon;
+
+  public static class Builder {
+    //required
+    private final int size;
+
+    //optional
+    private boolean cheese = false;
+    private boolean pepperoni = false;
+    private boolean bacon = false;
+
+    public Builder(int size) {
+      this.size = size;
+    }
+
+    public Builder cheese(boolean value) {
+      cheese = value;
+      return this;
+    }
+
+    public Builder pepperoni(boolean value) {
+      pepperoni = value;
+      return this;
+    }
+
+    public Builder bacon(boolean value) {
+      bacon = value;
+      return this;
+    }
+
+    public Pizza build() {
+      return new Pizza(this);
+    }
+  }
+
+  private Pizza(Builder builder) {
+    size = builder.size;
+    cheese = builder.cheese;
+    pepperoni = builder.pepperoni;
+    bacon = builder.bacon;
+  }
+}
+
+Pizza pizza = new Pizza.Builder(12)
+                       .cheese(true)
+                       .pepperoni(true)
+                       .bacon(true)
+                       .build();
+```
+
+c++版
+
+```c++
+class Pizza;
+
+class Pizza
+{
+	int size;
+	bool cheese;
+	bool pepperoni;
+	bool bacon;
+public:
+	class Builder
+	{
+		//required
+		int size_;
+
+		//optional
+		bool cheese_ { false };
+		bool pepperoni_ { false };
+		bool bacon_ { false };
+		public:
+		friend class Pizza;
+		Builder(int value)
+		{
+			size_ = value;
+		}
+
+		Builder& cheese(bool value)
+		{
+			cheese_ = value;
+			return *this;
+		}
+
+		Builder& pepperoni(bool value)
+		{
+			pepperoni_ = value;
+			return *this;
+		}
+
+		Builder& bacon(bool value)
+		{
+			bacon_ = value;
+			return *this;
+		}
+
+		Pizza* build()
+		{
+			return new Pizza(*this);
+		}
+	};
+private:
+	Pizza(Builder& builder)
+	{
+		size = builder.size_;
+		cheese = builder.cheese_;
+		pepperoni = builder.pepperoni_;
+		bacon = builder.bacon_;
+	}
+};
+
+int main()
+{
+	Pizza* pizza = Pizza::Builder(12).cheese(true).pepperoni(true).bacon(true).build();
+}
+
+```
+
 
 
 
@@ -18,9 +143,3 @@ The Builder is a [design pattern](https://en.wikipedia.org/wiki/Software_design_
 
 
 
-
-
-
-fluent api相关：
-- [Fluent API](http://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html)
-- [What is the difference between a fluent interface and the Builder pattern?](https://stackoverflow.com/questions/17937755/what-is-the-difference-between-a-fluent-interface-and-the-builder-pattern)

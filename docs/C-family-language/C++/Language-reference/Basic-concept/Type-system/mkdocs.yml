@@ -1,3 +1,4 @@
 nav:
     - Type-system: Type-system.md
-    - Const: Const.md
+    - Type-qualifier: Type-qualifier
+    - Type-conversion: Type-conversion

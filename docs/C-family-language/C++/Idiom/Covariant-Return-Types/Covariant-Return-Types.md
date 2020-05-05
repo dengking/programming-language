@@ -6,6 +6,8 @@
 
 ## More C++ Idioms [Covariant Return Types](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Covariant_Return_Types)
 
+
+
 ## 维基百科[Covariant return type](https://en.wikipedia.org/wiki/Covariant_return_type)
 
 
@@ -114,3 +116,9 @@ public:
 
 2. https://stackoverflow.com/a/1261355
 3. [Factory pattern](https://stackoverflow.com/a/1260934)
+
+
+
+## [Covariance and contravariance in C++](https://quuxplusone.github.io/blog/2019/01/20/covariance-and-contravariance/)
+
+这篇文章非常好

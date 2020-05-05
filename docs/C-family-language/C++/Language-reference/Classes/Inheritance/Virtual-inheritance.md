@@ -1,6 +1,6 @@
 # Virtual inheritance
 
-
+virtual base class是virtual inheritance的base class。
 
 ## 维基百科[Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
 
@@ -10,7 +10,7 @@
 
 
 
-## [virtual inheritance [duplicate]](https://stackoverflow.com/questions/419943/virtual-inheritance)
+## [virtual inheritance](https://stackoverflow.com/questions/419943/virtual-inheritance)
 
 
 
