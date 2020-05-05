@@ -101,15 +101,21 @@ container指各种常见的数据结构，一般programming language的standard 
 
 
 
+## What's new in the programming language
+
+Programming language是在不断演进的，各种programming language都会有自己的版本计划，在每个版本中，设计者会引入新的特性，这就是本节标题的What's new in the programming language的含义，即在这个版本中，引入了哪些新的特性。
+
+作为开发者，在学习programming language的时候，可以从这些新特性，即what is new入手来进行学习，首先搞清楚设计者引入这些新特性的意图、这些新特性所能够解决的问题，然后再去了解它们的grammar。这种学习方式是更加高效的。
+
 ## Philosophy
 
 programming language的设计者往往是遵循着一定的philosophy来设计这门语言的，作为使用者，了解这门语言的philosophy，也有助于我们对它的掌握。
 
-TODO: 
 
-添加Philosophy of python
 
-添加Philosophy of c++（在https://en.wikipedia.org/wiki/C++中对此有描述）
+[Philosophy of python](https://www.python.org/dev/peps/pep-0020/)
+
+在维基百科[C++#Philosophy](https://en.wikipedia.org/wiki/C%2B%2B#Philosophy)中，描述了Philosophy of C++（在https://en.wikipedia.org/wiki/C++中对此有描述）
 
 
 

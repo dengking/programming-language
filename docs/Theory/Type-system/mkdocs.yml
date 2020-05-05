@@ -3,6 +3,13 @@ nav:
     - Type: Type.md
     - Type-safety: Type-safety.md
     - Static-vs-dynamic-typing: Static-vs-dynamic-typing.md
+########## class和type之间的关系是现代OOP的核心##########
     - Class-and-type: Class-and-type.md
     - Subtyping: Subtyping.md
+########## Covariance and contravariance##########
+    - Covariance-and-contravariance: Covariance-and-contravariance.md
+########## 类型转换是一种非常重要的类型操作##########    
+    - Type-conversion: Type-conversion
+########## 类型双关是一种非常重要的类型操作##########    
+    - Type-punning: Type-punning
     

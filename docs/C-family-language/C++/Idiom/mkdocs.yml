@@ -1,15 +1,27 @@
 nav:
     - Introduction: index.md
+########## resource相关##########    
     - RAII: RAII
     - The-rule-of-three-five-zero: The-rule-of-three-five-zero
-    - Copy-and-swap: Copy-and-swap
-    - Erase-remove: Erase-remove
     - Non-throwing-swap: Non-throwing-swap
-    - Recursive-Type-Composition: Recursive-Type-Composition
+    - Copy-and-swap: Copy-and-swap
     - Smart-Pointer: Smart-Pointer
+########## ##########    
+    - Erase-remove: Erase-remove
+    - Recursive-Type-Composition: Recursive-Type-Composition
+    
+#################### virtual相关####################    
+    - Virtual-Constructor: Virtual-Constructor
     - Virtual-Friend-Function: Virtual-Friend-Function
 #################### template相关####################    
     - Curiously-recurring-template-pattern: Curiously-recurring-template-pattern
     - Expression-Template: Expression-Template
+########## 函数相关相关##########   
+    # 函数返回值
+    - Covariant-Return-Types: Covariant-Return-Types
+    # 函数参数
+    - Named-Parameter: Named-Parameter
+    # 命名构造函数
+    - Named-Constructor: Named-Constructor
 #################### Summary####################    
     - Summary-of-C++-idiom: Summary-of-C++-idiom.md

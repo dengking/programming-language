@@ -1,4 +1,10 @@
-# [When to use virtual destructors?](https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors)
+# Virtual destructor
+
+
+
+## When should my destructor be `virtual`?
+
+### stackoverflow [When to use virtual destructors?](https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors)
 
 Virtual destructors are useful when you can delete an instance of a derived class through a pointer to **base class**:
 
@@ -27,7 +33,7 @@ delete b; // Here's the problem!
 
 Since Base's destructor is not `virtual` and `b` is a `Base*` pointing to a `Derived` object, `delete b`has [undefined behaviour](https://stackoverflow.com/q/2397984/20984):
 
-> [In `delete b`], if the **static type** of the object to be deleted is different from its **dynamic type**, the static type shall be a base class of the dynamic type of the object to be deleted and **the static type shall have a virtual destructor or the behavior is undefined**.
+> [In `delete b`], if the **static type** of the object to be deleted is different from its **dynamic type**, the **static type** shall be a base class of the dynamic type of the object to be deleted and **the static type shall have a virtual destructor or the behavior is undefined**.
 
 总结：
 
@@ -104,3 +110,10 @@ int main()
 
 You can learn more about virtuality and virtual base class destructor in [this article from Herb Sutter](http://www.gotw.ca/publications/mill18.htm).
 
+### isocpp When should my destructor be `virtual`? [¶](https://isocpp.org/wiki/faq/virtual-functions#virtual-dtors) [Δ](https://isocpp.org/wiki/faq/virtual-functions#)
+
+
+
+## Why are destructors not `virtual` by default?
+
+### isocpp Why are destructors not `virtual` by default? [¶](https://isocpp.org/wiki/faq/virtual-functions#virtual-dtor-rationale) [Δ](https://isocpp.org/wiki/faq/virtual-functions#)

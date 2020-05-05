@@ -3,3 +3,4 @@ nav:
     - Constructor: Constructor.md
     - Code-example: Code-example.md
     - Converting-constructor: Converting-constructor.md
+    - Virtual-constructor: Virtual-constructor.md

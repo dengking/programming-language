@@ -130,7 +130,7 @@ Programming languages that include **dynamic type checking** but not **static ty
 
 总结：这里给出了**dynamically typed programming languages**的正确的定义。python就是一门**dynamically typed programming language**
 
-### Combining static and dynamic type checking[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=6)]
+### Combining static and dynamic type checking
 
 Some languages allow both static and dynamic typing (type checking), sometimes called *soft* typing. For example, Java and some other ostensibly statically typed languages support [downcasting](https://en.wikipedia.org/wiki/Downcasting) types to their [subtypes](https://en.wikipedia.org/wiki/Subtypes), querying an object to discover its **dynamic type,** and other type operations that depend on **runtime type information**. More generally, most programming languages include mechanisms for dispatching over different 'kinds' of data, such as [disjoint unions](https://en.wikipedia.org/wiki/Disjoint_union), [subtype polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), and [variant types](https://en.wikipedia.org/wiki/Variant_type). Even when not interacting with type annotations or type checking, such mechanisms are materially similar to dynamic typing implementations. See [programming language](https://en.wikipedia.org/wiki/Programming_language) for more discussion of the interactions between static and dynamic typing.
 
@@ -158,13 +158,13 @@ Dynamic typing typically allows [duck typing](https://en.wikipedia.org/wiki/Duck
 
 Dynamic typing typically makes [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) easier to use. For example, [C++](https://en.wikipedia.org/wiki/C%2B%2B) [templates](https://en.wikipedia.org/wiki/Template_(programming)) are typically more cumbersome to write than the equivalent [Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)) or [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) code since [C++](https://en.wikipedia.org/wiki/C%2B%2B) has stronger rules regarding type definitions (for both functions and variables). This forces a developer to write more boilerplate code for a template than a Python developer would need to. More advanced run-time constructs such as [metaclasses](https://en.wikipedia.org/wiki/Metaclass) and [introspection](https://en.wikipedia.org/wiki/Introspection_(computer_science)) are often harder to use in statically typed languages. In some languages, such features may also be used e.g. to generate new types and behaviors on the fly, based on run-time data. Such advanced constructs are often provided by [dynamic programming languages](https://en.wikipedia.org/wiki/Dynamic_programming_language); many of these are dynamically typed, although *dynamic typing* need not be related to *dynamic programming languages*.
 
-### Strong and weak type systems[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=8)]
+### Strong and weak type systems 
 
 Main article: [Strong and weak typing](https://en.wikipedia.org/wiki/Strong_and_weak_typing)
 
 Languages are often colloquially referred to as *strongly typed* or *weakly typed*. In fact, there is no universally accepted definition of what these terms mean. In general, there are more precise terms to represent the differences between type systems that lead people to call them "strong" or "weak".
 
-### Type safety and memory safety[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=9)]
+### Type safety and memory safety 
 
 Main article: [Type safety](https://en.wikipedia.org/wiki/Type_safety)
 
@@ -196,7 +196,7 @@ In general, **type-safety** and **memory-safety** go hand in hand. For example, 
 
 For more information, see [memory safety](https://en.wikipedia.org/wiki/Memory_safety).
 
-### Variable levels of type checking[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=10)]
+### Variable levels of type checking 
 
 Some languages allow different levels of checking to apply to different regions of code. Examples include:
 
@@ -206,19 +206,19 @@ Some languages allow different levels of checking to apply to different regions 
 
 Additional tools such as [lint](https://en.wikipedia.org/wiki/Lint_(software)) and [IBM Rational Purify](https://en.wikipedia.org/wiki/IBM_Rational_Purify) can also be used to achieve a higher level of strictness.
 
-### Optional type systems[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=11)]
+### Optional type systems 
 
 It has been proposed, chiefly by [Gilad Bracha](https://en.wikipedia.org/wiki/Gilad_Bracha), that the choice of type system be made independent of choice of language; that a type system should be a module that can be *plugged* into a language as needed. He believes this is advantageous, because what he calls mandatory type systems make languages less expressive and code more fragile.[[17\]](https://en.wikipedia.org/wiki/Type_system#cite_note-18) The requirement that types do not affect the semantics of the language is difficult to fulfill.
 
 Optional typing is related to [gradual typing](https://en.wikipedia.org/wiki/Gradual_typing), but still distinct from it.[[18\]](https://en.wikipedia.org/wiki/Type_system#cite_note-19)[*better source needed*]
 
-## Polymorphism and types[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=12)]
+## Polymorphism and types 
 
 Main article: [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
 
 The term *polymorphism* refers to the ability of code (especially, functions or classes) to act on values of multiple types, or to the ability of different instances of the same data structure to contain elements of different types. Type systems that allow polymorphism generally do so in order to improve the potential for code re-use: in a language with polymorphism, programmers need only implement a data structure such as a list or an [associative array](https://en.wikipedia.org/wiki/Associative_array) once, rather than once for each type of element with which they plan to use it. For this reason computer scientists sometimes call the use of certain forms of polymorphism *generic programming*. The type-theoretic foundations of polymorphism are closely related to those of [abstraction](https://en.wikipedia.org/wiki/Abstraction_(computer_science)), [modularity](https://en.wikipedia.org/wiki/Module_(programming)) and (in some cases) [subtyping](https://en.wikipedia.org/wiki/Subtype).
 
-### Duck typing[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=13)]
+### Duck typing 
 
 Main article: [Duck typing](https://en.wikipedia.org/wiki/Duck_typing)
 
@@ -232,11 +232,11 @@ Duck typing uses the premise that (referring to a value) "if it walks like a duc
 
 While one controlled experiment showed an increase in developer productivity for duck typing in single developer projects,[[21\]](https://en.wikipedia.org/wiki/Type_system#cite_note-22) other controlled experiments on API usability show the opposite.[[22\]](https://en.wikipedia.org/wiki/Type_system#cite_note-23)[[23\]](https://en.wikipedia.org/wiki/Type_system#cite_note-24)
 
-## Specialized type systems[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=14)]
+## Specialized type systems 
 
 Many type systems have been created that are specialized for use in certain environments with certain types of data, or for out-of-band [static program analysis](https://en.wikipedia.org/wiki/Static_program_analysis). Frequently, these are based on ideas from formal [type theory](https://en.wikipedia.org/wiki/Type_theory) and are only available as part of prototype research systems.
 
-### Dependent types[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=15)]
+### Dependent types 
 
 Main article: [Dependent type](https://en.wikipedia.org/wiki/Dependent_type)
 
@@ -248,13 +248,13 @@ where {\displaystyle k}![k](https://wikimedia.org/api/rest_v1/media/math/render/
 
 Other languages such as [Epigram](https://en.wikipedia.org/wiki/Epigram_(programming_language)) make the value of all expressions in the language decidable so that type checking can be decidable. However, in general [proof of decidability is undecidable](https://en.wikipedia.org/wiki/Halting_Problem), so many programs require hand-written annotations that may be very non-trivial. As this impedes the development process, many language implementations provide an easy way out in the form of an option to disable this condition. This, however, comes at the cost of making the type-checker run in an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when fed programs that do not type-check, causing the compilation to fail.
 
-### Linear types[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=16)]
+### Linear types 
 
 Main article: [Linear type](https://en.wikipedia.org/wiki/Linear_type)
 
 [Linear types](https://en.wikipedia.org/wiki/Linear_type), based on the theory of [linear logic](https://en.wikipedia.org/wiki/Linear_logic), and closely related to [uniqueness types](https://en.wikipedia.org/wiki/Uniqueness_type), are types assigned to values having the property that they have one and only one reference to them at all times. These are valuable for describing large [immutable values](https://en.wikipedia.org/wiki/Immutable_value) such as files, strings, and so on, because any operation that simultaneously destroys a linear object and creates a similar object (such as '`str= str + "a"`') can be optimized "under the hood" into an in-place mutation. Normally this is not possible, as such mutations could cause side effects on parts of the program holding other references to the object, violating [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency_(computer_science)). They are also used in the prototype operating system [Singularity](https://en.wikipedia.org/wiki/Singularity_(operating_system)) for interprocess communication, statically ensuring that processes cannot share objects in shared memory in order to prevent race conditions. The [Clean](https://en.wikipedia.org/wiki/Clean_(programming_language)) language (a [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language))-like language) uses this type system in order to gain a lot of speed (compared to performing a deep copy) while remaining safe.
 
-### Intersection types[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=17)]
+### Intersection types 
 
 Main article: [Intersection type](https://en.wikipedia.org/wiki/Intersection_type)
 
@@ -266,7 +266,7 @@ In a subclassing hierarchy, the intersection of a type and an ancestor type (suc
 
 The Forsythe language includes a general implementation of intersection types. A restricted form is [refinement types](https://en.wikipedia.org/wiki/Refinement_type).
 
-### Union types[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=18)]
+### Union types 
 
 Main article: [Union type](https://en.wikipedia.org/wiki/Union_type)
 
@@ -274,7 +274,7 @@ Main article: [Union type](https://en.wikipedia.org/wiki/Union_type)
 
 In a subclassing hierarchy, the union of a type and an ancestor type (such as its parent) is the ancestor type. The union of sibling types is a subtype of their common ancestor (that is, all operations permitted on their common ancestor are permitted on the union type, but they may also have other valid operations in common).
 
-### Existential types[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=19)]
+### Existential types 
 
 Main article: [Existential quantifier](https://en.wikipedia.org/wiki/Existential_quantifier)
 
@@ -291,7 +291,7 @@ In general it's impossible for the typechecker to infer which existential type a
 
 Although abstract data types and modules had been implemented in programming languages for quite some time, it wasn't until 1988 that [John C. Mitchell](https://en.wikipedia.org/wiki/John_C._Mitchell) and [Gordon Plotkin](https://en.wikipedia.org/wiki/Gordon_Plotkin) established the formal theory under the slogan: "Abstract [data] types have existential type".[[24\]](https://en.wikipedia.org/wiki/Type_system#cite_note-25) The theory is a second-order [typed lambda calculus](https://en.wikipedia.org/wiki/Typed_lambda_calculus)similar to [System F](https://en.wikipedia.org/wiki/System_F), but with existential instead of universal quantification.
 
-### Gradual typing[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=20)]
+### Gradual typing 
 
 Main article: [Gradual typing](https://en.wikipedia.org/wiki/Gradual_typing)
 
@@ -307,11 +307,11 @@ Numerical and string constants and expressions in code can and often do imply ty
 
 Type inference is in general possible, if it is [decidable](https://en.wikipedia.org/wiki/Decidability_(logic)) in the type theory in question. Moreover, even if inference is undecidable in general for a given type theory, inference is often possible for a large subset of real-world programs. Haskell's type system, a version of [Hindley–Milner](https://en.wikipedia.org/wiki/Type_inference#Hindley%E2%80%93Milner_type_inference_algorithm), is a restriction of [System Fω](https://en.wikipedia.org/wiki/System_F-omega) to so-called rank-1 polymorphic types, in which type inference is decidable. Most Haskell compilers allow arbitrary-rank polymorphism as an extension, but this makes type inference undecidable. (Type checking is decidable, however, and rank-1 programs still have type inference; higher rank polymorphic programs are rejected unless given explicit type annotations.)
 
-## Unified type system[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=22)]
+## Unified type system 
 
 Some languages like [Perl 6](https://en.wikipedia.org/wiki/Perl_6) or [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) have a unified type system.[[27\]](https://en.wikipedia.org/wiki/Type_system#cite_note-28) This means that all [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) types including primitive types inherit from a single root object. Every type in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) inherits from the Object class. [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) has several primitive types that are not objects. Java provides wrapper object types that exist together with the primitive types so developers can use either the wrapper object types or the simpler non-object primitive types.
 
-## Compatibility: equivalence and subtyping[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=23)]
+## Compatibility: equivalence and subtyping 
 
 A type-checker for a statically typed language must verify that the type of any [expression](https://en.wikipedia.org/wiki/Expression_(programming)) is consistent with the type expected by the context in which that expression appears. For example, in an [assignment statement](https://en.wikipedia.org/wiki/Assignment_statement) of the form `x := *e*`, the inferred type of the expression *e* must be consistent with the declared or inferred type of the variable `x`. This notion of consistency, called *compatibility*, is specific to each programming language.
 
@@ -319,49 +319,3 @@ If the type of *e* and the type of `x` are the same, and assignment is allowed f
 
 In languages with [subtyping](https://en.wikipedia.org/wiki/Subtype), the compatibility relation is more complex. In particular, if `A` is a subtype of `B`, then a value of type `A` can be used in a context where one of type `B` is expected, even if the reverse is not true. Like equivalence, the subtype relation is defined differently for each programming language, with many variations possible. The presence of parametric or ad hoc [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) in a language may also have implications for type compatibility.
 
-## Notes[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=24)]
-
-1. **Jump up^** The Burroughs ALGOL computer line determined a memory location's contents by its flag bits. Flag bits specify the contents of a memory location. Instruction, data type, and functions are specified by a 3 bit code in addition to its 48 bit contents. Only the MCP (Master Control Program) could write to the flag code bits.
-
-## See also[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=25)]
-
-- [![icon](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/8bit-dynamiclist_%28reversed%29.gif/28px-8bit-dynamiclist_%28reversed%29.gif)](https://en.wikipedia.org/wiki/File:8bit-dynamiclist_(reversed).gif)[Computer programming portal](https://en.wikipedia.org/wiki/Portal:Computer_programming)
-
-- [Comparison of type systems](https://en.wikipedia.org/wiki/Comparison_of_type_systems)
-- [Covariance and contravariance (computer science)](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
-- [Polymorphism in object-oriented programming](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming)
-- [Type rules](https://en.wikipedia.org/wiki/Type_rules)
-- [Type signature](https://en.wikipedia.org/wiki/Type_signature)
-- [Type theory](https://en.wikipedia.org/wiki/Type_theory)
-
-## References[[edit](https://en.wikipedia.org/w/index.php?title=Type_system&action=edit&section=26)]
-
-1. **Jump up^** [Pierce 2002](https://en.wikipedia.org/wiki/Type_system#CITEREFPierce2002), p. 1: "A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute."
-2. **Jump up^** [Cardelli 2004](https://en.wikipedia.org/wiki/Type_system#CITEREFCardelli2004), p. 1: "The fundamental purpose of a type system is to prevent the occurrence of execution errors during the running of a program."
-3. **Jump up^** [Pierce 2002](https://en.wikipedia.org/wiki/Type_system#CITEREFPierce2002), p. 208.
-4. **Jump up^** [Infoworld 25 April 1983](https://books.google.com/books?id=7i8EAAAAMBAJ&pg=PA66)
-5. **Jump up^** [Brian Kernighan](https://en.wikipedia.org/wiki/Brian_Kernighan): *Why Pascal is not my favorite language*
-6. **Jump up^** "... any sound, decidable type system must be incomplete" —D. Remy (2017). p. 29, Remy, Didier. ["Type systems for programming languages"](http://gallium.inria.fr/~remy/mpri/cours1.pdf) (PDF). Retrieved 26 May2013.
-7. **Jump up^** [Pierce 2002](https://en.wikipedia.org/wiki/Type_system#CITEREFPierce2002).
-8. **Jump up^** ["dynamic (C# Reference)"](http://msdn.microsoft.com/en-us/library/dd264741.aspx). *MSDN Library*. Microsoft. Retrieved 14 January 2014.
-9. **Jump up^** Meijer, Erik; Drayton, Peter. ["Static Typing Where Possible, Dynamic Typing When Needed: The End of the Cold War Between Programming Languages"](http://research.microsoft.com/en-us/um/people/emeijer/Papers/RDL04Meijer.pdf) (PDF). [Microsoft](https://en.wikipedia.org/wiki/Microsoft) Corporation.
-10. **Jump up^** Laucher, Amanda; Snively, Paul. ["Types vs Tests"](http://www.infoq.com/presentations/Types-Tests). InfoQ.
-11. **Jump up^** Xi, Hongwei; Scott, Dana (1998). "Dependent Types in Practical Programming". *Proceedings of ACM SIGPLAN Symposium on Principles of Programming Languages*. ACM Press: 214–227. [CiteSeerX](https://en.wikipedia.org/wiki/CiteSeerX) [10.1.1.41.548](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.548) ![Freely accessible](https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/9px-Lock-green.svg.png).
-12. **Jump up^** [Visual Basic](https://en.wikipedia.org/wiki/Visual_Basic) is an example of a language that is both type-safe and memory-safe.
-13. **Jump up^** [Standard ECMA-262](http://www.ecma-international.org/publications/standards/Ecma-262.htm). Ecma-international.org. Retrieved on 2013-07-17.
-14. **Jump up^** [Strict mode - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode). Developer.mozilla.org (2013-07-03). Retrieved on 2013-07-17.
-15. **Jump up^** [Strict Mode (JavaScript)](http://msdn.microsoft.com/en-us/library/ie/br230269(v=vs.94).aspx). Msdn.microsoft.com. Retrieved on 2013-07-17.
-16. **Jump up^** [Strict typing](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict)
-17. **Jump up^** [Bracha, G.: *Pluggable Types*](http://bracha.org/pluggableTypesPosition.pdf)
-18. **Jump up^** <https://stackoverflow.com/a/13414347/975097>
-19. **Jump up^** Rozsnyai, S.; Schiefer, J.; Schatten, A. (2007). "Concepts and models for typing events for event-based systems". *Proceedings of the 2007 inaugural international conference on Distributed event-based systems – DEBS '07*. p. 62. [doi](https://en.wikipedia.org/wiki/Digital_object_identifier):[10.1145/1266894.1266904](https://doi.org/10.1145%2F1266894.1266904). [ISBN](https://en.wikipedia.org/wiki/International_Standard_Book_Number) [9781595936653](https://en.wikipedia.org/wiki/Special:BookSources/9781595936653).
-20. **Jump up^** Martelli, Alex (26 July 2000). ["Re: polymorphism (was Re: Type checking in python?)"](http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835?hl=en&). [Usenet:](https://en.wikipedia.org/wiki/Usenet) [8lmvn6017l@news1.newsguy.com](news:8lmvn6017l@news1.newsguy.com).
-21. **Jump up^** Stefan Hanenberg. ”An experiment about static and dynamic type systems: doubts about the positive impact of static type systems on development time“. OOPSLA 2010.
-22. **Jump up^** Kleinschmager, Hanenberg, Robbes, Tanter, Stefik: Do static type systems improve the maintainability of software systems? An empirical study. ICPC 2012
-23. **Jump up^** Hanenberg, Kleinschmager, S.Robbes, R.Tanter, Stefik: An empirical study on the impact of static typing on software maintainability, ESE 2014
-24. **Jump up^** Mitchell, John C.; Plotkin, Gordon D.; [*Abstract Types Have Existential Type*](http://theory.stanford.edu/~jcm/papers/mitch-plotkin-88.pdf), ACM Transactions on Programming Languages and Systems, Vol. 10, No. 3, July 1988, pp. 470–502
-25. **Jump up^** Siek, Jeremy. ["What is gradual typing?"](http://homes.soic.indiana.edu/jsiek/what-is-gradual-typing/).
-26. **Jump up^** Siek, Jeremy; Taha, Walid (September 2006). [*Gradual Typing for Functional Languages*](http://scheme2006.cs.uchicago.edu/13-siek.pdf) (PDF). *Scheme and Functional Programming 2006*. [University of Chicago](https://en.wikipedia.org/wiki/University_of_Chicago). pp. 81–92.
-27. **Jump up^** [Standard ECMA-334](http://www.ecma-international.org/publications/standards/Ecma-334.htm), 8.2.4 Type system unification.
-
-## Further reading
