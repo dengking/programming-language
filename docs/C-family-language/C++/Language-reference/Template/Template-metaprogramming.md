@@ -160,14 +160,5 @@ Another similar use is the "[Barton–Nackman trick](https://en.wikipedia.org/wi
 
 ## Benefits and drawbacks of template metaprogramming
 
-**Compile-time versus execution-time tradeoff** 
 
-If a great deal of template metaprogramming is used, compilation may become slow; section 14.7.1 [temp.inst] of the current standard defines the circumstances under which templates are implicitly instantiated. Defining a template does not imply that it will be instantiated, and instantiating a class template does not cause its member definitions to be instantiated. Depending on the style of use, templates may compile either faster or slower than hand-rolled code.
 
-[Generic programming](https://en.wikipedia.org/wiki/Generic_programming) 
-
-Template metaprogramming allows the programmer to focus on architecture and delegate to the compiler the generation of any implementation required by client code. Thus, template metaprogramming can accomplish truly generic code, facilitating code minimization and better maintainability[*citation needed*].
-
-**Readability** 
-
-With respect to C++, the syntax and idioms of template metaprogramming are esoteric compared to conventional C++ programming, and template metaprograms can be very difficult to understand.[[6\]](https://en.wikipedia.org/wiki/Template_metaprogramming#cite_note-6)[[7\]](https://en.wikipedia.org/wiki/Template_metaprogramming#cite_note-7)
