@@ -69,3 +69,11 @@ expressive programming language让我们能够编写更加readable、更加domai
 ## Thoughts
 
 越expressive的语言不通你越觉得就像是在进行配置一样
+
+
+
+## More expressive means you can express concept more expressively
+
+本节标题的含义是：更加expressive意味着你能够更加expressively地来描述概念。
+
+这是我在学习c++20 [concept](https://en.cppreference.com/w/cpp/language/constraints)特性时想到的，比起普通的template，显然c++20 [concept](https://en.cppreference.com/w/cpp/language/constraints)能够让programmer更加直观地表达相关named requirement。与此类似的是python [type hint](https://www.python.org/dev/peps/pep-0484/)。

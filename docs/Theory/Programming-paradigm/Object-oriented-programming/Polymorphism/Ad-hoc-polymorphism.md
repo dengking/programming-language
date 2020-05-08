@@ -6,3 +6,7 @@
 
 > The term [ad hoc](https://en.wikipedia.org/wiki/Ad_hoc) in this context is not intended to be pejorative; it refers simply to the fact that this type of polymorphism is not a fundamental feature of the [type system](https://en.wikipedia.org/wiki/Type_system). 
 
+包括两种：
+
+- [Function overloading](https://en.wikipedia.org/wiki/Function_overloading)
+- [Operator overloading](https://en.wikipedia.org/wiki/Operator_overloading)

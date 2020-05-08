@@ -1,4 +1,8 @@
-# [Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)
+# Template metaprogramming
+
+c++ template是属于template metaprogramming流派的。
+
+## [Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)
 
 **Template metaprogramming** (**TMP**) is a [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) technique in which [templates](https://en.wikipedia.org/wiki/Generic_programming) are used by a [compiler](https://en.wikipedia.org/wiki/Compiler) to generate temporary [source code](https://en.wikipedia.org/wiki/Source_code), which is merged by the compiler with the rest of the source code and then compiled. The **output** of these templates include [compile-time](https://en.wikipedia.org/wiki/Compile_time) [constants](https://en.wikipedia.org/wiki/Constant_(programming)), [data structures](https://en.wikipedia.org/wiki/Data_structure), and complete [functions](https://en.wikipedia.org/wiki/Function_(computer_science)). The use of templates can be thought of as [compile-time execution](https://en.wikipedia.org/wiki/Compile_time_function_execution). The technique is used by a number of languages, the best-known being [C++](https://en.wikipedia.org/wiki/C%2B%2B), but also [Curl](https://en.wikipedia.org/wiki/Curl_programming_language), [D](https://en.wikipedia.org/wiki/D_programming_language), and [XL](https://en.wikipedia.org/wiki/XL_Programming_Language).
 
@@ -8,9 +12,7 @@
 
 
 
-## Components of template metaprogramming
-
-The use of templates as a metaprogramming technique requires two distinct operations: a template must be defined, and a defined template must be [instantiated](https://en.wikipedia.org/wiki/Instance_(computer_science)). The template definition describes the generic form of the generated source code, and the instantiation causes a specific set of source code to be generated from the generic form in the template.
+### Components of template metaprogramming
 
 Template metaprogramming is [Turing-complete](https://en.wikipedia.org/wiki/Turing-complete) （图灵完全的）, meaning that any computation expressible by a computer program can be computed, in some form, by a template metaprogram.[[3\]](https://en.wikipedia.org/wiki/Template_metaprogramming#cite_note-Veldhuizen2003-3)
 
@@ -22,17 +24,23 @@ Templates are different from *macros*. A macro, which is also a compile-time lan
 
 **Template metaprograms** have no [mutable variables](https://en.wikipedia.org/wiki/Immutable_object)— that is, no variable can change value once it has been initialized, therefore **template metaprogramming** can be seen as a form of [functional programming](https://en.wikipedia.org/wiki/Functional_programming). In fact many template implementations implement **flow control** only through [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)), as seen in the example below.
 
-> NOTE: 上面这段话中，提到了template metaprogramming can be seen as a form of functional programming，其中特别提及了recursion，这就是典型的functional programming。下面的`factorial`就是一个典型的例子；`factorial`的实现是典型的functional programming，使用`c++`的template metaprogramming可以实现compiler-time的functional programming。
+> NOTE: 上面这段话对于理解template metaprogramming是非常重要的：
+>
+> template metaprogramming can be seen as a form of functional programming
+>
+> 在后面，我们会学习到template parameter和template argument，如果将template metaprogramming看做是一种functional programming的话，这个概念是非常任意理解的。
+>
+> 其中特别提及了recursion，这就是典型的functional programming。下面的`factorial`就是一个典型的例子；`factorial`的实现是典型的functional programming，使用`c++`的template metaprogramming可以实现compiler-time的functional programming。
 
 
 
-### Using template metaprogramming
+#### Using template metaprogramming
 
 Though the syntax of **template metaprogramming** is usually very different from the programming language it is used with, it has practical uses. Some common reasons to use templates are to implement **generic programming** (avoiding sections of code which are similar except for some minor variations) or to perform **automatic compile-time optimization** such as doing something once at **compile time** rather than every time the program is run — for instance, by having the compiler **unroll loops** to eliminate jumps（联想for-loop的流程图，可以想到此处的jump所指为每轮for-loop结束后，jump到循环开始的地方，然后继续执行） and loop count decrements whenever the program is executed.
 
 > NOTE: 这一段说明的是使用metaprogramming的原因所在。
 
-## Compile-time class generation
+### Compile-time class generation
 
 What exactly "programming at compile-time" means can be illustrated with an example of a factorial function, which in non-template C++ can be written using recursion as follows:
 
@@ -68,7 +76,7 @@ The code above calculates the factorial value of the literals 4 and 0 at **compi
 
 > NOTE: 在维基百科[Compile time function execution](https://en.wikipedia.org/wiki/Compile_time_function_execution)中，给出了c++11和c++14中，上述例子的书写方法。
 
-## Compile-time code optimization
+### Compile-time code optimization
 
 See also: [Compile time function execution](https://en.wikipedia.org/wiki/Compile_time_function_execution)
 
@@ -102,7 +110,7 @@ The compiler's optimizer should be able to unroll the `for` loop because the tem
 
 However, take care and exercise caution as this may cause code bloat as separate unrolled code will be generated for each 'N'(vector size) you instantiate with.
 
-## Static polymorphism
+### Static polymorphism
 
 [Polymorphism](https://en.wikipedia.org/wiki/Type_polymorphism) is a common standard programming facility where **derived objects** can be used as instances of their base object but where the derived objects' methods will be invoked, as in this code
 
@@ -158,7 +166,10 @@ Here the base class template will take advantage of the fact that **member funct
 
 Another similar use is the "[Barton–Nackman trick](https://en.wikipedia.org/wiki/Barton%E2%80%93Nackman_trick)", sometimes referred to as "restricted template expansion", where common functionality can be placed in a base class that is used not as a contract but as a necessary component to enforce conformant behaviour while minimising code redundancy.
 
-## Benefits and drawbacks of template metaprogramming
+### Benefits and drawbacks of template metaprogramming
 
 
 
+## Template is a kind of abstraction
+
+类是一种抽象，模板也是一种抽象，模板类是抽象的抽象。

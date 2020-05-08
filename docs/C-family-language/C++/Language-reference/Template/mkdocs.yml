@@ -1,7 +1,13 @@
 nav:
+######### 首先介绍template metaprogramming的概念，c++ template就是属于这个流派##########
     - Template-metaprogramming: Template-metaprogramming.md
+######### 然后介绍c++ template##########    
     - Templates: Templates.md
+######### 在Template-metaprogramming.md中已经提及，可以将template看做是一种functional programming，那么它就有它的
+# parameter和argument，所以这个认知对于理解template parameter和template argument是非常重要的    
     - Template-parameters-and-template-arguments: Template-parameters-and-template-arguments.md
     - Class-template: Class-template
     - Specialization: Specialization
+########## SFINAE是一种非常重要的技术##########
+    - SFINAE: SFINAE
     - Concepts: Concepts
