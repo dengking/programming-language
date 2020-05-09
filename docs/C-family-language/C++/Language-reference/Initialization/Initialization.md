@@ -1,5 +1,51 @@
 # Initialization
 
+## cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization)
+
+
+
+### Non-local variables
+
+> NOTE: 首先需要搞清楚non-local variable的概念，参见
+>
+> - `Theory\Resource-management\Memory-management\Variable`章节
+>
+> - `C-family-language\C++\Language-reference\Basic-concept\Data-model\Object\Storage.md`章节
+>
+> 
+
+All non-local variables with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) are initialized as part of program startup, before the execution of the [main function](https://en.cppreference.com/w/cpp/language/main_function) begins (unless deferred, see below). 
+
+All non-local variables with thread-local storage duration are initialized as part of thread launch, sequenced-before the execution of the thread function begins. 
+
+For both of these classes of variables, initialization occurs in two distinct stages:
+
+#### Static initialization
+
+> NOTE: static initialization的含义是什么？它是发生在compile-time吗？后面有专门的章节对它进行介绍
+
+
+
+#### Dynamic initialization
+
+
+
+#### Early dynamic initialization
+
+
+
+#### Deferred dynamic initialization
+
+
+
+### Static local variables
+
+
+
+### Class members
+
+
+
 先看看[learncpp](https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/)的[1.4 — Variable assignment and initialization](https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/)中关于initialization的介绍，因为其中结合了具体的示例，更加容易理解，然后再来看cppreference中对[Initialization](https://en.cppreference.com/w/cpp/language/initialization)的更加标准化的定义。
 
 

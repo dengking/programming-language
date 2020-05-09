@@ -27,7 +27,10 @@ static Bar bar_;
 };
 Foo f;
 Bar Foo::bar_; // definition of static member bar_
-int main () {}
+int main () 
+{
+    cout << "main\n";
+}
 ```
 
 > NOTE: 编译`g++ test.cpp`，输出如下：

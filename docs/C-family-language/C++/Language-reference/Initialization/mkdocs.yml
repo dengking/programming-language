@@ -1,3 +1,6 @@
 nav:
     - Introduction: index.md
     - Initialization: Initialization.md
+    - Initialization-of-Static-Variables: Initialization-of-Static-Variables
+    - Zero-initialization: Zero-initialization.md
+    - Constant_initialization: Constant_initialization.md

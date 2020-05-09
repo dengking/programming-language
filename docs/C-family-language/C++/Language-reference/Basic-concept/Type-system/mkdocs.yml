@@ -2,6 +2,9 @@ nav:
     - Type-system: Type-system.md
 # c++的type system是支持type qualifier的    
     - Type-qualifier: Type-qualifier
+# 查询类型
+    - decltype: decltype
+    - typeid: typeid
 # 类型转换是type system的一个非常重要的内容    
     - Type-conversion: Type-conversion
     - Reflection: Reflection.md

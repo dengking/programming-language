@@ -48,18 +48,19 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 ## cppreference [Type support library](https://en.cppreference.com/w/cpp/types)
 
+在`C++\Library\Standard-library\Utility-library\Language-support\Type_support`中，对此进行了分析。
+
 
 
 ## cppreference [typeid](https://en.cppreference.com/w/cpp/language/typeid)
 
+参见本章的`typeid`
 
+## cppreference [decltype](https://en.cppreference.com/w/cpp/language/typeid) 
+
+参见本章的`decltype`
 
 ## type cast and conversion
 
-- [static_cast](https://en.cppreference.com/w/cpp/language/static_cast) 
-- [const_cast](https://en.cppreference.com/w/cpp/language/const_cast)
-- [dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast)
-- [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
-- [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast)
-- [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast)
-- [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) 用户定义的类型转换规则
+参见本章的`Type-conversion`
+

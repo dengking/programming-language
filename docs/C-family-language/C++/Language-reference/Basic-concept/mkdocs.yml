@@ -7,6 +7,7 @@ nav:
     - Organization: Organization
     # 需要先描述c++ type system，然后描述declarations，因为declarations中的描述涉及到了type system中的概念
     - Type-system: Type-system
+    # 声明的概念在c++中非常重要
     - Declarations: Declarations
     # c++的执行模型
     - Execution-model: Execution-model
