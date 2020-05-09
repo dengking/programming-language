@@ -24,5 +24,5 @@ c++语言是在不断地演进的，那c++标准委员会的专家们是以什�
 
 > Prefer introducing new features via the standard library, rather than extending the core language
 
-
+上述standard library，更加具体来说就是[Language support library](https://en.cppreference.com/w/cpp/utility#Language_support)。
 

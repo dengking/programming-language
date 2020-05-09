@@ -4,7 +4,7 @@
 
 ### Motivation
 
-Static objects that have **non-trivial constructors** must be initialized before they are used. It is possible to access an uninitialized **non-local static object** before its initialization if proper care is not exercised.
+**Static objects** that have **non-trivial constructors** must be initialized before they are used. It is possible to access an uninitialized **non-local static object** before its initialization if proper care is not exercised.
 
 > NOTE: **non-trivial constructors**
 

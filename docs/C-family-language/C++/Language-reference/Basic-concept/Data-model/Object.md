@@ -1,8 +1,10 @@
 # Object
 
-需要注意的是，本文中的 object 并不是我们 object-oriented programming 中所指的 object；本文的 object是指“region of storage”。显然，它的含义与object-oriented programming 中所指的 object 完全不同；
+需要注意的是，本文中的 object 并不是我们 object-oriented programming 中所指的 object；本文的 object是指“region of storage”，在C中，有同样的概念，参见[Objects and alignment](https://en.cppreference.com/w/c/language/object)。显然，它的含义与object-oriented programming 中所指的 object 完全不同；
 
 此处的 object 是一个 runtime 概念，因为只有当program运行的时候，object才会被创建。
+
+> NOTE: 上面这段话的是不准确的，c++语言重复发挥了compile-time computation，所有有多object是在运行时就已经创建了
 
 object概念对于理解后面的内容非常重要，可以说，后续的很多概念都是建立在object之上的。
 
@@ -36,25 +38,19 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 
 
+#### [Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
 
 
 
+#### [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
 
 
 
+#### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 
 
 
-
-
-
-
-
-
-
-
-
-
+#### Alignment
 
 ## Lifetime of object
 
