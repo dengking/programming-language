@@ -9,8 +9,7 @@ nav:
     - Statements: Statements
     # function是programming language中都会涉及的一个问题
     - Functions: Functions
-    # 如何使用oop？
-    - Classes: Classes
+   
     # 指针和数组一般都会放到一起
     - Pointer: Pointer
     # Array
@@ -23,8 +22,13 @@ nav:
     - Namespace: Namespace
     # 枚举相关的问题
     - Enum: Enum
-    # 模板
-    - Template: Template
+    # 如何使用oop？
+    - Classes: Classes
 ###################################################这是在使用language过程中会涉及到的一些问题################################################    
     # 如何进行初始化，这在c++中非常重要
-    - Initialization: Initialization
+    - Initialization: Initialization     
+    # 模板
+    - Template: Template
+
+# 这是c++11引入的新特性    
+    - Attribute: Attribute

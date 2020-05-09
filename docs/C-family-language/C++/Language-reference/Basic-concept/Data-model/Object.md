@@ -1,6 +1,6 @@
 # Object
 
-需要注意的是，本文中的 object 并不是我们 object-oriented programming 中所指的 object；本文的 object是指“region of storage”，在C中，有同样的概念，参见[Objects and alignment](https://en.cppreference.com/w/c/language/object)。显然，它的含义与object-oriented programming 中所指的 object 完全不同；
+需要注意的是，本文中的 object 并不是我们 object-oriented programming 中所指的 object；本文的 object是指“region of storage”，在C中，有同样的概念，参见[Objects and alignment](https://en.cppreference.com/w/c/language/object)。显然，它的含义与object-oriented programming 中所指的 object 完全不同，后面为了便于区分，将它称为memory object，将OOP中的object称为OOP object；
 
 此处的 object 是一个 runtime 概念，因为只有当program运行的时候，object才会被创建。
 
@@ -37,6 +37,10 @@ A *variable* is an object or a reference that is not a non-static data member, t
 ### Object representation and value representation
 
 
+
+> NOTE: 需要留心的是，原文关于value representation和object representation之间关系的讨论对象是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的类型，这一点和C中关于这个话题的讨论是不同的。关于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中进行了详细分析。
+>
+> 仅仅讨论[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types是源于c++语言的复杂性，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中对这个问题进行了分析。
 
 #### [Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
 

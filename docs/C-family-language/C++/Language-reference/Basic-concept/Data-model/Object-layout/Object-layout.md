@@ -1,6 +1,10 @@
 # Object layout
 
-## 维基百科[Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C++11#Modification_to_the_definition_of_plain_old_data)
+c++标准对object layout的定义是在有进行变更的，下面首先反思变更历程，然后再来具体的思考各种object layout。
+
+## 标准变更历程
+
+### 维基百科[C++11#Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C++11#Modification_to_the_definition_of_plain_old_data)
 
 In C++03, a class or struct must follow a number of rules for it to be considered a [plain old data](https://en.wikipedia.org/wiki/Plain_old_data) (POD) type. Types that fit this definition produce **object layouts** that are compatible with C, and they could also be initialized statically. 
 
@@ -9,13 +13,13 @@ In C++03, a class or struct must follow a number of rules for it to be considere
 > - compatible with C
 > - initialized statically
 
-
-
 C++11 relaxed several of the POD rules, by dividing the **POD concept** into two separate concepts: *trivial* and *standard-layout*.
 
 A type that is *trivial* can be **statically initialized**. It also means that it is valid to copy data around via `memcpy`, rather than having to use a **copy constructor**. The lifetime of a *trivial* type begins when its storage is defined, not when a constructor completes.
 
 > NOTE: storage defined和constructor complete之间有什么关联？
+
+> NOTE: 上面所描述的其实就是Named requirement [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)、Named requirement [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)。
 
 A trivial class or struct is defined as one that:
 
@@ -24,9 +28,11 @@ A trivial class or struct is defined as one that:
 3. Has trivial copy and move assignment operators, which may use the default syntax.
 4. Has a trivial destructor, which must not be **virtual**.
 
+> NOTE: Named requirement [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)的描述是比上述描述要清晰易懂的，它将上述2、3、4，定义为Named requirement [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)。
+
 Constructors are **trivial** only if there are no **virtual member functions** of the class and no **virtual base classes**. Copy/move operations also require all non-static data members to be trivial.
 
-> NOTE:  下面的文章对trivial的定义与这不同
+> NOTE: 这里对trivial的含义进行了描述，显然trivial是不允许virtual的。
 
 A type that is *standard-layout* means that it orders and packs its members in a way that is compatible with C. A class or struct is standard-layout, by definition, provided:
 
@@ -37,17 +43,50 @@ A type that is *standard-layout* means that it orders and packs its members in a
 5. The above rules also apply to all the base classes and to all non-static data members in the class hierarchy
 6. It has no base classes of the same type as the first defined non-static data member
 
-> NOTE: 没有理解
+> NOTE: 显然，standard layout是不允许virtual的。
+>
+> 下面的文章有例子。
 
 A class/struct/union is considered POD if it is trivial, standard-layout, and all of its non-static data members and base classes are PODs.
 
 By separating these concepts, it becomes possible to give up one without losing the other. A class with complex move and copy constructors may not be trivial, but it could be standard-layout and thus interoperate with C. Similarly, a class with public and private non-static data members would not be standard-layout, but it could be trivial and thus `memcpy`-able.
 
+### [trivial vs. standard layout vs. POD](https://stackoverflow.com/questions/6496545/trivial-vs-standard-layout-vs-pod)
+
+[回答](https://stackoverflow.com/a/6496703)中也对标准的便跟历程进行了说明。
+
+```c++
+struct N { // neither trivial nor standard-layout
+   int i;
+   int j;
+    virtual ~N();
+};
+
+struct T { // trivial but not standard-layout
+    int i;
+private:
+    int j;
+};
+
+struct SL { // standard-layout but not trivial
+    int i;
+    int j;
+    ~SL();
+};
+
+struct POD { // both trivial and standard-layout
+    int i;
+    int j;
+};
+```
 
 
-## [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)
 
-The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a layout. That layout may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
+## microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)
+
+> NOTE: 这篇文章，主要是对这些概念进行详细的分析
+
+The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a **layout**. That **layout** may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
 
 > NOTE: 上诉“member”所指为data member
 
@@ -61,7 +100,7 @@ When a class or struct in C++ has compiler-provided or explicitly defaulted spec
 >
 > `Trivial2() = default;`
 
-Trivial types have a [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor), [trivial copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor#Trivial_copy_constructor), [trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator) and trivial destructor. In each case, *trivial* means the constructor/operator/destructor is not user-provided and belongs to a class that has
+Trivial types have a [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor), [trivial copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor#Trivial_copy_constructor), [trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator) and [trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor). In each case, *trivial* means the constructor/operator/destructor is not user-provided and belongs to a class that has
 
 - no virtual functions or virtual base classes,
 - no base classes with a corresponding non-trivial constructor/operator/destructor
@@ -272,32 +311,25 @@ A literal type is one whose layout can be determined at compile time. The follow
 - Arrays of void, scalar types or references
 - A class that has a trivial destructor, and one or more `constexpr` constructors that are not move or copy constructors. Additionally, all its non-static data members and base classes must be literal types and not volatile.
 
-## [trivial vs. standard layout vs. POD](https://stackoverflow.com/questions/6496545/trivial-vs-standard-layout-vs-pod)
+## Named requirements of layout 
 
-```cpp
-struct N { // neither trivial nor standard-layout
-   int i;
-   int j;
-    virtual ~N();
-};
+> NOTE: 有了前面的基础，现在阅读cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中关于[layout](https://en.cppreference.com/w/cpp/named_req#Layout)的描述就容易了。
 
-struct T { // trivial but not standard-layout
-    int i;
-private:
-    int j;
-};
+### [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) (C++11)
 
-struct SL { // standard-layout but not trivial
-    int i;
-    int j;
-    ~SL();
-};
 
-struct POD { // both trivial and standard-layout
-    int i;
-    int j;
-};
-```
+
+### [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType) (C++11)
+
+
+
+### [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType)(C++11)
+
+
+
+### [PODType](https://en.cppreference.com/w/cpp/named_req/PODType)
+
+
 
 ## SUMMARY
 
