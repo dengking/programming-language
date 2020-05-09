@@ -96,9 +96,9 @@ If the object was created by an [allocation function](https://en.cppreference.co
 
 
 
-***SUMMARY*** : 看到了effective type，我想到了在Unix中的effective user ID；
+> NOTE: 看到了effective type，我想到了在Unix中的effective user ID；
 
-***SUMMARY*** : `c++`中并没有effective type的概念；其实主要原因在于c++中使用了`new`，而c中则是`malloc`，显然这是`c++`在type safety上的一些改善，这一点在[Type safety](https://en.wikipedia.org/wiki/Type_safety#C++)中有解释；
+> NOTE: `c++`中并没有effective type的概念；其实主要原因在于c++中使用了`new`，而c中则是`malloc`，显然这是`c++`在type safety上的一些改善，这一点在[Type safety](https://en.wikipedia.org/wiki/Type_safety#C++)中有解释；
 
 
 

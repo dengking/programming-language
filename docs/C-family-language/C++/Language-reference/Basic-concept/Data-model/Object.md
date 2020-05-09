@@ -42,19 +42,39 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > 仅仅讨论[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types是源于c++语言的复杂性，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中对这个问题进行了分析。
 
+
+
 #### [Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
+
+> NOTE: 原文定义了如下概念：
+>
+> *subobjects*
+>
+> *complete object*，显然*complete object*和*subobjects*是两个相反的概念
+>
+> *most derived objects*，所谓most derived，其实可以从class hierarchy来理解，最最顶端的是root class，most derived class，显然就是叶子节点了
 
 
 
 #### [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
 
+Objects of a class type that declares or inherits at least one virtual function are polymorphic objects. Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
 
+> NOTE: [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)不是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) 
+
+For non-polymorphic objects, the interpretation of the value is determined from the expression in which the object is used, and is decided at compile time.
+
+> NOTE: 每个[Polymorphic object](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)有[Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)和[Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)
 
 #### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 
 
 
-#### Alignment
+#### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
+
+
+
+
 
 ## Lifetime of object
 
