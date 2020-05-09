@@ -42,6 +42,8 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 > NOTE: static type和dynamic type的概念对于c++ 非常重要，关于两者的一个典型例子就是：c++中如何实现multiple dispatch，参见[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)，在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Subtyping-polymorphism\Multiple-dispatch.md`中收录了这篇文章。
 
+### [Incomplete type](https://en.cppreference.com/w/cpp/language/type#Incomplete_type)
+
 
 
 ## cppreference [Type support library](https://en.cppreference.com/w/cpp/types)

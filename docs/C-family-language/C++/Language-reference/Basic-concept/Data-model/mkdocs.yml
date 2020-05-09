@@ -1,7 +1,4 @@
 nav:
     - Introduction: index.md
-    - Object: Object.md
-    - Object-storage: Object-storage.md
-    - Object-layout: Object-layout
+    - Object: Object
     - Memory-model: Memory-model
-    - Variable: Variable.md

@@ -72,13 +72,9 @@ For non-polymorphic objects, the interpretation of the value is determined from 
 
 #### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
 
+> NOTE: 原文将alignment放到object章节，但是我觉得alignment应该是type的属性，所以将alignment放到了Type-system章节中。
 
 
-
-
-## Lifetime of object
-
-object的initialization。
 
 ## Variable and object
 

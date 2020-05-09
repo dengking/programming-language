@@ -5,3 +5,5 @@ nav:
 # 类型转换是type system的一个非常重要的内容    
     - Type-conversion: Type-conversion
     - Reflection: Reflection.md
+# 类型决定了alignment
+    - Alignment: Alignment.md
