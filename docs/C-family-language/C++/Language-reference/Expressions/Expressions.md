@@ -6,7 +6,7 @@
 
 An expression is a sequence of *operators* and their *operands*, that specifies a **computation**.
 
-> NOTE: 上诉定义是从数学expression的角度出发来给出的定义，关于此可以参见`Theory\Programming-language-construct\Basic-Language-construct\Operator-expression-statement.md`，其中对这个话题进行了详细分析。
+> NOTE: 上述定义是从数学expression的角度出发来给出的定义，关于此可以参见`Theory\Programming-language-construct\Basic-Language-construct\Operator-expression-statement.md`，其中对这个话题进行了详细分析。
 >
 > 那c++语言中的expression是否仅限于此呢？不是的，在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中给出了详细的说明：
 >
@@ -202,7 +202,11 @@ In addition, if the lvalue is of volatile-qualified class type, a volatile copy-
 
 c++中有哪些operator？下面对此进行枚举：
 
-在cppreference [C++ Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence)中枚举了几乎所有的c++ operator。下面是在阅读cppreference时遇到的，需要进行补充的：
+在cppreference [C++ Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence)中枚举了几乎所有的c++ operator。
+
+## Supplement
+
+下面是在阅读cppreference时遇到的，需要进行补充的：
 
 - [id-expression](https://en.cppreference.com/w/cpp/language/identifiers)，此处的id的含义是identifier
 

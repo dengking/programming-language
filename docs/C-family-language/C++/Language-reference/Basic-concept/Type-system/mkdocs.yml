@@ -1,9 +1,13 @@
 nav:
     - Type-system: Type-system.md
+# 本篇讲述dynamic type的实现    
+    - Run-time-type-information: Run-time-type-information.md
 # c++的type system是支持type qualifier的    
     - Type-qualifier: Type-qualifier
 # 查询类型
+    # 查询静态类型
     - decltype: decltype
+    # 查询动态类型
     - typeid: typeid
 # 类型转换是type system的一个非常重要的内容    
     - Type-conversion: Type-conversion
