@@ -89,3 +89,15 @@ int main()
 编译`g++ tests.cpp`
 
 ## 维基百科[Named parameter#With chained method calls](https://en.wikipedia.org/wiki/Named_parameter#With_chained_method_calls)
+
+
+
+
+
+## TO READ 
+
+https://marcoarena.wordpress.com/2014/12/16/bring-named-parameters-in-modern-cpp/
+
+https://stackoverflow.com/questions/40533193/v8-c-how-to-get-object-key-values-provided-as-arguments
+
+https://www.fluentcpp.com/2018/12/14/named-arguments-cpp/

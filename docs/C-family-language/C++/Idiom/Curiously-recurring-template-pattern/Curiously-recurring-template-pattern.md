@@ -500,3 +500,23 @@ And finally, Microsoft's Active Template Library (ATL) uses CRTP comprehensively
 
 
 ## fluentcpp [The Curiously Recurring Template Pattern (CRTP)](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)
+
+
+
+
+
+
+
+## TO READ
+
+
+
+这个回答中的例子非常好
+
+https://stackoverflow.com/a/4173298
+
+https://www.geeksforgeeks.org/curiously-recurring-template-pattern-crtp-2/
+
+这个答案中进行了benchMark
+
+https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/

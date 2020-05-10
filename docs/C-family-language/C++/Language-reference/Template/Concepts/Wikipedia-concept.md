@@ -1,5 +1,5 @@
 # 维基百科[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))
-
+> 维基百科的[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))对concept的介绍是比较简洁清晰的，可以作为prime来进行阅读。
 
 
 ## [Main uses](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Main_uses)
@@ -53,3 +53,12 @@ note:   concept 'RandomAccessIterator()' was not satisfied
 
 ## [Type deduction](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Type_deduction)
 
+
+
+## TO READ
+
+https://www.modernescpp.com/index.php/c-20-concepts-the-details
+
+https://www.drdobbs.com/cpp/the-c0x-remove-concepts-decision/218600111
+
+https://www.modernescpp.com/index.php/c-20-define-the-concept-regular-and-semiregular

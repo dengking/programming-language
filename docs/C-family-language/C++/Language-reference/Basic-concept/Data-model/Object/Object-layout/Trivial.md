@@ -14,3 +14,16 @@
 - [Trivial move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment#Trivial_move_assignment_operator)
 - [Trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor)
 
+
+
+## TO READ
+
+https://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c
+
+https://www.geeksforgeeks.org/trivial-classes-c/
+
+http://olafurw.com/2019-02-14-trivial-code/
+
+https://isocpp.org/blog/2018/03/quick-q-what-is-a-non-trivial-constructor-in-cpp
+
+https://www.geeksforgeeks.org/trivial-classes-c/

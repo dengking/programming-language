@@ -106,6 +106,12 @@ int main() {
 
 > NOTE: 编译`g++ --std=c++11 test.cpp`，这段代码和上一段代码的输出是不同的，这段代码都是输出的`true`。
 
+
+
+## cppreference [sfinae](https://en.cppreference.com/w/cpp/language/sfinae)
+
+
+
 ## SFINAE and `enable_if`
 
 
@@ -123,3 +129,22 @@ int main() {
 
 
 ## sfinae and `static_assert`
+
+
+
+## TO READ
+
+
+
+https://www.bfilipek.com/2016/02/notes-on-c-sfinae.html
+
+
+
+https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/
+
+
+https://www.modernescpp.com/index.php/c-20-concepts-the-details
+
+
+### concept and sfinae
+https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae
