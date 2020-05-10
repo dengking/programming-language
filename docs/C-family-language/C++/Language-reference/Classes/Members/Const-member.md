@@ -2,4 +2,3 @@
 
 
 
-# [C++ Static Const Member Variable](https://cookierobotics.com/032/)
