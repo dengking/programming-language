@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - Type-support: Type-support.md
+    - Type-traits: Type-traits

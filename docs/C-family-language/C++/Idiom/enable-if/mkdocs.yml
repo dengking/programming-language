@@ -1,2 +1,3 @@
 nav:
     - enable_if: enable_if.md
+    - Analysis-of-enable_if: Analysis-of-enable_if.md

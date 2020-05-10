@@ -265,7 +265,7 @@ enum { value = false };
 
 
 
-# [how do traits classes work?](https://stackoverflow.com/questions/3979766/how-do-traits-classes-work)
+## [how do traits classes work?](https://stackoverflow.com/questions/3979766/how-do-traits-classes-work)
 
 I'm reading Scott Meyers' [*Effective C++*](http://rads.stackoverflow.com/amzn/click/0321334876). He is talking about traits classes, I understood that I need them to determine the type of the object during compilation time, but I can't understand his explanation about what these classes actually do? (from technical point of view)
 
@@ -273,11 +273,11 @@ I'm reading Scott Meyers' [*Effective C++*](http://rads.stackoverflow.com/amzn/c
 
 Traits classes do *not* determine the type of the object. Instead, they provide additional information about a type, typically by defining typedefs or constants inside the trait.
 
-***SUMMARY*** : 我们使用trait class来定义trait；trait class 总数template class
+> NOTE: 我们使用trait class来定义trait；trait class 总数template class
 
 
 
-# [Traits - A Template Specialization](https://www.bogotobogo.com/cplusplus/template_specialization_traits.php)
+## bogotobogo [Traits - A Template Specialization](https://www.bogotobogo.com/cplusplus/template_specialization_traits.php)
 
 Suppose we want to get max values for **int** or **double**, we do this:
 
@@ -448,10 +448,29 @@ For template specialization, please visit [Template Specialization](http://www.b
 
 
 
-# THINKING
+## THINKING
 
 在[An introduction to C++ Traits](https://accu.org/index.php/journals/442)有这样的一段话：
 
 > First, **a generic template** is defined that implements the **default behaviour**.
 
 trait class往往会定义一个template class，然后提供这个template的各种specification，显然在template class中需要提供trait的一种默认实现；如果trait是一个成员变量，那这还好说，如果trait是一个method，那么存在一种情况就是：这个method的默认实现无法提供，即只想允许用户使用各种specification，那在这种情况下，要如何来实现呢？我的想法是使用pure virtual method。
+
+
+
+## TO READ
+
+http://blog.aaronballman.com/2011/11/a-simple-introduction-to-type-traits/
+
+
+https://www.modernescpp.com/index.php/tag/type-traits
+
+https://www.modernescpp.com/index.php/templates-misconceptions-and-surprises
+
+https://www.modernescpp.com/index.php/c-core-guidelines-programming-at-compile-time-with-type-traits-ii
+
+https://www.modernescpp.com/index.php/type-traits-performance-matters
+
+https://www.modernescpp.com/index.php/compare-and-modify-types
+
+https://www.modernescpp.com/index.php/check-types
