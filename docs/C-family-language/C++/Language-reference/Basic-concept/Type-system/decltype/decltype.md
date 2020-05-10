@@ -204,7 +204,9 @@ static_assert(test2, "PASS2");
 
 这条规则来自cppreference [decltype specifier](https://en.cppreference.com/w/cpp/language/decltype)。
 
+为什么这样设计呢？在维基百科[decltype#Semantics](https://en.wikipedia.org/wiki/Decltype#Semantics)中给出了解答：
 
+> These semantics were designed to fulfill the needs of generic library writers, while at the same time being intuitive for novice programmers, because the return type of `decltype` always matches the type of the object or function exactly as declared in the source code.
 
 
 

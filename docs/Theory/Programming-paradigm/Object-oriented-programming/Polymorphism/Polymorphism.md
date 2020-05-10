@@ -126,3 +126,24 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 
 
+## TODO 
+
+### duck type and polymorphism
+
+https://stackoverflow.com/questions/11502433/what-is-the-difference-between-polymorphism-and-duck-typing
+
+
+
+https://softwareengineering.stackexchange.com/questions/121778/is-duck-typing-a-subset-of-polymorphism
+
+
+
+https://dev.to/middlebrooks314/duck-typing-1gnn
+
+
+
+https://subscription.packtpub.com/book/application_development/9781788293181/8/08lvl1sec92/polymorphism-and-duck-typing
+
+
+
+https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types
