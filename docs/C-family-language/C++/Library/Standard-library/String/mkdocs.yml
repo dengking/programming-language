@@ -1,2 +1,4 @@
 nav:
     - String: String.md
+    - basic_string: basic_string
+    - char_traits: char_traits

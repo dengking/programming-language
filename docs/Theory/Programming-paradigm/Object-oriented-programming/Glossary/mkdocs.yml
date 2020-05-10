@@ -1,3 +1,8 @@
 nav:
     - Glossarys: Glossarys.md
     - Method: Method.md
+    - Trait: Trait.md
+    - Mixin: Mixin.md
+    - Delegation: Delegation.md
+    - Forwarding(object-oriented-programming): Forwarding(object-oriented-programming).md
+    - Protocol(object-oriented-programming): Protocol(object-oriented-programming).md

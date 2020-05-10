@@ -1,0 +1,1 @@
+# [Protocol (object-oriented programming)](https://en.wikipedia.org/wiki/Protocol_(object-oriented_programming))
