@@ -8,7 +8,7 @@ In [programming languages](https://en.wikipedia.org/wiki/Programming_language) a
 
 > NOTE: 这段话的意思是：在编程语言和类型理论中，多态性是向不同类型的实体提供单一接口，或使用单一符号表示多个不同类型。
 >
-> 显然，polymorphism中蕴含是：single和multiple，所以它和dispatch是密切相关的。
+> 显然，polymorphism中蕴含是：single和multiple，所以它和dispatch是密切相关的，关于此，参见下面的《Polymorphism的本质》段
 >
 > 从上面这段话中，我们可以看到，**polymorphism** 和 [type](https://en.wikipedia.org/wiki/Data_type) ，或者更加具体来说 和  [type systems](https://en.wikipedia.org/wiki/Type_system) 密切相关，参见原文的[History](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#History)章节。
 
@@ -59,8 +59,6 @@ The most commonly recognized major classes of polymorphism are:
 #### Parametric polymorphism
 
 参见[Parametric polymorphism](./Parametric-polymorphism.md)
-
-> NOTE: template metaprogramming就属于这种类型的polymorphism。
 
 #### Subtyping
 
@@ -120,15 +118,26 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 > - class based inheritance.
 > - prototype based objects (with or without inheritance)
 > - duck typing
-> - interface compliance (as done by Go's interfaces and implicitly on C++ templates)
+> - interface compliance (as done by Go's interfaces and implicitly on **C++ templates**)
 >
 > each of them allows the programmer to use a single code with different types, so all embody the concept of polymorphism.
 
+## Polymorphism的价值
+
+- 使代码更加地generic，从而带来更好的扩展性
+- 降低编写成本，使我们无需写一堆的`if-else`
 
 
-## TODO 
 
-### duck type and polymorphism
+## Template and polymorphism
+
+Template属于“single symbol to represent multiple different types”。
+
+## Duck type and polymorphism
+
+Duck type属于“single symbol to represent multiple different types”。
+
+在维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中已经提及了，下面是一些补充。
 
 https://stackoverflow.com/questions/11502433/what-is-the-difference-between-polymorphism-and-duck-typing
 

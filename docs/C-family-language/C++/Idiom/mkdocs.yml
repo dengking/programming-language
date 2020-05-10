@@ -18,8 +18,11 @@ nav:
 #################### template相关####################    
     - Curiously-recurring-template-pattern: Curiously-recurring-template-pattern
     - Expression-Template: Expression-Template
-    - enable-if: enable-if
+    # trait是和template相关的
     - Trait: Trait
+    # enable-if的实现是依赖于trait
+    - enable-if: enable-if
+    
 ########## 函数相关相关##########   
     # 函数返回值
     - Covariant-Return-Types: Covariant-Return-Types

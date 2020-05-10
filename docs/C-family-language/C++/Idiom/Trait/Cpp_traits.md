@@ -16,7 +16,7 @@ Both C and `C++` programmers should be familiar with `limits.h`, and `float.h`, 
 
 Most C++ programmers are familiar with [`std::numeric_limits`](https://en.cppreference.com/w/cpp/types/numeric_limits) , which at first glance simply provides the same service, implemented differently. By taking a closer look at `numeric_limits` we uncover the first advantage of traits, a **consistent interface**.
 
-> NOTE: 千万不要小看上面这段话中的**consistent interface**的价值，如果能够保证**consistent interface**，那么当我们修改底层代码的时候，caller是无需修改的， 但是如果interface是unconsistent的，那么caller是需要修改的。interface-oriented programming的目的即是保证接口的一致。
+> NOTE: 千万不要小看上面这段话中的**consistent interface**的价值，如果能够保证**consistent interface**，那么当我们修改底层代码的时候，caller是无需修改的， 但是如果interface是unconsistent的，那么caller是需要修改的。此处的consistent interface，是一种Polymorphism，参见`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`的《Template and polymorphism》段。
 
 Using `float.h`, and `limits.h`, you have to remember the type prefix and the trait, for example, `DBL_MAX` contains the "maximum value" trait for the double data type. By using a traits class such as `numeric_limits` the type becomes part of the name, so that the maximum value for a double becomes `numeric_limits< double >::max()`, more to the point, you don't need to know which type you need to use. For example, take this simple template function (adapted from [[Veldhuizen](https://accu.org/index.php/journals/442#Veldhuizen)]), which returns the largest value in an array:
 
@@ -180,67 +180,70 @@ int main(int argc, char* argv[]) {
 And that's it. Hopefully you can now "wow" your friends and colleague with your in-depth understanding of the c++ traits concept. :)
 
 > NOTE: 下面是完整可运行代码
->
-> ```c++
-> #include <iostream>
-> template< typename T > 
-> struct supports_optimised_implementation{ 
-> 	static const bool value = false; 
-> };
-> 
-> template< bool b > 
-> struct algorithm_selector { 
->   template< typename T > 
->   static void implementation( T& object ) 
->   { 
-> //implement the alorithm operating on "object" here 
->       std::cout<<"普通实现"<<std::endl;
->   } 
-> };
-> 
-> template<> 
-> struct algorithm_selector< true > { 
->   template< typename T > 
->   static void implementation( T& object )   { 
->     object.optimised_implementation(); 
->   } 
-> };
-> 
-> template< typename T > 
-> void algorithm( T& object ) { 
->   algorithm_selector< supports_optimised_implementation< T >::value >::implementation(object); 
-> }
-> 
-> class ObjectA {
->     
-> };
-> class ObjectB { 
-> public: 
->   void optimised_implementation() { 
-> //... 
->       std::cout<<"优化实现"<<std::endl;
->   } 
-> };
-> 
-> template<> 
-> struct supports_optimised_implementation< ObjectB > { 
->   static const bool value = true; 
-> };
-> 
-> int main(int argc, char* argv[]) { 
->   ObjectA a; 
->   algorithm( a ); 
-> // calls default implementation 
->   ObjectB b; 
->   algorithm( b ); 
-> // calls 
-> // ObjectB::optimised_implementation(); 
->   return 0; 
-> }
-> 
-> ```
->
+```c++
+#include <iostream>
+template< typename T > 
+struct supports_optimised_implementation{ 
+	static const bool value = false; 
+};
+
+template< bool b > 
+struct algorithm_selector { 
+template< typename T > 
+static void implementation( T& object ) 
+{ 
+//implement the alorithm operating on "object" here 
+   std::cout<<"普通实现"<<std::endl;
+} 
+};
+
+template<> 
+struct algorithm_selector< true > { 
+template< typename T > 
+static void implementation( T& object )   { 
+ object.optimised_implementation(); 
+} 
+};
+
+template< typename T > 
+void algorithm( T& object ) { 
+algorithm_selector< supports_optimised_implementation< T >::value >::implementation(object); 
+}
+
+class ObjectA {
+ 
+};
+class ObjectB { 
+public: 
+void optimised_implementation() { 
+//... 
+   std::cout<<"优化实现"<<std::endl;
+} 
+};
+
+template<> 
+struct supports_optimised_implementation< ObjectB > { 
+static const bool value = true; 
+};
+
+int main(int argc, char* argv[]) { 
+ObjectA a; 
+algorithm( a ); 
+// calls default implementation 
+ObjectB b; 
+algorithm( b ); 
+// calls 
+// ObjectB::optimised_implementation(); 
+return 0; 
+}
+```
 > 编译指令如下：`g++ test.cpp`
+>
+> 关于上述代码有几点是需要特别强调的：
+>
+> trait class的`value`是compile-time constant
+
+
 
 ### Notes
 
@@ -257,34 +260,6 @@ enum { value = false };
 ```
 
 
-
-### References and Further Reading
-
-
-
-[Myers] *Traits: a new and useful template technique* by Nathan C. Myers.
-
-
-
-[Veldhuizen] *Using C++ Trait Classes for Scientific Computing* by Todd Veldhuizen.
-
-
-
-[boost] [boost.org](http://www.boost.org/)'s `type_traits`.
-
-
-
-[Maddock] *C++ Type Traits* by John Maddock & Steve Cleary, *Dr Dobb's Journal* #317
-
-
-
-[Alexandrescu1] *Traits: The else-if-then of Types* - Andrei Alexandrescu
-
-*Traits on Steroids* - Andrei Alexandrescu
-
-
-
-[Sutter] Guru of the Week #71 *Inheritance Traits?* - Herb Sutter
 
 
 
