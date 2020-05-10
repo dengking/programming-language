@@ -46,6 +46,32 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 先看看[learncpp](https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/)的[1.4 — Variable assignment and initialization](https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/)中关于initialization的介绍，因为其中结合了具体的示例，更加容易理解，然后再来看cppreference中对[Initialization](https://en.cppreference.com/w/cpp/language/initialization)的更加标准化的定义。
 
 
@@ -79,12 +105,6 @@ For simple data types (like integers), copy and direct initialization are essent
 两者之间的相同点是都会改变object的值。
 
 
-
-## cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization)
-
-*Initialization* of a variable provides its initial value at the time of construction.
-
-> NOTE: 
 
 
 
