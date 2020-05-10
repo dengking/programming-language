@@ -62,3 +62,11 @@ most derived class
 在https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019中提及了
 
 > For example, if a class has virtual functions, all the instances of that class might share a single virtual function table
+
+
+
+## Template Specialization VS Function Overloading
+
+https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading
+
+https://www.fluentcpp.com/2017/08/15/function-templates-partial-specialization-cpp/

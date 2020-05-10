@@ -23,6 +23,7 @@ nav:
     # enable-if的实现是依赖于trait
     - enable-if: enable-if
     - Barton–Nackman-trick: Barton–Nackman-trick
+    - Detection-idiom: Detection-idiom
 ########## 函数相关相关##########   
     # 函数返回值
     - Covariant-Return-Types: Covariant-Return-Types

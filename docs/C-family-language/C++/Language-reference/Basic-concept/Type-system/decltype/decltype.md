@@ -222,3 +222,18 @@ decltype(a->x) x4; // type is double
 decltype((a->x)) x5; // type is const double&
 ```
 
+
+
+
+
+## TO READ
+
+https://en.wikipedia.org/wiki/Decltype#Semantics
+
+https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019#remarks
+
+https://riptutorial.com/cplusplus/example/18513/decltype
+
+https://stackoverflow.com/questions/18815221/what-is-decltype-and-how-is-it-used
+
+https://arne-mertz.de/2017/01/decltype-declval/
