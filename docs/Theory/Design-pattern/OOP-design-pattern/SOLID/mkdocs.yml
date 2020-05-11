@@ -1,7 +1,7 @@
 nav:
     - SOLID: SOLID.md
-    - Open-closed-principle: Open-closed-principle.md
-    - Liskov-substitution-principle: Liskov-substitution-principle.md
+    - Open-closed-principle: Open-closed-principle
+    - Liskov-substitution-principle: Liskov-substitution-principle
     - Inversion-of-control: Inversion-of-control.md
 #################### 其他的一些设计思想####################     
     - Design-by-contract: Design-by-contract.md

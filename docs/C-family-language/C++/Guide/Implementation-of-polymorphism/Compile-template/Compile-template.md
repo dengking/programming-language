@@ -39,3 +39,9 @@
 
 
 
+## Substitution
+
+compiler编译template的过程其实可以看做是substitution的过程，关于这一点，在下面的文章中提及了：
+
+- [SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)
+- [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)

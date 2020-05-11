@@ -21,11 +21,17 @@ dynamic
 
 [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
 
+cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)对此进行了描述。
+
+
+
+
+
 匹配过程在下面的文章中有提及：
 
 文章：[SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)
 
-这篇文章中给出的例子非常好，其实的“matches perfectly”。
+这篇文章中给出的例子非常好，“matches perfectly”、“overload candidate selection phase”
 
 维基百科文章：[Function overloading](https://en.wikipedia.org/wiki/Function_overloading)
 
@@ -34,6 +40,10 @@ dynamic
 与此相关的问题有：
 
 - [Argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)
+
+
+
+
 
 ## Implementation of template
 
@@ -44,6 +54,10 @@ dynamic
 - trait
 - sfinae
 - enable_if
+
+
+
+
 
 ## Implementation of virtual method
 
@@ -65,8 +79,19 @@ most derived class
 
 
 
+## Overload + template
+
+在文章[SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)中就探讨了这个问题，这篇文章对此的讲解是非常好的。
+
+> while looking for the best overload, all candidates have to be considered. 
+
+正如这篇文章中所讲述的，为了寻找到best overload，compiler采用了SFINAE策略。
+
+
+
 ## Template Specialization VS Function Overloading
 
 https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading
 
 https://www.fluentcpp.com/2017/08/15/function-templates-partial-specialization-cpp/
+
