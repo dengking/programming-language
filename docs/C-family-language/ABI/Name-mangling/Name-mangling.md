@@ -2,25 +2,23 @@
 
 In [compiler](https://en.wikipedia.org/wiki/Compiler) construction, **name mangling** (also called **name decoration**) is a technique used to solve various problems caused by the need to resolve unique names for **programming entities** in many modern [programming languages](https://en.wikipedia.org/wiki/Programming_language).
 
+> NOTE: name mangling是由compiler来实现的。其实相比于mangling，我觉得decoration是更加贴合它的实际用途的：及可能地encode更多的information到name中
+
 It provides a way of encoding additional information in the name of a [function](https://en.wikipedia.org/wiki/Function_(programming)), [structure](https://en.wikipedia.org/wiki/Structure), [class](https://en.wikipedia.org/wiki/Class_(computer_science)) or another [datatype](https://en.wikipedia.org/wiki/Datatype) in order to pass more semantic information from the [compilers](https://en.wikipedia.org/wiki/Compiler) to [linkers](https://en.wikipedia.org/wiki/Linker_(computing)).
 
-***SUMMARY*** : 上面这段话描述了使用name mangling的意图
 
-The need arises where the language allows different **entities** to be named with the same [identifier](https://en.wikipedia.org/wiki/Identifier) as long as they occupy a different [namespace](https://en.wikipedia.org/wiki/Namespace) (where a namespace is typically defined by a module, class, or explicit *namespace* directive) or have different signatures (such as [function overloading](https://en.wikipedia.org/wiki/Function_overloading)).
 
-Any [object code](https://en.wikipedia.org/wiki/Object_code) produced by compilers is usually linked with other pieces of object code (produced by the same or another compiler) by a type of program called a [linker](https://en.wikipedia.org/wiki/Linker_(computing)). The linker needs a great deal of information on each program entity. For example, to correctly link a function it needs its name, the number of arguments and their types, and so on.
+> NOTE: 原文的第三、第四段告诉我们，进行name mangling的一个重要需求是compiler将尽可能的信息encode到name中，这些信息可能包括return type、namespace、type of parameter，这样linker就可以通过name来获取更多的信息。
 
-## Examples
+This programming pattern of encoding additional information in names is often referred to as "primitive obsession" and is considered an [anti-pattern](https://en.wikipedia.org/wiki/Anti-pattern), but in this case has been established as the norm.
+
+> NOTE: "primitive obsession" 的意思是“基本类型偏执”，最后一段话告诉我们：name mangling已经被确立为标准（norm）了
+
+## [Examples](https://en.wikipedia.org/wiki/Name_mangling#Examples)
 
 ### C
 
-Although name mangling is not generally required or used by languages that do not support [function overloading](https://en.wikipedia.org/wiki/Function_overloading) (such as C and classic Pascal), they use it in some cases to provide additional information about a function. For example, compilers targeted at Microsoft Windows platforms support a variety of [calling conventions](https://en.wikipedia.org/wiki/Calling_convention), which determine the manner in which parameters are sent to subroutines and results returned. Because the different **calling conventions** are not compatible with one another, compilers mangle symbols with codes detailing which **convention** should be used to call the specific routine.
 
-***SUMMARY*** : encode calling convention in the name
-
-The **mangling scheme** was established by Microsoft, and has been informally followed by other compilers including Digital Mars, Borland, and GNU GCC, when compiling code for the Windows platforms. The scheme even applies to other languages, such as [Pascal](https://en.wikipedia.org/wiki/Pascal_programming_language), [D](https://en.wikipedia.org/wiki/D_programming_language), [Delphi](https://en.wikipedia.org/wiki/Embarcadero_Delphi), [Fortran](https://en.wikipedia.org/wiki/Fortran), and [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)). This allows subroutines written in those languages to call, or be called by, existing Windows libraries using a calling convention different from their default.
-
-When compiling the following C examples:
 
 ```c
 int _cdecl    f (int x) { return 0; }
@@ -36,32 +34,18 @@ _g@4
 @h@4
 ```
 
-In the `stdcall` and `fastcall` mangling schemes, the function is encoded as `_**name**@**X**` and `@**name**@**X**` respectively, where **X** is the number of bytes, in decimal, of the argument(s) in the parameter list (including those passed in registers, for fastcall). In the case of `cdecl`, the function name is merely prefixed by an underscore.
+> NOTE: c compiler将 [calling conventions](https://en.wikipedia.org/wiki/Calling_convention) encode到name中
 
-The 64-bit convention on Windows (Microsoft C) has no leading underscore. This difference may in some rare cases lead to unresolved externals when porting such code to 64 bits. For example, Fortran code can use 'alias' to link against a C method by name as follows:
-
-```Fortran 
-SUBROUTINE f()
-!DEC$ ATTRIBUTES C, ALIAS:'_f' :: f
-END SUBROUTINE
-```
-
-This will compile and link fine under 32 bits, but generate an unresolved external '_f' under 64 bits. One workaround for this is not to use 'alias' at all (in which the method names typically need to be capitalized in C and Fortran). Another is to use the BIND option:
-
-```Fortran 
-SUBROUTINE f() BIND(C,NAME="f")
-END SUBROUTINE
-```
 
 ### C++
 
-[C++](https://en.wikipedia.org/wiki/C%2B%2B) compilers are the most widespread users of **name mangling**. The first C++ compilers were implemented as translators to [C](https://en.wikipedia.org/wiki/C_(programming_language)) source code, which would then be compiled by a C compiler to object code; because of this, symbol names had to conform to C identifier rules. Even later, with the emergence of compilers which produced machine code or assembly directly, the system's [linker](https://en.wikipedia.org/wiki/Linker_(computing)) generally did not support C++ symbols, and mangling was still required.
+
 
 The [C++](https://en.wikipedia.org/wiki/C%2B%2B) language does not define a standard decoration scheme, so each compiler uses its own. C++ also has complex language features, such as [classes](https://en.wikipedia.org/wiki/C%2B%2B_class), [templates](https://en.wikipedia.org/wiki/C%2B%2B_template), [namespaces](https://en.wikipedia.org/wiki/Namespace_(C%2B%2B)), and [operator overloading](https://en.wikipedia.org/wiki/Operator_overloading), that alter the meaning of specific symbols based on context or usage. Meta-data about these features can be disambiguated(消除) by mangling (decorating) the name of a [symbol](https://en.wikipedia.org/wiki/Debug_symbol). Because the **name-mangling systems** for such features are not standardized across compilers, few linkers can link object code that was produced by different compilers.
 
-#### Simple example[[edit](https://en.wikipedia.org/w/index.php?title=Name_mangling&action=edit&section=4)]
+> NOTE: 没有标准的弊端就是通用性的降低
 
-A single C++ translation unit might define two functions named `f()`:
+#### Simple example 
 
 ```cpp
 int  f (void) { return 1; }
@@ -69,7 +53,7 @@ int  f (int)  { return 0; }
 void g (void) { int i = f(), j = f(0); }
 ```
 
-These are distinct functions, with no relation to each other apart from the name. The C++ compiler therefore will encode the type information in the symbol name, the result being something resembling:
+ 
 
 ```cpp
 int  __f_v (void) { return 1; }
@@ -77,11 +61,9 @@ int  __f_i (int)  { return 0; }
 void __g_v (void) { int i = __f_v(), j = __f_i(0); }
 ```
 
-Even though its name is unique, `g()` is still mangled: name mangling applies to **all** symbols.
+ 
 
-#### Complex example[[edit](https://en.wikipedia.org/w/index.php?title=Name_mangling&action=edit&section=5)]
-
-The mangled symbols in this example, in the comments below the respective identifier name, are those produced by the GNU GCC 3.x compilers:
+#### Complex example 
 
 ```cpp
 namespace wikipedia 
@@ -123,9 +105,9 @@ For `print_to`, the standard type `std::ostream` (which is a `typedef` for `std:
 _ZN9Wikipedia7article8print_toERSo
 ```
 
-#### How different compilers mangle the same functions[[edit](https://en.wikipedia.org/w/index.php?title=Name_mangling&action=edit&section=6)]
+#### How different compilers mangle the same functions 
 
-There isn't a standard scheme by which even trivial C++ identifiers are mangled, and consequently different compilers (or even different versions of the same compiler, or the same compiler on different platforms) mangle public symbols in radically different (and thus totally incompatible) ways. Consider how different C++ compilers mangle the same functions:
+
 
 | Compiler                                                     | `void h(int)`      | `void h(int, char)`    | `void h(void)`        |
 | ------------------------------------------------------------ | ------------------ | ---------------------- | --------------------- |
@@ -148,13 +130,7 @@ There isn't a standard scheme by which even trivial C++ identifiers are mangled,
 | Tru64 C++ V6.5 (ANSI mode)                                   | `__7h__Fi`         | `__7h__Fic`            | `__7h__Fv`            |
 | Watcom C++ 10.6                                              | `W?h$n(i)v`        | `W?h$n(ia)v`           | `W?h$n()v`            |
 
-Notes:
 
-- The Compaq C++ compiler on OpenVMS VAX and Alpha (but not IA-64) and Tru64 has two name mangling schemes. The original, pre-standard scheme is known as ARM model, and is based on the name mangling described in the C++ Annotated Reference Manual (ARM). With the advent of new features in standard C++, particularly [templates](https://en.wikipedia.org/wiki/Template_(programming)), the ARM scheme became more and more unsuitable — it could not encode certain function types, or produced identical mangled names for different functions. It was therefore replaced by the newer "ANSI" model, which supported all ANSI template features, but was not backwards compatible.
-- On IA-64, a standard [Application Binary Interface (ABI)](https://en.wikipedia.org/wiki/Application_binary_interface) exists (see [external links](https://en.wikipedia.org/wiki/Name_mangling#External_links)), which defines (among other things) a standard name-mangling scheme, and which is used by all the IA-64 compilers. GNU GCC 3.*x*, in addition, has adopted the name mangling scheme defined in this standard for use on other, non-Intel platforms.
-- The Visual Studio and Windows SDK include the program `undname` which prints the C-style function prototype for a given mangled name.
-- On Microsoft Windows, the Intel compiler[[2\]](https://en.wikipedia.org/wiki/Name_mangling#cite_note-2) and [Clang](https://en.wikipedia.org/wiki/Clang)[[3\]](https://en.wikipedia.org/wiki/Name_mangling#cite_note-3) uses the Visual C++ name mangling for compatibility.
-- For the IAR EWARM C++ 7.4 ARM compiler the best way to determine the name of a function is to compile with the assembler output turned on and to look at the output in the ".s" file thus generated.
 
 #### Handling of C symbols when linking from C++
 
@@ -170,7 +146,7 @@ extern "C" {
 #endif
 ```
 
-is to ensure that the symbols within are "unmangled" – that the compiler emits(创造，生产出) a binary file with their names undecorated, as a C compiler would do. As C language definitions are unmangled, the C++ compiler needs to avoid mangling references to these identifiers.
+is to ensure that the symbols within are "unmangled" – that the compiler emits a binary file with their names undecorated, as a C compiler would do. As C language definitions are unmangled, the C++ compiler needs to avoid mangling references to these identifiers.
 
 For example, the standard strings library, `<string.h>` usually contains something resembling:
 
