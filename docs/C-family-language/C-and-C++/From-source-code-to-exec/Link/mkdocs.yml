@@ -1,3 +1,5 @@
 nav:
     - Dynamic-linker: Dynamic-linker.md
     - Linker: Linker.md
+    - Linkage: Linkage
+    - Multiple-definition: Multiple-definition
