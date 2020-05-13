@@ -27,3 +27,17 @@ RAII等都是C++的resource management策略。
 
 
 ### Rule of three/five
+
+
+
+## Example of resource management
+
+movable but not copyable：
+
+[redis-plus-plus](https://github.com/sewenew/redis-plus-plus)
+
+> `Redis` class is movable but NOT copyable.
+
+[std::thread](https://en.cppreference.com/w/cpp/thread/thread)
+
+> `std::thread` is not [*CopyConstructible*](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) or [*CopyAssignable*](https://en.cppreference.com/w/cpp/named_req/CopyAssignable), although it is [*MoveConstructible*](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) and [*MoveAssignable*](https://en.cppreference.com/w/cpp/named_req/MoveAssignable).
