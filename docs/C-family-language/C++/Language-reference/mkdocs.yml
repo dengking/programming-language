@@ -28,6 +28,7 @@ nav:
     - Initialization: Initialization     
     # 模板
     - Template: Template
-
+    # 断言
+    - Assertion: Assertion
 # 这是c++11引入的新特性    
     - Attribute: Attribute
