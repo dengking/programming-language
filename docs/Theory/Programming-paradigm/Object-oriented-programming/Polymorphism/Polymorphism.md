@@ -124,7 +124,7 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 ## Polymorphism的价值
 
-- 使代码更加地generic，从而带来更好的扩展性
+- 使代码更加地generic（参见[generic programming](http://en.wikipedia.org/wiki/Generic_programming)），从而带来更好的扩展性
 - 降低编写成本，使我们无需写一堆的`if-else`
 
 

@@ -1,6 +1,6 @@
 # Generic programming
 
-如何编写通用地代码？这是所有的programming language都需要考虑的一个问题，`c++`中通过template来实现generic programming，python中的duck type实现generic programming。
+如何使代码更加地generic，即更加地通用？这是所有的programming language都需要考虑的一个问题，`c++`中通过template来实现generic，python中的duck type也能够使程序更加地generic，需要注意的是，严格说来，这里所说的generic并不是本文接下来要讨论的generic programming。我是思考“如何使代码更加地generic”而想到generic programming的。[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)的思想是抽象出类型而是程序更加地generic，更多细节将再下面这篇文章中介绍。
 
 ## 维基百科[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)
 
@@ -19,6 +19,10 @@ and *parameterized types* in the influential 1994 book *[Design Patterns](https:
 > NOTE: 通过上面四段话，我们可以看到，同一个概念在不同的领域有着不同的名称，其实它们表达了相同的内涵。
 
 
+
+The term "generic programming" was originally coined by [David Musser](https://en.wikipedia.org/wiki/David_Musser) and [Alexander Stepanov](https://en.wikipedia.org/wiki/Alexander_Stepanov)[[4\]](https://en.wikipedia.org/wiki/Generic_programming#cite_note-FOOTNOTEMusserStepanov1989-4) in a more specific sense than the above, to describe a programming paradigm whereby fundamental requirements on types are abstracted from across concrete examples of algorithms and data structures and formalized as [concepts](https://en.wikipedia.org/wiki/Concept_(generic_programming)), with [generic functions](https://en.wikipedia.org/wiki/Generic_function) implemented in terms of these concepts, typically using language genericity mechanisms as described above.
+
+> NOTE: 
 
 ## Generic programming and polymorphism
 
@@ -47,3 +51,15 @@ Generic 的实现是依赖于polymorphism的
 ### Generic programming and design by contact
 
 requirement其实就是一种contact。
+
+
+
+## Example of generic programming
+
+### C++
+
+#### [Standard Template Library](https://en.wikipedia.org/wiki/Standard_Template_Library)
+
+
+
+#### [The Boost Graph Library (BGL)](https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/)

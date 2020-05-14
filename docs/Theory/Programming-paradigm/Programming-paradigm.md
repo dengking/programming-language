@@ -1,6 +1,8 @@
 # Programming paradigm
 
+Programming paradigm所表示的是编程的理念、思想，它指导着programming language的设计，进而影响programming language的方方面面。每种paradigm，有着各自的优势，在学习各种programming paradigm的时候，我觉得应该抓住各种paradigm的思想，然后再结合programming language对这种paradigm的实现。
 
+另外非常重要的一点是：现代programming language往往会采用多种paradigm，显然，这样的做法，让programming language更加地强大，当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是c++，它的两个典型的paradigm是object programming和generic programming。
 
 ## 维基百科[Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) 
 

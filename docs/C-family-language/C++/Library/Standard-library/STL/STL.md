@@ -54,13 +54,12 @@ The STL was created as the first library of generic algorithms and data structur
 
 
 
+## stroustrup [C++ in 2005](http://www.stroustrup.com/DnE2005.pdf)
+
+Stroustrup的这篇文章介绍地也比较好。
+
+
+
 ## geeksforgeeks [The C++ Standard Template Library (STL)](https://www.geeksforgeeks.org/the-c-standard-template-library-stl/)
 
-
-
-
-
-
-
-## Design pattern of STL
 
