@@ -16,7 +16,7 @@ Subtyping的实现方式是[Virtual method table](https://en.wikipedia.org/wiki/
 
 https://stackoverflow.com/questions/6923299/whats-the-relationship-between-c-template-and-duck-typing
 
-https://www.drdobbs.com/templates-and-duck-typing/184401971
+
 
 
 ### subtyping polymorphism and RTII
