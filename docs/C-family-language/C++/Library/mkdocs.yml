@@ -2,7 +2,7 @@ nav:
     - Standard-library: Standard-library
     - A-list-of-open-source-Cpp-libraries: A-list-of-open-source-Cpp-libraries.md
     - Boost: Boost
-    - Evented-IO-library: Evented-IO-library.md
+    - Communication: Communication
     - Plugin-system: Plugin-system.md
     - Abseil: Abseil
     - Log: Log

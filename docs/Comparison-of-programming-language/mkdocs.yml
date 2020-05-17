@@ -1,4 +1,5 @@
 nav:
     - Comparison-of-programming-language: Comparison-of-programming-language.md
     - Cpp-VS-python: Cpp-VS-python.md
-    - Cpp-VS-python-generic-programming: Cpp-VS-python-generic-programming.md
+    - Templates-and-Duck-Typing: Templates-and-Duck-Typing
+    

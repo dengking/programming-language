@@ -34,3 +34,6 @@ Like the STL, there are three ways in which the BGL is generic.
 
 > NOTE: 本段所描述的是如何来存储图
 
+# [A Quick Tour of the Boost Graph Library](https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/quick_tour.html)
+
+![](./analogy.gif)
