@@ -1,21 +1,5 @@
 nav:
-    - Introduction: index.md
-########## initialization相关##########
-    - Construct-On-First-Use: Construct-On-First-Use
-########## resource相关##########    
-    - RAII: RAII
-    - The-rule-of-three-five-zero: The-rule-of-three-five-zero
-    - Non-throwing-swap: Non-throwing-swap
-    - Copy-and-swap: Copy-and-swap
-    - Smart-Pointer: Smart-Pointer
-########## ##########    
-    - Erase-remove: Erase-remove
-    - Recursive-Type-Composition: Recursive-Type-Composition
-    
-#################### virtual相关####################    
-    - Virtual-Constructor: Virtual-Constructor
-    - Virtual-Friend-Function: Virtual-Friend-Function
-#################### template相关####################    
+#################### generic programming都是和template相关的 ####################    
     - Curiously-recurring-template-pattern: Curiously-recurring-template-pattern
     - Expression-Template: Expression-Template
     # trait是和template相关的
@@ -23,13 +7,3 @@ nav:
     # enable-if的实现是依赖于trait
     - enable-if: enable-if
     - Barton–Nackman-trick: Barton–Nackman-trick
-    - Detection-idiom: Detection-idiom
-########## 函数相关相关##########   
-    # 函数返回值
-    - Covariant-Return-Types: Covariant-Return-Types
-    # 函数参数
-    - Named-Parameter: Named-Parameter
-    # 命名构造函数
-    - Named-Constructor: Named-Constructor
-#################### Summary####################    
-    - Summary-of-C++-idiom: Summary-of-C++-idiom.md
