@@ -1,8 +1,20 @@
 # Programming paradigm
 
-Programming paradigm所表示的是编程的理念、思想，它指导着programming language的设计，进而影响programming language的方方面面。每种paradigm，有着各自的优势，在学习各种programming paradigm的时候，我觉得应该抓住各种paradigm的思想，然后再结合programming language对这种paradigm的实现。
+Programming paradigm所表示的是编程的理念、思想，它指导着programming language的设计，进而影响programming language的方方面面，在programming language中，有相应的construct来实现它。在学习各种programming paradigm的时候，我觉得应该抓住各种paradigm的思想，然后再结合programming language对这种paradigm的实现，关于这个观点，在维基百科[Generic programming#Stepanov–Musser and other generic programming paradigms](https://en.wikipedia.org/wiki/Generic_programming#Stepanov%E2%80%93Musser_and_other_generic_programming_paradigms)中有这样的描述：
 
-另外非常重要的一点是：现代programming language往往会采用多种paradigm，显然，这样的做法，让programming language更加地强大，当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是c++，它的两个典型的paradigm是object programming和generic programming。
+> In this article we distinguish the high-level [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) of *generic programming*, above, from the lower-level programming language *genericity mechanisms* used to implement them (see [Programming language support for genericity](https://en.wikipedia.org/wiki/Generic_programming#Programming_language_support_for_genericity)). 
+
+上面这段话中的“high-level [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) of *generic programming*”就是generic programming这种paradigm的核心思想，而“lower-level programming language *genericity mechanisms* used to implement them ”即为programming language对它的实现。
+
+programming language的设计者在设计实现某种paradigm的时候，需要考虑的问题是非常之多的，工作量也是非常之大的，所以它可能会将对某种paradigm的实现分为多个版本来进行实现，在某个版本中提供初级的实现，然后在后续版本中提供更多的、高级的实现。一个典型的例子就是c++对generic programming的实现，generic programming的核心思想中明确地提出了concept，但是c++知道c++20版本才提供显式定义concept的实现，在此之前的版本，用户只能够通过`SFINAE`、`enable_if`来间接地描述concept。关于这一点是我在阅读[Generic Programming in ConceptC++](http://www.generic-programming.org/languages/conceptcpp.html)时，受到的启发
+
+> ConceptC++ is an extension to the C++ Programming Language that introduces first-class support for Generic Programming. It is the first attempt to introduce **complete** support for Generic Programming into a mainstream programming language. 
+
+
+
+另外非常重要的一点是：每种paradigm，有着各自的优势，能够解决一些问题，所以现代programming language往往会采用多种paradigm，即“博采众长”，显然，这样的做法，让programming language更加地强大，当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是c++，它的两个典型的paradigm是object programming和generic programming。
+
+
 
 ## 维基百科[Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) 
 
