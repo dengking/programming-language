@@ -265,16 +265,6 @@ enum { value = false };
 
 
 
-## [how do traits classes work?](https://stackoverflow.com/questions/3979766/how-do-traits-classes-work)
-
-I'm reading Scott Meyers' [*Effective C++*](http://rads.stackoverflow.com/amzn/click/0321334876). He is talking about traits classes, I understood that I need them to determine the type of the object during compilation time, but I can't understand his explanation about what these classes actually do? (from technical point of view)
-
-[A](https://stackoverflow.com/a/3979850)
-
-Traits classes do *not* determine the type of the object. Instead, they provide additional information about a type, typically by defining typedefs or constants inside the trait.
-
-> NOTE: 我们使用trait class来定义trait；trait class 总数template class
-
 
 
 ## bogotobogo [Traits - A Template Specialization](https://www.bogotobogo.com/cplusplus/template_specialization_traits.php)
@@ -344,13 +334,13 @@ In the code, we used the header `<limits>` instead of `<climits>`, and the query
 
 What happened?
 
-The **numeric_limits** template class replaced/supplemented the ordinary preprocessor constants of C (`<climits>` or <limits.h>).
+The **numeric_limits** template class replaced/supplemented the ordinary preprocessor constants of C (`<climits>` or `<limits.h>`).
 
-## numeric_limits traits class
+### numeric_limits traits class
 
 Actually, in the `limits.h`, for example, `DBL_MAX` contains the "maximum value" **trait**(特性) for the double data **type**. However, by using a **traits class** such as **numeric_limits**, the **type ** becomes part of the name, so that the maximum value for a double becomes `numeric_limits<double>::max()`, and also, we don't need to know the type.
 
-Usually, we use templates to implement something once for any type. But we can also use templates to provide a common interface that is implemented for each type. We do this by providing **specialization of a general template**.
+Usually, we use templates to implement something once for any type. But we can also use templates to provide a **common interface** that is implemented for each type. We do this by providing **specialization of a general template**.
 
 In this tutorial, we'll see the **numeric_limits** is the typical example of specialization:
 
@@ -426,7 +416,21 @@ is_specialized(long double): 1
 is_specialized(std::string): 0
 ```
 
+
+
+
+
+
+
 ## What is Traits?
+
+在boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)中关于trait的定义，我觉得是比较好的：
+
+> A traits class provides a way of associating information with a compile-time entity (a type, integral constant, or address). 
+
+
+
+
 
 So, what is **traits**?
 
@@ -442,7 +446,7 @@ Traits gives us additional information other than just the type. More exactly, w
 >
 > -Scott Meyers #Item 47: "Use traits classes for information about types" of his book Effective C++ 55 Specific Ways to Improve Your Programs and Designs.
 
-Traits of std::iterator, please visit [Templates](http://www.bogotobogo.com/cplusplus/templates.php#restrictionstemplateparameter).
+Traits of `std::iterator`, please visit [Templates](http://www.bogotobogo.com/cplusplus/templates.php#restrictionstemplateparameter).
 
 For template specialization, please visit [Template Specialization](http://www.bogotobogo.com/cplusplus/template_specialization_function_class.php).
 

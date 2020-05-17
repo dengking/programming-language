@@ -1,5 +1,7 @@
 nav:
     - Boost: Boost.md
+# boost社区，其中说明了boost库编写的一些内容
+    - Boost-community: Boost-community
     - Boost-Book: Boost-Book
 # data structure    
     - Boost-Graph-Library: Boost-Graph-Library

@@ -82,7 +82,11 @@ In this article we distinguish the high-level [programming paradigms](https://en
 
 > NOTE: 这段话印证了在本章开篇[Programming-paradigm](../Programming-paradigm.md)中所论述的观点，上面这段话中的“high-level [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) of *generic programming*”所指的是generic programming的核心思想，“lower-level programming language *genericity mechanisms* used to implement them”则指的是programming language的实现。
 
-## Generic programming and polymorphism
+## Implementation of generic programming
+
+不同的programming language，对generic programming的实现是不同的，比较典型的是c++通过template来实现，而python的通过duck type。
+
+### Generic programming and polymorphism
 
 Generic 的实现是依赖于polymorphism的。
 
