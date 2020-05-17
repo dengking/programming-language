@@ -110,6 +110,32 @@ int main() {
 
 ## cppreference [sfinae](https://en.cppreference.com/w/cpp/language/sfinae)
 
+### [Explanation](https://en.cppreference.com/w/cpp/language/sfinae#Explanation)
+
+
+
+### [Type SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Type_SFINAE)
+
+
+
+### [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
+
+> NOTE: 
+
+### [Library support](https://en.cppreference.com/w/cpp/language/sfinae#Library_support)
+
+
+
+### [Alternatives](https://en.cppreference.com/w/cpp/language/sfinae#Alternatives)
+
+Where applicable, [tag dispatch](https://en.cppreference.com/w/cpp/iterator/iterator_tags#Example), [static_assert](https://en.cppreference.com/w/cpp/language/static_assert), and, if available, [concepts](https://en.cppreference.com/w/cpp/language/constraints), are usually preferred over direct use of SFINAE.
+
+
+
+### [Examples](https://en.cppreference.com/w/cpp/language/sfinae#Examples)
+
+A common idiom is to use expression SFINAE on the return type, where the expression uses the comma operator, whose left subexpression is the one that is being examined (cast to void to ensure the user-defined operator comma on the returned type is not selected), and the right subexpression has the type that the function is supposed to return.
+
 
 
 ## SFINAE and `enable_if`
@@ -132,6 +158,12 @@ int main() {
 
 
 
+## concept and sfinae
+
+https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae
+
+
+
 ## TO READ
 
 
@@ -145,6 +177,3 @@ https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/
 
 https://www.modernescpp.com/index.php/c-20-concepts-the-details
 
-
-### concept and sfinae
-https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae

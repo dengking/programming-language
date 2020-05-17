@@ -10,3 +10,7 @@ nav:
     - Barton–Nackman-trick: Barton–Nackman-trick
     #
     - Type-Generator: Type-Generator
+    # 
+    - Object-Generator: Object-Generator
+    #
+    - Tag-Dispatching: Tag-Dispatching
