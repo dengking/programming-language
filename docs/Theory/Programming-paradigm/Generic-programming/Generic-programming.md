@@ -46,11 +46,13 @@ the best known example is the [Standard Template Library](https://en.wikipedia.o
 
 > NOTE: 原文的这一段分析，使用量化的方式（从*N* × *M* 到 *N* + *M* ）来为我们分析了generic programming所创造的genericity 的价值。
 >
-> 原文的上述两段中，都提及了iterator，我觉得是对data structure的抽象描述，正如AST是对program的抽象描述（在compiler principle工程中有描述），它们可以看做是一种protocol，这种protocol实现了generic programming中多个不同的component之间的interact，比如algorithm和data structure之间通过iterator来进行interact，显然通过它们，多个不同的component之间可以进行组合，显然，通过它们，我们使用*N* + *M* 来实现*N* × *M* 。关于此的分析，在工程龙书的[Chapter-6-Intermediate-Code-Generation](https://dengking.github.io/compiler-principle/Chapter-6-Intermediate-Code-Generation/)中也有相同的分析。Stroustrup的文章[C++ in 2005](http://www.stroustrup.com/DnE2005.pdf) 中的的这张图直观地体现了
+> 原文的上述两段中，都提及了iterator，我觉得它是对data structure的抽象描述，正如AST是对program的抽象描述（在compiler principle工程中有描述），它们可以看做是一种protocol，这种protocol实现了generic programming中多个不同的component之间的interact，比如algorithm和data structure之间通过iterator来进行interact，显然通过它们，多个不同的component之间可以进行组合，显然，通过它们，我们使用*N* + *M* 来实现*N* × *M* 。关于此的分析，在工程龙书的[Chapter-6-Intermediate-Code-Generation](https://dengking.github.io/compiler-principle/Chapter-6-Intermediate-Code-Generation/)中也有相同的分析。Stroustrup的文章[C++ in 2005](http://www.stroustrup.com/DnE2005.pdf) 中的的这张图直观地体现了
 >
 > ![](./STL.jpg)
 >
 > 如何来创造适合于具体问题的抽象描述/protocol，这是至关重要的问题。
+>
+> 上面的分析，其实验证了在软件工程设计中经常使用到的一个说法：依赖于抽象而不是依赖于具体，抽象描述/protocol就是抽象，各个component之间应该依赖于它们。
 >
 > 在进行software design的时候，我们常常在讨论的一个话题是：decouple，显然generic programming是实现decouple的一种途径，最最典型的例子就是：generic programming显然能够decouple  algorithm和data structure。从上述对generic programming所实现的从*N* + *M* 到 *N* × *M*，我们能看到loosely coupled的价值所在。
 

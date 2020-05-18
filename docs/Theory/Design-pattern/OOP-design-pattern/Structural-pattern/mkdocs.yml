@@ -1,3 +1,4 @@
 nav:
     - Decorator-pattern: Decorator-pattern
     - Adapter-pattern: Adapter-pattern
+    - Composite-pattern: Composite-pattern

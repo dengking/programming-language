@@ -8,9 +8,11 @@
 
 In [software engineering](https://en.wikipedia.org/wiki/Software_engineering), a **software design pattern** is a general, [reusable](https://en.wikipedia.org/wiki/Reusability) solution to a commonly occurring problem within a given context in [software design](https://en.wikipedia.org/wiki/Software_design). It is not a finished design that can be transformed directly into [source](https://en.wikipedia.org/wiki/Source_code) or [machine code](https://en.wikipedia.org/wiki/Machine_code). It is a description or template for how to solve a problem that can be used in many different situations. Design patterns are formalized [best practices](https://en.wikipedia.org/wiki/Best_practice) that the programmer can use to solve common problems when designing an application or system.
 
+> NOTE: design pattern是formalized [best practices](https://en.wikipedia.org/wiki/Best_practice) 
+
 [Object-oriented](https://en.wikipedia.org/wiki/Object-oriented) design patterns typically show relationships and [interactions](https://en.wikipedia.org/wiki/Interaction) between [classes](https://en.wikipedia.org/wiki/Class_(computer_science)) or [objects](https://en.wikipedia.org/wiki/Object_(computer_science)), without specifying the final application classes or objects that are involved. Patterns that imply mutable（可变的） state may be unsuited for [functional programming](https://en.wikipedia.org/wiki/Functional_programming) languages, some patterns can be rendered unnecessary in languages that have built-in support for solving the problem they are trying to solve, and object-oriented patterns are not necessarily suitable for non-object-oriented languages.
 
-
+> NOTE: 关于functional programming，参见`Theory\Programming-paradigm\Functional-programming`章节。
 
 ### Practice
 
@@ -22,7 +24,7 @@ Design patterns can speed up the development process by providing tested, proven
 
 In order to achieve flexibility, design patterns usually introduce additional levels of [indirection](https://en.wikipedia.org/wiki/Indirection), which in some cases may complicate the resulting designs and hurt application performance.
 
-> NOTE: 参见文章[分层](https://dengking.github.io/Post/Abstraction/Abstraction-and-architecture-and-layer/)。
+> NOTE: 参见文章[分层](https://dengking.github.io/Post/Abstraction/Abstraction-and-architecture-and-layer/)、文章`Create-larger-concept.md`。
 
 By definition, a pattern must be programmed anew（重新，再次） into each application that uses it. Since some authors see this as a step backward from [software reuse](https://en.wikipedia.org/wiki/Software_reuse) as provided by [components](https://en.wikipedia.org/wiki/Software_componentry), researchers have worked to turn patterns into components. Meyer and Arnout were able to provide full or partial componentization of two-thirds of the patterns they attempted. 
 
@@ -30,50 +32,63 @@ Software design techniques are difficult to apply to a broader range of problems
 
 
 
-### Classification and list
+## Classification and list
 
-**Design patterns** were originally grouped into the categories: [creational patterns](https://en.wikipedia.org/wiki/Creational_pattern), [structural patterns](https://en.wikipedia.org/wiki/Structural_pattern), and [behavioral patterns](https://en.wikipedia.org/wiki/Behavioral_pattern), and described using the concepts of [delegation](https://en.wikipedia.org/wiki/Delegation_(programming)), [aggregation](https://en.wikipedia.org/wiki/Aggregation_(object-oriented_programming)), and [consultation](https://en.wikipedia.org/w/index.php?title=Consultation_(object-oriented_programming)&action=edit&redlink=1). For further background on object-oriented design, see [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_science)) and [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)), [inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science)), [interface](https://en.wikipedia.org/wiki/Interface_(object-oriented_programming)), and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming). Another classification has also introduced the notion of [architectural design pattern](https://en.wikipedia.org/wiki/Architectural_pattern) that may be applied at the architecture level of the software such as the [Model–View–Controller](https://en.wikipedia.org/wiki/Model–View–Controller) pattern. 
+design pattern如此之多，如何对它们进行分类至关重要，这是本节需要讨论的问题，本节的内容参考自：
+
+- [维基百科Software design pattern#Classification and list](https://en.wikipedia.org/wiki/Software_design_pattern#Classification_and_list)
+- refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)
+- 维基百科[*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns)
+
+refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)：
+
+> Design patterns differ by their complexity, level of detail and scale of applicability to the entire system being designed. I like the analogy to road construction: you can make an intersection（十字路口） safer by either installing some traffic lights or building an entire multi-level interchange with underground passages for pedestrians（行人）.
+>
+> The most basic and low-level patterns are often called *idioms*. They usually apply only to a single programming language.
+>
+> The most universal and high-level patterns are *architectural patterns*. Developers can implement these patterns in virtually any language. Unlike other patterns, they can be used to design the architecture of an entire application.
+>
+> In addition, all patterns can be categorized by their *intent*, or purpose. 
+
+这段总结是非常好的，在c++中，我们总结了[More C++ Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms)，显然idiom是language-specific，它是某种具体的programming的pattern。我们平时最最常听说的design pattern，往往指的是的OOP的pattern，显然只要某种programming language支持OOP，那么我们就可以使用OOP design pattern，显然它是programming-paradigm-specific的。最最universal、hight-level的是 *architectural patterns*，显然它不是面向某种具体的programming language、某种具体的programming paradigm的，它是面向application的，比如web  application。
+
+
+
+> **Design patterns** were originally grouped into the categories: [creational patterns](https://en.wikipedia.org/wiki/Creational_pattern), [structural patterns](https://en.wikipedia.org/wiki/Structural_pattern), and [behavioral patterns](https://en.wikipedia.org/wiki/Behavioral_pattern), and described using the concepts of [delegation](https://en.wikipedia.org/wiki/Delegation_(programming)), [aggregation](https://en.wikipedia.org/wiki/Aggregation_(object-oriented_programming)), and [consultation](https://en.wikipedia.org/w/index.php?title=Consultation_(object-oriented_programming)&action=edit&redlink=1). For further background on object-oriented design, see [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_science)) and [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)), [inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science)), [interface](https://en.wikipedia.org/wiki/Interface_(object-oriented_programming)), and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming). Another classification has also introduced the notion of [architectural design pattern](https://en.wikipedia.org/wiki/Architectural_pattern) that may be applied at the architecture level of the software such as the [Model–View–Controller](https://en.wikipedia.org/wiki/Model–View–Controller) pattern. 
+
+
+
+### OOP design pattern
+
+由[***Design Patterns: Elements of Reusable Object-Oriented Software***](https://en.wikipedia.org/wiki/Design_Patterns) 提出的OOP 的design pattern，是design pattern的开山之作。
 
 #### [Creational patterns](https://en.wikipedia.org/wiki/Creational_pattern)
 
-| Name                                                         | Description                                                  | In *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))* | In *[Code Complete](https://en.wikipedia.org/wiki/Code_Complete)* | Other |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----- |
-| [Abstract factory](https://en.wikipedia.org/wiki/Abstract_factory_pattern) | Provide an interface for creating *families* of related or dependent objects without specifying their concrete classes. | Yes                                                          | Yes                                                          | N/A   |
-| [Builder](https://en.wikipedia.org/wiki/Builder_pattern)     | Separate the construction of a complex object from its representation, allowing the same construction process to create various representations. | Yes                                                          | No                                                           | N/A   |
-| [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection) | A class accepts the objects it requires from an injector instead of creating the objects directly. | No                                                           | No                                                           | N/A   |
-| [Factory method](https://en.wikipedia.org/wiki/Factory_method_pattern) | Define an interface for creating a *single* object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses. | Yes                                                          | Yes                                                          | N/A   |
-| [Lazy initialization](https://en.wikipedia.org/wiki/Lazy_initialization) | Tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed. This pattern appears in the GoF catalog as "virtual proxy", an implementation strategy for the [Proxy](https://en.wikipedia.org/wiki/Proxy_pattern) pattern. | No                                                           | No                                                           | PoEAA |
-| [Multiton](https://en.wikipedia.org/wiki/Multiton_pattern)   | Ensure a class has only named instances, and provide a global point of access to them. | No                                                           | No                                                           | N/A   |
-| [Object pool](https://en.wikipedia.org/wiki/Object_pool_pattern) | Avoid expensive acquisition and release of resources by recycling objects that are no longer in use. Can be considered a generalisation of [connection pool](https://en.wikipedia.org/wiki/Connection_pool) and [thread pool](https://en.wikipedia.org/wiki/Thread_pool) patterns. | No                                                           | No                                                           | N/A   |
-| [Prototype](https://en.wikipedia.org/wiki/Prototype_pattern) | Specify the kinds of objects to create using a prototypical instance, and create new objects from the 'skeleton' of an existing object, thus boosting performance and keeping memory footprints to a minimum. | Yes                                                          | No                                                           | N/A   |
-| [Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization) (RAII) | Ensure that resources are properly released by tying them to the lifespan of suitable objects. | No                                                           | No                                                           | N/A   |
-| [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) | Ensure a class has only one instance, and provide a global point of access to it. | Yes                                                          | Yes                                                          | N/A   |
+维基百科[Design Patterns#Creational](https://en.wikipedia.org/wiki/Design_Patterns#Creational)：
+
+> [Creational patterns](https://en.wikipedia.org/wiki/Creational_pattern) are ones that create objects, rather than having to instantiate objects directly. This gives the program more flexibility in deciding which objects need to be created for a given case.
+
+#### [Structural patterns](https://en.wikipedia.org/wiki/Structural_pattern)
+
+refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)：
+
+> **Structural patterns** explain how to assemble objects and classes into larger structures, while keeping the structures flexible and efficient.
+
+除此看到structural pattern，我的第一想法是[Boost.PropertyTree](https://www.boost.org/doc/libs/1_73_0/doc/html/property_tree.html)。
+
+#### [Behavioral pattern](https://en.wikipedia.org/wiki/Behavioral_pattern)
+
+> **behavioral design patterns** are [design patterns](https://en.wikipedia.org/wiki/Design_pattern_(computer_science)) that identify common communication patterns among objects and realize these patterns.
+
+即object之间communicate的pattern。
+
+
+
+### [Concurrency patterns](https://en.wikipedia.org/wiki/Concurrency_pattern)
 
 
 
 
 
-#### [Concurrency patterns](https://en.wikipedia.org/wiki/Concurrency_pattern)
-
-| Name                                                         | Description                                                  | In *[POSA2](https://en.wikipedia.org/w/index.php?title=Pattern-Oriented_Software_Architecture&action=edit&redlink=1)* | Other |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----- |
-| [Active Object](https://en.wikipedia.org/wiki/Active_object) | Decouples method execution from method invocation that reside in their own thread of control. The goal is to introduce concurrency, by using [asynchronous method invocation](https://en.wikipedia.org/wiki/Asynchronous_method_invocation) and a [scheduler](https://en.wikipedia.org/wiki/Scheduling_(computing)) for handling requests. | Yes                                                          | N/A   |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
-|                                                              |                                                              |                                                              |       |
+### [Architectural design pattern](https://en.wikipedia.org/wiki/Architectural_pattern) 
 
