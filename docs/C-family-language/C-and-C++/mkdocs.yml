@@ -14,8 +14,7 @@ nav:
     - Preprocessor: Preprocessor
 ##########编译过程中可能会涉及到问题##########
     - Multiple-definition: Multiple-definition
-##########C和C++语言的实现##########    
-    - Implementation: Implementation  
+
     
     
     

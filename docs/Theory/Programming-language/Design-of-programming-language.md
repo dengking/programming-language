@@ -4,10 +4,10 @@
 
 一般一门programming language的设计，可以分为两大块：
 
-- language reference
+- language 
 - standard library
 
-## Language reference
+## Language 
 
 ### Syntax 
 

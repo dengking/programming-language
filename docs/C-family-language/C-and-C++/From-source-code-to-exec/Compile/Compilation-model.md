@@ -15,3 +15,4 @@ C和`C++`都是采用的Separate compilation model，其实所谓的“Separate 
 
 
 ## 维基百科[Single Compilation Unit](https://en.wikipedia.org/wiki/Single_Compilation_Unit)
+

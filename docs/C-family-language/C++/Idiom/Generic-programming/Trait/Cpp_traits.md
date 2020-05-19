@@ -53,6 +53,10 @@ Note the use of `numeric_limits`. As you can see, where as with the C style `lim
 >
 > trait还带来了可扩展性
 
+> NOTE: `numeric_limits`是实现：[libstdc++-v3](https://code.woboq.org/gcc/libstdc++-v3/)/[include](https://code.woboq.org/gcc/libstdc++-v3/include/)/[std](https://code.woboq.org/gcc/libstdc++-v3/include/std/)/[limits](https://code.woboq.org/gcc/libstdc++-v3/include/std/limits.html)
+
+
+
 But I'd like to move away from `numeric_limits`, its just an example of traits in action, and I'd like to take you through creating traits classes of your own.
 
 First lets look at one of the simplest traits classes you can get (from [boost.org](http://www.boost.org/)) and that's the `is_void` [[boost](https://accu.org/index.php/journals/442#boost)] trait.
@@ -450,15 +454,28 @@ Traits of `std::iterator`, please visit [Templates](http://www.bogotobogo.com/cp
 
 For template specialization, please visit [Template Specialization](http://www.bogotobogo.com/cplusplus/template_specialization_function_class.php).
 
+## Implementation of trait
+
+关于Template specialization，参见：
+
+- cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
+- cppreference [partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)
 
 
-## THINKING
 
 在[An introduction to C++ Traits](https://accu.org/index.php/journals/442)有这样的一段话：
 
 > First, **a generic template** is defined that implements the **default behaviour**.
 
-trait class往往会定义一个template class，然后提供这个template的各种specification，显然在template class中需要提供trait的一种默认实现；如果trait是一个成员变量，那这还好说，如果trait是一个method，那么存在一种情况就是：这个method的默认实现无法提供，即只想允许用户使用各种specification，那在这种情况下，要如何来实现呢？我的想法是使用pure virtual method。
+trait class往往会定义一个template class（primary template class），然后提供这个template的各种specification，显然在primary template class中需要提供trait的一种默认实现/默认值，下面分情况对它进行讨论：
+
+- trait是一个变量，trait variable
+
+- trait是一个method，trait function
+
+- trait是一个type，trait type
+
+参见[Example.md](./Example.md)，其中发布列举了对应上述三种情况的例子，这些例子回答了上述问题。
 
 
 

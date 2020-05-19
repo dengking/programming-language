@@ -51,3 +51,56 @@ singleton
 实现类`class SPDLOG_API thread_pool`，实现文件`thread_pool.h`。
 
 `class SPDLOG_API registry`有成员变量`std::shared_ptr<thread_pool> tp_;`
+
+
+
+## Install
+
+通过阅读[INSTALL](https://github.com/gabime/spdlog/blob/v1.x/INSTALL)可知，它有两种使用模式：
+
+- Header only version
+
+- Compiled library version
+
+  编译的时候，需要`-DSPDLOG_COMPILED_LIB`
+
+
+
+
+
+## 代码阅读
+
+
+
+### `common.h`
+
+```c++
+#ifdef SPDLOG_COMPILED_LIB /*使用Compiled library version*/
+
+#undef SPDLOG_HEADER_ONLY
+
+#if defined(_WIN32) && defined(SPDLOG_SHARED_LIB) /*win32*/
+
+#ifdef spdlog_EXPORTS
+#define SPDLOG_API __declspec(dllexport)
+#else
+#define SPDLOG_API __declspec(dllimport)
+#endif
+
+#else /*非win32*/
+
+#define SPDLOG_API
+
+#endif /*end win32*/
+
+#define SPDLOG_INLINE
+
+#else /*不使用Compiled library version*/
+
+#define SPDLOG_API
+#define SPDLOG_HEADER_ONLY
+#define SPDLOG_INLINE inline
+
+#endif /*end 使用Compiled library version*/
+```
+
