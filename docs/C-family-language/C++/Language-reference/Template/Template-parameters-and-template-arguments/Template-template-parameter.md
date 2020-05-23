@@ -47,18 +47,18 @@ T2<T1> t2;
 
 
 ```c++
-///委托主推、补漏查询应答信息
+
 template<typename FieldT>
 struct CUstOptOrderInfoBase
 {
-	///发布类型 23-委托确认（注意：发布类型必须放在最开头）
+
 	HSIssuetype Issuetype;
-	///主推序号
+
 	HSNum SequenceNumber;
-	///委托主推信息详情
+
 	FieldT RspQryOrder;
 };
-//委托主推
+
 template<template<typename > typename InfoT, typename FieldT>
 struct CUstOptOrderRspBase
 {

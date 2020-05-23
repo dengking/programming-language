@@ -142,6 +142,83 @@ A common idiom is to use expression SFINAE on the return type, where the express
 
 
 
+### SFINAE and Function template and *trailing-return-type*
+
+在阅读[redis-plus-plus](https://github.com/sewenew/redis-plus-plus)的[redis.h](https://github.com/sewenew/redis-plus-plus/blob/master/src/sw/redis%2B%2B/redis.h)时，发现了类似于这样的语法
+
+```c++
+    template <typename ...Args>
+    auto command(const StringView &cmd_name, Args &&...args)
+        -> typename std::enable_if<IsIter<typename LastType<Args...>::type>::value, void>::type;
+```
+
+下面是仿照上述写的一个demo例子：
+
+```c++
+#include <iostream>
+#include <type_traits>
+
+namespace ServiceTypeNS
+{
+typedef int type;
+/**
+ * 普通服务，请求和响应都是单条的
+ */
+static const type Normal = 1;
+/**
+ * 查询类服务，响应是结果集类型，即多条记录
+ */
+static const type Query = 2;
+/**
+ * 主推类服务
+ */
+static const type Push = 3;
+
+}
+
+struct CoreTypeA
+{
+};
+struct CoreTypeB
+{
+};
+
+template<typename CoreType>
+struct NormalServiceTrait: std::true_type
+{
+	constexpr static ServiceTypeNS::type ServiceType = ServiceTypeNS::Normal;
+};
+
+template<typename CoreType>
+struct QueryServiceTrait: std::true_type
+{
+	constexpr static ServiceTypeNS::type ServiceType = ServiceTypeNS::Query;
+};
+
+template<template<class > class ServiceTraitType, class CoreType>
+auto Func(int FuncNo)->typename std::enable_if<ServiceTraitType<CoreType>::ServiceType==ServiceTypeNS::Normal, void>::type
+{
+	std::cout << "normal service" << FuncNo << std::endl;
+}
+
+template<template<class > class ServiceTraitType, class CoreType>
+auto Func(int FuncNo)->typename std::enable_if<ServiceTraitType<CoreType>::ServiceType==ServiceTypeNS::Query, void>::type
+{
+	std::cout << "query service" << FuncNo << std::endl;
+}
+
+int main()
+{
+	Func<NormalServiceTrait, CoreTypeA>(1);
+	Func<QueryServiceTrait, CoreTypeA>(1);
+	return 0;
+}
+
+
+```
+
+
+
 ## SFINAE and constructor
 
 
