@@ -10,9 +10,9 @@ The C++ traits technique provides an answer.
 
 > Think of a **trait** as a small object whose main purpose is to carry information used by another object or algorithm to determine "policy" or "implementation details". - Bjarne Stroustrup
 
-> NOTE: 在很多库中，trait都使用`***tag`来命名，按照上面这段话的描述，trait是用于carry information的，这正是tag。
+### [`std::numeric_limits`](https://en.cppreference.com/w/cpp/types/numeric_limits)
 
-Both C and `C++` programmers should be familiar with `limits.h`, and `float.h`, which are used to determine the various properties of the integer and floating point types.
+Both C and `C++` programmers should be familiar with [`limits.h`](https://code.woboq.org/gcc/libstdc++-v3/include/std/limits.html) , and `float.h`, which are used to determine the various properties of the integer and floating point types.
 
 Most C++ programmers are familiar with [`std::numeric_limits`](https://en.cppreference.com/w/cpp/types/numeric_limits) , which at first glance simply provides the same service, implemented differently. By taking a closer look at `numeric_limits` we uncover the first advantage of traits, a **consistent interface**.
 
@@ -55,7 +55,7 @@ Note the use of `numeric_limits`. As you can see, where as with the C style `lim
 
 > NOTE: `numeric_limits`是实现：[libstdc++-v3](https://code.woboq.org/gcc/libstdc++-v3/)/[include](https://code.woboq.org/gcc/libstdc++-v3/include/)/[std](https://code.woboq.org/gcc/libstdc++-v3/include/std/)/[limits](https://code.woboq.org/gcc/libstdc++-v3/include/std/limits.html)
 
-
+### `is_void`
 
 But I'd like to move away from `numeric_limits`, its just an example of traits in action, and I'd like to take you through creating traits classes of your own.
 
@@ -81,6 +81,8 @@ struct is_void< void >{
 
 And we have a complete traits type that can be used to detect if any given type, passed in as a **template parameter**, is `void`. Not the most useful piece of code on its own, but definitely a useful demonstration of the technique.
 
+### `is_pointer`
+
 Now, while **fully specialized templates** are useful and in my experience, the most common sort of trait class specialization, I think that it is worth quickly looking at **partial specialization**, in this case, `boost::is_pointer` [[boost](https://accu.org/index.php/journals/442#boost)]. Again, a default template class is defined:
 
 ```c++
@@ -99,7 +101,7 @@ struct is_pointer< T* >{
 };
 ```
 
-
+### `supports_optimized_implementation`
 
 So, having got this far, how can this technique be used to solve the lowest common denominator(共同特征) problem? How can it be used to **select** an appropriate algorithm at **compile time**? This is best demonstrated with an example.
 
@@ -182,6 +184,8 @@ int main(int argc, char* argv[]) {
 ```
 
 And that's it. Hopefully you can now "wow" your friends and colleague with your in-depth understanding of the c++ traits concept. :)
+
+#### 完整可运行代码
 
 > NOTE: 下面是完整可运行代码
 ```c++
@@ -273,6 +277,8 @@ enum { value = false };
 
 ## bogotobogo [Traits - A Template Specialization](https://www.bogotobogo.com/cplusplus/template_specialization_traits.php)
 
+### `numeric_limits`
+
 Suppose we want to get max values for **int** or **double**, we do this:
 
 ```c++
@@ -340,7 +346,9 @@ What happened?
 
 The **numeric_limits** template class replaced/supplemented the ordinary preprocessor constants of C (`<climits>` or `<limits.h>`).
 
-### numeric_limits traits class
+### `numeric_limits` traits class
+
+> NOTE: 这篇说明了`numeric_limits`的实现
 
 Actually, in the `limits.h`, for example, `DBL_MAX` contains the "maximum value" **trait**(特性) for the double data **type**. However, by using a **traits class** such as **numeric_limits**, the **type ** becomes part of the name, so that the maximum value for a double becomes `numeric_limits<double>::max()`, and also, we don't need to know the type.
 
@@ -422,17 +430,13 @@ is_specialized(std::string): 0
 
 
 
-
-
-
-
 ## What is Traits?
+
+### boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)中关于trait的定义
 
 在boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)中关于trait的定义，我觉得是比较好的：
 
 > A traits class provides a way of associating information with a compile-time entity (a type, integral constant, or address). 
-
-
 
 
 
@@ -454,12 +458,17 @@ Traits of `std::iterator`, please visit [Templates](http://www.bogotobogo.com/cp
 
 For template specialization, please visit [Template Specialization](http://www.bogotobogo.com/cplusplus/template_specialization_function_class.php).
 
+### 文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)
+
+在文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)中，对trait的介绍也非常好:
+
+> They are a **meta programming technique** which appears to use types and their sub types like functions at compile time, to control what the compiler actually compiles.
+
+正如上面这段话中所言，trait是一种meta programming technique。
+
+
+
 ## Implementation of trait
-
-关于Template specialization，参见：
-
-- cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
-- cppreference [partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)
 
 
 
@@ -476,6 +485,13 @@ trait class往往会定义一个template class（primary template class），然
 - trait是一个type，trait type
 
 参见[Example.md](./Example.md)，其中发布列举了对应上述三种情况的例子，这些例子回答了上述问题。
+
+
+
+关于Template specialization，参见：
+
+- cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
+- cppreference [partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)
 
 
 

@@ -56,10 +56,95 @@ template < class ValueType > struct container_gen< mapS, ValueType >
 
 ### [libstdc++-v3](https://code.woboq.org/gcc/libstdc++-v3/)/[include](https://code.woboq.org/gcc/libstdc++-v3/include/)/[std](https://code.woboq.org/gcc/libstdc++-v3/include/std/)/[limits](https://code.woboq.org/gcc/libstdc++-v3/include/std/limits.html)
 
+```c++
+  /**
+   *  @brief Properties of fundamental types.
+   *
+   *  This class allows a program to obtain information about the
+   *  representation of a fundamental type on a given platform.  For
+   *  non-fundamental types, the functions will return 0 and the data
+   *  members will all be @c false.
+  */
+  template<typename _Tp>
+    struct numeric_limits : public __numeric_limits_base
+```
 
+注释中，对default value的说明。
 
 ## Trait variable
 
-这种是最最简单的。
+这种是最最简单的，即定义有成员变量来说明含义。
 
-[What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)
+### [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)
+
+#### not
+
+```c++
+// (A)
+template <bool X>
+struct not
+{
+    static constexpr bool value {false};
+};
+
+// (B)
+template <>
+struct not<false>
+{
+    static constexpr bool value {true};
+};
+```
+
+#### Comparing types
+
+```c++
+// (A)
+template <typename T, typename U>
+struct is_same_type
+{
+    static constexpr bool value {false};
+};
+
+// (B)
+template <typename T>
+struct is_same_type<T, T>
+{
+    static constexpr bool value {true};
+};
+
+template <typename T>
+T myfunc(T x)
+{
+    if (is_same_type<T, FooType>::value) {
+        /* do something which is completely FooType specific */
+    } else {
+        /* do the general thing */
+    }
+}
+```
+
+```c++
+template <typename T>
+T myfunc(T x)
+{ /* do the general thing */ }
+
+template <>
+FooType myfunc(FooType x)
+{ /* do something which is completely FooType specific */ }
+```
+
+#### Determining if `T` is a pointer type
+
+```c++
+template <typename T>
+struct is_pointer
+{
+    static constexpr bool value {false};
+};
+
+template <typename T>
+struct is_pointer<T*>
+{
+    static constexpr bool value {true};
+};
+```

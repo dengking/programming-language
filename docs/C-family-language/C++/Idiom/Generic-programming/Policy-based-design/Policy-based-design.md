@@ -15,3 +15,7 @@
 ## Trait and policy
 
 [What is the difference between a trait and a policy?](https://stackoverflow.com/questions/14718055/what-is-the-difference-between-a-trait-and-a-policy)
+
+[What is the point of STL Character Traits?](https://stackoverflow.com/questions/5319770/what-is-the-point-of-stl-character-traits)
+
+etutorials [8.4 Traits and Policies](http://etutorials.org/Programming/Programming+Cpp/Chapter+8.+Standard+Library/8.4+Traits+and+Policies/)

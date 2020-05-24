@@ -173,3 +173,18 @@ Another similar use is the "[Barton–Nackman trick](https://en.wikipedia.org/wi
 ## Template is a kind of abstraction
 
 类是一种抽象，模板也是一种抽象，模板类是抽象的抽象。
+
+
+
+## Short Intro to C++ metaprogramming
+
+在阅读文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)时，其中的Short Intro段对c++的metaprogramming进行了较好的总结：
+
+> Looking at complex C++ meta programs, which appear seemlessly（无缝的） embedded into normal program code, is confusing at first. It is like looking at brain fuck code. That is, because the **meta programming syntax** is ugly and bloated. *Why is it so ugly?* The answer is simply, that C++ was not designed from the very beginning to contain a **meta programming language**. The language evolved, controlled by a consortium which always tried to keep newer language standards backwards compatible to older ones. One day, people realized, that this growing little template engine is actually *Turing complete*. Soon, people started to write really crazy **meta programs** with it, which were able to elevate implementations of C++ libraries to a level of unprecedented **usability**, **versatility** and **elegance** (from the perspective of a user which has not seen the implementation). Data structures and functions can be implemented in a way, where they do magic of all kinds on any user provided type - with no overhead at runtime, because all the magic happens at compile time, resulting in completely fixed and optimized run time code.
+
+
+
+`constexpr` function、trait等都是meta program的典型例子，在c++中，meta program是compile-time computation。我们将它们嵌入到normal program code中，来对program的生成进行控制，比如可以实现polymorphism，它们给予了c++非常强大的灵活性。
+
+
+

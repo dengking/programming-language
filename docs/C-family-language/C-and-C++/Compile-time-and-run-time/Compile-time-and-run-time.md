@@ -1,22 +1,36 @@
+# Compile-time and run-time
+
 ## c++
 
-`static_cast` VS `dynamic_cast`
+### `static_cast` VS `dynamic_cast`
 
 
 
-compile-time concept:
+### compile-time concept
 
-template
+下面总结了c++中的compile-time concept。
 
-static 多态 VS runtime多态
+#### constant expression
 
-name mangling VS virtual table
+关于constant expression，参见`C-family-language\C++\Language-reference\Expressions\Operators\Other\Constant-expressions`章节。
 
-c++ compile time and run time
-constant expression
+#### template
 
-https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
-https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
+关于template，参见`C-family-language\C++\Language-reference\Template`章节。
+
+### Compile-time context
+
+下面是总结的（部分）compile-time context：
+
+- template arguments
+- array sizes，参见[Array declaration](https://en.cppreference.com/w/cpp/language/array)
+- [switch statement](https://en.cppreference.com/w/cpp/language/switch)
+
+
+
+### static 多态 VS runtime多态
+
+#### name mangling VS virtual table
 
 name mangling
 https://www.geeksforgeeks.org/extern-c-in-c/
@@ -25,8 +39,7 @@ https://en.wikipedia.org/wiki/Name_mangling
 
 
 
-TODO: 将compile-time context移到这里
+https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
+https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
 
-
-
-static type and dynamic type
+### static type and dynamic type

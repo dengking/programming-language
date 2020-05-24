@@ -24,7 +24,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 - [alternative representations](https://en.cppreference.com/w/cpp/language/operator_alternative) are alternative spellings for some operators
 - [operator overloading](https://en.cppreference.com/w/cpp/language/operators) makes it possible to specify the behavior of the operators with user-defined classes.
 
-> NOTE: python中没有value categories一说，先比之下，python的data model是简单地多的。其他的相关问题，python中都有。
+> NOTE: python中没有value categories一说，相比之下，python的data model是简单地多的。其他的相关问题，python中都有。
 
 > NOTE: 上述后三条在原文中和前两条不在一起，我觉得它们是所有的operator都会涉及到的问题，所以我将它们放到了一起。
 

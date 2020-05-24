@@ -6,6 +6,7 @@ nav:
     - static_cast: static_cast
     - dynamic_cast: dynamic_cast
     - pointer_cast: pointer_cast
+    - const_cast: const_cast
 ########## 用户自定义cast    
     - User-defined-conversion: User-defined-conversion.md
 ########## 所有的conversion都会涉及到CV的问题    
