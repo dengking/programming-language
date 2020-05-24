@@ -6,6 +6,18 @@
 
 > NOTE: 建议先阅读例子，然后阅读理论描述
 
+### [Structure](https://en.wikipedia.org/wiki/Abstract_factory_pattern#Structure)
+
+
+
+[![Class diagram example The method createButton on the GUIFactory interface returns objects of type Button. What implementation of Button is returned depends on which implementation of GUIFactory is handling the method call.](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Abstract_factory.svg/259px-Abstract_factory.svg.png)](https://en.wikipedia.org/wiki/File:Abstract_factory.svg)
+
+**Class diagram example** The method `createButton` on the `GUIFactory` interface returns objects of type `Button`. What implementation of `Button` is returned depends on which implementation of `GUIFactory` is handling the method call.
+
+> NOTE: UML图最能够体现abstract factory pattern
+
+
+
 ### [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) example
 
 ```python
@@ -131,3 +143,7 @@ if __name__ == '__main__':
 ```
 
 > NOTE: Everything in python is a object，so do class
+>
+> 下面是上述代码的UML图
+>
+> ![](./PythonAbstractFactory.png)

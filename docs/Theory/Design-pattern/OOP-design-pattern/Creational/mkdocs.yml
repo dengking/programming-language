@@ -1,5 +1,7 @@
 nav:
     - Introduction: index.md
+    - Factory: Factory
     - Abstract-factory-pattern: Abstract-factory-pattern
     - Singleton-pattern: Singleton-pattern
     - Builder-pattern: Builder-pattern
+    - Dependency-injection: Dependency-injection

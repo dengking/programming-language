@@ -227,4 +227,4 @@ https://stackoverflow.com/questions/32079697/observer-pattern-visitor-pattern-fo
 
 
 
-design pattern充分利用dynamic dispatch和static dispatch，主要我们遵循design-by-context，那么就可以在不修改的design（抽象模型）的情况下，进行扩展，或者所，dispatch是建立抽象与具体的桥梁。
+design pattern充分利用dynamic dispatch和static dispatch，主要我们遵循design-by-context，那么就可以在不修改的design（抽象模型）的情况下，进行扩展，dispatch是建立抽象与具体的桥梁。

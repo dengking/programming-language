@@ -1,0 +1,6 @@
+nav:
+    - Factory: Factory.md
+    - Abstract-factory-pattern: Abstract-factory-pattern.md   
+    - Factory-method-pattern: Factory-method-pattern
+    - Summary: Summary.md
+    
