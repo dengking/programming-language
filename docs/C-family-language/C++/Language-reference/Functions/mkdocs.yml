@@ -1,5 +1,6 @@
 nav:
     - Function: Function.md
+    - Function-declaration: Function-declaration
 # 函数调用中也包含一些内容
     - Function-calls: Function-calls
 # 运算符重载    
