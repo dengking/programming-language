@@ -90,7 +90,9 @@ The term *layout* refers to how the members of an object of class, struct or uni
 
 > NOTE: 上诉“member”所指为data member
 
-To enable compilers as well as C++ programs and metaprograms to reason about the suitability of any given type for operations that depend on a particular memory layout, C++14 introduced three categories of simple classes and structs: *trivial*, *standard-layout*, and *POD* or Plain Old Data. The Standard Library has the function templates [`is_trivial`](https://en.cppreference.com/w/cpp/types/is_trivial) , [`is_standard_layout`](https://en.cppreference.com/w/cpp/types/is_standard_layout)  and [`is_pod`](https://en.cppreference.com/w/cpp/types/is_pod) that determine whether a given type belongs to a given category.
+To enable compilers as well as **C++ programs** and **metaprograms** to reason about the suitability of any given type for operations that depend on a particular memory layout, C++14 introduced three categories of simple classes and structs: *trivial*, *standard-layout*, and *POD* or Plain Old Data. The Standard Library has the function templates [`is_trivial`](https://en.cppreference.com/w/cpp/types/is_trivial) , [`is_standard_layout`](https://en.cppreference.com/w/cpp/types/is_standard_layout)  and [`is_pod`](https://en.cppreference.com/w/cpp/types/is_pod) that determine whether a given type belongs to a given category.
+
+> NOTE: 上述metaprogram所指的是c++的template metaprogramming，参见`C-family-language\C++\Language-reference\Template\Template-metaprogramming.md`
 
 ### [Trivial types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#trivial-types)
 

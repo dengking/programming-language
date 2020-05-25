@@ -188,3 +188,12 @@ Another similar use is the "[Barton–Nackman trick](https://en.wikipedia.org/wi
 
 
 
+## SUMMARY
+
+在microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中有这样的描述：
+
+> To enable compilers as well as **C++ programs** and **metaprograms** to reason about the suitability of any given type for operations that depend on a particular memory layout, C++14 introduced three categories of simple classes and structs
+
+从meta programming的角度来看，c++ program可以分为c++ program和metaprogram，metaprogram是compiler-time computation。
+
+在`Theory\Programming-paradigm\Metaprogramming\Metaprogramming.md`中对这种观点进行了总结。

@@ -2,17 +2,22 @@
 
 在文章Meta中，总结了programming language中的各种meta，其中我们已经总结了：
 
-> meta是一种抽象
+> NOTE: meta是一种抽象
 
 ## 维基百科[Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) 
 
 **Metaprogramming** is a programming technique in which [computer programs](https://en.wikipedia.org/wiki/Computer_program) have the ability to treat programs as their data. It means that a program can be designed to read, generate, analyze or transform other programs, and even modify itself while running. [[1\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-1)[[2\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-2) In some cases, this allows programmers to minimize the number of lines of code to express a solution, thus reducing the development time.[[3\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-3)  It also allows programs greater flexibility to efficiently handle new situations without recompilation.
 
-> NOTE: 上面所描述的是metaprogramming的核心思想。结合我们所使用的具体的programming（c++、python），发现其实它们都提供了对metaprogramming的支持
+**Metaprogramming** can be used to move computations from [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) to [compile-time](https://en.wikipedia.org/wiki/Compile-time), to generate code using compile time computations, and to enable [self-modifying code](https://en.wikipedia.org/wiki/Self-modifying_code). The language in which the **metaprogram** is written is called the [metalanguage](https://en.wikipedia.org/wiki/Self-modifying_code). The language of the programs that are manipulated is called the [attribute-oriented programming](https://en.wikipedia.org/wiki/Attribute-oriented_programming) language. The ability of a programming language to be its own metalanguage is called [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_science)) or "reflexivity".[[4\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-4) **Reflection** is a valuable language feature to facilitate metaprogramming.
 
-**Metaprogramming** can be used to move computations from [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) to [compile-time](https://en.wikipedia.org/wiki/Compile-time), to generate code using compile time computations, and to enable [self-modifying code](https://en.wikipedia.org/wiki/Self-modifying_code). The language in which the metaprogram is written is called the [metalanguage](https://en.wikipedia.org/wiki/Self-modifying_code). The language of the programs that are manipulated is called the [attribute-oriented programming](https://en.wikipedia.org/wiki/Attribute-oriented_programming) language. The ability of a programming language to be its own metalanguage is called [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_science)) or "reflexivity".[[4\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-4) **Reflection** is a valuable language feature to facilitate metaprogramming.
-
-> NOTE: 
+> NOTE: 上面所描述的是metaprogramming的核心思想。结合我们所使用的具体的programming（c++、python），发现其实它们都提供了对metaprogramming的支持。
+>
+> 从metaprogramming的角度来看，我们编写的program就包含两类了：
+>
+> - program（使用programming language）
+> - metaprogram（使用metaprogramming language）
+>
+> c++和python都支持metaprogramming，它们的programming language和metaprogramming相同。
 
 ### Approaches 
 

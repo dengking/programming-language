@@ -28,7 +28,7 @@ The *entities* of a C++ program are values, [objects](https://en.cppreference.co
 >
 > 上述第三段回答了问题“C++ program的组成”，这一段中，使用“entity”的概念来描述C++ program的组成，作者（其实就是c++语言的设计者）认为，一个C++ program由上述所列举的11种entity组成。如果你已经有了编写c++ program的经验，那么请你回想一下，你的c++ program是否是由上面枚举的这些entity所组成的。
 >
-> 比较不幸的是，原文并没有给出“entity”概念的定义，而仅仅告诉了读者在“C++ program”中，哪些是entity，那要如何来理解“entity”呢？既然它是一个由“entity”是c++语言的设计者所**抽象**的，在文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)中我们已经对**抽象**进行了总结：
+> 比较不幸的是，原文并没有给出“entity”概念的定义，而仅仅告诉了读者在“C++ program”中，哪些是entity，那要如何来理解“entity”呢？既然它是一个由c++语言的设计者所**抽象**的，在文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)中我们已经对**抽象**进行了总结：
 >
 > > 抽象是概括的过程，抽象是提取公共特征的过程，它所概括的、所提取的公共特征，可以使用 [concepts](https://en.wikipedia.org/wiki/Concept) 来进行表示
 >
@@ -89,7 +89,5 @@ Declared objects and declared references that are not [non-static data members](
 
 至于name了，我觉得它和identifier的含义基本类似，按照上面的介绍，它主要是和declaration、entity、scope相关联，我觉得这个可以这样认为：name概念是和entity概念相关联，或者说，每个entity都有一个name。
 
-总的来说：word、identifier、name，都是静态概念，都是有compiler来进行理解的。
-
-variable则是一个动态概念、是一个运行时概念，它所表示的含义有：memory。
+总的来说：word、identifier、name，都是静态概念，都是有compiler来进行理解的。variable则是一个动态概念、是一个运行时概念，它所表示的含义有：memory。
 
