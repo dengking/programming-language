@@ -1,7 +1,7 @@
 nav:
-    - SOLID: SOLID
-    - Object-oriented-design: Object-oriented-design.md
+    - Goal-and-principle: Goal-and-principle
     - Books: Books.md
+    - Composition-and-inheritance: Composition-and-inheritance
     - Creational: Creational
     - Behavioral-pattern: Behavioral-pattern
     - Structural-pattern: Structural-pattern

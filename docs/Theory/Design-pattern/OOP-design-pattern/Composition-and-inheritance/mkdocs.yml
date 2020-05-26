@@ -1,0 +1,4 @@
+nav:
+    - Has-a: Has-a.md
+    - Is-a: Is-a.md
+    - Inheritance-VS-composition: Inheritance-VS-composition.md

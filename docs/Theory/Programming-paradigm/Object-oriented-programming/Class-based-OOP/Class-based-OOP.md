@@ -28,9 +28,15 @@ Junade Ali, *Mastering PHP Design Patterns*
 
 我们平时所说的“面向对象编程”的三大特性，更加严格地说应该是class-based OOP的三大特性：
 
-- 继承
-- 封装
-- 多态
+- Inheritance
+
+- Encapsulation
+
+- Polymorphism
+
+  > 在维基百科[Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)中有这样的描述：
+  >
+  > Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wiki/Dynamic_dispatch) and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), which are central features of object-oriented programming.
 
 这三大特性貌似并没有形式化地定义，应该是约定俗成的一种说法。
 
