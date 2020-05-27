@@ -348,7 +348,7 @@ signbit(T x)
 
 Without using `enable_if`, think about the options the library implementors would have. One would be to overload the function for each of the known arithmetic type. That's very verbose. Another would be to just use an unrestricted template. But then, had we actually passed a wrong type into it, say `std::string`, we'd most likely get a fairly obscure error *at the point of use*. With `enable_if`, we neither have to write boilerplate, nor to produce bad error messages. If we invoke `std::signbit` as defined above with a bad type we'll get a fairly helpful error saying that a suitable function cannot be found.
 
-## A more advanced version of enable_if
+### A more advanced version of enable_if
 
 Admittedly, `std::enable_if` is clumsy, and even `enable_if_t` doesn't help much, though it's a bit less verbose. You still have to mix it into the declaration of a function in a way that often obscures the return type or an argument type. This is why some sources online suggest crafting more advanced versions that "get out of the way". Personally, I think this is the wrong tradeoff to make.
 
