@@ -2,11 +2,8 @@ nav:
 #################### generic programming都是和template相关的 ####################    
     - Curiously-recurring-template-pattern: Curiously-recurring-template-pattern
     - Expression-Template: Expression-Template
-    - SFINAE: SFINAE
     # trait是和template相关的
-    - Trait: Trait
-    # enable-if的实现是依赖于trait
-    - enable-if: enable-if
+    - SFINAE-trait-enable-if: SFINAE-trait-enable-if
     # 
     - Barton–Nackman-trick: Barton–Nackman-trick
     #

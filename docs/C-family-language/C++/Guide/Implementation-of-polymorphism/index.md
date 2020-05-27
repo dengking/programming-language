@@ -49,11 +49,7 @@ cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/ov
 
 最最简单的情况是，仅仅存在primary template，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个partial specialization of template的时候，compiler如何选择set  of candidates中的哪个partial specialization of template进行instantiation？
 
-与此相关的有：
 
-- trait
-- sfinae
-- enable_if
 
 
 
@@ -95,3 +91,18 @@ https://stackoverflow.com/questions/7108033/template-specialization-vs-function-
 
 https://www.fluentcpp.com/2017/08/15/function-templates-partial-specialization-cpp/
 
+想法：
+
+c++ overload resolution、template specialization的过程和Python attribute find的过程类似，都是实现polymorphsim的基础
+
+
+
+## Static polymorphism and template metaprogramming
+
+c++的static polymorphism是由compiler来实现，c++的实现运行programmer通过template metaprogramming来对static polymorphism的过程进行控制，这是c++的核心特性，主要的实现方式：
+
+- trait
+- sfinae
+- enable_if
+
+上诉三者在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if`中总结了。
