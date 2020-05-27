@@ -8,3 +8,30 @@ SFINAE、trait、enable_if，三者是实现template metaprogramming的基础，
 
 这是c++ metaprogramming的精髓所在。
 
+下面是一些典型的用法：
+
+## Class template SFINAE
+
+https://cpppatterns.com/patterns/class-template-sfinae.html
+
+## Function template SFINAE
+
+[Using SFINAE to specialize template methods, depending on the type of container std::map or std::vector, passed as an argument](https://evileg.com/en/post/468/)
+
+
+
+[Enable_if for template function specialization](https://stackoverflow.com/questions/48097889/enable-if-for-template-function-specialization)
+
+
+
+[std::enable_if to conditionally compile a member function](https://stackoverflow.com/questions/6972368/stdenable-if-to-conditionally-compile-a-member-function)
+
+
+
+
+
+## TO READ
+
+[Template SFINAE & type-traits](https://shaharmike.com/cpp/sfinae/)
+
+ 
