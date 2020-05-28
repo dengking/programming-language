@@ -5,6 +5,8 @@ nav:
     # trait是和template相关的
     - SFINAE-trait-enable-if: SFINAE-trait-enable-if
     # 
+    - Metafunction: Metafunction
+    # 
     - Barton–Nackman-trick: Barton–Nackman-trick
     #
     - Type-Generator: Type-Generator
