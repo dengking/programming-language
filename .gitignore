@@ -102,3 +102,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+docs/C-family-language/C++/Library/Boost/boost_1_73_0.tar.gz

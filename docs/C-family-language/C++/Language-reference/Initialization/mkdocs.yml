@@ -8,3 +8,5 @@ nav:
     - Zero-initialization: Zero-initialization.md
     - Constant_initialization: Constant_initialization.md
     - Aggregate-initialization: Aggregate-initialization.md
+# 实际的运用
+    - Initialization-of-struct: Initialization-of-struct.md

@@ -1,6 +1,6 @@
 # C++ paradigm
 
-C++是一种multi-paradigm programming language，下面罗列了c++支持的paradigm以及每种paradigm的实现。
+C++是一种multi-paradigm programming language，下面罗列了c++支持的paradigm以及每种paradigm的实现。在`Idiom`章节总结了各种paradigm的idiom。
 
 ## Generic programming
 

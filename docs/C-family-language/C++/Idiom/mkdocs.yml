@@ -5,8 +5,9 @@ nav:
 ########## ##########    
     - Erase-remove: Erase-remove
     - Recursive-Type-Composition: Recursive-Type-Composition
-#################### template metaprogramming####################    
+#################### template metaprogramming和Generic-programming密切相关####################    
     - Template-metaprogramming: Template-metaprogramming
+    - Generic-programming: Generic-programming
 ########## 函数相关相关##########   
     # 函数返回值
     - Covariant-Return-Types: Covariant-Return-Types

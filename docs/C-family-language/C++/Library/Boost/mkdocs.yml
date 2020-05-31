@@ -15,4 +15,6 @@ nav:
     - Boost-Poly-Collection: Boost-Poly-Collection
 # meta programming    
     - Boost-Meta-programming: Boost-Meta-programming
+# generic programming
+    - Boost-Iterator: Boost-Iterator
     

@@ -44,3 +44,9 @@ auto as_integer(Enumeration const value)
 
 
 #### [magic_enum](https://github.com/Neargye/magic_enum)
+
+
+
+## underlying type of enum
+
+[What is the underlying type of a c++ enum?](https://stackoverflow.com/questions/1122096/what-is-the-underlying-type-of-a-c-enum)
