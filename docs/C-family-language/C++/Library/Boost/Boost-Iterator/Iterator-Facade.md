@@ -118,3 +118,25 @@ with `X`.
 
 category指的是标准库的iterator category，traversal指的是boost iterator library的，在`iterator_facade.html#categoryortraversal`中对此进行了说明。
 
+
+
+iterators whose **dereference operators** reference the same value for all iterators into the same sequence (like many input     iterators) need help with their postfix ++: the **referenced value** must be read and stored away before the increment occurs so that `*a++` yields the originally referenced element and not the next one.
+
+```C++
+struct postfix_increment_proxy
+{
+    
+};
+```
+
+
+
+
+
+```c++
+struct writable_postfix_increment_proxy
+{
+
+};
+```
+

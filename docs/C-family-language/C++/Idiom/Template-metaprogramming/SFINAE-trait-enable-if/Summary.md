@@ -30,6 +30,94 @@ https://cpppatterns.com/patterns/class-template-sfinae.html
 
 
 
+### Example
+
+```C++
+
+#include <iostream>
+#include <type_traits>
+
+struct Stock
+{
+};
+struct Derivative
+{
+};
+
+/**
+ *
+ */
+struct NoIndexMsg
+{
+	constexpr static int ServiceMsgType = 1;
+
+};
+
+/**
+ *
+ */
+struct TradeMsg
+{
+	constexpr static int ServiceMsgType = 2;
+};
+/**
+ *
+ */
+struct QueryMsg
+{
+	constexpr static int ServiceMsgType = 3;
+};
+
+/**
+ * 主推类消息
+ */
+struct PushMsg
+{
+	constexpr static int ServiceMsgType = 4;
+};
+
+template<typename UstTag>
+struct LoginServiceTrait: std::true_type, NoIndexMsg
+{
+	constexpr static int FuncNo = 1;
+};
+
+template<typename UstTag>
+struct OrderInsertServiceTrait: std::true_type, TradeMsg
+{
+	constexpr static int FuncNo = 2;
+};
+
+/**
+ * trade消息的请求
+ * @param ReqField 请求字段
+ * @return
+ */
+template<template<class > class ServiceTraitType, typename UstTag>
+auto Req()->typename std::enable_if<ServiceTraitType<UstTag>::ServiceMsgType==NoIndexMsg::ServiceMsgType, int>::type
+{
+	std::cout<<ServiceTraitType<UstTag>::FuncNo<<std::endl;
+	return 0;
+}
+/**
+ * trade消息的请求
+ * @param ReqField 请求字段
+ * @return
+ */
+template<template<class > class ServiceTraitType, typename UstTag>
+auto Req()->typename std::enable_if<ServiceTraitType<UstTag>::ServiceMsgType==TradeMsg::ServiceMsgType, int>::type
+{
+	std::cout<<ServiceTraitType<UstTag>::FuncNo<<std::endl;
+	return 0;
+}
+
+int main()
+{
+	Req<OrderInsertServiceTrait, Stock>();
+}
+
+```
+
 
 
 ## TO READ

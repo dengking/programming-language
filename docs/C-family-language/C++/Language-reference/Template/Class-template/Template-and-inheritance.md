@@ -14,6 +14,153 @@ https://www.tutorialspoint.com/cplusplus/cpp_templates.htm
 
 
 
+### [Derived template-class access to base-class member-data](https://stackoverflow.com/questions/1120833/derived-template-class-access-to-base-class-member-data)
+
+
+
+```c++
+#include "stddef.h"
+#include <cstdint>
+using FuncNoType = unsigned int;
+
+struct MSG_HEAD
+{
+	uint32_t uMsgLen;
+	uint32_t uFuncNo;
+	int64_t nToken;
+	int32_t nSenderID;
+	uint32_t uReqNum;
+};
+
+/**
+ * normal请求msg
+ */
+template<typename FieldType>
+struct CNormalMsgReq
+{
+	MSG_HEAD MsgHead;
+	FieldType Field;
+};
+
+template<typename ReqFieldType>
+struct CMsgPacker
+{
+public:
+	CMsgPacker(ReqFieldType *ReqField)
+			: m_ReqField(ReqField)
+	{
+
+	}
+	void InitMsgHead()
+	{
+		m_MsgHead = (MSG_HEAD*) m_ReqMsgPtr;
+	}
+	CMsgPacker& SetFuncNo(uint32_t FuncNo)
+	{
+		if (m_MsgHead)
+		{
+			m_MsgHead->uFuncNo = FuncNo;
+		}
+		return *this;
+	}
+	CMsgPacker& SetToken(int64_t Token)
+	{
+		if (m_MsgHead)
+		{
+			m_MsgHead->nToken = Token;
+		}
+		return *this;
+	}
+
+	CMsgPacker& SetSenderID(int32_t SenderID)
+	{
+		if (m_MsgHead)
+		{
+			m_MsgHead->nSenderID = SenderID;
+		}
+		return *this;
+	}
+
+	CMsgPacker& SetReqNum(uint32_t ReqNum)
+	{
+		if (m_MsgHead)
+		{
+			m_MsgHead->uReqNum = ReqNum;
+		}
+		return *this;
+	}
+	const void* GetMsgPtr()
+	{
+		return m_ReqMsgPtr;
+	}
+	size_t GetMsgLen()
+	{
+		return m_MsgLen;
+	}
+protected:
+
+	void CopyReqFieldToMsgBody(size_t Offset)
+	{
+		void *lpBody = m_ReqMsgPtr + Offset;
+		memcpy(lpBody, m_ReqField, sizeof(ReqFieldType));
+	}
+public:
+	/**
+	 * 指向消息头的指针
+	 */
+	MSG_HEAD* m_MsgHead { nullptr };
+	/**
+	 * 指向请求消息的指针
+	 */
+	char* m_ReqMsgPtr { nullptr };
+	/**
+	 * 消息长度
+	 */
+	size_t m_MsgLen { 0 };
+	ReqFieldType *m_ReqField { nullptr };
+	FuncNoType m_FuncNo { 0 };
+};
+
+template<typename ReqFieldType>
+struct CNoIndexMsgPacker: public CMsgPacker<ReqFieldType>
+{
+public:
+	using ReqMsgType = CNormalMsgReq<ReqFieldType>;
+	CNoIndexMsgPacker(ReqFieldType *ReqField)
+			: CMsgPacker<ReqFieldType>(ReqField)
+	{
+		this->m_MsgLen = sizeof(ReqMsgType);
+		memset(&m_ReqMsg, 0x00, this->m_MsgLen);
+		m_ReqMsgPtr = &m_ReqMsg;
+		InitMsgHead();
+
+		m_ReqMsg.MsgHead.uMsgLen = m_MsgLen;
+		m_ReqMsg.MsgHead.uMsgType = MSG_NO_INDEX;
+
+		CopyReqFieldToMsgBody(sizeof(MSG_HEAD));
+
+	}
+private:
+	ReqMsgType m_ReqMsg;
+};
+
+struct Test
+{
+	int i;
+};
+int main()
+{
+	Test t;
+	CNoIndexMsgPacker<Test>(&t);
+}
+```
+
+
+
+#### Why am I getting errors when my template-derived-class uses a member it inherits from its template-base-class? [¶](https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members) [Δ](https://isocpp.org/wiki/faq/templates#)
+
+
+
 ## 模板类继承一个非模板类
 
 模板类继承一个非模板类，如下模板类`Child`继承非模板类`Base`，在模板类`C`中，有一个`C2`类型的成员变量`m_c2`，这个类型需要一个类型为`Base`的入参，那这就出现了一个问题：如何将模板类`C`的特化后的类对象作为入参传入呢？下面是一个简单的测试出现，结果是可以的，其实显而易见，特化后的模板类是一个基础自`Base`的普通类。

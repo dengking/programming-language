@@ -73,3 +73,10 @@ using CUstOptExerciseInfo = CUstOptExerciseInfoBase<CHSInsRspQryExerciseField>;
 using CUstOptExerciseRsp = CUstOptExerciseRspBase<CUstOptExerciseInfoBase, CHSInsRspQryExerciseField>;
 ```
 
+## [What are some uses of template template parameters?](https://stackoverflow.com/questions/213761/what-are-some-uses-of-template-template-parameters)
+
+
+
+## [Templated class specialization where template argument is a template](https://stackoverflow.com/questions/4189945/templated-class-specialization-where-template-argument-is-a-template)
+
+Google template template specialization	
