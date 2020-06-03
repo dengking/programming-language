@@ -31,7 +31,8 @@ namespace BussinessTypes
 这让我想起了`const`的linkage，显然它是internal linkage的，下面是参考内容：
 
 - [Why does const imply internal linkage in C++, when it doesn't in C?](https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c)
-- 
+
+  
 
 ### constexpr
 

@@ -26,25 +26,27 @@ Each parameter in *parameter-list* may be:
 
 #### Non-type template parameter
 
-
-
-> NOTE: Non-type template parameter即非类型模板参数，关于它的例子参见：
->
-> https://stackoverflow.com/questions/45559355/how-do-you-pass-a-templated-class-instance-as-a-template-parameter-to-another-te
-
-
+> NOTE: non-type template 是比较复杂的，放到了单独的一篇中进行介绍。
 
 #### Type template parameter
 
+> NOTE: 这种是非常常见的
 
 
-#### Template template arguments
 
-> Template template arguments的含义是使用一个template来作为template argument。
+#### Template template parameter
+
+> Template template parameter的含义是使用一个template来作为template parameter。
 
 ### Template arguments
 
 #### Template non-type arguments
+
+- For integral and arithmetic types, the template argument provided during instantiation must be a [converted constant expression](https://en.cppreference.com/w/cpp/language/constant_expression) of the template parameter's type (so certain implicit conversion applies).
+- For pointers to objects, the template arguments have to designate the address of a complete object with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and a [linkage](https://en.cppreference.com/w/cpp/language/storage_duration#Linkage) (either internal or external), or a constant expression that evaluates to the appropriate null pointer or [std::nullptr_t](https://en.cppreference.com/w/cpp/types/nullptr_t) value.
+- For pointers to functions, the valid arguments are pointers to functions with linkage (or constant expressions that evaluate to null pointer values).
+- For lvalue reference parameters, the argument provided at instantiation cannot be a temporary, an unnamed lvalue, or a named lvalue with no linkage (in other words, the argument must have linkage).
+- For pointers to members, the argument has to be a pointer to member expressed as &Class::Member or a constant expression that evaluates to null pointer or [std::nullptr_t](https://en.cppreference.com/w/cpp/types/nullptr_t) value.
 
 #### Template type arguments
 

@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)
 
 It is often quite hard to distinguish between **scope** and **linkage**, and the roles they play. This article focuses on [scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) and [linkage](https://en.wikipedia.org/wiki/Linkage_(software)), and how they are used in C language.
