@@ -14,6 +14,14 @@ One way to avoid such misconceptions is to adopt a term for the kind of **type r
 
 > NOTE: duck type是典型的基于behavior的。
 
+
+
+> NOTE: 证实本段观点的例子：
+>
+> [cppreference Iterator library](https://en.cppreference.com/w/cpp/iterator)
+>
+> > Instead of being defined by specific types, each category of iterator is defined by the operations that can be performed on it. This definition means that any type that supports the necessary operations can be used as an iterator -- for example, a pointer supports all of the operations required by [*LegacyRandomAccessIterator*](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator), so a pointer can be used anywhere a [*LegacyRandomAccessIterator*](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator) is expected.
+
 ### Examples
 
 > NOTE: 下面首先列举了OOP的例子，然后列举了generic programming的例子。关于例子的标题是我添加的，原文中并没有。

@@ -10,7 +10,9 @@ Chapter 1 is a discussion of [object-oriented](https://en.wikipedia.org/wiki/Obj
 
 - "Program to an 'interface', not an '**implementation'**." (Gang of Four 1995:18)
 
-  > NOTE: interface是abstraction，implementation是concrete。关于abstraction、concrete，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)，它是OOP的核心思想，[IoC](https://en.wikipedia.org/wiki/Inversion_of_control)、[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)都遵循这这个思想，它是实现[Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)的关键实现。
+  > NOTE: interface是abstraction，implementation是concrete。关于abstraction、concrete，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)，它是OOP的核心思想，SOLID中的“D”即[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)表达的是和这相同的含义。
+  >
+  > 它是实现[Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)的关键实现。
 
 - [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance): "Favor '[object composition](https://en.wikipedia.org/wiki/Object_composition)' over '[class inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science))'." (Gang of Four 1995:20)
 

@@ -24,9 +24,15 @@ Junade Ali, *Mastering PHP Design Patterns*
 
 
 
-## 三大特性
+## Class-based OOP的特性
 
-我们平时所说的“面向对象编程”的三大特性，更加严格地说应该是class-based OOP的三大特性：
+Class-based OOP的特性：
+
+- abstraction
+
+  > NOTE: 在tutorialsteacher [Dependency Inversion Principle](https://www.tutorialsteacher.com/ioc/dependency-inversion-principle)中有这样的描述：
+  >
+  > Abstraction and encapsulation are important principles of object-oriented programming.
 
 - Inheritance
 
@@ -38,7 +44,7 @@ Junade Ali, *Mastering PHP Design Patterns*
   >
   > Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wiki/Dynamic_dispatch) and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), which are central features of object-oriented programming.
 
-这三大特性貌似并没有形式化地定义，应该是约定俗成的一种说法。
+
 
 本段参考的内容有：
 
