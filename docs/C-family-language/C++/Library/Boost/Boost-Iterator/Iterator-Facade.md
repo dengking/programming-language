@@ -110,17 +110,31 @@ with `X`.
 
 
 
+## Implementation
 
+实现的源代码：`iterator_facade.hpp`
 
-## `iterator_facade.hpp`
+### `enable_if`
 
-模板参数`CategoryOrTraversal`
+大量运用`enable_if`
+
+`enable_if_interoperable`、`enable_if_interoperable_and_random_access_traversal`、
+
+### 模板参数`CategoryOrTraversal`
 
 category指的是标准库的iterator category，traversal指的是boost iterator library的，在`iterator_facade.html#categoryortraversal`中对此进行了说明。
 
+### proxy
 
+首先需要搞清楚proxy的功能是什么：proxy其实需要提供它所代理的object相同的behavior，它应该将这些behavior forward到它的底层的object。
 
-iterators whose **dereference operators** reference the same value for all iterators into the same sequence (like many input     iterators) need help with their postfix ++: the **referenced value** must be read and stored away before the increment occurs so that `*a++` yields the originally referenced element and not the next one.
+下面是实现中，用到了proxy的
+
+#### postfix increment proxy
+
+这个proxy仅仅提供了`*`支持，所以它允许`(*r++)`。
+
+iterators whose **dereference operators** reference the same value for all iterators into the same sequence (like many input iterators) need help with their postfix `++`: the **referenced value** must be read and stored away before the increment occurs so that `*a++` yields the originally referenced element and not the next one.
 
 ```C++
 struct postfix_increment_proxy
@@ -129,9 +143,9 @@ struct postfix_increment_proxy
 };
 ```
 
+#### `writable_postfix_increment_proxy`
 
-
-
+顾名思义，它提供了write behavior。
 
 ```c++
 struct writable_postfix_increment_proxy
@@ -139,4 +153,8 @@ struct writable_postfix_increment_proxy
 
 };
 ```
+
+
+
+
 
