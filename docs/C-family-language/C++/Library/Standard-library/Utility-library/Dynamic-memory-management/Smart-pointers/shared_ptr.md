@@ -61,3 +61,30 @@ int main()
 }
 ```
 
+### `make_shard` with no argument
+
+​	
+
+这个例子是源自cppreference [std::make_shared, std::make_shared_for_overwrite](https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared)
+
+```c++
+#include <iostream>
+#include <memory>
+#include <type_traits>
+ 
+struct C
+{
+  
+  int i;
+};
+ 
+int main()
+{
+    auto sp = std::make_shared<C>();
+ 
+    //static_assert(std::is_same_v<decltype(sp), std::shared_ptr<C>>);
+ 
+    std::cout << sp->i << '\n';
+}
+```
+

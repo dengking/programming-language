@@ -14,3 +14,4 @@ nav:
     - Object-Generator: Object-Generator
     #
     - Tag-Dispatching: Tag-Dispatching
+    - Member-Detector: Member-Detector
