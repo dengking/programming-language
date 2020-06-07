@@ -24,3 +24,17 @@ The third argument, `bidirectionalS`, selects a directed graph that provides acc
 
 
 
+## Accessing the Edge Set
+
+
+
+## The Adjacency Structure
+
+
+
+### Vertex Descriptors
+
+> NOTE: 在boost [New Iterator Concepts](https://www.boost.org/doc/libs/1_73_0/libs/iterator/doc/new-iter-concepts.html)中，对它进行了介绍。
+
+### Out-Edges, In-Edges, and Edge Descriptors
+

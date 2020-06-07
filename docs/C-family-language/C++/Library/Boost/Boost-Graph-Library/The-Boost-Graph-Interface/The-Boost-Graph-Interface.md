@@ -10,3 +10,19 @@
 
 
 
+![](./concepts.gif)
+
+**Figure 1:** The graph concepts and refinement relationships.
+
+| concept                                   | explanation                                                  |
+| ----------------------------------------- | ------------------------------------------------------------ |
+| Graph                                     | The Graph concept contains a few requirements that are common to all the graph concepts. |
+| IncidenceGraph refines Graph              | The IncidenceGraph concept provides an interface for efficient access to the out-edges of each vertex in the graph. |
+| BidirectionalGraph refines IncidenceGraph | The BidirectionalGraph concept refines [IncidenceGraph](./IncidenceGraph.html) and adds the requirement for efficient access to the in-edges of each vertex. |
+| AdjacencyGraph refines Graph              | The AdjacencyGraph concept provides and interface for efficient access of the adjacent vertices to a vertex in a graph. |
+| VertexListGraph refines Graph             | The VertexListGraph concept refines the Graph concept, and adds the requirement for efficient traversal of all the vertices in the graph. |
+| EdgeListGraph refines Graph               | The EdgeListGraph concept refines the [Graph](./Graph.html) concept, and adds the requirement for efficient access to all the edges in the graph. |
+| AdjacencyMatrix refines Graph             | The AdjacencyMatrix concept refines [Graph](./Graph.html) concept and adds the requirement for efficient access to any edge in the graph given the source and target vertices. |
+| MutableGraph refines Graph                | A MutableGraph can be changed via the addition or removal of edges and vertices. |
+| PropertyGraph refines Graph               | A PropertyGraph is a graph that has some property associated with each of the vertices or edges in the graph. |
+
