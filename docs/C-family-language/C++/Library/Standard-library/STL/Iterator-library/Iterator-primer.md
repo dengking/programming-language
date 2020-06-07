@@ -33,9 +33,11 @@ copy(v.begin(), v.end(), l.begin());
 
 In this case, `v` and `l` are some STL containers and `begin()` and `end()` are member functions that return iterators pointing to locations within those containers.
 
-> **Note 1:** `begin()` returns a location you can dereference. `end()` does not. Dereferencing the end pointer is an error. The end pointer is only to be used to see when you've reached it.
+> **Note 1:** `begin()` returns a location you can dereference. `end()` does not. Dereferencing the **end pointer** is an error. The end pointer is only to be used to see when you've reached it.
 >
 > **Note 2:** `copy()` assumes that the destination already has room for the elements being copied. It would be an error to copy into an empty list or vector. However, this limitation is easily overcome with [insert operators](https://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-iterators.html#insert).
+>
+> > NOTE: [insert operators](https://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-iterators.html#insert)将开辟新的空间
 
 ## Iterator Classes
 
@@ -54,15 +56,25 @@ Iterators are divided into classes. These are not real C++ **classes**, but simp
 All STL containers can return at least this level of iterator. Here's typical code that prints out everything in a vector:
 
 ```cpp
+#include <iostream>
+#include <iterator>
+#include <vector>
+
+using namespace std;
+int main()
+{
+
 	vector<int> v;
 	vector<int>::iterator iter;
- 
+
 	v.push_back(1);
 	v.push_back(2);
 	v.push_back(3);
-	
+
 	for (iter = v.begin(); iter != v.end(); iter++)
-	  cout << (*iter) << endl;
+		cout << (*iter) << endl;
+}
+
 ```
 
 This is called an input iterator because you can only use it to "read" data from a container. You can't use it to store data, that is,
@@ -114,9 +126,24 @@ An example of using the insert iterators appears when describing [istream iterat
 We can construct an ostream iterator from a C++ output stream as follows:
 
 ```cpp
-ostream_iterator<int> outIter( cout, " " );
-...
-copy( v.begin(), v.end(), outIter );
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <vector>
+
+using namespace std;
+int main()
+{
+
+	vector<int> v;
+
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
+
+	ostream_iterator<int> outIter(cout, " ");
+	copy(v.begin(), v.end(), outIter);
+}
 ```
 
 The first line defines `outIter` to be an ostream iterator for integers. The `" "` means "put a space between each integer." If we'd said `"\n"` then `outIter` would put a newline between each integer. The second line uses the generic algorithm `copy()` to copy our vector `v` from beginning to end to `cout`. Note how much simpler this is than the equivalent `for` loop with `cout` and `<<`.
@@ -128,10 +155,26 @@ The first line defines `outIter` to be an ostream iterator for integers. The `" 
 **Istream** iterators for input streams work similarly to ostream iterators. Istream iterators are `InputIterators`. The following code fragment constructs an istream iterator that reads integers from `cin` and copies them into a vector `v`. We use a `back_inserter` to add the elements to the end of the vector, which could be empty:
 
 ```cpp
-copy( istream_iterator<int>( cin ),
-      istream_iterator<int>(),
-      back_inserter( v ) );
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <vector>
+
+using namespace std;
+int main()
+{
+
+	vector<int> v;
+
+	copy(istream_iterator<int>(cin),
+			istream_iterator<int>(),
+			back_inserter(v));
+	for (vector<int>::iterator iter = v.begin(); iter != v.end(); iter++)
+		cout << (*iter) << endl;
+}
 ```
+
+> NOTE: 通过`ctr+d`来表示输入结束。
 
 The first argument to copy calls an istream iterator constructor that simply points to the input stream `cin`. The second argument calls a special constructor that creates a pointer to "the end of the input." What this actually means, especially for terminal input, depends on your operating system. So the above says "copy from the current item in the input sream to the end of the input stream into the container v."
 
@@ -302,7 +345,7 @@ Iter generate( Iter start, Iter stop )
 
 The following loop would then get the answers and print or store them, as desired:
 
-```
+```c++
 vector<int> nums;
 ...
 vector<int>::iterator ans
@@ -316,7 +359,7 @@ while ( ans != nums.end() ) {
 
 **If the container does not exist**, you have to be a little smarter. In particular, both of the following are **very bad** (and won't even compile without some more work):
 
-```
+```c++
 template <class Container>
 Container & generate()
 { 
@@ -337,7 +380,7 @@ Both of these return references to `temp` which no longer exists when `generate(
 
 The following is better
 
-```
+```c++
 template <class Container>
 Container * generate()
 { 
@@ -353,7 +396,7 @@ but now we're dealing with pointers and we have to guarantee that the container 
 
 The clever way to solve this problem is to do this:
 
-```
+```c++
 template <class Iter>
 void generate( Iter iter ) 
 { 
@@ -365,7 +408,7 @@ void generate( Iter iter )
 
 In other words, don't have any container in `generate()` at all. Just pass `generate()` an iterator to store answers in. As before, what container to use (if any) is up to the calling code. Two ways we could call `generate()` are:
 
-```
+```c++
 generate( back_inserter( v ) ); // stores answers in v
  
 generate( ostream_iterator<type>( cout, "\n" ) ); //print answers

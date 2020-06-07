@@ -22,6 +22,38 @@ Now each one of these iterators are not supported by all the containers in STL, 
 
 ## cppreference [Iterator library](https://en.cppreference.com/w/cpp/iterator)
 
+Instead of being defined by specific types, each category of iterator is defined by the operations that can be performed on it. This definition means that any type that supports the necessary operations can be used as an iterator -- for example, a pointer supports all of the operations required by [*LegacyRandomAccessIterator*](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator), so a pointer can be used anywhere a [*LegacyRandomAccessIterator*](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator) is expected.
+
+> NOTE: 
+
+> NOTE: STL是基于template的，而template是基于behavior的，所以在STL中，下面罗列的几种类型的iterator并没有对应的type，这一点和我们习惯的对OOP的认知是相左的。但是有些iterator定义了对应的type的，这些iterator并不属于下面罗列的几种类型的iterator，下面对这两种情况进行总结：
+>
+> 没有定义iterator type：
+>
+> [Containers library](https://en.cppreference.com/w/cpp/container)中的各种container的iterator都没有统一的定义iterator的type。
+>
+> 定义iterator type：
+>
+> **基类**：
+>
+> [std::iterator](https://en.cppreference.com/w/cpp/iterator/iterator)
+>
+> **insert iterator**：
+>
+> - [back_insert_iterator](https://en.cppreference.com/w/cpp/iterator/back_insert_iterator)
+>
+> - [front_insert_iterator](https://en.cppreference.com/w/cpp/iterator/front_insert_iterator)
+>
+> - [insert_iterator](https://en.cppreference.com/w/cpp/iterator/insert_iterator)
+>
+> **Stream iterators**：
+>
+> | input iterator                                               | output iterator                                              |
+> | ------------------------------------------------------------ | ------------------------------------------------------------ |
+> | [istream_iterator](https://en.cppreference.com/w/cpp/iterator/istream_iterator) | [ostreambuf_iterator](https://en.cppreference.com/w/cpp/iterator/ostreambuf_iterator) |
+> | [istreambuf_iterator](https://en.cppreference.com/w/cpp/iterator/istreambuf_iterator) | [ostream_iterator](https://en.cppreference.com/w/cpp/iterator/ostream_iterator) |
+>
+> 这些定义了iterator type的，需要通过iterator type来显式地构造iterator。
 
 
 

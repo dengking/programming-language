@@ -1,18 +1,99 @@
 # Input/output library
 
+c++的io library可以说将stream的概念发扬光大了，c的io library也是基于stream的。在APUE的《5 Standard I/O Library》中对stream-based I/O进行了非常详细的分析，c++的Stream-based I/O其实也采用的是其中描述的实现思路，所以首先阅读APUE的《5 Standard I/O Library》能够帮助理解c++的io library。下面是一些关键性地思想：
 
+APUE的《5.2  Streams and FILE Objects》
 
-c++的io library可以说将stream的概念发扬光大了。
+> When we open or create a file with the standard I/O library, we say that we have associated a stream with the file.
 
-c的io library也是基于stream的。
+它描述了stream的概念。
 
+APUE的《5.4  Buffering》
 
+> The goal of the buffering provided by the standard I/O library is to use the minimum number of `read` and `write` calls. (Recall Figure 3.6, which showed the amount of CPU time required to perform I/O using various buffer sizes.) Also, this library tries to do its buffering automatically for each I/O stream, obviating the need for the application to worry about it.
+
+stream-based io往往是采用buffering策略，c++ io library也是如此，buffer相关的内容将在`Buffer.md`中进行总结。
 
 ## cppreference [Input/output library](Input/output library)
 
 
 
+### Stream-based I/O
 
+The stream-based input/output library is organized around abstract input/output devices. These abstract devices allow the same code to handle input/output to **files**, **memory streams**, or **custom adaptor devices** that perform arbitrary operations (e.g. compression) on the fly.
+
+> NOTE: abstraction的威力
+
+Most of the classes are templated, so they can be adapted to any **basic character type**. Separate typedefs are provided for the most common basic character types (char and wchar_t). 
+
+> NOTE: 上面强调“Most of the classes are templated, so they can be adapted to any **basic character type**”，那这是否说明C++的Stream-based I/O library只能够是character stream呢？这个问题需要结合character stream和byte stream之间的差异、c++ I/O的实现来谈。
+>
+> 在工程[Linux-OS](https://dengking.github.io/Linux-OS/)的`Programming\IO\IO-流派\Stream`章节中对“character stream和byte stream之间的差异”进行了总结：
+>
+> > byte stream的unit是byte，character stream的unit是character；一个character由一个或者多个byte组成。
+>
+> 上面所述的**basic character type**其实包含了：
+>
+> - `char`
+> - `wchar_t`
+> - `char16_t`
+> - `char32_t`
+>
+> 显然，`char`其实对应的byte，而其它更宽的char类型对应的是character。显然c++的I/O通过抽象`CharT`，实现了同时支持byte stream、character stream。
+>
+> [`std::basic_ios`](https://en.cppreference.com/w/cpp/io/basic_ios)的声明如下：
+>
+> ```c++
+> template<
+>     class CharT,
+>     class Traits = std::char_traits<CharT>
+> > class basic_ios : public std::ios_base
+> ```
+
+
+
+The classes are organized into the following hierarchy:
+
+> NOTE: 两个正交的概念：
+>
+> - input、output
+> - file、string
+>
+> 下面表格基于上述两个正交的概念进行绘制，它和原文的结构类似
+
+|              | [std::basic_istream](https://en.cppreference.com/w/cpp/io/basic_istream) | [std::basic_ostream](https://en.cppreference.com/w/cpp/io/basic_ostream) | [std::basic_iostream](https://en.cppreference.com/w/cpp/io/basic_iostream) |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| string steam | [std::basic_istringstream](https://en.cppreference.com/w/cpp/io/basic_istringstream) | [std::basic_ostringstream](https://en.cppreference.com/w/cpp/io/basic_ostringstream) | [std::basic_stringstream](https://en.cppreference.com/w/cpp/io/basic_stringstream) |
+| file string  | [std::basic_ifstream](https://en.cppreference.com/w/cpp/io/basic_ifstream) | [std::basic_ofstream](https://en.cppreference.com/w/cpp/io/basic_ofstream) | [std::basic_fstream](https://en.cppreference.com/w/cpp/io/basic_fstream) |
+
+##### Abstraction
+
+
+
+|                                                              |                                                              | 注释                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [ios_base](https://en.cppreference.com/w/cpp/io/ios_base)    | manages formatting flags and input/output exceptions (class) |                                                              |
+| [basic_ios](https://en.cppreference.com/w/cpp/io/basic_ios)  | manages an arbitrary stream buffer                           | The class `std::basic_ios` provides facilities for interfacing with objects that have [std::basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf) interface，显然它为了实现buffering IO的。 |
+| [basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf) | abstracts a raw device (class template)                      | 这是底层buffer的实现，其它类型的stream的实现都依赖于它，比如下面的File I/O implementation的[basic_filebuf](https://en.cppreference.com/w/cpp/io/basic_filebuf)、String I/O implementation的[basic_stringbuf](https://en.cppreference.com/w/cpp/io/basic_stringbuf)，这些内容将在`Buffer.md`中进行总结 |
+| [basic_ostream](https://en.cppreference.com/w/cpp/io/basic_ostream) | wraps a given abstract device ([std::basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf)) and provides high-level output interface |                                                              |
+| [basic_istream](https://en.cppreference.com/w/cpp/io/basic_istream) | wraps a given abstract device ([std::basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf)) and provides high-level output interface |                                                              |
+| [basic_iostream](https://en.cppreference.com/w/cpp/io/basic_iostream) | wraps a given abstract device ([std::basic_streambuf](https://en.cppreference.com/w/cpp/io/basic_streambuf)) and provides high-level input/output interface |                                                              |
+
+
+
+##### File I/O implementation
+
+
+
+##### String I/O implementation
+
+
+
+#### Predefined standard stream objects
+
+
+
+#### [I/O Manipulators](https://en.cppreference.com/w/cpp/io/manip)
 
 ## bit stream
 
