@@ -26,3 +26,6 @@
 | MutableGraph refines Graph                | A MutableGraph can be changed via the addition or removal of edges and vertices. |
 | PropertyGraph refines Graph               | A PropertyGraph is a graph that has some property associated with each of the vertices or edges in the graph. |
 
+
+
+> NOTE: 基于concept的设计，concept是behavior-based的，它是duck-type，它比较类似于interface。

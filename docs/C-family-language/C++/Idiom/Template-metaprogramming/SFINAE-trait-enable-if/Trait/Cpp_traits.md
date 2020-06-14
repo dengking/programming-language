@@ -16,7 +16,11 @@ Both C and `C++` programmers should be familiar with [`limits.h`](https://code.w
 
 Most C++ programmers are familiar with [`std::numeric_limits`](https://en.cppreference.com/w/cpp/types/numeric_limits) , which at first glance simply provides the same service, implemented differently. By taking a closer look at `numeric_limits` we uncover the first advantage of traits, a **consistent interface**.
 
-> NOTE: 千万不要小看上面这段话中的**consistent interface**的价值，如果能够保证**consistent interface**，那么当我们修改底层代码的时候，caller是无需修改的， 但是如果interface是unconsistent的，那么caller是需要修改的。此处的consistent interface，是一种Polymorphism，参见`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`的《Template and polymorphism》段。
+> NOTE: 千万不要小看上面这段话中的**consistent interface**的价值，如果能够保证**consistent interface**，那么当我们修改底层代码的时候，caller是无需修改的， 但是如果interface是unconsistent的，那么caller是需要修改的。此处的consistent interface，是一种抽象，它能够带来Polymorphism，参见`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`的《Template and polymorphism》段。
+>
+> 在阅读[boost graph](https://www.boost.org/doc/libs/release/libs/graph/doc/)的下面这段话的时候，我想到：trait提供了一层抽象，提供了获取信息的接口。
+>
+> > Note that different graph classes can have different associated vertex iterator types, which is why we need the `graph_traits` class. Given some graph type, the `graph_traits` class will provide access to the `vertex_iterator` type.
 
 Using `float.h`, and `limits.h`, you have to remember the type prefix and the trait, for example, `DBL_MAX` contains the "maximum value" trait for the double data type. By using a traits class such as `numeric_limits` the type becomes part of the name, so that the maximum value for a double becomes `numeric_limits< double >::max()`, more to the point, you don't need to know which type you need to use. For example, take this simple template function (adapted from [[Veldhuizen](https://accu.org/index.php/journals/442#Veldhuizen)]), which returns the largest value in an array:
 
