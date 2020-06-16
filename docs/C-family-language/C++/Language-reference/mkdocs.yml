@@ -30,5 +30,7 @@ nav:
     - Template: Template
     # 断言
     - Assertion: Assertion
+    # 别名
+    - Alias: Alias
 # 这是c++11引入的新特性    
     - Attribute: Attribute
