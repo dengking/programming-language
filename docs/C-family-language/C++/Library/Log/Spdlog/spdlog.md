@@ -4,7 +4,11 @@
 
 以完全面向对象的方式来进行实现。
 
+[QuickStart](https://github.com/gabime/spdlog/wiki/1.-QuickStart):
 
+> spdlog is a header only library. 
+>
+> spdlog takes the "include what you need" approach - your code should include the features that actually needed.
 
 ## data structure
 
@@ -64,7 +68,7 @@ singleton
 
   编译的时候，需要`-DSPDLOG_COMPILED_LIB`
 
-
+## [Asynchronous logging](https://github.com/gabime/spdlog/wiki/6.-Asynchronous-logging)
 
 
 

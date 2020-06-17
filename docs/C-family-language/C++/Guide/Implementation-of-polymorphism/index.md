@@ -1,6 +1,6 @@
 # 关于本章
 
-本章讨论c++中如何实现polymorphism，这是一个较大的话题。c++中提供了多种polymorphism，下面根据static/dynamic进行分类：
+在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中讨论了各种polymorphism，本章讨论c++中如何实现polymorphism，这是一个较大的话题。c++中提供了多种polymorphism，下面根据static/dynamic进行分类：
 
 static
 
@@ -19,11 +19,11 @@ dynamic
 
 ### 实现方式
 
-[Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
-
 cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)对此进行了描述。
 
 
+
+[Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
 
 
 
@@ -48,10 +48,6 @@ cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/ov
 ## Implementation of template
 
 最最简单的情况是，仅仅存在primary template，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个partial specialization of template的时候，compiler如何选择set  of candidates中的哪个partial specialization of template进行instantiation？
-
-
-
-
 
 
 
@@ -99,7 +95,7 @@ c++ overload resolution、template specialization的过程和Python attribute fi
 
 ## Static polymorphism and template metaprogramming
 
-c++的static polymorphism是由compiler来实现，c++的实现运行programmer通过template metaprogramming来对static polymorphism的过程进行控制，这是c++的核心特性，主要的实现方式：
+c++的static polymorphism是由compiler来实现，c++的实现允许programmer通过template metaprogramming来对static polymorphism的过程进行控制，这是c++的核心特性，主要的实现方式：
 
 - trait
 - sfinae

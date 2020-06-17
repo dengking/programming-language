@@ -1,2 +1,4 @@
 nav:
     - SFINAE: SFINAE.md
+    - Class-template-SFINAE: Class-template-SFINAE.md
+    - Function-template-SFINAE: Function-template-SFINAE.md

@@ -11,7 +11,7 @@ b=a;
 
 ```
 
-Here, the value of `a` is promoted(提升) from `short` to `int` without the need of any **explicit operator**. This is known as a **standard conversion**. Standard conversions affect fundamental data types, and allow the conversions between numerical types (short to int, int to float, double to int...), to or from bool, and some pointer conversions.
+Here, the value of `a` is promoted(提升) from `short` to `int` without the need of any **explicit operator**. This is known as a **standard conversion**. Standard conversions affect fundamental data types, and allow the conversions between numerical types (short to int, int to float, double to int...), to or from `bool`, and some pointer conversions.
 
 总结：**standard conversion**是**implicit conversion**，但是**implicit conversion**不一定是**standard conversion**
 
@@ -447,3 +447,4 @@ premature  过早的
 ctor 构造函数
 
 incur 招致
+

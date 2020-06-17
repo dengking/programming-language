@@ -1,8 +1,8 @@
 # Template metaprogramming
 
-c++ template是属于template metaprogramming流派的。
+c++ template是属于template metaprogramming流派的，在`Theory\Programming-paradigm\Metaprogramming`中对Metaprogramming进行了介绍。
 
-## [Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)
+## 维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)
 
 **Template metaprogramming** (**TMP**) is a [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) technique in which [templates](https://en.wikipedia.org/wiki/Generic_programming) are used by a [compiler](https://en.wikipedia.org/wiki/Compiler) to generate temporary [source code](https://en.wikipedia.org/wiki/Source_code), which is merged by the compiler with the rest of the source code and then compiled. The **output** of these templates include [compile-time](https://en.wikipedia.org/wiki/Compile_time) [constants](https://en.wikipedia.org/wiki/Constant_(programming)), [data structures](https://en.wikipedia.org/wiki/Data_structure), and complete [functions](https://en.wikipedia.org/wiki/Function_(computer_science)). The use of templates can be thought of as [compile-time execution](https://en.wikipedia.org/wiki/Compile_time_function_execution). The technique is used by a number of languages, the best-known being [C++](https://en.wikipedia.org/wiki/C%2B%2B), but also [Curl](https://en.wikipedia.org/wiki/Curl_programming_language), [D](https://en.wikipedia.org/wiki/D_programming_language), and [XL](https://en.wikipedia.org/wiki/XL_Programming_Language).
 
@@ -24,13 +24,21 @@ Templates are different from *macros*. A macro, which is also a compile-time lan
 
 **Template metaprograms** have no [mutable variables](https://en.wikipedia.org/wiki/Immutable_object)— that is, no variable can change value once it has been initialized, therefore **template metaprogramming** can be seen as a form of [functional programming](https://en.wikipedia.org/wiki/Functional_programming). In fact many template implementations implement **flow control** only through [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)), as seen in the example below.
 
-> NOTE: 上面这段话对于理解template metaprogramming是非常重要的：
+> NOTE: 
+>
+> #### Template metaprogramming and functional programming and non-type template parameter
+>
+> 上面这段话对于理解template metaprogramming是非常重要的：
 >
 > template metaprogramming can be seen as a form of functional programming
 >
-> 在后面，我们会学习到template parameter和template argument，如果将template metaprogramming看做是一种functional programming的话，这个概念是非常任意理解的。
+> 在后面，我们会学习到template parameter和template argument，如果将template metaprogramming看做是一种functional programming的话，这个概念是非常容易理解的。
 >
-> 其中特别提及了recursion，这就是典型的functional programming。下面的`factorial`就是一个典型的例子；`factorial`的实现是典型的functional programming，使用`c++`的template metaprogramming可以实现compiler-time的functional programming。
+> 上面这段话中中特别提及了recursion，这就是典型的functional programming。
+>
+> 需要注意的是，一般使用non-type template parameter来实现compile-time execution，它可以看做是一种典型的functional programming，而其他的template parameter，如type template parameter、template template parameter，其实就不属于functional programming的概念了。
+>
+> 下面的`factorial`就是一个典型的例子；`factorial`的实现是典型的functional programming，使用`c++`的template metaprogramming可以实现compiler-time的functional programming。
 
 
 
@@ -110,6 +118,8 @@ The compiler's optimizer should be able to unroll the `for` loop because the tem
 
 However, take care and exercise caution as this may cause code bloat as separate unrolled code will be generated for each 'N'(vector size) you instantiate with.
 
+
+
 ### Static polymorphism
 
 [Polymorphism](https://en.wikipedia.org/wiki/Type_polymorphism) is a common standard programming facility where **derived objects** can be used as instances of their base object but where the derived objects' methods will be invoked, as in this code
@@ -174,9 +184,26 @@ Another similar use is the "[Barton–Nackman trick](https://en.wikipedia.org/wi
 
 类是一种抽象，模板也是一种抽象，模板类是抽象的抽象。
 
+## SUMMARY of C++ template metaprogramming
+
+从meta programming的角度来看，c++ program可以分为
+
+- c++ program
+- metaprogram，metaprogram是compiler-time computation
+
+在`Theory\Programming-paradigm\Metaprogramming\Metaprogramming.md`中对这种观点进行了总结。
+
+在下面文章中使用了这个观点
+
+microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中有这样的描述
+
+> To enable compilers as well as **C++ programs** and **metaprograms** to reason about the suitability of any given type for operations that depend on a particular memory layout, C++14 introduced three categories of simple classes and structs
+
+文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)中对这个观点进行了非常深刻的介绍。
 
 
-## Short Intro to C++ metaprogramming
+
+### Short Intro to C++ metaprogramming
 
 在阅读文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)时，其中的Short Intro段对c++的metaprogramming进行了较好的总结：
 
@@ -188,12 +215,19 @@ Another similar use is the "[Barton–Nackman trick](https://en.wikipedia.org/wi
 
 
 
-## SUMMARY
+### Application of template metaprogramming
 
-在microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中有这样的描述：
+维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)中已经总结了部分Application of template metaprogramming，下面是一些补充内容：
 
-> To enable compilers as well as **C++ programs** and **metaprograms** to reason about the suitability of any given type for operations that depend on a particular memory layout, C++14 introduced three categories of simple classes and structs
+#### SFINAE
 
-从meta programming的角度来看，c++ program可以分为c++ program和metaprogram，metaprogram是compiler-time computation。
+- 控制overload resolution，即function template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Function-template-SFINAE.md`中对此进行了分析
+- 控制template specification，即class template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Clasas-template-SFINAE.md`中对此进行了分析
 
-在`Theory\Programming-paradigm\Metaprogramming\Metaprogramming.md`中对这种观点进行了总结。
+
+
+
+
+### Idiom of template metaprogramming
+
+在`C-family-language\C++\Idiom\Template-metaprogramming`中介绍了Idiom of template metaprogramming。

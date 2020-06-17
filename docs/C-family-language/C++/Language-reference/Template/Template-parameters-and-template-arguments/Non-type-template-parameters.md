@@ -1,12 +1,12 @@
 # Non-type template parameters
 
-
+“non-type template parameters”即非类型模板参数。
 
 ## cppreference [Template parameters and template arguments](https://en.cppreference.com/w/cpp/language/template_parameters)
 
 #### Non-type template parameter
 
-> NOTE: Non-type template parameter即非类型模板参数，显然，它所参数化的不是type，而是value，显然non-type template parameter相当于function parameter，而对应的template entity其实相当于一个function，关于此的最最典型的例子是维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)的Compile-time class generation段所枚举的`factorial`例子。
+> NOTE: Non-type template parameter即非类型模板参数，显然，它所参数化的不是type，而是value，显然non-type template parameter相当于function parameter，而对应的template entity其实相当于一个function，关于此的最最典型的例子是维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)的Compile-time class generation段所枚举的`factorial`例子。使用Non-type template parameter可以实现functional programming，这是一种compile-time computation，这个观点在维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)中已经提出。
 >
 > Non-type template的一个典型的例子就是[Boost.Array](https://www.boost.org/doc/libs/1_73_0/doc/html/array.html)，源码路径：
 >

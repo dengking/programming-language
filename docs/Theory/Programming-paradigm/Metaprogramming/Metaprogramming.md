@@ -14,10 +14,10 @@
 >
 > 从metaprogramming的角度来看，我们编写的program就包含两类了：
 >
-> - program（使用programming language）
-> - metaprogram（使用metaprogramming language）
+> - program（使用**programming language**）
+> - metaprogram（使用**metaprogramming language**）
 >
-> c++和python都支持metaprogramming，它们的programming language和metaprogramming相同。
+> c++和python都支持metaprogramming，它们的programming language和metaprogramming language是相同。具体到c++，它使用的template metaprogramming，所以它的template就属于metaprogram。
 
 ### Approaches 
 
