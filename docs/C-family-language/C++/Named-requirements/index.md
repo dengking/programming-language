@@ -7,3 +7,14 @@
 named requirement或者说concept是基于behavior的，behavior常常是以expression的方式来进行表达，所以可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中使用expression来表达这些concept。
 
 ## cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)
+
+
+
+### Library-wide
+
+|                                                              |      |                                                              |
+| ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| [Swappable](https://en.cppreference.com/w/cpp/named_req/Swappable) (C++11) |      | `C-family-language\C++\Idiom\OOP\Resource-management\Non-throwing-swap` |
+|                                                              |      |                                                              |
+|                                                              |      |                                                              |
+
