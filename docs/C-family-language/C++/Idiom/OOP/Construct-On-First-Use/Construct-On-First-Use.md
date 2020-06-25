@@ -1,5 +1,7 @@
 # Construct On First Use
 
+
+
 ## [More C++ Idioms/Construct On First Use](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Construct_On_First_Use)
 
 ### Motivation

@@ -6,6 +6,8 @@ nav:
 #################### virtual相关####################    
     - Virtual-Constructor: Virtual-Constructor
     - Virtual-Friend-Function: Virtual-Friend-Function  
+    - Calling-Virtuals-During-Initialization: Calling-Virtuals-During-Initialization
+    - Base-from-Member: Base-from-Member
     # 命名参数
     - Named-Parameter: Named-Parameter
     # 命名构造函数

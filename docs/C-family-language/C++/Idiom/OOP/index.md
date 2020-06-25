@@ -4,7 +4,12 @@
 
 ## Initialization相关
 
-- [Construct-On-First-Use](./Construct-On-First-Use/Construct-On-First-Use.md)
+
+
+| idiom                                                        | example | summary                                                      |
+| ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| [Construct-On-First-Use](./Construct-On-First-Use/Construct-On-First-Use.md) |         | 描述static object的initialization                            |
+| [Calling-Virtuals-During-Initialization](./Calling-Virtuals-During-Initialization/Calling-Virtuals-During-Initialization.md) |         | invoke virtual functions of derived classes while a derived object is being initialized |
 
 
 
@@ -12,17 +17,11 @@
 
 
 
-| idiom                                                        | example | summary |
-| ------------------------------------------------------------ | ------- | ------- |
-| [Virtual-Friend-Function](./Virtual-Friend-Function/Virtual-Friend-Function.md) |         |         |
-| [Virtual-Constructor](./Virtual-Constructor/Virtual-Constructor.md) |         |         |
-| [Calling-Virtuals-During-Initialization](./Calling-Virtuals-During-Initialization/Calling-Virtuals-During-Initialization.md) |         |         |
-
-
-
-
-
-
+| idiom                                                        | example | summary                                                      |
+| ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| [Virtual-Friend-Function](./Virtual-Friend-Function/Virtual-Friend-Function.md) |         | 添加一层indirection to achieve the desired effect of dynamic binding for friend functions |
+| [Virtual-Constructor](./Virtual-Constructor/Virtual-Constructor.md) |         |                                                              |
+|                                                              |         |                                                              |
 
 
 
