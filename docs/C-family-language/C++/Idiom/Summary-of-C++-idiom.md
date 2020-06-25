@@ -48,6 +48,8 @@ Virtual Friend Function
 
 ## Idiom concerning temporary
 
+temporary的特性：自动创建、自动销毁。
+
 使用了temporary的idiom、消除temporary的idiom。
 
 ### [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap)
@@ -76,6 +78,16 @@ This is sometimes called the ***swap with temporary idiom***.
 
 
 
+### [Execute-Around Pointer](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Execute-Around_Pointer)
+
+每个aspect的，其实都相当于一个temporary。
+
+> Overloaded -> operator of visualizableVector creates a temporary proxy object and it is
+> returned.
+
 ### [Computational Constructor](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Computational_Constructor)
 
 消除temporary
+
+
+

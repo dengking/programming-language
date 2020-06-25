@@ -5,7 +5,11 @@ nav:
     - Resource-management: Resource-management   
 #################### virtual相关####################    
     - Virtual-Constructor: Virtual-Constructor
-    - Virtual-Friend-Function: Virtual-Friend-Function    
+    - Virtual-Friend-Function: Virtual-Friend-Function  
+    # 命名参数
     - Named-Parameter: Named-Parameter
     # 命名构造函数
     - Named-Constructor: Named-Constructor
+    # Control the granularity of access to the implementation details of a class
+    - Attorney-Client: Attorney-Client
+    - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects

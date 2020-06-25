@@ -16,7 +16,7 @@ To simplify creation of objects without explicitly specifying their types. (This
 
 In the *object generator* idiom, a template function is created whose only job is to construct a new object from its parameters. It is based on a useful property of function templates which class templates don't have: The type parameters of a function template are deduced automatically from its actual parameters. 
 
-> NOTE: 充分运用function template的automatically deduce特性，进而实现简化代码的目的
+> NOTE: 充分运用function template的automatically deduce parameter特性，进而实现简化代码的目的
 
 ```c++
 template <class T, class U>

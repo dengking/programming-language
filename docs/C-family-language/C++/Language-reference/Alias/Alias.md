@@ -1,6 +1,12 @@
 # Alias
 
+"alias"即“别名”。
+
 ## cppreference [Type alias](https://en.cppreference.com/w/cpp/language/type_alias)
+
+
+
+
 
 ## c++11 using keyword
 
@@ -11,6 +17,11 @@ c++11引入了`using`关键字。
 
 
 ## Template aliases
+
+有两种实现方式：
+
+- c++11 using
+- [Type-Generator idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Generator)（参见`C-family-language\C++\Idiom\Template-metaprogramming\Type-Generator`章节）
 
 ### 维基百科[C++11#Template aliases](https://en.wikipedia.org/wiki/C%2B%2B11#Template_aliases)
 
@@ -212,3 +223,4 @@ using Vector = typename detail::VectorTypedef<Size, T>::type;
 ```
 
 Which is exactly what I wanted. If you think about this, this actually makes templates more powerful than they were in C++03. In C++03 you could create templates that were completely different structs depending on the template arguments,like `std::vector<bool>` vs. `std::vector<unsigned char>`, but the classes would always have to be related. You could never have an unrelated type from a library or a fundamental type behind a template. Now you can.
+
