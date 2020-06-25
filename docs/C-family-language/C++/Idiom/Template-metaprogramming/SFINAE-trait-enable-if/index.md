@@ -1,4 +1,4 @@
-# Summary
+# 关于本章
 
 SFINAE、trait、enable_if，三者是实现template metaprogramming的基础，实现上，往往是三者一起使用才能够发挥出c++的强大之处。
 
@@ -15,3 +15,6 @@ SFINAE、trait、enable_if，三者是实现template metaprogramming的基础，
 [Template SFINAE & type-traits](https://shaharmike.com/cpp/sfinae/)
 
  
+
+[How to Make SFINAE Pretty – Part 2: the Hidden Beauty of SFINAE](https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/)
+

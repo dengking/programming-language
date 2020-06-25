@@ -63,3 +63,9 @@ int main()
 ```
 
 `getRandomN` class has a constructor and a **templatized conversion operator function**. For initialization, a temporary object of `getRandomN` class is created and assigned to the desired container class. C++ compiler attempts to convert the **temporary object** into the container class object. The only way to do that is via the conversion operator. The conversion operator is instantiated with the type of the container that is being populated. Due to automatic resolution of the return type, the user does not have to spell it out again. Note that `insert` member function has been used instead of `push_back` because `std::set` does not support `push_back`.
+
+
+
+### Known Uses
+
+The [nullptr](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/nullptr) idiom makes use of the return type resolver idiom to automatically deduce a null pointer of the correct type depending upon the pointer variable it is assigning to.

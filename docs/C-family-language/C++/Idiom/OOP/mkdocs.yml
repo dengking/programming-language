@@ -12,4 +12,7 @@ nav:
     - Named-Constructor: Named-Constructor
     # Control the granularity of access to the implementation details of a class
     - Attorney-Client: Attorney-Client
+    # 控制object是否能够创建于heap
     - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects
+    #
+    - Temporary-Proxy: Temporary-Proxy

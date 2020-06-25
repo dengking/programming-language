@@ -20,3 +20,5 @@ nav:
     - Member-Detector: Member-Detector
     # Deduce
     - Return-Type-Resolver: Return-Type-Resolver
+    #
+    - nullptr: nullptr

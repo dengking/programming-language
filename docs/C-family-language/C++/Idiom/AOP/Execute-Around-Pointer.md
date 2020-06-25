@@ -2,7 +2,7 @@
 
 
 
-## more c++ idiom [Execute-Around Pointer](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Execute-Around_Pointer)
+## More c++ idiom [Execute-Around Pointer](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Execute-Around_Pointer)
 
 ### Intent
 
