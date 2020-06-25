@@ -4,6 +4,10 @@
 
 ## More c++ idiom [Execute-Around Pointer](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Execute-Around_Pointer)
 
+> NOTE: 总结：
+>
+> 使用一个proxy class来描述aspect，aspect的[*cross-cutting concerns*](https://en.wikipedia.org/wiki/Aspect-oriented_programming)行为放到proxy class的constructor、destructor中来进行实现。primary class中涉及到[*cross-cutting concerns*](https://en.wikipedia.org/wiki/Aspect-oriented_programming)的行为，需要由proxy class object来forward到primary class object来实现。
+
 ### Intent
 
 Provide a smart pointer object that transparently executes actions before and after each function call on an object, given that the actions performed are the same for all functions.[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Execute-Around_Pointer#cite_note-1) This can be regarded as a special form of [aspect oriented programming(AOP)](https://en.wikipedia.org/wiki/Aspect-oriented_programming).

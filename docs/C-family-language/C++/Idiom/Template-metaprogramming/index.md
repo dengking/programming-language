@@ -1,14 +1,16 @@
 # 关于本章
 
-template metaprogramming中核心的idiom
+下面对本章的idiom进行了总结：
+
+template metaprogramming中核心的idiom：
 
 [SFINAE-trait-enable-if](./SFINAE-trait-enable-if/index.md)
 
-template metaprogramming的设计思想
+template metaprogramming的设计思想：
 
 [Policy-based-design](./Policy-based-design/Policy-based-design.md)
 
-简化代码的技巧
+简化代码的技巧：
 
 | idiom                                                        | example                                                      | summary                                                      |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -18,14 +20,14 @@ template metaprogramming的设计思想
 
 
 
-template alias
+template alias：
 
 | idiom                                                | example                | summary                                                      |
 | ---------------------------------------------------- | ---------------------- | ------------------------------------------------------------ |
 | [Type Generator](./Type-Generator/Type-Generator.md) | `Directory<int>::type` | 其实就是Templated Typedef，c++11的using，即[Template aliases](https://en.wikipedia.org/wiki/C++11#Template_aliases)能够简化type generator。 |
 |                                                      |                        |                                                              |
 
-reflection
+reflection：
 
 | idiom                                                   | example | summary                                  |
 | ------------------------------------------------------- | ------- | ---------------------------------------- |
@@ -34,7 +36,7 @@ reflection
 
 
 
-OOP
+OOP：
 
 | idiom                                                        | example                      |                  | summary                                                      |
 | ------------------------------------------------------------ | ---------------------------- | ---------------- | ------------------------------------------------------------ |
