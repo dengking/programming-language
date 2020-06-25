@@ -1,5 +1,9 @@
 # Summary of C++ idiom
 
+## 一些基础的idiom
+
+RAII、swap、temporary
+
 ## Idiom about resource
 
 [RAII](./RAII/RAII.md)和[The-rule-of-three-five-zero](./The-rule-of-three-five-zero/The-rule-of-three-five-zero.md)其实都是resource management的一些技巧，它能够保住使用者规避一些错误。
@@ -41,3 +45,37 @@ expression template
 Virtual Constructor
 
 Virtual Friend Function
+
+## Idiom concerning temporary
+
+使用了temporary的idiom、消除temporary的idiom。
+
+### [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap)
+
+Create-Temporary-and-Swap
+
+这是显然的应用temporary。
+
+
+
+### [Clear-and-minimize](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Clear-and-minimize)
+
+This is sometimes called the ***swap with temporary idiom***.
+
+显然它是依赖于：temporary、swap，其实它可以看做是将swap idiom用于container上。
+
+
+
+
+
+### [Temporary Base Class](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Temporary_Base_Class)
+
+
+
+### [Temporary Proxy](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Temporary_Proxy) 
+
+
+
+### [Computational Constructor](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Computational_Constructor)
+
+消除temporary
