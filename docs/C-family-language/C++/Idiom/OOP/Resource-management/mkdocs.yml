@@ -1,6 +1,7 @@
 nav:
     - RAII: RAII
     - The-rule-of-three-five-zero: The-rule-of-three-five-zero
+    - Move-Constructor: Move-Constructor
     - Smart-Pointer: Smart-Pointer    
     - Non-throwing-swap: Non-throwing-swap
     - Copy-and-swap: Copy-and-swap

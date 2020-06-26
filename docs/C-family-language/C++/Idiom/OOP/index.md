@@ -36,6 +36,16 @@
 
 ## Idiom about resource
 
+
+
+| idiom                                                        |      | summary |
+| ------------------------------------------------------------ | ---- | ------- |
+| [RAII](./RAII/RAII.md)                                       |      |         |
+| [The-rule-of-three-five-zero](./The-rule-of-three-five-zero/The-rule-of-three-five-zero.md) |      |         |
+|                                                              |      |         |
+|                                                              |      |         |
+|                                                              |      |         |
+
 [RAII](./RAII/RAII.md)和[The-rule-of-three-five-zero](./The-rule-of-three-five-zero/The-rule-of-three-five-zero.md)其实都是resource management的一些技巧，它能够保住使用者规避一些错误。
 
 在[What is the copy-and-swap idiom?](https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)中有这样的描写：
@@ -93,7 +103,7 @@ Idiom concerning temporary/proxy可以分为：
 | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
 | [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) |         | 这个idiom又称为：Create-Temporary-and-Swap，它的名字已经告诉了我们它应用了temporary。 |
 | [Clear-and-minimize](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Clear-and-minimize) |         | 这个idiom又称为： ***swap with temporary idiom***. <br> 显然它是依赖于：temporary、swap，其实它可以看做是将swap idiom用于container上。 |
-| [Return Type Resolver](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Return_Type_Resolver) |         |                                                              |
+| [Return Type Resolver](../Template-metaprogramming/Return-Type-Resolver/Return-Type-Resolver.md) |         | 提供**templatized conversion operator function**，充分运用compiler自动地调用**conversion operator function**来讲将**temporary object**转换为目标变量（即等号左侧的变量）从而达到简化代码的目的 |
 |                                                              |         |                                                              |
 |                                                              |         |                                                              |
 |                                                              |         |                                                              |
@@ -125,6 +135,8 @@ proxy
 ### 
 
 ### 消除temporary的idiom
+
+
 
 [Computational Constructor](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Computational_Constructor)
 

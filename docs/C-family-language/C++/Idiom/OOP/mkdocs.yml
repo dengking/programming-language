@@ -21,3 +21,5 @@ nav:
     - Temporary-Proxy: Temporary-Proxy
     #
     - Address-Of: Address-Of
+    #
+    - Temporary-Base-Class: Temporary-Base-Class
