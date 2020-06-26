@@ -38,9 +38,9 @@ reflection：
 
 OOP：
 
-| idiom                                                        | example                      |                  | summary                                                      |
-| ------------------------------------------------------------ | ---------------------------- | ---------------- | ------------------------------------------------------------ |
-| [Curiously Recurring Template Pattern](./Curiously-recurring-template-pattern/Curiously-recurring-template-pattern.md) | `class T : public X<T> {…};` | Mixin-from-above | Specialize a base class using the derived class as a template argument，从而实现Static polymorphism |
-| [Parameterized Base Class](./Parameterized-Base-Class/Parameterized-Base-Class.md) |                              | Mixin-from-below | To abstract out an aspect in a reusable module and combine it in a given type when required. |
-| [Barton-Nackman trick](Barton–Nackman-trick/Barton–Nackman-trick.md) |                              |                  | 已经过时，现代compiler已经支持了。                           |
+| idiom                                                        | idiom using it                                               |                  | summary                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------- | ------------------------------------------------------------ |
+| [Curiously Recurring Template Pattern](./Curiously-recurring-template-pattern/Curiously-recurring-template-pattern.md) | [Non-copyable Mixin](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-copyable_Mixin) <br> | Mixin-from-above | Specialize a base class using the derived class as a template argument，从而实现Static polymorphism |
+| [Parameterized Base Class](./Parameterized-Base-Class/Parameterized-Base-Class.md) |                                                              | Mixin-from-below | To abstract out an aspect in a reusable module and combine it in a given type when required. |
+| [Barton-Nackman trick](Barton–Nackman-trick/Barton–Nackman-trick.md) |                                                              |                  | 已经过时，现代compiler已经支持了。                           |
 

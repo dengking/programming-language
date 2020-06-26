@@ -66,7 +66,13 @@ copy-and-swap idiom依赖于：
 
 [Handle Body](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Handle_Body)<-[Non-throwing swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap)<- [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) 
 
+### 基于reference counting的resource management
 
+| idiom                                             |      | summary                                                      |
+| ------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| [Counted-Body](./Counted-Body/Counted-Body.md)    |      |                                                              |
+| [Nifty-Counter](./Nifty-Counter/Nifty-Counter.md) |      | 将reference counting用于对static object的initialization/deinitialization |
+|                                                   |      |                                                              |
 
 
 
