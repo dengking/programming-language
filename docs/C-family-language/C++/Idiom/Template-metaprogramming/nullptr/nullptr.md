@@ -4,6 +4,8 @@
 
 ## More C++ Idioms/[nullptr](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/nullptr)
 
+> NOTE: 对[Return Type Resolver](./Return-Type-Resolver/Return-Type-Resolver.md)的应用
+
 ### Intent
 
 To distinguish between an integer 0 and a null pointer.

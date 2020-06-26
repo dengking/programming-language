@@ -1,6 +1,7 @@
 nav:
 ########## initialization相关##########
     - Construct-On-First-Use: Construct-On-First-Use
+    - Nifty-Counter: Nifty-Counter
 ########## resource相关########## 
     - Resource-management: Resource-management   
 #################### virtual相关####################    
@@ -18,3 +19,5 @@ nav:
     - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects
     #
     - Temporary-Proxy: Temporary-Proxy
+    #
+    - Address-Of: Address-Of

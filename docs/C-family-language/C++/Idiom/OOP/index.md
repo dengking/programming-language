@@ -4,12 +4,19 @@
 
 ## Initialization相关
 
+[Runtime Static Initialization Orde Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Runtime_Static_Initialization_Order_Idioms)
+
+| idiom                                                        | example | summary                           |
+| ------------------------------------------------------------ | ------- | --------------------------------- |
+| [Construct-On-First-Use](./Construct-On-First-Use/Construct-On-First-Use.md) |         | 描述static object的initialization |
+| [Nifty-Counter](./Nifty-Counter/Nifty-Counter.md)            |         |                                   |
+
 
 
 | idiom                                                        | example | summary                                                      |
 | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
-| [Construct-On-First-Use](./Construct-On-First-Use/Construct-On-First-Use.md) |         | 描述static object的initialization                            |
 | [Calling-Virtuals-During-Initialization](./Calling-Virtuals-During-Initialization/Calling-Virtuals-During-Initialization.md) |         | invoke virtual functions of derived classes while a derived object is being initialized |
+| [Base-from-Member](./Base-from-Member/Base-from-Member.md)   |         | 基类的初始化需要用到子类的成员变量                           |
 
 
 
@@ -80,13 +87,13 @@ Idiom concerning temporary/proxy可以分为：
 - 使用temporary的idiom
 - 消除temporary的idiom
 
-使用temporary的idiom
+### 使用temporary的idiom
 
 | idiom                                                        | example | summary                                                      |
 | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
 | [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) |         | 这个idiom又称为：Create-Temporary-and-Swap，它的名字已经告诉了我们它应用了temporary。 |
 | [Clear-and-minimize](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Clear-and-minimize) |         | 这个idiom又称为： ***swap with temporary idiom***. <br> 显然它是依赖于：temporary、swap，其实它可以看做是将swap idiom用于container上。 |
-|                                                              |         |                                                              |
+| [Return Type Resolver](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Return_Type_Resolver) |         |                                                              |
 |                                                              |         |                                                              |
 |                                                              |         |                                                              |
 |                                                              |         |                                                              |
@@ -111,15 +118,15 @@ proxy
 
 
 
-### [Temporary Base Class](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Temporary_Base_Class)
+[Temporary Base Class](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Temporary_Base_Class)
 
 
 
 ### 
 
-消除temporary的idiom
+### 消除temporary的idiom
 
-### [Computational Constructor](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Computational_Constructor)
+[Computational Constructor](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Computational_Constructor)
 
 消除temporary
 

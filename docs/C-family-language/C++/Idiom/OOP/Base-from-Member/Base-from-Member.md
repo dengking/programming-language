@@ -4,7 +4,7 @@
 
 ## More C++ Idioms/[Base-from-Member](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Base-from-Member)
 
-In C++, base classes are initialized before any member of the derived classes. The reason for this is that members of a **derived class** may use *base* part of the object. Therefore, all the *base* parts (i.e., all the base classes) must be initialized before members of the **derived class**. Sometimes, however, it becomes necessary to initialize a **base class** from a data member that is available only in the **derived class**. It sounds contradictory to the rules of C++ language because the parameter (a member of derived class) that is passed to the base class constructor must be fully initialized. This creates circular initialization problem (an [infinite regress](https://en.wikipedia.org/wiki/Infinite_regress)).
+In C++, base classes are initialized before any member of the derived classes. The reason for this is that members of a **derived class** may use *base* part of the object. Therefore, all the *base* parts (i.e., all the base classes) must be initialized before members of the **derived class**. Sometimes, however, it becomes necessary to initialize a **base class** from a data member that is available only in the **derived class**. It sounds contradictory to the rules of C++ language because the parameter (a member of derived class) that is passed to the base class constructor must be **fully initialized**. This creates circular initialization problem (an [infinite regress](https://en.wikipedia.org/wiki/Infinite_regress)).
 
 The following code, obtained from Boost[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Base-from-Member#cite_note-1) library, shows the problem.
 
@@ -91,4 +91,65 @@ int main()
 }
 ```
 
-> NOTE: 上述代码是能够编译通过的
+> NOTE: 上述代码是能够编译通过的，`g++ test.cpp -fpermissive`
+
+
+
+The above code snippet shows a case where the programmer is interested in customizing the `std::streambuf` class. He/she does so in `fdoutbuf` by inheriting from `std::streambuf`. The `fdoutbuf` class is used as a member in `fdostream` class, which is-a kind of `std::ostream`. The `std::ostream` class, however, needs a pointer to a `std::streambuf` class, or its **derived class**. The type of pointer to `buf` is suitable but passing it makes sense only if `buf` is initialized. However, it won’t be initialized unless all base classes are initialized. Hence the **infinite regress**. The base-from-member idiom addresses this problem.
+
+### Solution and Sample Code
+
+This idiom makes use of the fact that **base classes** are initialized in the order they are declared. The **derived class** controls the order of its **base classes**, and in turn, controls the order in which they are initialized. In this idiom, a new class is added just to initialize the member in the **derived class** that is causing the problem. This new class is introduced in the **base-class-list** before all other **base classes**. Because the new class comes *before* the base class that needs the fully constructed parameter, it is initialized first and then the reference can be passed as usual. Here is the solution using **base-from-member idiom**.
+
+```c++
+#include <streambuf>  // for std::streambuf
+#include <ostream>    // for std::ostream
+
+class fdoutbuf
+    : public std::streambuf
+{
+public:
+    explicit fdoutbuf(int fd)
+    {
+    	//...        
+    }
+
+};
+
+struct fdostream_pbase // A newly introduced class
+{
+    fdoutbuf sbuffer; // The member moved 'up' the hierarchy.
+    explicit fdostream_pbase(int fd)
+        : sbuffer(fd)
+    {}
+};
+
+class fdostream
+    : protected fdostream_pbase // This class will be initialized before the next one.
+    , public std::ostream
+{
+public:
+    explicit fdostream(int fd)
+        : fdostream_pbase(fd),   // Initialize the newly added base before std::ostream.
+          std::ostream(&sbuffer) //  Now safe to pass the pointer
+    {}
+    //...
+};
+int main(void)
+{
+  fdostream standard_out(1);
+  standard_out << "Hello, World\n";
+
+  return 0;
+}
+```
+
+The `fdostream_pbase` class is the newly introduced class that now has the `sbuffer` member. The `fdostream` class inherits from this new class and adds it before `std::ostream` in its base class list. This ensures that `sbuffer` is initialized before and the pointer can be passed safely to the `std::ostream` constructor.
+
+### Known Uses
+
+- [Boost Base from Member](http://www.boost.org/doc/libs/1_47_0/libs/utility/base_from_member.html)
+
+### References
+
+- Boost Utility http://www.boost.org/doc/libs/1_61_0/libs/utility/doc/html/base_from_member.html

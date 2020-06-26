@@ -141,7 +141,7 @@ int main ()
 
 Constructors of class `Derived` should be made private to prevent users from accidentally using them. Interfaces should be easy to use correctly and hard to use incorrectly - remember? The factory function should then be friend of the derived class. In case of member create function, Base class can be friend of Derived.
 
-
+> NOTE: 下面是完整程序
 
 ```c++
 #include<iostream>
@@ -249,4 +249,5 @@ int main()
 >
 > 
 
-Using Base-from-member idiom more complex variations of this idiom can be created.
+Using [Base-from-member idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Base-from-Member) more complex variations of this idiom can be created.
+

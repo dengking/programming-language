@@ -4,7 +4,7 @@
 
 ## [More C++ Idioms/Return Type Resolver](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Return_Type_Resolver)
 
-
+> NOTE: 提供**templatized conversion operator function**，充分运用compiler自动地调用**conversion operator function**来讲将**temporary object**转换为目标变量（即等号左侧的变量）从而达到简化代码的目的
 
 ### Motivation
 
