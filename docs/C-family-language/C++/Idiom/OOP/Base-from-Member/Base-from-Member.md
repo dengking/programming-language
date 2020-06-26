@@ -4,6 +4,8 @@
 
 ## More C++ Idioms/[Base-from-Member](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Base-from-Member)
 
+> NOTE: 充分利用order of initialization即“**base classes** are initialized in the order they are declared”，引入一个class来初始化基类的constructor中需要使用的variable，并且保证这个类的次序在基类之前。
+
 In C++, base classes are initialized before any member of the derived classes. The reason for this is that members of a **derived class** may use *base* part of the object. Therefore, all the *base* parts (i.e., all the base classes) must be initialized before members of the **derived class**. Sometimes, however, it becomes necessary to initialize a **base class** from a data member that is available only in the **derived class**. It sounds contradictory to the rules of C++ language because the parameter (a member of derived class) that is passed to the base class constructor must be **fully initialized**. This creates circular initialization problem (an [infinite regress](https://en.wikipedia.org/wiki/Infinite_regress)).
 
 The following code, obtained from Boost[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Base-from-Member#cite_note-1) library, shows the problem.
