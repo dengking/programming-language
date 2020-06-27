@@ -2,6 +2,8 @@
 
 # [如何评价 C++11 的右值引用（Rvalue reference）特性？](https://www.zhihu.com/question/22111546)
 
+## [如何评价 C++11 的右值引用（Rvalue reference）特性？ - Tinro的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/30801982) 
+
 **右值引用**是C++11中最重要的新特性之一，它解决了C++中大量的历史遗留问题，使C++标准库的实现在多种场景下消除了不必要的额外开销（如[std::vector](https://en.cppreference.com/w/cpp/container/vector), [std::string](https://en.cppreference.com/w/cpp/string/basic_string))，也使得另外一些标准库（如[std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr), [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)）成为可能。即使你并不直接使用右值引用，也可以通过标准库，间接从这一新特性中受益。为了更好的理解**标准库**结合**右值引用**带来的优化，我们有必要了解一下**右值引用**的重大意义。
 
 右值引用的意义通常解释为两大作用：移动语义和完美转发。本文主要讨论移动语义。
@@ -228,3 +230,7 @@ thread也是一种典型的不可复制的资源，但可以通过移动来传�
 ------
 
 移动语义绝不是语法糖，而是带来了C++的深刻革新。移动语义不仅仅是针对库作者的，任何一个程序员都有必要去了解它。尽管你可能不会去主动为自己的类实现移动语义，但却时时刻刻都在享受移动语义带来的受益。因此这绝不意味着这是一个可有可无的东西。
+
+
+
+## [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 
