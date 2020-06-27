@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - Function: Function.md
     - Function-declaration: Function-declaration
 # 函数调用中也包含一些内容
@@ -6,3 +7,9 @@ nav:
 # 运算符重载    
     - Operator-overloading: Operator-overloading
     - Lambda-expression: Lambda-expression
+    # utility library中的function objects
+    - std-utility-lib-Function-objects: std-utility-lib-Function objects
+    # 变参函数
+    - Variadic-function: Variadic-function
+    # 这是非常重要的一点
+    - Perfect-forwarding: Perfect-forwarding

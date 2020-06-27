@@ -12,6 +12,8 @@ copy
 
 move
 
+swap
+
 destructor、delete
 
 ## idiom
