@@ -3,4 +3,5 @@ nav:
     - Resource-management: Resource-management.md
 # move是对resource的一种操作，这是c++11中引入的    
     - Move: Move
+    - Swap: Swap
     - Memory: Memory
