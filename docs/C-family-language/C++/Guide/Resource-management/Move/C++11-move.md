@@ -33,7 +33,7 @@
 
 **右值引用**至少可以解决以下场景中的**移动语义**缺失问题：
 
-- 按值传入参数
+### 按值传入参数
 
 ```c++
 #include<string> // string
@@ -93,7 +93,7 @@ People b(bn); // 拷贝构造name
 
 > NOTE: 没有读懂
 
-- 按值返回
+### 按值返回
 
 ```c++
 void str_split(const string& s, vector<string>* vec); // 一个按值语义定义的字符串拆分函数。这里不考虑分隔符，假定分隔符是固定的。
@@ -113,7 +113,7 @@ vector<string> str_split(const string& s) {
 
 如果函数按值返回，`return`语句又直接返回了一个栈上的左值对象（输入参数除外）时，标准要求优先调用**移动构造函数**，如果不符再调用**拷贝构造函数**。尽管`v`是左值，仍然会优先采用**移动语义**，返回`vector<string>`从此变得云淡风轻。此外，无论移动或是拷贝，可能的情况下仍然适用编译器优化，但语义不受影响。
 
-> NOTE: 现代compiler基本上都支持RVO。
+> NOTE: 现代compiler基本上都支持RVO，关于RVO，参见`C++\Language-reference\Initialization\Copy-elision\Copy-elision.md`。
 
 ```c++
 unique_ptr<SomeObj> create_obj(/*...*/) {
@@ -131,9 +131,11 @@ unique_ptr<SomeObj> create_obj(/*...*/) {
 
 ```
 
-在**工厂类**中，这样的语义是非常常见的。返回unique_ptr能够明确对所构造对象的所有权转移，特别的，这样的工厂类返回值可以被忽略而不会造成内存泄露。上面两种形式分别返回栈上的左值和右值，但都适用移动语义（unique_ptr不支持拷贝）。
+在**工厂类**中，这样的语义是非常常见的。返回`unique_ptr`能够明确对所构造对象的所有权转移，特别的，这样的工厂类返回值可以被忽略而不会造成内存泄露。上面两种形式分别返回栈上的左值和右值，但都适用移动语义（`unique_ptr`不支持拷贝）。
 
-- 接收**右值表达式**
+> NOTE: 上述就是Resource Return Idiom，参见`C++\Idiom\OOP\Resource-Return\Resource-Return.md`
+
+### 接收**右值表达式**
 
 ```c++
 vector<string> str_split(const string& s);
@@ -143,7 +145,9 @@ vector<string> v2;
 v2 = str_split("1,2,3"); // 返回的vector被复制给对象v（拷贝赋值操作符）。需要先清理v2中原有数据，将临时对象中的数据复制给v2，然后析构临时对象。
 ```
 
-注：v的拷贝构造调用有可能被优化掉，尽管如此在**语义上**仍然是有一次拷贝操作。
+注：`v`的拷贝构造调用有可能被优化掉，尽管如此在**语义上**仍然是有一次拷贝操作。
+
+同样的代码，在支持移动语义的世界里就变得更美好了。
 
 ```c++
 vector<string> str_split(const string& s);
@@ -157,36 +161,40 @@ v2 = str_split("1,2,3"); // 返回的vector被移动给对象v（移动赋值操
 
 不用多说也知道上面的形式是多么常用和自然。而且这里完全没有任何对**右值引用**的**显式**使用，性能提升却默默的实现了。
 
-- 对象存入容器
+### 对象存入容器
 
-```
+这个问题和前面的构造函数传参是类似的。不同的是这里是按两种引用分别传参。参见`std::vector`的[`push_back`](https://en.cppreference.com/w/cpp/container/vector/push_back) 函数。
+
+```c++
 void push_back( const T& value ); // (1)
 void push_back( T&& value ); // (2)
-
 ```
 
-```
+不用多说自然是左值调用1右值调用2。如果你要往容器内放入超大对象，那么版本2自然是不2选择。
+
+```c++
 vector<vector<string>> vv;
 
 vector<string> v = {"123", "456"};
 v.push_back("789"); // 临时构造的string类型右值被移动进容器v
 vv.push_back(move(v)); // 显式将v移动进vv
-
 ```
 
 困扰多年的难言之隐是不是一洗了之了？
 
-- std::vector的增长
+### `std::vector`的增长
 
 又一个隐蔽的优化。当vector的存储容量需要增长时，通常会重新申请一块内存，并把原来的内容一个个复制过去并删除。对，复制并删除，改用移动就够了。
 
 对于像vector<string>这样的容器，如果频繁插入造成存储容量不可避免的增长时，移动语义可以带来悄无声息而且美好的优化。
 
-- std::unique_ptr放入容器
+### `std::unique_ptr`放入容器
 
-曾经，由于vector增长时会复制对象，像std::unique_ptr这样不可复制的对象是无法放入容器的。但实际上vector并不复制对象，而只是“移动”对象。所以随着移动语义的引入，std::unique_ptr放入std::vector成为理所当然的事情。
+曾经，由于vector增长时会复制对象，像`std::unique_ptr`这样不可复制的对象是无法放入容器的。但实际上vector并不复制对象，而只是“移动”对象。所以随着移动语义的引入，`std::unique_ptr`放入`std::vector`成为理所当然的事情。
 
-```
+容器中存储`std::unique_ptr`有太多好处。想必每个人都写过这样的代码：
+
+```c++
 MyObj::MyObj() {
   for (...) {
     vec.push_back(new T());
@@ -200,18 +208,17 @@ MyObj::~MyObj() {
   }
   // ...
 }
-
 ```
 
-繁琐暂且不说，异常安全也是大问题。使用vector<unique_ptr<T>>，完全无需显式析构，unqiue_ptr自会打理一切。完全不用写析构函数的感觉，你造吗？
+繁琐暂且不说，异常安全也是大问题。使用`vector<unique_ptr<T>>`，完全无需显式析构，`unqiue_ptr`自会打理一切。完全不用写析构函数的感觉，你造吗？
 
-unique_ptr是非常轻量的封装，存储空间等价于裸指针，但安全性强了一个世纪。实际中需要共享所有权的对象（指针）是比较少的，但需要转移所有权是非常常见的情况。auto_ptr的失败就在于其转移所有权的繁琐操作。unique_ptr配合移动语义即可轻松解决所有权传递的问题。
+`unique_ptr`是非常轻量的封装，存储空间等价于**裸指针**，但安全性强了一个世纪。实际中需要共享所有权的对象（指针）是比较少的，但需要转移所有权是非常常见的情况。`auto_ptr`的失败就在于其转移所有权的繁琐操作。`unique_ptr`配合移动语义即可轻松解决所有权传递的问题。
 
-注：如果真的需要共享所有权，那么基于引用计数的shared_ptr是一个好的选择。shared_ptr同样可以移动。由于不需要线程同步，移动shared_ptr比复制更轻量。
+注：如果真的需要共享所有权，那么基于引用计数的`shared_ptr`是一个好的选择。`shared_ptr`同样可以移动。由于不需要线程同步，移动`shared_ptr`比复制更轻量。
 
-- std::thread的传递
+### `std::thread`的传递
 
-thread也是一种典型的不可复制的资源，但可以通过移动来传递所有权。同样std::future std::promise std::packaged_task等等这一票多线程类都是不可复制的，也都可以用移动的方式传递。
+thread也是一种典型的不可复制的资源，但可以通过移动来传递所有权。同样[std::future](https://en.cppreference.com/w/cpp/thread/future)、 [std::promise](https://en.cppreference.com/w/cpp/thread/promise)、[std::packaged_task](https://en.cppreference.com/w/cpp/thread/packaged_task)等等这一票多线程类都是不可复制的，也都可以用移动的方式传递。
 
 完美转发
 ------
@@ -219,3 +226,5 @@ thread也是一种典型的不可复制的资源，但可以通过移动来传�
 
 总结
 ------
+
+移动语义绝不是语法糖，而是带来了C++的深刻革新。移动语义不仅仅是针对库作者的，任何一个程序员都有必要去了解它。尽管你可能不会去主动为自己的类实现移动语义，但却时时刻刻都在享受移动语义带来的受益。因此这绝不意味着这是一个可有可无的东西。
