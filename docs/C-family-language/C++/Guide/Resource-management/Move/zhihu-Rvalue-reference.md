@@ -234,3 +234,8 @@ thread也是一种典型的不可复制的资源，但可以通过移动来传�
 
 
 ## [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 
+
+一句话答案：右值引用的出现是为了实现移动语义，顺便解决完美转发的问题，其意义在于扩充了值语义，帮助Modern C++可以全面地应用RAII。
+
+
+
