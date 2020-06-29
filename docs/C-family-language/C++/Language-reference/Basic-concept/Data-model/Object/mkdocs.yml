@@ -1,10 +1,10 @@
 nav:
 # 首先描述c++中object的概念
+    - Introduction: index.md
     - Object: Object.md
+# object的storage和lifetime是两个非常重要的概念    
+    - Object-storage-and-lifetime: Object-storage-and-lifetime.md    
 # 描述object的layout    
     - Object-layout: Object-layout    
-# object的storage和lifetime是两个非常重要的概念    
-    - Storage: Storage.md
-    - Lifetime: Lifetime.md
 # variable的概念    
     - Variable: Variable.md

@@ -17,11 +17,19 @@ C++ programs create, destroy, refer to, access, and manipulate *objects*.
 An object, in C++ , is a *region of storage* that (until C++14) has
 
 - size (can be determined with [sizeof](https://en.cppreference.com/w/cpp/language/sizeof));
+
 - alignment requirement (can be determined with [alignof](https://en.cppreference.com/w/cpp/language/alignof));
+
 - [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) (automatic, static, dynamic, thread-local);
+
 - [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary);
+
+  > NOTE: 上面这段话中的“bounded ”的含义是“由...决定”
+
 - [type](https://en.cppreference.com/w/cpp/language/type);
+
 - value (which may be indeterminate, e.g. for [default-initialized](https://en.cppreference.com/w/cpp/language/default_initialization) non-class types);
+
 - optionally, a [name](https://en.cppreference.com/w/cpp/language/name).
 
 > NOTE: 上述都是对object的属性的描述
