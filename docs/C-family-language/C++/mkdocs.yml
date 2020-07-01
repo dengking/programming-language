@@ -20,7 +20,7 @@ nav:
     # c++的设计模式
     - Pattern: Pattern
     # 代码风格
-    - Stype-guide: Stype-guide
+    - Style-guide: Style-guide
     # 
     - IDE: IDE.md
     # 对c++中的一些专题进行介绍
