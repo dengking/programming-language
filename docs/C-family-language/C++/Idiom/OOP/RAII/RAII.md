@@ -2,7 +2,7 @@
 
 RAII是C++的一个重要feature。
 
-# cppreference [RAII](https://en.cppreference.com/w/cpp/language/raii)
+## cppreference [RAII](https://en.cppreference.com/w/cpp/language/raii)
 
 *Resource Acquisition Is Initialization* or RAII, is a C++ programming technique which binds the life cycle of a **resource** that must be acquired before use (allocated heap memory, thread of execution, open socket, open file, locked mutex, disk space, database connection—anything that exists in limited supply) to the [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) of an object.
 
@@ -115,7 +115,7 @@ This code is **exception-safe** because `C++` guarantees that all **stack object
 
 Using **RAII** greatly simplifies resource management, reduces overall code size and helps ensure program correctness. RAII is therefore highly recommended in C++, and most of the C++ standard library follows the idiom.[[11\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-too-many-trycatch-blocks-11)
 
-## Benefits 
+### Benefits 
 
 The advantages of **RAII** as a resource management technique are that it provides 
 
@@ -135,7 +135,7 @@ Resource management therefore needs to be tied to the lifespan of suitable objec
 
 Comparing **RAII** with the `finally` construct used in Java, Stroustrup wrote that “In realistic systems, there are far more resource acquisitions than kinds of resources, so the "resource acquisition is initialization" technique leads to less code than use of a "finally" construct.”[[1\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-faq-1)
 
-## Typical uses 
+### Typical uses 
 
 The **RAII** design is often used for controlling **[mutex](https://en.wikipedia.org/wiki/Mutex) locks** in [multi-threaded](https://en.wikipedia.org/wiki/Thread_(computing)#Multithreading) applications. In that use, the object releases the lock when destroyed(对象在被销毁的时候释放锁). Without **RAII** in this scenario the potential for [deadlock](https://en.wikipedia.org/wiki/Deadlock) would be high and **the logic to lock the mutex** would be far from **the logic to unlock it**. With **RAII**, the code that locks the mutex essentially includes the logic that the lock will be released when execution leaves the scope of the RAII object(使用RAII，锁定互斥锁的代码基本上包括当执行离开RAII对象的范围时将释放锁的逻辑).
 
@@ -143,7 +143,7 @@ Another typical example is interacting with files: We could have an object that 
 
 Ownership of dynamically allocated objects (memory allocated with `new` in C++) can also be controlled with **RAII**, such that the object is released when the **RAII** (stack-based) object is destroyed. For this purpose, the [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) standard library defines the [smart pointer](https://en.wikipedia.org/wiki/Smart_pointer) classes `std::unique_ptr` for **single-owned objects** and `std::shared_ptr` for objects with **shared ownership**. Similar classes are also available through `std::auto_ptr` in C++98, and `boost::shared_ptr` in the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)).
 
-## Clang and GCC "cleanup" extension for C 
+### Clang and GCC "cleanup" extension for C 
 
 Both [Clang](https://en.wikipedia.org/wiki/Clang) and [GNU Compiler Collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) implement a non-standard extension to the [C](https://en.wikipedia.org/wiki/C_(programming_language)) language to support RAII: the "cleanup" variable attribute.[[12\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-12)The following [macro](https://en.wikipedia.org/wiki/Macro_(computer_science)) annotates a variable with a given **destructor function** that it will call when the variable goes out of scope:
 
@@ -165,7 +165,7 @@ In this example, the compiler arranges for the *fclosep* function to be called o
 
 
 
-## Limitations 
+### Limitations 
 
 **RAII** only works for resources acquired and released (directly or indirectly) by **stack-allocated objects**, where there *is* a well-defined static object lifetime. Heap-allocated objects which themselves acquire and release resources are common in many languages, including `C++`. RAII depends on heap-based objects to be implicitly or explicitly deleted along all possible execution paths, in order to trigger its resource-releasing destructor (or equivalent).[[13\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-toplas2008-13):8:27 This can be achieved by using [smart pointers](https://en.wikipedia.org/wiki/Smart_pointer) to manage all heap objects, with weak-pointers for cyclically referenced objects.
 
@@ -173,7 +173,7 @@ In `C++`, **stack unwinding** is only guaranteed to occur if the exception is ca
 
 
 
-## Reference counting 
+### Reference counting 
 
 [Perl](https://en.wikipedia.org/wiki/Perl), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) (in the [CPython](https://en.wikipedia.org/wiki/CPython) implementation),[[15\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-15) and [PHP](https://en.wikipedia.org/wiki/PHP)[[16\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-16) manage object lifetime by [reference counting](https://en.wikipedia.org/wiki/Reference_counting), which makes it possible to use RAII. Objects that are no longer referenced are immediately destroyed or finalized and released, so a [destructor](https://en.wikipedia.org/wiki/Destructor_(computer_programming)) or [finalizer](https://en.wikipedia.org/wiki/Finalizer) can release the resource at that time. However, it is not always idiomatic in such languages, and is specifically discouraged in Python (in favor of [context managers](https://en.wikipedia.org/w/index.php?title=Context_manager&action=edit&redlink=1) and *finalizers* from the *weakref* package).
 
@@ -182,16 +182,23 @@ However, **object lifetimes** are not necessarily bound to any scope, and object
 
 
 
-# THINKING
-
-`C++`的RAII让我想到了python中的`with`。上面这篇文章中的Reference counting 章节就谈到了这一点。
 
 
 
+## THINKING
+
+### RAII and GC
+
+`C++`的RAII让我想到了python中的`with`、 [context managers](https://en.wikipedia.org/w/index.php?title=Context_manager&action=edit&redlink=1) 。上面这篇文章中的Reference counting 章节就谈到了这一点。
+
+### [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 
+
+这是阅读这篇文章的感想：RAII虽然简单，但是能够处理非常多的问题：将一个resource的lifetime与一个object的lifetime bind到一起。c++又允许programmer来控制object的lifetime，同时C++有支持value and  reference semantic， 因此对于resource的处理将变得非常灵活且安全。GC的language无法实现RAII，因为它们无法控制object的lifetime。
 
 
 
-# TODO
+
+## TODO
 
 https://www.tomdalling.com/blog/software-design/resource-acquisition-is-initialisation-raii-explained/
 

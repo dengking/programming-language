@@ -1,6 +1,6 @@
+# zhihu Rvalue reference
 
 
-# [如何评价 C++11 的右值引用（Rvalue reference）特性？](https://www.zhihu.com/question/22111546)
 
 ## [如何评价 C++11 的右值引用（Rvalue reference）特性？ - Tinro的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/30801982) 
 
