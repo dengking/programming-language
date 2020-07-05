@@ -76,8 +76,6 @@ The most commonly recognized major classes of polymorphism are:
 
 ### Implementation aspects
 
-> NOTE: 原文关于实现的解释仅仅涉及了static和dynamic，其实不同的programming language的polymorphisim的实现是截然不同的，关于这些实现，将在不同的programming language中进行具体的展开。
-
 #### Static and dynamic polymorphism
 
 |                   Static(at compile time)                    |                     Dynamic(at run time)                     |
@@ -98,6 +96,19 @@ The most commonly recognized major classes of polymorphism are:
 However, it is possible to achieve static polymorphism with subtyping through more sophisticated use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming), namely the [curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern).
 
 > NOTE: 这是c++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
+
+
+
+> NOTE: 原文关于实现的解释仅仅涉及了static和dynamic，其实不同的programming language的polymorphisim的实现是截然不同的，关于这些实现，将在不同的programming language中进行具体的展开，下面是对此的一些总结：
+>
+> |      | static                                 | dynamic                                       |
+> | ---- | -------------------------------------- | --------------------------------------------- |
+> | 实现 | compiler实现，无需在内存中保存映射关系 | 需要在内存中保存所有的candidate之间的映射关系 |
+> | 例子 | c++ overload、template specialization  | c++ virtual method、python attribute find     |
+>
+> 关于c++ implementation of polymorphism，参加文章`C-family-language\C++\Guide\Implementation-of-polymorphism\index.md`
+
+
 
 ## Polymorphism的本质
 
@@ -122,20 +133,28 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 >
 > each of them allows the programmer to use a single code with different types, so all embody the concept of polymorphism.
 
+
+
+### Polymorphism是实现abstraction的基础
+
+
+
 ## Polymorphism的价值
+
+- 让programmer写出更加abstract的code
 
 - 使代码更加地generic（参见[generic programming](http://en.wikipedia.org/wiki/Generic_programming)），从而带来更好的扩展性
 - 降低编写成本，使我们无需写一堆的`if-else`
 
 
 
-## Template and polymorphism
+## Template and duck type and polymorphism
 
-Template属于“single symbol to represent multiple different types”。
+按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:Template属于“single symbol to represent multiple different types”。
 
-## Duck type and polymorphism
+按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:Duck type属于“single symbol to represent multiple different types”。
 
-Duck type属于“single symbol to represent multiple different types”。
+template是C++的典型特性，duck type是python的典型特性，从上面的对比来看，两者存在着一定的相似性，关于两者，在`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing`章节进行了深入分析。
 
 在维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中已经提及了，下面是一些补充。
 

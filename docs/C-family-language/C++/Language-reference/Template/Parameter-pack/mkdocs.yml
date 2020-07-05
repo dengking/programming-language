@@ -1,2 +1,3 @@
 nav:
     - Parameter-pack: Parameter-pack.md
+    - Eli-Bendersky-Variadic templates-in-Cpp: Eli-Bendersky-Variadic templates-in-Cpp.md
