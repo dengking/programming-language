@@ -1,5 +1,13 @@
 # [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
 
+> NOTE: 这篇文章展示了如下例子：
+>
+> - Variadic function template
+> - Variadic class template
+> - Perfect forwarding
+
+
+
 Prior to C++11, the only way to write functions that take an arbitrary number of arguments was to use **variadic functions** like `printf`, with the ellipsis syntax (`...`) and the accompanying `va_` family of macros. If you've ever written code using this approach you know how cumbersome(麻烦) it is. In addition to being type unsafe (all **type resolution** has to be done explicitly with casts in `va_arg`, at runtime), it's also tricky to get right. The `va_`macros perform low-level memory manipulation, and I've seen a lot of code that segfaults(段错误) because it isn't using them carefully enough.
 
 But what always bothered me most with this approach is leaving something that is clearly known at **compile-time**, to **run-time**. Yes, when we write a variadic function we don't know all the ways it's going to be used. But when the compiler puts the whole program together, *it does know*. It sees perfectly well all the invocations of the function throughout the program, and all the possible argument types it gets passed (types are, after all, resolved at compile-time in C++).
@@ -268,6 +276,8 @@ struct tuple<T, Ts...> : tuple<Ts...> {
 };
 ```
 
+> NOTE: 上述是Varidic class template。
+
 We start with the **base case** - the definition of a class template named `tuple`, which is empty. The specialization that follows peels off(剥离) the first type from the parameter pack, and defines a member of that type named `tail`. It also derives from(源于) the tuple instantiated with the rest of the pack. This is a recursive definition that stops when there are no more types to peel off, and the base of the hierarchy is an empty `tuple`. To get a better feel for the resulting data structure, let's use a concrete example:
 
 ```c++
@@ -332,9 +342,11 @@ struct elem_type_holder<k, tuple<T, Ts...>> {
 };
 ```
 
-`elem_type_holder` is yet another variadic class template. It takes a number `k` and the `tuple` type we're interested in as template parameters. Note that this is a compile-time template metaprogramming construct - it acts on **constants** and **types**, not on runtime objects. For example, given`elem_type_holder<2, some_tuple_type>`, we'll get the following pseudo expansion:
+> NOTE: `elem_type_holder`的模板参数`template <class T, class... Ts>`是`tuple`的模板参数。模板参数`k`用于控制我们要**剥离**几层，其实它非常类似于在维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)的Compile-time class generation段中列举的`factorial`例子。上诉例子只不过是添加了一个**剥离**的机制。
 
-```
+`elem_type_holder` is yet another variadic class template. It takes a number `k` and the `tuple` type we're interested in as template parameters. Note that this is a compile-time template metaprogramming construct - it acts on **constants** and **types**, not on runtime objects. For example, given `elem_type_holder<2, some_tuple_type>`, we'll get the following pseudo expansion:
+
+```c++
 struct elem_type_holder<2, tuple<T, Ts...>> {
   typedef typename elem_type_holder<1, tuple<Ts...>>::type type;
 }
@@ -348,9 +360,11 @@ struct elem_type_holder<0, tuple<T, Ts...>> {
 }
 ```
 
+
+
 So the `elem_type_holder<2, some_tuple_type>` peels off two types from the beginning of the tuple, and sets its `type` to the type of the third one, which is what we need. Armed with this, we can implement `get`:
 
-```
+```c++
 template <size_t k, class... Ts>
 typename std::enable_if<
     k == 0, typename elem_type_holder<0, tuple<Ts...>>::type&>::type
@@ -371,7 +385,7 @@ Here, [enable_if](http://eli.thegreenplace.net/2014/sfinae-and-enable_if/) is us
 
 Since it returns a reference, we can use `get` to both read tuple elements and write to them:
 
-```
+```c++
 tuple<double, uint64_t, const char*> t1(12.2, 42, "big");
 
 std::cout << "0th elem is " << get<0>(t1) << "\n";
@@ -388,7 +402,7 @@ Here is another example I find interesting. It's different from the ones already
 
 Say we want to write a function that can print out standard library containers. We want it to work for any container, and we also want the user to type as little as possible, so we don't want to act on iterators. We just want `print_container(c)` to work for any container `c`. Here's a first approach:
 
-```
+```c++
 template <template <typename, typename> class ContainerType,
           typename ValueType,
           typename AllocType>
@@ -402,7 +416,7 @@ void print_container(const ContainerType<ValueType, AllocType>& c) {
 
 Many of the STL containers are templates that can be parameterized by the value type and an allocator type; for example `vector`, `list`, `deque`, and so on. So we can write:
 
-```
+```c++
 std::vector<double> vd{3.14, 8.1, 3.2, 1.0};
 print_container(vd);
 
@@ -424,7 +438,7 @@ note: candidate template ignored: substitution failure :
 
 This is because `map` is a template parameterized by 4 template arguments, not 2. The same problem would occur for a `set`, which has 3 template arguments. This is annoying - while the contents of the `print_container`function would be the same for all these containers, the signature has to be different. What can we do without duplicating code? Variadic templates for the rescue:
 
-```
+```c++
 template <template <typename, typename...> class ContainerType,
           typename ValueType, typename... Args>
 void print_container(const ContainerType<ValueType, Args...>& c) {
@@ -437,7 +451,7 @@ void print_container(const ContainerType<ValueType, Args...>& c) {
 
 What this says is - `ContainerType` is a template template parameter with any amount of template parameters itself. We don't care really, as long as the compiler can type-deduce them at the call. This version of the function will work for `map`, `set`, `unordered_map` and other containers [[6\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id12). One small addition we have to make to support mappings is:
 
-```
+```c++
 // Implement << for pairs: this is needed to print out mappings where range
 // iteration goes over (key, value) pairs.
 template <typename T, typename U>
@@ -447,19 +461,106 @@ std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p) {
 }
 ```
 
+
+
+> NOTE: 完整例子如下：
+
+```c++
+#include<iostream>
+#include<vector>
+#include<list>
+#include<map>
+#include<string>
+
+template <template <typename, typename...> class ContainerType,
+          typename ValueType, typename... Args>
+void print_container(const ContainerType<ValueType, Args...>& c) {
+  for (const auto& v : c) {
+    std::cout << v << ' ';
+  }
+  std::cout << '\n';
+}
+
+// Implement << for pairs: this is needed to print out mappings where range
+// iteration goes over (key, value) pairs.
+template <typename T, typename U>
+std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p) {
+  out << "[" << p.first << ", " << p.second << "]";
+  return out;
+}
+
+int main()
+{
+std::vector<double> vd{3.14, 8.1, 3.2, 1.0};
+print_container(vd);
+std::list<int> li{1, 2, 3, 5};
+print_container(li);
+std::map<std::string, int> msi{{"foo", 42}, {"bar", 81}, {"bazzo", 4}};
+print_container(msi);
+}
+```
+
+> NOTE: 编译：`g++ --std=c++11 test.cpp`
+>
+> 输出：
+>
+> ```
+> 3.14 8.1 3.2 1 
+> 1 2 3 5 
+> [bar, 81] [bazzo, 4] [foo, 42]
+> ```
+>
+> 
+
+> NOTE: 上诉程序的另外一种写法如下：
+
+```c++
+#include<iostream>
+#include<vector>
+#include<list>
+#include<map>
+#include<string>
+template <typename T, typename U>
+std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& p) {
+  out << "[" << p.first << ", " << p.second << "]";
+  return out;
+}
+template<typename CT>
+void print_container(const CT& c) {
+  for (const auto& v : c) {
+    std::cout << v << ' ';
+  }
+  std::cout << '\n';
+}
+
+int main()
+{
+std::vector<double> vd{3.14, 8.1, 3.2, 1.0};
+print_container(vd);
+std::list<int> li{1, 2, 3, 5};
+print_container(li);
+std::map<std::string, int> msi{{"foo", 42}, {"bar", 81}, {"bazzo", 4}};
+print_container(msi);
+
+}
+
+```
+
+
+
 ## Variadic templates for forwarding
 
 A somewhat related example is templates that don't do much on their own, but have to forward all their arguments to some other template or function. This turns out to be very useful because C++ has a commonly used construct that is inherently "variadic" when viewed from a template parameter point of view - the constructor. Given a generic type `T`, to invoke the constructor of `T`, we may need to pass in an arbitrary number of arguments. Unlike function types that specify their arguments at compile time, given just a generic type `T` we don't know which constructor(s) it has and how many arguments the constructor accepts.
 
 A very important example of this is the `std::make_unique` function, available in the standard library since C++14. We want to be able to use it as follows:
 
-```
+```c++
 std::unique_ptr<FooType> f = std::make_unique<FooType>(1, "str", 2.13);
 ```
 
 `FooType` is an arbitrary type and can be constructed in arbitrary ways. How does `make_unique` know the signature of its constructor? With variadic templates, it doesn't have to know! Here's how `make_unique` is typically implemented:
 
-```
+```c++
 template<typename T, typename... Args>
 unique_ptr<T> make_unique(Args&&... args)
 {
@@ -480,28 +581,4 @@ I found a number of resources useful while preparing this article:
 5. Finally, if recursive use of variadic templates reminds you of pattern matching in functional languages, you're right! [Bartosz Milewski's article](http://bartoszmilewski.com/2009/10/21/what-does-haskell-have-to-do-with-c/) dives into more details about this.
 
 ------
-
-| [[1\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id1) | Technically, this is not recursion, because a different function is called. The compiler ends up generating a different function for every used length of the parameter pack. It's useful to reason about it recursively, though. |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
-| [[2\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id2) | It's a gcc extension, supported by Clang as well. |
-| ------------------------------------------------------------ | ------------------------------------------------- |
-|                                                              |                                                   |
-
-| [[3\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id3) | To be fair, modern compilers *may* warn you about it (Clang almost certainly will); but this is just special-casing the `printf` family of functions. In other variadic code, you're on your own. |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
-| [[4\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id4) | `std::tuple` is part of the standard library in C++11, and it's a more sophisticated version of what I'm showing here. |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
-| [[5\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id5) | `get` is a standalone function rather than a member, because it would be awkward to use as a member. Since it requires explicit template parameter specification and can't use deduction, we'd have to write something like `tup.template get<2>()` to use it, which is ugly and too verbose. |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
-| [[6\]](https://eli.thegreenplace.net/2014/variadic-templates-in-c/#id6) | Exercise for the reader: there is a C++11 container this still won't work for. Which one? |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
 
