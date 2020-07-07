@@ -1,3 +1,4 @@
 nav:
     - Virtual-inheritance: Virtual-inheritance.md
     - Virtual-class-VS-virtual-base-class: Virtual-class-VS-virtual-base-class.md
+    - Super: Super.md
