@@ -2,3 +2,5 @@ nav:
     - Introduction: index.md
     - Static-members: Static-members.md
     - Const-member: Const-member.md
+########## 将constructor、destructor、assignment operator都归入magic function这一类##########    
+    - Special-member-functions: Special-member-functions
