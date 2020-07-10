@@ -12,7 +12,7 @@
 
 
 
-inversion of control中的control是一个含义非常宽泛的词语，它可以指代：flow of control、dependency的注入、对object lifetime的管理，如果我们从这个宽泛的角度出发来理解的话，就会发现软件工程领域的很多内容都可以归入到inversion of control中：
+inversion of control中的control是一个含义非常宽泛的词语，它可以指代：flow of control、dependency的注入、对object lifetime的管理，如果我们从这个宽泛的角度出发来理解的话，就会发现软件工程领域的很多内容都可以归入到inversion of control中。原本这些control是由programmer来进行实现，而inversion of control则启发我们：这些control应该由framework来进行实现；此处的framework的含义也是非常宽泛的，它可以是类似于spring的container，也可以是类似于reference counting这样的逻辑；
 
 gc是一种Ioc，有gc来管理object的lifetime
 
@@ -25,6 +25,8 @@ reactive programming是一种ioc，由framework来管理event和event handler之
 
 
 inversion of control的思想内涵；
+
+inversion of control的优势/价值；
 
 inversion of control的实现方式；
 
