@@ -1,4 +1,5 @@
 nav:
     - Object-oriented-design: Object-oriented-design.md
     - SOLID: SOLID    
+    - Inversion-of-control: Inversion-of-control
     - Goal: Goal.md

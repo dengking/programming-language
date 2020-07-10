@@ -73,6 +73,9 @@ dynamic dispatch是连接抽象与具体的桥梁。
 
 
 
-## SOLID
+## SOLID principle
 
-这在下一章节会进行描述。
+这在[SOLID](./SOLID/SOLID.md)章节会进行描述。
+
+
+
