@@ -188,3 +188,15 @@ In an original article by Martin Fowler,[[9\]](https://en.wikipedia.org/wiki/Inv
 
 
 
+
+
+
+
+```
+class CQueryMgr
+{
+
+
+};
+```
+

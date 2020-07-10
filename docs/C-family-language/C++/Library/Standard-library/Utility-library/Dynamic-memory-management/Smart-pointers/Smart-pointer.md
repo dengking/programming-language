@@ -1,6 +1,6 @@
 # Smart pointer
 
-
+“Smart pointer”即“智能指针”
 
 ## 维基百科[Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)
 
@@ -8,13 +8,34 @@
 
 > NOTE: smart pointer能够解决的问题其实就是manual memory management所面临的问题，在`Manual-memory-management\Manual-memory-management.md`中对这些问题进行了总结。
 >
-> 
 
 
 
 ### [Features](https://en.wikipedia.org/wiki/Smart_pointer#Features)
 
 Smart pointers can facilitate [intentional programming](https://en.wikipedia.org/wiki/Intentional_programming) by expressing, in the type, how the memory of the referent of the pointer will be managed. For example, if a `C++` function returns a pointer, there is no way to know whether the caller should delete the memory of the referent when the caller is finished with the information.
+
+> NOTE:
+>
+> ### smart pointer符合[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)
+>
+> [C++ Core Guidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)的P: Philosophy中有如下两条：
+>
+> - P.1: Express ideas directly in code
+> - P.3: Express intent
+>
+> [intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)显然是符合上述两条的，C++ smart pointer显然也符合上述两条的；C++ smart pointer所表达的intent是**ownership**。关于此，在`Cpp-Core-Guidelines-Passing-Smart-Pointers.md`中将对**ownership**进行非常详细的说明。
+>
+> 本节的意思是`c++`的`std::unique_ptr`显式地表示由caller来管理指针。在原文本节的第二段告诉了我们，`c++`的`std::unique_ptr`是通过type来显式表达intent，这属于[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)。
+>
+> ### smart pointer符合[Inversion of control principle](https://en.wikipedia.org/wiki/Inversion_of_control)
+>
+> 对于row pointer，需要由programmer来管理其lifetime，对于smart pointer，它们的lifetime无需programmer来管理：
+>
+> - `shared_ptr`由reference count来管理
+> - `unique_ptr`由scope来管理
+
+
 
 ```C++
 SomeType* AmbiguousFunction();  // What should be done with the result?
@@ -28,7 +49,7 @@ std::unique_ptr<SomeType> ObviousFunction();
 
 The declaration of the function return type as a `unique_ptr` makes explicit the fact that the caller takes ownership of the result, and the `C++` runtime ensures that the memory will be reclaimed（回收） automatically. Before [C++11](https://en.wikipedia.org/wiki/C%2B%2B11), `unique_ptr` can be replaced with [auto_ptr](https://en.wikipedia.org/wiki/Auto_ptr).
 
-> NOTE: 本节的意思是`c++`的`std::unique_ptr`显式地表示由caller来管理指针。在原文本节的第二段告诉了我们，`c++`的`std::unique_ptr`是通过type来显式表达intent，这属于[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)。
+
 
 ### `unique_ptr`
 
@@ -57,12 +78,18 @@ p2.reset();  // Deletes the memory, since no one else owns the memory.
 
 
 
-## internalpointers [A beginner's look at smart pointers in modern C++](https://www.internalpointers.com/post/beginner-s-look-smart-pointers-modern-c)
 
 
 
-## [intro/smart pointers](https://en.cppreference.com/book/intro/smart_pointers)
+
+## Reading list
+
+### internalpointers [A beginner's look at smart pointers in modern C++](https://www.internalpointers.com/post/beginner-s-look-smart-pointers-modern-c)
 
 
 
-## [What is a smart pointer and when should I use one?](https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one)
+### [intro/smart pointers](https://en.cppreference.com/book/intro/smart_pointers)
+
+
+
+### [What is a smart pointer and when should I use one?](https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one)
