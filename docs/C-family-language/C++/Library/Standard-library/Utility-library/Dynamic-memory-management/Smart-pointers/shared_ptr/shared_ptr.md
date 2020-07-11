@@ -429,6 +429,14 @@ is incorrect. Only `d` will point to the new `A(10)`, and `a`, `b`, and `c` will
 
 Correct, `shared_ptr`s use atomic increments/decrements of a reference count value.
 
+
+
+## `shared_ptr` and `this`
+
+[std::shared_ptr of this](https://stackoverflow.com/questions/11711034/stdshared-ptr-of-this)
+
+[Getting a boost::shared_ptr for this](https://stackoverflow.com/questions/142391/getting-a-boostshared-ptr-for-this)
+
 ## Example
 
 ### `make_shard` with no argument
