@@ -1,4 +1,6 @@
 nav:
+    - Programming-principles: Programming-principles.md
+    - Object-oriented-design: Object-oriented-design.md
     - SOLID: SOLID    
     - Inversion-of-control: Inversion-of-control
     
