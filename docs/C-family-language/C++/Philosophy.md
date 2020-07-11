@@ -6,13 +6,19 @@
 
 ### P.1: Express ideas directly in code
 
-What is expressed in code has defined semantics and can (in principle) be checked by compilers and other tools.
+**Reason** Compilers don’t read comments (or design documents) and neither do many programmers (consistently). What is expressed in code has defined semantics and can (in principle) be checked by compilers and other tools.
 
-> NOTE: programming language也是一种[语言](https://dengking.github.io/Post/Language/Language/)，我们使用它来描述万事万物；
+> NOTE: programming language也是一种[语言](https://dengking.github.io/Post/Language/Language/)，我们使用它来描述万事万物；我们需要使用programming language提供的feature来完整地的“描述”我们的意图，而不是将意图隐式地在comments 、document、甚至口头 说明。
 >
-> 我们需要使用programming language提供的feature来使我们的“描述”简洁易懂（可读性）、准确、含义丰富；
+> 这一点与[zen of python](https://www.python.org/dev/peps/pep-0020/)的
 >
-> prefer explicit over implicit
+> ```
+> Explicit is better than implicit.
+> ```
+>
+> 一致。
+>
+> 这一点和P.3: Express intent相关；
 
 
 
@@ -32,6 +38,16 @@ change_speed(23m / 10s); // meters per second
 ```
 
 
+
+
+
+### P.3: Express intent
+
+**Reason** Unless the intent of some code is stated (e.g., in names or comments), it is impossible to tell whether the code does what it is supposed to do.
+
+> NOTE: 上述“stated”的含义是“说明、描述、表述”
+>
+> 在阅读维基百科[smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)时，其中提及了smart pointer属于[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)，显然smart pointer是典型的express intent。
 
 
 
