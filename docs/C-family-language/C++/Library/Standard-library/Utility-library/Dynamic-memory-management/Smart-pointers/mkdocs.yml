@@ -1,7 +1,7 @@
 nav:
     - Smart-pointer: Smart-pointer.md
     - Cpp-Core-Guidelines-Passing-Smart-Pointers: Cpp-Core-Guidelines-Passing-Smart-Pointers.md
-    - unique_ptr: unique_ptr.md
-    - shared_ptr: shared_ptr.md
-    - weak_ptr: weak_ptr.md
+    - unique_ptr: unique_ptr
+    - shared_ptr: shared_ptr
+    - weak_ptr: weak_ptr
     - auto_ptr: auto_ptr.md

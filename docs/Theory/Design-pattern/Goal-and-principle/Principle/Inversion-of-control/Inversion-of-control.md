@@ -6,13 +6,19 @@
 
 关于它的第一个问题就是：what aspect of control are they inverting?这个问题需要结合具体的例子来进行回答，本章基于如下文章：
 
-- 维基百科[Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control)
-- martinfowler [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
-- stackoverflow [What is Inversion of Control?](https://stackoverflow.com/questions/3058/what-is-inversion-of-control)
+- 入门读物：martinfowler [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
+- 总结：维基百科[Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control)
+- 总结：stackoverflow [What is Inversion of Control?](https://stackoverflow.com/questions/3058/what-is-inversion-of-control)
 
 
 
-inversion of control中的control是一个含义非常宽泛的词语，它可以指代：flow of control、dependency的注入、对object lifetime的管理，如果我们从这个宽泛的角度出发来理解的话，就会发现软件工程领域的很多内容都可以归入到inversion of control中。原本这些control是由programmer来进行实现，而inversion of control则启发我们：这些control应该由framework来进行实现；此处的framework的含义也是非常宽泛的，它可以是类似于spring的container，也可以是类似于reference counting这样的逻辑；
+inversion of control中的control是一个含义非常宽泛的词语，维基百科给出的解释是[Control flow](https://en.wikipedia.org/wiki/Control_flow)，我觉得这个解释是比较狭隘的，从广义而言，它可以指代：flow of control、dependency的注入、对object lifetime的管理，event和event handler之间的映射，显然这些都是control，如果我们从这个宽泛的角度出发来理解的话，就会发现软件工程领域的很多内容都可以归入到inversion of control中。原本这些control是由programmer来进行实现，而inversion of control则启发我们：这些control应该由framework来进行实现；此处的framework的含义也是非常宽泛的，它可以是类似于spring的container，也可以是类似于reference counting这样的逻辑，显然IOC可以简单地总结为：
+
+非IOC:由programmer来实现control
+
+IOC:由framework来实现control
+
+
 
 gc是一种Ioc，有gc来管理object的lifetime
 

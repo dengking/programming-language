@@ -74,9 +74,13 @@ p2.reset();  // Deletes the memory, since no one else owns the memory.
 
 
 
+## `unique_ptr` and `shared_ptr` and `weak_ptr`
 
+learncpp [15.6 — std::shared_ptr#Shared pointers can be created from unique pointers](https://www.learncpp.com/cpp-tutorial/15-6-stdshared_ptr/)
 
-
+> A std::unique_ptr can be converted into a std::shared_ptr via a special std::shared_ptr constructor that accepts a std::unique_ptr r-value. The contents of the std::unique_ptr will be moved to the std::shared_ptr.
+>
+> However, std::shared_ptr can not be safely converted to a std::unique_ptr. This means that if you’re creating a function that is going to return a smart pointer, you’re better off returning a std::unique_ptr and assigning it to a std::shared_ptr if and when that’s appropriate.
 
 
 
