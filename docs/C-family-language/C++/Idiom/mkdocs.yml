@@ -3,8 +3,7 @@ nav:
 ########## oop##########
     - OOP: OOP
 #################### template metaprogramming和Generic-programming密切相关####################    
-    - Template-metaprogramming: Template-metaprogramming
-    - Generic-programming: Generic-programming
+    - Templates-and-generic-programming: Templates-and-generic-programming
 ########## 函数相关相关##########   
     - Function: Function
 ########## container相关##########
