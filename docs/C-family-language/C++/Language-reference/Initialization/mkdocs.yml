@@ -6,7 +6,7 @@ nav:
 # 下面专门描述Static Variables的initialization     
     - Initialization-of-Static-Variables: Initialization-of-Static-Variables
     - Zero-initialization: Zero-initialization.md
-    - Constant_initialization: Constant_initialization.md
+    - Constant-initialization: Constant-initialization.md
     - Aggregate-initialization: Aggregate-initialization.md
 # Copy elision
     - Copy-elision: Copy-elision
