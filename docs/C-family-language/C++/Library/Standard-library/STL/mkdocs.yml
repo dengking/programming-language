@@ -8,3 +8,5 @@ nav:
 
 # range是c++引入的新特性    
     - Range: Range
+    
+    - Idiom: Idiom

@@ -45,10 +45,6 @@ STL中使用到的一些design pattern。在[design patterns used in STL(standar
 
 
 
-
-
-
-
 关于adapter pattern，参见
 
 - 维基百科[Adapter pattern](https://en.wikipedia.org/wiki/Adapter_pattern)

@@ -39,13 +39,13 @@ In this case, `v` and `l` are some STL containers and `begin()` and `end()` are 
 >
 > > NOTE: [insert operators](https://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-iterators.html#insert)将开辟新的空间
 
-## Iterator Classes
+### Iterator Classes
 
 Iterators are divided into classes. These are not real C++ **classes**, but simply **categories** of kind of iterators. Each category specifies the **operations** the iterator supports. For example, some iterators support incrementing but not decrementing, some support dereferencing for getting data but not for storing data, some support scalar arithmetic, i.e., adding `n`, and some don't. Each STL container defines what class of iterators it can return. Each **algorithm** specifies what class of iterators it requires(如何来实现). The more powerful iterator classes are usually subclasses of the weaker ones, so if an algorithm requires a minimal iterator, it will work just fine with an iterator with more power.
 
 > NOTE: 不支持decrement的典型例子就是单向链表。
 
-### `InputIterator`
+#### `InputIterator`
 
 `InputIterator` is a useful but limited class of iterators. If `iter` is an `InputIterator`, you can use:
 
@@ -85,7 +85,7 @@ This is called an input iterator because you can only use it to "read" data from
 
 is illegal if `iter` is no more than an input iterator. It will work for the iterator above because vectors return iterators more powerful than just input iterators. But if `iter` were an `istream` iterator (discussed shortly), then the above restriction would apply.
 
-### `OutputIterator`
+#### `OutputIterator`
 
 `OutputIterator` is another limited class of iterators, basically the opposite of `InputIterator`. If `iter` is an `OutputIterator`, you can use:
 
@@ -101,7 +101,7 @@ It may seem like an iterator you can only write to, not read from, is about as s
 
 > NOTE: output即输出，即write，所以`OutputIterator`能够被写;input即输入，即read，所以`InputIterator`能够被读。
 
-### Insert Iterators
+#### Insert Iterators
 
 Insert iterators let you "point" to some location in a container and insert elements. You do this with just dereferencing and assignment:
 
@@ -119,7 +119,7 @@ You create an **insert iterator** with one of the following:
 
 An example of using the insert iterators appears when describing [istream iterators](https://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-iterators.html#istream).
 
-### `Ostream OutputIterator`
+#### `Ostream OutputIterator`
 
 **Ostream iterators** let you "point" to an **output stream** and insert elements into it, i.e., write to the output stream.
 
@@ -150,7 +150,7 @@ The first line defines `outIter` to be an ostream iterator for integers. The `" 
 
 > NOTE:往输出流中写
 
-### `Istream InputIterator`
+#### `Istream InputIterator`
 
 **Istream** iterators for input streams work similarly to ostream iterators. Istream iterators are `InputIterators`. The following code fragment constructs an istream iterator that reads integers from `cin` and copies them into a vector `v`. We use a `back_inserter` to add the elements to the end of the vector, which could be empty:
 
@@ -180,7 +180,7 @@ The first argument to copy calls an istream iterator constructor that simply poi
 
 > NOTE:从输入流中读
 
-### `ForwardIterator`
+#### `ForwardIterator`
 
 `ForwardIterator` combines `InputIterator` and `OutputIterator`. You can use them to read and write to a container. They also support:
 
@@ -199,14 +199,14 @@ This will work if the iterators are` ForwardIterator`'s. Note that it can't work
 
 > **Note:** A saved iterator is only valid if the underlying container is not modified. If you insert elements or otherwise change the container, using a saved iterator will have undefined behavior.
 
-### `BidirectionalIterator`
+#### `BidirectionalIterator`
 
 If `iter` is a `BidirectionalIterator`, you can use:
 
 - all `ForwardIterator` operations
 - `--iter` and `iter--` to decrement it, i.e., advance the pointer to the previous element
 
-### `RandomAccessIterator`
+#### `RandomAccessIterator`
 
 If `iter1` and `iter2` are `RandomAccessIterator`'s, you can use:
 
@@ -218,7 +218,7 @@ Since `BidirectionalIterator`'s support ++ and --, don't they support these oper
 
 ------
 
-## Why Iterators Make Code General and Efficient
+### Why Iterators Make Code General and Efficient
 
 There are two rules for making container-based code general and efficient:
 
