@@ -4,7 +4,7 @@
 
 此处的 object 是一个 runtime 概念，因为只有当program运行的时候，object才会被创建。
 
-> NOTE: 上面这段话的是不准确的，c++语言重复发挥了compile-time computation，所有有多object是在运行时就已经创建了
+> NOTE: 上面这段话的是不准确的，c++语言充分发挥了compile-time computation，所有有多object是在运行时就已经创建了
 
 object概念对于理解后面的内容非常重要，可以说，后续的很多概念都是建立在object之上的。
 
@@ -50,6 +50,32 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > 仅仅讨论[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types是源于c++语言的复杂性，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中对这个问题进行了分析。
 
+```c++
+#include <cassert>
+struct S {
+    char c;  // 1 byte value
+             // 3 bytes padding (assuming alignof(float) == 4)
+    float f; // 4 bytes value (assuming sizeof(float) == 4)
+    bool operator==(const S& arg) const { // value-based equality
+        return c == arg.c && f == arg.f;
+    }
+};
+ 
+void f() {
+    assert(sizeof(S) == 8);
+    S s1 = {'a', 3.14};
+    S s2 = s1;
+    reinterpret_cast<unsigned char*>(&s1)[2] = 'b'; // change 2nd byte of padding
+    assert(s1 == s2); // value did not change
+}
+int main()
+{
+    f();
+}
+```
+
+> NOTE: 编译: `g++ test.cpp`
+
 
 
 #### [Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
@@ -72,7 +98,7 @@ Objects of a class type that declares or inherits at least one virtual function 
 
 For non-polymorphic objects, the interpretation of the value is determined from the expression in which the object is used, and is decided at compile time.
 
-> NOTE: 每个[Polymorphic object](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)有[Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)和[Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)
+> NOTE: 每个[Polymorphic object](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)有[Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)和[Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)，如何获得它们的static type和dynamic type？
 
 #### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 

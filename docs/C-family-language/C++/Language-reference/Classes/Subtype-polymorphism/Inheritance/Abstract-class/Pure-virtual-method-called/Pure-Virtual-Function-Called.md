@@ -2,7 +2,7 @@
 
 
 
-## [Pure Virtual Function Called](https://wiki.c2.com/?PureVirtualFunctionCalled)
+## wiki.c2.com [Pure Virtual Function Called](https://wiki.c2.com/?PureVirtualFunctionCalled)
 
 
 
@@ -56,7 +56,9 @@ Shape::value() const
 
 > NOTE: virtual method是`area`
 
+(The comments before the destructors refer to Item 7 in the third edition of Scott Meyers's *Effective C++*: "**Declare destructors virtual in polymorphic base classes**." This code follows a convention used on several projects, where references like this are put in the code, serving as reminders to maintainers and reviewers. To some people, the point is obvious and the reminder is distracting（分散注意力的）; but one person's distraction is another person's helpful hint, and programmers in a hurry often forget what should be "obvious.")
 
+> NOTE: "析构函数之前的注释参考了Scott Meyers的有效c++第三版中的第7项:“在多态基类中声明析构函数是虚的。”这段代码遵循了在几个项目中使用的约定，其中像这样的引用被放在代码中，作为对维护人员和审阅人员的提醒。对一些人来说，这一点很明显，而这种提醒会让人分心;但是一个人的分心对另一个人来说是有用的提示，匆忙的程序员经常会忘记应该是“明显的”。"
 
 ### Object Oriented C++: Under the Covers
 
@@ -260,3 +262,102 @@ The next two examples built without warning for all compilers. (That's to be exp
 
 
 ## [Example code](https://www.artima.com/forums/flat.jsp?forum=226&thread=196881)
+
+
+
+```c++
+// Artima.com: The C++ Source: "Pure virtual function called",
+// example 1, virtual function directly called in constructor.
+
+#include <cstdlib>
+#include <iostream>
+
+class AbstractShape {
+public:
+	virtual double area() const = 0;
+	double value() const;
+	// Meyers 3rd Item 7:
+	virtual ~AbstractShape();
+protected:
+	AbstractShape(double valuePerSquareUnit);
+private:
+	double valuePerSquareUnit_;
+};
+
+class Rectangle : public AbstractShape {
+public:
+	Rectangle(double width, double height, double valuePerSquareUnit);
+	virtual double area() const;
+	// Meyers 3rd Item 7:
+	virtual ~Rectangle();
+private:
+	double width_;
+	double height_;
+};
+
+AbstractShape::AbstractShape(double valuePerSquareUnit)
+	: valuePerSquareUnit_(valuePerSquareUnit)
+{
+	// ERROR: Violation of Meyers 3rd Item 9!
+	std::cout << "creating shape, area = " << area() << std::endl;
+}
+
+AbstractShape::~AbstractShape()
+{
+}
+
+#ifdef DEFINE_PURE_VIRTUAL_FUNCTION
+
+// Some compilers optimize away the vtbl, and try to directly call the base
+// class version of the virtual function. If the function is defined, the
+// program links and runs; if not, it doesn't link.
+
+double
+AbstractShape::area() const
+{
+	return 0;
+}
+
+#endif /* DEFINE_PURE_VIRTUAL_FUNCTION */
+
+double
+AbstractShape::value() const
+{
+	return valuePerSquareUnit_ * area();
+}
+
+Rectangle::Rectangle(double width, double height, double valuePerSquareUnit)
+	: AbstractShape(valuePerSquareUnit),
+	width_(width),
+	height_(height)
+{
+}
+
+Rectangle::~Rectangle()
+{
+}
+
+double
+Rectangle::area() const
+{
+	return width_ * height_;
+}
+
+int
+main(int argc, char** argv)
+{
+	if (argc != 4) {
+		std::cerr << "usage: " << argv[0] <<
+		  " width height valuePerSquareUnit" << std::endl;
+		return 1;  // Failure!
+	}
+	double width = std::atof(argv[1]);
+	double height = std::atof(argv[2]);
+	double valuePerSquareUnit = std::atof(argv[3]);
+
+	Rectangle r(width, height, valuePerSquareUnit);
+	std::cout << "value = " << r.value() << std::endl;
+
+	return 0;  // Success!
+}
+```

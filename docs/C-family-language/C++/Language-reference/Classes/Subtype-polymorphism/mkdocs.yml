@@ -1,6 +1,4 @@
 nav:
     - Introduction: index.md
-    # 抽象类
-    - Abstract-class: Abstract-class
 ########## 继承是OOP非常重要的内容##########    
     - Inheritance: Inheritance
