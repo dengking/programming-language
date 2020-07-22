@@ -76,7 +76,7 @@ int main()
 
 
 
-在`spdlog/common.h`
+在`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier.md`中的 `spdlog/common.h`也是literal class的一个例子。
 
 #### `static constexpr`
 

@@ -62,7 +62,7 @@ Shape::value() const
 
 A *pure* virtual function is declared, but not necessarily defined, by a base class.
 
-
+> NOTE: 在某些情况下，pure virtual method是需要给出definition的。
 
 ### Object Oriented C++: Under the Covers
 
@@ -267,7 +267,7 @@ The next two examples built without warning for all compilers. (That's to be exp
 
 ## [Example code](https://www.artima.com/forums/flat.jsp?forum=226&thread=196881)
 
-
+### Example program 1
 
 ```c++
 // Artima.com: The C++ Source: "Pure virtual function called",
@@ -365,3 +365,5 @@ main(int argc, char** argv)
 	return 0;  // Success!
 }
 ```
+
+上述代码的运行是有些不符合我们的认知的，结合cppreference abstract class

@@ -13,3 +13,7 @@
 | pure-specifier (`=0`) | 在[Pure-virtual-function-and-abstract-class](./Pure-virtual-function-and-abstract-class/Pure-virtual-function-and-abstract-class.md) |      |
 | `override` specifier  |                                                              |      |
 
+*virt-specifier*: 
+
+- `final` specifier
+- `override` specifier
