@@ -30,4 +30,8 @@
 
 ### SUMMARY
 
-`constexpr`和`consteval`的引入，是为了强化C++的[Compile time function execution](https://en.wikipedia.org/wiki/Compile_time_function_execution)
+`constexpr`和`consteval`的引入，是为了强化C++的[Compile time function execution](https://en.wikipedia.org/wiki/Compile_time_function_execution)，关于C++中的compile-time context，参见
+
+- `C-family-language\C-and-C++\Compile-time-and-run-time\Compile-time-and-run-time.md`
+- 工程[compiler-principle](https://dengking.github.io/compiler-principle/) `Guide\Compile-time-and-run-time\Compile-time-and-run-time.md`
+

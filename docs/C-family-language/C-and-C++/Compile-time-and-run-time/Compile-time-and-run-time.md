@@ -22,7 +22,7 @@
 
 下面是总结的（部分）compile-time context：
 
-- template arguments
+- template-meta programming
 - array sizes，参见[Array declaration](https://en.cppreference.com/w/cpp/language/array)
 - [switch statement](https://en.cppreference.com/w/cpp/language/switch)
 
@@ -43,3 +43,11 @@ https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-st
 https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
 
 ### static type and dynamic type
+
+参见`C-family-language\C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md`。
+
+
+
+### run-time concept
+
+`virtual`
