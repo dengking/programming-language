@@ -366,4 +366,15 @@ main(int argc, char** argv)
 }
 ```
 
-上述代码的运行是有些不符合我们的认知的，结合cppreference abstract class
+上述代码的运行是有些不符合我们的认知的，结合cppreference abstract class中的解释，我们发现上述代码的运行结果有以下反常：
+
+- 在constructor中调用了pure virtual method，并没有像前面的例子中那样抛出异常
+- 必须要给出`AbstractShape::area()`的定义，否则上述代码链接报错
+
+关于此，上述代码中的注释给出了解释：
+
+```
+Some compilers optimize away the vtbl, and try to directly call the base class version of the virtual function. If the function is defined, the program links and runs; if not, it doesn't link.
+```
+
+compiler的优化带来了与认知相反的现象。
