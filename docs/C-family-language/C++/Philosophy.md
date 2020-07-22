@@ -88,3 +88,8 @@ c++提供了极大的选择空间，这就意味着它需要提供各种各样�
 c++的smart pointer library就是用来帮助programmer管理位于heap的object的。
 
 在带有GC的programming language中，programmer是无需关注这些内容的。
+
+c++囊括了：
+
+- value semantic、reference semantic
+- compile-time、run-time
