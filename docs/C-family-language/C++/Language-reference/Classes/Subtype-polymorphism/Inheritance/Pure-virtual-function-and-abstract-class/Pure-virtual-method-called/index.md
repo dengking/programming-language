@@ -101,7 +101,10 @@ int main()
 
 So what’s the moral of the story? If you ever see the error message `pure virtual method called / terminate called without an active exception`, check your object lifetimes! You may be trying to call members on a destructing (and thus incomplete) object. Don’t waste as much time as I did.
 
+### 如何修复？
 
+- 使用virtual method来替换pure virtual method
+- 避免race condition
 
 ## constructor、destructor中调用pure virtual method
 
@@ -224,3 +227,7 @@ terminate called without an active exception
 ### Analysis
 
 关于此的分析，在[Pure-Virtual-Function-Called](./Pure-Virtual-Function-Called.md)中进行描述。
+
+
+
+### 如何修复？

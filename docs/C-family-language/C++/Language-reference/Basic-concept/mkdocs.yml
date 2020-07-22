@@ -14,8 +14,6 @@ nav:
     - Type-system: Type-system
     # 声明的概念在c++中非常重要
     - Declarations: Declarations
-    #
-    - Storage-and-linkage: Storage-and-linkage
     # c++的执行模型
     - Execution-model: Execution-model
     

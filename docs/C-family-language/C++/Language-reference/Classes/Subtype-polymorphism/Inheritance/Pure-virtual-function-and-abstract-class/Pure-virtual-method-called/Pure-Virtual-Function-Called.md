@@ -20,7 +20,7 @@ public:
 	virtual ~Shape();
 protected:
 	Shape(double valuePerSquareUnit);
-	private:
+private:
 	double valuePerSquareUnit_;
 };
 
@@ -59,6 +59,10 @@ Shape::value() const
 (The comments before the destructors refer to Item 7 in the third edition of Scott Meyers's *Effective C++*: "**Declare destructors virtual in polymorphic base classes**." This code follows a convention used on several projects, where references like this are put in the code, serving as reminders to maintainers and reviewers. To some people, the point is obvious and the reminder is distracting（分散注意力的）; but one person's distraction is another person's helpful hint, and programmers in a hurry often forget what should be "obvious.")
 
 > NOTE: "析构函数之前的注释参考了Scott Meyers的有效c++第三版中的第7项:“在多态基类中声明析构函数是虚的。”这段代码遵循了在几个项目中使用的约定，其中像这样的引用被放在代码中，作为对维护人员和审阅人员的提醒。对一些人来说，这一点很明显，而这种提醒会让人分心;但是一个人的分心对另一个人来说是有用的提示，匆忙的程序员经常会忘记应该是“明显的”。"
+
+A *pure* virtual function is declared, but not necessarily defined, by a base class.
+
+
 
 ### Object Oriented C++: Under the Covers
 
