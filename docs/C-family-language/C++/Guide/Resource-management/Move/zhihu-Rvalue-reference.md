@@ -73,7 +73,7 @@ People b(bn); // 拷贝构造name
 > class People {
 > public:
 >   People(const string& name) 
->   : name_(name) // 显式移动构造，将传入的字符串移入成员变量
+>   : name_(name) 
 >   {
 >   }
 >   string name_;
@@ -188,7 +188,7 @@ vv.push_back(move(v)); // 显式将v移动进vv
 
 又一个隐蔽的优化。当vector的存储容量需要增长时，通常会重新申请一块内存，并把原来的内容一个个复制过去并删除。对，复制并删除，改用移动就够了。
 
-对于像vector<string>这样的容器，如果频繁插入造成存储容量不可避免的增长时，移动语义可以带来悄无声息而且美好的优化。
+对于像`vector<string>`这样的容器，如果频繁插入造成存储容量不可避免的增长时，移动语义可以带来悄无声息而且美好的优化。
 
 ### `std::unique_ptr`放入容器
 

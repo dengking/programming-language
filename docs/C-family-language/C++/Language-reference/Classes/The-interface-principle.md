@@ -766,3 +766,338 @@ o     The Interface Principle: For a class `X`, all functions, including free fu
 o     Therefore both member *and nonmember* functions can be logically "part of" a class. A member function is still more strongly related to a class than is a nonmember, however.
 
 o     In the **Interface Principle**, a useful way to interpret "supplied with" is "appears in the same **header** and/or **namespace**." If the function appears in the same header as the class, it is "part of" the class in terms of dependencies. If the function appears in the same namespace as the class, it is "part of" the class in terms of object use and name lookup.
+
+
+
+## gotw [Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)
+
+Use **namespaces** wisely. If you put a class into a namespace, be sure to put all **helper functions** and operators into the same **namespace** too. If you don't, you may discover surprising effects in your code.
+
+### The Interface Principle Revisited
+
+
+
+This column goes further, and shows why you should always put helper functions, especially operators, in the same namespace as a class. That's a simple rule, but it's not entirely obvious why it's necessary, so I'll begin with a motivating example to demonstrate a hidden pitfall that comes from the way C++ namespaces and name lookup interact.
+
+> NOTE: 这段话描述了作者写作这篇文章的意图
+
+#### Example 1
+
+```c++
+// Example 1: Will this compile?
+//
+// a mainline to exercise it
+#include <numeric>
+#include <iostream>
+
+// in some library header
+namespace N
+{
+class C
+{
+};
+}
+
+int operator+(int i, N::C)
+{
+	std::cout << i << std::endl;
+	return i + 1;
+}
+
+int main()
+{
+	N::C a[10];
+	std::accumulate(a, a + 10, 0);
+}
+
+```
+
+> NOTE: 上述代码在`g++`中无法编译通过，编译报错如下：
+>
+> ```c++
+> In file included from /usr/include/c++/4.8.2/numeric:62:0,
+>                  from test.cpp:3:
+> /usr/include/c++/4.8.2/bits/stl_numeric.h: In instantiation of ‘_Tp std::accumulate(_InputIterator, _InputIterator, _Tp) [with _InputIterator = N::C*; _Tp = int]’:
+> test.cpp:20:29:   required from here
+> /usr/include/c++/4.8.2/bits/stl_numeric.h:127:18: 错误：no match for ‘operator+’ (operand types are ‘int’ and ‘N::C’)
+>   __init = __init + *__first;
+> 
+> ```
+>
+> 正确的写法如下：
+>
+> ```c++
+> // Example 1: Will this compile?
+> //
+> // a mainline to exercise it
+> #include <numeric>
+> #include <iostream>
+> 
+> // in some library header
+> namespace N
+> {
+> class C
+> {
+> };
+> int operator+(int i, N::C)
+> {
+> 	std::cout << i << std::endl;
+> 	return i + 1;
+> }
+> 
+> }
+> 
+> int main()
+> {
+> 	N::C a[10];
+> 	std::accumulate(a, a + 10, 0);
+> }
+> 
+> ```
+>
+> 
+
+
+
+
+
+### Digression: Recap of a Familiar Inheritance Issue
+
+> NOTE: 题外话:重述一个熟悉的继承问题
+
+#### Example 2a
+
+```c++
+#include <string>
+
+// Example 2a: Hiding a name
+//             from a base class
+//
+struct B
+{
+	int f(int);
+	int f(double);
+	int g(int);
+};
+
+struct D: public B
+{
+private:
+	int g(std::string, bool);
+};
+
+int main()
+{
+
+	D d;
+	int i;
+	d.f(i);    // ok, means B::f(int)
+	d.g(i);    // error: g takes 2 args
+}
+```
+
+> NOTE: 编译报错如下:
+>
+> ```c++
+> test.cpp: 在函数‘int main()’中:
+> test.cpp:25:7: 错误：对‘D::g(int&)’的调用没有匹配的函数
+>   d.g(i);    // error: g takes 2 args
+>        ^
+> test.cpp:25:7: 附注：备选是：
+> test.cpp:16:6: 附注：int D::g(std::string, bool)
+>   int g(std::string, bool);
+>       ^
+> test.cpp:16:6: 附注： 备选需要 2 实参，但提供了 1 个
+> 
+> ```
+
+
+
+Most of us should be used to seeing this kind of name hiding, although the fact that the last line won't compile surprises most new C++ programmers. In short, when we declare a function named `g` in the derived class `D`, it automatically hides all functions with the same name in all direct and indirect **base classes**. It doesn't matter a whit that `D::g` "obviously" can't be the function that the programmer meant to call (not only does `D::g` have the wrong signature, but it's private and therefore inaccessible to boot), because `B::g` is hidden and can't be considered by name lookup.
+
+> NOTE: 在derived class中，不管`g`的access为何，它都会hide base class中的所有的`g`。
+
+To see what's really going on, let's look in a little more detail at what the compiler does when it encounters the function call `d.g(i)`. First, it looks in the immediate scope, in this case the scope of class `D`, and makes a list of all functions it can find that are named `g` (regardless of whether they're accessible or even take the right number of parameters). *Only if it doesn* does it then continue "outward" into the next enclosing scope and repeat--in this case, the scope of the base class `B`--until eventually it either runs out of scopes without having found a function with the right name or else finds a scope that contains at least one candidate function. If a scope is found that has one or more candidate functions, the compiler then stops searching and works with the candidates that it's found, performing **overload resolution** and applying **access rules**.
+
+There are very good reasons why the language must work this way.**[[3\]](http://www.gotw.ca/publications/mill08.htm#3)** To take the extreme case, it makes intuitive sense that a member function that's a near-exact match ought to be preferred over a global function that would have been a perfect match had we considered the parameter types only.
+
+Of course, there are the two usual ways around the **name-hiding problem** in Example 2a. First, the calling code can simply say which one it wants, and force the compiler to look in the right scope:
+
+#### Example 2b
+
+```c++
+#include <string>
+
+// Example 2b: Asking for a name
+//             from a base class
+struct B
+{
+	int f(int)
+	{
+	}
+	int f(double)
+	{
+	}
+	int g(int)
+	{
+	}
+};
+
+struct D: public B
+{
+private:
+	int g(std::string, bool)
+	{
+	}
+};
+
+int main()
+{
+
+	D d;
+	int i;
+	d.f(i);    // ok, means B::f(int)
+	d.B::g(i);    // error: g takes 2 args
+}
+
+```
+
+Second, and usually more appropriate, the designer of class `D` can make `B::g` visible with a using-declaration. This allows the compiler to consider `B::g` in the same scope as `D::g` for the purposes of name lookup and subsequent overload resolution:
+
+```c++
+#include <string>
+
+// Example 2c: Un-hiding a name
+//             from a base class
+//
+struct B
+{
+	int f(int)
+	{
+	}
+	int f(double)
+	{
+	}
+	int g(int)
+	{
+	}
+};
+
+struct D: public B
+{
+	using B::g;
+private:
+	int g(std::string, bool)
+	{
+	}
+};
+
+int main()
+{
+
+	D d;
+	int i;
+	d.f(i);    // ok, means B::f(int)
+	d.g(i);    // error: g takes 2 args
+}
+// g++ test.cpp
+```
+
+Either of these gets around the hiding problem in the original Example 2a code.
+
+### Back On Topic: Name Hiding in Nested Namespaces
+
+Well, at first glance, it sure looks legal. But will it compile? The answer is probably surprising: Maybe it will compile, or maybe not. It depends entirely on your implementation, and I know of standard-conforming implementations that will compile this program correctly and equally standard-conforming implementations that won't. Gather 'round, and I'll show you why.
+
+The key to understanding the answer is understanding what the compiler has to do inside [`std::accumulate`](https://en.cppreference.com/w/cpp/algorithm/accumulate) . The `std::accumulate` template looks something like this:
+
+```c++
+namespace std {
+  template<class Iter, class T>
+  inline T accumulate( Iter first,
+                       Iter last,
+                       T    value ) {
+    while( first != last ) {
+      value = value + *first;   // 1
+      ++first;
+    }
+    return value;
+  }
+}
+```
+
+The code in Example 1 actually calls `std::accumulate<N::C*,int>`. In line 1 above, how should the compiler interpret the expression `value + *first`? Well, it's got to look for an `operator+` that takes an `int` and an `N::C` (or parameters that can be converted to int and `N::C`). Hey, it just so happens that we have just such an `operator+(int,N::C)` at global scope! Look, there it is! Cool. So everything must be fine, right?
+
+The problem is that the compiler may or may not be able to see the `operator+(int,N::C)` at global scope, depending on what other functions have already been seen to be declared in namespace `std` at the point where `std::accumulate<N::C*,int>` is instantiated.
+
+To see why, consider that the same name hiding the we observed with derived classes happens with any nested scopes, including namespaces, and consider *where* the compiler starts looking for a suitable `operator+`. (Now I'm going to reuse my explanation from the previous section, only with a few names substituted:) First, it looks in the immediate scope, in this case the scope of namespace `std`, and makes a list of all functions it can find that are named `operator+` (regardless of whether they're accessible or even take the right number of parameters). *Only if it doesn* does it then continue "outward" into the next **enclosing scope** and repeat--in this case, the scope of the next enclosing namespace outside `std`, which happens to be the global scope--until eventually it either runs out of scopes without having found a function with the right name or else finds a scope that contains at least one candidate function. If a scope is found that has one or more candidate functions, the compiler then stops searching and works with the candidates that it's found, performing **overload resolution** and applying **access rules**.
+
+In short, whether Example 1 will compile depends entirely on whether this implementation's version of the standard header `numeric`: 
+
+a) declares an `operator+` (any `operator+`, suitable or not, accessible or not); or 
+
+b) includes any other standard header that does so. 
+
+Unlike Standard C, Standard C++ does not specify which standard headers may or may not include each other, so when you include `numeric` you may or may not get header iterator too, for example, which does define several `operator+` functions. I know of C++ products that won't compile Example 1, others that will compile Example 1 but balk once you add the line `#include <vector>`, and so on.
+
+### Some Fun With Compilers
+
+It's bad enough that the compiler can't find the right function if there happens to be another `operator+` in the way, but typically the `operator+` that does get encountered in a standard header is a template, and compilers generate notoriously（众所周知地） difficult-to-read error messages when templates are involved. For example, one popular implementation reports the following errors when compiling Example 1 (note that in this implementation the header `numeric` does in fact include the header `iterator`):
+
+```c++
+error C2784: 'class std::reverse_iterator<`template-parameter-1', `template-parameter-2', `template-parameter-3', `template-parameter-4', `template-parameter-5'> __cdecl std::operator +(template-parameter-5, const class std::reverse_iterator< `template-parameter-1', `template-parameter-2', `template-parameter-3', `template-parameter-4', `template-parameter-5'>&)' : could not deduce template argument for 'template-parameter-5' from 'int'
+
+error C2677: binary '+' : no global operator defined which takes type 'class N::C' (or there is no acceptable conversion)
+```
+
+How is a mortal programmer ever to decipher what's going wrong here? And, once he does, how loudly is he likely to curse the author of class `N::C`? Best to avoid the problem completely, as we shall now see.
+
+### The Solution
+
+When we encountered this problem in the familiar guise of base/derived name hiding, we had two possible solutions: either have the calling code explicitly say which function it wants (Example 2b), or write a using-declaration to make the desired function visible in the right scope (Example 2c). Neither solution works in this case; the first is possible**[[4\]](http://www.gotw.ca/publications/mill08.htm#4)** but places an unacceptable burden on the programmer, while the second is impossible.
+
+The real solution is to put our `operator+` where it has always truly belonged and should have been put in the first place: in namespace `N`.
+
+#### Example 1b
+
+```c++
+// Example 1b: Solution
+//
+// a mainline to exercise it
+#include <numeric>
+#include <iostream>
+
+// in some library header
+namespace N
+{
+class C
+{
+};
+int operator+(int i, N::C)
+{
+	std::cout << i << std::endl;
+	return i + 1;
+}
+
+}
+
+int main()
+{
+	N::C a[10];
+	std::accumulate(a, a + 10, 0);
+}
+// g++ test.c
+```
+
+This code is portable and will compile on all conforming compilers, regardless of what happens to be already defined in `std` or any other namespace. Now that the `operator+` is in the same namespace as the second parameter, when the compiler tries to resolve the "`+`" call inside `std::accumulate` it is able to see the right `operator+` because of **Koenig lookup**. Recall that Koenig lookup says that, in addition to looking in all the usual scopes, the compiler shall also look in the scopes of the function's parameter types to see if it can find a match. `N::C` is in namespace `N`, so the compiler looks in namespace `N`, and happily finds exactly what it needs no matter how many other `operator+`'s happen to be lying around and cluttering up namespace `std`.
+
+### Conclusion
+
+The problem arose because Example 1 did not follow the Interface Principle:
+
+> The Interface Principle
+>
+> For a class X, all functions, including free functions, that both
+>   (a) "mention" X, and
+>   (b) are "supplied with" X
+> are logically part of X, because they form part of the interface of X.

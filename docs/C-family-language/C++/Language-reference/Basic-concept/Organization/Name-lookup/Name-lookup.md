@@ -1,6 +1,6 @@
 # Name lookup
 
-name lookup是由compiler在编译阶段完成的。
+name lookup是由compiler在compile-time完成的，由于C++语言的复杂性，name lookup过程也是非常复杂的，它涉及到了非常多的内容，对C++ name lookup过程有所了解，能够帮助我们理解C++语言中的很多问题；
 
 ## cppreference [Name lookup](https://en.cppreference.com/w/cpp/language/lookup)
 

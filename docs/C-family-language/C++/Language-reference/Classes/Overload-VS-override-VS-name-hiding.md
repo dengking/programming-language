@@ -23,3 +23,10 @@
 [What Is Name Hiding in C++?](https://itinterviewguide.com/name-hiding/)
 
 [Name hiding (C++ only)](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.cbclx01/name_hiding.htm)
+
+
+
+关于name hiding，在gotw [Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中也对它进行了介绍，并且列举了具体的例子，以及对原因进行了比较深刻的剖析，在[The-interface-principle](./The-interface-principle.md)中，收录了这篇文章。
+
+
+

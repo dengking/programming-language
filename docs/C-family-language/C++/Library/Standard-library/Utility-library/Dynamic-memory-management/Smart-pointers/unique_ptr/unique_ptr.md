@@ -6,6 +6,30 @@
 
 
 
+### [std::unique_ptr<T,Deleter>::release](https://en.cppreference.com/w/cpp/memory/unique_ptr/release) and [std::unique_ptr<T,Deleter>::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
+
+> NOTE: 
+>
+> release: returns a pointer to the managed object and **releases the ownership**
+>
+> reset: Replaces the managed object.
+
+> NOTE:  `unique_ptr` release and delete the owned object：
+>
+> ```c++
+> u_ptr.reset(nullptr);
+> ```
+>
+> 
+
+
+
+## Implementation
+
+> NOTE: 很多问题，当阅读它的实现的时候，就非常任意理解了。
+
+
+
 ## std::unique_ptr return from function and test for null
 
 [C++ std::unique_ptr return from function and test for null](https://stackoverflow.com/questions/30293338/c-stdunique-ptr-return-from-function-and-test-for-null)
