@@ -30,6 +30,11 @@ SPDLOG_INLINE void swap(logger &a, logger &b)
 
 `std::swap`和类成员函数`swap`
 
+```c++
+using std::swap;
+swap(a, b);
+```
+
 
 
 `std::begin` 和 类成员函数`begin`：
@@ -73,11 +78,17 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 ## ADL的重要意义
 
-在`C++\Language-reference\Classes\The-interface-principle.md`中对ADL and the Interface Principle进行了分析，其中，我知道了：
+在`C++\Language-reference\Classes\The-interface-principle.md`中对ADL and the Interface Principle进行了分析。
+
+### ADL make C++ generic and extensible
 
 > 从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP。
 
+扩展性
 
+维基百科[Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
+
+> Functions found by ADL are considered part of a class's interface. In the C++ Standard Library, several algorithms use unqualified calls to `swap` from within the `std` namespace. As a result, the generic `std::swap` function is used if nothing else is found, but if these algorithms are used with a third-party class, `Foo`, found in another namespace that also contains `swap(Foo&, Foo&)`, that overload of `swap` will be used.
 
 
 

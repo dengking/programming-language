@@ -12,11 +12,13 @@
 
 
 
-### Range is an abstraction
+### Range is an abstraction as iterator is
 
-和iterator类似，range也是一种抽象，它是behavior-defined，只要支持`begin`和`end`，那么就可以作为range；
+和iterator类似，range也是一种抽象，它是**behavior-defined**（参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`），只要支持`begin`和`end`、iteration操作，那么就可以作为range；
 
+### Range is an enhancement to iterator
 
+range是对iterator的增强，两者都旨在generic programming。
 
 ## cppreference [Ranges library (C++20)](https://en.cppreference.com/w/cpp/ranges)
 
