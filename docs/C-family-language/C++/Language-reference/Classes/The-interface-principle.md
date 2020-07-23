@@ -4,7 +4,26 @@
 
 Interface Principle使我们从一个更高的角度来思考C++语言的设计与实现，它拓宽了我们对OOP的认知，它让我更加深刻地感受了：“设计与实现”，或者说：“理念与实现” 之间的关系，OOP是理念，它的实现方式可以有多种；通过[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章[What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)，我们可以看到C++对OOP的支持是非常广泛、灵活的；从这两篇文章，我们可以得知：
 
-从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP。
+> C++ ADL是增强其对Interface Principle的支持，是为了更好、更灵活地支持OOP。
+
+Interface是一种抽象，显然interface principle，其实遵循了[Abstraction principle](https://en.wikipedia.org/wiki/Abstraction_principle_(computer_programming))。Interface principle make C++ program generic、extensible。Interface principle是behavior defined（参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-TypingTemplates-and-Duck-Typing.md`）。
+
+### Interface principle VS C++ template
+
+- 都遵循[Abstraction principle](https://en.wikipedia.org/wiki/Abstraction_principle_(computer_programming))
+-  **behavior-based**
+
+### ADL VS C++ template
+
+- 都是static的，即发生于compile-time
+
+
+
+### Interface principle make C++ generic and extensible
+
+维基百科[Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
+
+> Functions found by ADL are considered part of a class's interface. In the C++ Standard Library, several algorithms use unqualified calls to `swap` from within the `std` namespace. As a result, the generic `std::swap` function is used if nothing else is found, but if these algorithms are used with a third-party class, `Foo`, found in another namespace that also contains `swap(Foo&, Foo&)`, that overload of `swap` will be used.
 
 
 

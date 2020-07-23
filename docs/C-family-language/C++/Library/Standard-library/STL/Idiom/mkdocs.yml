@@ -1,4 +1,2 @@
 nav:
-    - Introduction: index.md
-    - Range-based-algorithms: Range-based-algorithms.md
-    - Copy-a-range-of-elements: Copy-a-range-of-elements.md
+    - Range-based-idiom: Range-based-idiom
