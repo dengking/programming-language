@@ -2,6 +2,8 @@
 
 name lookup是由compiler在compile-time完成的，由于C++语言的复杂性，name lookup过程也是非常复杂的，它涉及到了非常多的内容，对C++ name lookup过程有所了解，能够帮助我们理解C++语言中的很多问题；
 
+在name lookup中，一个非常重要的主题就是：对function的lookup。
+
 ## cppreference [Name lookup](https://en.cppreference.com/w/cpp/language/lookup)
 
 **Name lookup** is the procedure by which a [name](https://en.cppreference.com/w/cpp/language/name), when encountered in a program, is associated with the [declaration](https://en.cppreference.com/w/cpp/language/declarations) that introduced it.

@@ -1,9 +1,85 @@
 # ADL
 
-ADL是compiler的一种行为，可以将compiler的lookup分为两种：
+ADL是compiler的一种行为，可以将compiler的name lookup分为两种：
 
 - ADL
 - ordinary lookup
+
+## 前言：ADL在C++中的广泛应用
+
+今天阅读cppreference Argument-dependent lookup方知，我们的`std::cout << "Test\n";`既然蕴藏着如此之多的玄机：
+
+- `std::cout`是一个object，它没有成员函数`operator<<`
+
+- 在`<iostram>`中，定义了`std::operator<<(std::ostream&, const char*)`
+
+- 当我们编写`std::cout << "Test\n";`的时候，compiler会使用ADL来进行查找：
+
+  > There is no operator<< in global namespace, but ADL examines std namespace because the left argument is in `std` and finds `std::operator<<(std::ostream&, const char*)` 
+
+
+
+这让我想到了之前在阅读代码的时候，有很多类似的写法：
+
+spdlog:`logger-inc.h`
+
+```c++
+SPDLOG_INLINE void swap(logger &a, logger &b)
+{
+    a.swap(b);
+}
+```
+
+
+
+`std::swap`和类成员函数`swap`
+
+
+
+`std::begin` 和 类成员函数`begin`：
+
+下面的`initializer_list`就是一个例子：
+
+```c++
+// initializer_list standard header (core)
+
+// Copyright (c) Microsoft Corporation.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+
+// CLASS TEMPLATE initializer_list
+template <class _Elem>
+class initializer_list {
+public:
+
+    _NODISCARD constexpr const _Elem* begin() const noexcept {
+        return _First;
+    }
+
+    _NODISCARD constexpr const _Elem* end() const noexcept {
+        return _Last;
+    }
+
+
+};
+
+// FUNCTION TEMPLATE begin
+template <class _Elem>
+_NODISCARD constexpr const _Elem* begin(initializer_list<_Elem> _Ilist) noexcept {
+    return _Ilist.begin();
+}
+
+// FUNCTION TEMPLATE end
+template <class _Elem>
+_NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
+    return _Ilist.end();
+}
+```
+
+
+
+
+
+
 
 ## cppreference [ADL](https://en.cppreference.com/w/cpp/language/adl) 
 
@@ -144,7 +220,16 @@ In the following contexts **ADL-only lookup** (that is, lookup in associated nam
 
 ## ADL and the Interface Principle
 
-使用the Interface Principle来思考C++的设计者设计ADL的目的，在文章`C++\Language-reference\Classes\The-interface-principle.md`中对此进行了分析，可以看到ADL其实是C++对OOP的一种辅助。
+Interface Principle使我们从一个更高的角度来思考C++语言的设计与实现，它拓宽了我们对OOP的认知，它让我更加深刻地感受了：“设计与实现”，或者说：“理念与实现” 之间的关系，OOP是理念，它的实现方式可以有多种；通过[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章[What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)，我们可以看到C++对OOP的支持是非常广泛、灵活的；从这两篇文章，我们可以得知：
+
+从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP。
+
+
+
+- class
+- 
+
+，通过；设计者设计ADL的目的，在[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章`C++\Language-reference\Classes\The-interface-principle.md`中对此进行了分析，可以看到ADL其实是C++对OOP的一种辅助。
 
 ## [What is “Argument-Dependent Lookup” (aka ADL, or “Koenig Lookup”)?](https://stackoverflow.com/questions/8111677/what-is-argument-dependent-lookup-aka-adl-or-koenig-lookup)
 
