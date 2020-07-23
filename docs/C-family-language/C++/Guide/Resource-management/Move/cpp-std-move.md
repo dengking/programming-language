@@ -1,6 +1,6 @@
-[TOC]
 
-# [What is std::move(), and when should it be used?](https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used)
+
+## [What is std::move(), and when should it be used?](https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used)
 
 ## [A](https://stackoverflow.com/a/3413547)
 
@@ -17,5 +17,5 @@ Try googling for move semantics, rvalue, perfect forwarding.
 
 
 
-# [std::move](https://en.cppreference.com/w/cpp/utility/move)
+## cppreference [std::move](https://en.cppreference.com/w/cpp/utility/move)
 

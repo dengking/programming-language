@@ -14,7 +14,9 @@
 
 ### Range is an abstraction as iterator is
 
-和iterator类似，range也是一种抽象，它是**behavior-defined**（参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`），只要支持`begin`和`end`、iteration操作，那么就可以作为range；
+和iterator类似，range也是一种抽象，它是**behavior-defined**（参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`），只要支持`begin`和`end`、iteration操作，那么就可以作为range，这就包括了c++的各种容器，正如cppreference [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for)中所述：
+
+> Used as a more readable equivalent to the traditional [for loop](https://en.cppreference.com/w/cpp/language/for) operating over a range of values, such as all elements in a container.
 
 ### Range is an enhancement to iterator
 

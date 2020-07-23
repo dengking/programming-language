@@ -90,7 +90,10 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 > Functions found by ADL are considered part of a class's interface. In the C++ Standard Library, several algorithms use unqualified calls to `swap` from within the `std` namespace. As a result, the generic `std::swap` function is used if nothing else is found, but if these algorithms are used with a third-party class, `Foo`, found in another namespace that also contains `swap(Foo&, Foo&)`, that overload of `swap` will be used.
 
+典型的例子：
 
+- [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
+- [Swap values](https://cpppatterns.com/patterns/swap-values.html)
 
 
 
@@ -253,6 +256,7 @@ https://stackoverflow.com/questions/18086292/is-bjarne-wrong-about-this-example-
 
 - swap idiom
 - [Range-based algorithms](https://cpppatterns.com/patterns/range-based-algorithms.html)
+- [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
 
 ### `get_rtti`
 
