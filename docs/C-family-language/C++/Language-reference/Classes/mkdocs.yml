@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
     - Class: Class.md
+    - The-interface-principle: The-interface-principle.md
     - Members: Members
     - Special-member-functions: Special-member-functions
     - Member-access: Member-access

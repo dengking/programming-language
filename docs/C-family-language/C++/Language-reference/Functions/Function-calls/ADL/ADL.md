@@ -140,6 +140,12 @@ In the following contexts **ADL-only lookup** (that is, lookup in associated nam
 - the [dependent name lookup](dependent_name.html#Lookup_rules) from the point of template instantiation.
 - the lookup of non-member function `get` performed by [structured binding declaration](structured_binding.html) for tuple-like types (since C++17)
 
+
+
+## ADL and the Interface Principle
+
+使用the Interface Principle来思考C++的设计者设计ADL的目的，在文章`C++\Language-reference\Classes\The-interface-principle.md`中对此进行了分析，可以看到ADL其实是C++对OOP的一种辅助。
+
 ## [What is “Argument-Dependent Lookup” (aka ADL, or “Koenig Lookup”)?](https://stackoverflow.com/questions/8111677/what-is-argument-dependent-lookup-aka-adl-or-koenig-lookup)
 
 > NOTE: 这篇文章介绍的更多一些
@@ -288,7 +294,5 @@ int main()
 	std::cout<<Utility::GetRtti<MyStruct1>()<<std::endl;
 	std::cout<<NS::Utility::GetRtti<NS::MyStruct1>()<<std::endl;
 }
-
-
 ```
 
