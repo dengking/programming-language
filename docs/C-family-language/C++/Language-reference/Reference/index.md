@@ -5,9 +5,13 @@
 - rvalue reference
 - forward reference
 
+本章，采用的是在`Theory\Programming-language\How-to-master-programming-language.md`的”What's new in the programming language“章节中描述的方法来学习这两个新特性：
 
+rvalue reference用于move semantic；
 
-我们从这两个新特性所解决的问题，它们给语言带来的提升，或者说它们的application，然后描述标准中，关于它们的内容。
+forward reference用于perfect forwarding；
+
+这两个特性，为C++语言带来了较大的改变。
 
 
 

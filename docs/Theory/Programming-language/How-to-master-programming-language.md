@@ -26,6 +26,31 @@
 
 
 
+### What's new in the programming language
+
+> “Living languages must change,
+> must adapt,
+> must grow.”
+> – Edward Finegan
+
+上面这段话是Bjarne Stroustrup的[C++ in 2005](http://www.stroustrup.com/DnE2005.pdf)的开篇词，他的这篇文章描述了c++后续的发展方向。
+
+Programming language是在不断演进的，各种programming language都会有自己的版本计划，在每个版本中，设计者会引入新的特性，这就是本节标题的What's new in the programming language的含义，即在这个版本中，引入了哪些新的特性。
+
+作为开发者，在学习programming language的时候，可以从这些新特性，即从what is new入手来进行学习，首先搞清楚设计者引入这些新特性的意图、这些新特性所能够解决的问题、application，然后再去了解它们的grammar。这种学习方式是更加高效的。
+
+### Philosophy
+
+programming language的设计者往往是遵循着一定的philosophy来设计这门语言的，作为使用者，了解这门语言的philosophy，也有助于我们对它的掌握。
+
+
+
+#### [Philosophy of python](https://www.python.org/dev/peps/pep-0020/)
+
+#### [C++#Philosophy](https://en.wikipedia.org/wiki/C%2B%2B#Philosophy)
+
+在维基百科[C++#Philosophy](https://en.wikipedia.org/wiki/C%2B%2B#Philosophy)中，描述了Philosophy of C++（在https://en.wikipedia.org/wiki/C++中对此有描述）
+
 
 
 
