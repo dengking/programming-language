@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Value-semantics: Value-semantics.md
     - Value-and-reference-semantics: Value-and-reference-semantics.md
