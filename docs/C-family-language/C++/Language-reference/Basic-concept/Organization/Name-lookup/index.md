@@ -9,3 +9,8 @@ compiler使用**tree结构**来表示program，这是一种hierarchy结构，所
 
 
 c++ name lookup，它是复杂的，是compile-time的，下面描述了function lookup，它还涉及到的内容有：ADL、overload resolution、member access、Elaborated type specifier、using等，文章[Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中对此进行了描述；需要将所有涉及的内容，放到一起；
+
+
+
+compiler-time的搜索过程，还伴随着：overload resolution、access 等，在文章[Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中对此进行了描述。
+
