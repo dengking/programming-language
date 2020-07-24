@@ -156,7 +156,7 @@ int main()
 
 "rvalue reference variables are **lvalues** when used in expressions"
 
-也就是说：rvalue reference variables is lvalue；所以，对于入参类型为rvalue reference的function的argument，它的在argument就是典型的rvalue reference variables，也就是说function body中，argument为lvalue。比如在下面例子中，`x`是lvalue：
+也就是说：rvalue reference variables is lvalue；所以，对于入参类型为rvalue reference的function的argument，它的argument就是典型的rvalue reference variables，也就是说function body中，argument为lvalue。比如在下面例子中，`x`是lvalue：
 
 ```c++
 void f(int&& x)
@@ -165,11 +165,11 @@ void f(int&& x)
 }
 ```
 
-
+我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
 
 #### Rvalue references bind to xvalues
 
-Because rvalue references can bind to xvalues, they can refer to non-temporary objects:
+Because rvalue references can bind to **xvalues**, they can refer to **non-temporary objects**:
 
 ```c++
 #include <iostream>
