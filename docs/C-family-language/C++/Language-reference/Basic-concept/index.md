@@ -14,8 +14,8 @@ c++语言是复杂的，所以本章的内容也是庞杂的，我们需要有�
 | [Reference-and-Value-Semantics](./Reference-and-Value-Semantics/index.md) | C++同时支持reference semantic和value semantic，充分理解两者是掌握C++语言所必须的，它是后面很多内容的基础，所以将它放到交前的位置 |              |
 | [Data-model](./Data-model/index.md)                          | 描述data model，核心概念是object，以及由它而发散出的一些列内容；它对应的是value semantic | run-time     |
 | [Organization](./Organization/index.md)                      | 描述C++ program的organization，其中描述了name-lookup，它能够帮助理解很多C++ compile error。 | compile-time |
-| [Type-system](./Type-system/index.md)                        | 描述C++的type system                                         | compile-time |
-| Declarations                                                 |                                                              | compile-time |
-| Execution-model                                              |                                                              | run-time     |
+| [Type-system](./Type-system/index.md)                        | 描述C++的type system，其中还描述了C++ RTTI、reflection等等   | compile-time |
+| Declarations                                                 | 描述C++ declarations、specifiers                             | compile-time |
+| [Execution-model](./Execution-model/index.md)                | 描述C++ execution model                                      | run-time     |
 
 
