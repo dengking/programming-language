@@ -1,5 +1,4 @@
 nav:
 # 然后介绍标准中关于value category的描述    
     - Value-categories: Value-categories.md
-    - Value-and-reference-semantics: Value-and-reference-semantics.md
     - rvalue: rvalue
