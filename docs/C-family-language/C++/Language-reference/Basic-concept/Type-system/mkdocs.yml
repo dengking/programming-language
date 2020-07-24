@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - Type-system: Type-system.md
 # 本篇讲述dynamic type的实现    
     - Run-time-type-information: Run-time-type-information.md

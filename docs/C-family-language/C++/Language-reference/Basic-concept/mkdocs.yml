@@ -2,8 +2,7 @@ nav:
     - Introduction: index.md
     # 这篇文章，照应全局
     - Basic-concepts: Basic-concepts.md
-    # 
-    - Phases-of-translation: Phases-of-translation.md
+    - Reference-and-Value-Semantics: Reference-and-Value-Semantics
 # data-model是核心概念    
     # 动态概念：数据模型
     - Data-model: Data-model
