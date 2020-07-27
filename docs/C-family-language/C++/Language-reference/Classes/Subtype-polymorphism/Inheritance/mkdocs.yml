@@ -3,6 +3,8 @@ nav:
     # 抽象类
     - Virtual-function: Virtual-function
     - Pure-virtual-function-and-abstract-class: Pure-virtual-function-and-abstract-class
+    # 
+    - Override-specifier: Override-specifier.md
     - Virtual-inheritance: Virtual-inheritance.md
     - Virtual-class-VS-virtual-base-class: Virtual-class-VS-virtual-base-class.md
     - Super: Super.md
