@@ -10,7 +10,7 @@
 
 
 
-#### 使用`const  char *`来构造
+## 使用`const  char *`来构造
 
 原文的`(5)`描述了使用`const  char *`来构造，相关问题如下：
 
@@ -39,7 +39,7 @@ std::string pchar_to_string(const char * pchar)
 
 
 
-## Operation
+## Algorithm
 
 ### Upper Case
 
@@ -61,4 +61,18 @@ static void ToUpper(std::string& S)
 }
 }
 ```
+
+
+
+## Implementation
+
+### [libstdc++ basic_string.h](https://gcc.gnu.org/onlinedocs/gcc-4.9.0/libstdc++/api/a00998_source.html)
+
+#### [basic_string](https://gcc.gnu.org/onlinedocs/gcc-4.9.0/libstdc++/api/a00454.html)的operator的实现
+
+[operator+=](https://gcc.gnu.org/onlinedocs/gcc-4.9.0/libstdc++/api/a00454.html#a3f985c5b2f4e7220ca0f49fba85ee836) modify 对应的object，所以将它们作为member method；
+
+[operator+](https://gcc.gnu.org/onlinedocs/gcc-4.9.0/libstdc++/api/a01644.html#gaf2a59d9d4f1421dcdba7b5ce55ca9358) 需要构造一个新的object，所以没有将它作为member method；
+
+无论是否是member method，它们都是`basic_string`的interface，关于此，参见gotw [What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)；
 

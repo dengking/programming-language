@@ -205,7 +205,7 @@ int fseek(FILE* stream,
 		int origin);
 ```
 
-It really doesn't matter whether or not the functions are members. As long as they "mention" `FILE` and are "supplied with" `FILE`, they really are part of `FILE`. In Example 2 (a), all of the functions were nonmembers because in C they have to be. Even in C++, some functions in a class' interface have to be (or should be) nonmembers: `operator<<` can't be a member because it requires a stream as the left-hand argument, and `operator+` shouldn't be a member in order to allow conversions on the left-hand argument.
+It really doesn't matter whether or not the functions are members. As long as they "mention" `FILE` and are "supplied with" `FILE`, they really are part of `FILE`. In Example 2 (a), all of the functions were nonmembers because in C they have to be. Even in `C++`, some functions in a class' interface have to be (or should be) nonmembers: `operator<<` can't be a member because it requires a stream as the left-hand argument, and `operator+` shouldn't be a member in order to allow conversions on the left-hand argument.
 
 ### Introducing Koenig Lookup
 

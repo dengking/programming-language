@@ -415,9 +415,22 @@ See also [template argument deduction](https://en.cppreference.com/w/cpp/languag
 
 
 
+## Reference and value category
 
+在[What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics)的[回答](https://stackoverflow.com/a/11540204)中的总结：
 
-## isocpp [References](https://isocpp.org/wiki/faq/references) 
+```c++
+            lvalue   const lvalue   rvalue   const rvalue
+---------------------------------------------------------              
+X&          yes
+const X&    yes      yes            yes      yes
+X&&                                 yes
+const X&&                           yes      yes
+```
+
+> In practice, you can forget about `const X&&`. Being restricted to read from **rvalues** is not very useful.
+
+## isocpp faq [References](https://isocpp.org/wiki/faq/references) 
 
 
 

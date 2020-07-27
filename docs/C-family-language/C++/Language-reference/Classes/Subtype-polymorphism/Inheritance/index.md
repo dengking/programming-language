@@ -18,8 +18,3 @@
 - `final` specifier
 - `override` specifier
 
-
-
-## override specifier
-
-### cppreference override specifier (since C++11)
