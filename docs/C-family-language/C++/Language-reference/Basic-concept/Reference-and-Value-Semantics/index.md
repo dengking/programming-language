@@ -53,17 +53,17 @@ void consumer()
 
 用try-with-resources根本就搞不定。当然，finally还是可以搞定，只是代码会很丑。
 
-所以，值语义在C++里的作用之一就是用于控制对象生命期([另一个作用就是提升性能](https://link.zhihu.com/?target=http%3A//blog.csdn.net/Solstice/article/details/6692976))，以方便通过RAII写出简洁自然、异常安全的代码。该意义非常重大，这也是右值引用在[C++ - State of the Evolution](https://link.zhihu.com/?target=http%3A//www2.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2291.html)上稳坐头把交椅的原因。
+所以，**值语义**在C++里的作用之一就是用于控制对象生命期([另一个作用就是提升性能](https://link.zhihu.com/?target=http%3A//blog.csdn.net/Solstice/article/details/6692976))，以方便通过RAII写出简洁自然、异常安全的代码。该意义非常重大，这也是**右值引用**在[C++ - State of the Evolution](https://link.zhihu.com/?target=http%3A//www2.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2291.html)上稳坐头把交椅的原因。
 
 ### 右值引用与值语义
 
 
 前面提到，**值语义**用于控制对象的生命期，而其具体的控制方式分为两种：
 
-- - 生命期限于scope内：无需控制，到期自动调用析构函数。
-  - 需要延长到scope外：移动语义。
+- 生命期限于scope内：无需控制，到期自动调用析构函数。
+- 需要延长到scope外：移动语义。
 
-因为右值引用的目的在于[实现移动语义](https://link.zhihu.com/?target=http%3A//www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n2027.html%23rvalue_reference)，所以右值引用 意义即是**加强了值语义对对象生命期的控制能力**。
+因为右值引用的目的在于[实现移动语义](https://link.zhihu.com/?target=http%3A//www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n2027.html%23rvalue_reference)，所以**右值引用** 意义即是**加强了值语义对对象生命期的控制能力**。
 
 在移动语义的作用下，[Effective C++](https://link.zhihu.com/?target=http%3A//book.douban.com/subject/1231590/) 条款23从此作古：
 
@@ -85,34 +85,36 @@ void consumer()
 
 
 
-## Runtime polymorphism
-
-在C++中，runtime polymorphism与value semantic、reference semantic密切相关。触发我对它们产生思考的是：
-
-- [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)中提及的：[值语义和运行时多态是矛盾的。](https://link.zhihu.com/?target=http%3A//akrzemi1.wordpress.com/2012/02/03/value-semantics/%23comment-270)
-- multiple dispatch
-
-c++的value semantic是不支持runtime polymorphsim的，reference semantic是支持runtime polymorphsim的，所以需要通过reference才能够实现runtime polymorphysim的。
-
-需要思考：reference semantic是如何实现polymorphism的，其实reference就是pointer。
-
-在C++，polymorphism是行为（function），而不是值的。
+## SUMMARY
 
 
 
+C++允许programmer管理memory->在cppreference中，使用object（在cppreference）概念来对此进行统一描述；
 
+Every object has a value->Value semantic；
 
-c++的很多问题都是由它的value semantic而引入的，比如它的value category、reference。
+Reference object->Reference semantic；
 
+显然，使用object概念可以将上面这些内容串联起来，往更深层次来思考：C++中的很多问题都可以归为object的问题：
 
+- RAII：基于scope的对object的lifetime管理
+- MOVE：cross scope，即越过scope的限制
+- dangling pointer、dangling reference
+- ......
 
-## Pass-by-value and pass-by-reference
+C++是兼容并包的语言，它既包含value semantic又包含reference semantic；
 
-这两者是最最能够体现value-semantic和reference-semantic的。
+### Object
 
+Object lifetime、Object value、Object type，这将会在`C++\Language-reference\Basic-concept\Data-model\Object`中描述；
 
+#### Object、type、value
 
-## Value semantic is default
+关于三种的关系，在akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)中有一定的阐述；
+
+**Object**的是标准中定义的一个抽象概念，在实际交流、表述中，我们更多地是使用value，即value semantic，value是比object更加具体一些的概念，它能够表达type，并且对于实际的application，我们关注的是value，而不是像object这样非常底层的，这也是为什么：Value semantic is default；
+
+### Value semantic is default
 
 在c++中，value semantic is default，即默认是value semantic，如果要实现reference semantic，则需要使用`&`。而在java、python中则正好相反，reference semantic is default；
 
@@ -145,19 +147,32 @@ c++的很多问题都是由它的value semantic而引入的，比如它的value 
 
 
 
-## Object
+### Runtime polymorphism
 
-### Object lifetime
+在C++中，runtime polymorphism与value semantic、reference semantic密切相关。触发我对它们产生思考的是：
 
-### Object value
+- [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)中提及的：[值语义和运行时多态是矛盾的。](https://link.zhihu.com/?target=http%3A//akrzemi1.wordpress.com/2012/02/03/value-semantics/%23comment-270)
+- multiple dispatch
 
-### Object type
+c++的value semantic是不支持runtime polymorphsim的，reference semantic是支持runtime polymorphsim的，所以需要通过reference才能够实现runtime polymorphysim的。
 
-## Value category
+需要思考：reference semantic是如何实现polymorphism的。
+
+在C++，polymorphism是行为（function），只有virtual method、virtual table，而不是值的。
 
 
 
-value semantic：
+### Pass-by-value and pass-by-reference
+
+这两者是最最能够体现value-semantic和reference-semantic的。
+
+
+
+### Value category
+
+
+
+### TO READ
 
 https://stackoverflow.com/questions/3106110/what-is-move-semantics/3109981#3109981
 
@@ -201,22 +216,3 @@ https://stackoverflow.com/questions/142391/getting-a-boostshared-ptr-for-this
 
 
 
-C++的value semantic，要求programmer来管理object的lifetime，这就引入了一系列问题：
-
-- RAII：基于scope的lifetime管理
-
-- MOVE：cross scope，即越过scope的限制
-
-- dangling pointer、dangling reference
-
-- smart pointer
-
-
-
-等等，这些问题环绕中programmer。
-
-目前我已经对这类问题进行了部分总结：
-
-- GCC pure virtual method called
-
-- 
