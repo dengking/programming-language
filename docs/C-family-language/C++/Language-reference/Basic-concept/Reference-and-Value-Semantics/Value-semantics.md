@@ -199,6 +199,8 @@ How many times does the copy constructor of `vector<string>` get called? The ans
 
 Now, how about passing the arguments by value? First, let’s consider the situation where in the function implementation you need to make the copy of the argument. It is often the case when we implement the copy assignment and want to provide strong (commit-or-rollback) guarantee. In such cases **passing by value**, and not making the **local copy** is more efficient in general and equally efficient as passing by reference in the worst case. This is very well described by Dave Abrahams in [this article](http://web.archive.org/web/20140113221447/http://cpp-next.com/archive/2009/08/want-speed-pass-by-value/).
 
+> NOTE: 上面描述的其实是copy-and-swap idiom（参见`C++\Idiom\OOP\Copy-and-swap`）。
+
 In the other case, where only want to query the given value for some attributes, **passing by reference** is more efficient that **passing by value** for types with expensive copy constructors.
 
 ```c++
@@ -215,28 +217,364 @@ void fun()
 }
 ```
 
+Here, if we passed the dictionary by value to function `remainingRoom` we would cause an unnecessary copying. While passing the arguments by a reference to const object eliminates the unnecessary copy, it should be kept in mind that it is passing by reference, and it does not mean that the object referred by `d` will not change. I refer you again to the very [important article](http://drdobbs.com/blogs/cpp/232400151) by Andrew Koenig. So, could a similar copy elision not be applied in this case? C++ as it is specified today does not allow that, but there does not appears to be anything that shoul make such an optimization hard. It has been called ‘[compile-time copy-on-write](http://web.archive.org/web/20140113221447/http://cpp-next.com/archive/2009/08/want-speed-pass-by-value/comment-page-1/#comment-80)’ by Dave Abrahams. It is likely that we will find this optimization in C++ in the future.
+
+> NOTE: 并没有读懂上面这段话。
+
+### Passing by value is not copying
+
+While we were able to see that sometimes **passing by value** requires the call to copy **constructor**, in general this is not so. Have a look at this example.
+
+```c++
+#include <memory>
+using namespace std;
+unique_ptr<int> make1()
+{
+    return unique_ptr<int>( new int(1) );
+}
+ 
+unique_ptr<int> increment( unique_ptr<int> i )
+{
+    ++*i;
+    return i;
+}
+ 
+int main()
+{
+    unique_ptr<int> p = increment(make1());
+}
+// g++ --std=c++11 test.cpp
+```
+
+Notice that function `increment` takes the argument and **returns by value**. Yet `std::unique_ptr` does not have a **copy constructor**. Do you find it surprising? It is not surprising if you adapt the C++ way of thinking: you tell the compiler that you are interested in **values** rather than **objects**, and the compiler chooses the best tool to implement your intentions. It has a couple of tools:
+
+1. Copy elision
+2. Move constructor
+3. Copy constructor
+4. The ‘as-if’ rule: it enables the compiler to do whatever it wants as long as you cannot tell the difference.
 
 
 
+### More…
 
+Value semantics are a way of thinking about the program and computations. It cannot be comprehensively described in a short post. I just wanted to provide an overview of the idea. There is a lot more to be learned. Just to give you a couple of references:
 
+1. [C++Next](http://web.archive.org/web/20140113221447/http://cpp-next.com/archive/tag/value/) has a nice series of articles on value semantics.
+2. [N2479](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2479.pdf) — this proposal tries to formally define the *value*.
+3. [“Fundamentals of Generic Programming”](http://www.stepanovpapers.com/DeSt98.pdf) provides a definition of a *Regular Type*, which is also a core of value semantics.
 
 ### Comments
 
+[Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
+
+[February 18, 2012 at 7:59 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-263)
+
+I do compare “value semantics” to “OO” but my goal is not to say they are exact opposites — what I want is to show the difference. And I believe the difference exists, it looks like (tell me if I am wrong) you and I think of something different when we say “OO”. I wonder what “OO” means for you. I can tell you what it means for me. It is definitely more than just being able to define user-defined types. If I write:
+
+```c++
+class Rational
+{
+int numerator_;
+int denumerator_:
+
+public:
+// copy, assignment, comparison, stream operators
+int numerator() const { return numerator_; }
+int denumerator() const { return denumerator_; }
+};
+```
+
+I do not call it OO just yet. It is only the ability to create a user-defined type that provides a convenience and a certain degree of **encapsulation** (according to my understanding of the term). What I understand as “object oriented” is the ability to add **run-time polymorphism** (based on **virtual function table**); and this feature in order to work requires of the programmers to pass **references** or **pointers** to functions and return **pointers**. And in this sense it is in conflict with **value semantics**. I may have failed to highlight what I understand under term “OO” enough. I will try to add this to the post. In particular, under my understanding of the term, “OO” has nothing to do with using objects (as defined in C++).
+
+> NOTE: 在C++中，如果想要发挥OOP的runtime polymorphism特性，必须要通过reference semantic才能够实现，无法通过value semantic来实现，这就是[如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 中所总结的：
+>
+> > [值语义和运行时多态是矛盾的。](https://link.zhihu.com/?target=http%3A//akrzemi1.wordpress.com/2012/02/03/value-semantics/%23comment-270)
+
+But let me note that just comparing two things does not imply that they are **opposite** things. It only implies that there exist some differences. I agree with you that “value semantics” could be contrasted with “reference semantics” and I believe I said this in this post. I chose the way of describing “value semantics” by showing what it is not. And I do not think it is particularly bad an approach.
+
+> NOTE: 作者上面这段话中想表达的意思是：value semantic和reference semantic并不是opposite的，但是可以将两者一起来进行比较。
+
+Next, the difference in assignment you show between Java and `C++` is of course true, but I believe saying only this would be to little to show the nature of value and reference semantics. I only put a short link to [this article](http://javadude.com/articles/passbyvalue.htm) by Scott Stanchfield, but I believe it is very enlightening. I also used to think that passing by pointer (not by reference!) as in Java is no different than passing by reference. But now I can see it is different, and Scott explains it very well.
+
+#### Gunnar Hansen *says:*
+
+[February 19, 2012 at 6:09 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-264)
+
+Andrzej,
+
+The problem with your post is that you don’t seem to understand what OO is all about. In short, it is combination of **encapsulation**, **inheritance** and **polymorphism**. All of these 3 are completely present in `C++`. **Value semantics** is a feature of the language that is orthogonal to the OO nature of the language. It does nothing to diminish（缩小） it. For example,
+
+```c++
+MyCircle myRoundThing; // The MyCircle class is derived from Circle, derived from Shape, INHERITING methods and data.
+myRoundThing.radius( 20 ); // The MyCircle class ENCAPSULATES the data and operations appropriate to MyCircle
+myRoundThing.draw(); // Virtual function draw, which behaves POLYMORPHCIALLY, since it calls the Circle::draw()
+```
+
+All 3 of the essential characteristics of an OO language are demonstrated using **value semantics**. **Polymorphism** means that the behavior changes based on the type.
+
+I never said they were opposite, but neither is there any difference, because the two concepts are orthogonal. In other words, they have nothing to do with each other.
+
+#### [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
+
+[February 19, 2012 at 8:19 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-265)
+
+Hi Gunnar,
+I believe that in your example, you got the feature of “polymorphism” wrong. Let me quote it here.
+
+```c++
+MyCircle myRoundThing;      // The MyCircle class is derived from Circle,
+                            // derived from Shape, INHERITING methods and data.
+myRoundThing.radius( 20 );  // The MyCircle class ENCAPSULATES the data
+                            // and operations appropriate to MyCircle
+myRoundThing.draw();        //  Virtual function draw, which behaves 
+                            // POLYMORPHCIALLY, since it calls the Circle::draw()
+```
+
+Your example shows that you can inherit member functions (methods) from **base classes** and **encapsulate** data, but it does not show any OO-style **run-time polymorphism**. Calling member functions inherited from base classes *is not* **polymorphism**. In your example, you do not even need to declare `Circle::draw()` a virtual function, and you will achieve the same effect. **Polymorphism** is something somewhat the opposite: when you can call method defined in `MyCircle` by only being aware of the interface: `Shape`.
+
+When you only use two thirds of OO, (inheritance and encapsulation) but do not use polymorphism, then you are right, such use cases get along very well with value semantics; and they are often useful. But if you also start using **polymorphism** (and OO is much about polymorphism) you will soon discover that it is hard, if possible, to use it without passing the arguments by references or by pointers.
+
+[Examples from Wikipedia](http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming) probably explain OO-style polymorphism better than I.
 
 
-Hi Gunnar, it looks we are getting somewhere. I am trying to identify at which point we really disagree (because we seem to agree on many things). It looks like you claim that “value semantics is completely orthogonal to polymorphism” and I claim that there is a tension between value semantics and run-time polymorphism (based on virtual table look-up). Agreed?
+
+#### Gunnar Hansen *says:*
+
+[February 20, 2012 at 5:53 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-268)
+
+You still don’t understand. **Polymorphism** comes from the fact that each object has a hidden piece of data which points to the **Virtual Table** that is created for each class. This is the key to **polymorphic behavior**. It’s there regardless of whether you access the object with **value semantics**, **reference semantics** or **pointer semantics**. That’s why I say that **value semantics** is completely orthogonal to polymorphism and therefore, OO.
+
+For example, I could create a `MyCircle` object and add it to a list of Shape objects. Then, I could loop through the list and call:
+
+```c++
+ShapeList[c].draw();
+```
+
+These objects will behave polymorphically, which means that the method actually executed will depend on the type of object that it is. All with value semantics.
+
+You missed the point. The fact that I did declare `draw` a **virtual function** means that I’m invoking the polymorphism feature of C++. That means that a **VTable** reference is embedded in the object at construction time. This means that **polymorphic behavior** is built into the object, and not at all dependent on **value semantics**.
+
+#### [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
+
+[February 20, 2012 at 10:29 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-270)
+
+Hi Gunnar, it looks we are getting somewhere. I am trying to identify at which point we really disagree (because we seem to agree on many things). It looks like you claim that “**value semantics** is completely orthogonal to **polymorphism**” and I claim that there is a tension between value semantics and run-time polymorphism (based on virtual table look-up). Agreed?
 
 Now, let me go through your post:
 
-> Polymorphism comes from the fact that each object has a hidden piece of data which points to the Virtual Table that is created for each class. This is the key to polymorphic behavior.
+> Polymorphism comes from the fact that each object has a hidden piece of data which points to the **Virtual Table** that is created for each class. This is the key to polymorphic behavior.
 
-I agree so far, although “this is the key” seems a bit imprecise: having a virtual table pointer is a way of implementing run-time polymorphism but it is not a polymorphism per se. C++ does not require that compilers provide virtual tables if they can implement the same polymorphic behaviour by other means. (but in practise it is always virtual tables, I guess).
+I agree so far, although “this is the key” seems a bit imprecise: having a **virtual table pointer** is a way of implementing **run-time polymorphism** but it is not a polymorphism per se. C++ does not require that compilers provide **virtual tables** if they can implement the same **polymorphic behaviour** by other means. (but in practise it is always virtual tables, I guess).
+
+> NOTE: 阅读完后，可以知道，上面这段话中的“this is the key” 的imprecise。
 
 > It’s there regardless of whether you access the object with value semantics, reference semantics or pointer semantics.
 
-If by “it” you mean “a hidden piece of data which points to the Virtual Table” than, this I agree that we would find “it” in a newly created object, or in an object referred to by a named reference, or in an object pointed to by a pointer.
+If by “**it**” you mean “a hidden piece of data which points to the **Virtual Table**” than, this I agree that we would find “**it**” in a newly created object, or in an object referred to by a named reference, or in an object pointed to by a pointer.
 
 > That’s why I say that value semantics is completely orthogonal to polymorphism and therefore, OO.
 
-This is where I disagree with you. Only having “a hidden piece of data which points to the Virtual Table” does not mean using polymorphism. In fact, you have shown a good example the last time how one can create a polymorphic type and then choose not to use this polymorphism. Of course the example was very scarce, so I can only guess how you defined your types (sorry if I guessed wrong) but here is how I imagine you define your classes:
+This is where I disagree with you. Only having “a hidden piece of data which points to the Virtual Table” does not mean using **polymorphism**. In fact, you have shown a good example the last time how one can create a **polymorphic type** and then choose not to use this **polymorphism**. Of course the example was very scarce, so I can only guess how you defined your types (sorry if I guessed wrong) but here is how I imagine you define your classes:
+
+```c++
+#include <iostream>
+
+struct Shape
+{
+	virtual void draw()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	// other stuff
+};
+
+struct Circle: Shape
+{
+	void draw() /*override*/
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	virtual void radius(int i)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	// other stuff
+};
+
+struct MyCircle: Circle
+{
+	void draw() /*override*/
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	void radius(int i) /*override*/
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	// other stuff
+};
+int main()
+{
+	// later on:
+	MyCircle myRoundThing;
+	myRoundThing.radius(20);  // no virtual table look-up
+	myRoundThing.draw();        // no virtual table look-up
+}
+
+// g++ --std=c++11 test.cpp
+```
+
+> NOTE: 上述程序输出如下：
+>
+> ```
+> virtual void MyCircle::radius(int)
+> virtual void MyCircle::draw()
+> ```
+>
+> 
+
+In this example (the three last lines), since the compiler knows the exact type of the object (`MyCircle`) already **it will not** bother to look the functions up in the **virtual table** to call the two functions. Even though “a hidden piece of data which points to the Virtual Table” is there. Compiler does not need it, because it can already see it is an object of type `MyCircle` and it will call its methods directly. Really. Check it for yourself. Remove every keyword “`virtual`” and every “`=0`” and the effect of the last three lines will be exactly the same: the right methods from `MyCircle` will be chosen. No “hidden piece of data which points to the Virtual Table” is required. This is because even though you created a polymorphic type `Shape` (and `Circle`) you decided not to use them, and abandoned the **polymorphism**. The example that would show how **virtual table** is engaged is this:
+
+```c++
+#include <iostream>
+
+struct Shape
+{
+	virtual void draw()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	// other stuff
+};
+
+struct Circle: Shape
+{
+	void draw() /*override*/
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	virtual void radius(int i)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	// other stuff
+};
+
+struct MyCircle: Circle
+{
+	void draw() /*override*/
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	void radius(int i) /*override*/
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		//...
+	}
+	// other stuff
+};
+
+void drawAll(Shape & s1, Shape & s2)
+{
+	s1.draw();
+	s2.draw();
+}
+
+int main()
+{
+	Circle c;
+	MyCircle myRoundThing;
+	drawAll(c, myRoundThing);
+}
+// g++ --std=c++11 test.cpp 
+```
+
+> NOTE:  输出如下：
+>
+> ```c++
+> virtual void Circle::draw()
+> virtual void MyCircle::draw()
+> ```
+>
+> 
+
+Here, the compiler does not know what is the type of the object referred to by `s1` or `s2` so in order to execute the correct `draw` it **has to** look the **virtual table** up. But note that I used references. And I **could not** use values:
+
+```c++
+void drawAll( Shape s1, Shape s2 ) {
+  s1.draw();
+  s2.draw();
+}
+```
+
+This wouldn’t even compile. But even if it would, it would pick the wrong function. Do you agree?
+
+
+
+#### Gunnar Hansen *says:*
+
+[March 2, 2012 at 2:13 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-282)
+
+Ok, that wasn’t a good example. Here is a better one:
+
+```c++
+Shape ShapeList[3];
+Shape myShape;
+Square mySquare;
+Circle myCircle;
+ShapeList[0] = myShape;
+ShapeList[1] = mySquare;
+ShapeList[2] = myCircle;
+
+for each( auto s in ShapeList )
+{
+s.draw();
+}
+```
+
+A) result: `shapeshapeshape`
+
+
+
+```c++
+Shape* ShapeList[3];
+Shape myShape;
+Square mySquare;
+Circle myCircle;
+ShapeList[0] = &myShape;
+ShapeList[1] = &mySquare;
+ShapeList[2] = &myCircle;
+
+for each( auto s in ShapeList )
+{
+(*s).draw();
+}
+```
+
+B) result: `shapeSquareCircle`
+
+
+
+```c++
+Shape ShapeList[3];
+Shape myShape;
+Square mySquare;
+Circle myCircle;
+ShapeList[0] = myShape;
+ShapeList[1] = mySquare;
+ShapeList[2] = myCircle;
+
+for each( auto s in ShapeList )
+{
+(&s)->draw();
+}
+```
+
+C) result: `shapeshapeshape`

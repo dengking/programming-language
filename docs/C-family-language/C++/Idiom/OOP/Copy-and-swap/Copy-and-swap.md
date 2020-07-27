@@ -269,7 +269,7 @@ And so concludes the **copy-and-swap idiom**.
 
 
 
-## [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap)
+## More C++ Idioms [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap)
 
 ### Motivation
 
@@ -290,7 +290,7 @@ And so concludes the **copy-and-swap idiom**.
 
 
 
-# [What is the copy-and-swap idiom?](https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
+## [What is the copy-and-swap idiom?](https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
 
 
 
@@ -300,5 +300,5 @@ And so concludes the **copy-and-swap idiom**.
 
 
 
-# ==TODO== want speed pass by value c++
+## ==TODO== want speed pass by value c++
 

@@ -110,6 +110,41 @@ c++的很多问题都是由它的value semantic而引入的，比如它的value 
 
 这两者是最最能够体现value-semantic和reference-semantic的。
 
+
+
+## Value semantic is default
+
+在c++中，value semantic is default，即默认是value semantic，如果要实现reference semantic，则需要使用`&`。而在java、python中则正好相反，reference semantic is default；
+
+下面是akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)中的例子
+
+> In C++, `A = B` means that the value of `B` was assigned to `A`. In languages like C# and Java, `A = B` means that the reference `A` now points to whatever `B` was pointing to. Very different.
+
+
+
+> In C++, you can instantiate instances (objects) of a Class (user defined type) with the normal value semantics of the built in types. For example,
+>
+> ```c++
+> float a;
+> MyClass b;
+> ```
+>
+> We can also declare a pointer reference if we want:
+>
+> ```c++
+> MyClass* c = new MyClass();
+> ```
+>
+> In `C#`, we can only declare a reference:
+>
+> ```c++
+> MyClass c = new MyClass();
+> ```
+>
+> So, C# and Java have reduced functionality compared to C++.
+
+
+
 ## Object
 
 ### Object lifetime
