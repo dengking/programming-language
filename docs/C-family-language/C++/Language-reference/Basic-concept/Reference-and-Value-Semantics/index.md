@@ -87,15 +87,38 @@ void consumer()
 
 ## Runtime polymorphism
 
+在C++中，runtime polymorphism与value semantic、reference semantic密切相关。触发我对它们产生思考的是：
+
+- [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)中提及的：[值语义和运行时多态是矛盾的。](https://link.zhihu.com/?target=http%3A//akrzemi1.wordpress.com/2012/02/03/value-semantics/%23comment-270)
+- multiple dispatch
+
 c++的value semantic是不支持runtime polymorphsim的，reference semantic是支持runtime polymorphsim的，所以需要通过reference才能够实现runtime polymorphysim的。
+
+需要思考：reference semantic是如何实现polymorphism的，其实reference就是pointer。
+
+在C++，polymorphism是行为（function），而不是值的。
+
+
+
+
 
 c++的很多问题都是由它的value semantic而引入的，比如它的value category、reference。
 
 
 
-## Lifetime
+## Pass-by-value and pass-by-reference
 
+这两者是最最能够体现value-semantic和reference-semantic的。
 
+## Object
+
+### Object lifetime
+
+### Object value
+
+### Object type
+
+## Value category
 
 
 

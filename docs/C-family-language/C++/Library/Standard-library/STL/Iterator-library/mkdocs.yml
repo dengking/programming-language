@@ -9,3 +9,6 @@ nav:
     - Iterator-adaptors: Iterator-adaptors
 #    
     - Stream-iterators: Stream-iterators
+    # 
+    - Iterator-operations: Iterator-operations.md
+    - Range-access: Range-access.md
