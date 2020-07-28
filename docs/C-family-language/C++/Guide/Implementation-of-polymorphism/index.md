@@ -13,7 +13,7 @@ dynamic
 
 当对它们进行实现的时候，无论是哪种实现方式，都需要考虑one-to-many的问题，即需要考虑使用set  of candidates中的哪一个来作为实现，那到底选择哪一个呢？显然这有一个比较的过程，通俗来讲，选择最“合适” 的那一个，那到底哪个最合适呢？不同的polymorphism有不同的标准。
 
-c++ overload 、template specialization、virtual method和Python attribute find的过程类似，都是实现polymorphsim的基础。这在implementation-of-polymorphism.md中进行了介绍。
+c++ overload 、template specialization、virtual method和Python attribute find的过程类似，都是实现polymorphsim的基础。
 
 Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**），compiler在进行选择/resolve的时候，应该选择**最最特殊情况**。
 
@@ -170,7 +170,7 @@ The compiler does **overload resolution** before it even looks at specialisation
 
 ##### TODO
 
-上述分析的resolution过程，没有设计SFINAE，后续需要结合具体的例子来进行说明。
+上述分析的resolution过程，没有涉及SFINAE，后续需要结合具体的例子来进行说明。
 
 TO READ:
 
