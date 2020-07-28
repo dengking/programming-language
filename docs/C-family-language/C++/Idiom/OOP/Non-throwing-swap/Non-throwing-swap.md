@@ -175,7 +175,161 @@ Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a 
 
    > NOTE: 这种做法相当于什么都没有做
 
-> NOTE:  Caveats所讨论的是将user defined type的`swap`函数添加到`std`中的问题，这是extending namespace `std`，这在`C++\Library\Standard-library\Extending-std.md`中进行了讨论；对于non-throwing swap idiom，推荐使用[Swap values idiom](https://cpppatterns.com/patterns/swap-values.html)，即上述solution 1；
+> NOTE:  Caveats所讨论的是将user defined type的`swap`函数添加到`std`中的问题，这是extending namespace `std`，这在`C++\Library\Standard-library\Extending-std.md`中进行了讨论；对于non-throwing swap idiom，推荐使用[Swap values idiom](https://cpppatterns.com/patterns/swap-values.html)，即上述solution 1，关于此，参见`C++\Idiom\Templates-and-generic-programming\Swappable`。
+
+
+
+### Source Code
+
+#### 使用Swappable idiom
+
+```c++
+#include <utility>
+#include <cstring>
+#include <algorithm>
+#include <iostream>
+
+namespace Orange
+{
+class String
+{
+	char * str;
+	public:
+	void swap(String &s) // noexcept
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		std::swap(this->str, s.str);
+	}
+	String(const char* p)
+	{
+		size_t size = strlen(p) + 1;
+		str = new char[size];
+		memcpy(str, p, size);
+	}
+	friend std::ostream& operator<<(std::ostream& Stream, String& S)
+	{
+		Stream << S.str;
+		return Stream;
+	}
+};
+void swap(String & s1, String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+
+}
+
+namespace std
+{
+template<>
+void swap(Orange::String & s1, Orange::String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+}
+
+int main()
+{
+	using std::swap;
+	Orange::String s1("hello");
+	Orange::String s2("world");
+	std::cout << "Before swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+	swap(s1, s2);
+	std::cout << "After swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+}
+// g++ --std=c++11 test.cpp
+```
+
+输出如下:
+
+```c++
+Before swap:
+hello world
+void Orange::swap(Orange::String&, Orange::String&)
+void Orange::String::swap(Orange::String&)
+After swap:
+world hello
+```
+
+
+
+#### 使用`std::swap`
+
+```c++
+#include <utility>
+#include <cstring>
+#include <algorithm>
+#include <iostream>
+
+namespace Orange
+{
+class String
+{
+	char * str;
+	public:
+	void swap(String &s) // noexcept
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		std::swap(this->str, s.str);
+	}
+	String(const char* p)
+	{
+		size_t size = strlen(p) + 1;
+		str = new char[size];
+		memcpy(str, p, size);
+	}
+	friend std::ostream& operator<<(std::ostream& Stream, String& S)
+	{
+		Stream << S.str;
+		return Stream;
+	}
+};
+void swap(String & s1, String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+
+}
+
+namespace std
+{
+template<>
+void swap(Orange::String & s1, Orange::String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+}
+
+int main()
+{
+	// using std::swap;
+	Orange::String s1("hello");
+	Orange::String s2("world");
+	std::cout << "Before swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+	std::swap(s1, s2);
+	std::cout << "After swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+}
+// g++ --std=c++11 test.cpp
+```
+
+输出如下:
+
+```c++
+Before swap:
+hello world
+void std::swap(_Tp&, _Tp&) [with _Tp = Orange::String]
+void Orange::String::swap(Orange::String&)
+After swap:
+world hello
+```
 
 
 

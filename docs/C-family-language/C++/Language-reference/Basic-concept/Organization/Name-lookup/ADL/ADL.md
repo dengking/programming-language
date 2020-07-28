@@ -82,7 +82,7 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 ### ADL make C++ generic and extensible
 
-> 从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP。
+> 从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP、generic programming。
 
 扩展性
 
@@ -254,7 +254,7 @@ https://stackoverflow.com/questions/18086292/is-bjarne-wrong-about-this-example-
 
 ### Idiom based on ADL
 
-- swap idiom
+- [Swappable idiom](https://en.cppreference.com/w/cpp/named_req/Swappable)
 - [Range-based algorithms](https://cpppatterns.com/patterns/range-based-algorithms.html)
 - [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
 
@@ -385,5 +385,161 @@ int main()
 	std::cout<<Utility::GetRtti<MyStruct1>()<<std::endl;
 	std::cout<<NS::Utility::GetRtti<NS::MyStruct1>()<<std::endl;
 }
+```
+
+
+
+### 观察ADL
+
+在`C++\Idiom\OOP\Non-throwing-swap`中给出的例子，就展示了ADL：
+
+#### 使用Swappable idiom
+
+```c++
+#include <utility>
+#include <cstring>
+#include <algorithm>
+#include <iostream>
+
+namespace Orange
+{
+class String
+{
+	char * str;
+	public:
+	void swap(String &s) // noexcept
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		std::swap(this->str, s.str);
+	}
+	String(const char* p)
+	{
+		size_t size = strlen(p) + 1;
+		str = new char[size];
+		memcpy(str, p, size);
+	}
+	friend std::ostream& operator<<(std::ostream& Stream, String& S)
+	{
+		Stream << S.str;
+		return Stream;
+	}
+};
+void swap(String & s1, String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+
+}
+
+namespace std
+{
+template<>
+void swap(Orange::String & s1, Orange::String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+}
+
+int main()
+{
+	using std::swap;
+	Orange::String s1("hello");
+	Orange::String s2("world");
+	std::cout << "Before swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+	swap(s1, s2);
+	std::cout << "After swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+}
+// g++ --std=c++11 test.cpp
+```
+
+输出如下:
+
+```c++
+Before swap:
+hello world
+void Orange::swap(Orange::String&, Orange::String&)
+void Orange::String::swap(Orange::String&)
+After swap:
+world hello
+```
+
+
+
+#### 使用`std::swap`
+
+```c++
+#include <utility>
+#include <cstring>
+#include <algorithm>
+#include <iostream>
+
+namespace Orange
+{
+class String
+{
+	char * str;
+	public:
+	void swap(String &s) // noexcept
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		std::swap(this->str, s.str);
+	}
+	String(const char* p)
+	{
+		size_t size = strlen(p) + 1;
+		str = new char[size];
+		memcpy(str, p, size);
+	}
+	friend std::ostream& operator<<(std::ostream& Stream, String& S)
+	{
+		Stream << S.str;
+		return Stream;
+	}
+};
+void swap(String & s1, String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+
+}
+
+namespace std
+{
+template<>
+void swap(Orange::String & s1, Orange::String & s2) // noexcept
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	s1.swap(s2);
+}
+}
+
+int main()
+{
+	// using std::swap;
+	Orange::String s1("hello");
+	Orange::String s2("world");
+	std::cout << "Before swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+	std::swap(s1, s2);
+	std::cout << "After swap:" << std::endl;
+	std::cout << s1 << " " << s2 << std::endl;
+}
+// g++ --std=c++11 test.cpp
+```
+
+输出如下:
+
+```c++
+Before swap:
+hello world
+void std::swap(_Tp&, _Tp&) [with _Tp = Orange::String]
+void Orange::String::swap(Orange::String&)
+After swap:
+world hello
 ```
 

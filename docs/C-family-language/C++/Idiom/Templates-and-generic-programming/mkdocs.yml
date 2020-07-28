@@ -25,3 +25,4 @@ nav:
     - Return-Type-Resolver: Return-Type-Resolver
     #
     - nullptr: nullptr
+    - Swappable: Swappable
