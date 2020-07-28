@@ -3,3 +3,135 @@
 
 
 ## 维基百科[Erase–remove idiom](https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom)
+
+
+
+## makeinjava [STL Erase-Remove Idiom in C++ (with example)](https://makeinjava.com/stl-erase-remove-idiom-c-example/)
+
+Its very common practice to remove element(s) from collection(s) like vector. The **common** practice is just iterate through the container to remove the desired element. But STL has builtin feature specifically to avoid this situation. Erase-Remove idiom comes in our rescue. **Erase-Remove** is an **efficient** way to permanently remove element(s) from an STL container.
+
+> NOTE: iterate and delete是非常任意出错的
+
+### `erase` and `remove`
+
+Let’s see couple of methods to understand it further – **erase**() and **remove**() (and **remove_if**()).
+
+- `erase`: – STL containers provide erase method to remove an **element** or a **range** of elements from the container. `erase` method **reduces** the size of the container.
+- `remove`:– `remove` and `remove_if` methods are also a part of STL algorithm.
+  - These methods pushes the element(s), which matches the ‘remove’ criteria, to end of the container.
+  - `remove` method returns an iterator pointing to the first removed element.
+  - The removed element is still part of the container **but** it is pushed to the **end** of container.
+
+### Example
+
+```c++
+#include <algorithm> // remove
+#include <vector> // vector
+#include <iostream> // cout
+
+void print_vec(const std::vector<int>& vec)
+{
+	for (std::vector<int>::const_iterator it = vec.begin(); it != vec.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl
+			<< "Vector Size :" << vec.size() << std::endl;
+	return;
+}
+
+bool greater_than_five(int i)
+{
+	return (i > 5);
+}
+
+void remove_example(void)
+{
+	std::vector<int> my_vec;
+	for (int i = 0; i < 10; i++)
+	{
+		my_vec.push_back(i % 2);
+	}
+	std::cout << "Printing input vector contents for remove example" << std::endl;
+	print_vec(my_vec);
+
+	std::vector<int>::iterator new_end = std::remove(my_vec.begin(), my_vec.end(), 0);
+	std::cout << "Printing vector contents after remove operation " << std::endl;
+	for (std::vector<int>::const_iterator it = my_vec.begin(); it != new_end; it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl
+			<< "Vector New Size :" << my_vec.size() << std::endl;
+}
+void erase_remove_example(void)
+{
+	std::vector<int> my_vec;
+	for (int i = 0; i < 10; i++)
+	{
+		my_vec.push_back(i % 2);
+	}
+	std::cout << "Printing input vector contents for erase_remove example" << std::endl;
+	print_vec(my_vec);
+
+	my_vec.erase(std::remove(my_vec.begin(), my_vec.end(), 0), my_vec.end());
+	std::cout << "Printing vector contents after erase remove operation " << std::endl;
+	print_vec(my_vec);
+}
+void erase_remove_if_example(void)
+{
+	std::vector<int> my_vec;
+	for (int i = 0; i < 10; i++)
+	{
+		my_vec.push_back(i);
+	}
+	std::cout << "Printing input vector contents for erase_remove_if example" << std::endl;
+	print_vec(my_vec);
+
+	my_vec.erase(std::remove_if(my_vec.begin(), my_vec.end(), greater_than_five), my_vec.end());
+	std::cout << "Printing vector contents after erase_remove_if operation " << std::endl;
+	print_vec(my_vec);
+}
+
+int main(int argc, char** argv)
+{
+	std::cout << "================================================================" << std::endl;
+	remove_example();
+	std::cout << "================================================================" << std::endl;
+	erase_remove_example();
+	std::cout << "================================================================" << std::endl;
+	erase_remove_if_example();
+
+	return 0;
+}
+// g++ test.cpp
+```
+
+> NOTE: 输出如下:
+>
+> ```c++
+> ================================================================
+> Printing input vector contents for remove example
+> 0 1 0 1 0 1 0 1 0 1 
+> Vector Size :10
+> Printing vector contents after remove operation 
+> 1 1 1 1 1 
+> Vector New Size :10
+> ================================================================
+> Printing input vector contents for erase_remove example
+> 0 1 0 1 0 1 0 1 0 1 
+> Vector Size :10
+> Printing vector contents after erase remove operation 
+> 1 1 1 1 1 
+> Vector Size :5
+> ================================================================
+> Printing input vector contents for erase_remove_if example
+> 0 1 2 3 4 5 6 7 8 9 
+> Vector Size :10
+> Printing vector contents after erase_remove_if operation 
+> 0 1 2 3 4 5 
+> Vector Size :6
+> 
+> ```
+>
+> 

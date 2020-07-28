@@ -1,4 +1,5 @@
 nav:
     - zhihu-Rvalue-reference: zhihu-Rvalue-reference.md
+    - stackoverflow-What-is-move-semantics: stackoverflow-What-is-move-semantics.md
 # 以维基百科Rvalue references and move constructors作为引入
     - rvalue-reference-and-move-semantic: rvalue-reference-and-move-semantic.md

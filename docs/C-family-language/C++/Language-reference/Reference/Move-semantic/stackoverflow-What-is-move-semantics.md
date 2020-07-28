@@ -224,7 +224,7 @@ class cannot_benefit_from_move_semantics
 };
 ```
 
-> NOTE: 上诉`d`是一个static array，而非dynamic array，`d`自动释放的，无需像dynamic array那样由programmer来显式delete；
+> NOTE: 上诉`d`是一个static array，而非dynamic array，`d`会自动释放的，无需像dynamic array那样由programmer来显式delete；
 
 #### Implementing safe "move-only" types
 
@@ -281,7 +281,7 @@ Note how the initialization of `b` with `a` does *not* copy the triangle, but in
 
 > To move an object means to transfer ownership of some resource it manages to another object.
 
-总结：显然，move的语义和copy的语义是完全不相同的。
+> NOTE: 显然，move的语义和copy的语义是完全不相同的。move的语义让我想到了`std::unique_ptr`，我觉得它们都是intentional programming
 
 The copy constructor of `auto_ptr` probably looks something like this (somewhat simplified):
 
