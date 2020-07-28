@@ -35,3 +35,12 @@ If the iterators are not necessary to implement the algorithm, we may instead be
 >
 > - `C++\Language-reference\Functions\Function-calls\ADL\ADL.md`
 > - `C++\Language-reference\Classes\The-interface-principle.md`
+
+
+
+## [C++ algorithms library](https://en.cppreference.com/w/cpp/algorithm/)
+
+C++ algorithms library中的大部分algorithm是典型的“range-based algorithm”，即它们的入参一般都是：
+
+- `InputIt first`
+- `InputIt last`

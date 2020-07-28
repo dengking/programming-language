@@ -2,7 +2,7 @@
 
 
 
-## [c++patterns Copy a range of elements](https://cpppatterns.com/patterns/copy-range-of-elements.html)
+## cpppatterns [Copy a range of elements](https://cpppatterns.com/patterns/copy-range-of-elements.html)
 
 > NOTE: 原文描述了三种情况的copy a range of elements：
 >

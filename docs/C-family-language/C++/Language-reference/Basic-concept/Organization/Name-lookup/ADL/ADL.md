@@ -94,6 +94,7 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 - [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
 - [Swap values](https://cpppatterns.com/patterns/swap-values.html)
+- [Range-based for](http://en.cppreference.com/w/cpp/language/range-for)
 
 
 

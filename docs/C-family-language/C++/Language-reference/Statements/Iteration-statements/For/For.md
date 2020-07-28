@@ -15,3 +15,15 @@ The [range-based `for` loop](http://en.cppreference.com/w/cpp/language/range-for
 
 
 ### cppreference [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for)
+
+
+
+
+
+*`begin_expr`* and *`end_expr`* are defined as follows:
+
+> NOTE: 如何实现？
+
+
+
+## cppreference [std::for_each](https://en.cppreference.com/w/cpp/algorithm/for_each)

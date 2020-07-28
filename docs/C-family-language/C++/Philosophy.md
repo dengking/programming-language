@@ -39,6 +39,10 @@ change_speed(23m / 10s); // meters per second
 
 
 
+#### 补充
+
+- `std::chrono::seconds`
+
 
 
 ### P.3: Express intent
@@ -93,3 +97,4 @@ c++囊括了：
 
 - value semantic、reference semantic
 - compile-time、run-time
+- OOP、template meta programming、generic programming
