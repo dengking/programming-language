@@ -175,13 +175,29 @@ Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a 
 
    > NOTE: 这种做法相当于什么都没有做
 
-> NOTE:  Caveats所讨论的是将user defined type的`swap`函数添加到`std`中的问题
+> NOTE:  Caveats所讨论的是将user defined type的`swap`函数添加到`std`中的问题，这是extending namespace `std`，这在`C++\Library\Standard-library\Extending-std.md`中进行了讨论；对于non-throwing swap idiom，推荐使用[Swap values idiom](https://cpppatterns.com/patterns/swap-values.html)，即上述solution 1；
 
 
 
 ## [Why implementing swap() as non-throwing](https://stackoverflow.com/questions/44042043/why-implementing-swap-as-non-throwing)
 
+[A](https://stackoverflow.com/a/44042914)
 
+> My question is **why** we should implement our `swap()` function as a ***non-throwing\*** one
+
+1. Because `swap` is completely useless if it might throw.
+
+   Consider: you `swap` two instances, and the operation throws. Now, what state are they in?
+
+   The strong guarantee is that there are no side-effects if an exception was thrown, meaning both original objects are left in their original state.
+
+   If we *can't* meet the strong guarantee, we simply can't use `swap` in many cases, because there's no way to recover usefully from a failure, and there's no point in writing that version of `swap` at all.
+
+2. Because there's no reason for it to throw.
+
+   The trivial implementation of `swap` (now) uses move-assignment and -construction.
+
+   There's generally no reason for a move-constructor to throw: it doesn't allocate anything new, it's just re-seating existing data. There's generally no reason for move-assignment to throw (as above), and destructors should never throw - and those are the only operations required.
 
 
 
