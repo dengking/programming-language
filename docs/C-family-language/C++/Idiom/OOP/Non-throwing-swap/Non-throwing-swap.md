@@ -38,7 +38,7 @@ Swapping of two large, complex objects of the same type is inefficient due to ac
 
 This generic swap implementation may throw if resources are not available. (Such a behavior does not make sense where in fact no new resources should have been requested in the first place.) Therefore, this implementation cannot be used for the [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) idiom.
 
-> NOTE: 第一段话的解释是：`T temp (a);`是需要acquisition of resources的，所以当系统中resource已经耗尽的情况下，这个语句是会抛出exception的。
+> NOTE: 第一段话的解释是：`T temp (a);`是需要acquisition of resources的，所以当系统中resource已经耗尽的情况下，这个语句是会抛出exception的。括号中的意思是：swap是不需要request new resource的；
 >
 > 最后一句话的意思是：[Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) idiom的要求swap函数是non-throw的
 
@@ -68,7 +68,7 @@ class String
 }
 ```
 
-Although an efficient and exception-safe swap function can be implemented (as shown above) as a member function, non-throwing swap idiom goes further than that for simplicity, consistency, and to facilitate generic programming. An explicit specialization of `std::swap` should be added in the `std` namespace as well as the namespace of the class itself.
+Although an efficient and exception-safe `swap` function can be implemented (as shown above) as a member function, non-throwing swap idiom goes further than that for **simplicity**, **consistency**, and to facilitate **generic programming**. An explicit specialization of `std::swap` should be added in the `std` namespace as well as the namespace of the class itself.
 
 ```c++
 namespace Orange { // namespace of String
@@ -102,7 +102,9 @@ If **fully qualified `swap`** is used, Koenig lookup is suppressed and one in th
 
 > NOTE: `std::swap(Orange::String, Orange::String)`
 
-Remaining discussion here uses fully qualified swap only. It gives a uniform look and feel because `C++` programmers often use swap function in an idiomatic way by fully qualifying it with **std::** as shown below.
+
+
+Remaining discussion here uses fully qualified swap only. It gives a uniform look and feel because `C++` programmers often use `swap` function in an idiomatic way by fully qualifying it with **std::** as shown below.
 
 ```c++
 template <class T>
@@ -165,7 +167,7 @@ Therefore, it is a good idea to define a specialization of `std::swap` for the t
 
 ### Caveats
 
-Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a subtle issue. As per the C++98 standard, only the full specialization of `std::swap` is allowed to be defined inside `std` namespace for the user-defined types. **Partial specializations** or **function overloading** is not allowed by the language. Trying to achieve the similar effect for template classes (e.g., `Matrix<T>`) results into overloading of `std::swap` in `std` namepspace, which is technically **undefined behavior**. This is not necessarily the ideal state of affairs as indicated by some people in a spectacularly long discussion thread on comp.lang.c++.moderated newsgroup.[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-1) There are two possible solutions, both imperfect, to this issue:
+Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a subtle issue. As per the C++98 standard, only the **full specialization** of `std::swap` is allowed to be defined inside `std` namespace for the **user-defined types**. **Partial specializations** or **function overloading** is not allowed by the language. Trying to achieve the similar effect for template classes (e.g., `Matrix<T>`) results into overloading of `std::swap` in `std` namepspace, which is technically **undefined behavior**. This is not necessarily the ideal state of affairs as indicated by some people in a spectacularly long discussion thread on comp.lang.c++.moderated newsgroup.[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-1) There are two possible solutions, both imperfect, to this issue:
 
 1. Standard-compliant solution. Leveraging on Koenig lookup, define an overloaded swap function template in the same namespace as that of the class being swapped. Not all compilers may support this correctly, but this solution is compliant to the standard.[[2\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-2)
 
@@ -173,7 +175,7 @@ Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a 
 
    > NOTE: 这种做法相当于什么都没有做
 
-> NOTE: 这一节的内容并没有读懂
+> NOTE:  Caveats所讨论的是将user defined type的`swap`函数添加到`std`中的问题
 
 
 

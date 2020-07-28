@@ -1,4 +1,4 @@
-# Expanding std
+# Extending std
 
 
 
