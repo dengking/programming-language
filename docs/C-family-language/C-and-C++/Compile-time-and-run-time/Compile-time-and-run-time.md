@@ -2,9 +2,17 @@
 
 ## c++
 
-### `static_cast` VS `dynamic_cast`
+### [`static_cast`](https://en.cppreference.com/w/cpp/language/static_cast) VS [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 
 
+`static_cast` 是 compile-time
 
+`dynamic_cast` 是 run-time
+
+### [`static_assert`](https://en.cppreference.com/w/cpp/language/static_assert) VS [`assert`](https://en.cppreference.com/w/cpp/error/assert) 
+
+`static_assert` 是compile-time
+
+`assert` 是 run-time
 
 ### compile-time concept
 

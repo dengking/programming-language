@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
-    - Move-semantic: Move-semantic
     - Perfect-forwarding: Perfect-forwarding
+    - Move-semantic: Move-semantic
     - Reference: Reference.md
+    - Forwarding-reference: Forwarding-reference.md
     - Pointer-VS-reference: Pointer-VS-reference.md

@@ -135,7 +135,7 @@ void func(T&& t) {
 }
 ```
 
-Don't let `T&&` fool you here - `t` is not an **rvalue reference** [[2\]](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c#id6). When it appears in a type-deducing context, `T&&` acquires a special meaning. When `func` is instantiated, `T` depends on whether the argument passed to `func` is an lvalue or an rvalue. If it's an lvalue of type `U`, `T` is deduced to `U&`. If it's an rvalue, `T` is deduced to `U`:
+Don't let `T&&` fool you here - `t` is not an **rvalue reference** [[2\]](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c#id6). When it appears in a type-deducing context, `T&&` acquires a special meaning. When `func` is instantiated, `T` depends on whether the argument passed to `func` is an **lvalue** or an **rvalue**. If it's an **lvalue** of type `U`, `T` is deduced to `U&`. If it's an **rvalue**, `T` is deduced to `U`:
 
 ```c++
 func(4);            // 4 is an rvalue: T deduced to int

@@ -1,6 +1,6 @@
 # [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics)
 
-## part one 
+## [part one](https://stackoverflow.com/a/3109981) 
 I find it easiest to understand move semantics with example code. Let's start with a very simple string class which only holds a pointer to a heap-allocated block of memory:
 
 ```C++
@@ -198,7 +198,7 @@ string::~string()
 
 
 
-## part two 
+## [part two](https://stackoverflow.com/a/11540204) 
 
 My first answer was an extremely simplified introduction to **move semantics**, and many details were left out on purpose to keep it simple. However, there is a lot more to **move semantics**, and I thought it was time for a second answer to fill the gaps. The first answer is already quite old, and it did not feel right to simply replace it with a completely different text. I think it still serves well as a first introduction. But if you want to dig deeper, read on :)
 
@@ -341,9 +341,13 @@ Note that the letters `l` and `r` have a historic origin in the left-hand side a
 
 > An rvalue of class type is an **expression** whose evaluation creates a **temporary object**. Under normal circumstances, no other expression inside the same scope denotes the same **temporary object**.
 
+
+
 ### Rvalue references
 
 We now understand that moving from **lvalues** is potentially dangerous, but moving from **rvalues** is harmless. If `C++` had language support to distinguish **lvalue** arguments from **rvalue** arguments, we could either completely forbid moving from **lvalues**, or at least make moving from lvalues *explicit* at call site, so that we no longer move by accident.
+
+> NOTE: 对于dangerous的事情，要么 完全 禁止，要求 explicit；
 
 `C++11`'s answer to this problem is ***rvalue references***. An **rvalue reference** is a new kind of **reference** that only binds to **rvalues**, and the syntax is `X&&`. The good old reference `X&` is now known as an ***lvalue reference***. (Note that `X&&` is *not* a reference to a reference; there is no such thing in C++.)
 
@@ -361,6 +365,21 @@ const X&&                           yes      yes
 In practice, you can forget about `const X&&`. Being restricted to read from **rvalues** is not very useful.
 
 > An rvalue reference `X&&` is a new kind of reference that only binds to **rvalues**.
+
+
+
+> NOTE: 
+>
+> ## application
+>
+> 原文从此处开始，介绍的如下内容都是programmer会应用move semantic的地方，作者总结地比较好
+>
+> - Implicit conversions
+> - Move constructors
+> - Move assignment operators
+> - Moving from lvalues
+> - Moving into members
+> - Special member functions
 
 ### Implicit conversions
 
@@ -545,8 +564,6 @@ unique_ptr<Shape> c(make_triangle());   // okay
 
 The second line fails to compile, because `a` is an **lvalue**, but the parameter `unique_ptr&& source`can only be bound to **rvalues**. This is exactly what we wanted; dangerous moves should never be **implicit**. The third line compiles just fine, because `make_triangle()` is an **rvalue**. The **move constructor** will transfer ownership from the temporary to `c`. Again, this is exactly what we wanted.
 
-总结：显然有时候使一些危险的操作编程explicit是保证程序安全性的非常好的一种措施。
-
 > The move constructor transfers ownership of a managed resource into the current object.
 
 ### Move assignment operators
@@ -585,7 +602,7 @@ Now that `source` is a variable of type `unique_ptr`, it will be initialized by 
 
 ### Moving from lvalues
 
-Sometimes, we want to move from **lvalues**. That is, sometimes we want the compiler to treat an **lvalue** as if it were an **rvalue**, so it can invoke the **move constructor**, even though it could be potentially unsafe. For this purpose, `C++11` offers a standard library function template called `std::move` inside the header `<utility>`. This name is a bit unfortunate, because `std::move`simply casts an **lvalue** to an **rvalue**; it does *not* move anything by itself. It merely *enables* moving. Maybe it should have been named `std::cast_to_rvalue` or `std::enable_move`, but we are stuck with the name by now.
+Sometimes, we want to move from **lvalues**. That is, sometimes we want the compiler to treat an **lvalue** as if it were an **rvalue**, so it can invoke the **move constructor**, even though it could be potentially unsafe. For this purpose, `C++11` offers a standard library function template called `std::move` inside the header `<utility>`. This name is a bit unfortunate, because `std::move` simply casts an **lvalue** to an **rvalue**; it does *not* move anything by itself. It merely *enables* moving. Maybe it should have been named `std::cast_to_rvalue` or `std::enable_move`, but we are stuck with the name by now.
 
 Here is how you explicitly move from an lvalue:
 
@@ -669,12 +686,13 @@ unique_ptr<Shape>&& flawed_attempt()   // DO NOT DO THIS!
 
 ### Moving into members
 
-总结：下面的这个例子需要结合前面的`unique_ptr`类的定义来理解，因为前面的`unique_ptr`类的构造函数如下:
-```
+> NOTE: 下面的这个例子需要结合前面的`unique_ptr`类的定义来理解，因为前面的`unique_ptr`类的构造函数如下:
+
+```C++
 explicit unique_ptr(T* p = nullptr);
 unique_ptr(unique_ptr&& source);
 ```
-显然第二个函数的参数类型为**rvalue reference**，在进行构造的时候必须要传入**rvalue reference**。
+> NOTE: 显然第二个函数的参数类型为**rvalue reference**，在进行构造的时候必须要传入**rvalue reference**。
 
 Sooner or later, you are going to write code like this:
 
@@ -711,6 +729,8 @@ public:
 ```
 
 You could argue that `parameter` is not used anymore after the initialization of `member`. Why is there no special rule to silently insert `std::move` just as with **return values**? Probably because it would be too much burden on the compiler implementors. For example, what if the constructor body was in another translation unit? By contrast, the return value rule simply has to check the symbol tables to determine whether or not the identifier after the `return` keyword denotes an automatic object.
+
+> NOTE: compiler实现的可能
 
 You can also pass `parameter` by value. For **move-only types** like `unique_ptr`, it seems there is no established idiom yet. Personally, I prefer pass by value, as it causes less clutter in the interface.
 
@@ -749,6 +769,8 @@ X& X::operator=(X source)    // unified assignment operator
 
 This way, the number of special member functions to implement drops from five to four. There is a tradeoff between exception-safety and efficiency here, but I am not an expert on this issue.
 
+> NOTE: 上述是copy-and-swap idiom
+
 ### Forwarding references ([previously](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4164.pdf) known as *Universal references*)
 
 Consider the following function template:
@@ -768,7 +790,7 @@ foo(a);                 // T is unique_ptr<Shape>&, T&& is unique_ptr<Shape>&
 
 If the argument is an rvalue of type `X`, `T` is deduced to be `X`, hence `T&&` means `X&&`. This is what anyone would expect. But if the argument is an **lvalue** of type `X`, due to a special rule, `T` is deduced to be `X&`, hence `T&&` would mean something like `X& &&`. But since C++ still has no notion of references to references, the type `X& &&` is *collapsed* into `X&`. This may sound confusing and useless at first, but reference collapsing is essential for *perfect forwarding* (which will not be discussed here).
 
-> T&& is not an rvalue reference, but a **forwarding reference**. It also binds to lvalues, in which case `T` and `T&&` are both lvalue references.
+> `T&&` is not an **rvalue reference**, but a **forwarding reference**. It also binds to lvalues, in which case `T` and `T&&` are both lvalue references.
 
 If you want to constrain a function template to rvalues, you can combine [SFINAE](http://en.cppreference.com/w/cpp/language/sfinae) with type traits:
 
