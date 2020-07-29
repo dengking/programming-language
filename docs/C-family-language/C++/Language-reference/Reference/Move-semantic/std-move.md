@@ -1,5 +1,3 @@
-
-
 # `std::move`
 
 ## cppreference [std::move](https://en.cppreference.com/w/cpp/utility/move)
@@ -18,7 +16,7 @@
 
 
 
-C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将lvalue也move走的权利，为了支持这个，C++语言做了如下变动：
+C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性，所以它，为了支持这个，C++语言做了如下变动：
 
 引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic。
 

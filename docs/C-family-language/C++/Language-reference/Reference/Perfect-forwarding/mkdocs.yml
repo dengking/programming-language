@@ -1,2 +1,3 @@
 nav:
     - Perfect-forwarding: Perfect-forwarding.md
+    - std-forward: std-forward.md

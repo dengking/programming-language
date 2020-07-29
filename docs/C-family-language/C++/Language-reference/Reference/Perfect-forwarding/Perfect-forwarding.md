@@ -2,13 +2,15 @@
 
 Perfect forwarding是C++11的重要特性
 
-## example
+## Example
 
-- `emplace_back`，在[Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)中，将它作为引言
+- `emplace_back`，在thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)中，将它作为引言
+- [`std::make_unique`](http://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique)
+- [`std::make_shared`](http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared) 
 
 
 
-## idiom
+## Idiom
 
 [variadic templates](http://eli.thegreenplace.net/2014/variadic-templates-in-c/) and perfect forwarding 两者一起使用
 
@@ -28,7 +30,7 @@ void outer(T1&& t1, T2&& t2)
 
 ## cpppatterns [Perfect forwarding](https://cpppatterns.com/patterns/perfect-forwarding.html)
 
-#
+
 
 ## C++ std::move and std::forward
 
