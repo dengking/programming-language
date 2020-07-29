@@ -12,7 +12,7 @@ Now I was seriously worried. Clearly we were headed for an impasse（僵局） o
 - “has identity” – i.e. and address, a pointer, the user can determine whether two copies are identical, etc.
 - “can be moved from” – i.e. we are allowed to leave to source of a “copy” in some **indeterminate**, but **valid** state(即我们被允许在一些不确定但有效的状态下留下”副本“的来源)
 
-> NOTE: 上面这段话将 “has identity”  和 “can be moved from” 描述为 two independent properties，为什么他们是两个是independent的？它们之间是否存在互斥性？要回答这个问题，需要我搞清楚这两个property的含义。其中"has identity"是非常好理解的，但是"can be moved from"的含义我就不清楚了。经过Google，[这篇文章](https://stackoverflow.com/a/3109981)对move semantics的解释非常好。在《cpp-move.md》中，对这篇文章进行了收录。
+> NOTE: 上面这段话将 “has identity”  和 “can be moved from” 描述为 two independent properties，为什么他们是两个是independent的？它们之间是否存在互斥性？要回答这个问题，需要我搞清楚这两个property的含义。其中"has identity"是非常好理解的，但是"can be moved from"的含义我就不清楚了。经过Google，[这篇文章](https://stackoverflow.com/a/3109981)对move semantics的解释非常好。
 
 This led me to the conclusion that there are exactly three kinds of **values** (using the regex notational trick of using a capital letter to indicate a negative – I was in a hurry):
 
@@ -84,7 +84,55 @@ lvalue       xvalue           prvalue
     glvalue           rvalue
 ```
 
-
+> NOTE: 
+>
+> generalized lvalue 广义左值
+>
+> pure rvalue 纯右值 
+>
+> **xvalue** 上面并没有给出准确的描述，在一些地方将其称为“eXpiring value”即“将亡值” （在 https://stackoverflow.com/a/11540204 中有介绍）
+>
+> 如何理解上述图？
+>
+> 在 https://stackoverflow.com/a/11540204 中，使用的是下面这种图
+>
+> ```c++
+>         expressions
+>           /     \
+>          /       \
+>         /         \
+>     glvalues   rvalues
+>       /  \       /  \
+>      /    \     /    \
+>     /      \   /      \
+> lvalues   xvalues   prvalues
+> ```
+>
+> 相比而言，这张图是更加易懂的：expression分为两大类：
+>
+> - glvalues
+> - rvalues
+>
+> 上述两大类包含第三层的对应元素：
+>
+> - glvalues：lvalues、xvalues
+> - rvalues：prvalues、xvalues
+>
+> lvalues、prvalues是历史遗留的，通过上面的描述可以知道，它们是遵循convention的，所以在此不再进行赘述；新增的是：xvalues。
+>
+> 令人费解的是：xvalues它既可以归入glvalues也可以归入rvalues；我们需要思考：C++为什么引入xvalues这个新的概念？答案是：move semantic（关于move semantic，在`C++\Language-reference\Reference\Move-semantic`中进行了介绍），下面对这个答案进行详细说明：
+>
+> C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性。
+>
+> 需要注意：与prvalue必然可以安全地move不同的是，对于**可以安全地移走的glvalue** 的判断是完全由programmer 来决定的，也就是xvalue是由programmer来决定的。
+>
+> 为了支持这个，C++语言做了如下变动：
+>
+> 引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic。
+>
+> 为了支持上述的转换：将xvalue作为rvalue来使用，C++添加了reference collapsing规则（在`C++\Language-reference\Reference`中对这些规则进行了详细介绍）；
+>
+> 需要注意的是：C++中，只允许programmer**引用**rvalue。
 
 Note the classification of current uses of “lvalue” (with various classifications) in the pre-Pittsburgh WP to the left (mostly in Doug’s handwriting).
 
@@ -94,8 +142,4 @@ In Pittsburgh (and a few places later), I had the opportunity to explain this te
 The (supposedly new) terminology in the FCD (and presented in [Miller,2010a]) is logical (derived from fundamental language properties), in accordance with the history of C++ and all of its ancestors, in accordance with the pre-Pittsburgh wording, consistent with the terminology used to specify the standard library, and solves a few specification problems that several members of the CWG deemed important.
 
 
-
-generalized lvalue 广义左值
-
-pure rvalue 纯右值
 
