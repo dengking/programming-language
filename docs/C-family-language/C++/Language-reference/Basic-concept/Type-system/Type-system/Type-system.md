@@ -119,7 +119,7 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 参见本章的`typeid`
 
-## cppreference [decltype](https://en.cppreference.com/w/cpp/language/typeid) 
+## cppreference [decltype](https://en.cppreference.com/w/cpp/language/decltype) 
 
 参见本章的`decltype`
 

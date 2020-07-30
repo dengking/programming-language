@@ -84,6 +84,8 @@ c++提供了极大的选择空间，这就意味着它需要提供各种各样�
 
 
 
+### Feature of C++
+
 在c和c++中，需要由programmer来管理[object](https://en.cppreference.com/w/cpp/language/object ) 的lifetime、storage duration。object的lifetime有：
 
 - global
@@ -98,11 +100,27 @@ c++的smart pointer library就是用来帮助programmer管理位于heap的object
 
 c++囊括了：
 
-- value semantic、reference semantic
-- compile-time、run-time
-- OOP、template meta programming、generic programming
+#### Value semantic and reference semantic
+
+
+
+#### Compile-time and run-time
+
+在`C-and-C++\Compile-time-and-run-time`中对此进行描述
+
+#### Programming paradigm
+
+- OOP
+- template meta programming
+- generic programming
+
+#### Explicit and implicit
 
 `explicit`供programmer对conversion进行控制；
+
+
+
+
 
 C++允许programmer控制是否进行template argument deduction；
 
