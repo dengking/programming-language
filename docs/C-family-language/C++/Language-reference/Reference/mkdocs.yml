@@ -4,5 +4,4 @@ nav:
     - Move-semantic: Move-semantic
     - std-move-and-std-forward: std-move-and-std-forward.md
     - Reference: Reference.md
-    - Forwarding-reference: Forwarding-reference.md
     - Pointer-VS-reference: Pointer-VS-reference.md

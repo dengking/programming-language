@@ -8,7 +8,39 @@
 
 ## cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)
 
+Only the following conversions can be done with static_cast, except when such conversions would cast away *constness* or *volatility*.
 
+> NOTE: `static_cast`是需要维护CV的，否则会编译报错
+
+### 1) 
+
+If there is an [implicit conversion sequence](https://en.cppreference.com/w/cpp/language/implicit_cast) from *expression* to *`new_type`*, or if **overload resolution** for a [direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) of an object or reference of type *`new_type`* from *`expression`* would find at least one viable（可行的） function, then `static_cast<new_type>(expression)` returns the imaginary（虚构的） variable `Temp` initialized as if by `new_type Temp(expression);`, which may involve [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast), a call to the [constructor](https://en.cppreference.com/w/cpp/language/constructor) of *`new_type`* or a call to a [user-defined conversion operator](https://en.cppreference.com/w/cpp/language/cast_operator). For non-reference *`new_type`*, the result object of the `static_cast` prvalue expression is what's direct-initialized. (since C++17)
+
+> NOTE: 上面这段话，`if`、`or if`描述了两种情况下，`static_cast`的行为：`new_type Temp(expression);`
+>
+> 原文没有提供例子，不容易理解
+
+
+
+### 3) (since C++11)
+
+If *`new_type`* is an **rvalue reference type**, `static_cast` converts the value of glvalue, class prvalue, or array prvalue (until C++17)any lvalue (since C++17) *expression* to *xvalue* referring to the same object as the expression, or to its **base sub-object** (depending on *`new_type`*). If the target type is an inaccessible or ambiguous base of the type of the expression, the program is ill-formed. If the expression is a [bit field](https://en.cppreference.com/w/cpp/language/bit_field) lvalue, it is first converted to prvalue of the underlying type. This type of `static_cast` is used to implement move semantics in `std::move`.
+
+> [gcc](https://github.com/gcc-mirror/gcc)/[libstdc++-v3](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3)/[include](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include)/[bits](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include/bits)/[move.h](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/bits/move.h)
+>
+> ```c++
+> /**
+>  *  @brief  Convert a value to an rvalue.
+>  *  @param  __t  A thing of arbitrary type.
+>  *  @return The parameter cast to an rvalue-reference to allow moving it.
+>  */
+> template<typename _Tp>
+> constexpr typename std::remove_reference<_Tp>::type&&
+> move(_Tp&& __t) noexcept
+> {	return static_cast<typename std::remove_reference<_Tp>::type&&>(__t);}
+> ```
+>
+> 
 
 ## Example
 

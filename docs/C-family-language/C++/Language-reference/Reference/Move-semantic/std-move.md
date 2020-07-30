@@ -1,5 +1,7 @@
 # `std::move`
 
+
+
 ## cppreference [std::move](https://en.cppreference.com/w/cpp/utility/move)
 
 `std::move` is used to *indicate* that an object `t` may be "moved from", i.e. allowing the efficient transfer of resources from `t` to another object.
@@ -13,7 +15,7 @@ In particular, `std::move` produces an [xvalue expression](../language/value_cat
 > NOTE:  为什么`std::move` produces an [xvalue expression](../language/value_category.html) ？这要如何来解释？
 >
 > - 入参是lvalue reference to an object，`std::move`的返回值是一个rvalue reference to an object，则此时compiler就可以选择move semantic function，在这些function中，可以将这个object给move走；显然，这个object满足两个条件：`im`，所以它是一个xvalue
-> - 入参是rvalue reference to an object，这种情况允许吗？
+> - 入参是rvalue reference to an object，这种情况允许吗？是允许的，因为它的入参是forwarding reference；
 
 
 
@@ -33,42 +35,51 @@ move(_Tp&& __t) noexcept
 {	return static_cast<typename std::remove_reference<_Tp>::type&&>(__t);}
 ```
 
-`constexpr`说明它发生在compile-time；
+#### `constexpr`
 
-入参：`_Tp&& __t`，说明它使用了universal reference，所以它的入参既可以是rvalue reference也可以是lvalue reference；
+说明它发生在compile-time；
+
+#### Forwarding reference
+
+入参：`_Tp&& __t`，说明它使用了forwarding / universal reference，所以它的入参既可以是rvalue reference也可以是lvalue reference，关于这一点，在文章bajamircea [std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中有描述：
+
+> First of all `std::move` is a template with a `forwarding reference` argument which means that it can be called with either a `lvalue` or an `rvalue`, and the reference collapsing rules apply.
+
+#### `static_cast`
+
+cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)的`3`专门对此进行了描述；
+
+#### `remove_reference`
+
+在文章bajamircea [std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中有描述：
+
+> The `remove_reference` template specializations are used to get the underlying type for `T` without any references, and that type is decorated with `&&` for the `static_cast` and return type.
+
+
 
 在 https://stackoverflow.com/a/11540204 中，对`std::move` 的实现进行了分析。
 
-`std::move(some_lvalue)` casts an lvalue to an rvalue, thus enabling a subsequent move.
+> `std::move(some_lvalue)` casts an lvalue to an rvalue, thus enabling a subsequent move.
 
 需要注意的是， 仅仅是rvalue，而不是prvalue，因为xvalue也是rvalue；
 
 
 
-C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性，所以它，为了支持这个，C++语言做了如下变动：
+`C++11`给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性，所以它，为了支持这个，C++语言做了如下变动：
 
 引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic。
 
-为了支持上述转换，C++添加了reference collapsing规则；
+## C++ `std::move` does not **move** 
+
+bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)：
+
+> C++ `std::move` does not **move** and `std::forward` does not **forward**. 
 
 
 
 ## [What is std::move(), and when should it be used?](https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used)
 
-### [A](https://stackoverflow.com/a/3413547)
-
-[Wikipedia Page on C++11 R-value references and move constructors](https://en.wikipedia.org/wiki/C%2B%2B11#Rvalue_references_and_move_constructors)
-
-1. In C++11, in addition to copy constructors, objects can have move constructors.
-   (And in addition to copy assignment operators, they have move assignment operators.)
-2. The move constructor is used instead of the copy constructor, if the object has type "rvalue-reference" (`Type &&`).
-3. `std::move()` is a cast that produces an **rvalue-reference** to an object, to enable moving from it.
-
-It's a new `C++` way to **avoid copies**. For example, using a move constructor, a `std::vector` could just copy its internal pointer to data to the new object, leaving the moved object in an incorrect state, avoiding to copy all data. This would be C++-valid.
-
-Try googling for move semantics, rvalue, perfect forwarding.
 
 
 
-## 
 

@@ -35,6 +35,18 @@ If there are multiple parameters, each `P/A` pair is deduced **separately** and 
 > 这让我思考：如何来强制不进行deduction。
 >
 > 在某些情况下，programmer是不想启用deduction的，所以C++提供了给了programmer这种控制能力，这是C++灵活性的体现。
+>
+> ## Disable argument-based template parameter deduction for functions
+>
+> [Better way to disable argument-based template parameter deduction for functions?](https://stackoverflow.com/questions/37737487/better-way-to-disable-argument-based-template-parameter-deduction-for-functions)
+>
+> You can do it by putting T in non deducible context (to the left of `::`), and use [std::common_type](http://en.cppreference.com/w/cpp/types/common_type) from `<type_traits>`.
+>
+> example:
+>
+> ```cpp
+> template <typename T> void f(typename std::common_type<T>::type obj) {std::cout << obj;}
+> ```
 
 In the following cases, the types, templates, and non-type values that are used to compose `P` do not participate in **template argument deduction**, but instead use the **template arguments** that were either deduced elsewhere or explicitly specified. If a template parameter is used only in **non-deduced contexts** and is not explicitly specified, template argument deduction fails.
 

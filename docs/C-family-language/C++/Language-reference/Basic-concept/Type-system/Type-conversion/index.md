@@ -1,5 +1,7 @@
 # 关于本章
 
+C++ 的 type system提供了非常完备的type conversion支持：
+
 - [static_cast](https://en.cppreference.com/w/cpp/language/static_cast) 
 - [const_cast](https://en.cppreference.com/w/cpp/language/const_cast)
 - [dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast)
