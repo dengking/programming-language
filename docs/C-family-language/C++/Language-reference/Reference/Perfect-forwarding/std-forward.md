@@ -214,33 +214,40 @@ int main()
 [gcc](https://github.com/gcc-mirror/gcc)/[libstdc++-v3](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3)/[include](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include)/[bits](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include/bits)/[move.h](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/bits/move.h)
 
 ```c++
-  /**
-   *  @brief  Forward an lvalue.
-   *  @return The parameter cast to the specified type.
-   *
-   *  This function is used to implement "perfect forwarding".
-   */
-  template<typename _Tp>
-    constexpr _Tp&&
-    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-    { return static_cast<_Tp&&>(__t); }
+/**
+ *  @brief  Forward an lvalue.
+ *  @return The parameter cast to the specified type.
+ *
+ *  This function is used to implement "perfect forwarding".
+ */
+template<typename _Tp>
+constexpr _Tp&&
+forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+{
+	return static_cast<_Tp&&>(__t);
+}
 
-  /**
-   *  @brief  Forward an rvalue.
-   *  @return The parameter cast to the specified type.
-   *
-   *  This function is used to implement "perfect forwarding".
-   */
-  template<typename _Tp>
-    constexpr _Tp&&
-    forward(typename std::remove_reference<_Tp>::type&& __t) noexcept
-    {
-      static_assert(!std::is_lvalue_reference<_Tp>::value, "template argument"
-		    " substituting _Tp is an lvalue reference type");
-      return static_cast<_Tp&&>(__t);
-    }
+/**
+ *  @brief  Forward an rvalue.
+ *  @return The parameter cast to the specified type.
+ *
+ *  This function is used to implement "perfect forwarding".
+ */
+template<typename _Tp>
+constexpr _Tp&&
+forward(typename std::remove_reference<_Tp>::type&& __t) noexcept
+{
+	static_assert(!std::is_lvalue_reference<_Tp>::value, "template argument"
+			" substituting _Tp is an lvalue reference type");
+	return static_cast<_Tp&&>(__t);
+}
+
 ```
 
-## [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
+在bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中对`std::forward`实现进行了分析：
+
+
+
+## bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
 
 C++ `std::move` does not **move** and `std::forward` does not **forward**.
