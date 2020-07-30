@@ -8,9 +8,3 @@
 | Runtime type identification | dynamic |      |
 | Type traits                 | static  |      |
 
-
-
-
-
-
-
