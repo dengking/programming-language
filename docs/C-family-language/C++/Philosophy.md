@@ -42,6 +42,7 @@ change_speed(23m / 10s); // meters per second
 #### 补充
 
 - `std::chrono::seconds`
+- `std::unique_lock`、`std::unique_ptr`、`std::shared_lock`、`std::shared_ptr`
 
 
 
@@ -57,7 +58,7 @@ change_speed(23m / 10s); // meters per second
 
 ## C++语言的设计者的设计原则
 
-### C++是一门自由的语言
+### C++是一门自由、灵活的语言
 
 它给予programmer极大的自由，此处所谓的自由是指programmer有着很大的**选择**空间，或者说它并没有给予programmer过多的限制。
 
@@ -81,7 +82,9 @@ c++语言就是在这样的发展中，逐渐变大庞杂。
 
 c++提供了极大的选择空间，这就意味着它需要提供各种各样的program technique。一个典型的例子是：c++语言的概念比其他的programming language要多得多：比如在python、java，它们仅仅有reference semantic，而c++囊括了：value semantic、reference semantic。
 
-在c和c++中，需要由programmer来管理object https://en.cppreference.com/w/cpp/language/object 的lifetime、Storage duration。object的lifetime有：
+
+
+在c和c++中，需要由programmer来管理[object](https://en.cppreference.com/w/cpp/language/object ) 的lifetime、storage duration。object的lifetime有：
 
 - global
 
@@ -98,3 +101,8 @@ c++囊括了：
 - value semantic、reference semantic
 - compile-time、run-time
 - OOP、template meta programming、generic programming
+
+`explicit`供programmer对conversion进行控制；
+
+C++允许programmer控制是否进行template argument deduction；
+

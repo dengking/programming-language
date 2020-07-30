@@ -364,7 +364,9 @@ The `forward` template exists in C++11, in the `<utility>` header, as `std::forw
 
 Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous（多余的）. It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
 
-
+> NOTE: 关于 **non-deducing context** ，参见cppreference [Template argument deduction#Non-deduced contexts](https://en.cppreference.com/w/cpp/language/template_argument_deduction#Non-deduced_contexts)，显然`std::forward`符合第一条：
+>
+> everything to the left of the scope resolution operator `::`
 
 ### Universal references
 

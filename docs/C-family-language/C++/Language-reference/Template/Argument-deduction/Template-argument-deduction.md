@@ -22,7 +22,71 @@ If there are multiple parameters, each `P/A` pair is deduced **separately** and 
 
 #### Non-deduced contexts
 
-> NOTE: 在某些情况下，programmer是不想启用deduction的，所以C++提供了给了programmer这种控制能力。
+> NOTE: 关于non-deduced contexts，是我在阅读如下文章时碰到的：
+>
+> bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)，其中对`std::forward`的实现的分析中有如下描述：
+>
+> > The type `T` is not deduced, therefore we had to specify it when **using** `std::forward`.
+>
+> thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)，其中对`std::forward`的实现的分析中有如下描述：
+>
+> > Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous（多余的）. It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
+>
+> 这让我思考：如何来强制不进行deduction。
+>
+> 在某些情况下，programmer是不想启用deduction的，所以C++提供了给了programmer这种控制能力，这是C++灵活性的体现。
 
 In the following cases, the types, templates, and non-type values that are used to compose `P` do not participate in **template argument deduction**, but instead use the **template arguments** that were either deduced elsewhere or explicitly specified. If a template parameter is used only in **non-deduced contexts** and is not explicitly specified, template argument deduction fails.
 
+1) The *nested-name-specifier* (everything to the left of the scope resolution operator `::`) of a type that was specified using a [qualified-id](name.html#Qualified_identifiers):
+
+##### Example 1
+
+```c++
+#include <vector>
+#include <complex>
+// the identity template, often used to exclude specific arguments from deduction
+// (available as std::type_identity as of C++20)
+template<typename T> struct identity
+{
+	typedef T type;
+};
+template<typename T> void bad(std::vector<T> x, T value = 1)
+{
+}
+template<typename T> void good(std::vector<T> x, typename identity<T>::type value = 1)
+{
+}
+
+int main()
+{
+	std::vector<std::complex<double>> x;
+	// bad(x, 1.2);  // P1 = std::vector<T>, A1 = std::vector<std::complex<double>>
+				  // P1/A1: deduced T = std::complex<double>
+				  // P2 = T, A2 = double
+				  // P2/A2: deduced T = double
+				  // error: deduction fails, T is ambiguous
+	good(x, 1.2); // P1 = std::vector<T>, A1 = std::vector<std::complex<double>>
+				  // P1/A1: deduced T = std::complex<double>
+				  // P2 = identity<T>::type, A2 = double
+				  // P2/A2: uses T deduced by P1/A1 because T is to the left of :: in P2
+				  // OK: T = std::complex<double>
+}
+
+```
+
+> NOTE: 上述`identity<T>::type`就是 **non-deduced contexts** 。
+
+
+
+##### Example 2
+
+关于此的另外一个例子就是`std::forward`，这在bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)、thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)中都有描述；
+
+
+
+#### Deduction from a type
+
+
+
+### Other contexts

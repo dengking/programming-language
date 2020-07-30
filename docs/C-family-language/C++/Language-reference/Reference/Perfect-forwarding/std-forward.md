@@ -244,7 +244,35 @@ forward(typename std::remove_reference<_Tp>::type&& __t) noexcept
 
 ```
 
-在bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中对`std::forward`实现进行了分析：
+#### non-deducing context 
+
+bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中此有描述：
+
+> The type `T` is not deduced, therefore we had to specify it when **using** `std::forward`.
+
+thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)中此有描述：
+
+> Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous（多余的）. It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
+
+
+
+关于 **non-deducing context** ，参见cppreference [Template argument deduction#Non-deduced contexts](https://en.cppreference.com/w/cpp/language/template_argument_deduction#Non-deduced_contexts)，显然`std::forward`符合第一条：
+
+> everything to the left of the scope resolution operator `::`
+
+#### Stop at compile time attempts to convert from an `rvalue` to an `lvalue` 
+
+The `static_assert` is there to stop at compile time attempts to convert from an `rvalue` to an `lvalue` (that would have the dangling reference problem: a reference pointing to a temporary long gone). This is explained in more details in [N2835](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2835.html), but the gist is:
+
+```c++
+forward<const Y&>(Y()); // does not compile
+// static assert in forward triggers compilation failure for line above
+// with "invalid rvalue to lvalue conversion"
+```
+
+
+
+Some non-obvious properties of `std::forward` are that the return value can be more cv-qualified (i.e. can add a `const`). Also it allows for the case where the argument and return are different e.g. to forward expressions from **derived type** to it’s **base type** (even some scenarios where the base is derived from as `private`).
 
 
 
