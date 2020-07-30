@@ -1,6 +1,9 @@
 # C++ std::move and std::forward
 
-两者都和reference相关，`std::move`用于辅助move semantic，`std::forward`用于辅助perfect forwarding；
+两者可以放到一起来进行比较：
+
+- 两者都和reference相关，`std::move`用于辅助move semantic，`std::forward`用于辅助perfect forwarding
+- C++ `std::move` does not **move** and `std::forward` does not **forward**（bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)）
 
 ## bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
 

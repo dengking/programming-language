@@ -1,6 +1,6 @@
 # explicit specifier
 
-
+`explicit`供programmer对conversion进行控制，它体现了C++的灵活性。
 
 ## cppreference [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
 

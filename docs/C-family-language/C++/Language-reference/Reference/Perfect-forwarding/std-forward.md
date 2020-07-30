@@ -248,6 +248,8 @@ forward(typename std::remove_reference<_Tp>::type&& __t) noexcept
 
 
 
-## bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
+## `std::forward` does not **forward**
 
-C++ `std::move` does not **move** and `std::forward` does not **forward**.
+在bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中，有这样的描述：
+
+> C++ `std::move` does not **move** and `std::forward` does not **forward**.

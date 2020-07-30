@@ -9,6 +9,7 @@ nav:
     - Template-parameters-and-template-arguments: Template-parameters-and-template-arguments
     - Class-template: Class-template
     - Specialization: Specialization
+    - Argument-deduction: Argument-deduction
 ########## SFINAE是一种非常重要的技术##########
     - SFINAE: SFINAE
 # concept是c++20引入的一个非常重要的特性    
