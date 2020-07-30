@@ -6,14 +6,12 @@ Perfect forwarding是一直以来困扰C++ programmer的问题（在文章thegre
 
 要想搞清楚perfect forwarding，需要首先搞清楚如下内容：
 
-- Reference collapsing rule
-- Special type deduction rules for rvalue references
+| 内容                                               | application                      |      |
+| -------------------------------------------------- | -------------------------------- | ---- |
+| Reference collapsing rule                          | 主要用于实现`std::forward`       |      |
+| Special type deduction rules for rvalue references | 主要用于实现forwarding reference |      |
 
 上述两者，在文章thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)的Reference collapsing and special type deduction for rvalues中进行了总结；
-
-在建立了上述认知后，我们就可以知道forwarding reference了：
-
-> forwarding reference = reference collapsing rule + special type deduction rules for rvalue references；
 
 forwarding reference既可以reference **lvalue**又可以reference **rvalue**，所以它是universal，这是它的另外一个名称universal reference中universal的含义；
 
@@ -21,9 +19,15 @@ forwarding reference既可以reference **lvalue**又可以reference **rvalue**�
 
 > perfect forwarding = forwarding reference + `std::forward`；
 
+关于perfect forwarding的含义，在stackoverflow [Advantages of using forward](https://stackoverflow.com/questions/3582001/advantages-of-using-forward)的[回答](https://stackoverflow.com/a/3582313)中有着较好的解释：
+
+> Why is this useful? Because combined we maintain the ability to keep track of the value category of a type: if it was an **lvalue**, we have an **lvalue-reference parameter**, otherwise we have an **rvalue-reference parameter**.
+
 
 
 在文章thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)中，对它们有着较好的介绍，所以以它为入门读物；
+
+
 
 ## thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)
 
@@ -490,7 +494,11 @@ N arguments require $2^N$ combinations, a nightmare. We'd like to do this automa
 
 ------
 
+### Solution
+
 In C++11, we get a chance to fix this. [One solution modifies template deduction rules on existing types, but this potentially breaks a great deal of code.](https://stackoverflow.com/questions/3591832/perfect-forwarding-in-c03/3591909#3591909) So we have to find another way.
+
+#### Reference collapsing rule
 
 The solution is to instead use the newly added **rvalue-references**; we can introduce new rules when deducing rvalue-reference types and create any desired result. After all, we cannot possibly break code now.
 
@@ -516,9 +524,15 @@ T&&  &  -> T&  // lvalue reference to cv TR -> lvalue reference to T
 T&&  && -> T&& // rvalue reference to cv TR -> TR (rvalue reference to T)
 ```
 
-Next, with template argument deduction: if an argument is an lvalue A, we supply the template argument with an lvalue reference to A. Otherwise, we deduce normally. This gives so-called **universal references** (the term [*forwarding reference*](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4164.pdf) is now the official one).
+#### Special type deduction rules for rvalue references 
 
-Why is this useful? Because combined we maintain the ability to keep track of the value category of a type: if it was an lvalue, we have an **lvalue-reference parameter**, otherwise we have an **rvalue-reference parameter**.
+Next, with template argument deduction: if an argument is an lvalue `A`, we supply the template argument with an lvalue reference to `A`. Otherwise, we deduce normally. This gives so-called **universal references** (the term [*forwarding reference*](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4164.pdf) is now the official one).
+
+#### Combine: perfect forwarding
+
+Why is this useful? Because combined we maintain the ability to keep track of the value category of a type: if it was an **lvalue**, we have an **lvalue-reference parameter**, otherwise we have an **rvalue-reference parameter**.
+
+> NOTE: 上面这段话中的combined的意思是：结合Reference collapsing rule和Special type deduction rules for rvalue references 
 
 In code:
 
@@ -540,21 +554,34 @@ int main()
 // g++ --std=c++11  test.cpp 
 ```
 
-The last thing is to "forward" the value category of the variable. Keep in mind, once inside the function the parameter could be passed as an lvalue to anything:
+The last thing is to "forward" the **value category** of the variable. Keep in mind, once inside the function the parameter could be passed as an **lvalue** to anything:
 
 ```cpp
-void foo(int&);
+#include <iostream>
 
-template <typename T>
+void foo(int& x)
+{
+	std::cout << x << std::endl;
+}
+template<typename T>
 void deduce(T&& x)
 {
-    foo(x); // fine, foo can refer to x
+	foo(x); // fine, foo can refer to x
 }
-
-deduce(1); // okay, foo operates on x which has a value of 1
+int main()
+{
+	int i = 0;
+	deduce(i); // deduce<int&>(int& &&) -> deduce<int&>(int&)
+	deduce(1); // deduce<int>(int&&)
+}
+// g++ --std=c++11 test.cpp 
 ```
 
-That's no good. E needs to get the same kind of value-category that we got! The solution is this:
+> NOTE: 上述程序可以编译通过，`deduce(1);`
+
+
+
+That's no good. `E` needs to get the same kind of value-category that we got! The solution is this:
 
 ```cpp
 static_cast<T&&>(x);
@@ -578,7 +605,7 @@ When `f` receives an lvalue, `E` gets an lvalue. When `f` receives an rvalue, `E
 
 ------
 
-And of course, we want to get rid of the ugly. `static_cast<T&&>` is cryptic and weird to remember; let's instead make a utility function called `forward`, which does the same thing:
+And of course, we want to get rid of the ugly. `static_cast<T&&>` is cryptic and weird to remember; let's instead make a utility function called `std::forward`, which does the same thing:
 
 ```cpp
 std::forward<A>(a);
