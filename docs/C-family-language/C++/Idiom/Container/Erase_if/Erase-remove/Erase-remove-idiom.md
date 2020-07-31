@@ -4,7 +4,56 @@
 
 ## 维基百科[Erase–remove idiom](https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom)
 
+### Motivation
 
+`erase` can be used to delete an element from a collection, but for containers which are based on an array, such as `vector`, all elements after the deleted element have to be moved forward to avoid "gaps" in the collection. Calling erase multiple times on the same container generates lots of overhead from moving the elements.
+
+> NOTE: 主要原因
+
+
+
+> NOTE: 关于`algorithm` library的`std::remove`、`std::remove_if`，参见：https://en.cppreference.com/w/cpp/algorithm/remove
+
+### Example
+
+```c++
+// Use g++ -std=c++11 or clang++ -std=c++11 to compile.
+
+#include <algorithm>  // remove and remove_if
+#include <iostream>
+#include <vector>  // the general-purpose vector container
+
+bool IsOdd(int i) { return i & 1; }
+
+void Print(const std::vector<int>& vec) {
+  for (const auto& i : vec) {
+    std::cout << i << ' ';
+  }
+  std::cout << std::endl;
+}
+
+int main() {
+  // Initializes a vector that holds numbers from 0-9.
+  std::vector<int> v = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  Print(v);
+
+  // Removes all elements with the value 5.
+  v.erase(std::remove(v.begin(), v.end(), 5), v.end());
+  Print(v);
+
+  // Removes all odd numbers.
+  v.erase(std::remove_if(v.begin(), v.end(), IsOdd), v.end());
+  Print(v);
+}
+// g++ -std=c++11 test.cpp
+
+/*
+Output:
+0 1 2 3 4 5 6 7 8 9
+0 1 2 3 4 6 7 8 9
+0 2 4 6 8
+*/
+```
 
 ## makeinjava [STL Erase-Remove Idiom in C++ (with example)](https://makeinjava.com/stl-erase-remove-idiom-c-example/)
 

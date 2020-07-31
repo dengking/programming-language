@@ -25,13 +25,27 @@ C++ STL提供了多种container，需要结合这些container的实现来选择�
 
 
 
-这些container提供了`std::remove`、`std::remove_if`，使用这些成员函数，可以满足需求；
+这些container提供了`remove`、`remove_if`成员函数，使用这些成员函数，可以满足需求；
+
+也可以使用algorithm library提供的`std::remove`、`std::remove_if`，所以它们也可以使用使用[Erase-remove idiom](./Erase-remove/Erase-remove-idiom.md)。
 
 ### For containers based on search tree
 
 - [std::set](https://en.cppreference.com/w/cpp/container/set)
+- [std::multiset](https://en.cppreference.com/w/cpp/container/multiset)
+- [std::map](https://en.cppreference.com/w/cpp/container/map)
+- [std::multimap](https://en.cppreference.com/w/cpp/container/multimap)
 
-使用iterate-delete 方式
+这些container无法使用使用iterate-delete 方式。
+
+### For containers based on hash table
+
+- [unordered_set](https://en.cppreference.com/w/cpp/container/unordered_set)(C++11) 
+- [unordered_map](https://en.cppreference.com/w/cpp/container/unordered_map)(C++11) 
+- [unordered_multiset](https://en.cppreference.com/w/cpp/container/unordered_multiset)(C++11) 
+- [unordered_multimap](https://en.cppreference.com/w/cpp/container/unordered_multimap)(C++11) 
+
+
 
 ## C++20
 
