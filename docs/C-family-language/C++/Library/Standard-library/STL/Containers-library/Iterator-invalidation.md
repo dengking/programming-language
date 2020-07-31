@@ -163,3 +163,12 @@ vecArr.insert ( it + 2, 1 , 200 );
 it = vecArr.begin();
 ```
 
+
+
+## TO READ
+
+https://www.geeksforgeeks.org/iterator-invalidation-cpp/
+
+https://stackoverflow.com/questions/16904454/what-is-iterator-invalidation
+
+https://wiki.c2.com/?IteratorInvalidationProblem

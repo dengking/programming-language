@@ -1,6 +1,7 @@
 nav:
     - Containers-library: Containers-library.md
     - Iterator-invalidation: Iterator-invalidation.md
+    - Thread-safety: Thread-safety.md
     - Map: Map
     - List: List
     - Vector: Vector
