@@ -1,2 +1,3 @@
 nav:
-    - cppreference-Function-objects: cppreference-Function-objects.md
+    - Function-objects: Function-objects.md
+    - std-function: std-function.md
