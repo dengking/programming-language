@@ -66,13 +66,11 @@ This illustration shows the parts of a lambda:
 
 
 
-## drdobbs [Lambdas in C++11](https://www.drdobbs.com/cpp/lambdas-in-c11/240168241)
-
-### Basic Syntax and Elements for Lambda Expressions
-
 
 
 ### Passing Lambda Expressions with `std::function`
+
+在drdobbs [Lambdas in C++11](https://www.drdobbs.com/cpp/lambdas-in-c11/240168241)中有如下描述：
 
 Each time you are creating a **lambda expression**, its implementation creates a new class under the hood. Thus, each lambda creates a separate class and has a different type. As you might guess, even when many lambda expressions receive the same arguments and return the same type, each of them will be a different class; that is, a different type. Luckily, C++11 incorporates a **wrapper** for any of the following functions with `std::function` and makes it easy to pass around lambda expressions:
 
@@ -84,3 +82,4 @@ Each time you are creating a **lambda expression**, its implementation creates a
 
 
 
+关于此的例子，参见`C++\Language-reference\Functions\std-utility-lib-Function-objects\cppreference-std-function.md`。
