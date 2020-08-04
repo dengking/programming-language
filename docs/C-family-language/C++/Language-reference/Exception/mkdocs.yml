@@ -1,2 +1,3 @@
 nav:
     - Exception: Exception.md
+    - Best-practices-for-exception-handling: Best-practices-for-exception-handling.md
