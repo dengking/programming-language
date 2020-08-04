@@ -4,7 +4,7 @@
 
 ## [Why use double indirection? or Why use pointers to pointers?](https://stackoverflow.com/questions/5580761/why-use-double-indirection-or-why-use-pointers-to-pointers)
 
-### [A](https://stackoverflow.com/a/5580952)
+### [A](https://stackoverflow.com/a/5580952): characters-word-sentence-monologue类比
 
 If you want to have a list of characters (a word), you can use `char *word`
 
@@ -154,7 +154,7 @@ Output:
 total words in my lol: 243
 ```
 
-### [A](https://stackoverflow.com/a/5580790)
+### [A](https://stackoverflow.com/a/5580790): change the value of the pointer passed to a function as the function argument
 
 One reason is you want to change the value of the pointer passed to a function as the **function argument**, to do this you require **pointer to a pointer**.
 
