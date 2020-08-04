@@ -1,13 +1,15 @@
 nav:
     - Introduction: index.md
 ##########C和C++中都会涉及到的概念的对比##########
-    - Linkage: Linkage.md
+    - From-source-code-to-exec: From-source-code-to-exec.md
+    - Pointer-array-alias: Pointer-array-alias
     - VS-C-VS-C++: VS-C-VS-c++.md
     - Type-system: Type-system.md
     - Data-model: Data-model
     - Dynamic-emory-management: Dynamic-emory-management.md
     - Undefined-behavior: Undefined-behavior
     - Void: Void
+    
 ##########C和C++中都会涉及到的概念的对比##########
     - VS-inline-VS-marco: VS-inline-VS-marco.md
 ##########C和C++中都会涉及到Preprocessor##########    
