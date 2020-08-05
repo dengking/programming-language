@@ -95,12 +95,12 @@ int wordsinlol(char ******x)
 
 int main(void)
 {
-	char *word;
-	char **sentence;
-	char ***monologue;
-	char ****biography;
-	char *****biolibrary;
-	char ******lol;
+	char *word; // a pointer to char
+	char **sentence; // a pointer to char *
+	char ***monologue; // a pointer to char **
+	char ****biography; // a pointer to char ***
+	char *****biolibrary; // a pointer to char ****
+	char ******lol; // a pointer to char *****
 
 	//fill data structure
 	word = (char*) malloc(4 * sizeof *word); // assume it worked
