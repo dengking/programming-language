@@ -222,8 +222,99 @@ int main()
 > ```c++
 > true
 > ```
->
-> 
+
+
+
+However, `&x[0]` is generally *not* equivalent to `x`. The former is a pointer, the latter an array. Only when the context triggers array-to-pointer decay can `x` and `&x[0]` be used interchangeably. For example:
+
+```cpp
+T* p = &array[0];  // rewritten as &*(array+0), decay happens due to the addition
+T* q = array;      // decay happens due to the assignment
+```
+
+On the first line, the compiler detects an assignment from a pointer to a pointer, which trivially succeeds. On the second line, it detects an assignment from an *array* to a pointer. Since this is meaningless (but *pointer* to pointer assignment makes sense), array-to-pointer decay kicks in as usual.
+
+#### Ranges
+
+An array of type `T[n]` has `n` elements, indexed from `0` to `n-1`; there is no element `n`. And yet, to support **half-open ranges** (where the beginning is *inclusive* and the end is *exclusive*), C++ allows the computation of a pointer to the (non-existent) n-th element, but it is illegal to **dereference** that pointer:
+
+```cpp
+   +---+---+---+---+---+---+---+---+....
+x: |   |   |   |   |   |   |   |   |   .   int[8]
+   +---+---+---+---+---+---+---+---+....
+     ^                               ^
+     |                               |
+     |                               |
+     |                               |
+x+0  |                          x+8  |     int*
+```
+
+For example, if you want to sort an array, both of the following would work equally well:
+
+```cpp
+#include <algorithm>
+#include <iostream>
+
+int main()
+{
+	int x[] = { 8, 7, 6, 5, 4, 3, 2, 1 };
+	int n = sizeof(x) / sizeof(int);
+	std::cout << "length of array:" << n << std::endl;
+	std::sort(x + 0, x + n);
+	for (auto&& i : x)
+	{
+		std::cout << i << std::endl;
+	}
+	int y[] = { 8, 7, 6, 5, 4, 3, 2, 1 };
+	std::sort(&y[0], &y[0] + n);
+	for (auto&& i : x)
+	{
+		std::cout << i << std::endl;
+	}
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+Note that it is illegal to provide `&x[n]` as the second argument since this is equivalent to `&*(x+n)`, and the sub-expression `*(x+n)` technically invokes [undefined behavior](https://stackoverflow.com/questions/3144904/) in C++ (but not in C99).
+
+Also note that you could simply provide `x` as the first argument. That is a little too terse（简洁） for my taste, and it also makes template argument deduction a bit harder for the compiler, because in that case the first argument is an array but the second argument is a pointer. (Again, array-to-pointer decay kicks in.)
+
+### Multidimensional arrays
+
+Most programmers are familiar with named multidimensional arrays, but many are unaware of the fact that **multidimensional array** can also be created anonymously. Multidimensional arrays are often referred to as "arrays of arrays" or "*true* multidimensional arrays".
+
+#### Named multidimensional arrays
+
+When using named multidimensional arrays, *all* dimensions must be known at compile time:
+
+```c++
+#include <algorithm>
+#include <iostream>
+int read_int()
+{
+	int i = 0;
+	std::cin >> i;
+	return i;
+}
+int main()
+{
+//	int H = read_int();
+//	int W = read_int();
+
+	int connect_four[6][7];   // okay
+
+//	int connect_four[H][7];   // ISO C++ forbids variable length array
+//	int connect_four[6][W];   // ISO C++ forbids variable length array
+//	int connect_four[H][W];   // ISO C++ forbids variable length array
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
+
 
 ## pointer and array
 
