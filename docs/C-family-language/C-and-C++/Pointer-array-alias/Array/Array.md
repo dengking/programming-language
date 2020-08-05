@@ -312,7 +312,229 @@ int main()
 
 ```
 
+This is how a named multidimensional array looks like in memory:
 
+```cpp
+              +---+---+---+---+---+---+---+
+connect_four: |   |   |   |   |   |   |   |
+              +---+---+---+---+---+---+---+
+              |   |   |   |   |   |   |   |
+              +---+---+---+---+---+---+---+
+              |   |   |   |   |   |   |   |
+              +---+---+---+---+---+---+---+
+              |   |   |   |   |   |   |   |
+              +---+---+---+---+---+---+---+
+              |   |   |   |   |   |   |   |
+              +---+---+---+---+---+---+---+
+              |   |   |   |   |   |   |   |
+              +---+---+---+---+---+---+---+
+```
+
+Note that 2D grids such as the above are merely helpful visualizations. From the point of view of C++, memory is a "flat" sequence of bytes. The elements of a multidimensional array are stored in row-major order. That is, `connect_four[0][6]` and `connect_four[1][0]` are neighbors in memory. In fact, `connect_four[0][7]` and `connect_four[1][0]` denote the same element! This means that you can take multi-dimensional arrays and treat them as large, one-dimensional arrays:
+
+```cpp
+int* p = &connect_four[0][0];
+int* q = p + 42;
+some_int_sequence_algorithm(p, q);
+```
+
+
+
+#### Anonymous multidimensional arrays
+
+With anonymous multidimensional arrays, all dimensions *except the first* must be known at compile time:
+
+```c++
+#include <algorithm>
+#include <iostream>
+int main()
+{
+	int H = 6;
+	int W = 7;
+
+	int (*p)[7] = new int[6][7];   // okay
+	int(*q)[7] = new int[H][7];   // okay
+
+	// int(*p)[W] = new int[6][W];   // ISO C++ forbids variable length array
+	// int(*p)[W] = new int[H][W];   // ISO C++ forbids variable length array
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 
+>
+> `int (*p)[7] = new int[6][7];` `p` is a pointer to array
+
+This is how an anonymous multidimensional array looks like in memory:
+
+```cpp
+              +---+---+---+---+---+---+---+
+        +---> |   |   |   |   |   |   |   |
+        |     +---+---+---+---+---+---+---+
+        |     |   |   |   |   |   |   |   |
+        |     +---+---+---+---+---+---+---+
+        |     |   |   |   |   |   |   |   |
+        |     +---+---+---+---+---+---+---+
+        |     |   |   |   |   |   |   |   |
+        |     +---+---+---+---+---+---+---+
+        |     |   |   |   |   |   |   |   |
+        |     +---+---+---+---+---+---+---+
+        |     |   |   |   |   |   |   |   |
+        |     +---+---+---+---+---+---+---+
+        |
+      +-|-+
+   p: | | |
+      +---+
+```
+
+Note that the array itself is still allocated as a single block in memory.
+
+### Named arrays of pointers
+
+Here is a named array of five pointers which are initialized with anonymous arrays of different lengths:
+
+```c++
+#include <algorithm>
+#include <iostream>
+int main()
+{
+	int* triangle[5];
+	for (int i = 0; i < 5; ++i)
+	{
+		triangle[i] = new int[5 - i];
+	}
+
+	// ...
+
+	for (int i = 0; i < 5; ++i)
+	{
+		delete[] triangle[i];
+	}
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+And here is how it looks like in memory:
+
+```cpp
+          +---+---+---+---+---+
+          |   |   |   |   |   |
+          +---+---+---+---+---+
+            ^
+            | +---+---+---+---+
+            | |   |   |   |   |
+            | +---+---+---+---+
+            |   ^
+            |   | +---+---+---+
+            |   | |   |   |   |
+            |   | +---+---+---+
+            |   |   ^
+            |   |   | +---+---+
+            |   |   | |   |   |
+            |   |   | +---+---+
+            |   |   |   ^
+            |   |   |   | +---+
+            |   |   |   | |   |
+            |   |   |   | +---+
+            |   |   |   |   ^
+            |   |   |   |   |
+            |   |   |   |   |
+          +-|-+-|-+-|-+-|-+-|-+
+triangle: | | | | | | | | | | |
+          +---+---+---+---+---+
+```
+
+Since each line is allocated individually now, viewing 2D arrays as 1D arrays does not work anymore.
+
+### Anonymous arrays of pointers
+
+Here is an anonymous array of 5 (or any other number of) pointers which are initialized with anonymous arrays of different lengths:
+
+```c++
+#include <algorithm>
+#include <iostream>
+int calculate_five()
+{
+	int i = 5;
+	return i;
+}
+int main()
+{
+	int n = calculate_five();   // or any other number
+	int** p = new int*[n];
+	for (int i = 0; i < n; ++i)
+	{
+		p[i] = new int[n - i];
+	}
+
+	// ...
+
+	for (int i = 0; i < n; ++i)
+	{
+		delete[] p[i];
+	}
+	delete[] p;   // note the extra delete[] !
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+And here is how it looks like in memory:
+
+```cpp
+          +---+---+---+---+---+
+          |   |   |   |   |   |
+          +---+---+---+---+---+
+            ^
+            | +---+---+---+---+
+            | |   |   |   |   |
+            | +---+---+---+---+
+            |   ^
+            |   | +---+---+---+
+            |   | |   |   |   |
+            |   | +---+---+---+
+            |   |   ^
+            |   |   | +---+---+
+            |   |   | |   |   |
+            |   |   | +---+---+
+            |   |   |   ^
+            |   |   |   | +---+
+            |   |   |   | |   |
+            |   |   |   | +---+
+            |   |   |   |   ^
+            |   |   |   |   |
+            |   |   |   |   |
+          +-|-+-|-+-|-+-|-+-|-+
+          | | | | | | | | | | |
+          +---+---+---+---+---+
+            ^
+            |
+            |
+          +-|-+
+       p: | | |
+          +---+
+```
+
+### Conversions
+
+**Array-to-pointer decay** naturally extends to arrays of arrays and arrays of pointers:
+
+```c++
+#include <algorithm>
+#include <iostream>
+int main()
+{
+	int array_of_arrays[6][7];
+	int (*pointer_to_array)[7] = array_of_arrays;
+
+	int* array_of_pointers[6];
+	int** pointer_to_pointer = array_of_pointers;
+}
+// g++ --std=c++11 test.cpp
+
+```
 
 
 

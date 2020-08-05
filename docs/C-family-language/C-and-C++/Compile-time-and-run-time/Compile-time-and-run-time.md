@@ -14,6 +14,10 @@
 
 `assert` 是 run-time
 
+### static array VS dynamic array
+
+在 https://stackoverflow.com/a/4810676 中提及了；
+
 ### compile-time concept
 
 下面总结了c++中的compile-time concept。
