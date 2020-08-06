@@ -111,3 +111,123 @@ test.cpp:9:16: 错误：ISO C++ 不允许比较指针和整数的值 [-fpermissi
 
 
 
+## Using integer as pointer
+
+本节标题的含义是：“将integer用作pointer”；正常来说，compiler是绝对不允许这样做的，因为这样做非常危险，下面举例进行说明。
+
+```c++
+// [main.cpp]
+#include <iostream>
+
+int* numbers[42] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+int main()
+{
+	using namespace std;
+	for (int i = 0; i < 42; ++i)
+	{
+		cout << (i > 0 ? ", " : "") << numbers[i];
+	}
+	cout << endl;
+}
+// g++ -g test.cpp
+```
+
+上述程序，编译报错如下：
+
+```c++
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+ int* numbers[42] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                                                ^
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+test.cpp:4:48: 错误：从类型‘int’到类型‘int*’的转换无效 [-fpermissive]
+```
+
+
+
+上述程序，就典型地“将integer用作pointer”；显然，compiler是不允许的；但是在一些情况下，compiler会“放过” “将integer用作pointer”的程序：
+
+
+
+在 stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)的[Common pitfalls when using arrays](https://stackoverflow.com/a/7439261) 中给出了样例程序：
+
+
+
+```cpp
+// [main.cpp]
+#include <iostream>
+
+extern int* numbers;
+
+int main()
+{
+    using namespace std;
+    for( int i = 0;  i < 42;  ++i )
+    {
+        cout << (i > 0? ", " : "") << numbers[i];
+    }
+    cout << endl;
+}
+```
+
+
+
+```cpp
+// [numbers.cpp]
+int numbers[42] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+```
+
+
+
+> NOTE: 编译： `g++ main.cpp numbers.cpp -g -o main`
+
+### 0 and null pointer
+
+compiler是允许将0赋值给pointer的，下面是一些例子：
+
+```c++
+// [main.cpp]
+#include <iostream>
+int i0 = 0;
+int i1 = 1;
+int i2 = 2;
+int i3 = 3;
+int* numbers[42] = { &i0, &i1, &i2, &i3 };
+int main()
+{
+	using namespace std;
+	for (int i = 0; i < 42; ++i)
+	{
+		cout << (i > 0 ? ", " : "") << *numbers[i];
+	}
+	cout << endl;
+}
+// g++ test.cpp
+```
+
+上述程序是会core dump的，因为除了前4个元素，`numbers`中的其他元素的值为`0`，这就导致了deference null pointer。
+
+
+
+```c++
+// [main.cpp]
+#include <iostream>
+int* numbers[42] = { 0, 0 };
+int main()
+{
+	using namespace std;
+	for (int i = 0; i < 42; ++i)
+	{
+		cout << (i > 0 ? ", " : "") << *numbers[i];
+	}
+	cout << endl;
+}
+
+```
+
+上述程序是可以编译通过的。

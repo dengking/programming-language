@@ -931,9 +931,317 @@ int main()
 int numbers[42] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 ```
 
+> NOTE: 编译: `g++ main.cpp numbers.cpp -g -o main`
+
+In Windows 7 this compiles and links fine with both MinGW g++ 4.4.1 and Visual C++ 10.0.
+
+Since the types don't match, the program crashes when you run it.
+
+> NOTE: 这违背了strict aliasing。
+
+In-the-formal explanation: the program has **Undefined Behavior** (UB), and instead of crashing it can therefore just hang, or perhaps do nothing, or it can send threating e-mails to the presidents of the USA, Russia, India, China and Switzerland, and make Nasal Daemons fly out of your nose.
+
+In-practice explanation: in `main.cpp` the array is treated as a pointer, placed at the same address as the array. For 32-bit executable this means that the first `int` value in the array, is treated as a pointer. I.e., in `main.cpp` the `numbers` variable contains, or appears to contain, `(int*)1`. This causes the program to access memory down at very bottom of the address space, which is conventionally reserved and trap-causing. Result: you get a crash.
+
+> NOTE: 在`main.cpp`中，`numbers`的类型是`int *`，那按理来说`numbers[i]`仅仅是访问成员，而并不会去dereference成员的值，所以应该不存在“access memory down at very bottom of the address space”。所以我觉得上述解释应该是错误的。下面是改编的程序，它将array和array中的内容打印出来：
+>
+> ```c++
+> // [main.cpp]
+> #include <iostream>
+> 
+> extern int* numbers;
+> void print_array();
+> 
+> int main()
+> {
+> 	print_array();
+> 	using namespace std;
+> 	std::cout << numbers << std::endl;
+> 
+> 	for (int i = 0; i < 9; ++i)
+> 	{
+> 		cout << (i > 0 ? ", " : "") << (numbers + i * sizeof(int));
+> 	}
+> 	cout << endl;
+> }
+> 
+> ```
+>
+> 
+>
+> ```c++
+> // [numbers.cpp]
+> #include <iostream>
+> const int length = 9;
+> int numbers[length] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+> 
+> void print_array()
+> {
+> 	std::cout << numbers << std::endl;
+> 	for (int i = 0; i < length; ++i)
+> 	{
+> 		std::cout << numbers + i << std::endl;
+> 		std::cout << numbers[i] << std::endl;
+> 	}
+> }
+> 
+> ```
+>
+> 编译: `g++ main.cpp numbers.cpp -g -o main`
+>
+> 在linux下的运行结果如下：
+>
+> ```c++
+> 0x6010a0
+> 0x6010a0
+> 1
+> 0x6010a4
+> 2
+> 0x6010a8
+> 3
+> 0x6010ac
+> 4
+> 0x6010b0
+> 5
+> 0x6010b4
+> 6
+> 0x6010b8
+> 7
+> 0x6010bc
+> 8
+> 0x6010c0
+> 9
+> 0x200000001
+> 0x200000001, 0x200000011, 0x200000021, 0x200000031, 0x200000041, 0x200000051, 0x200000061, 0x200000071, 0x200000081
+> ```
+>
+> 通过上述运行结果可以看出，`main.cpp`中访问的`numbers`和`numbers.cpp`中的number的内存地址不一致，显然这是导致程序core dump的原因。
+
+The compilers are fully within their rights to not diagnose this error, because C++11 §3.5/10 says, about the requirement of compatible types for the declarations,
+
+> **[N3290 §3.5/10]**
+> A violation of this rule on type identity does not require a diagnostic.
+
+The same paragraph details the variation that is allowed:
+
+> … declarations for an array object can specify array types that differ by the presence or absence of a major array bound (8.3.4).
+
+This allowed variation does not include declaring a name as an array in one translation unit, and as a pointer in another **translation unit**.
+
+#### 5.2 Pitfall: Doing premature optimization (`memset` & friends).
 
 
 
+#### 5.3 Pitfall: Using the C idiom to get number of elements.
+
+With deep C experience it’s natural to write …
+
+```cpp
+#define N_ITEMS( array )   (sizeof( array )/sizeof( array[0] ))
+```
+
+Since an `array` decays to pointer to first element where needed, the expression `sizeof(a)/sizeof(a[0])` can also be written as `sizeof(a)/sizeof(*a)`. It means the same, and no matter how it’s written it is the **C idiom** for finding the number elements of array.
+
+Main pitfall: the C idiom is not typesafe. For example, the code …
+
+```c++
+#include <stdio.h>
+
+#define N_ITEMS( array ) (sizeof( array )/sizeof( *array ))
+
+void display(int const a[7])
+{
+	int const n = N_ITEMS(a);          // Oops.
+	printf("%d elements.\n", n);
+}
+
+int main()
+{
+	int const moohaha[] = { 1, 2, 3, 4, 5, 6, 7 };
+
+	printf("%d elements, calling display...\n", N_ITEMS(moohaha));
+	display(moohaha);
+}
+// gcc test.c
+```
+
+> NOTE: 上述程序，传递array的方式为：Pass by pointer
+
+> NOTE: 上述程序输出如下：
+>
+> ```
+> 7 elements, calling display...
+> 2 elements.
+> 
+> ```
+
+1. The compiler rewrites `int const a[7]` to just `int const a[]`.
+2. The compiler rewrites `int const a[]` to `int const* a`.
+3. `N_ITEMS` is therefore invoked with a pointer.
+4. For a 32-bit executable `sizeof(array)` (size of a pointer) is then 4.
+5. `sizeof(*array)` is equivalent to `sizeof(int)`, which for a 32-bit executable is also 4.
+
+
+
+In order to detect this error at **run time** you can do …
+
+```c++
+#include "assert.h"
+#include "stdio.h"
+#include <iostream>
+#include <typeinfo>
+
+#define N_ITEMS( array )       (                               \
+    assert((                                                    \
+        "N_ITEMS requires an actual array as argument",        \
+        typeid( array ) != typeid( &*array )                    \
+        )),                                                     \
+    sizeof( array )/sizeof( *array )                            \
+    )
+
+void display(int const a[7])
+{
+	int const n = N_ITEMS(a);          // Oops.
+	std::cout << typeid( a ).name() << std::endl;
+	std::cout << typeid( &*a ).name() << std::endl;
+	printf("%d elements.\n", n);
+}
+
+int main()
+{
+	int const moohaha[] = { 1, 2, 3, 4, 5, 6, 7 };
+	printf("%d elements, calling display...\n", N_ITEMS(moohaha));
+	display(moohaha);
+}
+
+```
+
+> NOTE: 关于`typeid` ，参见cppreference [`typeid`](https://en.cppreference.com/w/cpp/language/typeid)
+>
+> 上述实现中，如果`array`的实际类型是pointer，则`typeid( array ) == typeid( &*array )`，显然是不符合assertion的。
+>
+> 运行结果:
+>
+> ```c++
+> 7 elements, calling display...
+> a.out: test.cpp:18: void display(const int*): Assertion `( "N_ITEMS requires an actual array as argument", typeid( a ) != typeid( &*a ) )' failed.
+> 已放弃(吐核)
+> ```
+
+The **runtime error detection** is better than **no detection**, but it wastes a little processor time, and perhaps much more programmer time. Better with **detection at compile time**! And if you're happy to not support arrays of local types with C++98, then you can do that:
+
+```cpp
+#include "stddef.h"
+#include "stdio.h"
+#include <iostream>
+#include <typeinfo>
+
+typedef ptrdiff_t   Size;
+
+template< class Type, Size n >
+Size n_items( Type (&)[n] ) { return n; }
+
+#define N_ITEMS( array )       n_items( array )
+void display(int const a[7])
+{
+	int const n = N_ITEMS(a);          // Oops.
+	std::cout << typeid( a ).name() << std::endl;
+	std::cout << typeid( &*a ).name() << std::endl;
+	printf("%d elements.\n", n);
+}
+
+int main()
+{
+	int const moohaha[] = { 1, 2, 3, 4, 5, 6, 7 };
+	printf("%d elements, calling display...\n", N_ITEMS(moohaha));
+	display(moohaha);
+}
+// g++ --std=c++11 test.cpp
+```
+
+> NOTE: 上述程序编译报错如下:
+>
+> ```c#
+> test.cpp: 在函数‘void display(const int*)’中:
+> test.cpp:11:47: 错误：对‘n_items(const int*&)’的调用没有匹配的函数
+>  #define N_ITEMS( array )       n_items( array )
+> 
+> ```
+>
+> 
+
+How it works: the array is passed *by reference* to `n_items`, and so it does not decay to pointer to first element, and the function can just return the number of elements specified by the type.
+
+With C++11 you can use this also for arrays of local type, and it's the type safe **C++ idiom** for finding the number of elements of an array.
+
+#### 5.4 C++11 & C++14 pitfall: Using a `constexpr` array size function.
+
+With C++11 and later it's natural, but as you'll see dangerous!, to replace the C++03 function
+
+```cpp
+typedef ptrdiff_t   Size;
+
+template< class Type, Size n >
+Size n_items( Type (&)[n] ) { return n; }
+```
+
+with
+
+```cpp
+using Size = ptrdiff_t;
+
+template< class Type, Size n >
+constexpr auto n_items( Type (&)[n] ) -> Size { return n; }
+```
+
+where the significant change is the use of `constexpr`, which allows this function to produce a **compile time constant**.
+
+For example, in contrast to the C++03 function, such a compile time constant can be used to declare an array of the same size as another:
+
+```c++
+#include "stddef.h"
+#include "stdio.h"
+#include <iostream>
+#include <typeinfo>
+
+typedef ptrdiff_t Size;
+
+using Size = ptrdiff_t;
+
+template<class Type, Size n>
+constexpr auto n_items(Type (&)[n]) -> Size
+{
+	return n;
+}
+
+// Example 1
+void foo()
+{
+	int const x[] = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 4 };
+	constexpr Size n = n_items(x);
+	int y[n] = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 4 };
+	for (auto&& i : y)
+	{
+		std::cout << i << std::endl;
+	}
+	// Using y here.
+}
+
+int main()
+{
+	foo();
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序输出:
+>
+> ```
+> 42
+> ```
+>
+> 
 
 ## pointer and array
 
