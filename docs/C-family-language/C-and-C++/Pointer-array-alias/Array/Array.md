@@ -519,7 +519,9 @@ And here is how it looks like in memory:
 
 ### Conversions
 
-**Array-to-pointer decay** naturally extends to arrays of arrays and arrays of pointers:
+#### Array-to-pointer decay
+
+**Array-to-pointer decay** naturally extends to **arrays of arrays** and **arrays of pointers**:
 
 ```c++
 #include <algorithm>
@@ -536,7 +538,64 @@ int main()
 
 ```
 
+> NOTE: `pointer_to_array`是一个指向array的pointer；`array_of_pointers`是一个array，元素的类型是`int*`。
+>
+> 对于`array_of_arrays`，经过**array-to-pointer decay**，得到的是pointer to arrays，这个pointer的类型是`int (*)[7]`；
+>
+> 对于`array_of_pointers`，经过**array-to-pointer decay**，得到的是pointer to pointer，即double pointer；
+>
+> 上面的这个例子是非常经典的例子。
+>
+> ### Pointer to pointer to int array
+>
+> ```c++
+> #include <algorithm>
+> #include <iostream>
+> void print_array(int **arr, int row, int col)
+> {
+> 	for (int i = 0; i < row; ++i)
+> 	{
+> 		for (int j = 0; j < col; ++i)
+> 		{
+> 			std::cout << arr[i][j] << std::endl;
+> 		}
+> 	}
+> }
+> int main()
+> {
+> 	const int row = 2;
+> 	const int col = 2;
+> 	int array_of_arrays[row][col] = { { 1, 2 }, { 3, 3 } };
+> 	int (*pointer_to_array)[col] = array_of_arrays;
+> 	int** pointer_to_pointer = &pointer_to_array;
+> 	print_array(pointer_to_pointer, 2, 2);
+> }
+> // g++ --std=c++11 test.cpp
+> ```
+>
+> 上述程序的编译报错如下：
+>
+> ```c++
+> test.cpp: 在函数‘int main()’中:
+> test.cpp:19:30: 错误：不能在初始化时将‘int (**)[2]’转换为‘int**’
+>   int** pointer_to_pointer = &pointer_to_array;
+> ```
+>
+> 上述编译报错给我们的提示是：`&pointer_to_array`的类型是`int (**)[2]`。
 
+#### Two dimension array to `**pointer`
+
+However, there is no **implicit conversion** from `T[h][w]` to `T**`. If such an **implicit conversion** did exist, the result would be a pointer to the first element of an array of `h` pointers to `T` (each pointing to the first element of a line in the original 2D array), but that pointer array does not exist anywhere in memory yet. If you want such a **conversion**, you must create and fill the required pointer array manually:
+
+
+
+> NOTE: 下面是一些补充内容：
+>
+> [How to assign two dimension array to pointer](https://stackoverflow.com/questions/10165627/how-to-assign-two-dimensional-array-to-pointer)
+>
+> [conversion of 2D array to pointer-to-pointer](https://stackoverflow.com/questions/8203700/conversion-of-2d-array-to-pointer-to-pointer)
+>
+> 
 
 ## pointer and array
 
