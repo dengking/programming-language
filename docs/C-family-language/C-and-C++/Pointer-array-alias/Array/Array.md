@@ -330,12 +330,41 @@ connect_four: |   |   |   |   |   |   |   |
               +---+---+---+---+---+---+---+
 ```
 
+##### Actual memory layout
+
 Note that 2D grids such as the above are merely helpful visualizations. From the point of view of C++, memory is a "flat" sequence of bytes. The elements of a multidimensional array are stored in row-major order. That is, `connect_four[0][6]` and `connect_four[1][0]` are neighbors in memory. In fact, `connect_four[0][7]` and `connect_four[1][0]` denote the same element! This means that you can take multi-dimensional arrays and treat them as large, one-dimensional arrays:
 
 ```cpp
 int* p = &connect_four[0][0];
 int* q = p + 42;
 some_int_sequence_algorithm(p, q);
+```
+
+
+
+```c++
+#include <algorithm>
+#include <iostream>
+void print_array(int *arr, int length)
+{
+	for (int i = 0; i < length; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+int main()
+{
+	const int row = 2;
+	const int col = 2;
+	int connect_four[row][col] = { { 4, 3 }, { 2, 1 } };
+	int* p = &connect_four[0][0];
+	int* q = p + row * col;
+	std::sort(p, q);
+	print_array(p, row * col);
+}
+// g++ --std=c++11 test.cpp
+
 ```
 
 
@@ -587,6 +616,88 @@ int main()
 
 However, there is no **implicit conversion** from `T[h][w]` to `T**`. If such an **implicit conversion** did exist, the result would be a pointer to the first element of an array of `h` pointers to `T` (each pointing to the first element of a line in the original 2D array), but that pointer array does not exist anywhere in memory yet. If you want such a **conversion**, you must create and fill the required pointer array manually:
 
+```c++
+#include <algorithm>
+#include <iostream>
+void print_array(int **arr, int row, int col)
+{
+	for (int i = 0; i < row; ++i)
+	{
+		for (int j = 0; j < col; ++j)
+		{
+			std::cout << arr[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+int main()
+{
+	const int row = 2;
+	const int col = 2;
+	int connect_four[row][col] = { { 1, 2 }, { 3, 4 } };
+
+	int** p = new int*[row];
+	for (int i = 0; i < row; ++i)
+	{
+		p[i] = connect_four[i];
+	}
+	// ...
+
+	print_array(p, row, col);
+	delete[] p;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序的输出如下:
+>
+> ```
+> 1 2 
+> 3 4 
+> ```
+
+Note that this generates a view of the original multidimensional array. If you need a copy instead, you must create extra arrays and copy the data yourself:
+
+```c++
+#include <algorithm>
+#include <iostream>
+void print_array(int **arr, int row, int col)
+{
+	for (int i = 0; i < row; ++i)
+	{
+		for (int j = 0; j < col; ++j)
+		{
+			std::cout << arr[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+int main()
+{
+	const int row = 2;
+	const int col = 2;
+	int connect_four[row][col] = { { 1, 2 }, { 3, 4 } };
+
+	int** p = new int*[row];
+	for (int i = 0; i < col; ++i)
+	{
+		p[i] = new int[7];
+		std::copy(connect_four[i], connect_four[i + 1], p[i]);
+	}
+
+	// ...
+	print_array(p, row, col);
+	for (int i = 0; i < row; ++i)
+	{
+		delete[] p[i];
+	}
+	delete[] p;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
 
 
 > NOTE: 下面是一些补充内容：
@@ -594,8 +705,235 @@ However, there is no **implicit conversion** from `T[h][w]` to `T**`. If such an
 > [How to assign two dimension array to pointer](https://stackoverflow.com/questions/10165627/how-to-assign-two-dimensional-array-to-pointer)
 >
 > [conversion of 2D array to pointer-to-pointer](https://stackoverflow.com/questions/8203700/conversion-of-2d-array-to-pointer-to-pointer)
+
+
+
+> ### NOTE: Passing multiple-dimensional array to function
+>
+> 如何passing multiple-dimensional array to function？有多种方式，下面以print multiple-dimensional array为例来进行说明
+>
+> #### Pass as pointer
+>
+> 正如在“Actual memory layout”中所述：
+>
+> “you can take multi-dimensional arrays and treat them as large, one-dimensional arrays”
+>
+> ```c++
+> #include <algorithm>
+> #include <iostream>
+> void print_array(int *arr, int length)
+> {
+> 	for (int i = 0; i < length; ++i)
+> 	{
+> 		std::cout << arr[i] << " ";
+> 	}
+> 	std::cout << std::endl;
+> }
+> int main()
+> {
+> 	const int row = 2;
+> 	const int col = 2;
+> 	int connect_four[row][col] = { { 4, 3 }, { 2, 1 } };
+> 	int* p = &connect_four[0][0];
+> 	int* q = p + row * col;
+> 	std::sort(p, q);
+> 	print_array(p, row * col);
+> }
+> // g++ --std=c++11 test.cpp
+> 
+> ```
 >
 > 
+>
+> #### Pass as pointer to pointer
+>
+> 采用“Two dimension array to `**pointer`”中描述的方法。
+
+
+
+### Assignment
+
+For no particular reason, arrays cannot be assigned to one another. Use `std::copy` instead:
+
+```c++
+#include <algorithm>
+#include <iostream>
+void print_array(int *arr, int length)
+{
+	for (int i = 0; i < length; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+int main()
+{
+
+	int a[8] = { 2, 3, 5, 7, 11, 13, 17, 19 };
+	int b[8];
+	std::copy(a + 0, a + 8, b);
+	print_array(b, 8);
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+This is more flexible than what true array assignment could provide because it is possible to copy slices of larger arrays into smaller arrays. `std::copy` is usually specialized for primitive types to give maximum performance. It is unlikely that `std::memcpy` performs better. If in doubt, measure.
+
+Although you cannot assign arrays directly, you *can* assign structs and classes which *contain* array members. That is because [array members are copied memberwise](https://stackoverflow.com/questions/4164279/) by the assignment operator which is provided as a default by the compiler. If you define the assignment operator manually for your own struct or class types, you must fall back to manual copying for the array members.
+
+### Parameter passing
+
+Arrays cannot be passed by value. You can either pass them by pointer or by reference.
+
+#### Pass by pointer
+
+Since arrays themselves cannot be passed by value, usually a pointer to their first element is passed by value instead. This is often called "**pass by pointer**". Since the size of the array is not retrievable via that pointer, you have to pass a second parameter indicating the size of the array (the classic C solution) or a second pointer pointing after the last element of the array (the C++ iterator solution):
+
+```c++
+#include <algorithm>
+#include <iostream>
+#include <numeric>
+#include <cstddef>
+
+void print_array(int *arr, int length)
+{
+	for (int i = 0; i < length; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+int sum(const int* p, std::size_t n)
+{
+	return std::accumulate(p, p + n, 0);
+}
+
+int sum(const int* p, const int* q)
+{
+	return std::accumulate(p, q, 0);
+}
+
+int main()
+{
+	const int row = 2;
+	const int col = 2;
+	int connect_four[row][col] = { { 4, 3 }, { 2, 1 } };
+	int* p = &connect_four[0][0];
+	int* q = p + row * col;
+	std::cout << sum(p, q) << std::endl;
+	std::cout << sum(p, row * col) << std::endl;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+As a syntactic alternative, you can also declare parameters as `T p[]`, and it means the exact same thing as `T* p` **in the context of parameter lists only**:
+
+```cpp
+int sum(const int p[], std::size_t n)
+{
+    return std::accumulate(p, p + n, 0);
+}
+```
+
+You can think of the compiler as rewriting `T p[]` to `T *p` **in the context of parameter lists only**. This special rule is partly responsible for the whole confusion about arrays and pointers. In every other context, declaring something as an array or as a pointer makes a *huge* difference.
+
+Unfortunately, you can also provide a size in an array parameter which is silently ignored by the compiler. That is, the following three signatures are exactly equivalent, as indicated by the compiler errors:
+
+```cpp
+int sum(const int* p, std::size_t n)
+
+// error: redefinition of 'int sum(const int*, size_t)'
+int sum(const int p[], std::size_t n)
+
+// error: redefinition of 'int sum(const int*, size_t)'
+int sum(const int p[8], std::size_t n)   // the 8 has no meaning here
+```
+
+
+
+#### Pass by reference
+
+Arrays can also be passed by reference:
+
+```cpp
+int sum(const int (&a)[8])
+{
+    return std::accumulate(a + 0, a + 8, 0);
+}
+```
+
+In this case, the array size is significant. Since writing a function that only accepts arrays of exactly 8 elements is of little use, programmers usually write such functions as templates:
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <numeric>
+#include <cstddef>
+
+void print_array(int *arr, int length)
+{
+	for (int i = 0; i < length; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+template<std::size_t n>
+int sum(const int (&a)[n])
+{
+	return std::accumulate(a + 0, a + n, 0);
+}
+
+int main()
+{
+	int connect_four[] = { 4, 3, 2, 1 };
+	std::cout << sum(connect_four) << std::endl;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+Note that you can only call such a function template with an actual array of integers, not with a pointer to an integer. The size of the array is automatically inferred, and for every size `n`, a different function is instantiated from the template. You can also write [quite useful](https://stackoverflow.com/questions/4759078/) function templates that abstract from both the element type and from the size.
+
+
+
+### 5. Common pitfalls when using arrays.
+
+#### 5.1 Pitfall: Trusting type-unsafe linking.
+
+OK, you’ve been told, or have found out yourself, that globals (namespace scope variables that can be accessed outside the translation unit) are Evil™. But did you know how truly Evil™ they are? Consider the program below, consisting of two files [main.cpp] and [numbers.cpp]:
+
+```cpp
+// [main.cpp]
+#include <iostream>
+
+extern int* numbers;
+
+int main()
+{
+    using namespace std;
+    for( int i = 0;  i < 42;  ++i )
+    {
+        cout << (i > 0? ", " : "") << numbers[i];
+    }
+    cout << endl;
+}
+```
+
+
+
+```cpp
+// [numbers.cpp]
+int numbers[42] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+```
+
+
+
+
 
 ## pointer and array
 
