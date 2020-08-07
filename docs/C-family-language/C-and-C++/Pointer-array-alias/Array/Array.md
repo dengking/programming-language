@@ -103,11 +103,11 @@ If you are unfamiliar with the C declarator syntax, the parenthesis in the type 
 
   > NOTE: `int* array[8]`
 
-### Accessing elements
+#### Accessing elements
 
 C++ provides two syntactic variations to access individual elements of an array. Neither of them is superior to the other, and you should familiarize yourself with both.
 
-#### Pointer arithmetic
+##### Pointer arithmetic
 
 Given a pointer `p` to the first element of an array, the expression `p+i` yields a pointer to the i-th element of the array. By dereferencing that pointer afterwards, one can access individual elements:
 
@@ -154,7 +154,7 @@ x: | | |    x+3  |          x+7  |     int*
 
 Note that in the depicted case, `x` is a pointer *variable* (discernible by the small box next to `x`), but it could just as well be the result of a function returning a pointer (or any other expression of type `T*`).
 
-#### Indexing operator
+##### Indexing operator
 
 Since the syntax `*(x+i)` is a bit clumsy, C++ provides the alternative syntax `x[i]`:
 
@@ -419,7 +419,7 @@ This is how an anonymous multidimensional array looks like in memory:
 
 Note that the array itself is still allocated as a single block in memory.
 
-### Named arrays of pointers
+#### Named arrays of pointers
 
 Here is a named array of five pointers which are initialized with anonymous arrays of different lengths:
 
@@ -477,7 +477,7 @@ triangle: | | | | | | | | | | |
 
 Since each line is allocated individually now, viewing 2D arrays as 1D arrays does not work anymore.
 
-### Anonymous arrays of pointers
+#### Anonymous arrays of pointers
 
 Here is an anonymous array of 5 (or any other number of) pointers which are initialized with anonymous arrays of different lengths:
 
@@ -546,9 +546,9 @@ And here is how it looks like in memory:
           +---+
 ```
 
-### Conversions
+#### Conversions
 
-#### Array-to-pointer decay
+##### Array-to-pointer decay
 
 **Array-to-pointer decay** naturally extends to **arrays of arrays** and **arrays of pointers**:
 
@@ -612,7 +612,7 @@ int main()
 >
 > 上述编译报错给我们的提示是：`&pointer_to_array`的类型是`int (**)[2]`。
 
-#### Two dimension array to `**pointer`
+##### Two dimension array to `**pointer`
 
 However, there is no **implicit conversion** from `T[h][w]` to `T**`. If such an **implicit conversion** did exist, the result would be a pointer to the first element of an array of `h` pointers to `T` (each pointing to the first element of a line in the original 2D array), but that pointer array does not exist anywhere in memory yet. If you want such a **conversion**, you must create and fill the required pointer array manually:
 
@@ -782,11 +782,11 @@ This is more flexible than what true array assignment could provide because it i
 
 Although you cannot assign arrays directly, you *can* assign structs and classes which *contain* array members. That is because [array members are copied memberwise](https://stackoverflow.com/questions/4164279/) by the assignment operator which is provided as a default by the compiler. If you define the assignment operator manually for your own struct or class types, you must fall back to manual copying for the array members.
 
-### Parameter passing
+#### Parameter passing
 
 Arrays cannot be passed by value. You can either pass them by pointer or by reference.
 
-#### Pass by pointer
+##### Pass by pointer
 
 Since arrays themselves cannot be passed by value, usually a pointer to their first element is passed by value instead. This is often called "**pass by pointer**". Since the size of the array is not retrievable via that pointer, you have to pass a second parameter indicating the size of the array (the classic C solution) or a second pointer pointing after the last element of the array (the C++ iterator solution):
 
@@ -854,7 +854,7 @@ int sum(const int p[8], std::size_t n)   // the 8 has no meaning here
 
 
 
-#### Pass by reference
+##### Pass by reference
 
 Arrays can also be passed by reference:
 
