@@ -12,10 +12,7 @@ nav:
     
 ##########C和C++中都会涉及到的概念的对比##########
     - VS-inline-VS-marco: VS-inline-VS-marco.md
-##########C和C++中都会涉及到Preprocessor##########    
-    - Preprocessor: Preprocessor
-##########编译过程中可能会涉及到问题##########
-    - Multiple-definition: Multiple-definition
+
 
     
     
