@@ -49,7 +49,7 @@ static constexpr not(bool x)
 
 #### Examples
 
-维基百科[Compile time function execution#Examples](https://en.wikipedia.org/wiki/Compile_time_function_execution)
+##### 维基百科[Compile time function execution#Examples](https://en.wikipedia.org/wiki/Compile_time_function_execution)
 
 C++11之前：
 
@@ -149,6 +149,45 @@ int main()
 
 
 
+##### stackoverflow [Using a `constexpr` array size function](https://stackoverflow.com/a/7439261)
+
+```
+#include "stddef.h"
+#include "stdio.h"
+#include <iostream>
+#include <typeinfo>
+
+typedef ptrdiff_t Size;
+
+using Size = ptrdiff_t;
+
+template<class Type, Size n>
+constexpr auto n_items(Type (&)[n]) -> Size
+{
+	return n;
+}
+
+// Example 1
+void foo()
+{
+	int const x[] = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 4 };
+	constexpr Size n = n_items(x);
+	int y[n] = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 4 };
+	for (auto&& i : y)
+	{
+		std::cout << i << std::endl;
+	}
+	// Using y here.
+}
+
+int main()
+{
+	foo();
+}
+// g++ --std=c++11 test.cpp
+
+```
+
 
 
 
@@ -159,7 +198,7 @@ int main()
 
 #### Examples
 
-`spdlog/common.h`
+##### `spdlog/common.h`
 
 
 ```c++
@@ -195,7 +234,7 @@ struct source_loc
 
 
 
-cppreference [constexpr specifier#Example](https://en.cppreference.com/w/cpp/language/constexpr#Example)
+##### cppreference [constexpr specifier#Example](https://en.cppreference.com/w/cpp/language/constexpr#Example)
 
 ```c++
 #include <cstddef>
