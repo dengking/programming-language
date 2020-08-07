@@ -41,11 +41,18 @@ struct作为protocol，描述接口，具备描述功能；
 
 ### struct RTTI
 
-RTTI即run-time type info，struct的RTTI需要包含如下信息：
+RTTI即run-time type info，struct RTTI需要包含如下信息：
 
 - 字段个数
 
-- 每个字段的类型、长度、offset
+- 每个字段的类型、长度、offset，使用[offsetof](https://en.cppreference.com/w/cpp/types/offsetof)获得
+
+struct value RTTI：
+
+- 字段个数
+- 每个字段的类型、长度，offset，剔除padding的offset
+
+
 
 #### struct RTTI的生成
 
@@ -53,3 +60,6 @@ RTTI即run-time type info，struct的RTTI需要包含如下信息：
 
 
 
+
+
+所有的struct都使用相同的模式，所以可以使用自动代码生成工具来进行生成。
