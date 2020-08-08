@@ -1,5 +1,4 @@
 nav:
     - Pointer: Pointer.md
-    - Array: Array
-    - Double-pointer: Double-pointer.md
     - Pointer-and-integer: Pointer-and-integer.md
+    - Array: Array    
