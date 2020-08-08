@@ -365,6 +365,14 @@ int main(int argc, char** argv)
 
 ## Pointer to `void` 
 
+### Generic interface
+
+正如creference [Pointers to void](https://en.cppreference.com/w/c/language/pointer)中所言：
+
+> Pointers to `void` are used to pass objects of unknown type, which is common in **generic interfaces**
+
+### cppreference Pointer to `void`
+
 Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void` (optionally [cv-qualified](cv.html)); the pointer value is unchanged. The reverse conversion, which requires [static_cast](static_cast.html) or [explicit cast](explicit_cast.html), yields the original pointer value:
 
 > NOTE: 下面展示的就是`static_cast`的用法
@@ -387,32 +395,21 @@ If the original pointer is pointing to a base class subobject within an object o
 
 > NOTE: 上面这段话是什么意思？
 
-Pointers to void are used to pass objects of unknown type, which is common in C interfaces: [std::malloc](../memory/c/malloc.html) returns `void*`, [std::qsort](../algorithm/qsort.html) expects a user-provided callback that accepts two `const void*` arguments. [pthread_create](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_create.html) expects a user-provided callback that accepts and returns `void*`. In all cases, it is the caller's responsibility to cast the pointer to the correct type before use.
+Pointers to void are used to pass objects of unknown type, which is common in C interfaces: [std::malloc](../memory/c/malloc.html) returns `void*`, [std::qsort](../algorithm/qsort.html) expects a user-provided callback that accepts two `const void*` arguments. [pthread_create](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_create.html) expects a user-provided callback that accepts and returns `void*`. In all cases, it is the **caller**'s responsibility to cast the pointer to the correct type before use.
 
+TO READ:
 
-
-## [Pointers to void](https://en.cppreference.com/w/c/language/pointer)
-
-Pointer to object of any type can be [implicitly converted](https://en.cppreference.com/w/c/language/conversion) to pointer to `void` (optionally [const](https://en.cppreference.com/w/c/language/const) or [volatile](https://en.cppreference.com/w/c/language/volatile)-qualified), and vice versa:
-
-```C
-int n=1, *p=&n;
-void* pv = p; // int* to void*
-int* p2 = pv; // void* to int*
-printf("%d\n", *p2); // prints 1
-```
-
-Pointers to `void` are used to pass objects of unknown type, which is common in **generic interfaces**: [malloc](https://en.cppreference.com/w/c/memory/malloc) returns `void`, [qsort](https://en.cppreference.com/w/c/algorithm/qsort) expects a user-provided callback that accepts two `const void*` arguments. [pthread_create](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_create.html) expects a user-provided callback that accepts and returns `void*`. In all cases, it is the caller's responsibility to convert the pointer to the **correct type** before use.
+[Why type cast a void pointer?](https://stackoverflow.com/questions/16986214/why-type-cast-a-void-pointer)
 
 
 
 
 
-## stackoverflow [What does void mean in C, C++, and C#?](https://stackoverflow.com/questions/1043034/what-does-void-mean-in-c-c-and-c)
+### stackoverflow [What does void mean in C, C++, and C#?](https://stackoverflow.com/questions/1043034/what-does-void-mean-in-c-c-and-c)
 
 
 
-### [A](https://stackoverflow.com/a/1043107)
+#### [A](https://stackoverflow.com/a/1043107)
 
 Basically it means "nothing" or "no type"
 
@@ -430,9 +427,9 @@ Note: the `void` in a function argument is optional in C++, so `int myFunc()` is
 
 
 
-## Example
+### Examples
 
-### Plugin system
+#### Plugin system
 
 ```c++
 int FUNCTION_CALL_MODE HQInit(void* lpInstance, PFOnSetTimeOut pfOnSetTimeOut)
@@ -446,7 +443,7 @@ int FUNCTION_CALL_MODE HQInit(void* lpInstance, PFOnSetTimeOut pfOnSetTimeOut)
 
 
 
-### redis linked list
+#### redis linked list
 
 ```C
 typedef struct listNode {
@@ -489,17 +486,13 @@ list *listAddNodeTail(list *list, void *value)
 > - If a pointer to object is converted to a pointer to void and back, its value compares equal to the original pointer.
 > - No other guarantees are offered
 
-## Q&A
+### void pointer and alignment
 
 alignment如何保证？`void*`应该具备最大的alignment。
 
 
 
-## [Why type cast a void pointer?](https://stackoverflow.com/questions/16986214/why-type-cast-a-void-pointer)
-
-
-
-## Void pointer VS char pointer
+## Pointer to void VS pointer to char 
 
 https://stackoverflow.com/questions/10058234/void-vs-char-pointer-arithmetic
 
@@ -516,6 +509,8 @@ https://groups.google.com/forum/#!topic/comp.lang.c/kz6ORGo6GD8
 http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
 
 http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
+
+
 
 ## TO READ
 
