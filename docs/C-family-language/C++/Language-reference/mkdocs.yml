@@ -9,11 +9,6 @@ nav:
     - Statements: Statements
     # function是programming language中都会涉及的一个问题
     - Functions: Functions
-   
-    # 指针和数组一般都会放到一起
-    - Pointer: Pointer
-    # Array
-    - Array: Array
     # 引用
     - Reference: Reference
     # 异常机制
