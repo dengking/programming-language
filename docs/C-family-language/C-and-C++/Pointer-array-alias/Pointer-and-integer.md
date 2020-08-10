@@ -30,7 +30,7 @@ Do not convert a pointer type to an integer type if the result cannot be represe
 
 The mapping between pointers and integers must be consistent with the addressing structure of the execution environment. Issues may arise, for example, on architectures that have a segmented memory model.
 
-#### Noncompliant Code Example
+#### Noncompliant Code Example: pointer to integral type
 
 The size of a **pointer** can be greater than the size of an **integer**, such as in an implementation where pointers are 64 bits and unsigned integers are 32 bits. This code example is noncompliant on such implementations because the result of converting the 64-bit `ptr` cannot be represented in the 32-bit integer type:
 
@@ -93,7 +93,7 @@ int main()
 
 ```
 
-#### Noncompliant Code Example
+#### Noncompliant Code Example: **literal integer** to **pointer** 
 
 It is sometimes necessary to access memory at a specific location, requiring a **literal integer** to **pointer** conversion. In this noncompliant code, a pointer is set directly to an **integer constant**, where it is unknown whether the result will be as intended:
 
@@ -180,15 +180,11 @@ int main()
 
 
 
+## cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
 
+在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中，对integer to pointer、pointer to integer进行了详细说明。
 
 ### Integer to pointer
-
-在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中有这样的描述：
-
-> 3) A value of any integral or enumeration type can be converted to a pointer type.
-
-
 
 本节标题的含义是：“将integer转换为pointer”；正常来说，compiler是绝对不允许这样做的，因为这样做非常危险，下面举例进行说明。
 
@@ -365,6 +361,115 @@ int main()
 
 
 ### Pointer to integer
+
+#### Example: stackoverflow [How do I cast a pointer to an int](https://stackoverflow.com/questions/14092754/how-do-i-cast-a-pointer-to-an-int)
+
+错误程序如下：
+
+```c++
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> test;
+
+int main()
+{
+	int *ip;
+	int pointervalue = 50;
+	ip = &pointervalue;
+
+	int thatvalue = 1;
+	thatvalue = ip; // compile error：pointer to integer
+
+	cout << ip << endl;
+
+	test.push_back(thatvalue);
+
+	cout << test[0] << endl;
+	return 0;
+}
+// g++ -g test.cpp
+
+```
+
+上述程序编译报错：
+
+```c++
+test.cpp: 在函数‘int main()’中:
+test.cpp:16:12: 错误：从类型‘int*’到类型‘int’的转换无效 [-fpermissive]
+  thatvalue = ip; // compile error：pointer to integer
+```
+
+按照 [A](https://stackoverflow.com/a/14093919) 中的回答，使用`reinterpret_cast<intptr_t>`：
+
+```c++
+#include "stdint.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<intptr_t> test;
+
+int main()
+{
+	int *ip;
+	int pointervalue = 50;
+	ip = &pointervalue;
+
+	intptr_t thatvalue = 1;
+	/* Convert it as a bit pattern.
+	 It is valid and converting it back to a pointer is also OK
+	 But if you modify it all bets are off (you need to be very careful).*/
+	thatvalue = reinterpret_cast<intptr_t>(ip);
+
+	cout << ip << endl;
+
+	test.push_back(thatvalue);
+
+	cout << test[0] << endl;
+	return 0;
+}
+// g++ -g test.cpp
+
+```
+
+按照 [A](https://stackoverflow.com/a/14092767) 中的回答，使用C-style cast：
+
+```c++
+#include "stdint.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<intptr_t> test;
+
+int main()
+{
+	int *ip;
+	int pointervalue = 50;
+	ip = &pointervalue;
+
+	intptr_t thatvalue = 1;
+	/* Convert it as a bit pattern.
+	 It is valid and converting it back to a pointer is also OK
+	 But if you modify it all bets are off (you need to be very careful).*/
+	thatvalue = (intptr_t) ip;
+
+	cout << ip << endl;
+
+	test.push_back(thatvalue);
+
+	cout << test[0] << endl;
+	return 0;
+}
+// g++ -g test.cpp
+
+```
 
 
 
