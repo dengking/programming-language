@@ -159,7 +159,7 @@ int main()
 
 > NOTE: `struct counter`将destructor声明为`protected`，这与我们平时的将destructor声明为public virtual是不同的，它这样做的原因是：
 >
-> 避免直接使用`counter`对象，而是仅仅使用它的子类对象，因为它是一个mixin class；这样做的目的是让这个class被继承。
+> 避免直接使用`counter`类对象，让`counter`类为abstract class，因为它是一个mixin class。关于这一点，在`C++\Language-reference\Classes\Special-member-functions\Destructor\Destructor.md`的“Make the base classes' destructor **`protected` and nonvirtual**”节中进行了详细介绍。
 
 ### Polymorphic chaining
 

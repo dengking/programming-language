@@ -1,6 +1,6 @@
-# [type conversions](http://www.cplusplus.com/doc/tutorial/typecasting/)
+## cplusplus [type conversions](http://www.cplusplus.com/doc/tutorial/typecasting/)
 
-## Implicit conversion
+### Implicit conversion
 
 **Implicit conversions** are automatically performed when a value is copied to a **compatible type**. For example:
 
@@ -11,15 +11,41 @@ b=a;
 
 ```
 
-Here, the value of `a` is promoted(提升) from `short` to `int` without the need of any **explicit operator**. This is known as a **standard conversion**. Standard conversions affect fundamental data types, and allow the conversions between numerical types (short to int, int to float, double to int...), to or from `bool`, and some pointer conversions.
+Here, the value of `a` is promoted(提升) from `short` to `int` without the need of any **explicit operator**. This is known as a **standard conversion**. Standard conversions affect fundamental data types, and allow the conversions between numerical types (`short` to `int`, `int` to `float`, `double` to `int`...), to or from `bool`, and some pointer conversions.
 
-总结：**standard conversion**是**implicit conversion**，但是**implicit conversion**不一定是**standard conversion**
+> NOTE: **standard conversion**是**implicit conversion**，但是**implicit conversion**不一定是**standard conversion**
 
-Converting to int from some smaller integer type, or to double from float is known as **promotion**, and is guaranteed to produce the exact same value in the destination type. Other conversions between **arithmetic types** may not always be able to represent the same value exactly:
+Converting to `int` from some smaller integer type, or to `double` from float is `known` as **promotion**, and is guaranteed to produce the exact same value in the destination type. Other conversions between **arithmetic types** may not always be able to represent the same value exactly:
 
 - If a **negative integer** value is converted to an **unsigned type**, the resulting value corresponds to its 2's complement bitwise representation (i.e., -1 becomes the largest value representable by the type, -2 the second largest, ...).
-- The conversions from/to `bool` consider `false` equivalent to **zero** (for numeric types) and to **null pointer** (for pointer types); `tru`e is equivalent to all other values and is converted to the equivalent of 1.
+
+  > NOTE: 测试程序如下：
+  >
+  > ```c++
+  > #include<iostream>
+  > int main()
+  > {
+  > 	int i = -1;
+  > 	unsigned int j = i;
+  > 	std::cout << j << std::endl;
+  > }
+  > 
+  > ```
+  >
+  > 输出如下：
+  >
+  > ```
+  > 4294967295
+  > ```
+
+  
+
+  
+
+- The conversions from/to `bool` consider `false` equivalent to **zero** (for numeric types) and to **null pointer** (for pointer types); `true` is equivalent to all other values and is converted to the equivalent of 1.
+
 - If the conversion is from a **floating-point type** to an **integer type**, the value is truncated (the decimal part is removed). If the result lies outside the range of representable values by the type, the conversion causes **undefined behavior**.
+
 - Otherwise, if the conversion is between numeric types of the same kind (integer-to-integer or floating-to-floating), the conversion is valid, but the value is implementation-specific (and may not be portable).
 
 总结：上面主要描述的是**conversions between arithmetic types**
@@ -32,7 +58,7 @@ For **non-fundamental types**, **arrays** and **functions** **implicitly** conve
 - Pointers to any type can be converted to void pointers.
 - Pointer upcast: pointers to a **derived class** can be converted to a pointer of an accessible and unambiguous **base class**, without modifying its const or volatile qualification.
 
-## Implicit conversions with classes
+### Implicit conversions with classes
 
 In the world of classes, **implicit conversions** can be controlled by means of three **member functions**:
 
@@ -80,7 +106,7 @@ int main ()
 The **type-cast operator** uses a particular syntax: it uses the `operator` keyword followed by the **destination type** and an empty set of parentheses. Notice that the return type is the **destination type** and thus is not specified before the `operator` keyword.
 
 
-## Keyword explicit
+### Keyword explicit
 
 On a function call, `C++` allows one **implicit conversion** to happen for each **argument**(函数的参数). This may be somewhat problematic for classes, because it is not always what is intended. For example, if we add the following function to the last example:
 
@@ -141,52 +167,7 @@ Type-cast member functions (those described in the previous section) can also be
 
 
 
-# pointer and its type
-
-## [c-pointers-to-any-type](https://stackoverflow.com/questions/2935955/c-pointers-to-any-type)
-
-Yes, you can use a `void*` to point to anything, and then cast it to the proper type when needed (that's how `malloc` and such can work).
-
-`void*` is basically "pointer to an arbitrary block of memory".
-
-## [Any type of pointer can point to anything?](https://stackoverflow.com/questions/19710601/any-type-of-pointer-can-point-to-anything)
-
-Pointers *may* be interchangeable(通用的), but are not required to be(指针可以互换，但不是必需如此).
-
-In particular, on some platforms, certain types need to be aligned to certain byte-boundaries. So while a `char` may be anywhere in memory, an `int` may need to be on a 4-byte boundary.
-
-Another important potential difference is with function-pointers.
-Pointers to functions may not be interchangeable with pointers to data-types on many platforms.
-
-It bears repeating: **This is platform-specific**.
-
-I believe Intel x86 architectures treat all pointers the same.
-But you may well encounter other platforms where this is not true.
-
-I strongly doubt that on any given platform, casting a pointer from one type to another will modify the **address value**. I understand that dereferencing an unaligned pointer may cause an **exception**, but I doubt the compiler would align the pointer when the cast is done. I can't see any benefits or any motive for this behavior. – [Spidey](https://stackoverflow.com/users/131326/spidey)
-
-Every pointer is of some specific **type**. There's a special generic pointer type `void*` that can point to anything, but you have to convert a `void*` to some specific pointer type before you can **dereference** it.
-
-You can convert a pointer value from one pointer type to another. In most cases, converting a pointer from `foo*` to `bar*` and back to `foo*` will yield the original value -- but that's not actually guaranteed in all cases.
-
-You *can* cause a pointer of type `foo*` to point to an object of type `bar`, but (a) it's usually a bad idea, and (b) in some cases, it may not work (say, if the target types `foo` and `bar` have different sizes or **alignment requirements**).
-
-You can get away with things like:
-
-```cpp
-int n = 42;
-char *p = (char*)&n;
-```
-
-which causes `p` to point to `n` -- but then `*p` doesn't give you the value of `n`, it gives you the value of the first byte of `n` as a `char`.
-
-The differing behavior of **pointer arithmetic** is only part of the reason for having different **pointer types**. It's mostly about *type safety*. If you have a pointer of type `int*`, you can be reasonably sure (unless you've done something unsafe) that it actually points to an `int` object. And if you try to treat it as an object of a different type, the compiler will likely complain about it.
-
-Basically, we have distinct pointer types for the same reasons we have other distinct types: so we can keep track of what kind of value is stored in each object, with help from the compiler.
-
-(There have been languages that only have untyped generic pointers. In such a language, it's more difficult to avoid type errors, such as storing a value of one type and accidentally accessing it as if it were of another type.)
-
-## Type casting
+### Type casting
 
 C++ is a **strong-typed** language. Many conversions, specially those that imply a different interpretation of the value, require an explicit conversion, known in C++ as *type-casting*. There exist two main syntaxes for generic type-casting: *functional* and *c-like*:
 
@@ -250,7 +231,7 @@ new_type (expression)
 
 but each one with its own special characteristics:
 
-### dynamic_cast
+#### `dynamic_cast`
 
   `dynamic_cast` can only be used with **pointers** and **references** to classes (or with `void*`). Its purpose is to ensure that the result of the **type conversion** points to a valid complete object of the destination **pointer** type.
 
@@ -301,7 +282,7 @@ When `dynamic_cast` cannot cast a pointer because it is not a complete object of
 
 `dynamic_cast` can also perform the other implicit casts allowed on pointers: casting null pointers between pointers types (even between unrelated classes), and casting any pointer of any type to a `void*` pointer.  
 
-### static_cast
+#### `static_cast`
 
 `static_cast` can perform conversions between pointers to related classes, not only *upcasts* (from pointer-to-derived to pointer-to-base), but also *downcasts* (from pointer-to-base to pointer-to-derived). No checks are performed during runtime to guarantee that the object being converted is in fact a full object of the destination type. Therefore, it is up to the **programmer** to ensure that the conversion is safe. On the other side, it does not incur the overhead of the type-safety checks of `dynamic_cast`.
 
@@ -328,7 +309,7 @@ Additionally, `static_cast` can also perform the following:
 - Convert `enum class` values into integers or floating-point values.
 - Convert any type to `void`, evaluating and discarding the value.
 
-### reinterpret_cast
+#### `reinterpret_cast`
 
   `reinterpret_cast` converts any pointer type to any other pointer type, even of unrelated classes. The operation result is a simple **binary copy** of the value from one pointer to the other. All pointer conversions are allowed: neither the content pointed nor the pointer type itself is checked.
 
@@ -345,7 +326,7 @@ B * b = reinterpret_cast<B*>(a);
 
 This code compiles, although it does not make much sense, since now `b` points to an object of a totally unrelated and likely incompatible class. Dereferencing `b` is unsafe.
 
-### const_cast
+#### `const_cast`
 
 This type of casting manipulates the **constness** of the object pointed by a pointer, either to be set or to be removed. For example, in order to pass a `const` pointer to a function that expects a **non-const** argument:
 
@@ -368,7 +349,7 @@ int main () {
 
 The example above is guaranteed to work because function `print` does not write to the pointed object(因为函数print不会对传入的参数str进行修改，所以上面的程序是可以正常运行的). Note though, that removing the **constness** of a pointed object to actually write to it causes *undefined behavior*(但请注意，删除指向对象的常量以实际写入它会导致未定义的行为).
 
-## typeid
+### `typeid`
 
 `typeid` allows to check the type of an expression:
 
@@ -437,14 +418,58 @@ Notice how the type that `typeid` considers for **pointers** is the pointer type
 If the type `typeid` evaluates is a pointer preceded by the dereference operator (`*`), and this pointer has a null value, `typeid` throws a `bad_typeid` exception.  
 
 
-# ==TODO== When should `static_cast`, `dynamic_cast`, `const_cast` and `reinterpret_cast` be used?
+
+
+
+## pointer and its type
+
+### [c-pointers-to-any-type](https://stackoverflow.com/questions/2935955/c-pointers-to-any-type)
+
+Yes, you can use a `void*` to point to anything, and then cast it to the proper type when needed (that's how `malloc` and such can work).
+
+`void*` is basically "pointer to an arbitrary block of memory".
+
+### [Any type of pointer can point to anything?](https://stackoverflow.com/questions/19710601/any-type-of-pointer-can-point-to-anything)
+
+Pointers *may* be interchangeable(通用的), but are not required to be(指针可以互换，但不是必需如此).
+
+In particular, on some platforms, certain types need to be aligned to certain byte-boundaries. So while a `char` may be anywhere in memory, an `int` may need to be on a 4-byte boundary.
+
+Another important potential difference is with function-pointers.
+Pointers to functions may not be interchangeable with pointers to data-types on many platforms.
+
+It bears repeating: **This is platform-specific**.
+
+I believe Intel x86 architectures treat all pointers the same.
+But you may well encounter other platforms where this is not true.
+
+I strongly doubt that on any given platform, casting a pointer from one type to another will modify the **address value**. I understand that dereferencing an unaligned pointer may cause an **exception**, but I doubt the compiler would align the pointer when the cast is done. I can't see any benefits or any motive for this behavior. – [Spidey](https://stackoverflow.com/users/131326/spidey)
+
+Every pointer is of some specific **type**. There's a special generic pointer type `void*` that can point to anything, but you have to convert a `void*` to some specific pointer type before you can **dereference** it.
+
+You can convert a pointer value from one pointer type to another. In most cases, converting a pointer from `foo*` to `bar*` and back to `foo*` will yield the original value -- but that's not actually guaranteed in all cases.
+
+You *can* cause a pointer of type `foo*` to point to an object of type `bar`, but (a) it's usually a bad idea, and (b) in some cases, it may not work (say, if the target types `foo` and `bar` have different sizes or **alignment requirements**).
+
+You can get away with things like:
+
+```cpp
+int n = 42;
+char *p = (char*)&n;
+```
+
+which causes `p` to point to `n` -- but then `*p` doesn't give you the value of `n`, it gives you the value of the first byte of `n` as a `char`.
+
+The differing behavior of **pointer arithmetic** is only part of the reason for having different **pointer types**. It's mostly about *type safety*. If you have a pointer of type `int*`, you can be reasonably sure (unless you've done something unsafe) that it actually points to an `int` object. And if you try to treat it as an object of a different type, the compiler will likely complain about it.
+
+Basically, we have distinct pointer types for the same reasons we have other distinct types: so we can keep track of what kind of value is stored in each object, with help from the compiler.
+
+(There have been languages that only have untyped generic pointers. In such a language, it's more difficult to avoid type errors, such as storing a value of one type and accidentally accessing it as if it were of another type.)
+
+
+## When should `static_cast`, `dynamic_cast`, `const_cast` and `reinterpret_cast` be used?
 
 https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used
 
-# English
-premature  过早的
 
-ctor 构造函数
-
-incur 招致
 

@@ -1,6 +1,6 @@
+# Virtual function
 
-
-# [virtual function specifier](https://en.cppreference.com/w/cpp/language/virtual)
+## cppreference [virtual function specifier](https://en.cppreference.com/w/cpp/language/virtual)
 
 The **virtual specifier** specifies that a **non-static** [member function](https://en.cppreference.com/w/cpp/language/member_functions) is *virtual* and supports **dynamic dispatch**. It may only appear in the `decl-specifier-seq` of the initial declaration of a **non-static** member function (i.e., when it is declared in the class definition).
 
@@ -318,4 +318,6 @@ B::B(V* v, A* a)
 - [final specifier](https://en.cppreference.com/w/cpp/language/final) (since C++11)
 
 
+
+## wikipedia [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
 

@@ -1,12 +1,2 @@
 nav:
-    - Introduction: index.md
-    - Class: Class.md
     - Access-specifiers: Access-specifiers.md
-    - Members: Members
-    - Member-access: Member-access
-    # 抽象类
-    - Abstract-class: Abstract-class
-########## 继承是OOP非常重要的内容##########    
-    - Inheritance: Inheritance
-######### 这是c++中非常常见的三种容易混淆的情况##########    
-    - Overload-VS-override-VS-name-hiding: Overload-VS-override-VS-name-hiding.md

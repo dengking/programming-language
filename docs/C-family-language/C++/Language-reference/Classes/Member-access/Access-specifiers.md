@@ -1,12 +1,14 @@
+# Access specifiers
 
 
-# [access specifiers](https://en.cppreference.com/w/cpp/language/access)
+
+## cppreference [access specifiers](https://en.cppreference.com/w/cpp/language/access)
 
 In a **member-specification** of a [class/struct](https://en.cppreference.com/w/cpp/language/class) or [union](https://en.cppreference.com/w/cpp/language/union), define the accessibility of subsequent（后续的） members.
 
 In a **base-specifier** of a [derived class](https://en.cppreference.com/w/cpp/language/derived_class) declaration, define the accessibility of inherited members of the subsequent **base class**.
 
-思考：declaration和specification的区别和联系
+
 
 ### Syntax
 
@@ -262,6 +264,10 @@ The [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast) (C
 ### Inheritance
 
 See [derived classes](https://en.cppreference.com/w/cpp/language/derived_class) for the meaning of public, protected, and private inheritance.
+
+
+
+
 
 # [What are POD types in C++?](https://stackoverflow.com/questions/146452/what-are-pod-types-in-c)
 

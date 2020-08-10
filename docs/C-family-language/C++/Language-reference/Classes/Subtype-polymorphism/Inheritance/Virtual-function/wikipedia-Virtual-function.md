@@ -1,1 +1,0 @@
-# wikipedia [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
