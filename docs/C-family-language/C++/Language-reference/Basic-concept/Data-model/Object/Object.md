@@ -4,7 +4,7 @@
 
 此处的 object 是一个 runtime 概念，因为只有当program运行的时候，object才会被创建。
 
-> NOTE: 上面这段话的是不准确的，c++语言充分发挥了compile-time computation，所有有多object是在运行时就已经创建了
+> NOTE: 上面这段话的是不准确的，c++语言充分发挥了compile-time computation，所有有多object是在compile-time时就已经创建了
 
 object概念对于理解后面的内容非常重要，可以说，后续的很多概念都是建立在object之上的。
 
@@ -32,19 +32,31 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 
 - optionally, a [name](https://en.cppreference.com/w/cpp/language/name).
 
+
+
 > NOTE: 上述都是对object的属性的描述。这些属性之间是存在着一定的关系的：
 >
 > ### Memory representation、value and type
 >
-> **type** 决定了**interpretation** of **memory representation**，进而决定了 **value**
+> **type** 决定了**interpretation** of **memory representation**，进而决定了 **value**。关于这个观点，在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中的描述是可以佐证的：
+>
+> > Converts between **types** by **reinterpreting** the underlying **bit** pattern.
+>
+> 
 >
 > ### Type、size and alignment
 >
-> type决定了object的size、alignment
+> type决定了object的size、alignment；
+>
+> 通过上面的描述可以看出，type是核心概念。
+>
+> 
 >
 > ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 
 >
-> 两者是相关的。
+> 两者是密切相关的。
+
+
 
 > NOTE: 
 >
@@ -52,7 +64,13 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 >
 > 之所以在此专门添加这个说明，是为了强调“interpretion”这个词语，在cppreference中，这个词语多次出现：
 >
-> 
+> - 在[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)段：
+>
+> > For non-polymorphic objects, the **interpretation** of the **value** is determined from the expression in which the object is used, and is decided at **compile time**.
+>
+> - [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) conversion
+>
+> > Converts between types by reinterpreting the underlying bit pattern.
 
 The following entities are not objects: value, reference, function, enumerator, type, non-static class member, template, class or function template specialization, namespace, parameter pack, and this.
 
@@ -69,6 +87,8 @@ A *variable* is an object or a reference that is not a non-static data member, t
 > 所谓的object representation，其实就memory representation。那：如何查看object representation？在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation.md`中对这个问题进行了说明；
 >
 > 与object representation密切相关的一个问题是：[endianess](https://en.wikipedia.org/wiki/Endianness)，这在工程hardware的`CPU\Endianess`章节对此进行了说明。
+
+
 
 > NOTE: 需要留心的是，原文关于value representation和object representation之间关系的讨论对象是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的类型，这一点和C中关于这个话题的讨论是不同的。关于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中进行了详细分析。
 >
@@ -136,72 +156,7 @@ Objects of a class type that declares or inherits at least one **virtual functio
 
 For non-polymorphic objects, the **interpretation** of the value is determined from the expression in which the object is used, and is decided at **compile time**.
 
-> NOTE: 每个[Polymorphic object](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)有[Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)和[Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)，那对于polymorphic object：
->
-> 如何获得它的static type？
->
-> `typeid(decltype(b1)).name()`
->
-> 如何获得它的dynamic type？
->
-> `typeid(b1).name()`
->
-> 关于这个问题，下面的例子给出了回答：
-
-```C++
-#include <iostream>
-#include <typeinfo>
-struct Base1
-{
-	// polymorphic type: declares a virtual member
-	virtual ~Base1()
-	{
-	}
-};
-struct Derived1: Base1
-{
-	// polymorphic type: inherits a virtual member
-};
-
-struct Base2
-{
-	// non-polymorphic type
-};
-struct Derived2: Base2
-{
-	// non-polymorphic type
-};
-
-int main()
-{
-	Derived1 obj1; // object1 created with type Derived1
-	Derived2 obj2; // object2 created with type Derived2
-
-	Base1& b1 = obj1; // b1 refers to the object obj1
-	Base2& b2 = obj2; // b2 refers to the object obj2
-
-	std::cout << "Expression type of b1: " << typeid(decltype(b1)).name() << '\n'
-			<< "Expression type of b2: " << typeid(decltype(b2)).name() << '\n'
-			<< "Object type of b1: " << typeid(b1).name() << '\n'
-			<< "Object type of b2: " << typeid(b2).name() << '\n'
-			<< "Size of b1: " << sizeof b1 << '\n'
-			<< "Size of b2: " << sizeof b2 << '\n';
-}
-// g++ --std=c++11 test.cpp
-```
-
-> NOTE: 上述程序的输出：
->
-> ```c++
-> Expression type of b1: 5Base1
-> Expression type of b2: 5Base2
-> Object type of b1: 8Derived1
-> Object type of b2: 5Base2
-> Size of b1: 8
-> Size of b2: 1
-> ```
->
-> 对于上述输出，需要注意的是`typeid(b2).name()`的输出是`5Base2`，而不是`Derived2`，这是因为`Base2`和`Derived2`都不是polymorphic type。
+> NOTE: 原文中的例子移到了`C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Static type and dynamic type`中
 
 #### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 

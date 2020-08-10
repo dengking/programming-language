@@ -115,7 +115,7 @@ c++囊括了：
 对于polymorphism object，它有static type和dynamic type，关于此，在如下章节中对此进行了说明：
 
 - `C++\Language-reference\Basic-concept\Data-model\Object\Object.md#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
-- 
+- `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Static type and dynamic type`
 
 对于polymorphic object，如何获得它的static type？如何获得它的static type？这些C++都是支持的。
 
