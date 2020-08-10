@@ -2,4 +2,4 @@ nav:
     - Linkage: Linkage.md
     - Linkage-and-linker: Linkage-and-linker.md
     - Internal-Linkage-and-External-Linkage-in-C: Internal-Linkage-and-External-Linkage-in-C.md
-    - const-and-linkage: const-and-linkage.md
+    - const-static-and-linkage: const-static-and-linkage.md
