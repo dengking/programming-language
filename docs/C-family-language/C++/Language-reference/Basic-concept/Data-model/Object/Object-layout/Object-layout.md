@@ -339,3 +339,11 @@ trivial type并没有限制access control
 
 standard layout限制了必须相同的access control
 
+
+
+## TO READ
+
+
+
+[What are POD types in C++?](https://stackoverflow.com/questions/146452/what-are-pod-types-in-c)
+
