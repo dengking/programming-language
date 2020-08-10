@@ -9,39 +9,58 @@
 ### Static polymorphism
 
 ```c++
-template <class T> 
+#include <iostream>
+
+template<class T>
 struct Base
 {
-    void interface()
-    {
-        // ...
-        static_cast<T*>(this)->implementation();
-        // ...
-    }
+	void interface()
+	{
+		// ...
+		static_cast<T*>(this)->implementation();
+		// ...
+	}
 
-    static void static_func()
-    {
-        // ...
-        T::static_sub_func();
-        // ...
-    }
+	static void static_func()
+	{
+		// ...
+		T::static_sub_func();
+		// ...
+	}
 };
 
-struct Derived : Base<Derived>
+struct Derived: Base<Derived>
 {
-    void implementation();
-    static void static_sub_func();
+	void implementation()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	static void static_sub_func()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
 };
+int main()
+{
+	Derived d;
+
+	d.interface();
+	d.static_sub_func();
+}
+// g++ test.cpp
+
 ```
 
 > NOTE: 上述代码展示了两种：
 >
 > - method
 > - static method
+>
+> 上述`static_cast<T*>(this)`对应的是cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)中的`2)`。
 
 In the above example, note in particular that the function `Base<Derived>::interface()`, though *declared* before the existence of the `struct Derived` is known by the compiler (i.e., before `Derived` is declared), is not actually *instantiated* by the compiler until it is actually *called* by some later code which occurs *after* the declaration of `Derived` (not shown in the above example), so that at the time the function "`implementation`" is instantiated, the declaration of `Derived::implementation()` is known.
 
-> NOTE: 原文的这一段所解释的其实是在`interface()`中，调用了`implementation()`方法，而这个方法在`struct Base`中是没有声明的。这段解释的含义是： `Base<Derived>::interface()`并不会被*instantiated*直到通过`struct Derived`的对象调用了`interface()`方法，这样就保证了`Derived::implementation()` is known。这是compiler的机制。具体的可执行的例子参见下面的文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)。
+> NOTE: 原文的这一段所解释的其实是在`interface()`中，调用了`implementation()`方法，而这个方法在`struct Base`中是没有声明的。这段解释的含义是： `Base<Derived>::interface()`并不会被*instantiated*直到通过`struct Derived`的对象调用了`interface()`方法，这样就保证了`Derived::implementation()` is known。这是compiler编译template的机制，参见`C++\Language-reference\Template\Templates.md`的`Lazyness of template instantiation`段。具体的可执行的例子参见下面的文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)。
 
 
 
@@ -54,44 +73,93 @@ However, if base class member functions use CRTP for all member function calls, 
 ### Object counter
 
 ```c++
-template <typename T>
+#include <iostream>
+
+template<typename T>
 struct counter
 {
-    static int objects_created;
-    static int objects_alive;
+	static int objects_created;
+	static int objects_alive;
 
-    counter()
-    {
-        ++objects_created;
-        ++objects_alive;
-    }
-    
-    counter(const counter&)
-    {
-        ++objects_created;
-        ++objects_alive;
-    }
+	counter()
+	{
+
+		++objects_created;
+		++objects_alive;
+		std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
+	}
+
+	counter(const counter&)
+	{
+
+		++objects_created;
+		++objects_alive;
+		std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
+	}
 protected:
-    ~counter() // objects should never be removed through pointers of this type
-    {
-        --objects_alive;
-    }
+	~counter() // objects should never be removed through pointers of this type
+	{
+		--objects_alive;
+		std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
+	}
 };
-template <typename T> int counter<T>::objects_created( 0 );
-template <typename T> int counter<T>::objects_alive( 0 );
+template<typename T> int counter<T>::objects_created(0);
+template<typename T> int counter<T>::objects_alive(0);
 
-class X : counter<X>
+class X: counter<X>
 {
-    // ...
+	// ...
 };
 
-class Y : counter<Y>
+class Y: counter<Y>
 {
-    // ...
+	// ...
 };
+
+int main()
+{
+	{
+		X x1, x2, x3, x4, x5;
+	}
+	{
+		Y y1, y2, y3, y4, y5;
+	}
+}
+// g++ test.cpp
 ```
 
+> NOTE: 上述程序的输出:
+>
+> ```c++
+> counter<T>::counter() [with T = X] 1 1
+> counter<T>::counter() [with T = X] 2 2
+> counter<T>::counter() [with T = X] 3 3
+> counter<T>::counter() [with T = X] 4 4
+> counter<T>::counter() [with T = X] 5 5
+> counter<T>::~counter() [with T = X] 5 4
+> counter<T>::~counter() [with T = X] 5 3
+> counter<T>::~counter() [with T = X] 5 2
+> counter<T>::~counter() [with T = X] 5 1
+> counter<T>::~counter() [with T = X] 5 0
+> counter<T>::counter() [with T = Y] 1 1
+> counter<T>::counter() [with T = Y] 2 2
+> counter<T>::counter() [with T = Y] 3 3
+> counter<T>::counter() [with T = Y] 4 4
+> counter<T>::counter() [with T = Y] 5 5
+> counter<T>::~counter() [with T = Y] 5 4
+> counter<T>::~counter() [with T = Y] 5 3
+> counter<T>::~counter() [with T = Y] 5 2
+> counter<T>::~counter() [with T = Y] 5 1
+> counter<T>::~counter() [with T = Y] 5 0
+> ```
+
+
+
 > NOTE: 按照下面的文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)中的`struct Comparisons`例子，`struct counter`是一个mixin class。
+
+> NOTE: `struct counter`将destructor声明为`protected`，这与我们平时的将destructor声明为public virtual是不同的，它这样做的原因是：
+>
+> 避免直接使用`counter`对象，而是仅仅使用它的子类对象，因为它是一个mixin class；这样做的目的是让这个class被继承。
 
 ### Polymorphic chaining
 
@@ -161,96 +229,194 @@ we "lose" the concrete class as soon as we invoke a function of the base:
 CoutPrinter().print("Hello ").SetConsoleColor(Color.red).println("Printer!"); // compile error
 ```
 
-This happens because 'print' is a function of the base - 'Printer' - and then it returns a 'Printer' instance.
+This happens because '`print`' is a function of the base - '`Printer`' - and then it returns a '`Printer`' instance.
 
-The CRTP can be used to avoid such problem and to implement "Polymorphic chaining": 
+The CRTP can be used to avoid such problem and to implement "**Polymorphic chaining**": 
 
 ```c++
-#include<iostream>
+#include <iostream>
+
 using namespace std;
 // Base class
-template <typename ConcretePrinter>
+template<typename ConcretePrinter>
 class Printer
 {
 public:
-    Printer(ostream& pstream) : m_stream(pstream) {}
- 
-    template <typename T>
-    ConcretePrinter& print(T&& t)
-    {
-        m_stream << t;
-        return static_cast<ConcretePrinter&>(*this);
-    }
- 
-    template <typename T>
-    ConcretePrinter& println(T&& t)
-    {
-        m_stream << t << endl;
-        return static_cast<ConcretePrinter&>(*this);
-    }
+	Printer(ostream& pstream)
+			: m_stream(pstream)
+	{
+	}
+
+	template<typename T>
+	ConcretePrinter& print(T&& t)
+	{
+		m_stream << t;
+		return static_cast<ConcretePrinter&>(*this);
+	}
+
+	template<typename T>
+	ConcretePrinter& println(T&& t)
+	{
+		m_stream << t << endl;
+		return static_cast<ConcretePrinter&>(*this);
+	}
 private:
-    ostream& m_stream;
+	ostream& m_stream;
 };
 enum Color
 {
-  red,
-  blue
+	red,
+	blue
 };
 // Derived class
-class CoutPrinter : public Printer<CoutPrinter>
+class CoutPrinter: public Printer<CoutPrinter>
 {
 public:
-    CoutPrinter() : Printer(cout) {}
- 
-    CoutPrinter& SetConsoleColor(Color c)
-    {
-        // ...
-        return *this;
-    }
+	CoutPrinter()
+			: Printer(cout)
+	{
+	}
+
+	CoutPrinter& SetConsoleColor(Color c)
+	{
+		// ...
+		return *this;
+	}
 };
 int main()
 {
 	// usage
 	CoutPrinter().print("Hello ").SetConsoleColor(red).println("Printer!");
 }
+// g++ --std=c++11 test.cpp
+
 ```
 
-编译`g++ --std=c++11 test.cpp`
+> NOTE: 输出如下:
+>
+> ```
+> Hello Printer!
+> ```
+>
+> 
+
+
 
 ### Polymorphic copy construction
 
 When using polymorphism, one sometimes needs to create copies of objects by the base class pointer. A commonly used idiom for this is adding a virtual `clone` function that is defined in every derived class. The CRTP can be used to avoid having to duplicate that function or other similar functions in every derived class.
 
 ```c++
+#include <iostream>
+#include <memory>
+
+#if __cplusplus >= 201402L // C++14 and beyond
+using std::make_unique;
+#else
+template<typename T, typename... Args>
+std::unique_ptr<T> make_unique(Args &&... args)
+{
+	static_assert(!std::is_array<T>::value, "arrays not supported");
+	return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+#endif
+
 // Base class has a pure virtual function for cloning
-class AbstractShape {
+class AbstractShape
+{
 public:
-    virtual ~AbstractShape () = default;
-    virtual std::unique_ptr<AbstractShape> clone() const = 0;
+	virtual ~AbstractShape() = default;
+	virtual std::unique_ptr<AbstractShape> clone() const = 0;
 };
 
 // This CRTP class implements clone() for Derived
-template <typename Derived>
-class Shape : public AbstractShape {
+template<typename Derived>
+class Shape: public AbstractShape
+{
 public:
-    std::unique_ptr<AbstractShape> clone() const override {
-        // 调用基类的copy constructor，所以必须要将this转换为子类的类型，这就是
-        // static_cast<Derived const&>(*this) 的意图，否则代码是无法编译通过的。
-        return std::make_unique<Derived>(static_cast<Derived const&>(*this)); 
-    }
+	std::unique_ptr<AbstractShape> clone() const override
+	{
+		// 调用基类的copy constructor，所以必须要将this转换为子类的类型，这就是
+		// static_cast<Derived const&>(*this) 的意图，否则代码是无法编译通过的。
+		return make_unique<Derived>(static_cast<Derived const&>(*this));
+	}
 
 protected:
-   // We make clear Shape class needs to be inherited
-   Shape() = default;
-   Shape(const Shape&) = default;
+	// We make clear Shape class needs to be inherited
+	Shape() = default;
+	Shape(const Shape&) = default;
 };
 
 // Every derived class inherits from CRTP class instead of abstract class
 
-class Square : public Shape<Square>{};
+class Square: public Shape<Square>
+{
+public:
+	Square()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	virtual ~Square()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	Square(const Square&)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
 
-class Circle : public Shape<Circle>{};
+class Circle: public Shape<Circle>
+{
+public:
+	Circle()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	virtual ~Circle()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	Circle(const Circle&)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+int main()
+{
+	{
+		std::unique_ptr<AbstractShape> Shape = std::unique_ptr<AbstractShape>(new Square());
+		std::unique_ptr<AbstractShape> Shape2 = Shape->clone();
+		std::unique_ptr<AbstractShape> Shape3 = Shape->clone();
+	}
+	{
+		std::unique_ptr<AbstractShape> Shape = std::unique_ptr<AbstractShape>(new Circle());
+		std::unique_ptr<AbstractShape> Shape2 = Shape->clone();
+		std::unique_ptr<AbstractShape> Shape3 = Shape->clone();
+	}
+}
+
 ```
+
+> NOTE: 输出如下：
+>
+> ```c++
+> Square::Square()
+> Square::Square(const Square&)
+> Square::Square(const Square&)
+> virtual Square::~Square()
+> virtual Square::~Square()
+> virtual Square::~Square()
+> Circle::Circle()
+> Circle::Circle(const Circle&)
+> Circle::Circle(const Circle&)
+> virtual Circle::~Circle()
+> virtual Circle::~Circle()
+> virtual Circle::~Circle()
+> ```
+>
+> 
 
 This allows obtaining copies of squares, circles or any other shapes by `shapePtr->clone()`.
 
