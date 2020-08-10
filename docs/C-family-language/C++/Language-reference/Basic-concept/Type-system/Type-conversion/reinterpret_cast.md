@@ -12,6 +12,8 @@ Converts between types by **reinterpreting** the underlying bit pattern.
 
 ### Integral type and pointer
 
+关于integral type 和 pointer之间的转换，在`C-family-language\C-and-C++\Pointer-array-alias\Pointer-and-integer.md`中对此进行了详细的说明。
+
 #### 1)
 
 > NOTE: 原文描述的规则没有理解
@@ -44,6 +46,8 @@ The null pointer constant NULL or integer zero is not guaranteed to yield the nu
 
 
 ### Type aliasing
+
+
 
 #### 5) type aliasing through pointer
 
@@ -120,3 +124,17 @@ int main()
 
 
 #### 6) type aliasing through reference
+
+
+
+#### 11) OOP type aliasing: type aliasing through pointer
+
+
+
+### Pointer to function
+
+#### 7) pointer to function conversion
+
+
+
+#### 10) OOP pointer to function conversion

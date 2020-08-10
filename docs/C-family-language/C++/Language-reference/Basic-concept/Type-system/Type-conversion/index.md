@@ -9,3 +9,4 @@ C++ 的 type system提供了非常完备的type conversion支持：
 - [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast)
 - [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast)
 - [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) 用户定义的类型转换规则
+
