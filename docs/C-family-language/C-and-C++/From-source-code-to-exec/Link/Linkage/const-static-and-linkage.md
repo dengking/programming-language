@@ -1,4 +1,10 @@
-# const and linkage
+# const、static and linkage
+
+`const`、`static` 修饰的variable都具备internal linkage。这是因为：
+
+`const`、`static`所修饰的variable都是compile-time的，它们的value在compile-time就已经已知；在一个translation unit中，通过extern声明了一个variable，显然在compile-time是无法获知它的value的，显然，这是矛盾的，所以需要将它们的linkage指定为internal了；
+
+## `const` and linkage
 
 下面是我改写[How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)的[5.1 Pitfall: Trusting type-unsafe linking.](https://stackoverflow.com/a/7439261)中的例子：
 
@@ -57,7 +63,7 @@ collect2: 错误：ld 返回 1
 
 上述问题，让我思考：`const`和`extern`。Google “extern const undefined reference c++”，下面是正解：
 
-## stackoverflow [Why does “extern const int n;” not work as expected?](https://stackoverflow.com/questions/14894698/why-does-extern-const-int-n-not-work-as-expected)
+### stackoverflow [Why does “extern const int n;” not work as expected?](https://stackoverflow.com/questions/14894698/why-does-extern-const-int-n-not-work-as-expected)
 
 [A](https://stackoverflow.com/a/14894897)
 
@@ -105,7 +111,7 @@ extern const int n = 8;
 
 is also possible
 
-## stackoverflow [Mixing extern and const](https://stackoverflow.com/questions/2190919/mixing-extern-and-const)
+### stackoverflow [Mixing extern and const](https://stackoverflow.com/questions/2190919/mixing-extern-and-const)
 
 
 
