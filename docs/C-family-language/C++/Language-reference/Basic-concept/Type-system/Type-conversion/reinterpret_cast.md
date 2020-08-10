@@ -16,13 +16,15 @@ Converts between types by **reinterpreting** the underlying bit pattern.
 
 > NOTE: 原文描述的规则没有理解
 
-### 2) pointer to integral type
+#### 2) pointer to integral type
 
 A pointer can be converted to any integral type large enough to hold all values of its type (e.g. to `std::uintptr_t`)
 
 A **pointer** converted to an integer of **sufficient size** and back to the same pointer type is guaranteed to have its original value, otherwise the resulting pointer cannot be dereferenced safely (the round-trip conversion in the opposite direction is not guaranteed; the same pointer may have multiple integer representations)
 
-> NOTE: 为了保证“sufficient size”，最好使用C99中引入的[`intptr_t`、`uintptr_t`](https://en.cppreference.com/w/c/types/integer) ，关于此，可以参见：
+> NOTE: 为了保证“sufficient size”，最好使用C99中引入的[`intptr_t`、`uintptr_t`](https://en.cppreference.com/w/c/types/integer) ，关于此，在cmu.edu [INT36-C. Converting a pointer to integer or integer to pointer](https://wiki.sei.cmu.edu/confluence/display/c/INT36-C.+Converting+a+pointer+to+integer+or+integer+to+pointer)中进行了探讨，在`C-and-C++\Pointer-array-alias\Pointer-and-integer.md`中收录了这篇文章。
+>
+> 关于[`intptr_t`、`uintptr_t`](https://en.cppreference.com/w/c/types/integer) ，可以参见：
 >
 > - stackoverflow [What is the use of intptr_t?](https://stackoverflow.com/questions/35071200/what-is-the-use-of-intptr-t)
 > - stackoverflow [Why / when to use `intptr_t` for type-casting in C?](https://stackoverflow.com/questions/6326338/why-when-to-use-intptr-t-for-type-casting-in-c)
@@ -31,118 +33,15 @@ The null pointer constant NULL or integer zero is not guaranteed to yield the nu
 
 > NOTE: 原文中的，这一段话没有理解。
 
-##### Example: stackoverflow [How do I cast a pointer to an int](https://stackoverflow.com/questions/14092754/how-do-i-cast-a-pointer-to-an-int)
 
-错误程序如下：
 
-```c++
-#include <cstdlib>
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-vector<int> test;
-
-int main()
-{
-	int *ip;
-	int pointervalue = 50;
-	ip = &pointervalue;
-
-	int thatvalue = 1;
-	thatvalue = ip; // compile error：pointer to integer
-
-	cout << ip << endl;
-
-	test.push_back(thatvalue);
-
-	cout << test[0] << endl;
-	return 0;
-}
-// g++ -g test.cpp
-
-```
-
-上述程序编译报错：
-
-```c++
-test.cpp: 在函数‘int main()’中:
-test.cpp:16:12: 错误：从类型‘int*’到类型‘int’的转换无效 [-fpermissive]
-  thatvalue = ip; // compile error：pointer to integer
-```
-
-按照 [A](https://stackoverflow.com/a/14093919) 中的回答，使用`reinterpret_cast<intptr_t>`：
-
-```c++
-#include "stdint.h"
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-vector<intptr_t> test;
-
-int main()
-{
-	int *ip;
-	int pointervalue = 50;
-	ip = &pointervalue;
-
-	intptr_t thatvalue = 1;
-	/* Convert it as a bit pattern.
-	 It is valid and converting it back to a pointer is also OK
-	 But if you modify it all bets are off (you need to be very careful).*/
-	thatvalue = reinterpret_cast<intptr_t>(ip);
-
-	cout << ip << endl;
-
-	test.push_back(thatvalue);
-
-	cout << test[0] << endl;
-	return 0;
-}
-// g++ -g test.cpp
-
-```
-
-按照 [A](https://stackoverflow.com/a/14092767) 中的回答，使用C-style cast：
-
-```c++
-#include "stdint.h"
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-vector<intptr_t> test;
-
-int main()
-{
-	int *ip;
-	int pointervalue = 50;
-	ip = &pointervalue;
-
-	intptr_t thatvalue = 1;
-	/* Convert it as a bit pattern.
-	 It is valid and converting it back to a pointer is also OK
-	 But if you modify it all bets are off (you need to be very careful).*/
-	thatvalue = (intptr_t) ip;
-
-	cout << ip << endl;
-
-	test.push_back(thatvalue);
-
-	cout << test[0] << endl;
-	return 0;
-}
-// g++ -g test.cpp
-
-```
+#### 3) integral or enumeration type to pointer
 
 
 
-### 3) integral or enumeration type to pointer
+#### 4) `std::nullptr_t` to integral type
+
+
 
 ### Type aliasing
 
