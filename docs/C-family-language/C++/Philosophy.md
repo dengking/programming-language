@@ -102,11 +102,22 @@ c++囊括了：
 
 #### Value semantic and reference semantic
 
-
+在`Language-reference\Basic-concept\Reference-and-Value-Semantics`中对此进行了说明。
 
 #### Compile-time and run-time
 
 在`C-and-C++\Compile-time-and-run-time`中对此进行描述
+
+#### Static and dynamic 
+
+##### static type and dynamic type
+
+对于polymorphism object，它有static type和dynamic type，关于此，在如下章节中对此进行了说明：
+
+- `C++\Language-reference\Basic-concept\Data-model\Object\Object.md#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
+- 
+
+对于polymorphic object，如何获得它的static type？如何获得它的static type？这些C++都是支持的。
 
 #### Programming paradigm
 

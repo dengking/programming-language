@@ -93,17 +93,17 @@ std::function<auto(int) -> void> y = f; // same
 
 ### [Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)
 
+The type of an expression that results from the **compile-time** analysis of the program is known as the *static type* of the expression. The **static type** does not change while the program is executing.
+
 ​	
 
 ### [Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)
 
-If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_category) refers to a [polymorphic object](https://en.cppreference.com/w/cpp/language/object), the type of its **most derived object** is known as the dynamic type.
+If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_category) refers to a [polymorphic object](https://en.cppreference.com/w/cpp/language/object), the type of its **most derived object** is known as the **dynamic type**.
 
-> NOTE: 关于上面这段话中的**most derived object**，参见cppreference [Object#Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
+> NOTE: 上面这段话给出了dynamic type的定义，需要注意的是，dynamic type是run-time获得的。关于上面这段话中的**most derived object**，参见cppreference [Object#Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
 
 
-
-> NOTE: static type和dynamic type的概念对于c++ 非常重要，关于两者的一个典型例子就是：c++中如何实现multiple dispatch，参见[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)，在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Subtyping-polymorphism\Multiple-dispatch.md`中收录了这篇文章。
 
 ### [Incomplete type](https://en.cppreference.com/w/cpp/language/type#Incomplete_type)
 
@@ -112,6 +112,26 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 ## cppreference [Type support library](https://en.cppreference.com/w/cpp/types)
 
 在`C++\Library\Standard-library\Utility-library\Language-support\Type_support`中，对此进行了分析。
+
+
+
+## Static type and dynamic type
+
+`C++`中对static type 和 dynamic type的区分是源于`C++`对runtime polymorphism的支持。
+
+
+
+### cast
+
+`static_cast`、`dynamic_cast`
+
+### 如何获得type 
+
+`typeid`
+
+`decltype`
+
+static type和dynamic type的概念对于c++ 非常重要，关于两者的一个典型例子就是：c++中如何实现multiple dispatch，参见[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)，在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Subtyping-polymorphism\Multiple-dispatch.md`中收录了这篇文章。
 
 
 
