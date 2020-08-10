@@ -71,6 +71,92 @@ When a **class template specialization** is referenced in context that requires 
 > specialization是对一种特殊情况的特殊实现，specialization相当于OOP中的inheritance；
 >
 > instantiation 是compiler真正的实现代码。
+>
+> 关于此的一个典型的例子就是[Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism)：
+>
+> ```c++
+> #include <iostream>
+> 
+> template<class T>
+> struct Base
+> {
+> 	void interface()
+> 	{
+> 		// ...
+> 		static_cast<T*>(this)->implementation();
+> 		// ...
+> 	}
+> 
+> 	static void static_func()
+> 	{
+> 		// ...
+> 		T::static_sub_func();
+> 		// ...
+> 	}
+> };
+> 
+> struct Derived: Base<Derived>
+> {
+> 	void implementation()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	static void static_sub_func()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> int main()
+> {
+> 	Derived d;
+> 
+> 	d.interface();
+> 	d.static_sub_func();
+> }
+> // g++ test.cpp
+> #include <iostream>
+> 
+> template<class T>
+> struct Base
+> {
+> 	void interface()
+> 	{
+> 		// ...
+> 		static_cast<T*>(this)->implementation();
+> 		// ...
+> 	}
+> 
+> 	static void static_func()
+> 	{
+> 		// ...
+> 		T::static_sub_func();
+> 		// ...
+> 	}
+> };
+> 
+> struct Derived: Base<Derived>
+> {
+> 	void implementation()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	static void static_sub_func()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> int main()
+> {
+> 	Derived d;
+> 
+> 	d.interface();
+> 	d.static_sub_func();
+> }
+> // g++ test.cpp
+> 
+> ```
+>
+> > In the above example, note in particular that the function `Base<Derived>::interface()`, though *declared* before the existence of the `struct Derived` is known by the compiler (i.e., before `Derived` is declared), is not actually *instantiated* by the compiler until it is actually *called* by some later code which occurs *after* the declaration of `Derived` (not shown in the above example), so that at the time the function "`implementation`" is instantiated, the declaration of `Derived::implementation()` is known.
 
 
 

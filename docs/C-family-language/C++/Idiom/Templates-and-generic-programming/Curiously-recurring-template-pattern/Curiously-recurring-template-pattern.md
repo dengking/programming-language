@@ -337,7 +337,9 @@ public:
 	std::unique_ptr<AbstractShape> clone() const override
 	{
 		// 调用基类的copy constructor，所以必须要将this转换为子类的类型，这就是
-		// static_cast<Derived const&>(*this) 的意图，否则代码是无法编译通过的。
+		// static_cast<Derived const&>(*this) 的意图，否则代码是无法编译通过的，会报:
+        // casts away qualifiers
+        // 因为copyconstructor的原型是：Shape(const Shape&)，
 		return make_unique<Derived>(static_cast<Derived const&>(*this));
 	}
 
