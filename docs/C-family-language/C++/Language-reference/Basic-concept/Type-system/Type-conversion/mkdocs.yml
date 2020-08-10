@@ -5,6 +5,7 @@ nav:
 ##########
     - static_cast: static_cast
     - dynamic_cast: dynamic_cast
+    - reinterpret_cast: reinterpret_cast.md
     - pointer_cast: pointer_cast
     - const_cast: const_cast
 ########## 用户自定义cast    
