@@ -1309,9 +1309,15 @@ I find a library analogy very useful to visualizing arrays of multiple dimension
 
 
 
-## [Get length of array in C and C++](https://iq.opengenus.org/length-of-array-in-c/)
+## Get length of array in C and C++
 
+### Length in term of element in the array
 
+关于此，在“5.3 Pitfall: Using the C idiom to get number of elements.”中进行了详细说明；
+
+### Length in term of byte
+
+当我们使用c api来操作array的时候，需要使用length in term of byte，主要使用`sizeof`。
 
 ## [With arrays, why is it the case that a[5] == 5[a]?](https://stackoverflow.com/questions/381542/with-arrays-why-is-it-the-case-that-a5-5a)
 

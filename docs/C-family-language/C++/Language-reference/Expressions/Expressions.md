@@ -79,7 +79,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 - [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast) conversion using C-style cast notation and functional notation
 - [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) makes it possible to specify conversion from user-defined classes
 
-
+> NOTE: 放到了type system章节
 
 ##### Memory allocation
 
@@ -91,9 +91,15 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 ##### Other
 
 - [constant expressions ](https://en.cppreference.com/w/cpp/language/constant_expression)can be evaluated at compile time and used in compile-time context (template arguments, array sizes, etc)
+
+  > NOTE: 非常重要的概念
+
 - [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof)
+
 - [`alignof`](https://en.cppreference.com/w/cpp/language/alignof)
+
 - [`typeid`](https://en.cppreference.com/w/cpp/language/typeid)
+
 - [throw-expression](https://en.cppreference.com/w/cpp/language/throw)
 
 
@@ -166,7 +172,7 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 >
 > 上述程序的输出为`2`，显然function-call operator的operand `i+1`被evaluated了，它是run-time的。
 
-> NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将次作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
+> NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将此作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
 
 The unevaluated operands are considered to be *full expressions* even though they are syntactically operands in a larger expression (for example, this means that `sizeof(T())` requires an accessible `T::~T`). (since C++14)
 
@@ -178,9 +184,26 @@ The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraint
 
 ### Discarded-value expressions
 
+> NOTE: discarded-value expressions即“弃值表达式”。
+
 A *discarded-value expression* is an expression that is used for its side-effects only. The value calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the [built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator), or the argument of a cast-expression that casts to the type `void`.
 
-> NOTE: 没有搞懂，没有具体例子，不容易理解
+> NOTE: 后面有专门关于[built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)的描述；
+>
+> 可以利用“the argument of a cast-expression that casts to the type `void` is a discard-value expression”来实现一些效果，下面是一些案例：
+>
+> - [Expression SFINAE on the return type](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
+>
+>   > A common idiom is to use expression SFINAE on the return type, where the expression uses the comma operator, whose left subexpression is the one that is being examined (cast to void to ensure the user-defined operator comma on the returned type is not selected), and the right subexpression has the type that the function is supposed to return.
+>
+> - https://stackoverflow.com/a/1486931 silence a warning about unused variables
+>
+>   ```c
+>   // silence a warning about unused variables，https://stackoverflow.com/a/1486931
+>   #define UNUSED(expr) do { (void)(expr); } while (0)
+>   ```
+>
+>   
 
 Array-to-pointer and function-to-pointer **conversions** are never applied to the **value** calculated by a **discarded-value expression**. The **lvalue-to-rvalue conversion** is applied if and only if the expression is a [volatile-qualified](https://en.cppreference.com/w/cpp/language/cv) glvalue and has one of the following forms (built-in meaning required, possibly parenthesized)
 
@@ -194,7 +217,7 @@ Array-to-pointer and function-to-pointer **conversions** are never applied to th
 
 In addition, if the lvalue is of volatile-qualified class type, a volatile copy-constructor is required to initialize the resulting **rvalue temporary**.
 
-> NOTE: 没有搞懂，没有具体例子，不容易理解
+
 
 
 
