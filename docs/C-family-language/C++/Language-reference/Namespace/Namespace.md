@@ -1,4 +1,6 @@
-# [Namespaces](https://en.cppreference.com/w/cpp/language/namespace) 
+# Namespace
+
+## cppreference [Namespaces](https://en.cppreference.com/w/cpp/language/namespace) 
 
 **Namespaces** provide a method for preventing name conflicts in large projects.
 
@@ -49,9 +51,9 @@ Syntax
 - using-directive是visible，using-declaration是accessible
 - using-declaration从名称来看，是declaration
 
-### Explanation
 
-#### Namespaces H4
+
+#### Namespaces 
 
 ```
 inline(optional) namespace attr(optional) identifier { namespace-body }
@@ -143,13 +145,13 @@ namespace A {
 }
 ```
 
-#### Inline namespaces H4
+#### Inline namespaces 
 
-未阅读
 
-#### Unnamed namespaces H4
 
-未阅读
+#### Unnamed namespaces
+
+
 
 #### Using-declarations H4
 
@@ -296,7 +298,7 @@ namespace X {
 
 More generally, a declaration that appears in any namespace scope and introduces a name using an **unqualified** identifier always introduces a member into the namespace it's in and not to any other namespace. The exceptions are explicit instantiations and explicit specializations of a **primary template** that is defined in an inline namespace: because they do not introduce a new name, they may use unqualified-id in an enclosing namespace.
 
-#### Using-directives H4
+#### Using-directives  
 
 A *using-directive* is a [block-declaration](https://en.cppreference.com/w/cpp/language/declarations) with the following syntax:
 
@@ -374,7 +376,7 @@ void f() {
 }
 ```
 
-### Notes H3
+### Notes 
 
 The using-directive `using namespace std;` at any namespace scope introduces every name from the namespace `std`into the **global namespace** (since the **global namespace** is the nearest namespace that contains both `std` and any user-declared namespace), which may lead to undesirable name collisions. This, and other using directives are generally considered bad practice at file scope of a header file.
 
@@ -417,55 +419,208 @@ int main()
 }
 ```
 
-# c++编译错误 H1
-## undefined reference to `B::f(double)' H2
-代码如下：
-```
-namespace A {
-    int x;
+
+
+## ADL
+
+下面是ADL的一些例子，关于ADL，参见`C++\Language-reference\Basic-concept\Organization\Name-lookup\ADL`。
+
+```c++
+#include<iostream>
+class C
+{
+public:
+	void MyName()
+	{
+		std::cout << "C" << std::endl;
+	}
+};
+namespace Test
+{
+class C
+{
+public:
+	void MyName()
+	{
+		std::cout << "D" << std::endl;
+	}
+};
 }
 
-namespace B {
-    int i;
-    struct g { };
-    struct x { };
-    void f(int);
-    void f(double);
-    void g(char); 
-}
-
-void func() {
-    int i;
-    //using B::i; 
- 
-    void f(char);
-    using B::f; 
-    f(3.5); 
- 
-    using B::g;
-    g('a');      
-    struct g g1; 
- 
-    using B::x;
-    using A::x;  
-    x = 99;      
-    struct x x1; 
+template<typename T>
+void func()
+{
+	T t;
+	t.MyName();
 }
 
 int main()
 {
-    func();
+
+	func<C>();
+	func<Test::C>();
+}
+// g++ test.cpp
+```
+
+
+
+
+
+```c++
+#include <string>
+#include <iostream>
+
+/**
+ * 结构体1
+ */
+struct MyStruct1
+{
+};
+
+/**
+ * 结构体
+ */
+struct MyStruct2
+{
+};
+
+/**
+ * 结构体类型信息
+ */
+typedef std::string CStructRtti;
+
+/**
+ * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+ * @param f
+ * @return
+ */
+CStructRtti GetRtti(MyStruct1* f)
+{
+	return "MyStruct1";
+}
+
+/**
+ * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+ * @param f
+ * @return
+ */
+CStructRtti GetRtti(MyStruct2* f)
+{
+	return "MyStruct2";
+}
+
+/**
+ * 模板函数，根据结构体类型来获取结构体类型信息，它的实现是派发到上述的根据结构体对象来获取结构体类型休息
+ * @return
+ */
+template<typename StructT>
+CStructRtti GetRttiByType()
+{
+	StructT Tmp = StructT();
+	return GetRtti(&Tmp);
+}
+
+class Utility
+{
+public:
+	template<typename StrucT>
+	static CStructRtti GetRtti()
+	{
+		return GetRttiByType<StrucT>();
+	}
+
+};
+/**
+ * 该namespace内部和外部的结构基本一致
+ * @param f
+ * @return
+ */
+namespace NS
+{
+/**
+ * 结构体1
+ */
+struct MyStruct1
+{
+};
+
+/**
+ * 结构体
+ */
+struct MyStruct2
+{
+};
+
+/**
+ * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+ * @param f
+ * @return
+ */
+CStructRtti GetRtti(MyStruct1* f)
+{
+	return "NS::MyStruct1";
+}
+
+/**
+ * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+ * @param f
+ * @return
+ */
+CStructRtti GetRtti(MyStruct2* f)
+{
+	return "NS::MyStruct2";
+}
+
+class Utility
+{
+public:
+	template<typename StrucT>
+	static CStructRtti GetRtti()
+	{
+		return GetRttiByType<StrucT>();
+	}
+
+};
+}
+
+int main()
+{
+	std::cout << Utility::GetRtti<MyStruct1>() << std::endl;
+	std::cout << NS::Utility::GetRtti<NS::MyStruct1>() << std::endl;
+}
+// g++ test.cpp
+```
+
+
+
+## Nesting namespace
+
+C++支持nesting namespace，并且支持在inner namespace和outter namespace中定义相同的name；
+
+```C++
+#include <iostream>
+namespace Outter
+{
+struct Test
+{
+	int a;
+};
+namespace Inner
+{
+struct Test
+{
+	int a;
+};
+}
+}
+int main()
+{
+	Outter::Test t;
+	t.a = 1;
+	Outter::Inner::Test t2;
+	t2.a = 2;
 }
 
 ```
 
-报错信息如下：
-```
-/tmp/ccak91SA.o: In function `func()':
-using-declaration.cpp:(.text+0x1c): undefined reference to `B::f(double)'
-using-declaration.cpp:(.text+0x26): undefined reference to `B::g(char)'
-collect2: error: ld returned 1 exit status
-```
-错误的原因是`B::f(double)`和`B::g(char)`只声明而没有定义，这就导致了函数`func`中对它的调用会失败。
-
-引起我的好奇的是上述报错信息中的`.text+0x1c`和`.text+0x26`，显然它们是正文段。
