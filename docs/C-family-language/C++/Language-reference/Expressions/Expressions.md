@@ -184,11 +184,17 @@ The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraint
 
 ### Discarded-value expressions
 
-> NOTE: discarded-value expressions即“弃值表达式”。
+> NOTE: discarded-value expressions即“弃值表达式”。需要注意的是：discarded-value expressions，不是unevaluated expressions，discarded-value expressions会被evaluated，但是它的value会被discard。
 
-A *discarded-value expression* is an expression that is used for its side-effects only. The value calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the [built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator), or the argument of a cast-expression that casts to the type `void`.
+A *discarded-value expression* is an expression that is used for its **side-effects** only. The **value** calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the [built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator), or the argument of a cast-expression that casts to the type `void`.
 
-> NOTE: 后面有专门关于[built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)的描述；
+> NOTE: 
+>
+> #### built-in comma operator
+>
+> 后面有专门关于[built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)的描述；
+>
+> #### cast-expression that casts to the type `void`
 >
 > 可以利用“the argument of a cast-expression that casts to the type `void` is a discard-value expression”来实现一些效果，下面是一些案例：
 >
