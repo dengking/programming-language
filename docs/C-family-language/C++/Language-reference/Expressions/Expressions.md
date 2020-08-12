@@ -178,7 +178,11 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 >
 > 在文章`C++\Language-reference\Expressions\Operators\sizeof.md`中给出了`sizeof`和Unevaluated expressions之间的例子。
 
-
+> NOTE: 
+>
+> #### Unevaluated expressions and built-in comma operator
+>
+> `decltype` 的 operand 可以是build-in command operator构成的expression，build-in command operator的第一个operand是discard value的，说明它是被evaluated的，那这要如何来进行理解呢？
 
 > NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将此作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
 
