@@ -34,7 +34,7 @@ The comma in various comma-separated lists, such as function argument lists (`f(
 > // g++ test.cpp
 > ```
 >
-> `(n++, n + b)`就是中的`,`就是comma operator 。
+> `(n++, n + b)`就是中的`,`就是comma operator ，上述程序所展示的是：comma operator的first argument会被evaluated。
 >
 > 上述程序的输出如下：
 >
@@ -43,8 +43,10 @@ The comma in various comma-separated lists, such as function argument lists (`f(
 > b:3
 > c:3
 > ```
->
-> 
+
+
+
+
 
 ## Examples
 
@@ -69,4 +71,6 @@ int main()
 }
 
 ```
+
+> NOTE: `42, 3.14`中的`,`为comma operator。
 
