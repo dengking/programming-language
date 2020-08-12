@@ -152,7 +152,9 @@ Any expression in parentheses is also classified as a **primary expression**: th
 
 The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/language/typeid), [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof), [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept), and [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) (since C++11) are expressions that are not evaluated (unless they are **polymorphic glvalues** and are the operands of `typeid`), since these operators only query the **compile-time** properties of their operands. Thus, `std::size_t n = sizeof(std::cout << 42);` does not perform console output.
 
-> NOTE: 由于`typeid`、`sizeof`、`noexcept`、`decltype`都是compile-time operator（ `typeid`比较特殊，上面这段话对此进行了补充说明），所以当它们的operand是expression的时候，这些operator仅仅会使用expression的compile-time property，所以这些expression是不会被evaluate的，这就是本节所描述的unevaluated expressions。
+> NOTE: 
+>
+> 由于`typeid`、`sizeof`、`noexcept`、`decltype`都是compile-time operator（ `typeid`比较特殊，上面这段话对此进行了补充说明），所以当它们的operand是expression的时候，这些operator仅仅会使用expression的compile-time property，所以这些expression是不会被evaluate的，这就是本节所描述的unevaluated expressions。
 >
 > 我们可以从对立面来理解它，以function-call operator为例：
 >
@@ -171,6 +173,12 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 > ```
 >
 > 上述程序的输出为`2`，显然function-call operator的operand `i+1`被evaluated了，它是run-time的。
+>
+> #### Example: `sizeof`
+>
+> 在文章`C++\Language-reference\Expressions\Operators\sizeof.md`中给出了`sizeof`和Unevaluated expressions之间的例子。
+
+
 
 > NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将此作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
 

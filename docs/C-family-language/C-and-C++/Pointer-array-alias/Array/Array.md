@@ -1081,7 +1081,7 @@ int main()
 4. For a 32-bit executable `sizeof(array)` (size of a pointer) is then 4.
 5. `sizeof(*array)` is equivalent to `sizeof(int)`, which for a 32-bit executable is also 4.
 
-
+> NOTE: 关于这一点，在creference [sizeof](https://en.cppreference.com/w/c/language/sizeof)中进行了详细说明。
 
 In order to detect this error at **run time** you can do …
 

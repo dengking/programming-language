@@ -7,5 +7,6 @@ nav:
     - Conversions: Conversions
     # 内存分配运算符
     - Memory-allocation: Memory-allocation
+    - sizeof: sizeof.md
     # 运算符重载
     - Operator-overloading: Operator-overloading
