@@ -10,7 +10,7 @@ Specify *storage duration* and *linkage* of objects and functions:
 
 
 
-> NOTE: 一个name，要么是在本translation unit中定义，要么是在另外 一个translation unit中定义；如果一个name是在另外一个translation unit中定义的，那么在本[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))中它就是external linkage；
+> NOTE: 
 
 > NOTE: `_Thread_local`和前面的三个`specifier`不同的是它仅仅specify storage duration而没有specify linkage；如下面的[Explanation](#Explanation)中所介绍的，当还需要指定linkage的时候，需要和`static`和`extern`一起来使用；
 

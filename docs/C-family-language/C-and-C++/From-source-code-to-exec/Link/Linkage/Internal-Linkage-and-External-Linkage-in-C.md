@@ -1,8 +1,8 @@
-# [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)
+# geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)
 
 It is often quite hard to distinguish between **scope** and **linkage**, and the roles they play. This article focuses on [scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) and [linkage](https://en.wikipedia.org/wiki/Linkage_(software)), and how they are used in C language.
 
-***SUMMARY*** : 关于linkage和scope，在[Translation unit (programming)](https://en.wikipedia.org/wiki/Translation_unit_(programming))中有描述；
+> NOTE : 关于linkage和scope，在[Translation unit (programming)](https://en.wikipedia.org/wiki/Translation_unit_(programming))中有描述；
 
 **Note:** All C programs have been compiled on 64 bit GCC 4.9.2. Also, the terms “identifier” and “name” have been used interchangeably in this article.
 
@@ -17,20 +17,6 @@ It is often quite hard to distinguish between **scope** and **linkage**, and the
   The above sounds similar to Scope, but it is not so. To understand what the above means, let us dig deeper into the compilation process.
 
 - [Translation Unit](https://en.wikipedia.org/wiki/Translation_unit_(programming)) : A translation unit is a file containing source code, header files and other dependencies. All of these sources are grouped together in a file for they are used to produce one single executable object. It is important to link the sources together in a meaningful way. For example, the compiler should know that `printf` definition lies in `stdio` header file.
-
-
-
-In C and `C++`, a program that consists of multiple source code files is compiled *one at a time*. Until the compilation process, a variable can be described by it’s scope. It is only when the **linking process** starts, that **linkage property** comes into play. Thus, **scope is a property handled by compiler, whereas linkage is a property handled by linker.**
-
-***SUMMARY*** : 关于第一句话的理解参见[One-pass compiler](https://en.wikipedia.org/wiki/One-pass_compiler) 。
-
-The Linker links the resources together in the *linking* stage of compilation process. The [Linker](https://en.wikipedia.org/wiki/Linker_(computing)) is a program that takes multiple machine code files as input, and produces an executable object code. It resolves symbols (i.e, fetches definition of symbols such as “+” etc..) and arranges objects in **address space**.
-
-**Linkage** is a property that describes how variables should be linked by the **linker**. Should a variable be available for another file to use? Should a variable be used only in the file declared? Both are decided by **linkage**.
-
-**Linkage** thus allows you to couple names together on a per file basis, scope determines visibility of those names.
-
-***SUMMARY***:因此，链接允许您在每个文件的基础上将名称耦合在一起（这句话的意思是通过linkage来将多个文件结合成同一个文件，更加直白的说其实是将多个不同文件在文件中的name合成同一个），范围确定这些名称的可见性（其实范围仅仅在一个**Translation Unit **中有效）。
 
 
 
@@ -252,7 +238,5 @@ The next phase is **linking**. The **linker** goes through the compiled code and
 
 Now, the linker comes to `extern int y` and tries to find any definition of `y` within the translation unit. It looks through every file in the translation unit to find definition of `y`. If it does not find any definition, a linker error will be thrown. In our program, we have given the definition outside `main()`, which has already been compiled for us. Thus, the linker finds that definition and updates `y`.
 
-This article is contributed by [**simran dhamija**](https://auth.geeksforgeeks.org/profile.php?user=simran). If you like GeeksforGeeks and would like to contribute, you can also write an article using [contribute.geeksforgeeks.org](http://www.contribute.geeksforgeeks.org/) or mail your article to contribute@geeksforgeeks.org. See your article appearing on the GeeksforGeeks main page and help other Geeks.
 
-Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.
 
