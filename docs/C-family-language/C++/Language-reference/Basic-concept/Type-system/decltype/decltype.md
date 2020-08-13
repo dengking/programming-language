@@ -23,13 +23,44 @@ One of the cited main motivations for the `decltype` proposal was the ability to
 It is sometimes desirable to write a generic forwarding function that returns the same type as the wrapped function, regardless of the type it is instantiated with. Without `decltype`, it is not generally possible to accomplish this.[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8) An example, which also utilizes the *[trailing-return-type](https://en.wikipedia.org/wiki/Trailing-return-type)*:[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8)
 
 ```c++
-int& foo(int& i);
-float foo(float& f);
-
-template <class T> auto transparent_forwarder(T& t) −> decltype(foo(t)) {
-  return foo(t);
+#include <iostream>
+int g_IntValue = 1;
+int& foo(int& i)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	return g_IntValue;
 }
+float foo(float& f)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	return 0.0;
+}
+
+template<class T>
+auto transparent_forwarder(T& t) -> decltype(foo(t))
+{
+	return foo(t);
+}
+
+int main()
+{
+	int i = 0;
+	float j = 0.0;
+	transparent_forwarder(i);
+	transparent_forwarder(j);
+}
+// g++ --std=c++11 test.cpp
+
 ```
+
+> NOTE: 上述程序的输出如下:
+>
+> ```c++
+> int& foo(int&)
+> float foo(float&)
+> ```
+>
+> 
 
 `decltype` is essential here because it preserves the information about whether the wrapped function returns a reference type.[[9\]](https://en.wikipedia.org/wiki/Decltype#cite_note-msdn_decltype-9)
 
@@ -45,13 +76,17 @@ template <class T> auto transparent_forwarder(T& t) −> decltype(foo(t)) {
 const int&& foo();
 const int bar();
 int i;
-struct A { double x; };
+struct A
+{
+	double x;
+};
 const A* a = new A();
 decltype(foo()) x1; // type is const int&&
 decltype(bar()) x2; // type is int
 decltype(i) x3; // type is int
 decltype(a->x) x4; // type is double
 decltype((a->x)) x5; // type is const double&
+
 ```
 
 > NOTE: 原文中的上述例子在下面的microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019)中有更好的解释
@@ -65,18 +100,43 @@ decltype((a->x)) x5; // type is const double&
 
 
 ```c++
+#include <iostream>
+#include <utility>
+
+using namespace std;
 //C++11
 template<typename T, typename U>
 auto myFunc(T&& t, U&& u) -> decltype (forward<T>(t) + forward<U>(u))
-        { return forward<T>(t) + forward<U>(u); };
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	return forward<T>(t) + forward<U>(u);
+}
 
-//C++14
-template<typename T, typename U>
-decltype(auto) myFunc(T&& t, U&& u)
-        { return forward<T>(t) + forward<U>(u); };
+////C++14
+//template<typename T, typename U>
+//decltype(auto) myFunc(T&& t, U&& u)
+//{
+//	return forward<T>(t) + forward<U>(u);
+//}
+
+int main()
+{
+	std::cout << myFunc(1, 2) << std::endl;
+	std::cout << myFunc(1.1, 2.2) << std::endl;
+}
+// g++ --std=c++11 test.cpp
 ```
 
-
+> NOTE: 输出如下：
+>
+> ```
+> decltype ((forward<T>(t) + forward<U>(u))) myFunc(T&&, U&&) [with T = int; U = int; decltype ((forward<T>(t) + forward<U>(u))) = int]
+> 3
+> decltype ((forward<T>(t) + forward<U>(u))) myFunc(T&&, U&&) [with T = double; U = double; decltype ((forward<T>(t) + forward<U>(u))) = double]
+> 3.3
+> ```
+>
+> 
 
 
 
@@ -216,7 +276,7 @@ static_assert(test2, "PASS2");
 
 这是cppreference [decltype specifier](https://en.cppreference.com/w/cpp/language/decltype)中特别描述的一点，在三篇文章中，都结合具体的例子对它进行了解释：
 
-```
+```c++
 struct A { double x; };
 decltype(a->x) x4; // type is double
 decltype((a->x)) x5; // type is const double&
@@ -224,7 +284,9 @@ decltype((a->x)) x5; // type is const double&
 
 
 
+## `std::declval`
 
+### cppreference [std::declval](https://en.cppreference.com/w/cpp/utility/declval)
 
 ## TO READ
 
