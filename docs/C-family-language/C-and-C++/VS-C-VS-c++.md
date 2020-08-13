@@ -12,9 +12,16 @@ c++在c上所增强的，主要方面：
 
 ### safety
 
-new和malloc
+`new`和`malloc`
 
-string literal：c中的类型`char *`，c++中是`const char *`。
+#### CV
+
+C++在CV方面，比C要严格：
+
+- string literal：c中的类型`char *`，c++中是`const char *`
+- C-style cast会drop掉CV，C++的各种type cast函数如`reinterpret_cast`、`static_cast`等，都需要保持CV，C++中需要通过`const_cast`来drop掉CV，相比于C的implicit，C++的是explicit，这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-conversion\reinterpret_cast.md#CV`段中进行了详细介绍
+
+
 
 ### Generic programming
 

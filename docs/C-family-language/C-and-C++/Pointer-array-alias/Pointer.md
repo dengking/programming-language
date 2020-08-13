@@ -76,7 +76,7 @@ int main()
 
 ## Multiple-level pointer
 
-“multiple-level pointer”即“多级指针”
+“multiple-level pointer”即“多级指针”；在cppreference [const_cast conversion](https://en.cppreference.com/w/cpp/language/const_cast)中，使用multilevel pointer来表达“多级指针”。
 
 ### [Why use double indirection? or Why use pointers to pointers?](https://stackoverflow.com/questions/5580761/why-use-double-indirection-or-why-use-pointers-to-pointers)
 

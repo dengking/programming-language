@@ -58,9 +58,9 @@ change_speed(23m / 10s); // meters per second
 
 ## C++语言的设计者的设计原则
 
-### C++是一门自由、灵活的语言
+### C++是一门安全、自由、灵活的语言
 
-它给予programmer极大的自由，此处所谓的自由是指programmer有着很大的**选择**空间，或者说它并没有给予programmer过多的限制。
+它给予programmer极大的自由，此处所谓的**自由**是指programmer有着很大的**选择**空间，或者说它并没有给予programmer过多的限制。
 
 [正如在如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎]( https://www.zhihu.com/question/22111546/answer/31929118) 中作者所援引的：
 
@@ -76,9 +76,13 @@ change_speed(23m / 10s); // meters per second
 
 > As we all know, the First Amendment to the C++ Standard states: "The committee shall make no rule that prevents C++ programmers from shooting themselves in the foot." Speaking less facetiously, when it comes to choosing between giving programmers more control and saving them from their own carelessness, C++ tends to err on the side of giving more control. Being true to that spirit, C++11 allows you to use move semantics not just on rvalues, but, at your discretion, on lvalues as well. A good example is the `std` library function `swap`. As before, let `X` be a class for which we have overloaded the copy constructor and copy assignment operator to achieve move semantics on rvalues.
 
-c++语言就是在这样的发展中，逐渐变大庞杂。
+验证上面这段话所表达的思想的另外一个例子是：[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 
 
-### c++是兼容并包的
+C++的安全性体现在compiler进行了严格的类型检查，对于不符合规范的program，compiler会给出报错提示。同时C++基于了programmer执行危险操作的权利，不过C++采用的“explicit”的策略，即需要由programmer“explicit”地来执行，而不是由compiler“implicit”地执行。
+
+C++语言就是在这样的发展中，逐渐变大庞杂。
+
+### C++是兼容并包的
 
 c++提供了极大的选择空间，这就意味着它需要提供各种各样的program technique。一个典型的例子是：c++语言的概念比其他的programming language要多得多：比如在python、java，它们仅仅有reference semantic，而c++囊括了：value semantic、reference semantic。
 
@@ -131,7 +135,9 @@ c++囊括了：
 
 
 
+#### Automatic
 
+为了提供C++的易用性，C++ compiler automatic地执行了很多操作，同时它也提供了供programmer将automatic操作取消掉的权利。如下是一些例子：
 
-C++允许programmer控制是否进行template argument deduction；
+- C++允许programmer控制是否进行template argument deduction；
 

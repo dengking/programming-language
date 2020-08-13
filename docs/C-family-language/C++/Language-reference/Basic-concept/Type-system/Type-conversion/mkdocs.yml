@@ -10,5 +10,3 @@ nav:
     - const_cast: const_cast
 ########## 用户自定义cast    
     - User-defined-conversion: User-defined-conversion.md
-########## 所有的conversion都会涉及到CV的问题    
-    - Cast-away-CV: Cast-away-CV.md
