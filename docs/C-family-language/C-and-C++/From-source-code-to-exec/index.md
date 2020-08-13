@@ -4,14 +4,6 @@
 
 
 
-## cppreference [Phases of translation](https://en.cppreference.com/w/cpp/language/translation_phases)
-
-
-
-## creference [Phases of translation](https://en.cppreference.com/w/c/language/translation_phases)
-
-
-
 ## 将ABI归入本章
 
 本节描述的是我将ABI归入到本章的原因：

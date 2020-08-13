@@ -5,3 +5,10 @@ c++语言是典型的[Compiled language](https://en.wikipedia.org/wiki/Compiled_
 另外需要注意的是：理论与实现，虽然原文描述多种phase of translation，实际的实现可能并没有严格地区分这些phase。对于programmer而言，区分compiler-time、link-time、run-time即可。
 
 ## cppreference [Phases of translation](https://en.cppreference.com/w/cpp/language/translation_phases)
+
+
+
+
+
+## creference [Phases of translation](https://en.cppreference.com/w/c/language/translation_phases)
+

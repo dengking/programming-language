@@ -4,9 +4,137 @@ drop CV是危险的，但是`C++`还是给programmer提供了这种权利，这�
 
 ## cppreference [`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 
 
-only const_cast may be used to cast away (remove) constness or volatility.
+only `const_cast` may be used to cast away (remove) constness or volatility.
 
-> NOTE: 唯一的方法
+> NOTE: C++中drop CV的唯一的方法
+
+### 1)
+
+### 2) 
+
+> NOTE: 需要注意的是，必须是相同类型。
+
+#### Example: `this`
+
+```c++
+#include <iostream>
+
+struct type
+{
+	int i;
+
+	type() : i(3)
+	{
+	}
+
+	void f(int v) const
+	{
+		// this->i = v;                 // compile error: this is a pointer to const
+		const_cast<type*>(this)->i = v; // OK as long as the type object isn't const
+	}
+};
+
+int main()
+{
+	type t; // if this was const type t, then t.f(4) would be undefined behavior
+	t.f(4);
+	std::cout << "type::i = " << t.i << '\n';
+}
+// g++ test.cpp
+
+```
+
+
+
+#### Example: reference
+
+```c++
+#include <iostream>
+
+int main()
+{
+	int i = 3;                 // i is not declared const
+	const int& rci = i;
+	const_cast<int&>(rci) = 4; // OK: modifies i
+	std::cout << "i = " << i << '\n';
+}
+// g++ test.cpp
+
+```
+
+
+
+#### Example: different type
+
+```c++
+#include "stddef.h"
+
+int main()
+{
+	const void* ptr = NULL;
+	const_cast<char*>(ptr); // compiler error
+}
+// g++ test.cpp
+
+```
+
+上述程序编译报错如下：
+
+```c++
+test.cpp: 在函数‘int main()’中:
+test.cpp:6:23: 错误：从类型‘const void*’到类型‘char*’中的 const_cast 无效
+  const_cast<char*>(ptr); // compiler errorc
+```
+
+
+
+#### Example: cppreference [`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 
+
+```c++
+#include <iostream>
+
+struct type
+{
+	int i;
+
+	type()
+			: i(3)
+	{
+	}
+
+	void f(int v) const
+	{
+		// this->i = v;                 // compile error: this is a pointer to const
+		const_cast<type*>(this)->i = v; // OK as long as the type object isn't const
+	}
+};
+
+int main()
+{
+	int i = 3;                 // i is not declared const
+	const int& rci = i;
+	const_cast<int&>(rci) = 4; // OK: modifies i
+	std::cout << "i = " << i << '\n';
+
+	type t; // if this was const type t, then t.f(4) would be undefined behavior
+	t.f(4);
+	std::cout << "type::i = " << t.i << '\n';
+
+	const int j = 3; // j is declared const
+	int* pj = const_cast<int*>(&j);
+	// *pj = 4;      // undefined behavior
+
+	void (type::*pmf)(int) const = &type::f; // pointer to member function
+	// const_cast<void(type::*)(int)>(pmf);   // compile error: const_cast does
+	// not work on function pointers
+}
+// g++ test.cpp
+
+```
+
+
+
+### 3) 
 
 ### NOTE
 
