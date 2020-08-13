@@ -122,3 +122,9 @@ public:
 ## [Covariance and contravariance in C++](https://quuxplusone.github.io/blog/2019/01/20/covariance-and-contravariance/)
 
 这篇文章非常好
+
+
+
+## TO READ
+
+https://arne-mertz.de/2019/10/multiple-dispatch-over-covariant-functions/
