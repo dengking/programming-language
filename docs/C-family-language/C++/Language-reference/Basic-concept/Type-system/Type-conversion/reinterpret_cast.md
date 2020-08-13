@@ -2,7 +2,7 @@
 
 
 
-## cppreference reinterpret_cast conversion
+## cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
 
 Converts between types by **reinterpreting** the underlying bit pattern.
 
@@ -10,9 +10,57 @@ Converts between types by **reinterpreting** the underlying bit pattern.
 
 ### Explanation
 
+Only the following conversions can be done with `reinterpret_cast`, except when such conversions would cast away *constness* or *volatility*.
+
+> NOTE: 上面这段话的意思是：`reinterpret_cast`是需要保证CV的，结合下面的例子来进行说明：
+>
+> ```c++
+> #include <iostream>
+> 
+> void func(const void* input)
+> {
+> 	const int* i = reinterpret_cast<const int*>(input); // 保持CV
+> 	std::cout << *i << std::endl;
+> }
+> int main()
+> {
+> 	const int i = 0;
+> 	func(&i);
+> }
+> 
+> ```
+>
+> 函数`func`的入参是`const`的，`reinterpret_cast`的时候，是需要保持CV的，否则会编译报错，如下是错误示例：
+>
+> ```c++
+> #include <iostream>
+> 
+> void func(const void* input)
+> {
+> 	int* i = reinterpret_cast<int*>(input); // 丢失CV
+> 	std::cout << *i << std::endl;
+> }
+> int main()
+> {
+> 	const int i = 0;
+> 	func(&i);
+> }
+> 
+> ```
+>
+> 上述程序报错如下：
+>
+> ```c++
+> test.cpp: 在函数‘void func(const void*)’中:
+> test.cpp:5:39: 错误：从类型‘const void*’到类型‘int*’的 reinterpret_cast 丢失了限定符
+>   int* i = reinterpret_cast<int*>(input);
+> ```
+>
+> 上述程序，可以通过`const_cast`来 drop CV，在“`reinterpret_cast` VS C-style cast”章节对它进行了详细描述。
+
 ### Integral type and pointer
 
-关于integral type 和 pointer之间的转换，在`C-family-language\C-and-C++\Pointer-array-alias\Pointer-and-integer.md`中对此进行了详细的说明。
+> NOTE: 关于integral type 和 pointer之间的转换，在`C-family-language\C-and-C++\Pointer-array-alias\Pointer-and-integer.md`中对此进行了详细的说明。
 
 #### 1)
 
@@ -138,3 +186,57 @@ int main()
 
 
 #### 10) OOP pointer to function conversion
+
+
+
+## `reinterpret_cast` VS C-style cast
+
+### CV
+
+从CV角度来看：
+
+- `reinterpret_cast`需要保证CV（关于此，参见cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)`#`Explanation段，其中给出了示例）
+- C-style cast不需要保证CV
+
+从这个角度来看：C++对C中的type-unsafe做的改善。`C++`的`reinterpret_cast`保证了type-safe，同时C++提供了[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast)来给予programmer escape from CV的能力，但是相比于C的implicit，C++的`const_cast`是explicit，因此相比而言，它更加safe。  
+
+下面是cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)`#`Explanation段中给出了示例使用C-style cast重写的结果：
+
+```c++
+#include <iostream>
+
+void func(const void* input)
+{
+	int* i = (int*) input;
+	std::cout << *i << std::endl;
+}
+int main()
+{
+	const int i = 0;
+	func(&i);
+}
+// gcc test.c
+
+```
+
+上述程序编译通过，但是可能引入undefined behavior，如果在`func`尝试对`input`进行修改，则会导致undefined behavior，这体现了了C++ 的type safety。
+
+`reinterpret_cast` + `const_cast` 来模拟C-style cast：
+
+```c++
+#include <iostream>
+
+void func(const void* input)
+{
+	int* i = const_cast<int*>(reinterpret_cast<const int*>(input)); // 丢失CV
+	std::cout << *i << std::endl;
+}
+int main()
+{
+	const int i = 0;
+	func(&i);
+}
+// g++ test.cpp
+
+```
+
