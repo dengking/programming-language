@@ -19,3 +19,4 @@ definition是ORD，declaration是可以多个的。
 `const`、`static`都是internal linkage
 
 `extern` variable的storage duration是static的，这是因为显然它需要compiler在
+
