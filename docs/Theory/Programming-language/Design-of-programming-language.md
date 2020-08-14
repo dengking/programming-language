@@ -106,3 +106,17 @@ container指各种常见的数据结构，一般programming language的standard 
 ## Specification of expectation of type in class-based OOP language
 
 这部分内容移到了`Theory\Programming-paradigm\Generic-programming\Specification-of-expectation-of-type.md`中。
+
+
+
+## Design of specifier
+
+语言为了简便，key word要尽可能地少；
+
+一个key word能够用于多种entity
+
+最最典型的例子就是C++ static key word
+
+它既可以用于object，也可以用于function的
+
+另外一个就是C++ extern
