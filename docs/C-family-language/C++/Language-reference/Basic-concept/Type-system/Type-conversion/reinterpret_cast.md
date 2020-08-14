@@ -27,7 +27,7 @@ Only the following conversions can be done with `reinterpret_cast`, except when 
 > 	const int i = 0;
 > 	func(&i);
 > }
-> 
+> // g++ test.cpp
 > ```
 >
 > 函数`func`的入参是`const`的，`reinterpret_cast`的时候，是需要保持CV的，否则会编译报错，如下是错误示例：

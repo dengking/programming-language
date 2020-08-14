@@ -25,7 +25,7 @@ No linkage means two declarations at different scopes in the same translation un
 So, if I have something like:
 
 ```c
-int f() { 
+int f() { T
     static int x; // no linkage
 }
 ```
@@ -36,7 +36,7 @@ int f() {
 
 Internal linkage means declarations at different scopes in the same translation unit can refer to the same object. For example:
 
-```
+```C++
 static int x;  // a namespace scope, so `x` has internal linkage
 
 int f() { 
@@ -52,7 +52,7 @@ Assuming we put these all in one file (i.e., they end up as a single translation
 
 For example, consider code like this:
 
-```
+```c++
 #include <iostream>
 
 static int x; // a namespace scope, so `x` has internal linkage
@@ -91,7 +91,7 @@ We can see this in the generated code. For example, if we compile the code above
 
 f:
 
-```
+```assembly
     movl    _ZL1x(%rip), %eax
     addl    $1, %eax
     movl    %eax, _ZL1x(%rip)
@@ -101,7 +101,7 @@ That's the increment of `x` (it uses the name `_ZL1x` for it).
 
 g:
 
-```
+```assembly
     movl    _ZL1x(%rip), %eax
     [...]
     call    _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c@PLT

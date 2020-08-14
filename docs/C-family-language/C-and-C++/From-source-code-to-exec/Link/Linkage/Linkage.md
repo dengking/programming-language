@@ -18,13 +18,12 @@ linkage是和programming language的编译过程密切相关的，C和C++语言�
 
 差异性：
 
-- `#include`发生于preprocess阶段
-
-- linkage发生于link阶段
+- `#include`发生于preprocess阶段，`#include`的对象是header file
+- linkage发生于link阶段，linkage的对象是`.o` object files
 
 相似性：
 
-- 从关系的角度来看，都是将多个file合并为一个file，即many-to-one
+- 从**关系**的角度来看，都是将多个file合并为一个file，即many-to-one
 
 ### scope and linkage
 
@@ -51,10 +50,6 @@ The Linker links the resources together in the *linking* stage of compilation pr
 > NOTE: 因此，链接允许您在每个文件的基础上将名称耦合在一起（这句话的意思是通过linkage来将多个文件结合成同一个文件，更加直白的说其实是将多个不同文件在文件中的name合成同一个），范围确定这些名称的可见性（其实范围仅仅在一个**Translation Unit **中有效）。
 
 
-
-### linkage and storage duration
-
-关于linkage，在cppreference中，都是将
 
 ### wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))
 
@@ -90,6 +85,30 @@ Linkage between languages must be done with some care, as different languages [a
 
 
 
+### linkage and storage duration specifiers
+
+无论是`C++`还是C，都没有专门描述linkage的specifier，而是将描述**storage duration**和描述**linkage**的specifier合并在一起，对于linkage，并没有单独描述它的specifier，但是，compiler提供了default linkage；关于这一点，我们需要仔细阅读cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 和 creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration)：
+
+cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 中，对specifiers的描述如下：
+
+> The **storage class specifiers** are a part of the *decl-specifier-seq* of a name's [declaration syntax](https://en.cppreference.com/w/cpp/language/declarations). Together with the [scope](https://en.cppreference.com/w/cpp/language/scope) of the name, they control two independent properties of the name: its *storage duration* and its *linkage*.
+
+在`C++`中，将这些specifier称为 storage class specifier。
+
+creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration) 中，对specifiers的描述如下：
+
+> Specify *storage duration* and *linkage* of objects and functions
+
+在`C`中，将这些specifier称为 storage class specifier。
+
+
+
+我们需要深入思考：为什么将linkage和storage duration的specifier合并？
+
+
+
+另外需要注意的是， 对于function而言，它是否有storage duration？对于object而言，它既有linkage又有storage duration。对于function而言，讨论它的storage duration是没有意义的。
+
 
 
 ### Classification of linkage and specifiers
@@ -102,6 +121,8 @@ Linkage between languages must be done with some care, as different languages [a
 - geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)
 - learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)
 - learncpp [6.7 — External linkage](https://www.learncpp.com/cpp-tutorial/external-linkage/)
+
+对linkage的分类是以translation unit为单位的，
 
 
 
@@ -204,7 +225,9 @@ int y = 2;
 
 一个name，要么是在本translation unit中定义，要么是在另外 一个translation unit中定义；如果一个name是在另外一个translation unit中定义的，那么在本[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))中它就是external linkage；
 
-思考：ODR 的判断是发生于哪个阶段？link-time。
+思考：ODR 的判断是发生于哪个阶段？
+
+在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对ODR进行了分析：
 
 
 
