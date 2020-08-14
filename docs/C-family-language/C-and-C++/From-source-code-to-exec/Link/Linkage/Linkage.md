@@ -33,9 +33,11 @@ scope是compile-time概念，它所描述的在一个translation unit内；
 
 linkage是link-time概念，它描述的是多个object file之间；
 
+compile-time发生在link-time之前，所以scope的检查发生在linkage的检查之前。
 
 
-关于这一点，在文章geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)中对此进行了描述：
+
+关于scope and linkage，在文章geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)中对此进行了描述：
 
 In C and `C++`, a program that consists of multiple source code files is compiled *one at a time*. Until the compilation process, a variable can be described by it’s scope. It is only when the **linking process** starts, that **linkage property** comes into play. Thus, **scope is a property handled by compiler, whereas linkage is a property handled by linker.**
 
@@ -87,23 +89,7 @@ Linkage between languages must be done with some care, as different languages [a
 
 ### linkage and storage duration specifiers
 
-无论是`C++`还是C，都没有专门描述linkage的specifier，而是将描述**storage duration**和描述**linkage**的specifier合并在一起，对于linkage，并没有单独描述它的specifier，但是，compiler提供了default linkage；关于这一点，我们需要仔细阅读cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 和 creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration)：
-
-cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 中，对specifiers的描述如下：
-
-> The **storage class specifiers** are a part of the *decl-specifier-seq* of a name's [declaration syntax](https://en.cppreference.com/w/cpp/language/declarations). Together with the [scope](https://en.cppreference.com/w/cpp/language/scope) of the name, they control two independent properties of the name: its *storage duration* and its *linkage*.
-
-在`C++`中，将这些specifier称为 storage class specifier。
-
-creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration) 中，对specifiers的描述如下：
-
-> Specify *storage duration* and *linkage* of objects and functions
-
-在`C`中，将这些specifier称为 storage class specifier。
-
-
-
-我们需要深入思考：为什么将linkage和storage duration的specifier合并？
+关于此，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`中进行了详细描述。
 
 
 

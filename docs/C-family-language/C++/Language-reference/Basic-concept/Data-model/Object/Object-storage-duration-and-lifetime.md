@@ -5,15 +5,17 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 object的storage duration和lifetime是两个非常重要的概念，是理解后续很多内容的基础：
 
 - allocation
-
 - initialization（在cppreference中，对initialization有着专门的描述）
-- deallocation（destruction）
+- destruction
+- deallocation
+
+需要注意的是：上面是按照发生顺序进行排列的，即：allocation->initialization->destruction->deallocation。
 
 ## cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)
 
 > NOTE: 原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，linkage的讨论，参见`C-family-language\C-and-C++\From-source-code-to-exec\Link\Linkage`章节；
 >
-> 原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在`C-family-language\C-and-C++\From-source-code-to-exec\Link\LinkageLinkage.md#linkage and storage duration specifiers`中进行了详细的讨论。
+> 原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
 >
 > 我们按照在`Theory\Programming-language\How-to-master-programming-language.md#`中总结的：首先学习property，然后学习描述这些property的specifier的方式来进行学习。
 >
@@ -22,7 +24,7 @@ object的storage duration和lifetime是两个非常重要的概念，是理解�
 > - C++ object有哪几种storage duration
 > - C++ language提供了哪些specifier来供programmer对storage duration进行控制/描述，即C++ language中，有哪些Storage class specifiers
 >
-> 所以，本文与原文的组织有所差异
+> 所以，本文与原文的组织有所差异。
 
 ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration#Storage_duration)
 
@@ -41,6 +43,9 @@ object的storage duration和lifetime是两个非常重要的概念，是理解�
 | static                   | the object is allocated when the **program** begins          | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括**static local object**、**extern local object**） | process  |                              |
 | dynamic                  | the object is allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              |          |                              |
 
+> NOTE:
+>
+> 上述storage duration的分类中，并不包含对 temporary object的说明，关于temporary object，参见cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) `#`  “Temporary object lifetime” 章节
 
 #### Example: ***automatic*** storage duration: extern local object
 
@@ -88,11 +93,60 @@ int main()
 | `thread_local`(since C++11) | *thread*                                                     |            |                                                              |                                                              |
 | `mutable`                   | does not affect storage duration or linkage. See [const/volatile](https://en.cppreference.com/w/cpp/language/cv) for the explanation. |            |                                                              |                                                              |
 
+> NOTE: 
+>
+> 无论是`C++`还是C，都没有专门描述linkage的specifier，而是将描述**storage duration**和描述**linkage**的specifier合并在一起，对于linkage，并没有单独描述它的specifier，但是，compiler提供了default linkage；关于这一点，我们需要仔细阅读cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 和 creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration)：
+>
+> cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 中，对specifiers的描述如下：
+>
+> > The **storage class specifiers** are a part of the *decl-specifier-seq* of a name's [declaration syntax](https://en.cppreference.com/w/cpp/language/declarations). Together with the [scope](https://en.cppreference.com/w/cpp/language/scope) of the name, they control two independent properties of the name: its *storage duration* and its *linkage*.
+>
+> 在`C++`中，将这些specifier称为 storage class specifier。
+>
+> creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration) 中，对specifiers的描述如下：
+>
+> > Specify *storage duration* and *linkage* of objects and functions
+>
+> 在`C`中，将这些specifier称为 storage class specifier。
+>
+> 
+>
+> 我们需要深入思考：为什么将linkage和storage duration的specifier合并？
+
+### Static local variables
+
+> NOTE: 对于static local variable，
+
+Variables declared at **block scope** with the specifier `static` or `thread_local` (since C++11) have static or thread (since C++11) storage duration but are initialized the first time control passes through their declaration (unless their initialization is [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization), which can be performed before the block is first entered). On all further calls, the declaration is skipped.
+
+> NOTE: 上面这段话关于initialization的描述是不易理解的？它的意思是：对于static local variable，它的initialization的发生时间如下：
+>
+> - [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) can be performed before the block is first entered
+> - others are initialized the first time control passes through their declaration
 
 
 
+
+
+> NOTE:
+>
+> #### `static` specifier and static storage duration
+>
+> ####  
 
 ## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
+
+
+
+### Temporary object lifetime
+
+
+
+### Storage reuse
+
+
+
+### Access outside of lifetime
 
 
 
