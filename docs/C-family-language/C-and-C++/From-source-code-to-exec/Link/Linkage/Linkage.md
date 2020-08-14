@@ -89,31 +89,23 @@ Linkage between languages must be done with some care, as different languages [a
 
 
 
-#### 从definition 和 declaration 来思考 linkage
+#### 从 definition 和 declaration 来思考 linkage
 
 一个entity，可以有多个declaration，但是只能够有一个definition，这些declarations可以位于同一个translation unit也可以位于不同的translation unit；
 
 在每个translation-unit中，都需要declare这个entity；在compile-time，compiler通过declaration来进行grammar校验；在link-time，linker通过合并object file来找到这个entity的definition；
 
-一个name，要么是在本translation unit中定义，要么是在另外 一个translation unit中定义；如果一个name是在另外一个translation unit中定义的，那么在本[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))中它需要指定它为external linkage；
+一个name，要么是在本translation unit中定义，要么是在另外 一个translation unit中定义；如果一个name是在另外一个translation unit中定义的，那么在本[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))中它需要指定它为**external linkage**；
 
 在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对此进行了非常好的总结：
 
 > In lesson [6.3 -- Local variables](https://www.learncpp.com/cpp-tutorial/local-variables/), we said, “An identifier’s linkage determines whether other declarations of that name refer to the same object or not”
-
-思考：ODR 的判断是发生于哪个阶段？
-
-在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对ODR进行了分析：
 
 
 
 ### linkage and storage duration specifiers
 
 关于此，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`中进行了详细描述。
-
-
-
-另外需要注意的是， 对于function而言，它是否有storage duration？对于object而言，它既有linkage又有storage duration。对于function而言，讨论它的storage duration是没有意义的。
 
 
 
