@@ -4,8 +4,10 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 object的storage duration和lifetime是两个非常重要的概念，是理解后续很多内容的基础：
 
+- allocation
+
 - initialization（在cppreference中，对initialization有着专门的描述）
-- destruction
+- deallocation（destruction）
 
 ## cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)
 
@@ -24,21 +26,48 @@ object的storage duration和lifetime是两个非常重要的概念，是理解�
 
 ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration#Storage_duration)
 
-> NOTE: 对于每种storage duration，都有对应的allocation time point 和 dealloaction time point。
+> NOTE: 下面描述该表格的组织。
+>
+> 对于每种storage duration，都有对应的allocation time point 和 dealloaction time point。
 
-#### automatic
+| storage duration         | allocation time point                                        | dealloaction time point                                      | objects                                                      | scope    | explanation |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- | ----------- |
+| automatic                | the object is allocated at the beginning of the enclosing code block | `C++`: deallocated at the end <br>C: deallocated when it is exited by any means ([goto](https://en.cppreference.com/w/c/language/goto), [return](https://en.cppreference.com/w/c/language/return), reaching the end) | 1. local objects, **except** those declared `static` （**static local object**）, `extern`（**extern local object**） or `thread_local`. | function | RAII        |
+| thread <br>(since C++11) | the object is allocated when the thread begins               | deallocated when the thread ends                             | 1. objects declared `thread_local` have this storage duration | thread   |             |
+| static                   | the object is allocated when the **program** begins          | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括**static local object**、**extern local object**） | process  |             |
+| dynamic                  | the object is allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              |          |             |
+|                          |                                                              |                                                              |                                                              |          |             |
 
-> NOTE: *automatic* storage duration
+#### Example: ***automatic*** storage duration: extern local object
 
-#### static
+来源：[How does linker handle variables with different linkages?](https://stackoverflow.com/questions/51737002/how-does-linker-handle-variables-with-different-linkages) `#` [A](https://stackoverflow.com/a/51737215)
 
-All objects declared at namespace scope (including global namespace) have this storage duration, plus those declared with `static` or `extern`. See [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) for details on initialization of objects with this storage duration.
+```c++
+#include <iostream>
 
-#### thread (since C++11)
+static int x; // a namespace scope, so `x` has internal linkage, static storage duration
 
+int f()
+{
+	extern int x; // static storage duration
+	++x;
+}
 
+int g()
+{
+	extern int x; // static storage duration
+	std::cout << x << '\n';
+}
 
-#### dynamic
+int main()
+{
+	g();
+	f();
+	g();
+}
+// g++ test.cpp
+
+```
 
 
 
@@ -51,7 +80,7 @@ All objects declared at namespace scope (including global namespace) have this s
 | `auto` (until C++11)        | *automatic*                                                  | no linkage | 在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)的Notes有说明: Since C++11, `auto` is no longer a storage class specifier; it is used to indicate type deduction. |                                                              |
 | `register` (until C++17)    | *automatic*                                                  | no linkage |                                                              |                                                              |
 | `static`                    | *static* or *thread*                                         | *internal* |                                                              |                                                              |
-| `extern`                    | *static* or *thread*                                         | *external* |                                                              | It specifies **external linkage**, and does not technically affect **storage duration**, but it cannot be used in a definition of an **automatic storage duration** object, so all `extern` objects have **static** or **thread** durations. In addition, a variable declaration that uses `extern` and has no initializer is not a [definition](https://en.cppreference.com/w/cpp/language/definition). |
+| `extern`                    | *static* or *thread*                                         | *external* |                                                              | It specifies **external linkage**, and does not technically affect **storage duration**, but it cannot be used in a **definition** of an **automatic storage duration** object, so all `extern` objects have **static** or **thread** durations. In addition, a variable declaration that uses `extern` and has no initializer is not a [definition](https://en.cppreference.com/w/cpp/language/definition).<br> |
 | `thread_local`(since C++11) | *thread*                                                     |            |                                                              |                                                              |
 | `mutable`                   | does not affect storage duration or linkage. See [const/volatile](https://en.cppreference.com/w/cpp/language/cv) for the explanation. |            |                                                              |                                                              |
 
