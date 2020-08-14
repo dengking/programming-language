@@ -8,7 +8,7 @@
 >
 > 原文之所以将它们放到一起是因为：C++和C并没有提供专门描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在`C-family-language\C-and-C++\From-source-code-to-exec\Link\LinkageLinkage.md#linkage and storage duration specifiers`中进行了详细的讨论。
 >
-> 对于language的学习，我们应该首先学习property，然后学习描述这些property的specifier。
+> 我们按照在中卖对于language的学习，我们应该首先学习property，然后学习描述这些property的specifier。
 >
 > 本文仅仅关注原文中object storage duration相关的内容，我们以如下的思路来组织内容：
 >
