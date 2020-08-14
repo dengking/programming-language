@@ -26,17 +26,21 @@ object的storage duration和lifetime是两个非常重要的概念，是理解�
 
 ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration#Storage_duration)
 
-> NOTE: 下面描述该表格的组织。
+> NOTE: 下面描述该表格的组织以及各列的含义
 >
-> 对于每种storage duration，都有对应的allocation time point 和 dealloaction time point。
+> 对于每种storage duration，都有对应的“allocation time point”（何时分配）和 “dealloaction time point”（何时被回收）。
+>
+> 另外一个非常重要的问题是：判断object具备哪种storage duration，这在“objects”列中说明。
+>
+> scope是我们从OS的角度来分析storage duration。
 
-| storage duration         | allocation time point                                        | dealloaction time point                                      | objects                                                      | scope    | explanation |
-| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- | ----------- |
-| automatic                | the object is allocated at the beginning of the enclosing code block | `C++`: deallocated at the end <br>C: deallocated when it is exited by any means ([goto](https://en.cppreference.com/w/c/language/goto), [return](https://en.cppreference.com/w/c/language/return), reaching the end) | 1. local objects, **except** those declared `static` （**static local object**）, `extern`（**extern local object**） or `thread_local`. | function | RAII        |
-| thread <br>(since C++11) | the object is allocated when the thread begins               | deallocated when the thread ends                             | 1. objects declared `thread_local` have this storage duration | thread   |             |
-| static                   | the object is allocated when the **program** begins          | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括**static local object**、**extern local object**） | process  |             |
-| dynamic                  | the object is allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              |          |             |
-|                          |                                                              |                                                              |                                                              |          |             |
+| storage duration         | allocation time point                                        | dealloaction time point                                      | objects                                                      | scope    | explanation                  |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- | ---------------------------- |
+| automatic                | the object is allocated at the beginning of the enclosing code block | `C++`: deallocated at the end <br>C: deallocated when it is exited by any means ([goto](https://en.cppreference.com/w/c/language/goto), [return](https://en.cppreference.com/w/c/language/return), reaching the end) | 1. local objects, **except** those declared `static` （**static object**）, `extern`（**extern object**） or `thread_local`. | function | 与此相关的一个主要概念是RAII |
+| thread <br>(since C++11) | the object is allocated when the thread begins               | deallocated when the thread ends                             | 1. objects declared `thread_local` have this storage duration | thread   |                              |
+| static                   | the object is allocated when the **program** begins          | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括**static local object**、**extern local object**） | process  |                              |
+| dynamic                  | the object is allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              |          |                              |
+
 
 #### Example: ***automatic*** storage duration: extern local object
 
