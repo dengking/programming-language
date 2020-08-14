@@ -84,14 +84,14 @@ int main()
 
 > NOTE: 本节描述描述storage duration的specifier
 
-| specifier                   | storage duration                                             | linkage    | C++ version                                                  | Explanation                                                  |
-| --------------------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `auto` (until C++11)        | *automatic*                                                  | no linkage | 在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)的Notes有说明: Since C++11, `auto` is no longer a storage class specifier; it is used to indicate type deduction. |                                                              |
-| `register` (until C++17)    | *automatic*                                                  | no linkage |                                                              |                                                              |
-| `static`                    | *static* or *thread*                                         | *internal* |                                                              |                                                              |
-| `extern`                    | *static* or *thread*                                         | *external* |                                                              | It specifies **external linkage**, and does not technically affect **storage duration**, but it cannot be used in a **definition** of an **automatic storage duration** object, so all `extern` objects have **static** or **thread** durations. In addition, a variable declaration that uses `extern` and has no initializer is not a [definition](https://en.cppreference.com/w/cpp/language/definition).<br> 上面这段话的意思是：`extern` variable只能够link to **object with static storage** or **object with `thread_local` storage**。 |
-| `thread_local`(since C++11) | *thread*                                                     |            |                                                              |                                                              |
-| `mutable`                   | does not affect storage duration or linkage. See [const/volatile](https://en.cppreference.com/w/cpp/language/cv) for the explanation. |            |                                                              |                                                              |
+| specifier                   | storage duration                                             | linkage    | C++ version                                                  | Explanation                                                  | function         |
+| --------------------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------- |
+| `auto` (until C++11)        | *automatic*                                                  | no linkage | 在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)的Notes有说明: Since C++11, `auto` is no longer a storage class specifier; it is used to indicate type deduction. |                                                              | 不可修饰function |
+| `register` (until C++17)    | *automatic*                                                  | no linkage |                                                              |                                                              | 不可修饰function |
+| `static`                    | *static* or *thread*                                         | *internal* |                                                              |                                                              | 可以修饰function |
+| `extern`                    | *static* or *thread*                                         | *external* |                                                              | It specifies **external linkage**, and does not technically affect **storage duration**, but it cannot be used in a **definition** of an **automatic storage duration** object, so all `extern` objects have **static** or **thread** durations. In addition, a variable declaration that uses `extern` and has no initializer is not a [definition](https://en.cppreference.com/w/cpp/language/definition).<br> 上面这段话的意思是：`extern` variable只能够link to **object with static storage** or **object with `thread_local` storage**。 | 可以修饰function |
+| `thread_local`(since C++11) | *thread*                                                     |            |                                                              |                                                              | 不可修饰function |
+| `mutable`                   | does not affect storage duration or linkage. See [const/volatile](https://en.cppreference.com/w/cpp/language/cv) for the explanation. |            |                                                              |                                                              | 不可修饰function |
 
 > NOTE: 
 >
@@ -112,6 +112,18 @@ int main()
 > 
 >
 > 我们需要深入思考：为什么将linkage和storage duration的specifier合并？
+>
+> 这一点，可以参看上述table中`extern`的Explanation。
+
+
+
+#### linkage and storage duration of function
+
+需要注意的是：对于function而言，它没有**storage duration** property？对于object而言，它既有linkage又有storage duration。对于function而言，讨论它的storage duration是没有意义的。
+
+`static` 、 `extern` 也可以 修饰 function，linkage
+
+
 
 ### Static local variables
 
