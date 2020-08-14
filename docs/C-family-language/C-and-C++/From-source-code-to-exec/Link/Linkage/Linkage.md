@@ -51,9 +51,11 @@ The Linker links the resources together in the *linking* stage of compilation pr
 
 > NOTE: 因此，链接允许您在每个文件的基础上将名称耦合在一起（这句话的意思是通过linkage来将多个文件结合成同一个文件，更加直白的说其实是将多个不同文件在文件中的name合成同一个），范围确定这些名称的可见性（其实范围仅仅在一个**Translation Unit **中有效）。
 
+### What is linkage？
 
+本节讨论what is linkage。
 
-### wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))
+#### wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))
 
 In programming languages, particularly the compiled ones like [C](https://en.wikipedia.org/wiki/C_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and [D](https://en.wikipedia.org/wiki/D_(programming_language)), **linkage** describes how **names** can or can not refer to the same entity throughout the whole program or one single [translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming)).
 
@@ -87,6 +89,24 @@ Linkage between languages must be done with some care, as different languages [a
 
 
 
+#### 从definition 和 declaration 来思考 linkage
+
+一个entity，可以有多个declaration，但是只能够有一个definition，这些declarations可以位于同一个translation unit也可以位于不同的translation unit；
+
+在每个translation-unit中，都需要declare这个entity；在compile-time，compiler通过declaration来进行grammar校验；在link-time，linker通过合并object file来找到这个entity的definition；
+
+一个name，要么是在本translation unit中定义，要么是在另外 一个translation unit中定义；如果一个name是在另外一个translation unit中定义的，那么在本[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))中它需要指定它为external linkage；
+
+在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对此进行了非常好的总结：
+
+> In lesson [6.3 -- Local variables](https://www.learncpp.com/cpp-tutorial/local-variables/), we said, “An identifier’s linkage determines whether other declarations of that name refer to the same object or not”
+
+思考：ODR 的判断是发生于哪个阶段？
+
+在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对ODR进行了分析：
+
+
+
 ### linkage and storage duration specifiers
 
 关于此，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`中进行了详细描述。
@@ -108,7 +128,7 @@ Linkage between languages must be done with some care, as different languages [a
 - learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)
 - learncpp [6.7 — External linkage](https://www.learncpp.com/cpp-tutorial/external-linkage/)
 
-对linkage的分类是以translation unit为单位的，
+对linkage的分类是以**translation unit**为单位的，
 
 
 
@@ -202,18 +222,6 @@ int y = 2;
 
 
 
-
-## 从linkage来思考definition 和 declaration
-
-一个entity，可以有多个declaration，但是只能够有一个definition；
-
-在每个translation-unit中，都需要declare这个entity；在compile-time，compiler通过declaration来进行grammar校验；在link-time，linker通过合并object file来找到这个entity的definition；
-
-一个name，要么是在本translation unit中定义，要么是在另外 一个translation unit中定义；如果一个name是在另外一个translation unit中定义的，那么在本[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))中它就是external linkage；
-
-思考：ODR 的判断是发生于哪个阶段？
-
-在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对ODR进行了分析：
 
 
 
