@@ -41,6 +41,12 @@ Programming language是在不断演进的，各种programming language都会有�
 
 作为开发者，在学习programming language的时候，可以从这些新特性，即从what is new入手来进行学习，首先搞清楚设计者引入这些新特性的意图、这些新特性所能够解决的问题、application，然后再去了解它们的grammar。这种学习方式是更加高效的。
 
+### 首先学习property，然后学习描述这些property的specifier
+
+为了准确地使用programming language提供的specifier，我们需要首先理解这些specifier所描述的property，这就是本机标题的含义。
+
+关于此的一个典型例子就是[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)，programmer可以用它来对storage duration、linkage进行描述，因此，在此之前，我们需要首先搞清楚storage duration、linkage的概念 。
+
 ### Philosophy
 
 programming language的设计者往往是遵循着一定的philosophy来设计这门语言的，作为使用者，了解这门语言的philosophy，也有助于我们对它的掌握。
