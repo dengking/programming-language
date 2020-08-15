@@ -31,3 +31,15 @@ However, it’s worth noting that **internal objects** (and **functions**) that 
 
 - compiler来保证ODR
 - linker来保证ODR
+
+
+
+
+
+## TO READ
+
+https://cpluspluspedia.com/en/tutorial/4907/one-definition-rule--odr-
+
+https://en.cppreference.com/w/cpp/language/definition
+
+https://en.cppreference.com/w/cpp/language/declarations

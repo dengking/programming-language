@@ -1,15 +1,24 @@
-# `reinterpret_cast`
+# `dynamic_cast`
 
 
 
-## cppreference [`reinterpret_cast`](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
+## cppreference [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast)
 
 
 
-## TODO
+## `c++` `isinstanceof` `issubclass`
 
-[When to use reinterpret_cast?](https://stackoverflow.com/questions/573294/when-to-use-reinterpret-cast)
+http://www.cplusplus.com/forum/general/50090/
 
-[Reinterpret_cast vs. C-style cast](https://stackoverflow.com/questions/7831696/reinterpret-cast-vs-c-style-cast)
+https://www.gamedev.net/forums/topic/322781-c-instanceof/
 
-[using reinterpret_cast to convert char* to vector](https://stackoverflow.com/questions/30287441/using-reinterpret-cast-to-convert-char-to-vectorbyte)
+https://www.tutorialspoint.com/cplusplus-equivalent-of-instanceof
+
+https://stackoverflow.com/questions/27595076/instanceof-equivalent-in-c
+
+https://stackoverflow.com/questions/500493/c-equivalent-of-javas-instanceof
+
+
+
+
+
