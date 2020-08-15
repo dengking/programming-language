@@ -150,3 +150,9 @@ https://stackoverflow.com/questions/5150748/protected-constructor-and-accessibil
 典型的例子就是STL的container，它们这样的目的是避免STL的用户继承其中的class。在维基百科[Standard Template Library](https://en.wikipedia.org/wiki/Standard_Template_Library)中对此进行了说明：
 
 > STL containers are not intended to be used as base classes (their destructors are deliberately non-virtual); deriving from a container is a common mistake.
+
+
+
+#### Guideline: destructor of any base class must be [public and virtual or protected and non-virtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#discussion-make-base-class-destructors-public-and-virtual-or-protected-and-nonvirtual)
+
+在cppreference `virtual function specifier#Virtual destructor`中提及了这个。
