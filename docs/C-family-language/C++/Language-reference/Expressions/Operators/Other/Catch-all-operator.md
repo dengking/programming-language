@@ -86,6 +86,13 @@ a(...)
 
 是通过学习detection idiom发现了这种用法的。
 
+### 标准
+
+按照C++标准的说法，它叫做Variadic arguments，在cppreference的下列章节中对它进行了描述：
+
+- cppreference Variadic arguments中对它进行了专门描述
+- cppreference Overload resolution`#`Viable functions中将它称为 **ellipsis parameter**
+
 ### Example: stackoverflow [What is “Expression SFINAE”?](https://stackoverflow.com/questions/12654067/what-is-expression-sfinae) `#` [A](https://stackoverflow.com/a/12654277)
 
 

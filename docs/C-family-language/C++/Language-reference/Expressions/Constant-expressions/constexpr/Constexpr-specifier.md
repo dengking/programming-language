@@ -10,7 +10,7 @@ The `constexpr` specifier declares that it is possible to evaluate the value of 
 
 > NOTE: 这段话是非常核心地所在
 
-Such variables and **functions** can then be used where only compile time [constant expressions](constant_expression.html) are allowed (provided that **appropriate function arguments are given**).
+Such **variables** and **functions** can then be used where only compile time [constant expressions](constant_expression.html) are allowed (provided that **appropriate function arguments are given**).
 
 > NOTE: 需要对最后一句话进行说明：它的意思是：constexpr function的入参必须是能够在compile-time获得的。
 
@@ -151,7 +151,7 @@ int main()
 
 ##### stackoverflow [Using a `constexpr` array size function](https://stackoverflow.com/a/7439261)
 
-```
+```C++
 #include "stddef.h"
 #include "stdio.h"
 #include <iostream>
@@ -189,6 +189,8 @@ int main()
 ```
 
 
+
+##### Example: cppreference `sizeof...` operator`make_array`
 
 
 
@@ -300,7 +302,9 @@ int main()
 
 
 
+## `constexpr if` statements (C++17)
 
+本地地址：`file:///D:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/language/if.html`
 
 ## microsoft [constexpr (C++)](https://docs.microsoft.com/en-us/cpp/cpp/constexpr-cpp?view=vs-2019)
 

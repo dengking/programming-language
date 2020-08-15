@@ -6,7 +6,7 @@
 
 A template parameter pack is a **template parameter** that accepts zero or more **template arguments** (non-types, types, or templates).
 
-> NOTE: 需要注意id是，它的名称是**parameter** pack，它是parameter，这种语法是告诉compiler，这个parameter可以接受多个argument的，它是一个**pack**，这是template parameter pack的内涵。
+> NOTE: 需要注意的是，它的名称是**parameter** pack，它是parameter，这种语法是告诉compiler，这个parameter可以接受多个argument的，它是一个**pack**，这是template parameter pack的内涵。
 >
 > 既然有pack，那么肯定有对应的unpack过程，在原文中，将unpack过程称为“Parameter pack expansion”。
 >
@@ -16,77 +16,123 @@ A template parameter pack is a **template parameter** that accepts zero or more 
 
 
 
+## cppreference `sizeof...` operator
+
+Queries the number of elements in a [parameter pack](parameter_pack.html).
 
 
-一个类使用另外一个template class作为data member，如下面的，`Test2`使用模板类`Test`作为成员变量，显然此时需要将`Test`的模板参数传递到`Test2`中，如果使用逐个声明的方式，在`Test2`中声明和`Test`相同的模板参数，则维护起来就比较麻烦，尤其当`Test`的模板参数较多的时候，使用Parameter pack可以避免这种问题。
+
+### Example
 
 ```c++
 #include <iostream>
-template<class T1>
-class Test
-{
+#include <array>
+#include <type_traits>
 
-};
-template<class ...Args>
-class Test2
+template<typename ... Ts>
+constexpr auto make_array(Ts&&... ts) -> std::array<std::common_type_t<Ts...>,sizeof...(ts)>
 {
-public:
-Test2(Test<Args...>  t):m_t(t){}
-Test<Args...>  m_t;
-
-};
+	return {	std::forward<Ts>(ts)...};
+}
 
 int main()
 {
-
-Test<int> t;
-Test2<int> t2(t);
-std::cout<<&t2<<std::endl;
-
+	auto b = make_array(1, 2, 3);
+	std::cout << b.size() << '\n';
+	for (auto i : b)
+		std::cout << i << ' ';
 }
+// g++ --std=c++11 test.cpp
 ```
 
 
 
-## parameter pack and `std::forward`
+## cppreference fold expression(since C++17)
 
-https://stackoverflow.com/questions/41847828/c-passing-parameter-pack-to-class
+> NOTE: 这是C++17中增强parameter pack的新特性
 
-
-
-## [Limit the number of parameters in a variadic template parameter pack](https://stackoverflow.com/questions/39621158/limit-the-number-of-parameters-in-a-variadic-template-parameter-pack)
-
-如何限制parameter pack中参数的个数
+Reduces ([folds](https://en.wikipedia.org/wiki/Fold_(higher-order_function))) a [parameter pack](parameter_pack.html) over a binary operator.
 
 
 
-## Parameter pack for class
-
-为class添加parameter pack。
-
-https://en.cppreference.com/w/cpp/language/parameter_pack
-
-
-
-## mix parameter pack and single template parameter
+### Example: `all`
 
 ```c++
-template<typename CHSInsRspQryOrderField,
-		typename CHSInsRspQryTradeField,typename ...Args>
-class C
+
+template<typename ... Args>
+bool all(Args ... args)
 {
-
-};
-
-
-int main
+	return (... && args);}
+}
+int main()
 {
-
-C<int, int, int> c;
-
+	 // within all(), the unary left fold expands as
+	 //  return ((true && true) && true) && false;
+	 // b is false
+	bool b = all(true, true, true, false);
 
 }
+// g++ --std=c++17
+```
+
+
+
+### Example: endianness swap
+
+```C++
+#include <cstddef> // std::size_t
+#include <type_traits>
+#include <utility>
+
+// compile-time endianness swap based on http://stackoverflow.com/a/36937049
+template<class T, std::size_t ... N>
+constexpr T bswap_impl(T i, std::index_sequence<N...>)
+{
+	return (((i >> N*CHAR_BIT & std::uint8_t(-1)) << (sizeof(T)-1-N)*CHAR_BIT) | ...);
+}
+template<class T, class U = std::make_unsigned_t<T>>
+constexpr U bswap(T i)
+{
+	return bswap_impl<U>(i, std::make_index_sequence<sizeof(T)> { });
+}
+
+int main()
+{
+    static_assert(bswap<std::uint16_t>(0x1234u)==0x3412u);
+    static_assert(bswap<std::uint64_t>(0x0123456789abcdefULL)==0xefcdab8967452301ULL);
+}
+// g++ --std=c++17 test.cpp
 
 ```
 
-需要注意的是：参数包‘Args’必须出现在模板形参表末尾。
+
+
+### Example: `push_back`
+
+```c++
+#include <iostream>
+#include <vector> // std::vector
+#include <type_traits> // std::is_constructible_v
+#include <utility> // std::forward
+
+template<typename T, typename ... Args>
+void push_back_vec(std::vector<T>& v, Args&&... args)
+{
+	static_assert((std::is_constructible_v<T, Args&&> && ...));
+	(v.push_back(std::forward<Args>(args)), ...);
+}
+
+int main()
+{
+	std::vector<int> v;
+	push_back_vec(v, 6, 2, 45, 12);
+	push_back_vec(v, 1, 2, 9);
+	for (int i : v)
+		std::cout << i << ' ';
+}
+// g++ --std=c++17 test.cpp
+
+```
+
+
+
