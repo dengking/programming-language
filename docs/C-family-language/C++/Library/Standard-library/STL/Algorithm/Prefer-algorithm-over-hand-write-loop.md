@@ -414,3 +414,7 @@ int main()
 ```
 
 The “**`bind2nd(plus<int>(), 41)`**” might take you a couple of minutes to get right (especially if you don’t use STL’s binders very often), but the only iterator-related worries you have are specifying the beginning and end of the source range (which was never a problem) and being sure to use **`inserter`** as the beginning of the destination range. In practice, figuring out the correct initial iterators for source and destination ranges is usually easy, or at least a lot easier than making sure the body of a loop doesn’t inadvertently（无意的） invalidate an iterator you need to keep using.
+
+
+
+## arne-mertz [algorithms and the KISS principle](https://arne-mertz.de/2019/05/algorithms-and-the-kiss-principle/)
