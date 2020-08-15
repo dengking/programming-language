@@ -111,12 +111,4 @@ container指各种常见的数据结构，一般programming language的standard 
 
 ## Design of specifier
 
-语言为了简便，key word要尽可能地少；
-
-一个key word能够用于多种entity
-
-最最典型的例子就是C++ static key word
-
-它既可以用于object，也可以用于function的
-
-另外一个就是C++ extern
+语言为了简便，key word要尽可能地少，因此一个key word能够用于多种entity，最最典型的例子就是C++ `static` key word，它既可以用于object，也可以用于function的；另外一个就是C++ `extern`。

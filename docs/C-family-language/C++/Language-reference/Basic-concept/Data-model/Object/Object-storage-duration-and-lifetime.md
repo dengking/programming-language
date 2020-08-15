@@ -113,7 +113,7 @@ int main()
 >
 > 我们需要深入思考：为什么将linkage和storage duration的specifier合并？
 >
-> 这一点，可以参看上述table中`extern`的Explanation。
+> 关于此的原因之一可以参看上述table中`extern`的Explanation，原因之二则是出于语言设计者出于对语言简便性的考虑（在`Theory\Programming-languageDesign-of-programming-language.md\#Design of specifier`中进行了讨论）
 
 
 
@@ -124,6 +124,12 @@ int main()
 `static` 、 `extern` 也可以 修饰 function，linkage
 
 
+
+
+
+#### `static` specifier and static storage duration
+
+使用`static` specifier修饰的object具有static storage duration，但是具有static storage duration的object，不一定要使用`static` specifier来修饰。
 
 ### Static local variables
 
@@ -138,13 +144,21 @@ Variables declared at **block scope** with the specifier `static` or `thread_loc
 
 
 
+#### Initialization of static local variable concurrently (since C++11)
+
+> NOTE: 这种情况的典型就是：线程执行函数中声明了一个static local variable。
+
+If multiple threads attempt to initialize the same **static local variable** concurrently, the **initialization** occurs exactly once (similar behavior can be obtained for arbitrary functions with [std::call_once](../thread/call_once.html)).
+
+Note: usual implementations of this feature use variants of the double-checked locking pattern, which reduces runtime overhead for already-initialized local statics to a single non-atomic boolean comparison.
+
+> NOTE: double-checked locking pattern在工程parallel-computing的`Synchronization\Lock`章节描述。
 
 
-> NOTE:
->
-> #### `static` specifier and static storage duration
->
-> ####  
+
+
+
+
 
 ## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
 
