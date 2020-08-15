@@ -47,9 +47,9 @@ static constexpr not(bool x)
 
 
 
-#### Examples
+#### Example
 
-##### 维基百科[Compile time function execution#Examples](https://en.wikipedia.org/wiki/Compile_time_function_execution)
+来源: 维基百科[Compile time function execution#Examples](https://en.wikipedia.org/wiki/Compile_time_function_execution)
 
 C++11之前：
 
@@ -147,9 +147,9 @@ int main()
 >
 > 
 
+#### Example
 
-
-##### stackoverflow [Using a `constexpr` array size function](https://stackoverflow.com/a/7439261)
+来源: stackoverflow [Using a `constexpr` array size function](https://stackoverflow.com/a/7439261)
 
 ```C++
 #include "stddef.h"
@@ -188,9 +188,9 @@ int main()
 
 ```
 
+#### Example
 
-
-##### Example: cppreference `sizeof...` operator`make_array`
+来源: cppreference `sizeof...` operator`make_array`
 
 
 
@@ -198,9 +198,9 @@ int main()
 
 
 
-#### Examples
+#### Example
 
-##### `spdlog/common.h`
+来源: `spdlog/common.h`
 
 
 ```c++
@@ -234,9 +234,9 @@ struct source_loc
 
 `source_loc`的入参`filename_in`、`line_in`、`funcname_in`就确定了 ，所以它可以在compile-time构造。
 
+#### Example
 
-
-##### cppreference [constexpr specifier#Example](https://en.cppreference.com/w/cpp/language/constexpr#Example)
+来源: cppreference [constexpr specifier#Example](https://en.cppreference.com/w/cpp/language/constexpr#Example)
 
 ```c++
 #include <cstddef>
