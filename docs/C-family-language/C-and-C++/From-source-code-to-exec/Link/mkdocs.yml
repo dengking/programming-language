@@ -1,5 +1,4 @@
 nav:
-    - Dynamic-linker: Dynamic-linker.md
     - Linker: Linker.md
     - Linkage: Linkage
     - Link-time-error: Link-time-error

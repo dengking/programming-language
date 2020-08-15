@@ -1,6 +1,8 @@
 # Linkage 
 
-需要从完整的编译过程（是指从source file到最终的object file）来分析linkage。
+需要从完整的编译过程（是指从source file到最终的object file）来分析linkage。和storage duration不同的是，linkage描述的是“name”，所以它既可以指代function，也可以指代object。	
+
+首先需要搞清楚的是，linkage涉及的是translation unit
 
 ## 编译模型
 
@@ -138,7 +140,7 @@ http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_externa
 
 microsoft [Translation units and linkage](https://docs.microsoft.com/en-us/cpp/cpp/program-and-linkage-cpp?view=vs-2019)
 
-
+https://aticleworld.com/linkage-in-c/
 
 
 
