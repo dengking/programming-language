@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [Understanding “extern” keyword in C](https://www.geeksforgeeks.org/understanding-extern-keyword-in-c/)
 
 I’m sure that this post will be as interesting and informative to C virgins (i.e. beginners) as it will be to those who are well versed in C. So let me start by saying that `extern` keyword applies to C variables (data objects) and C functions. Basically **`extern`** keyword extends the visibility of the C variables and C functions. Probably that’s is the reason why it was named as `extern`.

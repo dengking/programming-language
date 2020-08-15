@@ -19,7 +19,7 @@ linkage是和programming language的编译过程密切相关的，C和C++语言�
 差异性：
 
 - `#include`发生于preprocess阶段，`#include`的对象是header file
-- linkage发生于link阶段，linkage的对象是`.o` object files
+- linkage发生于compile、link阶段，link的对象是`.o` object files
 
 相似性：
 
@@ -120,9 +120,31 @@ Linkage between languages must be done with some care, as different languages [a
 - learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)
 - learncpp [6.7 — External linkage](https://www.learncpp.com/cpp-tutorial/external-linkage/)
 
-对linkage的分类是以**translation unit**为单位的，
+对linkage的分类是以**translation unit**为单位的，正如[learncpp 6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)
+
+> An identifier with **internal linkage** can be seen and used within a single file, but it is not accessible from other files (that is, it is not exposed to the linker). This means that if two files have identically named identifiers with internal linkage, those identifiers will be treated as independent.
+
+#### Internal linkage
 
 
+
+#### External linkage
+
+
+
+TO READ:
+
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+microsoft [Translation units and linkage](https://docs.microsoft.com/en-us/cpp/cpp/program-and-linkage-cpp?view=vs-2019)
+
+
+
+
+
+### const and linkage
+
+参考[const-static-and-linkage](./const-static-and-linkage.md)。
 
 ## Examples
 
@@ -217,13 +239,13 @@ int y = 2;
 
 
 
-# THINKING
+## THINKING
 
-## linkage and linker
+### linkage and linker
 
-关于linkage和linker，在[Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)中给出了非常详细的分析；
+关于linkage和linker，在geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)中给出了非常详细的分析；
 
-# [How does linker handle variables with different linkages?](https://stackoverflow.com/questions/51737002/how-does-linker-handle-variables-with-different-linkages)
+### [How does linker handle variables with different linkages?](https://stackoverflow.com/questions/51737002/how-does-linker-handle-variables-with-different-linkages)
 
 In C and C++ we can manipulate a variable's **linkage**. There are three kinds of linkage: **no linkage**, **internal linkage**, and **external linkage**. My question is probably related to why these are called "linkage" (How is that related to the **linker**).
 
@@ -237,13 +259,13 @@ The **linker** does not handle variables with internal or no linkage. The compil
 
 
 
-## [A](https://stackoverflow.com/a/51737215)
+#### [A](https://stackoverflow.com/a/51737215)
 
 The **linker** isn't normally involved in either **internal linkage** or **no linkage**--they're resolved entirely by the **compiler**, before the **linker** gets into the act at all.
 
 **Internal linkage** means two declarations at different scopes in the same **translation unit** can refer to the same thing.
 
-### No Linkage
+##### No Linkage
 
 No linkage means two declarations at different scopes in the same translation unit can't refer to the same thing.
 
@@ -257,7 +279,7 @@ int f() { T
 
 ...no other declaration of `x` in any other scope can refer to this `x`. The linker is involved only to the degree that it typically has to produce a field in the executable telling it the **size** of static space needed by the executable, and that will include space for this variable. Since it can never be referred to by any other declaration, there's no need for the linker to get involved beyond that though (in particular, the linker has nothing to do with resolving the name).
 
-### Internal linkage
+##### Internal linkage
 
 Internal linkage means declarations at different scopes in the same translation unit can refer to the same object. For example:
 
@@ -340,7 +362,7 @@ The **linker** isn't really involved, because all it sees is that this file has 
 
 
 
-## [A](https://stackoverflow.com/a/51737185)
+#### [A](https://stackoverflow.com/a/51737185)
 
 As far as C++ itself goes, this does not matter: the only thing that matters is the behavior of the system as a whole. Variables with no linkage should not be linked; variables with internal linkage should not be linked across translation units; and variables with external linkage should be linked across translation units. (Of course, as the person writing the C++ code, you must obey all of *your*constraints as well.)
 

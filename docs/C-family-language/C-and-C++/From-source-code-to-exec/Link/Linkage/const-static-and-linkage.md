@@ -4,6 +4,10 @@
 
 `const`、`static`所修饰的variable都是compile-time的，它们的value在compile-time就已经已知；在一个translation unit中，通过extern声明了一个variable，显然在compile-time是无法获知它的value的，显然，这是矛盾的，所以需要将它们的linkage指定为internal了；
 
+下面是参考内容：
+
+- [Why does const imply internal linkage in C++, when it doesn't in C?](https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c)
+
 ## `const` and linkage
 
 下面是我改写[How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)的[5.1 Pitfall: Trusting type-unsafe linking.](https://stackoverflow.com/a/7439261)中的例子：
@@ -127,4 +131,53 @@ The usual pattern is:
 - *file.c:*
   `#include "file.h"`
   `const int a_global_var = /* some const expression */;`
+
+
+
+### constexpr and linkage
+
+这是c++11中引入的，那么它是否和`const`一样，是internal linkage呢？
+
+参考：
+
+- [use of constexpr in header file](https://stackoverflow.com/questions/50488831/use-of-constexpr-in-header-file)
+- [Quick Q: use of constexpr in header file](https://isocpp.org/blog/2018/05/quick-q-use-of-constexpr-in-header-file)
+
+
+
+
+
+## Example
+
+在头文件`BussinessTypes.h`中，如下定义
+
+```C++
+namespace BussinessTypes
+{
+    
+    int StockOpt = 1;
+}
+
+```
+
+这种写法是非常不好的，当多个source file包含`BussinessTypes.h`，则会出现：multiple definition of `StockOpt`。
+
+这让我想起来在头文件中声明的`const`常量不会出现这种问题，则将上述修改为
+
+```C++
+namespace BussinessTypes
+{
+    
+    const int StockOpt = 1;
+}
+```
+
+可以避免上述问题
+
+
+这让我想起了`const`的linkage，显然它是internal linkage的。
+
+
+
+
 

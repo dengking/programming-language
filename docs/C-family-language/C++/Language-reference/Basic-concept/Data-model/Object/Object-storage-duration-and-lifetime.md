@@ -156,10 +156,6 @@ Note: usual implementations of this feature use variants of the double-checked l
 
 
 
-
-
-
-
 ## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
 
 

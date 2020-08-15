@@ -90,4 +90,13 @@ http://www.parashift.com/c++-faq/construct-on-first-use-v2.html
 
 ### 唯一性
 
+#### Nifty counter idiom
+
 https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Nifty_Counter
+
+#### Function-local static objects in inline function
+
+在`cppreference Storage class specifiers#Static local variables`中对这个问题进行了说明:
+
+> Function-local static objects in all definitions of the same [inline function](inline.html) (which may be implicitly inline) all refer to the same object defined in one translation unit.
+

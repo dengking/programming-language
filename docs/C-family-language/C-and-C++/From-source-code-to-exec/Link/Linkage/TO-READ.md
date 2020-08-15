@@ -1,1 +1,0 @@
-# [String literals not allowed as non type template parameters](https://stackoverflow.com/questions/5547852/string-literals-not-allowed-as-non-type-template-parameters)
