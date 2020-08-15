@@ -35,7 +35,9 @@ https://stackoverflow.com/questions/780730/c-c-static-function-in-header-file-wh
 
 https://stackoverflow.com/questions/47819719/static-inline-functions-in-a-header-file
 
+https://stackoverflow.com/questions/22102919/static-vs-inline-for-functions-implemented-in-header-files?noredirect=1
 
+https://stackoverflow.com/questions/12836171/difference-between-an-inline-function-and-static-inline-function
 
 ## static object
 
@@ -100,3 +102,6 @@ https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Nifty_Counter
 
 > Function-local static objects in all definitions of the same [inline function](inline.html) (which may be implicitly inline) all refer to the same object defined in one translation unit.
 
+TO READ:
+
+https://stackoverflow.com/questions/185624/static-variables-in-an-inlined-function

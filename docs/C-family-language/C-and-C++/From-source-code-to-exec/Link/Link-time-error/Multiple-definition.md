@@ -25,3 +25,9 @@
 ## 问题分析
 
 当多个source file/translation unit中，包含有相同name的definition时，就会出现这个错误，这是因为c和c++中，遵循[ODR](https://en.cppreference.com/w/cpp/language/definition)。
+
+
+
+TO READ:
+
+https://stackoverflow.com/questions/17904643/error-with-multiple-definitions-of-function
