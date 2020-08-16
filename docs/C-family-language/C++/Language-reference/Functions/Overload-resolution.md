@@ -32,3 +32,10 @@ At the end, we have a list of viable functions that can be used for the specific
 https://akrzemi1.wordpress.com/2015/11/19/overload-resolution/
 
 http://foonathan.github.io/blog/2015/11/30/overload-resolution-4.html
+
+
+
+## TO READ
+
+https://akrzemi1.wordpress.com/2015/11/19/overload-resolution/
+
