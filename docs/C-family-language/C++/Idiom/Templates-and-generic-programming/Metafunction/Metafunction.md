@@ -10,12 +10,32 @@
 
 
 
-## [Meta-functions in C++11](https://akrzemi1.wordpress.com/2012/03/19/meta-functions-in-c11/)
+## akrzemi1 [Meta-functions in C++11](https://akrzemi1.wordpress.com/2012/03/19/meta-functions-in-c11/)
+
+## Example
+
+### `std::enable_if`
+
+在cppreference `std::enable_if`中的介绍如下:
+
+> This metafunction is a convenient way to leverage SFINAE to conditionally remove functions from overload resolution based on type traits and to provide separate function overloads and specializations for different type traits.
+
+### `std::void_t`
+
+在cppreference `std::void_t`中的介绍如下:
+
+> Utility metafunction that maps a sequence of any types to the type void
+
+### cppreference `Utility library#Type support#Metafunctions`
+
+在cppreference 中介绍了metafunction。
 
 
 
-## [C++: are “trait” and “meta-function” synonymous?](https://stackoverflow.com/questions/32471222/c-are-trait-and-meta-function-synonymous)
+## TO READ
+
+[C++: are “trait” and “meta-function” synonymous?](https://stackoverflow.com/questions/32471222/c-are-trait-and-meta-function-synonymous)
 
 
 
-## [An In-Depth Look at Metafunctions in C++](https://www.informit.com/articles/article.aspx?p=375705)
+[An In-Depth Look at Metafunctions in C++](https://www.informit.com/articles/article.aspx?p=375705)

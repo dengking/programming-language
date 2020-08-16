@@ -390,7 +390,7 @@ https://gist.github.com/fenbf/d2cd670704b82e2ce7fd
 
 
 
-## Detection Idiom
+## Detection Idiom TO READ
 
 https://www.codeplay.com/portal/09-15-17-detection-idiom-a-stopgap-for-concepts
 
@@ -398,3 +398,12 @@ https://stackoverflow.com/questions/45249985/how-to-require-an-exact-function-si
 
 https://humanreadablemag.com/issues/1/articles/cpp-evolution-via-detection-idiom-lens
 
+https://blog.tartanllama.xyz/detection-idiom/
+
+https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function/9154394#9154394
+
+https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature
+
+https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function
+
+https://stackoverflow.com/questions/18570285/using-sfinae-to-detect-a-member-function
