@@ -12,8 +12,6 @@ AMUSTAPI是一个非常好的例子；
 需要梳理清楚overload resolution、template function之间的关系；substitution和overload resolution的发生顺序。
 
 
-#3
-SFINAE是一种事前检查，C++concept也是一种事前检查，不过C++concept的语法更加清晰易读。
 
 
 
