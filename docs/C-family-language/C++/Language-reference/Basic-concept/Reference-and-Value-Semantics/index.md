@@ -28,7 +28,7 @@
 
 
 
-但问题是，像C#的[using statement](https://link.zhihu.com/?target=http%3A//msdn.microsoft.com/en-us/library/yh598w02%28v%3Dvs.80%29.aspx)和Java的[try-with-resources statement](https://link.zhihu.com/?target=http%3A//docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)同样具有RAII的特点，但仍然有人会提出["RAII: Why is unique to C++?"](https://link.zhihu.com/?target=http%3A//swiftcoder.wordpress.com/2009/02/18/raii-why-is-it-unique-to-c/)这样的问题。原因即在于C++独有的值语义：**程序员通过**值语义可以方便直观地控制对象生命期，让RAII用起来更自然。
+但问题是，像C#的[using statement](https://link.zhihu.com/?target=http%3A//msdn.microsoft.com/en-us/library/yh598w02%28v%3Dvs.80%29.aspx)和Java的[try-with-resources statement](https://link.zhihu.com/?target=http%3A//docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)同样具有RAII的特点，但仍然有人会提出["RAII: Why is unique to C++?"](https://link.zhihu.com/?target=http%3A//swiftcoder.wordpress.com/2009/02/18/raii-why-is-it-unique-to-c/)这样的问题。原因即在于C++独有的值语义：**程序员通过**值语义可以方便直观地控制对象生命期（object lifetime），让RAII用起来更自然。
 
 更何况像这段代码，
 
@@ -97,7 +97,7 @@ void consumer()
 
 
 
-C++允许programmer管理memory->在cppreference中，使用object（在cppreference）概念来对此进行统一描述；
+C++允许programmer管理memory -> 在cppreference中，使用object（在cppreference）概念来对此进行统一描述；
 
 Every object has a value;
 

@@ -8,7 +8,7 @@ In [programming languages](https://en.wikipedia.org/wiki/Programming_language) a
 
 > NOTE: 这段话的意思是：在编程语言和类型理论中，多态性是向不同类型的实体提供单一接口，或使用单一符号表示多个不同类型。
 >
-> 显然，polymorphism中蕴含是：single和multiple，所以它和dispatch是密切相关的，关于此，参见下面的《Polymorphism的本质》段
+> 显然，polymorphism中蕴含是：single和multiple，所以它和**dispatch**是密切相关的，关于此，参见下面的《Polymorphism的本质》段
 >
 > 从上面这段话中，我们可以看到，**polymorphism** 和 [type](https://en.wikipedia.org/wiki/Data_type) ，或者更加具体来说 和  [type systems](https://en.wikipedia.org/wiki/Type_system) 密切相关，参见原文的[History](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#History)章节。
 
@@ -112,11 +112,11 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 ## Polymorphism的本质
 
-### Polymorphism is a mapping
+### Polymorphism is a mapping/dispatch
 
 本节标题的含义是：多态是一种映射	
 
-我觉得Polymorphism的本质是描述了一种one-to-many关系，实现了一种**映射**，这种**映射**是由programming language实现来提供的，往更加宽泛地说，**映射**就是**dispatch**，显然，Polymorphism让我们不用写一堆的if-else判断。
+我觉得Polymorphism的本质是描述了一种one-to-many关系，实现了一种**映射**，这种**映射**是由programming language实现来提供的，往更加宽泛地说，**映射**就是**dispatch**，这种dispatch往往是由programming language来实现的。显然，Polymorphism让我们不用写一堆的if-else判断。
 
 
 

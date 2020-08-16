@@ -6,8 +6,7 @@ Compile Time if - Since C++17：https://www.bfilipek.com/2016/02/notes-on-c-sfin
 https://www.bfilipek.com/2018/03/ifconstexpr.html
 
 #2
-SFINAE 超过类型的限制，运行programmer灵活地进行dispatch；比如concept上进行dispatch。比如根据消息类型来进行dispatch，消息类型是enum，是integer，不是type，无法按照type来进行dispatch，只能使用SFIANE。
-AMUSTAPI是一个非常好的例子；
+
 
 需要梳理清楚overload resolution、template function之间的关系；substitution和overload resolution的发生顺序。
 

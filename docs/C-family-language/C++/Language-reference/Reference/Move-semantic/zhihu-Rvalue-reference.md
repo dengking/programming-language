@@ -66,7 +66,7 @@ People b(bn); // 拷贝构造name
 
 > NOTE: 使用`const string& name`的写法如下：
 >
-> ```
+> ```c++
 > #include<string> // string
 > 
 > using namespace std;
