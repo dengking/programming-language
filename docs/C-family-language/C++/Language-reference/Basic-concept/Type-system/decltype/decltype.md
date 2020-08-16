@@ -288,6 +288,8 @@ decltype((a->x)) x5; // type is const double&
 
 ### cppreference [std::declval](https://en.cppreference.com/w/cpp/utility/declval)
 
+
+
 ## TO READ
 
 https://en.wikipedia.org/wiki/Decltype#Semantics

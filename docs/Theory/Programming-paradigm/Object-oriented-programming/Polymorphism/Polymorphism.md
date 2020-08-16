@@ -152,8 +152,6 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:Template属于“single symbol to represent multiple different types”。
 
-按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:Duck type属于“single symbol to represent multiple different types”。
-
 template是C++的典型特性，duck type是python的典型特性，从上面的对比来看，两者存在着一定的相似性，关于两者，在`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing`章节进行了深入分析。
 
 在维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中已经提及了，下面是一些补充。
