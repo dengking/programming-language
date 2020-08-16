@@ -13,6 +13,9 @@ SFINAE是template的特性，在cppreference [Templates](https://en.cppreference
 C++支持template function、template class，它们都可以通过SFINA来进行控制：
 
 - Controlling overload resolution: [function overloads](https://en.wikipedia.org/wiki/Overload_resolution) 
+
+  > NOTE: 参见：https://foonathan.net/2015/11/overload-resolution-4/
+
 - Controlling template specializations
 
 SFINAE 超过type的限制，允许programmer灵活地进行dispatch，比如：
