@@ -2,7 +2,7 @@
 
 “SFINAE”是“Substitution failure is not an error”的缩写。SFINAE和C++的特性`template`相关，"substitution"所表示是使用template argument来**substitute** template parameter。
 
-## SFINAE and conditional compiling
+## SFINAE and conditional compiling/dispatch
 
 SFINAE是template的特性，在cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)中有如下介绍：
 
@@ -133,11 +133,11 @@ int main() {
 
 ### [Type SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Type_SFINAE)
 
-
+> NOTE: 参见[Class-template-SFINAE](./Class-template-SFINAE.md)。
 
 ### [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
 
-> NOTE: 
+> NOTE: 参见[Expression-SFINAE](./Expression-SFINAE.md)。
 
 ### [Library support](https://en.cppreference.com/w/cpp/language/sfinae#Library_support)
 
@@ -148,10 +148,6 @@ int main() {
 Where applicable, [tag dispatch](https://en.cppreference.com/w/cpp/iterator/iterator_tags#Example), [static_assert](https://en.cppreference.com/w/cpp/language/static_assert), and, if available, [concepts](https://en.cppreference.com/w/cpp/language/constraints), are usually preferred over direct use of SFINAE.
 
 
-
-### [Examples](https://en.cppreference.com/w/cpp/language/sfinae#Examples)
-
-A common idiom is to use expression SFINAE on the return type, where the expression uses the comma operator, whose left subexpression is the one that is being examined (cast to void to ensure the user-defined operator comma on the returned type is not selected), and the right subexpression has the type that the function is supposed to return.
 
 ## Example: conditional compiling by detection idiom
 
@@ -179,8 +175,6 @@ TokenType GetToken(ReqFieldType* ReqField)
 上述程序算法无法编译通过的，因为当给函数GetToken提供一个没有字段`AccountIndex`的`ReqFieldType`时，compiler在编译`Token  = ReqField->AccountIndex;`时，是会complain：`ReqFieldType`没有字段`AccountIndex`的。
 
 所以，我们需要使用conditional compiling，下面是实现代码：
-
-
 
 ```c++
 	template<typename ReqFieldType>
