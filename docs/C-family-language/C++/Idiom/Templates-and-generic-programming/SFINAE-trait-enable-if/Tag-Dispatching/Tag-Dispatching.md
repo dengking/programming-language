@@ -8,7 +8,7 @@
 
 Simplify writing multiple SFINAE-constrained overloads
 
-> NOTE: 这段话说明了tag dispatching和SFINAE-constrained overloads之间的关联，显然两者能够实现相同的目的
+> NOTE: 这段话说明了tag dispatching和SFINAE-constrained overloads之间的关联，显然两者能够实现相同的目的。
 
 ### Motivation
 
@@ -140,7 +140,9 @@ After:1 3 5
 
 Tag dispatch can also be used when the tag carries useful information, not just a preference ordering.
 
-For example 'dispatching' on `std::iterator_traits<It>::iterator_category{}` and have different algorithms for `std::random_access_iterator_tag` and `std::forward_iterator_tag`
+For example 'dispatching' on `std::iterator_traits<It>::iterator_category{}` and have different algorithms for `std::random_access_iterator_tag` and `std::forward_iterator_tag`。
+
+> NOTE: 从下面的例子可以看出，对于`implementation_details::alg`，两者都是template function，并且两者的入参都是相同的，如果不使用tag，仅仅依赖于overload resolution，无法实现对每种category都提供一个专门的overload。添加一个tag，能够实现准确的overload resolution。
 
 #### Example: STL iterator tag
 
