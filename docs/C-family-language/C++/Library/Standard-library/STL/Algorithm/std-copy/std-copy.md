@@ -18,9 +18,9 @@ I'm going to go against the general wisdom here that `std::copy` will have a sli
 
 > NOTE:在这里，我将违背一般的智慧，即`std::copy`将有轻微的、几乎难以察觉的性能损失
 
-I wrote a `C++` SHA-2 implementation. In my test, I hash 5 strings using all four SHA-2 versions (224, 256, 384, 512), and I loop 300 times. I measure times using `Boost.timer`. That 300 loop counter is enough to completely stabilize my results. I ran the test 5 times each, alternating between the `memcpy` version and the `std::copy` version. My code takes advantage of grabbing（抓） data in as large of chunks as possible (many other implementations operate with `char` / `char *`, whereas I operate with `T` / `T *` (where `T` is the largest type in the user's implementation that has correct overflow behavior), so fast memory access on the largest types I can is central to the performance of my algorithm. These are my results:
+I wrote a `C++` SHA-2 implementation. In my test, I hash 5 strings using all four SHA-2 versions (224, 256, 384, 512), and I loop 300 times. I measure times using `Boost.timer`. That 300 loop counter is enough to completely stabilize（使稳固） my results. I ran the test 5 times each, alternating between the `memcpy` version and the `std::copy` version. My code takes advantage of grabbing（抓） data in as large of chunks as possible (many other implementations operate with `char` / `char *`, whereas I operate with `T` / `T *` (where `T` is the largest type in the user's implementation that has correct overflow behavior), so fast memory access on the largest types I can is central to the performance of my algorithm. These are my results:
 
-**Time (in seconds) to complete run of SHA-2 tests**
+#### **Time (in seconds) to complete run of SHA-2 tests**
 
 ```cpp
 std::copy   memcpy  % increase
@@ -43,7 +43,7 @@ Same compiler settings and flags. There is only one version of MD5, and it's fas
 
 These are my final 10 results:
 
-**Time (in seconds) to complete run of MD5 tests**
+#### **Time (in seconds) to complete run of MD5 tests**
 
 ```cpp
 std::copy   memcpy      % difference
@@ -63,11 +63,13 @@ std::copy   memcpy      % difference
 
 [Code for my MD5 implementation](https://bitbucket.org/davidstone/md5)
 
-These results suggest that there is some optimization that std::copy used in my SHA-2 tests that `std::copy` could not use in my MD5 tests. In the SHA-2 tests, both arrays were created in the same function that called `std::copy` / `memcpy`. In my MD5 tests, one of the arrays was passed in to the function as a function parameter.
+These results suggest that there is some optimization that `std::copy` used in my SHA-2 tests that `std::copy` could not use in my MD5 tests. In the SHA-2 tests, both arrays were created in the same function that called `std::copy` / `memcpy`. In my MD5 tests, one of the arrays was passed in to the function as a function parameter.
 
-I did a little bit more testing to see what I could do to make `std::copy` faster again. The answer turned out to be simple: turn on link time optimization. These are my results with LTO turned on (option -flto in gcc):
 
-**Time (in seconds) to complete run of MD5 tests with -flto**
+
+I did a little bit more testing to see what I could do to make `std::copy` faster again. The answer turned out to be simple: turn on link time optimization. These are my results with LTO turned on (option `-flto` in gcc):
+
+#### **Time (in seconds) to complete run of MD5 tests with `-flto`**
 
 ```cpp
 std::copy   memcpy      % difference
@@ -87,14 +89,22 @@ std::copy   memcpy      % difference
 
 In summary, there does not appear to be a performance penalty for using `std::copy`. In fact, there appears to be a performance gain.
 
-**Explanation of results**
+#### **Explanation of results**
 
 So why might `std::copy` give a performance boost?
 
-First, I would not expect it to be slower for any implementation, as long as the optimization of inlining is turned on. All compilers inline aggressively; it is possibly the most important optimization because it enables so many other optimizations. `std::copy` can (and I suspect all real world implementations do) detect that the arguments are trivially copyable and that memory is laid out sequentially. This means that in the worst case, when `memcpy` is legal, `std::copy` should perform no worse. The trivial implementation of `std::copy` that defers to `memcpy` should meet your compiler's criteria of "always inline this when optimizing for speed or size".
+First, I would not expect it to be slower for any implementation, as long as the optimization of inlining is turned on. All compilers inline aggressively; it is possibly the most important optimization because it enables so many other optimizations. `std::copy` can (and I suspect all real world implementations do) detect that the arguments are **trivially copyable** and that memory is laid out **sequentially**. This means that in the worst case, when `memcpy` is legal, `std::copy` should perform no worse. The trivial implementation of `std::copy` that defers to `memcpy` should meet your compiler's criteria of "always inline this when optimizing for speed or size".
 
-However, `std::copy` also keeps more of its information. When you call `std::copy`, the function keeps the types intact. `memcpy` operates on `void *`, which discards almost all useful information. For instance, if I pass in an array of `std::uint64_t`, the compiler or library implementer may be able to take advantage of 64-bit alignment with `std::copy`, but it may be more difficult to do so with `memcpy`. Many implementations of algorithms like this work by first working on the unaligned portion at the start of the range, then the aligned portion, then the unaligned portion at the end. If it is all guaranteed to be aligned, then the code becomes simpler and faster, and easier for the branch predictor in your processor to get correct.
+However, `std::copy` also keeps more of its information. When you call `std::copy`, the function keeps the types intact（原封未动的）. `memcpy` operates on `void *`, which discards almost all useful information. For instance, if I pass in an array of `std::uint64_t`, the compiler or library implementer may be able to take advantage of 64-bit alignment with `std::copy`, but it may be more difficult to do so with `memcpy`. Many implementations of algorithms like this work by first working on the unaligned portion at the start of the range, then the aligned portion, then the unaligned portion at the end. If it is all guaranteed to be aligned, then the code becomes simpler and faster, and easier for the branch predictor in your processor to get correct.
 
 **Premature optimization?**
 
 `std::copy` is in an interesting position. I expect it to never be slower than `memcpy` and sometimes faster with any modern optimizing compiler. Moreover, anything that you can `memcpy`, you can `std::copy`. `memcpy` does not allow any overlap in the buffers, whereas `std::copy` supports overlap in one direction (with `std::copy_backward` for the other direction of overlap). `memcpy` only works on pointers, `std::copy` works on any iterators (`std::map`, `std::vector`, `std::deque`, or my own custom type). In other words, you should just use `std::copy` when you need to copy chunks of data around.
+
+
+
+#### [A](https://stackoverflow.com/a/4707028)
+
+All compilers I know will replace a simple `std::copy` with a `memcpy` when it is appropriate, or even better, **vectorize the copy** so that it would be even faster than a `memcpy`.
+
+> NOTE: 上面这段话中的“vectorize the copy"的意思是：批量copy，而不是一个一个地进行copy。
