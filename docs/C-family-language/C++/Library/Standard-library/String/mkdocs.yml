@@ -5,3 +5,4 @@ nav:
     - basic_string_view: basic_string_view
     # 字符串的常见功能
     - String-utility: String-utility
+    - Null-terminated-byte-string: Null-terminated-byte-string

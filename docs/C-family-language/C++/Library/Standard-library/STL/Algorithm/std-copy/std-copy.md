@@ -14,12 +14,16 @@
 
 上面这段话的意思是`std::copy`、`std::copy_backward`能够处理一部分overlapping range的情况：
 
-|                      |                      |                                                              |
+| 函数原型             | 方向                 | 解释                                                         |
 | -------------------- | -------------------- | ------------------------------------------------------------ |
 | `std::copy`          | copying to **left**  | beginning of the destination range is outside the source range |
 | `std::copy_backward` | copying to **right** | end of the destination range is outside the source range     |
 
+总的来说：使用`std::copy`、`std::copy_backward`能够处理几乎所有的range to range copy，即使source range和destination range之间存在着overlapping。
 
+TO READ:
+
+- [Does std::copy handle overlapping ranges?](https://stackoverflow.com/questions/1952972/does-stdcopy-handle-overlapping-ranges)
 
 ## `std::copy` VS `std::memcpy`
 

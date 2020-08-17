@@ -2,6 +2,10 @@
 
 
 
+## Pointer and the stored-program machine
+
+[Stored-program computer](https://en.wikipedia.org/wiki/Stored-program_computer) and [Universal Turing machine § Stored-program computer](https://en.wikipedia.org/wiki/Universal_Turing_machine#Stored-program_computer) 告诉我们，将program和data保存到memory中，这样我们就可以使用pointer来引用这些内容。
+
 ## wikipedia [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))
 
 
@@ -371,9 +375,16 @@ int main(int argc, char** argv)
 
 > Pointers to `void` are used to pass objects of unknown type, which is common in **generic interfaces**
 
+显然pointer to void是C中实现**generic programming**的方式，这种generic是通过**type erasure**来实现的：
+
+- void是type-less、是incomplete type，programmer无法直接操作void pointer，必须要先将它[static_cast](static_cast.html) or [explicit cast](explicit_cast.html)为complete type才能够进行操作
+- Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void`，在这个过程中，就丢失了type
+
 ### cppreference Pointer to `void`
 
 Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void` (optionally [cv-qualified](cv.html)); the pointer value is unchanged. The reverse conversion, which requires [static_cast](static_cast.html) or [explicit cast](explicit_cast.html), yields the original pointer value:
+
+> NOTE: 上述的conversion，其实就是type erasure，是C中实现generic programming的重要手段。
 
 > NOTE: 下面展示的就是`static_cast`的用法
 
@@ -400,6 +411,53 @@ Pointers to void are used to pass objects of unknown type, which is common in C 
 TO READ:
 
 [Why type cast a void pointer?](https://stackoverflow.com/questions/16986214/why-type-cast-a-void-pointer)
+
+
+
+### void pointer and alignment
+
+alignment如何保证？
+
+错误观点:  `void*`应该具备最大的alignment，这样才能够保证它能够容纳下所有类型的pointer。
+
+正确理解: `void*`类型的变量用于保存pointer的值，由于它是incomplete type，所以programmer无法直接对其进行操作（直接`+`、`*`一个`void*`，编译器会报错的，这样的program是无法编译通过的），programmer必须先将它转换为complete type pointer。由于无法直接使用`void*`，所以考虑考虑它的alignment是没有意义的。需要考虑的是：`void*`的值是否满足它的destination type的alignment，如果不满足，则是会发生undefined behavior的。
+
+### Pointer to void VS pointer to `char` 
+
+前面已经描述了pointer to void了。另外一种非常常见的pointer就是pointer to `char`，两者存在着相似点：
+
+通用性：
+
+| pointer type | 通用性的体现                                                 | 目的                     |
+| ------------ | ------------------------------------------------------------ | ------------------------ |
+| `void*`      | Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void` | 实现generic programming  |
+| `char*`      | `char*`与value representation对应，并且它拥有最小的alignment requirement，所以任何类型的pointer也都可以转换为`char*`，从而获得所指向的object的value representation | 获得value representation |
+
+最能够体现两者之间关联的例子是：`std::memcpy`、`std::memmove`，解释如下：
+
+两者的入参类型都是`void*`，显然这样实现了generic，这些函数内部实现中，都需要执行:
+
+> objects are reinterpreted as arrays of unsigned char.
+
+然后按照byte( `unsigned char`)进行操作。
+
+TO READ:
+
+https://stackoverflow.com/questions/10058234/void-vs-char-pointer-arithmetic
+
+https://bytes.com/topic/c/answers/618725-void-vs-char
+
+https://github.com/RIOT-OS/RIOT/issues/5497
+
+https://codeforwin.org/2017/11/c-void-pointer-generic-pointer-use-arithmetic.html
+
+https://www.geeksforgeeks.org/dangling-void-null-wild-pointers/
+
+https://groups.google.com/forum/#!topic/comp.lang.c/kz6ORGo6GD8
+
+http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
+
+http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
 
 
 
@@ -486,31 +544,17 @@ list *listAddNodeTail(list *list, void *value)
 > - If a pointer to object is converted to a pointer to void and back, its value compares equal to the original pointer.
 > - No other guarantees are offered
 
-### void pointer and alignment
+#### C interfaces
 
-alignment如何保证？`void*`应该具备最大的alignment。
+正如cppreference `Pointer declaration#Pointers to objects#Pointers to void`中所总结的：
 
+> Pointers to void are used to pass objects of unknown type, which is common in C interfaces:
 
+下面是例子:
 
-## Pointer to void VS pointer to char 
-
-https://stackoverflow.com/questions/10058234/void-vs-char-pointer-arithmetic
-
-https://bytes.com/topic/c/answers/618725-void-vs-char
-
-https://github.com/RIOT-OS/RIOT/issues/5497
-
-https://codeforwin.org/2017/11/c-void-pointer-generic-pointer-use-arithmetic.html
-
-https://www.geeksforgeeks.org/dangling-void-null-wild-pointers/
-
-https://groups.google.com/forum/#!topic/comp.lang.c/kz6ORGo6GD8
-
-http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
-
-http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
-
-
+- `std::malloc`
+- [pthread_create](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_create.html)
+- `std::qsort`
 
 ## TO READ
 
