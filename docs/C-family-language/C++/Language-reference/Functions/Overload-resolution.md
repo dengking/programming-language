@@ -8,6 +8,10 @@
 
 
 
+
+
+
+
 需要梳理清楚overload resolution、template function之间的关系；substitution和overload resolution的发生顺序。
 
 
@@ -34,6 +38,10 @@ https://akrzemi1.wordpress.com/2015/11/19/overload-resolution/
 http://foonathan.github.io/blog/2015/11/30/overload-resolution-4.html
 
 
+
+## 控制overload resolution
+
+[More C++ Idioms/Tag Dispatching](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Tag_Dispatching)中的preference ordering就是一个典型的例子。
 
 ## TO READ
 
