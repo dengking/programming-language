@@ -30,11 +30,13 @@ It is most useful when you have multiple overloads for the same function, and th
 >
 > - trailing return type + expression SFINAE 来描述condition
 >
-> - tag实现preference ordering，tag之间存在着继承关系，可以对overload resolution进行控制
+> - tag实现preference ordering，tag之间存在着继承关系，可以对overload resolution进行控制（参见`C++\Language-reference\Functions\Overload-resolution.md`）
+>
+> 下面例子中，`pick_3 <- pick_2 <- pick_1`，显然，preference ordering为:`pick_3 < pick_2 < pick_1`。
 >
 > 
 
-#### Example: 
+#### Example: tag dispatch + trailing return type + expression SFINAE 
 
 This works because exact match is a better match than a base-class, which in turn is a better match than base of base, etc.
 
@@ -136,11 +138,13 @@ After:1 3 5
 
 ### Application: Category info
 
+Tag dispatch can also be used when the tag carries useful information, not just a preference ordering.
 
+For example 'dispatching' on `std::iterator_traits<It>::iterator_category{}` and have different algorithms for `std::random_access_iterator_tag` and `std::forward_iterator_tag`
 
-Example: STL iterator tag
+#### Example: STL iterator tag
 
-tag dispatch的一个典型的例子就是[Iterator library](https://en.cppreference.com/w/cpp/iterator)的[iterator tag](https://en.cppreference.com/w/cpp/iterator/iterator_tags)。
+> NOTE: tag dispatch的一个典型的例子就是[Iterator library](https://en.cppreference.com/w/cpp/iterator)的[iterator tag](https://en.cppreference.com/w/cpp/iterator/iterator_tags)，下面的例子取自：https://en.cppreference.com/w/cpp/iterator/iterator_tags ：
 
 ```c++
 #include <iostream>
@@ -154,12 +158,14 @@ namespace implementation_details
 template<class BDIter>
 void alg(BDIter, BDIter, std::bidirectional_iterator_tag)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	std::cout << "alg() called for bidirectional iterator\n";
 }
 
 template<class RAIter>
 void alg(RAIter, RAIter, std::random_access_iterator_tag)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	std::cout << "alg() called for random-access iterator\n";
 }
 } // namespace implementation_details
@@ -188,9 +194,10 @@ int main()
 
 上述程序的输出如下:
 
-```
+```c++
+void implementation_details::alg(RAIter, RAIter, std::random_access_iterator_tag) [with RAIter = __gnu_cxx::__normal_iterator<int*, std::vector<int> >]
 alg() called for random-access iterator
+void implementation_details::alg(BDIter, BDIter, std::bidirectional_iterator_tag) [with BDIter = std::_List_iterator<int>]
 alg() called for bidirectional iterator
-
 ```
 
