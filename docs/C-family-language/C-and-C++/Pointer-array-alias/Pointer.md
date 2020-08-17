@@ -6,6 +6,8 @@
 
 [Stored-program computer](https://en.wikipedia.org/wiki/Stored-program_computer) and [Universal Turing machine § Stored-program computer](https://en.wikipedia.org/wiki/Universal_Turing_machine#Stored-program_computer) 告诉我们，将program和data保存到memory中，这样我们就可以使用pointer来引用这些内容。
 
+在[Function-pointer#从stored-program computer来理解function pointer](./Function-pointer.md)中也对这个问题进行了探讨。
+
 ## wikipedia [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))
 
 
