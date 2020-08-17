@@ -6,6 +6,19 @@
 
 
 
+## Overlapping range
+
+在cppreference `std::copy, std::copy_if#Notes`章节中对这个问题进行了说明: 
+
+> When copying overlapping ranges, `std::copy` is appropriate when copying to the **left** (beginning of the destination range is outside the source range) while `std::copy_backward` is appropriate when copying to the **right** (end of the destination range is outside the source range).
+
+上面这段话的意思是`std::copy`、`std::copy_backward`能够处理一部分overlapping range的情况：
+
+|                      |                      |                                                              |
+| -------------------- | -------------------- | ------------------------------------------------------------ |
+| `std::copy`          | copying to **left**  | beginning of the destination range is outside the source range |
+| `std::copy_backward` | copying to **right** | end of the destination range is outside the source range     |
+
 
 
 ## `std::copy` VS `std::memcpy`
@@ -108,3 +121,11 @@ However, `std::copy` also keeps more of its information. When you call `std::cop
 All compilers I know will replace a simple `std::copy` with a `memcpy` when it is appropriate, or even better, **vectorize the copy** so that it would be even faster than a `memcpy`.
 
 > NOTE: 上面这段话中的“vectorize the copy"的意思是：批量copy，而不是一个一个地进行copy。
+
+
+
+## Vectorize the copy
+
+在[A](https://stackoverflow.com/a/4707028)中提及了“**vectorize the copy**”，检索了一下，下面是相关内容:
+
+- stackoverflow [Why would std::copy not vectorize? ](https://stackoverflow.com/questions/23910017/why-would-stdcopy-not-vectorize)
