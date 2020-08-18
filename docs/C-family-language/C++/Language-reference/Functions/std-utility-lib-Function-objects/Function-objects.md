@@ -2,7 +2,7 @@
 
 Function as first class citizen.
 
-## cppreference [Function objects](https://en.cppreference.com/w/cpp/utility/functional)
+## cppreference [Utility library#Function objects](https://en.cppreference.com/w/cpp/utility/functional)
 
 A *function object* is any object for which the **function call operator** is defined. `C++` provides many built-in function objects as well as support for **creation** and **manipulation** of new function objects.
 
@@ -51,7 +51,8 @@ C++ defines several function objects that represent common arithmetic and logica
 
 
 
+#### Arithmetic operations
 
+`std::plus`
 
-
-
+在[`std::transform`](https://en.cppreference.com/w/cpp/algorithm/transform) 的 example中，使用了`std::plus`

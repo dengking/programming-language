@@ -22,7 +22,13 @@
 
 ### [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 
-
+> NOTE: function object的概念非常重要，在algorithm library中，经常使用这个概念，比如:
+>
+> [std::transform](https://en.cppreference.com/w/cpp/algorithm/transform):
+>
+> > unary operation **function object** that will be applied.
+>
+> 在[Utility library](https://en.cppreference.com/w/cpp/utility) `#` [Function objects](https://en.cppreference.com/w/cpp/utility/functional) 中 介绍了标准库中对function object的支持。
 
 
 
