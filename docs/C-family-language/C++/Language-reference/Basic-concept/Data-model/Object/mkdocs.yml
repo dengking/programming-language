@@ -6,5 +6,3 @@ nav:
     - Object-storage-duration-and-lifetime: Object-storage-duration-and-lifetime.md
 # 描述object的layout    
     - Object-layout: Object-layout    
-# variable的概念    
-    - Variable: Variable.md

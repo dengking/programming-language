@@ -46,7 +46,7 @@ int main()
 
 ### Pointers to functions
 
-
+> NOTE: 在[Function-pointer](./Function-pointer.md)中进行介绍。
 
 ### Pointers to members
 

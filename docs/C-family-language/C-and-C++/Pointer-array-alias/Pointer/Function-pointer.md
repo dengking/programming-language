@@ -14,7 +14,7 @@
 
 ## cppreference [Pointers to functions](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions)
 
-
+Because of the [function-to-pointer](https://en.cppreference.com/w/cpp/language/implicit_cast) implicit conversion, the address-of operator is optional:
 
 ```c++
 void f(int)

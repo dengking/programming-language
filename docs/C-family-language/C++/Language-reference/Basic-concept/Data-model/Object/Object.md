@@ -13,6 +13,19 @@ object概念对于理解后面的内容非常重要，可以说，后续的很�
 C++ programs create, destroy, refer to, access, and manipulate *objects*.
 
 > NOTE: 在上一节我们描述了C++ program的组成（是静态的、compile-time的），上面这段话描述了C++ program在runtime所做的事情。上述描述和C的[Objects and alignment](https://en.cppreference.com/w/c/language/object)中的描述相同。
+>
+> 下面总结了对object的manipulation:
+>
+> - create
+> - destroy
+> - refer to
+> - access
+>
+> - stored in arrays
+> - copied
+> - assigned
+>
+> 对于非object，无法执行全部上述这些manipulation。
 
 An object, in C++ , is a *region of storage* that (until C++14) has
 
@@ -75,6 +88,20 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 The following entities are not objects: value, reference, function, enumerator, type, non-static class member, template, class or function template specialization, namespace, parameter pack, and this.
 
 > NOTE: 上面这段话有些多余，按照[Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)中的描述，object和这些entity之间是并列关系，所以显然它们都不是object。
+>
+> 需要注意的是：reference不是object，这是它和pointer的重要差别，在文章`C++\Language-reference\Reference\Pointer-VS-reference.md`中引用了上述内容。
+>
+> 上面这些entity都不是object，所以它们不能够像object那样被manipulate（关于object的manipulation，参见第一段），关于这一段，在下面章节中进行了描述：
+>
+> cppreference [Pointer declaration#Pointer to function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions):
+>
+> > Unlike functions or references to functions, pointers to **functions** are objects and thus can be stored in arrays, copied, assigned, etc.
+>
+> cpprefrence [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
+>
+> > References are not **objects**; they do not necessarily occupy storage, although the compiler may allocate storage if it is necessary to implement the desired semantics (e.g. a non-static data member of reference type usually increases the size of the class by the amount necessary to store a memory address).
+> >
+> > Because references are not objects, there are no arrays of references, no pointers to references, and no references to references:
 
 A *variable* is an object or a reference that is not a non-static data member, that is introduced by a [declaration](https://en.cppreference.com/w/cpp/language/declarations).
 
@@ -171,3 +198,7 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 ## Variable and object
 
 两种都是runtime概念，variable是一种object，但是不是所有的object都是variable。
+
+c++中variable的概念和object的概念密切相关，在下面文章中描述了此：
+
+learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutorial/introduction-to-variables/)

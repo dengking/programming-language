@@ -8,7 +8,10 @@
 
 
 
-**Pointer is an object, while reference is not**, 这一点是在cppreference [Pointer declaration#Pointer to function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions)中受启发而想到的:
+**Pointer is an object, while reference is not**, 这一点是在阅读cppreference [Pointer declaration#Pointer to function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions)中下面这一段时受启发而想到的:
 
 > Unlike functions or references to functions, pointers to functions are objects and thus can be stored in arrays, copied, assigned, etc.
 
+在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中，也对此进行了说明:
+
+> The following entities are not objects: value, reference, function

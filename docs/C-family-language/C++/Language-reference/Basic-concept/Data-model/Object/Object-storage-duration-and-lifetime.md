@@ -121,7 +121,7 @@ int main()
 
 需要注意的是：对于function而言，它没有**storage duration** property，只有**linkage** property，对于function而言，讨论它的storage duration是没有意义的。对于object而言，它既有**storage duration** property，又有**linkage** property。
 
-`static` 、 `extern` 也可以 修饰 function，linkage
+`static` 、 `extern` 也可以 修饰 function，来控制它的linkage。
 
 
 
