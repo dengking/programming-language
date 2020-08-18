@@ -4,7 +4,7 @@
 
 ## Pointer and the stored-program machine
 
-[Stored-program computer](https://en.wikipedia.org/wiki/Stored-program_computer) and [Universal Turing machine § Stored-program computer](https://en.wikipedia.org/wiki/Universal_Turing_machine#Stored-program_computer) 告诉我们，将program和data保存到memory中，这样我们就可以使用pointer来引用这些内容。
+[Stored-program computer](https://en.wikipedia.org/wiki/Stored-program_computer) and [Universal Turing machine § Stored-program computer](https://en.wikipedia.org/wiki/Universal_Turing_machine#Stored-program_computer) 告诉我们，将program（function）和data（object）保存到memory中，这样我们就可以使用pointer来引用这些内容。关于这一点，在`C++\Language-reference\Basic-concept\index.md#object 和 function`段中进行了阐述。
 
 在[Function-pointer#从stored-program computer来理解function pointer](./Function-pointer.md)中也对这个问题进行了探讨。
 
@@ -66,13 +66,23 @@ int main()
 
 ### Constness
 
-| Syntax           | meaning                             |
-| ---------------- | ----------------------------------- |
-| `const T*`       | pointer to constant object          |
-| `T const*`       | pointer to constant object          |
-| `T* const`       | constant pointer to object          |
-| `const T* const` | constant pointer to constant object |
-| `T const* const` | constant pointer to constant object |
+| Syntax               | meaning                             | 说明                                                         |
+| -------------------- | ----------------------------------- | ------------------------------------------------------------ |
+| `const T* ptr`       | pointer to constant object          |                                                              |
+| `T const* ptr`       | pointer to constant object          |                                                              |
+| `T* const ptr`       | constant pointer to object          | 按照[这篇文章](https://stackoverflow.com/a/596750)中的看法: <br>A *reference* can be thought of as a *constant pointer* |
+| `const T* const ptr` | constant pointer to constant object |                                                              |
+| `T const* const ptr` | constant pointer to constant object |                                                              |
+
+> NOTE: 原文，并没有添加variable name，不添加variable name是不易理解的，上面是我添加了variable name的描述。
+>
+> 在下面文章中，对这个问题进行了深入分析:
+>
+> - [What is the difference between char * const and const char *?](https://stackoverflow.com/questions/890535/what-is-the-difference-between-char-const-and-const-char)
+> - [Constant pointer vs Pointer to constant [duplicate]](https://stackoverflow.com/questions/21476869/constant-pointer-vs-pointer-to-constant)
+> - [What is the difference between const int*, const int * const, and int const *?](https://stackoverflow.com/questions/1143262/what-is-the-difference-between-const-int-const-int-const-and-int-const)
+>
+> 其实，使用 [Clockwise/Spiral Rule](http://c-faq.com/decl/spiral.anderson.html)， 我们可以非常快速地理解其语义。
 
 ## cppreference [Pointer comparison operators](https://en.cppreference.com/w/cpp/language/operator_comparison#Pointer_comparison_operators)
 

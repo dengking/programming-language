@@ -1,7 +1,5 @@
 nav:
     - C++: C++
     - C: C
-    - C-and-c++: C-and-c++
-    # ABI
-    - ABI: ABI
+    - C-and-C++: C-and-C++
     

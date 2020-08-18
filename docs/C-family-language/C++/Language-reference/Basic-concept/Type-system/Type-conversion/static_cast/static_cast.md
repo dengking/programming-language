@@ -18,7 +18,7 @@ For non-reference *`new_type`*, the result object of the `static_cast` prvalue e
 >
 > 原文没有提供例子，不容易理解
 
-### 2) downcast
+### 2) static downcast
 
 > NOTE: 在[Why use static_cast(x) instead of (int)x?](https://stackoverflow.com/questions/103512/why-use-static-castintx-instead-of-intx)的[A](https://stackoverflow.com/a/103868)中对downcast进行了说明：
 >
@@ -81,7 +81,7 @@ static void Derived::static_sub_func()
 
 
 
-### 3) (since C++11)
+### 3) lvalue to xvalue (since C++11)
 
 If *`new_type`* is an **rvalue reference type**, `static_cast` converts the value of glvalue, class prvalue, or array prvalue (until C++17)any lvalue (since C++17) *expression* to  ***xvalue*** referring to the same object as the expression, or to its **base sub-object** (depending on *`new_type`*). If the target type is an inaccessible or ambiguous base of the type of the expression, the program is ill-formed. If the expression is a [bit field](https://en.cppreference.com/w/cpp/language/bit_field) lvalue, it is first converted to prvalue of the underlying type. This type of `static_cast` is used to implement move semantics in `std::move`.
 
@@ -99,6 +99,125 @@ If *`new_type`* is an **rvalue reference type**, `static_cast` converts the valu
 > {	return static_cast<typename std::remove_reference<_Tp>::type&&>(__t);}
 > ```
 >
+
+### 4) discard value
+
+
+
+### 5) inverse of that implicit conversion
+
+
+
+### 7) enum to int or float
+
+
+
+### 8) int to enum
+
+
+
+### 9) pointer to member upcast
+
+
+
+### 10) pointer to `void` to pointer to complete type
+
+
+
+### Example
+
+```c++
+#include <vector>
+#include <iostream>
+
+struct B
+{
+	int m = 0;
+	void hello() const
+	{
+		std::cout << "Hello world, this is B!\n";
+	}
+};
+struct D: B
+{
+	void hello() const
+	{
+		std::cout << "Hello world, this is D!\n";
+	}
+};
+
+enum class E
+{
+	ONE = 1, TWO, THREE
+};
+enum EU
+{
+	ONE = 1, TWO, THREE
+};
+
+int main()
+{
+	// 1: initializing conversion
+	int n = static_cast<int>(3.14);
+	std::cout << "n = " << n << '\n';
+	std::vector<int> v = static_cast<std::vector<int>>(10);
+	std::cout << "v.size() = " << v.size() << '\n';
+
+	// 2: static downcast
+	D d;
+	B& br = d; // upcast via implicit conversion
+	br.hello();
+	D& another_d = static_cast<D&>(br); // downcast
+	another_d.hello();
+
+	// 3: lvalue to xvalue
+	std::vector<int> v2 = static_cast<std::vector<int>&&>(v);
+	std::cout << "after move, v.size() = " << v.size() << '\n';
+
+	// 4: discarded-value expression
+	static_cast<void>(v2.size());
+
+	// 5. inverse of implicit conversion
+	void* nv = &n;
+	int* ni = static_cast<int*>(nv);
+	std::cout << "*ni = " << *ni << '\n';
+
+	// 6. array-to-pointer followed by upcast
+	D a[10];
+	B* dp = static_cast<B*>(a);
+
+	// 7. scoped enum to int or float
+	E e = E::ONE;
+	int one = static_cast<int>(e);
+	std::cout << one << '\n';
+
+	// 8. int to enum, enum to another enum
+	E e2 = static_cast<E>(one);
+	EU eu = static_cast<EU>(e2);
+
+	// 9. pointer to member upcast
+	int D::*pm = &D::m;
+	std::cout << br.*static_cast<int B::*>(pm) << '\n';
+
+	// 10. void* to any type
+	void* voidp = &e;
+	std::vector<int>* p = static_cast<std::vector<int>*>(voidp);
+}
+// g++ --std=c++11 test.cpp
+```
+
+输出如下:
+
+```c++
+n = 3
+v.size() = 10
+Hello world, this is B!
+Hello world, this is D!
+after move, v.size() = 0
+*ni = 3
+1
+0
+```
 
 
 
