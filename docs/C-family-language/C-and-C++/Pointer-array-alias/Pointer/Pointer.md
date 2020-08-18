@@ -82,7 +82,7 @@ int main()
 > - [Constant pointer vs Pointer to constant [duplicate]](https://stackoverflow.com/questions/21476869/constant-pointer-vs-pointer-to-constant)
 > - [What is the difference between const int*, const int * const, and int const *?](https://stackoverflow.com/questions/1143262/what-is-the-difference-between-const-int-const-int-const-and-int-const)
 >
-> 其实，使用 [Clockwise/Spiral Rule](http://c-faq.com/decl/spiral.anderson.html)， 我们可以非常快速地理解其语义。
+> 其实，使用 [Clockwise/Spiral Rule](http://c-faq.com/decl/spiral.anderson.html)， 我们可以非常快速地理解其语义，参见`C-and-C++\Declaration\The-Clockwise-Spiral-Rule.md`。
 
 ## cppreference [Pointer comparison operators](https://en.cppreference.com/w/cpp/language/operator_comparison#Pointer_comparison_operators)
 

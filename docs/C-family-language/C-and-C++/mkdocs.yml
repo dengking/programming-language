@@ -4,6 +4,7 @@ nav:
     - From-source-code-to-exec: From-source-code-to-exec.md
     - Pointer-array-alias: Pointer-array-alias
     - VS-C-VS-C++: VS-C-VS-c++.md
+    - Declaration: Declaration
     - Type-system: Type-system
     - Data-model: Data-model
     - Dynamic-emory-management: Dynamic-emory-management.md

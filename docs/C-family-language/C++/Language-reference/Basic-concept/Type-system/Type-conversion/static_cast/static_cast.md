@@ -16,7 +16,7 @@ For non-reference *`new_type`*, the result object of the `static_cast` prvalue e
 
 > NOTE: 上面这段话，`if`、`or if`描述了两种情况下，`static_cast`的行为：`new_type Temp(expression);`
 >
-> 原文没有提供例子，不容易理解
+> 在Example中，有例子对此进行说明。
 
 ### 2) static downcast
 
@@ -100,9 +100,9 @@ If *`new_type`* is an **rvalue reference type**, `static_cast` converts the valu
 > ```
 >
 
-### 4) discard value
+### 4) discard value expression
 
-
+> NOTE: 关于discard value expression，参见`C++\Language-reference\Expressions\Expressions.md`
 
 ### 5) inverse of that implicit conversion
 

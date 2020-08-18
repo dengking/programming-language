@@ -31,7 +31,7 @@ If the cast is successful, `dynamic_cast` returns a value of type *new-type*. If
 
 ### 3) Upcast
 
-Note: an implicit conversion and static_cast can perform this conversion as well.
+Note: an implicit conversion and `static_cast` can perform this conversion as well.
 
 ### 4) To the most derived object
 
