@@ -35,11 +35,23 @@ Note: an implicit conversion and `static_cast` can perform this conversion as we
 
 ### 4) To the most derived object
 
-> NOTE:关于这一点，在cppreference [Pointer declaration#Pointer to void](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_void)中也描述了。不知道这个有什么用途。
+> NOTE:关于这一点，在cppreference [Pointer declaration#Pointer to void](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_void)中也描述了，相比而言，那里的描述更加容易理解，结合来看，我们知道这种情况下的返回值为:
 >
-> 在文章panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/)
+> > a `void*` that is pointing at the complete object of the most derived type
+>
+> 暂时想不到这个有什么用途。
+>
+> 在文章panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/)中给出了例子:
+>
+> 
 
 ### 5) dynamic downcast
+
+
+
+### Notes
+
+
 
 ## `c++` `isinstanceof` `issubclass`
 

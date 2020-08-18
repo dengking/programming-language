@@ -416,7 +416,7 @@ int main()
 
 If the original pointer is pointing to a base class subobject within an object of some polymorphic type, [dynamic_cast](dynamic_cast.html) may be used to obtain a `void*` that is pointing at the complete object of the most derived type.
 
-> NOTE: 上面这段话是什么意思？
+> NOTE: 这一点就是在cppreference [dynamic_cast](dynamic_cast.html) 中提及的`4)`
 
 Pointers to void are used to pass objects of unknown type, which is common in C interfaces: [std::malloc](../memory/c/malloc.html) returns `void*`, [std::qsort](../algorithm/qsort.html) expects a user-provided callback that accepts two `const void*` arguments. [pthread_create](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_create.html) expects a user-provided callback that accepts and returns `void*`. In all cases, it is the **caller**'s responsibility to cast the pointer to the correct type before use.
 

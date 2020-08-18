@@ -125,21 +125,18 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 `static_cast`、`dynamic_cast`
 
-### 如何获得type 
+### 如何获得type？
 
 既然`C++`中区分static type和dynamic type，那么就需要考虑如何来获得两者。
 
 每个[Polymorphic object](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)有[Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)和[Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)，那对于polymorphic object：
 
-如何获得它的**static type**？
+| 问题                       | code                          |
+| -------------------------- | ----------------------------- |
+| 如何获得**static type**？  | `typeid(decltype(b1)).name()` |
+| 如何获得**dynamic type**？ | `typeid(b1).name()`           |
 
-`typeid(decltype(b1)).name()`
-
-如何获得它的**dynamic type**？
-
-`typeid(b1).name()`
-
-关于这个问题，下面的例子（源自cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)）给出了回答：
+下面的例子源自cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects) ：
 
 
 
@@ -211,10 +208,6 @@ int main()
 在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)中给出了这个问题的解答：
 
 > Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
-
-
-
-
 
 
 
