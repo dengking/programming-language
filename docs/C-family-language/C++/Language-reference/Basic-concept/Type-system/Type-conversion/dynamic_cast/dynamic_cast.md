@@ -2,6 +2,79 @@
 
 
 
+## panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/)
+
+### The `dynamic_cast`
+
+First thing you need to know about RTTI is, that it doesn’t work for the **non-polymorphic types**.
+
+> NOTE: 这是作者列举的大多数人的错误认知，后面它会对此进行修正
+
+And it turns out, that **dynamic_cast** can work for non-polymorphic types. How is that even possible? The answer is simple – not every case, that **dynamic_cast** handles, needs RTTI. We will prove that later on in the article.
+
+> NOTE: 上面这段话描述的是正确的结论，它的大致意思是：`dynamic_cast`可以用于多种情形，当需要RTTI的时候，它才需要入参的type是polymorphic type，因为只有polymorphic type才有RTTI。
+
+Example: downcast
+
+```c++
+struct B
+{
+};
+struct D: B
+{
+};
+int main()
+{
+	B* ptr = new D;
+	dynamic_cast<D*>(ptr);
+}
+// g++ test.cpp
+
+```
+
+> NOTE: 上述程序编译报错如下:
+>
+> ```c++
+> test.cpp: 在函数‘int main()’中:
+> test.cpp:5:25: 错误：无法将‘ptr’从类型‘B*’动态转换到类型‘struct D*’(源类型不是多态的)
+>      dynamic_cast<D*>(ptr);
+> ```
+
+
+
+The above snippet requires RTTI mechanism to ensure safety in your program. After all, you can try to cast to a different derived type, which is not a dynamic type of a pointer you are trying to cast. This case is handled by the **dynamic_cast** by returning **nullptr** or throwing the **std::bad_cast** exception (depending on whether you cast a pointer or a reference). Since type **B** has got *no virtual function*, then *this is non-polymorphic type* and RTTI cannot be used. This causes compilation error – **dynamic_cast** wants to use RTTI, but it can’t do so.
+
+
+
+So now let’s try also to cast types the other way around, so from the derived to the base class. The snippet below represents that situation.
+
+Example: upcast
+
+```c++
+struct B
+{
+};
+struct D: B
+{
+};
+int main()
+{
+	D* ptr = new D;
+	dynamic_cast<B*>(ptr);
+	delete ptr;
+}
+// g++ test.cpp
+
+```
+
+> NOTE: 上述程序可以正常编译通过
+
+This works correctly. After all, even implicit cast would be fine here, but **dynamic_cast** also won’t complain. Why is that? The fact, that the cast is safe is known by the compiler at compile time. This means, that **dynamic_cast** does not need to use RTTI.
+
+We can say in general, that **dynamic_cast** is a tool for moving around the inheritance tree – up and down. Whether the **dynamic_cast** uses RTTI depends only on whether the particular case needs it.
+
+Using **dynamic_cast** can also make our intentions clearer. Whenever we say **dynamic_cast**, the reader knows we intend to cast to the base or derived class. Whenever we say **static_cast**, on the other hand, we know we mainly mean to perform some arithmetic casts, converting constructor calls or the user’s conversion operators.
+
 ## cppreference [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast)
 
 Safely converts **pointers** and **references** to classes up, down, and sideways（平级） along the inheritance hierarchy.

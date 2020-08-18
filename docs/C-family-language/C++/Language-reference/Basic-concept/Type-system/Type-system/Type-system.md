@@ -103,19 +103,29 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 > NOTE: 上面这段话给出了dynamic type的定义，需要注意的是，dynamic type是run-time获得的。关于上面这段话中的**most derived object**，参见cppreference [Object#Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
 
-
+> NOTE: 关于dynamic type、static type，参见下面的“Polymorphic type”段。
 
 ### [Incomplete type](https://en.cppreference.com/w/cpp/language/type#Incomplete_type)
 
-
+> NOTE: `void*`是典型的incomplete type。
 
 ## cppreference [Type support library](https://en.cppreference.com/w/cpp/types)
 
 在`C++\Library\Standard-library\Utility-library\Language-support\Type_support`中，对此进行了分析。
 
+## Polymorphic type
 
+cppreference中并没有正式地定义polymorphic type，其中只有 [polymorphic object](https://en.cppreference.com/w/cpp/language/object) 的定义，仔细阅读 [polymorphic object](https://en.cppreference.com/w/cpp/language/object) 段，可以发现其中给出的例子中有“polymorphic type”，当我们进入到type system后，使用polymorphic type来进行描述会更加方便。
 
-## Static type and dynamic type
+在文章panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/)中，给出了polymorphic type的定义:
+
+> First thing you need to know about RTTI is, that it doesn’t work for the non-polymorphic types. If you wonder what polymorphic types are, then here I come with the explanation. The types are polymorphic, when either they have at least one virtual function or they inherit from another polymorphic type.
+
+### RTTI of polymorphic type
+
+对于polymorphic type，目前的实现普遍会使用RTTI，这在`C++\Language-reference\Basic-concept\Type-system\RTTI.md`中进行了描述。
+
+### Static type and dynamic type
 
 `C++`中对**static type** 和 **dynamic type**的区分是源于`C++`对runtime polymorphism（参见 [polymorphic object](https://en.cppreference.com/w/cpp/language/object)）的支持，只有[polymorphic object](https://en.cppreference.com/w/cpp/language/object)才同时具备static type和dynamic type。
 
