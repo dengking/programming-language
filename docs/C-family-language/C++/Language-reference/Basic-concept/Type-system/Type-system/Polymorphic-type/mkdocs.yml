@@ -1,0 +1,4 @@
+nav:
+    - Polymorphic-type: Polymorphic-type.md
+    # 本篇讲述dynamic type的实现    
+    - RTTI: RTTI.md

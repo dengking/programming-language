@@ -1,3 +1,4 @@
 nav:
     - Type-system: Type-system.md
+    - Polymorphic-type: Polymorphic-type
     - Literal-type: Literal-type.md

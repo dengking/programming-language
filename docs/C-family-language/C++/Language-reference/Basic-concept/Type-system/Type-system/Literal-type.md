@@ -147,3 +147,6 @@ int main()
 
 
 
+## microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)
+
+> NOTE:  这篇文章中也对literal type进行了描述。
