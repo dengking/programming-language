@@ -125,7 +125,7 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >   - polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，需要RTTI、virtual method table
 >   - [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
 > - compiler optimization
-> - subobject
+> - subobject（在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中，有对它的讨论）
 > - platform
 > - ......
 >
