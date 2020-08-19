@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Alignment: Alignment.md
     - Data-structure-alignment: Data-structure-alignment

@@ -233,7 +233,7 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 
 #### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
 
-> NOTE: 原文将alignment放到object章节，但是我觉得alignment应该是type的属性，所以将alignment放到了Type-system章节中。
+> NOTE: 将alignment放到了`C-and-C++\From-source-code-to-exec\ABI\Alignment`章节中。
 
 
 

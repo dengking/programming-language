@@ -121,9 +121,7 @@ cppreference中并没有正式地定义polymorphic type，其中只有 [polymorp
 
 > First thing you need to know about RTTI is, that it doesn’t work for the non-polymorphic types. If you wonder what polymorphic types are, then here I come with the explanation. The types are polymorphic, when either they have at least one virtual function or they inherit from another polymorphic type.
 
-### RTTI of polymorphic type
 
-对于polymorphic type，目前的实现普遍会使用RTTI，这在`C++\Language-reference\Basic-concept\Type-system\RTTI.md`中进行了描述。
 
 ### Static type and dynamic type
 
@@ -219,6 +217,20 @@ int main()
 
 > Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
 
+#### RTTI of polymorphic type
+
+对于polymorphic type，目前的实现普遍会使用RTTI，这在`C++\Language-reference\Basic-concept\Type-system\RTTI.md`中进行了描述。
+
+#### Virtual function table of polymorphic type
+
+Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI\Virtual-method-table.md`。
+
+
+
+## Trivial type
+
+另外一种非常重要的type是“trivial type”，trivial type是相对于polymorphic type而言的，trivial type在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial.md`中进行了描述。
+
 
 
 ## cppreference [typeid](https://en.cppreference.com/w/cpp/language/typeid)
@@ -231,5 +243,5 @@ int main()
 
 ## type cast and conversion
 
-参见本章的`Type-conversion`
+参见`Type-conversion`章节。
 
