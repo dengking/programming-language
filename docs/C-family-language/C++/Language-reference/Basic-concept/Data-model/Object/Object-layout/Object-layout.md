@@ -15,9 +15,13 @@ In C++03, a class or struct must follow a number of rules for it to be considere
 
 C++11 relaxed several of the POD rules, by dividing the **POD concept** into two separate concepts: *trivial* and *standard-layout*.
 
+> NOTE: trivial的含义是“普通的、平凡的”
+
 A type that is *trivial* can be **statically initialized**. It also means that it is valid to copy data around via `memcpy`, rather than having to use a **copy constructor**. The lifetime of a *trivial* type begins when its storage is defined, not when a constructor completes.
 
-> NOTE: storage defined和constructor complete之间有什么关联？
+> NOTE: “A type that is *trivial* can be **statically initialized**"意味着它的constructor是default、implicitly defined，不能是user-defined，也就是下面所说的[trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)，否则就无法实现**statically initialized**
+
+> NOTE: “not when a constructor completes”要如何理解？trivial type的destructor必须是trivial destructor
 
 > NOTE: 上面所描述的其实就是Named requirement [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)、Named requirement [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)。
 
@@ -30,28 +34,37 @@ A trivial class or struct is defined as one that:
 
 > NOTE: Named requirement [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)的描述是比上述描述要清晰易懂的，它将上述2、3、4，定义为Named requirement [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)。
 
-Constructors are **trivial** only if there are no **virtual member functions** of the class and no **virtual base classes**. Copy/move operations also require all non-static data members to be trivial.
+**Constructors** are **trivial** only if there are no **virtual member functions** of the class and no **virtual base classes**. Copy/move operations also require all non-static data members to be trivial.
 
 > NOTE: 这里对trivial的含义进行了描述，显然trivial是不允许virtual的。
 
 A type that is *standard-layout* means that it orders and packs its members in a way that is compatible with C. A class or struct is standard-layout, by definition, provided:
 
 1. It has no virtual functions
+
 2. It has no virtual base classes
+
 3. All its non-static data members have the same access control (public, private, protected)
+
 4. All its non-static data members, including any in its base classes, are in the same one class in the hierarchy
+
+   > NOTE:所有的“non-static data members”都在同一个类中
+
 5. The above rules also apply to all the base classes and to all non-static data members in the class hierarchy
+
 6. It has no base classes of the same type as the first defined non-static data member
 
-> NOTE: 显然，standard layout是不允许virtual的。
+> NOTE: 显然，standard-layout type不是trivial type，它们是正交的概念。
 >
-> 下面的文章有例子。
+> 上面所述的“compatible with C”的含义是通过`->`来access data member。
+>
+> 思考：standard-layout type能否像trivial type那样通过`memcpy`进行copy？结合最后一段的描述来看，这是不符合用途的：standard-layout type是有copy constructor的，所以我们应该使用它的copy constructor，而不是使用`memcpy`。
 
 A class/struct/union is considered POD if it is trivial, standard-layout, and all of its non-static data members and base classes are PODs.
 
 By separating these concepts, it becomes possible to give up one without losing the other. A class with complex move and copy constructors may not be trivial, but it could be standard-layout and thus interoperate with C. Similarly, a class with public and private non-static data members would not be standard-layout, but it could be trivial and thus `memcpy`-able.
 
-### [trivial vs. standard layout vs. POD](https://stackoverflow.com/questions/6496545/trivial-vs-standard-layout-vs-pod)
+### stackoverflow [trivial vs. standard layout vs. POD](https://stackoverflow.com/questions/6496545/trivial-vs-standard-layout-vs-pod)
 
 [回答](https://stackoverflow.com/a/6496703)中也对标准的便跟历程进行了说明。
 
@@ -62,13 +75,13 @@ struct N { // neither trivial nor standard-layout
     virtual ~N();
 };
 
-struct T { // trivial but not standard-layout
+struct T { // trivial but not standard-layout，non-static data member的access right不同
     int i;
 private:
     int j;
 };
 
-struct SL { // standard-layout but not trivial
+struct SL { // standard-layout but not trivial，因为它的destructor不是trivial的
     int i;
     int j;
     ~SL();

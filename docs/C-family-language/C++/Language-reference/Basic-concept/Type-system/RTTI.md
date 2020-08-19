@@ -21,5 +21,5 @@ C++ features that depend on RTTI
 - `typeid` 
 
 - `dynamic_cast`
-- runtime polymorphism
 - [std::any](https://en.cppreference.com/w/cpp/utility/any) （在panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/) 中提及）
+

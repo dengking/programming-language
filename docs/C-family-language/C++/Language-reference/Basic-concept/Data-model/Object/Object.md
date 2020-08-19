@@ -113,13 +113,50 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > 所谓的object representation，其实就memory representation。那：如何查看object representation？在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation.md`中对这个问题进行了说明；
 >
-> 与object representation密切相关的一个问题是：[endianess](https://en.wikipedia.org/wiki/Endianness)，这在工程hardware的`CPU\Endianess`章节对此进行了说明。
-
-
-
-> NOTE: 需要留心的是，原文关于value representation和object representation之间关系的讨论对象是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的类型，这一点和C中关于这个话题的讨论是不同的。关于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中进行了详细分析。
+> 前面说明了object representation的含义，现在我们思考这个问题：C++ compiler如何来编排object的memory layout（后面简称为**object layout**）？
 >
-> 仅仅讨论[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types是源于c++语言的复杂性，在文章`C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`中对这个问题进行了分析。
+> 其实这个问题涉及到了C++ ABI，下面是object layout需要考虑的：
+>
+> - 与object layout相关的一个问题是：[endianess](https://en.wikipedia.org/wiki/Endianness)，这在工程hardware的`CPU\Endianess`章节对此进行了说明
+>
+> - 与object layout相关的一个问题是：alignment
+> - 与object layout相关的一个问题是：如何实现C++提供的很多高级特性，比如下面两个：
+>
+>   - polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，需要RTTI、virtual method table
+>   - [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
+> - compiler optimization
+> - platform
+> - ......
+>
+> 需要考虑的问题非常多，处于各种考虑，C++标准并没有对object layout的方方面面都进行统一规定，而是将一些留给了C++ implementation去自由地选择。关于这一点，在文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中进行了说明：
+>
+> > The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a **layout**. That **layout** may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
+>
+> 关于C++标准对object layout的定义参见:
+>
+> - `C++\Language-reference\Basic-concept\Data-model\Object\Object-layout`中进行了描述。
+>
+> 关于implementation-defined的object layout参见:
+>
+> - `C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI`中进行了描述。
+>
+> 关于polymorphic type，参见：
+>
+> - `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Polymorphic type`
+
+
+
+> NOTE: 原文关于value representation和object representation之间关系的讨论对象是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type，这一点和C中关于这个话题的讨论是不同的，C中讨论并没有区分type，也就是说C中所有的type都可以按照其中讨论的value representation和object representation；
+>
+> C++中关于value representation和object representation之间关系的讨论对象仅仅局限于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type这是源于C++语言的复杂性，
+>
+> C++标准貌似没有描述一些C++ feature的实现，所以标准无法统一地描述各种type的object representation和value representation之间的关系。
+>
+> 关于trivial type，参见：
+>
+> - `C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`
+>
+> 
 
 
 
@@ -166,7 +203,13 @@ int main()
 >
 > *most derived objects*，所谓most derived，其实可以从class hierarchy来理解，最最顶端的是root class，most derived class，显然就是叶子节点了
 
+An object can have *subobjects*. These include
 
+- member objects
+- base class subobjects（在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中对这个进行了介绍）；
+- array elements
+
+> NOTE: subobject是典型的sub structure（参见工程discrete的`Guide\Relation-structure-computation\Computation\Induction-and-Recursion\Recursion\Recursive-definition.md`章节），它是containing关系。
 
 #### [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
 
