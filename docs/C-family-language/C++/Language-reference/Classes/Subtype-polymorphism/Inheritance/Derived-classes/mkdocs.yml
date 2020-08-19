@@ -1,0 +1,4 @@
+nav:
+    - Derived-classes: Derived-classes.md
+    - Virtual-inheritance: Virtual-inheritance.md
+    - Super: Super.md

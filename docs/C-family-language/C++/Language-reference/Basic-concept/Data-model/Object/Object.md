@@ -183,7 +183,7 @@ Objects of a class type that declares or inherits at least one **virtual functio
 
 For non-polymorphic objects, the **interpretation** of the value is determined from the expression in which the object is used, and is decided at **compile time**.
 
-> NOTE: 原文中的例子移到了`C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Static type and dynamic type`中
+> NOTE: 原文中的例子移到了`C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Polymorphic  type`中
 
 #### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 
