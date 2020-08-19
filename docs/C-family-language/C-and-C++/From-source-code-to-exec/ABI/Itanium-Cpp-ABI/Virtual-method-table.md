@@ -1,4 +1,8 @@
-# [Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
+# Virtual method table
+
+
+
+## wikipedia [Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
 
 A **virtual method table** (**VMT**), **virtual function table**, **virtual call table**, [dispatch table](https://en.wikipedia.org/wiki/Dispatch_table), **vtable**, or **vftable** is a mechanism used in a [programming language](https://en.wikipedia.org/wiki/Programming_language) to support [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) (or [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) [method](https://en.wikipedia.org/wiki/Method_(computer_programming)) [binding](https://en.wikipedia.org/wiki/Name_binding)).
 
@@ -8,7 +12,7 @@ There are many different ways to implement such **dynamic dispatch**, but use of
 
 Suppose a program contains three [classes](https://en.wikipedia.org/wiki/Class_(computer_programming)) in an [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) hierarchy: a [superclass](https://en.wikipedia.org/wiki/Superclass_(computer_science)), `Cat`, and two [subclasses](https://en.wikipedia.org/wiki/Subclass_(computer_science)), `HouseCat` and `Lion`. Class `Cat` defines a [virtual function](https://en.wikipedia.org/wiki/Virtual_function) named `speak`, so its subclasses may provide an appropriate implementation (e.g. either `meow` or `roar`). When the program calls the `speak` function on a `Cat` reference (which can refer to an instance of `Cat`, or an instance of `HouseCat` or `Lion`), the code must be able to determine which implementation of the function the call should be *dispatched* to. This depends on the actual class of the object, not the class of the reference to it (`Cat`). The class can not generally be determined *statically*(that is, at [compile time](https://en.wikipedia.org/wiki/Compile_time)), so neither can the compiler decide which function to call at that time. The call must be dispatched to the right function *dynamically* (that is, at [run time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase))) instead.
 
-## Implementation
+### Implementation
 
 An object's **virtual method table** will contain the [addresses](https://en.wikipedia.org/wiki/Memory_address) of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's **virtual method table**. The **virtual method table** is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have **virtual method tables** with the same **layout**: the address of a given method will appear at **the same offset** for all type-compatible classes. Thus, fetching the method's address from a given offset into a **virtual method table** will get the method corresponding to the object's actual class.[[1\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-1)
 
@@ -18,7 +22,7 @@ Typically, the compiler creates a separate **virtual method table** for each cla
 
 Many compilers place the virtual table pointer as the last member of the object; other compilers place it as the first; portable source code works either way.[[2\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-2) For example, [g++](https://en.wikipedia.org/wiki/G%2B%2B) previously placed the pointer at the end of the object.
 
-## Example
+### Example
 
 Consider the following class declarations in [C++ syntax](https://en.wikipedia.org/wiki/C%2B%2B_syntax):
 
@@ -93,7 +97,7 @@ Also note the [virtual destructors](https://en.wikipedia.org/wiki/Virtual_functi
 
 Overriding of the method `f2()` in class `D` is implemented by duplicating the virtual method table of `B2` and replacing the pointer to `B2::f2()` with a pointer to `D::f2()`.
 
-## Multiple inheritance and thunks
+### Multiple inheritance and thunks
 
 The g++ compiler implements the [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance) of the classes `B1` and `B2` in class `D` using two virtual method tables, one for each base class. (There are other ways to implement multiple inheritance, but this is the most common.) This leads to the necessity for "pointer fixups", also called [thunks](https://en.wikipedia.org/wiki/Thunk_(programming)), when [casting](https://en.wikipedia.org/wiki/Type_conversion).
 
@@ -107,7 +111,7 @@ B2 *b2 = d;
 
 While `d` and `b1` will point to the same memory location after execution of this code, `b2` will point to the location `d+8` (eight bytes beyond the memory location of `d`). Thus, `b2` points to the region within `d` that "looks like" an instance of `B2`, i.e., has the same memory layout as an instance of `B2`.
 
-## Invocation
+### Invocation
 
 A call to `d->f1()` is handled by dereferencing `d`'s `D::B1` **vpointer**, looking up the `f1` entry in the **virtual method table**, and then dereferencing that pointer to call the code.
 
@@ -134,7 +138,7 @@ By comparison, a call to `d->f0()` is much simpler:
 (*B1::f0)(d)
 ```
 
-## Efficiency
+### Efficiency
 
 A **virtual call** requires at least an extra indexed dereference and sometimes a "fixup" addition, compared to a non-virtual call, which is simply a jump to a compiled-in pointer. Therefore, calling **virtual functions** is inherently slower than calling **non-virtual functions**. An experiment done in 1996 indicates that approximately 6–13% of execution time is spent simply dispatching to the correct function, though the overhead can be as high as 50%.[[4\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-6)The cost of virtual functions may not be so high on modern CPU architectures due to much larger caches and better [branch prediction](https://en.wikipedia.org/wiki/Branch_predictor).
 
@@ -144,7 +148,7 @@ To avoid this overhead, compilers usually avoid using virtual method tables when
 
 Thus, the call to `f1` above may not require a table lookup because the compiler may be able to tell that `d` can only hold a `D` at this point, and `D` does not override `f1`. Or the compiler (or optimizer) may be able to detect that there are no subclasses of `B1` anywhere in the program that override `f1`. The call to `B1::f1` or `B2::f2` will probably not require a table lookup because the implementation is specified explicitly (although it does still require the 'this'-pointer fixup).
 
-## Comparison with alternatives
+### Comparison with alternatives
 
 The virtual method table is generally a good performance trade-off to achieve dynamic dispatch, but there are alternatives, such as [binary tree dispatch](https://en.wikipedia.org/w/index.php?title=Binary_tree_dispatch&action=edit&redlink=1), with higher performance but different costs.[[5\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-7)
 
@@ -154,9 +158,11 @@ Virtual method tables also only work if dispatching is constrained to a known se
 
 Languages that provide either or both of these features often dispatch by looking up a string in a [hash table](https://en.wikipedia.org/wiki/Hash_table), or some other equivalent method. There are a variety of techniques to make this faster (e.g., [interning](https://en.wikipedia.org/wiki/String_interning)/tokenizing method names, caching lookups, [just-in-time compilation](https://en.wikipedia.org/wiki/Just-in-time_compilation)).
 
-## See also
+### See also
 
 - [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
 - [Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
 - [Branch table](https://en.wikipedia.org/wiki/Branch_table)
+
+
 

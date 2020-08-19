@@ -42,7 +42,7 @@ int main()
 
 
 
-The above snippet requires RTTI mechanism to ensure safety in your program. After all, you can try to cast to a different derived type, which is not a dynamic type of a pointer you are trying to cast. This case is handled by the **dynamic_cast** by returning **nullptr** or throwing the **std::bad_cast** exception (depending on whether you cast a pointer or a reference). Since type **B** has got *no virtual function*, then *this is non-polymorphic type* and RTTI cannot be used. This causes compilation error – **dynamic_cast** wants to use RTTI, but it can’t do so.
+The above snippet requires **RTTI** mechanism to ensure safety in your program. After all, you can try to cast to a different derived type, which is not a dynamic type of a pointer you are trying to cast. This case is handled by the **dynamic_cast** by returning **nullptr** or throwing the **std::bad_cast** exception (depending on whether you cast a pointer or a reference). Since type **B** has got *no virtual function*, then *this is non-polymorphic type* and RTTI cannot be used. This causes compilation error – **dynamic_cast** wants to use RTTI, but it can’t do so.
 
 
 
@@ -73,7 +73,73 @@ This works correctly. After all, even implicit cast would be fine here, but **dy
 
 We can say in general, that **dynamic_cast** is a tool for moving around the inheritance tree – up and down. Whether the **dynamic_cast** uses RTTI depends only on whether the particular case needs it.
 
-Using **dynamic_cast** can also make our intentions clearer. Whenever we say **dynamic_cast**, the reader knows we intend to cast to the base or derived class. Whenever we say **static_cast**, on the other hand, we know we mainly mean to perform some arithmetic casts, converting constructor calls or the user’s conversion operators.
+Using **dynamic_cast** can also make our intentions clearer. Whenever we say **dynamic_cast**, the reader knows we intend to cast to the **base** or **derived** class. Whenever we say **static_cast**, on the other hand, we know we mainly mean to perform some arithmetic casts, converting constructor calls or the user’s conversion operators.
+
+### The dynamic_cast, you (probably) didn’t know
+
+#### `dynamic_cast<void*>`
+
+We said, that dynamic_cast is dedicated for moving around the inheritance tree. One of such moves is a move to the most derived object. With C++ we can perform such move even without knowing the most derived object’s type. And this is where **dynamic_cast<void\*>** can be used. Let’s have a look at an example:
+
+```c++
+#include <cassert>
+#include <iostream>
+
+struct B
+{
+	int a;
+	int b;
+	virtual ~B() = default;
+};
+struct C
+{
+	int a;
+	int b;
+	virtual ~C() = default;
+};
+struct D: C, B
+{
+	int c;
+	int d;
+};
+int main()
+{
+	// ptrd、ptrb、ptrc 的值并不相同
+	D* ptrd = new D;
+	B* ptrb = ptrd;
+	C* ptrc = ptrd;
+	std::cout << ptrb << std::endl;
+	std::cout << ptrc << std::endl;
+	std::cout << ptrd << std::endl;
+	assert(dynamic_cast<void*>(ptrb) == ptrd);
+	assert(dynamic_cast<void*>(ptrc) == ptrd);
+	delete ptrd;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 输出如下:
+>
+> ```c++
+> 0x134d020
+> 0x134d010
+> 0x134d010
+> ```
+>
+> 
+
+In this case, the **ptrb** will have different value, than **ptrd**, since **B** is the subobject of **D** (and therefore its address will have some offset from the beginning of the object **D**).
+
+This, of course, needs the information about the type in the runtime, since we might not know what’s the exact type of the most derived object. For this reason structures B and C have virtual destructors (RTTI on those types must be possible).
+
+#### Ambiguous casts
+
+Did you ever wonder, what if some object of type (let’s say) **D** would inherit twice from the type **B** and we would like to cast it to this type?
+
+Let’s have a look at the example of such cast:
+
+
 
 ## cppreference [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast)
 
