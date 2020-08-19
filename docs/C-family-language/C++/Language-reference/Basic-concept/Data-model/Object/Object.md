@@ -117,14 +117,15 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > 其实这个问题涉及到了C++ ABI，下面是object layout需要考虑的：
 >
-> - 与object layout相关的一个问题是：[endianess](https://en.wikipedia.org/wiki/Endianness)，这在工程hardware的`CPU\Endianess`章节对此进行了说明
+> - [endianess](https://en.wikipedia.org/wiki/Endianness)，这在工程hardware的`CPU\Endianess`章节对此进行了说明
 >
-> - 与object layout相关的一个问题是：alignment
-> - 与object layout相关的一个问题是：如何实现C++提供的很多高级特性，比如下面两个：
+> - alignment
+> - C++提供的很多高级特性的实现，比如下面两个：
 >
 >   - polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，需要RTTI、virtual method table
 >   - [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
 > - compiler optimization
+> - subobject
 > - platform
 > - ......
 >
@@ -148,13 +149,11 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > NOTE: 原文关于value representation和object representation之间关系的讨论对象是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type，这一点和C中关于这个话题的讨论是不同的，C中讨论并没有区分type，也就是说C中所有的type都可以按照其中讨论的value representation和object representation；
 >
-> C++中关于value representation和object representation之间关系的讨论对象仅仅局限于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type这是源于C++语言的复杂性，
->
-> C++标准貌似没有描述一些C++ feature的实现，所以标准无法统一地描述各种type的object representation和value representation之间的关系。
+> C++中关于value representation和object representation之间关系的讨论对象仅仅局限于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type这是源于C++语言的复杂性，C++标准貌似没有描述一些C++ feature的实现，所以标准无法统一地描述各种type的object representation和value representation之间的关系。
 >
 > 关于trivial type，参见：
 >
-> - `C++\Language-reference\Basic-concept\Data-model\Object-layout\Object-layout.md`
+> - `C++\Language-reference\Basic-concept\Data-model\Object-layout\Trivial.md`
 >
 > 
 
@@ -220,7 +219,7 @@ An object can have *subobjects*. These include
 
 Objects of a class type that declares or inherits at least one **virtual function** are **polymorphic objects**. Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
 
-> NOTE: [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)不是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) 。
+> NOTE: [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)不是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) ，其实这是因为polymorphic type不是trivial type。
 >
 > 上面这段话还描述了`C++` runtime polymorphism的实现，这部分内容在ABI中会进行详细的介绍。
 
