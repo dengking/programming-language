@@ -155,6 +155,8 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 在`C++\Library\Standard-library\Utility-library\Language-support\Type_support`中，对此进行了分析。
 
+
+
 ## Important types
 
 下面描述了C++中非常重要的类型。

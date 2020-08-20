@@ -1,6 +1,12 @@
 # Literal type
 
+## 如何理解literal type？
+
 谈及literal type，联想到了literal，在`C-family-language\C++\Language-reference\Expressions\Literals`中对它进行了介绍。
+
+在compile-time进行allocation、initialization
+
+cppreference [constexpr variable](https://en.cppreference.com/w/cpp/language/constexpr)
 
 ## cppreference [LiteralType](https://en.cppreference.com/w/cpp/named_req/LiteralType)
 
