@@ -190,117 +190,21 @@ int main()
 
 #### Example
 
-来源: cppreference `sizeof...` operator`make_array`
+来源: cppreference `sizeof...` operator `make_array`
 
 
 
 ### constexpr constructor
 
-
-
-#### Example
-
-来源: `spdlog/common.h`
-
-
-```c++
-// visual studio upto 2013 does not support noexcept nor constexpr
-#if defined(_MSC_VER) && (_MSC_VER < 1900)
-#define SPDLOG_NOEXCEPT _NOEXCEPT
-#define SPDLOG_CONSTEXPR
-#else
-#define SPDLOG_NOEXCEPT noexcept
-#define SPDLOG_CONSTEXPR constexpr
-#endif
-
-struct source_loc
-{
-    SPDLOG_CONSTEXPR source_loc() = default;
-    SPDLOG_CONSTEXPR source_loc(const char *filename_in, int line_in, const char *funcname_in)
-        : filename{filename_in}
-        , line{line_in}
-        , funcname{funcname_in}
-    {}
-
-    SPDLOG_CONSTEXPR bool empty() const SPDLOG_NOEXCEPT
-    {
-        return line == 0;
-    }
-    const char *filename{nullptr};
-    int line{0};
-    const char *funcname{nullptr};
-};
-```
-
-`source_loc`的入参`filename_in`、`line_in`、`funcname_in`就确定了 ，所以它可以在compile-time构造。
+> NOTE: 在cppreference [Constructors and member initializer lists#Explanation](https://en.cppreference.com/w/cpp/language/constructor#Explanation) 中有这样的描述：
+>
+> The constructors with a `constexpr` specifier make their type a [*LiteralType*](https://en.cppreference.com/w/cpp/named_req/LiteralType).
+>
+> 这段话，说明了在C++中，如何构建literal type。
 
 #### Example
 
-来源: cppreference [constexpr specifier#Example](https://en.cppreference.com/w/cpp/language/constexpr#Example)
-
-```c++
-#include <cstddef>
-#include <iostream>
-#include <stdexcept>
-
-// literal class
-class conststr
-{
-	const char* p;
-	std::size_t sz;
-	public:
-	template<std::size_t N>
-	constexpr conststr(const char (&a)[N])
-			: p(a), sz(N - 1)
-	{
-	}
-
-	// constexpr functions signal errors by throwing exceptions
-	// in C++11, they must do so from the conditional operator ?:
-	constexpr char operator[](std::size_t n) const
-			{
-		return n < sz ? p[n] : throw std::out_of_range("");
-	}
-	constexpr std::size_t size() const
-	{
-		return sz;
-	}
-};
-
-// C++11 constexpr functions had to put everything in a single return statement
-// (C++14 doesn't have that requirement)
-constexpr std::size_t countlower(conststr s, std::size_t n = 0, std::size_t c = 0)
-{
-	return n == s.size() ? c :
-			'a' <= s[n] && s[n] <= 'z' ? countlower(s, n + 1, c + 1) :
-											countlower(s, n + 1, c);
-}
-
-// output function that requires a compile-time constant, for testing
-template<int n>
-struct constN
-{
-	constN()
-	{
-		std::cout << n << '\n';
-	}
-};
-
-int main()
-{
-	std::cout << "the number of lowercase letters in \"Hello, world!\" is ";
-	constN<countlower("Hello, world!")> out2; // implicitly converted to conststr
-}
-
-```
-
-> ```
-> g++ -std=c++11 test.cpp 
-> ./a.out 
-> the number of lowercase letters in "Hello, world!" is 9
-> ```
-
-
+参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Literal-type.md`。
 
 ## `constexpr if` statements (C++17)
 

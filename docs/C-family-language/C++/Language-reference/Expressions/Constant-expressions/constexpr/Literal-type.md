@@ -1,22 +1,42 @@
 # Literal type
 
+
+
 ## 如何理解literal type？
 
-谈及literal type，联想到了literal，在`C-family-language\C++\Language-reference\Expressions\Literals`中对它进行了介绍。
+cppreference [LiteralType](https://en.cppreference.com/w/cpp/named_req/LiteralType) 中对其定义如下：
 
-在compile-time进行allocation、initialization
+> Specifies that a type is a *literal type*. Literal types are the types of [constexpr variables](https://en.cppreference.com/w/cpp/language/constexpr) and they can be constructed, manipulated, and returned from [constexpr functions](https://en.cppreference.com/w/cpp/language/constexpr).
 
-cppreference [constexpr variable](https://en.cppreference.com/w/cpp/language/constexpr)
+显然**literal type**和`constexpr`密切相关，所以，理解literal type的第一步是理解`constexpr`。
 
-## cppreference [LiteralType](https://en.cppreference.com/w/cpp/named_req/LiteralType)
+`constexpr`的核心思想是：“evaluate the value of the **function** or **variable** at **compile time**”，所以literal type的value也是需要compile-time获得的，它是在compile-time allocation、initialization，它的value就像是literal一样，在compile-time就已知了，这应该是literal type的命名缘由。
 
-> NOTE: Literal type和constexpr密切相关。
+关于literal，参见：
 
-### Example
+- 在`C-family-language\C++\Language-reference\Expressions\Literals`中对它进行了介绍
 
-#### Literal class
 
-cppreference [constexpr specifier#Example](https://en.cppreference.com/w/cpp/language/constexpr#Example)
+
+## How to construct user-defined literal type？
+
+在cppreference [Constructors and member initializer lists#Explanation](https://en.cppreference.com/w/cpp/language/constructor#Explanation) 中有这样的描述：
+
+> The constructors with a `constexpr` specifier make their type a [*LiteralType*](https://en.cppreference.com/w/cpp/named_req/LiteralType).
+
+显然，literal type的constructor需要使用 `constexpr` 来修饰。
+
+在[C++ named requirements: LiteralType#Requirements](https://en.cppreference.com/w/cpp/named_req/LiteralType)对此也进行了说明:
+
+> has a trivial (until C++20)constexpr (since C++20) destructor
+
+上面这段话如何理解呢？
+
+## Examples
+
+
+
+### cppreference [C++ named requirements: LiteralType#Example](https://en.cppreference.com/w/cpp/named_req/LiteralType) 
 
 ```c++
 #include <cstddef>
@@ -71,20 +91,61 @@ int main()
 	std::cout << "the number of lowercase letters in \"Hello, world!\" is ";
 	constN<countlower("Hello, world!")> out2; // implicitly converted to conststr
 }
-
+// g++ -std=c++11 test.cpp 
 ```
 
-> ```
-> g++ -std=c++11 test.cpp 
-> ./a.out 
-> the number of lowercase letters in "Hello, world!" is 9
-> ```
+上述程序 输出如下：
+
+```c++
+the number of lowercase letters in "Hello, world!" is 9
+```
+
+上述例子有几个点需要特殊说明：
+
+- `constexpr conststr(const char (&a)[N])` 运用的是 stackoverflow [Using a `constexpr` array size function](https://stackoverflow.com/a/7439261) 中介绍的技巧，在`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier.md`中收录了这个技巧
+- `countlower("Hello, world!")`运用了 implicit conversion，因为`constexpr conststr(const char (&a)[N])` conversion function
 
 
 
-在`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier.md`中的 `spdlog/common.h`也是literal class的一个例子。
+### `spdlog/common.h`
 
-#### `static constexpr`
+
+
+
+```c++
+// visual studio upto 2013 does not support noexcept nor constexpr
+#if defined(_MSC_VER) && (_MSC_VER < 1900)
+#define SPDLOG_NOEXCEPT _NOEXCEPT
+#define SPDLOG_CONSTEXPR
+#else
+#define SPDLOG_NOEXCEPT noexcept
+#define SPDLOG_CONSTEXPR constexpr
+#endif
+
+struct source_loc
+{
+    SPDLOG_CONSTEXPR source_loc() = default;
+    SPDLOG_CONSTEXPR source_loc(const char *filename_in, int line_in, const char *funcname_in)
+        : filename{filename_in}
+        , line{line_in}
+        , funcname{funcname_in}
+    {}
+
+    SPDLOG_CONSTEXPR bool empty() const SPDLOG_NOEXCEPT
+    {
+        return line == 0;
+    }
+    const char *filename{nullptr};
+    int line{0};
+    const char *funcname{nullptr};
+};
+```
+
+`source_loc`的入参`filename_in`、`line_in`、`funcname_in`就确定了 ，所以它可以在compile-time构造。
+
+
+
+### `static constexpr`
 
 ```c++
 #include <string>
