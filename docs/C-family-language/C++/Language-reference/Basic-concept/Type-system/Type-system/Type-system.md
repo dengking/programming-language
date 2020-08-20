@@ -20,30 +20,70 @@ compound types (see also [std::is_compound](https://en.cppreference.com/w/cpp/ty
 
 ### [Type naming](https://en.cppreference.com/w/cpp/language/type#Type_naming)
 
-> NOTE: 在实际的program中，我们使用的type常常是没有name的，我们常常使用的是type-id。所以在c++中，有两种方式来name一个type：
+> NOTE: 在实际的program中，我们使用的type常常是没有name的，我们常常使用的是type-id。所以在c++中，有两种方式来表示一个type：
 >
 > - type name
 > - type id
 >
-> 对于type name我们是熟悉的；对于type id，其实我们已经熟悉了它的用法，只是对它的概念不熟悉。
+> 对于type name，它的含义是使用一个name来表示type，这样后续就可以用这个name来使用这个type；
 >
-> 在实际programming中， 为了便利，我们往往通过[type alias](type_alias.html) declaration、[typedef](typedef.html) declaration来为name一个type，这样后续直接通过name来使用它将会非常方便。
+> 对于type id，其实我们已经熟悉了它的用法，只是对它的概念不熟悉。
 >
-> 
+> 在实际programming中， 为了便利，我们往往通过 type alias declaration、typedef declaration来为type指定name，这样后续直接通过name来使用它将会非常方便。
 
-The syntax of the type-id that names type T is exactly the syntax of a [declaration](declarations.html) of a variable or function of type T, with the identifier omitted, except that *decl-specifier-seq* of the declaration grammar is constrained to *type-specifier-seq*
+Types that do not have names often need to be referred to in C++ programs; the syntax for that is known as *type-id*. The syntax of the type-id that names type `T` is exactly the syntax of a [declaration](https://en.cppreference.com/w/cpp/language/declarations) of a variable or function of type `T`, with the identifier omitted, except that *decl-specifier-seq* of the declaration grammar is constrained to *type-specifier-seq*, and that new types may be defined only if the type-id appears on the right-hand side of a non-template type alias declaration.
 
-> NOTE: 上面这段话需要结合如下例子来理解:
->
-> ```c++
-> sizeof(static int); // error: storage class specifiers not part of type-specifier-seq
-> ```
->
-> 
+> NOTE: 上面描述了如何来声明type-id。上面这段话需要结合如下例子来理解:
+
+
+
+```c++
+#include <functional>
+#include <vector>
+
+int* p; // declaration of a pointer to int
+static_cast<int*>(p); // type-id is "int*"
+
+int a[3]; // declaration of an array of 3 int
+new int[3]; // type-id is "int[3]" (called new-type-id)
+
+// declaration of an array of 2 pointers to functions
+// returning pointer to array of 3 int
+// x是variable name
+int (*(*x[2])())[3];
+new(int (*(*[2])())[3]); // type-id is "int (*(*[2])())[3]"
+
+void f(int); // declaration of a function taking int and returning void
+std::function<void(int)> x = f; // type template parameter is a type-id "void(int)"
+std::function<auto(int) -> void> y = f; // same
+
+std::vector<int> v;       // declaration of a vector of int
+sizeof(std::vector<int>); // type-id is "std::vector<int>"
+
+struct
+{
+	int x;
+} b;         // creates a new type and declares an object b of that type
+
+sizeof(struct
+{
+	int x;
+});    // error: cannot define new types in a sizeof expression
+
+// creates a new type and declares t as an alias of that type
+using t = struct {	int x;};
+
+
+sizeof(static int);// error: storage class specifiers not part of type-specifier-seq
+std::function<inline void(int)> f;// error: neither are function specifiers
+
+```
+
+
 
 *Type-id* may be used in the following situations:
 
-to specify the target type in [cast expressions](expressions.html#Conversions);
+- to specify the target type in [cast expressions](expressions.html#Conversions);
 
 Example:
 
@@ -54,7 +94,7 @@ static_cast<int*>(p); // type-id is "int*"
 
 
 
-as arguments to [sizeof](sizeof.html), [alignof](alignof.html), [alignas](alignas.html), [new](new.html), and [typeid](typeid.html);
+- as arguments to [sizeof](sizeof.html), [alignof](alignof.html), [alignas](alignas.html), [new](new.html), and [typeid](typeid.html);
 
 Example:
 
@@ -67,7 +107,7 @@ int (*(*x[2])())[3];      // declaration of an array of 2 pointers to functions
 new (int (*(*[2])())[3]); // type-id is "int (*(*[2])())[3]"
 ```
 
-on the right-hand side of a [type alias](type_alias.html) declaration;
+- on the right-hand side of a [type alias](type_alias.html) declaration;
 
 Example:
 
@@ -79,7 +119,7 @@ using t = struct { int x; }; // creates a new type and declares t as an alias of
 
 
 
-as the template argument for a [template type parameter](template_parameters.html#Template_type_arguments);
+- as the template argument for a [template type parameter](template_parameters.html#Template_type_arguments);
 
 ```C++
 void f(int);                    // declaration of a function taking int and returning void
