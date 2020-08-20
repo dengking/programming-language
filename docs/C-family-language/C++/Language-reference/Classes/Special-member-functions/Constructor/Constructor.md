@@ -8,6 +8,59 @@
 
 
 
+### Delegating constructor (since C++11)
+
+
+
+```c++
+#include <iostream>
+class Foo
+{
+public:
+	Foo(char x, int y)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	Foo(int y)
+			: Foo('a', y) // Foo(int) delegates to Foo(char,int)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+int main()
+{
+	Foo f(1);
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序的输出如下:
+>
+> ```c++
+> Foo::Foo(char, int)
+> Foo::Foo(int)
+> ```
+
+
+
+### Initialization order
+
+The order of **member initializers** in the list is irrelevant: the actual order of initialization is as follows:
+
+1) If the constructor is for the **most-derived class**, virtual bases are initialized in the order in which they appear in depth-first left-to-right traversal of the base class declarations (left-to-right refers to the appearance in **base-specifier lists**)
+
+2) Then, **direct bases** are initialized in left-to-right order as they appear in this class's **base-specifier list**
+
+3) Then, non-static data member are initialized in order of declaration in the class definition.
+
+4) Finally, the body of the constructor is executed
+
+(Note: if initialization order was controlled by the appearance in the member initializer lists of different constructors, then the [destructor](https://en.cppreference.com/w/cpp/language/destructor) wouldn't be able to ensure that the order of destruction is the reverse of the order of construction)
+
+
+
 ## cppreference [Default constructors](https://en.cppreference.com/w/cpp/language/default_constructor)
 
 A default constructor is a [constructor](https://en.cppreference.com/w/cpp/language/constructor) which can be called with no arguments (either defined with an empty parameter list, or with default arguments provided for every parameter). A type with a public default constructor is [*DefaultConstructible*](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible).
