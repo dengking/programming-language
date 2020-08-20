@@ -118,11 +118,13 @@ To enable compilers as well as **C++ programs** and **metaprograms** to reason a
 
 ### [Trivial types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#trivial-types)
 
-When a class or struct in C++ has compiler-provided or explicitly defaulted special member functions, then it is a **trivial type**. 
+When a class or struct in C++ has compiler-provided or explicitly defaulted **special member functions**, then it is a **trivial type**. 
 
 > NOTE: 上面这段话中的“explicitly defaulted special member functions”，所指为类似如下的做法：
 >
 > `Trivial2() = default;`
+>
+> 
 
 Trivial types have a [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor), [trivial copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor#Trivial_copy_constructor), [trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator) and [trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor). In each case, *trivial* means the constructor/operator/destructor is not user-provided and belongs to a class that has
 
@@ -401,27 +403,41 @@ A **literal type** is one whose layout can be determined at compile time. The fo
 
 如果使用default member initializer，那么这个类是否依然是trivial、standard layout、POD？
 
-在microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中并没有对此进行说明，下面结合具体的例子来进行说明。
+下面分别进行描述。
+
+### Trivial type
+
+在microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019) `#` [Trivial types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#trivial-types)中给出的条件中，已经包含了对这种情况的说明：
+
+> Trivial types have a [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor), [trivial copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor#Trivial_copy_constructor), [trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator) and [trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor). 
+
+查看cppreference [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)，可以看到其中有这样的条件:
+
+> - `T` has no non-static members with default initializers. (since C++11)
+
+所以，一旦使用了default member initializer，则不再是**trivial type**了。
+
+下面结合具体的例子来进行说明。
 
 ```c++
 #include <iostream>
 #include <type_traits>
 
-struct Trivial
+struct NonTrivial
 {
-	int i { 0 };
-	private:
+	int i { 0 }; // default member initializer
+private:
 	int j;
 };
 
-struct Trivial2
+struct NonTrivial2
 {
-	int i { 0 };
-	Trivial2(int a, int b)
+	int i { 0 }; // default member initializer
+	NonTrivial2(int a, int b)
 			: i(a), j(b)
 	{
 	}
-	Trivial2() = default;
+	NonTrivial2() = default;
 private:
 	int j;   // Different access control
 };
@@ -429,8 +445,8 @@ private:
 int main()
 {
 	std::cout << std::boolalpha;
-	std::cout << std::is_trivial<Trivial>::value << '\n';
-	std::cout << std::is_trivial<Trivial2>::value << '\n';
+	std::cout << std::is_trivial<NonTrivial>::value << '\n';
+	std::cout << std::is_trivial<NonTrivial2>::value << '\n';
 }
 // g++ --std=c++11 test.cpp
 
@@ -443,7 +459,39 @@ false
 false
 ```
 
-显然，一旦使用default member initializer，则不再是trivial type了。
+
+
+### Standard layout
+
+```c++
+#include<type_traits>
+#include<iostream>
+struct SL
+{
+	// All members have same access:
+	int i { 1 }; // default member initializer
+	int j;
+	SL(int a, int b)
+			: i(a), j(b)
+	{
+	} // User-defined constructor OK
+};
+int main()
+{
+	std::cout << std::boolalpha;
+	std::cout << std::is_standard_layout<SL>::value << '\n';
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+上述程序的输出如下：
+
+```C++
+true
+```
+
+所以，default member initializer并不影响**standard layout**了。
 
 ## Named requirements of layout 
 

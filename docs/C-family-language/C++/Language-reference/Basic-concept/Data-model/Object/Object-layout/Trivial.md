@@ -8,6 +8,10 @@
 - advanced feature：
   - non-static members with default initializers
 
+
+
+
+
 在阅读cppreference的时候，多次碰到这个词语，有：
 
 - [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)
