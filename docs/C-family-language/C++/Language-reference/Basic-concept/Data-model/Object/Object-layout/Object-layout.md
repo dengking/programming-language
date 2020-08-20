@@ -2,6 +2,8 @@
 
 c++标准对object layout的定义是在有进行变更的，下面首先反思变更历程，然后再来具体的思考各种object layout。
 
+
+
 ## 标准变更历程
 
 ### 维基百科[C++11#Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C++11#Modification_to_the_definition_of_plain_old_data)
@@ -497,15 +499,15 @@ true
 
 > NOTE: 有了前面的基础，现在阅读cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中关于[layout](https://en.cppreference.com/w/cpp/named_req#Layout)的描述就容易了。
 
-### [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType) (C++11)
+### cppreference [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType) (C++11)
 
 
 
-### [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType)(C++11)
+### cppreference [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType) (C++11)
 
 
 
-### [PODType](https://en.cppreference.com/w/cpp/named_req/PODType)
+### cppreference [PODType](https://en.cppreference.com/w/cpp/named_req/PODType)
 
 
 

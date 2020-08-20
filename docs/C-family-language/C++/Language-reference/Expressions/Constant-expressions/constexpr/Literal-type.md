@@ -32,6 +32,16 @@ cppreference [LiteralType](https://en.cppreference.com/w/cpp/named_req/LiteralTy
 
 上面这段话如何理解呢？
 
+在microsoft [Trivial, standard-layout, POD, and literal types#literal_types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#literal_types) 中对literal type进行了解释:
+
+A **literal type** is one whose layout can be determined at **compile time**. The following are the literal types:
+
+- void
+- scalar types
+- references
+- Arrays of void, scalar types or references
+- A class that has a **trivial destructor**, and one or more `constexpr` constructors that are not move or copy constructors. Additionally, all its non-static data members and base classes must be literal types and not volatile.
+
 ## Examples
 
 
