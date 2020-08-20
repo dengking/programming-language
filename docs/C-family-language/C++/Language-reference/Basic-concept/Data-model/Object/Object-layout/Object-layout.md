@@ -20,6 +20,11 @@ C++11 relaxed several of the POD rules, by dividing the **POD concept** into two
 A type that is *trivial* can be **statically initialized**. It also means that it is valid to copy data around via `memcpy`, rather than having to use a **copy constructor**. The lifetime of a *trivial* type begins when its storage is defined, not when a constructor completes.
 
 > NOTE: “A type that is *trivial* can be **statically initialized**"意味着它的constructor是default、implicitly defined，不能是user-defined，也就是下面所说的[trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)，否则就无法实现**statically initialized**
+>
+> trivial type的核心特征：
+>
+> - can be **statically initialized**
+> - copy data around via `memcpy`
 
 > NOTE: “not when a constructor completes”要如何理解？trivial type的destructor必须是trivial destructor
 
@@ -40,9 +45,13 @@ A trivial class or struct is defined as one that:
 
 A type that is *standard-layout* means that it orders and packs its members in a way that is compatible with C. A class or struct is standard-layout, by definition, provided:
 
+> NOTE: *standard-layout*的核心特征：
+>
+> - compatible with C
+
 1. It has no virtual functions
 
-2. It has no virtual base classes
+2. It has no [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
 
 3. All its non-static data members have the same access control (public, private, protected)
 
@@ -62,7 +71,7 @@ A type that is *standard-layout* means that it orders and packs its members in a
 
 A class/struct/union is considered POD if it is trivial, standard-layout, and all of its non-static data members and base classes are PODs.
 
-By separating these concepts, it becomes possible to give up one without losing the other. A class with complex move and copy constructors may not be trivial, but it could be standard-layout and thus interoperate with C. Similarly, a class with public and private non-static data members would not be standard-layout, but it could be trivial and thus `memcpy`-able.
+By separating these concepts, it becomes possible to give up one without losing the other. A class with complex move and copy constructors may not be **trivial**, but it could be **standard-layout** and thus interoperate with C. Similarly, a class with public and private non-static data members would not be standard-layout, but it could be **trivial** and thus `memcpy`-able.
 
 ### stackoverflow [trivial vs. standard layout vs. POD](https://stackoverflow.com/questions/6496545/trivial-vs-standard-layout-vs-pod)
 
@@ -117,7 +126,7 @@ When a class or struct in C++ has compiler-provided or explicitly defaulted spec
 
 Trivial types have a [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor), [trivial copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor#Trivial_copy_constructor), [trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator) and [trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor). In each case, *trivial* means the constructor/operator/destructor is not user-provided and belongs to a class that has
 
-- no virtual functions or virtual base classes,
+- no virtual functions or [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes),
 - no base classes with a corresponding non-trivial constructor/operator/destructor
 - no data members of class type with a corresponding non-trivial constructor/operator/destructor
 
@@ -125,7 +134,7 @@ Trivial types have a [trivial default constructor](https://en.cppreference.com/w
 
 
 
-The following examples show trivial types. In `Trivial2`, the presence of the `Trivial2(int a, int b)` constructor requires that you provide a default constructor. For the type to qualify as trivial, you must explicitly default that constructor.
+The following examples show trivial types. In `Trivial2`, the presence of the `Trivial2(int a, int b)` constructor requires that you provide a **default constructor**. For the type to qualify as **trivial**, you must **explicitly default that constructor**.
 
 ```c++
 #include <iostream>
@@ -153,9 +162,21 @@ int main()
     std::cout << std::is_trivial<Trivial>::value << '\n';
     std::cout << std::is_trivial<Trivial2>::value << '\n';
 }
+// g++ --std=c++11 test.cpp
+
 ```
 
-> NOTE: 编译`g++ --std=c++11 test.cpp`
+> NOTE: 
+>
+> 输出如下:
+>
+> ```c++
+> true
+> true
+> 
+> ```
+>
+> 
 
 
 
@@ -189,44 +210,69 @@ Standard-layout types can have user-defined special member functions. In additio
 #include<iostream>
 struct SL
 {
-   // All members have same access:
-   int i;
-   int j;
-   SL(int a, int b) : i(a), j(b) {} // User-defined constructor OK
+	// All members have same access:
+	int i;
+	int j;
+	SL(int a, int b)
+			: i(a), j(b)
+	{
+	} // User-defined constructor OK
 };
 int main()
 {
-    std::cout << std::boolalpha;
-    std::cout << std::is_standard_layout<SL>::value << '\n';
+	std::cout << std::boolalpha;
+	std::cout << std::is_standard_layout<SL>::value << '\n';
 }
+// g++ --std=c++11 test.cpp
+
 ```
 
+> NOTE: 
+>
+> 上述程序的输出如下:
+>
+> ```c++
+> true
+> ```
+>
+> 
 
-
-The last two requirements can perhaps be better illustrated with code. In the next example, even though Base is standard-layout, `Derived` is not standard layout because both it (the most derived class) and `Base` have non-static data members:
+The last two requirements can perhaps be better illustrated with code. In the next example, even though `Base` is standard-layout, `Derived` is not standard layout because both it (the most derived class) and `Base` have non-static data members:
 
 ```c++
 #include<type_traits>
 #include<iostream>
 struct Base
 {
-   int i;
-   int j;
+	int i;
+	int j;
 };
 
 // std::is_standard_layout<<Derived> == false!
-struct Derived : public Base
+struct Derived: public Base
 {
-   int x;
-   int y;
+	int x;
+	int y;
 };
 
 int main()
 {
-    std::cout << std::boolalpha;
-    std::cout << std::is_standard_layout<Derived>::value << '\n';
+	std::cout << std::boolalpha;
+	std::cout << std::is_standard_layout<Derived>::value << '\n';
 }
+// g++ --std=c++11 test.cpp
+
 ```
+
+> NOTE: 
+>
+> 上述程序的输出为:
+>
+> ```c++
+> false
+> ```
+>
+> 
 
 In this example `Derived` is standard-layout because `Base` has no non-static data members:
 
@@ -235,21 +281,35 @@ In this example `Derived` is standard-layout because `Base` has no non-static da
 #include<iostream>
 struct Base
 {
-   void Foo() {}
+	void Foo()
+	{
+	}
 };
 
 // std::is_standard_layout<<Derived> == true
-struct Derived : public Base
+struct Derived: public Base
 {
-   int x;
-   int y;
+	int x;
+	int y;
 };
 int main()
 {
-    std::cout << std::boolalpha;
-    std::cout << std::is_standard_layout<Derived>::value << '\n';
+	std::cout << std::boolalpha;
+	std::cout << std::is_standard_layout<Derived>::value << '\n';
 }
+// g++ --std=c++11 test.cpp
+
 ```
+
+> NOTE:
+>
+>  上述程序的输出如下：
+>
+> ```c++
+> true
+> ```
+>
+> 
 
 ### [POD types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#pod-types)
 
@@ -264,61 +324,70 @@ using namespace std;
 struct B
 {
 protected:
-   virtual void Foo() {}
+	virtual void Foo()
+	{
+	}
 };
 
 // Neither trivial nor standard-layout
-struct A : B
+struct A: B
 {
-   int a;
-   int b;
-   void Foo() override {} // Virtual function
+	int a;
+	int b;
+	void Foo() override
+	{
+	} // Virtual function
 };
 
 // Trivial but not standard-layout
 struct C
 {
-   int a;
-private:
-   int b;   // Different access control
+	int a;
+	private:
+	int b;   // Different access control
 };
 
 // Standard-layout but not trivial
 struct D
 {
-   int a;
-   int b;
-   D() {} //User-defined constructor
+	int a;
+	int b;
+	//User-defined constructor
+	D()
+	{
+	}
 };
 
 struct POD
 {
-   int a;
-   int b;
+	int a;
+	int b;
 };
 
 int main()
 {
-   cout << boolalpha;
-   cout << "A is trivial is " << is_trivial<A>() << endl; // false
-   cout << "A is standard-layout is " << is_standard_layout<A>() << endl;  // false
+	cout << boolalpha;
+	cout << "A is trivial is " << is_trivial<A>() << endl; // false
+	cout << "A is standard-layout is " << is_standard_layout<A>() << endl;  // false
 
-   cout << "C is trivial is " << is_trivial<C>() << endl; // true
-   cout << "C is standard-layout is " << is_standard_layout<C>() << endl;  // false
+	cout << "C is trivial is " << is_trivial<C>() << endl; // true
+	cout << "C is standard-layout is " << is_standard_layout<C>() << endl;  // false
 
-   cout << "D is trivial is " << is_trivial<D>() << endl;  // false
-   cout << "D is standard-layout is " << is_standard_layout<D>() << endl; // true
+	cout << "D is trivial is " << is_trivial<D>() << endl;  // false
+	cout << "D is standard-layout is " << is_standard_layout<D>() << endl; // true
 
-   cout << "POD is trivial is " << is_trivial<POD>() << endl; // true
-   cout << "POD is standard-layout is " << is_standard_layout<POD>() << endl; // true
+	cout << "POD is trivial is " << is_trivial<POD>() << endl; // true
+	cout << "POD is standard-layout is " << is_standard_layout<POD>() << endl; // true
 
-   return 0;
+	return 0;
 }
+// g++ --std=c++11 test.cpp
+
 ```
 
 ### [Literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#literal_types)
 
-A literal type is one whose layout can be determined at compile time. The following are the literal types:
+A **literal type** is one whose layout can be determined at compile time. The following are the literal types:
 
 - void
 - scalar types
@@ -326,13 +395,59 @@ A literal type is one whose layout can be determined at compile time. The follow
 - Arrays of void, scalar types or references
 - A class that has a trivial destructor, and one or more `constexpr` constructors that are not move or copy constructors. Additionally, all its non-static data members and base classes must be literal types and not volatile.
 
+## Default member initializers
+
+在cppreference [Non-static data members#Member initialization](https://en.cppreference.com/w/cpp/language/data_members)中介绍了default member initializers，那需要思考一下：
+
+如果使用default member initializer，那么这个类是否依然是trivial、standard layout、POD？
+
+在microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中并没有对此进行说明，下面结合具体的例子来进行说明。
+
+```c++
+#include <iostream>
+#include <type_traits>
+
+struct Trivial
+{
+	int i { 0 };
+	private:
+	int j;
+};
+
+struct Trivial2
+{
+	int i { 0 };
+	Trivial2(int a, int b)
+			: i(a), j(b)
+	{
+	}
+	Trivial2() = default;
+private:
+	int j;   // Different access control
+};
+
+int main()
+{
+	std::cout << std::boolalpha;
+	std::cout << std::is_trivial<Trivial>::value << '\n';
+	std::cout << std::is_trivial<Trivial2>::value << '\n';
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+上述程序的输出如下:
+
+```c++
+false
+false
+```
+
+显然，一旦使用default member initializer，则不再是trivial type了。
+
 ## Named requirements of layout 
 
 > NOTE: 有了前面的基础，现在阅读cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中关于[layout](https://en.cppreference.com/w/cpp/named_req#Layout)的描述就容易了。
-
-### [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) (C++11)
-
-
 
 ### [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType) (C++11)
 
@@ -346,11 +461,7 @@ A literal type is one whose layout can be determined at compile time. The follow
 
 
 
-## SUMMARY
-
-trivial type并没有限制access control
-
-standard layout限制了必须相同的access control
+## cppreference [Non-static data members#Standard layout](https://en.cppreference.com/w/cpp/language/data_members#Standard_layout)
 
 
 

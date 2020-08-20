@@ -28,6 +28,8 @@ compound types (see also [std::is_compound](https://en.cppreference.com/w/cpp/ty
 > 对于type name我们是熟悉的；对于type id，其实我们已经熟悉了它的用法，只是对它的概念不熟悉。
 >
 > 在实际programming中， 为了便利，我们往往通过[type alias](type_alias.html) declaration、[typedef](typedef.html) declaration来为name一个type，这样后续直接通过name来使用它将会非常方便。
+>
+> 
 
 The syntax of the type-id that names type T is exactly the syntax of a [declaration](declarations.html) of a variable or function of type T, with the identifier omitted, except that *decl-specifier-seq* of the declaration grammar is constrained to *type-specifier-seq*
 
@@ -113,17 +115,31 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 在`C++\Library\Standard-library\Utility-library\Language-support\Type_support`中，对此进行了分析。
 
-## Important type
+## Important types
 
 下面描述了C++中非常重要的类型。
 
+
+
 ### Polymorphic type
 
-这在`C++\Language-reference\Basic-concept\Type-system\Type-system\Polymorphic-type`章节进行了描述。
+在`C++\Language-reference\Basic-concept\Type-system\Type-system\Polymorphic-type`章节进行了描述。
 
-### Trivial type
+### Type classified by object layout
 
-另外一种非常重要的type是“trivial type”，trivial type是相对于polymorphic type而言的，trivial type在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial.md`中进行了描述。
+这种类型分类方式，是文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)提供的。
+
+#### Trivial type
+
+在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial.md`章节进行了描述。
+
+#### Standard-layout type
+
+
+
+#### POD type
+
+
 
 ### Literal type
 

@@ -2,6 +2,12 @@
 
 按照维基百科[Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C++11#Modification_to_the_definition_of_plain_old_data)中的说法，`trivial`是c++11引入的。
 
+“trivial”的含义是“普通的、平凡的”，在C++中，它的含义是：不包含C++中的一些特性：
+
+- runtime polymorphism（所以trivial type和polymorphic type是相对的）
+- advanced feature：
+  - non-static members with default initializers
+
 在阅读cppreference的时候，多次碰到这个词语，有：
 
 - [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)
