@@ -4,10 +4,12 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 object的storage duration和lifetime是两个非常重要的概念，是理解后续很多内容的基础：
 
-- allocation
-- initialization（在cppreference中，对initialization有着专门的描述）
-- destruction
-- deallocation
+| 步骤             | 说明                                  |                                                      |
+| ---------------- | ------------------------------------- | ---------------------------------------------------- |
+| allocation       | 为object分配内存区域                  |                                                      |
+| initialization   | 初始化object，会调用合适的constructor | （在cppreference中，对initialization有着专门的描述） |
+| deinitialization | 反初始化object，会调用destructor      |                                                      |
+| deallocation     | 回收object的内存                      |                                                      |
 
 需要注意的是：上面是按照发生顺序进行排列的，即：allocation->initialization->destruction->deallocation。
 

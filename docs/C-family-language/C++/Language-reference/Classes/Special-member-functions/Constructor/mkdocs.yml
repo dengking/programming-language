@@ -1,8 +1,11 @@
 nav:
     - Introduction: index.md
     - Constructor: Constructor.md
-    - Code-example: Code-example.md
+    - Default-constructors: Default-constructors.md
     - Converting-constructor: Converting-constructor.md
+    
+    - Code-example: Code-example.md
+    
 ########## 这是一种idiom，在idiom章节对它有描述##########    
     - Virtual-constructor: Virtual-constructor.md
 ########## https://isocpp.org/wiki/faq/ctors#static-init-order #########    
