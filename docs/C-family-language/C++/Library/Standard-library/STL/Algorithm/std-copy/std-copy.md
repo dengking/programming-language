@@ -21,6 +21,16 @@
 
 总的来说：使用`std::copy`、`std::copy_backward`能够处理几乎所有的range to range copy，即使source range和destination range之间存在着overlapping。
 
+copy to left
+
+![](./copying-to-left.jpg)
+
+copy to right
+
+![](./copying-to-right.jpg)
+
+
+
 TO READ:
 
 - [Does std::copy handle overlapping ranges?](https://stackoverflow.com/questions/1952972/does-stdcopy-handle-overlapping-ranges)

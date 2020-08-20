@@ -49,7 +49,7 @@ int main()
 
 The order of **member initializers** in the list is irrelevant: the actual order of initialization is as follows:
 
-1) If the constructor is for the **most-derived class**, virtual bases are initialized in the order in which they appear in depth-first left-to-right traversal of the base class declarations (left-to-right refers to the appearance in **base-specifier lists**)
+1) If the constructor is for the **most-derived class**, **virtual bases** are initialized in the order in which they appear in depth-first left-to-right traversal of the base class declarations (left-to-right refers to the appearance in **base-specifier lists**)
 
 2) Then, **direct bases** are initialized in left-to-right order as they appear in this class's **base-specifier list**
 
@@ -58,6 +58,32 @@ The order of **member initializers** in the list is irrelevant: the actual order
 4) Finally, the body of the constructor is executed
 
 (Note: if initialization order was controlled by the appearance in the member initializer lists of different constructors, then the [destructor](https://en.cppreference.com/w/cpp/language/destructor) wouldn't be able to ensure that the order of destruction is the reverse of the order of construction)
+
+> NOTE: 沿着class hierarchy，自顶向下、自左至右进行初始化。
+
+## Summary
+
+Classification of constructor：
+
+- default constructor
+- copy constructor
+- move constructor
+
+对于上述每种constructor，都涉及如下问题：
+
+| 问题                                       | 说明                                                         |      |
+| ------------------------------------------ | ------------------------------------------------------------ | ---- |
+| implicitly-declared and Implicitly-defined |                                                              |      |
+| default                                    | If some user-defined constructors are present, the user may still force the automatic generation of a default constructor by the compiler that would be implicitly-declared otherwise with the keyword `default`. (since C++11) |      |
+| delete                                     | Deleted constructor.                                         |      |
+
+
+
+
+
+
+
+
 
 
 
@@ -69,13 +95,74 @@ A default constructor is a [constructor](https://en.cppreference.com/w/cpp/langu
 >
 >  [*DefaultConstructible*](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible)能够被  **statically initialized**？
 >
-> 
+
+### Syntax
+
+
+
+### Implicitly-declared default constructor
+
+
+
+### Implicitly-defined default constructor
+
+
+
+### Deleted implicitly-declared default constructor
+
+
+
+### Trivial default constructor
+
+
+
+### Eligible default constructor
+
+
 
 ## cppreference [Copy constructors](https://en.cppreference.com/w/cpp/language/copy_constructor)
 
 
 
+### Syntax
+
+
+
+### Implicitly-declared copy constructor
+
+
+
+### Implicitly-defined copy constructor
+
+
+
+### Deleted implicitly-declared copy constructor
+
+
+
+### Trivial copy constructor
+
+
+
+
+
 ## cppreference [Move constructors](https://en.cppreference.com/w/cpp/language/move_constructor)
+
+
+
+### Syntax
+
+
+
+### Implicitly-declared move constructor
+
+
+
+### Implicitly-defined move constructor
+
+
+
+### Trivial move constructor
 
 
 
