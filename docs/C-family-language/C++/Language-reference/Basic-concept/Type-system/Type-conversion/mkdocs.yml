@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
 ########## 首先描述c++中的type conversion的概念#########    
     - Type-conversion: Type-conversion.md
+    - Implicit-conversion: Implicit-conversion
     - Cast-operator: Cast-operator
 ########## 用户自定义cast    
     - User-defined-conversion: User-defined-conversion.md
