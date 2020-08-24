@@ -1,2 +1,3 @@
 nav:
     - shared_ptr: shared_ptr.md
+    - pointer_cast: pointer_cast.md
