@@ -125,3 +125,10 @@ container指各种常见的数据结构，一般programming language的standard 
 
 - C++的跨平台由具体实现完成，MCVC for windows、gcc for linux，由这些compiler来完成abstract machine 到 physical machine的映射。
 
+### Abstract machine and memory model
+
+上面提到了abstract machine，与abstract machine是它的memory model。
+
+java和python都没有向programmer提供memory model，所以programmer无法直接操作memory；
+
+C++和C都提供了。
