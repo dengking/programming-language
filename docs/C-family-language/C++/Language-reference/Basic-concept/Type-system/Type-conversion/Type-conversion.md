@@ -466,10 +466,3 @@ Basically, we have distinct pointer types for the same reasons we have other dis
 
 (There have been languages that only have untyped generic pointers. In such a language, it's more difficult to avoid type errors, such as storing a value of one type and accidentally accessing it as if it were of another type.)
 
-
-## When should `static_cast`, `dynamic_cast`, `const_cast` and `reinterpret_cast` be used?
-
-https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used
-
-
-

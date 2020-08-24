@@ -166,8 +166,3 @@ https://stackoverflow.com/questions/2006161/changing-the-value-of-const-variable
 static_cast from 'const clone_inherit<concrete, cloneable>' to 'concrete &' casts away qualifiers
 ```
 
-
-
-
-
-[reinterpret_cast casts away qualifiers](https://stackoverflow.com/questions/27995692/reinterpret-cast-casts-away-qualifiers)

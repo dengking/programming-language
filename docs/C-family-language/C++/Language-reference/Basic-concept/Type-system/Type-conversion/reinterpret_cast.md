@@ -1,6 +1,6 @@
 # `reinterpret_cast` 
 
-
+C++中pointer、reference的conversion都使用`reinterpret_cast` 。关于pointer，在`C-family-language\C-and-C++\Pointer-array-alias\Pointer`章节进行了描述。
 
 ## cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
 

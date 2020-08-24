@@ -1,5 +1,7 @@
 nav:
     - Introduction: index.md
+    - Prefer-cast-function-to-C-style-cast: Prefer-cast-function-to-C-style-cast.md
+    - Express-cast-intent: Express-cast-intent.md
 ########## 首先描述c++中的type conversion的概念#########    
     - Type-conversion: Type-conversion.md
 ##########

@@ -138,6 +138,10 @@ All compilers I know will replace a simple `std::copy` with a `memcpy` when it i
 
 
 
+### Replace `std::memcpy`  with `std::copy`  
+
+
+
 ## Vectorize the copy
 
 在[A](https://stackoverflow.com/a/4707028)中提及了“**vectorize the copy**”，检索了一下，下面是相关内容:
