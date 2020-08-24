@@ -112,3 +112,16 @@ container指各种常见的数据结构，一般programming language的standard 
 ## Design of specifier
 
 语言为了简便，key word要尽可能地少，因此一个key word能够用于多种entity，最最典型的例子就是C++ `static` key word，它既可以用于object，也可以用于function的；另外一个就是C++ `extern`。
+
+
+
+## Abstract machine
+
+多余general purpose programming language，一个非常重要的问题就是cross platform。所以，语言的设计者，往往使用抽象的abstract machine，而不是具体的physical machine、OS。
+
+下面以三种主流programming language为例来进行说明：
+
+- python、java的跨平台本质上是相同的，python、java的跨平台是依赖于VM，这些VM也是由实现提供，比如VM for windows，VM for linux，由这些VM实现来完成abstract machine 到 physical machine的映射。
+
+- C++的跨平台由具体实现完成，MCVC for windows、gcc for linux，由这些compiler来完成abstract machine 到 physical machine的映射。
+
