@@ -1,14 +1,7 @@
 nav:
     - Introduction: index.md
-    - Prefer-cast-function-to-C-style-cast: Prefer-cast-function-to-C-style-cast.md
-    - Express-cast-intent: Express-cast-intent.md
 ########## 首先描述c++中的type conversion的概念#########    
     - Type-conversion: Type-conversion.md
-##########
-    - static_cast: static_cast
-    - dynamic_cast: dynamic_cast
-    - reinterpret_cast: reinterpret_cast.md
-    - pointer_cast: pointer_cast
-    - const_cast: const_cast
+    - Cast-operator: Cast-operator
 ########## 用户自定义cast    
     - User-defined-conversion: User-defined-conversion.md
