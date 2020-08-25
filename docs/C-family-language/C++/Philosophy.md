@@ -78,7 +78,13 @@ not possible. Problem areas:
 - range errors
 - narrowing conversions
 
-> NOTE: 上述这些问题，C++基于C都努力地进行着改进，这部分能否在`C-family-language\C-and-C++\VS-C-VS-c++.md`中有描述。
+> NOTE: 上述这些问题，C++基于C努力地进行着改进，这部分能否在`C-family-language\C-and-C++\VS-C-VS-c++.md`中有描述。
+>
+> C++的meta-programming 技术，赋予了programmer非常强大的、灵活的对类型进行描述、检查的能力，一旦类型不符合预期，则立即给出编译报错，终止编译，典型特性包括：
+>
+> - concept
+> - detection idiom
+> - trait（一种reflection）
 
 
 

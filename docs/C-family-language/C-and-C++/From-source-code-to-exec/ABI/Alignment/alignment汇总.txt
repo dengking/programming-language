@@ -1,0 +1,37 @@
+alignment：
+
+D:\github\dengking\Unix-like-operating-system\docs\Programming\Computer-errors\Memory-access-error\Segment-fault\Misalignment
+D:\github\dengking\Unix-like-operating-system\docs\Programming\Computer-errors\Memory-access-error\Segment-fault\Misalignment\__strcpy_sse2_unaligned
+
+D:\github\dengking\programming-language-theory\programming-language\docs\C-family-language\C-and-C++\From-source-code-to-exec\ABI\Alignment
+D:\github\dengking\programming-language-theory\programming-language\docs\C-family-language\C-and-C++\From-source-code-to-exec\ABI\Alignment\Data-structure-alignment
+D:\github\dengking\programming-language-theory\programming-language\docs\C-family-language\C-and-C++\From-source-code-to-exec\ABI\Alignment\Alignment.md
+
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\48EB4AE2F8AE4CB0B9C150F1DA1EF601\A bug story-data alignment on x86.md
+
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\F35C7D47294846AA8626BD9BD66EA385\alignment相关.md
+
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\31140B35EA604936A155E9CA22739CFB\argv-alignment.md
+
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\CB5B98E7334648328DF2474ED1FDC0C3\c-code-alignment-in-struct-flexible-array-member.md
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\3494D6C9A9D24600935C3025ABCBB56D\pointer-and-alignment.md
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\9B159E5AF7E14770A13C0025D401594B\SEGFAULT and alignment.md
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\61517DA426B646848AF7EAC24B35C9B5\Unaligned accesses in C-C++-what, why and solutions to do it properly.md
+
+
+
+D:\github\dengking\Hardware\docs\CPU\Memory-access\Memory-alignment
+D:\github\dengking\Hardware\docs\CPU\Memory-access\Memory-alignment\Data-alignment-Straighten-up-and-fly-right.md
+D:\github\dengking\Hardware\docs\CPU\Memory-access\Memory-alignment\Memory-alignment.md
+
+D:\github\linux-master\Documentation\unaligned-memory-access.txt
+
+与alignment密切相关的一个问题就是：strict aliasing
+Google c++ new alignment
+https://stackoverflow.com/questions/506518/is-there-any-guarantee-of-alignment-of-address-return-by-cs-new-operation
+https://en.cppreference.com/w/cpp/language/new
+
+object and alignment
+https://en.cppreference.com/w/cpp/language/object#Alignment
+https://en.cppreference.com/w/cpp/memory/align
+https://en.cppreference.com/w/cpp/types/aligned_storage
