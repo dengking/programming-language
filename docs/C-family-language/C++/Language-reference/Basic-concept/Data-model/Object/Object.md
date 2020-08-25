@@ -111,7 +111,15 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > NOTE: 
 >
-> 所谓的object representation，其实就memory representation。那：如何查看object representation？在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation.md`中对这个问题进行了说明；
+> 所谓的object representation，其实就memory representation。
+>
+> ### 如何查看object representation？
+>
+> 在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation.md`中对这个问题进行了说明；
+>
+> 按照“Serialization and deserialization”节的说法，这个过程叫做Serialization。
+>
+> ### Memory layout
 >
 > 前面说明了object representation的含义，现在我们思考这个问题：C++ compiler如何来编排object的memory layout（后面简称为**object layout**）？
 >
@@ -244,3 +252,25 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 c++中variable的概念和object的概念密切相关，在下面文章中描述了此：
 
 learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutorial/introduction-to-variables/)
+
+
+
+## Serialization and deserialization
+
+序列化与反序列化。
+
+| 概念            | 解释                                                | 需要考虑的问题                                               |
+| --------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| serialization   | 给定一个object，得到它的object representation       |                                                              |
+| deserialization | 给定一个memory region，按照指定type进行interpretion | - memory region是否满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement<br>- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing) |
+
+C++中，serialization and deserialization都是通过`reinterpret_cast`来实现的。
+
+从上面可以看出，这些内容是密切相关的：
+
+- deserialization
+- `reinterpret_cast`
+- [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) 
+- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
+
+可以这样来总结它们之间的关联：在C++中，一般通过`reinterpret_cast`来进行deserialization，在进行deserialization的时候，需要[Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)，其中非常重要的一点是：满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement。

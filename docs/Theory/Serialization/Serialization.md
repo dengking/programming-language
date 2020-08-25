@@ -28,9 +28,13 @@ Since both serializing and deserializing can be driven from common code (for exa
 
 ## Implementation
 
+### Python pickle
+
 比如[`pickle`](https://docs.python.org/3/library/pickle.html#module-pickle) — Python object serialization[¶](https://docs.python.org/3/library/pickle.html#module-pickle)。
 
+### Alignment
 
+对于C++、C中，type有着alignment requirement，在进行deserialization的时候，就需要考虑alignment，这就是strict。
 
 ## binary serialization vs protoc-buff
 

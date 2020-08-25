@@ -35,3 +35,5 @@ object and alignment
 https://en.cppreference.com/w/cpp/language/object#Alignment
 https://en.cppreference.com/w/cpp/memory/align
 https://en.cppreference.com/w/cpp/types/aligned_storage
+
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\00035BB5BE694DF89E6B320C85204A92\c-memcpy-and-type-punning.md
