@@ -18,7 +18,9 @@
 
 
 
+## TODO
 
+- new、malloc and alignment
 
-## [Data Alignment](http://www.songho.ca/misc/alignment/dataalign.html)
+- [Data Alignment](http://www.songho.ca/misc/alignment/dataalign.html)
 
