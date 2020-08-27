@@ -49,25 +49,38 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 
 > NOTE: 上述都是对object的属性的描述。
 >
-> ### Type determines everything
+> # Classification of property
 >
-> 上述object的属性，一些是由type决定的，这验证了“Type determines everything”（参见`Theory\Type-system\index.md`）。
+> static property：
 >
-> 这些属性之间是存在着一定的关系的：
+> - size
+> - alignment
+> - type
+> - name
+> - value
 >
-> ### Memory representation、value and type
+> dynamic property：
 >
-> **type** 决定了**interpretation** of **memory representation**，进而决定了 **value**。关于这个观点，在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中的描述是可以佐证的：
+> - lifetime
+> - storage duration
+>
+> # Type determines everything
+>
+> 上述object的属性，很多都是由type决定的，这验证了“Type determines everything”（参见`Theory\Type-system\index.md`）。
+>
+> 这些属性之间是存在着一定的关系的，下面对此进行说明
+>
+> ## Type determines the interpretion of memory representation, and further determine value
+>
+> **type** 决定了 **interpretation** of **memory representation**，进而决定了 **value**。关于这个观点，在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中的描述是可以佐证的：
 >
 > > Converts between **types** by **reinterpreting** the underlying **bit** pattern.
 >
-> 
+> 在工程hardware的，`CPU\Endianess\Endianness.md`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，对programmer而言是透明的。
 >
-> ### Type、size and alignment
+> ## Type determines size and alignment
 >
 > type决定了object的size、alignment；
->
-> 通过上面的描述可以看出，type是核心概念。
 >
 > 
 >
@@ -267,7 +280,7 @@ learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutori
 
 | 概念            | 解释                                                | 需要考虑的问题                                               |
 | --------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| serialization   | 给定一个object，得到它的object representation       | 一般使用byte type                                            |
+| serialization   | 给定一个object，得到它的object representation       | 一般使用**byte type**                                        |
 | deserialization | 给定一个memory region，按照指定type进行interpretion | - memory address是否满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement<br>- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing) |
 
 C++中，serialization and deserialization都是通过`reinterpret_cast`来实现的。

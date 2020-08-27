@@ -10,10 +10,28 @@ Accessing an object using an expression of a type other than the type with which
 
 ## creference `Objects and alignment#Strict aliasing`
 
-Given an object with *effective type* `T1`, using an lvalue expression (typically, dereferencing a pointer) of a different type `T2` is **undefined behavior**
+Given an object with *effective type* `T1`, using an lvalue expression (typically, **dereferencing a pointer**) of a different type `T2` is **undefined behavior**
 
-
+> NOTE: 
+>
+> 下面是展示“**dereferencing a pointer**”的一个简单的例子，这个例子源自`creference Objects and alignment#Strict aliasing`: 
+>
+> ```c++
+> #include <cstdio>
+> 
+> int main()
+> {
+> 	int i = 7;
+> 	float* pf = (float*) (&i);
+> 	float d = *pf; // UB: float lvalue *pf cannot be used to access int
+> }
+> 
+> ```
+>
+> 
 
 ## Why?
 
 alignment requirement。
+
+compiler optimization。
