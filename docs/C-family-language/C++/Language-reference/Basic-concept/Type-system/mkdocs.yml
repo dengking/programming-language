@@ -1,8 +1,6 @@
 nav:
     - Introduction: index.md
     - Type-system: Type-system
-# c++的type system是支持type qualifier的    
-    - Type-qualifier: Type-qualifier
 # 查询类型
     # 查询静态类型
     - decltype: decltype

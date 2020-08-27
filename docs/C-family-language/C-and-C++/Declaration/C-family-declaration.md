@@ -2,6 +2,10 @@
 
 总结一些平时遇到的比较难以理解的declaration。
 
+对于type declaration，参见：
+
+- `C-family-language\C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Type naming`
+
 ## [What does C expression ((void(*)(void))0)(); mean?](https://stackoverflow.com/questions/20357106/what-does-c-expression-voidvoid0-mean)
 
 ```C

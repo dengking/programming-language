@@ -30,6 +30,8 @@ compound types (see also [std::is_compound](https://en.cppreference.com/w/cpp/ty
 > 对于type id，其实我们已经熟悉了它的用法，只是对它的概念不熟悉。
 >
 > 在实际programming中， 为了便利，我们往往通过 type alias declaration、typedef declaration来为type指定name，这样后续直接通过name来使用它将会非常方便。
+>
+> 在`C-family-language\C-and-C++\Declaration\C-family-declaration.md`总结了一些比较难以理解的type declaration。
 
 Types that do not have names often need to be referred to in C++ programs; the syntax for that is known as *type-id*. The syntax of the type-id that names type `T` is exactly the syntax of a [declaration](https://en.cppreference.com/w/cpp/language/declarations) of a variable or function of type `T`, with the identifier omitted, except that *decl-specifier-seq* of the declaration grammar is constrained to *type-specifier-seq*, and that new types may be defined only if the type-id appears on the right-hand side of a non-template type alias declaration.
 
