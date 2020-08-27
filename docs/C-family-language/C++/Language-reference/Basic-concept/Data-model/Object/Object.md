@@ -76,7 +76,25 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 >
 > > Converts between **types** by **reinterpreting** the underlying **bit** pattern.
 >
-> 在工程hardware的，`CPU\Endianess\Endianness.md`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，对programmer而言是透明的。
+> 在工程hardware的，`CPU\Endianess\Endianness.md`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，programmer无需关注endian。
+>
+> ### Aliase to an existing object
+>
+> C++、C非常灵活，对于同一个object，允许
+>
+> - 使用多种type进行interpret，即reinterpret（重解释），一般通过pointer + `rereinterpret_cast`来实现
+> - 使用多个name进行refer to，一般通过reference来实现
+>
+> 对于reinterpret，C++、C标准都进行了严格的定义，在后面的strict aliasing中进行介绍。C++将strict aliasing的内容和`rereinterpret_cast`放到了一起。如果programmer不遵循strict aliasing，则会导致undefined behavior。
+>
+> 需要注意的是：上述两种方式，都不会重新创建一个原object的副本。
+>
+> 参见：
+>
+> - alias: `C++\Language-reference\Alias`
+> - `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
+> - reference: `C++\Language-reference\Reference`
+> - pointer: `C-family-language\C-and-C++\Pointer-array\Pointer`
 >
 > ## Type determines size and alignment
 >

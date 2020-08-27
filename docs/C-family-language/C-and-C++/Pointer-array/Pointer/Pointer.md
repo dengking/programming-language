@@ -8,6 +8,10 @@
 
 在[Function-pointer#从stored-program computer来理解function pointer](./Function-pointer.md)中也对这个问题进行了探讨。
 
+## Pointer can alias to an existing object
+
+关于这个观点，参见`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`。
+
 ## wikipedia [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))
 
 

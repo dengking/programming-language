@@ -1,5 +1,7 @@
 # Strict aliasing
 
+“alias”的意思是“别名”，它表示，同一个object，使用另外一种type进行interpretation。type punning也是如此。
+
 在C++、C中，都描述了strict aliasing内容。
 
 ## cppreference `Object#Strict aliasing`
@@ -39,6 +41,8 @@ Given an object with *effective type* `T1`, using an lvalue expression (typicall
 
 ## Why?
 
-alignment requirement。
+### Alignment requirement
 
-compiler optimization。
+在`C-family-language\C-and-C++\From-source-code-to-exec\ABI\Alignment`中对alignment进行了深入分析。
+
+### Compiler optimization。
