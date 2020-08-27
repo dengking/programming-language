@@ -1,4 +1,8 @@
-## [Static vs. dynamic typing of programming languages](https://pythonconquerstheuniverse.wordpress.com/2009/10/03/static-vs-dynamic-typing-of-programming-languages/)
+# Static type and dynamic type
+
+
+
+## pythonconquerstheuniverse [Static vs. dynamic typing of programming languages](https://pythonconquerstheuniverse.wordpress.com/2009/10/03/static-vs-dynamic-typing-of-programming-languages/)
 
 *Updated 2010-10-20 — added a bit more information about Boo’s type inferencing.*
 *Updated 2012-04-08 — This post is an appendix to a post comparing Java and Python. Some comments on this post are actually comments on that other post.*
@@ -29,17 +33,24 @@ Python is a **dynamically-typed language**. Java is a **statically-typed languag
 
 
 
-# [Is it possible to have a dynamically typed language without duck typing? [closed\]](https://softwareengineering.stackexchange.com/questions/259941/is-it-possible-to-have-a-dynamically-typed-language-without-duck-typing)
+## [Is it possible to have a dynamically typed language without duck typing? [closed]](https://softwareengineering.stackexchange.com/questions/259941/is-it-possible-to-have-a-dynamically-typed-language-without-duck-typing)
 
 
 
 
 
-# [static vs dynamic vs strong vs weak vs duck typing](https://www.koffeinfrei.org/2012/03/19/static-vs-dynamic-vs-strong-vs-weak-vs-duck-typing/)
+## [static vs dynamic vs strong vs weak vs duck typing](https://www.koffeinfrei.org/2012/03/19/static-vs-dynamic-vs-strong-vs-weak-vs-duck-typing/)
 
 
 
-***THINKING*** : string type和duck type是否冲突？
+思考 : strong type和duck type是否冲突？
 
 <https://devopedia.org/duck-typing>
 
+
+
+## C++ static type and runtime type
+
+C++是典型的区分static type和runtime type的语言。
+
+在文章[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)中，提出了static type和dynamic type的概念。

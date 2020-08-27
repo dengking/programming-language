@@ -47,7 +47,13 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 
 
 
-> NOTE: 上述都是对object的属性的描述。这些属性之间是存在着一定的关系的：
+> NOTE: 上述都是对object的属性的描述。
+>
+> ### Type determines everything
+>
+> 上述object的属性，一些是由type决定的，这验证了“Type determines everything”（参见`Theory\Type-system\index.md`）。
+>
+> 这些属性之间是存在着一定的关系的：
 >
 > ### Memory representation、value and type
 >
@@ -67,7 +73,7 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 >
 > ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 
 >
-> 两者是密切相关的。
+> 两者是密切相关的，在`Object-storage-duration-and-lifetime.md`中对此进行了描述。
 
 
 
@@ -237,7 +243,7 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 
 #### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 
-
+> NOTE: 将strict aliasing放到了`C-family-language\C-and-C++\Pointer-array-alias\Alias`章节中。
 
 #### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
 
@@ -261,8 +267,8 @@ learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutori
 
 | 概念            | 解释                                                | 需要考虑的问题                                               |
 | --------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| serialization   | 给定一个object，得到它的object representation       |                                                              |
-| deserialization | 给定一个memory region，按照指定type进行interpretion | - memory region是否满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement<br>- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing) |
+| serialization   | 给定一个object，得到它的object representation       | 一般使用byte type                                            |
+| deserialization | 给定一个memory region，按照指定type进行interpretion | - memory address是否满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement<br>- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing) |
 
 C++中，serialization and deserialization都是通过`reinterpret_cast`来实现的。
 
@@ -270,7 +276,14 @@ C++中，serialization and deserialization都是通过`reinterpret_cast`来实�
 
 - deserialization
 - `reinterpret_cast`
-- [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) 
 - [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
+- [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) 
 
-可以这样来总结它们之间的关联：在C++中，一般通过`reinterpret_cast`来进行deserialization，在进行deserialization的时候，需要[Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)，其中非常重要的一点是：满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement。
+可以这样来总结它们之间的关联：在C++中，一般通过`reinterpret_cast`来进行deserialization，在进行deserialization的时候，需要考虑[Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)，strict aliasing的目的是：满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement。
+
+
+
+参见：
+
+- byte type：`C-family-language\C++\Language-reference\Basic-concept\Type-system\Type-system\Byte-type.md`
+- strict aliasing：`C-family-language\C-and-C++\Pointer-array-alias\Alias`
