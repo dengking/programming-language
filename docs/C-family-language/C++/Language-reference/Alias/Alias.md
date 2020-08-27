@@ -17,7 +17,8 @@ C++支持两种方式来实现alias to an existing object：
 - reference
 - pointer
 
-参见:
+参见: 
 
 - `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
 - reference: `C++\Language-reference\Reference`
+

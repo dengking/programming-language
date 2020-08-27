@@ -85,9 +85,11 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 > - 使用多种type进行interpret，即reinterpret（重解释），一般通过pointer + `rereinterpret_cast`来实现
 > - 使用多个name进行refer to，一般通过reference来实现
 >
-> 对于reinterpret，C++、C标准都进行了严格的定义，在后面的strict aliasing中进行介绍。C++将strict aliasing的内容和`rereinterpret_cast`放到了一起。如果programmer不遵循strict aliasing，则会导致undefined behavior。
+> 对于aliase to an existing object，C++、C标准都进行了严格的定义，这在strict aliasing中进行了详细介绍。如果programmer不遵循strict aliasing，则会导致undefined behavior。
 >
-> 需要注意的是：上述两种方式，都不会重新创建一个原object的副本。
+> C++中，reinterpret由`rereinterpret_cast`来实现，所它将strict aliasing的内容和`rereinterpret_cast`放到了一起。
+>
+> 需要注意的是：上述两种方式，都仅仅是alias，都不会重新创建一个新的object（原object的副本）。
 >
 > 参见：
 >
@@ -294,7 +296,7 @@ learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutori
 
 ## Serialization and deserialization
 
-序列化与反序列化。
+序列化与反序列化。按照C++中的说法，deserialization也可以叫做reinterpret。
 
 | 概念            | 解释                                                | 需要考虑的问题                                               |
 | --------------- | --------------------------------------------------- | ------------------------------------------------------------ |

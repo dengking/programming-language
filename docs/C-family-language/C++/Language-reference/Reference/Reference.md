@@ -11,6 +11,8 @@ c++的reference是alias。
 - alias to **already-existing** object
 - alias to **already-existing** function
 
+关于alias，参见`C++\Language-reference\Alias`。
+
 ## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
 
 ### Syntax
