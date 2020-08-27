@@ -17,4 +17,3 @@ Given an object with *effective type* `T1`, using an lvalue expression (typicall
 ## Why?
 
 alignment requirement。
-
