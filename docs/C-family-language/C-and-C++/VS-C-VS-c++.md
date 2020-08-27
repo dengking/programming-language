@@ -6,7 +6,7 @@ c++在c上所增强的，主要方面：
 
 ### OOP
 
-
+C++支持OOP。
 
 ### Type system
 
@@ -14,9 +14,9 @@ c中有[effective type](https://en.cppreference.com/w/c/language/object)的概�
 
 `c++`中并没有effective type的概念；其实主要原因在于c++中使用了`new`，而c中则是`malloc`，显然这是`c++`在type safety上的一些改善，这一点在[Type safety](https://en.wikipedia.org/wiki/Type_safety#C++)中有解释；
 
-### safety
+#### `new`和`malloc`
 
-`new`和`malloc`
+
 
 #### CV
 
@@ -25,11 +25,17 @@ C++在CV方面，比C要严格：
 - string literal：c中的类型`char *`，c++中是`const char *`
 - C-style cast会drop掉CV，C++的各种type cast函数如`reinterpret_cast`、`static_cast`等，都需要保持CV，C++中需要通过`const_cast`来drop掉CV，相比于C的implicit，C++的是explicit，这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-conversion\reinterpret_cast.md#CV`段中进行了详细介绍
 
+#### Type conversion
 
+关于这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator\index.md`中进行了详细比较。
 
-### Generic programming
+#### Type punning
 
-主要是template
+关于这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-punning`中进行了详细比较。
+
+### Generic programming 
+
+主要是template-meta programming。
 
 ### Library
 

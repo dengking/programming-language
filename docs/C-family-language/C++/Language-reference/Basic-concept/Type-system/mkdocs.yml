@@ -8,6 +8,8 @@ nav:
     - typeid: typeid
 # 类型转换是type system的一个非常重要的内容    
     - Type-conversion: Type-conversion
+    - Type-punning: Type-punning
+    - Strict-aliasing: Strict-aliasing
     - Reflection: Reflection.md
 # 类型决定了alignment
     - Alignment: Alignment.md
