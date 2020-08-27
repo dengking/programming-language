@@ -42,4 +42,9 @@ Given an object with *effective type* `T1`, using an lvalue expression (typicall
 
 在`C-family-language\C-and-C++\From-source-code-to-exec\ABI\Alignment`中对alignment进行了深入分析。
 
-### Compiler optimization。
+如果不遵循alignment，则会导致非常严重的问题，在`C-family-language\C-and-C++\From-source-code-to-exec\ABI\Alignment`给出了example。
+
+### Compiler optimization
+
+对于没有遵循strict aliasing的program，compiler可能会进行错误的optimization，进而导致生成非常诡异的程序，因为它是undefined的。关于此的一个例子是quarkslab [Unaligned accesses in C/C++: what, why and solutions to do it properly](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html) 。
+
