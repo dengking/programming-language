@@ -70,8 +70,8 @@ static uint64_t hash(const uint8_t* Data, const size_t Len)
      Ret = (Ret ^ V)*CST;
    }
    uint64_t LastV = 0;
-   for (size_t I = 0; I < (Len-NBlocks*8); ++I) {
-     LastV |= ((uint64_t)Data[NBlocks*8+I]) << (I*8);
+   for (size_t I = 0; I < (Len-NBlocks*8); ++I) { // I的单位是byte
+     LastV |= ((uint64_t)Data[NBlocks*8+I]) << (I*8); // uint64_t占8字节，<<的单位是bit
    }
    Ret = (Ret^LastV)*CST;
    return Ret;
