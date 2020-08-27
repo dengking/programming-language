@@ -90,6 +90,8 @@ int main(int argc, char** argv)
 }
 ```
 
+> NOTE: `uint8_t`是byte type，参见：`C-family-language\C++\Language-reference\Basic-concept\Type-system`
+
 It basically processes the input data as blocks of 64-bit little endian integers, performing a `XOR` with the current hash value and a multiplication. For the remaining bytes, it fills a 64-bit number with the remaining bytes.
 
 If we want to make this hash portable across architectures (portable in the sense that it will generate the same value on every possible CPU/OS), we need to take care of the target's **endianness**. We will come back on this topic at the end of this blog post
@@ -132,11 +134,11 @@ It looks like we have issues with **alignment**. Let's look at the **assembly** 
 
 ![img](https://blog.quarkslab.com/resources/2018-10-16-unaligned-accesses/disasm_arm.png)
 
-The `LDMIA` instruction is loading data from memory into multiple registers. In our case, it loads our **64-bit integer** into two **32-bit registers**. The ARM documentation of this instruction [[3\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id13) states that the **memory pointer** must be word-aligned (a **word** is 2 bytes in our case). The problem arises because our main function uses a buffer passed by the `libc` loader to `argv`, which has no alignment guarantees.
+The `LDMIA` instruction is loading data from memory into multiple registers. In our case, it loads our **64-bit integer** into two **32-bit registers**. The ARM documentation of this instruction [[3\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id13) states that the **memory pointer** must be **word-aligned** (a **word** is 2 bytes in our case). The problem arises because our main function uses a buffer passed by the `libc` loader to `argv`, which has no alignment guarantees.
 
-***SUMMARY*** : 在上述代码中，`argv[1]`作为入参传入了函数`hash`
+> NOTE : 在上述代码中，`argv[1]`作为入参传入了函数`hash`
 
-***SUMMARY*** : 在word为2 byte的ARM中时，指针类型的变量的alignment就是2。并且最后一句话也强调了由`argv`并没有alignment；
+> NOTE: 在word为2 byte的ARM中时，指针类型的变量的alignment就是2 byte。并且最后一句话也强调了`argv`并没有alignment；
 
 ### Why does this happen?
 
@@ -154,13 +156,19 @@ According to the C standard [[10\]](https://blog.quarkslab.com/unaligned-accesse
 V % (alignof(uint64_t)) == 0
 ```
 
-***SUMMARY*** :  `V`是一个指针，它的值是地址值
+> NOTE :  `V`是一个指针，它的值是地址值
 
 Still according to the C standard, converting a pointer from a type to another without respecting this **alignement rule** is **undefined behavior** (http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf page 74, 7).
 
+> NOTE: 上述`(uint64_t const*)V`就是典型的“converting a pointer from a type to another without respecting this **alignement rule** is **undefined behavior** ”
+
 In our case the alignment of `uint64_t` is 8 bytes (which can be checked for instance like this https://godbolt.org/z/SJjN9y ), hence we are experiencing this **undefined behavior**. What happens more precisely here is that the previous cast directly said to our compiler "`Ret` is a multiple of 8, and so a multiple of 2. You are safe to use `LDMIA`".
 
-***SUMMARY*** : `uint8_t`的alignment是`1`（可以通过如下的方式来进行验证），所以按照上述方式进行cast，`V`可能并不respect `Ret`的alignment requirement。所以按照上述的方式，最终的`ret`可能并不符合它的alignment requirement。
+> NOTE: 
+>
+> C standard将“converting a pointer from a type to another without respecting this **alignement rule** “视为” **undefined behavior** ”的原因是：compiler会进行optimization，optimization是依据我们的program的，所以如果program不遵守standard，那么optimization的结果就是无法预测的，是undefined的。
+>
+> `uint8_t`的alignment是`1`（可以通过如下的方式来进行验证），所以按照上述方式进行cast，`V`可能并不respect `Ret`的alignment requirement。所以按照上述的方式，最终的`ret`可能并不符合它的alignment requirement。
 
 ```c
 #include <stdint.h>
@@ -174,9 +182,7 @@ foo():
   bx lr
 ```
 
-
-
-The problem does not arise under x86-64 because the Intel `mov` instruction supports unaligned loads [[4\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id14) (if alignment checking is not enabled [[5\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id15), which is something that can only be enabled by operating systems [[6\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id16)). This is why a non negligible part of "old" code have this silent bug, because they never showed up on x86 computers (where they have been developed). It's actually so bad that the ARM Debian kernel has a mode to catch unaligned access and handle them properly [[7\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id17)!
+The problem does not arise under x86-64 because the Intel `mov` instruction supports **unaligned loads** [[4\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id14) (if **alignment checking** is not enabled [[5\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id15), which is something that can only be enabled by operating systems [[6\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id16)). This is why a non negligible part of "old" code have this silent bug, because they never showed up on x86 computers (where they have been developed). It's actually so bad that the ARM Debian kernel has a mode to catch **unaligned access** and handle them properly [[7\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id17)!
 
 ## Solutions
 
@@ -200,7 +206,7 @@ uint64_t load64_le(uint8_t const* V)
 }
 ```
 
-This code has multiple advantages: it's a portable way to load a little endian 64-bit integer from memory, and does not break the previous **alignment rule**. One drawback is that, if we just want the natural byte order of the CPU for integers, we need to write two versions and compile the good one using ifdef's. Moreover, it's a bit tedious and error-prone to write.
+This code has multiple advantages: it's a portable way to load a little endian 64-bit integer from memory, and does not break the previous **alignment rule**. One drawback is that, if we just want the natural byte order of the CPU for integers, we need to write two versions and compile the good one using `ifdef`'s. Moreover, it's a bit tedious and error-prone to write.
 
 Anyway, let's see what clang 6.0 in `-O2` mode generates, for various architectures:
 
@@ -208,7 +214,7 @@ Anyway, let's see what clang 6.0 in `-O2` mode generates, for various architectu
 - ARM64 `ldr x0, [x0]` (https://godbolt.org/z/qlXpDB ). Indeed, the `ldr` ARM64 instruction does not seem to have any alignment restriction [[8\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id18).
 - ARMv5 in Thumb mode: https://godbolt.org/z/wCBfcV. This is basically the code we wrote, which loads the integer byte by byte and constructs it. We can note that this is some non negligible amount of code (compared to the previous cases).
 
-So Clang is able to detect this pattern and to generate efficient code whenever possible, as long as optimisations are activated (note the `-O1` flag in the various `godbolt.org` links)!
+So `Clang` is able to detect this pattern and to generate efficient code whenever possible, as long as optimisations are activated (note the `-O1` flag in the various `godbolt.org` links)!
 
 ### memcpy
 
@@ -235,6 +241,8 @@ Let's see what clang 6.0 in `-02` mode generates, for various architectures:
 
 We can see that the compiler understands the semantic of `memcpy` and optimizes it **correclty**, as alignment rules are still valid. The generated code is basically the same as in the previous solution.
 
+
+
 ## Helper C++ library
 
 After having written that kind of code a dozen times, I've decided to write a small header-only C++ helper library that allows the loading/storing in natural/little/big byte order for integers of any type. It's available on github here: https://github.com/aguinet/intmem. Nothing really fancy, but it might help and/or save time to others.
@@ -245,7 +253,7 @@ It has been tested with Clang and GCC under Linux (x86 32/64, ARM and mips), and
 
 It's a bit sad that we still need to do this kind of "hacks" to write portable code to load integers from memory. The current status is bad enough that we need to rely on compilers' optimisations to generate efficient and valid code.
 
-Indeed, compiler people like to say that "you should trust your compiler to optimize your code". Even if this is generally an advice to follow, the big problem of the solutions we described is that they **do not rely** on the C standard, but on modern C compiler optimisations. Thus, nothing enforces them to optimize our `memcpy` call or the list of binary ORs and shifts of the first solution, and a change/bug in any of these optimisations could render our code inefficient. Looking at the code generated in `-O0` gives an idea of what this code could be (https://godbolt.org/z/bUE1LP).
+Indeed, compiler people like to say that "you should trust your compiler to optimize your code". Even if this is generally an advice to follow, the big problem of the solutions we described is that they **do not rely** on the C standard, but on modern C compiler optimisations. Thus, nothing enforces them to optimize our `memcpy` call or the list of binary `OR`s and shifts of the first solution, and a change/bug in any of these optimisations could render our code inefficient. Looking at the code generated in `-O0` gives an idea of what this code could be (https://godbolt.org/z/bUE1LP).
 
 In the end, the only way to be sure that what we expect actually happened is by looking at the final assembly, which is not really practical in real-life projects. It could be nice to have a better automated way to check for this kind of optimisations, for instance by using `pragma` s, or by having a small subset of optimisations that could be defined by the C standard and activated on demand (but the questions are: which one? how to define them?). Or we could even add a standard portable builtin to the C language to do this. But that's for another story...
 
@@ -259,40 +267,12 @@ I'd like to thank all my Quarkslab colleagues that took time to review this arti
 
 | [[1\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id1) | http://pzemtsov.github.io/2016/11/06/bug-story-alignment-on-x86.html |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[2\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id2) | https://research.csiro.au/tsblog/debugging-stories-stack-alignment-matters/ |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[3\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id3) | http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0068b/BABEFCIB.html |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[4\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id5) | https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf , page 690 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[5\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id6) | https://xem.github.io/minix86/manual/intel-x86-and-64-manual-vol3/o_fe12b1e2a880e0ce-231.html |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[6\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id7) | No x86 operating system that I know of activates this. One would not that doing so could make compilers generate bad code, if they are not aware of it! |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[7\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id8) | https://wiki.debian.org/ArmEabiFixes#word_accesses_must_be_aligned_to_a_multiple_of_their_size |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
 | [[8\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id9) | http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0802b/LDR_reg_gen.html |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
-
-| [[9\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id10) | https://queue.acm.org/detail.cfm?id=3212479 |
-| ------------------------------------------------------------ | ------------------------------------------- |
-|                                                              |                                             |
-
+| [[9\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id10) | https://queue.acm.org/detail.cfm?id=3212479                  |
 | [[10\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id4) | http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf, page 66, 6.2.8.1 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-|                                                              |                                                              |
