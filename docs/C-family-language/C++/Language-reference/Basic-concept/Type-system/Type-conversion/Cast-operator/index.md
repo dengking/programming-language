@@ -4,7 +4,7 @@
 
 本文对这些operator进行综述，便于整体掌握。
 
-## Prefer cast function to C-style cast
+## Prefer cast operator to C-style cast
 
 本节标题的函数是：优先使用`C++`提供的cast函数：
 
@@ -147,9 +147,13 @@ pOther = reinterpret_cast<CMyOtherStuff*>(pSomething);
 
 That means that, not only are C-style casts more dangerous, but it's a lot harder to find them all to make sure that they are correct.
 
+### Cast operator and CV
+
+C++的cast operator都要求保持CV，而C-style cast可以不保持CV，这是C++的类型强化，在一定程度上能够加强了type safety。关于这一点，在`reinterpret_cast.md`的`reinterpret_cast` VS C-style cast给出了例证。
 
 
-## Express cast intent
+
+### Express cast intent
 
 本节标题的含义是：准确表达cast的intent。
 
@@ -167,12 +171,12 @@ That means that, not only are C-style casts more dangerous, but it's a lot harde
 
 下面对cast operator进行总结：
 
-| operator           | intent                        | eexample |
-| ------------------ | ----------------------------- | -------- |
-| `static_cast`      |                               |          |
-| `dynamic_cast`     | cast along the class hierachy |          |
-| `const_cast`       | drop CV                       |          |
-| `reinterpret_cast` | aliasing、pointer、reference  |          |
+| operator           | intent                        | example |
+| ------------------ | ----------------------------- | ------- |
+| `static_cast`      |                               |         |
+| `dynamic_cast`     | cast along the class hierachy |         |
+| `const_cast`       | drop CV                       |         |
+| `reinterpret_cast` | aliasing、pointer、reference  |         |
 
 参考文章：
 
@@ -180,6 +184,8 @@ That means that, not only are C-style casts more dangerous, but it's a lot harde
 
 - stackoverflow [Regular cast vs. static_cast vs. dynamic_cast [duplicate]](https://stackoverflow.com/questions/28002/regular-cast-vs-static-cast-vs-dynamic-cast)
 - panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/)
+
+
 
 ## TO READ
 
