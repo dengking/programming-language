@@ -1,12 +1,19 @@
 # `reinterpret_cast` 
 
-C++中pointer、reference的conversion都使用`reinterpret_cast` 。关于pointer，在`C-family-language\C-and-C++\Pointer-array-alias\Pointer`章节进行了描述。
+C++中`reinterpret_cast`的目的是是实现：alias to an existing object，这在`C++\Language-reference\Basic-concept\Data-model\Object\Object.md#Aliase to an existing object` 中进行了详细介绍。
+
+pointer、reference的conversion都使用`reinterpret_cast` 。
+
+参见:
+
+- pointer: `C-family-language\C-and-C++\Pointer-array-alias\Pointer`
+- reference: `C++\Language-reference\Reference`
 
 ## cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
 
 Converts between types by **reinterpreting** the underlying bit pattern.
 
-> NOTE: 上面这段话所描述的就是alias；关于上面这段话中的**reinterpreting**，参见`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`中”Interpretion of memory representation“
+> NOTE: 上面这段话所描述的就是alias，这在`C++\Language-reference\Basic-concept\Data-model\Object\Object.md#Aliase to an existing object` 中进行了详细介绍。
 
 ### Explanation
 
