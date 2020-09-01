@@ -37,9 +37,7 @@ c++的static polymorphism是由compiler来实现，c++的实现允许programmer�
 
 ### Implementation of template
 
-最最简单的情况是，仅仅存在primary template，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个specialization of template的时候，compiler如何选择set  of candidates中的哪个specialization of template进行instantiation？
-
-
+在`C++\Language-reference\Template\Implementation`章节对此进行了深入分析。
 
 
 

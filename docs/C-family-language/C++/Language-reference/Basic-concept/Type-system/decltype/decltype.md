@@ -284,9 +284,26 @@ decltype((a->x)) x5; // type is const double&
 
 
 
+## `decltype` is non-deduced context
+
+参见：
+
+- cppreference `Template argument deduction#Non-deduced contexts`
+- stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
+
+## Operands of `decltype` is unevaluated expressions
+
+参见:
+
+- cppreference `Expressions#Unevaluated expressions`
+
 ## `std::declval`
 
 ### cppreference [std::declval](https://en.cppreference.com/w/cpp/utility/declval)
+
+
+
+
 
 
 

@@ -85,6 +85,8 @@ not possible. Problem areas:
 > - concept
 > - detection idiom
 > - trait（一种reflection）
+>
+> 另外一個例子是：`static_assert`
 
 
 

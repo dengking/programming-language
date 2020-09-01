@@ -38,7 +38,7 @@ If there are multiple parameters, each `P/A` pair is deduced **separately** and 
 >
 > ## Disable argument-based template parameter deduction for functions
 >
-> [Better way to disable argument-based template parameter deduction for functions?](https://stackoverflow.com/questions/37737487/better-way-to-disable-argument-based-template-parameter-deduction-for-functions)
+> stackoverflow [Better way to disable argument-based template parameter deduction for functions?](https://stackoverflow.com/questions/37737487/better-way-to-disable-argument-based-template-parameter-deduction-for-functions)
 >
 > You can do it by putting T in non deducible context (to the left of `::`), and use [std::common_type](http://en.cppreference.com/w/cpp/types/common_type) from `<type_traits>`.
 >
@@ -96,6 +96,10 @@ int main()
 关于此的另外一个例子就是`std::forward`，这在bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)、thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)中都有描述；
 
 
+
+2) The expression of a decltype-specifier(since C++11):
+
+> NOTE: 关于这一点，是在阅读stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work) 时，其中提及的。这一点，收录在`C++\Language-reference\Basic-concept\Type-system\decltype\decltype.md` 中。
 
 #### Deduction from a type
 
