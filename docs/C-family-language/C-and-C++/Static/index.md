@@ -7,6 +7,11 @@
 
 虽然上面将两者分开，但是实际编程中，可能会出现两者之的重叠：static object in static function。
 
+与static相关的章节有：
+
+- `C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`
+- `C++\Language-reference\Initialization\Initialization-of-Static-Variables`
+
 ## `static` keyword 
 
 https://www.geeksforgeeks.org/static-keyword-cpp/
@@ -75,16 +80,9 @@ https://stackoverflow.com/questions/14495536/how-to-initialize-const-member-vari
 
 ### Initialization
 
+参见`C++\Language-reference\Initialization\Initialization-of-Static-Variables`
 
 
-https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Runtime_Static_Initialization_Order_Idioms
-
-
-
-#### Construct on first use idiom
-https://stackoverflow.com/questions/25122575/construct-on-first-use-forced-initialization-to-solve-static-initialization-or
-
-http://www.parashift.com/c++-faq/construct-on-first-use-v2.html
 
 ### static local object in static function
 
@@ -94,7 +92,7 @@ http://www.parashift.com/c++-faq/construct-on-first-use-v2.html
 
 #### Nifty counter idiom
 
-https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Nifty_Counter
+参见`C++\Language-reference\Initialization\Initialization-of-Static-Variables`
 
 #### Function-local static objects in inline function
 

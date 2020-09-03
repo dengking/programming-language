@@ -1,3 +1,4 @@
 nav:
     - Singleton: Singleton.md
     - Extern-and-singleton: Extern-and-singleton.md
+    - Cpp-and-the-Perils-of-Double-Checked-Locking: Cpp-and-the-Perils-of-Double-Checked-Locking.md
