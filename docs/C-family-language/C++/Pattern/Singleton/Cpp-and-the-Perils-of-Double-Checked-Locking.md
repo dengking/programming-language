@@ -38,7 +38,13 @@ Singleton* Singleton::instance() // Line 12
 
 In a single-threaded environment, this generally works ﬁne, though interrupts can be problematic. If you are in `Singleton::instance`, receive an interrupt, and invoke `Singleton::instance` from the handler, you can see how you’d get into trouble. Interrupts aside, however, this implementation works ﬁne in a single-threaded environment. 
 
-> NOTE: 关于上面描述的场景，在APUE 10.6 Reentrant Functions中进行了介绍。
+> NOTE: 关于上面描述的场景，在APUE 10.6 Reentrant Functions中进行了介绍，也可以通过Google “libc malloc  reentrant”，下面是检索到的比较有价值的内容:
+>
+> - stackoverflow [Why are malloc() and printf() said as non-reentrant?](https://stackoverflow.com/questions/3941271/why-are-malloc-and-printf-said-as-non-reentrant)
+> - stackoverflow [Is malloc thread-safe?](https://stackoverflow.com/questions/855763/is-malloc-thread-safe)
+> - gnu libc [24.4.6 Signal Handling and Nonreentrant Functions](https://www.gnu.org/software/libc/manual/html_node/Nonreentrancy.html)
+>
+> 
 
 Unfortunately, this implementation is not reliable in a multithreaded environment. Suppose that Thread A enters the `instance` function, executes through Line 14 ( `if (pInstance == 0)` ), and is then suspended. At the point where it is suspended, it has just determined that pInstance is null, i.e., that no `Singleton` object has yet been created. Thread B now enters `instance` and executes Line14. It sees that `pInstance` is null, so it proceeds to Line 15 and creates a `Singleton` for `pInstance` to point to. It then returns `pInstance` to instance’s caller. At some point later, Thread A is allowed to continue running, and the ﬁrst thing it does is move to Line 15, where it conjures up another Singleton object and makes `pInstance` point to it. It should be clear that this violates the meaning of a singleton, as there are now two Singleton objects. Technically, Line 11 is where `pInstance` is initialized, but for practical purposes, it’s Line 15 that makes it point where we want it to, so for the remainder of this article, we’ll treat Line 15 as the point where `pInstance` is initialized. Making the classic Singleton implementation thread safe is easy. Just acquire a lock before testing `pInstance`:
 
