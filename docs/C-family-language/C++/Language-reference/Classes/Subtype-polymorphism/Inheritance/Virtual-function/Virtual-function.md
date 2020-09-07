@@ -1,5 +1,15 @@
 # Virtual function
 
+
+
+## wikipedia [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
+
+
+
+Most programming languages, such as [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [PHP](https://en.wikipedia.org/wiki/PHP) and [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), treat all methods as virtual by default[[1\]](https://en.wikipedia.org/wiki/Virtual_function#cite_note-1) and do not provide a modifier to change this behavior.
+
+> NOTE: `C++`给programmer提供了控制的权利。
+
 ## cppreference [virtual function specifier](https://en.cppreference.com/w/cpp/language/virtual)
 
 The **virtual specifier** specifies that a **non-static** [member function](https://en.cppreference.com/w/cpp/language/member_functions) is *virtual* and supports **dynamic dispatch**. It may only appear in the `decl-specifier-seq` of the initial declaration of a **non-static** member function (i.e., when it is declared in the class definition).
@@ -317,7 +327,4 @@ B::B(V* v, A* a)
 - [override specifier](https://en.cppreference.com/w/cpp/language/override) (since C++11)
 - [final specifier](https://en.cppreference.com/w/cpp/language/final) (since C++11)
 
-
-
-## wikipedia [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
 

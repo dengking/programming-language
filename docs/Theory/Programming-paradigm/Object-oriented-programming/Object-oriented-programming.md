@@ -81,3 +81,30 @@ Concerning the degree of **object orientation**, the following distinctions can 
 OOP的class-based流派，每个**class**对应一种**类型**，往往是**强类型**语言使用，比如c++，Java等。
 
 OOP的prototype-based流派，并没有class的概念，往往是weak类型语言使用，比如JavaScript。
+
+
+
+## 基于hierarchy来思考
+
+本节标题的含义是：以**结构化思维**来进行思考，即基于hierarchy来思考OOP中的内容，这是一种非常好的思考角度，能够让我们快速的理解OOP中的许多内容，具体分析如下：
+
+### Inheritance关系
+
+OOP中的inheritance关系是典型的nesting关系，因此它能够呈现出hierarchy（如果仅仅允许single-inheritance的话，则是tree），这是本节标题的含义
+
+### Hierarchy-based implementation
+
+本节标题的含义是：基于hierarchy的实现，OOP中的很多内容都是基于hierarchy来实现的：
+
+**order**
+
+|                                            | 说明                                                       |      |
+| ------------------------------------------ | ---------------------------------------------------------- | ---- |
+| initialization order（construction order） | object的构造，涉及基类的构造，这就涉及initialization order |      |
+| destruction order                          | object                                                     |      |
+
+**implementation of polymorphism**
+
+virtual function find order
+
+需要结合Python、C++的implementation来进行说明。

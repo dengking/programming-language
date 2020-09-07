@@ -10,4 +10,12 @@
 | Member-access                                                | 成员的访问，主要包括权限                                     | [Member access](https://en.cppreference.com/w/cpp/language/access) - [`friend`](https://en.cppreference.com/w/cpp/language/friend) |
 | [Subtype-polymorphism](./Subtype-polymorphism/index.md)      | 按照在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中总结的polymorphism分类方法，将C++中和Subtype-polymorphism的内容置于该目录下 | [Derived class](https://en.cppreference.com/w/cpp/language/derived_class) - [`using`-declaration](https://en.cppreference.com/w/cpp/language/using_declaration)<br>[Virtual function](https://en.cppreference.com/w/cpp/language/virtual) - [Abstract class](https://en.cppreference.com/w/cpp/language/abstract_class)<br/>[`override`](https://en.cppreference.com/w/cpp/language/override)(C++11) - [`final`](https://en.cppreference.com/w/cpp/language/final)(C++11) |
 
+## 基于class hierarchy来思考
 
+OOP的内容非常多，以**结构化思维**来进行思考：基于class hierarchy来思考。
+
+- initialization order（construction order）
+
+- destruction order
+
+- virtual function find order
