@@ -23,7 +23,7 @@ Overload、specialization、subclass都是对某种“特殊情况的说明”�
 
 ### Static polymorphism and template metaprogramming
 
-c++的static polymorphism是由compiler来实现，c++的实现允许programmer通过template metaprogramming来对static polymorphism的过程进行控制，这是c++的核心特性，主要的实现方式：
+c++的static polymorphism是由compiler来实现，C++的实现允许programmer通过template metaprogramming来对static polymorphism的过程进行控制，这是C++的核心特性，主要的实现方式：
 
 - trait
 - sfinae

@@ -105,6 +105,9 @@ OOP中的inheritance关系是典型的nesting关系，因此它能够呈现出hi
 
 **implementation of polymorphism**
 
-virtual function find order
+function find order：沿着hierarchy进行搜索。
 
-需要结合Python、C++的implementation来进行说明。
+需要结合Python、C++的implementation来进行说明：
+
+- C++ vtable
+- Python C3 serialization
