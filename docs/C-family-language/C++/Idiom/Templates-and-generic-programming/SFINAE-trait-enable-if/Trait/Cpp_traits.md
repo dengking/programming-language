@@ -18,7 +18,7 @@ Most C++ programmers are familiar with [`std::numeric_limits`](https://en.cppref
 
 > NOTE: 千万不要小看上面这段话中的**consistent interface**的价值，如果能够保证**consistent interface**，那么当我们修改底层代码的时候，caller是无需修改的， 但是如果interface是unconsistent的，那么caller是需要修改的。此处的consistent interface，是一种抽象，它能够带来Polymorphism，参见`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`的《Template and polymorphism》段。
 >
-> 在阅读[boost graph](https://www.boost.org/doc/libs/release/libs/graph/doc/)的下面这段话的时候，我想到：trait提供了一层抽象，提供了获取信息的接口。
+> 在阅读[boost graph](https://www.boost.org/doc/libs/release/libs/graph/doc/)的下面这段话的时候，我想到：trait提供了一层abstraction，提供了获取信息的interface。
 >
 > > Note that different graph classes can have different associated vertex iterator types, which is why we need the `graph_traits` class. Given some graph type, the `graph_traits` class will provide access to the `vertex_iterator` type.
 

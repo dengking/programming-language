@@ -203,3 +203,51 @@ void implementation_details::alg(BDIter, BDIter, std::bidirectional_iterator_tag
 alg() called for bidirectional iterator
 ```
 
+
+
+#### Example: category tag + metafunction
+
+使用category tag + metafunction来实现trait：
+
+metafunction的模板参数是category tag，在这种情况下，metafunction是interface，abstraction，通过这个interface来查询对应的category 的信息。另外一种实现方式是直接在类型中进行`typedef`，而不是使用metafunction。
+
+下面是一个例子:
+
+```c++
+namespace Tags
+{
+struct QueryServiceTag
+{
+};
+struct ComputeServiceTag
+{
+};
+}
+
+/**
+ * 查询服务的spi类型
+ */
+template<typename Tag>
+struct SpiTypeTrait
+{
+
+};
+
+template<>
+struct SpiTypeTrait<Tags::QueryServiceTag>
+{
+};
+
+/**
+ * 对应的服务采用的是哪种协议
+ */
+template<typename Tag>
+struct ProtocolTrait
+{
+
+};
+
+```
+
+
+
