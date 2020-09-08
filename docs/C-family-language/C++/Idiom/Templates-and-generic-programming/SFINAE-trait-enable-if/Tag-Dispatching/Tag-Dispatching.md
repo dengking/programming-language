@@ -144,7 +144,9 @@ For example 'dispatching' on `std::iterator_traits<It>::iterator_category{}` and
 
 > NOTE: 从下面的例子可以看出，对于`implementation_details::alg`，两者都是template function，并且两者的入参都是相同的，如果不使用tag，仅仅依赖于overload resolution，无法实现对每种category都提供一个专门的overload。添加一个tag，能够实现准确的overload resolution。
 
-#### Example: STL iterator tag
+#### Example: function overload
+
+**STL iterator tag**
 
 > NOTE: tag dispatch的一个典型的例子就是[Iterator library](https://en.cppreference.com/w/cpp/iterator)的[iterator tag](https://en.cppreference.com/w/cpp/iterator/iterator_tags)，下面的例子取自：https://en.cppreference.com/w/cpp/iterator/iterator_tags ：
 
@@ -203,9 +205,13 @@ void implementation_details::alg(BDIter, BDIter, std::bidirectional_iterator_tag
 alg() called for bidirectional iterator
 ```
 
+**strtk**
 
+https://github.com/ArashPartow/strtk/blob/master/strtk.hpp
 
-#### Example: category tag + metafunction
+#### Example: template specialization
+
+**trait: category tag + metafunction**
 
 使用category tag + metafunction来实现trait：
 
