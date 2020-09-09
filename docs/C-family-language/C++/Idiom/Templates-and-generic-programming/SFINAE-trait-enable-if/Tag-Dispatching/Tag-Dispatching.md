@@ -278,3 +278,4 @@ struct ProtocolTrait
 尤其是distance 的 实现，它让我想到了我之前实现的api框架；我的实现思路与它的实现思路非常类似，我也是基于tag dispatch的，将api分为多类，每类一个tag，然后基于tag进行dispatch。
 
 显然，在实际开发中，需要结合多种idiom才能够充分发挥`C++`的威力；正如上述例子，结合了trait、tag dispatch；
+
