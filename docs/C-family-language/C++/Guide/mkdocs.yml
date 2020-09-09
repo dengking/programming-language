@@ -11,4 +11,5 @@ nav:
     # 如何进行注释，如何根据注释生成文档
     - Comment: Comment
     - Temporary: Temporary
+    - Timeit: Timeit
     
