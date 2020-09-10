@@ -436,6 +436,10 @@ is_specialized(std::string): 0
 
 ## What is Traits?
 
+### trait is a kind of metafunction and is an kind of abstraction
+
+trait是典型的metafunction，参见`C++\Idiom\Templates-and-generic-programming\Metafunction`。
+
 ### boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)中关于trait的定义
 
 在boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)中关于trait的定义，我觉得是比较好的：

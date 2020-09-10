@@ -136,6 +136,8 @@ decltype ((cont.remove_if(op), void())) detail::remove_if(detail::pick_1, Cont&,
 After:1 3 5 
 ```
 
+
+
 ### Application: Category info
 
 Tag dispatch can also be used when the tag carries useful information, not just a preference ordering.
@@ -256,4 +258,24 @@ struct ProtocolTrait
 ```
 
 
+
+## Example: iterator library
+
+刚刚阅读cppreference中关于iterator operation的实现的样例代码，链接如下：
+
+- [std::next](https://en.cppreference.com/w/cpp/iterator/next) 
+- [std::prev](https://en.cppreference.com/w/cpp/iterator/prev)
+- [std::distance](https://en.cppreference.com/w/cpp/iterator/distance)
+- [std::advance](https://en.cppreference.com/w/cpp/iterator/advance)
+
+看到它们的实现：
+
+- first version(before C++17): tag dispatch + trait
+- second version(C++17): `constexpr` + trait
+
+无论是first version，还是second version，都充分运用了trait，显然trait是一种抽象。
+
+尤其是distance 的 实现，它让我想到了我之前实现的api框架；我的实现思路与它的实现思路非常类似，我也是基于tag dispatch的，将api分为多类，每类一个tag，然后基于tag进行dispatch。
+
+显然，在实际开发中，需要结合多种idiom才能够充分发挥`C++`的威力；正如上述例子，结合了trait、tag dispatch；
 

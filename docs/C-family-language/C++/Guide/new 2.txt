@@ -1,26 +1,8 @@
-#1
+﻿#1
 dispatch：
 polymorphism是一种dispatch
 C++在这方面的提升：
 Compile Time if - Since C++17：https://www.bfilipek.com/2016/02/notes-on-c-sfinae.html#compile-time-if-since-c17
 https://www.bfilipek.com/2018/03/ifconstexpr.html
 
-#4
-tag dispatch的优势
-
-iterator library是一个非常好的example，strtk也是一个非常好的example
-
-
-
-刚刚阅读cppreference中关于iterator operation的实现的样例代码，链接如下：
-https://en.cppreference.com/w/cpp/iterator/next
-https://en.cppreference.com/w/cpp/iterator/distance
-https://en.cppreference.com/w/cpp/iterator/advance
-https://en.cppreference.com/w/cpp/iterator/prev
-
-可以看到，无论是first version，还是second version，都充分运用了trait，显然trait是一种抽象。
-
-尤其是distance 的 Second version，它让我想到了我之前实现的api框架；我的实现思路与它的实现思路非常类似，我也是基于tag dispatch的，将api分为多类，每类一个tag，然后基于tag进行dispatch。tag是通过trait而获取的
-
-显然，在实际开发中，需要结合多种idiom才能够充分发挥C++的威力；正如上述例子，结合了trait、tag dispatch；
 
