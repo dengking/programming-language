@@ -13,7 +13,7 @@ Class template `std::function` is a general-purpose polymorphic function wrapper
 
 > NOTE: 
 >
-> `std::function`是一种abstraction、wrapper；正如在文章[Lambdas in C++11](https://www.drdobbs.com/cpp/lambdas-in-c11/240168241?pgno=2)中所说的：
+> `std::function`是一种abstraction、wrapper；正如在文章drdobbs [Lambdas in C++11](https://www.drdobbs.com/cpp/lambdas-in-c11/240168241?pgno=2)中所说的：
 >
 > > Luckily, C++11 incorporates a **wrapper** for any of the following functions with `std::function` and makes it easy to pass around lambda expressions:
 > >

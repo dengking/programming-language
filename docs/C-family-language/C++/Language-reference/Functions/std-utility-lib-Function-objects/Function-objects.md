@@ -10,26 +10,26 @@ A *function object* is any object for which the **function call operator** is de
 
 ### Function wrappers
 
-[std::function](https://en.cppreference.com/w/cpp/utility/functional/function) provides support for storing arbitrary function objects.
-
-> NOTE: `std::function`是一个abstraction
 
 
+|                                                              |                                                              |                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------- |
+| [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)(C++11) | wraps callable object of any type with specified function call signature<br/>(class template) | 需要指定function的signature |
+| [mem_fn](https://en.cppreference.com/w/cpp/utility/functional/mem_fn) (C++11) | creates a function object out of a pointer to a member<br/>(function template) |                             |
 
-### Function invocation
-
-[std::invoke](https://en.cppreference.com/w/cpp/utility/functional/invoke) can invoke any [*Callable*](https://en.cppreference.com/w/cpp/named_req/Callable) object with given arguments.
-
-
-|                                                              |                                                              |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [invoke](https://en.cppreference.com/w/cpp/utility/functional/invoke)(C++17) | invokes any [*Callable*](https://en.cppreference.com/w/cpp/named_req/Callable) object with given arguments  (function template) |
-
-> NOTE : [Function object](https://en.cppreference.com/w/cpp/named_req/FunctionObject)和[Callable object](https://en.cppreference.com/w/cpp/named_req/Callable)之间有什么异同？？
-
-### Identity
-
-
+> NOTE: 
+>
+> wrapper and target：
+>
+> - `std::function`
+> - `std::mem_fn`
+> - `std::thread`
+>
+> wrapper是一种abstraction。
+>
+> `std::function`、`std::mem_fu`都是class template，所以它们的object是first class citizen。
+>
+> 如何描述它们的类型？
 
 ### Partial function application
 
