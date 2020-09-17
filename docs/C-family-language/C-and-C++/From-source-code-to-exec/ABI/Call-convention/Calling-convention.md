@@ -1,10 +1,12 @@
-# [Calling convention](https://en.wikipedia.org/wiki/Calling_convention)
+# Calling convention
+
+## wikipedia [Calling convention](https://en.wikipedia.org/wiki/Calling_convention)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **calling convention** is an implementation-level (low-level) scheme for how [subroutines](https://en.wikipedia.org/wiki/Subroutine) receive parameters from their caller and how they return a result. Differences in various implementations include where parameters, [return values](https://en.wikipedia.org/wiki/Return_value), return addresses and scope links are placed, and how the tasks of preparing for a function call and restoring the environment afterward are divided between the caller and the callee(以及如何在调用者和被调用者之间划分准备函数调用和恢复环境的任务).
 
 **Calling conventions** may be related to a particular programming language's [evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy) but most often are not considered part of it (or vice versa), as the evaluation strategy is usually defined on a higher abstraction level and seen as a part of the language rather than as a low-level implementation detail of a particular language's [compiler](https://en.wikipedia.org/wiki/Compiler).
 
-## Variations
+### Variations
 
 Calling conventions may differ in:
 
@@ -22,15 +24,15 @@ In some cases, differences also include the following:
 - Conventions on which registers may be directly used by the callee, without being preserved (otherwise regarded as an [ABI](https://en.wikipedia.org/wiki/Application_binary_interface) detail)
 - Which registers are considered to be volatile and, if volatile, need not be restored by the callee (often regarded as an ABI detail)
 
-### Compiler variation
+#### Compiler variation
 
 Although *some*[*which?*] languages actually may specify this partially in the [programming language](https://en.wikipedia.org/wiki/Programming_language) specification (or in some pivotal implementation), different implementations of such languages (i.e. different [compilers](https://en.wikipedia.org/wiki/Compiler)) may typically still use various **calling conventions**, often selectable. Reasons for this are performance, frequent adaptation to the conventions of other popular languages (with or without technical reasons), and restrictions or conventions imposed by various "platforms" (combinations of [CPU architectures](https://en.wikipedia.org/wiki/CPU_architecture) and [operating systems](https://en.wikipedia.org/wiki/Operating_system)).
 
-### Architecture variation
+#### Architecture variation
 
 CPU architectures always have more than one possible calling convention[*why?*]. With many general-purpose registers and other features, the potential number of calling conventions is large, although some[*which?*] architectures are formally specified to use only one calling convention, supplied by the architect.
 
-#### x86 (32-bit)
+##### x86 (32-bit)
 
 *Main article:* [x86 calling conventions](https://en.wikipedia.org/wiki/X86_calling_conventions)
 
@@ -60,7 +62,7 @@ calc:
   ret paramsize       ; free parameter space and return
 ```
 
-#### ARM (A32)
+##### ARM (A32)
 
 The standard 32-bit [ARM](https://en.wikipedia.org/wiki/ARM_architecture) calling convention allocates the 15 general-purpose registers as:
 
@@ -89,7 +91,7 @@ This calling convention causes a "typical" ARM subroutine to
 
 
 
-## See also
 
-### [Calling Conventions](https://wiki.osdev.org/Calling_Conventions)
+
+## osdev [Calling Conventions](https://wiki.osdev.org/Calling_Conventions)
 
