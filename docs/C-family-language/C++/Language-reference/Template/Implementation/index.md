@@ -341,7 +341,11 @@ struct has_member< T , void_t< decltype( T::member ) > > : true_type
 
 The compiler tries to match the template arguments `A, void` with the patterns defined in the **partial specialization**: `T` and `void_t<..>` one by one. ***First***, **template argument deduction** is performed. The **partial specialization** above is still a template with template-parameters that need to be "filled" by arguments.
 
-> NOTE: 先deduce，然后进行substitute。上面这段话中的“filled”，其实就是substitute的意思。
+> NOTE: 
+>
+> 先deduce，然后进行substitute。
+>
+> 上面这段话中的“filled”，其实就是substitute的意思。
 
 **The first pattern** `T`, allows the compiler to deduce the template-parameter `T`. This is a trivial deduction, but consider a pattern like `T const&`, where we could still deduce `T`. For the pattern `T` and the template argument `A`, we deduce `T` to be `A`.
 
@@ -376,15 +380,18 @@ struct has_member<A, void> : true_type
 
 **Now**, we can compare the **template parameter list** of this specialization with the template arguments supplied to the original `has_member<A>::value`. Both types match exactly, so this **partial specialization** is chosen.
 
+
+
 ------
 
 On the other hand, when we define the template as:
 
 ```cpp
+// primary template
 template< class , class = int > // <-- int here instead of void
 struct has_member : false_type
 { };
-
+// specializaiton template
 template< class T >
 struct has_member< T , void_t< decltype( T::member ) > > : true_type
 { };
@@ -399,6 +406,8 @@ struct has_member<A, void> : true_type
 ```
 
 but our **template argument list** for `has_member<A>::value` now is `<A, int>`. The arguments do not match the parameters of the specialization, and the primary template is chosen as a fall-back.
+
+> NOTE: 这段话的意思是：只有primary template的argument-list和specialization的argument-list的一致的时候，才会选择specializaiton。
 
 ------
 

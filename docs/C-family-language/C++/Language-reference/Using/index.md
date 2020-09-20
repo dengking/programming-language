@@ -8,6 +8,13 @@
 
 
 
+## `using` and name lookup
+
+`using` 和 compiler的name lookup密切相关，在下面文章中对此进行了说明:
+
+- cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
+- TODO: 添加the interface principle文章，其中也包含这个主题
+
 ## Examples
 
 ### cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
