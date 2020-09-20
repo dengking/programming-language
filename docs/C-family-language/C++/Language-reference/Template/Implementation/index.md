@@ -186,6 +186,8 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 从上面的描述可以看到：parameter-list、argument-list。
 
+### cppreference [Partial template specialization#The argument list](https://en.cppreference.com/w/cpp/language/partial_specialization#The_argument_list)
+
 
 
 ### Template argument: provided or deduced
@@ -209,9 +211,9 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 Partial template specializations are not found by name lookup. Only if the primary template is found by name lookup, its partial specializations are considered. In particular, a `using` declaration that makes a primary template visible, makes partial specializations visible as well.
 
-> NOTE: 上面这段话的意思，翻译为白话就是: compiler只有在看见了primary template的时候，才会考虑partial template specialization，因此可以认为，partial template specialization是primary template的附庸。
+> NOTE: 上面这段话的意思，翻译为白话就是: compiler只有在看见了primary template的时候，才会考虑partial template specialization，因此可以认为，partial template specialization是primary template的附庸，在素材: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)中还会涉及到这个问题。
 
-
+> NOTE: 下面这个例子，着重展示的是上面这段话中，`using`部分的内容。
 
 ```c++
 #include<iostream>
@@ -272,7 +274,38 @@ int main()
 Given a simple **variable template** that evaluates to `void` if all template arguments are well formed:
 
 ```c++
-template<class ... > using void_t = void;
+#include <type_traits> // std::true_type
+
+template<class ... >
+using void_t = void;
+// primary template
+template<class, class = void>
+struct has_member: std::false_type
+{
+};
+
+// specialized as has_member< T , void > or discarded (sfinae)
+template<class T>
+struct has_member<T, void_t<decltype( T::member )> > : std::true_type
+{
+};
+class A
+{
+public:
+	int member;
+};
+
+class B
+{
+};
+int main()
+{
+	static_assert( has_member< A >::value , "A" );
+	static_assert( has_member< B >::value , "B" );
+}
+
+// g++ --std=c++11 test.cpp
+
 ```
 
 [A](https://stackoverflow.com/a/27688405)
@@ -298,7 +331,7 @@ The template argument list `<A>` is compared to the **template parameter list** 
 
 #### 2. Specialized Class Template
 
-**Now**, the **template parameter list** is compared against any **specializations** of the template `has_member`. Only if no specialization matches, the definition of the **primary template** is used as a **fall-back**. So the **partial specialization** is taken into account:
+**Now**, the **template parameter list** is compared against any **specializations** of the template `has_member`. Only if no **specialization** matches, the definition of the **primary template** is used as a **fall-back**. So the **partial specialization** is taken into account:
 
 ```cpp
 template< class T >
@@ -306,7 +339,9 @@ struct has_member< T , void_t< decltype( T::member ) > > : true_type
 { };
 ```
 
-The compiler tries to match the template arguments `A, void` with the patterns defined in the **partial specialization**: `T` and `void_t<..>` one by one. ***First***, **template argument deduction** is performed. The partial specialization above is still a template with template-parameters that need to be "filled" by arguments.
+The compiler tries to match the template arguments `A, void` with the patterns defined in the **partial specialization**: `T` and `void_t<..>` one by one. ***First***, **template argument deduction** is performed. The **partial specialization** above is still a template with template-parameters that need to be "filled" by arguments.
+
+> NOTE: 先deduce，然后进行substitute。上面这段话中的“filled”，其实就是substitute的意思。
 
 **The first pattern** `T`, allows the compiler to deduce the template-parameter `T`. This is a trivial deduction, but consider a pattern like `T const&`, where we could still deduce `T`. For the pattern `T` and the template argument `A`, we deduce `T` to be `A`.
 
@@ -320,6 +355,8 @@ The compiler tries to match the template arguments `A, void` with the patterns d
 > NOTE: 关于`decltype`是Non-deduced contexts，参加cppreference Template argument deduction，其中有专门说明。
 
 Template argument deduction is finished`(*)`, ***now*** the *deduced* template arguments are substituted. This creates a specialization that looks like this:
+
+> NOTE: 先deduce，然后进行substitute
 
 ```cpp
 template<>
@@ -384,7 +421,9 @@ How does this work? When I try to instantiate `has_foo<T>::value`, that will cau
 
 在`C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\SFINAE`中对SFINAE进行了深入分析。
 
+### Deduction 
 
+在`C++\Language-reference\Template\Implementation\Argument-deduction`中对这个问题进行了描述。
 
 
 
