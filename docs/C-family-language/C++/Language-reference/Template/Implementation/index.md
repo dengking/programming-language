@@ -298,42 +298,7 @@ int main()
 
 #### cppreference [Function template#Function overloads vs function specializations](https://en.cppreference.com/w/cpp/language/function_template#Function_overloads_vs_function_specializations)
 
-Note that only non-template and **primary template overloads** participate in overload resolution. The **specializations** are not overloads and are not considered. Only after the **overload resolution** selects the best-matching **primary function template**, its specializations are examined to see if one is a better match.
-
-> NOTE: 显然，这种设计让整体都变得简单
-
-```c++
-#include <iostream>
-// #1: overload for all types
-template<class T> void f(T)
-{
-	std::cout << __LINE__<<" " <<__PRETTY_FUNCTION__ << std::endl;
-}
-// #2: specialization of #1 for pointers to int
-template<> void f(int*)
-{
-	std::cout << __LINE__<<" " <<__PRETTY_FUNCTION__ << std::endl;
-}
-// #3: overload for all pointer types
-template<class T> void f(T*)
-{
-	std::cout << __LINE__<<" " <<__PRETTY_FUNCTION__ << std::endl;
-}
-int main()
-{
-	f(new int(1)); // calls #3, even though specialization of #1 would be a perfect match
-}
-// g++ test.cpp
-
-```
-
-上述程序的输出如下:
-
-```C++
-15 void f(T*) [with T = int]
-```
-
-
+参见`C++\Language-reference\Template\Function-template\index.md`，其中进行了详细分析。
 
 ### cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 

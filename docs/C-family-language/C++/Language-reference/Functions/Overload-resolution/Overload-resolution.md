@@ -89,3 +89,25 @@ cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/ov
 
 
 
+### draft: Resolution过程总结
+
+首先是执行name lookup，对于function，还会涉及ADL；然后进行overload resolution，然后进行template specializaiton resolution。
+
+function template的resolution算法，在文章[SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)中就总结地较好：
+
+> while looking for the best overload, all candidates have to be considered. 
+
+正如这篇文章中所讲述的，为了寻找到best overload，compiler采用了SFINAE策略，即它会尝试所有的candidate，关于SFINAE，参见`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if`章节。
+
+
+
+
+
+##### TODO
+
+上述分析的resolution过程，没有涉及SFINAE，后续需要结合具体的例子来进行说明。
+
+TO READ:
+
+- https://www.fluentcpp.com/2017/08/15/function-templates-partial-specialization-cpp/
+
