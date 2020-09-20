@@ -167,11 +167,17 @@ The definition of a template must be visible at the point of implicit instantiat
 
 需要对template的完整的编译过程有一个高屋建瓴的理解，目前还没有遇到专门描述的文章；可以肯定的是：这个完整的过程，包含了前面描述的一些步骤，但是compiler需要考虑的问题，比上面描述的要多得多。下面是我总结的描述这个问题的内容: 
 
-### 先deduce 然后 substitute
+- 1 先deduce 然后 substitute
+- 2 Primary template and template specializaiton
+- 3 SFINAE
+- 4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
+- 5 Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
+
+## 1 先deduce 然后 substitute
 
 “先deduce 然后 substitute”是我在阅读stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)时所总结的，显然它描述了compiler实现template的一个重要过程。
 
-#### Parameter-list and argument-list
+### Parameter-list and argument-list
 
 在cppreference中，并没有给出parameter-list、argument-list的专门定义，而是在**template syntax**中提及了它们，为了便于后面的描述，现对它们两者进行说明，下面是引用cppreference [Partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)中的描述:
 
@@ -183,7 +189,7 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 
 
-#### Template argument: provided or deduced
+### Template argument: provided or deduced
 
 本节标题描述的是：获得template argument的两种方式：
 
@@ -194,13 +200,13 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 需要注意的是：先deduce 然后 substitute。
 
-#### Deduction 
+### Deduction 
 
 在`C++\Language-reference\Template\Implementation\Argument-deduction`中对这个问题进行了描述。
 
 
 
-#### Substitution: argument->parameter
+### Substitution: argument->parameter
 
 本节标题的含有是：将template argument 赋给 template parameter的过程，在C++ template的世界中，一般叫做 **substitution**。
 
@@ -213,11 +219,11 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 
 
 
-#### cppreference [Partial template specialization#The argument list](https://en.cppreference.com/w/cpp/language/partial_specialization#The_argument_list)
+### cppreference [Partial template specialization#The argument list](https://en.cppreference.com/w/cpp/language/partial_specialization#The_argument_list)
 
 
 
-### Primary template and template specializaiton
+## 2 Primary template and template specializaiton
 
 最最简单的情况是，仅仅存在**primary template**，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个specialization of template的时候，compiler如何选择set  of candidates中的哪个specialization of template进行instantiation？这就是“How dose compiler select from a set of candidates？”。
 
@@ -229,6 +235,10 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 - 首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用
 - 优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization 
 - cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
+
+### Partial template specialization是primary template的附庸
+
+本节的观点是我在阅读cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)时所总结的，我觉得这个观点对于理解C++ template机制非常重要，下面是论证这个观点的文章:
 
 #### cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
 
@@ -283,10 +293,49 @@ int main()
 > ```C++
 > N::Z<T, T*>::Z() [with T = int]
 > ```
->
-> 
 
-#### cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
+
+
+#### cppreference [Function template#Function overloads vs function specializations](https://en.cppreference.com/w/cpp/language/function_template#Function_overloads_vs_function_specializations)
+
+Note that only non-template and **primary template overloads** participate in overload resolution. The **specializations** are not overloads and are not considered. Only after the **overload resolution** selects the best-matching **primary function template**, its specializations are examined to see if one is a better match.
+
+> NOTE: 显然，这种设计让整体都变得简单
+
+```c++
+#include <iostream>
+// #1: overload for all types
+template<class T> void f(T)
+{
+	std::cout << __LINE__<<" " <<__PRETTY_FUNCTION__ << std::endl;
+}
+// #2: specialization of #1 for pointers to int
+template<> void f(int*)
+{
+	std::cout << __LINE__<<" " <<__PRETTY_FUNCTION__ << std::endl;
+}
+// #3: overload for all pointer types
+template<class T> void f(T*)
+{
+	std::cout << __LINE__<<" " <<__PRETTY_FUNCTION__ << std::endl;
+}
+int main()
+{
+	f(new int(1)); // calls #3, even though specialization of #1 would be a perfect match
+}
+// g++ test.cpp
+
+```
+
+上述程序的输出如下:
+
+```C++
+15 void f(T*) [with T = int]
+```
+
+
+
+### cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 
 
 
@@ -338,11 +387,58 @@ int main()
 
 
 
-### SFINAE
+Informally "A is more specialized than B" means "A accepts a subset of the types that B accepts".
+
+Formally, to establish **more-specialized-than relationship** between partial specializations, each is first converted to a fictitious function template as follows:
+
+- the first function template has the same template parameters as the first partial specialization and has just one function parameter, whose type is a class template specialization with all the template arguments from the first partial specialization
+- the second function template has the same template parameters as the second partial specialization and has just one function parameter whose type is a class template specialization with all the template arguments from the second partial specialization.
+
+The function templates are then ranked as if for [function template overloading](https://en.cppreference.com/w/cpp/language/function_template#Function_template_overloading).
+
+```c++
+#include <iostream>
+// primary template
+template<int I, int J, class T> struct X
+{
+};
+// partial specialization #1
+template<int I, int J> struct X<I, J, int>
+{
+	static const int s = 1;
+};
+// fictitious function template for #1 is
+// template<int I, int J> void f(X<I, J, int>); #A
+
+// partial specialization #2
+template<int I> struct X<I, I, int>
+{
+	static const int s = 2;
+};
+// fictitious function template for #2 is
+// template<int I>        void f(X<I, I, int>); #B
+
+int main()
+{
+	X<2, 2, int> x; // both #1 and #2 match
+// partial ordering for function templates:
+// #A from #B: void(X<I,J,int>) from void(X<U1, U1, int>): deduction ok
+// #B from #A: void(X<I,I,int>) from void(X<U1, U2, int>): deduction fails
+// #B is more specialized
+// #2 is the specialization that is instantiated
+	std::cout << x.s << '\n'; // prints 2
+}
+// g++ test.cpp
+
+```
+
+
+
+## 3 SFINAE
 
 SFINAE是C++ template的重要机制，在`C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\SFINAE`中对SFINAE进行了深入分析。
 
-### Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
+## 4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
 
 > 這是我在学习`void_t`的实现的時候，遇到的一篇讲解的比较详细的、涉及template的实现的文章，我覺得非常好，遂收录在此。它结合了一个具体的案例对这个过程进行描述，非常好。
 
@@ -496,7 +592,7 @@ but our **template argument list** for `has_member<A>::value` now is `<A, int>`.
 
 But this does not *just* mean that all template-parameters of the partial specialization have to be deduced; it also means that substitution must succeed and (as it seems?) the template arguments have to match the (substituted) template parameters of the partial specialization. Note that I'm not completely aware of *where* the Standard specifies the comparison between the substituted argument list and the supplied argument list.
 
-### Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
+## 5 Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
 
 How does this work? When I try to instantiate `has_foo<T>::value`, that will cause the compiler to try to look for the best specialization for `has_foo<T, void>`. We have two options: the primary, and this secondary one which involves having to instantiate that underlying expression:
 
