@@ -2,7 +2,7 @@
 
 
 
-## [ccppreference C++ language](https://en.cppreference.com/w/cpp/language)
+## [cppreference C++ language](https://en.cppreference.com/w/cpp/language)
 
 
 
@@ -22,8 +22,6 @@
 
 
 
-
-
 充分发挥value-semantic:
 
 | feature                   | 引入版本 | 章节                                                 | 说明 |
@@ -34,3 +32,18 @@
 
 
 
+## Useful resources
+
+
+
+### cppreference [Useful resources](https://en.cppreference.com/w/cpp/links)
+
+
+
+### Book
+
+[Essential C++](https://www.programming-books.io/essential/cpp/)
+
+
+
+### [CppCon](https://cppcon.org/)

@@ -5,8 +5,7 @@ nav:
     - What-is-new-in-C++: What-is-new-in-C++
     # c++的哲学
     - Philosophy: Philosophy.md
-    # cppreference中给出的c++的useful resource
-    - Useful-resources: Useful-resources.md
+    - Person: Person
 ###################################################理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识################################################      
     # Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
     - Language-reference: Language-reference

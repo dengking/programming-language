@@ -1,1 +1,0 @@
-# [Weak symbol](https://en.wikipedia.org/wiki/Weak_symbol)
