@@ -4,10 +4,9 @@ nav:
     # 各种具体的programming  language
     - Python: Python
     - C-family-language: C-family-language
+    - Rust: Rust
     - JavaScript: JavaScript
     - Java: Java
     - Eiffel: Eiffel
-########## 对比python和c++##########    
-    - Summary-of-my-programming-language: Summary-of-my-programming-language.md
-    # ABI
-    - ABI: ABI
+########## 对比各种programming language##########    
+    - Comparison-of-programming-language: Comparison-of-programming-language
