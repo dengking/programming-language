@@ -10,7 +10,17 @@ template specialization，需要搞清楚如下问题：
 
 ## Primary template and template specialization
 
-primary template和template specialization是两个相对的概念；
+primary template和template specialization是两个相对的概念，关于两者之间的关系，在下面章节中进行了介绍:
+
+| 路径                                                      | 章节                                                    |
+| --------------------------------------------------------- | ------------------------------------------------------- |
+| `C++\Language-reference\Template\Implementation\index.md` | Partial template specialization是primary template的附庸 |
+|                                                           |                                                         |
+|                                                           |                                                         |
+
+
+
+
 
 ## cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
 

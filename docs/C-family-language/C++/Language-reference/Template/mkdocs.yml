@@ -4,12 +4,13 @@ nav:
     - Template-metaprogramming: Template-metaprogramming.md
 ######### 然后介绍c++ template##########    
     - Templates: Templates.md
-    # 描述模板的實現    
-    - Implementation: Implementation
+
 ######### 在Template-metaprogramming.md中已经提及，可以将template看做是一种functional programming，那么它就有它的
 # parameter和argument，所以这个认知对于理解template parameter和template argument是非常重要的    
     - Template-parameters-and-template-arguments: Template-parameters-and-template-arguments
     - Class-template: Class-template
     - Specialization: Specialization
-# concept是c++20引入的一个非常重要的特性    
+    # 描述模板的實現    
+    - Implementation: Implementation
+    # concept是c++20引入的一个非常重要的特性    
     - Concepts: Concepts

@@ -337,7 +337,13 @@ int main()
 
 ### cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 
+When a class or variable (since C++14) template is instantiated, and there are partial specializations available, the compiler has to decide if the **primary template** is going to be used or one of its **partial specializations**.
 
+1) If only one specialization matches the template arguments, that specialization is used
+
+2) If more than one specialization matches, partial order rules are used to determine which specialization is more **specialized**. The most specialized specialization is used, if it is unique (if it is not unique, the program cannot be compiled)
+
+3) If no specializations match, the primary template is used
 
 ```C++
 // primary template
@@ -432,7 +438,7 @@ int main()
 
 ```
 
-
+> NOTE: 上述过程没有理解
 
 ## 3 SFINAE
 
@@ -483,7 +489,7 @@ int main()
 
 [A](https://stackoverflow.com/a/27688405)
 
-#### 1. Primary Class Template
+### 1. Primary Class Template
 
 When you write `has_member<A>::value`, the compiler looks up the name `has_member` and finds the *primary* class template, that is, this declaration:
 
@@ -502,7 +508,7 @@ The template argument list `<A>` is compared to the **template parameter list** 
 >
 > 上面这段话中的**template parameter list**非常重要，后面会使用给它。
 
-#### 2. Specialized Class Template
+### 2. Specialized Class Template
 
 **Now**, the **template parameter list** is compared against any **specializations** of the template `has_member`. Only if no **specialization** matches, the definition of the **primary template** is used as a **fall-back**. So the **partial specialization** is taken into account:
 
@@ -549,7 +555,7 @@ struct has_member<A, void> : true_type
 { };
 ```
 
-#### 3. Choice
+### 3. Choice
 
 **Now**, we can compare the **template parameter list** of this specialization with the template arguments supplied to the original `has_member<A>::value`. Both types match exactly, so this **partial specialization** is chosen.
 
