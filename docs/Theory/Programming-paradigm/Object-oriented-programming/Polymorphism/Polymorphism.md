@@ -88,7 +88,7 @@ The most commonly recognized major classes of polymorphism are:
 
 > [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)和[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)都属于[Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)，而[Subtyping](https://en.wikipedia.org/wiki/Subtyping)则属于[dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)。
 
-| Static/dynamic                                               |                                                              |
+| Static/dynamic                                               | Example                                                      |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)、[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism) |
 | [Dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [Subtyping](https://en.wikipedia.org/wiki/Subtyping)         |

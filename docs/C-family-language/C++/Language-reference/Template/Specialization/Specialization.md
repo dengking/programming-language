@@ -1,22 +1,15 @@
 # Specialization
 
-template specialization，需要搞清楚如下问题：
-
-- 如何认知template specialization
-- compiler如何选择specialization
-- usage
-
-这些内容，在`C++\Guide\Implementation-of-polymorphism`中进行了解释；
+本文主要给出template specializaiton的例子，关于实现，在`C++\Guide\Implementation-of-polymorphism`中进行了解释；
 
 ## Primary template and template specialization
 
 primary template和template specialization是两个相对的概念，关于两者之间的关系，在下面章节中进行了介绍:
 
-| 路径                                                      | 章节                                                    |
-| --------------------------------------------------------- | ------------------------------------------------------- |
-| `C++\Language-reference\Template\Implementation\index.md` | Partial template specialization是primary template的附庸 |
-|                                                           |                                                         |
-|                                                           |                                                         |
+| 路径                                                      | 章节                                                    | 观点                                                         |
+| --------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| `C++\Language-reference\Template\Implementation\index.md` | Partial template specialization是primary template的附庸 | Partial template specialization是primary template的附庸      |
+| `C++\Guide\Implementation-of-polymorphism\index.md`       |                                                         | Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**） |
 
 
 
