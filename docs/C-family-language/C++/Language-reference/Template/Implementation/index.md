@@ -18,7 +18,7 @@ Template is a kind of static polymorphism，对于这个结论，我们需要从
 
 本节描述Specialization and instantiation of template，下面是涉及这个主题的素材。
 
-### 素材: cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)
+### cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)
 
 When **template arguments** are provided, or, for [function](https://en.cppreference.com/w/cpp/language/function_template#Template_argument_deduction) and [class](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction) (since C++17) templates only, deduced, they are substituted for the **template parameters** to obtain a *specialization* of the template, that is, a specific type or a specific function lvalue. 
 
@@ -163,20 +163,15 @@ The definition of a template must be visible at the point of implicit instantiat
 
 
 
+## 完整的编译过程
 
+需要对template的完整的编译过程有一个高屋建瓴的理解，目前还没有遇到专门描述的文章；可以肯定的是：这个完整的过程，包含了前面描述的一些步骤，但是compiler需要考虑的问题，比上面描述的要多得多。下面是我总结的描述这个问题的内容: 
 
-## Substitution: argument->parameter
+### 先deduce 然后 substitute
 
-本节标题的含有是：将template argument 赋给 template parameter的过程，在C++ template的世界中，一般叫做 **substitution**。
+“先deduce 然后 substitute”是我在阅读stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)时所总结的，显然它描述了compiler实现template的一个重要过程。
 
-substitution是compiler编译template的过程中的非常重要的一个环节，它应该就是template specialization；
-
-关于substitution，在下面的文章中提及了：
-
-- thegreenplace [SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)
-- wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
-
-### Parameter-list and argument-list
+#### Parameter-list and argument-list
 
 在cppreference中，并没有给出parameter-list、argument-list的专门定义，而是在**template syntax**中提及了它们，为了便于后面的描述，现对它们两者进行说明，下面是引用cppreference [Partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)中的描述:
 
@@ -186,11 +181,9 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 从上面的描述可以看到：parameter-list、argument-list。
 
-### cppreference [Partial template specialization#The argument list](https://en.cppreference.com/w/cpp/language/partial_specialization#The_argument_list)
 
 
-
-### Template argument: provided or deduced
+#### Template argument: provided or deduced
 
 本节标题描述的是：获得template argument的两种方式：
 
@@ -199,15 +192,45 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 本节标题中的内容是源自：素材: cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)。
 
+需要注意的是：先deduce 然后 substitute。
+
+#### Deduction 
+
+在`C++\Language-reference\Template\Implementation\Argument-deduction`中对这个问题进行了描述。
 
 
-## 完整的编译过程
 
-需要对template的完整的编译过程有一个高屋建瓴的理解，目前还没有遇到专门描述的文章；可以肯定的是：这个完整的过程，包含了前面描述的一些步骤，但是compiler需要考虑的问题，比上面描述的要多得多。下面是我总结的描述这个问题的内容: 
+#### Substitution: argument->parameter
+
+本节标题的含有是：将template argument 赋给 template parameter的过程，在C++ template的世界中，一般叫做 **substitution**。
+
+substitution是compiler编译template的过程中的非常重要的一个环节，它其实就是template specialization过程；
+
+关于substitution，在下面的文章中提及了：
+
+- thegreenplace [SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)
+- wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
 
 
 
-### cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
+#### cppreference [Partial template specialization#The argument list](https://en.cppreference.com/w/cpp/language/partial_specialization#The_argument_list)
+
+
+
+### Primary template and template specializaiton
+
+最最简单的情况是，仅仅存在**primary template**，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个specialization of template的时候，compiler如何选择set  of candidates中的哪个specialization of template进行instantiation？这就是“How dose compiler select from a set of candidates？”。
+
+这个过程还是比较复杂的，目前还没有遇到专门描述的文章。
+
+在stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)中有所涉及，下面是阅读该文章的一些总结：
+
+- compiler会逐个substitute Primary Class Template、Specialized Class Template
+- 首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用
+- 优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization 
+- cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
+
+#### cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
 
 Partial template specializations are not found by name lookup. Only if the primary template is found by name lookup, its partial specializations are considered. In particular, a `using` declaration that makes a primary template visible, makes partial specializations visible as well.
 
@@ -263,9 +286,63 @@ int main()
 >
 > 
 
+#### cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 
 
-### 素材: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
+
+```C++
+// primary template
+template<class T1, class T2, int I>
+class A
+{
+};
+
+// #1: partial specialization where T2 is a pointer to T1
+template<class T, int I>
+class A<T, T*, I>
+{
+};
+
+// #2: partial specialization where T1 is a pointer
+template<class T, class T2, int I>
+class A<T*, T2, I>
+{
+};
+
+// #3: partial specialization where T1 is int, I is 5,
+//     and T2 is a pointer
+template<class T>
+class A<int, T*, 5>
+{
+};
+
+// #4: partial specialization where T2 is a pointer
+template<class X, class T, int I>
+class A<X, T*, I>
+{
+};
+int main()
+{
+	// given the template A as defined above
+	A<int, int, 1> a1;   // no specializations match, uses primary template
+	A<int, int*, 1> a2;  // uses partial specialization #1 (T=int, I=1)
+	A<int, char*, 5> a3; // uses partial specialization #3, (T=char)
+	A<int, char*, 1> a4; // uses partial specialization #4, (X=int, T=char, I=1)
+	// A<int*, int*, 2> a5; // error: matches #2 (T=int, T2=int*, I=2)
+						 //        matches #4 (X=int*, T=int, I=2)
+						 // neither one is more specialized than the other
+}
+// g++ test.cpp
+
+```
+
+
+
+### SFINAE
+
+SFINAE是C++ template的重要机制，在`C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\SFINAE`中对SFINAE进行了深入分析。
+
+### Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
 
 > 這是我在学习`void_t`的实现的時候，遇到的一篇讲解的比较详细的、涉及template的实现的文章，我覺得非常好，遂收录在此。它结合了一个具体的案例对这个过程进行描述，非常好。
 
@@ -407,7 +484,9 @@ struct has_member<A, void> : true_type
 
 but our **template argument list** for `has_member<A>::value` now is `<A, int>`. The arguments do not match the parameters of the specialization, and the primary template is chosen as a fall-back.
 
-> NOTE: 这段话的意思是：只有primary template的argument-list和specialization的argument-list的一致的时候，才会选择specializaiton。
+> NOTE: 这段话的意思是：只有primary template的argument-list和specialization的argument-list的一致的时候，才会选择specializaiton，这再次验证了在前面总结的:
+>
+> partial template specialization是primary template的附庸
 
 ------
 
@@ -417,37 +496,12 @@ but our **template argument list** for `has_member<A>::value` now is `<A, int>`.
 
 But this does not *just* mean that all template-parameters of the partial specialization have to be deduced; it also means that substitution must succeed and (as it seems?) the template arguments have to match the (substituted) template parameters of the partial specialization. Note that I'm not completely aware of *where* the Standard specifies the comparison between the substituted argument list and the supplied argument list.
 
-### 素材: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
+### Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
 
 How does this work? When I try to instantiate `has_foo<T>::value`, that will cause the compiler to try to look for the best specialization for `has_foo<T, void>`. We have two options: the primary, and this secondary one which involves having to instantiate that underlying expression:
 
 - If `T` *does* have a member function `foo()`, then whatever type that returns gets converted to `void`, and the specialization is preferred to the primary based on the template partial ordering rules. So `has_foo<T>::value` will be `true`
 - If `T` *doesn't* have such a member function (or it requires more than one argument), then substitution fails for the specialization and we only have the primary template to fallback on. Hence, `has_foo<T>::value` is `false`.
-
-
-
-### SFINAE
-
-在`C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\SFINAE`中对SFINAE进行了深入分析。
-
-### Deduction 
-
-在`C++\Language-reference\Template\Implementation\Argument-deduction`中对这个问题进行了描述。
-
-
-
-## How dose compiler select from a set of candidates？
-
-最最简单的情况是，仅仅存在**primary template**，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个specialization of template的时候，compiler如何选择set  of candidates中的哪个specialization of template进行instantiation？这就是本节标题的含义。
-
-这个过程还是比较复杂的，目前还没有遇到专门描述的文章。
-
-在stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)中有所涉及，下面是阅读该文章的一些总结：
-
-- compiler会逐个substitute Primary Class Template、Specialized Class Template
-- 首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用
-- 优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization 
-- cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 
 
 
