@@ -185,30 +185,4 @@ http://foonathan.github.io/blog/2015/11/30/overload-resolution-4.html
 
 https://www.fluentcpp.com/2017/08/15/function-templates-partial-specialization-cpp/
 
-### draft: implementation
-
-
-
-#### 实现方式
-
-cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)对此进行了描述。
-
-
-
-
-
-匹配过程在下面的文章中有提及：
-
-文章：[SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/)
-
-这篇文章中给出的例子非常好，“matches perfectly”、“overload candidate selection phase”
-
-维基百科文章：[Function overloading](https://en.wikipedia.org/wiki/Function_overloading)
-
-这篇文章中，将匹配过程描述为resolution。
-
-与此相关的问题有：
-
-- [Argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)
-
 
