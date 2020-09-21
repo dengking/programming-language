@@ -121,7 +121,7 @@ The **standard conversion sequence** is either an identity conversion or consist
 
 ## User-Defined Conversion Sequences
 
-A user-defined conversion sequence is a composition of three pieces: first an initial standard conversion sequence followed by a **user-defined conversion**（可以是conversion function、constructor） and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the source type to the **implicit object parameter** so that the user-defined conversion can be applied.
+A **user-defined conversion sequence** is a composition of three pieces: first an initial standard conversion sequence followed by a **user-defined conversion**（可以是conversion function、constructor） and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the source type to the **implicit object parameter** so that the user-defined conversion can be applied.
 
 > NOTE: 最后一句话需要结合下面的例子来进行理解：`long var = A();`，需要将`A`转换为`long`，即source type是`A`，destination type是`long`；`A`有成员函数`operator int()`，所以最终需要调用这个conversion function，那么这就需要首先将source type转换为 **implicit object parameter** ，说白了就是在“Member Functions and Built-in Operators With Overloading”中介绍的，member function的implicit object parameter。
 
