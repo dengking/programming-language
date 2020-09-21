@@ -20,13 +20,13 @@ Many different contexts of overloading exist and each has its own set of rules f
 
 A viable function is better than another viable function if (and only if) it does not have a worse **implicit conversion sequence** for any of its arguments than the other function and has one of the following properties:
 
-- It has at least one better conversion sequence than the other function.
-- It is a non-template and the other function is a template specialisation.（这段话的意思是：非模板优于模板？）
-- Both are templates and it is more specialised than the other function according to the **partial ordering rules**.
+- It has at least one better **conversion sequence** than the other function.
+- It is a non-template and the other function is a template specialisation.（这段话的意思是：非模板优于模板？是这样的，在“Function Templates With Overloading”章节对此进行了说明）
+- Both are templates and it is more specialised than the other function according to the **partial ordering rules**.（关于partial ordering rule，参见`C++\Language-reference\Template\Implementation`）
 
 The ordering of **implicit conversion sequences** is explained later. If only one function is better than other functions in the set of viable functions then it is called the *best viable function* and is selected by the **overload resolution**. Otherwise the call is ill-formed and diagnostics are reported.
 
-
+> NOTE: 这段总结得非常好，它总结了overload resolution中进行ordering的核心思想。
 
 ## Member Functions and Built-in Operators With Overloading
 
@@ -121,9 +121,9 @@ The **standard conversion sequence** is either an identity conversion or consist
 
 ## User-Defined Conversion Sequences
 
-A user-defined conversion sequence is a composition of three pieces: first an initial standard conversion sequence followed by a user-defined conversion and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the source type to the **implicit object parameter** so that the user-defined conversion can be applied.
+A user-defined conversion sequence is a composition of three pieces: first an initial standard conversion sequence followed by a **user-defined conversion**（可以是conversion function、constructor） and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the source type to the **implicit object parameter** so that the user-defined conversion can be applied.
 
-On the other hand, if the **user-defined conversion** is a **constructor**, the source type is converted to a type required by the constructor. After the **user-defined conversion** is applied, the second standard conversion sequence converts the result to a destination type. If the **user-defined conversion** is a **template conversion function**, the second standard conversion sequence is required to have an exact match rank. A conversion from a type to the same type is given an exact match rank even though a **user-defined conversion** is used. This is natural when passing parameters by value and hence using a copy constructor.
+> NOTE: 最后一句话需要结合下面的例子来进行理解：`long var = A();`，需要将`A`转换为`long`，即source type是`A`，destination type是`long`；`A`有成员函数`operator int()`，所以最终需要调用这个conversion function，那么这就需要首先将source type转换为 **implicit object parameter** ，说白了就是在“Member Functions and Built-in Operators With Overloading”中介绍的，member function的implicit object parameter。
 
 **Examples:**
 
@@ -145,6 +145,12 @@ int main()
 ```
 
 A ➔ `int `➔ `long`
+
+On the other hand, if the **user-defined conversion** is a **constructor**, the source type is converted to a type required by the constructor. After the **user-defined conversion** is applied, the second standard conversion sequence converts the result to a destination type. If the **user-defined conversion** is a **template conversion function**, the second standard conversion sequence is required to have an exact match rank. A conversion from a type to the same type is given an exact match rank even though a **user-defined conversion** is used. This is natural when passing parameters by value and hence using a copy constructor.
+
+> NOTE: 结合下面的例子来理解上面这段话的内容
+
+**Examples:**
 
 ```C++
 #include <iostream>
@@ -228,7 +234,7 @@ The same applies with pointers and references, also with pointers `void* ` is co
 
 ## Ordering of User-Defined Conversion Sequences
 
-User-defined conversion sequences are somewhat more difficult to order. Constructing a user-defined conversion sequence for a specific parameter means first using the overload resolution to select the best user-defined conversion for the sequence. This works just like ordinary overloading but now the first parameter of a converting constructor is considered as a destination type and similarly in the case of a conversion function the implicit object parameter. In case there is more than one best user-defined conversion, the second standard conversion sequence is used to decide which conversion sequence is better than the other. If there is no best conversion sequence for that specific parameter, the sequence is an *ambiguous conversion sequence* . It is treated as any user-defined conversion sequence because it always involves a user-defined conversion. The purpose of an ambiguous conversion sequence is to keep a specific function viable. Removing the function from the set of viable functions could cause some other function to become the best viable function even if it clearly is not. If a function using an ambiguous conversion sequence is selected as the best viable function, the call is ill-formed.
+User-defined conversion sequences are somewhat more difficult to order. Constructing a **user-defined conversion sequence** for a specific parameter means first using the **overload resolution** to select the best **user-defined conversion** for the sequence. This works just like ordinary overloading but now the first parameter of a **converting constructor** is considered as a **destination type** and similarly in the case of a conversion function the implicit object parameter（这段话没有读懂）. In case there is more than one **best user-defined conversion**, the second **standard conversion sequence** is used to decide which conversion sequence is better than the other. If there is no best conversion sequence for that specific parameter, the sequence is an *ambiguous conversion sequence* . It is treated as any user-defined conversion sequence because it always involves a **user-defined conversion**. The purpose of an ambiguous conversion sequence is to keep a specific function viable. Removing the function from the set of viable functions could cause some other function to become the best viable function even if it clearly is not. If a function using an ambiguous conversion sequence is selected as the best viable function, the call is ill-formed.
 
 **Examples:**
 
@@ -287,19 +293,33 @@ int main()
 > 
 > ```
 >
-> 
+> 因为`class A`有如下两个conversion function:
+>
+> - `operator B()`
+> - `operator int()`
+>
+> 函数`func`的两个重载的入参类型正好是:
+>
+> - `func(B)`
+> - `func(int)`
+>
+> 所以，compiler无法决定到底使用哪个overload。
 
-The call is ambiguous, however, the parameter *`B `*has an ambiguous conversion sequence and if the function having this parameter was eliminated the call would not be ambiguous. This is because there would be only one function to select.
+The call is ambiguous, however, the parameter *`B `* has an ambiguous conversion sequence and if the function having this parameter was eliminated the call would not be ambiguous. This is because there would be only one function to select.
 
 For each argument the implicit conversion sequences are constructed. After that the sequences are compared and ordered. Two user-defined conversion sequences are indistinguishable unless they use the same user-defined conversion in which case the second standard conversion sequence is conclusive.
 
+
+
 ## Difficulties With User-Defined Conversions
 
-There are a few oddities with user-defined conversions, mostly when the destination type is a reference.
+There are a few oddities（奇怪） with user-defined conversions, mostly when the destination type is a reference.
 
 One such context is an initialisation by conversion function for direct reference binding. This means that a conversion function converting to a type which is reference-compatible with the destination type exists. In this case the candidates for selecting the user-defined conversion are only the conversion functions returning a reference that is compatible with the destination reference.
 
 Another thing is that in the same context, the second standard conversion sequence is considered to be an identity conversion if the result binds directly to the destination, or a derived-to-base conversion in the case of a base class. This means for example that there is no ordering for different cv-qualifications. The rules concerning this might change in future standards to make the rules consistent and to meet one's expectations.
+
+
 
 ## Another Way to Handle User-Defined Conversion Sequences
 
@@ -311,9 +331,13 @@ After that the second standard conversion sequence is used to select the best co
 
 Of course one has to be careful not to mix those with the conversion sequences that do not have the same destination.
 
+
+
 ## Function Templates With Overloading
 
 In most cases a function template behaves just like a normal function when considering overload resolution. The template argument deduction is applied, if it succeeds, the function is added to the candidates set. Such a function is handled like any other function, except when two viable functions are equally good, the non-template one is selected. In case both are a specialisation of a function template, partial ordering rules are applied. The partial ordering rules are out of the scope of this article.
+
+
 
 ## Conclusion
 
