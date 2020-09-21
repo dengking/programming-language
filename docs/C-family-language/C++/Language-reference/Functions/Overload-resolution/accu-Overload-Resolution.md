@@ -121,9 +121,11 @@ The **standard conversion sequence** is either an identity conversion or consist
 
 ## User-Defined Conversion Sequences
 
-A **user-defined conversion sequence** is a composition of three pieces: first an initial standard conversion sequence followed by a **user-defined conversion**（可以是conversion function、constructor） and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the source type to the **implicit object parameter** so that the user-defined conversion can be applied.
+A **user-defined conversion sequence** is a composition of three pieces: first an initial standard conversion sequence followed by a **user-defined conversion**（可以是conversion function、constructor） and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the **source type** to the **implicit object parameter** so that the user-defined conversion can be applied.
 
 > NOTE: 最后一句话需要结合下面的例子来进行理解：`long var = A();`，需要将`A`转换为`long`，即source type是`A`，destination type是`long`；`A`有成员函数`operator int()`，所以最终需要调用这个conversion function，那么这就需要首先将source type转换为 **implicit object parameter** ，说白了就是在“Member Functions and Built-in Operators With Overloading”中介绍的，member function的implicit object parameter。
+>
+> source type到implicit object parameter的转换是我之前的知识盲区。
 
 **Examples:**
 
@@ -208,9 +210,11 @@ int main()
 
 > NOTE: 本段所讨论的是，函数入参是否为reference的情况
 
-If a parameter type is not a reference, the **implicit conversion sequence** models a **copy-initialisation**. In that case any difference in top level cv-qualification is not considered as a **conversion**. Also the use of a **copy constructor** is not ranked as a **user-defined conversion** but as an exact match and hence is not a **conversion**. However, if the parameter is a reference, binding to a reference occurs. The binding is considered an **identity conversion** and hence if the destination type binds directly to the source expression, it is an exact match. An rvalue can not be bound to a non-const reference and a candidate requiring such is not viable. If the type of the argument does not directly bind to the parameter, the implicit conversion sequence models a copy-initialisation of a temporary to the underlying type of the reference, similar to the case of a non-reference.
+If a parameter type is not a reference, the **implicit conversion sequence** models a **copy-initialisation**. In that case any difference in top level cv-qualification is not considered as a **conversion**. Also the use of a **copy constructor** is not ranked as a **user-defined conversion** but as an exact match and hence is not a **conversion**. 
 
+However, if the parameter is a reference, binding to a reference occurs. The binding is considered an **identity conversion** and hence if the destination type binds directly to the source expression, it is an exact match. An rvalue can not be bound to a non-const reference and a candidate requiring such is not viable. If the **type** of the **argument** does not directly bind to the **parameter**, the **implicit conversion sequence** models a copy-initialisation of a temporary to the underlying type of the reference, similar to the case of a non-reference.
 
+> NOTE: 对于最后一段话所描述的情况，显然会创造一个temporary，temporary是rvalue，那么当函数的入参是非const的reference的时候，此时是否会编译报错呢？
 
 ## Basic Ordering of Conversion Sequences
 
@@ -218,7 +222,7 @@ The implicit conversion sequences for the nth parameters of the viable functions
 
 > NOTE: 简而言之:
 >
-> **standard conversion sequence** > **user-defined conversion sequence** > **user-defined conversion sequence**
+> **standard conversion sequence** > **user-defined conversion sequence** >  **ellipsis conversion sequence**
 
 ## Ordering of Standard Conversion Sequences
 
@@ -234,7 +238,27 @@ The same applies with pointers and references, also with pointers `void* ` is co
 
 ## Ordering of User-Defined Conversion Sequences
 
-User-defined conversion sequences are somewhat more difficult to order. Constructing a **user-defined conversion sequence** for a specific parameter means first using the **overload resolution** to select the best **user-defined conversion** for the sequence. This works just like ordinary overloading but now the first parameter of a **converting constructor** is considered as a **destination type** and similarly in the case of a conversion function the implicit object parameter（这段话没有读懂）. In case there is more than one **best user-defined conversion**, the second **standard conversion sequence** is used to decide which conversion sequence is better than the other. If there is no best conversion sequence for that specific parameter, the sequence is an *ambiguous conversion sequence* . It is treated as any user-defined conversion sequence because it always involves a **user-defined conversion**. The purpose of an ambiguous conversion sequence is to keep a specific function viable. Removing the function from the set of viable functions could cause some other function to become the best viable function even if it clearly is not. If a function using an ambiguous conversion sequence is selected as the best viable function, the call is ill-formed.
+User-defined conversion sequences are somewhat more difficult to order. 
+
+Constructing a **user-defined conversion sequence** for a specific parameter means first using the **overload resolution** to select the best **user-defined conversion** for the sequence. This works just like ordinary overloading but now the first parameter of a **converting constructor** is considered as a **destination type** and similarly in the case of a **conversion function** the implicit object parameter. 
+
+> NOTE: 理解这段话，需要结合前面的“User-Defined Conversion Sequences”段中的内容，在“User-Defined Conversion Sequences”中，我们知道，有两种user-defined conversion：
+>
+> - converting constructor
+> - conversion function
+>
+> 上面这段话的最后一段中，作者分别对这两种情况中的overload resolution进行了说明：
+>
+> | conversion             | first parameter           |
+> | ---------------------- | ------------------------- |
+> | converting constructor | **destination type**      |
+> | conversion function    | implicit object parameter |
+>
+> 在“User-Defined Conversion Sequences”中，我们知道User-Defined Conversion Sequences有three pieces组成，这个知识对于理解本节的内容至关重要。
+
+In case there is more than one **best user-defined conversion**, the second **standard conversion sequence** is used to decide which conversion sequence is better than the other. If there is no best conversion sequence for that specific parameter, the sequence is an *ambiguous conversion sequence* . It is treated as any user-defined conversion sequence because it always involves a **user-defined conversion**. 
+
+The purpose of an ambiguous conversion sequence is to keep a specific function viable. Removing the function from the set of viable functions could cause some other function to become the best viable function even if it clearly is not. If a function using an ambiguous conversion sequence is selected as the best viable function, the call is ill-formed.
 
 **Examples:**
 
@@ -307,15 +331,15 @@ int main()
 
 The call is ambiguous, however, the parameter *`B `* has an ambiguous conversion sequence and if the function having this parameter was eliminated the call would not be ambiguous. This is because there would be only one function to select.
 
-For each argument the implicit conversion sequences are constructed. After that the sequences are compared and ordered. Two user-defined conversion sequences are indistinguishable unless they use the same user-defined conversion in which case the second standard conversion sequence is conclusive.
+For each argument the implicit conversion sequences are constructed. After that the sequences are compared and ordered. Two user-defined conversion sequences are indistinguishable unless they use the same user-defined conversion in which case the second standard conversion sequence is conclusive（决定性的）.
 
 
 
 ## Difficulties With User-Defined Conversions
 
-There are a few oddities（奇怪） with user-defined conversions, mostly when the destination type is a reference.
+There are a few oddities（奇怪） with **user-defined conversions**, mostly when the **destination type** is a reference.
 
-One such context is an initialisation by conversion function for direct reference binding. This means that a conversion function converting to a type which is reference-compatible with the destination type exists. In this case the candidates for selecting the user-defined conversion are only the conversion functions returning a reference that is compatible with the destination reference.
+One such context is an initialisation by **conversion function** for direct reference binding. This means that a conversion function converting to a type which is reference-compatible with the destination type exists. In this case the candidates for selecting the user-defined conversion are only the conversion functions returning a reference that is compatible with the destination reference.
 
 Another thing is that in the same context, the second standard conversion sequence is considered to be an identity conversion if the result binds directly to the destination, or a derived-to-base conversion in the case of a base class. This means for example that there is no ordering for different cv-qualifications. The rules concerning this might change in future standards to make the rules consistent and to meet one's expectations.
 
