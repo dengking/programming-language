@@ -4,7 +4,7 @@
 
 ## Overview of Overloading Process
 
-Declaring two or more items with the same name in a scope is called *overloading* . In C++ the items which can be overloaded are **free functions**, **member functions** and **constructors**, which are collectively referred to as **functions**. The compiler selects which function to use at compile time according to the **argument list**, including the **object** itself in the case of **member functions**. The functions that have the same name and are visible in a specific context are called *candidates* . First the usable functions are selected from the set of candidates. These usable functions are called *viable functions* . A function is viable if it can be called, that is the parameter count matches the arguments and an *implicit conversion sequence* exists for every argument to the corresponding parameter. A function having more parameters than there are arguments in an argument list can also be viable if default arguments exist for all the extra parameters. In such cases the extra parameters are not considered for the purpose of overload resolution. **Access control** is applied after **overload resolution**, meaning that if the function selected is not accessible in the specified context, the program is ill-formed.
+Declaring two or more items with the same name in a scope is called *overloading* . In C++ the items which can be overloaded are **free functions**, **member functions** and **constructors**, which are collectively referred to as **functions**. The compiler selects which function to use at compile time according to the **argument list**, including the **object** itself in the case of **member functions**. The functions that have the same name and are visible in a specific context are called *candidates* . First the usable functions are selected from the set of **candidates**. These usable functions are called *viable functions* . A function is viable if it can be called, that is the **parameter count** matches the arguments and an *implicit conversion sequence* exists for every argument to the corresponding parameter. A function having more parameters than there are arguments in an argument list can also be viable if default arguments exist for all the extra parameters. In such cases the extra parameters are not considered for the purpose of overload resolution. **Access control** is applied after **overload resolution**, meaning that if the function selected is not accessible in the specified context, the program is ill-formed.
 
 **Phases of the function call process:**
 
@@ -18,19 +18,31 @@ Many different contexts of overloading exist and each has its own set of rules f
 
 ## Ordering of Viable Functions
 
-A viable function is better than another viable function if (and only if) it does not have a worse implicit conversion sequence for any of its arguments than the other function and has one of the following properties:
+A viable function is better than another viable function if (and only if) it does not have a worse **implicit conversion sequence** for any of its arguments than the other function and has one of the following properties:
 
 - It has at least one better conversion sequence than the other function.
-- It is a non-template and the other function is a template specialisation.
+- It is a non-template and the other function is a template specialisation.（这段话的意思是：非模板优于模板？）
 - Both are templates and it is more specialised than the other function according to the **partial ordering rules**.
 
-The ordering of **implicit conversion sequences** is explained later. If only one function is better than other functions in the set of viable functions then it is called the *best viable function* and is selected by the overload resolution. Otherwise the call is ill-formed and diagnostics are reported.
+The ordering of **implicit conversion sequences** is explained later. If only one function is better than other functions in the set of viable functions then it is called the *best viable function* and is selected by the **overload resolution**. Otherwise the call is ill-formed and diagnostics are reported.
 
 
 
 ## Member Functions and Built-in Operators With Overloading
 
-For overload resolution, member functions are considered as free functions with an extra parameter taking the object itself. This is called the *implicit object parameter* . The cv-qualification [ [1 ](https://accu.org/journals/overload/13/66/kilpelainen_268/#ftn.d0e82)] of the implicit parameter is the same as the cv-qualification of the specified member function. The object is matched to the implicit object parameter to make the overload resolution possible. This is an easy way to make the overloading rules uniform for the member functions and free functions. The implicit object argument is just like other arguments, except for a few special rules: the related conversions cannot introduce temporaries, no user-defined conversions are allowed and an rvalue can be bound to a non-constant reference. For static member functions the implicit object parameter is not considered since there is no object to match it. Also the built-in operators are considered free functions for the purpose of overload resolution.
+> NOTE: 这段解释非常好，它的视角是站在设计者的角度
+
+For overload resolution, **member functions** are considered as free functions with an extra parameter taking the object itself. This is called the *implicit object parameter* . The cv-qualification [ [1 ](https://accu.org/journals/overload/13/66/kilpelainen_268/#ftn.d0e82)] of the implicit parameter is the same as the cv-qualification of the specified member function. The object is matched to the **implicit object parameter** to make the overload resolution possible. This is an easy way to make the overloading rules uniform for the member functions and free functions. The **implicit object argument** is just like other arguments, except for a few special rules: 
+
+- the related conversions cannot introduce temporaries, 
+
+- no user-defined conversions are allowed and 
+
+- an rvalue can be bound to a non-constant reference. 
+
+For static member functions the implicit object parameter is not considered since there is no object to match it. 
+
+Also the built-in operators are considered free functions for the purpose of overload resolution.
 
 **Examples:**
 
@@ -63,7 +75,15 @@ where `T `is a cv-(un)qualified type.
 
 ## Conversions
 
-The implicit conversion sequences are based on single conversions. These simple implicit conversions provide a great deal of flexibility and can be helpful if used correctly. Even though single conversions are quite easy, the interaction between the sequences of conversions and the overloading is far from simple. The standard conversions are the built-in conversions, those are categorised and ranked to form an intuitive order. This is the basis for ranking the conversion sequences consisting of only standard conversions. There are three ranks for these conversions (see Table 1). In addition to those standard conversions, a derived-to-base conversion exists but only in the description of implicit conversion sequences. It has a conversion rank.
+The **implicit conversion sequences** are based on **single conversions**. These simple implicit conversions provide a great deal of flexibility and can be helpful if used correctly. Even though single conversions are quite easy, the interaction between the sequences of conversions and the overloading is far from simple. The **standard conversions** are the built-in conversions, those are categorised and ranked to form an intuitive（直觉的） order. This is the basis for ranking the conversion sequences consisting of only standard conversions. There are three ranks for these conversions (see Table 1). In addition to those standard conversions, a derived-to-base conversion exists but only in the description of implicit conversion sequences. It has a conversion rank.
+
+> NOTE: 
+>
+> 上面这段话的意思是： **implicit conversion sequences** 是由一个一个的single conversion构成的；
+>
+> 为什么叫conversion sequence呢？这是因为parameter list，即函数的parameter可以是多个的。
+>
+> 
 
 **Examples:**
 
@@ -72,7 +92,7 @@ The implicit conversion sequences are based on single conversions. These simple 
 type ➔ type `const `(qualification conversion)
 type ➔ type (identity conversion)
 
-Besides standard conversions there are the user-defined conversions, meaning conversion functions and converting constructors. User-defined conversions are applied only if they are unambiguous. It is good to know that at most one user-defined conversion is implicitly applied to a single value. Three forms of conversion sequences can be constructed from these different conversions:
+Besides standard conversions there are the **user-defined conversions**, meaning conversion functions and converting constructors. **User-defined conversions** are applied only if they are unambiguous. It is good to know that at most one **user-defined conversion** is implicitly applied to a single value. Three forms of conversion sequences can be constructed from these different conversions:
 
 - Standard conversion sequence
 - User-defined conversion sequence
@@ -92,7 +112,7 @@ Table 1. Standard Conversions (smallest number is highest rank)
 
 ## Standard Conversion Sequences
 
-The standard conversion sequence is either an identity conversion or consists of one to three standard conversions from the four categories when identity is not considered, at most one conversion per category. The standard conversions are always applied in a certain order: Lvalue transformation, Promotion or Conversion and Qualification adjustment. The standard conversion sequence is ranked according to the conversions it contains, the conversion with the lowest rank dictates the rank of the whole sequence.
+The **standard conversion sequence** is either an identity conversion or consists of one to three standard conversions from the four categories when identity is not considered, at most one conversion per category. The standard conversions are always applied in a certain order: Lvalue transformation, Promotion or Conversion and Qualification adjustment. The **standard conversion sequence** is ranked according to the conversions it contains, the conversion with the lowest rank dictates（决定了） the rank of the whole sequence.
 
 **Examples:**
 
@@ -103,25 +123,56 @@ The standard conversion sequence is either an identity conversion or consists of
 
 ## User-Defined Conversion Sequences
 
-A user-defined conversion sequence is a composition of three pieces: first an initial standard conversion sequence followed by a user-defined conversion and then followed by another standard conversion sequence. In the case when the user-defined conversion is a conversion function, the first conversion sequence converts the source type to the implicit object parameter so that the user-defined conversion can be applied.
+A user-defined conversion sequence is a composition of three pieces: first an initial standard conversion sequence followed by a user-defined conversion and then followed by another standard conversion sequence. In the case when the user-defined conversion is a **conversion function**, the first conversion sequence converts the source type to the **implicit object parameter** so that the user-defined conversion can be applied.
 
-On the other hand, if the user-defined conversion is a constructor, the source type is converted to a type required by the constructor. After the user-defined conversion is applied, the second standard conversion sequence converts the result to a destination type. If the user-defined conversion is a template conversion function, the second standard conversion sequence is required to have an exact match rank. A conversion from a type to the same type is given an exact match rank even though a user-defined conversion is used. This is natural when passing parameters by value and hence using a copy constructor.
+On the other hand, if the **user-defined conversion** is a **constructor**, the source type is converted to a type required by the constructor. After the **user-defined conversion** is applied, the second standard conversion sequence converts the result to a destination type. If the **user-defined conversion** is a **template conversion function**, the second standard conversion sequence is required to have an exact match rank. A conversion from a type to the same type is given an exact match rank even though a **user-defined conversion** is used. This is natural when passing parameters by value and hence using a copy constructor.
 
 **Examples:**
 
 ```C++
-struct A { operator int(); };
-long var = A();
+#include <iostream>
+struct A
+{
+	operator int()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+int main()
+{
+	long var = A();
+}
+// g++ test.cpp
+
 ```
 
 A ➔ `int `➔ `long`
 
 ```C++
-struct B { B(float); };
-void func(B const&);
-func(0);
-int `➔ `float `➔ B ➔ B `const
+#include <iostream>
+struct B
+{
+	B(float)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+void func(B const&)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+
+int main()
+{
+	func(0);
+}
+// g++ test.cpp
+
 ```
+
+
+
+int ➔ float ➔ B ➔ B const
 
 ## Ellipsis Conversion Sequences
 
@@ -130,19 +181,36 @@ The last and third form of conversion sequence is an ellipsis conversion sequenc
 **Examples:**
 
 ```C++
-void func(...);
-func(0); // an ellipsis conversion sequence,
-         // int matching to an ellipsis
-         // parameter.
+#include <iostream>
+
+void func(...)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+
+int main()
+{
+	func(0); // an ellipsis conversion sequence,
+			 // int matching to an ellipsis
+			 // parameter.
+}
+// g++ test.cpp
+
 ```
+
+
 
 ## Reference and Non-Reference Parameters
 
-If a parameter type is not a reference, the implicit conversion sequence models a copy-initialisation. In that case any difference in top level cv-qualification is not considered as a conversion. Also the use of a copy constructor is not ranked as a user-defined conversion but as an exact match and hence is not a conversion. However, if the parameter is a reference, binding to a reference occurs. The binding is considered an identity conversion and hence if the destination type binds directly to the source expression, it is an exact match. An rvalue can not be bound to a non-const reference and a candidate requiring such is not viable. If the type of the argument does not directly bind to the parameter, the implicit conversion sequence models a copy-initialisation of a temporary to the underlying type of the reference, similar to the case of a non-reference.
+If a parameter type is not a reference, the **implicit conversion sequence** models a **copy-initialisation**. In that case any difference in top level cv-qualification is not considered as a conversion. Also the use of a **copy constructor** is not ranked as a **user-defined conversion** but as an exact match and hence is not a conversion. However, if the parameter is a reference, binding to a reference occurs. The binding is considered an identity conversion and hence if the destination type binds directly to the source expression, it is an exact match. An rvalue can not be bound to a non-const reference and a candidate requiring such is not viable. If the type of the argument does not directly bind to the parameter, the implicit conversion sequence models a copy-initialisation of a temporary to the underlying type of the reference, similar to the case of a non-reference.
+
+
 
 ## Basic Ordering of Conversion Sequences
 
 The implicit conversion sequences for the nth parameters of the viable functions need to be ordered to select the best viable function if one exists. The three basic forms of sequences are ordered so that the standard conversion sequence is better than the user-defined conversion sequence and the user-defined conversion sequence is better than the ellipsis conversion sequence. In case that two conversion sequences cannot be ordered, they are said to be indistinguishable. This is rather easy and intuitive ordering but there is a lot more to it.
+
+
 
 ## Ordering of Standard Conversion Sequences
 

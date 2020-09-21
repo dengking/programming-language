@@ -65,6 +65,7 @@ int main()
 //	a.B::f(1); // Error: user-defined conversions cannot be applied
 //			   // to the implicit object parameter
 	static_cast<B&>(a).f(1); // OK
+    ((B&)a).f(1); // OK
 }
 // g++ test.cpp
 
@@ -73,6 +74,8 @@ int main()
 > NOTE: 上述程序的输出为:
 >
 > ```C++
+> A::operator B&()
+> void B::f(int)
 > A::operator B&()
 > void B::f(int)
 > ```
