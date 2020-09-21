@@ -75,15 +75,19 @@ where `T `is a cv-(un)qualified type.
 
 ## Conversions
 
+> NOTE: 本段对conversion的总结是非常好的。
+
 The **implicit conversion sequences** are based on **single conversions**. These simple implicit conversions provide a great deal of flexibility and can be helpful if used correctly. Even though single conversions are quite easy, the interaction between the sequences of conversions and the overloading is far from simple. The **standard conversions** are the built-in conversions, those are categorised and ranked to form an intuitive（直觉的） order. This is the basis for ranking the conversion sequences consisting of only standard conversions. There are three ranks for these conversions (see Table 1). In addition to those standard conversions, a derived-to-base conversion exists but only in the description of implicit conversion sequences. It has a conversion rank.
 
 > NOTE: 
 >
-> 上面这段话的意思是： **implicit conversion sequences** 是由一个一个的single conversion构成的；
+> 上面这段话的意思是： **implicit conversion sequences** 是由一个一个的single conversion构成的，显然这是one-by-one（参见工程discrete的`Relation-structure-computation\Computation`章节）。
 >
-> 为什么叫conversion sequence呢？这是因为parameter list，即函数的parameter可以是多个的。
+> 为什么叫conversion **sequence**呢？这是因为parameter list，即函数的parameter可以是多个的。
 >
-> 
+> 为什么是implicit conversion？argument到parameter之间的conversion，它是由compiler来完成的，所以是implicit conversion。
+>
+> implicit conversion包含哪些？在下面回答了这个问题。
 
 **Examples:**
 
@@ -92,19 +96,21 @@ The **implicit conversion sequences** are based on **single conversions**. These
 type ➔ type `const `(qualification conversion)
 type ➔ type (identity conversion)
 
-Besides standard conversions there are the **user-defined conversions**, meaning conversion functions and converting constructors. **User-defined conversions** are applied only if they are unambiguous. It is good to know that at most one **user-defined conversion** is implicitly applied to a single value. Three forms of conversion sequences can be constructed from these different conversions:
+Besides **standard conversions** there are the **user-defined conversions**, meaning **conversion functions** and **converting constructors**. **User-defined conversions** are applied only if they are unambiguous. It is good to know that at most one **user-defined conversion** is implicitly applied to a single value. Three forms of conversion sequences can be constructed from these different conversions:
 
 - Standard conversion sequence
 - User-defined conversion sequence
 - Ellipsis conversion sequence
 
-
+> NOTE: 原文后面对这三种conversion进行了专门介绍
 
 ![](./Table-1-Standard-Conversions.png)
 
+
+
 ## Standard Conversion Sequences
 
-The **standard conversion sequence** is either an identity conversion or consists of one to three standard conversions from the four categories when identity is not considered, at most one conversion per category. The standard conversions are always applied in a certain order: Lvalue transformation, Promotion or Conversion and Qualification adjustment. The **standard conversion sequence** is ranked according to the conversions it contains, the conversion with the lowest rank dictates（决定了） the rank of the whole sequence.
+The **standard conversion sequence** is either an identity conversion or consists of one to three standard conversions from the four categories when identity is not considered, at most one conversion per category. The **standard conversions** are always applied in a certain order: Lvalue transformation, Promotion or Conversion and Qualification adjustment. The **standard conversion sequence** is ranked according to the conversions it contains, the conversion with the lowest rank dictates（决定了） the rank of the whole sequence.
 
 **Examples:**
 
@@ -194,19 +200,31 @@ int main()
 
 ## Reference and Non-Reference Parameters
 
-If a parameter type is not a reference, the **implicit conversion sequence** models a **copy-initialisation**. In that case any difference in top level cv-qualification is not considered as a conversion. Also the use of a **copy constructor** is not ranked as a **user-defined conversion** but as an exact match and hence is not a conversion. However, if the parameter is a reference, binding to a reference occurs. The binding is considered an identity conversion and hence if the destination type binds directly to the source expression, it is an exact match. An rvalue can not be bound to a non-const reference and a candidate requiring such is not viable. If the type of the argument does not directly bind to the parameter, the implicit conversion sequence models a copy-initialisation of a temporary to the underlying type of the reference, similar to the case of a non-reference.
+> NOTE: 本段所讨论的是，函数入参是否为reference的情况
+
+If a parameter type is not a reference, the **implicit conversion sequence** models a **copy-initialisation**. In that case any difference in top level cv-qualification is not considered as a **conversion**. Also the use of a **copy constructor** is not ranked as a **user-defined conversion** but as an exact match and hence is not a **conversion**. However, if the parameter is a reference, binding to a reference occurs. The binding is considered an **identity conversion** and hence if the destination type binds directly to the source expression, it is an exact match. An rvalue can not be bound to a non-const reference and a candidate requiring such is not viable. If the type of the argument does not directly bind to the parameter, the implicit conversion sequence models a copy-initialisation of a temporary to the underlying type of the reference, similar to the case of a non-reference.
 
 
 
 ## Basic Ordering of Conversion Sequences
 
-The implicit conversion sequences for the nth parameters of the viable functions need to be ordered to select the best viable function if one exists. The three basic forms of sequences are ordered so that the standard conversion sequence is better than the user-defined conversion sequence and the user-defined conversion sequence is better than the ellipsis conversion sequence. In case that two conversion sequences cannot be ordered, they are said to be indistinguishable. This is rather easy and intuitive ordering but there is a lot more to it.
+The implicit conversion sequences for the nth parameters of the viable functions need to be ordered to select the best viable function if one exists. The three basic forms of sequences are ordered so that the **standard conversion sequence** is better than the **user-defined conversion sequence** and the **user-defined conversion sequence** is better than the **ellipsis conversion sequence**. In case that two conversion sequences cannot be ordered, they are said to be indistinguishable. This is rather easy and intuitive ordering but there is a lot more to it.
 
-
+> NOTE: 简而言之:
+>
+> **standard conversion sequence** > **user-defined conversion sequence** > **user-defined conversion sequence**
 
 ## Ordering of Standard Conversion Sequences
 
-Standard conversion sequences are ordered by their rank. The higher the rank, the better the sequence. Another important ordering is that a proper subsequence of another sequence is better than the other sequence. The comparison excludes lvalue transformations. An identity conversion is considered to be a subsequence of any non-identity conversion sequence. Also there are other rules that apply with the standard conversion sequences: If two sequences have the same conversion rank, they are indistinguishable unless one is a conversion of a pointer to bool which is a worse conversion than other conversions. In case of converting a type to its direct or indirect base class, the conversion to a base class closer in the inheritance hierarchy is a better conversion than a conversion to a base class that is further away. The same applies with pointers and references, also with pointers `void* `is considered to be the furthest in the hierarchy.
+**Standard conversion sequences** are ordered by their rank. The higher the rank, the better the sequence. Another important ordering is that a proper subsequence of another sequence is better than the other sequence. The comparison excludes **lvalue transformations**. An identity conversion is considered to be a subsequence of any non-identity conversion sequence. Also there are other rules that apply with the **standard conversion sequences**: 
+
+If two sequences have the same conversion rank, they are indistinguishable（相同的） unless one is a conversion of a **pointer to bool** which is a worse conversion than other conversions. 
+
+In case of converting a type to its direct or indirect base class, the conversion to a base class closer in the inheritance hierarchy is a better conversion than a conversion to a base class that is further away. 
+
+The same applies with pointers and references, also with pointers `void* ` is considered to be the furthest in the hierarchy.
+
+> NOTE: 上述Ordering of Standard Conversion Sequence的描述是非常值得思考的
 
 ## Ordering of User-Defined Conversion Sequences
 
@@ -215,20 +233,61 @@ User-defined conversion sequences are somewhat more difficult to order. Construc
 **Examples:**
 
 ```C++
+#include <iostream>
+
 struct A;
-struct B {
-  B(A const&);
+struct B
+{
+	B(A const&)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
 };
 
-struct A {
-  operator B() const;
-  operator int() const;
+struct A
+{
+	operator B() const
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	operator int() const
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
 };
-void func(B);
-void func(int);
+void func(B)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+void func(int)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
 
-func(A());
+int main()
+{
+	func(A());
+}
+// g++ test.cpp
 ```
+
+> NOTE: 上述函数编译报错如下: 
+>
+> ```c++
+> test.cpp: 在函数‘int main()’中:
+> test.cpp:34:10: 错误：调用重载的‘func(A)’有歧义
+>   func(A());
+>           ^
+> test.cpp:34:10: 附注：备选是：
+> test.cpp:23:6: 附注：void func(B)
+>  void func(B)
+>       ^
+> test.cpp:27:6: 附注：void func(int)
+>  void func(int)
+> 
+> ```
+>
+> 
 
 The call is ambiguous, however, the parameter *`B `*has an ambiguous conversion sequence and if the function having this parameter was eliminated the call would not be ambiguous. This is because there would be only one function to select.
 
