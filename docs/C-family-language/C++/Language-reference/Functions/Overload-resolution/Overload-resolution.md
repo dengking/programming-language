@@ -25,19 +25,29 @@ If a function cannot be selected by overload resolution (e.g. it is a [templated
 >
 > *implicit object parameter*，参见 cppreference [this pointer](https://en.cppreference.com/w/cpp/language/this)
 
-#### *implicit object parameter* and *implied object argument*
+#### Member function
+
+> NOTE: 本节的小标题是我添加上去的，原文并没有，我添加的目的是对内容进行梳理总结，原文原文的中的下面这些段落都是对member function的描述，其中重点描述的是implicit object parameter和implied object argument。
 
 If any candidate function is a [member function](https://en.cppreference.com/w/cpp/language/member_functions) (static or non-static), but not a constructor, it is treated as if it has an extra parameter (*implicit object parameter*) which represents the object for which they are called and appears before the first of the actual parameters.
 
 Similarly, the object on which a member function is being called is prepended to the argument list as the *implied object argument*.
 
-
+> NOTE: 原文的介绍是非常难懂的，因为它并没有像读者说明清楚这样做的意图是什么，所以造出读者：不知其所以然，后者说，它没有站在设计者的角度来向读者阐明这样做的目的。在accu [**Overload Resolution - Selecting the Function**](https://accu.org/journals/overload/13/66/kilpelainen_268/)的中则对此进行了说明：
+>
+> For overload resolution, member functions are considered as free functions with an extra parameter taking the object itself. This is called the *implicit object parameter* . The cv-qualification [ [1 ](https://accu.org/journals/overload/13/66/kilpelainen_268/#ftn.d0e82)] of the implicit parameter is the same as the cv-qualification of the specified member function. The object is matched to the implicit object parameter to make the overload resolution possible. This is an easy way to make the overloading rules **uniform** for the member functions and free functions. 
+>
+> 显然，最后一句话是点睛之笔。
+>
+> 但是毕竟 *implicit object parameter* 与其他的parameter是有所不同的，所以原文的下面对此它的特别之处进行了详细说明：
 
 For member functions of class `X`, the type of the implicit object parameter is affected by cv-qualifications and ref-qualifications of the member function as described in [member functions](https://en.cppreference.com/w/cpp/language/member_functions).
 
 > NOTE: 在cppreference [member functions](https://en.cppreference.com/w/cpp/language/member_functions)的“const- and volatile-qualified member functions”段，对这个问题进行了深入分析。
 
 For the rest of overload resolution, the *implied object argument* is indistinguishable from other arguments, but the following special rules apply to the *implicit object parameter*:
+
+> NOTE: 上面这段话中的“indistinguishable”的意思其实就是“same”，即相同的。下面是 *implied object argument* 的特别之处
 
 1) user-defined conversions cannot be applied to the **implicit object parameter**
 
@@ -80,7 +90,19 @@ int main()
 > void B::f(int)
 > ```
 
+#### Function template
 
+If any candidate is a **function template**, its specializations are generated using [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction), and such specializations are treated just like **non-template functions** except where specified otherwise in the **tie-breaker rules**. If a name refers to one or more function templates and also to a set of overloaded non-template functions, those functions and the specializations generated from the templates are all candidates.
+
+> NOTE: 上面这段话中的“tie-breaker rules“的意思是”打破平局规则“，"tiebreakers"的意思是“决胜局”，关于这个词，参见下面内容:
+>
+> baidu [tie-breaker-rule是什么意思](https://zhidao.baidu.com/question/560880697101891604.html)
+>
+> > 打破bai平局规则；打破平局的规则；判定准则
+>
+> wikipedia [Tennis scoring system](https://en.wikipedia.org/wiki/Tennis_scoring_system)
+>
+> > However, if the players reach 12–12, a 7-point tie-breaker is played to determine the winner. 
 
 
 
