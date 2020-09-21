@@ -21,6 +21,94 @@ If a function cannot be selected by overload resolution (e.g. it is a [templated
 
 ### Details
 
+> NOTE: 
+>
+> *implicit object parameter*，参见 cppreference [this pointer](https://en.cppreference.com/w/cpp/language/this)
+
+#### *implicit object parameter* and *implied object argument*
+
+If any candidate function is a [member function](https://en.cppreference.com/w/cpp/language/member_functions) (static or non-static), but not a constructor, it is treated as if it has an extra parameter (*implicit object parameter*) which represents the object for which they are called and appears before the first of the actual parameters.
+
+Similarly, the object on which a member function is being called is prepended to the argument list as the *implied object argument*.
+
+
+
+For member functions of class `X`, the type of the implicit object parameter is affected by cv-qualifications and ref-qualifications of the member function as described in [member functions](https://en.cppreference.com/w/cpp/language/member_functions).
+
+> NOTE: 在cppreference [member functions](https://en.cppreference.com/w/cpp/language/member_functions)的“const- and volatile-qualified member functions”段，对这个问题进行了深入分析。
+
+For the rest of overload resolution, the *implied object argument* is indistinguishable from other arguments, but the following special rules apply to the *implicit object parameter*:
+
+1) user-defined conversions cannot be applied to the **implicit object parameter**
+
+```c++
+#include <iostream>
+
+struct B
+{
+	void f(int)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+struct A
+{
+	operator B&()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+int main()
+{
+	A a;
+//	a.B::f(1); // Error: user-defined conversions cannot be applied
+//			   // to the implicit object parameter
+	static_cast<B&>(a).f(1); // OK
+}
+// g++ test.cpp
+
+```
+
+> NOTE: 上述程序的输出为:
+>
+> ```C++
+> A::operator B&()
+> void B::f(int)
+> ```
+
+
+
+
+
+### Candidate functions
+
+The set of candidate functions and the list of arguments is prepared in a unique way for each of the **contexts** where overload resolution is used:
+
+#### Call to a named function
+
+#### Call to a class object
+
+#### Call to an overloaded operator
+
+#### Initialization by constructor
+
+#### Copy-initialization by conversion
+
+#### Non-class initialization by conversion
+
+#### Reference initialization by conversion
+
+#### List-initialization
+
+### Viable functions
+
+### Best viable function
+
+### Ranking of implicit conversion sequences
+
+### Implicit conversion sequence in list-initialization
+
 
 
 ## Overload resolution and template function
