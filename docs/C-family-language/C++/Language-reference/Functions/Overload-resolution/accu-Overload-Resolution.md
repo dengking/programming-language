@@ -100,15 +100,7 @@ Besides standard conversions there are the **user-defined conversions**, meaning
 
 
 
-| Conversion                                                   | Category                 | Ranking     | Rank |
-| :----------------------------------------------------------- | :----------------------- | :---------- | :--- |
-| No conversions required                                      | Identity                 | Exact match | 1    |
-| Lvalue-to-rvalue conversion Array-to-pointer conversion Function-to-pointer conversion | Lvalue transformation    |             |      |
-| Qualification conversion                                     | Qualification adjustment |             |      |
-| Integral promotions Floating point promotions                | Promotion                | Promotion   | 2    |
-| Integral conversions Floating point conversions Floating-integral conversions Pointer conversions Pointer to member conversions Boolean conversions | Conversion               | Conversion  | 3    |
-
-Table 1. Standard Conversions (smallest number is highest rank)
+![](./Table-1-Standard-Conversions.png)
 
 ## Standard Conversion Sequences
 
