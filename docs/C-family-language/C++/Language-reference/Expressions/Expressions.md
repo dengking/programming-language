@@ -112,17 +112,17 @@ The operands of any operator may be other **expressions** or **primary expressio
 
 Primary expressions are any of the following:
 
-1) Literals (e.g. 2 or "Hello, world")
+1) Literals (e.g. 2 or "Hello, world")\
 
-2) Suitably declared [unqualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Unqualified_identifiers) (e.g. `n` or `cout`)
+2) Id-expressions
 
-3) Suitably declared [qualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers) (e.g. [std::string::npos](https://en.cppreference.com/w/cpp/string/basic_string/npos))
+> NOTE: 参见下面的“ID-expression”章节
 
-4) [Lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda) (C++11)
+3) [Lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda) (C++11)
 
-5) [Fold-expressions](https://en.cppreference.com/w/cpp/language/fold) (C++17)
+4) [Fold-expressions](https://en.cppreference.com/w/cpp/language/fold) (C++17)
 
-6) [Requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) (C++20)
+5) [Requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) (C++20)
 
 Any expression in parentheses is also classified as a **primary expression**: this guarantees that the parentheses have higher precedence than any **operator**. Parentheses preserve **value**, **type**, and **value category**.
 
@@ -250,5 +250,65 @@ c++中有哪些operator？下面对此进行枚举：
 
 下面是在阅读cppreference时遇到的，需要进行补充的：
 
-- [id-expression](https://en.cppreference.com/w/cpp/language/identifiers)，此处的id的含义是identifier
+### id-expression
 
+[id-expression](https://en.cppreference.com/w/cpp/language/identifiers)中的id的含义是identifier
+
+它包含:
+
+1) Suitably declared [unqualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Unqualified_identifiers) (e.g. `n` or `cout`)
+
+2) Suitably declared [qualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers) (e.g. [std::string::npos](https://en.cppreference.com/w/cpp/string/basic_string/npos))
+
+在下面的章节中提及了id-expression:
+
+- cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions)
+
+#### Example
+
+stackoverflow [Why user-defined conversion is not implicitly taking place on the calling object](https://stackoverflow.com/questions/44699176/why-user-defined-conversion-is-not-implicitly-taking-place-on-the-calling-object)
+
+```c++
+#include <iostream>
+class A
+{
+public:
+	void func() const
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+class B
+{
+public:
+	// user-defined conversion operator to A
+	operator A() const
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		return a_;
+	}
+private:
+	A a_;
+};
+
+int main()
+{
+	B b;
+	static_cast<A>(b).func(); // call func() on temporary instance of A
+	B b;
+	// b.func(); // <-- error: 'class B' has no member named 'func'
+}
+// g++  test.cpp
+
+```
+
+[A](https://stackoverflow.com/a/44699334)
+
+**Conversion** isn't considered for **member access** (§5.2.5/2 [expr.ref]).
+
+> In either case, the *id-expression* shall name a member of the class or of one of its base classes
+
+Here the *id-expression* is `func()`
+
+So the compiler considers that `func` must be a member of `B` or a class that `B` derives from. Implicit conversion to other types that might have a `func` member is not considered.
