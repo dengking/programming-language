@@ -17,7 +17,9 @@ C++ 的type system提供了非常丰富的type conversion支持：
 | [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast) | - [static_cast](https://en.cppreference.com/w/cpp/language/static_cast) <br/>- [const_cast](https://en.cppreference.com/w/cpp/language/const_cast) <br/>- [dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) <br/>- [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) <br/>- C-style cast |      |
 | [implicit conversion](https://en.cppreference.com/w/cpp/language/implicit_cast) |                                                              |      |
 
+与explicit相关的有:
 
+- `explicit` specifier: `C++\Language-reference\Classes\Members\explicit-specifier.md`
 
 ## 根据built-in/user-defined进行分类
 

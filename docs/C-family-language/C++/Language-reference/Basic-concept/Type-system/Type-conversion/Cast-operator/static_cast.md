@@ -8,7 +8,7 @@ Only the following conversions can be done with static_cast, except when such co
 
 > NOTE: `static_cast`是需要维护CV的，否则会编译报错
 
-### 1) 
+### 1) implicit cast
 
 If there is an [implicit conversion sequence](https://en.cppreference.com/w/cpp/language/implicit_cast) from *expression* to *`new_type`*, or if **overload resolution** for a [direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) of an object or reference of type *`new_type`* from *`expression`* would find at least one viable（可行的） function, then `static_cast<new_type>(expression)` returns the imaginary（虚构的） variable `Temp` initialized as if by `new_type Temp(expression);`, which may involve [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast), a call to the [constructor](https://en.cppreference.com/w/cpp/language/constructor) of *`new_type`* or a call to a [user-defined conversion operator](https://en.cppreference.com/w/cpp/language/cast_operator). 
 
@@ -233,7 +233,9 @@ after move, v.size() = 0
 
 
 
-### `static_cast` and user-define conversion
+### `static_cast` and explicit/implicit and user-define conversion
+
+来源: cppreference [user-defined conversion function](https://en.cppreference.com/w/cpp/language/cast_operator)
 
 ```c++
 #include <iostream>
@@ -290,3 +292,4 @@ int main()
 24 X::operator int (*)[3]() const
 ```
 
+通过上述例子可以看出，`static_cast`既可以用于implicit cast，也可以用于explicit cast。
