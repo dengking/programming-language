@@ -4,5 +4,5 @@
 
 | 文章                                                         | 点评                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/) | 内容非常好，它以高屋建瓴的角度综述了overload resolution的核心内容，总结了指导思想，非常适合于入门者。 |
+| accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/) | 内容非常好，它以高屋建瓴的角度综述了overload resolution的核心内容，总结了指导思想，非常适合于入门者。通过这篇文章，我们能够对C++ type conversion有一个更加深刻的认知。 |
 

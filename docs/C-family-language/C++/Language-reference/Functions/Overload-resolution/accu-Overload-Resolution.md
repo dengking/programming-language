@@ -361,7 +361,11 @@ Of course one has to be careful not to mix those with the conversion sequences t
 
 In most cases a function template behaves just like a normal function when considering overload resolution. The template argument deduction is applied, if it succeeds, the function is added to the candidates set. Such a function is handled like any other function, except when two viable functions are equally good, the non-template one is selected. In case both are a specialisation of a function template, partial ordering rules are applied. The partial ordering rules are out of the scope of this article.
 
-
+> NOTE: 在“Ordering of Viable Functions”章节中，对此进行了介绍:
+>
+> It is a non-template and the other function is a template specialisation
+>
+> 
 
 ## Conclusion
 
