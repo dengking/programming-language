@@ -1,4 +1,4 @@
-# [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf)
+# stroustrup [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf)
 
 ## Background 
 

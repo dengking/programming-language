@@ -3,3 +3,5 @@ nav:
     - Static-members: Static-members.md
     - Const-member: Const-member.md
     - explicit-specifier: explicit-specifier.md
+    - this-pointer: this-pointer.md
+    - Non-static-member-functions: Non-static-member-functions.md

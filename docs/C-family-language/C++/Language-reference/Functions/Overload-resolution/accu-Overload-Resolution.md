@@ -351,6 +351,8 @@ Considering the overload rules for user-defined conversions, it is easy to notic
 
 If the destination parameter is the same for two sequences, the first standard conversion sequences are used to order these user-defined conversion sequences.
 
+> NOTE: 这个观点，在前面已经阐述了 
+
 After that the second standard conversion sequence is used to select the best conversion sequence.
 
 Of course one has to be careful not to mix those with the conversion sequences that do not have the same destination.
