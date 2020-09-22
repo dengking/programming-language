@@ -63,3 +63,9 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 ### [CppCon](https://cppcon.org/)
+
+
+
+### [gotw](http://www.gotw.ca/)
+
+[Guru of the Week](http://www.gotw.ca/gotw/)

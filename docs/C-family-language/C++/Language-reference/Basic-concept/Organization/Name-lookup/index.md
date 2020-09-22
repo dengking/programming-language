@@ -14,7 +14,7 @@ Name lookup还涉及到的内容有：
 
 下面是涉及name lookup的好文章: 
 
-- 文章[Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中对此进行了描述；
+- 文章[Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中对此进行了描述
 
 
 
