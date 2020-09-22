@@ -230,3 +230,63 @@ after move, v.size() = 0
 
 
 [Question of using static_cast on “this” pointer in a derived object to base class](https://stackoverflow.com/questions/4543670/question-of-using-static-cast-on-this-pointer-in-a-derived-object-to-base-clas)
+
+
+
+### `static_cast` and user-define conversion
+
+```c++
+#include <iostream>
+
+struct X
+{
+	//implicit conversion
+	operator int() const
+	{
+		std::cout << __LINE__<< " " << __PRETTY_FUNCTION__ << std::endl;
+		return 7;
+	}
+
+	// explicit conversion
+	explicit operator int*() const
+	{
+		std::cout << __LINE__<< " " << __PRETTY_FUNCTION__ << std::endl;
+		return nullptr;
+	}
+
+//   Error: array operator not allowed in conversion-type-id
+//   operator int(*)[3]() const { return nullptr; }
+	using arr_t = int[3];
+	operator arr_t*() const
+	{
+		std::cout << __LINE__<< " " << __PRETTY_FUNCTION__ << std::endl;
+		return nullptr;
+	} // OK if done through typedef
+//  operator arr_t () const; // Error: conversion to array not allowed in any case
+};
+
+int main()
+{
+	X x;
+
+	int n = static_cast<int>(x);   // OK: sets n to 7
+	int m = x;                     // OK: sets m to 7
+
+	int *p = static_cast<int*>(x);  // OK: sets p to null
+//  int* q = x; // Error: no implicit conversion
+
+	int (*pa)[3] = x;  // OK
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+上述程序的输出如下:
+
+```c++
+8 X::operator int() const
+8 X::operator int() const
+15 X::operator int*() const
+24 X::operator int (*)[3]() const
+```
+

@@ -6,7 +6,11 @@
 
 
 
-Within the body of a non-static member function of `X`, any [id-expression](https://en.cppreference.com/w/cpp/language/expressions) E (e.g. an identifier) that resolves to a non-type non-static member of X or of a base class of X, is transformed to a member access expression (*this).E (unless it's already a part of a member access expression). This does not occur in template definition context, so a name may have to be prefixed with this-> explicitly to become [dependent](https://en.cppreference.com/w/cpp/language/dependent_name).
+Within the body of a non-static member function of `X`, any [id-expression](https://en.cppreference.com/w/cpp/language/expressions) `E` (e.g. an identifier) that resolves to a non-type non-static member of `X` or of a base class of `X`, is transformed to a member access expression `(*this).E` (unless it's already a part of a member access expression). This does not occur in template definition context, so a name may have to be prefixed with `this->` explicitly to become [dependent](https://en.cppreference.com/w/cpp/language/dependent_name).
+
+> NOTE: 关于上面这段话中的“non-type non-static member of `X` or of a base class of `X`”的理解，其实它就是表示普通的data member、member method。
+>
+> 关于上面这段话中的id-expression，参见`C++\Language-reference\Expressions`，
 
 
 
