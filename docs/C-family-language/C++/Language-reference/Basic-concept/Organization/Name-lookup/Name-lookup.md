@@ -1,8 +1,6 @@
 # Name lookup
 
-name lookup是由compiler在compile-time完成的，由于C++语言的复杂性，name lookup过程也是非常复杂的，它涉及到了非常多的内容，对C++ name lookup过程有所了解，能够帮助我们理解C++语言中的很多问题；
 
-在name lookup中，一个非常重要的主题就是：对function的lookup。
 
 ## cppreference [Name lookup](https://en.cppreference.com/w/cpp/language/lookup)
 
@@ -22,9 +20,11 @@ For example, to compile [std::cout](http://en.cppreference.com/w/cpp/io/cout) <<
 
 For function and function template names, **name lookup** can associate *multiple* declarations with the same name, and may obtain additional declarations from [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl). [Template argument deduction](https://en.cppreference.com/w/cpp/language/function_template) may also apply, and the set of declarations is passed to [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), which selects the declaration that will be used. [Member access](https://en.cppreference.com/w/cpp/language/access) rules, if applicable, are considered only after **name lookup** and **overload resolution**.
 
+> NOTE: 完整的编译过程涉及到了非常多的内容
+
 For all other names (variables, namespaces, classes, etc), **name lookup** must produce a *single* declaration in order for the program to compile. Lookup for a name in a scope finds all declarations of that name, with one exception, known as the "struct hack" or "type/non-type hiding": Within the same scope, some occurrences of a name may refer to a declaration of a `class`/`struct`/`union`/`enum` that is not a typedef, while all other occurrences of the same name either all refer to the same variable, non-static data member (since C++14), or enumerator, or they all refer to possibly overloaded function or function template names. In this case, there is no error, but the type name is hidden from lookup (the code must use [elaborated type specifier](https://en.cppreference.com/w/cpp/language/elaborated_type_specifier) to access it).
 
-总结：上面两段话分别概述了function的name lookup和others的name lookup。需要注意它们的异同。
+> NOTE: 上面两段话分别概述了function的name lookup和others的name lookup。需要注意它们的异同。
 
 ### Types of lookup
 
@@ -53,9 +53,9 @@ A *qualified* name is a name that appears on the right hand side of the scope re
 
 If there is nothing on the left hand side of the `::`, the lookup considers only declarations made in the **global namespace scope** (or introduced into the global namespace by a [using declaration](https://en.cppreference.com/w/cpp/language/namespace)). This makes it possible to refer to such names even if they were hidden by a local declaration:
 
-注意：上面仅仅提及了 [using declaration](https://en.cppreference.com/w/cpp/language/namespace)而没有[using-directives](https://en.cppreference.com/w/cpp/language/namespace)；刚刚看了[using-directives](https://en.cppreference.com/w/cpp/language/namespace)的介绍，我想到的一个问题是：visibility和name lookup的关系是什么？
-
-总结：下面的代码就是local declaration的例子
+> NOTE: 上面仅仅提及了 [using declaration](https://en.cppreference.com/w/cpp/language/namespace)而没有[using-directives](https://en.cppreference.com/w/cpp/language/namespace)；刚刚看了[using-directives](https://en.cppreference.com/w/cpp/language/namespace)的介绍，我想到的一个问题是：visibility和name lookup的关系是什么？
+>
+> 总结：下面的代码就是local declaration的例子
 
 ```cpp
 #include <iostream>
@@ -68,7 +68,7 @@ int main() {
 
 Before **name lookup** can be performed for the name on the right hand side of `::`, lookup must be completed for the name on its left hand side (unless a [decltype](https://en.cppreference.com/w/cpp/language/decltype) expression is used, or there is nothing on the left). This lookup, which may be **qualified** or **unqualified**, depending on whether there's another `::` to the left of that name, considers only namespaces, class types, enumerations, and templates whose specializations are types:
 
-总结：从这段话可以推测出，对qualified name的lookup是从左到右的。
+> NOTE：从这段话可以推测出，对qualified name的lookup是从左到右的。
 
 ```cpp
 struct A {
@@ -83,7 +83,7 @@ int main() {
 
 When a **qualified name** is used as a [declarator](https://en.cppreference.com/w/cpp/language/declarations), then [unqualified lookup](https://en.cppreference.com/w/cpp/language/unqualified_lookup) of the names used in the same declarator that follow that qualified name, but not the names that precede it, is performed in the scope of the member's class or namespace:
 
-总结：这段话描述的是下面的`C::X C::arr[number], brr[number];`。
+> NOTE：这段话描述的是下面的`C::X C::arr[number], brr[number];`。
 
 ```cpp
 class X { };
