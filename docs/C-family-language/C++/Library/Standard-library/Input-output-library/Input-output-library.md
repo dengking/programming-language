@@ -95,7 +95,21 @@ The classes are organized into the following hierarchy:
 
 #### [I/O Manipulators](https://en.cppreference.com/w/cpp/io/manip)
 
-## bit stream
+
+
+## C++ IO library and STL
+
+一般我们不将C++ IO library纳入STL的中，但是C++ IO library的设计理念和STL是一脉相承的，并且由于C++ IO library是stream-based的，而stream又非常类似于container，所以C++ std library的设计者已经充分考虑了两者之间的关联，已经实现了让用户按照STL的模式来处理IO stream，连接两者的桥梁是: `std::istream_iterator`、`std::ostream_iterator`，它们在`C++\Library\Standard-library\STL\Iterator-library\Stream-iterators`中进行了详细介绍。
+
+关于本节总结的思想，在geeksforgeeks [std::istream_iterator and std::ostream_iterator in C++ STL](https://www.geeksforgeeks.org/stdistream_iterator-stdostream_iterator-c-stl/)中进行了较好的论述:
+
+> All three components are so designed that they confirm to the principles of data abstraction. Thus any object which holds data and *behaves like a container*, is a container. Similarly, any iterator which sweeps through the elements in a container is an iterator.
+>
+> If an iterator can be used to access elements of a data container, then what about streams? In keeping with the design, Streams too are data containers and so C++ provides us with iterators to iterate over the elements present in any stream. These iterators are called **Stream Iterators**. To use these iterators the *iterator* header file must be included.
+
+
+
+## Bit stream
 
 看了一下，c++的io library是不支持bit stream的，那在c++中如何来处理bit stream呢？
 
@@ -105,7 +119,7 @@ http://www.drdobbs.com/bitstream-parsing-in-c/184402014
 
 
 
-## buffer stream
+## Buffer stream
 
 今天写了这样的一个程序
 

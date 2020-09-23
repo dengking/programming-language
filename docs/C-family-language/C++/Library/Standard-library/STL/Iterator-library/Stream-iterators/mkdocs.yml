@@ -1,4 +1,2 @@
 nav:
     - Introduction: index.md
-    - istream_iterator: istream_iterator.md
-    - ostream_iterator: ostream_iterator.md
