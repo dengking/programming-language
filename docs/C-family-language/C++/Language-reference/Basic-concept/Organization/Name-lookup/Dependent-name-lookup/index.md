@@ -275,7 +275,10 @@ The following resources have been helpful in the preparation of this article and
 
 
 
+## TO READ
 
+- stackoverflow [Two phase lookup - explanation needed](https://stackoverflow.com/questions/7767626/two-phase-lookup-explanation-needed)
+- microsoft [Two-phase name lookup support comes to MSVC](https://devblogs.microsoft.com/cppblog/two-phase-name-lookup-support-comes-to-msvc/)
 
 ## cppreference [Two-phase name lookup](https://en.cppreference.com/w/cpp/language/two-phase_lookup)
 
@@ -764,3 +767,11 @@ void bar()
 
 ```
 
+
+
+## TO READ
+
+- deque [Why template parameters of dependent type names cannot be deduced, and what to do about it](https://deque.blog/2017/10/12/why-template-parameters-of-dependent-type-names-cannot-be-deduced-and-what-to-do-about-it/)
+
+- stackoverflow [How do you understand dependent names in C++](https://stackoverflow.com/questions/1527849/how-do-you-understand-dependent-names-in-c)
+- gcc [14.7.2 Name Lookup, Templates, and Accessing Members of Base Classes](https://gcc.gnu.org/onlinedocs/gcc/Name-lookup.html)
