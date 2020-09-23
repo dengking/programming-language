@@ -10,7 +10,13 @@
 
 ## 维基百科[Expression templates](https://en.wikipedia.org/wiki/Expression_templates)
 
+**Expression templates** are a [C++](https://en.wikipedia.org/wiki/C%2B%2B) [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming) technique that builds structures representing a computation at compile time, where expressions are [evaluated only as needed](https://en.wikipedia.org/wiki/Lazy_evaluation) to produce efficient code for the entire computation.[[1\]](https://en.wikipedia.org/wiki/Expression_templates#cite_note-matsuzaki-1) Expression templates thus allow programmers to bypass the normal order of evaluation of the C++ language and achieve optimizations such as [loop fusion](https://en.wikipedia.org/wiki/Loop_fusion).
 
+> NOTE: 这段总结非常好
+
+### Applications
+
+Outside of vector math, the [Spirit parser framework](https://en.wikipedia.org/wiki/Spirit_parser_framework) uses expression templates to represent [formal grammars](https://en.wikipedia.org/wiki/Formal_grammar) and compile these into parsers.
 
 
 

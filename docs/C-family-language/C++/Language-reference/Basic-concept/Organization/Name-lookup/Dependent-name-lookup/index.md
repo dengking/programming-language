@@ -278,3 +278,263 @@ The following resources have been helpful in the preparation of this article and
 
 
 ## cppreference [Two-phase name lookup](https://en.cppreference.com/w/cpp/language/two-phase_lookup)
+
+Inside the definition of a [template](https://en.cppreference.com/w/cpp/language/templates) (both [class template](https://en.cppreference.com/w/cpp/language/class_template) and [function template](https://en.cppreference.com/w/cpp/language/function_template)), the meaning of some constructs may differ from one instantiation to another. In particular, types and expressions may depend on types of type template parameters and values of non-type template parameters.
+
+> NOTE: 下面是对最后一句话的理解：
+>
+> | template parameter           |       |
+> | ---------------------------- | ----- |
+> | type template parameters     | type  |
+> | non-type template parameters | value |
+>
+> 
+
+```C++
+template<typename T>
+struct X : B<T> // "B<T>" is dependent on T
+{
+    typename T::A* pa; // "T::A" is dependent on T
+                       // (see below for the meaning of this use of "typename")
+    void f(B<T>* pb) {
+        static int i = B<T>::i; // "B<T>::i" is dependent on T
+        pb->j++; // "pb->j" is dependent on T
+    }
+};
+```
+
+Name lookup and binding are different for *dependent names* and non-*dependent names*
+
+### Binding rules
+
+**Non-dependent names** are looked up and bound at the point of **template definition**. This **binding** holds even if at the point of **template instantiation** there is a better match:
+
+```c++
+#include <iostream>
+void g(double)
+{
+	std::cout << "g(double)\n";
+}
+
+template<class T>
+struct S
+{
+	void f() const
+	{
+		g(1); // "g" is a non-dependent name, bound now
+	}
+};
+
+void g(int)
+{
+	std::cout << "g(int)\n";
+}
+
+int main()
+{
+	g(1); // calls g(int)
+
+	S<int> s;
+	s.f(); // calls g(double)
+}
+// g++ test.cpp
+
+```
+
+> NOTE: 上述程序的输出如下:
+>
+> ```c++
+> g(int)
+> g(double)
+> 
+> ```
+>
+> 可以看到`s.f(); // calls g(double)`，即使有更好的overload `void g(int)`。
+
+Binding of *dependent names* is postponed until lookup takes place.
+
+### Lookup rules
+
+As discussed in [lookup](https://en.cppreference.com/w/cpp/language/lookup), the lookup of a **dependent name** used in a template is postponed until the **template arguments** are known, at which time
+
+- non-ADL lookup examines function declarations with external linkage that are visible from the *template definition* context
+- [ADL](https://en.cppreference.com/w/cpp/language/adl) examines function declarations with external linkage that are visible from either the *template definition* context or the *template instantiation* context
+
+(in other words, adding a new function declaration after template definition does not make it visible, except via ADL).
+
+> NOTE: 综合上面描述的compiler进行lookup的两个规则，可知：
+>
+> |                                                              | *template definition* context | *template instantiation* context |
+> | ------------------------------------------------------------ | ----------------------------- | -------------------------------- |
+> | non-ADL lookup                                               | yes                           | no                               |
+> | [ADL](https://en.cppreference.com/w/cpp/language/adl) lookup | yes                           | yes                              |
+>
+> 从中可以看出，在*template instantiation* context是不执行non-ADL lookup，后面会对此进行详细解释，尤其需要注意的是搞清楚这样做的原因。
+
+(in other words, adding a new function declaration after template definition does not make it visible, except via ADL).
+
+The purpose of this rule is to help guard against violations of the [ODR](https://en.cppreference.com/w/cpp/language/definition#One_Definition_Rule) for template instantiations:
+
+```c++
+#include <iostream>
+#include <vector>
+
+// an external library
+namespace E
+{
+template<typename T>
+void writeObject(const T &t)
+{
+	std::cout << "Value = " << t << '\n';
+}
+}
+
+// translation unit 1:
+// Programmer 1 wants to allow E::writeObject to work with vector<int>
+namespace P1
+{
+std::ostream& operator<<(std::ostream &os, const std::vector<int> &v)
+{
+	for (int n : v)
+		os << n << ' ';
+	return os;
+}
+void doSomething()
+{
+	std::vector<int> v;
+	E::writeObject(v); // error: will not find P1::operator<<
+}
+}
+
+// translation unit 2:
+// Programmer 2 wants to allow E::writeObject to work with vector<int>
+namespace P2
+{
+std::ostream& operator<<(std::ostream &os, const std::vector<int> &v)
+{
+	for (int n : v)
+		os << n << ':';
+	return os << "[]";
+}
+void doSomethingElse()
+{
+	std::vector<int> v;
+	E::writeObject(v); // error: will not find P2::operator<<
+}
+}
+int main()
+{
+	P1::doSomething();
+	P2::doSomethingElse();
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序编译报错，报错如下:
+>
+> ```C++
+> test.cpp: In instantiation of ‘void E::writeObject(const T&) [with T = std::vector<int>]’:
+> test.cpp:27:18:   required from here
+> test.cpp:10:26: 错误：无法将左值‘std::basic_ostream<char>’绑定到‘std::basic_ostream<char>&&’
+>   std::cout << "Value = " << t << '\n';
+> 
+> ```
+>
+> 这是因为compiler无法找到用户重载的`std::ostream& operator<<(std::ostream &os, const std::vector<int> &v)`，原因如下:
+>
+> - 通过前面描述的规则可知，non-ADL lookup for `operator<<` were allowed from the **instantiation context**，所以无法找到`namespace P1`中的`std::ostream& operator<<(std::ostream &os, const std::vector<int> &v)`；
+> - `std::vector<int>`不是user-defined type，因此不会触发ADL，所以无法找到在`namespace P1`中提供的上述重载。
+>
+> 下面是另外一个example，它 通过引入user-define type来触发ADL，从而使程序能够编译通过。
+
+In the above example, if non-ADL lookup for `operator<<` were allowed from the instantiation context, the instantiation of `E::writeObject<vector<int>>` would have two different definitions: one using `P1::operator<<` and one using `P2::operator<<`. Such ODR violation may not be detected by the linker, leading to one or the other being used in both instances.
+
+To make ADL examine a user-defined namespace, either `std::vector` should be replaced by a user-defined class or its element type should be a user-defined class:
+
+```c++
+#include <iostream>
+#include <vector>
+
+// an external library
+namespace E
+{
+template<typename T>
+void writeObject(const T &t)
+{
+	std::cout << "Value = " << t << '\n';
+}
+}
+
+// translation unit 1:
+// Programmer 1 wants to allow E::writeObject to work with vector<int>
+namespace P1
+{
+class C
+{
+
+};
+std::ostream& operator<<(std::ostream &os, const C &v)
+{
+	os << "class P1::C";
+	return os;
+}
+std::ostream& operator<<(std::ostream &os, const std::vector<C> &v)
+{
+	for (C n : v)
+		os << n << ' ';
+	return os;
+}
+void doSomething()
+{
+	std::vector<C> v;
+	v.emplace_back();
+	v.emplace_back();
+	v.emplace_back();
+	E::writeObject(v); // error: will not find P1::operator<<
+}
+}
+
+// translation unit 2:
+// Programmer 2 wants to allow E::writeObject to work with vector<int>
+namespace P2
+{
+class C
+{
+
+};
+std::ostream& operator<<(std::ostream &os, const C &v)
+{
+	os << "class P2::C";
+	return os;
+}
+std::ostream& operator<<(std::ostream &os, const std::vector<C> &v)
+{
+	for (C n : v)
+		os << n << ' ';
+	return os;
+}
+void doSomethingElse()
+{
+	std::vector<C> v;
+	v.emplace_back();
+	v.emplace_back();
+	v.emplace_back();
+	E::writeObject(v); // error: will not find P2::operator<<
+}
+}
+
+int main()
+{
+	P1::doSomething();
+	P2::doSomethingElse();
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
+Note: this rule makes it impractical to overload operators for standard library types
+
+> NOTE: 
