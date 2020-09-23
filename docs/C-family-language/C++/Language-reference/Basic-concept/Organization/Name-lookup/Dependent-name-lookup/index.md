@@ -538,3 +538,229 @@ int main()
 Note: this rule makes it impractical to overload operators for standard library types
 
 > NOTE: 
+
+```C++
+#include <iostream>
+#include <vector>
+#include <iterator>
+#include <utility>
+// Bad idea: operator in global namespace, but its arguments are in std::
+std::ostream& operator<<(std::ostream &os, std::pair<int, double> p)
+{
+	return os << p.first << ',' << p.second;
+}
+
+int main()
+{
+	typedef std::pair<int, double> elem_t;
+	std::vector<elem_t> v(10);
+	std::cout << v[0] << '\n'; // OK, ordinary lookup finds ::operator<<
+	std::copy(v.begin(), v.end(), std::ostream_iterator < elem_t > (std::cout, " ")); // Error: both ordinary
+	// lookup from the point of definition of std::ostream_iterator and ADL will
+	// only consider the std namespace, and will find many overloads of
+	// std::operator<<, so the lookup will be done. Overload resolution will then
+	// fail to find operator<< for elem_t in the set found by the lookup.
+}
+
+```
+
+> NOTE: 上述程序报错如下:
+>
+> ```C++
+> /usr/include/c++/4.8.2/bits/stl_algobase.h:428:38:   required from ‘_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = __gnu_cxx::__normal_iterator<std::pair<int, double>*, std::vector<std::pair<int, double> > >; _OI = std::ostream_iterator<std::pair<int, double> >]’
+> /usr/include/c++/4.8.2/bits/stl_algobase.h:460:17:   required from ‘_OI std::copy(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<std::pair<int, double>*, std::vector<std::pair<int, double> > >; _OI = std::ostream_iterator<std::pair<int, double> >]’
+> test.cpp:16:81:   required from here
+> /usr/include/c++/4.8.2/bits/stream_iterator.h:198:13: 错误：无法将左值‘std::ostream_iterator<std::pair<int, double> >::ostream_type {aka std::basic_ostream<char>}’绑定到‘std::basic_ostream<char>&&’
+>   *_M_stream << __value;
+>              ^
+> In file included from /usr/include/c++/4.8.2/iostream:39:0,
+>                  from test.cpp:1:
+> /usr/include/c++/4.8.2/ostream:602:5: 错误：以初始化‘std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&&, const _Tp&) [with _CharT = char; _Traits = std::char_traits<char>; _Tp = std::pair<int, double>]’的实参 1
+>      operator<<(basic_ostream<_CharT, _Traits>&& __os, const _Tp& __x)
+> 
+> ```
+>
+> 错误的原因在于，compiler的name lookup机制无法找到定义在global namespace的`std::ostream& operator<<(std::ostream &os, std::pair<int, double> p)`；正如源程序中所注释的：
+>
+> Bad idea: operator in global namespace, but its arguments are in `std::`
+>
+> 
+
+```C++
+#include <iostream>
+#include <vector>
+#include <iterator>
+#include <utility>
+namespace std
+{
+// Bad idea: operator in global namespace, but its arguments are in std::
+std::ostream& operator<<(std::ostream &os, std::pair<int, double> p)
+{
+	return os << p.first << ',' << p.second;
+}
+}
+
+int main()
+{
+	typedef std::pair<int, double> elem_t;
+	std::vector<elem_t> v(10);
+	std::cout << v[0] << '\n'; // OK, ordinary lookup finds ::operator<<
+	std::copy(v.begin(), v.end(), std::ostream_iterator < elem_t > (std::cout, " ")); // Error: both ordinary
+	// lookup from the point of definition of std::ostream_iterator and ADL will
+	// only consider the std namespace, and will find many overloads of
+	// std::operator<<, so the lookup will be done. Overload resolution will then
+	// fail to find operator<< for elem_t in the set found by the lookup.
+}
+
+```
+
+
+
+### Dependent types
+
+The following types are dependent types:
+
+| dependent type     | explanation | 说明                         |
+| ------------------ | ----------- | ---------------------------- |
+| template parameter |             | 这是最最常见的dependent type |
+|                    |             |                              |
+|                    |             |                              |
+|                    |             |                              |
+|                    |             |                              |
+
+
+
+Note: a `typedef` member of a current instantiation is only dependent when the type it refers to is.
+
+> NOTE: 这句话要如何理解？
+
+### Type-dependent expressions
+
+
+
+### Value-dependent expressions
+
+
+
+### Current instantiation
+
+Within a **class template definition** (including its member functions and nested classes) some names may be deduced to refer to the *current instantiation*. This allows certain errors to be detected at the point of definition, rather than **instantiation**, and removes the requirement on the `typename` and `template` disambiguators for dependent names, see below.
+
+```c++
+#include <iostream>
+#include <vector>
+
+template<class T> class A
+{
+	A *p1;    // A is the current instantiation
+	A<T> *p2; // A<T> is the current instantiation
+	::A<T> *p4; // ::A<T> is the current instantiation
+	A<T*> p3; // A<T*> is not the current instantiation
+	class B
+	{
+		B *p1; // B is the current instantiation
+		A<T>::B *p2; // A<T>::B is the current instantiation
+		typename A<T*>::B *p3; // A<T*>::B is not the current instantiation
+	};
+};
+template<class T> class A<T*>
+{
+	A<T*> *p1;  // A<T*> is the current instantiation
+	A<T> *p2;   // A<T> is not the current instantiation
+};
+template<int I> struct B
+{
+	static const int my_I = I;
+	static const int my_I2 = I + 0;
+	static const int my_I3 = my_I;
+	B<my_I> *b3;  // B<my_I> is the current instantiation
+	B<my_I2> *b4; // B<my_I2> is not the current instantiation
+	B<my_I3> *b5; // B<my_I3> is the current instantiation
+};
+
+int main()
+{
+	B<5> b;
+
+	A<int> a1;
+	A<int*> a2;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
+
+
+### The `typename` disambiguator for dependent names
+
+```c++
+#include <iostream>
+#include <vector>
+
+int p = 1;
+template<typename T>
+void foo(const std::vector<T> &v)
+{
+
+	// std::vector<T>::const_iterator is a dependent name,
+	typename std::vector<T>::const_iterator it = v.begin();
+
+	// without 'typename', the following is parsed as multiplication
+	// of the type-dependent member variable 'const_iterator'
+	// and some variable 'p'. Since there is a global 'p' visible
+	// at this point, this template definition compiles.
+	// std::vector<T>::const_iterator *p;
+
+	typedef typename std::vector<T>::const_iterator iter_t;
+	iter_t *p2; // iter_t is a dependent name, but it's known to be a type name
+}
+
+template<typename T>
+struct S
+{
+	typedef int value_t; // member of current instantiation
+	void f()
+	{
+		S<T>::value_t n { };  // S<T> is dependent, but 'typename' not needed
+		std::cout << n << '\n';
+	}
+};
+
+int main()
+{
+	std::vector<int> v;
+	foo(v); // template instantiation fails: there is no member variable
+			// called 'const_iterator' in the type std::vector<int>
+	S<int>().f();
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
+### The `template` disambiguator for dependent names
+
+Similarly, in a template definition, a dependent name that is not a member of the *current instantiation* is not considered to be a template name unless the disambiguation keyword `template` is used or unless it was already established as a template name:
+
+```c++
+template<typename T>
+struct S
+{
+	template<typename U> void foo()
+	{
+	}
+};
+
+template<typename T>
+void bar()
+{
+	S<T> s;
+	s.foo<T>(); // error: < parsed as less than operator
+	s.template foo<T>(); // OK
+}
+
+```
+
