@@ -8,3 +8,6 @@ nav:
     - Log: Log
     - Math: Math
     - String: String
+    - Partow: Partow
+    - Reflection: Reflection
+    - Json: Json.md

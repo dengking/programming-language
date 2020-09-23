@@ -3,9 +3,9 @@ nav:
     - STL: STL
     - String: String
     - Input-output-library: Input-output-library
-    - Dynamic-memory-management: Dynamic-memory-management
     - Thread: Thread
     - Atomic-operations-library: Atomic-operations-library
+    - Utility-library: Utility-library
     # 标准库的实现
     - Implementation: Implementation
     - Expanding-std: Expanding-std.md
