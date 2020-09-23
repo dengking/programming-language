@@ -6,6 +6,10 @@ compiler使用**tree结构**来表示program，这是一种hierarchy结构，所
 
 name lookup是由compiler在compile-time完成的，由于C++语言的复杂性，name lookup过程也是非常复杂的，它涉及到了非常多的内容，对C++ name lookup过程有所了解，能够帮助我们理解C++语言中的很多问题；
 
+## Compile error
+
+很多compile error都可以追溯到name lookup，因此掌握name lookup是解决很多compile error的前提。
+
 ## Implementation of static polymorphism is based on the result of name lookup
 
 本节标题的含义是：static polymorphism是基于name lookup的结果，关于static polymorphism，参见`C++\Guide\Implementation-of-polymorphism`。
