@@ -246,15 +246,11 @@ c++中有哪些operator？下面对此进行枚举：
 
 在cppreference [C++ Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence)中枚举了几乎所有的c++ operator。
 
-## Supplement
+## Supplement: id-expression
 
-下面是在阅读cppreference时遇到的，需要进行补充的：
+原文没有对id-expression进行深入说明，下面是对它的补充说明:
 
-### id-expression
-
-[id-expression](https://en.cppreference.com/w/cpp/language/identifiers)中的id的含义是identifier
-
-它包含:
+id-expression中的id的含义是[identifier](https://en.cppreference.com/w/cpp/language/identifiers)，在cppreference [identifier](https://en.cppreference.com/w/cpp/language/identifiers)的“In expressions”段中对它进行了详细的说明，它包含:
 
 1) Suitably declared [unqualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Unqualified_identifiers) (e.g. `n` or `cout`)
 
@@ -264,7 +260,7 @@ c++中有哪些operator？下面对此进行枚举：
 
 - cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions)
 
-#### Example
+### Example 1
 
 stackoverflow [Why user-defined conversion is not implicitly taking place on the calling object](https://stackoverflow.com/questions/44699176/why-user-defined-conversion-is-not-implicitly-taking-place-on-the-calling-object)
 
@@ -312,3 +308,9 @@ int main()
 Here the *id-expression* is `func()`
 
 So the compiler considers that `func` must be a member of `B` or a class that `B` derives from. Implicit conversion to other types that might have a `func` member is not considered.
+
+### Example 2
+
+thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) :
+
+compiler默认情况下是将dependent name作为identifier，通过keyword `typename`来告诉compiler，这个name表示的是type，通过keyword `template`来告诉compiler，这个name表示的是template；
