@@ -85,9 +85,43 @@ Declared objects and declared references that are not [non-static data members](
 如果从语言学的角度来看的话，我们编写的program其实就相当于一篇文章，和我们平时写的文章一样，program也可以看做是由一个一个的word组成，这就是word的含义。显然，program中的word包括了两大类：
 
 - 由program language保留的，如keyword、operator等等
-- 由用户创建的：identifier
-
-至于name了，我觉得它和identifier的含义基本类似，按照上面的介绍，它主要是和declaration、entity、scope相关联，我觉得这个可以这样认为：name概念是和entity概念相关联，或者说，每个entity都有一个name。
+- 由用户创建的：如identifier等
 
 总的来说：word、identifier、name，都是静态概念，都是有compiler来进行理解的。variable则是一个动态概念、是一个运行时概念，它所表示的含义有：memory。
+
+### Name and identifier
+
+在cppreference [Identifiers](https://en.cppreference.com/w/cpp/language/identifiers)中对name和identifier进行了说明，但是，看完了之后，还是没有能够准确地把握两个词的含义。下面是对两者的区分。
+
+#### Name是compiler的概念
+
+正如在cppreference [Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)中所阐述的: 
+
+每个entity都有一个name，compiler是通过name lookup来获知这个name所对应的entity。就cppreference中这两个词的含义而言，name是比identifier更加宽泛的、底层的概念，name是compiler的概念，需要以compiler的视角来准确掌握这个词的含义，这是本节标题“Name是compiler的概念”的含义，下面是基于name的一些概念，从中也可以看出name的准确含义：
+
+| 概念           | 参考                                                         |
+| -------------- | ------------------------------------------------------------ |
+| name lookup    | cppreference [Name lookup](https://en.cppreference.com/w/cpp/language/lookup) |
+| dependent name | cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) |
+| namespace      | cppreference [Namespaces](https://en.cppreference.com/w/cpp/language/namespace) |
+
+下面这些概念也是和 name相关的:
+
+- declaration
+- entity
+- scope
+
+显然，identifier是name；
+
+#### Identifier是programming language的概念
+
+关于identifier，我们见得最多的应该是id-expression，在`C++\Language-reference\Expressions\Expressions.md`对它进行了描述。相对于name而已，identifier更多地展现出和programming language相关性。
+
+#### 区分
+
+总的来说，name和identifier两者的含义是有一些重叠的，但是正如前面所总结的，两种使用场景是不同的，这就造成了两者之间的差异，下面是非常能够体现这种差异的一些例子:
+
+文章thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)中的论述较好地展示出了两者之间用法的不同:
+
+compiler默认情况下是将dependent name作为identifier，通过keyword `typename`来告诉compiler，这个name表示的是type，通过keyword `template`来告诉compiler，这个name表示的是template；
 
