@@ -25,24 +25,40 @@ Instead, if classes *A* and *B* inherit virtually from class *X*, then objects o
 This feature is most useful for [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance), as it makes the **virtual base** a common [subobject](https://en.wikipedia.org/wiki/Subobject) for the **deriving class** and all classes that are derived from it. This can be used to avoid the [diamond problem](https://en.wikipedia.org/wiki/Diamond_problem) by clarifying ambiguity over which ancestor class to use, as from the perspective of the deriving class (*C* in the example above) the virtual base (*X*) acts as though it were the direct base class of *C*, not a class derived indirectly through its base (*A*)
 
 ```cpp
-struct Animal {
-  virtual ~Animal() { }
-  virtual void eat(){};
+struct Animal
+{
+	virtual ~Animal()
+	{
+	}
+	virtual void eat()
+	{
+	}
 };
 
-struct Mammal : Animal {
-  virtual void breathe(){};
+struct Mammal: Animal
+{
+	virtual void breathe()
+	{
+	}
 };
 
-struct WingedAnimal : Animal {
-  virtual void flap(){};
+struct WingedAnimal: Animal
+{
+	virtual void flap()
+	{
+	}
 };
 
 // A bat is a winged mammal
-struct Bat : Mammal, WingedAnimal {
+struct Bat: Mammal, WingedAnimal
+{
 };
+int main()
+{
+	Bat bat;
+}
+// g++ test.cpp
 
-Bat bat;
 ```
 
 As declared above, a call to `bat.eat()` is ambiguous because there are two `Animal` (indirect) base classes in `Bat`, so any `Bat` object has two different `Animal` base class subobjects(子对象). So an attempt to directly bind a reference to the `Animal` subobject of a `Bat` object would fail, since the binding is inherently(本质上来说) ambiguous:
