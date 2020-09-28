@@ -1,6 +1,6 @@
 # 关于本章
 
-在阅读[如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 时，其中的内容引起了我对C++ value semantic 和 reference semantic的思考，经过一番思考后，我发现，它们两者对于理解C++至关重要，需要进行专门的总结。
+在阅读zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 时，其中的内容引起了我对C++ value semantic 和 reference semantic的思考，经过一番思考后，我发现，它们两者对于理解C++至关重要，需要进行专门的总结。
 
 
 

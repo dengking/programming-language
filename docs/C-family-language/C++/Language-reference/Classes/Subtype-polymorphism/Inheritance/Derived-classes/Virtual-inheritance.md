@@ -117,11 +117,11 @@ The ability to share a single instance of the `Animal` parent between `Mammal` a
 
 
 
-## [virtual inheritance](https://stackoverflow.com/questions/419943/virtual-inheritance)
+## stackoverflow [virtual inheritance](https://stackoverflow.com/questions/419943/virtual-inheritance)
 
 
 
-## [In C++, what is a virtual base class?](https://stackoverflow.com/questions/21558/in-c-what-is-a-virtual-base-class)
+## stackoverflow [In C++, what is a virtual base class?](https://stackoverflow.com/questions/21558/in-c-what-is-a-virtual-base-class)
 
 ## virtual base class
 
