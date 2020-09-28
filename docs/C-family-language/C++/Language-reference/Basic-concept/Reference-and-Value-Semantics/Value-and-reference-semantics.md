@@ -1,6 +1,6 @@
 # Value and reference semantics
 
-在阅读[如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 时，发现了其中对value semantic的讨论，其中“[值语义](https://link.zhihu.com/?target=http%3A//www.parashift.com/c%2B%2B-faq/val-vs-ref-semantics.html)”的链接的文章在下文中收录了。
+在阅读zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 时，发现了其中对value semantic的讨论，其中“[值语义](https://link.zhihu.com/?target=http%3A//www.parashift.com/c%2B%2B-faq/val-vs-ref-semantics.html)”的链接的文章在下文中收录了。
 
 
 
@@ -129,7 +129,55 @@ int main()
 >
 > 
 
+Pros:
 
+- Easier implementation of `StretchableStack` (most of the code is inherited)
+- Users can pass a `StretchableStack` as a kind-of `Stack`
+
+> NOTE: 这描述的是inheritance和dynamic polymorphism的优势
+
+Cons:
+
+- Adds an extra layer of indirection to access the `Array`
+- Adds some extra freestore allocation overhead (both `new` and `delete`)
+- Adds some extra dynamic binding overhead (reason given in next FAQ)
+
+> NOTE: 这描述的是inheritance和dynamic polymorphism的劣势
+
+In other words, we succeeded at making *our* job easier as the implementer of `StretchableStack`, but all our users [pay for it](https://isocpp.org/wiki/faq/value-vs-ref-semantics#costs-of-heap). Unfortunately the extra overhead was imposed on both users of `StretchableStack` *and* on users of `Stack`.
+
+### What’s the difference between `virtual` data and dynamic data? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#virt-vs-dynam-data) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
+
+> NOTE: dynamic data的含义是什么？
+
+The easiest way to see the distinction is by an analogy with [virtual functions](https://isocpp.org/wiki/faq/virtual-functions): A `virtual` member function means the declaration (signature) must stay the same in derived classes, but the definition (body) can be overridden. The overriddenness of an inherited member function is a static property of the derived class; it doesn’t change dynamically throughout the life of any particular object, nor is it possible for distinct objects of the derived class to have distinct definitions of the member function.
+
+Now go back and re-read the previous paragraph, but make these substitutions:
+
+- “member function” → “member object”
+- “signature” → “type”
+- “body” → “exact class”
+
+After this, you’ll have a working definition of `virtual` data.
+
+> NOTE: 上述对比是非常巧妙的，初读可能无法理解其对照的工整。需要结合第一段话的内容来进行解释:
+>
+> | member function                                              | member object                                                |
+> | ------------------------------------------------------------ | ------------------------------------------------------------ |
+> | A `virtual` **member function** means the declaration (**signature**) must stay the same in derived classes | A `virtual` **member object** means the declaration (**type**) must stay the same in derived classes |
+> | but the definition (**body**) can be overridden              | but the definition (**exact class**) can be overridden       |
+>
+> 
+
+Another way to look at this is to distinguish “per-object” member functions from “dynamic” member functions. A “per-object” member function is a member function that is potentially different in any given instance of an object, and could be implemented by burying a function pointer in the object; this pointer could be `const`, since the pointer will never be changed throughout the object’s life. A “dynamic” member function is a member function that will change dynamically over time; this could also be implemented by a function pointer, but the function pointer would not be const.
+
+Extending the analogy, this gives us three distinct concepts for data members:
+
+- `virtual` data: the definition (`class`) of the member object is overridable in derived classes provided its declaration (“type”) remains the same, and this overriddenness is a static property of the derived class
+- per-object-data: any given object of a class can instantiate a different conformal (same type) member object upon initialization (usually a “wrapper” object), and the exact class of the member object is a static property of the object that wraps it
+- dynamic-data: the member object’s exact class can change dynamically over time
+
+The reason they all look so much the same is that none of this is “supported” in C++. It’s all merely “allowed,” and in this case, the mechanism for faking each of these is the same: a pointer to a (probably abstract) base class. In a language that made these “first class” abstraction mechanisms, the difference would be more striking, since they’d each have a different syntactic variant.
 
 ### Sounds like I should never use reference semantics, right? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#ref-semantics-sometimes-good) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 

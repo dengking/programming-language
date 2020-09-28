@@ -7,7 +7,7 @@ nav:
 #################### virtual相关####################    
     - Virtual-Constructor: Virtual-Constructor
     - Virtual-Friend-Function: Virtual-Friend-Function  
-    - Calling-Virtuals-During-Initialization: Calling-Virtuals-During-Initialization
+    - Calling-Virtual-During-Initialization: Calling-Virtuals-During-Initialization
     - Polymorphic-Value-Types: Polymorphic-Value-Types
     - Base-from-Member: Base-from-Member
     # 命名参数
