@@ -177,9 +177,9 @@ C++中需要通过reference semantic才能够实现runtime polymorphism，关于
 
 这在`C++\Language-reference\Expressions\Value-categories`章节进行了讨论。
 
-### Compiler optimization
+### 性能
 
-compiler optimization和value semantic、reference semantic之间也有着关联，这在`C++\Language-reference\Basic-concept\Reference-and-Value-Semantics\Value-and-reference-semantics.md`中进行了深入讨论。
+value semantic和reference semantic和program的性能是存在一定关联的，这其中有着复杂的原因，其中一个非常重要的原因是: Compiler optimization，这在`C++\Language-reference\Basic-concept\Reference-and-Value-Semantics\Value-and-reference-semantics.md`中进行了深入讨论。
 
 ### TO READ
 

@@ -6,6 +6,10 @@
 
 ## isocpp faq Reference and Value Semantics [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 
+> NOTE: 原文的内容是比较好的， 但是没有较好地将它们串联起来，也就是读者不容易领悟作者重要表达的思路、思想，因此需要在此将作者的书写思路进行说明: 作者首先说明了value semantic 和 reference semantic，然后着重对两者进行对比，作者对两者的对比，着力点在于分析value semantic在speed上的优势以及它取得这种优势的原因，这个分析占用了原文的大部分内容。
+>
+> 有了上述认知，就能够更快的掌握原文的内容了。
+
 ### What is value and/or reference semantics, and which is best in C++? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#val-vs-ref-semantics) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 
 With **reference semantics**, assignment is a pointer-copy (i.e., a *reference*). Value (or “copy”) semantics mean assignment copies the value, not just the pointer. C++ gives you the choice: use the assignment `operator` to copy the value (copy/value semantics), or use a pointer-copy to copy a pointer (reference semantics). C++ allows you to override the assignment `operator` to do anything your heart desires, however the default (and most common) choice is to copy the *value.*
@@ -217,11 +221,13 @@ Thus fully-contained member objects allow significant optimizations that wouldn�
 
 ### Are “`inline` `virtual`” member functions ever actually “inlined”? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#inline-virtuals) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 
-> NOTE: `inline`发生在compile time，而virtual function一般是需要到run time才能够bind的，因此，从表面来看，两者是存在矛盾之处的，实际上，compiler在某些情况下是可以inline virtual function的，这是本节主要介绍的问题。
+> NOTE: `inline`发生在compile time，而virtual function一般是需要到run time才能够bind的，因此，从表面来看，两者是存在矛盾之处的，实际上，compiler在某些情况下是可以inline virtual function的，这是本节主要介绍的问题。从下面的内容来看，作者回答本节标题的提问是: Occasionally
 
 Occasionally…
 
-When the object is referenced via a **pointer** or a **reference**, a call to a [`virtual`](https://isocpp.org/wiki/faq/virtual-functions) function generally cannot be **inlined**, since the call must be resolved dynamically. Reason: the compiler can’t know which actual code to call until **run-time** (i.e., dynamically), since the code may be from a derived class that was created after the caller was compiled.
+When the object is referenced via a **pointer** or a **reference**, a call to a [`virtual`](https://isocpp.org/wiki/faq/virtual-functions) function **generally** cannot be **inlined**, since the call must be resolved dynamically. Reason: the compiler can’t know which actual code to call until **run-time** (i.e., dynamically), since the code may be from a derived class that was created after the caller was compiled.
+
+> NOTE: runtime polymorphism
 
 Therefore the only time an `inline` `virtual` call can be inlined is when the compiler knows the “exact class” of the object which is the target of the `virtual` function call. This can happen only when the compiler has an actual object rather than a **pointer** or **reference** to an object. I.e., either with a local object, a global/`static` object, or a fully contained object inside a composite. This situation can sometimes happen even with a pointer or reference, for example when functions get inlined, access through a pointer or reference may become direct access on the object.
 
