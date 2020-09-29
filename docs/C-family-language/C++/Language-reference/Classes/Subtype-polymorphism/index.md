@@ -37,8 +37,6 @@ c++的value semantic是不支持runtime polymorphsim的，reference semantic是�
 | Virtual destructor      | `C++\Language-reference\Classes\Special-member-functions\Destructor\Virtual-destructor.md` |      |
 | Virtual Friend-Function | `C++\Idiom\OOP\Virtual-Friend-Function`                      |      |
 | Virtual function        | `C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Virtual-function` |      |
-| Virtual data            |                                                              |      |
-|                         |                                                              |      |
 
 
 
