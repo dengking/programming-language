@@ -84,55 +84,7 @@ lvalue       xvalue           prvalue
     glvalue           rvalue
 ```
 
-> NOTE: 
->
-> generalized lvalue 广义左值
->
-> pure rvalue 纯右值 
->
-> **xvalue** 上面并没有给出准确的描述，在一些地方将其称为“eXpiring value”即“将亡值” （在 https://stackoverflow.com/a/11540204 中有介绍）
->
-> 如何理解上述图？
->
-> 在 https://stackoverflow.com/a/11540204 中，使用的是下面这种图
->
-> ```c++
->         expressions
->           /     \
->          /       \
->         /         \
->     glvalues   rvalues
->       /  \       /  \
->      /    \     /    \
->     /      \   /      \
-> lvalues   xvalues   prvalues
-> ```
->
-> 相比而言，这张图是更加易懂的：expression分为两大类：
->
-> - glvalues
-> - rvalues
->
-> 上述两大类包含第三层的对应元素：
->
-> - glvalues：lvalues、xvalues
-> - rvalues：prvalues、xvalues
->
-> lvalues、prvalues是历史遗留的，通过上面的描述可以知道，它们是遵循convention的，所以在此不再进行赘述；新增的是：xvalues。
->
-> 令人费解的是：xvalues它既可以归入glvalues也可以归入rvalues；我们需要思考：C++为什么引入xvalues这个新的概念？答案是：move semantic（关于move semantic，在`C++\Language-reference\Reference\Move-semantic`中进行了介绍），下面对这个答案进行详细说明：
->
-> C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性。
->
-> 需要注意：与prvalue必然可以安全地move不同的是，对于**可以安全地移走的glvalue** 的判断是完全由programmer 来决定的，也就是xvalue是由programmer来决定的。
->
-> 为了支持这个，C++语言做了如下变动：
->
-> 引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic。
->
-> 为了支持上述的转换：将xvalue作为rvalue来使用，C++添加了reference collapsing规则（在`C++\Language-reference\Reference`中对这些规则进行了详细介绍）；
->
-> 需要注意的是：C++中，只允许programmer**引用**rvalue。
+> NOTE: 关于上图的注解，参见下面的explanation章节。
 
 Note the classification of current uses of “lvalue” (with various classifications) in the pre-Pittsburgh WP to the left (mostly in Doug’s handwriting).
 
@@ -143,3 +95,74 @@ The (supposedly new) terminology in the FCD (and presented in [Miller,2010a]) is
 
 
 
+## Explanation
+
+本节对下面这张图进行详细说明
+
+```
+lvalue       xvalue           prvalue
+ \           /    \           /
+  \         /      \         /
+   \       /        \       /
+    \     /          \     /
+     \   /            \   /
+    glvalue           rvalue
+```
+
+### 名称解释
+
+| 缩写    | 全拼                                                         | 中文含义 |
+| ------- | ------------------------------------------------------------ | -------- |
+| glvalue | generalized lvalue                                           | 广义左值 |
+| prvalue | pure rvalue                                                  | 纯右值   |
+| xvalue  | eXpiring value，在下面文章中提及了这个名称: <br>- cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category) <br>- stackoverflow [What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics) `#` [A](https://stackoverflow.com/a/11540204) | 将亡值   |
+
+### 如何理解上述图？
+
+在 https://stackoverflow.com/a/11540204 中，使用的是下面这种图
+
+```c++
+     expressions
+       /     \
+      /       \
+     /         \
+ glvalues   rvalues
+   /  \       /  \
+  /    \     /    \
+ /      \   /      \
+lvalues   xvalues   prvalues
+```
+
+相比而言，这张图是更加易懂的：expression分为两大类：
+
+- glvalues
+- rvalues
+
+上述两大类包含第三层的对应元素：
+
+- glvalues：lvalues、xvalues
+- rvalues：prvalues、xvalues
+
+按照cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中的说法，“the three primary value categories”是:
+
+- lvalues
+- xvalues
+- prvalues
+
+lvalues、prvalues是历史遗留的，通过上面的描述可以知道，它们是遵循convention的，所以在此不再进行赘述；新增的是：xvalues。
+
+### xvalues
+
+令人费解的是：xvalues它既可以归入glvalues也可以归入rvalues；我们需要思考：C++为什么引入xvalues这个新的概念？答案是：move semantic（关于move semantic，在`C++\Language-reference\Reference\Move-semantic`中进行了介绍），下面对这个答案进行详细说明：
+
+C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性。
+
+需要注意：与prvalue必然可以安全地move不同的是，对于**可以安全地移走的glvalue** 的判断是完全由programmer 来决定的，也就是xvalue是由programmer来决定的。
+
+为了支持这个，C++语言做了如下变动：
+
+引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic。
+
+为了支持上述的转换：将xvalue作为rvalue来使用，C++添加了reference collapsing规则（在`C++\Language-reference\Reference`中对这些规则进行了详细介绍）；
+
+需要注意的是：C++中，只允许programmer**引用**rvalue。

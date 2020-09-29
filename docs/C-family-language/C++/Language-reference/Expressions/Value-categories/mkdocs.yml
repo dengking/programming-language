@@ -3,4 +3,4 @@ nav:
 # 首先介绍Bjarne Stroustrup的这篇通俗易懂的文章    
     - New-Value-Terminology: New-Value-Terminology.md
 # 然后介绍标准中关于value category的描述    
-    - Value-categories: Value-categories.md
+    - Value-categories: Value-categories

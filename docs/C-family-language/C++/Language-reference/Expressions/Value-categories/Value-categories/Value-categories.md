@@ -1,17 +1,30 @@
-# [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
+# cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 
-Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (an operator with its operands, a literal, a variable name, etc.) is characterized by two independent properties: a *type* and a *value category*. Each expression has some non-reference type, and each expression belongs to exactly one of the three primary value categories: *prvalue*, *xvalue*, and *lvalue*, defined as follows:
+Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (an operator with its operands, a literal, a variable name, etc.) is characterized by two independent properties: a *type* and a *value category*. Each expression has some non-reference type, and each expression belongs to exactly one of the three primary value categories: *prvalue*, *xvalue*, and *lvalue*. 
 
-- a glvalue (“generalized” lvalue) is an expression whose evaluation determines the identity of an object, bit-field, or function;
-- a prvalue (“pure” rvalue) is an expression whose evaluation either
-
-
-
-- an xvalue (an “eXpiring” value) is a glvalue that denotes an object or bit-field whose resources can be reused;
-- an lvalue (so-called, historically, because lvalues could appear on the left-hand side of an assignment expression) is a glvalue that is not an xvalue;
-- an rvalue (so-called, historically, because rvalues could appear on the right-hand side of an assignment expression) is a prvalue or an xvalue.
-
-Note: this taxonomy went through significant changes with past C++ standard revisions, see [History](https://en.cppreference.com/w/cpp/language/value_category#History) below for details.
+> NOTE: 始终牢记stroustrup [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf)中给出的"W"图
+>
+> ```
+> iM      im      Im
+>  \     /  \     /
+>   \   /    \   /
+>    \ /      \ /
+>     i        m
+> ```
+>
+> 
+>
+> ```
+> lvalue       xvalue           prvalue
+>  \           /    \           /
+>   \         /      \         /
+>    \       /        \       /
+>     \     /          \     /
+>      \   /            \   /
+>     glvalue           rvalue
+> ```
+>
+> 需要按照stroustrup [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf) 中的思路来理解本文。
 
 ## Primary categories
 
