@@ -32,24 +32,66 @@ Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (a
 
 The following expressions are *lvalue expressions*:
 
-- the name of a variable, a function, a [template parameter object](https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter) (since C++20), or a data member, regardless of type, such as [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl). Even if the variable's type is rvalue reference, the expression consisting of its name is an lvalue expression;
-- a function call or an overloaded operator expression, whose return type is lvalue reference, such as [std::getline](http://en.cppreference.com/w/cpp/string/basic_string/getline)([std::cin](http://en.cppreference.com/w/cpp/io/cin), str), [std::cout](http://en.cppreference.com/w/cpp/io/cout) << 1, str1 = str2, or ++it;
-- a = b, a += b, a %= b, and all other built-in [assignment and compound assignment](https://en.cppreference.com/w/cpp/language/operator_assignment) expressions;
-- ++a and --a, the built-in [pre-increment and pre-decrement](https://en.cppreference.com/w/cpp/language/operator_incdec#Built-in_prefix_operators) expressions;
-- *p, the built-in [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) expression;
-- a[n] and p[n], the built-in [subscript](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_subscript_operator) expressions, where one operand in a[n] is an array lvalue (since C++11);
-- a.m, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
-- p->m, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
-- a.*mp, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an lvalue and `mp` is a pointer to data member;
-- p->*mp, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to data member;
-- a, b, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an lvalue;
-- a ? b : c, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (e.g., when both are lvalues of the same type, but see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
-- a [string literal](https://en.cppreference.com/w/cpp/language/string_literal), such as "Hello, world!";
-- a cast expression to lvalue reference type, such as static_cast<int&>(x);
+#### Named variable
 
-| a function call or an overloaded operator expression, whose return type is rvalue reference to function;a cast expression to rvalue reference to function type, such as static_cast<void (&&)(int)>(x). | (since C++11) |
-| ------------------------------------------------------------ | ------------- |
-|                                                              |               |
+> NOTE: 这种是最容易理解的，它们是典型的`iM`
+
+the name of a variable, a function, a [template parameter object](https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter) (since C++20), or a data member, regardless of type, such as [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl). Even if the variable's type is rvalue reference, the expression consisting of its name is an lvalue expression;
+
+> NOTE: 上面这段话后半句的意思是: 虽然 [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl) 的类型是rvalue reference，但是它们满足`iM`，因此它们是rvalue，这就是stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) `#` [part two](https://stackoverflow.com/a/11540204) 中总结的：
+>
+> > A **named rvalue reference** is an lvalue, just like any other variable.
+>
+> 在`C++\Language-reference\Reference\Move-semantic\stackoverflow-What-is-move-semantics.md`中收录了这篇文章。
+
+#### Function call expression
+
+> NOTE: 函数调用表达式，如果对应的函数的返回值的类型是 **lvalue reference**，则这个expression的value category是lvalue 
+
+a function call or an overloaded operator expression, whose return type is **lvalue reference**, such as [std::getline](http://en.cppreference.com/w/cpp/string/basic_string/getline)([std::cin](http://en.cppreference.com/w/cpp/io/cin), str), [std::cout](http://en.cppreference.com/w/cpp/io/cout) `<< 1`, `str1 = str2`, or `++it`;
+
+> NOTE: 需要对上面列举的例子进行详细的说明:
+>
+> `std::getline`的原型如下，显然返回值的类型是lvalue reference: 
+>
+> ```C++
+> template< class CharT, class Traits, class Allocator >
+> std::basic_istream<CharT,Traits>& getline( std::basic_istream<CharT,Traits>& input,
+>                                            std::basic_string<CharT,Traits,Allocator>& str,
+>                                            CharT delim );
+> ```
+>
+> [std::cout](http://en.cppreference.com/w/cpp/io/cout) `<< 1` ，它实际调用的是
+>
+> `str1 = str2` 是 assignment expression，下面会进行介绍；
+>
+> `++it` 是 increment expression，下面会进行介绍；
+
+#### Assignment expression
+
+a = b, a += b, a %= b, and all other built-in [assignment and compound assignment](https://en.cppreference.com/w/cpp/language/operator_assignment) expressions;
+
+++a and --a, the built-in [pre-increment and pre-decrement](https://en.cppreference.com/w/cpp/language/operator_incdec#Built-in_prefix_operators) expressions;
+
+*p, the built-in [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) expression;
+
+a[n] and p[n], the built-in [subscript](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_subscript_operator) expressions, where one operand in a[n] is an array lvalue (since C++11);
+
+a.m, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
+
+p->m, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
+
+a.*mp, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an lvalue and `mp` is a pointer to data member;
+
+p->*mp, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to data member;
+
+a, b, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an lvalue;
+
+a ? b : c, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (e.g., when both are lvalues of the same type, but see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
+
+a [string literal](https://en.cppreference.com/w/cpp/language/string_literal), such as "Hello, world!";
+
+a cast expression to lvalue reference type, such as static_cast<int&>(x);
 
 Properties:
 
@@ -79,14 +121,6 @@ The following expressions are *prvalue expressions*:
 - the [`this`](https://en.cppreference.com/w/cpp/language/this) pointer;
 - an [enumerator](https://en.cppreference.com/w/cpp/language/enum);
 - non-type [template parameter](https://en.cppreference.com/w/cpp/language/template_parameters) unless its type was a class or (since C++20) an lvalue reference type;
-
-| a [lambda expression](https://en.cppreference.com/w/cpp/language/lambda), such as [](int x){ return x * x; }; | (since C++11) |
-| ------------------------------------------------------------ | ------------- |
-|                                                              |               |
-
-| a [requires-expression](https://en.cppreference.com/w/cpp/language/constraints), such as requires (T i) { typename T::type; };a specialization of a [concept](https://en.cppreference.com/w/cpp/language/constraints), such as [EqualityComparable](http://en.cppreference.com/w/cpp/concepts/EqualityComparable)<int>. | (since C++20) |
-| ------------------------------------------------------------ | ------------- |
-|                                                              |               |
 
 Properties:
 

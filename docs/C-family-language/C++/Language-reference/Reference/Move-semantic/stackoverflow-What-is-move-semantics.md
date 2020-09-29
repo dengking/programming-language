@@ -1,4 +1,4 @@
-# [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics)
+# stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics)
 
 ## [part one](https://stackoverflow.com/a/3109981) 
 I find it easiest to understand move semantics with example code. Let's start with a very simple string class which only holds a pointer to a heap-allocated block of memory:
