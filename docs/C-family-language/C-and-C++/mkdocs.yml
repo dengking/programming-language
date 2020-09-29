@@ -9,7 +9,6 @@ nav:
     - Dynamic-emory-management: Dynamic-emory-management.md
     - Undefined-behavior: Undefined-behavior
 ##########C和C++中都会涉及到的概念的对比##########
-    - VS-inline-VS-marco: VS-inline-VS-marco.md
     - Static: Static
 
 
