@@ -1,4 +1,5 @@
 nav:
-    - LLVM-Clang: LLVM-Clang.md
+    - LLVM: LLVM
     - GCC: GCC
+    - MSVC: MSVC
     

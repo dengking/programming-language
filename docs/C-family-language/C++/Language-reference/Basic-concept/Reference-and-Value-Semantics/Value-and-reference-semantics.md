@@ -148,8 +148,6 @@ In other words, we succeeded at making *our* job easier as the implementer of `S
 
 ### What’s the difference between `virtual` data and dynamic data? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#virt-vs-dynam-data) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 
-> NOTE: dynamic data的含义是什么？
-
 The easiest way to see the distinction is by an analogy with [virtual functions](https://isocpp.org/wiki/faq/virtual-functions): A `virtual` member function means the declaration (signature) must stay the same in derived classes, but the definition (body) can be overridden. The overriddenness of an inherited member function is a static property of the derived class; it doesn’t change dynamically throughout the life of any particular object, nor is it possible for distinct objects of the derived class to have distinct definitions of the member function.
 
 Now go back and re-read the previous paragraph, but make these substitutions:
@@ -169,15 +167,112 @@ After this, you’ll have a working definition of `virtual` data.
 >
 > 
 
-Another way to look at this is to distinguish “per-object” member functions from “dynamic” member functions. A “per-object” member function is a member function that is potentially different in any given instance of an object, and could be implemented by burying a function pointer in the object; this pointer could be `const`, since the pointer will never be changed throughout the object’s life. A “dynamic” member function is a member function that will change dynamically over time; this could also be implemented by a function pointer, but the function pointer would not be const.
+Another way to look at this is to distinguish “per-object” member functions from “dynamic” member functions. 
+
+A “per-object” member function is a member function that is potentially different in any given instance of an object, and could be implemented by burying a function pointer in the object; this pointer could be `const`, since the pointer will never be changed throughout the object’s life. 
+
+> NOTE: 感觉实现方式就是类有一个成员变量，这个成员变量的类型是function pointer，这个类的构造函数中接收一个function pointer
+
+A “dynamic” member function is a member function that will change dynamically over time; this could also be implemented by a function pointer, but the function pointer would not be const.
+
+> NOTE: 
 
 Extending the analogy, this gives us three distinct concepts for data members:
 
-- `virtual` data: the definition (`class`) of the member object is overridable in derived classes provided its declaration (“type”) remains the same, and this overriddenness is a static property of the derived class
-- per-object-data: any given object of a class can instantiate a different conformal (same type) member object upon initialization (usually a “wrapper” object), and the exact class of the member object is a static property of the object that wraps it
-- dynamic-data: the member object’s exact class can change dynamically over time
+| concept         | explanation                                                  | 说明                                                         |
+| --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `virtual` data  | the definition (`class`) of the member object is overridable in derived classes provided its declaration (“type”) remains the same, and this overriddenness is a **static property** of the derived class | - static property<br>- 主要用在OOP inheritance中             |
+| per-object-data | any given object of a class can instantiate a different conformal (same type) member object upon initialization (usually a “wrapper” object), and the exact class of the member object is a **static property** of the object that wraps it | - 没有inheritance，它强调的是每个对象可以有不同type的member object，这个member object在initialization时构造，但是它的准确类型是不变的 |
+| dynamic-data    | the member object’s exact class can change dynamically over time | dynamic                                                      |
+
+
 
 The reason they all look so much the same is that none of this is “supported” in C++. It’s all merely “allowed,” and in this case, the mechanism for faking each of these is the same: a pointer to a (probably abstract) base class. In a language that made these “first class” abstraction mechanisms, the difference would be more striking, since they’d each have a different syntactic variant.
+
+> NOTE: 上述三者，C++都不直接支持，但是是允许的，它们的实现方式的一个共同点是: a pointer to a (probably abstract) base class
+
+### Should I normally use pointers to freestore allocated objects for my data members, or should I use “composition”? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#compos-vs-heap) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
+
+Composition.
+
+Your member objects should normally be “contained” in the composite object (but not always; “wrapper” objects are a good example of where you want a pointer/reference; also the N-to-1-uses-a relationship needs something like a pointer/reference).
+
+There are three reasons why fully contained member objects (“composition”) has better performance than pointers to freestore-allocated member objects:
+
+- Extra layer of indirection every time you need to access the member object
+- Extra freestore allocations (`new` in constructor, `delete` in destructor)
+- Extra dynamic binding (reason given below)
+
+### What are relative costs of the 3 performance hits associated with allocating member objects from the freestore? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#costs-of-heap) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
+
+The three performance hits are enumerated in the previous FAQ:
+
+- By itself, an extra layer of indirection is small potatoes
+- Freestore allocations can be a performance issue (the performance of the typical implementation of `malloc()` degrades when there are many allocations; OO software can easily become “freestore bound” unless you’re careful)
+- The extra dynamic binding comes from having a pointer rather than an object. Whenever the C++ compiler can know an object’s *exact* class, [`virtual`](https://isocpp.org/wiki/faq/virtual-functions) function calls can be *statically* bound, which allows inlining. Inlining allows zillions (would you believe half a dozen :-) optimization opportunities such as procedural integration, register lifetime issues, etc. The C++ compiler can know an object’s exact class in three circumstances: local variables, global/`static` variables, and fully-contained member objects
+
+Thus fully-contained member objects allow significant optimizations that wouldn’t be possible under the “member objects-by-pointer” approach. This is the main reason that languages which enforce reference-semantics have “inherent” performance challenges.
+
+*Note: Please read the next three FAQs to get a balanced perspective!*
+
+### Are “`inline` `virtual`” member functions ever actually “inlined”? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#inline-virtuals) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
+
+> NOTE: `inline`发生在compile time，而virtual function一般是需要到run time才能够bind的，因此，从表面来看，两者是存在矛盾之处的，实际上，compiler在某些情况下是可以inline virtual function的，这是本节主要介绍的问题。
+
+Occasionally…
+
+When the object is referenced via a **pointer** or a **reference**, a call to a [`virtual`](https://isocpp.org/wiki/faq/virtual-functions) function generally cannot be **inlined**, since the call must be resolved dynamically. Reason: the compiler can’t know which actual code to call until **run-time** (i.e., dynamically), since the code may be from a derived class that was created after the caller was compiled.
+
+Therefore the only time an `inline` `virtual` call can be inlined is when the compiler knows the “exact class” of the object which is the target of the `virtual` function call. This can happen only when the compiler has an actual object rather than a **pointer** or **reference** to an object. I.e., either with a local object, a global/`static` object, or a fully contained object inside a composite. This situation can sometimes happen even with a pointer or reference, for example when functions get inlined, access through a pointer or reference may become direct access on the object.
+
+> NOTE: 下面的例子就是对最后一段话中描述的情况的说明
+
+Note that the difference between inlining and non-inlining is normally *much* more significant than the difference between a regular function call and a `virtual` function call. For example, the difference between a regular function call and a `virtual` function call is often just two extra memory references, but the difference between an `inline` function and a non-`inline` function can be as much as an order of magnitude (for zillions of calls to insignificant member functions, loss of inlining `virtual` functions can result in 25X speed degradation! [Doug Lea, “Customization in C++,” proc Usenix C++ 1990]).
+
+A practical consequence of this insight: don’t get bogged down（陷入） in the endless debates (or sales tactics!) of compiler/language vendors who compare the cost of a `virtual` function call on their language/compiler with the same on another language/compiler. Such comparisons are largely meaningless when compared with the ability of the language/compiler to “`inline` expand” member function calls. I.e., many language implementation vendors make a big stink about how good their dispatch strategy is, but if these implementations don’t *inline* member function calls, the overall system performance would be poor, since it is inlining —*not* dispatching— that has the greatest performance impact.
+
+Here is an example of where virtual calls can be inlined even through a reference. The following code is all in the same translation unit, or otherwise organized such that the optimizer can see all of this code at once.
+
+```c++
+#include <stdio.h> // printf
+class Calculable
+{
+public:
+	virtual unsigned char calculate() = 0;
+};
+class X: public Calculable
+{
+public:
+	virtual unsigned char calculate()
+	{
+		return 1;
+	}
+};
+class Y: public Calculable
+{
+public:
+	virtual unsigned char calculate()
+	{
+		return 2;
+	}
+};
+static void print(Calculable &c)
+{
+	printf("%d\n", c.calculate());
+	printf("+1: %d\n", c.calculate() + 1);
+}
+int main()
+{
+	X x;
+	Y y;
+	print(x);
+	print(y);
+}
+// g++ test.cpp
+
+```
+
+
 
 ### Sounds like I should never use reference semantics, right? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#ref-semantics-sometimes-good) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 
