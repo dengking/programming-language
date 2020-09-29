@@ -44,9 +44,18 @@ the name of a variable, a function, a [template parameter object](https://en.cpp
 >
 > 在`C++\Language-reference\Reference\Move-semantic\stackoverflow-What-is-move-semantics.md`中收录了这篇文章。
 
-#### Function call expression
+#### Lvalue function call expression
 
-> NOTE: 函数调用表达式，如果对应的函数的返回值的类型是 **lvalue reference**，则这个expression的value category是lvalue 
+> NOTE: 本节标题中的lvalue function是我创造的一个概念，与它相对的一个概念是rvalue expression，下面是它们的定义:
+>
+> | 概念              | 说明                                                   |
+> | ----------------- | ------------------------------------------------------ |
+> | lvalue function   | function whose **return type** is **lvalue reference** |
+> | rvalue expression | function whose **return type** is non-reference        |
+>
+> 上述 两个概念是基于value category来对function进行分类的，这样做是为了便于描述value category，因为在C++中，operator可以使用function来进行描述，所以operator expression（表示的是包含operator的expression） 都可以使用function call expression来进行描述，所以使用function call expression，可以描述所有的operator expression。
+>
+> Lvalue function call expression的value category是lvalue，这种情况是非常具有代表性的，后面的很多operator expressin都可以归入这个范畴。
 
 a function call or an overloaded operator expression, whose return type is **lvalue reference**, such as [std::getline](http://en.cppreference.com/w/cpp/string/basic_string/getline)([std::cin](http://en.cppreference.com/w/cpp/io/cin), str), [std::cout](http://en.cppreference.com/w/cpp/io/cout) `<< 1`, `str1 = str2`, or `++it`;
 
@@ -69,29 +78,51 @@ a function call or an overloaded operator expression, whose return type is **lva
 
 #### Assignment expression
 
-a = b, a += b, a %= b, and all other built-in [assignment and compound assignment](https://en.cppreference.com/w/cpp/language/operator_assignment) expressions;
+`a = b`, `a += b`, `a %= b`, and all other built-in [assignment and compound assignment](https://en.cppreference.com/w/cpp/language/operator_assignment) expressions;
 
-++a and --a, the built-in [pre-increment and pre-decrement](https://en.cppreference.com/w/cpp/language/operator_incdec#Built-in_prefix_operators) expressions;
+> NOTE: 在 [assignment and compound assignment](https://en.cppreference.com/w/cpp/language/operator_assignment) 中，给出了[Assignment operators](https://en.cppreference.com/w/cpp/language/operator_assignment)的函数原型，可以看到，它们都是前面描述的: a function call or an overloaded operator expression, whose return type is **lvalue reference**，即它是lvalue function，所以包它的expression就是lvalue expression。
 
-*p, the built-in [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) expression;
+#### Pre-increment and pre-decrement expression
 
-a[n] and p[n], the built-in [subscript](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_subscript_operator) expressions, where one operand in a[n] is an array lvalue (since C++11);
+`++a` and `--a`, the built-in [pre-increment and pre-decrement](https://en.cppreference.com/w/cpp/language/operator_incdec#Built-in_prefix_operators) expressions;
 
-a.m, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
+> NOTE: 相当于 Lvalue function call expression。
 
-p->m, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
+#### indirection expression
 
-a.*mp, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an lvalue and `mp` is a pointer to data member;
+`*p`, the built-in [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) expression;
 
-p->*mp, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to data member;
+> NOTE: 相当于 Lvalue function call expression。
 
-a, b, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an lvalue;
+#### Built-in subscript
 
-a ? b : c, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (e.g., when both are lvalues of the same type, but see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
+`a[n]` and `p[n]`, the built-in [subscript](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_subscript_operator) expressions, where one operand in `a[n]` is an array lvalue (since C++11);
+
+> NOTE: 相当于 Lvalue function call expression。
+
+#### Member expression
+
+`a.m`, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
+
+`p->m`, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
+
+`a.*mp`, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an lvalue and `mp` is a pointer to data member;
+
+`p->*mp`, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to data member;
+
+#### Comma expression
+
+`a, b`, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an lvalue;
+
+`a ? b : c`, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (e.g., when both are lvalues of the same type, but see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
+
+#### String literal
 
 a [string literal](https://en.cppreference.com/w/cpp/language/string_literal), such as "Hello, world!";
 
-a cast expression to lvalue reference type, such as static_cast<int&>(x);
+#### Cast expression
+
+a cast expression to lvalue reference type, such as `static_cast<int&>(x)`;
 
 Properties:
 
@@ -104,23 +135,75 @@ Properties:
 
 The following expressions are *prvalue expressions*:
 
-- a [literal](https://en.cppreference.com/w/cpp/language/expressions#Literals) (except for [string literal](https://en.cppreference.com/w/cpp/language/string_literal)), such as 42, true or nullptr;
-- a function call or an overloaded operator expression, whose return type is non-reference, such as str.substr(1, 2), str1 + str2, or it++;
-- a++ and a--, the built-in [post-increment and post-decrement](https://en.cppreference.com/w/cpp/language/operator_incdec#Built-in_postfix_operators) expressions;
-- a + b, a % b, a & b, a << b, and all other built-in [arithmetic](https://en.cppreference.com/w/cpp/language/operator_arithmetic) expressions;
-- a && b, a || b, !a, the built-in [logical](https://en.cppreference.com/w/cpp/language/operator_logical) expressions;
-- a < b, a == b, a >= b, and all other built-in [comparison](https://en.cppreference.com/w/cpp/language/operator_comparison) expressions;
-- &a, the built-in [address-of](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_address-of_operator) expression;
-- a.m, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2), or where `a` is an rvalue and `m` is a non-static data member of non-reference type (until C++11);
-- p->m, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2);
+#### Literal
+
+a [literal](https://en.cppreference.com/w/cpp/language/expressions#Literals) (except for [string literal](https://en.cppreference.com/w/cpp/language/string_literal)), such as `42`, `true` or `nullptr`;
+
+> NOTE: literal是非常典型的一类prvalue，后面的很多都可以归入这一类，literal是典型的与named variable不同的；我们可以使用传统的rvalue来理解它: 显然它是无法处于assignment左侧的。
+
+#### `this`
+
+the [`this`](https://en.cppreference.com/w/cpp/language/this) pointer;
+
+> NOTE: 需要注意的是，`this` pointer不是一个variable（虽然`this`是有name的，我们不需要declare），它相当于literal（可以使用`nullptr`来进行类比），显然它是无法处于assignment左侧的；
+>
+> 如果我们从`this`的实现来思考的话，那么`this` pointer是rvalue就非常容易理解: compiler让`this`的值为object的地址，因此，`this`仅仅是一个地址值而已，和literal非常类似，所以`this`是prvalue。
+
+#### enumerator
+
+an [enumerator](https://en.cppreference.com/w/cpp/language/enum)
+
+> NOTE: enumerator和`this`、literal是非常类似的，enumerator的值在compile阶段就已经确定了，所以所有的enumerator都会被替换为它的对应的value；显然它是无法位于assignment左侧的。
+
+#### Non-type template parameter
+
+non-type [template parameter](https://en.cppreference.com/w/cpp/language/template_parameters) unless its type was a class or (since C++20) an lvalue reference type;
+
+> NOTE: non-type template parameter对应的argument一般是literal
+
+#### Rvalue function call expression
+
+> NOTE: Rvalue function 的概念在前面的Lvalue function call expression章节中已经介绍了
+
+a function call or an overloaded operator expression, whose return type is non-reference, such as `str.substr(1, 2)`, `str1 + str2`, or `it++`;
+
+#### Post-increment and post-decrement expression
+
+`a++` and `a--`, the built-in [post-increment and post-decrement](https://en.cppreference.com/w/cpp/language/operator_incdec#Built-in_postfix_operators) expressions;
+
+> NOTE: 相当于 Rvalue function call expression。
+
+#### Arithmetic expression
+
+`a + b`, `a % b`, `a & b`, `a << b`, and all other built-in [arithmetic](https://en.cppreference.com/w/cpp/language/operator_arithmetic) expressions;
+
+#### Logical expression
+
+`a && b`, `a || b`, `!a`, the built-in [logical](https://en.cppreference.com/w/cpp/language/operator_logical) expressions;
+
+#### Comparison expression
+
+`a < b`, `a == b`, `a >= b`, and all other built-in [comparison](https://en.cppreference.com/w/cpp/language/operator_comparison) expressions;
+
+#### Address-of
+
+`&a`, the built-in [address-of](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_address-of_operator) expression;
+
+#### Member of object expression
+
+`a.m`, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2), or where `a` is an rvalue and `m` is a non-static data member of non-reference type (until C++11);
+
+
+
+`p->m`, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2);
+
 - a.*mp, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2), or where `a` is an rvalue and `mp` is a pointer to data member (until C++11);
 - p->*mp, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2);
 - a, b, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an rvalue;
 - a ? b : c, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
-- a cast expression to non-reference type, such as static_cast<double>(x), [std::string](http://en.cppreference.com/w/cpp/string/basic_string){}, or (int)42;
-- the [`this`](https://en.cppreference.com/w/cpp/language/this) pointer;
-- an [enumerator](https://en.cppreference.com/w/cpp/language/enum);
-- non-type [template parameter](https://en.cppreference.com/w/cpp/language/template_parameters) unless its type was a class or (since C++20) an lvalue reference type;
+- a cast expression to non-reference type, such as `static_cast<double>(x)`, [std::string](http://en.cppreference.com/w/cpp/string/basic_string){}, or `(int)42`;
+
+  
 
 Properties:
 
