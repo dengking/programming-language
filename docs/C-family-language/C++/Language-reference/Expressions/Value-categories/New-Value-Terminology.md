@@ -166,3 +166,32 @@ C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，
 为了支持上述的转换：将xvalue作为rvalue来使用，C++添加了reference collapsing规则（在`C++\Language-reference\Reference`中对这些规则进行了详细介绍）；
 
 需要注意的是：C++中，只允许programmer**引用**rvalue。
+
+### Literal类prvalue
+
+在`C++\Language-reference\Expressions\Value-categories\Value-categories\Value-categories.md`中总结了literal类prvalue，感觉使用stroustrup [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf)中的分类法无法将它们也归入prvalue，但是使用传统的rvalue不能处于assignment operator的左边则可以。在cnblogs [Lvalues and Rvalues](https://www.cnblogs.com/areliang/archive/2011/11/16/2251480.html)中，对此有着更加好的解释:
+
+> rvalue是不可以赋值的，它不是一个变量，在内存中没有存在，没有地址。它要么是存在于CPU的寄存器中，要么是存在于指令中（立即数）。所以只要对rvalue取地址，那么就一定是错误的（编译器会抱怨的）。
+>
+> 访问rvalue不会导致CPU访问存储器（对立即数和寄存器的访问很快）。
+>
+> rvalue的例子：
+>
+> ```C++
+> int a;  
+> a = 10; // 10是rvalue，它没有地址，&10就是错误的表达式。从汇编语言的角度来看，10是直接存在于MOV指令中的立即数。   
+> 10 = a; // 错误，10是rvalue，不可赋值。   
+> //函数返回值属于rvalue，因为返回值通常用CPU寄存器传递，没有地址。   
+> int foo()  
+> {  
+>     return 0;  
+> }  
+> int b = foo(); //没问题，函数返回值是rvalue。   
+> int* p = &foo(); //错误，rvalue没有地址。   
+> void bar(int& i)  
+> {  
+> }  
+> bar(foo()); //错误，bar函数参数需要的是lvalue。 
+> ```
+>
+> 

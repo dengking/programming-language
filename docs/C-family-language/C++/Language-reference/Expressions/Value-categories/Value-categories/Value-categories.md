@@ -7,9 +7,9 @@ Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (a
 > ```
 > iM      im      Im
 >  \     /  \     /
->   \   /    \   /
->    \ /      \ /
->     i        m
+>    \   /    \   /
+>      \ /      \ /
+>       i        m
 > ```
 >
 > 
@@ -17,11 +17,11 @@ Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (a
 > ```
 > lvalue       xvalue           prvalue
 >  \           /    \           /
->   \         /      \         /
->    \       /        \       /
->     \     /          \     /
->      \   /            \   /
->     glvalue           rvalue
+>    \         /      \         /
+>      \       /        \       /
+>       \     /          \     /
+>        \   /            \   /
+>        glvalue           rvalue
 > ```
 >
 > 需要按照stroustrup [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf) 中的思路来理解本文。
@@ -66,11 +66,17 @@ a function call or an overloaded operator expression, whose return type is **lva
 > ```C++
 > template< class CharT, class Traits, class Allocator >
 > std::basic_istream<CharT,Traits>& getline( std::basic_istream<CharT,Traits>& input,
->                                            std::basic_string<CharT,Traits,Allocator>& str,
->                                            CharT delim );
+>                                         std::basic_string<CharT,Traits,Allocator>& str,
+>                                         CharT delim );
 > ```
 >
-> [std::cout](http://en.cppreference.com/w/cpp/io/cout) `<< 1` ，它实际调用的是
+> [std::cout](http://en.cppreference.com/w/cpp/io/cout) `<< 1` ，它实际调用的是[std::basic_ostream<CharT,Traits>::operator<<](https://en.cppreference.com/w/cpp/io/basic_ostream/operator_ltlt)，这个函数的原型是:
+>
+> ```C++
+> basic_ostream& operator<<( int value );
+> ```
+>
+> 
 >
 > `str1 = str2` 是 assignment expression，下面会进行介绍；
 >
@@ -100,9 +106,17 @@ a function call or an overloaded operator expression, whose return type is **lva
 
 > NOTE: 相当于 Lvalue function call expression。
 
-#### Member expression
+#### Member access expression
 
-`a.m`, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
+> NOTE:  本段标题中的“member access”是取自cppreference [Member access operators](https://en.cppreference.com/w/cpp/language/operator_member_access)，下面这些operator，cppreference中将它们都归入了Member access operators。
+
+`a.m`, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a **member enumerator** or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
+
+> NOTE: 需要注意的是，“member of object”的意思是“object的member”。
+>
+> 关于member enumerator在“prvalue”段中会进行介绍。
+>
+> 
 
 `p->m`, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
 
@@ -135,13 +149,17 @@ Properties:
 
 The following expressions are *prvalue expressions*:
 
-#### Literal
+#### Literal类prvalue
+
+> NOTE: 本段标题“Literal类prvalue”是我创造的一个概念，它表示类似于literal的prvalue，包含如下: 
+
+**literal**: 
 
 a [literal](https://en.cppreference.com/w/cpp/language/expressions#Literals) (except for [string literal](https://en.cppreference.com/w/cpp/language/string_literal)), such as `42`, `true` or `nullptr`;
 
 > NOTE: literal是非常典型的一类prvalue，后面的很多都可以归入这一类，literal是典型的与named variable不同的；我们可以使用传统的rvalue来理解它: 显然它是无法处于assignment左侧的。
 
-#### `this`
+**`this`** :
 
 the [`this`](https://en.cppreference.com/w/cpp/language/this) pointer;
 
@@ -149,13 +167,13 @@ the [`this`](https://en.cppreference.com/w/cpp/language/this) pointer;
 >
 > 如果我们从`this`的实现来思考的话，那么`this` pointer是rvalue就非常容易理解: compiler让`this`的值为object的地址，因此，`this`仅仅是一个地址值而已，和literal非常类似，所以`this`是prvalue。
 
-#### enumerator
+**enumerator** :
 
 an [enumerator](https://en.cppreference.com/w/cpp/language/enum)
 
 > NOTE: enumerator和`this`、literal是非常类似的，enumerator的值在compile阶段就已经确定了，所以所有的enumerator都会被替换为它的对应的value；显然它是无法位于assignment左侧的。
 
-#### Non-type template parameter
+**Non-type template parameter** :
 
 non-type [template parameter](https://en.cppreference.com/w/cpp/language/template_parameters) unless its type was a class or (since C++20) an lvalue reference type;
 
@@ -166,6 +184,27 @@ non-type [template parameter](https://en.cppreference.com/w/cpp/language/templat
 > NOTE: Rvalue function 的概念在前面的Lvalue function call expression章节中已经介绍了
 
 a function call or an overloaded operator expression, whose return type is non-reference, such as `str.substr(1, 2)`, `str1 + str2`, or `it++`;
+
+> NOTE: 下面是cnblogs [Lvalues and Rvalues](https://www.cnblogs.com/areliang/archive/2011/11/16/2251480.html)中给出的一个例子: 
+>
+> ```C++
+> int a;  
+> a = 10; // 10是rvalue，它没有地址，&10就是错误的表达式。从汇编语言的角度来看，10是直接存在于MOV指令中的立即数。   
+> 10 = a; // 错误，10是rvalue，不可赋值。   
+> //函数返回值属于rvalue，因为返回值通常用CPU寄存器传递，没有地址。   
+> int foo()  
+> {  
+>     return 0;  
+> }  
+> int b = foo(); //没问题，函数返回值是rvalue。   
+> int* p = &foo(); //错误，rvalue没有地址。   
+> void bar(int& i)  
+> {  
+> }  
+> bar(foo()); //错误，bar函数参数需要的是lvalue。 
+> ```
+>
+> 
 
 #### Post-increment and post-decrement expression
 
