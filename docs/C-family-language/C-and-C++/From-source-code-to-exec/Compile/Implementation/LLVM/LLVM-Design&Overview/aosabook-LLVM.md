@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [LLVM](http://www.aosabook.org/en/llvm.html)
 
 This chapter discusses some of the design decisions that shaped LLVM[1](http://www.aosabook.org/en/llvm.html#footnote-1), an umbrella project that hosts and develops a set of close-knit low-level toolchain components (e.g., assemblers, compilers, debuggers, etc.), which are designed to be compatible with existing tools typically used on Unix systems. The name "LLVM" was once an acronym, but is now just a brand for the umbrella project. While LLVM provides some unique capabilities, and is known for some of its great tools (e.g., the Clang compiler[2](http://www.aosabook.org/en/llvm.html#footnote-2), a C/C++/Objective-C compiler which provides a number of benefits over the GCC compiler), the main thing that sets LLVM apart from other compilers is its **internal architecture**.

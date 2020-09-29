@@ -4,7 +4,7 @@
 
 
 
-## [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)
+## zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)
 
 [值语义](https://link.zhihu.com/?target=http%3A//www.parashift.com/c%2B%2B-faq/val-vs-ref-semantics.html)是很多OO语言（比如python、java）里没有的概念。在这些语言里，几乎所有的变量都是引用语义(**Reference Semantics**)，GC掌管了所有对象的生命期管理事务， 程序员无需为此操心，只需要用变量去对象池中去引用即可。值语义虽然也有出场的机会，例如Java里的[Primitive Data Type](https://link.zhihu.com/?target=http%3A//docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.htmlPrimitive)，但毕竟不是重点，所以往往被忽视。
 
@@ -95,7 +95,9 @@ void consumer()
 
 ## SUMMARY
 
+zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)中的内容是非常精简但是内容丰富，需要对一些内容进行扩展，经过仔细梳理、思考发现，C++中的很多内容都与它有着密切的关联，下面对此进行梳理。
 
+### Object
 
 C++允许programmer管理memory -> 在cppreference中，使用object（在cppreference）概念来对此进行统一描述；
 
@@ -112,11 +114,13 @@ Reference semantic：Reference object
 - dangling pointer、dangling reference
 - ......
 
+Object lifetime、Object value、Object type，这将会在`C++\Language-reference\Basic-concept\Data-model\Object`中描述；
+
+#### C++是兼容并包的
+
 C++是兼容并包的语言，它既包含value semantic又包含reference semantic；
 
-### Object
 
-Object lifetime、Object value、Object type，这将会在`C++\Language-reference\Basic-concept\Data-model\Object`中描述；
 
 #### Object、type、value
 
@@ -159,20 +163,7 @@ Object lifetime、Object value、Object type，这将会在`C++\Language-referen
 
 ### Runtime polymorphism
 
-在C++中，runtime polymorphism与value semantic、reference semantic密切相关。触发我对它们产生思考的是：
-
-- [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)中提及的：[值语义和运行时多态是矛盾的。](https://link.zhihu.com/?target=http%3A//akrzemi1.wordpress.com/2012/02/03/value-semantics/%23comment-270)
-- multiple dispatch
-
-c++的value semantic是不支持runtime polymorphsim的，reference semantic是支持runtime polymorphsim的，所以需要通过reference才能够实现runtime polymorphysim的。
-
-需要思考：reference semantic是如何实现polymorphism的。
-
-#### virtual method and virtual data
-
-在C++，polymorphism是行为（function），只有virtual method、virtual table，而不是值的。
-
-那C++中能否实现virtual data呢？这个问题在What is “`virtual` data,” and how-can / why-would I use it in C++? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#virt-data) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)中讨论了；
+C++中需要通过reference semantic才能够实现runtime polymorphism，关于此，在`C++\Language-reference\Classes\Subtype-polymorphism`章节进行了讨论。
 
 
 
