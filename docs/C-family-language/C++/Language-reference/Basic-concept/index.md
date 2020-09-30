@@ -31,7 +31,9 @@ C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展�
 | function | 包括free function、member method，关于member method是function的讨论，参见 |
 | data     | 包括普通object、member object                                |
 
+### Thoughts
 
+下面是一些关于function、object的想法。
 
 function 和 object的相同之处在于：
 

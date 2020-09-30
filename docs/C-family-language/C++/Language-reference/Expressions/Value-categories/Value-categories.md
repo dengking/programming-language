@@ -99,11 +99,13 @@ a function call or an overloaded operator expression, whose return type is **lva
 
 > NOTE: 相当于 Lvalue function call expression。
 
-#### indirection expression
+#### Indirection expression
 
 `*p`, the built-in [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) expression;
 
 > NOTE: 相当于 Lvalue function call expression。
+>
+> 最最典型的例子就是: `*this`，参见 cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions) ；
 
 #### Built-in subscript
 
