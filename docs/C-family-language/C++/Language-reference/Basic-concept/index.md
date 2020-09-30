@@ -26,10 +26,10 @@ c++语言是复杂的，所以本章的内容也是庞杂的，我们需要有�
 
 C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展，OOP只是一种programming paradigm，最终的program还是由function和data组成: 
 
-| 组成     | 说明                             |
-| -------- | -------------------------------- |
-| function | 包括free function、member method |
-| data     | 包括普通object、member object    |
+| 组成     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| function | 包括free function、member method，关于member method是function的讨论，参见 |
+| data     | 包括普通object、member object                                |
 
 
 
@@ -60,4 +60,20 @@ reference to function、reference to function。
 
 - function 没有 storage duration，其实对于function而言，考虑它的storage duration并没有太大的意义，所以C-family language的designer并没有设计描述function storage duration的specifier、并没有提供供programmer对function的storage duration进行控制的操作（这在文章`C++\Language-reference\Basic-concept\Data-model\ObjectObject-storage-duration-and-lifetime.md` “linkage and storage duration of function”段中进行了探讨）
 - 无法create function
+
+
+
+### Uniform function model
+
+> **关于Uniform function model和Function and data model的说明:** 
+>
+> 其实Function and data model就是一个非常统一的模型（进行了很高的抽象、囊括了非常多的情况），本节只是结合C++对function进行详细、具体的说明。
+
+本节标题的含义是: 统一函数模型，它的含义是: C++中，member method、operator都可以看做是一种function。下面分情况对Operator is a kind of function、member method is a kind of function进行详细说明: 
+
+**Operator is a kind of function**
+
+参见 `C++\Language-reference\Expressions\Operators\index.md` ，其中对此进行了详细说明。
+
+**Member method is a kind of function**
 
