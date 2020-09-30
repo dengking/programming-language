@@ -20,11 +20,9 @@ c++语言是复杂的，所以本章的内容也是庞杂的，我们需要有�
 | Declarations                                                 | 描述C++ declarations、specifiers                             | compile-time |
 | [Execution-model](./Execution-model/index.md)                | 描述C++ execution model                                      | run-time     |
 
+## Function and data model
 
-
-## object 和 function
-
-object 和 function构成了C-family language run-time的主要内容。
+在工程hardware的`Computer-architecture\Stored-program-computer.md`中，我们介绍了Function and data model，现在使用它来对C++进行描述。C++使用object来描述data，显然object 和 function构成了C-family language run-time的主要内容。
 
 function 和 object的相同之处在于：
 

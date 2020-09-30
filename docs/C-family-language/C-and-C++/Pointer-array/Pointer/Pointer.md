@@ -4,23 +4,19 @@
 
 ## Pointer and the stored-program machine
 
-[Stored-program computer](https://en.wikipedia.org/wiki/Stored-program_computer) and [Universal Turing machine § Stored-program computer](https://en.wikipedia.org/wiki/Universal_Turing_machine#Stored-program_computer) 告诉我们，将program（function）和data（object）保存到memory中，这样我们就可以使用pointer来引用这些内容。关于这一点，在`C++\Language-reference\Basic-concept\index.md#object 和 function`段中也进行了阐述。
-
-在[Function-pointer#从stored-program computer来理解function pointer](./Function-pointer.md)中也对这个问题进行了探讨。
+在工程Hardware的`Computer-architecture\Function and data model`章节中，提出了“Function and data model”，可以据此来对pointer进行分类:
 
 ### 两大类pointer
 
-简化，OOP只是一种programming paradigm，在运行时，我们可以认为process仅仅由如下两类构成: 
-
-- function (包括free function、member function)
-- data （）
-
 | pointer             | 说明                                                         |
 | ------------------- | ------------------------------------------------------------ |
-| pointer to object   | 在`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`中，将次描述为“Pointer can alias to an existing object” |
-| pointer to function | 在`C-family-language\C-and-C++\Pointer-array\Pointer\Function-pointer.md`中，对此进行了描述 |
+| pointer to object   | 参见: <br>- 在`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`中，将次描述为“Pointer can alias to an existing object” <br>- `C++\Language-reference\Basic-concept\index.md` |
+| pointer to function |                                                              |
 
-C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展。
+C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展，OOP只是一种programming paradigm，最终的program还是由function和data组成: 
+
+- function (包括free function、member function)
+- data （包括普通object、member object）
 
 ## wikipedia [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))
 
