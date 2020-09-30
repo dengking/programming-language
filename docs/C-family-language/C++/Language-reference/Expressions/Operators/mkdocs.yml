@@ -8,5 +8,7 @@ nav:
     # 内存分配运算符
     - Memory-allocation: Memory-allocation
     - sizeof: sizeof.md
+    - Member-access-operators: Member-access-operators
     # 运算符重载
     - Operator-overloading: Operator-overloading
+    
