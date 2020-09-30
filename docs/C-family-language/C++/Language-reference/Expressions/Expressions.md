@@ -71,15 +71,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 ##### Conversions
 
-- [standard conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion) implicit(隐式) conversions from one type to another
-- [`const_cast` conversion](https://en.cppreference.com/w/cpp/language/const_cast)
-- [`static_cast` conversion](https://en.cppreference.com/w/cpp/language/static_cast)
-- [`dynamic_cast` conversion](https://en.cppreference.com/w/cpp/language/dynamic_cast)
-- [`reinterpret_cast` conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
-- [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast) conversion using C-style cast notation and functional notation
-- [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) makes it possible to specify conversion from user-defined classes
-
-> NOTE: 放到了type system章节
+> NOTE: 放到了type system章节，参见`C++\Language-reference\Basic-concept\Type-system\Type-conversion`。
 
 ##### Memory allocation
 
@@ -90,21 +82,21 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 ##### Other
 
-- [constant expressions ](https://en.cppreference.com/w/cpp/language/constant_expression)can be evaluated at compile time and used in compile-time context (template arguments, array sizes, etc)
+| operator                                                     | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [constant expressions ](https://en.cppreference.com/w/cpp/language/constant_expression) | can be evaluated at compile time and used in compile-time context (template arguments, array sizes, etc), 非常重要的概念，在`C++\Language-reference\Expressions\Constant-expressions`中进行了介绍 |
+| [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof) | 参见: <br>- “Unevaluated expressions”                        |
+| [`alignof`](https://en.cppreference.com/w/cpp/language/alignof) | 参见: <br/>- “Unevaluated expressions”                       |
+| [`typeid`](https://en.cppreference.com/w/cpp/language/typeid) | 参见: <br/>- “Unevaluated expressions”                       |
+| [throw-expression](https://en.cppreference.com/w/cpp/language/throw) |                                                              |
 
-  > NOTE: 非常重要的概念
 
-- [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof)
-
-- [`alignof`](https://en.cppreference.com/w/cpp/language/alignof)
-
-- [`typeid`](https://en.cppreference.com/w/cpp/language/typeid)
-
-- [throw-expression](https://en.cppreference.com/w/cpp/language/throw)
 
 
 
 ### Primary expressions
+
+> NOTE: primary expression的概念是比较重要的，因为有的时候，compiler的报错中，直接就使用primary expression。
 
 The operands of any operator may be other **expressions** or **primary expressions** (e.g. in `1+2*3`, the operands of operator `+` are the subexpression `2*3` and the **primary expression** `1`).
 
@@ -125,6 +117,8 @@ Primary expressions are any of the following:
 5) [Requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) (C++20)
 
 Any expression in parentheses is also classified as a **primary expression**: this guarantees that the parentheses have higher precedence than any **operator**. Parentheses preserve **value**, **type**, and **value category**.
+
+
 
 #### Literals
 

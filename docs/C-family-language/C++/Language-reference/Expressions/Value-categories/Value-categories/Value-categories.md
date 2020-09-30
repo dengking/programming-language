@@ -7,7 +7,7 @@ Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (a
 > ```
 > iM      im      Im
 >  \     /  \     /
->    \   /    \   /
+>     \   /    \   /
 >      \ /      \ /
 >       i        m
 > ```
@@ -17,7 +17,7 @@ Each C++ [expression](https://en.cppreference.com/w/cpp/language/expressions) (a
 > ```
 > lvalue       xvalue           prvalue
 >  \           /    \           /
->    \         /      \         /
+>     \         /      \         /
 >      \       /        \       /
 >       \     /          \     /
 >        \   /            \   /
@@ -112,13 +112,19 @@ a function call or an overloaded operator expression, whose return type is **lva
 
 `a.m`, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a **member enumerator** or a non-static member function, or where `a` is an rvalue and `m` is a non-static data member of non-reference type;
 
-> NOTE: 需要注意的是，“member of object”的意思是“object的member”。
+> NOTE: 需要注意的是，“member of object”的意思是“object的member”。下面对否定条件进行说明:
 >
-> 关于member enumerator在“prvalue”段中会进行介绍。
+> | 否定条件                   | 分析                |
+> | -------------------------- | ------------------- |
+> | member enumerator          | enumerator是prvalue |
+> | non-static member function | function肯定是右值  |
+> |                            |                     |
 >
 > 
 
 `p->m`, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
+
+> NOTE: 和前面的情况类似
 
 `a.*mp`, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an lvalue and `mp` is a pointer to data member;
 

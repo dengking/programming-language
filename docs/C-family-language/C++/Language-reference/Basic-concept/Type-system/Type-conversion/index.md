@@ -1,14 +1,28 @@
-# 关于本章
+## 关于本章
 
 本章对C++的type conversion进行总结。
 
-cppreference中，将type conversion放到了[Expressions](https://en.cppreference.com/w/cpp/language/expressions)章节中。
+## cppreference [Conversions expression](https://en.cppreference.com/w/cpp/language/expressions#Conversions)
+
+>  cppreference中，将type conversion放到了[Expressions](https://en.cppreference.com/w/cpp/language/expressions)章节中。
+
+| conversion                                                   | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [standard conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion) | implicit(隐式) conversions from one type to another          |
+| [`const_cast` conversion](https://en.cppreference.com/w/cpp/language/const_cast) |                                                              |
+| [`static_cast` conversion](https://en.cppreference.com/w/cpp/language/static_cast) |                                                              |
+| [`dynamic_cast` conversion](https://en.cppreference.com/w/cpp/language/dynamic_cast) |                                                              |
+| [`reinterpret_cast` conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast) |                                                              |
+| [explicit cast](https://en.cppreference.com/w/cpp/language/explicit_cast) | conversion using C-style cast notation and functional notation |
+| [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) | makes it possible to specify conversion from user-defined classes |
 
 
 
-C++ 的type system提供了非常丰富的type conversion支持：
+## 分类
 
-## 根据implicit/explicit进行分类
+C++ 的type system提供了非常丰富的type conversion支持，下面是简单的分类，通过这些分类，能够帮助我们全面地理解type conversion。
+
+### 根据implicit/explicit进行分类
 
 转换方式是
 
@@ -21,7 +35,7 @@ C++ 的type system提供了非常丰富的type conversion支持：
 
 - `explicit` specifier: `C++\Language-reference\Classes\Members\explicit-specifier.md`
 
-## 根据built-in/user-defined进行分类
+### 根据built-in/user-defined进行分类
 
 | built-in/user-defined   | 细分                                                         | 说明                                                         |
 | ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
