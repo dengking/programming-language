@@ -16,3 +16,20 @@ Implicit conversions are performed whenever an expression of some type `T1` is u
 | when the expression is used in a `switch` statement (`T2` is integral type) |                                                              |
 | when the expression is used in an `if` statement or a loop (`T2` is bool) |                                                              |
 
+
+
+### Order of the conversions
+
+
+
+### Value transformations
+
+#### Lvalue to rvalue conversion
+
+#### Array to pointer conversion
+
+#### Temporary materialization
+
+#### Function to pointer
+
+### Numeric promotions
