@@ -12,7 +12,7 @@ Implicit conversions are performed whenever an expression of some type `T1` is u
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | when the expression is used as the argument when calling a function that is declared with `T2` as parameter |                                                              |
 | when the expression is used as an operand with an operator that expects `T2` | operator其实和前面所述的function是非常类似的（参见`C++\Language-reference\Expressions\Operators\index.md`中总结的“Operator is a kind of function”思想） |
-| when initializing a new object of type `T2`, including `return` statement in a function returning `T2` |                                                              |
+| when initializing a new object of type `T2`, including `return` statement in a function returning `T2` | `return` statement应该说的是这种情况:<br> `T2 Foo(){ return T1 }` |
 | when the expression is used in a `switch` statement (`T2` is integral type) |                                                              |
 | when the expression is used in an `if` statement or a loop (`T2` is bool) |                                                              |
 
