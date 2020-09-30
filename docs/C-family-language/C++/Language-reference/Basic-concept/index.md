@@ -24,6 +24,15 @@ c++语言是复杂的，所以本章的内容也是庞杂的，我们需要有�
 
 在工程hardware的`Computer-architecture\Stored-program-computer.md`中，我们介绍了Function and data model，现在使用它来对C++进行描述。C++使用object来描述data，显然object 和 function构成了C-family language run-time的主要内容。
 
+C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展，OOP只是一种programming paradigm，最终的program还是由function和data组成: 
+
+| 组成     | 说明                             |
+| -------- | -------------------------------- |
+| function | 包括free function、member method |
+| data     | 包括普通object、member object    |
+
+
+
 function 和 object的相同之处在于：
 
 - 都位于memory中（按照the stored-program computer的实现，显然function是位于memory中的），所以它们存在storage

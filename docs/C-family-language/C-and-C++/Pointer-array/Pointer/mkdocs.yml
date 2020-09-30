@@ -1,4 +1,6 @@
 nav:
+    - Introduction: index.md
     - Pointer: Pointer.md
+    - Multiple-level-pointer: Multiple-level-pointer.md
     - Pointer-and-integer: Pointer-and-integer.md
-    - Function-pointer: Function-pointer.md
+    
