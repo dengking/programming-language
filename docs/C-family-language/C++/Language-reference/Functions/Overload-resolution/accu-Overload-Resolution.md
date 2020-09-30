@@ -30,7 +30,7 @@ The ordering of **implicit conversion sequences** is explained later. If only on
 
 ## Member Functions and Built-in Operators With Overloading
 
-> NOTE: 这段解释非常好，它的视角是站在设计者的角度，告诉了我们这样做的原因。
+> NOTE: 这段解释非常好，它的视角是站在设计者的角度，告诉了我们这样做的原因。这是符合`C++\Language-reference\Basic-concept\index.md`中提出的“Uniform function model”的。
 
 For overload resolution, **member functions** are considered as free functions with an extra parameter taking the object itself. This is called the *implicit object parameter* . The cv-qualification [ [1 ](https://accu.org/journals/overload/13/66/kilpelainen_268/#ftn.d0e82)] of the implicit parameter is the same as the cv-qualification of the specified member function. The object is matched to the **implicit object parameter** to make the overload resolution possible. This is an easy way to make the overloading rules uniform for the member functions and free functions. The **implicit object argument** is just like other arguments, except for a few special rules: 
 
