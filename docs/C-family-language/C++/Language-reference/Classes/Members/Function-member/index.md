@@ -1,6 +1,17 @@
 # Non-static member functions
 
+## Member method is a kind of function
 
+在阅读下面文章时:
+
+- accu [**Overload Resolution - Selecting the Function**](https://accu.org/journals/overload/13/66/kilpelainen_268/)
+- cppreference [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
+
+其中都有关于member method、implicit object parameter、implied object argument的讨论，并且在accu [**Overload Resolution - Selecting the Function**](https://accu.org/journals/overload/13/66/kilpelainen_268/)中说明了这样做的原因:
+
+> This is an easy way to make the overloading rules **uniform** for the member functions and free functions.
+
+显然，从实现层面来看，Member method is a kind of function，这样我们可以使用一个统一的模型来描述free function、member method。这是符合在 `C++\Language-reference\Basic-concept\index.md` 中提出的“Uniform function model”的。
 
 ## cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions)
 

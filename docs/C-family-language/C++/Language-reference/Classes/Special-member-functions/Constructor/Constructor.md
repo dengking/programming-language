@@ -166,4 +166,3 @@ A default constructor is a [constructor](https://en.cppreference.com/w/cpp/langu
 
 
 
-## cppreference [Converting constructor](https://en.cppreference.com/w/cpp/language/converting_constructor)
