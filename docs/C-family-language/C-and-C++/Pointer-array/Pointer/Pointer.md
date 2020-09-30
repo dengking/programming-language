@@ -41,6 +41,16 @@
 
 ***declarator***	-	[declarator](https://en.cppreference.com/w/cpp/language/declarations)   
 
+
+
+### Initialization
+
+> NOTE: pointer是object，因此需要对它进行initialization
+
+[address-of operator](https://en.cppreference.com/w/cpp/language/operator_member_access)
+
+
+
 ### Pointers to objects
 
 ```c++

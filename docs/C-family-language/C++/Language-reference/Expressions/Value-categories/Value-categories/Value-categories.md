@@ -48,14 +48,19 @@ the name of a variable, a function, a [template parameter object](https://en.cpp
 
 > NOTE: 本节标题中的lvalue function是我创造的一个概念，与它相对的一个概念是rvalue expression，下面是它们的定义:
 >
-> | 概念              | 说明                                                   |
-> | ----------------- | ------------------------------------------------------ |
-> | lvalue function   | function whose **return type** is **lvalue reference** |
-> | rvalue expression | function whose **return type** is non-reference        |
+> | 概念            | 说明                                                   |
+> | --------------- | ------------------------------------------------------ |
+> | lvalue function | function whose **return type** is **lvalue reference** |
+> | rvalue function | function whose **return type** is non-reference        |
 >
-> 上述 两个概念是基于value category来对function进行分类的，这样做是为了便于描述value category，因为在C++中，operator可以使用function来进行描述，所以operator expression（表示的是包含operator的expression） 都可以使用function call expression来进行描述，所以使用function call expression，可以描述所有的operator expression。
+> 上述 两个概念是基于value category来对function进行分类的，这样做是为了便于描述value category，因为在C++中，operator可以使用function来进行描述（参见`C++\Language-reference\Expressions\Operators\index.md`中提出的“Operator is a kind of function”），所以operator expression（表示的是包含operator的expression） 都可以使用function call expression来进行描述，所以使用function call expression，可以描述所有的operator expression。下面是我总结的统一的规则:
 >
-> Lvalue function call expression的value category是lvalue，这种情况是非常具有代表性的，后面的很多operator expressin都可以归入这个范畴。
+> | expression                      | value category | 说明                                                         |
+> | ------------------------------- | -------------- | ------------------------------------------------------------ |
+> | Lvalue function call expression | lvalue         | 这种情况是非常具有代表性的，后面的很多operator expressin都可以归入这个范畴 |
+> | Rvalue function call expression | rvalue         |                                                              |
+>
+> 
 
 a function call or an overloaded operator expression, whose return type is **lvalue reference**, such as [std::getline](http://en.cppreference.com/w/cpp/string/basic_string/getline)([std::cin](http://en.cppreference.com/w/cpp/io/cin), str), [std::cout](http://en.cppreference.com/w/cpp/io/cout) `<< 1`, `str1 = str2`, or `++it`;
 

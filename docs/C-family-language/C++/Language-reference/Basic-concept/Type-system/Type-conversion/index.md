@@ -48,6 +48,6 @@ C++ 的type system提供了非常丰富的type conversion支持，下面是简�
 
 ## Type conversion and overload resolution
 
-阅读overload resolution可知，其中的涉及了非常多的type conversion内容，并且通过overload resolution的学习，可以进一步地深入对type conversion的认知。overload resolution在`C++\Language-reference\Functions\Overload-resolution`章节中描述的。
+阅读overload resolution可知，其中的涉及了非常多的type conversion内容：它是基于type conversion来进行ordering的。并且通过overload resolution的学习，可以进一步地深入对type conversion的认知。overload resolution在`C++\Language-reference\Functions\Overload-resolution`章节中描述的。
 
 非常建议阅读accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/)，它对两者总结得非常好。

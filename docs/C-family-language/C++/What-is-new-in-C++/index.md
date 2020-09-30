@@ -32,9 +32,11 @@ python的官方文档的“What’s New in Python[¶](https://docs.python.org/3/
 | cppreference [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) | C++ compiler support，仔细阅读原文就会发现它所讨论的是各种c++ compiler对各个版本c++所引入的feature的支持，并且，它的罗列是非常详细、以时间为顺序的，所以可以作为what is new in c++。 |      |
 | 维基百科[C++11](https://en.wikipedia.org/wiki/C%2B%2B11)     | 维基百科对各个版本的C++进行了总结，可以作为What is new in C++。 |      |
 
+
+
 ### C++发展方向:
 
-### compile-time computation
+#### compile-time computation
 
 C++的一个发展发现就是充分发挥compile-time computation。
 
@@ -44,7 +46,7 @@ C++的一个发展发现就是充分发挥compile-time computation。
 | `constexpr if` | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` |      |
 |                |          |                                                              |      |
 
-### template-meta programming
+#### template-meta programming
 
 C++的一个发展发现是对template-meta programming的强化。
 
@@ -56,7 +58,7 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 
-### value-semantic
+#### value-semantic
 
 充分发挥value-semantic。
 
