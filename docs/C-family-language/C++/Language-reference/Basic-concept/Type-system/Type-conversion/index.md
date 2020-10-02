@@ -1,4 +1,4 @@
-## 关于本章
+# 关于本章
 
 本章对C++的type conversion进行总结。
 
@@ -33,7 +33,7 @@ C++ 的type system提供了非常丰富的type conversion支持，下面是简�
 
 与explicit相关的有:
 
-- `explicit` specifier: `C++\Language-reference\Classes\Members\explicit-specifier.md`
+- `explicit` specifier: `\C++\Language-reference\Classes\Special-member-functions\Constructor\Converting-constructor\explicit-specifier.md`
 
 ### 根据built-in/user-defined进行分类
 

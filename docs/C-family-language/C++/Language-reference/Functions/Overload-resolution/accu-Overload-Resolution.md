@@ -20,9 +20,13 @@ Many different contexts of overloading exist and each has its own set of rules f
 
 A viable function is better than another viable function if (and only if) it does not have a worse **implicit conversion sequence** for any of its arguments than the other function and has one of the following properties:
 
-- It has at least one better **conversion sequence** than the other function.
-- It is a non-template and the other function is a template specialisation.（这段话的意思是：非模板优于模板？是这样的，在“Function Templates With Overloading”章节对此进行了说明）
-- Both are templates and it is more specialised than the other function according to the **partial ordering rules**.（关于partial ordering rule，参见`C++\Language-reference\Template\Implementation`）
+| property                                                     | 解释                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| It has at least one better **conversion sequence** than the other function. |                                                              |
+| It is a non-template and the other function is a template specialisation. | 这段话的意思是：非模板优于模板？是这样的，在“Function Templates With Overloading”章节对此进行了说明 |
+| Both are templates and it is more specialised than the other function according to the **partial ordering rules**. | 关于partial ordering rule，参见`C++\Language-reference\Template\Implementation` |
+
+
 
 The ordering of **implicit conversion sequences** is explained later. If only one function is better than other functions in the set of viable functions then it is called the *best viable function* and is selected by the **overload resolution**. Otherwise the call is ill-formed and diagnostics are reported.
 
@@ -77,7 +81,7 @@ where `T `is a cv-(un)qualified type.
 
 > NOTE: 本段对conversion的总结是非常好的。
 
-The **implicit conversion sequences** are based on **single conversions**. These simple implicit conversions provide a great deal of flexibility and can be helpful if used correctly. Even though single conversions are quite easy, the interaction between the sequences of conversions and the overloading is far from simple. The **standard conversions** are the built-in conversions, those are categorised and ranked to form an intuitive（直觉的） order. This is the basis for ranking the conversion sequences consisting of only standard conversions. There are three ranks for these conversions (see Table 1). In addition to those standard conversions, a derived-to-base conversion exists but only in the description of implicit conversion sequences. It has a conversion rank.
+The **implicit conversion sequences** are based on **single conversions**. These simple implicit conversions provide a great deal of flexibility and can be helpful if used correctly. Even though **single conversions** are quite easy, the interaction between the sequences of conversions and the overloading is far from simple. The **standard conversions** are the built-in conversions, those are categorised and ranked to form an intuitive（直觉的） order. This is the basis for ranking the **conversion sequences** consisting of only **standard conversions**. There are three ranks for these conversions (see Table 1). In addition to those standard conversions, a derived-to-base conversion exists but only in the description of implicit conversion sequences. It has a conversion rank.
 
 > NOTE: 
 >
@@ -85,9 +89,11 @@ The **implicit conversion sequences** are based on **single conversions**. These
 >
 > 为什么叫conversion **sequence**呢？这是因为parameter list，即函数的parameter可以是多个的。
 >
-> 为什么是implicit conversion？argument到parameter之间的conversion，它是由compiler来完成的，所以是implicit conversion。
+> 为什么是implicit conversion？argument到parameter之间的conversion，它是由compiler来完成的，所以是implicit conversion。关于implicit conversi3on，参见cppreference [Implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion)。
 >
 > implicit conversion包含哪些？在下面回答了这个问题。
+>
+> 
 
 **Examples:**
 
@@ -102,7 +108,7 @@ Besides **standard conversions** there are the **user-defined conversions**, mea
 - User-defined conversion sequence
 - Ellipsis conversion sequence
 
-> NOTE: 原文后面对这三种conversion进行了专门介绍
+> NOTE: 原文后面对这三种conversion进行了专门介绍；在cppreference [Implicit conversions # Order of the conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion#Order_of_the-conversions)中，也介绍了上述三种conversion sequence。
 
 ![](./Table-1-Standard-Conversions.png)
 

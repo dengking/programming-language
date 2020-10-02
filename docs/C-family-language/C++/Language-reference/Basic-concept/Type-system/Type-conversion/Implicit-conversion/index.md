@@ -20,6 +20,68 @@ Implicit conversions are performed whenever an expression of some type `T1` is u
 
 ### Order of the conversions
 
+> NOTE:
+>
+> | conversion sequence          | 注解 |
+> | ---------------------------- | ---- |
+> | Implicit conversion sequence |      |
+> | Standard conversion sequence |      |
+>
+> 从下面的描述来看，Implicit conversion sequence 包含: 
+>
+> - Standard conversion sequence
+> - User-defined conversion
+
+#### Implicit conversion sequence
+
+**Implicit conversion sequence** consists of the following, in this order:
+
+| order | explanation                                 | 注解                                    |
+| ----- | ------------------------------------------- | --------------------------------------- |
+| 1)    | zero or one *standard conversion sequence*; |                                         |
+| 2)    | zero or one *user-defined conversion*;      | 参见下面的“User-defined conversion”章节 |
+| 3）   | zero or one *standard conversion sequence*. |                                         |
+
+When considering the **argument** to a **constructor** or to a **user-defined conversion function**, only a **standard conversion sequence** is allowed (otherwise **user-defined conversions** could be effectively chained). 
+
+> NOTE: 上述argument，说明是调用函数的时候；上述constructor、user-defined conversion function，说明是user-defined conversion。
+>
+> 上面这段话，没有具体的例子，难以准确弄清楚作者想要表达的含义。
+
+When converting from one built-in type to another built-in type, only a **standard conversion sequence** is allowed.
+
+#### Standard conversion sequence 
+
+A **standard conversion sequence** consists of the following, in this order:
+
+| order | explanation                                                  | 注解          |
+| ----- | ------------------------------------------------------------ | ------------- |
+| 1)    | zero or one conversion from the following set: <br>- *lvalue-to-rvalue conversion*<br/>- *array-to-pointer conversion*<br/>- *function-to-pointer conversion*; |               |
+| 2)    | zero or one:<br>- *numeric promotion* <br/>- *numeric conversion*; |               |
+| 3)    | zero or one *function pointer conversion*;                   | (since C++17) |
+| 4)    | zero or one *qualification conversion*.                      |               |
+
+#### User-defined conversion
+
+| conversion                                                   | 注解                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **non-explicit** single-argument [converting constructor](https://en.cppreference.com/w/cpp/language/converting_constructor) | 参见: `C++\Language-reference\Classes\Special-member-functions\Constructor\Converting-constructor`章节 |
+| **non-explicit** [conversion function](https://en.cppreference.com/w/cpp/language/cast_operator) call |                                                              |
+
+> NOTE: 需要注意的是: 本文描述的是implicit conversion，因此它是不允许:
+>
+> - explicit single-argument converting function
+> - explicit conversion function
+
+#### Implicitly convertible
+
+An expression `e` is said to be *implicitly convertible to `T2`* if and only if `T2` can be [copy-initialized](https://en.cppreference.com/w/cpp/language/copy_initialization) from `e`, that is the declaration `T2 t = e;` is well-formed (can be compiled), for some invented temporary `t`. Note that this is different from [direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) (`T2 t(e)`), where **explicit** constructors and conversion functions would additionally be considered.
+
+| expression  | initialization                                               | conversion              |
+| ----------- | ------------------------------------------------------------ | ----------------------- |
+| `T2 t = e;` | [copy-initialized](https://en.cppreference.com/w/cpp/language/copy_initialization) | **implicit** conversion |
+| `T2 t(e)`   | [direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) | **explicit** conversion |
+
 
 
 ### Value transformations
