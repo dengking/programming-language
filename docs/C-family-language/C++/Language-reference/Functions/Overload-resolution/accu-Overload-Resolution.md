@@ -22,7 +22,7 @@ A viable function is better than another viable function if (and only if) it doe
 
 | property                                                     | 解释                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| It has at least one better **conversion sequence** than the other function. |                                                              |
+| It has at least one better **conversion sequence** than the other function. | 后面会介绍ordering of conversion sequence                    |
 | It is a non-template and the other function is a template specialisation. | 这段话的意思是：非模板优于模板？是这样的，在“Function Templates With Overloading”章节对此进行了说明 |
 | Both are templates and it is more specialised than the other function according to the **partial ordering rules**. | 关于partial ordering rule，参见`C++\Language-reference\Template\Implementation` |
 
@@ -310,16 +310,16 @@ int main()
 > NOTE: 上述函数编译报错如下: 
 >
 > ```c++
-> test.cpp: 在函数‘int main()’中:
-> test.cpp:34:10: 错误：调用重载的‘func(A)’有歧义
->   func(A());
->           ^
-> test.cpp:34:10: 附注：备选是：
-> test.cpp:23:6: 附注：void func(B)
->  void func(B)
->       ^
-> test.cpp:27:6: 附注：void func(int)
->  void func(int)
+> test3.cpp: In function ‘int main()’:
+> test3.cpp:34:10: error: call of overloaded ‘func(A)’ is ambiguous
+>     func(A());
+>              ^
+> test3.cpp:34:10: note: candidates are:
+> test3.cpp:23:6: note: void func(B)
+>   void func(B)
+>          ^
+> test3.cpp:27:6: note: void func(int)
+>   void func(int)
 > 
 > ```
 >
