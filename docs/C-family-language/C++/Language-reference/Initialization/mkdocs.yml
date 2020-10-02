@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
 # 首先描述cppreference中initialization的概念    
     - Initialization: Initialization.md
+    - Uniform-initialization: Uniform-initialization.md
     - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
 # 下面专门描述Static Variables的initialization     
     - Initialization-of-Static-Variables: Initialization-of-Static-Variables
