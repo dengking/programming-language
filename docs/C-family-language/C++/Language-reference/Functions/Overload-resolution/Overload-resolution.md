@@ -132,6 +132,72 @@ The set of candidate functions and the list of arguments is prepared in a unique
 
 ### Ranking of implicit conversion sequences
 
+Each [type of standard conversion sequence](https://en.cppreference.com/w/cpp/language/implicit_conversion) is assigned one of three ranks:
+
+| rank               | explanation                                                  | 注解 |
+| ------------------ | ------------------------------------------------------------ | ---- |
+| 1) **Exact match** | - no conversion required, <br>- lvalue-to-rvalue conversion, <br>- qualification conversion, <br>- function pointer conversion, (since C++17) <br>- user-defined conversion of class type to the same class |      |
+| 2) **Promotion**   | - integral promotion <br>- floating-point promotion          |      |
+| 3) **Conversion**  | - integral conversion, <br>- floating-point conversion, <br/>- floating-integral conversion, <br/>- pointer conversion, <br/>- pointer-to-member conversion, <br/>- boolean conversion, <br/>- user-defined conversion of a derived class to its base |      |
+
+The rank of the standard conversion sequence is the worst of the ranks of the standard conversions it holds (there may be up to [three conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion))
+
+> NOTE: 这段话的意思是: rank of the standard conversion sequence是由the worst of the ranks of the standard conversions it holds而决定的
+
+> NOTE: 目前重点关注一下ambiguous overload，因为这是我们平时非常容易遇到的
+
+
+
+```C++
+int f(const int&) // overload #1
+{
+	return 0;
+}
+
+int f(int&)       // overload #2 (both references)
+{
+	return 0;
+}
+int g(const int&) // overload #1
+{
+	return 0;
+}
+int g(int)         // overload #2
+{
+	return 0;
+}
+int main()
+{
+	int i;
+	int j = f(i); // lvalue i -> int& is better than lvalue int -> const int&
+				  // calls f(int&)
+	int k = g(i); // lvalue i -> const int& ranks Exact Match
+				  // lvalue i -> rvalue int ranks Exact Match
+				  // ambiguous overload: compilation error
+}
+// g++ test.cpp
+
+
+```
+
+> NOTE: 上述程序是典型的ambiguous overload，它被收录到了[Ambiguous-overload](./Ambiguous-overload.md) 中
+>
+> ```C++
+> test2.cpp: In function ‘int main()’:
+> test2.cpp:23:13: error: call of overloaded ‘g(int&)’ is ambiguous
+>   int k = g(i); // lvalue i -> const int& ranks Exact Match
+>              ^
+> test2.cpp:23:13: note: candidates are:
+> test2.cpp:10:5: note: int g(const int&)
+>  int g(const int&) // overload #1
+>      ^
+> test2.cpp:14:5: note: int g(int)
+>  int g(int)         // overload #2
+> 
+> ```
+>
+> 
+
 ### Implicit conversion sequence in list-initialization
 
 

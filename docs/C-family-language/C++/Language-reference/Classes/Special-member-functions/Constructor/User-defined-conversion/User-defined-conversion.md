@@ -101,7 +101,38 @@ int main()
 
 ### Conversion isn't considered for member access
 
-stackoverflow [Why user-defined conversion is not implicitly taking place on the calling object](https://stackoverflow.com/questions/44699176/why-user-defined-conversion-is-not-implicitly-taking-place-on-the-calling-object)
+stackoverflow [Why user-defined conversion is not implicitly taking place on the calling object](https://stackoverflow.com/questions/44699176/why-user-defined-conversion-is-not-implicitly-taking-place-on-the-calling-object) :
+
+```C++
+class A {
+public:
+   void func() const {}
+};
+
+class B {
+public:
+   // user-defined conversion operator to A
+   operator A() const { return a_; }
+private:
+   A a_;
+};
+```
+
+
+
+```c++
+B b;
+static_cast<A>(b).func(); // call func() on temporary instance of A
+```
+
+
+
+```C++
+B b;
+b.func(); // <-- error: 'class B' has no member named 'func'
+```
+
+
 
 [A](https://stackoverflow.com/a/44699334)
 
