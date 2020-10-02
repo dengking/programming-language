@@ -154,6 +154,8 @@ Example1: overload conversion operator for custom type to `std::string`:
 
 > NOTE: 这个例子收录到了`C++\Language-reference\Functions\Overload-resolution\Ambiguous-overload.md`中
 
+
+
 ## Converting constructor
 
 

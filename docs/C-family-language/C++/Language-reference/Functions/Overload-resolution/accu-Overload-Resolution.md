@@ -312,14 +312,14 @@ int main()
 > ```c++
 > test3.cpp: In function ‘int main()’:
 > test3.cpp:34:10: error: call of overloaded ‘func(A)’ is ambiguous
->     func(A());
->              ^
+>   func(A());
+>           ^
 > test3.cpp:34:10: note: candidates are:
 > test3.cpp:23:6: note: void func(B)
->   void func(B)
->          ^
+>  void func(B)
+>       ^
 > test3.cpp:27:6: note: void func(int)
->   void func(int)
+>  void func(int)
 > 
 > ```
 >
@@ -334,6 +334,8 @@ int main()
 > - `func(int)`
 >
 > 所以，compiler无法决定到底使用哪个overload。
+>
+> 这个例子收录到了: `C++\Language-reference\Functions\Overload-resolution\Ambiguous-overload.md` 中。
 
 The call is ambiguous, however, the parameter *`B `* has an ambiguous conversion sequence and if the function having this parameter was eliminated the call would not be ambiguous. This is because there would be only one function to select.
 

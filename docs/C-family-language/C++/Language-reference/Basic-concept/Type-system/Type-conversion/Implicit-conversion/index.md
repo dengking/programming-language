@@ -42,6 +42,15 @@ Implicit conversions are performed whenever an expression of some type `T1` is u
 | 2)    | zero or one *user-defined conversion*;      | 参见下面的“User-defined conversion”章节 |
 | 3）   | zero or one *standard conversion sequence*. |                                         |
 
+> NOTE: 为了便于理解Implicit conversion sequence的含义，我们看看涉及到它的章节:
+>
+> | 章节                                                         | 内容                                                         |
+> | ------------------------------------------------------------ | ------------------------------------------------------------ |
+> | [user-defined conversion function#Explanation](https://en.cppreference.com/w/cpp/language/cast_operator#Explanation) | User-defined conversion function is invoked on the second stage of the [implicit conversion](https://en.cppreference.com/w/cpp/language/implicit_cast). |
+> | [Overload resolution#Ranking of implicit conversion sequences](https://en.cppreference.com/w/cpp/language/overload_resolution#Ranking_of_implicit_conversion_sequences) |                                                              |
+>
+> 
+
 When considering the **argument** to a **constructor** or to a **user-defined conversion function**, only a **standard conversion sequence** is allowed (otherwise **user-defined conversions** could be effectively chained). 
 
 > NOTE: 上述argument，说明是调用函数的时候；上述constructor、user-defined conversion function，说明是user-defined conversion。
@@ -63,15 +72,18 @@ A **standard conversion sequence** consists of the following, in this order:
 
 #### User-defined conversion
 
-| conversion                                                   | 注解                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **non-explicit** single-argument [converting constructor](https://en.cppreference.com/w/cpp/language/converting_constructor) | 参见: `C++\Language-reference\Classes\Special-member-functions\Constructor\Converting-constructor`章节 |
-| **non-explicit** [conversion function](https://en.cppreference.com/w/cpp/language/cast_operator) call |                                                              |
+> NOTE: 关于User-defined conversion，参见 `C++\Language-reference\Classes\Special-member-functions\Constructor\User-defined-conversion` 章节
 
-> NOTE: 需要注意的是: 本文描述的是implicit conversion，因此它是不允许**explicit conversion**的，下面是C++中的explicit conversion:
+| conversion                                                   | 注解 |
+| ------------------------------------------------------------ | ---- |
+| **non-explicit** single-argument [converting constructor](https://en.cppreference.com/w/cpp/language/converting_constructor) |      |
+| **non-explicit** [conversion function](https://en.cppreference.com/w/cpp/language/cast_operator) call |      |
+
+> NOTE: 
 >
-> - explicit single-argument converting function
-> - explicit conversion function
+> 需要注意的是: 本文描述的是implicit conversion，因此它是不允许**explicit conversion**的，在 `C++\Language-reference\Classes\Special-member-functions\Constructor\User-defined-conversion` 章节中给出了explicit conversion example。
+>
+> 
 
 #### Implicitly convertible
 
@@ -163,7 +175,7 @@ int main()
 > test.cpp:36:11: error:   candidate conversions include ‘zero_init<T>::operator T&() [with T = int]’ and ‘zero_init<T>::operator T() const [with T = int]’
 > ```
 >
-> 
+> 下面是在C++11中可以编译通过的版本: 
 
 ```C++
 #include <cassert>

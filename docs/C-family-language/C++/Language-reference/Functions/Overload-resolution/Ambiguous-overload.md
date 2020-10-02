@@ -143,7 +143,161 @@ test3.cpp:26:6: note: void f(C)
 
 ### Example3
 
+stackoverflow [C++ overloading conversion operator for custom type to std::string](https://stackoverflow.com/questions/3518145/c-overloading-conversion-operator-for-custom-type-to-stdstring)
 
+```C++
+using namespace std;
+#include <string>
+#include <iostream>
+
+class testClass
+{
+public:
+	operator char*()
+	{
+		cout << __PRETTY_FUNCTION__ << std::endl;
+		return (char*) "hi";
+	}
+	operator int()
+	{
+		cout << __PRETTY_FUNCTION__ << std::endl;
+		return 77;
+	}
+	operator std::string()
+	{
+		cout << __PRETTY_FUNCTION__ << std::endl;
+		return "hello";
+	}
+};
+
+int main()
+{
+	char *c;
+	int i;
+	std::string s = "goodday";
+
+	testClass t;
+	std::cout << __FILE__ << " " << __LINE__ << std::endl;
+	c = t;
+	std::cout << __FILE__ << " " << __LINE__ << std::endl;
+	i = t;
+	// s = t;
+	std::cout << __FILE__ << " " << __LINE__ << std::endl;
+	s = t.operator std::string();
+	s = static_cast<std::string>(t);
+
+	cout << "char: " << c << " int: " << i << " string: " << s << endl;
+
+	return 0;
+}
+// g++ test.cpp
+
+```
+
+编译报错如下:
+
+```C++
+test.cpp: In function ‘int main()’:
+test.cpp:39:32: error: call of overloaded ‘basic_string(testClass&)’ is ambiguous
+  s = static_cast<std::string>(t);
+                                ^
+test.cpp:39:32: note: candidates are:
+In file included from /usr/include/c++/4.8.2/string:53:0,
+                 from test.cpp:2:
+/usr/include/c++/4.8.2/bits/basic_string.tcc:212:5: note: std::basic_string<_CharT, _Traits, _Alloc>::basic_string(const _CharT*, const _Alloc&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]
+     basic_string<_CharT, _Traits, _Alloc>::
+     ^
+/usr/include/c++/4.8.2/bits/basic_string.tcc:169:5: note: std::basic_string<_CharT, _Traits, _Alloc>::basic_string(const std::basic_string<_CharT, _Traits, _Alloc>&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]
+     basic_string<_CharT, _Traits, _Alloc>::
+```
+
+[A](https://stackoverflow.com/a/3518171)
+
+What the error is trying to explain is that your assignment "`s = t`", where `s` is a `std::string`, would be valid if `t` were a `std::string` too, or if `t` were a [`const`] `char*`. Your conversion operators can convert a `t` into either, so the compiler has no basis on which to choose one over the other....
+
+> NOTE: 通过上面这段话的分析，我们可知，这个例子其实和Example1是相同的原因: `testClass` 可以通过如下两个conversion operator实现conversion to string:
+>
+> - `operator char*()`
+> - `operator std::string()`
+>
+> compiler无法对上面两个overload进行ordering，所以就导致了上述compile error。
+
+You can disambiguate this explicitly by selecting the conversion you want:
+
+```cpp
+s = t.operator std::string();
+s = static_cast<std::string>(t);
+```
+
+Or you can provide only one of the conversions and let the user do a further conversion when necessary.
+
+You may find though - in the end - that any conversion operator is more trouble than it's worth... it's telling that `std::string` itself doesn't provide a conversion operator to `const char*`.
+
+> NOTE: 下面是正确的代码
+
+```C++
+using namespace std;
+#include <string>
+#include <iostream>
+
+class testClass
+{
+public:
+	operator char*()
+	{
+		cout << __PRETTY_FUNCTION__ << std::endl;
+		return (char*) "hi";
+	}
+	operator int()
+	{
+		cout << __PRETTY_FUNCTION__ << std::endl;
+		return 77;
+	}
+//	operator std::string()
+//	{
+//		cout << __PRETTY_FUNCTION__ << std::endl;
+//		return "hello";
+//	}
+};
+
+int main()
+{
+	char *c;
+	int i;
+	std::string s = "goodday";
+
+	testClass t;
+	std::cout << __FILE__ << " " << __LINE__ << std::endl;
+	c = t;
+	std::cout << __FILE__ << " " << __LINE__ << std::endl;
+	i = t;
+	// s = t;
+	std::cout << __FILE__ << " " << __LINE__ << std::endl;
+	// s = t.operator std::string();
+	s = static_cast<std::string>(t);
+
+	cout << "char: " << c << " int: " << i << " string: " << s << endl;
+
+	return 0;
+}
+// g++ test.cpp
+
+
+```
+
+> NOTE: 输出为:
+>
+> ```c++
+> test.cpp 32
+> testClass::operator char*()
+> test.cpp 34
+> testClass::operator int()
+> test.cpp 37
+> testClass::operator char*()
+> char: hi int: 77 string: hi
+> ```
+>
+> 
 
 ## Example: Standard conversion sequence
 
