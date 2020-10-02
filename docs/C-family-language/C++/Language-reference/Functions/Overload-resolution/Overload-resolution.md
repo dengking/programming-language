@@ -132,6 +132,8 @@ The set of candidate functions and the list of arguments is prepared in a unique
 
 ### Ranking of implicit conversion sequences
 
+#### Rank rule of standard conversion sequence
+
 Each [type of standard conversion sequence](https://en.cppreference.com/w/cpp/language/implicit_conversion) is assigned one of three ranks:
 
 | rank               | explanation                                                  | 注解 |
@@ -144,7 +146,19 @@ The rank of the standard conversion sequence is the worst of the ranks of the st
 
 > NOTE: 这段话的意思是: rank of the standard conversion sequence是由the worst of the ranks of the standard conversions it holds而决定的
 
-> NOTE: 目前重点关注一下ambiguous overload，因为这是我们平时非常容易遇到的
+> NOTE: 前面介绍了standard conversion sequence的rank rule，下面开始介绍implicit conversion sequence的rank rule
+
+#### Rank rule of implicit conversion sequences
+
+| rule                                                         | 注解                     |
+| ------------------------------------------------------------ | ------------------------ |
+| A standard conversion sequence is always *better* than a user-defined conversion sequence or an ellipsis conversion sequence. |                          |
+| A user-defined conversion sequence is always *better* than an [ellipsis conversion](https://en.cppreference.com/w/cpp/language/variadic_arguments) sequence |                          |
+| A standard conversion sequence `S1` is *better* than a standard conversion sequence `S2` if | 下面回答对此进行详细介绍 |
+
+
+
+> NOTE: 当compiler根据rank rule无法进行全排序的时候，则就会出现ambiguous overload的compile error，这是我们平时非常容易遇到的
 
 
 
@@ -194,6 +208,70 @@ int main()
 > test2.cpp:14:5: note: int g(int)
 >  int g(int)         // overload #2
 > 
+> ```
+
+
+
+
+
+
+
+```c++
+class B;
+class A
+{
+	A(B&)
+	{
+	}
+};
+// converting constructor
+class B
+{
+	operator A()
+	{
+	}
+};
+// user-defined conversion function
+class C
+{
+	C(B&)
+	{
+	}
+};
+// converting constructor
+void f(A)
+{
+} // overload #1
+void f(C)
+{
+} // overload #2
+
+int main()
+{
+	B b;
+	f(b); // B -> A via ctor or B -> A via function (ambiguous conversion)
+		  // b -> C via ctor (user-defined conversion)
+		  // the conversions for overload #1 and for overload #2
+		  // are indistinguishable; compilation fails
+}
+// g++ test.cpp
+
+
+```
+
+> NOTE:  上述程序编译报错如下:
+>
+> ```c++
+> test3.cpp: In function ‘int main()’:
+> test3.cpp:33:5: error: call of overloaded ‘f(B&)’ is ambiguous
+>   f(b); // B -> A via ctor or B -> A via function (ambiguous conversion)
+>      ^
+> test3.cpp:33:5: note: candidates are:
+> test3.cpp:23:6: note: void f(A)
+>  void f(A)
+>       ^
+> test3.cpp:26:6: note: void f(C)
+>  void f(C)
 > ```
 >
 > 

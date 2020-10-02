@@ -146,11 +146,13 @@ So the compiler considers that `func` must be a member of `B` or a class that `B
 
 
 
-### Examples
+### Example
 
-[C++ overloading conversion operator for custom type to std::string](https://stackoverflow.com/questions/3518145/c-overloading-conversion-operator-for-custom-type-to-stdstring)
+Example1: overload conversion operator for custom type to `std::string`: 
 
+来源: stackoverflow [C++ overloading conversion operator for custom type to std::string](https://stackoverflow.com/questions/3518145/c-overloading-conversion-operator-for-custom-type-to-stdstring)
 
+> NOTE: 这个例子收录到了`C++\Language-reference\Functions\Overload-resolution\Ambiguous-overload.md`中
 
 ## Converting constructor
 
