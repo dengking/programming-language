@@ -68,7 +68,7 @@ Default initialization of **non-class variable**s with **automatic** and **dynam
 
 > NOTE: 关于static、thread-local object，下面的例子中有着更加详细的说明。
 
-If `T` is a const-qualified type, it must be a class type with a **user-provided default constructor**.
+
 
 > NOTE: 也就是built-in type，是不允许default-initialized的。
 
@@ -120,6 +120,61 @@ int main()
 > 1963938480
 > T2::T2()
 > 125
+> ```
+
+#### Default initialization and `const`
+
+> NOTE: 这是我添加的标题
+
+If `T` is a const-qualified type, it must be a **class type** with a **user-provided default constructor**.
+
+> NOTE: 这段话的意思是非常明显的，如果`T`是一个const-qualified type，那么它必须是a **class type** with a **user-provided default constructor**，否则就不能够使用default initialization。
+
+```C++
+#include <string>
+#include <iostream>
+
+struct T1
+{
+	int mem;
+};
+
+struct T2
+{
+	int mem;
+	T2() // "mem" is not in the initializer list
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+int main()
+{
+	const int n2; // error: a const non-class
+	const T1 t1; // error: const class with implicit default ctor
+	const T2 t2;      // const class, calls the user-provided default ctor
+					  // t2.mem is default-initialized (to indeterminate value)
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序编译报错如下:
+>
+> ```C++
+> test.cpp: In function ‘int main()’:
+> test.cpp:20:12: error: uninitialized const ‘n2’ [-fpermissive]
+>   const int n2; // error: a const non-class
+>             ^
+> test.cpp:21:11: error: uninitialized const ‘t1’ [-fpermissive]
+>   const T1 t1; // error: const class with implicit default ctor
+>            ^
+> test.cpp:4:8: note: ‘const struct T1’ has no user-provided default constructor
+>  struct T1
+>         ^
+> test.cpp:6:6: note: and the implicitly-defined constructor does not initialize ‘int T1::mem’
+>   int mem;
+> 
 > ```
 >
 > 
