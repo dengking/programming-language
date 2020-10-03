@@ -81,6 +81,11 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 
 
+## TODO: value initialization VS zero-size initializer list
+
+两者的grammar是相同的，compiler如何来进行区分呢？
+
+在akrzemi1 [Value-initialization with C++](https://akrzemi1.wordpress.com/2013/09/10/value-initialization-with-c/) 中对这个问题进行了讨论。
 
 
 
@@ -90,12 +95,7 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 
 
-
-
-
-
-
-
+## draft
 
 
 
@@ -103,7 +103,7 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 
 
-## learncpp [1.4 — Variable assignment and initialization](https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/)
+### learncpp [1.4 — Variable assignment and initialization](https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/)
 
 One downside of assignment is that it requires at least two statements: one to define the variable, and one to assign the value.
 
@@ -127,7 +127,7 @@ For simple data types (like integers), copy and direct initialization are essent
 
 
 
-## Initialization VS assignment
+### Initialization VS assignment
 
 两者之间的相同点是都会改变object的值。
 
@@ -135,7 +135,7 @@ For simple data types (like integers), copy and direct initialization are essent
 
 
 
-## TO READ
+### TO READ
 
 learncpp [1.6 — Uninitialized variables and undefined behavior](https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/)
 

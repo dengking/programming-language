@@ -10,6 +10,8 @@ Some time ago, I showed how `boost::value_initialized` can be used to value-init
 
 ### Value initialization
 
+> NOTE: 本节其实重点是区分value initialization和default initialization。
+
 Are you familiar with term “value initialization”? It is sometimes confused with “default-initialization”. In the following declaration:
 
 ```C++
@@ -73,9 +75,22 @@ std::cin >> i; // read initial value
 ```
 
 Let’s continue with our example: `m` is also **default initialized**. But because `std::mutex` provides a **default constructor**, this constructor is chosen for **default-initialization**.
-For `w`, because type `widget` does not provide a custom **default constructor**, an **implicit default constructor** is generated (and called here) by the compiler: it calls **default constructors** for member sub-objects, which perform no initialization for `x` and `y` (as they are `int`s) and calls **user-provided default constructor** for `title`. For `a`, each element of the array is default-initialized (left in **indeterminate state**).
+For `w`, because type `widget` does not provide a **custom default constructor**, an **implicit default constructor** is generated (and called here) by the compiler: it calls **default constructors** for member sub-objects, which perform no initialization for `x` and `y` (as they are `int`s) and calls **user-provided default constructor** for `title`. For `a`, each element of the array is default-initialized (left in **indeterminate state**).
 
-As we can see, for **built-in types**, **default-initialization** leaves the objects in **indeterminate state**. **Value-initialization** enables us to tell that for **built-in types**, objects should be initialized with value `0`. We were able to use it in C++03 in certain contexts:
+As we can see, for **built-in types**, **default-initialization** leaves the objects in **indeterminate state**. **Value-initialization** enables us to tell that for **built-in types**, objects should be initialized with value `0`. 
+
+> NOTE: 上面已经说明了default-initialization和value-initialization的一个重要差异: 对于built-in type:
+>
+> | Initialization         |                                                              |
+> | :--------------------- | ------------------------------------------------------------ |
+> | Default-initialization | **default-initialization** leaves the objects in **indeterminate state** |
+> | Value-initialization   | objects should be initialized with value `0`                 |
+>
+> 
+
+#### Initialization list of the constructor
+
+We were able to use it in C++03 in certain contexts:
 
 ```C++
 #include <string>
@@ -136,7 +151,9 @@ int main()
 > a[3]:0
 > ```
 
-In initialization list of the constructor `()` means “value-initialize”. That is: initialize `i` with value 0. For `m`, call its **default constructor**. For `w`, its members `x` and `y` are initialized with value `0`, and for `title` we call `string`’s default constructor. Integers in `a` are initialized with value `0`.
+In **initialization list of the constructor** `()` means “value-initialize”. That is: initialize `i` with value 0. For `m`, call its **default constructor**. For `w`, its members `x` and `y` are initialized with value `0`, and for `title` we call `string`’s default constructor. Integers in `a` are initialized with value `0`.
+
+#### Automatic objects
 
 If we wanted to trigger such **value initialization** for **automatic objects** in C++03, it is possible, but we have to select the appropriate **initialization syntax** for each object:
 
@@ -160,7 +177,7 @@ void manual_value_initialization()
 }
 ```
 
-Since `T` can be `int`, `std::mutex`, `widget` or `int[9]`, which syntax do you pick for value-initialization? None will work for all four types.
+Since `T` can be `int`, `std::mutex`, `widget` or `int[9]`, which syntax do you pick for **value-initialization**? None will work for all four types.
 
 ### Value-initialization syntax
 
@@ -175,6 +192,53 @@ void cpp11_value_initialization()
 ```
 
 `{}` just means “value-initialize”, but unlike `()`, it works in any initialization context.
+
+Going back to our example with class called `value_initialization`, it is risky to put built-in types as members in a class, because you may forget to call their **value initialization** in the constructor(s). Especially, when you add a new member, and the body of the constructor is in another “cpp” file, you may forget to add **value-initialization** in all constructors. In C++11, you can fix that problem:
+
+```C++
+struct cpp11_value_initialization
+{
+  int i {};
+  std::mutex m {};
+  widget w {};
+  int a[9] {};
+ 
+  // no default constructor required
+};
+```
+
+> NOTE: if we used `()` to “initialize” `member` in the last example, we would be in fact declaring a member function. This is why initialization with `()` is not uniform.
+>
+> 显然，使用`()`无法实现initialization grammar的uniform。
+
+Syntax `int i {};` here means, “unless specified otherwise in the constructor, value-initialize member `i` upon initialization.” Similarly, in “generic context”:
+
+```C++
+template <typename T>
+class C
+{
+  T member {};
+  // ...
+};
+```
+
+Note that if a class defines (implicitly or not) a **default constructor**, **empty braces** are *not* interpreted as **zero-element initializer list** (see [this post](https://akrzemi1.wordpress.com/2013/05/14/empty-list-initialization/) for more details).
+
+> NOTE: 下面是作者添加的更新:
+>
+> **Update.** I made an error in the original text: empty braces are sometimes treated as a zero-size initializer list.
+
+This is why the braced initialization syntax is called “uniform initialization”: because it works the same in different (all) initialization contexts: in constructor initialization list, for declaring automatic, temporary, global, heap-allocated variables, for class members. Note that if we used `()` to “initialize” `member` in the last example, we would be in fact declaring a member function. This is why initialization with `()` is not uniform.
+
+“Uniform” does not mean that `()` and `{}` will do the same thing. For an example, see [this post](https://akrzemi1.wordpress.com/2013/06/05/intuitive-interface-part-i/).
+
+The empty brace syntax enables a funny-looking way of creating *tags*. A tag is an empty structure that does not store any value but whose type is used for selecting overloaded constructors of functions. You can find them in the Standard Library, for instance `std::allocator_arg`, `std::nothrow`, `std::piecewise_construct`, `std::defer_lock`. Such tags can be declared as one-liners:
+
+```c++
+constexpr struct allocator_arg_t{} allocator_arg{};
+```
+
+The first empty braces indicate that class `allocator_arg_t` has empty definition; the second indicates that we are **value-initializing** a global constant.
 
 
 
