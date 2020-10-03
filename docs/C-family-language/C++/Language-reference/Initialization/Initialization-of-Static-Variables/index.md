@@ -20,3 +20,10 @@ Singleton: 参见`C++\Pattern\Singleton`
 | Runtime Static Initialization Order Idioms |                                            | - [More C++ Idioms/Runtime Static Initialization Order Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Runtime_Static_Initialization_Order_Idioms) |
 | Nifty counter idiom                        | - `C++\Idiom\OOP\Nifty-Counter`            | - [More C++ Idioms/Nifty counter idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Nifty_Counter) |
 
+
+
+## TODO
+
+在下面章节中，提及了static variable的initialization问题:
+
+cppreference [Default initialization](https://en.cppreference.com/w/cpp/language/default_initialization)
