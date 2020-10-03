@@ -6,6 +6,7 @@ nav:
     - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
 # 下面专门描述Static Variables的initialization     
     - Initialization-of-Static-Variables: Initialization-of-Static-Variables
+    - Default-initialization: Default-initialization.md
     - Zero-initialization: Zero-initialization.md
     - Constant-initialization: Constant-initialization.md
     - Aggregate-initialization: Aggregate-initialization.md
