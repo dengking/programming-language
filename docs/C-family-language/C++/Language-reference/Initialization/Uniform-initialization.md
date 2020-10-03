@@ -16,6 +16,16 @@
 
 > NOTE: `C++\Language-reference\Initialization\Value-initialization.md`中收录了这篇文章。
 
+### cppreference [Value initialization (since C++03)#Notes](https://en.cppreference.com/w/cpp/language/value_initialization#Notes)
+
+> NOTE: 重要讨论的是uniform initialization的优势、它所解决的问题。
+
+The syntax `T object();` does not initialize an object; it declares a function that takes no arguments and returns `T`. The way to value-initialize a named variable before C++11 was `T object = T();`, which value-initializes a temporary and then copy-initializes the object: most compilers [optimize out the copy](https://en.cppreference.com/w/cpp/language/copy_elision) in this case.
+
+As described in [functional cast](https://en.cppreference.com/w/cpp/language/explicit_cast), the syntax `T()` (1) is prohibited for arrays, while `T{}` (5) is allowed.
+
+
+
 ### Summary
 
 “uniform initialization”正如其名称所揭示的：它让用户可以以非常uniform（统一的）的grammar来描述各种各样的initialization，这种uniform，带来的价值是：
