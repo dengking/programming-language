@@ -462,4 +462,4 @@ A constructor is *user-provided* if it is user-declared and not explicitly defau
 
 ## SUMMARY
 
-对于value initialization，直观的感觉是，它重要描述的是compiler的行为。
+对于value initialization，直观的感觉是，它重要描述的是compiler的default behavior。

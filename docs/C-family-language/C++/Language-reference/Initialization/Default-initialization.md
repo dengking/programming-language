@@ -10,31 +10,47 @@ This is the initialization performed when a variable is constructed with **no in
 
 ### Syntax
 
-
-
-### Explanation
-
 > NOTE: 从non-class type 和 class type来进行区分
-
-#### Situation
 
 Default initialization is performed in three situations:
 
-| situation                                                    | 注解                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| a variable with <br>- automatic, <br>- static <br/>- thread-local [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) <br>is declared with no **initializer**; | 需要注意的是，原文的NOTE段有这样的补充说明:<br>static and thread-local objects get [zero initialized](https://en.cppreference.com/w/cpp/language/zero_initialization) |
-| an object with **dynamic storage duration** <br>- is created by a [new-expression](https://en.cppreference.com/w/cpp/language/new) with no initializer or<br>- is created by a new-expression with the initializer consisting of an empty pair of parentheses (until C++03); | 需要注意的是，`new T ( )` (until C++03)，在C++03中，被认为是 [value initialization](https://en.cppreference.com/w/cpp/language/value_initialization)，原文的后面进行了专门说明 |
-| a base class or a **non-static data member** is not mentioned in a constructor [initializer list](https://en.cppreference.com/w/cpp/language/initializer_list) and that constructor is called. | OOP的情形，重要描述的是**non-static data member**            |
+| syntax                               | situation                                                    |
+| ------------------------------------ | ------------------------------------------------------------ |
+| `T object ;`                         | a variable with <br>- automatic, <br>- static <br/>- thread-local [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) <br>is declared with no **initializer**; |
+| `new T` <br>`new T ( )`(until C++03) | an object with **dynamic storage duration** <br>- is created by a [new-expression](https://en.cppreference.com/w/cpp/language/new) with no initializer or<br>- is created by a new-expression with the initializer consisting of an empty pair of parentheses (until C++03); |
+|                                      | a base class or a **non-static data member** is not mentioned in a constructor [initializer list](https://en.cppreference.com/w/cpp/language/initializer_list) and that **constructor** is called. |
 
-#### Effect
+
+
+| 注解                                                         |
+| ------------------------------------------------------------ |
+| 需要注意的是，关于static、thread-local object，原文的NOTE段有补充说明，需要以它为准 |
+| 需要注意的是，`new T ( )` (until C++03)，在C++03中，被认为是 [value initialization](https://en.cppreference.com/w/cpp/language/value_initialization)，原文的后面进行了专门说明 |
+| 意思是:对于**non-static data member**，如果在constructor [initializer list](https://en.cppreference.com/w/cpp/language/initializer_list)没有提起它，它的default constructor会被compiler调用 |
+
+
+
+### Effect
 
 The effects of **default initialization** are:
 
-| type                               | effect                                            |
-| ---------------------------------- | ------------------------------------------------- |
-| a non-POD (until C++11) class type | default constructor                               |
-| array type                         | every element of the array is default-initialized |
-| otherwise                          | nothing is done                                   |
+#### Class type
+
+the constructors are considered and subjected to [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution) against the empty argument list. The constructor selected (which is one of the [default constructors](https://en.cppreference.com/w/cpp/language/default_constructor)) is called to provide the initial value for the new object;
+
+> NOTE: 说白了就是default constructor被调用
+
+#### Array type
+
+every element of the array is default-initialized
+
+#### Other type
+
+nothing is done: the objects with automatic storage duration (and their subobjects) are initialized to indeterminate values.
+
+
+
+
 
 > NOTE: 原文中的解释其实是非常难以理解的，在下面文章中有非常好的解释:
 >
@@ -50,13 +66,63 @@ Default initialization of **non-class variable**s with **automatic** and **dynam
 >
 > > Its value is **indeterminate** (no initialization is performed). This is so for **performance** reasons, because sometimes we do not need an initial value.
 
+> NOTE: 关于static、thread-local object，下面的例子中有着更加详细的说明。
+
 If `T` is a const-qualified type, it must be a class type with a **user-provided default constructor**.
 
 > NOTE: 也就是built-in type，是不允许default-initialized的。
 
 Reference cannot be default-initialized.
 
+```C++
+#include <string>
+#include <iostream>
 
+struct T1
+{
+	int mem;
+};
+
+struct T2
+{
+	int mem;
+	T2() // "mem" is not in the initializer list
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+int n; // static non-class, a two-phase initialization is done:
+// 1) zero initialization initializes n to zero
+// 2) default initialization does nothing, leaving n being zero
+
+int main()
+{
+	int n;            // non-class, the value is indeterminate
+	std::string s;    // class, calls default ctor, the value is "" (empty string)
+	std::string a[2]; // array, default-initializes the elements, the value is {"", ""}
+//  int& r;           // error: a reference
+//  const int n;      // error: a const non-class
+//  const T1 t1;      // error: const class with implicit default ctor
+	T1 t1;            // class, calls implicit default ctor
+	std::cout << t1.mem << std::endl;
+	const T2 t2;      // const class, calls the user-provided default ctor
+					  // t2.mem is default-initialized (to indeterminate value)
+	std::cout << t2.mem << std::endl;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 输出如下:
+>
+> ```C++
+> 1963938480
+> T2::T2()
+> 125
+> ```
+>
+> 
 
 ### Indeterminate value and UB (since C++14)
 
@@ -65,3 +131,9 @@ Reference cannot be default-initialized.
 Use of an indeterminate value obtained by default-initializing a non-class variable of any type is [undefined behavior](https://en.cppreference.com/w/cpp/language/ub) (in particular, it may be a [trap representation](https://en.cppreference.com/w/cpp/language/object#Object_representation_and_value_representation)), except in the following cases:
 
 > NOTE: 在实际生产中这种UB发生的情况不多，因为一般的programmer都有着比较好的initialization意识。
+
+
+
+## Summary
+
+对于default initialization，直观感受是，它和default constructor对应；它不对built-in type进行 [zero initialization](https://en.cppreference.com/w/cpp/language/zero_initialization)，这是它和value initialization的主要差别。
