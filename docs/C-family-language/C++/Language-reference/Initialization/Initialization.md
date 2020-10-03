@@ -1,6 +1,20 @@
 # Initialization
 
+## 思路
 
+C++的initialization不仅种类繁多而且规则冗杂，下面是比较好的整理思路:
+
+首先需要区分每种initialization的syntax，因为compiler根据syntax来决定采用何种initialization；
+
+其次是需要搞清楚每种initialization的effect，对effect的讨论主要集中在对下面三种type的effect: 
+
+| type              | 注解        |
+| ----------------- | ----------- |
+| built-in type     | int、char等 |
+| user-defined type | class       |
+| aggregate type    | array       |
+
+各种initialization的差异重要体现在它们的effect上。
 
 ## cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization)
 
@@ -69,13 +83,11 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 
 
-
-
-|                                                              |                                                              |      |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ---- |
-| [Zero initialization](https://en.cppreference.com/w/cpp/language/zero_initialization) | Sets the initial value of an object to zero.                 |      |
-| [Default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) | This is the initialization performed when a variable is constructed with no initializer. |      |
-| [Constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) | Sets the initial values of the [static](https://en.cppreference.com/w/cpp/language/storage_duration) variables to a compile-time constant. |      |
+|                                                              |                                                              |                |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
+| [Zero initialization](https://en.cppreference.com/w/cpp/language/zero_initialization) | Sets the initial value of an object to zero.                 |                |
+| [Default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) | This is the initialization performed when a variable is constructed with no initializer. | no initializer |
+| [Constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) | Sets the initial values of the [static](https://en.cppreference.com/w/cpp/language/storage_duration) variables to a compile-time constant. |                |
 
 
 

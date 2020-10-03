@@ -244,11 +244,21 @@ The first empty braces indicate that class `allocator_arg_t` has empty definitio
 
 ## cppreference [Value initialization](https://en.cppreference.com/w/cpp/language/value_initialization)
 
+| syntax                                                       | explanation                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `T()` 、<br>`T{}`                                            | a **nameless temporary object** is created <br>with the **initializer** consisting of an empty pair of parentheses or braces (since C++11); |
+| `new T ()`、<br>`new T {}`                                   | an object with dynamic storage duration is created by a [new-expression](https://en.cppreference.com/w/cpp/language/new) <br>with the **initializer** consisting of an empty pair of parentheses or braces (since C++11); |
+| `Class::Class(...) : member() { ... }`、<br>`Class::Class(...) : member{} { ... }` | a non-static data member or a base class is initialized using a member initializer <br>with an empty pair of parentheses or braces (since C++11); |
+| `T object {};`                                               | a named variable (automatic, static, or thread-local) is declared with the initializer consisting of a pair of braces. (since C++11) |
 
 
+> NOTE: `{}`是C++11引入的uniform initialization特性，参见`C++\Language-reference\Initialization\Uniform-initialization.md`。
 
+In all cases, if the empty pair of braces `{}` is used and `T` is an *aggregate type*, [aggregate-initialization](https://en.cppreference.com/w/cpp/language/aggregate_initialization) is performed instead of **value-initialization**.
 
+If `T` is a class type that has no **default constructor** but has a constructor taking [std::initializer_list](http://en.cppreference.com/w/cpp/utility/initializer_list), [list-initialization](https://en.cppreference.com/w/cpp/language/list_initialization) is performed.
 
+> NOTE: 如果既有default constructor，又有constructor taking [std::initializer_list](http://en.cppreference.com/w/cpp/utility/initializer_list)，那compiler如何选择呢？
 
 ## Example
 
