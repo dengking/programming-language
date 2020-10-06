@@ -108,3 +108,9 @@ C<int, int, int> c;
 ```
 
 需要注意的是：参数包‘Args’必须出现在模板形参表末尾。
+
+
+
+
+
+# stackoverflow [Parameter pack template metaprogramming depth first search](https://stackoverflow.com/questions/6288425/parameter-pack-template-metaprogramming-depth-first-search)

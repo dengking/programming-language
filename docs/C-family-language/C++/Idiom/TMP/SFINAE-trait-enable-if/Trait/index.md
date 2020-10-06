@@ -503,6 +503,10 @@ trait class往往会定义一个template class（primary template class），然
 
 
 
+## C++14 TransformationTrait
+
+C++14 TransformationTrait对trait进行强化，参见`C++\What-is-new-in-C++\C++14\TransformationTrait`。
+
 ## TO READ
 
 http://blog.aaronballman.com/2011/11/a-simple-introduction-to-type-traits/

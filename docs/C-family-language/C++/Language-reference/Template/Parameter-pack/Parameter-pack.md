@@ -47,7 +47,7 @@ int main()
 
 
 
-## cppreference fold expression(since C++17)
+## cppreference [fold expression](https://en.cppreference.com/w/cpp/language/fold)(since C++17)
 
 > NOTE: 这是C++17中增强parameter pack的新特性
 
