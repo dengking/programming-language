@@ -1,1 +1,0 @@
-# boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)

@@ -4,7 +4,27 @@
 
 ## cppreference [`std::copy`](https://en.cppreference.com/w/cpp/algorithm/copy) 
 
+## cppreference [std::copy_n](https://en.cppreference.com/w/cpp/algorithm/copy_n)
 
+
+
+### Examples
+
+https://stackoverflow.com/a/26119379
+
+If you have access to the whole data structure, and therefore its size, you can use the following:
+
+```cpp
+std::vector<int> v1, v2;
+std::copy_n(v2.begin(), std::min(NUM, v2.size()), std::back_inserter(v1));
+```
+
+If you have access to only iterators, I don't know how to do this using only std functions without calculating the distance. This is cheap for random-access iterators but duplicates work for other types.
+
+```cpp
+std::vector<int>::iterator i_begin, i_end, o_begin;
+std::copy_n(i_begin, std::min(NUM, std::distance(i_begin, i_end)), o_begin);
+```
 
 ## Overlapping range
 

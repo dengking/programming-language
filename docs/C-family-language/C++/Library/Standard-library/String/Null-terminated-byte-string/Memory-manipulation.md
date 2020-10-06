@@ -4,9 +4,27 @@
 
 ## cppreference `std::memcpy`
 
-
+http://cplusplus.com/reference/cstring/memcpy/
 
 ## cppreference `std::memmove`
+
+http://cplusplus.com/reference/cstring/memmove/
+
+
+
+## `memchr`
+
+http://cplusplus.com/reference/cstring/memchr/
+
+## `memset`
+
+http://cplusplus.com/reference/cstring/memset/
+
+
+
+## `memcmp`
+
+http://cplusplus.com/reference/cstring/memcmp/
 
 
 
