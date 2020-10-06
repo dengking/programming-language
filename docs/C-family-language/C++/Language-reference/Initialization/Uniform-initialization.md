@@ -1,12 +1,14 @@
 # Uniform initialization
 
-按照 `C++\Language-reference\Expressions\Constant-expressions` 中总结的经验: 应该是先阅读what's new in c++（一般是在这个特性的提案中描述这部分内容， 但是提案往往非常漫长，最快捷的方式是阅读维基百科中所总结的），先搞清楚引入这些feature的意图、application，然后再去了解这些feature的grammar等详情。
+按照 `C++\Language-reference\Expressions\Constant-expressions` 中总结的经验:
 
-本节奇怪的是，在cppreference [C++11](https://en.cppreference.com/w/cpp/11)中并没有找到Uniform initialization的介绍，不确定 "brace-or-equal initializers" 是否就是uniform initialization。
+> 应该是先阅读what's new in c++（一般是在这个特性的提案中描述这部分内容， 但是提案往往非常漫长，最快捷的方式是阅读维基百科中所总结的），先搞清楚引入这些feature的意图、application，然后再去了解这些feature的grammar等详情。
+
+奇怪的是，在cppreference [C++11](https://en.cppreference.com/w/cpp/11)中并没有找到Uniform initialization的介绍，不确定 "brace-or-equal initializers" 是否就是uniform initialization。
 
 ## TODO: What's in c++: Uniform initialization
 
-
+下面文章中，讨论了为什么C++11引入uniform initialization特性: 
 
 ### wikipedia [C++11#Uniform initialization](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization)
 
@@ -23,6 +25,8 @@
 The syntax `T object();` does not initialize an object; it declares a function that takes no arguments and returns `T`. The way to value-initialize a named variable before C++11 was `T object = T();`, which value-initializes a temporary and then copy-initializes the object: most compilers [optimize out the copy](https://en.cppreference.com/w/cpp/language/copy_elision) in this case.
 
 As described in [functional cast](https://en.cppreference.com/w/cpp/language/explicit_cast), the syntax `T()` (1) is prohibited for arrays, while `T{}` (5) is allowed.
+
+### CppCoreGuidelines [T.68: Use `{}` rather than `()` within templates to avoid ambiguities](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t68-use--rather-than--within-templates-to-avoid-ambiguities)
 
 
 

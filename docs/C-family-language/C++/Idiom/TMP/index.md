@@ -1,5 +1,13 @@
 # 关于本章
 
+
+
+## C++ Core Guidelines: [Templates and generic programming](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-templates)
+
+> NOTE: 非常值得读
+
+## Summary
+
 下面对本章的idiom进行了总结：
 
 template metaprogramming中核心的idiom：
