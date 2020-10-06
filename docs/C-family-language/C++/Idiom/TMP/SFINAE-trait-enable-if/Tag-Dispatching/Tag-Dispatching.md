@@ -136,7 +136,9 @@ decltype ((cont.remove_if(op), void())) detail::remove_if(detail::pick_1, Cont&,
 After:1 3 5 
 ```
 
+#### Example: iterator library
 
+参见下面的“Example: iterator library”章节。
 
 ### Application: Category info
 
@@ -259,6 +261,22 @@ struct ProtocolTrait
 
 
 
+## [boost Generic Programming Techniques#Tag Dispatching](https://www.boost.org/community/generic_programming.html#tag_dispatching)
+
+
+
+
+
+## enum and tag dispatch
+
+Google c++ static polymorphism on enum values
+
+[When to Use Enums and When to Use Tag Dispatching in C++](https://www.fluentcpp.com/2018/05/01/when-to-use-enums-and-when-to-use-tag-dispatching-in-cpp/)
+
+[Polymorphic Enum in C++](https://stackoverflow.com/questions/3117462/polymorphic-enum-in-c)
+
+
+
 ## Example: iterator library
 
 刚刚阅读cppreference中关于iterator operation的实现的样例代码，链接如下：
@@ -279,3 +297,15 @@ struct ProtocolTrait
 
 显然，在实际开发中，需要结合多种idiom才能够充分发挥`C++`的威力；正如上述例子，结合了trait、tag dispatch；
 
+### Iterator tags 
+
+下面是 [Iterator tags](https://en.cppreference.com/w/cpp/iterator/iterator_tags) 中给出的tag定义，可以看出它们也是基于inheritance的。
+
+| tag                                                          |
+| ------------------------------------------------------------ |
+| `struct input_iterator_tag { };`                             |
+| `struct output_iterator_tag { };`                            |
+| `struct forward_iterator_tag : public input_iterator_tag { };` |
+| `struct bidirectional_iterator_tag : public forward_iterator_tag { };` |
+| `struct random_access_iterator_tag : public bidirectional_iterator_tag { };` |
+| `struct contiguous_iterator_tag: public random_access_iterator_tag { };` |
