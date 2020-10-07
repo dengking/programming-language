@@ -1,7 +1,7 @@
 nav:
-    - Goal-and-principle: Goal-and-principle
     - Books: Books.md
-    - Composition-and-inheritance: Composition-and-inheritance
+    - Book-design-pattern: Book-design-pattern
+    - Composition-and-inheritance-and-delegation: Composition-and-inheritance-and-delegation
     - Creational: Creational
     - Behavioral-pattern: Behavioral-pattern
     - Structural-pattern: Structural-pattern
