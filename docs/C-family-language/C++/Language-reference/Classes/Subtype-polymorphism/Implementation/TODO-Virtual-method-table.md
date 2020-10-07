@@ -158,11 +158,5 @@ Virtual method tables also only work if dispatching is constrained to a known se
 
 Languages that provide either or both of these features often dispatch by looking up a string in a [hash table](https://en.wikipedia.org/wiki/Hash_table), or some other equivalent method. There are a variety of techniques to make this faster (e.g., [interning](https://en.wikipedia.org/wiki/String_interning)/tokenizing method names, caching lookups, [just-in-time compilation](https://en.wikipedia.org/wiki/Just-in-time_compilation)).
 
-### See also
-
-- [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
-- [Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
-- [Branch table](https://en.wikipedia.org/wiki/Branch_table)
-
 
 
