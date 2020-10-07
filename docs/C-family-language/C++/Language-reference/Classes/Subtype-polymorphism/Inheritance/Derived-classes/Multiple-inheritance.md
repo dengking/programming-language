@@ -1,4 +1,84 @@
-# Virtual inheritance
+# Multiple inheritance
+
+
+
+## 两种class hierarchy
+
+C++是支持[multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance)特性的，这就是使得C++的class hierarchy可能非常复杂，下面是两类class hierarchy:
+
+### Diamond and [the diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)
+
+```
+  A
+ / \
+B   C
+ \ /
+  D
+```
+
+D inherit from B
+
+D inherit from C
+
+B inherit from A
+
+C inherit from A
+
+这种class hierarchy是存在[The diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)的。
+
+### Tree
+
+```
+A1  A2
+|   |
+B   C
+ \ /
+  D
+```
+
+D inherit from B
+
+D inherit from C
+
+B inherit from A1
+
+C inherit from A2
+
+## isocpp.faq: Inheritance — Multiple and Virtual Inheritance [¶](https://isocpp.org/wiki/faq/multiple-inheritance) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+
+> NOTE: 这篇文章讲解地还不错
+
+### Do we really need multiple inheritance? [¶](https://isocpp.org/wiki/faq/multiple-inheritance#mi-needed) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+
+In C++, abstract classes often serve as interfaces and a class can have many interfaces. Other languages – often deemed “not MI” – simply have a separate name for their equivalent to a pure abstract class: an interface. 
+
+> NOTE: 可以使用multiple inheritance的场景
+
+The reason languages provide inheritance (both single and multiple) is that language-supported inheritance is typically superior to workarounds (e.g. use of forwarding functions to sub-objects or separately allocated objects) for ease of programming, for detecting logical problems, for maintainability, and often for performance.
+
+> NOTE: 这段话所要表明的是: 虽然可以使用walkround来实现和multiple inheritance类似的效果，但是如果programming language提供了multiple inheritance，那么直接使用这个特性能够带来诸多优势。
+
+### I’ve been told that I should never use multiple inheritance. Is that right? [¶](https://isocpp.org/wiki/faq/multiple-inheritance#mi-not-evil) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+
+It *really* bothers me when people think they know what’s best for *your* problem even though they’ve never seen *your* problem!! How can anybody possibly know that multiple inheritance won’t help *you* accomplish *your* goals without knowing *your* goals?!?!?!?!!!
+
+> NOTE: 表明意思是: 当人们认为他们知道如何解决你的问题时，即使他们从未见过你的问题，这真的让我很困扰!!
+>
+> 其实说白了就是：千万不要迷信，要具体问题具体讨论。
+
+ “One size does not fit all.”
+
+### So there are times when multiple inheritance isn’t bad?!?? [¶](https://isocpp.org/wiki/faq/multiple-inheritance#mi-not-evil-2) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+
+If MI (multiple inheritance) helps, use it; if not, don’t. 
+
+### What are some disciplines for using multiple inheritance? [¶](https://isocpp.org/wiki/faq/multiple-inheritance#mi-disciplines) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+
+
+
+## Virtual inheritance
+
+C++引入的Virtual inheritance特性就是为了解决前面提到的[the diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)的。
 
 virtual base class是virtual inheritance的base class。
 
@@ -113,7 +193,7 @@ The ability to share a single instance of the `Animal` parent between `Mammal` a
 
 
 
-## Inheritance — Multiple and Virtual Inheritance [¶](https://isocpp.org/wiki/faq/multiple-inheritance) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+## 
 
 
 

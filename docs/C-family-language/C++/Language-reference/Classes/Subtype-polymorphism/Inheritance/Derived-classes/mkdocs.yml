@@ -1,4 +1,4 @@
 nav:
     - Derived-classes: Derived-classes.md
-    - Virtual-inheritance: Virtual-inheritance.md
+    - Multiple-inheritance: Multiple-inheritance.md.md
     - Super: Super.md

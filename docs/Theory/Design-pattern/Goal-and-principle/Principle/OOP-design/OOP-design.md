@@ -1,27 +1,28 @@
-# Design
+# OOP Design
 
 在进入具体的design pattern之前，有必要对oop中的设计思想进行阐述，因为各种的design pattern其实都是贯彻着这些思想的。
 
-## [***Design Patterns: Elements of Reusable Object-Oriented Software***](https://en.wikipedia.org/wiki/Design_Patterns)
+## wikipedia [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns)
 
 > 开山之作。
 
 Chapter 1 is a discussion of [object-oriented](https://en.wikipedia.org/wiki/Object-oriented) design techniques, based on the authors' experience, which they believe would lead to good object-oriented software design, including:
 
-- "Program to an 'interface', not an '**implementation'**." (Gang of Four 1995:18)
+1) "Program to an 'interface', not an '**implementation'**." (Gang of Four 1995:18)
 
-  > NOTE: interface是abstraction，implementation是concrete。关于abstraction、concrete，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)，它是OOP的核心思想，SOLID中的“D”即[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)表达的是和这相同的含义。
-  >
-  > 它是实现[Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)的关键实现。
+> NOTE: interface是abstraction，implementation是concrete。关于abstraction、concrete，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)，它是OOP的核心思想，SOLID中的“D”即[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)表达的是和这相同的含义。
+>
+> 它是实现[Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)的关键实现。
 
-- [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance): "Favor '[object composition](https://en.wikipedia.org/wiki/Object_composition)' over '[class inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science))'." (Gang of Four 1995:20)
+2) [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance): "Favor '[object composition](https://en.wikipedia.org/wiki/Object_composition)' over '[class inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science))'." (Gang of Four 1995:20)
 
 
 
 The authors claim the following as advantages of [interfaces](https://en.wikipedia.org/wiki/Interface_(computer_science)) over implementation:
 
-- clients remain unaware of the specific types of objects they use, as long as the object adheres to the interface
-- clients remain unaware of the classes that implement these objects; clients only know about the abstract class(es) defining the interface
+1) clients remain unaware of the specific types of objects they use, as long as the object adheres to the interface
+
+2) clients remain unaware of the classes that implement these objects; clients only know about the abstract class(es) defining the interface
 
 Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wiki/Dynamic_dispatch) and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), which are central features of object-oriented programming.
 

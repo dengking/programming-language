@@ -1,6 +1,6 @@
 nav:
     - Programming-principles: Programming-principles.md
-    - Object-oriented-design: Object-oriented-design.md
+    - OOP-design: OOP-design
     - SOLID: SOLID    
     
     

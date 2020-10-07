@@ -2,8 +2,10 @@
 
 本文主要基于维基百科[Object-oriented programming。如果有一定的编程经验的话，可以较好理解，如果没有OOP的经验，可以阅读下一章[Thinking-in-java](./Class-based-OOP/Thinking-in-java/index.md)，其中对OOP理论有非常好的描述。OOP有如下流派：
 
-- [Class-based programming](https://en.wikipedia.org/wiki/Class-based_programming)，典型代表有C++、Java、Python
-- [Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming)，典型代表就是 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) 
+| 流派                                                         | example                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Class-based programming](https://en.wikipedia.org/wiki/Class-based_programming) | 典型代表有C++、Java、Python                                  |
+| [Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming) | 典型代表就是 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) |
 
 
 
@@ -41,9 +43,9 @@ A method call is also known as *[message passing](https://en.wikipedia.org/wiki/
 
 #### [Composition, inheritance, and delegation](https://en.wikipedia.org/wiki/Object-oriented_programming#Composition,_inheritance,_and_delegation)
 
-Objects can contain other objects in their instance variables; this is known as [object composition](https://en.wikipedia.org/wiki/Object_composition). For example, an object in the Employee class might contain (either directly or through a pointer) an object in the Address class, in addition to its own instance variables like "first_name" and "position". Object composition is used to represent "has-a" relationships.
+Objects can contain other objects in their instance variables; this is known as [object composition](https://en.wikipedia.org/wiki/Object_composition). For example, an object in the `Employee` class might contain (either directly or through a pointer) an object in the `Address` class, in addition to its own instance variables like "first_name" and "position". Object composition is used to represent "**has-a**" relationships.
 
-Languages that support classes almost always support [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)). This allows classes to be arranged in a hierarchy that represents "is-a-type-of" relationships. 
+Languages that support classes almost always support [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)). This allows classes to be arranged in a hierarchy that represents "**is-a-type-of**" relationships. 
 
 Subclasses can override the methods defined by superclasses.
 
@@ -55,7 +57,7 @@ Subclasses can override the methods defined by superclasses.
 
 #### [Polymorphism](https://en.wikipedia.org/wiki/Object-oriented_programming#Polymorphism)
 
-[Subtyping](https://en.wikipedia.org/wiki/Subtyping) – a form of [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) – is when calling code can be agnostic as to which class in the supported hierarchy it is operating on – the parent class or one of its descendants. Meanwhile, the same operation name among objects in an inheritance hierarchy may behave differently.
+> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`章节将对它进行详细说明。
 
 #### [Open recursion](https://en.wikipedia.org/wiki/Object-oriented_programming#Open_recursion)
 
@@ -84,7 +86,7 @@ OOP的prototype-based流派，并没有class的概念，往往是weak类型语�
 
 
 
-## 基于hierarchy来思考
+## 基于hierarchy关系来思考
 
 本节标题的含义是：以**结构化思维**来进行思考，即基于hierarchy来思考OOP中的内容，这是一种非常好的思考角度，能够让我们快速的理解OOP中的许多内容，具体分析如下：
 

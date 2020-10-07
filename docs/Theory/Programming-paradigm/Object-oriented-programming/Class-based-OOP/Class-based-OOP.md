@@ -14,35 +14,25 @@ Junade Ali, *Mastering PHP Design Patterns*
 
 
 
-### Encapsulation
-
-
-
-### Inheritance
-
-
-
-
-
 ## Class-based OOP的特性
 
 Class-based OOP的特性：
 
-- abstraction
+1) abstraction
 
-  > NOTE: 在tutorialsteacher [Dependency Inversion Principle](https://www.tutorialsteacher.com/ioc/dependency-inversion-principle)中有这样的描述：
-  >
-  > Abstraction and encapsulation are important principles of object-oriented programming.
+在tutorialsteacher [Dependency Inversion Principle](https://www.tutorialsteacher.com/ioc/dependency-inversion-principle)中有这样的描述：
 
-- Inheritance
+> Abstraction and encapsulation are important principles of object-oriented programming.
 
-- Encapsulation
+2) Inheritance
 
-- Polymorphism
+3) Encapsulation
 
-  > 在维基百科[Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)中有这样的描述：
-  >
-  > Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wiki/Dynamic_dispatch) and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), which are central features of object-oriented programming.
+4) Polymorphism
+
+在维基百科[Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)中有这样的描述：
+
+> Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wiki/Dynamic_dispatch) and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), which are central features of object-oriented programming.
 
 
 
@@ -52,3 +42,7 @@ Class-based OOP的特性：
 - [object-oriented programming](https://www.pcmag.com/encyclopedia/term/object-oriented-programming)
 
 
+
+## Design
+
+参见`Theory\Design-pattern\OOP-design-pattern`章节。
