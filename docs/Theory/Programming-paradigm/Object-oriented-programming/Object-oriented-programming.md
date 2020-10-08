@@ -43,6 +43,8 @@ A method call is also known as *[message passing](https://en.wikipedia.org/wiki/
 
 #### [Composition, inheritance, and delegation](https://en.wikipedia.org/wiki/Object-oriented_programming#Composition,_inheritance,_and_delegation)
 
+> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Assemble`章节，对这部分内容进行了专门的介绍。
+
 Objects can contain other objects in their instance variables; this is known as [object composition](https://en.wikipedia.org/wiki/Object_composition). For example, an object in the `Employee` class might contain (either directly or through a pointer) an object in the `Address` class, in addition to its own instance variables like "first_name" and "position". Object composition is used to represent "**has-a**" relationships.
 
 Languages that support classes almost always support [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)). This allows classes to be arranged in a hierarchy that represents "**is-a-type-of**" relationships. 
@@ -84,32 +86,22 @@ OOP的class-based流派，每个**class**对应一种**类型**，往往是**强
 
 OOP的prototype-based流派，并没有class的概念，往往是weak类型语言使用，比如JavaScript。
 
+## Behavior and data member
+
+后续为了描述的统一性，使用**behavior**来表示method、function member，使用data member来表示“成员变量”；
+
+在`Theory\Programming-paradigm\Object-oriented-programming\Behaivor.md`中对behavior进行了总结。
 
 
-## 基于hierarchy关系来思考
 
-本节标题的含义是：以**结构化思维**来进行思考，即基于hierarchy来思考OOP中的内容，这是一种非常好的思考角度，能够让我们快速的理解OOP中的许多内容，具体分析如下：
+## OOP and “function and data model”
 
-### Inheritance关系
+在工程hardware的`Computer-architecture\Stored-program-computer.md`中，我们介绍了Function and data model。OOP的object是符合“function and data model”的，下面描述了它们的对应关系: 
 
-OOP中的inheritance关系是典型的nesting关系，因此它能够呈现出hierarchy（如果仅仅允许single-inheritance的话，则是tree），这是本节标题的含义
+| OOP的object     | function and data model |
+| --------------- | ----------------------- |
+| function member | function                |
+| data member     | data                    |
 
-### Hierarchy-based implementation
+关于C++ OOP and “function and data model”，参见`C-family-language\C++\Language-reference\Basic-concept\index.md`。
 
-本节标题的含义是：基于hierarchy的实现，OOP中的很多内容都是基于hierarchy来实现的：
-
-**order**
-
-|                                            | 说明                                                       |      |
-| ------------------------------------------ | ---------------------------------------------------------- | ---- |
-| initialization order（construction order） | object的构造，涉及基类的构造，这就涉及initialization order |      |
-| destruction order                          | object                                                     |      |
-
-**implementation of polymorphism**
-
-function find order：沿着hierarchy进行搜索。
-
-需要结合Python、C++的implementation来进行说明：
-
-- C++ vtable
-- Python C3 serialization

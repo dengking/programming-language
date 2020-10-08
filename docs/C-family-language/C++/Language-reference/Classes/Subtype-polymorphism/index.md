@@ -19,7 +19,7 @@ c++的value semantic是不支持runtime polymorphsim的，reference semantic是�
 
 ## Virtual method and virtual data
 
-在C++，dynamic polymorphism是behavior（function），只有virtual method、virtual table，而不是值的。
+在C++，dynamic polymorphism是behavior（function），只有virtual method（virtual table），而不是data/value的。
 
 > NOTE: 这是符合Uniform function model的，参见`C++\Language-reference\Basic-concept\index.md`的“Uniform function model”章节，它所对应的是**Member method is a kind of function**。
 

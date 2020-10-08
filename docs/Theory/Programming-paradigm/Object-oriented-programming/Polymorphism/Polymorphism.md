@@ -29,22 +29,13 @@ The most commonly recognized major classes of polymorphism are:
 | a single [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to entities of different [types](https://en.wikipedia.org/wiki/Data_type) | [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) |
 | a single symbol to represent multiple different types        | [Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) |
 
-[Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)
 
-- [Function overloading](https://en.wikipedia.org/wiki/Function_overloading)
-- [Operator overloading](https://en.wikipedia.org/wiki/Operator_overloading)
 
-[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)
-
-- [Generic function](https://en.wikipedia.org/wiki/Generic_function)
-- [Generic programming](https://en.wikipedia.org/wiki/Generic_programming)
-
-[Subtyping](https://en.wikipedia.org/wiki/Subtyping)
-
-- [Virtual function](https://en.wikipedia.org/wiki/Virtual_function)
-- [Single and dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
-- [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch)
-- [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
+|                                                              | **实现方式**                                                 | 说明 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---- |
+| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | - [Function overloading](https://en.wikipedia.org/wiki/Function_overloading) <br>- [Operator overloading](https://en.wikipedia.org/wiki/Operator_overloading) |      |
+| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | - [Generic function](https://en.wikipedia.org/wiki/Generic_function) <br>- [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) |      |
+| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | - [Virtual function](https://en.wikipedia.org/wiki/Virtual_function) <br>- [Single and dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) <br>- [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch) <br>- [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch) |      |
 
 
 
