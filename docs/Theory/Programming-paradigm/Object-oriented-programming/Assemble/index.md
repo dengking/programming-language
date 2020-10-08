@@ -32,6 +32,11 @@
 
 ### delegation and inheritance
 
+在维基百科[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)中有这样的描述: 
+
+> [Delegation](https://en.wikipedia.org/wiki/Delegation_(programming)) is another language feature that can be used as an alternative to inheritance.
+>
+
 
 
 
