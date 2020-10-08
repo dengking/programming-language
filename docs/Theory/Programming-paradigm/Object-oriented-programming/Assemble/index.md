@@ -8,11 +8,11 @@
 
 上面这段话中，已经告诉了我们两个答案，并且这两个是当前OOP中的主流的technique，除此之外，还有一些其他的technique，下面是本章将要讨论的technique:
 
-| technique   | 简介                       | 章节                                                         |
-| ----------- | -------------------------- | ------------------------------------------------------------ |
-| inheritance | "继承", 又称为"sub-typing" | `Theory\Programming-paradigm\Object-oriented-programming\Assemble\Inheritance` |
-| composition | "组合"                     | `Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition` |
-| mixin       |                            |                                                              |
+| technique   | 简介                                                         | 章节                                                         |
+| ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| inheritance | "继承", 又称为"sub-typing"                                   | `Theory\Programming-paradigm\Object-oriented-programming\Assemble\Inheritance` |
+| composition | "组合"                                                       | `Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition` |
+| mixin       | "混入"，其实它是基于inheritance的，不过有它的独特之处，<br>所以将它单独进行描述 |                                                              |
 
 
 
