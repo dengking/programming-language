@@ -1,6 +1,7 @@
 nav:
-    - Programming-principles: Programming-principles.md
-    - OOP-design: OOP-design
+    - Introduction: index.md
     - SOLID: SOLID    
+    #################### 其他的一些设计思想####################     
+    - Design-by-contract: Design-by-contract.md
     
     

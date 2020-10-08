@@ -40,7 +40,7 @@ design pattern如此之多，如何对它们进行分类至关重要，这是本
 - refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)
 - 维基百科[*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns)
 
-refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)：
+### refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)
 
 > Design patterns differ by their complexity, level of detail and scale of applicability to the entire system being designed. I like the analogy to road construction: you can make an intersection（十字路口） safer by either installing some traffic lights or building an entire multi-level interchange with underground passages for pedestrians（行人）.
 >
@@ -60,35 +60,13 @@ refactoring [Classification of patterns](https://refactoring.guru/design-pattern
 
 ### OOP design pattern
 
-由[***Design Patterns: Elements of Reusable Object-Oriented Software***](https://en.wikipedia.org/wiki/Design_Patterns) 提出的OOP 的design pattern，是design pattern的开山之作。
+在`Theory\Design-pattern\OOP-design-pattern`章节进行详细描述
 
-#### [Creational patterns](https://en.wikipedia.org/wiki/Creational_pattern)
-
-维基百科[Design Patterns#Creational](https://en.wikipedia.org/wiki/Design_Patterns#Creational)：
-
-> [Creational patterns](https://en.wikipedia.org/wiki/Creational_pattern) are ones that create objects, rather than having to instantiate objects directly. This gives the program more flexibility in deciding which objects need to be created for a given case.
-
-#### [Structural patterns](https://en.wikipedia.org/wiki/Structural_pattern)
-
-refactoring [Classification of patterns](https://refactoring.guru/design-patterns/classification)：
-
-> **Structural patterns** explain how to assemble objects and classes into larger structures, while keeping the structures flexible and efficient.
-
-除此看到structural pattern，我的第一想法是[Boost.PropertyTree](https://www.boost.org/doc/libs/1_73_0/doc/html/property_tree.html)。
-
-#### [Behavioral pattern](https://en.wikipedia.org/wiki/Behavioral_pattern)
-
-> **behavioral design patterns** are [design patterns](https://en.wikipedia.org/wiki/Design_pattern_(computer_science)) that identify common communication patterns among objects and realize these patterns.
-
-即object之间communicate的pattern。
-
-
-
-### [Concurrency patterns](https://en.wikipedia.org/wiki/Concurrency_pattern)
+### TODO [Concurrency patterns](https://en.wikipedia.org/wiki/Concurrency_pattern)
 
 
 
 
 
-### [Architectural design pattern](https://en.wikipedia.org/wiki/Architectural_pattern) 
+### TODO [Architectural design pattern](https://en.wikipedia.org/wiki/Architectural_pattern) 
 

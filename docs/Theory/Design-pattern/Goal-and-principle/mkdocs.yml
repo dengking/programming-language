@@ -1,3 +1,5 @@
 nav:    
-    - Principle: Principle    
+    - Introduction: index.md
     - Goal: Goal.md
+    - Principle: Principle    
+    

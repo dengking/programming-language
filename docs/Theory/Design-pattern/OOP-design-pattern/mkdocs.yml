@@ -1,7 +1,7 @@
 nav:
+    - Introduction: index.md
     - Books: Books.md
-    - Book-design-pattern: Book-design-pattern
-    - Composition-and-inheritance-and-delegation: Composition-and-inheritance-and-delegation
+    - Principle: Principle
     - Creational: Creational
     - Behavioral-pattern: Behavioral-pattern
     - Structural-pattern: Structural-pattern
