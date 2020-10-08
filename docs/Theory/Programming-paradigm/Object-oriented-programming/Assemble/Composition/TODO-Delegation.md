@@ -37,3 +37,13 @@ The term *delegation* is also used loosely for various other relationships betwe
 ## Delegation VS inheritance
 
 这其实就是composition VS inheritance，composition over inheritance；
+
+
+
+## TODO
+
+geeksforgeeks [Delegation vs Inheritance in Java](https://www.geeksforgeeks.org/delegation-vs-inheritance-java/)
+
+stackoverflow [What is a C++ delegate?](https://stackoverflow.com/questions/9568150/what-is-a-c-delegate)
+
+wikipedia [Delegation pattern](https://en.wikipedia.org/wiki/Delegation_pattern)

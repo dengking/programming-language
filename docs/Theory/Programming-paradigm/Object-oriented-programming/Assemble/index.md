@@ -37,9 +37,9 @@
 > [Delegation](https://en.wikipedia.org/wiki/Delegation_(programming)) is another language feature that can be used as an alternative to inheritance.
 >
 
+在wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)中，也介绍了使用delegation来实现inheritance的内容。
 
-
-
+在`Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition\index.md`中将具体介绍如何来实现这一点。
 
 ## TODO 基于“结构化思维”来分析assemble
 
