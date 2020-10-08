@@ -18,17 +18,17 @@ Junade Ali, *Mastering PHP Design Patterns*
 
 Class-based OOP的特性：
 
-1) abstraction
+### 1) Abstraction
 
 在tutorialsteacher [Dependency Inversion Principle](https://www.tutorialsteacher.com/ioc/dependency-inversion-principle)中有这样的描述：
 
 > Abstraction and encapsulation are important principles of object-oriented programming.
 
-2) Inheritance
+### 2) Inheritance
 
-3) Encapsulation
+### 3) Encapsulation
 
-4) Polymorphism
+### 4) Polymorphism
 
 在维基百科[Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)中有这样的描述：
 

@@ -1,15 +1,17 @@
+# Forwarding 
+
+“forwarding”即“转发”；
 
 
-
-# [Forwarding (object-oriented programming)](https://en.wikipedia.org/wiki/Forwarding_(object-oriented_programming))
+## wikipedia [Forwarding (object-oriented programming)](https://en.wikipedia.org/wiki/Forwarding_(object-oriented_programming))
 
 In [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), **forwarding** means that using a member of an [object](https://en.wikipedia.org/wiki/Object_(computer_science)) (either a [property](https://en.wikipedia.org/wiki/Property_(programming)) or a [method](https://en.wikipedia.org/wiki/Method_(computer_programming))) results in actually using the corresponding member of a different object: the use is *forwarded* to another object. Forwarding is used in a number of [design patterns](https://en.wikipedia.org/wiki/Software_design_pattern), where some members are forwarded to another object, while others are handled by the directly used object. The **forwarding object** is frequently called a **wrapper object**, and explicit forwarding members are called [wrapper functions](https://en.wikipedia.org/wiki/Wrapper_function).
 
-总结：经常在阅读过程中碰到这个词语，直到今天阅读了这篇文章才完全理解它的意思；
+> NOTE：经常在阅读过程中碰到这个词语，直到今天阅读了这篇文章才完全理解它的意思；
 
-总结：forward可以理解为“转发”
 
-## Delegation
+
+### Delegation
 
 **Forwarding** is often confused with [delegation](https://en.wikipedia.org/wiki/Delegation_(object-oriented_programming)); formally, they are complementary（互补的） concepts. In both cases, there are two objects, and the first (sending, wrapper) object uses the second (receiving, wrappee) object, for example to call a method. They differ in what `self` refers to on the **receiving object** (formally, in the [evaluation environment](https://en.wikipedia.org/wiki/Evaluation_environment) of the method on the **receiving object**): in **delegation** it refers to the **sending object**, while in **forwarding** it refers to the **receiving object**. Note that `self` is often used implicitly as part of [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) (method resolution: which function a method name refers to method name指的是哪个function).
 
@@ -43,7 +45,7 @@ In both cases, reuse is dynamic, meaning determined at run time (based on the *o
 
 
 
-## Examples
+### Examples
 
 A simple example of **explicit forwarding** in Java: an instance of `B` forwards calls to the `foo` method of its `a` field:
 
@@ -106,7 +108,7 @@ del b.x  # Deletes b.a.x.
 
 
 
-### Complex
+#### Complex
 
 The more complex case is a [Decorator Pattern](https://en.wikipedia.org/wiki/Decorator_pattern#Java) that by using [interfaces](https://en.wikipedia.org/wiki/Interface_(Java)), **forwarding** can be made more flexible and [typesafe](https://en.wikipedia.org/wiki/Type_safety). "Flexibility" here means that `C` need not refer to `A` or `B` in any way, as the switching of forwarding is abstracted from `C`. In this example, class `C` can forward to any class that implements an interface `I`. Class `C` has a method to switch to another forwarder. Including the `implements` clauses improves [type safety](https://en.wikipedia.org/wiki/Type_safety), because each class must implement the methods in the interface. The main tradeoff is more code.
 
@@ -150,7 +152,7 @@ public class Main {
 }
 ```
 
-## Applications
+### Applications
 
 Forwarding is used in many design patterns.[[2\]](https://en.wikipedia.org/wiki/Forwarding_(object-oriented_programming)#cite_note-2) Forwarding is used directly in several patterns:
 
@@ -166,8 +168,11 @@ Forwarding may be used in other patterns, but often use is modified; for example
 
 
 
-# [In OOP, what is forwarding and how is it different from delegation?](https://stackoverflow.com/questions/7816011/in-oop-what-is-forwarding-and-how-is-it-different-from-delegation)
+## stackoverflow [In OOP, what is forwarding and how is it different from delegation?](https://stackoverflow.com/questions/7816011/in-oop-what-is-forwarding-and-how-is-it-different-from-delegation)
 
 这个回答是非常好的：https://stackoverflow.com/a/28539643
 
 总结：It seems that the metaphor in this answer is very subtle.and it fits very well with the explanation in Wikipedia.
+
+
+

@@ -1,10 +1,6 @@
-# Delegation
+# Delegation pattern
 
-
-
-## 维基百科[Delegation (computing)](https://en.wikipedia.org/wiki/Delegation_(computing))
-
-> NOTE: 这篇对delegation的总结是最好的。
+关于delegation ，参见`Theory\Programming-paradigm\Object-oriented-programming\Glossary\Delegation.md`。
 
 
 
