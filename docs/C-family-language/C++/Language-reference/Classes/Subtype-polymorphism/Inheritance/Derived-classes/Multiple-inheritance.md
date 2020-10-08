@@ -203,11 +203,171 @@ The ability to share a single instance of the `Animal` parent between `Mammal` a
 
 ## stackoverflow [In C++, what is a virtual base class?](https://stackoverflow.com/questions/21558/in-c-what-is-a-virtual-base-class)
 
-## virtual base class
 
-[In C++, what is a virtual base class?](https://stackoverflow.com/questions/21558/in-c-what-is-a-virtual-base-class)
 
-维基百科[Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
+## Example
+
+来源: https://en.wikipedia.org/wiki/Composition_over_inheritance#Example
+
+类图如下: 
+
+```C++
+        Object
+      /    |   \
+     /     |     \
+Visible   Solid   Movable
+     \     |      /
+      \    |     /
+       \   |    /
+         Player
+```
+
+需要注意的是，在inheritance hierarchy的每一层都需要使用**virtual inheritance**。
+
+```C++
+#include <iostream>
+class Object
+{
+public:
+	virtual void update()
+	{
+		// no-op
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+
+	virtual void draw()
+	{
+		// no-op
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+
+	virtual void collide(Object objects[])
+	{
+		// no-op
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+class Visible: virtual public Object
+{
+
+public:
+	virtual void draw() override
+	{
+		// code to draw a model at the position of this object
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+/**
+ * @brief 固体
+ *
+ */
+class Solid: virtual public Object
+{
+public:
+	/**
+	 * @brief 碰撞
+	 *  固体会和其他对象碰撞
+	 */
+	virtual void collide(Object objects[]) override
+	{
+		// code to check for and react to collisions with other objects
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+class Movable: virtual public Object
+{
+public:
+	virtual void update() override
+	{
+		// code to update the position of this object
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+
+/**
+ * @brief class Player - which is Solid, Movable and Visible
+ *
+ */
+class Player: virtual public Visible, virtual public Solid, virtual public Movable
+{
+
+};
+
+/**
+ * @brief class Cloud - which is Solid, Movable and Visible
+ *
+ */
+class Cloud: virtual public Visible, virtual public Movable
+{
+
+};
+
+/**
+ * @brief class Building - which is Solid, Movable and Visible
+ *
+ */
+class Building: virtual public Visible, virtual public Solid, virtual public Movable
+{
+
+};
+
+/**
+ * @brief class Building - which is Solid, Movable and Visible
+ *
+ */
+class Trap: virtual public Solid
+{
+
+};
+
+void draw(Object &o)
+{
+	o.draw();
+}
+void update(Object &o)
+{
+	o.update();
+}
+int main()
+{
+	Player p;
+	draw(p);
+	update(p);
+	Cloud c;
+	draw(c);
+	update(c);
+	Building b;
+	draw(b);
+	update(b);
+	Trap t;
+	draw(t);
+}
+// g++ --std=c++11 test.cpp
+
+
+```
+
+
+
+输出如下:
+
+```C++
+virtual void Visible::draw()
+virtual void Movable::update()
+virtual void Visible::draw()
+virtual void Movable::update()
+virtual void Visible::draw()
+virtual void Movable::update()
+virtual void Visible::draw()
+virtual void Movable::update()
+virtual void Visible::draw()
+virtual void Movable::update()
+virtual void Object::draw()
+
+```
+
 
 
 
