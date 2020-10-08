@@ -1,4 +1,6 @@
-# [Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))
+# Trait 
+
+## wikipedia [Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))
 
 In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), a **trait** is a concept used in [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), which represents a set of [methods](https://en.wikipedia.org/wiki/Method_(computer_programming)) that can be used to extend the functionality of a [class](https://en.wikipedia.org/wiki/Class_(computer_science)).
 
@@ -8,11 +10,11 @@ In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), a
 
 For inter-object communication, **traits** are somewhat between an object-oriented [protocol (interface)](https://en.wikipedia.org/wiki/Protocol_(object-oriented_programming)) and a [mixin](https://en.wikipedia.org/wiki/Mixin). An **interface** may define one or more behaviors via [***method signatures***](https://en.wikipedia.org/wiki/Function_prototype), while a **trait** defines behaviors via full ***method definitions***: i.e., it includes the [body of the methods](https://en.wikipedia.org/wiki/Class_implementation_file). In contrast, mixins include full ***method definitions*** and may also carry [state](https://en.wikipedia.org/wiki/State_(computer_science)) through member variable, while traits usually don't.
 
-SUMMARY:this paragraph summarize the difference between **interface**,**trait** and **mixin**.
+> NOTE: this paragraph summarize the difference between **interface**,**trait** and **mixin**.
 
 Hence an object defined as a **trait** is created as the composition of methods, which can be used by other classes without requiring [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance). In case of a [naming collision](https://en.wikipedia.org/wiki/Naming_collision), when more than one trait to be used by a class has a method with the same name, the programmer must explicitly disambiguate which one of those methods will be used in the class; thus manually solving the *diamond problem* of multiple inheritance. This is different from other composition methods in object-oriented programming, where conflicting names are automatically resolved by [scoping rules](https://en.wikipedia.org/wiki/Scope_(computer_science)).
 
-SUMMARY:trait can be used by other classes without requiring multiple inheritance whereas mixin need
+> NOTE: trait can be used by other classes without requiring multiple inheritance whereas mixin need
 
 Whereas(然而) mixins can be composed only using the [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) operation, traits offer a much wider selection of operations, including:[[3\]](https://en.wikipedia.org/wiki/Trait_(computer_programming)#cite_note-3)[[4\]](https://en.wikipedia.org/wiki/Trait_(computer_programming)#cite_note-4)
 

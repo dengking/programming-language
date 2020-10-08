@@ -14,5 +14,11 @@
 | composition | "组合"                                                       | `Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition` |
 | mixin       | "混入"，其实它是基于inheritance的，不过有它的独特之处，<br>所以将它单独进行描述 |                                                              |
 
+除了上面列出的这些technique外，不断地涌现出了新的technique；
 
+通过上述technique，我们可以实现assemble，进而实现了code reuse；
+
+## inheritance and composition
+
+虽然两种都能够实现assemble，但是从design的角度来看，它们是有着差异的，在`Theory\Design-pattern\OOP-design-pattern\Principle\Composition-over-inheritance`中对它们进行了对比。
 

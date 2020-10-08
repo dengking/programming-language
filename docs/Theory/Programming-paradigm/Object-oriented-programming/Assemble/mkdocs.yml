@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Inheritance: Inheritance
+    - Composition: Composition
+    - Mixin: Mixin

@@ -1,4 +1,4 @@
-# programming language theory:Mixin
+# Mixin
 
 [示例代码](https://github.com/scikit-learn/scikit-learn/blob/f0ab589f/sklearn/preprocessing/data.py#L461)如下：
 ```
@@ -39,7 +39,7 @@ class ClassifierMixin(object):
 ```
 显然 Mixin并非是python独有的，而是在面向对象编程中通用的一种模型，它应该属于programming language theory领域中。
 
-## [Mixin](https://en.wikipedia.org/wiki/Mixin)
+## wikipedia [Mixin](https://en.wikipedia.org/wiki/Mixin)
 
 In [object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language), a **Mixin** is a [class](https://en.wikipedia.org/wiki/Class_(computer_science)) that contains methods for use by other classes without having to be the parent class of those other classes(Mixin是一个包含其他类使用的方法的类，而不必是其他类的父类). How those other classes gain access to the mixin's methods depends on the language. Mixins are sometimes described as being "**included**" rather than "**inherited**".
 
@@ -83,48 +83,6 @@ Java 8 introduces a new feature in the form of default methods for interfaces.[[
 Interfaces combined with [aspect-oriented programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming) can also produce full-fledged mixins in languages that support such features, such as C# or Java. Additionally, through the use of the [marker interface pattern](https://en.wikipedia.org/wiki/Marker_interface_pattern), [generic programming](https://en.wikipedia.org/wiki/Generic_programming), and extension methods, C# 3.0 has the ability to mimic mixins. With C# 3.0 came the introduction of Extension Methods[2] and they can be applied, not only to classes but, also, to interfaces. Extension Methods provide additional functionality on an existing class without modifying the class. It then becomes possible to create a static helper class for specific functionality that defines the extension methods. Because the classes implement the interface (even if the actual interface doesn’t contain any methods or properties to implement) it will pick up all the extension methods also.[[16\]](https://en.wikipedia.org/wiki/Mixin#cite_note-16)[[17\]](https://en.wikipedia.org/wiki/Mixin#cite_note-17)[[18\]](https://en.wikipedia.org/wiki/Mixin#cite_note-18)
 
 [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript) (in most cases implemented as JavaScript) does not need to mimic object composition by stepwise copying fields from one object to another. It natively[[19\]](https://en.wikipedia.org/wiki/Mixin#cite_note-19) supports [Trait](https://en.wikipedia.org/wiki/Trait_(computer_programming)) and Mixin[[20\]](https://en.wikipedia.org/wiki/Mixin#cite_note-20)[[21\]](https://en.wikipedia.org/wiki/Mixin#cite_note-21) based object composition via function objects that implement additional behavior and then are delegated via `call` or `apply` to objects that are in need of such new functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
