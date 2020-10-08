@@ -18,6 +18,10 @@ Chapter 1 is a discussion of [object-oriented](https://en.wikipedia.org/wiki/Obj
 
 2) [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance): "Favor '[object composition](https://en.wikipedia.org/wiki/Object_composition)' over '[class inheritance](https://en.wikipedia.org/wiki/Inheritance_(computer_science))'." (Gang of Four 1995:20)
 
+
+
+> NOTE: 下面的H4标题原文中并没有，是我添加上去的，便于阅读
+
 #### Program to an 'interface', not an 'implementation'
 
 The authors claim the following as advantages of [interfaces](https://en.wikipedia.org/wiki/Interface_(computer_science)) over implementation:
@@ -34,13 +38,17 @@ Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wik
 
 The authors refer to [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) as *[white-box](https://en.wikipedia.org/wiki/White_box_(software_engineering)) reuse*, with white-box referring to visibility, because the internals of parent classes are often visible to [subclasses](https://en.wikipedia.org/wiki/Subclass_(computer_science)). In contrast, the authors refer to [object composition](https://en.wikipedia.org/wiki/Object_composition) (in which objects with well-defined interfaces are used dynamically at runtime by objects obtaining references to other objects) as *[black-box](https://en.wikipedia.org/wiki/Black_box) reuse* because no internal details of composed objects need be visible in the code using them.
 
+> NOTE: white-box reuse VS black-box reuse，其实核心思想是在下面描述的: "inheritance breaks encapsulation"，white-box reuse显然break encapsulation了。
+
 The authors discuss the tension between inheritance and encapsulation at length and state that in their experience, designers overuse inheritance (Gang of Four 1995:20). The danger is stated as follows:
 
-> "Because inheritance exposes a [subclass](https://en.wikipedia.org/wiki/Subclass_(computer_science)) to details of its parent's implementation, it's often said that 'inheritance breaks encapsulation'". (Gang of Four 1995:19)
+> "Because inheritance exposes a [subclass](https://en.wikipedia.org/wiki/Subclass_(computer_science)) to details of its parent's implementation, it's often said that '**inheritance breaks encapsulation**'". (Gang of Four 1995:19)
 
-> NOTE: inheritance breaks encapsulation
+
 
 They warn that the implementation of a subclass can become so bound up with the implementation of its parent class that any change in the parent's implementation will force the subclass to change. Furthermore, they claim that a way to avoid this is to inherit only from **abstract classes**—but then, they point out that there is minimal code reuse.
+
+> NOTE: ABC无法实现code reuse
 
 Using inheritance is recommended mainly when adding to the functionality of existing components, reusing most of the old code and adding relatively small amounts of new code.
 
@@ -52,7 +60,7 @@ To the authors, 'delegation' is an extreme form of object composition that can a
 
 
 
-
+#### Parameterized types
 
 The authors also discuss so-called **parameterized types**, which are also known as [generics](https://en.wikipedia.org/wiki/Generic_programming) (Ada, Eiffel, [Java](https://en.wikipedia.org/wiki/Generics_in_Java), C#, VB.NET, and Delphi) or templates (C++). These allow any type to be defined without specifying all the other types it uses—the unspecified types are supplied as 'parameters' at the point of use.
 
@@ -61,8 +69,6 @@ The authors admit that delegation and parameterization are very powerful but add
 
 
 The authors further distinguish between '[Aggregation](https://en.wikipedia.org/wiki/Object_composition#Aggregation)', where one object 'has' or 'is part of' another object (implying that an aggregate object and its owner have identical lifetimes) and **acquaintance**, where one object merely 'knows of' another object. Sometimes acquaintance is called 'association' or the 'using' relationship. Acquaintance objects may request operations of each other, but they aren't responsible for each other. Acquaintance is a weaker relationship than aggregation and suggests much [looser coupling](https://en.wikipedia.org/wiki/Loose_coupling) between objects, which can often be desirable for maximum maintainability in a design.
-
-The authors employ the term 'toolkit' where others might today use 'class library', as in C# or Java. In their parlance, toolkits are the object-oriented equivalent of subroutine libraries, whereas a '[framework](https://en.wikipedia.org/wiki/Software_framework)' is a set of cooperating classes that make up a reusable design for a specific class of software. They state that **applications** are hard to design, **toolkits** are harder, and **frameworks** are the hardest to design.
 
 
 
