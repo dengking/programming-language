@@ -16,7 +16,7 @@
 
 ## Subtyping polymorphism is based on behavior
 
-本节标题的是含义是: Subtyping polymorphism是基于behavior的，关于behavior，参见`Theory\Programming-paradigm\Object-oriented-programming\Behaivor.md`。关于这个观点，下面是例证:
+本节标题的是含义是: Subtyping polymorphism是基于behavior的，意思是: Subtyping polymorphism中能够polymorphism的只有behavior，data member是无法polymorphism；关于behavior，参见`Theory\Programming-paradigm\Object-oriented-programming\Behaivor.md`。关于这个观点，下面是例证:
 
 | 文章                                                         |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |

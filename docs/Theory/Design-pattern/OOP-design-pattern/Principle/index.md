@@ -34,9 +34,15 @@ Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wik
 
 > NOTE: OOP的核心特性：polymorphism。
 
+> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Behaivor.md`中，对interface进行了描述。
+
 ### Composition over inheritance
 
-> NOTE: 这将在`Theory\Design-pattern\OOP-design-pattern\Principle\Composition-over-inheritance`中进行详细说明。
+> NOTE: 
+>
+> 这将在`Theory\Design-pattern\OOP-design-pattern\Principle\Composition-over-inheritance`中进行详细说明。
+>
+> 在`Theory\Programming-paradigm\Object-oriented-programming\Assemble`中，对Composition、inheritance进行了描述。
 
 
 

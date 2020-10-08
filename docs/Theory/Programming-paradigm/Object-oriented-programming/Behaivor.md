@@ -12,7 +12,7 @@
 | `C++\Language-reference\Classes\Subtype-polymorphism\index.md` | 在C++，dynamic polymorphism是behavior（function），只有virtual method（virtual table），而不是data/value的。 |
 | `Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern\index.md` |                                                              |
 | wikipedia [Behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping) |                                                              |
-|                                                              |                                                              |
+| `Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Subtyping-polymorphism\index.md` | "Subtyping polymorphism is based on behavior"                |
 
 下面几个词在OOP中是经常出现的，我觉得它们的有着相似的内涵，且它们斗鱼behavior有关:
 
@@ -24,15 +24,11 @@
 
 
 
-
-
-
-
-
-
 ## Behavior and interface
 
-## Interface in OOP
+前面已经提及了interface，本节描述它和behavior的关系。
+
+### Interface in OOP
 
 Interface在OOP中占据着核心地位，关于interface，参见:
 
@@ -41,10 +37,16 @@ Interface在OOP中占据着核心地位，关于interface，参见:
 
 ### "program to interface" 
 
-参见: 
+参见: `Theory\Design-pattern\OOP-design-pattern\Principle\index.md`
 
 
 
 ### Interface is formal description of behavior
 
 本节标题的含义是interface是对behavior的formal description。
+
+
+
+### The interface principle
+
+这是[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章[What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)中提出的一个观点，虽然它描述的是C++世界，但是我觉得它对interface的阐释是比较好的，这篇文章收录在了`C++\Language-reference\Classes\The-interface-principle.md`。
