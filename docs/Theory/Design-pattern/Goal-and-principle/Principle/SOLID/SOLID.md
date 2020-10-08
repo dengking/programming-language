@@ -38,6 +38,8 @@ a [class](https://en.wikipedia.org/wiki/Class_(computer_science)) should have on
 
 one should "depend upon abstractions, [not] concretions." 
 
+> NOTE: 其实和OOP的“program to an abstraction not implementation"一致
+
 ### 深入理解
 
 上述罗列了五大设计原则，但是并没有深入，下面这些是原文的**References**中给出的列表中，我发现的一些比较有价值的内容：
@@ -52,12 +54,5 @@ one should "depend upon abstractions, [not] concretions."
 
 ## 两个 inversion
 
-在面向对象编程的SOID原则中有[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)，即依赖反转，今天在阅读[Rabit](https://github.com/dmlc/rabit)的时候，看到了**inversion of control principle**，即控制理论的反转。所以对这个两个**inversion**有些好奇，不知它们是否是基于同一个原则而提出的呢？
+在面向对象编程的SOID原则中有[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)，即依赖反转；另外一个inversion是: [Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control) ，在工程software-engineering的`Software-design\Control-theory\Inversion-of-control`章节中对它进行了描述。
 
-### [Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control) 
-
-### [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) 
-
-inject Dependency 注入依赖
-
-replace dependency 替换依赖

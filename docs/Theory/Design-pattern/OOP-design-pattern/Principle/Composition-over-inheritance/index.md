@@ -1,18 +1,18 @@
-# Inheritance and composition and delegation
+# Composition over inheritance
 
-在下面文章中，都对三者进行了比较分析:
+本文主要参考下面文章，都对三者进行了比较分析:
 
-| 文章                                                         | 章节 |
-| ------------------------------------------------------------ | ---- |
-|                                                              |      |
-| [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1) |      |
-|                                                              |      |
+| 文章                                                         | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) | 相比于其他的文章仅仅给出长篇的理论分析，这篇文章给出了一个非常好的对比例子，通过这两个例子，我们可以快速地领悟“composition over inheritance”的思想。因此将它置于首位。 |
+| wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1) |                                                              |
+|                                                              |                                                              |
 
 
 
 ## wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)
 
-> NOTE: 相比于其他的文章仅仅给出长篇的理论分析，这篇文章给出了一个非常好的对比例子，通过这两个例子，我们可以快速地领悟“composition over inheritance”的思想。
+> NOTE: 
 
 ### Example
 
@@ -523,7 +523,7 @@ public:
 		_c->collide(objects);
 	}
 };
-
+// 此处的基础是为了实现接口
 class Player: public Object
 {
 public:
@@ -581,31 +581,85 @@ int main()
 
 #### Comparison
 
-通过继承的方式来获得还是通过组合的方式来获得behavior；
+下面对Inheritance example和Composition and interfaces example进行对比: 
 
-由子类来注入implementation。
+Inheritance example: 通过Inheritance的方式来获得behavior；
 
-非常类似于strategy pattern。
+Composition and interfaces example: 通过Composition的来获得behavior；
 
-`Object`的behavior
+由子类来注入behavior的implementation；
+
+非常类似于behavioral pattern（参见`Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern`）的做法，尤其类似于strategy pattern（`Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern\Strategy-pattern`）。
+
+在下面的“Benefits”章节会对Composition and interfaces example的优势进行更加深入的分析。
 
 ### Benefits
 
-To favor over inheritance is a design principle that gives the design higher flexibility. It is more natural to build business-domain classes out of various components than trying to find commonality between them and creating a family tree. 
+To favor composition over inheritance is a design principle that gives the design higher flexibility. It is more natural to build **business-domain classes** out of various **components** than trying to find commonality between them and creating a family tree. 
 
-To favor **composition** over **inheritance** is a design principle that gives the design higher flexibility. It is more natural to build business-domain classes out of various components than trying to find **commonality** between them and creating a family tree. 
+> NOTE: 结合“Example”节中给出的例子来分析上面这段话的中的一些概念:
+>
+> | 概念                    | example                           |
+> | ----------------------- | --------------------------------- |
+> | business-domain classes | `class Player`                    |
+> | components              | `class Solid` <br>`class Movable` |
+
+Composition also provides a more stable business domain in the long term as it is less prone to the quirks of the family members. In other words, it is better to compose what an object can do (*[HAS-A](https://en.wikipedia.org/wiki/HAS-A)*) than extend what it is (*[IS-A](https://en.wikipedia.org/wiki/IS-A)*).[[1\]](https://en.wikipedia.org/wiki/Composition_over_inheritance#cite_note-FHDPs-1)
+
+> NOTE: 最后一段话总结得非常好，后面将它作为标准。结合前面的例子能够更好地理解它的内涵。
+>
+> 其实，在大多数情况下，我们是可以快速地判定 (*[HAS-A](https://en.wikipedia.org/wiki/HAS-A)*)、 (*[IS-A](https://en.wikipedia.org/wiki/IS-A)*)关系的。在下面的“is-a and has-a”章节会对它进行深入分析。
 
 
+
+### Drawbacks
+
+> NOTE: 原文的这一段，并没有理解
+
+## wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)	
+
+### Composition over inheritance
+
+The authors refer to [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) as *[white-box](https://en.wikipedia.org/wiki/White_box_(software_engineering)) reuse*, with white-box referring to visibility, because the internals of parent classes are often visible to [subclasses](https://en.wikipedia.org/wiki/Subclass_(computer_science)). In contrast, the authors refer to [object composition](https://en.wikipedia.org/wiki/Object_composition) (in which objects with well-defined interfaces are used dynamically at runtime by objects obtaining references to other objects) as *[black-box](https://en.wikipedia.org/wiki/Black_box) reuse* because no internal details of composed objects need be visible in the code using them.
+
+> NOTE: white-box reuse VS black-box reuse。
+>
+> 根据下面章节的内容，我们可以总结出相比于composition，inheritance的劣势为:
+>
+> | 劣势                                                         | 说明                                     |
+> | ------------------------------------------------------------ | ---------------------------------------- |
+> | "inheritance breaks encapsulation"                           | white-box reuse显然break encapsulation了 |
+> | “any change in the parent's implementation will force the subclass to change” |                                          |
+
+#### Inheritance breaks encapsulation
+
+The authors discuss the tension between inheritance and encapsulation at length and state that in their experience, designers overuse inheritance (Gang of Four 1995:20). The danger is stated as follows:
+
+> "Because inheritance exposes a [subclass](https://en.wikipedia.org/wiki/Subclass_(computer_science)) to details of its parent's implementation, it's often said that '**inheritance breaks encapsulation**'". (Gang of Four 1995:19)
+
+#### Any change in the parent's implementation will force the subclass to change
+
+They warn that the implementation of a subclass can become so bound up with the implementation of its parent class that **any change in the parent's implementation will force the subclass to change**. Furthermore, they claim that a way to avoid this is to inherit only from **abstract classes**—but then, they point out that there is minimal code reuse.
+
+> NOTE: 上面总结了相较于composition，inheritance的劣势，
+>
+> ABC无法实现code reuse
+
+
+
+Using inheritance is recommended mainly when adding to the functionality of existing components, reusing most of the old code and adding relatively small amounts of new code.
+
+#### Delegation
+
+To the authors, 'delegation' is an extreme form of object composition that can always be used to replace inheritance. Delegation involves two objects: a 'sender' passes itself to a 'delegate' to let the delegate refer to the sender. Thus the link between two parts of a system are established only at runtime, not at compile-time. The [Callback](https://en.wikipedia.org/wiki/Callback_(computer_science)) article has more information about delegation.
+
+> NOTE: 上面作者都是在对composition和inheritance进行讨论，composition是has-a关系、inheritance是is-a关系。
+>
+> [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)就是典型的使用delegation的。	
 
 
 
 ## stackoverflow [Prefer composition over inheritance?](https://stackoverflow.com/questions/49002/prefer-composition-over-inheritance)
-
-
-
-
-
-## wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)	
 
 
 
