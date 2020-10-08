@@ -98,8 +98,8 @@ Note that multiple inheritance is dangerous if not implemented carefully, as it 
 > 类图如下: 
 >
 > ```C++
->         Object
->       /    |   \
+>          Object
+>       /    |    \
 >      /     |     \
 > Visible   Solid   Movable
 >      \     |      /
