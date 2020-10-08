@@ -80,3 +80,4 @@ reference to function、reference to function。
 **Member method is a kind of function**
 
 参见`C++\Language-reference\Classes\Members\Function-member\index.md`，其中对此进行了详细说明。
+
