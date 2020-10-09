@@ -4,6 +4,9 @@
 
 - static function
 - static object
+- static member
+
+> NOTE: 上面是仿照cppreference pointer的分类方法，C++ OOP扩展
 
 虽然上面将两者分开，但是实际编程中，可能会出现两者之的重叠：static object in static function。
 
@@ -103,3 +106,17 @@ https://stackoverflow.com/questions/14495536/how-to-initialize-const-member-vari
 TO READ:
 
 https://stackoverflow.com/questions/185624/static-variables-in-an-inlined-function
+
+
+
+## static member
+
+
+
+
+
+## TODO
+
+### singleton pattern
+
+参见: `C++\Pattern\Singleton`

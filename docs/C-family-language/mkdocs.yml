@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - C++: C++
     - C: C
     - C-and-C++: C-and-C++

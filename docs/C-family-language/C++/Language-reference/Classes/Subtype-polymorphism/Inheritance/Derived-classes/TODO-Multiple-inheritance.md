@@ -82,7 +82,9 @@ C++引入的Virtual inheritance特性就是为了解决前面提到的[the diamo
 
 virtual base class是virtual inheritance的base class。
 
-## 维基百科[Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
+## TODO cppreference [Virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
+
+## TODO 维基百科[Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
 
 **Virtual inheritance** is a [C++](https://en.wikipedia.org/wiki/C%2B%2B) technique that ensures only one copy of a [base class](https://en.wikipedia.org/wiki/Base_class)'s **member variables** are [inherited](https://en.wikipedia.org/wiki/Inheritance_(computer_science)) by grandchild derived classes.
 
@@ -193,7 +195,7 @@ The ability to share a single instance of the `Animal` parent between `Mammal` a
 
 
 
-## 
+
 
 
 
