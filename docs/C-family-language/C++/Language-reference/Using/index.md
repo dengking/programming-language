@@ -15,6 +15,12 @@
 - cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
 - TODO: 添加the interface principle文章，其中也包含这个主题
 
+## TODO
+
+csdn https://blog.csdn.net/shift_wwx/article/details/78742459
+
+这篇文章，总结的还是不错的。
+
 ## Examples
 
 ### cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
