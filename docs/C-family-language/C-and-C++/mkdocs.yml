@@ -1,15 +1,17 @@
 nav:
     - Introduction: index.md
-##########C和C++中都会涉及到的概念的对比##########
-    - From-source-code-to-exec: From-source-code-to-exec.md
-    - Pointer-array: Pointer-array
-    - VS-C-VS-C++: VS-C-VS-c++.md
+    - From-source-code-to-exec: From-source-code-to-exec
+    - Compile-time-and-run-time: Compile-time-and-run-time
+    - Pointer-and-array: Pointer-and-array
+    - VS-C-VS-C++: VS-C-VS-C++.md
     - Declaration: Declaration
     - Data-model: Data-model
     - Dynamic-emory-management: Dynamic-emory-management.md
     - Undefined-behavior: Undefined-behavior
-##########C和C++中都会涉及到的概念的对比##########
     - Static: Static
+    - Struct: Struct
+    - SWIG: SWIG
+
 
 
     
