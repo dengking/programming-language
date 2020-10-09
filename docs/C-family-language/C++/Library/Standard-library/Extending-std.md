@@ -14,17 +14,22 @@ It is **undefined behavior** to add declarations or definitions to `namespace st
 
 ### Adding template specializations
 
+> NOTE: 关于template specializaiton，参见`C++\Language-reference\Template\Specialization`。
+
 #### Class templates
 
-
+It is **allowed** to add **template specializations** for any standard library class template to the namespace `std` only if the declaration depends on at least one program-defined type and the specialization satisfies all requirements for the original template, except where such specializations are prohibited.
 
 #### Function templates and member functions of templates
 
-
+|                                                              | version       |
+| ------------------------------------------------------------ | ------------- |
+| It is allowed to add template specializations for any standard library function template to the namespace `std` only if the declaration depends on at least one program-defined type and the specialization satisfies all requirements for the original template, except where such specializations are prohibited. | (until C++20) |
+| It is undefined behavior to declare a full specialization of any standard library function template. | (since C++20) |
 
 #### Variable templates
 
-
+> NOTE: C++14引入的
 
 ## 补充
 
