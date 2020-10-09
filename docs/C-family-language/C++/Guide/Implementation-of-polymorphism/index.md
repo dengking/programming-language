@@ -2,24 +2,19 @@
 
 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中讨论了各种polymorphism，本章讨论c++中如何实现polymorphism，这是一个较大的话题。c++中提供了多种polymorphism，下面根据static/dynamic进行分类：
 
-static
+| static                    | dynamic                     |
+| ------------------------- | --------------------------- |
+| - overload <br>- template | - sub-type / virtual method |
 
-- overload
-- template
 
-dynamic
-
-- virtual method
 
 正如在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中所总结的:
 
 > Polymorphism is a mapping/dispatch
 
-因此，无论是哪种实现方式，都需要考虑one-to-many的问题，即需要考虑使用set  of candidates中的哪一个来作为实现，那到底选择哪一个呢？显然这有一个比较的过程，通俗来讲，选择最“合适” 的那一个，那到底哪个最合适呢？不同的polymorphism有不同的标准。
+因此，无论是哪种实现方式，都需要考虑one-to-many的问题，即需要考虑使用set  of candidates中的哪一个来作为实现，那到底选择哪一个呢？显然这有一个**比较**/**排序**的过程，通俗来讲，选择最“**合适**” 的那一个，那到底哪个最**合适**呢？不同的polymorphism有不同的标准。
 
-c++ overload 、template specialization、virtual method和Python attribute find的过程类似，都是实现polymorphsim的基础。
-
-Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**），compiler在进行选择/resolve的时候，应该选择**最最特殊情况**: 
+Overload、specialization、subclass都是对某种“特殊情况的说明”，compiler在进行选择/resolve的时候，应该选择**最最特殊情况**: 
 
 | Type of polymorphism  | 最最特殊的                      | 样例                                                         |
 | --------------------- | ------------------------------- | ------------------------------------------------------------ |
@@ -27,7 +22,7 @@ Overload、specialization、subclass都是对某种“特殊情况的说明”�
 | template              | most specialized specialization | cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering) |
 | overload              | most matched                    | cppreference [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution) |
 
-
+> draft: c++ overload 、template specialization、virtual method和Python attribute find的过程类似，都是实现polymorphsim的基础。
 
 ## Static polymorphism
 

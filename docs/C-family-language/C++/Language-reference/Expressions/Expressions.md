@@ -104,7 +104,7 @@ The operands of any operator may be other **expressions** or **primary expressio
 
 Primary expressions are any of the following:
 
-1) Literals (e.g. 2 or "Hello, world")\
+1) Literals (e.g. `2` or `"Hello, world"`)
 
 2) Id-expressions
 
@@ -118,7 +118,13 @@ Primary expressions are any of the following:
 
 Any expression in parentheses is also classified as a **primary expression**: this guarantees that the parentheses have higher precedence than any **operator**. Parentheses preserve **value**, **type**, and **value category**.
 
-
+> NOTE: 如何理解primary expression呢？我觉得应该从operand来理解，operand需要是primary expression；如果不满足这个条件，则compiler就会complain类似如下error:
+>
+> [expected primary-expression before ‘>’ token](https://stackoverflow.com/questions/3505713/c-template-compilation-error-expected-primary-expression-before-token)
+>
+> 在`C++\Language-reference\Basic-concept\Organization\Name-lookup\Dependent-name-lookup`中讲述了上述错误的深层原因。
+>
+> 通过上述错误，能够加深我们对primary expression的理解。
 
 #### Literals
 

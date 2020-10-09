@@ -165,13 +165,15 @@ To make this work, the C++ standard defines a "two-phase name lookup" rule for n
 | *Dependent*     | names that depend on the template parameters but aren't declared within the template. |         |
 | *Non-dependent* | names that don't depend on the template parameters, plus the name of the template itself and names declared within it. |         |
 
-When the compiler tries to resolve some name in the code, it first decides whether the name is **dependent** or not, and the resolution process stems from this distinction（解析过程就是根据这种区别进行的）. While **non-dependent names** are resolved "normally" - when the template is defined, the resolution for **dependent names** happens at the point of the template's *instantiation*. This is what ensures that a specialization can be noticed correctly in the example above.
+When the compiler tries to resolve some name in the code, it first decides whether the name is **dependent** or not, and the resolution process stems from this distinction（解析过程就是根据这种区别进行的）. While **non-dependent names** are resolved "normally" - when the template is defined, the resolution for **dependent names** happens at the point of the **template's *instantiation***. This is what ensures that a specialization can be noticed correctly in the example above.
 
 > NOTE: 关于template instantiation，参见`C++\Language-reference\Template\Implementation\index.md`
 
 Now, back to our original problem. Why doesn't the compiler look `f` up in the base class? First, notice that in the call to `f()` in the first code snippet, `f` is a **non-dependent name**. So it must be resolved at the point of the **template's definition**. At that point, the compiler still doesn't know what `Base<T>::f` is, because it can be **specialized** later. So it doesn't look names up in the base class, but only in the enclosing scope. Since there's no `f` in the enclosing scope, the compiler complains.
 
-On the other hand, when we explicitly make the lookup of `f` dependent by calling it through `this->`, the lookup rule changes. Now `f` is resolved at the point of the template's instantiation, where the compiler has full understanding of the base class and can resolve the name correctly.
+> TODO:"At that point, the compiler still doesn't know what `Base<T>::f` is, because it can be **specialized** later. So it doesn't look names up in the base class, but only in the enclosing scope. " 这段话需要进一步分析。
+
+On the other hand, when we explicitly make the lookup of `f` dependent by calling it through `this->`, the lookup rule changes. Now `f` is resolved at the point of the **template's instantiation**, where the compiler has full understanding of the base class and can resolve the name correctly.
 
 ### Disambiguating dependent type names
 
@@ -258,11 +260,21 @@ template<typename T> void func(T* p) {
 }
 ```
 
+
+
 The first attempt to call `T::foo_method` fails - the compiler can't parse the code. As explained before, when a **dependent name** is encountered, it is assumed to be some sort of **identifier** (such as a function or variable name). Previously we've seen how to use the `typename` keyword to explicitly tell the compiler that it deals with a **type**.
 
 So in declaration (A) above can't be parsed, because the compiler assumes `foo_method` is just a member function and interprets the `<` and `>` symbols as comparison operators. But `foo_method` is a template, so we have to notify the compiler about it. As declaration (B) demonstrates, this can be done by using the keyword `template`.
 
-> NOTE: 实际上`foo_method`是一个function template。
+> NOTE:关于primary-expression，参见`C++\Language-reference\Expressions\Expressions.md`。
+>
+> 写法A中，compiler将`T::foo_method<T>()`中的`<`解析为less than operator，将`>`解析为more than operator，而C++规定: 
+>
+> > The operands of any operator may be other expressions or primary expressions
+>
+> 按照C++的规定，`T::foo_method<T`不是一个primary expression，所以compiler explain。
+>
+>  实际上`foo_method`是一个function template。
 
 ### Resources
 
@@ -775,3 +787,163 @@ void bar()
 
 - stackoverflow [How do you understand dependent names in C++](https://stackoverflow.com/questions/1527849/how-do-you-understand-dependent-names-in-c)
 - gcc [14.7.2 Name Lookup, Templates, and Accessing Members of Base Classes](https://gcc.gnu.org/onlinedocs/gcc/Name-lookup.html)
+
+
+
+## Examples
+
+### error: expected primary-expression before ‘>’ token
+
+这是一种非常常见的compile错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "Disambiguating dependent template names"段中介绍了这种错误，下面再补充一些例子: 
+
+stackoverflow [C++ template compilation error: expected primary-expression before ‘>’ token](https://stackoverflow.com/questions/3505713/c-template-compilation-error-expected-primary-expression-before-token)
+
+
+
+
+
+### error: there are no arguments to ‘`***`’ that depend on a template parameter, so a declaration of ‘`***`’ must be available
+
+这是一种常见的compiler错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "A simple problem and a solution"中介绍了这种错误，下面再补充一些例子:
+
+stackoverflow [Inheritance and templates in C++ - why are inherited members invisible?](https://stackoverflow.com/questions/1567730/inheritance-and-templates-in-c-why-are-inherited-members-invisible)
+
+```C++
+template <int a>
+class Test {
+public:
+    Test() {}
+    int MyMethod1() { return a; }
+};
+
+template <int b>
+class Another : public Test<b>
+{
+public:
+    Another() {}
+    void MyMethod2() {
+        MyMethod1();
+    }
+};
+
+int main()
+{
+    Another<5> a;
+    a.MyMethod1();
+    a.MyMethod2();
+}
+// g++ test.cpp
+
+```
+
+编译报错如下: 
+
+```c++
+test.cpp: In member function ‘void Another<b>::MyMethod2()’:
+test.cpp:14:19: error: there are no arguments to ‘MyMethod1’ that depend on a template parameter, so a declaration of ‘MyMethod1’ must be available [-fpermissive]
+         MyMethod1();
+                   ^
+test.cpp:14:19: note: (if you use ‘-fpermissive’, G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+```
+
+[A](https://stackoverflow.com/a/1567781)
+
+```C++
+template <int a>
+class Test {
+public:
+    Test() {}
+    int MyMethod1() { return a; }
+};
+
+template <int b>
+class Another : public Test<b>
+{
+public:
+    Another() {}
+    void MyMethod2() {
+        Test<b>::MyMethod1();
+    }
+};
+
+int main()
+{
+    Another<5> a;
+    a.MyMethod1();
+    a.MyMethod2();
+}
+// g++ test.cpp
+
+```
+
+
+
+### ‘`***`’ does not name a type
+
+这是一种常见的compiler错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "Disambiguating dependent type names"中介绍了这种错误，下面再补充一些例子:
+
+stackoverflow [Propagating 'typedef' from based to derived class for 'template'](https://stackoverflow.com/questions/1643035/propagating-typedef-from-based-to-derived-class-for-template)
+
+
+
+```C++
+#include <iostream>
+#include <vector>
+
+template<typename T>
+class A
+{
+public:
+	typedef std::vector<T> Vec_t;
+};
+
+template<typename T>
+class B: public A<T>
+{
+private:
+	Vec_t v;  // fails - Vec_t is not recognized
+};
+int main()
+{
+	B<int> b;
+}
+// g++ test.cpp
+
+```
+
+编译报错如下:
+
+```C++
+test.cpp:15:2: error: ‘Vec_t’ does not name a type
+  Vec_t v;  // fails - Vec_t is not recognized
+  ^
+test.cpp:15:2: note: (perhaps ‘typename A<T>::Vec_t’ was intended)
+```
+
+正确写法:
+
+```C++
+#include <iostream>
+#include <vector>
+
+template<typename T>
+class A
+{
+public:
+	typedef std::vector<T> Vec_t;
+};
+
+template<typename T>
+class B: public A<T>
+{
+private:
+	typename A<T>::Vec_t v;  // fails - Vec_t is not recognized
+};
+int main()
+{
+	B<int> b;
+}
+// g++ test.cpp
+
+```
+
