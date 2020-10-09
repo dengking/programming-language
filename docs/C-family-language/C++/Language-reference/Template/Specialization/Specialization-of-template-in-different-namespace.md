@@ -132,7 +132,72 @@ Since your *declarator-id* is in fact qualified with `MyLib::`, and the global n
 
 In C++98, however, the specialization must be put inside namespace in which the template is a member (see Mark B's comment below), and clang will produce a warning if [put in C++98 mode](http://coliru.stacked-crooked.com/a/1a12ca90d3c7033c).
 
+> NOTE: 下面是正确版本的代码
 
+```C++
+#include <iostream>
+#include <map>
+#include <cstring>
+namespace MyLib
+{
+
+#define DECLARE_ENUM( type ) template<> std::map<const char*, type>  \
+            MyLib::Enum<type>::mMap = std::map<const char*, type>(); \
+            template<> MyLib::Enum<type>::Enum (void)
+
+template<typename Type> class Enum
+{
+public:
+	Enum(void);
+	static int Size(void)
+	{ /* ... */
+		return mMap.size();
+	}
+
+private:
+	static std::map<const char*, Type> mMap;
+};
+
+}
+
+enum MyEnum
+{
+	value1, value2, value3,
+};
+
+namespace MyLib
+{
+DECLARE_ENUM (MyEnum)
+{
+	mMap["value1"] = value1;
+	mMap["value2"] = value2;
+	mMap["value3"] = value3;
+}
+}
+void SomeFunc(void)
+{
+	std::cout << MyLib::Enum<MyEnum>::Size() << std::endl;
+}
+// 触发构造
+static MyLib::Enum<MyEnum> g_E;
+
+int main()
+{
+
+	SomeFunc();
+}
+// g++ --std=c++11 test.cpp
+
+
+```
+
+> NOTE: 输出为:
+>
+> ```
+> 3
+> ```
+>
+> 
 
 ## Example code
 

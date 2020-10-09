@@ -30,6 +30,10 @@
 
 关于template，参见`C-family-language\C++\Language-reference\Template`章节。
 
+#### enum
+
+参见`C++\Language-reference\Enum`章节。
+
 ### Compile-time context
 
 下面是总结的（部分）compile-time context：
@@ -42,17 +46,9 @@
 
 ### static 多态 VS runtime多态
 
-#### name mangling VS virtual table
-
-name mangling
-https://www.geeksforgeeks.org/extern-c-in-c/
-https://www.ibm.com/support/knowledgecenter/en/ssw_ibm_i_72/rzarg/name_mangling.htm
-https://en.wikipedia.org/wiki/Name_mangling
+参见`C++\Guide\Implementation-of-polymorphism\index.md`章节。
 
 
-
-https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
-https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
 
 ### static type and dynamic type
 

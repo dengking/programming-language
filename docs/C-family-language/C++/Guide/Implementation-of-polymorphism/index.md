@@ -56,3 +56,13 @@ c++的static polymorphism是由compiler来实现，C++的实现允许programmer�
 
 在`C++\Language-reference\Classes\Subtype-polymorphism\Implementation`章节对此进行深入分析。
 
+
+
+## Draft
+
+### static polymorphism VS dynamic polymorphism 
+
+需要考虑dynamic polymorphism的增加的耗费
+
+https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
+https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
