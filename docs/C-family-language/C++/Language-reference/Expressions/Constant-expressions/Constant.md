@@ -12,6 +12,12 @@
 | enumerator          | cppreference [Enumeration declaration](https://en.cppreference.com/w/cpp/language/enum): <br>An *enumeration* may include several explicitly named constants ("*enumerators*"). | `C++\Language-reference\Enum`                                |
 | constant expression | cppreference [Constant expressions](https://en.cppreference.com/w/cpp/language/constant_expression) | `C++\Language-reference\Expressions\Constant-expressions`    |
 
+### Value category of constant
+
+这个问题，还比较复杂。
+
+
+
 ## Constant initialization
 
 另外，一个与constant有关的是[Constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization)。
@@ -20,11 +26,11 @@
 
 ## TODO Constant and literal
 
+literal type和constant之间的关系。
 
 
 
-
-## TODO enum VS const VS constexpre
+## TODO enum VS const VS constexpr
 
 draft:
 
@@ -33,7 +39,7 @@ draft:
 
 比如我定义有三种类型：
 
-```
+```C++
 enum EServiceType
 {
     
@@ -55,11 +61,13 @@ https://isocpp.org/blog/2016/05/quick-q-static-constexpr-int-vs-old-fashioned-en
 https://stackoverflow.com/questions/22867654/enum-vs-constexpr-for-actual-static-constants-inside-classes
 
 
-
-
 https://stackoverflow.com/questions/2636303/how-to-initialize-a-private-static-const-map-in-c
 
 
+
+enum、constexpr都可以用于in-class static constant
+
+都可以用于TMP进行dispatch，还有tag。
 
 
 

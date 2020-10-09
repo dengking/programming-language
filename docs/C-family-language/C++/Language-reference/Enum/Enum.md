@@ -195,6 +195,8 @@ auto as_integer(Enumeration const value)
 
 ## TODO enum and callback function
 
+这其实是要首先polymorphism。
+
 https://www.codeproject.com/Articles/10006/How-to-create-an-enum-and-callback-function
 
 https://www.drdobbs.com/callback-enumeration-apis-the-input-ite/184401766
