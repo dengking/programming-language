@@ -10,9 +10,31 @@
 
 ### [`static_assert`](https://en.cppreference.com/w/cpp/language/static_assert) VS [`assert`](https://en.cppreference.com/w/cpp/error/assert) 
 
-`static_assert` 是compile-time
 
-`assert` 是 run-time
+
+
+
+#### [static_assert](https://en.cppreference.com/w/cpp/language/static_assert) 
+
+`static_assert` 是compile-time；
+
+syntax如下：
+
+```c++
+static_assert ( bool_constexpr , message )
+```
+
+它的第一个入参是：`bool_constexpr`，解释是：
+
+> a contextually converted constant expression of type `bool`
+
+`static_assert` 的第一个入参往往是和 `type_traits` 中的 各种关于 type trait的函数一起使用的，也就是compile time的，所以是constant expression。
+
+
+
+#### `assert` 
+
+run-time
 
 ### static array VS dynamic array
 
