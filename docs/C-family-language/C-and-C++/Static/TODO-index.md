@@ -1,23 +1,42 @@
 # 关于本章
 
-本章描述在C和C++语言中都会涉及到的`static`，本章是一个专题总结。本文主要分为两大块：
+本章描述在C和C++语言中都会涉及到的`static`，本章是一个专题总结。
 
-- static function
-- static object
-- static member
+## `static`用法总结
 
-> NOTE: 上面是仿照cppreference pointer的分类方法，C++ OOP扩展
+对于`static`的用法，可以采用如下两种分类方法: 
+
+### 1) programming paradigm
+
+| programming paradigm | example                                        |
+| -------------------- | ---------------------------------------------- |
+| Non-OOP              | - static function<br>- static object           |
+| OOP                  | - static data member<br>- static data function |
+
+上面的分类方法是采用的在`C++\Language-reference\Basic-concept\index.md#Extend to OOP`中总结的思路:
+
+> 首先描述Non-OOP，然后描述OOP
 
 虽然上面将两者分开，但是实际编程中，可能会出现两者之的重叠：static object in static function。
 
-与static相关的章节有：
+### 2) cppreference [C++ keywords: static](https://en.cppreference.com/w/cpp/keyword/static)
+
+下面是 cppreference [C++ keywords: static](https://en.cppreference.com/w/cpp/keyword/static) 总结的static的用法，我觉得总结得是比较好的。
+
+|      | 用法                                                         | 说明                     |
+| ---- | ------------------------------------------------------------ | ------------------------ |
+| 1    | [declarations of namespace members with static storage duration and internal linkage](https://en.cppreference.com/w/cpp/language/storage_duration) | Non-OOP，namespace scope |
+| 2    | [definitions of block scope variables with static storage duration and initialized once](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) | Non-OOP，block scope     |
+| 3    | [declarations of class members not bound to specific instances](https://en.cppreference.com/w/cpp/language/static) | 对应的就是1)中的OOP      |
+
+和1)对比可以发现，其实2)中的1和2是对1)中的Non-OOP的细分；
+
+## 相关章节
 
 - `C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`
 - `C++\Language-reference\Initialization\Initialization-of-Static-Variables`
 
-## `static` keyword 
 
-https://www.geeksforgeeks.org/static-keyword-cpp/
 
 ## static function
 

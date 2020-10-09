@@ -24,12 +24,13 @@ c++语言是复杂的，所以本章的内容也是庞杂的，我们需要有�
 
 在`C-family-language\C-and-C++\VS-C-VS-C++.md`中，我们已经提及了"C++支持OOP，因此很多概念就需要向OOP扩展"，下面具体地罗列了C++向OOP中的扩展:
 
-| 扩展点                             | 说明                         | 章节                                             |
-| ---------------------------------- | ---------------------------- | ------------------------------------------------ |
-| pointer向OOP的扩展                 | 支持pointer to member        | `C-and-C++\Pointer-and-array\Pointer\Pointer.md` |
-| static向OOP的扩展                  | 支持static member            | `C-and-C++\Static`                               |
-| enum向OOP的扩展                    | 支持enum class               | `C++\Language-reference\Enum`                    |
-| function and data model向OOP的扩展 | member function、member data | 参见下一段中的“Extend to OOP”小节                |
+| 扩展点                             | 说明                         | 章节                                                         |
+| ---------------------------------- | ---------------------------- | ------------------------------------------------------------ |
+| function and data model向OOP的扩展 | member function、member data | 参见下一段中的“Extend to OOP”小节; <br>                      |
+| pointer向OOP的扩展                 | 支持pointer to member        | `C-and-C++\Pointer-and-array\Pointer\Pointer.md`             |
+| static向OOP的扩展                  | 支持static member            | `C-and-C++\Static`                                           |
+| const向OOP的扩展                   | 支持const member             | `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-qualifier` |
+| enum向OOP的扩展                    | 支持enum class               | `C++\Language-reference\Enum`                                |
 
 后续对它们的描述将统一按照pointer的中描述思路来进行: 首先描述Non-OOP，然后描述OOP。
 
