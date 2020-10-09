@@ -66,7 +66,7 @@ run-time
 
 
 
-### static 多态 VS runtime多态
+### static polymorphism VS runtime polymorphism 
 
 参见`C++\Guide\Implementation-of-polymorphism\index.md`章节。
 
