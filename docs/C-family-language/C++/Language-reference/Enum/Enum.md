@@ -2,22 +2,42 @@
 
 
 
-## enum is literal constant
-
-本节的标题的含义是: enum本质上是literal constant；这就决定了enum的如下属性:
-
-| 属性                    | 参见                                                  |
-| ----------------------- | ----------------------------------------------------- |
-| 可以用于static context  | `C-and-C++\Compile-time-and-run-time`                 |
-| value category是prvalue | `C++\Language-reference\Expressions\Value-categories` |
-
 
 
 ## cppreference [Enumeration declaration](https://en.cppreference.com/w/cpp/language/enum)
 
-An *enumeration* is a distinct type whose value is restricted to a range of values (see below for details), which may include several explicitly named constants ("*enumerators*"). The values of the constants are values of an integral type known as the *underlying type* of the enumeration.
+An *enumeration* is a distinct type whose value is restricted to a range of values (see below for details), which may include several explicitly named **constants** ("***enumerators***"). The values of the constants are values of an integral type known as the *underlying type* of the enumeration.
+
+> NOTE:
+>
+> ## enumerator is named constant
+>
+> 本节的标题的含义是: enumerator 本质上是constant；这就决定了enum的如下属性:
+>
+> | 属性                    | 参见                                                  |
+> | ----------------------- | ----------------------------------------------------- |
+> | 可以用于static context  | `C-and-C++\Compile-time-and-run-time`                 |
+> | value category是prvalue | `C++\Language-reference\Expressions\Value-categories` |
+>
+> 关于constant，参见`C++\Language-reference\Expressions\Constant-expressions`。
+
+
 
 > NOTE: *underlying type*的概念是非常重要的，如何获取它呢？参见：[std::underlying_type](https://en.cppreference.com/w/cpp/types/underlying_type)
+
+There are two distinct kinds of enumerations: 
+
+1) *unscoped enumeration* (declared with the *enum-key* `enum`) 
+
+1) *scoped enumeration* (declared with the *enum-key* `enum class` or `enum struct`). (since C++11)
+
+### Unscoped enumeration
+
+### Scoped enumerations
+
+
+
+
 
 ## Enum Classes VS Enum
 
@@ -165,3 +185,8 @@ auto as_integer(Enumeration const value)
 }
 ```
 
+
+
+## TODO enum in TMP
+
+我记得在TMP中，有多处是使用到了enum的，需要整理一下。

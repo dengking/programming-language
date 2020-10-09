@@ -5,7 +5,7 @@ nav:
     # 总结c++中的resource management    
     - Resource-management: Resource-management
     # 总结c++中polymorphism的实现
-    - Implementation-of-polymorphism: Implementation-of-polymorphism
+    - Plymorphism: Plymorphism
     - Serialization: Serialization
     - Command-line: Command-line
     # 如何进行注释，如何根据注释生成文档

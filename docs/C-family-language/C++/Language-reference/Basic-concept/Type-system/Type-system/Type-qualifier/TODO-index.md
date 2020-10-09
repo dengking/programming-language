@@ -1,4 +1,10 @@
-# CV
+# 关于本章
+
+本章对C++的type specifier进行说明，目前C++中有两个type specifier；
+
+本章采用的在`C++\Language-reference\Basic-concept\index.md#Extend to OOP`中总结的思路:
+
+> 首先描述Non-OOP，然后描述OOP
 
 ## const and non-const
 

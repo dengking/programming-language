@@ -1,7 +1,4 @@
 nav:
     - Introduction: index.md
-    - Static-members: Static-members.md
-    - Const-member: Const-member.md
-    - this-pointer: this-pointer.md
-    - Function-member: Function-member
-    - Data-member: Data-member
+    - Static-members: Static-members
+    - Non-static-member: Non-static-member
