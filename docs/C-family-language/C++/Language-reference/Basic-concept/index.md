@@ -20,9 +20,24 @@ c++语言是复杂的，所以本章的内容也是庞杂的，我们需要有�
 | Declarations                                                 | 描述C++ declarations、specifiers                             | compile-time |
 | [Execution-model](./Execution-model/index.md)                | 描述C++ execution model                                      | run-time     |
 
+## Extend to OOP
+
+在`C-family-language\C-and-C++\VS-C-VS-C++.md`中，我们已经提及了"C++支持OOP，因此很多概念就需要向OOP扩展"，下面具体地罗列了C++向OOP中的扩展:
+
+| 扩展点                             | 说明                         | 章节                                             |
+| ---------------------------------- | ---------------------------- | ------------------------------------------------ |
+| pointer向OOP的扩展                 | 支持pointer to member        | `C-and-C++\Pointer-and-array\Pointer\Pointer.md` |
+| static向OOP的扩展                  | 支持static member            | `C-and-C++\Static`                               |
+| enum向OOP的扩展                    | 支持enum class               | `C++\Language-reference\Enum`                    |
+| function and data model向OOP的扩展 | member function、member data | 参见下一段中的“Extend to OOP”小节                |
+
+后续对它们的描述将统一按照pointer的中描述思路来进行: 首先描述Non-OOP，然后描述OOP。
+
 ## Function and data model
 
 在工程hardware的`Computer-architecture\Stored-program-computer.md`中，我们介绍了Function and data model，现在使用它来对C++进行描述。C++使用object来描述data，显然object 和 function构成了C-family language run-time的主要内容。
+
+### Extend to OOP
 
 C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展，OOP只是一种programming paradigm，最终的program还是由function和data组成: 
 

@@ -1,3 +1,4 @@
 nav:
+    - Introduction: index.md
     - Pointer: Pointer.md
     - Array: Array    

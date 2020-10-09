@@ -2,15 +2,17 @@
 
 ## 思路
 
-c++在c上所增强的，主要方面：
+C++在C上所增强的，主要方面：
 
 ### OOP
 
-C++支持OOP。
+C++支持OOP，因此很多概念就需要向OOP扩展，在`C++\Language-reference\Basic-concept\index.md`中对这个问题进行了深入分析。
+
+
 
 ### Type system
 
-c中有[effective type](https://en.cppreference.com/w/c/language/object)的概念，而`c++`中则没有
+c中有[effective type](https://en.cppreference.com/w/c/language/object)的概念，而`c++`中则没有；
 
 `c++`中并没有effective type的概念；其实主要原因在于c++中使用了`new`，而c中则是`malloc`，显然这是`c++`在type safety上的一些改善，这一点在[Type safety](https://en.wikipedia.org/wiki/Type_safety#C++)中有解释；
 
@@ -49,9 +51,9 @@ c++的standard library提供的功能过多。
 
 ### name space
 
-c[namespace](https://en.cppreference.com/w/c/language/name_space)
+c [namespace](https://en.cppreference.com/w/c/language/name_space)
 
-`c++`[namespace](https://en.cppreference.com/w/cpp/language/lookup)
+`c++` [namespace](https://en.cppreference.com/w/cpp/language/lookup)
 
 ### scope
 
