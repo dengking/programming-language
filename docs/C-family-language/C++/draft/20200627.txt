@@ -1,0 +1,36 @@
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Generic_Container_Idioms
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Erasure
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-copyable_Mixin
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Safe_Enum
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Selection
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Hierarchy_Generation
+
+
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Nifty_Counter
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Temporary_Base_Class
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Counted_Body
+
+https://accu.org/index.php/journals/388
+
+proxy：https://ikeptwalking.com/proxy-design-pattern-explained/
+
+
+global var：https://stackoverflow.com/questions/34744811/global-variables-in-modern-c/34745065
+https://stackoverflow.com/questions/36844393/c-nifty-counter-idiom-why
+https://stackoverflow.com/questions/10676336/c-stl-cout-source-code
+https://stackoverflow.com/questions/11788187/reference-counting-in-c-oo-style
+
+
+AOP AND OOP:https://docs.microsoft.com/en-us/archive/msdn-magazine/2014/february/aspect-oriented-programming-aspect-oriented-programming-with-the-realproxy-class
+
+https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming
+
+https://stackoverflow.com/questions/242177/what-is-aspect-oriented-programming

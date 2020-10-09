@@ -1,0 +1,1086 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0087)https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style>
+
+ <title>B.4 — Initializer lists and uniform initialization | Learn C++</title> <link rel="shortcut icon" href="https://www.learncpp.com/blog/wp-content/ata-images/learncpp.ico">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.learncpp.com/blog/xmlrpc.php">
+
+<!-- All in One SEO Pack 2.11 by Michael Torbert of Semper Fi Web Designob_start_detected [-1,-1] -->
+<link rel="canonical" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/">
+<!-- /all in one seo pack -->
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://gateway.gear.mycelium.com/">
+<link rel="alternate" type="application/rss+xml" title="Learn C++ » Feed" href="https://www.learncpp.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Learn C++ » Comments Feed" href="https://www.learncpp.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Learn C++ » B.4 — Initializer lists and uniform initialization Comments Feed" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/feed/">
+<link rel="stylesheet" id="mycelium-gear-widget-admin-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/mycelium-gear-widget-admin.css" type="text/css" media="">
+<link rel="stylesheet" id="urvanov_syntax_highlighter-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/urvanov_syntax_highlighter.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-familiar-learncpp-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/familiar-learncpp.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-monaco-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/monaco.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="vscf_style-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/vscf-style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="learncpp-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/learncpp.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/jetpack.css" type="text/css" media="all">
+<script src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(3).txt"></script><script src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/osd.js.download"></script><script src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(4).txt"></script><script src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(5).txt" id="google_shimpl"></script><script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/analytics.js.download"></script><script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/jquery.js.download" data-cfasync="true"></script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/jquery-migrate.min.js.download" data-cfasync="true"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var UrvanovSyntaxHighlighterSyntaxSettings = {"version":"2.8.12","is_admin":"0","ajaxurl":"https:\/\/www.learncpp.com\/blog\/wp-admin\/admin-ajax.php","prefix":"urvanov-syntax-highlighter-","setting":"urvanov-syntax-highlighter-setting","selected":"urvanov-syntax-highlighter-setting-selected","changed":"urvanov-syntax-highlighter-setting-changed","special":"urvanov-syntax-highlighter-setting-special","orig_value":"data-orig-value","debug":""};
+var UrvanovSyntaxHighlighterSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/urvanov_syntax_highlighter.min.js.download" data-cfasync="true"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var cfmonitor = {"client_ip":"115.236.91.18","max_clicks":"8","clicks":"0","is_blocked":"0","customclass":"cf_monitor","disablead":"false","currentURL":"\/cpp-tutorial\/b-4-initializer-lists-and-uniform-initialization\/","debug":"","caching":"1","ajaxurl":"https:\/\/www.learncpp.com\/blog\/wp-admin\/admin-ajax.php","nonce":"cf0f35f48f"};
+/* ]]> */
+</script>
+<script data-cfasync="false" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/check_min.js.download"></script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/gear-widget-host.js.download" data-cfasync="true"></script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/DD_roundies.js.download" data-cfasync="true"></script>
+<link rel="https://api.w.org/" href="https://www.learncpp.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.learncpp.com/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.learncpp.com/blog/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="B.3 — Range-based for statements and static_assert" href="https://www.learncpp.com/cpp-tutorial/b-3-range-based-for-statements-and-static_assert/">
+<link rel="next" title="B.5 — Delegating constructors" href="https://www.learncpp.com/cpp-tutorial/b-5-delegating-constructors/">
+<link rel="shortlink" href="https://www.learncpp.com/?p=650">
+<link rel="alternate" type="application/json+oembed" href="https://www.learncpp.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.learncpp.com%2Fcpp-tutorial%2Fb-4-initializer-lists-and-uniform-initialization%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.learncpp.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.learncpp.com%2Fcpp-tutorial%2Fb-4-initializer-lists-and-uniform-initialization%2F&amp;format=xml">
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-2173612-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+
+	<!-- Hint Code -->
+        <script type="text/javascript">
+            function cppHintToggle(hint, link, showtext, hidetext) {
+                if (hint.style.display != 'none') {
+                    hint.style.display = 'none';
+                    link.innerHTML = showtext;
+                    link.className = 'hint_link_show';
+                } else {
+                    hint.style.display = 'block';
+                    link.innerHTML = hidetext;
+                    link.className = 'hint_link_hide';
+                }
+            }
+          </script>
+<!-- wpSolution Code -->
+        <script type="text/javascript">
+            function wpSolutionToggle(solution, link, showtext, hidetext) {
+                if (solution.style.display != 'none') {
+                    solution.style.display = 'none';
+                    link.innerHTML = showtext;
+                    link.className = 'solution_link_show';
+                } else {
+                    solution.style.display = 'block';
+                    link.innerHTML = hidetext;
+                    link.className = 'solution_link_hide';
+                }
+            }
+          </script>
+<style type="text/css">img#wpstats{display:none}</style><style type="text/css">body{text-align:center;margin:0;padding:0;font-family:verdana,arial,sans-serif;font-size:13px;line-height:1.4;color:#000000;background:#bbb;padding-bottom:20px}a:link,a:visited,a:active{color:#365DA0;font-weight:bold;text-decoration:none;}a:hover{color:#365DA0;font-weight:bold;text-decoration:underline}ul,ol,dl,p,h1,h2,h3,h4,h5,h6{margin-top:10px;margin-bottom:10px;padding-top:0;padding-bottom:0;}ul ul,ul ol,ol ul,ol ol{margin-top:0;margin-bottom:0}code,pre{font-family:"Courier New",Courier,monospace;font-size:1em}pre{overflow:auto;word-wrap:normal;padding-bottom:1.5em;overflow-y:hidden;width:99%}abbr[title],acronym[title]{border-bottom:1px dotted}hr{display:block;height:2px;border:none;margin:0.5em auto;color:#cccccc;background-color:#cccccc}table{font-size:1em;}div.post,ul.commentlist li,ol.commentlist li{word-wrap:break-word;}pre,.wp_syntax{word-wrap:normal;}div#wrapper{text-align:center;margin-left:auto;margin-right:auto;display:block;width:100%}div#container{padding:20px;box-shadow:0 0 15px #333;-moz-box-shadow:0 0 15px #333;width:auto;margin-left:auto;margin-right:auto;text-align:left;display:block}table#layout{font-size:100%;width:100%;table-layout:fixed}.colone{width:200px}.colone-inner{width:10px}.coltwo{width:100% }.colthree-inner{width:10px}.colthree{width:200px}div#header.full-width{width:100%}div#header,td#header{width:auto;padding:0}table#logoarea,table#logoarea tr,table#logoarea td{margin:0;padding:0;background:none;border:0}table#logoarea{width:100%;border-spacing:0px}img.logo{display:block;margin:0 10px 0 0}td.logoarea-logo{width:1%}h1.blogtitle,h2.blogtitle{ display:block;margin:0;padding:0;letter-spacing:-1px;line-height:1.0em;font-size:200%;text-transform:uppercase;font-smooth:always}h1.blogtitle a:link,h1.blogtitle a:visited,h1.blogtitle a:active,h2.blogtitle a:link,h2.blogtitle a:visited,h2.blogtitle a:active{ text-decoration:none;color:#000000;font-weight:normal;font-smooth:always}h1.blogtitle a:hover,h2.blogtitle a:hover{ text-decoration:none;color:#AC161B;font-weight:normal}p.tagline{margin:0;padding:0;font-size:1.2em;font-weight:normal;color:#444}td.feed-icons{white-space:nowrap;}div.rss-box{height:1%;display:block;padding:10px 0 10px 10px;margin:0;width:280px}a.comments-icon{height:22px;line-height:22px;margin:0 5px 0 5px;padding-left:22px;display:block;text-decoration:none;float:right;white-space:nowrap}a.comments-icon:link,a.comments-icon:active,a.comments-icon:visited{background:transparent url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/comment-gray.png) no-repeat scroll center left}a.comments-icon:hover{background:transparent url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/comment.png) no-repeat scroll center left}a.posts-icon{height:22px;line-height:22px;margin:0 5px 0 0;padding-left:20px;display:block;text-decoration:none;float:right;white-space:nowrap}a.posts-icon:link,a.posts-icon:active,a.posts-icon:visited{background:transparent url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/rss-gray.png) no-repeat scroll center left}a.posts-icon:hover{background:transparent url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/rss.png) no-repeat scroll center left}a.email-icon{height:22px;line-height:22px;margin:0 5px 0 5px;padding-left:24px;display:block;text-decoration:none;float:right;white-space:nowrap}a.email-icon:link,a.email-icon:active,a.email-icon:visited{background:transparent url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/email-gray.png) no-repeat scroll center left}a.email-icon:hover{background:transparent url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/email.png) no-repeat scroll center left}td.search-box{height:1%}div.searchbox{height:35px;border-bottom:0;width:200px;margin:0;padding:0}div.searchbox-form{margin:5px 10px 5px 10px}div.horbar1,div.horbar2{font-size:1px;clear:both;display:block;position:relative;padding:0;margin:0}div.horbar1{height:0px;background:#ffffff;border-top:dashed 1px #cccccc}div.horbar2{height:0px;background:#ffffff;border-bottom:dashed 1px #cccccc}div.header-image-container-pre{position:relative;margin:0;padding:0;height:150px;}div.header-image-container{position:relative;margin:0;padding:0;height:150px;}div.codeoverlay{position:absolute;top:0;left:0;width:100%;height:100%}div.clickable{position:absolute;top:0;left:0;z-index:3;margin:0;padding:0;width:100%;height:150px;}a.divclick:link,a.divclick:visited,a.divclick:active,a.divclick:hover{width:100%;height:100%;display:block;text-decoration:none}td#left{vertical-align:top;padding-right:10px}td#left-inner{vertical-align:top;padding-right:10px}td#right{vertical-align:top;padding-left:10px}td#right-inner{vertical-align:top;padding-left:10px}td#middle{vertical-align:top;width:100%;background:#fff;padding-left:15px!important;padding-right:15px!important;border:solid 4px #eee}div#footer.full-width{width:100%}div#footer,td#footer{width:auto;background-color:#f7f7f7;border:solid 4px #eee;padding:10px;text-align:center;color:#888;font-size:11px;margin-left:220px;margin-right:220px;margin-top:20px;width:auto!important}div#footer a:link,div#footer a:visited,div#footer a:active,td#footer a:link,td#footer a:visited,td#footer a:active{text-decoration:none;color:#777777;font-weight:normal}div#footer a:hover,td#footer a:hover{text-decoration:none;color:#777777;font-weight:normal}div.widget{display:block;width:auto;font-size:12px;margin:0 0 10px 0;padding:10px;border:solid 4px #eee;background:#fff}div.widget-title{display:block;width:auto}div.widget-title h3,td#left h3.tw-widgettitle,td#right h3.tw-widgettitle,td#left ul.tw-nav-list,td#right ul.tw-nav-list{padding:0;margin:0;font-size:0.9em;text-align:center;font-weight:normal;text-transform:uppercase;letter-spacing:1px;color:#333;border-bottom:solid 1px #eee;padding-bottom:10px;margin-bottom:10px}div.widget ul,div.textwidget{display:block;width:auto;background:#fff}div.widget select{width:98%;margin-top:5px;}div.widget ul{list-style-type:none;margin:0;padding:0;width:auto}div.widget ul li{display:block;margin:2px 0 2px 0px;padding:0 0 0 0px;border-left:solid 0px #CCCCCC}div.widget ul li:hover,div.widget ul li.sfhover{display:block;width:auto;border-left:solid 0px #000000;}div.widget ul li ul li{margin:2px 0 2px 5px;padding:0 0 0 0px;border-left:solid 0px #CCCCCC;}div.widget ul li ul li:hover,div.widget ul li ul li.sfhover{border-left:solid 0px #000000;}div.widget ul li ul li ul li{margin:2px 0 2px 5px;padding:0 0 0 0px;border-left:solid 0px #CCCCCC;}div.widget ul li ul li ul li:hover,div.widget ul li ul li ul li.sfhover{border-left:solid 0px #000000;}div.widget a:link,div.widget a:visited,div.widget a:active,div.widget td a:link,div.widget td a:visited,div.widget td a:active,div.widget ul li a:link,div.widget ul li a:visited,div.widget ul li a:active{text-decoration:none;font-weight:normal;color:#365DA0;font-weight:normal;}div.widget ul li ul li a:link,div.widget ul li ul li a:visited,div.widget ul li ul li a:active{color:#365DA0;font-weight:normal;}div.widget ul li ul li ul li a:link,div.widget ul li ul li ul li a:visited,div.widget ul li ul li ul li a:active{color:#365DA0;font-weight:normal;}div.widget a:hover,div.widget ul li a:hover{color:#365DA0;}div.widget ul li ul li a:hover{color:#365DA0;}div.widget ul li ul li ul li a:hover{color:#365DA0;}div.widget ul li a:link,div.widget ul li a:visited,div.widget ul li a:active,div.widget ul li a:hover{display:inline}* html div.widget ul li a:link,* html div.widget ul li a:visited,* html div.widget ul li a:active,* html div.widget ul li a:hover{height:1%; } div.widget_nav_menu ul li,div.widget_pages ul li,div.widget_categories ul li{border-left:0 !important;padding:0 !important}div.widget_nav_menu ul li a:link,div.widget_nav_menu ul li a:visited,div.widget_nav_menu ul li a:active,div.widget_pages ul li a:link,div.widget_pages ul li a:visited,div.widget_pages ul li a:active,div.widget_categories ul li a:link,div.widget_categories ul li a:visited,div.widget_categories ul li a:active{padding:0 0 0 0px;border-left:solid 0px #CCCCCC}div.widget_nav_menu ul li a:hover,div.widget_pages ul li a:hover,div.widget_categories ul li a:hover{border-left:solid 0px #000000;}div.widget_nav_menu ul li ul li a:link,div.widget_nav_menu ul li ul li a:visited,div.widget_nav_menu ul li ul li a:active,div.widget_pages ul li ul li a:link,div.widget_pages ul li ul li a:visited,div.widget_pages ul li ul li a:active,div.widget_categories ul li ul li a:link,div.widget_categories ul li ul li a:visited,div.widget_categories ul li ul li a:active{padding:0 0 0 0px;border-left:solid 0px #CCCCCC}div.widget_nav_menu ul li ul li a:hover,div.widget_pages ul li ul li a:hover,div.widget_categories ul li ul li a:hover{border-left:solid 0px #000000;}div.widget_nav_menu ul li ul li ul li a:link,div.widget_nav_menu ul li ul li ul li a:visited,div.widget_nav_menu ul li ul li ul li a:active,div.widget_pages ul li ul li ul li a:link,div.widget_pages ul li ul li ul li a:visited,div.widget_pages ul li ul li ul li a:active,div.widget_categories ul li ul li ul li a:link,div.widget_categories ul li ul li ul li a:visited,div.widget_categories ul li ul li ul li a:active{padding:0 0 0 0px;border-left:solid 0px #CCCCCC}div.widget_nav_menu ul li ul li ul li a:hover,div.widget_pages ul li ul li ul li a:hover,div.widget_categories ul li ul li ul li a:hover{border-left:solid 0px #000000;}div.widget_nav_menu ul li a:link,div.widget_nav_menu ul li a:active,div.widget_nav_menu ul li a:visited,div.widget_nav_menu ul li a:hover,div.widget_pages ul li a:link,div.widget_pages ul li a:active,div.widget_pages ul li a:visited,div.widget_pages ul li a:hover{display:block !important}div.widget_categories ul li a:link,div.widget_categories ul li a:active,div.widget_categories ul li a:visited,div.widget_categories ul li a:hover{display:inline !important}table.subscribe{width:100%}table.subscribe td.email-text{padding:0 0 5px 0;vertical-align:top}table.subscribe td.email-field{padding:0;width:100%}table.subscribe td.email-button{padding:0 0 0 5px}table.subscribe td.post-text{padding:7px 0 0 0;vertical-align:top}table.subscribe td.comment-text{padding:7px 0 0 0;vertical-align:top}div.post,div.page{display:block;margin:0 0 30px 0;padding-top:20px}div.sticky{background:#eee url('<?php bloginfo('template_directory');?>/images/sticky.gif') 99% 5% no-repeat;border:dashed 1px #cccccc;padding:10px}div.post-kicker{margin:0 0 5px 0}div.post-kicker a:link,div.post-kicker a:visited,div.post-kicker a:active{color:#999;text-decoration:none;text-transform:uppercase;letter-spacing:1px}div.post-kicker a:hover{color:#cc0000}div.post-headline{}div.post-headline h1,div.post-headline h2{ margin:0; padding:0;padding:0;margin:0;font-size:1.7em}div.post-headline h2 a:link,div.post-headline h2 a:visited,div.post-headline h2 a:active,div.post-headline h1 a:link,div.post-headline h1 a:visited,div.post-headline h1 a:active{}div.post-headline h2 a:hover,div.post-headline h1 a:hover{}div.post-byline{margin:5px 0 10px 0;color:#999;text-transform:uppercase;letter-spacing:1px;font-size:11px}div.post-byline a:link,div.post-byline a:visited,div.post-byline a:active{}div.post-byline a:hover{}div.post-bodycopy{}div.post-bodycopy p{margin:1em 0;padding:0;display:block}div.post-pagination{}div.post-footer{clear:both;display:block;color:#999;text-transform:uppercase;letter-spacing:1px;font-size:11px}div.post-footer a:link,div.post-footer a:visited,div.post-footer a:active{color:#999;font-weight:normal;text-decoration:none}div.post-footer a:hover{color:#333;font-weight:normal;text-decoration:underline}div.post-kicker img,div.post-byline img,div.post-footer img{border:0;padding:0;margin:0 0 -1px 0;background:none}span.post-ratings{display:inline-block;width:auto;white-space:nowrap}div.navigation-top{border-top:solid 4px #eee;padding:8px 0}div.navigation-middle{margin:10px 0 20px 0;padding:8px 0;border-top:solid 4px #eee;border-bottom:solid 4px #eee}div.navigation-bottom{margin:20px 0 0 0;padding:10px 0 0 0;border-top:solid 4px #eee}div.navigation-comments-above{margin:0 0 10px 0;padding:5px 0 5px 0}div.navigation-comments-below{margin:0 0 10px 0;padding:5px 0 5px 0}div.older{float:left;width:48%;text-align:left;margin:0;padding:0}div.newer{float:right;width:48%;text-align:right;margin:0;padding:0;}div.older-home{float:left;width:44%;text-align:left;margin:0;padding:0}div.newer-home{float:right;width:44%;text-align:right;margin:0;padding:0;}div.home{float:left;width:8%;text-align:center;margin:0;padding:0}form,.feedburner-email-form{margin:0;padding:0;}fieldset{border:1px solid #cccccc;width:auto;padding:0.35em 0.625em 0.75em;display:block;}legend{color:#000000;background:#f4f4f4;border:1px solid #cccccc;padding:2px 6px;margin-bottom:15px;}form p{margin:5px 0 0 0;padding:0;}div.xhtml-tags p{margin:0}label{margin-right:0.5em;font-family:arial;cursor:pointer;}input.text,input.textbox,input.password,input.file,input.TextField,textarea{padding:3px;color:#000000;border-top:solid 1px #333333;border-left:solid 1px #333333;border-right:solid 1px #999999;border-bottom:solid 1px #cccccc;background:url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/inputbackgr.gif) top left no-repeat}textarea{width:96%;}input.inputblur{color:#777777;width:95%}input.inputfocus{color:#000000;width:95%}input.highlight,textarea.highlight{background:#e8eff7;border-color:#37699f}.button,.Button,input[type=submit]{padding:0 2px;height:24px;line-height:16px;background-color:#777777;color:#ffffff;border:solid 2px #555555;font-weight:bold}input.buttonhover{padding:0 2px;cursor:pointer;background-color:#6b9c6b;color:#ffffff;border:solid 2px #496d49}form#commentform input#submit{ padding:0 .25em; overflow:visible}form#commentform input#submit[class]{width:auto}form#commentform input#submit{padding:4px 10px 4px 10px;font-size:1.2em;line-height:1.5em;height:36px}table.searchform{width:100%}table.searchform td.searchfield{padding:0;width:100%}table.searchform td.searchbutton{padding:0 0 0 5px}table.searchform td.searchbutton input{padding:0 0 0 5px}blockquote{height:1%;display:block;clear:both;color:#555555;padding:1em 1em;background:#f4f4f4;border:solid 1px #e1e1e1}blockquote blockquote{height:1%;display:block;clear:both;color:#444444;padding:1em 1em;background:#e1e1e1;border:solid 1px #d3d3d3}div.post table{border-collapse:collapse;margin:10px 0}div.post table caption{width:auto;margin:0 auto;background:#eeeeee;border:#999999;padding:4px 8px;color:#666666}div.post table th{background:#888888;color:#ffffff;font-weight:bold;font-size:90%;padding:4px 8px;border:solid 1px #ffffff;text-align:left}div.post table td{padding:4px 8px;background-color:#ffffff;border-bottom:1px solid #dddddd;text-align:left}div.post table tfoot td{}div.post table tr.alt td{background:#f4f4f4}div.post table tr.over td{background:#e2e2e2}#calendar_wrap{padding:0;border:none}table#wp-calendar{width:100%;font-size:90%;border-collapse:collapse;background-color:#ffffff;margin:0 auto}table#wp-calendar caption{width:auto;background:#eeeeee;border:none;;padding:3px;margin:0 auto;font-size:1em}table#wp-calendar th{border:solid 1px #eeeeee;background-color:#999999;color:#ffffff;font-weight:bold;padding:2px;text-align:center}table#wp-calendar td{padding:0;line-height:18px;background-color:#ffffff;border:1px solid #dddddd;text-align:center}table#wp-calendar tfoot td{border:solid 1px #eeeeee;background-color:#eeeeee}table#wp-calendar td a{display:block;background-color:#eeeeee;width:100%;height:100%;padding:0}div#respond{margin:25px 0;padding:25px;background:#eee;-moz-border-radius:8px;-khtml-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}p.thesetags{margin:10px 0}h3.reply,h3#reply-title{margin:0;padding:0 0 10px 0}ol.commentlist{margin:15px 0 25px 0;list-style-type:none;padding:0;display:block;border-top:dotted 1px #cccccc}ol.commentlist li{padding:15px 10px;display:block;height:1%;margin:0;background-color:#FFFFFF;border-bottom:dotted 1px #cccccc}ol.commentlist li.alt{display:block;height:1%;background-color:#EEEEEE;border-bottom:dotted 1px #cccccc}ol.commentlist li.authorcomment{display:block;height:1%;background-color:#D8D8FA}ol.commentlist span.authorname{font-weight:bold;font-size:110%}ol.commentlist span.commentdate{color:#666666;font-size:90%;margin-bottom:5px;display:block}ol.commentlist span.editcomment{display:block}ol.commentlist li p{margin:2px 0 5px 0}div.comment-number{float:right;font-size:2em;line-height:2em;font-family:georgia,serif;font-weight:bold;color:#ddd;margin:-10px 0 0 0;position:relative;height:1%}div.comment-number a:link,div.comment-number a:visited,div.comment-number a:active{color:#ccc}textarea#comment{width:98%;margin:10px 0;display:block}ul.commentlist{margin:15px 0 15px 0;list-style-type:none;padding:0;display:block;border-top:dotted 1px #cccccc}ul.commentlist ul{margin:0;border:none;list-style-type:none;padding:0}ul.commentlist li{padding:0; margin:0;display:block;clear:both;height:1%;}ul.commentlist ul.children li{ margin-left:30px}ul.commentlist div.comment-container{padding:10px;margin:0}ul.children div.comment-container{background-color:transparent;border:dotted 1px #ccc;padding:10px;margin:0 10px 8px 0; border-radius:5px}ul.children div.bypostauthor{}ul.commentlist li.thread-even{background-color:#FFFFFF;border-bottom:dotted 1px #cccccc}ul.commentlist li.thread-odd{background-color:#EEEEEE;border-bottom:dotted 1px #cccccc}ul.commentlist div.bypostauthor{background-color:#D8D8FA}ul.children div.bypostauthor{border:dotted 1px #BFBCFB}ul.commentlist span.authorname{font-size:110%}div.comment-meta a:link,div.comment-meta a:visited,div.comment-meta a:active,div.comment-meta a:hover{font-weight:normal}div#cancel-comment-reply{margin:-5px 0 10px 0}div.comment-number{float:right;font-size:2em;line-height:2em;font-family:georgia,serif;font-weight:bold;color:#ddd;margin:-10px 0 0 0;position:relative;height:1%}div.comment-number a:link,div.comment-number a:visited,div.comment-number a:active{color:#ccc}.page-numbers{padding:2px 6px;border:solid 1px #000000;border-radius:6px}span.current{background:#ddd}a.prev,a.next{border:none}a.page-numbers:link,a.page-numbers:visited,a.page-numbers:active{text-decoration:none;color:#365DA0;border-color:#365DA0}a.page-numbers:hover{text-decoration:none;color:#365DA0;border-color:#365DA0}div.xhtml-tags{display:none}abbr em{border:none !important;border-top:dashed 1px #aaa !important;display:inline-block !important;background:url(https://www.learncpp.com/blog/wp-content/themes/atahualpa/images/commentluv.gif) 0% 90% no-repeat;margin-top:8px;padding:5px 5px 2px 20px !important;font-style:normal}p.subscribe-to-comments{margin-bottom:10px}div#gsHeader{display:none;}div.g2_column{margin:0 !important;width:100% !important;font-size:1.2em}div#gsNavBar{border-top-width:0 !important}p.giDescription{font-size:1.2em;line-height:1 !important}p.giTitle{margin:0.3em 0 !important;font-size:1em;font-weight:normal;color:#666}div#wp-email img{border:0;padding:0}div#wp-email input,div#wp-email textarea{margin-top:5px;margin-bottom:2px}div#wp-email p{margin-bottom:10px}input#wp-email-submit{ padding:0; font-size:30px; height:50px; line-height:50px; overflow:visible;}img.WP-EmailIcon{ vertical-align:text-bottom !important}.tw-accordion .tw-widgettitle,.tw-accordion .tw-widgettitle:hover,.tw-accordion .tw-hovered,.tw-accordion .selected,.tw-accordion .selected:hover{ background:transparent !important; background-image:none !important}.tw-accordion .tw-widgettitle span{ padding-left:0 !important}.tw-accordion h3.tw-widgettitle{border-bottom:solid 1px #ccc}.tw-accordion h3.selected{border-bottom:none}td#left .without_title,td#right .without_title{ margin-top:0;margin-bottom:0}ul.tw-nav-list{border-bottom:solid 1px #999;display:block;margin-bottom:5px !important}td#left ul.tw-nav-list li,td#right ul.tw-nav-list li{padding:0 0 1px 0;margin:0 0 -1px 5px; border:solid 1px #ccc;border-bottom:none;border-radius:5px;border-bottom-right-radius:0;border-bottom-left-radius:0;background:#eee}td#left ul.tw-nav-list li.ui-tabs-selected,td#right ul.tw-nav-list li.ui-tabs-selected{ background:none;border:solid 1px #999;border-bottom:solid 1px #fff !important}ul.tw-nav-list li a:link,ul.tw-nav-list li a:visited,ul.tw-nav-list li a:active,ul.tw-nav-list li a:hover{padding:0 8px !important;background:none;border-left:none !important;outline:none}td#left ul.tw-nav-list li.ui-tabs-selected a,td#left li.ui-tabs-selected a:hover,td#right ul.tw-nav-list li.ui-tabs-selected a,td#right li.ui-tabs-selected a:hover{ color:#000000; text-decoration:none;font-weight:bold;background:none !important;outline:none}td#left .ui-tabs-panel,td#right .ui-tabs-panel{ margin:0; padding:0}img{border:0}#dbem-location-map img{ background:none !important}.post img{padding:5px;border:solid 1px #dddddd;background-color:#f3f3f3;-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}.post img.size-full{max-width:96%;width:auto;margin:5px 0 5px 0}div.post img[class~=size-full]{height:auto;}.post img.alignleft{float:left;margin:10px 10px 5px 0;}.post img.alignright{float:right;margin:10px 0 5px 10px;}.post img.aligncenter{display:block;margin:10px auto}.aligncenter,div.aligncenter{ display:block; margin-left:auto; margin-right:auto}.alignleft,div.alignleft{float:left;margin:10px 10px 5px 0}.alignright,div.alignright{ float:right; margin:10px 0 5px 10px}div.archives-page img{border:0;padding:0;background:none;margin-bottom:0;vertical-align:-10%}.wp-caption{max-width:96%;width:auto 100%;height:auto;display:block;border:1px solid #dddddd;text-align:center;background-color:#f3f3f3;padding-top:4px;margin:10px 0 0 0;-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}* html .wp-caption{height:100%;}.wp-caption img{ margin:0 !important; padding:0 !important; border:0 none !important}.wp-caption p.wp-caption-text{font-size:0.8em;line-height:13px;padding:2px 4px 5px;margin:0;color:#666666}img.wp-post-image{float:left;border:0;padding:0;background:none;margin:0 10px 5px 0}img.wp-smiley{ float:none;border:none !important;margin:0 1px -1px 1px;padding:0 !important;background:none !important}img.avatar{float:left;display:block;margin:0 8px 1px 0;padding:3px;border:solid 1px #ddd;background-color:#f3f3f3;-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}#comment_quicktags{text-align:left;padding:10px 0 2px 0;display:block}#comment_quicktags input.ed_button{background:#f4f4f4;border:2px solid #cccccc;color:#444444;margin:2px 4px 2px 0;width:auto;padding:0 4px;height:24px;line-height:16px}#comment_quicktags input.ed_button_hover{background:#dddddd;border:2px solid #666666;color:#000000;margin:2px 4px 2px 0;width:auto;padding:0 4px;height:24px;line-height:16px;cursor:pointer}#comment_quicktags #ed_strong{font-weight:bold}#comment_quicktags #ed_em{font-style:italic}@media print{body{background:white;color:black;margin:0;font-size:10pt !important;font-family:arial,sans-serif;}div.post-footer{line-height:normal !important;color:#555 !important;font-size:9pt !important}a:link,a:visited,a:active,a:hover{text-decoration:underline !important;color:#000}h2{color:#000;font-size:14pt !important;font-weight:normal !important}h3{color:#000;font-size:12pt !important;}#header,#footer,.colone,.colone-inner,.colthree-inner,.colthree,.navigation,.navigation-top,.navigation-middle,.navigation-bottom,.wp-pagenavi-navigation,#comment,#respond,.remove-for-print{display:none}td#left,td#right,td#left-inner,td#right-inner{width:0;display:none}td#middle{width:100% !important;display:block}*:lang(en) td#left{ display:none}*:lang(en) td#right{ display:none}*:lang(en) td#left-inner{ display:none}*:lang(en) td#right-inner{ display:none}td#left:empty{ display:none}td#right:empty{ display:none}td#left-inner:empty{ display:none}td#right-inner:empty{ display:none}}ul.rMenu,ul.rMenu ul,ul.rMenu li,ul.rMenu a{display:block;margin:0;padding:0}ul.rMenu,ul.rMenu li,ul.rMenu ul{list-style:none}ul.rMenu ul{display:none}ul.rMenu li{position:relative;z-index:1}ul.rMenu li:hover{z-index:999}ul.rMenu li:hover > ul{display:block;position:absolute}ul.rMenu li:hover{background-position:0 0} ul.rMenu-hor li{float:left;width:auto}ul.rMenu-hRight li{float:right}ul.sub-menu li,ul.rMenu-ver li{float:none}.clearfix:after{ content:".";display:block;height:0;clear:both;visibility:hidden}.clearfix{min-width:0;display:inline-block;display:block}* html .clearfix{height:1%;}.clearboth{clear:both;height:1%;font-size:1%;line-height:1%;display:block;padding:0;margin:0}.page-id-8 .post-headline{display:none;} div.useCode{background:linear-gradient(#FFFF66,#CCCC00);border-radius:8px;padding-left:10px;padding-right:10px;padding-top:2px;padding-bottom:2px;font-size:10pt;text-align:left;display:inline-block;font-weight:550;}td#header{padding-bottom:15px;}td#middle{padding:0}div.searchbox-form{margin:5px 0 15px 5px}div#menu1 ul.rMenu{background:transparent;border:none}div#imagecontainer{border-top:solid 0px #333;border-bottom:solid 5px #333;}div.widget ul li{padding:1px 5px 1px 12px !important;background:url('<?php bloginfo('template_directory');?>/images/bullets/round-gray.gif') no-repeat 0 7px}ul.rMenu-hor ul,ul.rMenu-hRight ul{margin-top:0px;}ul.rMenu-hor li{margin-bottom:0px;margin-top:0px;margin-left:0px;}ul.rMenu-hor{padding-left:0px;}ul.rMenu-ver li{margin-top:0xp;}div#menu1 ul.rMenu li a,div#menu2 ul.rMenu li a{padding:6px 10px}div#menu1 ul.rMenu li{margin-right:5px}div#menu1 ul.rMenu li li{margin-right:0}div#menu1 ul.rMenu li,div#menu1 ul.rMenu li a{-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;border-top-left-radius:5px;border-top-right-radius:5px}div#menu1 ul.rMenu li li,div#menu1 ul.rMenu li li a{-webkit-border-top-left-radius:0;-webkit-border-top-right-radius:0;-moz-border-radius-topleft:0;-moz-border-radius-topright:0;border-top-left-radius:0;border-top-right-radius:0}div#menu2{ border:dashed 1px #ffffff}ul{list-style-position:inside}@media only screen and (max-width:960px) and (device-width:1920px),only screen and (max-width:840px) and (device-width:1680px),only screen and (max-width:800px) and (device-width:1600px),only screen and (max-width:720px) and (device-width:1440px),only screen and (max-width:683px) and (device-width:1366px),only screen and (max-width:680px) and (device-width:1360px),only screen and (max-width:640px) and (device-width:1280px),only screen and (max-width:512px) and (device-width:1024px),only screen and (max-device-width:1080px){.colthree,td#right{ display:none}}@media only screen and (max-width:767px){ table#layout, table#layout > tbody, table#layout > tbody > tr, table#layout > tbody > tr > td, table#layout > tr, table#layout > tr > td, table#layout td#header, table#layout td#left, table#layout td#left-inner, table#layout td#middle, table#layout td#right, table#layout td#right-inner, table#layout td#footer{ display:block; }  table#layout > colgroup{ display:none; }  div#wrapper, td#middle{ width:auto; }  .hentry img{  max-width:100%; height:auto !important;  display:block !important;}}@media only screen and (max-width:767px){ #header{display:none;}}</style>
+<script type="text/javascript">
+//<![CDATA[
+
+
+
+/* JQUERY */
+jQuery(document).ready(function(){ 
+    
+   
+  
+
+	/* jQuery('ul#rmenu').superfish(); */
+	/* jQuery('ul#rmenu').superfish().find('ul').bgIframe({opacity:false}); */
+ 
+	/* For IE6 */
+	if (jQuery.browser.msie && /MSIE 6\.0/i.test(window.navigator.userAgent) && !/MSIE 7\.0/i.test(window.navigator.userAgent) && !/MSIE 8\.0/i.test(window.navigator.userAgent)) {
+
+		/* Max-width for images in IE6 */		
+		var centerwidth = jQuery("td#middle").width(); 
+		
+		/* Images without caption */
+		jQuery(".post img").each(function() { 
+			var maxwidth = centerwidth - 10 + 'px';
+			var imgwidth = jQuery(this).width(); 
+			var imgheight = jQuery(this).height(); 
+			var newimgheight = (centerwidth / imgwidth * imgheight) + 'px';	
+			if (imgwidth > centerwidth) { 
+				jQuery(this).css({width: maxwidth}); 
+				jQuery(this).css({height: newimgheight}); 
+			}
+		});
+		
+		/* Images with caption */
+		jQuery("div.wp-caption").each(function() { 
+			var captionwidth = jQuery(this).width(); 
+			var maxcaptionwidth = centerwidth + 'px';
+			var captionheight = jQuery(this).height();
+			var captionimgwidth =  jQuery("div.wp-caption img").width();
+			var captionimgheight =  jQuery("div.wp-caption img").height();
+			if (captionwidth > centerwidth) { 
+				jQuery(this).css({width: maxcaptionwidth}); 
+				var newcaptionheight = (centerwidth / captionwidth * captionheight) + 'px';
+				var newcaptionimgheight = (centerwidth / captionimgwidth * captionimgheight) + 'px';
+				jQuery(this).css({height: newcaptionheight}); 
+				jQuery("div.wp-caption img").css({height: newcaptionimgheight}); 
+				}
+		});
+		
+		/* sfhover for LI:HOVER support in IE6: */
+		jQuery("ul li").
+			hover( function() {
+					jQuery(this).addClass("sfhover")
+				}, 
+				function() {
+					jQuery(this).removeClass("sfhover")
+				} 
+			); 
+
+	/* End IE6 */
+	}
+	
+	
+	
+	/* Since 3.7.8: Auto resize videos (embed and iframe elements) 
+	TODO: Parse parent's dimensions only once per layout column, not per video
+	*/
+	function bfa_resize_video() {
+		jQuery('embed, iframe').each( function() {
+			var video = jQuery(this),
+			videoWidth = video.attr('width'); // use the attr here, not width() or css()
+			videoParent = video.parent(),
+			videoParentWidth = parseFloat( videoParent.css( 'width' ) ),
+			videoParentBorder = parseFloat( videoParent.css( 'border-left-width' ) ) 
+										+  parseFloat( videoParent.css( 'border-right-width' ) ),
+			videoParentPadding = parseFloat( videoParent.css( 'padding-left' ) ) 
+										+  parseFloat( videoParent.css( 'padding-right' ) ),
+			maxWidth = videoParentWidth - videoParentBorder - videoParentPadding;
+
+			if( videoWidth > maxWidth ) {
+				var videoHeight = video.attr('height'),
+				videoMaxHeight = ( maxWidth / videoWidth * videoHeight );
+				video.attr({ width: maxWidth, height: videoMaxHeight });
+			} 
+
+		});	
+	}
+	bfa_resize_video();
+	jQuery(window).resize( bfa_resize_video );
+
+		
+	jQuery(".post table tr").
+		mouseover(function() {
+			jQuery(this).addClass("over");
+		}).
+		mouseout(function() {
+			jQuery(this).removeClass("over");
+		});
+
+	
+	jQuery(".post table tr:even").
+		addClass("alt");
+
+	
+	jQuery("input.text, input.TextField, input.file, input.password, textarea").
+		focus(function () {  
+			jQuery(this).addClass("highlight"); 
+		}).
+		blur(function () { 
+			jQuery(this).removeClass("highlight"); 
+		})
+	
+	jQuery("input.inputblur").
+		focus(function () {  
+			jQuery(this).addClass("inputfocus"); 
+		}).
+		blur(function () { 
+			jQuery(this).removeClass("inputfocus"); 
+		})
+
+		
+
+	
+	jQuery("input.button, input.Button, input#submit").
+		mouseover(function() {
+			jQuery(this).addClass("buttonhover");
+		}).
+		mouseout(function() {
+			jQuery(this).removeClass("buttonhover");
+		});
+
+	/* toggle "you can use these xhtml tags" */
+	jQuery("a.xhtmltags").
+		click(function(){ 
+			jQuery("div.xhtml-tags").slideToggle(300); 
+		});
+
+	/* For the Tabbed Widgets plugin: */
+	jQuery("ul.tw-nav-list").
+		addClass("clearfix");
+
+		
+	
+});
+
+//]]>
+</script>
+
+<!--[if IE 6]>
+<script type="text/javascript">DD_roundies.addRule("a.posts-icon, a.comments-icon, a.email-icon, img.logo");</script>
+<![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1"><style>
+.ai-viewport-3                { display: none !important;}
+.ai-viewport-2                { display: none !important;}
+.ai-viewport-1                { display: inherit !important;}
+.ai-viewport-0                { display: none !important;}
+@media (min-width: 768px) and (max-width: 979px) {
+.ai-viewport-1                { display: none !important;}
+.ai-viewport-2                { display: inherit !important;}
+}
+@media (max-width: 767px) {
+.ai-viewport-1                { display: none !important;}
+.ai-viewport-3                { display: inherit !important;}
+}
+</style>
+<script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(6).txt"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0588844875925051",
+          enable_page_level_ads: true
+     });
+</script>
+
+<!--
+<script type="text/javascript">
+    window._mNHandle = window._mNHandle || {};
+    window._mNHandle.queue = window._mNHandle.queue || [];
+    medianet_versionId = "121199"; 
+    (function() {
+        var sct = document.createElement("script"),
+        sctHl = document.getElementsByTagName("script")[0],
+        isSSL = 'https:' == document.location.protocol;
+        sct.type = "text/javascript";
+        sct.src = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/dmedianet.js?cid=8CUIE2148' + (isSSL ? '&https=1' : '')+'';
+        sct.async = "async";
+        sctHl.parentNode.insertBefore(sct, sctHl);
+    })();
+</script>
+--><link rel="preload" href="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(7).txt" as="script"><script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(7).txt"></script></head>
+<body class="post-template-default single single-post postid-650 single-format-standard category-cpp-tutorial" onresize="OnResizeDocument()">
+
+		<!-- Full Width Header -->
+		<div id="header" class="full-width">
+		<div id="imagecontainer-pre" class="header-image-container-pre">    <div id="imagecontainer" class="header-image-container" style="background: url(&#39;https://www.learncpp.com/blog/wp-content/ata-images/header/LearnCpp_1920.jpg&#39;) top center no-repeat;"></div><div class="clickable"><a class="divclick" title="Learn C++" href="https://www.learncpp.com/">&nbsp;</a></div><div class="codeoverlay"></div></div>		</div>
+		<!-- / Full Width Header -->
+<div id="wrapper">
+<div id="container">
+<table id="layout" border="0" cellspacing="0" cellpadding="0">
+<colgroup>
+<col class="colone"><col class="coltwo">
+<col class="colthree"></colgroup> 
+
+	<!-- Main Body -->	
+	<tbody><tr id="bodyrow"><td id="left">
+
+			<div id="text-2" class="widget widget_text">			<div class="textwidget"><ul>
+<li><a href="https://www.learncpp.com/"><big><big>Main Page</big></big></a></li>
+<li><a href="https://www.learncpp.com/learn-cpp-site-index/">Site Index</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://www.learncpp.com/site-news/leave-feedback-report-issue/">Leave feedback</a></li>
+<li><a href="https://www.learncpp.com/site-news/leave-feedback-report-issue/">Report an Issue</a></li>
+<li><a href="https://www.learncpp.com/about/">About / Contact</a></li>
+<li><a href="https://www.learncpp.com/about/#Support">Support LearnCpp</a></li>
+</ul>
+</div>
+		</div><div id="text-3" class="widget widget_text"><div class="widget-title"><h3>Search</h3></div>			<div class="textwidget"><!-- SiteSearch Google -->
+<form method="get" action="https://www.google.com/custom" target="google_window">
+<table border="0" bgcolor="#ffffff">
+<tbody><tr><td nowrap="nowrap" valign="top" align="center">
+
+<!--<br/>-->
+<input type="hidden" name="domains" value="LearnCpp.com">
+<label for="sbi" style="display: none">Enter your search terms</label>
+<input type="text" name="q" size="16" maxlength="255" value="" id="sbi">
+</td></tr>
+<tr>
+<td nowrap="nowrap">
+<table>
+<tbody><tr>
+<td>
+<input type="hidden" name="sitesearch" value="www.LearnCpp.com" checked="" id="ss1">
+<label for="ss1" title="Search LearnCpp.com"></label></td>
+</tr>
+</tbody></table>
+<label for="sbb" style="display: none">Submit search form</label>
+<input type="submit" name="sa" value="Google Search" id="sbb">
+<input type="hidden" name="client" value="pub-0588844875925051">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="7774154974">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="safe" value="active">
+<input type="hidden" name="flav" value="0000">
+<input type="hidden" name="sig" value="q6fLrjobHHgL00cW">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google --></div>
+		</div><div id="text-9" class="widget widget_text">			<div class="textwidget"><div class="cf_monitor">
+<!-- Post - Left Sidebar - Wide Skyscraper -->
+<script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(6).txt"></script>
+<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-0588844875925051" data-ad-slot="2780990843" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:160px;height:600px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="160" height="600" frameborder="0" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/ads.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!1" data-google-query-id="CPWNnq-62OoCFYGRlgod_Q8BZA" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div></div>
+		</div>
+		</td>
+
+				<!-- Left Sidebar -->
+		
+		<!-- / Left Sidebar -->
+		
+				
+
+		<!-- Main Column -->
+		<td id="middle">
+
+    
+		
+	<div class="code-block code-block-1 ai-viewport-1" style="margin: 8px 8px 8px 0; float: left;">
+<div class="cf_monitor">
+<script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(6).txt"></script>
+<!-- Post - Top - Large Rectangle -->
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-0588844875925051" data-ad-slot="7945645163" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:336px;height:280px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="336" height="280" frameborder="0" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/ads(1).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!2" data-google-query-id="CNO8sa-62OoCFYqDlgodZ7EAeQ" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+	
+								<div class="post-650 post type-post status-publish format-standard hentry category-cpp-tutorial odd" id="post-650">
+						<div class="post-headline">		<h1>B.4 — Initializer lists and uniform initialization</h1>
+		</div>		<div class="post-byline">By Alex on November 27th, 2011 | last modified by nascardriver on December 23rd, 2019</div>		<div class="post-bodycopy clearfix"><p><strong>Initializer lists</strong></p>
+<p>C++03 has partial support for initializer lists, allowing you to use initializer lists for simple aggregate data types (structs and C-style arrays):</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-9" style="height: 15px;">9</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-1"><span class="crayon-t">struct</span><span class="crayon-h"> </span><span class="crayon-e">Employee</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">nID</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">nAge</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">float</span><span class="crayon-h"> </span><span class="crayon-v">fWage</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-6"><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-7"><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-8"><span class="crayon-e">Employee </span><span class="crayon-v">sJoe</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">42</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">60000.0f</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1c9934501224-9"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">anArray</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p></p>
+<p>However, this doesn’t work for classes, as classes must be initialized via constructors using the function call syntax.  This leads to the following inconsistency:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1d4232353341" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d4232353341-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d4232353341-2" style="height: 15px;">2</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d4232353341-1"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">anArray</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// ok</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d4232353341-2"><span class="crayon-v">std</span><span class="crayon-o">::</span><span class="crayon-v">vector</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">vArray</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// not okay in C++03</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>C++11 extends initializer lists so they can be used for all classes.  This is done via a new template class called std::initializer_list, which is part of the &lt;initializ_list&gt; header file.  If you use an initializer list on a class, C++11 will look for a constructor with a parameter of type std::initializer_list<t>.</t></p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1d7742364851" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d7742364851-1" style="height: 15px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d7742364851-1"><span class="crayon-v">std</span><span class="crayon-o">::</span><span class="crayon-v">vector</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">vArray</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// calls constructor std::vector&lt;int&gt;(std::initializer_list&lt;int&gt;);</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>All of the relevant standard library classes in C++11 have been updated to accept initializer lists, so you can start using them immediately (assuming your compiler supports them -- as of the time of writing, Visual Studio 2010 does not).</p>
+<p>You can also add initializer_list constructors to your own classes, and use an iterator to step through the members of the initializer list:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-9" style="height: 15px;">9</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-10" style="height: 15px;">10</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-11" style="height: 15px;">11</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-12" style="height: 15px;">12</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-13" style="height: 15px;">13</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-14" style="height: 15px;">14</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-15" style="height: 15px;">15</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-16" style="height: 15px;">16</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-17" style="height: 15px;">17</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-18" style="height: 15px;">18</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-19" style="height: 15px;">19</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-20" style="height: 15px;">20</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-21" style="height: 15px;">21</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-22" style="height: 15px;">22</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-23" style="height: 15px;">23</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-24" style="height: 15px;">24</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-25" style="height: 15px;">25</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-26" style="height: 15px;">26</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-27" style="height: 15px;">27</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-1"><span class="crayon-p">#include &lt;vector&gt;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-2"><span class="crayon-p">#include &lt;initializer_list&gt;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-4"><span class="crayon-r">using</span><span class="crayon-h"> </span><span class="crayon-t">namespace</span><span class="crayon-h"> </span><span class="crayon-v">std</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-6"><span class="crayon-t">template</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-r">typename</span><span class="crayon-h"> </span><span class="crayon-e">T</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-7"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">MyArray</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-8"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-9"><span class="crayon-m">private</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">vector</span><span class="crayon-o">&lt;</span><span class="crayon-v">T</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">m_Array</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-12"><span class="crayon-m">public</span><span class="crayon-o">:</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">MyArray</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-14">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">MyArray</span><span class="crayon-sy">(</span><span class="crayon-m">const</span><span class="crayon-h"> </span><span class="crayon-v">initializer_list</span><span class="crayon-o">&lt;</span><span class="crayon-v">T</span><span class="crayon-o">&gt;</span><span class="crayon-o">&amp;</span><span class="crayon-h"> </span><span class="crayon-v">il</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Manually populate the elements of the array from initializer_list x</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">auto</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">il</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c">// use range-based for statement to iterate over the elements of the initializer list</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">m_Array</span><span class="crayon-sy">.</span><span class="crayon-e">push_back</span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// push them into the array manually</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-21"><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-22">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-23"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-24"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">MyArray</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">foo</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1d8049173397-27"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>Because std::vector has an initializer_list constructor in C++11, we could also have let the vector constructor handle initialization itself:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1df073299437" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1df073299437-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1df073299437-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1df073299437-3" style="height: 15px;">3</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1df073299437-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">MyArray</span><span class="crayon-sy">(</span><span class="crayon-m">const</span><span class="crayon-h"> </span><span class="crayon-v">std</span><span class="crayon-o">::</span><span class="crayon-v">initializer_list</span><span class="crayon-o">&lt;</span><span class="crayon-v">T</span><span class="crayon-o">&gt;</span><span class="crayon-o">&amp;</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">m_Array</span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c">// let vector constructor handle population of mArray</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1df073299437-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1df073299437-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>Note that because initializer_list has iterator functions begin() and end(), we can use the new range-based for statement to iterate through them.</p>
+<p>A few oddities to note: while initializer_list supports the iterator functions begin() and end(), it doesn’t support const interator functions cbegin() and cend().  Initializer_list also doesn’t provide direct random access to data members via operator[].</p>
+<p>You can also use initializer lists as function parameters, and access the elements in the same way:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-9" style="height: 15px;">9</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-1"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">sum</span><span class="crayon-sy">(</span><span class="crayon-m">const</span><span class="crayon-h"> </span><span class="crayon-v">initializer_list</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">&amp;il</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">nSum</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">auto</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">il</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-c">// use range-based for statement to iterate over the elements of the initializer list</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">nSum</span><span class="crayon-h"> </span><span class="crayon-o">+=</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">nsum</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-7"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-8">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e1176897686-9"><span class="crayon-r">cout</span><span class="crayon-h"> </span><span class="crayon-o">&lt;&lt;</span><span class="crayon-h"> </span><span class="crayon-e">sum</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p><strong>Uniform initialization</strong></p>
+<p>As noted above, C++03 is inconsistent in how it lets you initialize different types of data.  Initializer lists go a long way to helping making initialization of data more consistent.  However, C++11 has one more trick up its sleeve called <strong>uniform initialization</strong>.  Unlike initializer lists, which take the form:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1e2719826218" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e2719826218-1" style="height: 15px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e2719826218-1"><span class="crayon-e">type </span><span class="crayon-v">variable</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">elements</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>The uniform initialization syntax takes the following form:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1e3958982065" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e3958982065-1" style="height: 15px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e3958982065-1"><span class="crayon-e">type</span><span class="crayon-h"> </span><span class="crayon-e">variable</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">elements</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// note: no assignment operator</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>This style of initialization will work for both plain aggregate data types (structs and C-style arrays) and classes.  For classes, the following rules are observed:</p>
+<ul>
+<li>If there is an initializer_list constructor of the appropriate type, that constructor is used</li>
+<li>Otherwise the class elements are initialized using the appropriate constructor</li>
+</ul>
+<p>For example:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-9" style="height: 15px;">9</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-10" style="height: 15px;">10</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-11" style="height: 15px;">11</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-1"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">MyStruct</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-3"><span class="crayon-m">private</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">m_nX</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">float</span><span class="crayon-h"> </span><span class="crayon-v">m_nY</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-6">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-7"><span class="crayon-m">public</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">MyStruct</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">float</span><span class="crayon-h"> </span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">m_nX</span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">m_nY</span><span class="crayon-sy">(</span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-9"><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-10">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1e9459004451-11"><span class="crayon-e">MyStruct</span><span class="crayon-h"> </span><span class="crayon-e">foo</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3.5f</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>Since MyStruct does not have an initializer_list constructor, it will next check to see if there’s a constructor that takes parameters of type (int, float).  MyStruct does, so that constructor is called.</p>
+<p>Although it may initially seem like the uniform initialization syntax is always preferable to the standard constructor syntax, there are cases where the two can provide different results:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1eb919474000" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1eb919474000-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1eb919474000-2" style="height: 15px;">2</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1eb919474000-1"><span class="crayon-v">std</span><span class="crayon-o">::</span><span class="crayon-v">vector</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-e">v1</span><span class="crayon-sy">(</span><span class="crayon-cn">8</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// creates an empty vector of size 8, using the int constructor</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1eb919474000-2"><span class="crayon-v">std</span><span class="crayon-o">::</span><span class="crayon-e">vector</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-e">v1</span><span class="crayon-sy">{</span><span class="crayon-cn">8</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// creates a one-element vector with data value 8, using the initializer_list constructor</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>This happens because the initializer_list constructor takes precedence over other constructors when doing uniform initialization.</p>
+<p>You can also use the uniform initialization syntax when calling or return values in functions:</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-9" style="height: 15px;">9</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-10" style="height: 15px;">10</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-1"><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">useMyStruct</span><span class="crayon-sy">(</span><span class="crayon-i">MyStruct</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-3"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-4">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-5"><span class="crayon-e">useMyStruct</span><span class="crayon-sy">(</span><span class="crayon-sy">{</span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3.5f</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// use uniform initialization to create a MyStruct implicitly</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-6">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-7"><span class="crayon-e">MyStruct </span><span class="crayon-e">makeMyStruct</span><span class="crayon-sy">(</span><span class="crayon-t">void</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-8"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3.5f</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// use uniform initialization to create a MyStruct implicitly</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374ca1ec741402582-10"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p><strong>Initializer lists vs initialization lists</strong></p>
+<p>The choice of the name “initializer list” is unfortunate, as it’s very easy to get confused with the “initialization list”, which is a similar concept.  Here’s the difference:</p>
+<p>An initialization list is used to do implicit assignments to class variables as part of a constructor:</p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1ed218130255" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ed218130255-1" style="height: 15px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ed218130255-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">MyStruct</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">float</span><span class="crayon-h"> </span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">m_nX</span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">m_nY</span><span class="crayon-sy">(</span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// m_nX and m_nY are part of the initialization list</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>An initializer list is a list of initializers inside brackets ( { } ) that can be used to initialize simple aggregate data types and classes that implement std::initializer_list:</p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374ca1ee480749738" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row alt">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374ca1ee480749738-1" style="height: 15px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374ca1ee480749738-1"><span class="crayon-v">std</span><span class="crayon-o">::</span><span class="crayon-v">vector</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">vArray</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// vArray initialized using an initializer_list</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<table border="0" cellpadding="3">
+<tbody><tr>
+<td>
+        <a href="https://www.learncpp.com/cpp-tutorial/b-5-delegating-constructors/" style="text-decoration:none"><img src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/next.png" align="middle"> B.5 -- Delegating constructors</a>
+</td>
+</tr>
+<tr class="alt">
+<td>
+        <a href="https://www.learncpp.com/#ChapterB" style="text-decoration:none"><img src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/up.png" align="middle"> Index</a>
+</td>
+</tr>
+<tr>
+<td>
+        <a href="https://www.learncpp.com/cpp-tutorial/b-3-range-based-for-statements-and-static_assert/" style="text-decoration:none"><img src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/prev.png" align="middle"> B.3 -- Range-based for statements and static_assert </a>
+</td>
+</tr>
+</tbody></table>
+<div class="code-block code-block-2" style="margin: 8px 8px 8px 0; float: left;">
+<div class="cf_monitor">
+<script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(6).txt"></script>
+<!-- Post - Below Content - Large Rectangle -->
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-0588844875925051" data-ad-slot="8689484849" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent;"><iframe id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0;width:336px;height:280px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="336" height="280" frameborder="0" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/ads(2).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!3" data-google-query-id="CNvA16662OoCFcTMlgodbX0A-w" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+
+
+</div>
+</div>						<div class="post-footer"><img src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/folder-gray.gif" alt=""> <a class="cpp-tutorial" href="https://www.learncpp.com/category/cpp-tutorial/" title="View all posts in C++ Tutorial">C++ Tutorial</a>   | <a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/print/" title="Print This Post" rel="nofollow"><img class="WP-PrintIcon" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/printer_famfamfam.gif" alt="Print This Post" title="Print This Post" style="border: 0px;"></a>&nbsp;<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/print/" title="Print This Post" rel="nofollow">Print This Post</a></div>		</div><!-- / Post -->	
+						
+	
+			
+
+	<a name="comments"></a><!-- named anchor for skip links -->
+	<h3 id="comments">17 comments to B.4 — Initializer lists and uniform initialization</h3>
+
+	
+	<!-- Comment List -->
+	<ul class="commentlist">
+		
+			<li class="comment even thread-even depth-1 clearfix" id="comment-416479">
+		<div id="div-comment-416479" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/03ceb2ab8465f4fc3bfb7ef5b3528236x96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/03ceb2ab8465f4fc3bfb7ef5b3528236x192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Dongwei</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-416479">
+		July 22, 2019 at 11:36 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-416479" data-commentid="416479" data-postid="650" data-belowelement="comment-416479" data-respondelement="respond" aria-label="Reply to Dongwei"> · Reply</a></span>		 
+		</div>
+		<p>Hi, Alex,<br>
+I have a question about the initializer list.<br>
+Do you mind explain why it can compile?<br>
+it should take the initializer list constructor to initialize fiveThirds, but I did not define it. It looks like constructor is called!<br>
+I use visual studio 2019.</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-9" style="height: 15px;">9</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-10" style="height: 15px;">10</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-11" style="height: 15px;">11</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-1"><span class="crayon-p">#include &lt;iostream&gt;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-2"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Fraction</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-3"><span class="crayon-m">public</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-4">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-e">Fraction</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">numerator</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">denominator</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-5"><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-6">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-7"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-8"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-9">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-e">Fraction </span><span class="crayon-v">fiveThirds</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-10">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc8a6563517630-11"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+		</div>
+<ul class="children">
+		<li class="comment odd alt depth-2 clearfix" id="comment-416528">
+		<div id="div-comment-416528" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/11b09338d6108681887f55d784841888x96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/11b09338d6108681887f55d784841888x192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname"><a href="https://cre3per.gitlab.io/learncpp" rel="external nofollow ugc" class="url">nascardriver</a></span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-416528">
+		July 23, 2019 at 12:21 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-416528" data-commentid="416528" data-postid="650" data-belowelement="comment-416528" data-respondelement="respond" aria-label="Reply to nascardriver"> · Reply</a></span>		 
+		</div>
+		<p>The right side uses brace initialization to create a `Fraction` by calling `Fraction::Fraction(int, int)`. `fiveThirds` is then initialized using copy initialization.<br>
+You don't need a list constructor to use brace initialization, see lesson 1.4.</p>
+		</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 clearfix" id="comment-324058">
+		<div id="div-comment-324058" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Huylo</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-324058">
+		April 23, 2018 at 11:38 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-324058" data-commentid="324058" data-postid="650" data-belowelement="comment-324058" data-respondelement="respond" aria-label="Reply to Huylo"> · Reply</a></span>		 
+		</div>
+		<p>Why is this page not listed on the main page? I can find it only through the search function.</p>
+		</div>
+<ul class="children">
+		<li class="comment byuser comment-author-tarindel bypostauthor odd alt depth-2 clearfix" id="comment-324095">
+		<div id="div-comment-324095" class="clearfix comment-container bypostauthor">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/a4e62d28c29f6c864923207d4c17993bx96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/a4e62d28c29f6c864923207d4c17993bx192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Alex</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-324095">
+		April 23, 2018 at 5:01 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-324095" data-commentid="324095" data-postid="650" data-belowelement="comment-324095" data-respondelement="respond" aria-label="Reply to Alex"> · Reply</a></span>		 
+		</div>
+		<p>Because this content was incorporated into other lessons, so it was redundant.</p>
+<p>You can use the site index and search for which lessons initializer lists and uniform initialization went.</p>
+		</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 clearfix" id="comment-316067">
+		<div id="div-comment-316067" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Aman</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-316067">
+		January 26, 2018 at 8:20 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-316067" data-commentid="316067" data-postid="650" data-belowelement="comment-316067" data-respondelement="respond" aria-label="Reply to Aman"> · Reply</a></span>		 
+		</div>
+		<p>This page "B.4 — Initializer lists and uniform initialization" is not available in index</p>
+		</div>
+</li><li class="google-auto-placed" style="clear: none; padding: 0px; margin: 0px; box-sizing: content-box; width: auto; height: 91px;"><ins data-ad-type="text" data-native-settings-key="f00abc6a" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-0588844875925051" data-adsbygoogle-status="done" style="width: 100%; height: 91px; display: inline-block;"><ins id="aswift_6_expand" style="display:inline-table;border:none;height:91px;margin:0;padding:0;position:relative;visibility:visible;width:1200px;background-color:transparent;"><ins id="aswift_6_anchor" style="display:block;border:none;height:91px;margin:0;padding:0;position:relative;visibility:visible;width:1200px;background-color:transparent;"><iframe id="aswift_6" name="aswift_6" style="left:0;position:absolute;top:0;border:0;width:1200px;height:91px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="91" frameborder="0" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/ads(3).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!6" data-google-query-id="CNX026662OoCFQIClgodTscBRw" data-load-complete="true"></iframe></ins></ins></ins></li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 clearfix" id="comment-301481">
+		<div id="div-comment-301481" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Nick</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-301481">
+		August 2, 2017 at 7:32 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-301481" data-commentid="301481" data-postid="650" data-belowelement="comment-301481" data-respondelement="respond" aria-label="Reply to Nick"> · Reply</a></span>		 
+		</div>
+		<p>This style of initialization will work for both plain aggregate data types (structs and C-style arrays) and classes. For classes, the following rules are observed:</p>
+<p>If there is an initialization_list constructor of the appropriate type, that constructor is used<br>
+Otherwise the class elements are initialized using the appropriate constructor<br>
+For example:<br>
+class MyStruct<br>
+{<br>
+private:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int m_nX;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;float m_nY;</p>
+<p>public:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MyStruct(int x, float y): m_nX(x), m_nY(y) {};<br>
+};</p>
+<p>MyStruct foo {2, 3.5f};<br>
+Since MyStruct does not have an initializer_list constructor, it will next check to see if there’s a constructor that takes parameters of type (int, float). MyStruct does, so that constructor is called.</p>
+<p>is it intitalization list or initializer_lisit? Rules says intitalization list , but u mention since intitalizer list not available, so it takes the constructor.</p>
+		</div>
+<ul class="children">
+		<li class="comment byuser comment-author-tarindel bypostauthor even depth-2 clearfix" id="comment-301840">
+		<div id="div-comment-301840" class="clearfix comment-container bypostauthor">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/a4e62d28c29f6c864923207d4c17993bx96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/a4e62d28c29f6c864923207d4c17993bx192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Alex</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-301840">
+		August 6, 2017 at 7:43 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-301840" data-commentid="301840" data-postid="650" data-belowelement="comment-301840" data-respondelement="respond" aria-label="Reply to Alex"> · Reply</a></span>		 
+		</div>
+		<p>initializer_list.  Typo fixed! Thanks for pointing that out.</p>
+		</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 clearfix" id="comment-301476">
+		<div id="div-comment-301476" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Nick</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-301476">
+		August 2, 2017 at 7:05 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-301476" data-commentid="301476" data-postid="650" data-belowelement="comment-301476" data-respondelement="respond" aria-label="Reply to Nick"> · Reply</a></span>		 
+		</div>
+		<p>Simple, nice Explaination.!. Keep itup Alex</p>
+		</div>
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 clearfix" id="comment-275981">
+		<div id="div-comment-275981" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Nate</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-275981">
+		January 29, 2017 at 7:11 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-275981" data-commentid="275981" data-postid="650" data-belowelement="comment-275981" data-respondelement="respond" aria-label="Reply to Nate"> · Reply</a></span>		 
+		</div>
+		<p>Hello all! I tried overloading operator &lt;&lt; for the example above and it gave me a couple of errors as follows.<br>
+||=== Build file: "no target" in "no project" (compiler: unknown) ===|<br>
+C:\myDirectory\myFile.cpp|23|warning: friend declaration 'std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const MyArray&lt;type&gt;&amp;)' declares a non-template function [-Wnon-template-friend]|<br>
+C:\myDirectory\myFile.cpp|23|note: (if this is not what you intended, make sure the function template has already been declared and add &lt;&gt; after the function name here) |<br>
+C:\myDirectory\myFile.o:myFile.cpp|| undefined reference to `operator&lt;&lt;(std::ostream&amp;, MyArray&lt;int&gt; const&amp;)'|<br>
+||error: ld returned 1 exit status|<br>
+||=== Build failed: 2 error(s), 1 warning(s) (0 minute(s), 1 second(s)) ===|</p>
+<p>I have no idea what the problem could be. Here is my code.</p>
+<p></p><!-- Urvanov Syntax Highlighter v2.8.12 -->
+
+		<div id="urvanov-syntax-highlighter-5f0d2374cc965623354501" class="urvanov-syntax-highlighter-syntax crayon-theme-familiar-learncpp urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" no-popup minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="urvanov-syntax-highlighter-plain-wrap"></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-1" style="height: 15px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-2" style="height: 15px;">2</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-3" style="height: 15px;">3</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-4" style="height: 15px;">4</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-5" style="height: 15px;">5</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-6" style="height: 15px;">6</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-7" style="height: 15px;">7</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-8" style="height: 15px;">8</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-9" style="height: 15px;">9</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-10" style="height: 15px;">10</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-11" style="height: 15px;">11</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-12" style="height: 15px;">12</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-13" style="height: 15px;">13</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-14" style="height: 15px;">14</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-15" style="height: 15px;">15</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-16" style="height: 15px;">16</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-17" style="height: 15px;">17</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-18" style="height: 15px;">18</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-19" style="height: 15px;">19</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-20" style="height: 15px;">20</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-21" style="height: 15px;">21</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-22" style="height: 15px;">22</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-23" style="height: 15px;">23</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-24" style="height: 15px;">24</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-25" style="height: 15px;">25</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-26" style="height: 15px;">26</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-27" style="height: 15px;">27</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-28" style="height: 15px;">28</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-29" style="height: 15px;">29</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-30" style="height: 15px;">30</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-31" style="height: 15px;">31</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-32" style="height: 15px;">32</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-33" style="height: 15px;">33</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-34" style="height: 15px;">34</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-35" style="height: 15px;">35</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-36" style="height: 15px;">36</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-37" style="height: 15px;">37</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-38" style="height: 15px;">38</div><div class="crayon-num" data-line="urvanov-syntax-highlighter-5f0d2374cc965623354501-39" style="height: 15px;">39</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-1"><span class="crayon-p">#include &lt;iostream&gt;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-2"><span class="crayon-p">#include &lt;vector&gt;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-3"><span class="crayon-p">#include &lt;initializer_list&gt;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-4">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-5"><span class="crayon-r">using</span><span class="crayon-h"> </span><span class="crayon-t">namespace</span><span class="crayon-h"> </span><span class="crayon-v">std</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-6">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-7"><span class="crayon-t">template</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-r">typename</span><span class="crayon-h"> </span><span class="crayon-e">type</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-8"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">MyArray</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-9"><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-10">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-v">vector</span><span class="crayon-o">&lt;</span><span class="crayon-v">type</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">m_array</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-11">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">m_length</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-12">&nbsp;</div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-13"><span class="crayon-m">public</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-14">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-e">MyArray</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-15">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-e">MyArray</span><span class="crayon-sy">(</span><span class="crayon-m">const</span><span class="crayon-h"> </span><span class="crayon-v">initializer_list</span><span class="crayon-o">&lt;</span><span class="crayon-v">type</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">&amp;il</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-16">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-17">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-c">// Manually populate the elements of the array from initializer list x</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-18">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-c">// use range base for statement to iterate over the elements of the</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-c">// initializer list. Push them into the array manually</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-e">auto </span><span class="crayon-v">el</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">il</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-21">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-v">m_array</span><span class="crayon-sy">.</span><span class="crayon-e">push_back</span><span class="crayon-sy">(</span><span class="crayon-v">el</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-22">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-sy">}</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-23">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-t">friend</span><span class="crayon-h"> </span><span class="crayon-v">ostream</span><span class="crayon-o">&amp;</span><span class="crayon-h"> </span><span class="crayon-t">operator</span><span class="crayon-o">&lt;&lt;</span><span class="crayon-sy">(</span><span class="crayon-v">ostream</span><span class="crayon-h"> </span><span class="crayon-v">&amp;out</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-m">const</span><span class="crayon-h"> </span><span class="crayon-v">MyArray</span><span class="crayon-o">&lt;</span><span class="crayon-v">type</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">&amp;array</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-24"><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-25">&nbsp;</div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-26"><span class="crayon-t">template</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-r">typename</span><span class="crayon-h"> </span><span class="crayon-v">type</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-27"><span class="crayon-v">ostream</span><span class="crayon-o">&amp;</span><span class="crayon-h"> </span><span class="crayon-t">operator</span><span class="crayon-o">&lt;&lt;</span><span class="crayon-sy">(</span><span class="crayon-v">ostream</span><span class="crayon-h"> </span><span class="crayon-v">&amp;out</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-m">const</span><span class="crayon-h"> </span><span class="crayon-v">MyArray</span><span class="crayon-o">&lt;</span><span class="crayon-v">type</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">&amp;array</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-28"><span class="crayon-sy">{</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-29">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-e">auto </span><span class="crayon-v">el</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">array</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-v">out</span><span class="crayon-h"> </span><span class="crayon-o">&lt;&lt;</span><span class="crayon-h"> </span><span class="crayon-v">el</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-31">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">out</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-32"><span class="crayon-sy">}</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-33">&nbsp;</div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-34"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-35"><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-36">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-e">MyArray</span><span class="crayon-o">&lt;</span><span class="crayon-t">int</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-e">foo</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-37">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-r">cout</span><span class="crayon-h"> </span><span class="crayon-o">&lt;&lt;</span><span class="crayon-h"> </span><span class="crayon-v">foo</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-38">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="urvanov-syntax-highlighter-5f0d2374cc965623354501-39"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p>How are you supposed to go about overloading operator &lt;&lt; in this case? What is the problem here? Any help is appreciated. Thanks!</p>
+		</div>
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 clearfix" id="comment-262876">
+		<div id="div-comment-262876" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Matt</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-262876">
+		October 23, 2016 at 11:22 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-262876" data-commentid="262876" data-postid="650" data-belowelement="comment-262876" data-respondelement="respond" aria-label="Reply to Matt"> · Reply</a></span>		 
+		</div>
+		<p>In the last sentence in the "Initializer lists" section, "a" should be "as":<br>
+"You can also use initializer lists a function parameters...".</p>
+		</div>
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 clearfix" id="comment-261071">
+		<div id="div-comment-261071" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Vineet</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261071">
+		July 18, 2016 at 11:19 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261071" data-commentid="261071" data-postid="650" data-belowelement="comment-261071" data-respondelement="respond" aria-label="Reply to Vineet"> · Reply</a></span>		 
+		</div>
+		<p>Why it is (const initializer_list&lt;int&gt; &amp;il) not just simply (initializer_list&lt;int&gt; &amp;il). What is the concept behind making it constant.</p>
+		</div>
+<ul class="children">
+		<li class="comment byuser comment-author-tarindel bypostauthor odd alt depth-2 clearfix" id="comment-261099">
+		<div id="div-comment-261099" class="clearfix comment-container bypostauthor">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/a4e62d28c29f6c864923207d4c17993bx96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/a4e62d28c29f6c864923207d4c17993bx192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Alex</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261099">
+		July 18, 2016 at 8:54 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261099" data-commentid="261099" data-postid="650" data-belowelement="comment-261099" data-respondelement="respond" aria-label="Reply to Alex"> · Reply</a></span>		 
+		</div>
+		<p>Same reason we always make our references const where we can -- it ensures we don't accidentally change the value of the arguments when we're not intending to, and allows us to pass in literals or temporary objects as arguments.</p>
+		</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 clearfix" id="comment-98012">
+		<div id="div-comment-98012" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/b90cf9b86b0da4d4a13a7b2aeac56292x96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/b90cf9b86b0da4d4a13a7b2aeac56292x192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">etam</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-98012">
+		December 11, 2012 at 10:34 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-98012" data-commentid="98012" data-postid="650" data-belowelement="comment-98012" data-respondelement="respond" aria-label="Reply to etam"> · Reply</a></span>		 
+		</div>
+		<p>You can't write "std::vector vArray[5] = {3, 2, 7, 5, 8};" It means that you are creating an array of five vectors, and each is initialized with int. This causes compilation error "could not convert ‘3’ from ‘int’ to ‘std::vector’" (repeat 4 times for every vector).</p>
+<p>The proper form is: "std::vector vArray = {3, 2, 7, 5, 8};". Vector's constructor will know the number of elements by using http://en.cppreference.com/w/cpp/utility/initializer_list/size</p>
+		</div>
+<ul class="children">
+		<li class="comment odd alt depth-2 clearfix" id="comment-251825">
+		<div id="div-comment-251825" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/2ee764d279d851b8d44e63b87f387751x96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/2ee764d279d851b8d44e63b87f387751x192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname"><a href="http://gaocegege.com/" rel="external nofollow ugc" class="url">gaocegege</a></span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-251825">
+		March 15, 2015 at 12:43 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-251825" data-commentid="251825" data-postid="650" data-belowelement="comment-251825" data-respondelement="respond" aria-label="Reply to gaocegege"> · Reply</a></span>		 
+		</div>
+		<p>u r right!</p>
+		</div>
+</li><!-- #comment-## -->
+		<li class="comment even depth-2 clearfix" id="comment-261552">
+		<div id="div-comment-261552" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Lion-O</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261552">
+		August 10, 2016 at 5:20 am</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261552" data-commentid="261552" data-postid="650" data-belowelement="comment-261552" data-respondelement="respond" aria-label="Reply to Lion-O"> · Reply</a></span>		 
+		</div>
+		<p>ask the author to fix it</p>
+		</div>
+<ul class="children">
+		<li class="comment byuser comment-author-tarindel bypostauthor odd alt depth-3 clearfix" id="comment-261573">
+		<div id="div-comment-261573" class="clearfix comment-container bypostauthor">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/a4e62d28c29f6c864923207d4c17993bx96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/a4e62d28c29f6c864923207d4c17993bx192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname">Alex</span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261573">
+		August 10, 2016 at 9:22 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-261573" data-commentid="261573" data-postid="650" data-belowelement="comment-261573" data-respondelement="respond" aria-label="Reply to Alex"> · Reply</a></span>		 
+		</div>
+		<p>You just did.  Fixed.</p>
+		</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 clearfix" id="comment-97384">
+		<div id="div-comment-97384" class="clearfix comment-container">
+		<div class="comment-author vcard">
+		<img alt="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/default96.png" srcset="//www.learncpp.com/blog/wp-content/uploads/fv-gravatar-cache/mystery192.png 2x" class="avatar avatar-65 photo" height="65" width="65">		<span class="authorname"><a href="http://www.monitortest.com/" rel="external nofollow ugc" class="url">hubalu</a></span>
+		</div>
+				<div class="comment-meta commentmetadata">
+		<a href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-97384">
+		May 15, 2012 at 11:56 pm</a>
+        <span class="comment-reply-link"><a rel="nofollow" class="comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#comment-97384" data-commentid="97384" data-postid="650" data-belowelement="comment-97384" data-respondelement="respond" aria-label="Reply to hubalu"> · Reply</a></span>		 
+		</div>
+		<p>Capitalization error in the sample code:</p>
+<p>return n<b>s</b>um;</p>
+		</div>
+</li><!-- #comment-## -->
+	
+	</ul>
+	<!-- / Comment List -->
+
+	
+
+
+
+	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://www.learncpp.com/cpp-tutorial/b-4-initializer-lists-and-uniform-initialization/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://www.learncpp.com/blog/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p><textarea autocomplete="new-password" id="comment" name="d48ad1a809" rows="10" cols="10" tabindex="4"></textarea><textarea id="a4954d145e647145c80fdf692bcc4f7d" aria-hidden="true" name="comment" autocomplete="new-password" style="padding:0;clip:rect(1px, 1px, 1px, 1px);position:absolute !important;white-space:nowrap;height:1px;width:1px;overflow:hidden;" tabindex="-1"></textarea><script data-noptimize="" type="text/javascript">document.getElementById("comment").setAttribute( "id", "a4954d145e647145c80fdf692bcc4f7d" );document.getElementById("d48ad1a809").setAttribute( "id", "comment" );</script></p><div class="useCode">Put all code inside code tags: [code]your code here[/code]</div><p><input class="text author" id="author" name="author" type="text" value="" size="30" tabindex="1">&nbsp;&nbsp;<label for="author"><strong>Name </strong> (required)</label></p>
+<p><input class="text email" id="email" name="email" type="text" value="" size="30" tabindex="2">&nbsp;&nbsp;<label for="email"><strong>Email</strong> (will not be published) (required)</label></p>
+<p><input class="text url" id="url" name="url" type="text" value="" size="30" tabindex="3">&nbsp;&nbsp;<label for="url">Website</label></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="650" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p></form>	</div><!-- #respond -->
+	<div class="code-block code-block-7" style="margin: 8px 0; clear: both;">
+<div class="cf_monitor">
+<script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(6).txt"></script>
+<!-- Post - Below Content - Responsive -->
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-0588844875925051" data-ad-slot="5999600639" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_4_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:1200px;background-color:transparent;"><ins id="aswift_4_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:1200px;background-color:transparent;"></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+		
+    
+
+</td>
+<!-- / Main Column -->
+
+<!-- Right Inner Sidebar -->
+
+<!-- Right Sidebar -->
+<td id="right">
+
+	<div id="text-7" class="widget widget_text">			<div class="textwidget"><div class="cf_monitor">
+<!-- Post - Right Sidebar - Wide Sky -->
+<script async="" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/f(6).txt"></script>
+<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-0588844875925051" data-ad-slot="0955932809" data-adsbygoogle-status="done"><ins id="aswift_5_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent;"><ins id="aswift_5_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent;"><iframe id="aswift_5" name="aswift_5" style="left:0;position:absolute;top:0;border:0;width:160px;height:600px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="160" height="600" frameborder="0" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/ads(4).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!5" data-google-query-id="CLS_oq-62OoCFYRJlgod4lwL1A" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div></div>
+		</div><!--
+Plugin: Custom Meta Widget
+Plugin URL: http://shinraholdings.com/plugins/custom-meta-widget/
+-->
+<div id="custommetawidget-2" class="widget customMetaWidget"><div class="widget-title"><h3>Admin</h3></div>		<ul>
+
+		
+					<li><a href="https://www.learncpp.com/blog/wp-login.php">Log in</a></li>
+		
+		
+
+		
+				</ul>
+
+	</div>
+</td>
+<!-- / Right Sidebar -->
+
+</tr>
+<!-- / Main Body -->
+
+
+</tbody></table><!-- / layout -->
+</div><!-- / container -->
+</div><!-- / wrapper -->
+		<!-- Full Width Footer -->
+		<div id="footer" class="full-width">
+    LearnCpp.com -- Teaching you how to program in C++ since 2007.<br>Copyright © 2020 <a href="https://www.learncpp.com/">Learn C++</a> - All Rights Reserved<br>    
+    
+    <script type="text/javascript">if(document.getElementById("vscf-anchor")) { document.getElementById("vscf-anchor").scrollIntoView({behavior:"smooth", block:"center"}); }</script><script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/comment-reply.min.js.download" data-cfasync="true"></script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/devicepx-jetpack.js.download" data-cfasync="true"></script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/wp-embed.min.js.download" data-cfasync="true"></script>
+<script type="text/javascript" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/e-202029.js.download" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.9',blog:'3928254',post:'650',tz:'-8',srv:'www.learncpp.com'} ]);
+	_stq.push([ 'clickTrackerInit', '3928254', '650' ]);
+</script>
+		</div><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/ads(5).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!0" data-load-complete="true"></iframe></ins></ins></ins><iframe id="google_osd_static_frame_2937693723319" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/saved_resource(5).html"></iframe>
+		<!-- / Full Width Footer -->
+
+<script>
+jQuery(document).ready(function($) {
+    if( $(window).width() < 768 ) {
+        // If any left sidebar exists
+        if ( $('#left').length || $('#left-inner').length ) {   
+            $("#middle").detach().prependTo('#bodyrow'); 
+        }
+    }
+});
+</script>
+
+<script type="text/javascript">
+
+  function OnResizeDocument () {
+    if( window.innerWidth < 767 ) {
+  //    jQuery(function($) {$("#middle").detach().prependTo('#bodyrow'); } );
+    }
+    if( window.innerWidth > 767 ) {
+      jQuery(function($) {$("#left").detach().prependTo('#bodyrow');   } );
+    }
+  }
+</script>
+
+<!-- Dynamic page generated in 0.430 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2020-07-13 19:16:04 -->
+
+<!-- super cache --></body><iframe id="google_esf" name="google_esf" src="./B.4 — Initializer lists and uniform initialization _ Learn C++_files/zrt_lookup.html" data-ad-client="ca-pub-0588844875925051" style="display: none;"></iframe></html>

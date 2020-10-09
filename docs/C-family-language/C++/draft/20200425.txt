@@ -1,0 +1,7 @@
+1. 比较template和duck type
+2. 模板的实现机制
+3. elf和操作命令，如何进行debug，如何查看visible symbol，它和compiler principle有一定的关联，那应该将它放到哪里呢？
+4. 之前遗留的问题
+5. memory error需要进行整理
+6. calling convention
+7. metaprogramming 所谓metaprogramming其实就是描述pattern

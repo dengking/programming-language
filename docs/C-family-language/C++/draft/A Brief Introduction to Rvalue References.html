@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://www.artima.com/cppsource/rvalue.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>A Brief Introduction to Rvalue References</title>
+
+<meta name="description" content="
+">
+<meta name="keywords" content="">
+<meta name="author" content="Howard E. Hinnant, Bjarne Stroustrup, and Bronek Kozicki">
+<link rel="stylesheet" type="text/css" href="./A Brief Introduction to Rvalue References_files/artima.css">
+<link rel="shortcut icon" href="https://www.artima.com/favicon.ico">
+</head>
+<body><table width="100%" bgcolor="#FFFFFF" style="margin-top: 5px">
+<tbody><tr>
+<td align="center">
+<div id="topbanner" style="height: 90px"><noscript><a href='https://www.artima.com/zcr/adclick.php?n=a86d37e9' target='_top'><img src='https://www.artima.com/zcr/adview.php?what=zone:1&amp;n=a86d37e9' border='0' alt='' /></a></noscript></div>
+</td>
+</tr>
+</tbody></table>
+<table width="100%" cellspacing="0">
+<tbody><tr>
+<td align="left" valign="bottom">
+<a href="https://www.artima.com/index.jsp"><img src="./A Brief Introduction to Rvalue References_files/a7.gif" alt="The Artima Developer Community" border="0" width="550" height="43"></a>
+</td>
+</tr></tbody></table>
+<table width="100%" bgcolor="#333333">
+<tbody><tr>
+<td align="center">
+<div class="ml">
+<a href="https://www.artima.com/articles" class="hl">Articles</a>&nbsp;|
+<a href="https://www.artima.com/news/index.jsp" class="hl">News</a>&nbsp;|
+<a href="https://www.artima.com/weblogs/index.jsp" class="hl">Weblogs</a>&nbsp;|
+<a href="https://www.artima.com/shop/catalog" class="hl">Books</a>&nbsp;|
+<a href="https://www.artima.com/forums/index.jsp" class="hl">Forums</a>
+</div>
+</td>
+</tr>
+</tbody></table>
+<table width="100%" bgcolor="#CCCCFF">
+<tbody><tr>
+<td align="center">
+<div class="sc">
+<a href="https://www.artima.com/cppsource/index.html">The C++ Source</a>&nbsp;| 
+<a href="https://www.artima.com/groups/group.jsp?group=cpp">C++ Community News</a>&nbsp;| 
+<a href="https://www.artima.com/forums/flat.jsp?forum=226&amp;thread=226637">Discuss</a>&nbsp;| 
+<a href="mailto:?subject=A%20Brief%20Introduction%20to%20Rvalue%20References&amp;body=%20%0AC++%20Source%20%0AA%20Brief%20Introduction%20to%20Rvalue%20References%20%0Aby%20Howard%20E.%20Hinnant,%20Bjarne%20Stroustrup,%20and%20Bronek%20Kozicki%20%0A%0Ahttps://www.artima.com/cppsource/rvalue.html">Email</a>&nbsp;| 
+Previous&nbsp;| 
+Next
+</div>
+</td>
+</tr>
+</tbody></table>
+<table width="100%" bgcolor="#EEEEEE">
+<tbody><tr>
+<td align="center">
+<div class="sc">
+<span style="color: #555555">Sponsored Link</span> <span style="color: #888888">•</span> 
+<script language="JavaScript" type="text/javascript" src="./A Brief Introduction to Rvalue References_files/adx.js.download"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+   if (!document.phpAds_used) document.phpAds_used = ',';
+   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+   
+   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+   document.write ("https://www.artima.com/zcr/adjs.php?n=" + phpAds_random);
+   document.write ("&amp;what=zone:9&amp;target=_top");   document.write ("&amp;exclude=" + document.phpAds_used);
+   if (document.referrer)
+      document.write ("&amp;referer=" + escape(document.referrer));
+   document.write ("'><" + "/script>");
+//-->
+</script><noscript><a href='https://www.artima.com/zcr/adclick.php?n=a799ecf6' target='_top'><img src='https://www.artima.com/zcr/adview.php?what=zone:9&amp;n=a0587811' border='0' alt=''></a></noscript>
+</div>
+</td>
+</tr>
+</tbody></table>
+<br>
+<div class="vegies">
+<div class="tc">
+<span class="sts">C++ Source</span><br>
+<span class="ts">A Brief Introduction to Rvalue References</span><br>
+<span class="as">by Howard E. Hinnant, Bjarne Stroustrup, and Bronek Kozicki</span><br>
+<span class="pd">March 10, 2008</span><br>
+</div>
+<p>
+
+</p><table align="right" border="0" cellpadding="5" cellspacing="0">
+
+<tbody><tr>
+
+<td align="center">
+
+<div style="margin-left: 15%;">
+
+<div class="adnotice">Advertisement</div>
+<script language="JavaScript" type="text/javascript" src="./A Brief Introduction to Rvalue References_files/adx.js.download"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+   if (!document.phpAds_used) document.phpAds_used = ',';
+   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+   
+   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+   document.write ("https://www.artima.com/zcr/adjs.php?n=" + phpAds_random);
+   document.write ("&amp;what=zone:2&amp;target=_top&amp;block=1&amp;blockcampaign=1");
+   document.write ("&amp;exclude=" + document.phpAds_used);
+   if (document.referrer)
+      document.write ("&amp;referer=" + escape(document.referrer));
+   document.write ("'><" + "/script>");
+//-->
+</script><noscript><a href='https://www.artima.com/zcr/adclick.php?n=a799ecf6' target='_top'><img src='https://www.artima.com/zcr/adview.php?what=zone:2&amp;n=a799ecf6' border='0' alt=''></a></noscript>
+</div>
+
+</td>
+
+</tr>
+
+</tbody></table>
+
+<p></p>
+
+  <title></title>
+<!-- TOP OF SUMMARY -->
+  <div class="summary">
+    <div class="summarytitle">
+      Summary
+    </div>Rvalue references is a small technical extension to the
+    C++ language. Rvalue references allow programmers to avoid
+    logically unnecessary copying and to provide perfect forwarding
+    functions. They are primarily meant to aid in the design of
+    higher performance and more robust libraries.
+  </div>
+<!-- BOTTOM OF SUMMARY -->
+  <h1>Introduction</h1>
+  <p>This document gives a quick tour of the new C++ language
+  feature <em>rvalue reference</em>. It is a brief tutorial, rather
+  than a complete reference. For details, see these references.</p>
+  <h1>The rvalue reference</h1>
+  <p>An <em>rvalue reference</em> is a compound type very similar
+  to C++'s traditional reference. To better distinguish these two
+  types, we refer to a traditional C++ reference as an <em>lvalue
+  reference</em>. When the term reference is used, it refers to
+  both kinds of reference: lvalue reference and rvalue
+  reference.</p>
+  <p>An lvalue reference is formed by placing an &amp; after some
+  type.</p>
+  <pre>A a;
+A&amp; a_ref1 = a;  // an lvalue reference
+</pre>
+  <p>An rvalue reference is formed by placing an &amp;&amp; after some
+  type.</p>
+  <pre>A a;
+A&amp;&amp; a_ref2 = a;  // an rvalue reference
+</pre>
+  <p>An rvalue reference behaves just like an lvalue reference
+  except that it can bind to a temporary (an rvalue), whereas you
+  can not bind a (non const) lvalue reference to an rvalue.</p>
+  <pre>A&amp;  a_ref3 = A();  // Error!
+A&amp;&amp; a_ref4 = A();  // Ok
+</pre>
+  <p>Question: Why on Earth would we want to do this?!</p>
+  <p>It turns out that the combination of rvalue references and
+  lvalue references is just what is needed to easily code <em>move
+  semantics</em>. The rvalue reference can also be used to achieve
+  perfect forwarding, a heretofore unsolved problem in C++. From a
+  casual programmer's perspective, what we get from rvalue
+  references is more general and better performing libraries.</p>
+  <h1>Move Semantics</h1>
+  <h2>Eliminating spurious copies</h2>
+  <p>Copying can be expensive. For example, for <code>std::vectors,
+  v2=v1</code> typically involves a function call, a memory
+  allocation, and a loop. This is of course acceptable where we
+  actually need two copies of a <code>vector</code>, but in many
+  cases, we don't: We often copy a <code>vector</code> from one
+  place to another, just to proceed to overwrite the old copy.
+  Consider:</p>
+  <pre>template &lt;class T&gt; swap(T&amp; a, T&amp; b)
+{
+    T tmp(a);   // now we have two copies of a
+    a = b;      // now we have two copies of b
+    b = tmp;    // now we have two copies of tmp (aka a)
+}
+</pre>
+  <p>But, we didn't want to have <em>any</em> copies of
+  <code>a</code> or <code>b</code>, we just wanted to swap them.
+  Let's try again:</p>
+  <pre>template &lt;class T&gt; swap(T&amp; a, T&amp; b)
+{
+    T tmp(std::move(a));
+    a = std::move(b);   
+    b = std::move(tmp);
+}
+</pre>
+  <p>This <code>move()</code> gives its target the value of its
+  argument, but is not obliged to preserve the value of its source.
+  So, for a <code>vector</code>, <code>move()</code> could
+  reasonably be expected to leave its argument as a zero-capacity
+  <code>vector</code> to avoid having to copy all the elements. In
+  other words, move is a potentially destructive read.</p>
+  <p>In this particular case, we could have optimized
+  <code>swap</code> by a specialization. However, we can't
+  specialize every function that copies a large object just before
+  it deletes or overwrites it. That would be unmanageable.</p>
+  <p>The first task of rvalue references is to allow us to
+  implement <code>move()</code> without verbosity, or runtime
+  overhead.</p>
+  <h2><code>move</code></h2>
+  <p>The move function really does very little work. All
+  <code>move</code> does is accept either an lvalue or rvalue
+  argument, and return it as an rvalue <em>without</em> triggering
+  a copy construction:</p>
+  <pre>template &lt;class T&gt;
+typename remove_reference&lt;T&gt;::type&amp;&amp;
+move(T&amp;&amp; a)
+{
+    return a;
+}
+</pre>
+  <p>It is now up to client code to overload key functions on
+  whether their argument is an lvalue or rvalue (e.g. copy
+  constructor and assignment operator). When the argument is an
+  lvalue, the argument must be copied from. When it is an rvalue,
+  it can safely be moved from.</p>
+  <h2>Overloading on lvalue / rvalue</h2>
+  <p>Consider a simple <code>handle</code> class that owns a
+  resource and also provides copy semantics (copy constructor and
+  assignment). For example a <code>clone_ptr</code> might own a
+  pointer, and call <code>clone()</code> on it for copying
+  purposes:</p>
+  <pre>template &lt;class T&gt;
+class clone_ptr
+{
+private:
+    T* ptr;
+public:
+    // construction
+    explicit clone_ptr(T* p = 0) : ptr(p) {}
+
+    // destruction
+    ~clone_ptr() {delete ptr;}
+
+    // copy semantics
+    clone_ptr(const clone_ptr&amp; p)
+        : ptr(p.ptr ? p.ptr-&gt;clone() : 0) {}
+
+    clone_ptr&amp; operator=(const clone_ptr&amp; p)
+    {
+        if (this != &amp;p)
+        {
+            delete ptr;
+            ptr = p.ptr ? p.ptr-&gt;clone() : 0;
+        }
+        return *this;
+    }
+
+    // move semantics
+    clone_ptr(clone_ptr&amp;&amp; p)
+        : ptr(p.ptr) {p.ptr = 0;}
+
+    clone_ptr&amp; operator=(clone_ptr&amp;&amp; p)
+    {
+        std::swap(ptr, p.ptr);
+        return *this;
+    }
+
+    // Other operations
+    T&amp; operator*() const {return *ptr;}
+    // ...
+};
+</pre>
+  <p>Except for the highlighted move semantics section above,
+  <code>clone_ptr</code> is code that you might find in today's
+  books on C++. Clients of <code>clone_ptr</code> might use it like
+  so:</p>
+  <pre>clone_ptr</pre>
+  <!--<base>--><base href=".">
+  <pre> p1(new derived);
+// ...
+clone_ptr</pre>
+  <!--<base>--><base href=".">
+  <pre> p2 = p1;  // p2 and p1 each own their own pointer
+</pre>
+  <p>Note that copy constructing or assigning a
+  <code>clone_ptr</code> is a relatively expensive operation.
+  However when the source of the copy is known to be an rvalue, one
+  can avoid the potentially expensive <code>clone()</code>
+  operation by pilfering the rvalue's pointer (no one will
+  notice!). The <em>move constructor</em> above does exactly that,
+  leaving the rvalue in a default constructed state. The <em>move
+  assignment</em> operator simply swaps state with the rvalue.</p>
+  <p>Now when code tries to copy an rvalue <code>clone_ptr</code>,
+  or if that code explicitly gives permission to consider the
+  source of the copy an rvalue (using <code>std::move</code>), the
+  operation will execute much faster.</p>
+  <pre>clone_ptr</pre>
+  <!--<base>--><base href=".">
+  <pre> p1(new derived);
+// ...
+clone_ptr</pre>
+  <!--<base>--><base href=".">
+  <pre>  p2 = std::move(p1);  // p2 now owns the pointer instead of p1
+</pre>
+  <p>For classes made up of other classes (via either containment
+  or inheritance), the move constructor and move assignment can
+  easily be coded using the <code>std::move</code> function:</p>
+  <pre>class Derived
+    : public Base
+{
+    std::vector&lt;int&gt; vec;
+    std::string name;
+    // ...
+public:
+    // ...
+    // move semantics
+    Derived(Derived&amp;&amp; x)              // rvalues bind here
+        : Base(std::move(x)), 
+          vec(std::move(x.vec)),
+          name(std::move(x.name)) { }
+
+    Derived&amp; operator=(Derived&amp;&amp; x)   // rvalues bind here
+    {
+        Base::operator=(std::move(x));
+        vec  = std::move(x.vec);
+        name = std::move(x.name);
+        return *this;
+    }
+    // ...
+};
+</pre>
+  <p>Each subobject will now be treated as an rvalue when binding
+  to the subobject's constructors and assignment operators.
+  <code>std::vector</code> and <code>std::string</code> have move
+  operations coded (just like our eariler <code>clone_ptr</code>
+  example) which will completely avoid the tremendously more
+  expensive copy operations.</p>
+  <p>Note above that the argument x is treated as an lvalue
+  internal to the move functions, even though it is declared as an
+  rvalue reference parameter. That's why it is necessary to say
+  <code>move(x)</code> instead of just <code>x</code> when passing
+  down to the base class. This is a key safety feature of move
+  semantics designed to prevent accidently moving twice from some
+  named variable. All moves occur only from rvalues, or with an
+  explicit cast to rvalue such as using <code>std::move</code>. If
+  you have a name for the variable, it is an lvalue.</p>
+  <p>Question: What about types that don't own resources? (E.g.
+  <code>std::complex</code>?)</p>
+  <p>No work needs to be done in that case. The copy constructor is
+  already optimal when copying from rvalues.</p>
+  <h1>Movable but Non-Copyable Types</h1>
+  <p>Some types are not amenable to copy semantics but can still be
+  made movable. For example:</p>
+  <ul>
+    <li><code>fstream</code></li>
+    <li><code>unique_ptr</code> (non-shared, non-copyable
+    ownership)</li>
+    <li>A type representing a thread of execution</li>
+  </ul>
+  <p>By making such types movable (though still non-copyable) their
+  utility is tremendously increased. Movable but non-copyable types
+  can be returned by value from factory functions:</p>
+  <pre>ifstream find_and_open_data_file(/* ... */);
+...
+ifstream data_file = find_and_open_data_file(/* ... */);  // No copies!
+</pre>
+  <p>In the above example, the underlying file handle is passed
+  from object to object, as long as the source
+  <code>ifstream</code> is an rvalue. At all times, there is still
+  only one underlying file handle, and only one ifstream owns it at
+  a time.</p>
+  <p>Movable but non-copyable types can also safely be put into
+  standard containers. If the container needs to "copy" an element
+  internally (e.g. <code>vector</code> reallocation) it will move
+  the element instead of copying it.</p>
+  <pre>vector&lt;unique_ptr&lt;base&gt;&gt; v1, v2;
+v1.push_back(unique_ptr</pre>
+  <!--<base>--><base href=".">
+  <pre>(new derived()));  // ok, moving, not copying
+...
+v2 = v1;             // Compile time error.  This is not a copyable type.
+v2 = move(v1);       // Move ok.  Ownership of pointers transferred to v2.
+</pre>
+  <p>Many standard algorithms benefit from moving elements of the
+  sequence as opposed to copying them. This not only provides
+  better performance (like the improved <code>std::swap</code>
+  implementation described above), but also allows these algorithms
+  to operate on movable but non-copyable types. For example the
+  following code sorts a
+  <code>vector&lt;unique_ptr&lt;T&gt;&gt;</code> based on comparing
+  the pointed-to types:</p>
+  <pre>
+struct indirect_less
+{
+    template &lt;class T&gt;
+    bool operator()(const T&amp; x, const T&amp; y)
+        {return *x &lt; *y;}
+};
+...
+std::vector&lt;std::unique_ptr&lt;A&gt;&gt; v;
+...
+std::sort(v.begin(), v.end(), indirect_less());
+</pre>
+  <p>As sort moves the <code>unique_ptr</code>'s around, it will
+  use <code>swap</code> (which no longer requires
+  <code>Copyability</code>) or move construction / move assignment.
+  Thus during the entire algorithm, the invariant that each item is
+  owned and referenced by one and only one smart pointer is
+  maintained. If the algorithm were to attempt a copy (say, by
+  programming mistake) a compile time error would result.</p>
+  <h1>Perfect Forwarding</h1>
+  <p>Consider writing a generic factory function that returns a
+  <code>std::shared_ptr</code> for a newly constructed generic
+  type. Factory functions such as this are valuable for
+  encapsulating and localizing the allocation of resources.
+  Obviously, the factory function must accept exactly the same sets
+  of arguments as the constructors of the type of objects
+  constructed. Today this might be coded as:</p>
+  <pre>template &lt;class T&gt;
+std::shared_ptr&lt;T&gt;
+factory()   // no argument version
+{
+    return std::shared_ptr&lt;T&gt;(new T);
+}
+
+template &lt;class T, class A1&gt;
+std::shared_ptr&lt;T&gt;
+factory(const A1&amp; a1)   // one argument version
+{
+    return std::shared_ptr&lt;T&gt;(new T(a1));
+}
+
+// all the other versions
+</pre>
+  <p>In the interest of brevity, we will focus on just the
+  one-parameter version. For example:</p>
+  <pre>std::shared_ptr&lt;A&gt; p = factory&lt;A&gt;(5);
+</pre>
+  <p>Question: What if <code>T</code>'s constructor takes a
+  parameter by non-const reference?</p>
+  <p>In that case, we get a compile-time error as the
+  const-qualifed argument of the factory function will not bind to
+  the non-const parameter of T's constructor.</p>
+  <p>To solve that problem, we could use non-const parameters in
+  our factory functions:</p>
+  <pre>template &lt;class T, class A1&gt;
+std::shared_ptr&lt;T&gt;
+factory(A1&amp; a1)
+{
+    return std::shared_ptr&lt;T&gt;(new T(a1));
+}
+</pre>
+  <p>This is much better. If a const-qualified type is passed to
+  the <code>factory</code>, the const will be deduced into the
+  template parameter (<code>A1</code> for example) and then
+  properly forwarded to T's constructor. Similarly, if a non-const
+  argument is given to <code>factory</code>, it will be correctly
+  forwarded to <code>T</code>'s constructor as a non-const. Indeed,
+  this is precisely how forwarding applications are coded today
+  (e.g. <code>std::bind</code>).</p>
+  <p>However, consider:</p>
+  <pre>std::shared_ptr&lt;A&gt; p = factory&lt;A&gt;(5);       // error
+A* q = new A(5);                        // ok
+</pre>
+  <p>This example worked with our first version of
+  <code>factory</code>, but now it's broken: The "5" causes the
+  <code>factory</code> template argument to be deduced as
+  <code>int&amp;</code> and subsequently will not bind to the rvalue
+  "5". Neither solution so far is right. Each breaks reasonable and
+  common code.</p>
+  <p>Question: What about overloading on every combination of
+  <code>AI&amp;</code> and <code>const AI&amp;</code>?</p>
+  <p>This would allow us to handle all examples, but at a cost of
+  an exponential explosion: For our two-parameter case, this would
+  require 4 overloads. For a three-parameter <code>factory</code>
+  we would need 8 additional overloads. For a four-parameter
+  <code>factory</code> we would need 16, and so on. This is not a
+  scalable solution.</p>
+  <p>Rvalue references offer a simple, scalable solution to this
+  problem:</p>
+  <pre>template &lt;class T, class A1&gt;
+std::shared_ptr&lt;T&gt;
+factory(A1&amp;&amp; a1)
+{
+    return std::shared_ptr&lt;T&gt;(new T(std::forward&lt;A1&gt;(a1)));
+}
+</pre>
+  <p>Now rvalue arguments can bind to the <code>factory</code>
+  parameters. If the argument is const, that fact gets deduced into
+  the <code>factory</code> template parameter type.</p>
+  <p>Question: What is that <code>forward</code> function in our
+  solution?</p>
+  <p>Like move, <code>forward</code> is a simple standard library
+  function used to express our intent directly and explicitly,
+  rather than through potentially cryptic uses of references. We
+  want to forward the argument <code>a1</code>, so we simply say
+  so.</p>
+  <p>Here, <code>forward</code> preserves the lvalue/rvalue-ness of
+  the argument that was passed to <code>factory</code>. If an
+  rvalue is passed to factory, then an rvalue will be passed to
+  <code>T</code>'s constructor with the help of the forward
+  function. Similarly, if an lvalue is passed to
+  <code>factory</code>, it is forwarded to <code>T</code>'s
+  constructor as an lvalue.</p>
+  <p>The definition of forward looks like this:</p>
+  <pre>template &lt;class T&gt;
+struct identity
+{
+    typedef T type;
+};
+
+template &lt;class T&gt;
+T&amp;&amp; forward(typename identity&lt;T&gt;::type&amp;&amp; a)
+{
+    return a;
+}
+</pre>
+  <h1>References</h1>
+  <p>As one of the main goals of this paper is brevity, there are
+  details missing from the above description. But the above content
+  represents 95% of the knowledge with a fraction of the
+  reading.</p>
+  <p>This proposal was initially put forth in the following paper.
+  The present article is substantially a reprint of the original
+  proposal:<br>
+  Hinnant, Howard, E., Bjarne Stroustrap, and Bronek Kozicki. <em>A
+  Brief Introduction to Rvalue References</em><br>
+  <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n2027.html">
+  http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n2027.html</a></p>
+  <p>For further details on the motivation of move semantics, such
+  as performance tests, details of movable but non-copyable types,
+  and many other details please see <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1377.htm">
+  N1377</a>.</p>
+  <p>For a very thorough treatment of the forwarding problem,
+  please see <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm">
+  N1385</a>.</p>
+  <p>For further applications of the rvalue reference (besides move
+  semantics and perfect forwarding), please see <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1690.html">
+  N1690</a>.</p>
+  <p>For proposed wording for the language changes required to
+  standardize the rvalue reference, please see <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1952.html">
+  N1952</a>.</p>
+  <p>For a summary of the impact the rvalue reference will have on
+  the standard library, please see <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1771.html">
+  N1771</a>.</p>
+  <p>For proposed wording for the library changes required to take
+  advantage of the rvalue reference, please see:</p>
+  <ul>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1856.html">
+      N1856</a>
+    </li>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1857.html">
+      N1857</a>
+    </li>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1858.html">
+      N1858</a>
+    </li>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1859.html">
+      N1859</a>
+    </li>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1860.html">
+      N1860</a>
+    </li>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1861.html">
+      N1861</a>
+    </li>
+    <li>
+      <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1862.html">
+      N1862</a>
+    </li>
+  </ul>
+  <p>For a proposal to extend the rvalue reference to the implicit
+  object parameter (<code>this</code>), please see <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2005/n1821.htm">
+  N1821</a>.</p>
+<!-- TOP OF SHARE YOUR OPINION -->
+  <h1>Share your opinion</h1>
+  <p>Have an opinion about Rvalue references?</p>Discuss this
+  article in the Articles Forum topic, <a href="http://www.artima.com/forums/flat.jsp?forum=226&amp;thread=226637">
+  A Brief Introduction to Rvalue References</a>.
+<!-- BOTTOM OF SHARE YOUR OPINION -->
+<!-- TOP OF ABOUT THE AUTHOR -->
+  <h1>About the Authors</h1>
+  <p>Howard Hinnant is the lead author of the rvalue reference
+  proposals for the next C++ standard. He implemented and
+  maintained the standard C++ library for
+  Metrowerks/Motorola/Freescale from the late 90's to 2005. He is
+  currently a senior software engineer at Apple and serving on the
+  C++ standards committee as Library Working Group chairman.</p>
+  <p>Bjarne Stroustrup is the designer and original implementor of
+  the C++ Programming Language. He is currently the College of
+  Engineering Endowed Chair in Computer Science at Texas A&amp;M
+  University. He formerly worked as the head of AT&amp;T Lab's
+  Large-scale Programming Research department, from its creation
+  until late 2002.</p>
+  <p>Bronek Kozicki is an experienced C++ programmer. He is a
+  member of BSI C++ panel and author of "extending move semantics
+  to *this" proposal (N1821, evolved to N2439). Bronek currently
+  works for a leading investment bank in London.</p>
+<!-- BOTTOM OF ABOUT THE AUTHOR -->
+
+<br clear="all">
+<p>
+</p><center>
+<div class="sc">
+<a href="https://www.artima.com/cppsource/index.html">The C++ Source</a>&nbsp;| 
+<a href="https://www.artima.com/groups/group.jsp?group=cpp">C++ Community News</a>&nbsp;| 
+<a href="https://www.artima.com/forums/flat.jsp?forum=226&amp;thread=226637">Discuss</a>&nbsp;| 
+<a href="mailto:?subject=A%20Brief%20Introduction%20to%20Rvalue%20References&amp;body=%20%0AC++%20Source%20%0AA%20Brief%20Introduction%20to%20Rvalue%20References%20%0Aby%20Howard%20E.%20Hinnant,%20Bjarne%20Stroustrup,%20and%20Bronek%20Kozicki%20%0A%0Ahttps://www.artima.com/cppsource/rvalue.html">Email</a>&nbsp;| 
+Previous&nbsp;| 
+Next
+</div>
+</center>
+</div>
+<hr width="100%">
+<table width="50%" align="center">
+<tbody><tr>
+<td>
+<div class="horizontaltextadbox">
+<div class="adheadline">Sponsored Links</div>
+<div id="sponsoredlinks">
+</div>
+</div>
+</td>
+</tr>
+</tbody></table>
+<hr width="100%">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3911176865765226";
+google_alternate_color = "ffffff";
+google_ad_width = 728;
+google_ad_height = 15;
+google_ad_format = "728x15_0ads_al";
+google_ad_channel = "";
+google_color_border = "ffffff";
+google_color_bg = "FFFFFF";
+google_color_link = "003090";
+google_color_text = "000000";
+google_color_url = "666666";
+//--></script>
+<script type="text/javascript" src="./A Brief Introduction to Rvalue References_files/f.txt">
+</script>
+<br>
+<br>
+<!-- SiteSearch Google -->
+<form method="get" action="https://www.google.com/custom">
+<table border="0" bgcolor="#ffffff">
+<tbody><tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<a href="https://www.google.com/">
+<img src="./A Brief Introduction to Rvalue References_files/Logo_25wht.gif" border="0" alt="Google"></a>
+</td>
+<td nowrap="nowrap">
+<input type="hidden" name="domains" value="Artima.com">
+<input type="text" name="q" size="31" maxlength="255" value="">
+<input type="submit" name="sa" value="Search">
+</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td nowrap="nowrap">
+<font size="-1" color="#000000">
+<input type="radio" name="sitesearch" value=""> Web
+<input type="radio" name="sitesearch" value="Artima.com" checked="checked">Artima.com
+</font>&nbsp;&nbsp;
+<input type="hidden" name="client" value="pub-3911176865765226">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:FFFFFF;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:150;L:https://www.artima.com/images/artima150.gif;S:https://www.artima.com;FORID:1;">
+<input type="hidden" name="hl" value="en">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google -->
+</center>
+<div class="sp">
+<div style="text-align: center">
+<a href="https://www.artima.com/copyright.html">Copyright</a> © 1996-2019 Artima, Inc. All Rights Reserved. - <a href="https://www.artima.com/privacy.html">Privacy Policy</a> - <a href="https://www.artima.com/termsofuse.html">Terms of Use</a>
+</div>
+</div>
+<br>
+<script language="JavaScript" type="text/javascript">
+<!--
+function initBannerVarForZone(zone) {
+        initBannerVarForZoneWithScript(zone, 'adjs_modified');
+}
+
+function initBannerVarForZoneWithScript(zone, phpScript) {
+
+        if (!document.phpAds_used) document.phpAds_used = ',';
+        phpAds_random = new String (Math.random());
+        phpAds_random = phpAds_random.substring(2,11);
+
+        var nextScriptSrc = 'https://www.artima.com/zcr/' + phpScript + '.php?n=' +
+                phpAds_random  +
+                '&amp;what=zone:' + zone + '&amp;target=_top&amp;block=1&amp;blockcampaign=1' +
+                '&amp;exclude=' + document.phpAds_used;
+
+        document.write("<script language='JavaScript' type='text/javascript' src='");
+        document.write(nextScriptSrc);
+        document.write("'><\/script>");
+
+}
+
+function replaceDiv(divID) {
+        document.getElementById(divID).innerHTML = phpadsbanner;
+}
+-->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+initBannerVarForZone(1);
+-->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+replaceDiv('topbanner');
+-->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+initBannerVarForZoneWithScript(4, 'textman');
+-->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+replaceDiv('sponsoredlinks');
+-->
+</script>
+
+
+</body></html>

@@ -1,0 +1,5 @@
+https://stackoverflow.com/questions/20790932/what-is-the-logic-behind-the-using-keyword-in-c
+
+https://stackoverflow.com/questions/10747810/what-is-the-difference-between-typedef-and-using-in-c11
+
+https://stackoverflow.com/questions/8967521/class-template-with-template-class-friend-whats-really-going-on-here

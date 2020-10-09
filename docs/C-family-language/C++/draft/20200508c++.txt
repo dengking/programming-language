@@ -1,0 +1,5 @@
+c++11:
+first class  function 
+在维基百科[Functional programming#Functional programming in non-functional languages](https://en.wikipedia.org/wiki/Functional_programming#Functional_programming_in_non-functional_languages)中有这样的描述：
+First-class functions have been introduced into other mainstream languages such as PHP 5.3, Visual Basic 9, C# 3.0, C++11, and Kotlin.
+
