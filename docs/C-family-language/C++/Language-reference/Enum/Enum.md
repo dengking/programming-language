@@ -190,3 +190,11 @@ auto as_integer(Enumeration const value)
 ## TODO enum in TMP
 
 我记得在TMP中，有多处是使用到了enum的，需要整理一下。
+
+
+
+## TODO enum and callback function
+
+https://www.codeproject.com/Articles/10006/How-to-create-an-enum-and-callback-function
+
+https://www.drdobbs.com/callback-enumeration-apis-the-input-ite/184401766

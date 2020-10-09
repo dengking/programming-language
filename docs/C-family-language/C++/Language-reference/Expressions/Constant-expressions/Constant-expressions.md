@@ -30,12 +30,12 @@ Such expressions can be used as non-type template arguments, array sizes, and in
 
 
 
-| 分类                          |      |      |
-| ----------------------------- | ---- | ---- |
-| Core constant expressions     |      |      |
-| Integral constant expression  |      |      |
-| Converted constant expression |      |      |
-| Constant expression           |      |      |
+| 分类                          | 简介 |
+| ----------------------------- | ---- |
+| Core constant expressions     |      |
+| Integral constant expression  |      |
+| Converted constant expression |      |
+| Constant expression           |      |
 
 
 
@@ -77,6 +77,8 @@ constexpr bool b = a[2]; // UB, but unspecified if detected
 
 > NOTE: 原文，没有给出例子，无法理解
 
+
+
 ### Converted constant expression
 
 > NOTE: 
@@ -85,6 +87,8 @@ constexpr bool b = a[2]; // UB, but unspecified if detected
 >
 > - [static_assert](https://en.cppreference.com/w/cpp/language/static_assert) 的第一个入参
 > - [Template non-type arguments](https://en.cppreference.com/w/cpp/language/template_parameters#Template_non-type_arguments)
+
+
 
 ### Constant expression
 
