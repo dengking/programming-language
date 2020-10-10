@@ -1,52 +1,31 @@
 # Object storage duration and lifetime
 
-
-
 storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/language/object)的重要属性，这两个属性是密切相关的，在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中对此进行了介绍，本文讨论object的storage duration和lifetime。
 
-object的storage duration和lifetime是两个非常重要的概念，是理解后续很多内容的基础：
+object的storage duration和lifetime是两个非常重要的概念。
 
-| 步骤             | 说明                                                        | 章节                                    |
-| ---------------- | ----------------------------------------------------------- | --------------------------------------- |
-| allocation       | 为object分配内存区域                                        |                                         |
-| initialization   | 初始化object<br>- 如果是OOP object，会调用合适的constructor | `C++\Language-reference\Initialization` |
-| deinitialization | 反初始化object<br>- 如果是OOP object，会调用destructor      |                                         |
-| deallocation     | 回收object的内存                                            |                                         |
+## Guide
 
-需要注意的是：上面是按照发生顺序进行排列的，即：allocation->initialization->deinitialization->deallocation。
+原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，对linkage的讨论，在`C-family-language\C-and-C++\From-source-code-to-exec\Link\Linkage`章节；
 
-## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
+原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
 
+我们按照在`Theory\Programming-language\How-to-master-programming-language.md#`中总结的：首先学习property，然后学习描述这些property的specifier的方式来进行学习。
 
+本文仅仅关注原文中object storage duration相关的内容，我们以如下的思路来组织内容：
 
-### Temporary object lifetime
-
-
-
-### Storage reuse
+| topic                    | 注解                                                         |
+| ------------------------ | ------------------------------------------------------------ |
+| storage duration         | C++ object有哪几种storage duration                           |
+| Storage class specifiers | C++ language提供了哪些specifier来供programmer对storage duration进行控制/描述，即C++ language中，有哪些Storage class specifiers |
 
 
 
-### Access outside of lifetime
-
-
-
-
+所以，本文与原文的组织有所差异。
 
 ## cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)
 
-> NOTE: 原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，对linkage的讨论，在`C-family-language\C-and-C++\From-source-code-to-exec\Link\Linkage`章节；
->
-> 原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
->
-> 我们按照在`Theory\Programming-language\How-to-master-programming-language.md#`中总结的：首先学习property，然后学习描述这些property的specifier的方式来进行学习。
->
-> 本文仅仅关注原文中object storage duration相关的内容，我们以如下的思路来组织内容：
->
-> - C++ object有哪几种storage duration
-> - C++ language提供了哪些specifier来供programmer对storage duration进行控制/描述，即C++ language中，有哪些Storage class specifiers
->
-> 所以，本文与原文的组织有所差异。
+
 
 ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration#Storage_duration)
 

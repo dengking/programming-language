@@ -1,12 +1,36 @@
 # Object
 
-需要注意的是，本文中的 object 并不是我们 object-oriented programming 中所指的 object；本文的 object是指“region of storage”，在C中，有同样的概念，参见[Objects and alignment](https://en.cppreference.com/w/c/language/object)。显然，它的含义与object-oriented programming 中所指的 object 完全不同，后面为了便于区分，将它称为memory object，将OOP中的object称为OOP object；
+## What is object?
 
-此处的 object 是一个 runtime 概念，因为只有当program运行的时候，object才会被创建。
+cppreference中的"object"是指“**region of storage**”，在C中，有同样的概念，参见creference [Objects and alignment](https://en.cppreference.com/w/c/language/object)。
+
+cppreference中的"object"是一个 runtime 概念，因为只有当program运行的时候，object才会被创建。
 
 > NOTE: 上面这段话的是不准确的，c++语言充分发挥了compile-time computation，所有有多object是在compile-time时就已经创建了
 
-object概念对于理解后面的内容非常重要，可以说，后续的很多概念都是建立在object之上的。
+object概念对于理解后面的内容非常重要，因为后续的很多概念都是建立在object之上的。
+
+### Storage
+
+cppreference中，习惯使用"storage"这个词语，它其实是对memory的一个更加抽象的描述，即它摒弃了实现细节，这是programming language的language reference中惯常的做法，因为对于想C++这样的general purpose programming language，它并不specific to某种具体的实现。所以读者需要对这种表达方式习惯。
+
+
+
+### Object and OOP object
+
+需要注意的是，cppreference中的 object 并不是我们 object-oriented programming 中所指的 object（参见`Theory\Programming-paradigm\Object-oriented-programming`）；后面为了便于区分，当两者同时出现的时候，将OOP中的object称为OOP object，将object称为memory object；默认情况下，object指的是memory object；
+
+## Object and storage
+
+本节概括object 和 storage的关系: 
+
+1) An object is a region of storage: 一个object占据a region of  storage
+
+2) Storage reuse: a region of storage can be reused(参见[Lifetime#Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse))
+
+3) Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
+
+
 
 ## cppreference [Object](https://en.cppreference.com/w/cpp/language/object)
 
@@ -123,6 +147,14 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) can also be implicitly created by
 
+> NOTE: 只有 [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 才能够implicit creation。implicit creation和object layout是否有关联？我觉得是有关联的，原因如下:
+>
+> 1) `C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Object-layout.md`中描述的trivial type是可以使用`memcpy`的，并且其中还讨论了lifetime
+>
+> 2)  [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 中提及了trivial
+>
+> 所以，我觉得 [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 应该和  [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) 有关。
+
 | objects are created in                          | storage                                                      | 注解                   |
 | ----------------------------------------------- | ------------------------------------------------------------ | ---------------------- |
 | the array                                       | an array of type `char`, `unsigned char`, or [`std::byte`](https://en.cppreference.com/w/cpp/types/byte), (since C++17) |                        |
@@ -156,7 +188,7 @@ int main(void)
 // g++ test.cpp
 ```
 
-
+> 
 
 ### Object representation and value representation
 
@@ -175,40 +207,6 @@ For an object of type `T`, *object representation* is the sequence of `sizeof(T)
 > 在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation`中对这个问题进行了说明；
 >
 > 按照“Serialization and deserialization”节的说法，这个过程叫做Serialization。
-
-
-
-> ### Object layout
->
-> 前面说明了object representation的含义，现在我们思考这个问题：C++ compiler如何来编排object的memory layout（后面简称为**object layout**）？
->
-> 其实这个问题涉及到了C++ ABI，下面是object layout需要考虑的：
->
-> | 考虑内容                                              | 说明                                                         |
->| ----------------------------------------------------- | ------------------------------------------------------------ |
-> | [endianess](https://en.wikipedia.org/wiki/Endianness) | 这在工程hardware的`CPU\Endianess`章节对此进行了说明          |
->| alignment                                             | 这在后面的Alignment章节讨论                                  |
-> | C++提供的很多高级特性的实现                           | 比如:<br>- polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，<br>需要RTTI、virtual method table<br>- [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes) |
->| compiler optimization                                 |                                                              |
-> | subobjects                                            | 在下面的“subobjects”有对它的描述；<br>在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中，有对它的讨论 |
->| platform                                              | 需要考虑平台相关的信息                                       |
-> | ......                                                |                                                              |
->
-> 需要考虑的问题非常多，出于各种考虑，C++标准并没有对object layout的方方面面都进行统一规定，而是将一些留给了C++ implementation去自由地选择。关于这一点，在文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中进行了说明：
-> 
-> > The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a **layout**. That **layout** may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
-> 
-> 关于C++标准对object layout的定义参见:
-> 
-> - `C++\Language-reference\Basic-concept\Data-model\Object\Object-layout`中进行了描述。
-> 
-> 关于implementation-defined的object layout参见:
->
-> - `C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI`中进行了描述。
->
-> 关于polymorphic type，参见：
->
-> - `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system#Polymorphic type`
 
 
 

@@ -64,7 +64,10 @@ A type that is *trivial* can be **statically initialized**. It also means that i
 > trivial type的核心特征：
 >
 > - can be **statically initialized**
-> - copy data around via `memcpy`
+>
+> - copy data around via `memcpy` (是否意味着它是可以implicit creation？参见`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`)
+>
+>   
 
 > NOTE: “not when a constructor completes”要如何理解？trivial type的destructor必须是trivial destructor
 
