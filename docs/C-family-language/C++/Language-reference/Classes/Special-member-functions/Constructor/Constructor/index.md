@@ -10,7 +10,11 @@
 
 ### Delegating constructor (since C++11)
 
-
+> NOTE: 关于delegate，参见`Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition\Delegation`
+>
+> TODO:
+>
+> https://www.geeksforgeeks.org/constructor-delegation-c/
 
 ```c++
 #include <iostream>

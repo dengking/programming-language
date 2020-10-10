@@ -38,7 +38,9 @@ The term *delegation* is also used loosely for various other relationships betwe
 
 这其实就是composition VS inheritance，composition over inheritance；
 
+## C++ delegating constructor
 
+C++11引入了delegating constructor特性，参见cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/constructor)。
 
 ## TODO
 
