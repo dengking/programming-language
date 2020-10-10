@@ -27,104 +27,29 @@ C++ programs create, destroy, refer to, access, and manipulate *objects*.
 >
 > 对于非object，无法执行全部上述这些manipulation。
 
+### Object property
+
+> NOTE: 原文并没有本节的标题，这个标题是我添加的，目的是便于后续引用
+
 An object, in C++ , is a *region of storage* that (until C++14) has
 
-- size (can be determined with [sizeof](https://en.cppreference.com/w/cpp/language/sizeof));
-
-- alignment requirement (can be determined with [alignof](https://en.cppreference.com/w/cpp/language/alignof));
-
-- [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) (automatic, static, dynamic, thread-local);
-
-- [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary);
-
-  > NOTE: 上面这段话中的“bounded ”的含义是“由...决定”
-
-- [type](https://en.cppreference.com/w/cpp/language/type);
-
-- value (which may be indeterminate, e.g. for [default-initialized](https://en.cppreference.com/w/cpp/language/default_initialization) non-class types);
-
-- optionally, a [name](https://en.cppreference.com/w/cpp/language/name).
-
-  > NOTE: temporary没有name
-
-
-
-> NOTE: 上述都是对object的属性的描述。
->
-> # Classification of property
->
-> static property：
->
-> - size
-> - alignment
-> - type
-> - name
-> - value
->
-> dynamic property：
->
-> - lifetime
-> - storage duration
->
-> # Type determines everything
->
-> 上述object的属性，很多都是由type决定的，这验证了“Type determines everything”（参见`Theory\Type-system\index.md`）。
->
-> 这些属性之间是存在着一定的关系的，下面对此进行说明
->
-> ## Type determines the interpretion of memory representation, and further determine value
->
-> **type** 决定了 **interpretation** of **memory representation**，进而决定了 **value**。关于这个观点，在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中的描述是可以佐证的：
->
-> > Converts between **types** by **reinterpreting** the underlying **bit** pattern.
->
-> 在工程hardware的，`CPU\Endianess\Endianness.md`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，programmer无需关注endian。
->
-> ### Aliase to an existing object
->
-> C++、C非常灵活，对于同一个object，允许
->
-> - 使用多种type进行interpret，即reinterpret（重解释），一般通过pointer + `rereinterpret_cast`来实现
-> - 使用多个name进行refer to，一般通过reference来实现
->
-> 对于aliase to an existing object，C++、C标准都进行了严格的定义，这在strict aliasing中进行了详细介绍。如果programmer不遵循strict aliasing，则会导致undefined behavior。
->
-> C++中，reinterpret由`rereinterpret_cast`来实现，所它将strict aliasing的内容和`rereinterpret_cast`放到了一起。
->
-> 需要注意的是：上述两种方式，都仅仅是alias，都不会重新创建一个新的object（原object的副本）。
->
-> 参见：
->
-> - alias: `C++\Language-reference\Alias`
-> - `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
-> - reference: `C++\Language-reference\Reference`
-> - pointer: `C-family-language\C-and-C++\Pointer-array\Pointer`
->
-> ## Type determines size and alignment
->
-> type决定了object的size、alignment；
->
-> 
->
-> ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 
->
-> 两者是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration.md`中对此进行了描述。
-
-
+| property                                                     |         | 注解                          |
+| ------------------------------------------------------------ | ------- | ----------------------------- |
+| size (can be determined with [sizeof](https://en.cppreference.com/w/cpp/language/sizeof)) | static  |                               |
+| alignment requirement (can be determined with [alignof](https://en.cppreference.com/w/cpp/language/alignof)) | static  |                               |
+| [type](https://en.cppreference.com/w/cpp/language/type)      | static  |                               |
+| value (which may be indeterminate, e.g. for [default-initialized](https://en.cppreference.com/w/cpp/language/default_initialization) non-class types); | static  |                               |
+| optionally, a [name](https://en.cppreference.com/w/cpp/language/name). | static  | temporary没有name             |
+| [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) | dynamic |                               |
+| [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary); | dynamic | “bounded ”的含义是“由...决定” |
 
 > NOTE: 
 >
-> ### Interpretion of memory representation
+> [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration.md`中对此进行了描述。
 >
-> 之所以在此专门添加这个说明，是为了强调“interpretion”这个词语，在cppreference中，这个词语多次出现：
->
-> - 在[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)段：
->
-> > For non-polymorphic objects, the **interpretation** of the **value** is determined from the expression in which the object is used, and is decided at **compile time**.
->
-> - [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) conversion
->
-> > Converts between types by reinterpreting the underlying bit pattern.
+> 关于static property，在下面的"Type determines everything"节中进行了讨论。
+
+
 
 
 
@@ -146,9 +71,28 @@ The following entities are not objects: value, reference, function, enumerator, 
 > >
 > > Because references are not objects, there are no arrays of references, no pointers to references, and no references to references:
 
+### Variable
+
 A *variable* is an object or a reference that is not a non-static data member, that is introduced by a [declaration](https://en.cppreference.com/w/cpp/language/declarations).
 
 > NOTE: “ a reference that is not a non-static data member”这段话是比较绕的，“non-static data member”指的是class的哪些没有使用`static`修饰的data member，“not a non-static data member”就相当于是否定的否定是肯定，即是static data member，则它的意思是：variable可以是static data member。
+
+
+
+> #### Variable and object
+>
+> 两种都是runtime概念，variable是一种object，但是不是所有的object都是variable（variable还包括reference）。
+>
+> c++中variable的概念和object的概念密切相关，在下面文章中描述了此：
+>
+> learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutorial/introduction-to-variables/)
+>
+
+
+
+### Object creation
+
+
 
 ### Object representation and value representation
 
@@ -168,19 +112,17 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > 其实这个问题涉及到了C++ ABI，下面是object layout需要考虑的：
 >
-> - [endianess](https://en.wikipedia.org/wiki/Endianness)，这在工程hardware的`CPU\Endianess`章节对此进行了说明
+> | 考虑内容                                              | 说明                                                         |
+> | ----------------------------------------------------- | ------------------------------------------------------------ |
+> | [endianess](https://en.wikipedia.org/wiki/Endianness) | 这在工程hardware的`CPU\Endianess`章节对此进行了说明          |
+> | alignment                                             | 这在后面的Alignment章节讨论                                  |
+> | C++提供的很多高级特性的实现                           | 比如:<br>- polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，<br>需要RTTI、virtual method table<br>- [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes) |
+> | compiler optimization                                 |                                                              |
+> | subobjects                                            | 在下面的“subobjects”有对它的描述；<br>在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中，有对它的讨论 |
+> | platform                                              | 需要考虑平台相关的信息                                       |
+> | ......                                                |                                                              |
 >
-> - alignment
-> - C++提供的很多高级特性的实现，比如下面两个：
->
->   - polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，需要RTTI、virtual method table
->   - [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
-> - compiler optimization
-> - subobject（在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中，有对它的讨论）
-> - platform
-> - ......
->
-> 需要考虑的问题非常多，处于各种考虑，C++标准并没有对object layout的方方面面都进行统一规定，而是将一些留给了C++ implementation去自由地选择。关于这一点，在文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中进行了说明：
+> 需要考虑的问题非常多，出于各种考虑，C++标准并没有对object layout的方方面面都进行统一规定，而是将一些留给了C++ implementation去自由地选择。关于这一点，在文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中进行了说明：
 >
 > > The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a **layout**. That **layout** may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
 >
@@ -200,7 +142,7 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > NOTE: 原文关于value representation和object representation之间关系的讨论对象是[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type，这一点和C中关于这个话题的讨论是不同的，C中讨论并没有区分type，也就是说C中所有的type都可以按照其中讨论的value representation和object representation；
 >
-> C++中关于value representation和object representation之间关系的讨论对象仅仅局限于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type这是源于C++语言的复杂性，C++标准貌似没有描述一些C++ feature的实现，所以标准无法统一地描述各种type的object representation和value representation之间的关系。
+> C++中关于value representation和object representation之间关系的讨论对象仅仅局限于[*TriviallyCopyable*](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) types，而不是所有的type这是源于C++语言的复杂性，C++标准没有描述一些C++ feature的实现，所以标准无法统一地描述各种type的object representation和value representation之间的关系。
 >
 > 关于trivial type，参见：
 >
@@ -255,9 +197,13 @@ int main()
 
 An object can have *subobjects*. These include
 
-- member objects
-- base class subobjects（在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中对这个进行了介绍）；
-- array elements
+|                       | 注解                                                         |
+| --------------------- | ------------------------------------------------------------ |
+| member objects        |                                                              |
+| base class subobjects | 在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中对这个进行了介绍 |
+| array elements        |                                                              |
+
+
 
 > NOTE: subobject是典型的sub structure（参见工程discrete的`Guide\Relation-structure-computation\Computation\Induction-and-Recursion\Recursion\Recursive-definition.md`章节），它是containing关系。
 
@@ -288,13 +234,57 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 
 
 
-## Variable and object
+## Type determines everything
 
-两种都是runtime概念，variable是一种object，但是不是所有的object都是variable。
+在"Object property"节中描述了object的属性，很多都是由type决定的，这验证了“Type determines everything”（参见`Theory\Type-system\index.md`）。
 
-c++中variable的概念和object的概念密切相关，在下面文章中描述了此：
+这些属性之间是存在着一定的关系的，下面对此进行说明
 
-learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutorial/introduction-to-variables/)
+### Type determines the interpretion of memory representation, and further determine value
+
+**type** 决定了 **interpretation** of **memory representation**，进而决定了 **value**。关于这个观点，在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中的描述是可以佐证的：
+
+Converts between **types** by **reinterpreting** the underlying **bit** pattern.
+
+在工程hardware的，`CPU\Endianess\Endianness.md`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，programmer无需关注endian。
+
+#### Aliase to an existing object
+
+C++、C非常灵活，对于同一个object，允许
+
+- 使用多种type进行interpret，即reinterpret（重解释），一般通过pointer + `rereinterpret_cast`来实现
+- 使用多个name进行refer to，一般通过reference来实现
+
+对于aliase to an existing object，C++、C标准都进行了严格的定义，这在strict aliasing中进行了详细介绍。如果programmer不遵循strict aliasing，则会导致undefined behavior。
+
+C++中，reinterpret由`rereinterpret_cast`来实现，所它将strict aliasing的内容和`rereinterpret_cast`放到了一起。
+
+需要注意的是：上述两种方式，都仅仅是alias，都不会重新创建一个新的object（原object的副本）。
+
+参见：
+
+- alias: `C++\Language-reference\Alias`
+- `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
+- reference: `C++\Language-reference\Reference`
+- pointer: `C-family-language\C-and-C++\Pointer-array\Pointer`
+
+### Type determines size and alignment
+
+type决定了object的size、alignment；
+
+
+
+## Interpretion of memory representation
+
+之所以在此专门添加这个说明，是为了强调“interpretion”这个词语，在cppreference中，这个词语多次出现：
+
+- 在[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)段：
+
+  > For non-polymorphic objects, the **interpretation** of the **value** is determined from the expression in which the object is used, and is decided at **compile time**.
+
+- [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) conversion
+
+  > Converts between types by reinterpreting the underlying bit pattern.
 
 
 
