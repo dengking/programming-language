@@ -1,5 +1,7 @@
 # Object storage duration and lifetime
 
+
+
 storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/language/object)的重要属性，这两个属性是密切相关的，在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中对此进行了介绍，本文讨论object的storage duration和lifetime。
 
 object的storage duration和lifetime是两个非常重要的概念，是理解后续很多内容的基础：
@@ -12,6 +14,22 @@ object的storage duration和lifetime是两个非常重要的概念，是理解�
 | deallocation     | 回收object的内存                                            |                                         |
 
 需要注意的是：上面是按照发生顺序进行排列的，即：allocation->initialization->deinitialization->deallocation。
+
+## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
+
+
+
+### Temporary object lifetime
+
+
+
+### Storage reuse
+
+
+
+### Access outside of lifetime
+
+
 
 
 
@@ -229,20 +247,6 @@ Note: usual implementations of this feature use variants of the double-checked l
 > NOTE: double-checked locking pattern在工程parallel-computing的`Synchronization\Lock`章节描述。
 
 
-
-## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
-
-
-
-### Temporary object lifetime
-
-
-
-### Storage reuse
-
-
-
-### Access outside of lifetime
 
 
 

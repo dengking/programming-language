@@ -5,6 +5,6 @@
 | 主题                                 | 概述                                                         | 链接                                                         |
 | ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | object                               | 主要讨论C++中object的概念                                    | [Object](./Object.md)                                        |
-| object storage duration and lifetime | object storage描述的是C++ object位于内存在的位置：stack、heap；<br>object lifetime与object storage是两个相互依存的概念，<br>在[Object](https://en.cppreference.com/w/cpp/language/object)中这样描述两者的关系：<br>[lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary); | [Object-storage-and-lifetime](./Object-storage-and-lifetime.md) |
+| object lifetime and storage duration | object lifetime与object storage是两个相互依存的概念，<br>在[Object](https://en.cppreference.com/w/cpp/language/object)中这样描述两者的关系：<br>[lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary); <br/>object storage描述的是C++ object位于内存在的位置：stack、heap； | [Object-lifetime-and-storage](./Object-lifetime-and-storage.md) |
 | object layout                        | 前面讨论了C++ object的storage，object layout则讨论的是object在内存中的布局 | [Object-layout](./Object-layout/index.md)                    |
 

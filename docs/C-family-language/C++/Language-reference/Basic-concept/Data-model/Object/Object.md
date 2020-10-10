@@ -45,6 +45,8 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 
 - optionally, a [name](https://en.cppreference.com/w/cpp/language/name).
 
+  > NOTE: temporary没有name
+
 
 
 > NOTE: 上述都是对object的属性的描述。
@@ -106,7 +108,7 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 >
 > ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 
 >
-> 两者是密切相关的，在`Object-storage-duration-and-lifetime.md`中对此进行了描述。
+> 两者是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration.md`中对此进行了描述。
 
 
 
@@ -123,6 +125,8 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 > - [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) conversion
 >
 > > Converts between types by reinterpreting the underlying bit pattern.
+
+
 
 The following entities are not objects: value, reference, function, enumerator, type, non-static class member, template, class or function template specialization, namespace, parameter pack, and this.
 

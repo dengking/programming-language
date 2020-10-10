@@ -3,6 +3,6 @@ nav:
     - Introduction: index.md
     - Object: Object.md
 # object的storage duration和lifetime是两个非常重要的概念    
-    - Object-storage-duration-and-lifetime: Object-storage-duration-and-lifetime.md
+    - Object-lifetime-and-storage-duration: Object-lifetime-and-storage-duration.md
 # 描述object的layout    
     - Object-layout: Object-layout    
