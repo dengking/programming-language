@@ -45,19 +45,17 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 
 > NOTE: 
 >
-> [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration.md`中对此进行了描述。
+> [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration`中对此进行了描述。
 >
 > 关于static property，在下面的"Type determines everything"节中进行了讨论。
 
 
 
-
-
-The following entities are not objects: value, reference, function, enumerator, type, non-static class member, template, class or function template specialization, namespace, parameter pack, and this.
+The following entities are not objects: value, reference, function, enumerator, type, non-static class member, template, class or function template specialization, namespace, parameter pack, and `this`.
 
 > NOTE: 上面这段话有些多余，按照[Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)中的描述，object和这些entity之间是并列关系，所以显然它们都不是object。
 >
-> 需要注意的是：reference不是object，这是它和pointer的重要差别，在文章`C++\Language-reference\Reference\Pointer-VS-reference.md`中引用了上述内容。
+> 需要注意的是：reference不是object，这是它和pointer的重要差别，在文章`C++\Language-reference\Reference\Pointer-VS-reference`中引用了上述内容。
 >
 > 上面这些entity都不是object，所以它们不能够像object那样被manipulate（关于object的manipulation，参见第一段），关于这一段，在下面章节中进行了描述：
 >
@@ -92,6 +90,68 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 ### Object creation
 
+> NOTE: 原文中将object creation分为如下两大类:
+>
+> - Explicit creation
+> - Implicit creation
+>
+> object本质上是 *region of storage* ，因此宽泛的说: 任何storage都可以用作object。
+
+#### Explicit creation
+
+
+
+| classification                                               | 注解 | 章节 |
+| ------------------------------------------------------------ | ---- | ---- |
+| [definitions](https://en.cppreference.com/w/cpp/language/definition) |      |      |
+| [new-expressions](https://en.cppreference.com/w/cpp/language/new) |      |      |
+| [throw-expressions](https://en.cppreference.com/w/cpp/language/throw) |      |      |
+| changing the active member of a [union](https://en.cppreference.com/w/cpp/language/union) |      |      |
+| evaluating expressions that require [temporary objects](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) |      |      |
+
+> NOTE: [Temporary object](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) 是否属于 explicit creation？
+>
+> 在[cppreference Lifetime#Temporary object lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime)中介绍了creation of temporary objects，那这种creation属于explicit creation吗？
+
+#### Implicit creation
+
+> NOTE: 非常类似于C中的做法；原文是根据storage来进行分类的。
+
+Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) can also be implicitly created by
+
+| objects are created in                          | storage                                                      | 注解                   |
+| ----------------------------------------------- | ------------------------------------------------------------ | ---------------------- |
+| the array                                       | an array of type `char`, `unsigned char`, or [`std::byte`](https://en.cppreference.com/w/cpp/types/byte), (since C++17) |                        |
+| the allocated storage                           | allocating functions: <br>- [operator new](https://en.cppreference.com/w/cpp/memory/new/operator_new)  <br/>- [`operator new[]`](https://en.cppreference.com/w/cpp/memory/new/operator_new) <br/>- [std::malloc](https://en.cppreference.com/w/cpp/memory/c/malloc) <br/>- [std::calloc](https://en.cppreference.com/w/cpp/memory/c/calloc) <br/>- [std::realloc](https://en.cppreference.com/w/cpp/memory/c/realloc) <br/>- [std::aligned_alloc](https://en.cppreference.com/w/cpp/memory/c/aligned_alloc) | 下面的例子就是这种情况 |
+| the destination region of storage or the result | object representation copying functions: <br>- [std::memcpy](https://en.cppreference.com/w/cpp/string/byte/memcpy) <br>- [std::memmove](https://en.cppreference.com/w/cpp/string/byte/memmove) <br>- `std::bit_cast` |                        |
+
+```C++
+#include <cstdlib>
+#include <iostream>
+struct X
+{
+	int a, b;
+};
+X* MakeX()
+{
+	// One of possible defined behaviors:
+	// the call to std::malloc implicitly creates an object of type X
+	// and its subobjects a and b, and returns a pointer to that X object
+	X *p = static_cast<X*>(std::malloc(sizeof(X)));
+	p->a = 1;
+	p->b = 2;
+	return p;
+}
+int main(void)
+{
+
+	X *x = MakeX();
+	std::cout << x->a << std::endl;
+	std::cout << x->b << std::endl;
+}
+// g++ test.cpp
+```
+
 
 
 ### Object representation and value representation
@@ -102,7 +162,7 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > ### 如何查看object representation？
 >
-> 在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation.md`中对这个问题进行了说明；
+> 在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation`中对这个问题进行了说明；
 >
 > 按照“Serialization and deserialization”节的说法，这个过程叫做Serialization。
 >
@@ -136,7 +196,7 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > 关于polymorphic type，参见：
 >
-> - `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Polymorphic type`
+> - `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system#Polymorphic type`
 
 
 
@@ -185,7 +245,7 @@ int main()
 
 
 
-#### [Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
+### [Subobjects](https://en.cppreference.com/w/cpp/language/object#Subobjects)
 
 > NOTE: 原文定义了如下概念：
 >
@@ -207,7 +267,7 @@ An object can have *subobjects*. These include
 
 > NOTE: subobject是典型的sub structure（参见工程discrete的`Guide\Relation-structure-computation\Computation\Induction-and-Recursion\Recursion\Recursive-definition.md`章节），它是containing关系。
 
-#### [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
+### [Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)
 
 > NOTE: 根据polymorphism，可以将`C++` object分为两类：
 >
@@ -224,11 +284,11 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 
 > NOTE: 原文中的例子移到了`C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Polymorphic  type`中
 
-#### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
+### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 
 > NOTE: 将strict aliasing放到了`C-family-language\C-and-C++\Pointer-array-alias\Alias`章节中。
 
-#### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
+### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
 
 > NOTE: 将alignment放到了`C-and-C++\From-source-code-to-exec\ABI\Alignment`章节中。
 
