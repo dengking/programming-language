@@ -267,3 +267,4 @@ See [derived classes](https://en.cppreference.com/w/cpp/language/derived_class) 
 
 
 
+## microsoft [Member Access Control (C++)](https://docs.microsoft.com/zh-cn/cpp/cpp/member-access-control-cpp?view=vs-2017)
