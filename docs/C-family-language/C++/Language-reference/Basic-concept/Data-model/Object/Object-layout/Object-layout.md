@@ -2,9 +2,45 @@
 
 c++标准对object layout的定义是在有进行变更的，下面首先反思变更历程，然后再来具体的思考各种object layout。
 
+## What is object layout
+
+在`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`中说明了object，我们知道: 
+
+> object本质上是a region of storage
+
+现在我们思考这个问题：C++ compiler如何来编排object的"region of storage"？这就是**object layout**？其实这个问题涉及到了C++ ABI，下面是object layout需要考虑的：
+
+| 考虑内容                                              | 说明                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| [endianess](https://en.wikipedia.org/wiki/Endianness) | 这在工程hardware的`CPU\Endianess`章节对此进行了说明          |
+| alignment                                             | `C++\Language-reference\Basic-concept\Data-model\Object\Object.md`的"Alignment"章节 |
+| C++提供的很多高级特性的实现                           | 比如:<br>- polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，<br>需要RTTI、virtual method table<br>- [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes) |
+| compiler optimization                                 |                                                              |
+| subobjects                                            | `C++\Language-reference\Basic-concept\Data-model\Object\Object.md`的的“subobjects”有对它的描述；<br>在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中，有对它的讨论 |
+| platform                                              | 需要考虑平台相关的信息                                       |
+| ......                                                |                                                              |
+
+需要考虑的问题非常多，出于各种考虑，C++标准并没有对object layout的方方面面都进行统一规定，而是将一些留给了C++ implementation去自由地选择。关于这一点，在文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中进行了说明：
+
+> The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a **layout**. That **layout** may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
+
+
+
+关于implementation-defined的object layout参见:
+
+- `C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI`中进行了描述。
+
+关于polymorphic type，参见：
+
+- `C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system#Polymorphic type`
+
+
+
 
 
 ## 标准变更历程
+
+虽然C++标准并没有对object layout进行统一的定义，但是定义了几类object layout，下面描述C++标准定义的几类object layout，以及标准的变更: 
 
 ### 维基百科[C++11#Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C++11#Modification_to_the_definition_of_plain_old_data)
 
@@ -18,6 +54,8 @@ In C++03, a class or struct must follow a number of rules for it to be considere
 C++11 relaxed several of the POD rules, by dividing the **POD concept** into two separate concepts: *trivial* and *standard-layout*.
 
 > NOTE: trivial的含义是“普通的、平凡的”
+
+#### Trivial
 
 A type that is *trivial* can be **statically initialized**. It also means that it is valid to copy data around via `memcpy`, rather than having to use a **copy constructor**. The lifetime of a *trivial* type begins when its storage is defined, not when a constructor completes.
 
@@ -45,6 +83,8 @@ A trivial class or struct is defined as one that:
 
 > NOTE: 这里对trivial的含义进行了描述，显然trivial是不允许virtual的。
 
+#### Standard-layout
+
 A type that is *standard-layout* means that it orders and packs its members in a way that is compatible with C. A class or struct is standard-layout, by definition, provided:
 
 > NOTE: *standard-layout*的核心特征：
@@ -71,9 +111,15 @@ A type that is *standard-layout* means that it orders and packs its members in a
 >
 > 思考：standard-layout type能否像trivial type那样通过`memcpy`进行copy？结合最后一段的描述来看，这是不符合用途的：standard-layout type是有copy constructor的，所以我们应该使用它的copy constructor，而不是使用`memcpy`。
 
+#### POD
+
 A class/struct/union is considered POD if it is trivial, standard-layout, and all of its non-static data members and base classes are PODs.
 
+
+
 By separating these concepts, it becomes possible to give up one without losing the other. A class with complex move and copy constructors may not be **trivial**, but it could be **standard-layout** and thus interoperate with C. Similarly, a class with public and private non-static data members would not be standard-layout, but it could be **trivial** and thus `memcpy`-able.
+
+
 
 ### stackoverflow [trivial vs. standard layout vs. POD](https://stackoverflow.com/questions/6496545/trivial-vs-standard-layout-vs-pod)
 

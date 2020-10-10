@@ -1,7 +1,7 @@
 nav:
-# 其实trivial是和object layout密切相关的，所以首先描述object layout的概念，下面这篇文章就对此进行了非常深入地讨论，在阅读了这篇文章后，我们大致就明白了trivial的含义
+    # 其实trivial是和object layout密切相关的，所以首先描述object layout的概念，下面这篇文章就对此进行了非常深入地讨论，在阅读了这篇文章后，我们大致就明白了trivial的含义
     - Object-layout: Object-layout.md
-# 总结trivial这个词    
+    # 总结trivial这个词    
     - Trivial: Trivial.md
     - Passive-data-structure: Passive-data-structure.md
     

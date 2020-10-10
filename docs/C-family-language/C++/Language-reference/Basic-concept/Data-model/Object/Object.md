@@ -95,7 +95,7 @@ A *variable* is an object or a reference that is not a non-static data member, t
 > - Explicit creation
 > - Implicit creation
 >
-> object本质上是 *region of storage* ，因此宽泛的说: 任何storage都可以用作object。
+> 
 
 #### Explicit creation
 
@@ -111,11 +111,15 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > NOTE: [Temporary object](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) 是否属于 explicit creation？
 >
-> 在[cppreference Lifetime#Temporary object lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime)中介绍了creation of temporary objects，那这种creation属于explicit creation吗？
+> 在[cppreference Lifetime#Temporary object lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime)中介绍了creation of temporary objects，那creation of temporary objects属于explicit creation吗？
 
 #### Implicit creation
 
-> NOTE: 非常类似于C中的做法；原文是根据storage来进行分类的。
+> NOTE: 
+>
+> object本质上是 *a region of storage* ，因此宽泛的说: 任何storage都可以用作object。Implicit creation本质上其实是给定 a region of storage，然后将它deserialization为指定type的object（关于deserialization，参见后面的"Serialization and deserialization"章节），这种做法是非常类似于C中的做法；
+>
+> 原文是根据storage来进行分类的，下面是我使用table的方式重新进行组织的: 
 
 Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) can also be implicitly created by
 
@@ -156,40 +160,48 @@ int main(void)
 
 ### Object representation and value representation
 
+For an object of type `T`, *object representation* is the sequence of `sizeof(T)` objects of type `unsigned char` (or, equivalently, [`std::byte`](https://en.cppreference.com/w/cpp/types/byte)) beginning at the same address as the `T` object.
+
 > NOTE: 
 >
-> 所谓的object representation，其实就memory representation。
+> 前面我们已经知道了，object本质上是*a region of storage*，所谓的object representation，其实就是 *a region of storage*，后面我们将这个过程称为**Serialization** （关于**Serialization** ，参见后面的"Serialization and deserialization"章节））
+
+
+
+> NOTE: 
 >
 > ### 如何查看object representation？
 >
 > 在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation`中对这个问题进行了说明；
 >
 > 按照“Serialization and deserialization”节的说法，这个过程叫做Serialization。
->
-> ### Memory layout
+
+
+
+> ### Object layout
 >
 > 前面说明了object representation的含义，现在我们思考这个问题：C++ compiler如何来编排object的memory layout（后面简称为**object layout**）？
 >
 > 其实这个问题涉及到了C++ ABI，下面是object layout需要考虑的：
 >
 > | 考虑内容                                              | 说明                                                         |
-> | ----------------------------------------------------- | ------------------------------------------------------------ |
+>| ----------------------------------------------------- | ------------------------------------------------------------ |
 > | [endianess](https://en.wikipedia.org/wiki/Endianness) | 这在工程hardware的`CPU\Endianess`章节对此进行了说明          |
-> | alignment                                             | 这在后面的Alignment章节讨论                                  |
+>| alignment                                             | 这在后面的Alignment章节讨论                                  |
 > | C++提供的很多高级特性的实现                           | 比如:<br>- polymorphic type，polymorphic type有[virtual functions](https://en.cppreference.com/w/cpp/language/virtual)，<br>需要RTTI、virtual method table<br>- [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes) |
-> | compiler optimization                                 |                                                              |
+>| compiler optimization                                 |                                                              |
 > | subobjects                                            | 在下面的“subobjects”有对它的描述；<br>在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中，有对它的讨论 |
-> | platform                                              | 需要考虑平台相关的信息                                       |
+>| platform                                              | 需要考虑平台相关的信息                                       |
 > | ......                                                |                                                              |
 >
 > 需要考虑的问题非常多，出于各种考虑，C++标准并没有对object layout的方方面面都进行统一规定，而是将一些留给了C++ implementation去自由地选择。关于这一点，在文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中进行了说明：
->
+> 
 > > The term *layout* refers to how the members of an object of class, struct or union type are arranged in memory. In some cases, the layout is well-defined by the language specification. But when a class or struct contains certain C++ language features such as [virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes), [virtual functions](https://en.cppreference.com/w/cpp/language/virtual), members with different access control, then the compiler is free to choose a **layout**. That **layout** may vary depending on what optimizations are being performed and in many cases the object might not even occupy a contiguous area of memory. 
->
+> 
 > 关于C++标准对object layout的定义参见:
->
+> 
 > - `C++\Language-reference\Basic-concept\Data-model\Object\Object-layout`中进行了描述。
->
+> 
 > 关于implementation-defined的object layout参见:
 >
 > - `C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI`中进行了描述。
@@ -357,7 +369,7 @@ type决定了object的size、alignment；
 | serialization   | 给定一个object，得到它的object representation       | 一般使用**byte type**                                        |
 | deserialization | 给定一个memory region，按照指定type进行interpretion | - memory address是否满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement<br>- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing) |
 
-C++中，serialization and deserialization都是通过`reinterpret_cast`来实现的。
+C++中，serialization and deserialization都是可以通过`reinterpret_cast`来实现的。
 
 从上面可以看出，这些内容是密切相关的：
 
