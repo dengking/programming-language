@@ -7,9 +7,9 @@ nav:
     - Compile: Compile
 #################### 链接阶段####################        
     - Link: Link
-    - Definition-and-ODR: Definition-and-ODR.md
-    - Linkage-and-ORD-and-header-only: Linkage-and-ORD-and-header-only.md
+    
     - Load: Load
     - ABI: ABI
     - Code-analysis-tool: Code-analysis-tool
+    - Optimization: Optimization
      

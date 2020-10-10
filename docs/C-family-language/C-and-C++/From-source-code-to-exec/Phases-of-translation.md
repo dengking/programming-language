@@ -12,3 +12,16 @@ c++语言是典型的[Compiled language](https://en.wikipedia.org/wiki/Compiled_
 
 ## creference [Phases of translation](https://en.cppreference.com/w/c/language/translation_phases)
 
+
+
+## nickdesaulniers [Object Files and Symbols](http://nickdesaulniers.github.io/blog/2016/08/13/object-files-and-symbols/)
+
+A quick review of the compilation+execution pipeline (for terminology):
+
+1. Lexing produces tokens
+2. Parsing produces an abstract syntax tree
+3. Analysis produces a code flow graph
+4. Optimization produces a reduced code flow graph
+5. Code gen produces object code
+6. Linkage produces a complete executable
+7. Loader instructs the OS how to start running the executable
