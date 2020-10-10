@@ -1,5 +1,7 @@
 # Resource management
 
+所有的programming language都会涉及这个问题，本章将对C family language中的resource management进行统一描述。
+
 ## 有哪些resource？
 
 file、network connection、memory等，都可以看做是resource。

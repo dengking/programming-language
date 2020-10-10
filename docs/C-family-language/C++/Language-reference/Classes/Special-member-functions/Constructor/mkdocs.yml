@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
     - Constructor: Constructor.md
+    - Copy-constructor: Copy-constructor
     - User-defined-conversion: User-defined-conversion
     # - Code-example: Code-example.md
     

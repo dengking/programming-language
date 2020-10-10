@@ -2,8 +2,6 @@ nav:
     - C++Core-Guidelines: C++Core-Guidelines
     # 总结c++支持的programming paradigm
     - Paradigm: Paradigm
-    # 总结c++中的resource management    
-    - Resource-management: Resource-management
     # 总结c++中polymorphism的实现
     - Plymorphism: Plymorphism
     - Serialization: Serialization
@@ -11,5 +9,5 @@ nav:
     # 如何进行注释，如何根据注释生成文档
     - Comment: Comment
     - Temporary: Temporary
-
+    - Order: Order
     

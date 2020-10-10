@@ -1,11 +1,3 @@
 nav:
     - Introduction: index.md
-    - Class: Class.md
     - The-interface-principle: The-interface-principle.md
-    - Members: Members
-    - Special-member-functions: Special-member-functions
-    - Member-access: Member-access
-    # 
-    - Subtype-polymorphism: Subtype-polymorphism
-######### 这是c++中非常常见的三种容易混淆的情况##########    
-    - Overload-VS-override-VS-name-hiding: Overload-VS-override-VS-name-hiding.md

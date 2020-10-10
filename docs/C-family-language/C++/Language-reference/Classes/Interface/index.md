@@ -1,6 +1,6 @@
 # Interface
 
-
+推荐先阅读`The-interface-principle.md`，以获得对C++中interface的全面了解: C++中，interface不仅仅局限于OOP，它的ADL，使得interface可以拓展到非method。
 
 ## CppCoreGuidelines [I: Interfaces](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-interfaces)
 

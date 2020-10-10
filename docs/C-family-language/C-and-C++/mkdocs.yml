@@ -3,6 +3,7 @@ nav:
     - From-source-code-to-exec: From-source-code-to-exec
     - Compile-time-and-run-time: Compile-time-and-run-time
     - VS-C-VS-C++: VS-C-VS-C++
+    - Resource-management: Resource-management
     # 下面是一些具体的语言点
     - Pointer-and-array: Pointer-and-array
     - Declaration: Declaration
