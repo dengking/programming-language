@@ -121,7 +121,7 @@ container指各种常见的数据结构，一般programming language的standard 
 
 ## Abstract machine
 
-多余general purpose programming language，一个非常重要的问题就是cross platform。所以，语言的设计者，往往使用抽象的abstract machine，而不是具体的physical machine、OS。
+对于general purpose programming language，一个非常重要的问题就是cross platform。所以，语言的设计者，往往使用抽象的abstract machine，而不是具体的physical machine、OS。
 
 下面以三种主流programming language为例来进行说明：
 

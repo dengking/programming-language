@@ -3,7 +3,8 @@ nav:
     # 这篇文章，照应全局
     - Basic-concepts: Basic-concepts.md
     - Reference-and-Value-Semantics: Reference-and-Value-Semantics
-# data-model是核心概念    
+    - Abstract-machine: Abstract-machine
+    # data-model是核心概念    
     # 动态概念：数据模型
     - Data-model: Data-model
 # 以compile-time、link-time、run-time为顺序来进行描述

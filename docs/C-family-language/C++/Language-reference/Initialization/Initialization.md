@@ -6,7 +6,7 @@ C++的initialization不仅种类繁多而且规则冗杂，下面是比较好的
 
 首先需要区分每种initialization的syntax，因为compiler根据syntax来决定采用何种initialization；
 
-其次是需要搞清楚每种initialization的effect，对effect的讨论主要集中在对下面三种type的effect: 
+其次是需要搞清楚每种initialization的**effect**，对effect的讨论主要集中在对下面三种type的effect: 
 
 | type              | 注解        |
 | ----------------- | ----------- |
@@ -14,9 +14,24 @@ C++的initialization不仅种类繁多而且规则冗杂，下面是比较好的
 | user-defined type | class       |
 | aggregate type    | array       |
 
-各种initialization的差异重要体现在它们的effect上。
+各种initialization的差异重要体现在它们的**effect**上。
 
 ## cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization)
+
+*Initialization* of a variable provides its initial value at the time of **construction**.
+
+> NOTE: initialization发生在object construction阶段，关于object的lifetime，参见`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`。
+
+### Initializer
+
+The initial value may be provided in the **initializer** section of a [declarator](https://en.cppreference.com/w/cpp/language/declarations) or a [new expression](https://en.cppreference.com/w/cpp/language/new).
+
+> ### Terminology: initializer
+>
+> "initializer"是cppreference中用来表示**初始值**的术语，在下面文章中使用了这个术语: 
+>
+> - cppreference [new expression](https://en.cppreference.com/w/cpp/language/new)
+> - cppreference [Declarators](https://en.cppreference.com/w/cpp/language/declarations#Declarators) 
 
 
 
@@ -40,6 +55,18 @@ Depending on context, the **initializer** may invoke:
 | [Reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization) | `char& c = a[0];`               |      |
 
 If no initializer is provided, the rules of [default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) apply.
+
+
+
+> NOTE: 对于下面几种类型的variable，由于它们的特殊性，C++语言进行了特殊的设计；从control theory的角度来看，它们的一些特性是out of control的，需要对它们进行特殊的介绍。
+>
+> 原文进行了专门的说明，我们首先看看这几类variable。
+
+non-local variables with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration)
+
+non-local variables with thread-local storage duration 
+
+Static local variables
 
 ### Non-local variables
 
