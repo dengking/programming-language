@@ -23,3 +23,11 @@
 > #### lvalue:
 >
 > `*p`, the built-in [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) expression;
+
+
+
+## `this` is dependent name
+
+参见`C++\Language-reference\Basic-concept\Organization\Name-lookup\Dependent-name-lookup\index.md`: 
+
+>  `this` is implicitly dependent on `T`

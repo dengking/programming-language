@@ -134,6 +134,10 @@ https://stackoverflow.com/questions/185624/static-variables-in-an-inlined-functi
 
 
 
+### static virtual?
+
+No，参见: https://stackoverflow.com/questions/1820477/c-static-virtual-members 
+
 
 
 ## TODO
