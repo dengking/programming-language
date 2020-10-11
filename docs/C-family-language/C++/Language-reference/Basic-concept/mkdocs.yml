@@ -6,7 +6,7 @@ nav:
     - Abstract-machine: Abstract-machine
     # data-model是核心概念    
     # 动态概念：数据模型
-    - Data-model: Data-model
+    - Object: Object
 # 以compile-time、link-time、run-time为顺序来进行描述
     # include file、 source file、module单个文件中的组织
     - Organization: Organization

@@ -1,5 +1,0 @@
-nav:
-    - Lifetime: Lifetime.md
-    - Storage-duration: Storage-duration.md
-    - Lifetime-of-object-with-static-storage-duration: Lifetime-of-object-with-static-storage-duration
-    - Lifetime-of-object-with-thread-local-storage-duration: Lifetime-of-object-with-thread-local-storage-duration
