@@ -53,10 +53,10 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 关于"OOP class type"，参见`C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type`。
 
-| 主题                       | 注解                              |
-| -------------------------- | --------------------------------- |
-| Storage reuse              | 同一个storage，可以用于多个object |
-| Access outside of lifetime |                                   |
+| 主题                       | 注解                                                         |
+| -------------------------- | ------------------------------------------------------------ |
+| Storage reuse              | 同一个storage，可以用于多个object                            |
+| Access outside of lifetime | 这是一种常见的error，这种error是和lifetime相关的，非常有必要学习 |
 
 
 
@@ -66,7 +66,7 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 ### Lifetime of an explicitly created object
 
-> NOTE: 大体的流程，并不涉及具体细节
+> NOTE: 仅仅描述了大体的流程，并不涉及具体细节
 
 #### Begin
 
@@ -123,23 +123,81 @@ Lifetimes of non-static data members and base subobjects **begin** and **end** f
 
 ### Temporary object lifetime
 
-> NOTE: 理解原文的内容的一个非常关键的点是: 理解C++17 [Temporary materialization](https://en.cppreference.com/w/cpp/language/implicit_conversion#Temporary_materialization) 特性，这个特性改变了temporary的规则。因此，原文中关于"Temporary object lifetime"的讨论分为了两部分:
+> NOTE: 
+>
+> 理解原文的内容的一个非常关键的点是: 理解C++17 [Temporary materialization](https://en.cppreference.com/w/cpp/language/implicit_conversion#Temporary_materialization) 特性，这个特性改变了Temporary object lifetime的规则。因此，原文中关于"Temporary object lifetime"的讨论分为了两部分:
 >
 > 1) C++17前
 >
 > 2) C++17
 >
 > 本文就采取的这种描述方式。
+>
+> 另外一个非常重要的是: C++是支持reference to temporary的，所以可以结合cppreference [Reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization)来理解本节内容。
+
+#### Begin
 
 Temporary objects are created in the following situations:
 
-[binding a reference to a prvalue](https://en.cppreference.com/w/cpp/language/reference_initialization)
+1) [binding a reference to a prvalue](https://en.cppreference.com/w/cpp/language/reference_initialization)
 
-[initializing](https://en.cppreference.com/w/cpp/language/list_initialization) an object of type [std::initializer_list](http://en.cppreference.com/w/cpp/utility/initializer_list)`<T>` from a braced-init-list (since C++11)
+> NOTE: 
+>
+> Example: 来源cppreference [Reference initialization#Explanation](https://en.cppreference.com/w/cpp/language/reference_initialization#Explanation) : 
+>
+> ```c++
+> const std::string& rs = "abc"; // rs refers to temporary copy-initialized from char array
+> const double& rcd2 = 2;        // rcd2 refers to temporary with value 2.0
+> ```
+>
+> 
+
+2) [initializing](https://en.cppreference.com/w/cpp/language/list_initialization) an object of type [std::initializer_list](http://en.cppreference.com/w/cpp/utility/initializer_list)`<T>` from a braced-init-list (since C++11)
+
+> NOTE: 
+
+##### until C++17
+
+3) returning a prvalue from a function
+
+> NOTE: 没有例子，不好理解
+
+4) [conversion](https://en.cppreference.com/w/cpp/language/expressions#Conversions) that creates a prvalue ([including](https://en.cppreference.com/w/cpp/language/explicit_cast) `T(a,b,c)` and `T{}`)
+
+5) [lambda expression](https://en.cppreference.com/w/cpp/language/lambda) (since C++11)
+
+> NOTE: 为什么lambda expression是temporary？
+
+6) [copy-initialization](https://en.cppreference.com/w/cpp/language/copy_initialization) that requires conversion of the initializer
+
+> NOTE: 转换过程中，会创建一个temporary
+
+7) [reference-initialization](https://en.cppreference.com/w/cpp/language/reference_initialization) to a different but convertible type or to a bitfield.
+
+> NOTE: 转换过程中，会创建一个temporary
+
+##### since C++17 
+
+> TODO: 这部分内容暂时不考虑
+
+#### End
+
+All **temporary objects** are destroyed as the last step in evaluating the **full-expression** that (lexically) contains the point where they were created, and if multiple **temporary objects** were created, they are **destroyed in the order opposite to the order of creation**. This is true even if that evaluation ends in throwing an exception.
+
+There are two exceptions from that:
+
+1) The lifetime of a **temporary object** may be extended by binding to a **const lvalue reference** or to an **rvalue reference** (since C++11), see [reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) for details.
+
+2) The lifetime of a temporary object created when evaluating the default arguments of a **default constructor** used to initialize an element of an array ends before the next element of the array begins initialization. (since C++11)
+
+> NOTE: 没有读懂
 
 
 
+### TODO [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
 
 
-All **temporary objects** are destroyed as the last step in evaluating the **full-expression** that (lexically) contains the point where they were created, and if multiple **temporary objects** were created, they are destroyed in the order opposite to the order of creation. This is true even if that evaluation ends in throwing an exception.
 
+### TODO [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
+
+> NOTE: 这是一种常见的error，这种error是和lifetime相关的
