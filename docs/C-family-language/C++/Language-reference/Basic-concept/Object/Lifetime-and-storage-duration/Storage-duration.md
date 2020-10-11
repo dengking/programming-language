@@ -1,8 +1,6 @@
-# Object storage duration and lifetime
+# Object storage duration 
 
-storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/language/object)的重要属性，这两个属性是密切相关的，在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中对此进行了介绍，本文讨论object的storage duration和lifetime。
-
-object的storage duration和lifetime是两个非常重要的概念。
+storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/language/object)的重要属性，这两个属性是密切相关的，在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中对此进行了介绍，本文讨论object的storage duration。
 
 ## Guide
 
@@ -50,7 +48,7 @@ object的storage duration和lifetime是两个非常重要的概念。
 | static           | allocated when the **program** begins                        | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括:<br>**static local object**、<br>**extern local object**） | process;            |
 | dynamic          | allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              | heap;               |
 
-
+> NOTE: 上述storage duration是C++ language对OS中process execution model、memory model的刻画，参见工程Linux-OS的`Kernel\Guide\Multitasking\Process-model\Process-run-model`章节。
 
 #### 统一描述方式: object with `***`storage duration
 
@@ -94,29 +92,9 @@ C++语言中，对object的initialization是受到了object的storage duration�
 
 
 
-#### TODO: Control of object
-
-从control theory的角度来思考上面描述的几种object。
-
-deallocation往往是out of control的；
-
-对于OOP object，它的deinitialization对应的是它的destructor；而destructor的调用，在某些情况下，是out of control的。
-
-对于Non-OOP object，它们一般没有deinitialization；
-
-
-
 #### Temporary object
 
-Temporary object的storage duration是什么呢？
-
-关于temporary object，参见cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) `#`  “Temporary object lifetime” 章节；
-
-
-
-
-
-
+Temporary object的storage duration是什么呢？在cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) `#`  “Temporary object lifetime” 章节对它的lifetime进行了描述，可以肯定的是，temporary object的storage duration是无法用上述四种storage duration进行描述的。
 
 
 
@@ -157,14 +135,14 @@ int main()
 
 > NOTE: 本节描述描述storage duration的specifier
 
-| specifier                   | storage duration                                             | linkage    | C++ version                                                  | Explanation                                                  | function         |
-| --------------------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------- |
-| `auto` (until C++11)        | *automatic*                                                  | no linkage | 在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)的Notes有说明: Since C++11, `auto` is no longer a storage class specifier; it is used to indicate type deduction. |                                                              | 不可修饰function |
-| `register` (until C++17)    | *automatic*                                                  | no linkage |                                                              |                                                              | 不可修饰function |
-| `static`                    | *static* or *thread*                                         | *internal* |                                                              |                                                              | 可以修饰function |
-| `extern`                    | *static* or *thread*                                         | *external* |                                                              | It specifies **external linkage**, and does not technically affect **storage duration**, but it cannot be used in a **definition** of an **automatic storage duration** object, so all `extern` objects have **static** or **thread** durations. In addition, a variable declaration that uses `extern` and has no initializer is not a [definition](https://en.cppreference.com/w/cpp/language/definition).<br> 上面这段话的意思是：`extern` variable只能够link to **object with static storage** or **object with `thread_local` storage**，所以`extern` variable的storage duration是static的，这是因为显然它需要compiler和linker在编译阶段就能够找到这个object。 | 可以修饰function |
-| `thread_local`(since C++11) | *thread*                                                     |            |                                                              |                                                              | 不可修饰function |
-| `mutable`                   | does not affect storage duration or linkage. See [const/volatile](https://en.cppreference.com/w/cpp/language/cv) for the explanation. |            |                                                              |                                                              | 不可修饰function |
+| specifier                   | storage duration                                             | linkage    | function         |
+| --------------------------- | ------------------------------------------------------------ | ---------- | ---------------- |
+| `auto` (until C++11)        | *automatic*                                                  | no linkage | 不可修饰function |
+| `register` (until C++17)    | *automatic*                                                  | no linkage | 不可修饰function |
+| `static`                    | *static* or *thread*                                         | *internal* | 可以修饰function |
+| `extern`                    | *static* or *thread*                                         | *external* | 可以修饰function |
+| `thread_local`(since C++11) | *thread*                                                     |            | 不可修饰function |
+| `mutable`                   | does not affect storage duration or linkage. See [const/volatile](https://en.cppreference.com/w/cpp/language/cv) for the explanation. |            | 不可修饰function |
 
 > NOTE: 
 >
@@ -186,7 +164,13 @@ int main()
 >
 > 我们需要深入思考：为什么将linkage和storage duration的specifier合并？
 >
-> 关于此的原因之一可以参看上述table中`extern`的Explanation，原因之二则是出于语言设计者出于对语言简便性的考虑（在`Theory\Programming-languageDesign-of-programming-language.md\#Design of specifier`中进行了讨论）
+> 关于此的原因之一可以参看下面对`extern`的Explanation，原因之二则是出于语言设计者出于对语言简便性的考虑（在`Theory\Programming-languageDesign-of-programming-language.md\#Design of specifier`中进行了讨论）
+
+#### `extern` 
+
+It specifies **external linkage**, and does not technically affect **storage duration**, but it cannot be used in a **definition** of an **automatic storage duration** object, so all `extern` objects have **static** or **thread** durations. In addition, a variable declaration that uses `extern` and has no initializer is not a [definition](https://en.cppreference.com/w/cpp/language/definition).
+
+> NOTE: 上面这段话的意思是：`extern` variable只能够link to **object with static storage** or **object with `thread_local` storage**，所以`extern` variable的storage duration是static的，这是因为显然它需要compiler和linker在编译阶段就能够找到这个object。
 
 
 
@@ -202,28 +186,11 @@ int main()
 
 使用`static` specifier修饰的object具有static storage duration，但是具有static storage duration的object，不一定要使用`static` specifier来修饰。
 
+
+
 ### Static local variables
 
-> NOTE: 对于static local variable，
-
-Variables declared at **block scope** with the specifier `static` or `thread_local` (since C++11) have static or thread (since C++11) storage duration but are initialized the first time control passes through their declaration (unless their initialization is [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization), which can be performed before the block is first entered). On all further calls, the declaration is skipped.
-
-> NOTE: 上面这段话关于initialization的描述是不易理解的？它的意思是：对于static local variable，它的initialization的发生时间如下：
->
-> - [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) can be performed before the block is first entered
-> - others are initialized the first time control passes through their declaration
-
-
-
-#### Initialization of static local variable concurrently (since C++11)
-
-> NOTE: 这种情况的典型就是：线程执行函数中声明了一个static local variable。
-
-If multiple threads attempt to initialize the same **static local variable** concurrently, the **initialization** occurs exactly once (similar behavior can be obtained for arbitrary functions with [std::call_once](../thread/call_once.html)).
-
-Note: usual implementations of this feature use variants of the double-checked locking pattern, which reduces runtime overhead for already-initialized local statics to a single non-atomic boolean comparison.
-
-> NOTE: double-checked locking pattern在工程parallel-computing的`Synchronization\Lock`章节描述。
+> NOTE: 对于static local variable，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration\Static-local-variables`章节
 
 
 

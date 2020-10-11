@@ -55,7 +55,7 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 | 主题                       | 注解                                                         |
 | -------------------------- | ------------------------------------------------------------ |
-| Storage reuse              | 同一个storage，可以用于多个object                            |
+| Object and storage         | 原文中并没有"Object and storage"这样的标题，它源于在`C++\Language-reference\Basic-concept\Object\Object.md`，在cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)中，其实也围绕着这个主题展开了讨论:<br>- Storage reuse: 同一个storage，可以用于多个object <br>- 对lifetime of object和storageduration的关系进行了说明 <br>所以，为了内容的连贯性，我沿用`Object.md`中的小标题来对内容进行组织 |
 | Access outside of lifetime | 这是一种常见的error，这种error是和lifetime相关的，非常有必要学习 |
 
 
@@ -84,6 +84,14 @@ The lifetime of an object ends when:
 1) if it is of a **non-class type**, the object is destroyed (maybe via a pseudo-destructor call) (since C++20), or
 
 2) if it is of a **class type**, the [destructor](https://en.cppreference.com/w/cpp/language/destructor) call starts, or
+
+> NOTE: 上面两段话，简单来说: 
+>
+> 对于Non-OOP object，它们一般没有deinitialization;
+>
+> 对于OOP object，它的deinitialization对应的是它的destructor；
+>
+> 
 
 3) the storage which the object occupies is released, or is reused by an object that is not nested within it.
 
@@ -192,12 +200,36 @@ There are two exceptions from that:
 
 > NOTE: 没有读懂
 
+### Object and storage
 
+本节的标题继承自`C++\Language-reference\Basic-concept\Object\Object.md`中的同名章节，本节结合cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 中的内容，从lifetime的角度对Object and storage之间的关系进行论述: 
 
-### TODO [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
+> Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
+
+"nested"是因为: [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse): 同一个storage，可以用于多个object，即存在object已经end了，但是storage还存在。
+
+TODO: 对于temporary，属于哪种storage duration？
+
+#### TODO [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
 
 
 
 ### TODO [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
 
 > NOTE: 这是一种常见的error，这种error是和lifetime相关的
+
+Before the lifetime of an object has started but after the storage which the object will occupy has been allocated
+
+> NOTE: "after the storage which the object will occupy has been allocated"的意思是: storage已经被分配了; "before the lifetime of an object has started"说明: initialization还没有完成
+
+or,
+
+after the lifetime of an object has ended and before the storage which the object occupied is reused or released, 
+
+> NOTE: "before the storage which the object occupied is reused or released"说明: storage还没有给回收; "after the lifetime of an object has ended"说明: deinitialization已经完成了
+
+the following uses of the glvalue expression that identifies that object are undefined:
+
+
+
+During construction and destruction, other restrictions apply, see [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction).

@@ -1,5 +1,7 @@
 # Object
 
+
+
 ## What is object?
 
 cppreference中的"object"是指“**region of storage**”，在C中，有同样的概念，参见creference [Objects and alignment](https://en.cppreference.com/w/c/language/object)。
@@ -28,7 +30,7 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 
 2) Storage reuse: a region of storage can be reused
 
-> 与此相关的有: 
+> 在下面章节中，也对storage reuse进行了讨论: 
 >
 > [Lifetime#Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
 >
@@ -36,7 +38,9 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 
 3) cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime): Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
 
+4) cppreference [Object](https://en.cppreference.com/w/cpp/language/object): [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary);
 
+> NOTE: 在lifetime中，对对3)、4)进行说明。
 
 ## cppreference [Object](https://en.cppreference.com/w/cpp/language/object)
 
@@ -178,7 +182,7 @@ Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/
 | ----------------------------------------------- | ------------------------------------------------------------ | ---------------------- |
 | the array                                       | an array of type `char`, `unsigned char`, or [`std::byte`](https://en.cppreference.com/w/cpp/types/byte), (since C++17) |                        |
 | the allocated storage                           | allocating functions: <br>- [operator new](https://en.cppreference.com/w/cpp/memory/new/operator_new)  <br/>- [`operator new[]`](https://en.cppreference.com/w/cpp/memory/new/operator_new) <br/>- [std::malloc](https://en.cppreference.com/w/cpp/memory/c/malloc) <br/>- [std::calloc](https://en.cppreference.com/w/cpp/memory/c/calloc) <br/>- [std::realloc](https://en.cppreference.com/w/cpp/memory/c/realloc) <br/>- [std::aligned_alloc](https://en.cppreference.com/w/cpp/memory/c/aligned_alloc) | 下面的例子就是这种情况 |
-| the destination region of storage or the result | object representation copying functions: <br>- [std::memcpy](https://en.cppreference.com/w/cpp/string/byte/memcpy) <br>- [std::memmove](https://en.cppreference.com/w/cpp/string/byte/memmove) <br>- `std::bit_cast` |                        |
+| the destination region of storage or the result | object representation copying functions: <br>- [std::memcpy](https://en.cppreference.com/w/cpp/string/byte/memcpy) <br>- [std::memmove](https://en.cppreference.com/w/cpp/string/byte/memmove) <br>- `std::bit_cast` | 其实是storage reuse    |
 
 ```C++
 #include <cstdlib>
