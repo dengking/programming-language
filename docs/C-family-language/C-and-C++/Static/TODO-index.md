@@ -2,16 +2,22 @@
 
 本章描述在C和C++语言中都会涉及到的`static`，本章是一个专题总结。
 
+
+
+keyword `static` 
+
+static storage duration
+
 ## `static`用法总结
 
 对于`static`的用法，可以采用如下两种分类方法: 
 
 ### 1) programming paradigm
 
-| programming paradigm | example                                        |
-| -------------------- | ---------------------------------------------- |
-| Non-OOP              | - static function<br>- static object           |
-| OOP                  | - static data member<br>- static data function |
+|             | object               | function                 |
+| ----------- | -------------------- | ------------------------ |
+| **Non-OOP** | - static object      | - static function        |
+| **OOP**     | - static data member | - static member function |
 
 上面的分类方法是采用的在`C++\Language-reference\Basic-concept\index.md#Extend to OOP`中总结的思路:
 

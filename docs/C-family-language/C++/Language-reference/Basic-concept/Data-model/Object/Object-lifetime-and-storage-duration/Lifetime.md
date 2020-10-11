@@ -30,7 +30,15 @@ Object lifetime就是典型的以"order"来对object进行描述；object是C fa
 | 1) 发生时间 | 对于不同的object，它的上述四个activity发生的时间是不同的；<br>比如不同的storage duration，它的上述activity发生的时间截然不同 |
 | 2) 具体流程 | 对于不同类型的object，它的上述四个activity的具体流程是不同的；<br>不同类型的object，它的initialization流程是完全不同的，<br>比如OOP object，它的initialization涉及到了很多问题; |
 
-C++语言对这些问题，都进行了详细的规定，后面我们将以此为思路，组织内容。
+C++语言对这些问题，都进行了详细的规定，后面我们将以此为思路，组织内容。对于比较特殊的object，我们会进行单独地、专门的描述，为了保持一致性，我们将其章节名称统一为"`Lifetime***`"模式，下面是这些章节的汇总:
+
+| 章节                                                         | 说明                                                    |
+| ------------------------------------------------------------ | ------------------------------------------------------- |
+| `C++\Language-reference\Classes\Lifetime`                    | 描述OOP object的lifetime                                |
+| `./Lifetime-of-object-with-static-storage-duration`          | 描述object with static storage duration的lifetime       |
+| `./Lifetime-of-object-with-thread-local-storage-duration.md` | 描述object with thread local storage duration的lifetime |
+
+
 
 ### 内容简介
 
@@ -38,7 +46,7 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 | 主题                  | 注解                                                         |
 | --------------------- | ------------------------------------------------------------ |
-| Lifetime of object    | - [explicitly created object](https://en.cppreference.com/w/cpp/language/object#Object_creation) <br>- [implicitly created objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types <br>- temporary object <br>- Lifetime of objects of OOP class type(C++是支持OOP的，所以它需要对objects of OOP class type的initialization、deinitialization进行准确的定义) |
+| Lifetime of object    | - [explicitly created object](https://en.cppreference.com/w/cpp/language/object#Object_creation) <br>- [implicitly created objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types <br>原文对于下面两种特殊的object进行专门的说明: <br>- Temporary object <br>- Lifetime of objects of OOP class type(C++是支持OOP的，所以它需要对objects of OOP class type的initialization、deinitialization进行准确的定义) |
 | Lifetime of reference |                                                              |
 
 通过上述表格可以看出，C++对各种可能的object的lifetime都进行了详细的定义。
@@ -58,12 +66,14 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 ### Lifetime of an explicitly created object
 
+> NOTE: 大体的流程，并不涉及具体细节
+
 #### Begin
 
-| activity                                                     | 注解                     |
-| ------------------------------------------------------------ | ------------------------ |
-| storage with the proper alignment and size for its type is obtained |                          |
-| its initialization (if any) is complete                      | 原文对此有更加详细的讨论 |
+| activity       | explanation                                                  | 注解                     |
+| -------------- | ------------------------------------------------------------ | ------------------------ |
+| allocation     | storage with the proper alignment and size for its type is obtained |                          |
+| initialization | its initialization (if any) is complete                      | 原文对此有更加详细的讨论 |
 
 
 
@@ -71,13 +81,15 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 The lifetime of an object ends when:
 
-1) if it is of a non-class type, the object is destroyed (maybe via a pseudo-destructor call) (since C++20), or
+1) if it is of a **non-class type**, the object is destroyed (maybe via a pseudo-destructor call) (since C++20), or
 
-2) if it is of a class type, the [destructor](https://en.cppreference.com/w/cpp/language/destructor) call starts, or
+2) if it is of a **class type**, the [destructor](https://en.cppreference.com/w/cpp/language/destructor) call starts, or
 
 3) the storage which the object occupies is released, or is reused by an object that is not nested within it.
 
 > NOTE: 参见下面的"Storage reuse"段
+>
+> 关于non-class type、class type，参见`C++\Language-reference\Basic-concept\Type-system\Type-system`
 
 ### Lifetime of an implicitly created object
 
@@ -87,7 +99,9 @@ Some operations [implicitly create objects](https://en.cppreference.com/w/cpp/la
 
 ### Lifetime of reference
 
-The lifetime of a [reference](https://en.cppreference.com/w/cpp/language/reference) begins when its initialization is complete and ends as if it were a scalar object.
+The lifetime of a [reference](https://en.cppreference.com/w/cpp/language/reference) begins when its initialization is complete and ends as if it were a **scalar object**.
+
+> NOTE: 关于scalar type，参见`C++\Language-reference\Basic-concept\Type-system\Type-system`。
 
 Note: the lifetime of the referred object may end before the end of the lifetime of the reference, which makes [dangling references](https://en.cppreference.com/w/cpp/language/reference#Dangling_references) possible.
 
@@ -95,9 +109,9 @@ Note: the lifetime of the referred object may end before the end of the lifetime
 
 ### Lifetime of objects of OOP class type
 
-> NOTE: 关于
-
 Lifetimes of non-static data members and base subobjects **begin** and **end** following [class initialization order](https://en.cppreference.com/w/cpp/language/initializer_list#Initialization_order).
+
+> NOTE: 原文关于此，仅仅是简单的一笔带过，其实这其中包含着发出多的内容，在`C++\Language-reference\Classes\Lifetime`章节对它进行了具体的描述。
 
 
 
