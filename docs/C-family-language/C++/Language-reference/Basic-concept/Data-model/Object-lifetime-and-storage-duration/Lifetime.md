@@ -30,13 +30,13 @@ Object lifetime就是典型的以"order"来对object进行描述；object是C fa
 | 1) 发生时间 | 对于不同的object，它的上述四个activity发生的时间是不同的；<br>比如不同的storage duration，它的上述activity发生的时间截然不同 |
 | 2) 具体流程 | 对于不同类型的object，它的上述四个activity的具体流程是不同的；<br>不同类型的object，它的initialization流程是完全不同的，<br>比如OOP object，它的initialization涉及到了很多问题; |
 
-C++语言对这些问题，都进行了详细的规定，后面我们将以此为思路，组织内容。对于比较特殊的object，我们会进行单独地、专门的描述，为了保持一致性，我们将其章节名称统一为"`Lifetime***`"模式，下面是这些章节的汇总:
+C++语言对这些问题，都进行了详细的规定，后面我们将以此为思路，组织内容。对于比较特殊的object，我们会进行单独地、专门的描述，下面是汇总:
 
 | 章节                                                         | 说明                                                    |
 | ------------------------------------------------------------ | ------------------------------------------------------- |
 | `C++\Language-reference\Classes\Lifetime`                    | 描述OOP object的lifetime                                |
-| `./Lifetime-of-object-with-static-storage-duration`          | 描述object with static storage duration的lifetime       |
-| `./Lifetime-of-object-with-thread-local-storage-duration.md` | 描述object with thread local storage duration的lifetime |
+| `C++\Language-reference\Basic-concept\Data-model\Object-with-static-storage-duration` | 描述object with static storage duration的lifetime       |
+| `C++\Language-reference\Basic-concept\Data-model\Object-with-thread-local-storage-duration` | 描述object with thread local storage duration的lifetime |
 
 
 
