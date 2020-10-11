@@ -10,3 +10,10 @@
 | member data initialization和deinitialization的问题           |                             |      |
 |                                                              |                             |      |
 
+
+
+## TODO
+
+### the order of declaration of the members in c++ and the order of destruction
+
+[Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )

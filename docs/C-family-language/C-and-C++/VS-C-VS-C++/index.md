@@ -1,8 +1,8 @@
 # VS C VS C++
 
-## 思路
+思路: C++在C上所增强的，主要方面：
 
-C++在C上所增强的，主要方面：
+## What C++ enhance?
 
 ### OOP
 
@@ -34,6 +34,10 @@ C++在CV方面，比C要严格：
 #### Type punning
 
 关于这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-punning`中进行了详细比较。
+
+#### TODO: variant VS union
+
+variant 是对union的改进。
 
 ### Generic programming 
 

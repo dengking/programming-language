@@ -15,9 +15,9 @@ c++的value semantic是不支持runtime polymorphsim的，reference semantic是�
 
 需要思考：reference semantic是如何实现polymorphism的，这在`C++\Language-reference\Classes\Subtype-polymorphism\Implementation`章节进行了描述。
 
+## Virtual in C++
 
-
-## Virtual method and virtual data
+### Virtual method and virtual data
 
 在C++，dynamic polymorphism是behavior（function），只有virtual method（virtual table），而不是data/value的。
 
@@ -46,9 +46,13 @@ c++的value semantic是不支持runtime polymorphsim的，reference semantic是�
 
 在What is “`virtual` data,” and how-can / why-would I use it in C++? [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics#virt-data) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)中讨论了，这个讨论收录在了`C++\Language-reference\Basic-concept\Reference-and-Value-Semantics\Value-and-reference-semantics.md`中。
 
+### virtual return type 
+
+Covariant 
 
 
-## Virtual inheritance
+
+### Virtual inheritance
 
 这在`C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Derived-classes\Virtual-inheritance.md`中进行了讨论。
 

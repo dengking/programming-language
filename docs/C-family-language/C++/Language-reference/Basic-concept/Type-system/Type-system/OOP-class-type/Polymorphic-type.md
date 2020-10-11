@@ -1,5 +1,7 @@
 # Polymorphic type
 
+在上一节中，我们已经介绍了polymorphic type，本节对它进行专门介绍。
+
 cppreference中并没有正式地定义polymorphic type，其中只有 [polymorphic object](https://en.cppreference.com/w/cpp/language/object) 的定义，仔细阅读 [polymorphic object](https://en.cppreference.com/w/cpp/language/object) 段，可以发现其中给出的例子中有“polymorphic type”，当我们进入到type system后，使用polymorphic type来进行描述会更加方便。
 
 在文章panicsoftware [DYNAMIC_CAST AND TYPEID AS (NON) RTTI TOOLS.](https://blog.panicsoftware.com/dynamic_cast-and-typeid-as-non-rtti-tools/)中，给出了polymorphic type的定义:
@@ -96,39 +98,11 @@ int main()
 
 
 
-## virtual
+## Virtual
 
-### virtual method
-
-### virtual data
-
-D:\github\dengking\programming-language-theory\programming-language\docs\C-family-language\C++\Language-reference\Basic-concept\Reference-and-Value-Semantics
-
-
-
-
-
-### virtual return type 
-
-Covariant 
-
-
-
-C++直接支持：
-
-- virtual method
+参见`C++\Language-reference\Classes\Subtype-polymorphism`。
 
 ## Implementation of dynamic type
 
-在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)中给出了这个问题的解答：
-
-> Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
-
-### RTTI of polymorphic type
-
-对于polymorphic type，目前的实现普遍会使用RTTI，这在`C++\Language-reference\Basic-concept\Type-system\RTTI.md`中进行了描述。
-
-### Virtual function table of polymorphic type
-
-Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI\Virtual-method-table.md`。
+这其实就是C++ dynamic polymorphism的实现，参见`C++\Language-reference\Classes\Subtype-polymorphism\Implementation`章节。
 

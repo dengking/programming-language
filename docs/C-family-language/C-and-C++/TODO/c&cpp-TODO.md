@@ -145,9 +145,6 @@ https://en.cppreference.com/w/cpp/chrono/c/tm
 https://stackoverflow.com/questions/4781852/how-to-convert-a-string-to-datetime-in-c
 
 
-# the order of declaration of the members in c++ and the order of destruction
-
-[Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )
 
 
 # Movable but Non-Copyable Types

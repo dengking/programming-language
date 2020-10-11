@@ -2,5 +2,5 @@ nav:
     - Type-system: Type-system.md
 # c++的type system是支持type qualifier的    
     - Type-qualifier: Type-qualifier
-    - Polymorphic-type: Polymorphic-type
+    - OOP-class-type: OOP-class-type
     - Byte-type: Byte-type.md

@@ -38,11 +38,12 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 | 主题                  | 注解                                                         |
 | --------------------- | ------------------------------------------------------------ |
-| Lifetime of object    | - [explicitly created object](https://en.cppreference.com/w/cpp/language/object#Object_creation) <br>- [implicitly created objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types <br>- temporary object <br>- Lifetime of objects of class type(C++是支持OOP的，所以它需要对objects of class type的initialization、deinitialization进行准确的定义) |
+| Lifetime of object    | - [explicitly created object](https://en.cppreference.com/w/cpp/language/object#Object_creation) <br>- [implicitly created objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types <br>- temporary object <br>- Lifetime of objects of OOP class type(C++是支持OOP的，所以它需要对objects of OOP class type的initialization、deinitialization进行准确的定义) |
 | Lifetime of reference |                                                              |
-|                       |                                                              |
 
 通过上述表格可以看出，C++对各种可能的object的lifetime都进行了详细的定义。
+
+关于"OOP class type"，参见`C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type`。
 
 | 主题                       | 注解                              |
 | -------------------------- | --------------------------------- |
@@ -92,7 +93,9 @@ Note: the lifetime of the referred object may end before the end of the lifetime
 
 
 
-### Lifetime of objects of class type
+### Lifetime of objects of OOP class type
+
+> NOTE: 关于
 
 Lifetimes of non-static data members and base subobjects **begin** and **end** following [class initialization order](https://en.cppreference.com/w/cpp/language/initializer_list#Initialization_order).
 
