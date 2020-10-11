@@ -76,7 +76,9 @@ object with automatic storage的lifetime is bound by "`{}`"，对这个特性的
 
 #### Static storage duration
 
-对于object with static storage duration，相比于其它类型的object，它的initialization是比较复杂的，后面会进行专门的描述；
+对于object with static storage duration，相比于其它类型的object，它的lifetime是比较复杂的，在下面章节进行了描述:
+
+`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
 
 
 
@@ -84,13 +86,17 @@ object with automatic storage的lifetime is bound by "`{}`"，对这个特性的
 
 这是C++11引入的，源于"C++11 introduced a standardized memory model"，关于此，参见`C++\Language-reference\Basic-concept\Abstract-machine\Memory-model`。
 
+对于对于object with thread storage duration相比于其它类型的object，它的lifetime是比较复杂的，在下面章节进行了描述:
 
+`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Thread-local-storage-duration`
 
 #### Initialization of object
 
-C++语言中，对object的initialization是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述是比较分散的，我将它们进行了整理，统一放到了initialization章节中。
+C++语言中，对object的initialization是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述是比较分散的，我将它们进行了整理: 
 
+`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Thread-local-storage-duration`
 
+`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
 
 #### Temporary object
 
