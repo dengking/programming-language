@@ -4,17 +4,15 @@
 
 ## Temporary object lifetime
 
-### cppreference Lifetime#Temporary object lifetime
+在cppreference的如下章节中，描述了lifetime of temporary: 
 
-本地地址：[file:///D:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/language/lifetime.html](file:///D:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/language/lifetime.html)
-
-
+### cppreference [Lifetime#Temporary object lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime)
 
 
 
-### cppreference  Reference initialization#Lifetime of a temporary
+### cppreference  [Reference initialization#Lifetime of a temporary](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary)
 
-本地地址：[file:///D:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/language/reference_initialization.html](file:///D:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/language/reference_initialization.html)
+
 
 ## Temporary materialization
 

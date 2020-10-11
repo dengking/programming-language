@@ -26,9 +26,15 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 
 1) An object is a region of storage: 一个object占据a region of  storage
 
-2) Storage reuse: a region of storage can be reused(参见[Lifetime#Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse))
+2) Storage reuse: a region of storage can be reused
 
-3) Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
+> 与此相关的有: 
+>
+> [Lifetime#Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
+>
+> cppreference [Object#Implicit creation](https://en.cppreference.com/w/cpp/language/object)
+
+3) cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime): Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
 
 
 
@@ -63,13 +69,13 @@ An object, in C++ , is a *region of storage* that (until C++14) has
 | alignment requirement (can be determined with [alignof](https://en.cppreference.com/w/cpp/language/alignof)) | static  |                               |
 | [type](https://en.cppreference.com/w/cpp/language/type)      | static  |                               |
 | value (which may be indeterminate, e.g. for [default-initialized](https://en.cppreference.com/w/cpp/language/default_initialization) non-class types); | static  |                               |
-| optionally, a [name](https://en.cppreference.com/w/cpp/language/name). | static  | temporary没有name             |
+| optionally, a [name](https://en.cppreference.com/w/cpp/language/name). | static  | temporary object没有name      |
 | [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) | dynamic |                               |
 | [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary); | dynamic | “bounded ”的含义是“由...决定” |
 
 > NOTE: 
 >
-> [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) and [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration`中对此进行了描述。
+>  [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) and [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) 是密切相关的，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration`中对此进行了描述。
 >
 > 关于static property，在下面的"Type determines everything"节中进行了讨论。
 
@@ -114,28 +120,37 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 ### Object creation
 
-> NOTE: 原文中将object creation分为如下两大类:
+> NOTE: 原文中将object creation方式分为如下两大类:
 >
 > - Explicit creation
 > - Implicit creation
 >
-> 
+> 另外一种分类标准是: 根据object是否由programmer主动(active)创建:
+>
+> |                     | 注解                                                         |
+> | ------------------- | ------------------------------------------------------------ |
+> | active creation     | 主动创建;<br>C++ language赋予programmer的创建object的所有的方式，包括了下面的Explicit creation、Implicit creation中描述的各种方式，temporary除外 |
+> | non-active creation | 非主动创建;<br>object不是由programmer主动create的，而是在expression evaluation过程中自动创建的，C++将其称为temporary |
+>
+> 原文本节对C++ language赋予programmer主动地create object的所有方式进行了非常全面的总结。
+
+
 
 #### Explicit creation
 
 
 
-| classification                                               | 注解 | 章节 |
-| ------------------------------------------------------------ | ---- | ---- |
-| [definitions](https://en.cppreference.com/w/cpp/language/definition) |      |      |
-| [new-expressions](https://en.cppreference.com/w/cpp/language/new) |      |      |
-| [throw-expressions](https://en.cppreference.com/w/cpp/language/throw) |      |      |
-| changing the active member of a [union](https://en.cppreference.com/w/cpp/language/union) |      |      |
-| evaluating expressions that require [temporary objects](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) |      |      |
+| classification                                               | 注解                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [definitions](https://en.cppreference.com/w/cpp/language/definition) | declaration不创建 object，这是它和definition的重要区别       |
+| [new-expressions](https://en.cppreference.com/w/cpp/language/new) |                                                              |
+| [throw-expressions](https://en.cppreference.com/w/cpp/language/throw) |                                                              |
+| changing the active member of a [union](https://en.cppreference.com/w/cpp/language/union) |                                                              |
+| evaluating expressions that require [temporary objects](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) | 意思是: 这类object是在expression evaluation过程中自动创建的，C++将其称为temporary |
 
-> NOTE: [Temporary object](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) 是否属于 explicit creation？
+> NOTE: [Temporary object](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime) 是否属于 explicit creation？是的，上述表格的最后一行就是对这种情况的描述。
 >
-> 在[cppreference Lifetime#Temporary object lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime)中介绍了creation of temporary objects，那creation of temporary objects属于explicit creation吗？
+> 在[cppreference Lifetime#Temporary object lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Temporary_object_lifetime)中介绍了creation of temporary objects。
 
 #### Implicit creation
 
@@ -143,9 +158,9 @@ A *variable* is an object or a reference that is not a non-static data member, t
 >
 > object本质上是 *a region of storage* ，因此宽泛的说: 任何storage都可以用作object。Implicit creation本质上其实是给定 a region of storage，然后将它deserialization为指定type的object（关于deserialization，参见后面的"Serialization and deserialization"章节），这种做法是非常类似于C中的做法；
 >
-> 原文是根据storage来进行分类的，下面是我使用table的方式重新进行组织的: 
+> 原文是根据storage来进行分类的，下面是我使用table的方式重新进行组织的。
 
-Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) can also be implicitly created by
+
 
 > NOTE: 只有 [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 才能够implicit creation。implicit creation和object layout是否有关联？我觉得是有关联的，原因如下:
 >
@@ -154,6 +169,10 @@ Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/
 > 2)  [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 中提及了trivial
 >
 > 所以，我觉得 [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 应该和  [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable) 有关。
+
+
+
+Objects of [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) can also be implicitly created by
 
 | objects are created in                          | storage                                                      | 注解                   |
 | ----------------------------------------------- | ------------------------------------------------------------ | ---------------------- |
@@ -188,7 +207,7 @@ int main(void)
 // g++ test.cpp
 ```
 
-> 
+> NOTE: 是否需要考虑alignment问题？
 
 ### Object representation and value representation
 
@@ -269,8 +288,8 @@ An object can have *subobjects*. These include
 
 |                       | 注解                                                         |
 | --------------------- | ------------------------------------------------------------ |
-| member objects        |                                                              |
-| base class subobjects | 在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中对这个进行了介绍 |
+| member objects        | 这源于C++对OOP支持                                           |
+| base class subobjects | 这源于C++对OOP支持; <br>在cppreference [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)中对这个进行了介绍 |
 | array elements        |                                                              |
 
 
