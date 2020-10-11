@@ -36,11 +36,11 @@ C++语言对这些问题，都进行了详细的规定，后面我们将以此�
 
 cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的内容是比较杂乱的，因此有必要梳理清楚: 
 
-| 主题                              | 注解                                                         |
-| --------------------------------- | ------------------------------------------------------------ |
-| Lifetime of object                | - [explicitly created object](https://en.cppreference.com/w/cpp/language/object#Object_creation) <br>- [implicitly create objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types <br>- temporary object |
-| Lifetime of reference             |                                                              |
-| Lifetime of objects of class type | C++是支持OOP的，所以它需要对objects of class type的initialization、deinitialization进行准确的说明 |
+| 主题                  | 注解                                                         |
+| --------------------- | ------------------------------------------------------------ |
+| Lifetime of object    | - [explicitly created object](https://en.cppreference.com/w/cpp/language/object#Object_creation) <br>- [implicitly created objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types <br>- temporary object <br>- Lifetime of objects of class type(C++是支持OOP的，所以它需要对objects of class type的initialization、deinitialization进行准确的定义) |
+| Lifetime of reference |                                                              |
+|                       |                                                              |
 
 通过上述表格可以看出，C++对各种可能的object的lifetime都进行了详细的定义。
 

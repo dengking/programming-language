@@ -6,15 +6,27 @@
 
 ### [Type classification](https://en.cppreference.com/w/cpp/language/type#Type_classification)
 
+
+
+#### Fundamental and compound
+
 > NOTE: 对type的classification是有多种方法的，原文的这一段就提供了多种划分方法，下面是原文主要描述的一种划分方法
 
-[fundamental types](https://en.cppreference.com/w/cpp/language/types) (see also [std::is_fundamental](https://en.cppreference.com/w/cpp/types/is_fundamental))
-
-compound types (see also [std::is_compound](https://en.cppreference.com/w/cpp/types/is_compound))
-
-
+| classification                                               | trait                                                        | 子类                                                         | 注解                |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------- |
+| [fundamental types](https://en.cppreference.com/w/cpp/language/types) | [std::is_fundamental](https://en.cppreference.com/w/cpp/types/is_fundamental) | - `void` <br>- [std::nullptr_t](http://en.cppreference.com/w/cpp/types/nullptr_t) <br>- arithmetic types | 其实就是C++内置类型 |
+| compound types                                               | [std::is_compound](https://en.cppreference.com/w/cpp/types/is_compound) | - [reference types](https://en.cppreference.com/w/cpp/language/reference) <br>- [pointer types](https://en.cppreference.com/w/cpp/language/pointer#Pointers) <br>- [pointer-to-member types](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_members) <br>- [array types](https://en.cppreference.com/w/cpp/language/array) <br>- [function types](https://en.cppreference.com/w/cpp/language/function) <br>- [enumeration types](https://en.cppreference.com/w/cpp/language/enum) <br>- [class types](https://en.cppreference.com/w/cpp/language/class) |                     |
 
 > NOTE: 通过原文可以看到，从c++11开始，每种类型都通过了对应的trait，从而提供给programmer compile-time reflection。
+
+#### Class type and non-class type
+
+> NOTE: 这种分类方法是我添加的，重要是因为在cppreference中，多处使用了这两个词，需要对它们进行专门的定义。一提到class type，读者肯定马上想起OOP class，遗憾的是，在C++中，并非如此: C++ class type，还包括[union types](https://en.cppreference.com/w/cpp/language/union)，所以后续我们为了区分，我们进行了如下分类:
+
+| classification                                               | trait | 子类                                                         |
+| ------------------------------------------------------------ | ----- | ------------------------------------------------------------ |
+| [class types](https://en.cppreference.com/w/cpp/language/class) |       | - OOP class type (see also [std::is_class](http://en.cppreference.com/w/cpp/types/is_class))<br>- [union types](https://en.cppreference.com/w/cpp/language/union) (see also [std::is_union](http://en.cppreference.com/w/cpp/types/is_union)). |
+| non-class types                                              |       | 其他的所有类型                                               |
 
 
 
@@ -165,23 +177,23 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 
 
-### Polymorphic type
+### OOP class type
 
-在`C++\Language-reference\Basic-concept\Type-system\Type-system\Polymorphic-type`章节进行了描述。
+这种类型对应的是OOP class，是C++对OOP的支持，在本章的`OOP-class-type`章节进行专门描述；
+
+#### Polymorphic type
+
+Polymorphic type是OOP class type的一种，在`C++\Language-reference\Basic-concept\Type-system\Type-system\Polymorphic-type`章节进行了描述。
 
 ### Type classified by object layout
 
 这种类型分类方式，是文章microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)提供的。
 
-#### Trivial type
-
-在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial.md`章节进行了描述。
-
-#### Standard-layout type
-
-
-
-#### POD type
+|                      | 注解                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| Trivial type         | 在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial.md`章节进行了描述 |
+| Standard-layout type |                                                              |
+| POD type             |                                                              |
 
 
 
@@ -189,17 +201,19 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 在`C++\Language-reference\Basic-concept\Type-system\Type-system\Literal-type.md`中进行了描述。
 
+### Byte type
 
+参见`Byte-type.md`。
 
 ## cppreference [typeid](https://en.cppreference.com/w/cpp/language/typeid)
 
-参见本章的`typeid`
+参见本章的`typeid`。
 
 ## cppreference [decltype](https://en.cppreference.com/w/cpp/language/decltype) 
 
-参见本章的`decltype`
+参见本章的`decltype`。
 
-## type cast and conversion
+## Type cast and conversion
 
 参见`Type-conversion`章节。
 
