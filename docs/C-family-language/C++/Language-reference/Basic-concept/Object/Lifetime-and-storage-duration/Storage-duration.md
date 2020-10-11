@@ -27,11 +27,23 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 ### [Storage duration](https://en.cppreference.com/w/cpp/language/storage_duration#Storage_duration)
 
-> NOTE: 下面描述该表格的组织思路: 
+> NOTE: 
 >
-> 对于object，它的storage duration属性，决定了它的“allocation time point”（何时分配）和 “dealloaction time point”（何时被回收）。
+> 
 >
-> 列说明: 
+> #### 统一描述方式: object with `***`storage duration
+>
+> 本节标题的含义是: 后面为了描述的统一性，我们统一使用"object with `***`storage (duration)"格式，括号括起来的部分，表示是optional；下面是例子: 
+>
+> 描述具备automatic storage duration的object: **object with automatic storage** ;
+>
+> 描述具备static storage duration的object: object with static storage ;
+>
+> ### 本节内容组织
+>
+> 在`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Lifetime`中，已经说明了object lifetime中的activity，在其中的"Object and storage"章节中，已经论述了lifetime of object 和 storage duration之间的关系，本节以storage duration为分类标准，描述各种object的lifetime。
+>
+> 下面的表格重要描述allocation activity和dealloaction activity，列说明: 
 >
 > 列object: 描述哪些object具备对应的storage duration；
 >
@@ -40,27 +52,39 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 > 列"allocation": 描述的是"allocation time point"；
 >
 > 列"dealloaction": 描述的是"dealloaction time point"；
+>
+> 后面的非表格内容，对各种storage duration进行说明，其中会initialization、deinitialization的内容。
+>
+> 所以，根据这两大块内容，读者能够对object的lifetime有一个非常完整、清晰的认识。
 
 | storage duration | allocation                                                   | dealloaction                                                 | objects                                                      | scope               |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------- |
 | automatic        | allocated at the beginning of the enclosing code **block**   | `C++`: deallocated at the beginning of the enclosing code **block**<br>C: deallocated when it is exited by any means ([goto](https://en.cppreference.com/w/c/language/goto), [return](https://en.cppreference.com/w/c/language/return), reaching the end) | 1. local objects, **except** those declared <br>`static` （**static object**）, <br>`extern`（**extern object**） or<br> `thread_local`. | stack;<br>function; |
-| thread           | allocated when the thread begins                             | deallocated when the thread ends                             | 1. objects declared `thread_local` have this storage duration | stack;<br/>thread;  |
-| static           | allocated when the **program** begins                        | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括:<br>**static local object**、<br>**extern local object**） | process;            |
+| thread           | allocated when the thread begins<br>(Before thread function execution) | deallocated when the thread ends                             | 1. objects declared `thread_local` have this storage duration | stack;<br/>thread;  |
+| static           | allocated when the **program** begins<br>(Before main function) | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括:<br>**static local object**、<br>**extern local object**） | process;            |
 | dynamic          | allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              | heap;               |
 
 > NOTE: 上述storage duration是C++ language对OS中process execution model、memory model的刻画，参见工程Linux-OS的`Kernel\Guide\Multitasking\Process-model\Process-run-model`章节。
 
-#### 统一描述方式: object with `***`storage duration
-
-本节标题的含义是: 后面为了描述的统一性，我们统一使用"object with `***`storage (duration)"格式，括号括起来的部分，表示是optional；下面是例子: 
-
-描述具备automatic storage duration的object: **object with automatic storage** ;
-
-描述具备static storage duration的object: object with static storage ;
 
 
+> NOTE: 
+>
+> ### Initialization
+>
+> C++语言中，对object的initialization是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述主要是如下两篇文章:
+>
+> [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) 
+>
+> 它们是比较分散的，我将它们进行了整理: 
+>
+> `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Thread-local-storage-duration`
+>
+> `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
 
 #### Automatic storage duration
+
+对于object with automatic storage duration，它的initialization、deinitialization没有说明特殊之处。
 
 我们平时所说的"自动变量"就具备这种storage duration；
 
@@ -76,31 +100,24 @@ object with automatic storage的lifetime is bound by "`{}`"，对这个特性的
 
 #### Static storage duration
 
-对于object with static storage duration，相比于其它类型的object，它的lifetime是比较复杂的，在下面章节进行了描述:
+对于object with static storage duration，相比于其它类型的object，它的initialization、deinitialization是比较复杂的，原文中有专门说明: 
 
-`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
+> See [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) for details on initialization of objects with this storage duration.
+
+在前面的注解中，已经描述了我的整理思路。
 
 
 
-#### Thread storage duration(since C++11)
+#### Thread local duration
+
 
 这是C++11引入的，源于"C++11 introduced a standardized memory model"，关于此，参见`C++\Language-reference\Basic-concept\Abstract-machine\Memory-model`。
 
-对于对于object with thread storage duration相比于其它类型的object，它的lifetime是比较复杂的，在下面章节进行了描述:
+对于对于object with thread storage duration相比于其它类型的object，它的initialization、deinitialization是比较复杂的，原文中有专门说明: 
 
-`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Thread-local-storage-duration`
+> See [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) for details on initialization of objects with this storage duration.
 
-#### Initialization of object
-
-C++语言中，对object的initialization是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述是比较分散的，我将它们进行了整理: 
-
-`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Thread-local-storage-duration`
-
-`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
-
-#### Temporary object
-
-Temporary object的storage duration是什么呢？在cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) `#`  “Temporary object lifetime” 章节对它的lifetime进行了描述，可以肯定的是，temporary object的storage duration是无法用上述四种storage duration进行描述的。
+在前面的注解中，已经描述了我的整理思路。
 
 
 
@@ -202,3 +219,6 @@ It specifies **external linkage**, and does not technically affect **storage dur
 
 
 
+## Storage duration of temporary object
+
+Temporary object的storage duration是什么呢？在cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) `#`  “Temporary object lifetime” 章节对它的lifetime进行了描述，可以肯定的是，temporary object的storage duration是无法用上述四种storage duration进行描述的。

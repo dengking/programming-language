@@ -8,11 +8,11 @@ C++的initialization不仅种类繁多而且规则冗杂，下面是比较好的
 
 其次是需要搞清楚每种initialization的**effect**，对effect的讨论主要集中在对下面三种type的effect: 
 
-| type              | 注解        |
-| ----------------- | ----------- |
-| built-in type     | int、char等 |
-| user-defined type | class       |
-| aggregate type    | array       |
+| type           | 注解        |
+| -------------- | ----------- |
+| built-in type  | int、char等 |
+| OOP class type | class       |
+| aggregate type | array       |
 
 各种initialization的差异重要体现在它们的**effect**上。
 
@@ -58,57 +58,21 @@ If no initializer is provided, the rules of [default initialization](https://en.
 
 
 
-> NOTE: 对于下面几种类型的variable，由于它们的特殊性，C++语言进行了特殊的设计；从control theory的角度来看，它们的一些特性是out of control的，需要对它们进行特殊的介绍。
->
-> 原文进行了专门的说明，我们首先看看这几类variable。
-
-non-local variables with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration)
-
-non-local variables with thread-local storage duration 
-
-Static local variables
-
 ### Non-local variables
 
-> NOTE: 首先需要搞清楚non-local variable的概念，参见
->
-> - `Theory\Resource-management\Memory-management\Variable`章节
->
-> - `C-family-language\C++\Language-reference\Basic-concept\Data-model\Object\Storage.md`章节
->
-> 
-
-All non-local variables with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) are initialized as part of program startup, before the execution of the [main function](https://en.cppreference.com/w/cpp/language/main_function) begins (unless deferred, see below). 
-
-All non-local variables with thread-local storage duration are initialized as part of thread launch, sequenced-before the execution of the thread function begins. 
-
-For both of these classes of variables, initialization occurs in two distinct stages:
-
-#### Static initialization
-
-> NOTE: static initialization的含义是什么？它是发生在compile-time吗？后面有专门的章节对它进行介绍
-
-
-
-#### Dynamic initialization
-
-
-
-#### Early dynamic initialization
-
-
-
-#### Deferred dynamic initialization
-
-
+> NOTE: 参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration\Non-local-object`
 
 ### Static local variables
 
-
+> NOTE: 参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration\Static-local-object`
 
 ### Class members
 
+Non-static data members can be initialized with [member initializer list](https://en.cppreference.com/w/cpp/language/initializer_list) or with a [default member initializer](https://en.cppreference.com/w/cpp/language/data_members#Member_initialization).
 
+## 其他initialization
+
+下面是一些其他initialization: 
 
 |                                                              |                                                              |                |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |

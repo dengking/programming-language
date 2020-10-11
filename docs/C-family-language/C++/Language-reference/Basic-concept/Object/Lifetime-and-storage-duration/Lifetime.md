@@ -208,11 +208,9 @@ There are two exceptions from that:
 
 "nested"是因为: [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse): 同一个storage，可以用于多个object，即存在object已经end了，但是storage还存在。
 
-TODO: 对于temporary，属于哪种storage duration？
-
 #### TODO [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
 
-
+> NOTE: 这段内容是值得一读的
 
 ### TODO [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
 
@@ -230,6 +228,8 @@ after the lifetime of an object has ended and before the storage which the objec
 
 the following uses of the glvalue expression that identifies that object are undefined:
 
-
+> NOTE: 需要补充
 
 During construction and destruction, other restrictions apply, see [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction).
+
+> NOTE: 与此相关的一个idiom是: `C++\Idiom\OOP\Calling-Virtual-During-Initialization`

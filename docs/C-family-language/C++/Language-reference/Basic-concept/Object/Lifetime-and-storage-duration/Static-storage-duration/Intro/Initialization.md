@@ -8,7 +8,17 @@
 
 ### [Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#static-variables)
 
-There is, however, a category of variables that can (and should) be initialized before the program starts: static variables. Global (namespace) variables or static class members[1](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#fn:2) live for the entire execution of the program: they must be initialized before `main()` is run and destroyed after execution finishes. Such variables have *static storage duration*.
+As the compiler translates your program it must decide how to deal with variables introduced: When should a variable be initialized? What’s the initial value? When should it be destroyed?
+
+> NOTE: 其实，这所讨论的就是lifetime of object的问题，这在`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration`章节中已经进行了讨论。
+
+Most of the time the compiler must deal with *dynamic* variables, i.e. variables that are initialized and destroyed at runtime: local (block-scope) variables, function arguments, non-static class members, etc.
+
+The compiler has little chance to initialize such variables before execution starts: How is it supposed to know what arguments will be passed to a function?, or if a given code block will be reached? The answers may even vary from execution to execution, so their initialization and destruction must happen on demand, at runtime, *dynamically*.
+
+> NOTE: automatic storage duration和dynamic storage duration
+
+There is, however, a category of variables that can (and should) be initialized before the program starts: **static variables**. Global (namespace) variables or static class members[1](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#fn:2) live for the entire execution of the program: they must be initialized before `main()` is run and destroyed after execution finishes. Such variables have *static storage duration*.
 
 The lifetime of static variables doesn’t depend on the execution: they always exist; forever; no matter what. This leads to the beautiful property that they can be potentially evaluated and initialized at compile time.
 

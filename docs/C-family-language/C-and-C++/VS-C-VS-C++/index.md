@@ -1,8 +1,10 @@
 # VS C VS C++
 
-思路: C++在C上所增强的，主要方面：
+
 
 ## What C++ enhance?
+
+思路: C++在C上所增强的，主要方面：
 
 ### OOP
 
@@ -129,3 +131,9 @@ In C++, assignment operators are lvalue expressions, not so in C
 https://en.cppreference.com/w/c/language/operator_incdec
 
 Unlike `C++` (and some implementations of C), the increment/decrement expressions are never themselves lvalues: `&++a` is invalid.
+
+
+
+## linkage规则的差异
+
+参见[Storage class specifiers#Notes](https://en.cppreference.com/w/cpp/language/storage_duration#Notes)。

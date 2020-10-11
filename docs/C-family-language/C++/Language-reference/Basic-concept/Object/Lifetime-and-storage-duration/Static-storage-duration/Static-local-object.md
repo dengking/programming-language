@@ -29,7 +29,7 @@ Note: usual implementations of this feature use variants of the double-checked l
 >
 > 在`C++\Pattern\Singleton\Cpp-and-the-Perils-of-Double-Checked-Locking`中解释了为何double-checked locking pattern无法实现singleton。
 
-### Deinitialization
+### End
 
 The destructor for a block-scope static variable [is called at program exit](https://en.cppreference.com/w/cpp/utility/program/exit), but only if the initialization took place successfully.
 

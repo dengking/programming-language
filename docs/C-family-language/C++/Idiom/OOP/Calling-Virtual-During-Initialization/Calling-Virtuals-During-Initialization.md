@@ -251,3 +251,12 @@ int main()
 
 Using [Base-from-member idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Base-from-Member) more complex variations of this idiom can be created.
 
+
+
+## 补充
+
+在cppreference [Lifetime#Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)章节中，对这种行为进行了专门说明: 
+
+> [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction)
+
+C++标准中将其定义为undefined behavior。

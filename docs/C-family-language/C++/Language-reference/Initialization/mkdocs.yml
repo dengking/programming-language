@@ -1,16 +1,14 @@
 nav:
     - Introduction: index.md
-# 首先描述cppreference中initialization的概念    
+    # 首先描述cppreference中initialization的概念    
     - Initialization: Initialization.md
     - Uniform-initialization: Uniform-initialization.md
     - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
-# 下面专门描述Static Variables的initialization     
-    - Initialization-of-Static-Variables: Initialization-of-Static-Variables
     - Default-initialization: Default-initialization.md
     - Zero-initialization: Zero-initialization.md
     - Constant-initialization: Constant-initialization.md
     - Aggregate-initialization: Aggregate-initialization.md
-# Copy elision
+    # Copy elision
     - Copy-elision: Copy-elision
-# 实际的运用
+    # 实际的运用
     - Initialization-of-struct: Initialization-of-struct.md
