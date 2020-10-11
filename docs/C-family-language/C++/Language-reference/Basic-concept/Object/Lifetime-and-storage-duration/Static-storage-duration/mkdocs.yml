@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - Static-local-variables: Static-local-variables.md
+    - Static-local-object: Static-local-object.md
+    - Non-local-object: Non-local-object.md
