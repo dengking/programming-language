@@ -28,19 +28,33 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 > NOTE: 
 >
-> 次序、范围
->
-> single translation unit
+> 可以看到，dynamic initialization的order是非常复杂的，且存在着unordered，如果program依赖于这个order，则可能导致一些问题。
 >
 > 
 
-After all **static initialization** is completed, **dynamic initialization** of non-local variables occurs in the following situations:
+After all static initialization is completed, dynamic initialization of non-local variables occurs in the following situations:
 
 1) *Unordered dynamic initialization*,
 
 2) *Partially-ordered dynamic initialization*, (since C++17)
 
-3) *Ordered dynamic initialization*, 
+3) *Ordered dynamic initialization*, which applies to all other non-local variables: 
+
+Within a single translation unit, initialization of these variables is always [sequenced](https://en.cppreference.com/w/cpp/language/eval_order) in exact order their definitions appear in the source code.
+
+> NOTE:ordered
+
+Initialization of static variables in different translation units is indeterminately sequenced. 
+
+> NOTE: unordered
+
+Initialization of thread-local variables in different translation units is unsequenced.
+
+> NOTE: unordered
+
+
+
+
 
 ### Early dynamic initialization
 
