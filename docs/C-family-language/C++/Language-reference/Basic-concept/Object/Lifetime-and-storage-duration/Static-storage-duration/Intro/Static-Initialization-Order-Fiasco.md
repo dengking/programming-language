@@ -14,3 +14,9 @@
 
 [extern vs Singleton class](https://stackoverflow.com/questions/12247912/extern-vs-singleton-class)
 
+
+
+## TODO
+
+stackoverflow [Finding C++ static initialization order problems](https://stackoverflow.com/questions/335369/finding-c-static-initialization-order-problems)
+
