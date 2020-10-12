@@ -56,7 +56,7 @@ Initialization of thread-local variables in different translation units is unseq
 
 > NOTE: 上面提及的unordered这是static initialization order fiasco的根源；由于这种unordered是out of control ，因此programmer必须要使用一种可以control的替换方案。
 >
-> 
+> 这是解决这类问题的主要思路。
 
 
 

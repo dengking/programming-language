@@ -1,6 +1,6 @@
 # Static Initialization Order Fiasco
 
-“Static Initialization Order Fiasco”即“静态初始化顺序失败”
+“Static Initialization Order Fiasco”即“静态初始化顺序失败”。
 
 ## isocpp What’s the “`static` initialization order ‘fiasco’ (problem)”? [¶](https://isocpp.org/wiki/faq/ctors#static-init-order) [Δ](https://isocpp.org/wiki/faq/ctors#)
 
