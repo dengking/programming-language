@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
     - Books: Books.md
+    - Goal: Goal.md
     - Principle: Principle
     - Creational: Creational
     - Behavioral-pattern: Behavioral-pattern

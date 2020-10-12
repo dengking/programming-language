@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
+    - Composition-over-inheritance: Composition-over-inheritance
     - SOLID: SOLID    
     #################### 其他的一些设计思想####################     
     - Design-by-contract: Design-by-contract.md
-    
-    

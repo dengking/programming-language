@@ -12,7 +12,7 @@ programming language的设计者在设计实现某种paradigm的时候，需要�
 
 
 
-另外非常重要的一点是：每种paradigm，有着各自的优势，能够解决一些问题，所以现代programming language往往会采用多种paradigm，即“博采众长”，显然，这样的做法，让programming language更加地强大，当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是c++，它的两个典型的paradigm是object programming和generic programming。
+另外非常重要的一点是：每种paradigm，有着各自的优势，能够解决一些问题，所以现代programming language往往会采用多种paradigm，即“博采众长”，显然，这样的做法，让programming language更加地强大，当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是c++，它的两个典型的paradigm是OOP和generic programming。
 
 
 
@@ -28,28 +28,37 @@ Some paradigms are concerned mainly with implications for the [execution model](
 
 Common programming paradigms include: 
 
-- imperative（命令式）
+1) imperative（命令式）
 
-  in which the programmer instructs（指示） the machine how to change its state,
+in which the programmer instructs（指示） the machine how to change its state,
 
-  - [procedural](https://en.wikipedia.org/wiki/Procedural_programming) which groups instructions into procedures,
-  - [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming) which groups instructions together with the part of the state they operate on,
+- [procedural](https://en.wikipedia.org/wiki/Procedural_programming) which groups instructions into procedures,
 
-- declarative（陈述式）
+  > NOTE: procedural语言的典型代表是C
 
-  in which the programmer merely declares properties of the desired result, but not how to compute it
+- [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming) which groups instructions together with the part of the state they operate on,
 
-  - [functional](https://en.wikipedia.org/wiki/Functional_programming) in which the desired result is declared as the value of a series of function applications,
-  - [logic](https://en.wikipedia.org/wiki/Logic_programming) in which the desired result is declared as the answer to a question about a system of facts and rules,
-  - [mathematical](https://en.wikipedia.org/wiki/Mathematical_programming) in which the desired result is declared as the solution of an optimization problem
+2) declarative（陈述式）
+
+in which the programmer merely declares properties of the desired result, but not how to compute it
+
+- [functional](https://en.wikipedia.org/wiki/Functional_programming) in which the desired result is declared as the value of a series of function applications,
+- [logic](https://en.wikipedia.org/wiki/Logic_programming) in which the desired result is declared as the answer to a question about a system of facts and rules,
+- [mathematical](https://en.wikipedia.org/wiki/Mathematical_programming) in which the desired result is declared as the solution of an optimization problem
 
 > NOTE: 目前的主流programming language基本上属于上述两大类。
 
+
+
 [Symbolic](https://en.wikipedia.org/wiki/Symbolic_programming) techniques such as [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)), which allow the program to refer to itself, might also be considered as a **programming paradigm**. However, this is compatible with the major paradigms and thus is not a real paradigm in its own right.
+
+> NOTE: 关于reflection，参见`Theory\Reflection`
 
 For example, languages that fall into the **imperative paradigm** have two main features: they state the order in which operations occur, with constructs that explicitly control that order, and they allow **side effects**, in which **state** can be modified at one point in time, within one unit of code, and then later read at a different point in time inside a different unit of code. The communication between the **units of code** is not explicit. Meanwhile, in **object-oriented** programming, code is organized into [objects](https://en.wikipedia.org/wiki/Object_(programming)) that contain state that is only modified by the code that is part of the object. Most object-oriented languages are also imperative languages.
 
-> NOTE：当到了现在的这个层级，就会阅读越来越多的编程的理论，如果我没有记错的话，**state**这个术语在多篇文章中出现过，在阅读[Overview](#Overview)的时候，其中有这样的一段话“ In [functional programming](https://en.wikipedia.org/wiki/Functional_programming), programs are treated as a sequence of **stateless** function evaluations.”，这突然让我想起来这是和面向对象相反的，面向对象是state的，是有side effect的；state的概念在编程语言理论是是非常重要的；
+> NOTE：当到了现在的这个层级，就会阅读越来越多的编程的理论，如果我没有记错的话，**state**这个术语在多篇文章中出现过，在阅读[Overview](#Overview)的时候，其中有这样的一段话“ In [functional programming](https://en.wikipedia.org/wiki/Functional_programming), programs are treated as a sequence of **stateless** function evaluations.”，这突然让我想起来这是和面向对象相反的，面向对象是state的，是有side effect的；state的概念在编程语言理论是是非常重要的，下面的分析说明了state的本质: 
+>
+> 其实state是基于memory的，即通过memory来记录state；functional programming是stateless，这是源于他不需要memory。而OOP是有state的，所以它需要memory。
 
 In contrast, languages that fit the **declarative paradigm** do not state the order in which to execute operations. Instead, they supply a number of operations that are available in the system, along with the conditions under which each is allowed to execute. The implementation of the language's execution model tracks which operations are free to execute and chooses the order on its own. More at [Comparison of multi-paradigm programming languages](https://en.wikipedia.org/wiki/Comparison_of_multi-paradigm_programming_languages).
 
@@ -75,7 +84,9 @@ For [parallel computing](https://en.wikipedia.org/wiki/Parallel_computing), usin
 
 
 
-## Summary of paradigm
+## Comparison of programming paradigms
+
+本段是我总结的对各种programming paradigm的比较。
 
 ### OOP VS Procedural programming
 
@@ -83,7 +94,7 @@ For [parallel computing](https://en.wikipedia.org/wiki/Parallel_computing), usin
 
 Procedural programming的一种典型写法就是：
 
-```
+```c++
 pthread_mutex_t lock;
 pthread_mutex_init(&lock, NULL);
 pthread_mutex_lock(&lock);
@@ -106,3 +117,19 @@ OOP中，则完全不同，OOP中，整个程序是object之间的交互，objec
 ### OOP VS FP
 
 OOP是有state的，FP（functional programming）是没有state的。
+
+
+
+## Domain-specific programming paradigm
+
+本节标题的含义是: 特定领域的programming paradigm。
+
+本章所讲述的programming paradigm是software engineering中通用的programming paradigm，与此相对立的是domain-specific programming paradigm，它是指在特定领域，为了更加高效地解决特定问题，而设计的programming paradigm，这其实非常类似于**domain-specific language**，下面是一些例子: 
+
+|                                                              | first class citizen |
+| ------------------------------------------------------------ | ------------------- |
+| OOP                                                          | object              |
+| [process-oriented programming](https://en.wikipedia.org/wiki/Process-oriented_programming), | process             |
+| TensorFlow                                                   | Tensor              |
+| numpy                                                        | ndarray             |
+

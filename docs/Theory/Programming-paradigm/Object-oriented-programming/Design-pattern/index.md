@@ -28,3 +28,8 @@ refactoring [Classification of patterns](https://refactoring.guru/design-pattern
 
 即object之间communicate的pattern。
 
+## Reference
+
+- [w3sdesign](http://w3sdesign.com/index0100.php)
+- [Refactoring.Guru](https://refactoring.guru/)
+

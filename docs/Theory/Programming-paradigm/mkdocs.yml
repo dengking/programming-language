@@ -1,15 +1,15 @@
 nav:
     - Introduction: index.md
     - Programming-paradigm: Programming-paradigm.md
-########## 面向对象编程##########    
+    ########## 面向对象编程##########    
     - Object-oriented-programming: Object-oriented-programming
-########## 面向切面编程########    
+    ########## 面向切面编程########    
     - Aspect-oriented-programming: Aspect-oriented-programming
-########## 函数式编程##########
+    ########## 函数式编程##########
     - Functional-programming: Functional-programming
-########## 事件驱动编程##########    
+    ########## 事件驱动编程##########    
     - Event-driven-programming: Event-driven-programming
-########## 泛型编程##########
+    ########## 泛型编程##########
     - Generic-programming: Generic-programming
-########## 元编程##########
+    ########## 元编程##########
     - Metaprogramming: Metaprogramming

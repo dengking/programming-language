@@ -6,6 +6,8 @@
 
 > Python is [dynamically typed](https://en.wikipedia.org/wiki/Dynamic_programming_language) and [garbage-collected](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It supports multiple [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigms), including [procedural](https://en.wikipedia.org/wiki/Procedural_programming), object-oriented, and [functional programming](https://en.wikipedia.org/wiki/Functional_programming). 
 
-[C++](https://en.wikipedia.org/wiki/C++)
+[C++](https://en.wikipedia.org/wiki/C++):
+
+> TODO: 添加C++的说明
 
 本章就对programming language的paradigm进行分析。

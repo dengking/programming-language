@@ -59,14 +59,6 @@ expression、statement等都是属于此范轴。
 
 
 
-##### Abstract machines
-
-一般在设计一门programming language的时候，都是使用abstract machine来进行描述的。在工程[automata-and-formal-language](https://dengking.github.io/automata-and-formal-language)中对这方面内容进行了描述。
-
-[Stack machine](https://en.wikipedia.org/wiki/Stack_machine)
-
-
-
 
 
 ## Standard library
@@ -117,22 +109,35 @@ container指各种常见的数据结构，一般programming language的standard 
 - [C++ `extern`](https://en.cppreference.com/w/cpp/keyword/extern)
 - [C++ `using`](https://en.cppreference.com/w/cpp/keyword/using)
 
+## Design to an abstraction
 
+本节标题的含义是: 对于general purpose programming language，designer在设计programming language的时候，是遵循如下原则的:
 
-## Abstract machine
+**design to an abstraction, not an implementation**
 
-对于general purpose programming language，一个非常重要的问题就是cross platform。所以，语言的设计者，往往使用抽象的abstract machine，而不是具体的physical machine、OS。
+它的意思是，designer在设计programming language的时候，是基于**abstract machine**来进行设计的，而不是specific to an concrete platform（physical machine、OS），然后由各个platform的开发者来完成abstraction到implementation的映射，即在该platform上实现这门语言。这是很多programming language实现cross platform的关键所在。
+
+> NOTE: 这是我仿照OOP design principle中的: "Program to an 'interface', not an 'implementation'"而总结的，其实两者背后的思想是相同的，关于OOP design principle，参见: `Theory\Design-pattern\OOP-design-pattern\Principle`。
+
+### Example
 
 下面以三种主流programming language为例来进行说明：
 
-- python、java的跨平台本质上是相同的，python、java的跨平台是依赖于VM，这些VM也是由实现提供，比如VM for windows，VM for linux，由这些VM实现来完成abstract machine 到 physical machine的映射。
+| language | implementation                                               |
+| -------- | ------------------------------------------------------------ |
+| java     | 见下                                                         |
+| python   | python、java的跨平台是依赖于VM，这些VM也是由实现提供，比如VM for windows，VM for linux，由这些VM实现来完成abstract machine 到 physical machine的映射。 |
+| C++      | 跨平台由具体实现（compiler等）完成，MCVC for windows、gcc for linux，由这些compiler来完成abstract machine 到 physical machine的映射。 |
 
-- C++的跨平台由具体实现完成，MCVC for windows、gcc for linux，由这些compiler来完成abstract machine 到 physical machine的映射。
+### Abstract machine
 
-### Abstract machine and memory model
-
-上面提到了abstract machine，与abstract machine是它的memory model。
+出于语言设计的目标，programming language designer对abstract machine的定义是不同的: 
 
 java和python都没有向programmer提供memory model，所以programmer无法直接操作memory；
 
-C++和C都提供了。
+C++和C都提供了，因此programmer可以直接操作memory。
+
+
+
+关于abstract machine，参见工程[automata-and-formal-language](https://dengking.github.io/automata-and-formal-language)。
+

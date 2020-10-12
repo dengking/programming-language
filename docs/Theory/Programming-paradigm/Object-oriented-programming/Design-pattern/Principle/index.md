@@ -1,10 +1,14 @@
 # OOP design principle
 
+本章所描述的内容是理念型的，属于philosophy and design，而不是tips and tricks。我们描述目标，然后描述原则，坚持这些原则能够让我们更容易达到目标。
+
+软件工程的先驱提出了众多principle，因此无法面面俱到，我觉得我们需要重点关注那些基本principle，很多principle本质上是相通的，因此我们需要融会贯通: 给出与它相关联的principle。
+
 在进入具体的design pattern之前，有必要对oop中的design principle进行阐述，因为各种的design pattern其实都是贯彻着这些思想的，经典书籍[Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns)对其有着非常好的总结，所以本文的很多内容都是从其中摘录的。
 
 ## wikipedia [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns)
 
-> 开山之作。
+> NOTE: 原书是这个领域的开山之作。
 
 ### Introduction, Chapter 1
 
@@ -68,7 +72,4 @@ dynamic dispatch是连接抽象与具体的桥梁。
 
 
 
-
-
-
-
+## TODO: 维基百科 [Programming principles](https://en.wikipedia.org/wiki/Category:Programming_principles)
