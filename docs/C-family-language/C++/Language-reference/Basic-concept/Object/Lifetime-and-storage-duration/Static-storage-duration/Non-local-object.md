@@ -12,7 +12,7 @@
 >
 > 
 
-All non-local variables with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) are initialized as part of program startup, before the execution of the [main function](https://en.cppreference.com/w/cpp/language/main_function) begins (unless deferred, see below). 
+All **non-local variables** with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration) are initialized as part of program startup, before the execution of the [main function](https://en.cppreference.com/w/cpp/language/main_function) begins (unless deferred, see below). 
 
 All non-local variables with thread-local storage duration are initialized as part of thread launch, sequenced-before the execution of the thread function begins. 
 
@@ -20,13 +20,27 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 ### Static initialization
 
-> NOTE: static initialization的含义是什么？它是发生在compile-time吗？后面有专门的章节对它进行介绍
+> NOTE: static initialization的含义是什么？它是发生在compile-time吗？是的
 
 
 
 ### Dynamic initialization
 
+> NOTE: 
+>
+> 次序、范围
+>
+> single translation unit
+>
+> 
 
+After all **static initialization** is completed, **dynamic initialization** of non-local variables occurs in the following situations:
+
+1) *Unordered dynamic initialization*,
+
+2) *Partially-ordered dynamic initialization*, (since C++17)
+
+3) *Ordered dynamic initialization*, 
 
 ### Early dynamic initialization
 

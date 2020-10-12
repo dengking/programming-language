@@ -39,7 +39,7 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 >
 > 描述具备static storage duration的object: object with static storage ;
 >
-> ### 本节内容组织
+> #### 本节内容组织
 >
 > 在`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Lifetime`中，已经说明了object lifetime中的activity，在其中的"Object and storage"章节中，已经论述了lifetime of object 和 storage duration之间的关系，本节以storage duration为分类标准，描述各种object的lifetime。
 >
@@ -70,9 +70,9 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 > NOTE: 
 >
-> ### Initialization
+> ### Lifetime of object with static and thread-local storage duration
 >
-> C++语言中，对object的initialization是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述主要是如下两篇文章:
+> C++语言中，对object的lifetime是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述主要是如下两篇文章:
 >
 > [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) 
 >
