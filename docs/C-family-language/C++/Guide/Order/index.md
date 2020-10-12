@@ -40,6 +40,8 @@ C++语言对expression的evaluation的规定，参见`C-family-language\C-and-C+
 
 ## Typical order
 
+下面描述在C++语言中，常用的一些order。
+
 ### Stack order
 
 在C++中，很多order相关的内容，都可以使用stack模型来进行描述。
