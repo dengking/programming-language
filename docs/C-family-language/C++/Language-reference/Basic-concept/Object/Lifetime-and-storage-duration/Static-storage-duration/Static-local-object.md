@@ -4,6 +4,8 @@
 
 ## cppreference [Storage class specifiers#Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables)
 
+
+
 ### Dnitialization
 
 Variables declared at **block scope** with the specifier `static` or `thread_local` (since C++11) have static or thread (since C++11) storage duration but are initialized the first time control passes through their declaration (unless their initialization is [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization), which can be performed before the block is first entered). On all further calls, the declaration is skipped.
@@ -40,6 +42,18 @@ Function-local static objects in all definitions of the same [inline function](h
 > NOTE: 能够保证唯一性
 
 
+
+## cppreference [Initialization#Static local variables](https://en.cppreference.com/w/cpp/language/initialization#Static_local_variables)
+
+For initialization of locals (that is, block scope) static and thread-local variables, see [static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables).
+
+Initializer is not allowed in a block-scope declaration of a variable with [external or internal linkage](https://en.cppreference.com/w/cpp/language/storage_duration#Linkage). Such a declaration must appear with extern and cannot be a definition.
+
+> NOTE: 
+>
+> 对于static local variable with external linkage，如果带上initializer，则它就是definition了，显然这是违反了ODR的。
+>
+> 一般，我们使用的static local variable是no linkage的。
 
 ## Application
 
