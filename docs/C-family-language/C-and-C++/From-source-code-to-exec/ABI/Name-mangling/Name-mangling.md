@@ -1,4 +1,4 @@
-# [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
+# wikipedia [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
 
 In [compiler](https://en.wikipedia.org/wiki/Compiler) construction, **name mangling** (also called **name decoration**) is a technique used to solve various problems caused by the need to resolve unique names for **programming entities** in many modern [programming languages](https://en.wikipedia.org/wiki/Programming_language).
 

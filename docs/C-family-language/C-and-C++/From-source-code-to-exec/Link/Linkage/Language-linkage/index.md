@@ -1,6 +1,8 @@
 # Language linkage
 
-跨语言进行link。
+## Mix C and C++
+
+本节标题的含义是: Use C in C++、Use C++ in C
 
 C++的设计目标之一是要兼容C，C++继承了非常C的大部分内容，所以大多数情况下C++是可以兼容C的，比如: 
 
@@ -12,7 +14,7 @@ C++的设计目标之一是要兼容C，C++继承了非常C的大部分内容，
 
 本文讨论的主题是: 如何在这两门语言相互使用，这大概就是本文的标题Language linkage，跨语言进行link的含义。
 
-## Use C in C++
+### Use C in C++
 
 本节讨论在C++中使用C的情况，前面我们已经介绍了: 大多数情况下C++是可以兼容C的，但是对于一些特殊情况，则需要进行特殊处理，这是本节重点关注的内容。
 
@@ -50,7 +52,7 @@ geeksforgeeks [Name Mangling and extern “C” in C++](https://www.geeksforgeek
 
 
 
-## Use C++ in C
+### Use C++ in C
 
 反过来，在C中，可以使用C++吗？这个问题应该是：有些是可以的（比如function），但是有些无法实现的（比如OOP）。由于C++是C的超集，因此当混合使用两者的时候，需要使用g++来进行编译；
 
@@ -68,7 +70,13 @@ geeksforgeeks [Name Mangling and extern “C” in C++](https://www.geeksforgeek
 
 我需要写一个sqlite extension，它需要被编译为一个shared library，由于这个shared library需要被dynamic load，因此它没有header file，无法对name mangling进行控制，所以它必须用C来实现。所有的C++，都需要进行wrap。
 
-## Examples
+
+
+### TODO: embeddedartistry [Mixing C and C++: extern C](https://embeddedartistry.com/blog/2017/05/01/mixing-c-and-c-extern-c/)
+
+
+
+### Examples
 
 本节介绍一些使用了`extern "C"`的例子:
 
@@ -80,3 +88,10 @@ wikipedia [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
 
 ## cppreference [Language linkage](https://en.cppreference.com/w/cpp/language/language_linkage)
 
+
+
+## TODO: Namespace and extern
+
+[extern “C” linkage inside C++ namespace?](https://stackoverflow.com/questions/28996944/extern-c-linkage-inside-c-namespace)
+
+['extern "C"' should not be used with namespaces](https://rules.sonarsource.com/cpp/RSPEC-3732)
