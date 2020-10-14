@@ -156,3 +156,11 @@ stackoverflow [What is an undefined reference/unresolved external symbol error a
 重要用于special member function，下面是一些描述它的文章:
 
 stackoverflow [The new syntax “= default” in C++11](https://stackoverflow.com/questions/20828907/the-new-syntax-default-in-c11)
+
+
+
+## RAII and stack unwind
+
+基于RAII来进行开发，告诉我们在constructor、destructor中，分别执行相反的操作，stack unwind是实现机制；两者的结合能够实现非常好的效果，发挥出最大的威力。
+
+它们其实是属于stack order问题的，关于stack order，参见工程discrete。
