@@ -1,5 +1,4 @@
 nav:
     - Linkage: Linkage.md
-    - Language-linkage: Language-linkage.md
-    - Linkage-and-libraries: Linkage-and-libraries.md
+    - Language-linkage: Language-linkage
     - const-static-and-linkage: const-static-and-linkage.md

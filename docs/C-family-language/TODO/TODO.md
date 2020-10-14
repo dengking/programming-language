@@ -164,3 +164,22 @@ stackoverflow [The new syntax “= default” in C++11](https://stackoverflow.co
 基于RAII来进行开发，告诉我们在constructor、destructor中，分别执行相反的操作，stack unwind是实现机制；两者的结合能够实现非常好的效果，发挥出最大的威力。
 
 它们其实是属于stack order问题的，关于stack order，参见工程discrete。
+
+
+
+## Overload resolution and name mangling
+
+### 构成完整的编译过程
+
+将name mangling和overload resolution整合起来，构成完成的编译过程
+
+overload resolution，参见: `C++\Language-reference\Functions\Overload-resolution`。
+
+https://www.ibm.com/support/knowledgecenter/en/ssw_ibm_i_72/rzarg/name_mangling.htm
+https://en.wikipedia.org/wiki/Name_mangling
+
+### name mangling and extern
+
+https://www.geeksforgeeks.org/extern-c-in-c/
+
+在`C-family-language\C-and-C++\extern`中对它进行了讨论。需要注意的是name mangling仅仅涉及的function name的decoration。

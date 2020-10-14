@@ -30,7 +30,7 @@ For both of these classes of variables, initialization occurs in two distinct st
 >
 > 可以看到，dynamic initialization的order是非常复杂的，且存在着unordered，如果program依赖于这个order，则可能导致一些问题。
 >
-> 
+> 关于ordered、unordered，参见`C++\Guide\Order`。
 
 After all static initialization is completed, dynamic initialization of non-local variables occurs in the following situations:
 
@@ -42,7 +42,7 @@ After all static initialization is completed, dynamic initialization of non-loca
 
 Within a single translation unit, initialization of these variables is always [sequenced](https://en.cppreference.com/w/cpp/language/eval_order) in exact order their definitions appear in the source code.
 
-> NOTE:ordered
+> NOTE: ordered
 
 Initialization of static variables in different translation units is indeterminately sequenced. 
 
@@ -54,7 +54,17 @@ Initialization of thread-local variables in different translation units is unseq
 
 
 
-> NOTE: 上面提及的unordered这是static initialization order fiasco的根源；由于这种unordered是out of control ，因此programmer必须要使用一种可以control的替换方案。
+> NOTE: 
+>
+> 显然，initialization order是建立在translation unit上的一个规则，参见`C-and-C++\From-source-code-to-exec\Phases-of-translation\Separate-compilation-model.md`。
+>
+> 其实上述规则可以简单地总结如下: 
+>
+> translation unit之内: ordered
+>
+> translation unit之间: unordered
+>
+> 上面提及的unordered这是static initialization order fiasco的根源；由于这种unordered是out of control ，因此programmer必须要使用一种可以control的替换方案。
 >
 > 这是解决这类问题的主要思路。
 

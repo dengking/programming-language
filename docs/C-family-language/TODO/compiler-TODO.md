@@ -1,12 +1,3 @@
-# separate compilation model
-
-https://stackoverflow.com/questions/3749099/why-should-the-implementation-and-the-declaration-of-a-template-class-be-in-the
-
-
-http://www.cs.sjsu.edu/~pearce/modules/lectures/cpp/advanced/SeparateCompilation.htm
-
-https://www.cs.bu.edu/teaching/c/separate-compilation/
-
 
 # Forward declaration
 

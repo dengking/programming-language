@@ -250,3 +250,7 @@ On encountering name mangled attributes, Python transforms these names by prepen
 >>> [attr for attr in dir(t) if 'name' in attr]
 ['_Test__mangled_name', 'normal_name']
 ```
+
+## geeksforgeeks [Name Mangling and extern “C” in C++](https://www.geeksforgeeks.org/extern-c-in-c/)
+
+> NOTE: 其中给出了具体的例子
