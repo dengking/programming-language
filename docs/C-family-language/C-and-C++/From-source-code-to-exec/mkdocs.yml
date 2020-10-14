@@ -7,8 +7,7 @@ nav:
     - Compile: Compile
 #################### 链接阶段####################        
     - Link: Link
-    - Load: Load
     - ABI: ABI
     - Code-analysis-tool: Code-analysis-tool
-    - Optimization: Optimization
+
      

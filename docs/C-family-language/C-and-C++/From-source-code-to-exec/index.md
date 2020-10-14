@@ -2,6 +2,15 @@
 
 “From source code to exec”的含义是“从源代码到可执行程序”，这是本章要探讨的问题。按照在工程[compiler principle](https://dengking.github.io/compiler-principle)的1.1 Language Processors[#](https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.1-Language-Processors/#11-language-processors)中所定义的概念，本章所要讨论的是c/c++语言的language processing system。
 
+本章首先采用总分的思路来描述from source code to executable的过程: 首先描述完整的translation流程，建立起鸟瞰的视角，然后描述流程中的各个步骤。
+
+| 章节                  | 简介                                        |
+| --------------------- | ------------------------------------------- |
+| Phases-of-translation | 描述完整的translation流程，建立起鸟瞰的视角 |
+| Preprocess            | 预处理阶段                                  |
+| Compile               | 编译阶段                                    |
+| Link                  | 链接阶段                                    |
+
 
 
 ## 将ABI归入本章
