@@ -10,7 +10,11 @@
 
 3) Rust
 
+下面是关于它的一些文章:
 
+arne-mertz [Trailing Return Types, East Const, and Code Style Consistency](https://arne-mertz.de/2018/05/trailing-return-types-east-const-and-code-style-consistency/) : 
+
+论述了采用trailing returntype的好处。
 
 ## C++ RVO 和 prvalue
 
@@ -96,3 +100,59 @@ else
 }
 ```
 
+
+
+## static constexpr member data
+
+之前遇到过重要的问题:
+
+```C++
+struct ServiceTrait
+{
+	static constexpr const char* Name = "报单服务";
+};
+```
+
+然后在下面的macro中，使用`Name`
+
+```C++
+#define LOG_MSG_INFO(...)                                                           \
+	if (CommunicateLogger::Instance().IsEnable())                                   \
+	{                                                                               \
+		SPDLOG_LOGGER_INFO(CommunicateLogger::Instance().GetLogger(), __VA_ARGS__); \
+	}
+```
+
+下面这种写法能够支持编译并链接: 
+
+```C++
+LOG_MSG_INFO("{}的响应:{}", std::string(ServiceTrait::Name));
+```
+
+下面这种写法，虽然能够正常编译通过，但是`ldd`检查发现了undefined symbol: 
+
+```C++
+LOG_MSG_INFO("{}的响应:{}", ServiceTrait::Name);
+```
+
+这貌似是template + macro的问题。
+
+下面是的内容static `constexpr` member data: 
+
+stackoverflow [Undefined reference to static constexpr char[]](https://stackoverflow.com/questions/8016780/undefined-reference-to-static-constexpr-char)
+
+
+
+## undefined reference
+
+这是常见的链接错误,下面是比较好的内容:
+
+stackoverflow [What is an undefined reference/unresolved external symbol error and how do I fix it?](https://stackoverflow.com/questions/12573816/what-is-an-undefined-reference-unresolved-external-symbol-error-and-how-do-i-fix)
+
+
+
+## C++ `default` keyWord
+
+重要用于special member function，下面是一些描述它的文章:
+
+stackoverflow [The new syntax “= default” in C++11](https://stackoverflow.com/questions/20828907/the-new-syntax-default-in-c11)
