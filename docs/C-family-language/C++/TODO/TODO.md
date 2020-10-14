@@ -77,3 +77,22 @@ bing: "C++ TMP whether the type of a reference is the same as a type", 下面是
 stackoverflow [How to check if two types are same at compiletime(bonus points if it works with Boost strong typedef)](https://stackoverflow.com/questions/13071340/how-to-check-if-two-types-are-same-at-compiletimebonus-points-if-it-works-with)
 
 bing: c++ compile time isinstanceof
+
+
+
+## `unordered_map`
+
+判断`map`中是否存在一个key，如果存在，则取该元素。下面是C++中的安全的做法，避免了`[]`默认添加一个元素。
+
+```C++
+auto Itor = m_Tables.find(TableName);
+if (Itor == m_Tables.end())
+{
+    return &m_NotExist;
+}
+else
+{
+    return *Itor;
+}
+```
+
