@@ -1,5 +1,3 @@
-
-
 # Multiple-level pointer
 
 “multiple-level pointer”即“多级指针”；在cppreference [const_cast conversion](https://en.cppreference.com/w/cpp/language/const_cast)中，使用multilevel pointer来表达“多级指针”。
@@ -289,13 +287,29 @@ int main(int argc, char** argv)
 
 ### SQLite [Virtual Table Methods](https://sqlite.org/vtab.html)
 
-2.1. The xCreate Method
+这就是前面所述的"change the value of the pointer passed to a function as the function argument"。
+
+在外层的声明是:
+
+```C++
+sqlite3_vtab* pVTab
+```
+
+在下面的函数`xCreate`中则进行类似的写法:
+
+```C++
+*ppVTab = new sqlite3_vtab;
+```
+
+
+
+2.1. The `xCreate` Method
 
 ```C++
 int (*xCreate)(sqlite3 *db, void *pAux, int argc, char *const*argv, sqlite3_vtab **ppVTab, char **pzErr);
 ```
 
-2.2. The xConnect Method
+2.2. The `xConnect` Method
 
 ```C
 int (*xConnect)(sqlite3*, void *pAux, int argc, char *const*argv, sqlite3_vtab **ppVTab, char **pzErr);
