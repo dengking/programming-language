@@ -65,3 +65,15 @@ Initialization order:
 ### Calling virtual during construction and destruction
 
 [During construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction)
+
+
+
+## TMP
+
+### C++ compile time `isinstanceof`
+
+bing: "C++ TMP whether the type of a reference is the same as a type", 下面是一些有价值的内容: 
+
+stackoverflow [How to check if two types are same at compiletime(bonus points if it works with Boost strong typedef)](https://stackoverflow.com/questions/13071340/how-to-check-if-two-types-are-same-at-compiletimebonus-points-if-it-works-with)
+
+bing: c++ compile time isinstanceof
