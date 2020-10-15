@@ -32,6 +32,8 @@
 
 关于programming language的发展史，需要将thinking in Java的内容添加到其中。
 
+
+
 ## Abstraction in [object-oriented programming](http://en.wikipedia.org/wiki/Object-oriented_programming)
 
 > NOTE: 当今，OOP language普遍流行，这背后有着深刻的原因，其中非常重要的一点是: OOP对concept的描述。
@@ -84,10 +86,10 @@ void resume(KernelControlPath& kernel_control_path)
 class Task:
 	pass
 
-class ProcessTask:
+class ProcessTask(Task):
 	pass
 
-class ThreadTask:
+class ThreadTask(Task):
 	pass
 ```
 
@@ -144,16 +146,33 @@ class ThreadTask:
 
 ### OOP VS AOP
 
-AOP 抽象出 *cross-cutting concerns* 即 横切关注点 或者 aspect ，是**横向**的
+|         | 抽象内容                                                  | 方向         |
+| ------- | --------------------------------------------------------- | ------------ |
+| **AOP** | 抽象出 *cross-cutting concerns* 即 横切关注点 或者 aspect | 是**横向**的 |
+| **OOP** | 抽象出 base class、object、class                          | 是**纵向**的 |
 
-OOP 抽象出 base class，是**纵向**的
+两者都能够让我们**抽象**出公共部分，实现code reuse。
 
-两者都能够让我们**抽象**出公共部分。
+#### Good article
 
-在 [C++11实现一个轻量级的AOP框架](https://www.cnblogs.com/qicosmos/p/4772389.html) 中进行了介绍:
+1) 在 [C++11实现一个轻量级的AOP框架](https://www.cnblogs.com/qicosmos/p/4772389.html) 中进行了介绍:
 
 > AOP（Aspect-Oriented Programming，面向方面编程），可以解决面向对象编程中的一些问题，是OOP的一种有益补充。面向对象编程中的继承是一种从上而下的关系，不适合定义从左到右的横向关系，如果继承体系中的很多无关联的对象都有一些公共行为，这些公共行为可能分散在不同的组件、不同的对象之中，通过继承方式提取这些公共行为就不太合适了。使用AOP还有一种情况是为了提高程序的可维护性，AOP将程序的非核心逻辑都“横切”出来，将非核心逻辑和核心逻辑分离，使我们能集中精力在核心逻辑上，例如图1所示的这种情况。
 
-### OOP VS GP
+2) [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918):
+
+
+
+### AOP VS Meta-programming
+
+1) [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918):
+
+> To me AOP is some kind of "meta-programming".
+
+2) Python使用metaclass来实现AOP
+
+
+
+### TODO: OOP VS GP
 
 > TODO 重点比较OOP和duck type
