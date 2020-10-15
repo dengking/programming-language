@@ -162,7 +162,30 @@ Temporary objects are created in the following situations:
 
 2) [initializing](https://en.cppreference.com/w/cpp/language/list_initialization) an object of type [std::initializer_list](http://en.cppreference.com/w/cpp/utility/initializer_list)`<T>` from a braced-init-list (since C++11)
 
-> NOTE: 
+> NOTE: Example: 源自cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions):  
+>
+> ```C++
+> #include <iostream>
+> // function name: "isodd"
+> // parameter list has one parameter, with name "n" and type int
+> // the return type is bool
+> bool isodd(int n)
+> {                      // the body of the function begins
+> 	return n % 2;
+> }                      // the body of the function ends
+> int main()
+> {
+> 	for (int arg : { -3, -2, -1, 0, 1, 2, 3 })
+> 	{
+> 		std::cout << isodd(arg) << ' '; // isodd called 7 times, each
+> 										// time n is copy-initialized from arg
+> 	}
+> }
+> // g++ --std=c++11 test.cpp
+> 
+> ```
+>
+> 
 
 ##### until C++17
 

@@ -84,11 +84,17 @@ reference to function、reference to function。
 
 ### Uniform function model
 
-> **关于Uniform function model和Function and data model的说明:** 
+> NOTE: **关于Uniform function model和Function and data model的说明:** 
 >
 > 其实Function and data model就是一个非常统一的模型（进行了很高的抽象、囊括了非常多的情况），本节只是结合C++对function进行详细、具体的说明。
 
-本节标题的含义是: 统一函数模型，它的含义是: C++中，member method、operator都可以看做是一种function。下面分情况对Operator is a kind of function、member method is a kind of function进行详细说明: 
+本节标题的含义是: 统一函数模型，它的含义是: C++中，member method、operator、coroutine都可以看做是一种function，我们可以拓宽function的定义:
+
+> 任何可以使用function call expression都可以看做是function
+
+关于function，参见`C++\Language-reference\Functions`。
+
+下面分情况进行详细说明: 
 
 **Operator is a kind of function**
 
@@ -98,3 +104,10 @@ reference to function、reference to function。
 
 参见`C++\Language-reference\Classes\Members\Non-static-member\Function-member`，其中对此进行了详细说明。
 
+**Coroutine is a kind of function**
+
+[Coroutines (C++20)](https://en.cppreference.com/w/cpp/language/coroutines)是C++20引入的新特性，它也可以看做是一种function，参见:
+
+1) cppreference [Coroutines (C++20)](https://en.cppreference.com/w/cpp/language/coroutines)
+
+2) cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)

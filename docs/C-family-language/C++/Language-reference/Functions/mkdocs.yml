@@ -5,10 +5,9 @@ nav:
     # 函数调用中也包含一些内容
     - Function-call: Function-call
     # 运算符重载    
-    - Operator-overloading: Operator-overloading
+    - Function-overload: Function-overload
     - Lambda-expression: Lambda-expression
     # 变参函数
     - Variadic-function: Variadic-function
     - Function-as-first-class-citizen: Function-as-first-class-citizen
-    # 
-    - Overload-resolution: Overload-resolution
+    

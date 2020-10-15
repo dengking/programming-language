@@ -1,10 +1,10 @@
 # Function
 
-
+本文介绍C++中function的概念，以及与此相关的内容。
 
 ## cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)
 
-> [function declaration](https://en.cppreference.com/w/cpp/language/function) and [function definition](https://en.cppreference.com/w/cpp/language/function) 
+> 
 >
 > function call 
 >
@@ -14,9 +14,41 @@
 >
 > [lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda)
 >
-> [function overloading](https://en.cppreference.com/w/cpp/language/overload_resolution)
+> 
 >
 > 
+
+### Termination
+
+> NOTE: 函数终止
+
+A function can terminate by [returning](https://en.cppreference.com/w/cpp/language/return) or by [throwing](https://en.cppreference.com/w/cpp/language/throw) an [exception](https://en.cppreference.com/w/cpp/language/exceptions).
+
+
+
+### [Coroutine](https://en.cppreference.com/w/cpp/language/coroutines) is a kind of function
+
+> NOTE: 符合uniform function model，参见 `C++\Language-reference\Basic-concept\index.md` 
+
+
+
+### [Function declaration](https://en.cppreference.com/w/cpp/language/function) and [function definition](https://en.cppreference.com/w/cpp/language/function) 
+
+> NOTE: C++中的各种function:
+>
+> |                                                              | 章节                                                         |
+> | ------------------------------------------------------------ | ------------------------------------------------------------ |
+> | [Member functions](https://en.cppreference.com/w/cpp/language/member_functions) | `C++\Language-reference\Classes\Members\Non-static-member\Function-member` |
+> | Unnamed functions([lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda)) | `C++\Language-reference\Functions\Lambda-expression`         |
+> | [Friend](https://en.cppreference.com/w/cpp/language/friend) function |                                                              |
+
+### Functions are not objects
+
+
+
+### [Function overloading](https://en.cppreference.com/w/cpp/language/overload_resolution)
+
+> NOTE: 这是C++的重要特性
 
 
 
