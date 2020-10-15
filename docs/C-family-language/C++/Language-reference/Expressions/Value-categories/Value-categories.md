@@ -286,9 +286,9 @@ Properties:
 
 In particular, like all rvalues, xvalues bind to rvalue references, and like all glvalues, xvalues may be [polymorphic](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects), and non-class xvalues may be [cv-qualified](https://en.cppreference.com/w/cpp/language/cv).
 
-## Mixed categories
+### Mixed categories
 
-### glvalue
+#### glvalue
 
 A *glvalue expression* is either lvalue or xvalue.
 
@@ -298,7 +298,7 @@ Properties:
 - A glvalue may be [polymorphic](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects): the [dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type) of the object it identifies is not necessarily the static type of the expression.
 - A glvalue can have [incomplete type](https://en.cppreference.com/w/cpp/language/type#Incomplete_type), where permitted by the expression.
 
-### rvalue
+#### rvalue
 
 An *rvalue expression* is either prvalue or xvalue.
 
@@ -316,19 +316,19 @@ Properties:
 
 
 
-## Special categories
+### Special categories
 
 ### Pending member function call
 
 The expressions a.mf and p->mf, where `mf` is a [non-static member function](https://en.cppreference.com/w/cpp/language/member_functions), and the expressions a.*pmf and p->*pmf, where `pmf` is a [pointer to member function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions), are classified as prvalue expressions, but they cannot be used to initialize references, as function arguments, or for any purpose at all, except as the left-hand argument of the function call operator, e.g. (p->*pmf)(args).
 
-### Void expressions
+#### Void expressions
 
 Function call expressions returning void, cast expressions to void, and [throw-expressions](https://en.cppreference.com/w/cpp/language/throw) are classified as prvalue expressions, but they cannot be used to initialize references or as function arguments. They can be used in discarded-value contexts (e.g. on a line of its own, as the left-hand operand of the comma operator, etc.) and in the returnstatement in a function returning void. In addition, throw-expressions may be used as the second and the third operands of the [conditional operator ?:](https://en.cppreference.com/w/cpp/language/operator_other).
 
 Void expressions have no *result object*.(since C++17)
 
-### Bit fields
+#### Bit fields
 
 An expression that designates a [bit field](https://en.cppreference.com/w/cpp/language/bit_field) (e.g. a.m, where `a` is an lvalue of type struct A { int m: 3; }) is an lvalue expression: it may be used as the left-hand operand of the assignment operator, but its address cannot be taken and a non-const lvalue reference cannot be bound to it. A const lvalue reference can be initialized from a bit-field lvalue, but a temporary copy of the bit-field will be made: it won't bind to the bit field directly.
 

@@ -38,7 +38,7 @@
 
 Functions are C++ entities that associate a sequence of [statements](https://en.cppreference.com/w/cpp/language/statements) (a *function body*) with a *name* and a list of zero or more *function parameters*.
 
-> NOTE: 有一点需要注意的是，function的value category是rvalue，这在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中是由特殊说明的，这是因为function满足: `i`特性，即"has identity"，参见
+> NOTE: 有一点需要注意的是，function的value category是rvalue，这在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中是由特殊说明的，这是因为function满足: `i`特性，即"has identity"，参见`C++\Language-reference\Expressions\Value-categories`，但是"Functions are not objects"。
 
 ### Termination
 
@@ -58,11 +58,19 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 ### [Function declaration](https://en.cppreference.com/w/cpp/language/function) and [function definition](https://en.cppreference.com/w/cpp/language/function) 
 
-> NOTE: 参见`C++\Language-reference\Functions\Function-declaration`
+> NOTE: 参见`C++\Language-reference\Functions\Function-declaration`。
+>
+> 将对能够用于function declaration的所有specifier进行说明。
 
 ### Functions are not objects
 
-> NOTE: 
+> NOTE: 在`C++\Language-reference\Basic-concept\index.md`的"Thoughts"段中也进行了说明。
+
+Functions are not objects: there are no arrays of functions and functions cannot be **passed by value** or returned from other functions. Pointers and references to functions are allowed, and may be used where functions themselves cannot.
+
+> NOTE: 由于function is not object，因此在C++中，**function is not first class** citizen。
+>
+> [Implicit conversions#Function to pointer](https://en.cppreference.com/w/cpp/language/implicit_conversion#Function_to_pointer) 
 
 ### [Function overloading](https://en.cppreference.com/w/cpp/language/overload_resolution)
 
