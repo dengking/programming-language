@@ -30,7 +30,15 @@
 
 [Friend](https://en.cppreference.com/w/cpp/language/friend) function
 
+## Callable 
 
+本节标题的callable是指C++中支持function call expression的，它包括: 
+
+| 类别                  | explanation                                                  | 章节                                                         |
+| --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| function lvalue       |                                                              |                                                              |
+| reference to function |                                                              |                                                              |
+| function object       | cppreference [FunctionObject](https://en.cppreference.com/w/cpp/named_req/FunctionObject) | [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects) |
 
 
 
@@ -68,7 +76,7 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 Functions are not objects: there are no arrays of functions and functions cannot be **passed by value** or returned from other functions. Pointers and references to functions are allowed, and may be used where functions themselves cannot.
 
-> NOTE: 由于function is not object，因此在C++中，**function is not first class** citizen。
+> NOTE: 由于function is not object，因此在C++中，**function is not first class citizen**，但是C++中，提供了walkround让可以间接地实现: **function is not first class citizen**，这将在后面进行详细说明。
 >
 > [Implicit conversions#Function to pointer](https://en.cppreference.com/w/cpp/language/implicit_conversion#Function_to_pointer) 
 
@@ -81,6 +89,23 @@ Functions are not objects: there are no arrays of functions and functions cannot
 ### Function type
 
 > NOTE: 函数也是有类型的
+
+Each function has a type, which consists of the function's **return type**, the types of all parameters (after array-to-pointer and function-to-pointer transformations, see [parameter list](https://en.cppreference.com/w/cpp/language/function#Parameter_list)) , whether the function is [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) or not (since C++17), and, for non-static member functions, cv-qualification and ref-qualification (since C++11). 
+
+> NOTE: 上面这段话的意思是，function type是由如下组成的:
+>
+> - return type
+> - types of all parameters
+> - whether the function is [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) or not (since C++17)
+> - for non-static member functions, cv-qualification and ref-qualification (since C++11) (free function是没有cv-qualification和ref-qualification的)
+>
+> 需要注意的是: function overload是不考虑return type的，这和function type不同。
+
+Function types also have [language linkage](https://en.cppreference.com/w/cpp/language/language_linkage). 
+
+> NOTE: 关于language linkage，参见`C-and-C++\From-source-code-to-exec\Link\Linkage\Language-linkage`。
+
+There are no cv-qualified function types (not to be confused with the types of [cv-qualified functions](https://en.cppreference.com/w/cpp/language/member_functions) such as `int f() const;` or functions returning [cv-qualified types](https://en.cppreference.com/w/cpp/language/cv), such as [std::string](http://en.cppreference.com/w/cpp/string/basic_string) `const f();`). Any cv-qualifier is ignored if it is added to an alias for a function type.
 
 ### [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 
@@ -197,3 +222,8 @@ std::for_each(vec.begin(), vec.end(), print); // prints all elements
 ------
 
 Concerning your question about `operator()` overloading, well yes it is possible. You can perfectly write a **functor** that has several parentheses operator, as long as you respect the basic rules of method overloading (e.g. overloading only on the return type is not possible).
+
+
+
+
+
