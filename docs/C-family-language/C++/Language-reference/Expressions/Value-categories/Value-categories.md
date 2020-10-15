@@ -36,13 +36,15 @@ The following expressions are *lvalue expressions*:
 
 > NOTE: 这种是最容易理解的，它们是典型的`iM`
 
-the name of a variable, a function, a [template parameter object](https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter) (since C++20), or a data member, regardless of type, such as [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl). Even if the variable's type is rvalue reference, the expression consisting of its name is an lvalue expression;
+the name of a variable, a **function**, a [template parameter object](https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter) (since C++20), or a data member, regardless of type, such as [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl). Even if the variable's type is rvalue reference, the expression consisting of its name is an lvalue expression;
 
-> NOTE: 上面这段话后半句的意思是: 虽然 [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl) 的类型是rvalue reference，但是它们满足`iM`，因此它们是rvalue，这就是stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) `#` [part two](https://stackoverflow.com/a/11540204) 中总结的：
+> NOTE: 上面这段话后半句的意思是: 虽然 [std::cin](http://en.cppreference.com/w/cpp/io/cin) or [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl) 的类型是rvalue reference，但是它们满足`iM`，因此它们是lvalue，这就是stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) `#` [part two](https://stackoverflow.com/a/11540204) 中总结的：
 >
 > > A **named rvalue reference** is an lvalue, just like any other variable.
 >
 > 在`C++\Language-reference\Reference\Move-semantic\stackoverflow-What-is-move-semantics.md`中收录了这篇文章。
+>
+> 需要注意的是: function是lvalue，关于此，参见`C++\Language-reference\Functions\Function.md`。
 
 #### Lvalue function call expression
 
@@ -249,10 +251,10 @@ a function call or an overloaded operator expression, whose return type is non-r
 
 `p->m`, the built-in [member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2);
 
-- a.*mp, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2), or where `a` is an rvalue and `mp` is a pointer to data member (until C++11);
-- p->*mp, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2);
-- a, b, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an rvalue;
-- a ? b : c, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
+- `a.*mp`, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2), or where `a` is an rvalue and `mp` is a pointer to data member (until C++11);
+- `p->*mp`, the built-in [pointer to member of pointer](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-pmfc-2);
+- `a, b`, the built-in [comma](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator) expression, where `b` is an rvalue;
+- `a ? b : c`, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
 - a cast expression to non-reference type, such as `static_cast<double>(x)`, [std::string](http://en.cppreference.com/w/cpp/string/basic_string){}, or `(int)42`;
 
   
@@ -270,15 +272,12 @@ Properties:
 The following expressions are *xvalue expressions*:
 
 - a function call or an overloaded operator expression, whose return type is rvalue reference to object, such as std::move(x);
-- a[n], the built-in [subscript](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_subscript_operator) expression, where one operand is an array rvalue;
-- a.m, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `a` is an rvalue and `m` is a non-static data member of non-reference type;
-- a.*mp, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an rvalue and `mp` is a pointer to data member;
-- a ? b : c, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
-- a cast expression to rvalue reference to object type, such as static_cast<char&&>(x);
-
-| any expression that designates a temporary object, after [temporary materialization](https://en.cppreference.com/w/cpp/language/implicit_conversion#Temporary_materialization). | (since C++17) |
-| ------------------------------------------------------------ | ------------- |
-|                                                              |               |
+- `a[n]`, the built-in [subscript](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_subscript_operator) expression, where one operand is an array rvalue;
+- `a.m`, the [member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) expression, where `a` is an rvalue and `m` is a non-static data member of non-reference type;
+- `a.*mp`, the [pointer to member of object](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_pointer-to-member_access_operators) expression, where `a` is an rvalue and `mp` is a pointer to data member;
+- `a ? b : c`, the [ternary conditional](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) expression for some `b` and `c` (see [definition](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator) for detail);
+- a cast expression to rvalue reference to object type, such as `static_cast<char&&>(x)`;
+- any expression that designates a temporary object, after [temporary materialization](https://en.cppreference.com/w/cpp/language/implicit_conversion#Temporary_materialization). (since C++17)
 
 Properties:
 
@@ -305,13 +304,17 @@ An *rvalue expression* is either prvalue or xvalue.
 
 Properties:
 
-- Address of an rvalue may not be taken: &int(), &i++[[3\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-3), &42, and &std::move(x) are invalid.
+- Address of an rvalue may not be taken: `&int()`, `&i++`[[3\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-3), `&42`, and `&std::move(x)` are invalid.
+
 - An rvalue can't be used as the left-hand operand of the built-in assignment or compound assignment operators.
+
 - An rvalue may be used to [initialize a const lvalue reference](https://en.cppreference.com/w/cpp/language/reference_initialization), in which case the lifetime of the object identified by the rvalue is [extended](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) until the scope of the reference ends.
 
-| An rvalue may be used to [initialize an rvalue reference](https://en.cppreference.com/w/cpp/language/reference_initialization), in which case the lifetime of the object identified by the rvalue is [extended](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) until the scope of the reference ends.When used as a function argument and when [two overloads](https://en.cppreference.com/w/cpp/language/overload_resolution) of the function are available, one taking rvalue reference parameter and the other taking lvalue reference to const parameter, an rvalue binds to the rvalue reference overload (thus, if both copy and move constructors are available, an rvalue argument invokes the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor), and likewise with copy and move assignment operators). | (since C++11) |
-| ------------------------------------------------------------ | ------------- |
-|                                                              |               |
+- An rvalue may be used to [initialize an rvalue reference](https://en.cppreference.com/w/cpp/language/reference_initialization), in which case the lifetime of the object identified by the rvalue is [extended](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) until the scope of the reference ends.When used as a function argument and when [two overloads](https://en.cppreference.com/w/cpp/language/overload_resolution) of the function are available, one taking rvalue reference parameter and the other taking lvalue reference to const parameter, an rvalue binds to the rvalue reference overload (thus, if both copy and move constructors are available, an rvalue argument invokes the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor), and likewise with copy and move assignment operators). (since C++11)
+
+  > NOTE: 参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Lifetime`。
+
+
 
 ## Special categories
 
@@ -323,57 +326,9 @@ The expressions a.mf and p->mf, where `mf` is a [non-static member function](htt
 
 Function call expressions returning void, cast expressions to void, and [throw-expressions](https://en.cppreference.com/w/cpp/language/throw) are classified as prvalue expressions, but they cannot be used to initialize references or as function arguments. They can be used in discarded-value contexts (e.g. on a line of its own, as the left-hand operand of the comma operator, etc.) and in the returnstatement in a function returning void. In addition, throw-expressions may be used as the second and the third operands of the [conditional operator ?:](https://en.cppreference.com/w/cpp/language/operator_other).
 
-| Void expressions have no *result object*. | (since C++17) |
-| ----------------------------------------- | ------------- |
-|                                           |               |
+Void expressions have no *result object*.(since C++17)
 
 ### Bit fields
 
 An expression that designates a [bit field](https://en.cppreference.com/w/cpp/language/bit_field) (e.g. a.m, where `a` is an lvalue of type struct A { int m: 3; }) is an lvalue expression: it may be used as the left-hand operand of the assignment operator, but its address cannot be taken and a non-const lvalue reference cannot be bound to it. A const lvalue reference can be initialized from a bit-field lvalue, but a temporary copy of the bit-field will be made: it won't bind to the bit field directly.
 
-## History
-
-### CPL
-
-The programming language [CPL](https://en.wikipedia.org/wiki/CPL_(programming_language)) was first to introduce value categories for expressions: all CPL expressions can be evaluated in "right-hand mode", but only certain kinds of expression are meaningful in "left-hand mode". When evaluated in right-hand mode, an expression is regarded as being a rule for the computation of a value (the right-hand value, or *rvalue*). When evaluated in left-hand mode an expression effectively gives an address (the left-hand value, or *lvalue*). "Left" and "Right" here stood for "left of assignment" and "right of assignment".
-
-### C
-
-The C programming language followed a similar taxonomy, except that the role of assignment was no longer significant: C expressions are categorized between "lvalue expressions" and others (functions and non-object values), where "lvalue" means an expression that identifies an object, a "locator value"[[4\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-4).
-
-### C++98
-
-Pre-2011 C++ followed the C model, but restored the name "rvalue" to non-lvalue expressions, made functions into lvalues, and added the rule that references can bind to lvalues, but only references to const can bind to rvalues. Several non-lvalue C expressions became lvalue expressions in C++.
-
-### C++11
-
-With the introduction of move semantics in C++11, value categories were redefined to characterize two independent properties of expressions[[5\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-5):
-
-- *has identity*: it's possible to determine whether the expression refers to the same entity as another expression, such as by comparing addresses of the objects or the functions they identify (obtained directly or indirectly);
-- *can be moved from*: [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment), or another function overload that implements move semantics can bind to the expression.
-
-In C++11, expressions that:
-
-- have identity and cannot be moved from are called *lvalue* expressions;
-- have identity and can be moved from are called *xvalue* expressions;
-- do not have identity and can be moved from are called *prvalue* ("pure rvalue") expressions;
-- do not have identity and cannot be moved from are not used[[6\]](https://en.cppreference.com/w/cpp/language/value_category#cite_note-6).
-
-The expressions that have identity are called "glvalue expressions" (glvalue stands for "generalized lvalue"). Both lvalues and xvalues are glvalue expressions.
-
-The expressions that can be moved from are called "rvalue expressions". Both prvalues and xvalues are rvalue expressions.
-
-### C++17
-
-In C++17, [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision) was made mandatory in some situations, and that required separation of prvalue expressions from the temporary objects initialized by them, resulting in the system we have today. Note that, in contrast with the C++11 scheme, prvalues are no longer moved from.
-
-## Footnotes
-
-1. [↑](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-1) Assuming i has built-in type or the pre-increment operator is [overloaded](https://en.cppreference.com/w/cpp/language/operators) to return by lvalue reference.
-2. ↑ [2.0](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-pmfc_2-0) [2.1](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-pmfc_2-1) [2.2](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-pmfc_2-2) [2.3](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-pmfc_2-3) Special rvalue category, see pending member function call.
-3. [↑](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-3) Assuming i has built-in type or the postincrement operator is not [overloaded](https://en.cppreference.com/w/cpp/language/operators) to return by lvalue reference.
-4. [↑](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-4) "A difference of opinion within the C community centered around the meaning of lvalue, one group considering an lvalue to be any kind of object locator, another group holding that an lvalue is meaningful on the left side of an assigning operator. The C89 Committee adopted the definition of lvalue as an object locator." -- ANSI C Rationale, 6.3.2.1/10.
-5. [↑](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-5) ["New" Value Terminology](http://www.stroustrup.com/terminology.pdf) by Bjarne Stroustrup, 2010.
-6. [↑](https://en.cppreference.com/w/cpp/language/value_category#cite_ref-6) const prvalues (only allowed for class types) and const xvalues do not bind to T&& overloads, but they bind to the const T&& overloads, which are also classified as "move constructor" and "move assignment operator" by the standard, satisfying the definition of "can be moved from" for the purpose of this classification. However, such overloads cannot modify their arguments and are not used in practice; in their absence const prvalues and const xvalues bind to const T& overloads.
-
-### Defect reports
