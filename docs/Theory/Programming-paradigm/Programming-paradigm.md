@@ -118,9 +118,11 @@ OOP中，则完全不同，OOP中，整个程序是object之间的交互，objec
 
 OOP是有state的，FP（functional programming）是没有state的。
 
+### 更多
 
+在`Theory\Programming-paradigm\Abstraction\Abstraction-in-programming-language`中以abstraction的角度对programming paradigm进行了分析。
 
-## Domain-specific programming paradigm
+## Draft: Domain-specific programming paradigm
 
 本节标题的含义是: 特定领域的programming paradigm。
 
@@ -130,6 +132,9 @@ OOP是有state的，FP（functional programming）是没有state的。
 | ------------------------------------------------------------ | ------------------- |
 | OOP                                                          | object              |
 | [process-oriented programming](https://en.wikipedia.org/wiki/Process-oriented_programming), | process             |
-| TensorFlow                                                   | Tensor              |
-| numpy                                                        | ndarray             |
+| TensorFlow tensor-oriented programming                       | Tensor              |
+| numpy ndarray-oriented programming                           | ndarray             |
 
+在下面文章中，描述了**domain-specific language**:
+
+1) `C++\Idiom\TMP\Expression-Template`

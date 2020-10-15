@@ -6,6 +6,9 @@
 
 > NOTE: 这篇文章关于expression template的描述是非常好的。
 
+**Domain-specific languages** (DSLs) is a way of developing programs where the problem to be solved is expressed using notation that is much closer to the domain of the problem rather than the usual notation (loops, conditionals, etc.) provided by **procedural languages**. **Domain-specific embedded languages** (DSELs) is a special case of DSLs where the notation is embedded in a host language (e.g., C++). Two prominent examples of DSELs based on C++ are the Boost Spirit Parser Framework1 and Blitz++2 scientific computing library. Spirit provides a notation to write EBNF grammar directly into a C++ program whereas Blitz++ allows a notation to perform mathematical operations on matrices. Obviously, such notation is not provided in C++ natively. The key benefit of using such notation is that the program captures the intention of the programmer quite intuitively making the program much more readable. It reduces the development as well as maintenance costs
+dramatically.
+
 
 
 ## 维基百科[Expression templates](https://en.wikipedia.org/wiki/Expression_templates)

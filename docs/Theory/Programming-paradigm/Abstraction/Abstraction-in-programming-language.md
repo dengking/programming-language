@@ -137,3 +137,23 @@ class ThreadTask:
 > 依赖于抽象而不是具体，即上层依赖于抽象的接口，底层实现具体。上层到底层的映射，依赖于多态，它可以是compiler time完成，也可以是run time完成。比如get_token，实现静态多态，实现了多个具体实现版本，由compiler进行派发，进行选择
 >
 > 上述"依赖于抽象而不是具体"，其实就是program to abstraction。
+
+
+
+## Abstraction in programming paradigm
+
+### OOP VS AOP
+
+AOP 抽象出 *cross-cutting concerns* 即 横切关注点 或者 aspect ，是**横向**的
+
+OOP 抽象出 base class，是**纵向**的
+
+两者都能够让我们**抽象**出公共部分。
+
+在 [C++11实现一个轻量级的AOP框架](https://www.cnblogs.com/qicosmos/p/4772389.html) 中进行了介绍:
+
+> AOP（Aspect-Oriented Programming，面向方面编程），可以解决面向对象编程中的一些问题，是OOP的一种有益补充。面向对象编程中的继承是一种从上而下的关系，不适合定义从左到右的横向关系，如果继承体系中的很多无关联的对象都有一些公共行为，这些公共行为可能分散在不同的组件、不同的对象之中，通过继承方式提取这些公共行为就不太合适了。使用AOP还有一种情况是为了提高程序的可维护性，AOP将程序的非核心逻辑都“横切”出来，将非核心逻辑和核心逻辑分离，使我们能集中精力在核心逻辑上，例如图1所示的这种情况。
+
+### OOP VS GP
+
+> TODO 重点比较OOP和duck type
