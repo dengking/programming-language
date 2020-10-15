@@ -10,7 +10,7 @@
 
 关于non-static member functions，参见`C++\Language-reference\Classes\Members\Non-static-member\Function-member`。
 
-
+需要注意的是: function overload是不考虑return type的，这和function type不同。
 
 ## TODO: overload is a kind of static polymorphism
 
