@@ -4,13 +4,33 @@
 
 ## stackoverflow [What is an undefined reference/unresolved external symbol error and how do I fix it?](https://stackoverflow.com/questions/12573816/what-is-an-undefined-reference-unresolved-external-symbol-error-and-how-do-i-fix)
 
-
+> NOTE: 高赞回答
 
 
 
 ## stackoverflow [c++ undefined symbol when compiling](https://stackoverflow.com/questions/15486797/c-undefined-symbol-when-compiling)
 
 
+
+
+
+## TODO
+
+
+
+https://stackoverflow.com/questions/14557657/linker-error-c-undefined-reference
+
+https://stackoverflow.com/questions/143530/linker-woes-undefined-reference
+
+https://blog.csdn.net/huangbo1221/article/details/53438598
+
+https://latedev.wordpress.com/2014/04/22/common-c-error-messages-2-unresolved-reference/
+
+https://visualgdb.com/tutorials/linux/libraries/diagnosing/
+
+https://www.linuxquestions.org/questions/programming-9/shared-library-error-undefined-reference-215785/
+
+https://stackoverflow.com/questions/12748837/c-shared-library-undefined-reference-to-fooclasssayhello
 
 
 

@@ -1,4 +1,4 @@
-# [Object Files and Symbols](http://nickdesaulniers.github.io/blog/2016/08/13/object-files-and-symbols/)
+# nickdesaulniers [Object Files and Symbols](http://nickdesaulniers.github.io/blog/2016/08/13/object-files-and-symbols/)
 
 What was supposed to be one blog post about **memory segmentation** turned into what will be a series of posts. As the first in the series, we cover the extreme basics of object files and symbols. In follow up posts, I plan to talk about [static libraries, dynamic libraries,](http://nickdesaulniers.github.io/blog/2016/11/20/static-and-dynamic-libraries/) dynamic linkage, memory segments, and finally memory usage accounting. I also cover command line tools for working with these notions, both in Linux and OSX.
 
