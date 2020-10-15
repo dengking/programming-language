@@ -54,10 +54,13 @@ C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展�
 
 function 和 object的相同之处在于：
 
-- 都位于memory中（按照the stored-program computer的实现，显然function是位于memory中的），所以它们存在storage
-- 都是run-time概念（object在run-time被manipulation、function在run-time被执行）
-- 都有type
-- 都存在linkage（这在文章`C++\Language-reference\Basic-concept\Data-model\ObjectObject-storage-duration-and-lifetime.md` “linkage and storage duration of function”段中进行了探讨）
+1) 都位于memory中（按照the stored-program computer的实现，显然function是位于memory中的），所以它们存在storage
+
+2) 都是run-time概念（object在run-time被manipulation、function在run-time被执行）
+
+3) 都有type
+
+4) 都存在linkage（这在文章`C++\Language-reference\Basic-concept\Data-model\ObjectObject-storage-duration-and-lifetime.md` “linkage and storage duration of function”段中进行了探讨）
 
 由于function 和 object 都 位于memory中，所以存在：
 
@@ -80,7 +83,7 @@ reference to function、reference to function。
 - function 没有 storage duration，其实对于function而言，考虑它的storage duration并没有太大的意义，所以C-family language的designer并没有设计描述function storage duration的specifier、并没有提供供programmer对function的storage duration进行控制的操作（这在文章`C++\Language-reference\Basic-concept\Data-model\ObjectObject-storage-duration-and-lifetime.md` “linkage and storage duration of function”段中进行了探讨）
 - 无法create function
 
-
+在cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)的"Functions are not objects"章节中，对此也进行了说明。
 
 ### Uniform function model
 

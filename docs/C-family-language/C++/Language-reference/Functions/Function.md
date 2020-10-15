@@ -4,19 +4,7 @@
 
 ## cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)
 
-> 
->
-> function call 
->
-> function termination
->
-> type of function
->
-> [lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda)
->
-> 
->
-> 
+
 
 ### Termination
 
@@ -48,9 +36,11 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 ### [Function overloading](https://en.cppreference.com/w/cpp/language/overload_resolution)
 
-> NOTE: 这是C++的重要特性
+> NOTE: 这是C++的重要特性，参见`C++\Language-reference\Functions\Function-overload`
 
 
+
+type of function
 
 ### [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 
