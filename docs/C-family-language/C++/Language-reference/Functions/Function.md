@@ -2,6 +2,20 @@
 
 本文介绍C++中function的概念，以及与此相关的内容。
 
+分类方法一：
+
+member function 
+
+free function
+
+分类方法二 ：
+
+named function
+
+unnamed function
+
+
+
 ## cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)
 
 
@@ -40,7 +54,9 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 
 
-type of function
+### Function type
+
+> NOTE: 函数也是有类型的
 
 ### [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 

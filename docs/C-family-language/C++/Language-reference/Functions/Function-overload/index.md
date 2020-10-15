@@ -15,3 +15,12 @@
 ## TODO: overload is a kind of static polymorphism
 
 增加overload is a kind of static polymorphism的说明。
+
+
+
+## TODO
+
+[Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
+
+[Address of an overloaded function](https://en.cppreference.com/w/cpp/language/overloaded_address)
+
