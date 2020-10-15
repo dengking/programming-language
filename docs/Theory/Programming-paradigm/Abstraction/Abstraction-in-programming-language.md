@@ -153,6 +153,18 @@ class ThreadTask(Task):
 
 两者都能够让我们**抽象**出公共部分，实现code reuse。
 
+#### AOP VS Mixin
+
+AOP是一种编程思想，它告诉我们使用aspect来进行抽象；
+
+Mixin是OOP中的一种技巧，目的是促进code reuse，参见`Theory\Programming-paradigm\Object-oriented-programming\Assemble\Mixin`;
+
+两者都能够让我们实现code reusage。
+
+Mixin and AOP：https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Parameterized_Base_Class，在`C++\Idiom\TMP\Parameterized-Base-Class\Parameterized-Base-Class`中收录了这篇文章。
+
+
+
 #### Good article
 
 1) 在 [C++11实现一个轻量级的AOP框架](https://www.cnblogs.com/qicosmos/p/4772389.html) 中进行了介绍:
