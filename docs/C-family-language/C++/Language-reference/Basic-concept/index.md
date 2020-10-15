@@ -45,7 +45,7 @@ C++支持OOP，因此相对于C而言，它的很多概念都需要向OOP扩展�
 
 | 组成     | 说明                                                         |
 | -------- | ------------------------------------------------------------ |
-| function | 包括free function、member method，关于member method是function的讨论，参见 |
+| function | 包括free function、member method，关于member method是function的讨论，参见"Uniform function model" |
 | data     | 包括普通object、member object                                |
 
 ### Thoughts
@@ -96,5 +96,5 @@ reference to function、reference to function。
 
 **Member method is a kind of function**
 
-参见`C++\Language-reference\Classes\Members\Function-member\index.md`，其中对此进行了详细说明。
+参见`C++\Language-reference\Classes\Members\Non-static-member\Function-member`，其中对此进行了详细说明。
 

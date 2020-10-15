@@ -8,10 +8,10 @@
 
 C++的header file的name convention是不带`.h`；C++是C的超集，所以它会包含C的header file，对于这种情况，name convention为`c***`:
 
-| C          | C++                                                      |
-| ---------- | -------------------------------------------------------- |
-| `string.h` | [`cstring`](http://www.cplusplus.com/reference/cstring/) |
-|            |                                                          |
+| C          | C++                                                         |
+| ---------- | ----------------------------------------------------------- |
+| `string.h` | [`cstring`](http://www.cplusplus.com/reference/cstring/)    |
+| `stdlib.h` | [cstdlib](https://en.cppreference.com/w/cpp/header/cstdlib) |
 
 
 

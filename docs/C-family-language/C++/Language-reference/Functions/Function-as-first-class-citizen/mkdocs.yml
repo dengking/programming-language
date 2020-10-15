@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Function-objects: Function-objects
     - Wrapper: Wrapper

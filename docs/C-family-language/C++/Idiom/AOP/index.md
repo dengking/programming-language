@@ -9,3 +9,15 @@ Function
 RAII
 
 Temporary
+
+
+
+## Framework
+
+### AspectC++
+
+参见: `C++\Idiom\AOP\AspectC++`
+
+
+
+[qaop](https://github.com/whitebob/qaop)
