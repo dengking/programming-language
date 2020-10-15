@@ -1,24 +1,44 @@
 # Function
 
-本文介绍C++中function的概念，以及与此相关的内容。
+本文介绍C++中function的概念，以及与此相关的内容。C++是复杂的，这体现在它的function上，我们将看到C++中function的内容是非常繁杂的。
 
-分类方法一：
+## Classification of function
 
-member function 
+本节描述C++ function的分类:
 
-free function
+### 1) 基于programming paradigm
 
-分类方法二 ：
+上面的分类方法是采用的在`C++\Language-reference\Basic-concept\index.md#Extend to OOP`中总结的思路:
 
-named function
+> 首先描述Non-OOP，然后描述OOP
 
-unnamed function
+| 类别    |                                                              | 章节                                                         |
+| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| OOP     | [Member functions](https://en.cppreference.com/w/cpp/language/member_functions) | `C++\Language-reference\Classes\Members\Non-static-member\Function-member` |
+| Non-OOP | free function                                                |                                                              |
+
+
+
+### 2) 是否有名
+
+| 类别             |                                                              | 章节                                                 |
+| ---------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| named function   |                                                              |                                                      |
+| unnamed function | [lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda) | `C++\Language-reference\Functions\Lambda-expression` |
+
+### 3) 其他
+
+[Friend](https://en.cppreference.com/w/cpp/language/friend) function
+
+
 
 
 
 ## cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)
 
+Functions are C++ entities that associate a sequence of [statements](https://en.cppreference.com/w/cpp/language/statements) (a *function body*) with a *name* and a list of zero or more *function parameters*.
 
+> NOTE: 有一点需要注意的是，function的value category是rvalue，这在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中是由特殊说明的，这是因为function满足: `i`特性，即"has identity"，参见
 
 ### Termination
 
@@ -31,22 +51,18 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 ### [Coroutine](https://en.cppreference.com/w/cpp/language/coroutines) is a kind of function
 
 > NOTE: 符合uniform function model，参见 `C++\Language-reference\Basic-concept\index.md` 
+>
+> 暂时还没有学习coroutine。
 
 
 
 ### [Function declaration](https://en.cppreference.com/w/cpp/language/function) and [function definition](https://en.cppreference.com/w/cpp/language/function) 
 
-> NOTE: C++中的各种function:
->
-> |                                                              | 章节                                                         |
-> | ------------------------------------------------------------ | ------------------------------------------------------------ |
-> | [Member functions](https://en.cppreference.com/w/cpp/language/member_functions) | `C++\Language-reference\Classes\Members\Non-static-member\Function-member` |
-> | Unnamed functions([lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda)) | `C++\Language-reference\Functions\Lambda-expression`         |
-> | [Friend](https://en.cppreference.com/w/cpp/language/friend) function |                                                              |
+> NOTE: 参见`C++\Language-reference\Functions\Function-declaration`
 
 ### Functions are not objects
 
-
+> NOTE: 
 
 ### [Function overloading](https://en.cppreference.com/w/cpp/language/overload_resolution)
 
@@ -70,9 +86,7 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 
 
-## TODO
 
-c++如何实现function as first class citizen？
 
 
 
