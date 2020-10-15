@@ -4,26 +4,26 @@
 
 本章总结在C++中如何来运用AOP思想。
 
-|                     |      |      |
-| ------------------- | ---- | ---- |
-| high order function |      |      |
-|                     |      |      |
-|                     |      |      |
+| 实现方式            | 章节                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| high order function | `C++\Language-reference\Functions\Function-as-first-class-citizen` |
+| AspectC++           |                                                              |
+| Temporary           |                                                              |
 
 Function
 
 RAII
 
-Temporary
 
 
 
-## Framework
+
+
 
 ### AspectC++
 
 参见: `C++\Idiom\AOP\AspectC++`
 
-
+## 参考
 
 [qaop](https://github.com/whitebob/qaop)
