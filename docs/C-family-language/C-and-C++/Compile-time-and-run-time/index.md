@@ -68,7 +68,7 @@ run-time
 
 ### static polymorphism VS runtime polymorphism 
 
-参见`C++\Guide\Implementation-of-polymorphism\index.md`章节。
+参见`C++\Guide\Implementation-of-polymorphism\`章节。
 
 
 

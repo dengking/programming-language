@@ -14,7 +14,7 @@
 
 ### Value category of constant
 
-这个问题，还比较复杂。
+这个问题，还比较复杂，后续进行补充。
 
 
 
@@ -32,27 +32,7 @@ literal type和constant之间的关系。
 
 ## TODO enum VS const VS constexpr
 
-draft:
 
-为每个trait class添加一个表示其类型的常量，然后添加判断条件来判断它属于哪种类型？
-
-
-比如我定义有三种类型：
-
-```C++
-enum EServiceType
-{
-    
-   TradeService=1;//交易类服务 
-   QueryService=2;//查询类服务
-};
-
-constexpr bool IsTradeService(EServiceType ServiceType)
-{
-    return ServiceType == TradeService;
-}
-```
-这些都需要在编译时完成
 
 参考
 
@@ -65,9 +45,11 @@ https://stackoverflow.com/questions/2636303/how-to-initialize-a-private-static-c
 
 
 
+### enum VS constexpr
+
 enum、constexpr都可以用于in-class static constant
 
-都可以用于TMP进行dispatch，还有tag。
+
 
 
 

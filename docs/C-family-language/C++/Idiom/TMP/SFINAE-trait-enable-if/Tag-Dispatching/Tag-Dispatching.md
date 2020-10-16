@@ -267,14 +267,6 @@ struct ProtocolTrait
 
 
 
-## enum and tag dispatch
-
-Google c++ static polymorphism on enum values
-
-[When to Use Enums and When to Use Tag Dispatching in C++](https://www.fluentcpp.com/2018/05/01/when-to-use-enums-and-when-to-use-tag-dispatching-in-cpp/)
-
-[Polymorphic Enum in C++](https://stackoverflow.com/questions/3117462/polymorphic-enum-in-c)
-
 
 
 ## Example: iterator library

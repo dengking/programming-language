@@ -10,7 +10,7 @@ An *enumeration* is a distinct type whose value is restricted to a range of valu
 
 > NOTE:
 >
-> ## enumerator is named constant
+> ### enumerator is named constant
 >
 > 本节的标题的含义是: enumerator 本质上是constant；这就决定了enum的如下属性:
 >
@@ -20,6 +20,10 @@ An *enumeration* is a distinct type whose value is restricted to a range of valu
 > | value category是prvalue | `C++\Language-reference\Expressions\Value-categories` |
 >
 > 关于constant，参见`C++\Language-reference\Expressions\Constant-expressions`。
+>
+> ### enumerator is value and is not object
+>
+> enumerator 是 value，而不是 object，这是一个非常重要的事实，这决定了enumerator的value category是prvalue。
 
 
 
@@ -49,11 +53,11 @@ https://www.geeksforgeeks.org/enum-classes-in-c-and-their-advantage-over-enum-da
 
 为enum的每个可选值指定一个name（string），这是我们的一种常见需求，那如何来实现呢？这是本节讨论的问题。下面讨论了各种实现方式: 
 
-### switch-case
+### 1) switch-case
 
 使用switch-case来实现，在cppreference [Enumeration declaration](https://en.cppreference.com/w/cpp/language/enum)的[Example](https://en.cppreference.com/w/cpp/language/enum#Example)中给出的例子非常好。
 
-### map + TMP
+### 2) map + TMP
 
 这是我在阅读stackoverflow [Specialization of template in different namespace](https://stackoverflow.com/questions/25311512/specialization-of-template-in-different-namespace) （`C++\Language-reference\Template\Specialization\Specialization-of-template-in-different-namespace.md`中收录了这篇文章）时，发现的一种实现，下面是对原文的代码的整理，将它放到了同一个文件中，并且修正了compiler error: 
 
@@ -124,7 +128,7 @@ int main()
 
 
 
-### array + enum as index
+### 3) array + enum as index
 
 保存enum的name，使用array的方式，不使用map，这是我在阅读 cppreference [Array initialization](https://en.cppreference.com/w/c/language/array_initialization) # Example 时看到的: 
 
@@ -164,9 +168,7 @@ github [magic_enum](https://github.com/Neargye/magic_enum)
 
 
 
-## underlying type of enum
-
-TODO:
+## TODO: underlying type of enum
 
 - stackoverflow [What is the underlying type of a c++ enum?](https://stackoverflow.com/questions/1122096/what-is-the-underlying-type-of-a-c-enum)
 
@@ -191,11 +193,48 @@ auto as_integer(Enumeration const value)
 
 我记得在TMP中，有多处是使用到了enum的，需要整理一下。
 
+### Enum dispatch: Enum + `enable_if`
+
+为每个trait class添加一个表示其类型的常量，然后添加判断条件来判断它属于哪种类型？
+
+
+比如我定义有三种类型：
+
+```C++
+// 服务类型
+enum EServiceType
+{
+    
+   TradeService=1;//交易类服务 
+   QueryService=2;//查询类服务
+};
+// 某个服务
+struct FooService
+{
+	constexpr static int ServiceType = EServiceType::TradeService;
+};
+// 判断是否是交易类服务
+constexpr bool IsTradeService(EServiceType ServiceType)
+{
+    return ServiceType == TradeService;
+}
+
+template<class ServiceTraitType>
+auto ReqService()->typename std::enable_if<IsTradeService(ServiceTraitType::ServiceType), int>::type
+{
+    
+}
+```
+
+
+
+
+
 
 
 ## TODO enum and callback function
 
-这其实是要首先polymorphism。
+这其实是要实现polymorphism。
 
 https://www.codeproject.com/Articles/10006/How-to-create-an-enum-and-callback-function
 
