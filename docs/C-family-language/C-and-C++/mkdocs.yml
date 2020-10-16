@@ -13,6 +13,7 @@ nav:
     - Struct: Struct
     - Order-of-evaluation: Order-of-evaluation
     - SWIG: SWIG
+    - Wrapper: Wrapper
     
 
 
