@@ -21,6 +21,6 @@ nav:
     # 代码风格
     - Style-guide: Style-guide
     # 
-    - IDE: IDE.md
+    - IDE: IDE
     # 对c++中的一些专题进行介绍
     - Guide: Guide
