@@ -3,3 +3,4 @@ nav:
     - extern: extern
     - static: static
     - inline: inline
+    - cv: cv
