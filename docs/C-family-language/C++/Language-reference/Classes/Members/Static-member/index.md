@@ -29,6 +29,8 @@ https://accu.org/index.php/journals/442
 
 
 
+## inline
+
 ## TODO
 
 ### c++ static const members

@@ -121,11 +121,13 @@ No，参见: https://stackoverflow.com/questions/1820477/c-static-virtual-member
 
 ## Static in header file
 
+对于static object 和 static function，如果将它们定义于header file中，则会产生一些列问题，这在`./Static-in-header-file.md`中进行了讨论。
+
 
 
 ## 相关内容
 
-### singleton pattern
+### Singleton pattern
 
 参见: `C++\Pattern\Singleton`
 
