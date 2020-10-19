@@ -4,13 +4,13 @@
 
 
 
-## static storage duration and keyword `static`
+## Static storage duration and keyword `static`
 
 在C family language中，提及static，我们应该要有上述认知，即存在:
 
 1) static storage duration，参见: `C++\Language-reference\Basic-concept\Data-model\Object\Storage-duration-and-lifetime.md`
 
-2) keyword `static`
+2) keyword `static`，在下面会对它进行详细说明。
 
 ## keyword  `static`用法总结
 
@@ -43,55 +43,25 @@
 
 
 
-## static function
+## Static function
 
 参见`Static-function.md`。
 
 
 
-## static object
+## Static object
 
 对于static object，需要考虑的问题有：
 
-- storage duration / lifetime
-- initialization
-- 唯一性
+1) storage duration / lifetime
+
+2) 唯一性
 
 
 
+### Static local object in static function
 
-
-
-### c++ static const members
-
-https://cookierobotics.com/032/
-
-https://stackoverflow.com/questions/3531060/how-to-initialize-a-static-const-member-in-c
-
-https://en.cppreference.com/w/cpp/language/static#Constant_static_members
-
-https://stackoverflow.com/questions/29822181/prevent-static-initialization-order-fiasco-c
-
-https://stackoverflow.com/questions/12247912/extern-vs-singleton-class
-
-
-https://isocpp.org/wiki/faq/ctors#static-init-order
-
-
-https://isocpp.org/wiki/faq/ctors#construct-on-first-use-v2
-
-
-https://stackoverflow.com/questions/14495536/how-to-initialize-const-member-variable-in-a-class
-
-### Initialization
-
-参见`C++\Language-reference\Initialization\Initialization-of-Static-Variables`
-
-
-
-### static local object in static function
-
-
+对于function而言，添加`static`修饰，只能够改变其linkage。对于位于static function中的static local object，它的lifetime并不受static function的影响。
 
 ### 唯一性
 
@@ -115,6 +85,27 @@ https://stackoverflow.com/questions/185624/static-variables-in-an-inlined-functi
 
 参见: `C++\Language-reference\Classes\Members\Static-member`。
 
+### c++ static const members
+
+https://cookierobotics.com/032/
+
+https://stackoverflow.com/questions/3531060/how-to-initialize-a-static-const-member-in-c
+
+https://en.cppreference.com/w/cpp/language/static#Constant_static_members
+
+https://stackoverflow.com/questions/29822181/prevent-static-initialization-order-fiasco-c
+
+https://stackoverflow.com/questions/12247912/extern-vs-singleton-class
+
+
+https://isocpp.org/wiki/faq/ctors#static-init-order
+
+
+https://isocpp.org/wiki/faq/ctors#construct-on-first-use-v2
+
+
+https://stackoverflow.com/questions/14495536/how-to-initialize-const-member-variable-in-a-class
+
 
 
 ### static virtual?
@@ -128,3 +119,19 @@ No，参见: https://stackoverflow.com/questions/1820477/c-static-virtual-member
 ### singleton pattern
 
 参见: `C++\Pattern\Singleton`
+
+
+
+## static function and static object in header file cause duplicate definition
+
+
+
+如果添加`namespace`是否会避免？
+
+如何查看function是否multiple definition？
+
+
+
+compiler对internal linkage的实现方式。
+
+对static的讨论，既需要涉及linkage有需要涉及lifetime。
