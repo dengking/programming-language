@@ -1,0 +1,1 @@
+参见`C-and-C++\Resource-management\Memory`章节。
