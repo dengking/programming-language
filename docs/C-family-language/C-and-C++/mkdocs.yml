@@ -7,7 +7,6 @@ nav:
     - Pointer-and-array: Pointer-and-array
     - Declaration: Declaration
     - Data-model: Data-model
-    - Dynamic-emory-management: Dynamic-emory-management.md
     - Undefined-behavior: Undefined-behavior
     - Static: Static
     - Struct: Struct
