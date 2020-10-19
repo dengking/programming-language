@@ -4,13 +4,17 @@
 
 
 
-keyword `static` 
+## static storage duration and keyword `static`
 
-static storage duration
+在C family language中，提及static，我们应该要有上述认知，即存在:
 
-## `static`用法总结
+1) static storage duration，参见: `C++\Language-reference\Basic-concept\Data-model\Object\Storage-duration-and-lifetime.md`
 
-对于`static`的用法，可以采用如下两种分类方法: 
+2) keyword `static`
+
+## keyword  `static`用法总结
+
+对于keyword  `static`的用法，可以采用如下两种分类方法: 
 
 ### 1) programming paradigm
 
@@ -37,40 +41,13 @@ static storage duration
 
 和1)对比可以发现，其实2)中的1和2是对1)中的Non-OOP的细分；
 
-## 相关章节
-
-- `C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`
-- `C++\Language-reference\Initialization\Initialization-of-Static-Variables`
-
 
 
 ## static function
 
-对于static function，需要考虑的问题有：
-
-- linkage
-
-### What is static function
-
-首先描述static function的概念。
-
-https://stackoverflow.com/questions/558122/what-is-a-static-function-in-c
-
-### static function in header
+参见`Static-function.md`。
 
 
-
-https://stackoverflow.com/questions/780730/c-c-static-function-in-header-file-what-does-it-mean
-
-
-
-### static inline function in header
-
-https://stackoverflow.com/questions/47819719/static-inline-functions-in-a-header-file
-
-https://stackoverflow.com/questions/22102919/static-vs-inline-for-functions-implemented-in-header-files?noredirect=1
-
-https://stackoverflow.com/questions/12836171/difference-between-an-inline-function-and-static-inline-function
 
 ## static object
 

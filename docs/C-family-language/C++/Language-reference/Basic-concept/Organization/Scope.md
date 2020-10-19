@@ -4,6 +4,8 @@
 
 ## cppreference [Scope](https://en.cppreference.com/w/cpp/language/scope)
 
+> NOTE: 
+
 ### Block scope
 
 > NOTE: block scope非常重要，它是后面将要介绍的这些scope的基石，后面会对其进行专门的介绍。
@@ -24,6 +26,8 @@ The potential scope of a variable introduced by a declaration in a [block (compo
 
 ### Namespace scope
 
+The top-level scope of a translation unit ("file scope" or "global scope") is also a namespace and is properly called "global namespace scope". The potential scope of any entity declared in the global namespace scope begins at the declaration and continues to the end of the translation unit.
+
 ### Class scope
 
 ### Enumeration scope
@@ -42,17 +46,17 @@ The potential scope of a variable introduced by a declaration in a [block (compo
 
 其实，梳理清楚c++的scope之间的关系非常简单：思考能否在一个scope中声明另外一个scope，比如：能否在function中定义class、能否在class中定义namespace。下面按照自顶向下的顺序来描述c++的scope的nesting关系：
 
-file scope / global scope
+1) file scope / global scope
 
-namespace scope
+2) namespace scope
 
-class scope 
+3) class scope 
 
-Enumeration scope
+4) Enumeration scope
 
-function scope
+5) function scope
 
-block scope
+6) block scope
 
 需要注意的是，上述的nesting关系仅仅描述了部分，而没有包含所有的。
 
@@ -68,7 +72,11 @@ c++中使用`{}`来定义block，也就是在c++中`{}`所包围的区域就是�
 
 ## Scope and object lifetime
 
-关于scope和object lifetime，在[Declarations](https://en.cppreference.com/w/cpp/language/declarations)的Notes段中有描述。
+关于scope和object lifetime，参见:
+
+1) [Declarations](https://en.cppreference.com/w/cpp/language/declarations)的Notes段中有描述
+
+2) 参见 `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration` 章节
 
 ### Scope and resource management
 

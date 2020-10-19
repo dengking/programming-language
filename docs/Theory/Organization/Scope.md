@@ -1,6 +1,6 @@
 # Scope
 
-
+在programming language中，name的一个非常重要的属性就是它的scope，目前我们所遇到的programming language，比如Python、C++等，大多数采用的是static scope。
 
 ## 维基百科[Scope (computer science)](https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping)
 
@@ -12,5 +12,5 @@ Strictly speaking[[b\]](https://en.wikipedia.org/wiki/Scope_(computer_science)#c
 
 In most cases, [name resolution](https://en.wikipedia.org/wiki/Name_resolution_(programming_languages)) based on **lexical scope** is relatively straightforward to use and to implement, as(因为) in use one can read backwards(向后读取) in the source code to determine to which entity a **name** refers, and in implementation one can maintain a list of names and contexts when compiling or interpreting a program. Difficulties arise in [name masking](https://en.wikipedia.org/wiki/Name_masking), [forward declarations](https://en.wikipedia.org/wiki/Forward_declaration), and [hoisting](https://en.wikipedia.org/wiki/Variable_hoisting), while considerably subtler ones arise with [non-local variables](https://en.wikipedia.org/wiki/Non-local_variable), particularly in [closures](https://en.wikipedia.org/wiki/Closure_(computer_programming)).
 
-思考：通过identifier来refer object，那就出现这样的问题：哪些地方可以使用这个identifier；如果从name binding的角度来看的话，哪些地方可以binding，
+> NOTE：通过identifier来refer object，那就出现这样的问题：哪些地方可以使用这个identifier；如果从name binding的角度来看的话，哪些地方可以binding，
 

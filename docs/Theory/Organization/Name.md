@@ -16,7 +16,9 @@ c++是一门编译型语言，在cppreference c++的[Basic concepts](https://en.
 
 ## Thoughts
 
-与name相关的问题有：name的scope。
+在各种programming language章，与name相关的问题是：name的scope，显然，scope可以看做是name的一个属性。
+
+
 
 在python中，每个scope都可以认为有一个namespace。
 

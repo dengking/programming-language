@@ -1,5 +1,17 @@
 # Organization
 
+> 以自顶向下的方式来进行描述，构建完整的视图。
+>
+> 每个scope都有一个namespace，scope之间是nesting关系，这样namespace之间也是nesting关系。
+>
+> 形成一颗完整的tree。
+>
+> 以hierarchy的方式来进行组织: 
+>
+> 整体project，由多个file unit组成。
+>
+> 
+
 对于大型的project，name非常之多，所以这就要求programming language的提供一定机制来对这些name进行organize，目前大多数programming language所采用的方式是：**namespace**。
 
 除了对name进行组织，还需要对program本身进行分解组织，不可能将所有的program写在一个文件中，而是将其分解为多个file unit（文件单元），这些file unit共同构成了整个项目，我们将此称为**file organization**。在c和c++中，显然，file unit就是source file，在c和c++中，它们的另外一个名称是[translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))。python的file unit是`.py`文件。

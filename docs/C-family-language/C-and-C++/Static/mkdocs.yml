@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - Static-function: Static-function.md
+    

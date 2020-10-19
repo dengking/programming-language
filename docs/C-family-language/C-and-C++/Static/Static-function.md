@@ -1,12 +1,16 @@
-[TOC]
+# static function
+
+对于static function，显然是不需要考虑它的storage duration是没有意义的，对于static function，我们需要考虑的问题有：
+
+1) linkage
 
 
 
+## What is static function
 
+首先描述static function的概念。
 
-
-
-# [What is a “static” function?](https://stackoverflow.com/questions/558122/what-is-a-static-function)
+### stackoverflow [What is a “static” function?](https://stackoverflow.com/questions/558122/what-is-a-static-function)
 
 The question was about plain [c](https://stackoverflow.com/questions/tagged/c) functions, not [c++](https://stackoverflow.com/questions/tagged/c%2b%2b) `static` methods, as clarified in comments.
 
@@ -18,7 +22,7 @@ And why is it that if I declare a function, let's say `void print_matrix`, in le
 
 
 
-## [A](https://stackoverflow.com/a/558132)
+#### [A](https://stackoverflow.com/a/558132)
 
 `static` functions are functions that are only visible to other functions in the same file (more precisely *the same translation unit*).
 
@@ -26,7 +30,7 @@ And why is it that if I declare a function, let's say `void print_matrix`, in le
 
 
 
-## [A](https://stackoverflow.com/a/558201)
+#### [A](https://stackoverflow.com/a/558201)
 
 There is a big difference between static functions in C and static member functions in C++. In C, a static function is not visible outside of its translation unit, which is the object file it is compiled into. In other words, making a function static limits its scope. You can think of a static function as being "private" to its *.c file (although that is not strictly correct).
 
@@ -35,3 +39,26 @@ In C++, "static" can also apply to member functions and data members of classes.
 Non-static member functions can access all data members of the class: static and non-static. Static member functions can only operate on the static data members.
 
 One way to think about this is that in C++ static data members and static member functions do not belong to any object, but to the entire class.
+
+
+
+
+
+## static function in header
+
+
+
+https://stackoverflow.com/questions/780730/c-c-static-function-in-header-file-what-does-it-mean
+
+
+
+### static inline function in header
+
+https://stackoverflow.com/questions/47819719/static-inline-functions-in-a-header-file
+
+https://stackoverflow.com/questions/22102919/static-vs-inline-for-functions-implemented-in-header-files?noredirect=1
+
+https://stackoverflow.com/questions/12836171/difference-between-an-inline-function-and-static-inline-function
+
+
+
