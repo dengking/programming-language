@@ -10,6 +10,19 @@
 
 
 
-## formmater
+## Formmater
 
 目前，对于C++，我采用的formatter是`./my-bsd-formatter.xml`，它是基于BSD的。
+
+
+
+## TODO: eclipse + MinGW
+
+如何在eclipse中配置MinGW？参见:
+
+1) https://www.eclipse.org/4diac/documentation/html/installation/minGW.html
+
+
+
+## TODO: eclipse C++/C header and symbol
+
