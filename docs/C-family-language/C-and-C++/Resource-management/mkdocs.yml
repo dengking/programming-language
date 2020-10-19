@@ -1,4 +1,4 @@
 nav:
     # 首先概述c++中的resource management
     - Resource-management: Resource-management.md
-    - Memory: Memory
+    - Memory-management: Memory-management

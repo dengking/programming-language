@@ -94,7 +94,7 @@ object with automatic storage的lifetime is bound by "`{}`"，对这个特性的
 
 #### Dynamic storage duration
 
-> TODO: 添加一些内容
+对于object with dynamic storage duration，在`C-and-C++\Resource-management\Memory-management`章节进行了描述。
 
 
 
@@ -203,7 +203,9 @@ It specifies **external linkage**, and does not technically affect **storage dur
 
 `static` 、 `extern` 也可以 修饰 function，来控制它的linkage。
 
+对于static function，参见`C-and-C++\specifiers\static\Static-function`。
 
+对于extern function，目前没有进行总结。
 
 #### `static` specifier and static storage duration
 
@@ -213,7 +215,7 @@ It specifies **external linkage**, and does not technically affect **storage dur
 
 ### Static local variables
 
-> NOTE: 对于static local variable，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration\Static-local-variables`章节
+对于static local variable，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration\Static-local-variables`章节
 
 
 

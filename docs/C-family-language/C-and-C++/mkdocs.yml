@@ -8,7 +8,6 @@ nav:
     - Declaration: Declaration
     - Data-model: Data-model
     - Undefined-behavior: Undefined-behavior
-    - Static: Static
     - Struct: Struct
     - Order-of-evaluation: Order-of-evaluation
     - SWIG: SWIG

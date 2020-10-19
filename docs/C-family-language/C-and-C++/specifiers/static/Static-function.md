@@ -1,8 +1,6 @@
 # static function
 
-对于static function，显然是不需要考虑它的storage duration是没有意义的，对于static function，我们需要考虑的问题有：
-
-1) linkage
+在前面已经介绍了static function，本文结合一些具体的例子来对它进行分析。
 
 
 
@@ -39,26 +37,5 @@ In C++, "static" can also apply to member functions and data members of classes.
 Non-static member functions can access all data members of the class: static and non-static. Static member functions can only operate on the static data members.
 
 One way to think about this is that in C++ static data members and static member functions do not belong to any object, but to the entire class.
-
-
-
-
-
-## static function in header
-
-
-
-https://stackoverflow.com/questions/780730/c-c-static-function-in-header-file-what-does-it-mean
-
-
-
-### static inline function in header
-
-https://stackoverflow.com/questions/47819719/static-inline-functions-in-a-header-file
-
-https://stackoverflow.com/questions/22102919/static-vs-inline-for-functions-implemented-in-header-files?noredirect=1
-
-https://stackoverflow.com/questions/12836171/difference-between-an-inline-function-and-static-inline-function
-
 
 

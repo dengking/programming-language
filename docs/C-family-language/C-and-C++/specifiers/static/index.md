@@ -12,6 +12,18 @@
 
 2) keyword `static`，在下面会对它进行详细说明。
 
+## 描述思路
+
+在`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Storage-duration`的[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)小节所总结的: 
+
+> 无论是`C++`还是C，都没有专门描述linkage的specifier，而是将描述**storage duration**和描述**linkage**的specifier合并在一起，对于linkage，并没有单独描述它的specifier，但是，compiler提供了default linkage；关于这一点，我们需要仔细阅读cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration) 和 creference [Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration)
+
+因此，对于keyword `static`的讨论是离不开static storage duration和linkage的，下面是专门描述这两种属性的章节:
+
+1) static storage duration: `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Storage-duration`
+
+2) linkage: `C-and-C++\From-source-code-to-exec\Link\Linkage`
+
 ## keyword  `static`用法总结
 
 对于keyword  `static`的用法，可以采用如下两种分类方法: 
@@ -29,6 +41,32 @@
 
 虽然上面将两者分开，但是实际编程中，可能会出现两者之的重叠：static object in static function。
 
+
+
+#### Non-OOP
+
+使用keyword `static`修饰的object，具备:
+
+1) storage duration: static storage duration
+
+2) linkage: internal linkage
+
+
+
+使用keyword static修饰的function，具备:
+
+1) storage duration: 在`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Storage-duration`中，已经讨论过了这个问题:
+
+> 对于function而言，它没有**storage duration** property，只有**linkage** property，对于function而言，讨论它的storage duration是没有意义的
+
+2) linkage: internal
+
+在`./Static-function`中，对它进行了专门分析。
+
+#### OOP
+
+参见: `C++\Language-reference\Classes\Members\Static-member`。
+
 ### 2) cppreference [C++ keywords: static](https://en.cppreference.com/w/cpp/keyword/static)
 
 下面是 cppreference [C++ keywords: static](https://en.cppreference.com/w/cpp/keyword/static) 总结的static的用法，我觉得总结得是比较好的。
@@ -40,12 +78,6 @@
 | 3     | [declarations of class members not bound to specific instances](https://en.cppreference.com/w/cpp/language/static) | 对应的就是1)中的OOP      |
 
 和1)对比可以发现，其实2)中的1和2是对1)中的Non-OOP的细分；
-
-
-
-## Static function
-
-参见`Static-function.md`。
 
 
 
@@ -81,40 +113,17 @@ https://stackoverflow.com/questions/185624/static-variables-in-an-inlined-functi
 
 
 
-## static member
-
-参见: `C++\Language-reference\Classes\Members\Static-member`。
-
-### c++ static const members
-
-https://cookierobotics.com/032/
-
-https://stackoverflow.com/questions/3531060/how-to-initialize-a-static-const-member-in-c
-
-https://en.cppreference.com/w/cpp/language/static#Constant_static_members
-
-https://stackoverflow.com/questions/29822181/prevent-static-initialization-order-fiasco-c
-
-https://stackoverflow.com/questions/12247912/extern-vs-singleton-class
-
-
-https://isocpp.org/wiki/faq/ctors#static-init-order
-
-
-https://isocpp.org/wiki/faq/ctors#construct-on-first-use-v2
-
-
-https://stackoverflow.com/questions/14495536/how-to-initialize-const-member-variable-in-a-class
-
 
 
 ### static virtual?
 
 No，参见: https://stackoverflow.com/questions/1820477/c-static-virtual-members 
 
+## Static in header file
 
 
-## TODO
+
+## 相关内容
 
 ### singleton pattern
 
@@ -122,16 +131,5 @@ No，参见: https://stackoverflow.com/questions/1820477/c-static-virtual-member
 
 
 
-## static function and static object in header file cause duplicate definition
 
 
-
-如果添加`namespace`是否会避免？
-
-如何查看function是否multiple definition？
-
-
-
-compiler对internal linkage的实现方式。
-
-对static的讨论，既需要涉及linkage有需要涉及lifetime。
