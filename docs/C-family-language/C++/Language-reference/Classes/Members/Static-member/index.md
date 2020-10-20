@@ -116,6 +116,8 @@ The address of a static member function may be stored in a regular [pointer to f
 
 > A function defined entirely inside a [class/struct/union definition](https://en.cppreference.com/w/cpp/language/classes), whether it's a **member function** or a **non-member friend function**, is implicitly an inline function.
 
+这样的规则的优势是: 使得C++ header only library成为现实。一个问题是: 这些member function，是否是同一个？
+
 下面是对比的例子: 
 
 `test.h`
