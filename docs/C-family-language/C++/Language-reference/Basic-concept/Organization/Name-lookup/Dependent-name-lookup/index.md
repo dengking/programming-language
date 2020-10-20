@@ -294,6 +294,10 @@ The following resources have been helpful in the preparation of this article and
 
 ## cppreference [Two-phase name lookup](https://en.cppreference.com/w/cpp/language/two-phase_lookup)
 
+
+
+## cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name)
+
 Inside the definition of a [template](https://en.cppreference.com/w/cpp/language/templates) (both [class template](https://en.cppreference.com/w/cpp/language/class_template) and [function template](https://en.cppreference.com/w/cpp/language/function_template)), the meaning of some constructs may differ from one instantiation to another. In particular, types and expressions may depend on types of type template parameters and values of non-type template parameters.
 
 > NOTE: 下面是对最后一句话的理解：
@@ -651,7 +655,13 @@ Note: a `typedef` member of a current instantiation is only dependent when the t
 
 ### Type-dependent expressions
 
+The following expressions are type-dependent
 
+> NOTE: 下面收录了我目前遇到过的:
+
+1) `this`, if the class is a dependent type.
+
+> NOTE: 参见`C++\Language-reference\Classes\Members\Non-static-member\this-pointer`章节。
 
 ### Value-dependent expressions
 
@@ -779,6 +789,72 @@ void bar()
 
 ```
 
+> NOTE: 下面是一个补充的例子，更加复杂一些
+
+```C++
+#include "stddef.h" // size_t
+#include <vector>
+
+typedef struct SFieldInfo
+{
+	/**
+	 * 字段在结构体中的偏移位置
+	 */
+	size_t m_iOffset;
+};
+
+class CStructRtti
+{
+
+	std::vector<SFieldInfo> m_FieldMetaList;
+public:
+	template<typename ValueType>
+	const ValueType* GetValue(void *Data, int Index) const
+	{
+		const SFieldInfo &FieldMeta = m_FieldMetaList[Index];
+		size_t iOffset = FieldMeta.m_iOffset;
+		char *DataStartAddress = reinterpret_cast<char*>(Data) + iOffset;
+		return reinterpret_cast<const ValueType*>(DataStartAddress);
+	}
+};
+
+class CTableInterface
+{
+protected:
+	/**
+	 * 列信息
+	 */
+	CStructRtti *m_Columns { nullptr };
+public:
+	virtual double GetDouble(size_t RowID, size_t ColID)=0;
+};
+
+template<typename RowType>
+class CTableImpl: public CTableInterface
+{
+	RowType m_Row { };
+public:
+	double GetDouble(size_t RowID, size_t ColID) override
+	{
+		return *m_Columns->template GetValue<double>(&m_Row, ColID); // 必须要使用 The `template` disambiguator for dependent names
+	}
+};
+
+struct SRow
+{
+
+};
+
+int main()
+{
+	CTableImpl<SRow> t;
+	t.GetDouble(1, 1);
+}
+// g++ --std=c++11 test.cpp
+
+
+```
+
 
 
 ## TO READ
@@ -788,15 +864,15 @@ void bar()
 - gcc [14.7.2 Name Lookup, Templates, and Accessing Members of Base Classes](https://gcc.gnu.org/onlinedocs/gcc/Name-lookup.html)
 - stackoverflow [Where and why do I have to put the “template” and “typename” keywords?](https://stackoverflow.com/questions/610245/where-and-why-do-i-have-to-put-the-template-and-typename-keywords)
 
+
+
 ## Examples
 
 ### error: expected primary-expression before ‘>’ token
 
 这是一种非常常见的compile错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "Disambiguating dependent template names"段中介绍了这种错误，下面再补充一些例子: 
 
-stackoverflow [C++ template compilation error: expected primary-expression before ‘>’ token](https://stackoverflow.com/questions/3505713/c-template-compilation-error-expected-primary-expression-before-token)
-
-
+1) stackoverflow [C++ template compilation error: expected primary-expression before ‘>’ token](https://stackoverflow.com/questions/3505713/c-template-compilation-error-expected-primary-expression-before-token)
 
 
 
