@@ -1,0 +1,1 @@
+Thread local storage duration基本上和static local storage duration的规则类似，cppreference中也将两者放到了一起进行描述。

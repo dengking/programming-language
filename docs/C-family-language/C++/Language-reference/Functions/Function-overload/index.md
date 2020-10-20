@@ -12,9 +12,9 @@
 
 需要注意的是: function overload是不考虑return type的，这和function type不同。
 
-## TODO: overload is a kind of static polymorphism
+## Overload is a kind of static polymorphism
 
-增加overload is a kind of static polymorphism的说明。
+参见`C++\Guide\Plymorphism`。
 
 
 

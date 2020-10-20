@@ -44,7 +44,7 @@ c++的static polymorphism是由compiler来实现，C++的实现允许programmer�
 
 ### Implementation of overload 
 
-在`C++\Language-reference\Functions\Overload-resolution`章节对此进行深入分析。
+在`C++\Language-reference\Functions\Function-overload\Overload-resolution`章节对此进行深入分析。
 
 ### Overload + template
 
