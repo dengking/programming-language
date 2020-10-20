@@ -1,6 +1,6 @@
 # inline
 
-`inline`是C family language中非常常见的specifier，本文对它进行总结，下面是参考内容: 
+`inline`的含义是: 内联。它是C family language中非常常见的specifier，本文对它进行总结，下面是参考内容: 
 
 1) cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline)
 
