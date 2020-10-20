@@ -445,7 +445,7 @@ const X&&                           yes      yes
 
 上述表格总结得非常好，基本上涵盖了reference、value category and const的所有可能的组合，下面结合具体的例子来对它进行仔细的说明:
 
-1) `const X&`  to lvalue
+### 1) `const X&`  to lvalue
 
 来源: csdn [【C++数据类型】const 引用的几点用法](https://blog.csdn.net/hyman_c/article/details/52700094)
 
@@ -503,11 +503,13 @@ int main()
 
 ```
 
-2) `const X&` to const lvalue
+### 2) `const X&` to const lvalue
 
+关于此的一个典型的例子就是在const-qualified member function中，所有的member data都是const-qualified的，如果想要reference，必须要使用`const X&` ，在`C++\Language-reference\Classes\Members\Non-static-member\Function-member`中给出了典型的例子。
 
+### 3) `const X&`  to rvalue
 
-## Example
+下面是一个小例子: 
 
 
 如果一个函数的说明如下:

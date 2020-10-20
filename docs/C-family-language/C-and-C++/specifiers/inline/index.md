@@ -37,3 +37,21 @@ inline member function
 ## inline namespace
 
 参见: cppreference [Namespaces#Inline namespaces](https://en.cppreference.com/w/cpp/language/namespace#Inline_namespaces) 。
+
+
+
+## TODO: defined inline
+
+"defined inline"是在阅读 cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions) 时发现的。
+
+```C++
+class S
+{
+	int mf4() const // can be defined inline
+	{
+		return data;
+	} 
+	int data;
+};
+
+```
