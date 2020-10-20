@@ -13,7 +13,7 @@
 
 ### Explanation
 
-
+> NOTE: 下面对原文Explanation中的内容进行组织，添加了标题。
 
 ### Declaration and definition
 
@@ -68,6 +68,8 @@ int main()
 
 ### Refer to a static member
 
+> NOTE: 描述如何使用一个
+
 ```C++
 #include <iostream>
 
@@ -106,150 +108,50 @@ int main()
 
 ### Static member functions
 
-Static member functions cannot be virtual, const, or volatile.
+Static member functions are not associated with any object. When called, they have no `this` pointer.
+
+Static member functions cannot be `virtual`, `const`, or volatile.
 
 The address of a static member function may be stored in a regular [pointer to function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions), but not in a [pointer to member function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions).
 
-#### inline
 
-关于member function的inline规则，参见`inline` specifier，其中有这样的描述:
 
-> A function defined entirely inside a [class/struct/union definition](https://en.cppreference.com/w/cpp/language/classes), whether it's a **member function** or a **non-member friend function**, is implicitly an inline function.
+### Static data members
 
-这样的规则的优势是: 使得C++ header only library成为现实。一个问题是: 这些member function，是否是同一个？
+There is only one instance of the static data member in the entire program with static [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration), unless the keyword [`thread_local`](https://en.cppreference.com/w/cpp/keyword/thread_local) is used, in which case there is one such object per thread with thread storage duration (since C++11).
 
-下面是对比的例子: 
+> NOTE: static data members能够保证唯一性
 
-`test.h`
+#### inline static data member (since C++17)
 
 ```C++
-#ifndef TEST_H_
-#define TEST_H_
-
-#include <iostream>
-
 struct X
 {
-	static void f();
-
+    inline static int n = 1;
 };
-
-void X::f()
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-}
-
-#endif /* TEST_H_ */
-
-```
-
-非`inline`。
-
-`test2.cpp`
-
-```C++
-#include "test.h"
-
-void f()
-{
-	X::f();  // X::f is a qualified name of static member function
-}
-
-```
-
-`test.cpp`
-
-```C++
-#include "test.h"
-
-X g()
-{
-	return X();
-} // some function returning X
-
-
-
-int main()
-{
-	g().f();
-}
-
 ```
 
 
 
-编译: `g++ test.cpp test2.cpp` ，报错如下:
-
-```C++
-/tmp/ccFetxpp.o：在函数‘X::f()’中：
-test2.cpp:(.text+0x0): multiple definition of `X::f()'
-/tmp/ccRczaCY.o:test.cpp:(.text+0x0)：第一次在此定义
-collect2: 错误：ld 返回 1
-
-```
+> NOTE: 这是C++17引入的新特性，它的意图在cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline)中进行了描述:
+>
+> "Inline variables eliminate the main obstacle to packaging C++ code as header-only libraries"即"内联变量消除了将c++代码打包为仅头文件库的主要障碍"，简而言之，它是为了促进header-only librariy的。
+>
+> inline definition of member function早就是C++的标准了，但是inline definition of static data member却没有得到C++标准的**完整**的支持((后面会解释此处为什么说是**完整**的)，所以，再次之前，"packaging C++ code as header-only libraries"其实是存在着一定的挑战的，往往需要programmer采用walkaround策略。
+>
+> 上面这段话中说: "inline definition of static data member却没有得到C++标准的**完整**的支持"，这是因为在C++17之前，可以通过[Constant static members](https://en.cppreference.com/w/cpp/language/static#Constant_static_members)实现类似的inline definition of static data member。
 
 
 
-`test.h`
+#### [Constant static members](https://en.cppreference.com/w/cpp/language/static#Constant_static_members)
 
-```C++
-#ifndef TEST_H_
-#define TEST_H_
+> NOTE: inline definition
 
-#include <iostream>
-
-struct X
-{
-	static void f()
-    {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-    }
-
-};
-
-void X::f()
-
-
-#endif /* TEST_H_ */
-
-```
-
-`test2.cpp`
-
-```C++
-#include "test.h"
-
-void f()
-{
-	X::f();  // X::f is a qualified name of static member function
-}
-
-```
-
-`test.cpp`
-
-```C++
-#include "test.h"
-
-X g()
-{
-	return X();
-} // some function returning X
+static data member of integral or enumeration type 
 
 
 
-int main()
-{
-	g().f();
-}
 
-```
-
-编译: `g++ test.cpp test2.cpp` ，正确运行。
-
-
-
-### [Constant static members](https://en.cppreference.com/w/cpp/language/static#Constant_static_members)
 
 补充内容：
 
