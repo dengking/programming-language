@@ -113,7 +113,7 @@ The lifetime of a [reference](https://en.cppreference.com/w/cpp/language/referen
 
 Note: the lifetime of the referred object may end before the end of the lifetime of the reference, which makes [dangling references](https://en.cppreference.com/w/cpp/language/reference#Dangling_references) possible.
 
-
+> NOTE: 关于dangling reference，参见`C++\Language-reference\Reference\Reference`章节。
 
 ### Lifetime of objects of OOP class type
 
@@ -256,3 +256,5 @@ the following uses of the glvalue expression that identifies that object are und
 During construction and destruction, other restrictions apply, see [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction).
 
 > NOTE: 与此相关的一个idiom是: `C++\Idiom\OOP\Calling-Virtual-During-Initialization`
+
+> NOTE:  [dangling references](https://en.cppreference.com/w/cpp/language/reference#Dangling_references) 也是一种access outside of lifetime error，参见`C++\Language-reference\Reference\Reference`章节。

@@ -1,15 +1,16 @@
 # Reference 
 
-c++的reference是alias。
+C++的reference是alias。
 
-- `&`是左值的alias
+1) `&`是左值的alias
 
-- `&&`是右值的alias
+2) `&&`是右值的alias
 
 它可以：
 
-- alias to **already-existing** object
-- alias to **already-existing** function
+1) alias to **already-existing** object
+
+2) alias to **already-existing** function
 
 关于alias，参见`C++\Language-reference\Alias`。
 
@@ -36,9 +37,17 @@ References are not **objects**; they do not necessarily occupy storage, although
 
 Because references are not **objects**, there are no **arrays** of references, no **pointers** to references, and no **references** to references:
 
+```C++
+int& a[3]; // error: **arrays** of references
+int&* p;   // error: **pointers** to references
+int& &r;   // error: **references** to references
+```
+
+
+
 ### Reference collapsing
 
-> NOTE: 支持reference collapsing的目的是什么？
+> NOTE: 支持reference collapsing的目的是什么？支持perfect forward，后面章节中会进行介绍
 
 
 
@@ -62,6 +71,8 @@ int main() {
     std::cout << r2 << '\n'; // prints s, which now holds "Example"
 }
 ```
+
+
 
 #### Pass-by-reference semantics
 
@@ -411,15 +422,15 @@ See also [template argument deduction](https://en.cppreference.com/w/cpp/languag
 
 ### Dangling references
 
+> NOTE: 关于 [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) ，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration`章节。
 
 
 
 
 
+## Reference and value category and const
 
-## Reference and value category
-
-在[What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics)的[回答](https://stackoverflow.com/a/11540204)中的总结：
+在stackoverflow [What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics)的[回答](https://stackoverflow.com/a/11540204)中的总结：
 
 ```c++
             lvalue   const lvalue   rvalue   const rvalue
@@ -432,7 +443,67 @@ const X&&                           yes      yes
 
 > In practice, you can forget about `const X&&`. Being restricted to read from **rvalues** is not very useful.
 
-## isocpp faq [References](https://isocpp.org/wiki/faq/references) 
+上述表格总结得非常好，基本上涵盖了reference、value category and const的所有可能的组合，下面结合具体的例子来对它进行仔细的说明:
+
+1) `const X&`  to lvalue
+
+来源: csdn [【C++数据类型】const 引用的几点用法](https://blog.csdn.net/hyman_c/article/details/52700094)
+
+这个例子中的`ra`就是典型的`const X&`  to lvalue，后续对`ra`的使用需要保持相同的CV，否则会编译报错，下面是一个典型的例子: 
+
+```C++
+#include<iostream>
+using std::cout;
+using std::endl;
+void print(int &a)
+{
+	cout << a << endl;
+}
+int main()
+{
+	int a = 10;
+	const int &ra = a;
+	print(ra); //传入常左值引用
+	return 0;
+}
+// g++ test.cpp
+
+```
+
+上述代码编译报错如下:
+
+```C++
+test.cpp: 在函数‘int main()’中:
+test.cpp:12:10: 错误：将类型为‘int&’的引用初始化为类型为‘const int’的表达式无效
+  print(ra); //传入常左值引用
+          ^
+test.cpp:4:6: 错误：在传递‘void print(int&)’的第 1 个实参时
+ void print(int &a)
+
+```
+
+上述报错提示中的`const int`所指为`ra`，显然上述程序就违背了CV原则，修改版本如下:
+
+```C++
+#include<iostream>
+using std::cout;
+using std::endl;
+void print(const int &a)
+{
+	cout << a << endl;
+}
+int main()
+{
+	int a = 10;
+	const int &ra = a;
+	print(ra); //传入常左值引用
+	return 0;
+}
+// g++ test.cpp
+
+```
+
+2) `const X&` to const lvalue
 
 
 
@@ -474,3 +545,7 @@ test.cpp:2:6: 错误：在传递‘void Sub(int, std::chrono::seconds&)’的第
 
 ```
 这是因为`Sub(3,std::chrono::seconds(3));`的第二个入参是右值，无法通过左值引用进行传参。
+
+
+
+## TODO: isocpp faq [References](https://isocpp.org/wiki/faq/references) 
