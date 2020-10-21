@@ -6,15 +6,17 @@
 
 The class `basic_streambuf` controls input and output to a **character sequence**.
 
-> NOTE: 有两个character sequence：
+> NOTE: 有两个**character sequence**：
 >
-> - *controlled character sequence*，buffer
-> - *associated character sequence*，source or sink
+> 1) *controlled character sequence*，buffer
+>
+> 2) *associated character sequence*，source or sink
 
 It includes and provides access to
 
-1. The *controlled character sequence*, also called the *buffer*, which may contain *input sequence* (also called *get area*) for buffering the input operations and/or *output sequence* (also called *put area*) for buffering the output operations.
-2. The *associated character sequence*, also called *source* (for input) or *sink* (for output). This may be an entity that is accessed through OS API (file, TCP socket, serial port, other character device), or it may be an object (std::vector, array, string literal), that can be interpreted as a character source or sink.
+1) The *controlled character sequence*, also called the *buffer*, which may contain *input sequence* (also called *get area*) for buffering the input operations and/or *output sequence* (also called *put area*) for buffering the output operations.
+
+2) The *associated character sequence*, also called *source* (for input) or *sink* (for output). This may be an entity that is accessed through OS API (file, TCP socket, serial port, other character device), or it may be an object (`std::vector`, array, string literal), that can be interpreted as a character source or sink.
 
 A `basic_streambuf` object may support 
 
@@ -30,13 +32,13 @@ In latter case, six pointers are tracked, which may all point to elements of the
 >
 > 上面这张图基本上已经形象的描述了`basic_streambuf`的原理了。
 >
-> 在上一章中，我们已经知道c++ io library采用了buffering策略，对应的就是input buffer、output buffer。
+> 在上一章中，我们已经知道C++ IO library采用了buffering策略，对应的就是**input buffer**、**output buffer**。
 >
 > 上图展示了两个数据流向：
 >
 > **input/read**：
 >
-> 如果input buffer为empty，即无数据可读、即`in_avail()`返回0、即next pointer等于`egptr()`，则调用`underflow()`来从associated character sequence中读取数据，数据的流向如下：
+> 如果input buffer为empty，即无数据可读、即`in_avail()`返回0、即next pointer等于`egptr()`，则调用`underflow()`来从**associated character sequence**中读取数据，数据的流向如下：
 >
 > associated character sequence ->  `codecvt` -> input buffer 
 >
@@ -48,7 +50,7 @@ In latter case, six pointers are tracked, which may all point to elements of the
 >
 > output buffer -> `codecvt` -> associated character sequence
 >
-> 此时out普通 buffer为empty。如何application可以调用`sputc()`，即“The next pointer can be dereferenced and assigned to.”
+> 此时output buffer为empty。如何application可以调用`sputc()`，即“The next pointer can be dereferenced and assigned to.”
 
 If the **next pointer** is less than the **end pointer** in the **put area**, a *write position* is available. The next pointer can be dereferenced and assigned to.
 
