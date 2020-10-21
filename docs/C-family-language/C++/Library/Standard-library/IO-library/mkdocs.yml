@@ -1,5 +1,5 @@
 nav:
-    - Input-output-library: Input-output-library.md
+    - Introduction: index.md
     # 讨论buffer的实现
     - Buffer: Buffer.md
     - Predefined-standard-stream-objects: Predefined-standard-stream-objects
