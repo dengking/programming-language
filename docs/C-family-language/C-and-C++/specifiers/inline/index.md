@@ -10,9 +10,13 @@
 
 3) cppreference [Namespaces#Inline namespaces](https://en.cppreference.com/w/cpp/language/namespace#Inline_namespaces)
 
-下面以programming paradigm来对inline的用法进行总结: 
+
 
 ## Semantic of `inline` keyword 
+
+首先理解inline的语义，本节参考: 
+
+1) cppreference [`inline` specifier#Explanation](https://en.cppreference.com/w/cpp/language/inline)
 
 ### Inline function
 
@@ -28,6 +32,10 @@ Because the meaning of the keyword `inline` for functions came to mean "multiple
 
 > 因为函数的关键字“inline”的意思变成了“允许多重定义”，而不是“内联是首选”，这个意思被扩展到了变量。
 
+
+
+下面以programming paradigm来对inline的用法进行总结: 
+
 ## Non-OOP
 
 ### inline function
@@ -40,17 +48,17 @@ Because the meaning of the keyword `inline` for functions came to mean "multiple
 
 2) `C-and-C++\From-source-code-to-exec\Compile\Optimization\inline`章节
 
-### inline variable
+### inline variable: namespace-scope variable 
 
-参见:
+cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline):
 
-1) cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline)
+> The inline specifier, when used in a [decl-specifier-seq](https://en.cppreference.com/w/cpp/language/declarations#Specifiers) of a variable with **static storage duration** (static class member or namespace-scope variable), declares the variable to be an *inline variable*.
 
 ## OOP
 
 
 
-## inline definition
+### inline definition
 
 本节标题是我根据"defined inline"重新定义的，"defined inline"是在阅读 cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions) 时发现的，下面结合 cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions) 给出的例子来理解它的含义: 
 
@@ -79,9 +87,35 @@ int S::mf1() // if not defined inline, has to be defined at namespace
 
 > A function defined entirely inside a [class/struct/union definition](https://en.cppreference.com/w/cpp/language/classes), whether it's a member function or a non-member friend function, is implicitly an **inline function**.
 
-
-
 2) not defined inline: declaration 和 definition 是分隔开来的，一般的做法是: `.h`文件中存放declaration，`.cpp`文件中存放definition。
+
+
+
+#### friend function and member function
+
+cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline) : 
+
+> A function defined entirely inside a [class/struct/union definition](https://en.cppreference.com/w/cpp/language/classes), whether it's a member function or a non-member friend function, is implicitly an inline function.
+
+member function包括:
+
+1) non-static member function
+
+2) static member function
+
+#### static member variable
+
+cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline) : 
+
+
+
+> The inline specifier, when used in a [decl-specifier-seq](https://en.cppreference.com/w/cpp/language/declarations#Specifiers) of a variable with static storage duration (static class member or namespace-scope variable), declares the variable to be an *inline variable*.A static member variable (but not a namespace-scope variable) declared constexpr is implicitly an inline variable.
+
+
+
+
+
+
 
 
 
