@@ -357,3 +357,6 @@ int main()
 
 ```
 
+
+
+对比: 使用 named  namespace不能够实现前面Unnamed/anonymous namespaces的效果，还是会报multiple definition错误。
