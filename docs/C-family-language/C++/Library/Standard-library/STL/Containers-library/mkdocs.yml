@@ -2,7 +2,7 @@ nav:
     - Containers-library: Containers-library.md
     - Iterator-invalidation: Iterator-invalidation.md
     - Thread-safety: Thread-safety.md
-    - Map: Map
+    - Maps: Maps
     - List: List
     - Vector: Vector
     - Emplace_back: Emplace_back
