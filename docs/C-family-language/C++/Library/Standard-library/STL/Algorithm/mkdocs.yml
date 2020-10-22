@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Prefer-algorithm-over-hand-write-loop: Prefer-algorithm-over-hand-write-loop.md
     - std-copy: std-copy
+    - std-transform: std-transform
     
