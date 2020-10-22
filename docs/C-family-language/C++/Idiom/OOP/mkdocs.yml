@@ -1,10 +1,10 @@
 nav:
-########## initialization相关##########
+    ########## initialization相关##########
     - Construct-On-First-Use: Construct-On-First-Use
     - Nifty-Counter: Nifty-Counter
-########## resource相关########## 
+    ########## resource相关########## 
     - Resource-management: Resource-management   
-#################### virtual相关####################    
+    #################### virtual相关####################    
     - Virtual-Constructor: Virtual-Constructor
     - Virtual-Friend-Function: Virtual-Friend-Function  
     - Calling-Virtual-During-Initialization: Calling-Virtuals-During-Initialization
