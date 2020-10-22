@@ -1,3 +1,5 @@
 nav:
     - Vocabulary-type: Vocabulary-type.md
     - optional: optional.md
+    - any: any.md
+    - variant: variant.md
