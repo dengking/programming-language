@@ -25,3 +25,7 @@ C++是一种multi-paradigm programming language，下面罗列了c++支持的par
 ## 发展情况
 
 感觉C++ 在 OOP上，并没有太多的发展，而在generic programming、template-meta programming上，依然不断地引入新的特性。
+
+## Idiom
+
+在`C++\Idiom`中总结了各种paradigm的idiom。

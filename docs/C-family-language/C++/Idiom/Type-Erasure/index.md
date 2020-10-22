@@ -1,5 +1,39 @@
 # Type Erasure
 
+Google: "type erasure c++"。
+
+## stackoverflow [Type erasure techniques](https://stackoverflow.com/questions/5450159/type-erasure-techniques)
+
+
+
+## akrzemi1 [Type erasure — Part I](https://akrzemi1.wordpress.com/2013/11/18/type-erasure-part-i/)
+
+## akrzemi1 [Type erasure — Part II](https://akrzemi1.wordpress.com/2013/12/06/type-erasure-part-ii/)
+
+## akrzemi1 [Type erasure — Part III](https://akrzemi1.wordpress.com/2013/12/11/type-erasure-part-iii/)
+
+## akrzemi1 [Type erasure — Part IV](https://akrzemi1.wordpress.com/2014/01/13/type-erasure-part-iv/)
+
+
+
+## modernescpp [C++ Core Guidelines: Type Erasure](https://www.modernescpp.com/index.php/c-core-guidelines-type-erasure)
+
+
+
+## quuxplusone [ What is Type Erasure?](https://quuxplusone.github.io/blog/2019/03/18/what-is-type-erasure/)
+
+
+
+## cplusplus [C++ type erasure](http://www.cplusplus.com/articles/oz18T05o/)
+
+
+
+## davekilian [C++ 'Type Erasure' Explained](https://davekilian.com/cpp-type-erasure.html)
+
+## lucadavidian [Type erasure in C++](http://www.lucadavidian.com/2019/08/26/type-erasure-in-c/)
+
+
+
 
 
 ## More C++ Idioms/[Type Erasure](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Erasure)
@@ -71,7 +105,7 @@ private:
 
 
 
-## Complete Implementation
+### Complete Implementation
 
 ```c++
 #include "stddef.h"
@@ -269,3 +303,26 @@ private:
 };
 ```
 
+
+
+
+
+## C++ standard library support for type erasure
+
+
+
+https://en.cppreference.com/w/cpp/utility/any
+
+
+
+https://en.cppreference.com/w/cpp/utility/variant
+
+
+
+http://en.wikipedia.org/wiki/Type_erasure
+
+
+
+`void*`
+
+dynamic_cast `void*`
