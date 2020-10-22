@@ -1,2 +1,6 @@
 nav:
+    - Introduction: index.md
     - Range-based-idiom: Range-based-idiom
+    - Clear-and-minimize: Clear-and-minimize.md
+    - Shrink-to-fit: Shrink-to-fit.md
+    - Erase_if: Erase_if
