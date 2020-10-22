@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
     - STL: STL
-    - String: String
     - IO-library: IO-library
     - Thread: Thread
     - Atomic-operations-library: Atomic-operations-library

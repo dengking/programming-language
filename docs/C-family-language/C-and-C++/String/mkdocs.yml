@@ -1,2 +1,6 @@
 nav:
     - Introduction: index.md
+    - C-string: C-string
+    - C++string: C++string
+    - String-operation: String-operation
+    - fmt: fmt
