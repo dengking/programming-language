@@ -37,5 +37,5 @@ bfilipek [How To Use Vocabulary Types from C++17, Presentation](https://www.bfil
 
 `std::any` type erasure，是对`void *`的增强。
 
-`std::variant` 对`union`的增强
+`std::variant` 对`union`的增强。
 
