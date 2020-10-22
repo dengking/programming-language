@@ -22,3 +22,4 @@ The world is invited to catalog(编目) reusable pieces of C++ knowledge (simila
 在`Theory\Design-pattern\Software-design-pattern.md`的`Classification and list`段中的描述是：
 
 > The most basic and low-level patterns are often called *idioms*. They usually apply only to a single programming language.
+

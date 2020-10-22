@@ -53,3 +53,6 @@ object是first class citizen，通过wrapper，可以将target转换为first cla
 
 
 
+### String wrapper
+
+参见`C-and-C++\String`。
