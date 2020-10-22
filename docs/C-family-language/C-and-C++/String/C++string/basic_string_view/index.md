@@ -59,6 +59,8 @@ There is a case where taking a `std::string` with no `const&` is optimal over a 
 
 ² Actual use case.
 
+## bfilipek [Performance of std::string_view vs std::string from C++17](https://www.bfilipek.com/2018/07/string-view-perf.html)
+
 
 
 ## Custom implementation
