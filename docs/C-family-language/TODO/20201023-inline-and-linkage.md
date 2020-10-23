@@ -44,20 +44,28 @@ int main() {
 
 ```
 
-编译:
+> NOTE: 编译:
+>
+> ```SHELL
+> gcc test2.c test.c
+> ```
+>
+> 报错如下:
+>
+> ```C++
+> /tmp/cc05yZTX.o: In function `foo':
+> test.c:(.text+0x0): multiple definition of `foo'
+> /tmp/ccAQptbY.o:test2.c:(.text+0x0): first defined here
+> collect2: error: ld returned 1 exit status
+> ```
+>
+> 和原文给出的结果是不同的，从上述结果来看，inline function默认是external linkage。
 
-```
-gcc test2.c test.c
-```
 
-报错如下:
 
-```C++
-/tmp/cc05yZTX.o: In function `foo':
-test.c:(.text+0x0): multiple definition of `foo'
-/tmp/ccAQptbY.o:test2.c:(.text+0x0): first defined here
-collect2: error: ld returned 1 exit status
-```
+
+
+
 
 
 
