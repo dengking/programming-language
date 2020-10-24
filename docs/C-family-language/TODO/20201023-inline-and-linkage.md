@@ -61,6 +61,10 @@ int main() {
 >
 > 和原文给出的结果是不同的，从上述结果来看，inline function默认是external linkage。
 
+Since inline functions are treated as having **internal linkage**, an inline function definition can co-exist with a regular, external definition of a function with the same name in another translation unit. However, when you call the function from the file containing the inline definition, the compiler may choose *either* the inline version defined in the same file *or* the external version defined in another file for the call; your program should not rely on the inline version being called. In the following example, the call to `foo` from function g could return either 6 or 3:
+
+> NOTE: 关于拥有相同name的多个inline function这一点，在cppreference [`inline` specifier](https://en.cppreference.com/w/cpp/language/inline) 中有关于此的讨论。
+
 
 
 
