@@ -69,10 +69,6 @@ Since inline functions are treated as having **internal linkage**, an inline fun
 
 
 
-
-
-
-
 ## Example
 
 下面程序是根据ibm [Linkage of inline functions](https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzarg/inline_linkage.htm)#Beginning of C only改编而来的: 
@@ -136,4 +132,8 @@ test.c:(.text+0x0): multiple definition of `foo'
 collect2: error: ld returned 1 exit status
 
 ```
+
+
+
+## TODO: stackoverflow [Does inline determine internal linkage?](https://stackoverflow.com/questions/56349383/does-inline-determine-internal-linkage)
 
