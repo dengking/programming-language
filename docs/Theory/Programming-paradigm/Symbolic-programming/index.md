@@ -2,7 +2,7 @@
 
 在学习deep learning的时候，其中描述了symbolic programing，因此，启发了我需要对symbolic programming进行总结。
 
-wolfram是采用symbolic programming paradigm的一种programming language，所以，我们结合wolfram [Symbolic Programming: Computationally Active Language](https://blog.wolfram.com/2007/06/15/symbolic-programming-computationally-active-language/)来理解symbolic programming。
+wolfram是采用symbolic programming paradigm的一种programming language，所以，我们结合wolfram [Symbolic Programming: Computationally Active Language](https://blog.wolfram.com/2007/06/15/symbolic-programming-computationally-active-language/) 来理解symbolic programming。
 
 ## wolfram [Symbolic Programming: Computationally Active Language](https://blog.wolfram.com/2007/06/15/symbolic-programming-computationally-active-language/)
 
@@ -47,6 +47,10 @@ This is a powerful **unification**(统一), making possible many useful computat
 >
 > other programming language则不是采用的**unification**(统一)的方式，它们的execution of the program不是基于它们的**Linguistic structures**。结合C来理解上面这段话: C program是需要符合一定的**linguistic structure**的，C program需要经过compiler的翻译，转换为instruction的方式来由CPU执行，显然C program的执行与C program的linguistic structure是不一致的。
 >
+> 在 stackoverflow [Mathematica: what is symbolic programming?](https://stackoverflow.com/questions/4430998/mathematica-what-is-symbolic-programming) # [A](https://stackoverflow.com/a/4435720) 中对**Symbolic programming** 的 model of computation 也有着相关的解释: 
+>
+> > I would characterize a symbolic programming environment as one in which the expressions used to represent program text also happen to be the primary data structure. As a result, it becomes very easy to build abstractions upon abstractions since data can easily be transformed into code and vice versa.
+>
 > 当今，programming language的  **linguistic structure** 都是采用的tree structure。
 
 ### Symbols: The Atoms of Language
@@ -57,7 +61,13 @@ This is a powerful **unification**(统一), making possible many useful computat
 
 > 翻译: 符号是语言的基本原子，也是符号编程的基本原子。符号的意义在它能够有不同的notation——无论是单词、数学函数还是音符——然后在整个系统中被分配解释。
 >
-> 直白的意思是: symbol其实是一种指代，它能够指代的事物的范围是非常广泛的，比如这段话中所列举的: word、mathematical function，至于symbol所指代的内容，需要后续进行赋值，这就是最后一段话的含义。
+> 直白的意思是: symbol其实是一种指代，它能够指代的事物的范围是非常广泛的，比如这段话中所列举的: word、mathematical function，至于symbol所指代的内容，需要后续进行赋值，这就是最后一段话的含义。在deep learning中，一般将symbol称为placeholder，比如:
+>
+> 1) mxnet [Deep Learning Programming Paradigm](https://mxnet.apache.org/versions/master/api/architecture/program_model):
+>
+> > We define the abstract function in terms of **placeholder** values
+>
+> 2) TensorFlow
 >
 > 后面会对symbol的含义、作用进行更加全面的描述。
 
@@ -198,6 +208,10 @@ It’s pretty impressive that so many useful consequences can flow from the simp
 
 已经将**Lecture Note**下载到本地了。
 
+2) ybrikman [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/)#Symbolic programming
+
+
+
 ## Symbolic programming and formal grammar
 
 Symbolic programming 和 formal grammar都是基于nesting关系构建的。
@@ -237,3 +251,7 @@ Symbolic programming 和 formal grammar都是基于nesting关系构建的。
 #### [SymPy](https://www.sympy.org/en/index.html)
 
 #### ArashPartow [exprtk](https://github.com/ArashPartow/exprtk)
+
+#### Deep learning
+
+Deep learning中，我们需要构建computational graph，computational graph就是典型的symbolic mathematics。目前大多数deep learning implementation，都支持symbolic programming。
