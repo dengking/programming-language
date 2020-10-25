@@ -2,6 +2,14 @@
 
 在阅读[blaze](https://bitbucket.org/blaze-lib/blaze/src/master/)的文档时，其中介绍了*Smart Expression Template* ，Google了一下，发现 了c++中的expression template idiom。
 
+## Expression Template and symbolic programming
+
+关于Symbolic programming，参见`Theory\Programming-paradigm\Symbolic-programming`。Expression Template 可以看做是采用的 Symbolic programming的思想: 构建expression tree，关于这一点，在下面文章中有描述:
+
+1) github mshadow [Expression Template Tutorial](https://github.com/dmlc/mshadow/blob/master/guide/exp-template/README.md)
+
+2) mxnet [Deep Learning Programming Paradigm](https://mxnet.apache.org/versions/master/api/architecture/program_model)
+
 ## [More C++ Idioms/Expression-template](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Expression-template)
 
 > NOTE: 这篇文章关于expression template的描述是非常好的。
@@ -21,17 +29,15 @@ dramatically.
 
 Outside of vector math, the [Spirit parser framework](https://en.wikipedia.org/wiki/Spirit_parser_framework) uses expression templates to represent [formal grammars](https://en.wikipedia.org/wiki/Formal_grammar) and compile these into parsers.
 
+## TODO
 
+1) modernescpp [Expression Templates](https://www.modernescpp.com/index.php/expression-templates)
 
-## modernescpp [Expression Templates](https://www.modernescpp.com/index.php/expression-templates)
+2) flipcode [Faster Vector Math Using Templates](https://www.flipcode.com/archives/Faster_Vector_Math_Using_Templates.shtml)
 
+## Implementation
 
-
-## [Faster Vector Math Using Templates](https://www.flipcode.com/archives/Faster_Vector_Math_Using_Templates.shtml)
-
-
-
-## [A basic example illustrating expression templates](https://riptutorial.com/cplusplus/example/19992/a-basic-example-illustrating-expression-templates)
+### riptutorial [A basic example illustrating expression templates](https://riptutorial.com/cplusplus/example/19992/a-basic-example-illustrating-expression-templates)
 
 
 

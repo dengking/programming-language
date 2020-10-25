@@ -218,11 +218,9 @@ Symbolic programming 和 formal grammar都是基于nesting关系构建的。
 
 本质上它们都是expression。
 
-## Application
+## Application: Symbolic mathematics
 
-本节讨论symbolic programming的应用。
-
-### Symbolic mathematics
+symbolic programming的一个重要application就是mathematics，本节对此进行梳理。
 
 本节标题的"symbolic mathematic"是我在阅读[SymPy](https://www.sympy.org/en/index.html)的介绍的时候遇到的:
 
@@ -246,12 +244,24 @@ Symbolic programming 和 formal grammar都是基于nesting关系构建的。
 
 然后对这些symbol进行赋值，然后对math expression进行evaluate，从而得到最终的结果。
 
+### Implementation
 
+下面是一些具体的实现: 
 
-#### [SymPy](https://www.sympy.org/en/index.html)
+1) [SymPy](https://www.sympy.org/en/index.html)
 
-#### ArashPartow [exprtk](https://github.com/ArashPartow/exprtk)
+2) ArashPartow [exprtk](https://github.com/ArashPartow/exprtk)
 
-#### Deep learning
+3) Deep learning
 
 Deep learning中，我们需要构建computational graph，computational graph就是典型的symbolic mathematics。目前大多数deep learning implementation，都支持symbolic programming。
+
+4) Expression template
+
+Expression template是C++ TMP中的一种重要trick，参见`C-family-language\C++\Idiom\TMP\Expression-Template`。
+
+
+
+### Symbolic programming VS imperative programming in Symbolic mathematics
+
+关于这个主题，参见工程machine-learning的`Programming\Programming-paradigm\Symbolic-and-imperative`章节。
