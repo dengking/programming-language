@@ -18,7 +18,7 @@ programming language的设计者在设计实现某种paradigm的时候，需要�
 
 > Why "vs"? It is not "vs". You can use Aspect Oriented programming in combination with functional programming, but also in combination with Object Oriented one.
 
-当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是c++，它的两个典型的paradigm是OOP和generic programming。
+当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是C++，它的两个典型的paradigm是OOP和generic programming。
 
 
 
@@ -144,3 +144,11 @@ OOP是有state的，FP（functional programming）是没有state的。
 在下面文章中，描述了**domain-specific language**:
 
 1) `C++\Idiom\TMP\Expression-Template`
+
+
+
+## TODO
+
+1) ybrikman [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/)
+
+这篇文章对几种programming paradigm有着较好的描述。

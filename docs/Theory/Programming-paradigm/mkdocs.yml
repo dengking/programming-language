@@ -13,4 +13,5 @@ nav:
     - Generic-programming: Generic-programming
     ########## 元编程##########
     - Metaprogramming: Metaprogramming
+    - Symbolic-programming: Symbolic-programming
     - Abstraction: Abstraction
