@@ -7,8 +7,6 @@ nav:
 ###################################################syntax相关内容，静态的，compiler处理的################################################
     # 基本上所有的programming language都会涉及到Syntax
     - Syntax: Syntax
-    # 使用专业的术语来描述“描述”
-    - Declaration-and-definition: Declaration-and-definition
 ###################################################type system相关内容################################################
     # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
