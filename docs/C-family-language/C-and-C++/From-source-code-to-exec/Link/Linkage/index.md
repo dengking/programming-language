@@ -8,54 +8,29 @@ linkage是建立translation unit之间的概念，参见`C-and-C++\From-source-c
 
 完整的编译过程在`C-and-C++\From-source-code-to-exec\Phases-of-translation`中描述的；
 
-## Linkage
-
-linkage是和programming language的编译过程密切相关的，C和C++语言的 [translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming)) 是`.c`和`cpp`文件，即源代码文件，这些源代码文件经过preprocess、compile后生成`.o` object files，然后由[linker](https://en.wikipedia.org/wiki/Linker_(computing))对这些`.o` object files进行link等步骤，最后生成executable或者shared library；linkage是由设计者提供给programmer用于控制link步骤的；
-
-### `#include` and linkage  
-
-在进入linkage的描述之前，需要首先区分linkage和 `#include`：
-
-差异性：
-
-- `#include`发生于preprocess阶段，`#include`的对象是header file
-- linkage发生于compile、link阶段，link的对象是`.o` object files
-
-相似性：
-
-- 从**关系**的角度来看，都是将多个file合并为一个file，即many-to-one
-
-### scope and linkage
-
-在wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))中，也对scope和linkage进行了对比。
-
-scope是compile-time概念，它所描述的在一个translation unit内；
-
-linkage是link-time概念，它描述的是多个object file之间；
-
-compile-time发生在link-time之前，所以scope的检查发生在linkage的检查之前。
 
 
-
-关于scope and linkage，在文章geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)中对此进行了描述：
-
-In C and `C++`, a program that consists of multiple source code files is compiled *one at a time*. Until the compilation process, a variable can be described by it’s scope. It is only when the **linking process** starts, that **linkage property** comes into play. Thus, **scope is a property handled by compiler, whereas linkage is a property handled by linker.**
-
-> NOTE : 关于第一句话的理解参见[One-pass compiler](https://en.wikipedia.org/wiki/One-pass_compiler) 。
-
-The Linker links the resources together in the *linking* stage of compilation process. The [Linker](https://en.wikipedia.org/wiki/Linker_(computing)) is a program that takes multiple machine code files as input, and produces an executable object code. It resolves symbols (i.e, fetches definition of symbols such as “+” etc..) and arranges objects in **address space**.
-
-**Linkage** is a property that describes how variables should be linked by the **linker**. Should a variable be available for another file to use? Should a variable be used only in the file declared? Both are decided by **linkage**.
-
-**Linkage** thus allows you to couple names together on a per file basis, scope determines visibility of those names.
-
-> NOTE: 因此，链接允许您在每个文件的基础上将名称耦合在一起（这句话的意思是通过linkage来将多个文件结合成同一个文件，更加直白的说其实是将多个不同文件在文件中的name合成同一个），范围确定这些名称的可见性（其实范围仅仅在一个**Translation Unit **中有效）。
-
-### What is linkage？
+## What is linkage？
 
 本节讨论what is linkage。
 
-#### wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))
+linkage是和programming language的编译过程密切相关的，C和C++语言的 [translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming)) 是`.c`和`cpp`文件，即源代码文件，这些源代码文件经过preprocess、compile后生成`.o` object files，然后由[linker](https://en.wikipedia.org/wiki/Linker_(computing))对这些`.o` object files进行link等步骤，最后生成executable或者shared library；linkage是由设计者提供给programmer用于控制link步骤的；
+
+### microsoft [Translation units and linkage](https://docs.microsoft.com/en-us/cpp/cpp/program-and-linkage-cpp?view=vs-2019)
+
+A program consists of one or more *translation units*. A translation unit consists of an implementation file and all the headers that it includes directly or indirectly. Implementation files typically have a file extension of *cpp* or *cxx*. Header files typically have an extension of *h* or *hpp*. Each translation unit is compiled independently by the compiler. After the compilation is complete, the linker merges the compiled translation units into a single *program*. Violations of the ODR rule typically show up as linker errors. Linker errors occur when the same name has two different definitions in different translation units.
+
+> NOTE: 关于Violations of the ODR rule ，参见`./Link-time-error/Violations-of-ODR`章节
+
+In some cases it may be necessary to declare a **global variable** or class in a *cpp* file. In those cases, you need a way to tell the compiler and linker what kind of *linkage* the name has. The type of **linkage** specifies whether the name of the object applies just to the **one file**, or to **all files**. The concept of **linkage** applies only to **global names**. The concept of linkage does not apply to names that are declared within a **scope**. A scope is specified by a set of enclosing braces such as in function or class definitions.
+
+#### External vs. internal linkage
+
+A *free function* is a function that is defined at global or namespace scope. **Non-const global variables** and **free functions** by default have *external linkage*; they are visible from any **translation unit** in the program. Therefore, no other global object can have that name. A symbol with *internal linkage* or *no linkage* is visible only within the translation unit in which it is declared. When a name has **internal linkage**, the same name may exist in another translation unit. **Variables declared within class definitions or function bodies have no linkage**.
+
+
+
+### wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))
 
 In programming languages, particularly the compiled ones like [C](https://en.wikipedia.org/wiki/C_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B), and [D](https://en.wikipedia.org/wiki/D_(programming_language)), **linkage** describes how **names** can or can not refer to the same entity throughout the whole program or one single [translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming)).
 
@@ -79,7 +54,7 @@ A name's **linkage** is related to, but distinct from, its [scope](https://en.wi
 
 If the name has **external linkage**, the entity（可能是变量，可能是函数） that name denotes may be referred to from **another translation unit** using a **distinct declaration** for that **same name**（名字必须相同，declaration可以不同）, and from **other scopes** within the **same translation unit** using distinct declarations. Were the name given **internal linkage**, such a declaration would denote a distinct entity, although using the same name, but its entity could be referred to by distinct declarations within the same translation unit. A name that **has no linkage** at all cannot be referred to from declarations in different scopes, not even from within the same **translation unit**. Examples of such names are parameters of functions and local variables. The details differ between C (where only objects and functions - but not types - have linkage) and `C++` and between this simplified overview.
 
-> NOTE: 在[C Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration)中对上面这段话的说明更加清晰一些，建议去看那里；
+> NOTE: 在 [C Storage-class specifiers](https://en.cppreference.com/w/c/language/storage_duration) 中对上面这段话的说明更加清晰一些，建议去看那里；
 
 > NOTE: 通过`extern`来告诉compiler，这个name是一个external symbol；
 
@@ -89,7 +64,7 @@ Linkage between languages must be done with some care, as different languages [a
 
 
 
-#### 从 definition 和 declaration 来思考 linkage
+### 从 definition 和 declaration 来思考 linkage
 
 一个entity，可以有多个declaration，但是只能够有一个definition，这些declarations可以位于同一个translation unit也可以位于不同的translation unit；
 
@@ -100,14 +75,6 @@ Linkage between languages must be done with some care, as different languages [a
 在learncpp [6.6 — Internal linkage](https://www.learncpp.com/cpp-tutorial/internal-linkage/)中对此进行了非常好的总结：
 
 > In lesson [6.3 -- Local variables](https://www.learncpp.com/cpp-tutorial/local-variables/), we said, “An identifier’s linkage determines whether other declarations of that name refer to the same object or not”
-
-
-
-### linkage and storage duration specifiers
-
-关于此，在`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`中进行了详细描述。
-
-
 
 ### Classification of linkage and specifiers
 
@@ -149,6 +116,47 @@ https://aticleworld.com/linkage-in-c/
 参考[const-static-and-linkage](./const-static-and-linkage.md)。
 
 
+
+
+
+## `#include` and linkage  
+
+在进入linkage的描述之前，需要首先区分linkage和 `#include`：
+
+差异性：
+
+- `#include`发生于preprocess阶段，`#include`的对象是header file
+- linkage发生于compile、link阶段，link的对象是`.o` object files
+
+相似性：
+
+- 从**关系**的角度来看，都是将多个file合并为一个file，即many-to-one
+
+## Scope and linkage
+
+在wikipedia [Linkage (software)](http://en.wikipedia.org/wiki/Linkage_(software))中，也对scope和linkage进行了对比。
+
+scope是compile-time概念，它所描述的在一个translation unit内；
+
+linkage是link-time概念，它描述的是多个object file之间；
+
+compile-time发生在link-time之前，所以scope的检查发生在linkage的检查之前。
+
+
+
+关于scope and linkage，在文章geeksforgeeks [Internal Linkage and External Linkage in C](https://www.geeksforgeeks.org/internal-linkage-external-linkage-c/)中对此进行了描述：
+
+In C and `C++`, a program that consists of multiple source code files is compiled *one at a time*. Until the compilation process, a variable can be described by it’s scope. It is only when the **linking process** starts, that **linkage property** comes into play. Thus, **scope is a property handled by compiler, whereas linkage is a property handled by linker.**
+
+> NOTE : 关于第一句话的理解参见[One-pass compiler](https://en.wikipedia.org/wiki/One-pass_compiler) 。
+
+The Linker links the resources together in the *linking* stage of compilation process. The [Linker](https://en.wikipedia.org/wiki/Linker_(computing)) is a program that takes multiple machine code files as input, and produces an executable object code. It resolves symbols (i.e, fetches definition of symbols such as “+” etc..) and arranges objects in **address space**.
+
+**Linkage** is a property that describes how variables should be linked by the **linker**. Should a variable be available for another file to use? Should a variable be used only in the file declared? Both are decided by **linkage**.
+
+**Linkage** thus allows you to couple names together on a per file basis, scope determines visibility of those names.
+
+> NOTE: 因此，链接允许您在每个文件的基础上将名称耦合在一起（这句话的意思是通过linkage来将多个文件结合成同一个文件，更加直白的说其实是将多个不同文件在文件中的name合成同一个），范围确定这些名称的可见性（其实范围仅仅在一个**Translation Unit **中有效）。
 
 
 
