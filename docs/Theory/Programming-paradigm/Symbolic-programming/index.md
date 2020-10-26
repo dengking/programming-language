@@ -198,8 +198,6 @@ Programs can be created by traditional programming, by the programs themselves o
 
 It’s pretty impressive that so many useful consequences can flow from the simple idea of **symbolic programming**: fitting computation to language, rather than the other way around.
 
-## stackoverflow [Mathematica: what is symbolic programming?](https://stackoverflow.com/questions/4430998/mathematica-what-is-symbolic-programming)
-
 
 
 ## TODO
@@ -210,7 +208,9 @@ It’s pretty impressive that so many useful consequences can flow from the simp
 
 2) ybrikman [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/)#Symbolic programming
 
+3) stackoverflow [Mathematica: what is symbolic programming?](https://stackoverflow.com/questions/4430998/mathematica-what-is-symbolic-programming)
 
+4) wikipedia [Symbolic programming](https://en.wikipedia.org/wiki/Symbolic_programming) and wikipedia [Symbolic language (programming)](https://en.wikipedia.org/wiki/Symbolic_language_(programming))
 
 ## Symbolic programming and formal grammar
 
@@ -218,13 +218,13 @@ Symbolic programming 和 formal grammar都是基于nesting关系构建的。
 
 本质上它们都是expression。
 
-## Application: Symbolic mathematics
+## Application: Computer algebra
 
-symbolic programming的一个重要application就是mathematics，本节对此进行梳理。
+Symbolic programming的一个重要application就是mathematics，本节对此进行梳理。
 
-本节标题的"symbolic mathematic"是我在阅读[SymPy](https://www.sympy.org/en/index.html)的介绍的时候遇到的:
+关于Computer algebra，参见:
 
-> **SymPy** is a Python library for **symbolic mathematics**. It aims to become a full-featured **computer algebra system** (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. SymPy is written entirely in Python.
+1) wikipedia [Computer algebra](https://en.wikipedia.org/wiki/Computer_algebra)
 
 在software engineering中，我们常常需要以通用的方式来描述一个数学计算，比如: 
 
@@ -250,6 +250,8 @@ symbolic programming的一个重要application就是mathematics，本节对此�
 
 1) [SymPy](https://www.sympy.org/en/index.html)
 
+**SymPy** is a Python library for **symbolic mathematics**. It aims to become a full-featured **computer algebra system** (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. SymPy is written entirely in Python.
+
 2) ArashPartow [exprtk](https://github.com/ArashPartow/exprtk)
 
 3) Deep learning
@@ -260,7 +262,11 @@ Deep learning中，我们需要构建computational graph，computational graph�
 
 Expression template是C++ TMP中的一种重要trick，参见`C-family-language\C++\Idiom\TMP\Expression-Template`。
 
+5) Wolfram Language
 
+参见wikipedia [Wolfram Language](https://en.wikipedia.org/wiki/Wolfram_Language): 
+
+> It emphasizes [symbolic computation](https://en.wikipedia.org/wiki/Symbolic_computation), [functional programming](https://en.wikipedia.org/wiki/Functional_programming), and [rule-based programming](https://en.wikipedia.org/wiki/Rule-based_programming)[[8\]](https://en.wikipedia.org/wiki/Wolfram_Language#cite_note-LangName-8) and can employ arbitrary [structures](https://en.wikipedia.org/wiki/Data_structure) and data.[[8\]](https://en.wikipedia.org/wiki/Wolfram_Language#cite_note-LangName-8) It is the programming language of the mathematical symbolic computation program [Mathematica](https://en.wikipedia.org/wiki/Mathematica).[[9\]](https://en.wikipedia.org/wiki/Wolfram_Language#cite_note-25anv-9)
 
 ### Symbolic programming VS imperative programming in Symbolic mathematics
 
