@@ -1,14 +1,14 @@
 # 20180318
 有代码如下：
 a.c
-```
+```C++
 void test_a()//定义函数test_a
 {
      return;
 }
 ```
 b.c
-```
+```C++
 void test_a();
 
 void test_b()
@@ -22,7 +22,7 @@ void main()
 }
 ```
 编译命令如下
-```
+```C++
 
 gcc a.c b.c -o b
 ```
@@ -30,7 +30,7 @@ gcc a.c b.c -o b
 按照这种写法是可以正确编译出可执行文件b的。
 
 如果我将编译命令修改为如下形式：
-```
+```shell
 gcc b.c -o b
 ```
 则编译器会报如下错误：
