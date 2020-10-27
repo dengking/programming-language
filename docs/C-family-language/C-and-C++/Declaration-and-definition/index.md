@@ -6,7 +6,7 @@
 
 ## What declaration and definition mean for compiler?
 
-
+### Example
 
 有代码如下：
 `a.c`
@@ -65,9 +65,15 @@ collect2: 错误：ld 返回 1
 
 显然是不相同的。
 
-### 函数声明对于编译器意味着什么
+**函数声明对于编译器意味着什么**
 
 如果在`b.c`中将函数`test_a`的声明去除掉的话，再进行编译，我发现函数也能够编译通过，并且能够正确执行。
+
+
+
+### Thoughts
+
+只有definition才会被编译object file中，declaration仅仅由于grammar检查。
 
 
 
