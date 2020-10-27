@@ -110,6 +110,53 @@ https://www.geeksforgeeks.org/enum-classes-in-c-and-their-advantage-over-enum-da
 
 
 
+## Simulate scoped enumeration before C++11
+
+如何在C++11之前的版本中模拟scoped enumeration ？
+
+### stackoverflow [How to use enums in C++](https://stackoverflow.com/questions/12183008/how-to-use-enums-in-c)
+
+[A](https://stackoverflow.com/a/12183377)
+
+This code is **wrong**:
+
+```cpp
+enum Days { Saturday,Sunday,Tuesday,Wednesday,Thursday,Friday};
+Days day = Days.Saturday;
+if(day == Days.Saturday)
+```
+
+Because `Days` is not a **scope**, nor **object**. It is a **type**. And Types themselves don't have members. What you wrote is the equivalent to `std::string.clear`. `std::string` is a type, so you can't use `.`on it. You use `.` on an *instance* of a class.
+
+Unfortunately, enums are magical and so the analogy stops there. Because with a class, you can do `std::string::clear` to get a pointer to the member function, but in C++03, `Days::Sunday` is invalid. (Which is sad). This is because` C++` is (somewhat) backwards compatable with C, and C had no namespaces, so enumerations had to be in the global namespace. So the syntax is simply:
+
+```cpp
+enum Days { Saturday,Sunday,Tuesday,Wednesday,Thursday,Friday};
+Days day = Saturday;
+if(day == Saturday)
+```
+
+Fortunately, [Mike Seymour](https://stackoverflow.com/users/204847/mike-seymour) observes that this has been addressed in C++11. Change `enum` to `enum class` and it gets its own **scope**; so `Days::Sunday` is not only valid, but is the *only* way to access `Sunday`. Happy days!
+
+[A](https://stackoverflow.com/a/25786472)
+
+You can use a trick to use scopes as you wish, just declare enum in such way:
+
+```cpp
+struct Days 
+{
+   enum type
+   {
+      Saturday,Sunday,Tuesday,Wednesday,Thursday,Friday
+   };
+};
+
+Days::type day = Days::Saturday;
+if (day == Days::Saturday)
+```
+
+
+
 ## Enum and string
 
 为enum的每个可选值指定一个name（string），这是我们的一种常见需求，那如何来实现呢？这是本节讨论的问题。下面讨论了各种实现方式: 
