@@ -2,8 +2,6 @@
 
 
 
-
-
 ## cppreference [Enumeration declaration](https://en.cppreference.com/w/cpp/language/enum)
 
 An *enumeration* is a distinct type whose value is restricted to a range of values (see below for details), which may include several explicitly named **constants** ("***enumerators***"). The values of the constants are values of an integral type known as the *underlying type* of the enumeration.
@@ -27,13 +25,76 @@ An *enumeration* is a distinct type whose value is restricted to a range of valu
 
 
 
-> NOTE: *underlying type*的概念是非常重要的，如何获取它呢？参见：[std::underlying_type](https://en.cppreference.com/w/cpp/types/underlying_type)
+
 
 There are two distinct kinds of enumerations: 
 
 1) *unscoped enumeration* (declared with the *enum-key* `enum`) 
 
 1) *scoped enumeration* (declared with the *enum-key* `enum class` or `enum struct`). (since C++11)
+
+
+
+### Underlying type
+
+> NOTE: 原文并没有Underlying type标题，我添加的目的是对underlying type进行统一描述。
+>
+> *underlying type*的概念是非常重要的，在C++11之前，C++语言并没有对enum的underlying type进行统一，也没有提供syntax来供programmer对它进行指定，C++11则解决了这个问题，它提供了syntax来供programmer对underlying type进行指定
+
+#### Specify underlying type
+
+| syntax                                         | 注解                                                         |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| `enum-key attr(optional) enum-name enum-base;` | colon (`:`), followed by a *type-specifier-seq* that names an **integral type** (if it is cv-qualified, qualifications are ignored) that will serve as the **fixed underlying type** for this enumeration type |
+
+```C++
+#include <cstdint>
+ 
+// enum that takes 16 bits
+enum smallenum: std::int16_t
+{
+    a,
+    b,
+    c
+};
+
+// altitude may be altitude::high or altitude::low
+enum class altitude: char
+{ 
+     high='h',
+     low='l', // C++11 allows the extra comma
+}; 
+
+```
+
+#### Query underlying type
+
+如何获取它呢？参见：[std::underlying_type](https://en.cppreference.com/w/cpp/types/underlying_type)。
+
+
+
+#### TODO
+
+1) stackoverflow [What is the underlying type of a c++ enum?](https://stackoverflow.com/questions/1122096/what-is-the-underlying-type-of-a-c-enum)
+
+
+
+#### Output the value of enum class
+
+在 stackoverflow [How can I output the value of an enum class in C++11](https://stackoverflow.com/questions/11421432/how-can-i-output-the-value-of-an-enum-class-in-c11) 的回答中给出的code，值的借鉴：
+
+```c++
+template <typename Enumeration>
+auto as_integer(Enumeration const value)
+    -> typename std::underlying_type<Enumeration>::type
+{
+    return static_cast<typename std::underlying_type<Enumeration>::type>(value);
+}
+```
+
+
+
+
 
 ### Unscoped enumeration
 
@@ -168,27 +229,6 @@ github [magic_enum](https://github.com/Neargye/magic_enum)
 
 
 
-## TODO: underlying type of enum
-
-- stackoverflow [What is the underlying type of a c++ enum?](https://stackoverflow.com/questions/1122096/what-is-the-underlying-type-of-a-c-enum)
-
-
-
-### Output the value of enum class
-
-在 stackoverflow [How can I output the value of an enum class in C++11](https://stackoverflow.com/questions/11421432/how-can-i-output-the-value-of-an-enum-class-in-c11) 的回答中给出的code，值的借鉴：
-
-```c++
-template <typename Enumeration>
-auto as_integer(Enumeration const value)
-    -> typename std::underlying_type<Enumeration>::type
-{
-    return static_cast<typename std::underlying_type<Enumeration>::type>(value);
-}
-```
-
-
-
 ## TODO enum in TMP
 
 我记得在TMP中，有多处是使用到了enum的，需要整理一下。
@@ -225,10 +265,6 @@ auto ReqService()->typename std::enable_if<IsTradeService(ServiceTraitType::Serv
     
 }
 ```
-
-
-
-
 
 
 
