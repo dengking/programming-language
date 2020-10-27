@@ -1,4 +1,4 @@
-# 202201021 maps
+# key of unordered map
 
 
 
@@ -173,9 +173,3 @@ If using `std::underlying_type` works, could be a very good proposal for the sta
 
 
 
-
-## c++-map-VS-unordered_map
-
-### 遍历性能比较
-
-对两者进行遍历的性能如何？
