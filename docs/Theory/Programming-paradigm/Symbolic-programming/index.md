@@ -222,9 +222,7 @@ Symbolic programming 和 formal grammar都是基于nesting关系构建的。
 
 Symbolic programming的一个重要application就是mathematics，本节对此进行梳理。
 
-关于Computer algebra，参见:
-
-1) wikipedia [Computer algebra](https://en.wikipedia.org/wiki/Computer_algebra)
+关于Computer algebra，参见工程discrete的`Relation-structure-computation\Computation\Computer-algebra`章节，或者wikipedia [Computer algebra](https://en.wikipedia.org/wiki/Computer_algebra)。
 
 在software engineering中，我们常常需要以通用的方式来描述一个数学计算，比如: 
 
@@ -267,6 +265,8 @@ Expression template是C++ TMP中的一种重要trick，参见`C-family-language\
 参见wikipedia [Wolfram Language](https://en.wikipedia.org/wiki/Wolfram_Language): 
 
 > It emphasizes [symbolic computation](https://en.wikipedia.org/wiki/Symbolic_computation), [functional programming](https://en.wikipedia.org/wiki/Functional_programming), and [rule-based programming](https://en.wikipedia.org/wiki/Rule-based_programming)[[8\]](https://en.wikipedia.org/wiki/Wolfram_Language#cite_note-LangName-8) and can employ arbitrary [structures](https://en.wikipedia.org/wiki/Data_structure) and data.[[8\]](https://en.wikipedia.org/wiki/Wolfram_Language#cite_note-LangName-8) It is the programming language of the mathematical symbolic computation program [Mathematica](https://en.wikipedia.org/wiki/Mathematica).[[9\]](https://en.wikipedia.org/wiki/Wolfram_Language#cite_note-25anv-9)
+
+
 
 ### Symbolic programming VS imperative programming in Symbolic mathematics
 
