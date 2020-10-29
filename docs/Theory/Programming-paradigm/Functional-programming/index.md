@@ -21,3 +21,38 @@
 > 在维基百科[Template metaprogramming#Components of template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming#Components_of_template_metaprogramming)中提及：
 >
 > Template metaprograms have no [mutable variables](https://en.wikipedia.org/wiki/Immutable_object)— that is, no variable can change value once it has been initialized, therefore template metaprogramming can be seen as a form of [functional programming](https://en.wikipedia.org/wiki/Functional_programming). In fact many template implementations implement flow control only through [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)), as seen in the example below.
+
+
+
+
+
+## utexas [CS 378, Symbolic Programming#Functional Programming](https://www.cs.utexas.edu/~novak/cs378.pdf)
+
+A functional program is one with no side effects:
+
+- changing a global variable
+- updating a database
+- printing
+
+If we call `sin(x)`, it will just return a value, but will have no side effects.
+
+Functional programming does everything by ***composition*** of functions:
+
+```C++
+guacamole:
+season(mash(slice(peel(wash(avocado)))))
+```
+
+Functions are composed so that the output of one function is the input of the next function(pipelined). 
+
+## Functional programming in distributed computing
+
+utexas [CS 378, Symbolic Programming#Functional Programming](https://www.cs.utexas.edu/~novak/cs378.pdf): 
+
+Functional programming works well with distributed cloud computing: the function can be replicated on many servers and executed in parallel on massive amounts of data.
+
+
+
+### Promise and future
+
+Promise and future起源自functional programming，关于Promise and future，参见工程Parallel-computing的`Programming-model\Promise-future`章节。
