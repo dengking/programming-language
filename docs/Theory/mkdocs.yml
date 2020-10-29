@@ -24,6 +24,7 @@ nav:
 ###################################################################################################    
     # 编程范式
     - Programming-paradigm: Programming-paradigm
+    - Programming-model: Programming-model
     # 设计模式
     - Design-pattern: Design-pattern
 ###################################################大多数programming language都会涉及到的一些编程问题################################################       
