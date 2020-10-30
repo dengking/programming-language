@@ -5,3 +5,7 @@ http://wordaligned.org/articles/cpp-streambufs
 http://www.angelikalanger.com/iostreams.html
 
 https://gcc.gnu.org/onlinedocs/libstdc++/manual/streambufs.html
+
+https://www.tutorialspoint.com/cplusplus/cpp_files_streams.htm
+
+http://www.cplusplus.com/doc/tutorial/files/	
