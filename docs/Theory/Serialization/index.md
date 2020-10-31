@@ -1,8 +1,22 @@
-# Serialization
+# Serialization and deserialization
 
-为了使用哪种programming language，都可能会涉及到serialization问题，本文对此进行总结。
+无论使用哪种programming language，都可能会涉及到serialization/deserialization问题，本文对此进行总结。
 
-## 维基百科[Serialization](https://en.wikipedia.org/wiki/Serialization)
+## Encode and decode
+
+这是serialization and deserialization的另外一种说法，在下面文章中对这种说法进行了解释: 
+
+medium [Use Binary Encoding Instead of JSON](https://medium.com/better-programming/use-binary-encoding-instead-of-json-dec745ec09b6):
+
+> when you want to send the data over a network or store it in a file, you need to **encode** the data as a self-contained sequence of bytes. The translation from the in-memory representation to a byte sequence is called **encoding** and the inverse is called **decoding**.
+
+显然:
+
+encode=serialization
+
+decode=deserialization
+
+## 维基百科 [Serialization](https://en.wikipedia.org/wiki/Serialization)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), in the context of data storage, **serialization** (or serialisation) is the process of translating [data structures](https://en.wikipedia.org/wiki/Data_structure) or [object](https://en.wikipedia.org/wiki/Object_(computer_science)) state into a format that can be **stored** (for example, in a [file](https://en.wikipedia.org/wiki/Computer_file) or memory [buffer](https://en.wikipedia.org/wiki/Data_buffer)) or **transmitted** (for example, across a [network](https://en.wikipedia.org/wiki/Computer_network) connection link) and **reconstructed** later (possibly in a different computer environment). When the resulting series of bits is reread according to the [**serialization format**](https://en.wikipedia.org/wiki/Category:Data_serialization_formats), it can be used to create a semantically identical clone of the original object. For many complex objects, such as those that make extensive use of [references](https://en.wikipedia.org/wiki/Reference_(computer_science)), this process is not straightforward. Serialization of object-oriented [objects](https://en.wikipedia.org/wiki/Object_(computer_science)) does not include any of their associated [methods](https://en.wikipedia.org/wiki/Method_(computer_science)) with which they were previously linked.
 
@@ -32,14 +46,20 @@ Since both serializing and deserializing can be driven from common code (for exa
 
 比如[`pickle`](https://docs.python.org/3/library/pickle.html#module-pickle) — Python object serialization[¶](https://docs.python.org/3/library/pickle.html#module-pickle)。
 
+
+
+### Protocol buffer
+
+https://github.com/protocolbuffers/protobuf
+
+
+https://developers.google.com/protocol-buffers/
+
+在工程Linux-OS的`Network\Protocol\Application-protocol\Protocol-data-format\IDL\Protobuf`章节中总结了protocol buffer。
+
+
+
 ### Alignment
 
 对于C++、C中，type有着alignment requirement，在进行deserialization的时候，就需要考虑alignment，这就是strict。
 
-## binary serialization vs protoc-buff
-
-在ust项目中，直接使用的binary serialization，为每种请求都涉及一个`struct`，然后client和server之间就使用`struct`来作为protocol。显然这种实现方式是最最高效的，但是这种实现方式所带来的一个问题是：每次新增一个请求，就涉及到client和server的全部的修改。而不是像普通的协议那样。与此相关的是redis的协议、http协议。
-
-https://stackoverflow.com/questions/2966500/protobuf-net-not-faster-than-binary-serialization
-
-https://theburningmonk.com/2011/08/performance-test-binaryformatter-vs-protobuf-net/
