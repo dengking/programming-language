@@ -1,5 +1,4 @@
 nav:
     - Introduction: index.md
+    - Programming-paradigm: Programming-paradigm
     - Lisp: Lisp
-    - Clojure: Clojure
-    - Scheme: Scheme
