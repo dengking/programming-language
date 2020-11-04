@@ -119,19 +119,19 @@ C++ includes the following types of statements:
 
 总的来说：statement有着如下的功能：
 
-- ***statement***控制着程序执行的**流程**（显然expression并不具备这样的功能），如顺序执行，循环执行（`for`，`while`），`return`，条件分支执行（`if-else`）；
+- ***statement***控制着程序执行的**流程**（显然**expression**并不具备这样的功能），如顺序执行，循环执行（`for`，`while`），`return`，条件分支执行（`if-else`）；
 - 定义与声明
 
 
 
 
-
-
-# 从`=`来看待expression和statement之间的差异
+## 从`=`来看待expression和statement之间的差异
 
 在[Operator associativity](https://en.wikipedia.org/wiki/Operator_associativity)中有这样的描述：
 
 > In many [imperative programming languages](https://en.wikipedia.org/wiki/Imperative_programming_language), the [assignment operator](https://en.wikipedia.org/wiki/Assignment_operator) is defined to be right-associative, and assignment is defined to be an **expression** (with a **value**), not just a **statement**. This allows [chained assignment](https://en.wikipedia.org/wiki/Assignment_(computer_science)#Chained_assignment) by using the value of one assignment expression as the input (right operand) of the next.
 >
 > For example, in [C](https://en.wikipedia.org/wiki/C_(programming_language)), the assignment `a = b` is an **expression** that returns a value (namely, `b` converted to the type of `a`) with the side effect of setting `a` to this value. An assignment can be performed in the middle of an expression. The right-associativity of the `=` operator allows expressions such as `a = b = c` to be interpreted as `a = (b = c)`, thereby setting both `a` and `b` to the value of `c`. In C, the alternative `(a = b) = c` does not make sense because `a = b` is not an [l-Value](https://en.wikipedia.org/wiki/Value_(computer_science)), just an r-value. However, in [C++](https://en.wikipedia.org/wiki/C%2B%2B) an assignment `a = b` returns a value referring to the left term in the assignment. Therefore, `(a = b) = c` can be interpreted as `a = b; a = c;`.
+
+
 
