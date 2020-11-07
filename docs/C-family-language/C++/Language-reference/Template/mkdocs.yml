@@ -13,6 +13,6 @@ nav:
     - Parameter-pack: Parameter-pack
     # concept是c++20引入的一个非常重要的特性    
     - Concepts: Concepts
-    # 描述模板的實現    
+    # 描述模板的实现
     - Implementation: Implementation
     

@@ -4,9 +4,11 @@ Compile-time 和 run-time 是非常重要的两个概念，有非常非常多的
 
 从它们的名称可以看出，这两个概念是根据time的维度来进行划分的。
 
-## 维基百科[Runtime (program lifecycle phase)](https://en.wikipedia.org/wiki/Runtime_(program_lifecycle_phase))
+C++和C是严格区分compile-time和run-time的language，这两门语言关于这个主题的讨论在`C-family-language\C-and-C++\Compile-time-and-run-time`章节中。
 
-## 维基百科[Compile time](https://en.wikipedia.org/wiki/Compile_time)
+## wikipedia [Runtime (program lifecycle phase)](https://en.wikipedia.org/wiki/Runtime_(program_lifecycle_phase))
+
+## wikipedia [Compile time](https://en.wikipedia.org/wiki/Compile_time)
 
 龙书的如下章节涉及到了两者：
 
