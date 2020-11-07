@@ -24,7 +24,11 @@
 
 
 
+## wikimili [Functional programming](https://wikimili.com/en/Functional_programming)
 
+
+
+## Higher-order Function
 
 ## utexas [CS 378, Symbolic Programming#Functional Programming](https://www.cs.utexas.edu/~novak/cs378.pdf)
 
@@ -56,3 +60,52 @@ Functional programming works well with distributed cloud computing: the function
 ### Promise and future
 
 Promise and future起源自functional programming，关于Promise and future，参见工程Parallel-computing的`Programming-model\Promise-future`章节。
+
+### Map (parallel pattern)
+
+https://infogalactic.com/info/Map_(parallel_pattern)
+
+## Pattern
+
+functional programming中的一种非常常见的pattern是在工程discrete的`Relation-structure-computation\Computation\Repetition`章节中提出的对structure顺序执行某个computation。
+
+关于functional programming，参见:
+
+1) cornell [Higher-order Programming](https://www.cs.cornell.edu/courses/cs3110/2017fa/l/06-hop/notes.html)
+
+2) https://softwarefoundations.cis.upenn.edu/lf-current/Poly.html
+
+3) Python Functional Programming HOWTO[¶](https://docs.python.org/3/howto/functional.html#functional-programming-howto)
+
+4) wikimili [Fold (higher-order function)](https://wikimili.com/en/Fold_(higher-order_function))
+
+
+
+下面是一些非常常见的模式，它们都是基于one-by-one computation model。
+
+### apply/map
+
+对一个data structure中的每个元素都执行同一个函数
+
+https://infogalactic.com/info/Map_(higher-order_function)
+
+### fold/reduce
+
+
+
+参见 C++ fold
+
+https://en.wikipedia.org/wiki/Fold_(higher-order_function)
+
+https://wikimili.com/en/Fold_(higher-order_function)
+
+### filter
+
+对一个sequence进行过滤
+
+https://infogalactic.com/info/Filter_(higher-order_function)
+
+### Convolution
+
+https://infogalactic.com/info/Convolution_(computer_science)
+
