@@ -21,7 +21,7 @@ A template parameter pack is a **template parameter** that accepts zero or more 
 >
 > 3) 既然有pack，那么肯定有对应的unpack过程，在原文中，将unpack过程称为“Parameter pack expansion”。
 >
-> 4) "parameter pack是linear structure"，之所以强调此的原因是: 我们应该将parameter pack看做是一个linear structure，那么这就让我们可以:
+> 4) "parameter pack是linear structure"，之所以强调此的原因是: 我们应该将parameter pack看做是一个linear structure，这就让我们可以对它进行operation。
 >
 > - `len` 查询它的长度，参见[sizeof... operator](https://en.cppreference.com/w/cpp/language/sizeof...)
 >
