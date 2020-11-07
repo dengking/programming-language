@@ -1,5 +1,6 @@
+# Metaclass
 
-# [metaclass](https://en.wikipedia.org/wiki/Metaclass) 
+## wikipedia [metaclass](https://en.wikipedia.org/wiki/Metaclass) 
 
 
 
@@ -78,23 +79,6 @@ new_car = Car(make='Toyota', model='Prius', year=2005, color='Green', engine='Hy
 ```
 
 这个例子非常有启发性。
-
-
-
-
-
-# meta in computer science
-
-[解释一](https://www.webopedia.com/TERM/M/meta.html)
-
-In computer science, a common prefix that means "about". So, for example, metadata is data that describes other data (data about data). A metalanguage is a language used to describe other languages. A metafile is a file that contains other files. The HTML META tag is used to describe the contents of a Web page.
-
-
-[解释二](https://whatis.techtarget.com/definition/metadata)
-
-这篇文章的描述是非常好的
-
-[Metadata](https://en.wikipedia.org/wiki/Metadata)
 
 
 
