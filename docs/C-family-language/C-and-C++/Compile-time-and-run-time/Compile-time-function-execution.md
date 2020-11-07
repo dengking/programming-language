@@ -6,19 +6,15 @@
 
 1) constant expression
 
+这是C++中主要的实现Compile time function execution的方式。
+
 参见: `C++\Language-reference\Expressions\Constant-expressions`。
 
+2) TMP recursion function
+
+参见: `C++\Language-reference\Template\TMP-and-FP`。
 
 
-non-type template parameter的computation，重要以template parameter pack的computation、recursion为基础来进行总结。
-
-
-
-## Static reflection
-
-C++的static reflection，重要讨论的问题有:
-
-- `decltype` 
 
 
 

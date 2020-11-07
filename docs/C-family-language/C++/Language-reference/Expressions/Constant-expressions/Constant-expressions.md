@@ -75,7 +75,7 @@ constexpr bool b = a[2]; // UB, but unspecified if detected
 
 *Integral constant expression* is an expression of integral or **unscoped enumeration type** implicitly converted to a **prvalue**, where the converted expression is a *core constant expression*.
 
-> NOTE: 原文，没有给出例子，无法理解
+> NOTE: 
 
 
 
