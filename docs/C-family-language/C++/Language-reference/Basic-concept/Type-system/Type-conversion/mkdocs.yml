@@ -5,4 +5,7 @@ nav:
     - Implicit-conversion: Implicit-conversion
     - Cast-operator: Cast-operator
 ########## 用户自定义cast    
-    - User-defined-conversion: User-defined-conversion.md
+    - User-defined-conversion: User-defined-conversion
+    
+    - Type-punning: Type-punning
+    - Strict-aliasing: Strict-aliasing

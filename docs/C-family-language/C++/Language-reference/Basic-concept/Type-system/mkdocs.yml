@@ -1,15 +1,8 @@
 nav:
     - Introduction: index.md
     - Type-system: Type-system
-# 查询类型
-    # 查询静态类型
-    - decltype: decltype
-    # 查询动态类型
-    - typeid: typeid
+    - Query-type: Query-type
 # 类型转换是type system的一个非常重要的内容    
     - Type-conversion: Type-conversion
-    - Type-punning: Type-punning
-    - Strict-aliasing: Strict-aliasing
+
     - Reflection: Reflection.md
-# 类型决定了alignment
-    - Alignment: Alignment.md

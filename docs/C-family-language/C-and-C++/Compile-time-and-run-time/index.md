@@ -1,6 +1,6 @@
 # Compile-time and run-time
 
-## c++
+## C++
 
 ### [`static_cast`](https://en.cppreference.com/w/cpp/language/static_cast) VS [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 
 
@@ -9,10 +9,6 @@
 `dynamic_cast` 是 run-time
 
 ### [`static_assert`](https://en.cppreference.com/w/cpp/language/static_assert) VS [`assert`](https://en.cppreference.com/w/cpp/error/assert) 
-
-
-
-
 
 #### [static_assert](https://en.cppreference.com/w/cpp/language/static_assert) 
 
@@ -36,23 +32,25 @@ static_assert ( bool_constexpr , message )
 
 run-time
 
-### static array VS dynamic array
+### Static array VS dynamic array
 
 在 https://stackoverflow.com/a/4810676 中提及了；
 
-### compile-time concept
 
-下面总结了c++中的compile-time concept。
 
-#### constant expression
+### Compile-time concept
+
+下面总结了C++中的compile-time concept。
+
+#### Constant expression
 
 关于constant expression，参见`C-family-language\C++\Language-reference\Expressions\Operators\Other\Constant-expressions`章节。
 
-#### template
+#### Template
 
 关于template，参见`C-family-language\C++\Language-reference\Template`章节。
 
-#### enum
+#### Enum
 
 参见`C++\Language-reference\Enum`章节。
 
@@ -66,18 +64,18 @@ run-time
 
 
 
-### static polymorphism VS runtime polymorphism 
+### Static polymorphism VS runtime polymorphism 
 
 参见`C++\Guide\Implementation-of-polymorphism\`章节。
 
 
 
-### static type and dynamic type
+### Static type and dynamic type
 
 参见`C-family-language\C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md`。
 
 
 
-### run-time concept
+### Run-time concept
 
 `virtual`
