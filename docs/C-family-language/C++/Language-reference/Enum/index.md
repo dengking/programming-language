@@ -276,7 +276,7 @@ github [magic_enum](https://github.com/Neargye/magic_enum)
 
 
 
-## TODO enum in TMP
+## enum in TMP
 
 我记得在TMP中，有多处是使用到了enum的，需要整理一下。
 
@@ -312,6 +312,10 @@ auto ReqService()->typename std::enable_if<IsTradeService(ServiceTraitType::Serv
     
 }
 ```
+
+
+
+
 
 
 

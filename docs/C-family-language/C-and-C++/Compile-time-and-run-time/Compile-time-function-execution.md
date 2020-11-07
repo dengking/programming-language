@@ -4,6 +4,12 @@
 
 本文标题的含义是: 编译时时函数执行，它是C++的一个非常强大的特性:
 
+1) constant expression
+
+参见: `C++\Language-reference\Expressions\Constant-expressions`。
+
+
+
 non-type template parameter的computation，重要以template parameter pack的computation、recursion为基础来进行总结。
 
 
