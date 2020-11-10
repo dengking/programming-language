@@ -13,6 +13,7 @@ nav:
     - Generic-programming: Generic-programming
     ########## 元编程##########
     - Metaprogramming: Metaprogramming
+    - Expression-oriented-programming: Expression-oriented-programming
     - Symbolic-programming: Symbolic-programming
     - Dataflow-programming: Dataflow-programming
     - Abstraction: Abstraction
