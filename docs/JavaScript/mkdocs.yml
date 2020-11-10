@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
+    - DOM: DOM
+    - Event-driven-model: Event-driven-model
     - Software: Software

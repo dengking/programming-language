@@ -1,0 +1,15 @@
+# JavaScript
+
+
+
+## Wikipedia [JavaScript](https://infogalactic.com/info/JavaScript)
+
+**JavaScript** ([/ˈdʒɑːvəˌskrɪpt/](https://infogalactic.com/info/Help:IPA_for_English)[[5\]](https://infogalactic.com/info/JavaScript#cite_note-5)) is a [high-level](https://infogalactic.com/info/High-level_programming_language), [dynamic](https://infogalactic.com/info/Dynamic_programming_language), [untyped](https://infogalactic.com/info/Programming_language#Type_system), and [interpreted](https://infogalactic.com/info/Interpreted_language) programming language.[[6\]](https://infogalactic.com/info/JavaScript#cite_note-FOOTNOTEFlanagan20111-6) It has been standardized in the [ECMAScript](https://infogalactic.com/info/ECMAScript) language specification.
+
+JavaScript is [prototype-based](https://infogalactic.com/info/Prototype-based_programming) with [first-class functions](https://infogalactic.com/info/First-class_function), making it a [multi-paradigm](https://infogalactic.com/info/Multi-paradigm) language, supporting [object-oriented](https://infogalactic.com/info/Object-oriented_programming),[[8\]](https://infogalactic.com/info/JavaScript#cite_note-ECMA-262-8) [imperative](https://infogalactic.com/info/Imperative_programming), and [functional](https://infogalactic.com/info/Functional_programming) programming styles.[[6\]](https://infogalactic.com/info/JavaScript#cite_note-FOOTNOTEFlanagan20111-6) It has an [API](https://infogalactic.com/info/Application_programming_interface) for working with text, [arrays](https://infogalactic.com/info/Array_data_type), dates and [regular expressions](https://infogalactic.com/info/Regular_expression), but does not include any [I/O](https://infogalactic.com/info/Input/output), such as networking, storage or graphics facilities, relying for these upon the host environment in which it is **embedded**.[[7\]](https://infogalactic.com/info/JavaScript#cite_note-FOOTNOTEFlanagan20112-7)
+
+> NOTE: 上面描述的JavaScript的核心特性，这些核心特性是非常有价值的。
+>
+> JavaScript是依赖于它的runtime的。
+
+JavaScript is also used in environments that are not web-based, such as [PDF](https://infogalactic.com/info/Portable_Document_Format) documents, [site-specific browsers](https://infogalactic.com/info/Site-specific_browser), and [desktop widgets](https://infogalactic.com/info/Desktop_widget). Newer and faster JavaScript [virtual machines](https://infogalactic.com/info/Virtual_machine) (VMs) and platforms built upon them have also increased the popularity of JavaScript for server-side [web applications](https://infogalactic.com/info/Web_application). On the client side, JavaScript has been traditionally implemented as an [interpreted](https://infogalactic.com/info/Interpreter_(computing)) language, but more recent browsers perform [just-in-time compilation](https://infogalactic.com/info/Just-in-time_compilation). It is also used in game development, the creation of desktop and mobile applications, and server-side network programming with runtime environments such as [Node.js](https://infogalactic.com/info/Node.js).
