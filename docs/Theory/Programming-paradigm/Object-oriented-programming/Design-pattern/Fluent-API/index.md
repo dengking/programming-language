@@ -16,6 +16,8 @@ A fluent interface is normally implemented by using [method cascading](https://i
 
 - terminated through the return of a void context.
 
+  > NOTE: 需要标识合适终止
+  
   
 
 > NOTE: 上面这段话所着重描述的是 **context**，显然被连续调用的method，它们所共用的就是context
@@ -32,7 +34,7 @@ A common example is the [iostream](https://infogalactic.com/info/Iostream) libra
 
 ### JavaScript
 
-There are many examples of JS libraries that use some variant of this: **jQuery** probably being the most well known. Typically fluent builders are used to implement 'DB queries', for example in https://github.com/Medium/dynamite :
+There are many examples of JS libraries that use some variant of this: **jQuery** probably being the most well known. Typically **fluent builders** are used to implement 'DB queries', for example in https://github.com/Medium/dynamite :
 
 ```javascript
 // getting an item from a table
@@ -45,7 +47,7 @@ client.getItem('user-table')
     })
 ```
 
-> NOTE: 这是典型的asynchronous programming，参见后面的"Asynchronous programming"章节。
+> NOTE: 这是典型的asynchronous programming，现代很多programming language都是支持这种paradigm的，在后面的"Asynchronous programming"章节会进行详细描述。
 
 A simple way to do this in javascript is using prototype inheritance and `this`.
 
@@ -92,7 +94,55 @@ new Kitten()
   .save();
 ```
 
+Although it's lots of clumsy code, a better alternative would be to pack these method in single function thus creating a framework.
 
+A more general way to do this is implemented in [mu-ffsm](https://github.com/0x01/mu-ffsm).
+
+```javascript
+var mkChained = function(spec) {
+  return function(init) {
+    var s = spec[0] ? spec[0](init) : 0;
+
+    var i = function(opt) {
+      return spec[1] ? spec[1](s, opt) : s;
+    }
+
+    Object.keys(spec).forEach(
+      function(name){
+        // skip `entry` and `exit` functions
+        if(/^\d+$/.test(name))
+          return;
+
+        // transition 'name : (s, opt) -> s'
+        i[name] = function(opt) {
+          s = spec[name](s, opt);
+          return i;
+        };
+    });
+
+    return i;
+  }
+};
+
+var API = mkChained({
+  0:    function(opt)    {return ;/* create initial state */},
+  then: function(s, opt) {return s; /* new state */},
+  whut: function(s, opt) {return s; /* new state */},
+  1:    function(s, opt) {return ;/* compute final value */}
+});
+
+// We create an instance of our newly crafted API,
+var call = API() // entry
+   .whut()       // transition
+   .then()       // transition
+   .whut();      // transition
+
+// And call it
+var result0 = call() // exit
+  , result1 = call() // exit
+```
+
+> NOTE: JavaScript这种语言是非常容易实现这种功能的
 
 ### Java
 
@@ -270,11 +320,15 @@ Request.Get("http://somehost/")
 
 ### Asynchronous programming
 
-当进行asynchronous programming的时候，我们可以使用fluent API来进行描述，这种描述方式是非常好的，其实这也非常类似于builder pattern。
-
-这种方式在**asynchronous programming**中是广泛存在的，因为**asynchronous programming**中比较重要的是表达"当 某个**event** 发生时，执行 某个 **callback**"
+当进行**asynchronous programming**的时候，往往需要表达"当 某个**event** 发生时，执行 某个 **callback**"，这个**callback**往往是用户注册的自定义函数，这种是可以使用fluent API来进行描述的，它其实非常类似于builder pattern，即由用户来设置**callback**，最最典型的就是jQuery，现代很多programming language都是支持这种paradigm的。
 
 #### jQuery
+
+在前面的JavaScript章节中给出了非常好的例子。
+
+
+
+#### Apache Curator
 
 
 
