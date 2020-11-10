@@ -2,68 +2,6 @@
 
 在`Theory\Compile-time-and-run-time`中，我们知道了compile time function execution的概念，本文对C++ compile time function execution进行总结。
 
-## 为什么需要compile time function execution？
-
-Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性。
-
-
-
-
-
-## SUMMARY of C++ template metaprogramming
-
-从meta programming的角度来看，c++ program可以分为
-
-- c++ program
-- metaprogram，metaprogram是compiler-time computation
-
-在`Theory\Programming-paradigm\Metaprogramming\Metaprogramming.md`中对这种观点进行了总结。
-
-在下面文章中使用了这个观点
-
-microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)中有这样的描述
-
-> To enable compilers as well as **C++ programs** and **metaprograms** to reason about the suitability of any given type for operations that depend on a particular memory layout, C++14 introduced three categories of simple classes and structs
-
-文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)中对这个观点进行了非常深刻的介绍。
-
-
-
-### Short Intro to C++ metaprogramming
-
-在阅读文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)时，其中的Short Intro段对c++的metaprogramming进行了较好的总结：
-
-> Looking at complex C++ meta programs, which appear seemlessly（无缝的） embedded into normal program code, is confusing at first. It is like looking at brain fuck code. That is, because the **meta programming syntax** is ugly and bloated. *Why is it so ugly?* The answer is simply, that C++ was not designed from the very beginning to contain a **meta programming language**. The language evolved, controlled by a consortium(联盟) which always tried to keep newer language standards backwards compatible to older ones. One day, people realized, that this growing little template engine is actually *Turing complete*. Soon, people started to write really crazy **meta programs** with it, which were able to elevate(提升) implementations of C++ libraries to a level of unprecedented **usability**, **versatility**(多功能性) and **elegance** (from the perspective of a user which has not seen the implementation). Data structures and functions can be implemented in a way, where they do magic of all kinds on any user provided type - with no overhead at **runtime**, because all the magic happens at compile time, resulting in completely fixed and optimized run time code.
-
-
-
-`constexpr` function、trait等都是meta program的典型例子，在c++中，meta program是compile-time computation。我们将它们嵌入到normal program code中，来对program的生成进行控制，比如可以实现polymorphism，它们给予了C++非常强大的灵活性。
-
-
-
-### Application of template metaprogramming
-
-维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)中已经总结了部分Application of template metaprogramming，下面是一些补充内容：
-
-#### SFINAE
-
-- 控制overload resolution，即function template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Function-template-SFINAE.md`中对此进行了分析
-- 控制template specification，即class template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Clasas-template-SFINAE.md`中对此进行了分析
-
-
-
-
-
-### Idiom of template metaprogramming
-
-在`C-family-language\C++\Idiom\Template-metaprogramming`中介绍了Idiom of template metaprogramming。
-
-
-
-
-
-
-
 
 
 ## 方式
@@ -110,5 +48,13 @@ Compile time function execution给予了C++非常强大的灵活性，下面对�
 
 
 
+## 为什么需要compile time function execution？
+
+Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性、高性能
+
+
+
 ## Application
+
+
 
