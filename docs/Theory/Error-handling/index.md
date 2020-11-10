@@ -18,7 +18,46 @@ Alternative approaches to exception handling in software are error checking, whi
 
 ## Exception VS errono
 
-exception是现代programming language提供的error handling机制，传统的做法是errono，那exception有什么优势呢？在wikipedia [Exception handling syntax](https://en.wikipedia.org/wiki/Exception_handling_syntax)中有着解释:
+exception是现代programming language提供的error handling机制，传统的做法是errono，那exception有什么优势呢？
+
+第一个优势: 让代码结构更加清晰
+
+在wikipedia [Exception handling syntax](https://en.wikipedia.org/wiki/Exception_handling_syntax)中有着解释:
 
 > **Exception handling syntax** is the set of keywords and/or structures provided by a computer [programming language](https://en.wikipedia.org/wiki/Programming_language) to allow [exception handling](https://en.wikipedia.org/wiki/Exception_handling), which separates the handling of errors that arise during a program's operation from its **ordinary processes**.
 
+第二优势: 更加得expressive
+
+在函数声明中，specify它可能跑出的exception，这种方式和C++中concept feature一样是formal description，这样的grammar让programmer以统一的方式来specify它可能跑出的exception，这样的方式能够让programmer只需要根据声明就知道函数的exception情况，显然相比于传统的使用`error_no`的方式，这样的方式是更加expressive的。
+
+Java就采用的这种方式，下面是Java中的一些例子:
+
+stackify [How to Specify and Handle Exceptions in Java](https://stackify.com/specify-handle-exceptions-java) : 
+
+```C++
+public void doSomething(String input) throws MyBusinessException {
+	// do something useful ...
+	// if it fails
+	throw new MyBusinessException("A message that describes the error.");
+}
+```
+
+curator.apache [Getting Started](http://curator.apache.org/getting-started.html) :
+
+```java
+LeaderSelectorListener listener = new LeaderSelectorListenerAdapter()
+{
+    public void takeLeadership(CuratorFramework client) throws Exception
+    {
+        // this callback will get called when you are the leader
+        // do whatever leader work you need to and only exit
+        // this method when you want to relinquish leadership
+    }
+}
+
+LeaderSelector selector = new LeaderSelector(client, path, listener);
+selector.autoRequeue();  // not required, but this is behavior that you will probably expect
+selector.start();
+```
+
+C++11、C++17中，去除了这种用法，参见`C++\Language-reference\Exception`章节。

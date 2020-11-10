@@ -1,3 +1,4 @@
 nav:
-    - Exception: Exception.md
+    - Exception: index.md
     - Best-practices-for-exception-handling: Best-practices-for-exception-handling.md
+    - Dynamic-exception-specification: Dynamic-exception-specification.md
