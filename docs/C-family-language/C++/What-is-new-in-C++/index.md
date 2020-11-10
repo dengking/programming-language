@@ -38,19 +38,11 @@ python的官方文档的“What’s New in Python[¶](https://docs.python.org/3/
 
 C++不断引入新的特性，我们需要从更高地层次来思考这些特性对C++的具体改进，这样我们能够梳理清楚C++的发展脉络，下面是我总结的一些方面:
 
-#### compile-time computation
+#### Compile-time computation
 
-C++的一个发展发现就是充分发挥compile-time computation。
+参见`C-and-C++\Compile-time-and-run-time`章节。
 
-| feature        | 引入版本 | 章节                                                         | 说明 |
-| -------------- | -------- | ------------------------------------------------------------ | ---- |
-| `constexpr`    | C++11    | 参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier.md` |      |
-| `constexpr if` | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` |      |
-|                |          |                                                              |      |
-
-
-
-#### template-meta programming
+#### Template-meta programming
 
 C++的一个发展发现是对template-meta programming的强化。
 
@@ -63,7 +55,7 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 
-#### value-semantic
+#### Value-semantic
 
 充分发挥value-semantic。
 
@@ -75,7 +67,7 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 
-#### user-defined literal
+#### User-defined literal
 
 | feature                                                      | 引入版本 | 章节 |
 | ------------------------------------------------------------ | -------- | ---- |
