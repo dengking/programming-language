@@ -6,5 +6,3 @@ nav:
     - Subroutine: Subroutine
     # 越来越多的语言支持Coroutine
     - Coroutine: Coroutine
-    # 当今大多数高级programming language都支持exception
-    - Exception: Exception

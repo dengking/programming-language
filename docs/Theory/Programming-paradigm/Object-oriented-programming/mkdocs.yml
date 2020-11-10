@@ -1,6 +1,6 @@
 nav:
     #################### 首先介绍面向对象编程的概念####################
-    - Object-oriented-programming: Object-oriented-programming.md
+    - Object-oriented-programming: index.md
     #################### thinking in java这本书对OOP的介绍是非常好的####################    
     - Thinking-in-java: Thinking-in-java
     #################### class-based OOP是我们最常用的####################    
