@@ -320,7 +320,7 @@ Request.Get("http://somehost/")
 
 ### Asynchronous programming
 
-当进行**asynchronous programming**的时候，往往需要表达"当 某个**event** 发生时，执行 某个 **callback**"，这个**callback**往往是用户注册的自定义函数，这种是可以使用fluent API来进行描述的，它其实非常类似于builder pattern，即由用户来设置**callback**，最最典型的就是jQuery，现代很多programming language都是支持这种paradigm的。
+
 
 #### jQuery
 
