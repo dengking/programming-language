@@ -9,6 +9,6 @@ nav:
     - Lambda-expression: Lambda-expression
     # 变参函数
     - Variadic-function: Variadic-function
-    - Function-as-first-class-citizen: Function-as-first-class-citizen
+    - First-class-function: First-class-function
     - TMP: TMP
     
