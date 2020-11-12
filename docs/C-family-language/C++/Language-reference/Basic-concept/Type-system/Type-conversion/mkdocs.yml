@@ -7,5 +7,3 @@ nav:
 ########## 用户自定义cast    
     - User-defined-conversion: User-defined-conversion
     
-    - Type-punning: Type-punning
-    - Strict-aliasing: Strict-aliasing

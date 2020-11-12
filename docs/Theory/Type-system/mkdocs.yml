@@ -9,6 +9,5 @@ nav:
     - Covariance-and-contravariance: Covariance-and-contravariance.md
 ########## 类型转换是一种非常重要的类型操作##########    
     - Type-conversion: Type-conversion
-########## 类型双关是一种非常重要的类型操作##########    
-    - Type-punning: Type-punning
+
     
