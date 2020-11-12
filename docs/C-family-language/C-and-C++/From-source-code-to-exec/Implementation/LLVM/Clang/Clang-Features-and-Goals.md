@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [Clang - Features and Goals](https://clang.llvm.org/features.html)
 
 This page describes the [features and goals](https://clang.llvm.org/index.html#goals) of Clang in more detail and gives a more broad explanation about what we mean. These features are:
