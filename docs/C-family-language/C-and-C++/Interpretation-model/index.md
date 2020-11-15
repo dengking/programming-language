@@ -1,8 +1,20 @@
-# interpretion
+# Interpretion model
 
-compiler根据type来汇编生成instruction，在硬件级别，没有type信息，在硬件级别，只有01。指令对01数据进行操作，比如加法指令，浮点运算指令。 在语言基本是function and data，在硬件级别是instruction and data
+在硬件级别，一切都是`01`，没有再高级programming language中的各种概念，比如type。在硬件级别，通过instruction来决定对`01`数据进行何种操作，比如:
+
+1) **加法指令**决定了`01`数据进行加法运算
+
+2) **浮点运算指令**决定了`01`数据进行浮点运算
+
+在高级programming language中，有type的概念，compiler根据type来汇编生成instruction:
+
+1) compiler根据type来决定对应的object的memory size
+
+2) 根据type来决定使用何种运算指令
 
 显然，对于浮点类型，compiler会选择浮点运算指令，对于整形，则会选择简单指令。
+
+> NOTE: 需要联系type determine everything来进行解释。
 
 上述分析非常重要 它是理解很多C，C++中pointer conversion的基础。
 
@@ -84,4 +96,10 @@ static uint64_t load64_le(uint8_t const* V)
   }
   ```
 
-  
+
+## TODO
+
+[Data Types and Memory Allocation](http://www.c-jump.com/CIS77/ASM/DataTypes/lecture.html)
+
+
+https://blog.csdn.net/Javaxuxuexi/article/details/93312804
