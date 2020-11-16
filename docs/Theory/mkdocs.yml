@@ -19,7 +19,7 @@ nav:
     - Organization: Organization
 
 ###################################################重要概念################################################    
-    - First-class-citizen: First-class-citizen.md
+    - First-class-citizen: First-class-citizen
 ###################################################################################################    
     # 编程范式
     - Programming-paradigm: Programming-paradigm

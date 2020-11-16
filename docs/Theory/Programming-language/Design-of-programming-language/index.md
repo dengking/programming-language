@@ -113,7 +113,7 @@ container指各种常见的数据结构，一般programming language的standard 
 
 本节标题的含义是: 对于general purpose programming language，designer在设计programming language的时候，是遵循如下原则的:
 
-**design to an abstraction, not an implementation**
+**Design to an abstraction, not an implementation**
 
 它的意思是，designer在设计programming language的时候，是基于**abstract machine**来进行设计的，而不是specific to an concrete platform（physical machine、OS），然后由各个platform的开发者来完成abstraction到implementation的映射，即在该platform上实现这门语言。这是很多programming language实现cross platform的关键所在。
 
@@ -125,17 +125,17 @@ container指各种常见的数据结构，一般programming language的standard 
 
 | language | implementation                                               |
 | -------- | ------------------------------------------------------------ |
-| java     | 见下                                                         |
-| python   | python、java的跨平台是依赖于VM，这些VM也是由实现提供，比如VM for windows，VM for linux，由这些VM实现来完成abstract machine 到 physical machine的映射。 |
+| Java     | 见下                                                         |
+| Python   | python、java的跨平台是依赖于VM，这些VM也是由实现提供，比如VM for windows，VM for linux，由这些VM实现来完成abstract machine 到 physical machine 的映射。 |
 | C++      | 跨平台由具体实现（compiler等）完成，MCVC for windows、gcc for linux，由这些compiler来完成abstract machine 到 physical machine的映射。 |
 
 ### Abstract machine
 
 出于语言设计的目标，programming language designer对abstract machine的定义是不同的: 
 
-java和python都没有向programmer提供memory model，所以programmer无法直接操作memory；
+Python都没有向programmer提供memory model，所以programmer无法直接操作memory；
 
-C++和C都提供了，因此programmer可以直接操作memory。
+Java、C++和C都提供了memory model，在C++和C中，programmer可以直接操作memory。
 
 
 

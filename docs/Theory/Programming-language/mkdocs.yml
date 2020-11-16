@@ -4,7 +4,7 @@ nav:
 #################### 如何来掌握programming language，这是本章的核心思想##################    
     - How-to-master-programming-language: How-to-master-programming-language.md
     # programming language的设计
-    - Design-of-programming-language: Design-of-programming-language.md
+    - Design-of-programming-language: Design-of-programming-language
     # programming language的实现
     - Implementation-of-programming-language: Implementation-of-programming-language.md
 #################### expressive是我们使用programming language来描述世界的最终目的####################    
