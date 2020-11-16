@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Key-of-unordered-map: Key-of-unordered-map.md
+    - Custom-type-as-key: Custom-type-as-key
     - Maps-operation: Maps-operation.md
