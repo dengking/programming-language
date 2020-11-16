@@ -1,5 +1,7 @@
 # `const char *` as key
 
+
+
 ## 问题描述
 
 今天碰到了一个非常容易出现错误的常见:
@@ -81,29 +83,35 @@ C++标准库为`std::string`提供了comparator、hasher，因此它可以作为
 
 关于`std::string`的comparator、hasher，参见cppreference [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)。
 
+
+
 ### 2) 使用`std::string_view`(C++17)来作为key
 
 C++标准库为`std::string_view`提供了comparator、hasher，因此它可以作为`std::map`的key、`std::unordered_map`的key。将`const  char *`转换为`std::string_view`不涉及deep copy。
 
 关于`std::string_view`的comparator、hasher，参见cppreference [std::std::basic_string_view](https://en.cppreference.com/w/cpp/string/basic_string_view)。
 
+在stackoverflow [std::hash value on char* value and not on memory address?](https://stackoverflow.com/questions/34597260/stdhash-value-on-char-value-and-not-on-memory-address) # [A](https://stackoverflow.com/a/64616123) 中给出了用法示例:
 
+> Since C++17 added [`std::string_view`](https://en.cppreference.com/w/cpp/header/string_view) including a `std::hash` specialization for it you can use that to compute the hash value of a C-string.
+>
+> Example:
+>
+> ```cpp
+> #include <string_view>
+> #include <cstring>
+> 
+> static size_t hash_cstr(const char *s)
+> {
+>     return std::hash<std::string_view>()(std::string_view(s, std::strlen(s)));
+> }
+> ```
 
 ### 3) custom comparator、hasher
 
 即自定义comparator、hasher
 
 这种方式非常灵活，用户可以以不deep copy的方式来实现。
-
-
-
-
-
-找到如下跟这个问题相关的内容:
-
-1) bugsdb [C++ unordered_map with char* as key](https://bugsdb.com/_en/debug/272c82a107ca800554a208494707cc6e)
-
-
 
 
 
@@ -201,3 +209,9 @@ struct cmp_str
 
 map<char *, int, cmp_str> BlahBlah;
 ```
+
+
+
+### hash for `const char *`
+
+参见`C++\Library\Standard-library\Utility-library\Hash\General-purpose-hash`章节。
