@@ -75,13 +75,13 @@ C++标准库并没有为`const char*`提供如下operator:
 
 ## 解决方法
 
-1) 使用`std::string`来作为key
+### 1) 使用`std::string`来作为key
 
 C++标准库为`std::string`提供了comparator、hasher，因此它可以作为`std::map`的key、`std::unordered_map`的key。但是将`const  char *`转换为`std::string`涉及deep copy。
 
 关于`std::string`的comparator、hasher，参见cppreference [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)。
 
-2) 使用`std::string_view`(C++17)来作为key
+### 2) 使用`std::string_view`(C++17)来作为key
 
 C++标准库为`std::string_view`提供了comparator、hasher，因此它可以作为`std::map`的key、`std::unordered_map`的key。将`const  char *`转换为`std::string_view`不涉及deep copy。
 
@@ -89,7 +89,9 @@ C++标准库为`std::string_view`提供了comparator、hasher，因此它可以�
 
 
 
-3) custom comparator、hasher即自定义comparator、hasher
+### 3) custom comparator、hasher
+
+即自定义comparator、hasher
 
 这种方式非常灵活，用户可以以不deep copy的方式来实现。
 
@@ -103,13 +105,9 @@ C++标准库为`std::string_view`提供了comparator、hasher，因此它可以�
 
 
 
-3) stackoverflow [Using char* as a key in std::map](https://stackoverflow.com/questions/4157687/using-char-as-a-key-in-stdmap)
-
-其中给出了样例程序，非常值得借鉴。
 
 
-
-## 如何避免deep copy？
+## Custom comparator、hasher examples
 
 
 
@@ -177,4 +175,29 @@ struct EqualString
 
 std::map<const char*, WhateverValue, LesserString> m1;
 std::unorderd_map<const char*, WhateverValue, HashString, EqualString> m2;
+```
+
+
+
+### stackoverflow [Using char* as a key in std::map](https://stackoverflow.com/questions/4157687/using-char-as-a-key-in-stdmap)
+
+> 其中给出了样例程序，非常值得借鉴。
+>
+
+[A](https://stackoverflow.com/a/4157729)
+
+You need to give a comparison functor to the map otherwise it's comparing the pointer, not the null-terminated string it points to. In general, this is the case anytime you want your map key to be a pointer.
+
+For example:
+
+```cpp
+struct cmp_str
+{
+   bool operator()(char const *a, char const *b) const
+   {
+      return std::strcmp(a, b) < 0;
+   }
+};
+
+map<char *, int, cmp_str> BlahBlah;
 ```
