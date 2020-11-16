@@ -8,7 +8,11 @@ https://www.sciencedirect.com/topics/computer-science/sequential-consistency
 
 ### 8.4.1 Memory Models and Memory Ordering Options
 
-**Three** memory models proposed by C++11, which, together with the memory ordering options that can be used in each one of them, are described next. Memory order options are symbolic constants passed as second argument to the atomic class member functions. As stated before, the same memory models are implemented in TBB and Windows, with minor implementation differences.
+**Three** memory models proposed by C++11, which, together with the **memory ordering options** that can be used in each one of them, are described next. **Memory order options** are **symbolic constants** passed as second argument to the **atomic class member functions**. As stated before, the same **memory models** are implemented in TBB and Windows, with minor implementation differences.
+
+> NOTE: TBB指的是[Threading Building Blocks](https://en.wikipedia.org/wiki/Threading_Building_Blocks):
+>
+> > **Threading Building Blocks** (**TBB**) is a [C++](https://en.wikipedia.org/wiki/C%2B%2B) [template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)) [library](https://en.wikipedia.org/wiki/Library_(computer_science)) developed by [Intel](https://en.wikipedia.org/wiki/Intel) for [parallel programming](https://en.wikipedia.org/wiki/Parallel_programming) on [multi-core processors](https://en.wikipedia.org/wiki/Multi-core_processor). Using TBB, a computation is broken down into [tasks](https://en.wikipedia.org/wiki/Task_parallelism) that can run in parallel. The library manages and [schedules](https://en.wikipedia.org/wiki/Scheduling_(computing)) [threads](https://en.wikipedia.org/wiki/Thread_(computing)) to execute these tasks.
 
 #### 1 Sequential consistency
 

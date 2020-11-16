@@ -20,6 +20,8 @@
 
 `std::string_view` is faster in a few cases.
 
+#### First
+
 First, `std::string const&` requires the data to be in a `std::string`, and not a raw C array, a `char const*` returned by a C API, a `std::vector<char>` produced by some deserialization engine, etc. The avoided format conversion avoids copying bytes, and (if the string is longer than the SBO¹ for the particular `std::string` implementation) avoids a memory allocation.
 
 > NOTE: 上面这段话的意思是: `std::string const&`要求string位于`std::string`中，显然一旦使用了`std::string`，则就会导致一次allocation、copy。这还会导致后续一系列的allocation、copy，显然这就大大降低了性能。
@@ -37,9 +39,13 @@ int main(int argc, char const*const* argv) {
 
 No allocations are done in the `string_view` case, but there would be if `foo` took a `std::string const&` instead of a `string_view`.
 
+> NOTE: compiler首先会调用`string(const char*)`来构造一个temporary string。
+
+#### Second 
+
 The second really big reason is that it permits working with substrings without a copy. Suppose you are parsing a 2 gigabyte json string (!)². If you parse it into `std::string`, each such parse node where they store the name or value of a node *copies* the original data from the 2 gb string to a local node.
 
-Instead, if you parse it to `std::string_view`s, the nodes *refer* to the original data. This can save millions of allocations and halve memory requirements during parsing.
+Instead, if you parse it to `std::string_view`s, the nodes *refer* to the original data. This can save millions of allocations and **halve**(减半) memory requirements during parsing.
 
 The speedup you can get is simply ridiculous.
 
@@ -47,11 +53,11 @@ This is an extreme case, but other "get a substring and work with it" cases can 
 
 An important part to the decision is what you lose by using `std::string_view`. It isn't much, but it is something.
 
-You lose implicit null termination, and that is about it. So if the same string will be passed to 3 functions all of which require a null terminator, converting to `std::string` once may be wise. Thus if your code is known to need a null terminator, and you don't expect strings fed from C-style sourced buffers or the like, maybe take a `std::string const&`. Otherwise take a `std::string_view`.
+You lose **implicit null termination**, and that is about it. So if the same string will be passed to 3 functions all of which require a null terminator, converting to `std::string` once may be wise. Thus if your code is known to need a **null terminator**, and you don't expect strings fed from C-style sourced buffers or the like, maybe take a `std::string const&`. Otherwise take a `std::string_view`.
 
 If `std::string_view` had a flag that stated if it was null terminated (or something fancier) it would remove even that last reason to use a `std::string const&`.
 
-There is a case where taking a `std::string` with no `const&` is optimal over a `std::string_view`. If you need to own a copy of the string indefinitely after the call, taking by-value is efficient. You'll either be in the SBO case (and no allocations, just a few character copies to duplicate it), or you'll be able to *move* the heap-allocated buffer into a local `std::string`. Having two overloads `std::string&&` and `std::string_view` might be faster, but only marginally, and it would cause modest code bloat (which could cost you all of the speed gains).
+There is a case where taking a `std::string` with no `const&` is optimal over a `std::string_view`. If you need to own a copy of the string indefinitely(永久的) after the call, taking by-value is efficient. You'll either be in the SBO case (and no allocations, just a few character copies to duplicate it), or you'll be able to *move* the heap-allocated buffer into a local `std::string`. Having two overloads `std::string&&` and `std::string_view` might be faster, but only marginally, and it would cause modest code bloat (which could cost you all of the speed gains).
 
 ------
 
