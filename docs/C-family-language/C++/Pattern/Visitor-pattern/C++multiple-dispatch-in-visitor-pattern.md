@@ -1,8 +1,8 @@
-# Multiple dispatch
+# C++ multiple dispatch in visitor pattern
 
 关于multiple dispatch，下面这篇文章的分析是非常到位的。
 
-## [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)
+## thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)
 
 
 

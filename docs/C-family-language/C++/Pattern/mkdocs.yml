@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Books: Books.md
     - Singleton: Singleton
+    - Visitor-pattern: Visitor-pattern

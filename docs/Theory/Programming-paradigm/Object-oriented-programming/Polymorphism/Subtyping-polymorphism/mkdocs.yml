@@ -1,4 +1,3 @@
 nav:
     - Introduction: index.md
     - Dynamic-Dispatch: Dynamic-Dispatch.md
-    - Dynamic-multiple-dispatch: Dynamic-multiple-dispatch.md
