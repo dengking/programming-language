@@ -138,6 +138,14 @@ C++ uses templates to enable generic programming techniques. The C++ Standard Li
 
 Generic programming的实现是依赖于polymorphism的。
 
+#### wikipedia [Generic function](https://en.wikipedia.org/wiki/Generic_function)
+
+> NOTE: 相关概念，所以将它收录到这里
+
+In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), a **generic function** is a function defined for [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)).
+
+
+
 
 
 ## Generic programming and reusable code 

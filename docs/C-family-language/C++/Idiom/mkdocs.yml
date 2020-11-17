@@ -4,7 +4,6 @@ nav:
     - OOP: OOP
     #################### template metaprogramming和Generic-programming密切相关####################    
     - TMP: TMP
-    - Generic-programming: Generic-programming
     ########## 函数相关相关##########   
     - Function: Function
     ########## STL相关##########
