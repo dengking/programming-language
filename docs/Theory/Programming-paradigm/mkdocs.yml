@@ -16,4 +16,6 @@ nav:
     - Expression-oriented-programming: Expression-oriented-programming
     - Symbolic-programming: Symbolic-programming
     - Dataflow-programming: Dataflow-programming
+    
     - Abstraction: Abstraction
+    - Type-requirement: Type-requirement

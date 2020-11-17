@@ -1,4 +1,4 @@
 nav:
-    - Generic-programming: Generic-programming.md
+    - Generic-programming: index.md
+    - Concept(generic-programming): Concept(generic-programming)
     - Templates-and-Duck-Typing: Templates-and-Duck-Typing
-    - Specification-of-expectation-of-type: Specification-of-expectation-of-type.md

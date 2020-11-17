@@ -1,4 +1,4 @@
-# 维基百科[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))
+# wikipedia [Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))
 > 维基百科的[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))对concept的介绍是比较简洁清晰的，可以作为prime来进行阅读。
 
 
