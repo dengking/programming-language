@@ -10,7 +10,7 @@
 
 显然，concept就是对requirement on type的formal description。
 
-
+> NOTE: 参见`Theory\Programming-paradigm\Type-requirement`。
 
 在[C++ Type Traits](https://www.drdobbs.com/cpp/c-type-traits/184404270)中有这样的描述：
 

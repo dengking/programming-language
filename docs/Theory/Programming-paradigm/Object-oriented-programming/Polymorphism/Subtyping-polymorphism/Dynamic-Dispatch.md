@@ -1,5 +1,7 @@
 # Dynamic dispatch
 
+
+
 ## Dispatch的本质
 
 在文章[Polymorphism](../Polymorphism.md)中，我们已经总结了：
@@ -8,7 +10,7 @@
 
 dispatch可以看做是对Polymorphism的一种实现，即它所实现的是一种one-to-many关系。
 
-## 维基百科[Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
+## wikipedia [Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
 
 ### [Single and multiple dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch#Single_and_multiple_dispatch)
 
@@ -20,13 +22,13 @@ dispatch可以看做是对Polymorphism的一种实现，即它所实现的是一
 
 
 
-## 维基百科[Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
+## wikipedia [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
 
 
 
 
-### 维基百科[Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch)
+### wikipedia [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch)
 
 [Double Dispatch: the next best thing with respect to Dependency Injection](https://dzone.com/articles/double-dispatch-next-best)
 

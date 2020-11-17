@@ -1,4 +1,4 @@
 nav:
-    - Introduction: TODO-index.md
-    - Dispatch: Dispatch.md
-    - Multiple-dispatch: Multiple-dispatch.md
+    - Introduction: index.md
+    - Dynamic-Dispatch: Dynamic-Dispatch.md
+    - Dynamic-multiple-dispatch: Dynamic-multiple-dispatch.md
