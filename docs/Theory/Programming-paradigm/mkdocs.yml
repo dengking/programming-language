@@ -19,3 +19,5 @@ nav:
     
     - Abstraction: Abstraction
     - Type-requirement: Type-requirement
+    #################### 多态是面向对象的核心####################    
+    - Polymorphism: Polymorphism

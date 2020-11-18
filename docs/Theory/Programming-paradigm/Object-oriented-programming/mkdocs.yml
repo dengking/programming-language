@@ -5,8 +5,7 @@ nav:
     - Thinking-in-java: Thinking-in-java
     #################### class-based OOP是我们最常用的####################    
     - Class-based-OOP: Class-based-OOP
-    #################### 多态是面向对象的核心####################    
-    - Polymorphism: Polymorphism
+
     # 
     - Assemble: Assemble
     #################### fluent api在OOP中有着广泛的应用####################
