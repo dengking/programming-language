@@ -228,3 +228,45 @@ In contrast, **compile-time duck typing** doesn't cost anything during runtime. 
 ## wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
 
 This works whether the arguments x and y are integers, strings, or any other type for which the expression x < y is sensible, or more specifically, for any type for which operator< is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+
+
+
+
+
+## draft
+
+
+
+### Template and duck type and polymorphism
+
+按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:Template属于“single symbol to represent multiple different types”。
+
+template是C++的典型特性，duck type是python的典型特性，从上面的对比来看，两者存在着一定的相似性，关于两者，在`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing`章节进行了深入分析。
+
+在维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中已经提及了，下面是一些补充。
+
+https://stackoverflow.com/questions/11502433/what-is-the-difference-between-polymorphism-and-duck-typing
+
+
+
+https://softwareengineering.stackexchange.com/questions/121778/is-duck-typing-a-subset-of-polymorphism
+
+
+
+https://dev.to/middlebrooks314/duck-typing-1gnn
+
+
+
+https://subscription.packtpub.com/book/application_development/9781788293181/8/08lvl1sec92/polymorphism-and-duck-typing
+
+
+
+https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types
+
+
+
+## draft
+
+[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism 更加类似于 [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism)，都是:
+
+"when one or more types are not specified by name but by **abstract symbols** that can represent any type."

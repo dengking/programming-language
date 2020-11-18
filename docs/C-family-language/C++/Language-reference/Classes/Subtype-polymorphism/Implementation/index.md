@@ -10,7 +10,7 @@
 
 #### 实现方式
 
-[Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
+wikipedia [Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
 
 
 
@@ -51,3 +51,18 @@ most derived class
 #### Virtual function table of polymorphic type
 
 Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI\Virtual-method-table.md`。
+
+
+
+## draft3
+
+在wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中有如下总结，我觉得描述地非常好: 
+
+[Object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language) offer subtype polymorphism using *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* (also known as *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)*). In typical implementations, each class contains what is called a *[virtual table](https://en.wikipedia.org/wiki/Virtual_table)*—a table of functions that implement the polymorphic part of the class interface—and each object contains a pointer to the "vtable" of its class, which is then consulted whenever a polymorphic method is called. This mechanism is an example of:
+
+- *[late binding](https://en.wikipedia.org/wiki/Late_binding)*, because virtual function calls are not bound until the time of invocation;
+
+- *[single dispatch](https://en.wikipedia.org/wiki/Single_dispatch)* (i.e. single-argument polymorphism), because virtual function calls are bound simply by looking through the vtable provided by the first argument (the `this` object), so the runtime types of the other arguments are completely irrelevant.
+
+  > NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
+

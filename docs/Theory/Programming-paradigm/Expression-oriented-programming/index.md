@@ -38,3 +38,12 @@ Expression其实也有着nesting关系，典型的例子就是使用**括号**�
 
 由于它们都有着nesting关系，所以都可以使用tree来结构化，从而实现它们的evaluation。
 
+
+
+
+
+## 涉及symbol的章节
+
+Theory\Programming-paradigm\Polymorphism
+
+Theory\Programming-paradigm\Polymorphism\Parametric-polymorphism

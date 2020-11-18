@@ -1,6 +1,10 @@
 # Generic programming
 
-如何使代码更加地generic，即更加地通用？这是所有的programming language都需要考虑的一个问题，`c++`中通过template来实现generic，python中的duck type也能够使程序更加地generic，需要注意的是，严格说来，这里所说的generic并不是本文接下来要讨论的generic programming。我是在思考“如何使代码更加地generic”而想到generic programming的。[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)的思想是：抽象出类型而使程序更加地generic，更多细节将再下面这篇文章中介绍。
+如何使代码更加地generic，即更加地通用？这是所有的programming language都需要考虑的一个问题，`c++`中通过template来实现generic，python中的duck type也能够使程序更加地generic，需要注意的是，严格说来，这里所说的generic并不是本文接下来要讨论的generic programming。我是在思考“如何使代码更加地generic”而想到generic programming的。[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)的核心思想是：
+
+> 抽象出类型并使用concept进行formal description，algorithm/function基于concept来进行设计和实现，从而达到使程序更加地generic的目的。
+
+更多细节将再下面这篇文章中介绍。
 
 ## wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming)
 
@@ -34,7 +38,7 @@ The term "generic programming" was originally coined by [David Musser](https://e
 >
 > 关于抽象，参见:
 >
-> 1) abstraction
+> 1) 文章abstraction
 >
 > 2) `Theory\Programming-paradigm\Abstraction`
 >
@@ -136,7 +140,7 @@ C++ uses templates to enable generic programming techniques. The C++ Standard Li
 
 ### Generic programming and polymorphism
 
-Generic programming的实现是依赖于polymorphism的。
+Generic programmingpolymorphism的属于[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)，关于此，参见`Theory\Programming-paradigm\Polymorphism`章节。
 
 #### wikipedia [Generic function](https://en.wikipedia.org/wiki/Generic_function)
 
