@@ -8,7 +8,7 @@ OOP的unit是object，而不是class。OOP有两个流派，class-based和protot
 
 class相当于一种类型，type system中的概念基本上都能够应用于class。
 
-## 维基百科[Subtyping](https://en.wikipedia.org/wiki/Subtyping)
+## wikipedia [Subtyping](https://en.wikipedia.org/wiki/Subtyping)
 
 
 

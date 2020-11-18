@@ -153,16 +153,211 @@ When dealing with [functions that take functions as arguments](https://en.wikipe
 
 ### Inheritance in object-oriented languages
 
+When a subclass [overrides](https://en.wikipedia.org/wiki/Method_overriding) a method in a superclass, the compiler must check that the overriding method has the right type. 
 
+While some languages require that the type exactly matches the type in the superclass (invariance), it is also type safe to allow the overriding method to have a "better" type. 
+
+By the usual subtyping rule for function types, this means that the overriding method should return a more specific type (**return type covariance**), and accept a more general argument (**parameter type contravariance**). 
+
+In [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) notation, the possibilities are as follows:
+
+**Variance and method overriding: overview**
 
 |                                                              |                                                              |                                                              |                                                              |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Vererbung_T.svg/120px-Vererbung_T.svg.png)](https://en.wikipedia.org/wiki/File:Vererbung_T.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Inheritance_invariant.svg/120px-Inheritance_invariant.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_invariant.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Inheritance_covariant_return.svg/120px-Inheritance_covariant_return.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_covariant_return.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Inheritance_contravariant_argument.svg/120px-Inheritance_contravariant_argument.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_contravariant_argument.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Inheritance_covariant_argument.svg/120px-Inheritance_covariant_argument.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_covariant_argument.svg) |
 | Subtyping of the parameter/return type of the method.        | *Invariance*. The signature of the overriding method is unchanged. | *Covariant return type*. The subtyping relation is in the same direction as the relation between ClassA and ClassB. | *Contravariant parameter type*. The subtyping relation is in the opposite direction to the relation between ClassA and ClassB. | *Covariant parameter type*. Not type safe.                   |
 
-  
+For a concrete example, suppose we are writing a class to model an [animal shelter](https://en.wikipedia.org/wiki/Animal_shelter). We assume that `Cat` is a subclass of `Animal`, and that we have a base class (using Java syntax)
+
+[![UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/AnimalShelter.svg/170px-AnimalShelter.svg.png)](https://en.wikipedia.org/wiki/File:AnimalShelter.svg)
+
+```java
+class AnimalShelter {
+
+    Animal getAnimalForAdoption() {
+        // ...
+    }
+    
+    void putAnimal(Animal animal) {
+        //...
+    }
+}
+```
+
+Now the question is: if we subclass `AnimalShelter`, what types are we allowed to give to `getAnimalForAdoption` and `putAnimal`?
+
+#### Covariant method return type
+
+In a language which allows [covariant return types](https://en.wikipedia.org/wiki/Covariant_return_type), a derived class can override the `getAnimalForAdoption` method to return a more specific type:
+
+[![UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Inheritance_covariant_return_animalshelter.svg/170px-Inheritance_covariant_return_animalshelter.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_covariant_return_animalshelter.svg)
+
+```java
+class CatShelter extends AnimalShelter {
+
+    Cat getAnimalForAdoption() {
+        return new Cat();
+    }
+}
+```
+
+Among mainstream OO languages, [Java](https://en.wikipedia.org/wiki/Java_(Programming_language)) and [C++](https://en.wikipedia.org/wiki/C%2B%2B) support **covariant return types**, while [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) does not. Adding the covariant return type was one of the first modifications of the C++ language approved by the standards committee in 1998.[[5\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-5) [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) and [D](https://en.wikipedia.org/wiki/D_(programming_language)) also support covariant return types.
+
+#### Contravariant method parameter type
+
+Similarly, it is type safe to allow an overriding method to accept a more general argument than the method in the base class:
+
+[![UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Inheritance_contravariant_argument_animalshelter.svg/170px-Inheritance_contravariant_argument_animalshelter.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_contravariant_argument_animalshelter.svg)
+
+```java
+class CatShelter extends AnimalShelter {
+    void putAnimal(Object animal) {
+        // ...
+    }
+}
+```
+
+Not many object-oriented languages actually allow this. `C++` and Java would interpret this as an unrelated method with an [overloaded](https://en.wikipedia.org/wiki/Function_overloading) name.
 
 
+
+#### Covariant method parameter type
+
+A couple of mainstream languages, [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)) and [Dart](https://en.wikipedia.org/wiki/Dart_(programming_language))[[6\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-Fixing_Common_Type_Problems_|_Dart-6) allow the parameters of an overriding method to have a *more* specific type than the method in the superclass (parameter type covariance). Thus, the following Dart code would type check, with `putAnimal` overriding the method in the base class:
+
+[![UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Inheritance_covariant_argument_animalshelter.svg/170px-Inheritance_covariant_argument_animalshelter.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_covariant_argument_animalshelter.svg)
+
+```java
+class CatShelter extends AnimalShelter {
+
+    void putAnimal(covariant Cat animal) {
+        // ...
+    }
+}
+```
+
+This is not type safe. By up-casting a `CatShelter` to an `AnimalShelter`, one can try to place a dog in a cat shelter. That does not meet `CatShelter` parameter restrictions, and will result in a runtime error.
+
+> NOTE: 上述up-casting所对应的是 [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle) ；在基类`AnimalShelter`中`putAnimal(Animal animal)`的入参类型为`Animal` ，因此能够接收dog ，但是这显然是不符合`CatShelter`的`putAnimal(covariant Cat animal)`。显然这就是导致了 runtime error 。显然这是Eiffel language层面的问题。
+
+Despite the **type safety** problem, the Eiffel designers consider **covariant parameter types** crucial(至关重要的) for modeling real world requirements.[[8\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-competentCompilers-8) The cat shelter illustrates a common phenomenon: it is *a kind of* animal shelter but has *additional restrictions*, and it seems reasonable to use inheritance and restricted parameter types to model this. In proposing this use of inheritance, the Eiffel designers reject the [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle), which states that objects of subclasses should always be less restricted than objects of their superclass.
+
+> NOTE: 从上面的讨论可以看出，Covariant method parameter type 和  [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle) 是无法兼得的。如何兼得呢？在后面的"Avoiding the need for covariant parameter types"章节对此进行了说明。
+
+
+
+Another example where **covariant parameters** seem helpful is so-called **binary methods**, i.e. methods where the parameter is expected to be of the same type as the object the method is called on(希望parameter和调用method的object的type是同类的). An example is the `compareTo` method: `a.compareTo(b)` checks whether `a` comes before or after `b` in some ordering, but the way to compare, say, two rational numbers will be different from the way to compare two strings. Other common examples of **binary methods** include equality tests, arithmetic operations, and set operations like subset and union.
+
+In older versions of Java, the comparison method was specified as an interface `Comparable`:
+
+```java
+interface Comparable {
+
+    int compareTo(Object o);
+}
+```
+
+The drawback of this is that the method is specified to take an argument of type `Object`. A typical implementation would first down-cast this argument (throwing an error if it is not of the expected type):
+
+```java
+class RationalNumber implements Comparable {
+    int numerator;
+    int denominator;
+    // ...
+ 
+    public int compareTo(Object other) {
+        RationalNumber otherNum = (RationalNumber)other;
+        return Integer.compare(numerator * otherNum.denominator,
+                               otherNum.numerator * denominator);
+    }
+}
+```
+
+In a language with **covariant parameters**, the argument to `compareTo` could be directly given the desired type `RationalNumber`, hiding the **typecast**. (Of course, this would still give a runtime error if `compareTo` was then called on e.g. a `String`.)
+
+#### Avoiding the need for covariant parameter types
+
+> NOTE: 当代programming language提出的解决"Covariant method parameter type"问题的方案，它使得programmer能够兼得**apparent benefits of covariant parameters** 和 **Liskov substitutability**。
+
+Other language features can provide the **apparent benefits of covariant parameters** while preserving **Liskov substitutability**.
+
+In a language with *generics* (a.k.a. [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)) and [bounded quantification](https://en.wikipedia.org/wiki/Bounded_quantification), the previous examples can be written in a type-safe way.[[9\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-9) Instead of defining `AnimalShelter`, we define a parameterized class `Shelter<T>`. (One drawback of this is that the implementer of the base class needs to foresee(预见) which types will need to be specialized in the subclasses.)
+
+```C++
+class Shelter<T extends Animal> {
+
+    T getAnimalForAdoption() {
+        // ...
+    }
+
+    void putAnimal(T animal) {
+        // ...
+    }
+}
+
+    
+class CatShelter extends Shelter<Cat> {
+
+    Cat getAnimalForAdoption() {
+        // ...
+    }
+
+    void putAnimal(Cat animal) {
+        // ...
+    }
+}
+```
+
+Similarly, in recent versions of Java the `Comparable` interface has been parameterized, which allows the downcast to be omitted in a type-safe way:
+
+```C++
+class RationalNumber implements Comparable<RationalNumber> {
+
+    int numerator;
+    int denominator;
+    // ...
+         
+    public int compareTo(RationalNumber otherNum) {
+        return Integer.compare(numerator * otherNum.denominator, 
+                               otherNum.numerator * denominator);
+    
+```
+
+
+
+Another language feature that can help is *multiple dispatch*. One reason that binary methods are awkward to write is that in a call like `a.compareTo(b)`, selecting the correct implementation of `compareTo` really depends on the **runtime type** of both `a` and `b`, but in a conventional OO language only the runtime type of `a` is taken into account. In a language with [Common Lisp Object System](https://en.wikipedia.org/wiki/Common_Lisp_Object_System) (CLOS)-style [multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch), the comparison method could be written as a **generic function** where both arguments are used for **method selection**.
+
+Giuseppe Castagna[[10\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-10) observed that in a typed language with **multiple dispatch**, a **generic function** can have some parameters which control **dispatch** and some "left-over"(剩下的) parameters which do not. Because the method **selection rule** chooses the **most specific applicable method**, if a method **overrides** another method, then the overriding method will have more **specific types** for the controlling parameters. On the other hand, to ensure type safety the language still must require the left-over parameters to be at least as general. Using the previous terminology, types used for **runtime method selection** are **covariant** while types not used for runtime method selection of the method are **contravariant**. Conventional **single-dispatch** languages like Java also obey this rule: only one argument is used for **method selection** (the receiver object, passed along to a method as the hidden argument `this`), and indeed the type of `this` is more specialized inside overriding methods than in the superclass.
+
+Castagna suggests that examples where covariant parameter types are superior (particularly, binary methods) should be handled using **multiple dispatch**; which is naturally **covariant**. However, most programming languages do not support **multiple dispatch**.
+
+> NOTE: Giuseppe Castagna的分析所强调的是: 对于支持covariant parameter types的programming language，应该使用multiple dispatch来保证安全。
+
+#### Summary of variance and inheritance
+
+|                                                              | Parameter type |                Return type                |
+| :----------------------------------------------------------: | :------------: | :---------------------------------------: |
+| [C++](https://en.wikipedia.org/wiki/C%2B%2B) (since 1998), [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) (since [J2SE 5.0](https://en.wikipedia.org/wiki/Java_Platform,_Standard_Edition)), [D](https://en.wikipedia.org/wiki/D_(programming_language)) |   Invariant    |                 Covariant                 |
+| [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) |   Invariant    | Covariant (since C# 9 - before Invariant) |
+| [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)), [Sather](https://en.wikipedia.org/wiki/Sather) | Contravariant  |                 Covariant                 |
+| [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)) |   Covariant    |                 Covariant                 |
+
+### Generic types
+
+In programming languages that support **generics** (a.k.a. [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)), the programmer can extend the type system with new constructors. For example, a `C#` interface like `IList<T>` makes it possible to construct new types like `IList<Animal>` or `IList<Cat>`. The question then arises what the **variance** of these type constructors should be.
+
+There are two main approaches. 
+
+1) In languages with *declaration-site variance annotations* (e.g., [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language))), the programmer annotates the definition of a **generic type** with the intended variance of its type parameters. 
+
+2) With *use-site variance annotations* (e.g., [Java](https://en.wikipedia.org/wiki/Java_(programming_language))), the programmer instead annotates the places where a **generic type** is instantiated.
+
+#### Declaration-site variance annotations
+
+The most popular languages with declaration-site variance annotations are [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) and [Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) (using the keywords `out` and `in`), and [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) and [OCaml](https://en.wikipedia.org/wiki/OCaml) (using the keywords `+` and `-`). C# only allows variance annotations for interface types, while Kotlin, Scala and OCaml allow them for both interface types and concrete data types.
+
+#### Use-site variance annotations (wildcards)
 
 ## wikipedia [Covariant return type](https://en.wikipedia.org/wiki/Covariant_return_type)
 

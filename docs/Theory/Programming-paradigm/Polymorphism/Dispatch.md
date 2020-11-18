@@ -1,0 +1,3 @@
+不同的语言、不同的polymorphism，实现dispatch的方式是不同的。
+
+在下面文章中提及了dispatch
