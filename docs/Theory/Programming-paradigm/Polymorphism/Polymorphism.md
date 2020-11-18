@@ -175,8 +175,6 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 
 
-
-
 ### Polymorphism is a generic trait
 
 本节标题的含义是：多态性是一种通用特性，它源自于[Is duck typing a subset of polymorphism](https://softwareengineering.stackexchange.com/questions/121778/is-duck-typing-a-subset-of-polymorphism)的[回答](https://softwareengineering.stackexchange.com/a/121818)：
