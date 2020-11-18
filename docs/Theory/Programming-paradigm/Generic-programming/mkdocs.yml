@@ -1,4 +1,4 @@
 nav:
     - Generic-programming: index.md
     - Concept(generic-programming): Concept(generic-programming)
-    - Templates-and-Duck-Typing: Templates-and-Duck-Typing
+    - Templates-VS-Duck-Typing-VS-Generics: Templates-VS-Duck-Typing-VS-Generics

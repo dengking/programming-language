@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - wikipedia-Type-system: wikipedia-Type-system.md
+    - Type-system: Type-system.md
     - Type-constructor: Type-constructor
     - Type-safety: Type-safety.md
     - Static-VS-dynamic-typing: Static-VS-dynamic-typing.md

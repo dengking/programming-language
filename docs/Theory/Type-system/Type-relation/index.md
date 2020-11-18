@@ -18,10 +18,10 @@ subtype是最最典型的type relation，它是OOP中的核心话题，OOP type�
 
 于此相关的有:
 
-- C++ overload resolution
+- C++ overload resolution，参见`C++\Language-reference\Functions\Function-overload\Overload-resolution`章节
 - 
 
-
+> NOTE: 只有ordering之后，才能够基于type进行computation，参见`Relation-structure-computation\Make-it-computational`。
 
 
 
