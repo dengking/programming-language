@@ -1,2 +1,3 @@
 nav:
     - Introduction: index.md
+    - Type-ordering: Type-ordering.md

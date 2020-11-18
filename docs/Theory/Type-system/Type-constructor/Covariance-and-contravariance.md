@@ -1,5 +1,7 @@
 # Covariance and contravariance
 
+"variance"是type constructor的一个非常重要的属性，本文对此进行描述。
+
 "covariance"的含义是"协变"，"contravariance"的含义是"逆变"。"variance"的含义是"可变"，"invariance"的含义是"不可变"。
 
 ## csdn [对协变和逆变的理解(Contravariance and Covariance)](https://blog.csdn.net/zj547877350/article/details/53050101)
@@ -345,7 +347,7 @@ Castagna suggests that examples where covariant parameter types are superior (pa
 
 ### Generic types
 
-In programming languages that support **generics** (a.k.a. [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)), the programmer can extend the type system with new constructors. For example, a `C#` interface like `IList<T>` makes it possible to construct new types like `IList<Animal>` or `IList<Cat>`. The question then arises what the **variance** of these type constructors should be.
+In programming languages that support **generics** (a.k.a. [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)), the programmer can extend the type system with new **constructors**. For example, a `C#` interface like `IList<T>` makes it possible to construct new types like `IList<Animal>` or `IList<Cat>`. The question then arises what the **variance** of these type constructors should be.
 
 There are two main approaches. 
 
@@ -355,9 +357,13 @@ There are two main approaches.
 
 #### Declaration-site variance annotations
 
-The most popular languages with declaration-site variance annotations are [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) and [Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) (using the keywords `out` and `in`), and [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) and [OCaml](https://en.wikipedia.org/wiki/OCaml) (using the keywords `+` and `-`). C# only allows variance annotations for interface types, while Kotlin, Scala and OCaml allow them for both interface types and concrete data types.
+The most popular languages with declaration-site variance annotations are [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) and [Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) (using the keywords `out` and `in`), and [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) and [OCaml](https://en.wikipedia.org/wiki/OCaml) (using the keywords `+` and `-`). `C#` only allows **variance annotations** for **interface types**, while Kotlin, Scala and OCaml allow them for both interface types and concrete data types.
 
 #### Use-site variance annotations (wildcards)
+
+> NOTE: 暂时不去了解
+
+
 
 ## wikipedia [Covariant return type](https://en.wikipedia.org/wiki/Covariant_return_type)
 
