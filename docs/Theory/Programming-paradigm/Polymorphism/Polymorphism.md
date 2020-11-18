@@ -101,7 +101,9 @@ Some, however, such as [Common Lisp Object System](https://en.wikipedia.org/wiki
 
 The interaction(相互作用，相互影响) between **parametric polymorphism** and **subtyping** leads to the concepts of [variance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) and [bounded quantification](https://en.wikipedia.org/wiki/Bounded_quantification).
 
-> NOTE: "variance"的字面意思是"变化"、"变异"
+> NOTE: "variance"即"可变性"，在`Theory\Type-system\Type-constructor`章节进行了描述。
+>
+>  [bounded quantification](https://en.wikipedia.org/wiki/Bounded_quantification)在`Programming-paradigm\Generic-programming\Generics`章节进行了描述。
 
 #### Row polymorphism
 

@@ -1,4 +1,5 @@
 nav:
     - Generic-programming: index.md
+    - Generics: Generics
     - Type-requirement: Type-requirement
     - Templates-VS-Duck-Typing-VS-Generics: Templates-VS-Duck-Typing-VS-Generics

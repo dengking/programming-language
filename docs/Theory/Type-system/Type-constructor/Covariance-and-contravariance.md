@@ -387,7 +387,60 @@ The most popular languages with declaration-site variance annotations are [C#](h
 
 > NOTE: 暂时不去了解
 
+## Covariant return type
 
+### wikipedia [Covariant return type](https://en.wikipedia.org/wiki/Covariant_return_type)
 
-## wikipedia [Covariant return type](https://en.wikipedia.org/wiki/Covariant_return_type)
+In [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), a **covariant return type** of a method is one that can be replaced by a "narrower" type when the method is [overridden](https://en.wikipedia.org/wiki/Method_overriding_(programming)) in a subclass. A notable language in which this is a fairly common paradigm is [C++](https://en.wikipedia.org/wiki/C%2B%2B).
+
+```java
+ // Classes used as return types:
+ 
+ class A {
+ }
+ 
+ class B extends A {
+ }
+ 
+ // "Class B is narrower than class A"
+ // Classes demonstrating method overriding:
+ 
+ class C {
+     A getFoo() {
+         return new A();
+     }
+ }
+  
+ class D extends C {
+//Overriding getFoo() in parent class C
+     B getFoo() {
+         return new B();
+     }
+ }
+```
+
+### csdn [Covariant return type](https://blog.csdn.net/while0/article/details/45888657)
+
+```C++
+class Shape {
+  public:
+    virtual double area() const = 0;
+};
+class Circle : public Shape {
+  public:
+    float area() const; // error! different return type    
+};
+
+int
+main() {
+}
+
+```
+
+在继承关系中，子类覆盖父类的虚函数的时候，必须连返回值类型也完全相同。所以上面这个程序编译是编不过的：
+
+```c++
+main.cpp:9: error: conflicting return type specified for `virtual float Circle::area() const'
+main.cpp:5: error:   overriding `virtual double Shape::area() const'
+```
 

@@ -1,0 +1,1 @@
+wikipedia [Bounded quantification](https://en.wikipedia.org/wiki/Bounded_quantification)
