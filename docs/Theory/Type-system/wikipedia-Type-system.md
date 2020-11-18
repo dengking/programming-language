@@ -1,8 +1,4 @@
-# Type system
-
-在编程过程中，少不了跟**类型**打交道：我们会创建一个类型（如定义一个类），我们会对不同类型的数据进行运算，等等。如果对数据的类型认识不够，则会导致[类型错误](https://en.wikipedia.org/wiki/Type_error)这种常见的编程错误。所以对**编程语言**的type system有一个完整深刻的认知非常重要。我在编程过程中也曾陷入混淆、误用类型的深渊，为此搜寻对**编程语言**的**类型系统**有完整介绍的文章，下面这篇文章我觉得非常好，源自维基百科。
-
-## 维基百科 [Type system](https://en.wikipedia.org/wiki/Type_system)
+# wikipedia [Type system](https://en.wikipedia.org/wiki/Type_system)
 
 This article is about type systems from the point-of-view of computer programming. For a theoretical formulation(阐述), see [type theory](https://en.wikipedia.org/wiki/Type_theory).
 
