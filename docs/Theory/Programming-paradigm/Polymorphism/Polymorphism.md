@@ -196,7 +196,9 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 **single**就是abstraction。
 
+一个抽象有多种实现，polymorphism能够自动的进行dispatch，从而选择合适的实现。
 
+TODO: 此处需要添加文章抽象中的内容。
 
 ## Polymorphism的价值
 
