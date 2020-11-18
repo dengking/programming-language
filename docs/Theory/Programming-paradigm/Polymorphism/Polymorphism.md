@@ -211,6 +211,6 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 相比于显式地使用`if-else`，polymorphism有如下优势:
 
 - 更加高效
-- 代码维护性更高
+- 代码维护性更高、复杂度更低(可以使用**圈复杂度**来进行量化)
 
 
