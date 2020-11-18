@@ -2,7 +2,25 @@
 
 "variance"是type constructor的一个非常重要的属性，本文对此进行描述。
 
+Language designer需要对由type constructor而构建的complex type之间的relation规则进行准确的定义，wikipedia [Covariance and contravariance (computer science)](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) 就对这个问题进行了描述，下面是我阅读完这篇文章后所总结的: 
+
+> 对于由**type constructor**构建而成**complex type**，这些**complex type**之间的subtype relation由如下因素决定:
+>
+> 1) type constructor的variance属性
+>
+> 2) complex type的simple type之间的subtype relation
+>
+> 
+
+关于此，在wikipedia [Covariance and contravariance (computer science)](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) 中有着如下描述: 
+
+> Depending on the **variance** of the [type constructor](https://en.wikipedia.org/wiki/Type_constructor), the subtyping relation of the simple types may be either preserved(保留), reversed(反转), or ignored(忽视) for the respective complex types.
+
+
+
 "covariance"的含义是"协变"，"contravariance"的含义是"逆变"。"variance"的含义是"可变"，"invariance"的含义是"不可变"。
+
+
 
 ## csdn [对协变和逆变的理解(Contravariance and Covariance)](https://blog.csdn.net/zj547877350/article/details/53050101)
 
@@ -64,7 +82,7 @@ List<Object> list2 = list1;
 
 
 
-## 维基百科[Covariance and contravariance (computer science)](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
+## wikipedia [Covariance and contravariance (computer science)](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
 
 Many [programming language](https://en.wikipedia.org/wiki/Programming_language) [type systems](https://en.wikipedia.org/wiki/Type_system) support [subtyping](https://en.wikipedia.org/wiki/Subtyping). For instance, if the type `Cat` is a subtype of `Animal`, then an expression of type `Cat` [should be substitutable](https://en.wikipedia.org/wiki/Liskov_substitution_principle) wherever an expression of type `Animal` is used.
 
@@ -80,7 +98,7 @@ Many [programming language](https://en.wikipedia.org/wiki/Programming_language) 
 >
 > 2) `Cat`和`Animal`之间有subtyping关系，那function that returns `Cat` 和 function that returns `Animal`之间的关系呢？
 
-Depending on the variance of the [type constructor](https://en.wikipedia.org/wiki/Type_constructor), the subtyping relation of the simple types may be either preserved(保留), reversed(反转), or ignored(忽视) for the respective complex types.
+Depending on the **variance** of the [type constructor](https://en.wikipedia.org/wiki/Type_constructor), the subtyping relation of the simple types may be either preserved(保留), reversed(反转), or ignored(忽视) for the respective complex types.
 
 > NOTE: 这段话的意思是: variance of the [type constructor](https://en.wikipedia.org/wiki/Type_constructor) 决定了 complex types 是 preserve、reverse还是ignore "subtyping relation of the simple types"。
 >
@@ -105,6 +123,8 @@ On the other hand, "function from `Animal` to `String`" is a **subtype** of "fun
 
 A programming language designer will consider variance when devising(设计) typing rules for language features such as arrays, inheritance, and [generic datatypes](https://en.wikipedia.org/wiki/Generic_datatype). By making **type constructors** **covariant** or **contravariant** instead of **invariant**, more programs will be accepted as well-typed. On the other hand, programmers often find contravariance unintuitive(不直观), and accurately tracking variance to avoid runtime type errors can lead to complex typing rules.
 
+> NOTE: 从语言的设计者的角度来进行考虑
+
 ### Formal definition
 
 Within the [type system](https://en.wikipedia.org/wiki/Type_system) of a [programming language](https://en.wikipedia.org/wiki/Programming_language), a typing rule or a type constructor is:
@@ -127,9 +147,15 @@ For example, in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language
 
 ### Arrays
 
+> NOTE: 略
+
 #### Covariant arrays in Java and `C#`
 
+> NOTE: 略
+
 ### Function types
+
+> NOTE: 描述function type之间的关系
 
 Languages with [first-class functions](https://en.wikipedia.org/wiki/First-class_function) have [function types](https://en.wikipedia.org/wiki/Function_type) like "a function expecting a `Cat` and returning an `Animal`" (written `Cat -> Animal` in [OCaml](https://en.wikipedia.org/wiki/OCaml) syntax or `Func<Cat,Animal>` in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) syntax).
 
@@ -157,9 +183,7 @@ When dealing with [functions that take functions as arguments](https://en.wikipe
 
 When a subclass [overrides](https://en.wikipedia.org/wiki/Method_overriding) a method in a superclass, the compiler must check that the overriding method has the right type. 
 
-While some languages require that the type exactly matches the type in the superclass (invariance), it is also type safe to allow the overriding method to have a "better" type. 
-
-By the usual subtyping rule for function types, this means that the overriding method should return a more specific type (**return type covariance**), and accept a more general argument (**parameter type contravariance**). 
+While some languages require that the type exactly matches the type in the superclass (**invariance**), it is also type safe to allow the overriding method to have a "better" type. By the usual subtyping rule for function types, this means that the overriding method should return a more specific type (**return type covariance**), and accept a more general argument (**parameter type contravariance**). 
 
 In [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) notation, the possibilities are as follows:
 

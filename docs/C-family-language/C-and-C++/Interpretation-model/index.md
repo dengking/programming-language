@@ -1,6 +1,6 @@
 # Interpretion model
 
-在硬件级别，一切都是`01`，没有再高级programming language中的各种概念，比如type。在硬件级别，通过instruction来决定对`01`数据进行何种操作，比如:
+在硬件级别，一切都是`01`，没有在高级programming language中的各种概念，比如type。在硬件级别，通过instruction来决定对`01`数据进行何种操作，比如:
 
 1) **加法指令**决定了`01`数据进行加法运算
 
@@ -8,15 +8,15 @@
 
 在高级programming language中，有type的概念，compiler根据type来汇编生成instruction:
 
-1) compiler根据type来决定对应的object的memory size
+1) compiler根据type来决定对应的object的memory size，进而决定storage allocation
 
 2) 根据type来决定使用何种运算指令
 
 显然，对于浮点类型，compiler会选择浮点运算指令，对于整形，则会选择简单指令。
 
-> NOTE: 需要联系type determine everything来进行解释。
+> NOTE: 这是符合"type determine everything"观点的，参见`Theory\Type-system`章节。
 
-上述分析非常重要 它是理解很多C，C++中pointer conversion的基础。
+上述分析非常重要 ，它是理解很多C，C++中pointer conversion的基础。
 
 将此作成为interpretation model。
 
@@ -27,6 +27,26 @@
 \- union
 
 \- aliasing
+
+## wikipedia [Type system](https://en.wikipedia.org/wiki/Type_system) 中关于"interpretion model"的解释
+
+关于interpretation model，在wikipedia [Type system](https://en.wikipedia.org/wiki/Type_system)中有着解释:
+
+### wikipedia [Type system](https://en.wikipedia.org/wiki/Type_system) # [Usage overview](https://en.wikipedia.org/wiki/Type_system#Usage_overview)
+
+> A [compiler](https://en.wikipedia.org/wiki/Compiler) may also use the static type of a value to optimize the storage it needs and the choice of algorithms for operations on the value. In many [C](https://en.wikipedia.org/wiki/C_(programming_language)) compilers the *float* [data type](https://en.wikipedia.org/wiki/Data_type), for example, is represented in 32 [bits](https://en.wikipedia.org/wiki/Bit), in accord with the [IEEE specification for single-precision floating point numbers](https://en.wikipedia.org/wiki/IEEE_754-2008). They will thus use floating-point-specific [microprocessor operations](https://en.wikipedia.org/wiki/Instruction_set) on those values (floating-point addition, multiplication, etc.).
+
+compiler根据static type来决定:
+
+1) storage
+
+2) "the choice of algorithms for operations on the value"，其实就是选择合适的instruction。
+
+### wikipedia [Type system](https://en.wikipedia.org/wiki/Type_system) # [Fundamentals](https://en.wikipedia.org/wiki/Type_system#Fundamentals)
+
+> Assigning a data type, termed *typing*, gives meaning to a sequence of [bits](https://en.wikipedia.org/wiki/Bit) such as a value in [memory](https://en.wikipedia.org/wiki/Computer_memory) or some [object](https://en.wikipedia.org/wiki/Object_(computer_science)) such as a [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)). The hardware of a [general purpose computer](https://en.wikipedia.org/wiki/General_purpose_computer) is unable to discriminate between for example a [memory address](https://en.wikipedia.org/wiki/Memory_address) and an [instruction code](https://en.wikipedia.org/wiki/Instruction_code_(programming)), or between a [character](https://en.wikipedia.org/wiki/Character_(computing)), an [integer](https://en.wikipedia.org/wiki/Integer), or a [floating-point number](https://en.wikipedia.org/wiki/Floating-point_number), because it makes no intrinsic distinction between any of the possible values that a sequence of bits might *mean*.[[note 1\]](https://en.wikipedia.org/wiki/Type_system#cite_note-Burroughs-4) Associating a sequence of bits with a type conveys that [meaning](https://en.wiktionary.org/wiki/meaning) to the programmable hardware to form a *[symbolic system](https://en.wikipedia.org/wiki/Symbolic_system)* composed of that hardware and some program.
+
+Type决定了sequence of bits的含义。
 
 
 

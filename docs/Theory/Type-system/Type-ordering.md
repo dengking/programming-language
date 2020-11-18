@@ -1,1 +1,0 @@
-现代programming language的很多特性的实现都是建立在type ordering的基础之上的。

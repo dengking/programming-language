@@ -2,12 +2,19 @@
 
 This article is about type systems from the point-of-view of computer programming. For a theoretical formulation(阐述), see [type theory](https://en.wikipedia.org/wiki/Type_theory).
 
-In [programming languages](https://en.wikipedia.org/wiki/Programming_language), a **type system** is a set of rules that assigns a property called [type](https://en.wikipedia.org/wiki/Type_(computer_science)) to the various constructs(组成部分) of a [computer program](https://en.wikipedia.org/wiki/Computer_program), such as [variables](https://en.wikipedia.org/wiki/Variable_(computer_science)), [expressions](https://en.wikipedia.org/wiki/Expression_(computer_science)), [functions](https://en.wikipedia.org/wiki/Function_(computer_science)) or [modules](https://en.wikipedia.org/wiki/Modular_programming)(将类型作为一个属性).[[1\]](https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTEPierce20021-1) These types formalize and enforce the otherwise implicit categories the programmer uses for data structures and components (e.g. "string", "array of float", "function returning boolean")(这段话中“the programmer uses for data structures and components ”是定语，修饰categories，字面意思是：类型形式化并强制执行程序员用于数据结构和组件的隐式类别。各种编程语言中都会提供基本类型，如`int`，`float`等，也会提供一些复合类型，如容器string等。显然这些复合类型的定义是离不开基本类型的。). The main purpose of a **type system** is to reduce possibilities for [bugs](https://en.wikipedia.org/wiki/Bug_(computer_programming)) in computer programs[[2\]](https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTECardelli20041-2) by defining **interfaces** between different parts of a computer program, and then checking that the parts have been connected in a consistent way. **This checking** can happen statically (at [compile time](https://en.wikipedia.org/wiki/Compile_time)), dynamically (at [run time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase))), or as a combination of static and dynamic checking. Type systems have other purposes as well, such as :
+In [programming languages](https://en.wikipedia.org/wiki/Programming_language), a **type system** is a set of rules that assigns a property called [type](https://en.wikipedia.org/wiki/Type_(computer_science)) to the various constructs(组成部分) of a [computer program](https://en.wikipedia.org/wiki/Computer_program), such as [variables](https://en.wikipedia.org/wiki/Variable_(computer_science)), [expressions](https://en.wikipedia.org/wiki/Expression_(computer_science)), [functions](https://en.wikipedia.org/wiki/Function_(computer_science)) or [modules](https://en.wikipedia.org/wiki/Modular_programming)(将类型作为一个属性).[[1\]](https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTEPierce20021-1) These types formalize and enforce the otherwise implicit categories the programmer uses for data structures and components (e.g. "string", "array of float", "function returning boolean")(这段话中“the programmer uses for data structures and components ”是定语，修饰categories，字面意思是：类型形式化并强制执行程序员用于数据结构和组件的隐式类别。各种编程语言中都会提供基本类型，如`int`，`float`等，也会提供一些复合类型，如容器string等。显然这些复合类型的定义是离不开基本类型的). 
+
+## Purpose of type system
+
+The main purpose of a **type system** is to reduce possibilities for [bugs](https://en.wikipedia.org/wiki/Bug_(computer_programming)) in computer programs[[2\]](https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTECardelli20041-2) by defining [interfaces](https://en.wikipedia.org/wiki/Interface_(computer_science)) between different parts of a computer program, and then checking that the parts have been connected in a consistent way. **This checking** can happen statically (at [compile time](https://en.wikipedia.org/wiki/Compile_time)), dynamically (at [run time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase))), or as a combination of static and dynamic checking. Type systems have other purposes as well, such as :
 
 - expressing business rules(表达业务规则)
 - enabling certain compiler optimizations
-- allowing for [multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)(允许多级调用)
-- providing a form of documentation, etc.
+- allowing for [multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
+- providing a form of documentation
+- etc
+
+
 
 A type system **associates** a type with each computed value and, by examining the flow of these values, **attempts** to ensure or prove that no [type errors](https://en.wikipedia.org/wiki/Type_error) can occur. The given type system in question determines exactly what constitutes(构成) a type error, but in general the aim is to prevent operations expecting a certain kind of value from being used with values for which that operation does not make sense ([logic errors](https://en.wikipedia.org/wiki/Logic_error)). Type systems are often specified as part of [programming languages](https://en.wikipedia.org/wiki/Programming_language), and built into the interpreters and compilers for them; although the type system of a language can be extended by [optional tools](https://en.wikipedia.org/wiki/Extended_static_checking) that perform added kinds of checks using the language's original type syntax and grammar.
 
@@ -21,35 +28,33 @@ A type system **associates** a type with each computed value and, by examining t
 >
 > 运行时类型检查是什么？是和多态有关的吗？
 
-### Usage overview
-
-An example of a simple type system is that of the [C language](https://en.wikipedia.org/wiki/C_(programming_language)). The portions(组成部分) of a C program are the [function](https://en.wikipedia.org/wiki/Subroutine) definitions. One function is invoked by another function. The **interface** of a function states the name of the function and a list of values that are passed to the function's code. The code of an invoking function states the name of the invoked, along with the names of variables that hold values to pass to it. During execution, the values are placed into **temporary storage**, then execution jumps to the code of the invoked function. The invoked function's code accesses the values and makes use of them. If the **instructions** inside the function are written with the assumption of receiving an **integer** value, but the calling code passed a **floating-point** value, then the wrong result will be computed by the invoked function. The **C compiler** checks the type declared for each variable sent, against the type declared for each variable in the interface of the invoked function(C编译器会检查函数形参的类型，以及调用函数时候传入的实参的类型). If the types do not match, the compiler throws a compile-time error(如果类型不匹配，则编译器在编译阶段就会抛出一个编译错误).
-
-> NOTE：这段话以C编译器的**静态类型检查**为例来说明类型的一个作用
+## Usage overview
 
 A [compiler](https://en.wikipedia.org/wiki/Compiler) may also use the static type of a value to optimize the storage it needs and the choice of algorithms for operations on the value. In many [C](https://en.wikipedia.org/wiki/C_(programming_language)) compilers the *float* [data type](https://en.wikipedia.org/wiki/Data_type), for example, is represented in 32 [bits](https://en.wikipedia.org/wiki/Bit), in accord with(与什么一致) the [IEEE specification for single-precision floating point numbers](https://en.wikipedia.org/wiki/IEEE_754-2008). They will thus use floating-point-specific [microprocessor operations](https://en.wikipedia.org/wiki/Instruction_set) on those values (floating-point addition, multiplication, etc.)(它们将对这些值使用浮点特定的微处理器操作（浮点加法，乘法等），这是一种优化).
 
-总结：这段胡以float类型的数据为例来说明：编译器在汇编阶段可以根据value的static type来优化对该value的存储以及选择处理该value的指令。
+> NOTE：这段胡以float类型的数据为例来说明：编译器在汇编阶段可以根据value的static type来优化对该value的存储以及选择处理该value的instruction。这就是interpretation model，参见`C-family-language\C-and-C++\Interpretation-model`。
 
-The depth of type constraints(类型限制) and the manner of their evaluation(类型推断) affect the *typing* of the language. A [programming language](https://en.wikipedia.org/wiki/Programming_language) may further associate an operation with various resolutions for each type, in the case of [type polymorphism](https://en.wikipedia.org/wiki/Type_polymorphism)(在类型多态性的情况下，编程语言可以进一步将操作与每种类型的各种分辨率相关联。此处将resolutions翻译为分辨率，感觉是不对的). [Type theory](https://en.wikipedia.org/wiki/Type_theory) is the study of type systems. The concrete types of some programming languages, such as integers and strings, depend on practical issues of computer architecture, compiler implementation, and language design.
+The depth of type constraints(类型限制) and the manner of their evaluation(类型推断) affect the *typing* of the language. A [programming language](https://en.wikipedia.org/wiki/Programming_language) may further associate an operation with various resolutions for each type, in the case of [type polymorphism](https://en.wikipedia.org/wiki/Type_polymorphism)(在类型多态性的情况下，编程语言可以进一步将操作与每种类型的各种分辨率相关联。此处将resolutions翻译为分辨率，感觉是不对的). 
 
-### Fundamentals
+[Type theory](https://en.wikipedia.org/wiki/Type_theory) is the study of type systems. The concrete types of some programming languages, such as integers and strings, depend on practical issues of computer architecture, compiler implementation, and language design.
+
+## Fundamentals
 
 Formally, [type theory](https://en.wikipedia.org/wiki/Type_theory) studies type systems. A programming language must have occurrence to type check using the *type system* whether at compile time or runtime, manually annotated or automatically inferred. 
 
-总结：无论是在编译时还是在运行时，手动注释或自动推断，编程语言都必须使用类型系统进行类型检查。
+> NOTE: 无论是在编译时还是在运行时，手动注释或自动推断，编程语言都必须使用类型系统进行类型检查。
 
 As [Mark Manasse](https://en.wikipedia.org/w/index.php?title=Mark_Manasse&action=edit&redlink=1) concisely put it:[[3\]](https://en.wikipedia.org/wiki/Type_system#cite_note-FOOTNOTEPierce2002208-3)
 
-> The fundamental problem addressed by a type theory is to ensure that programs have meaning. The fundamental problem caused by a type theory is that meaningful programs may not have meanings ascribed to（归属于） them. The quest for richer type systems results from this tension.
+> The fundamental problem addressed by a type theory is to ensure that programs have meaning. The fundamental problem caused by a type theory is that meaningful programs may not have meanings ascribed to（归属于） them. The quest(追求) for richer type systems results from this tension.
 
-总结：Mark Manasse的观点是**类型**使程序具有**意义**，下面的话对这个观点进行了阐述：
+> NOTE: Mark Manasse的观点是**类型**使程序具有**意义**，下面的话对这个观点进行了阐述：
 
-Assigning a data type, termed *typing*, gives **meaning** to a sequence of [bits](https://en.wikipedia.org/wiki/Bit) such as a value in [memory](https://en.wikipedia.org/wiki/Computer_memory) or some [object](https://en.wikipedia.org/wiki/Object_(computer_science)) such as a [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)). The **hardware** of a [general purpose computer](https://en.wikipedia.org/wiki/General_purpose_computer) is unable to discriminate(区分) between for example a [memory address](https://en.wikipedia.org/wiki/Memory_address) and an [instruction code](https://en.wikipedia.org/wiki/Instruction_code_(programming))(指令代码), or between a [character](https://en.wikipedia.org/wiki/Character_(computing)), an [integer](https://en.wikipedia.org/wiki/Integer), or a [floating-point number](https://en.wikipedia.org/wiki/Floating-point_number), because it makes no intrinsic distinction(区分) between any of the possible values that a sequence of bits might *mean*(这段话的意思是当我们将高级语言所编写的程序翻译成二进制程序后，硬件层，比如CPU，在执行这些二进制程序的时候，并不会关心这些二进制数据所代表的含义（这些数据表示的是内存地址，还是指令码，等等），也就是硬件层压根就没有类型的概念，对它们而言，所有的一切都是二进制数).[[note 1\]](https://en.wikipedia.org/wiki/Type_system#cite_note-Burroughs-4) Associating a sequence of bits with a type conveys that [meaning](https://en.wiktionary.org/wiki/meaning) to the programmable hardware to form a *symbolic system* composed of that hardware and some program(将二进制串和类型相关联能够将类型的意义传递到可编程硬件，这样可以实现由硬件和程序组成的symbolic system).
+Assigning a data type, termed *typing*, gives **meaning** to a sequence of [bits](https://en.wikipedia.org/wiki/Bit) such as a value in [memory](https://en.wikipedia.org/wiki/Computer_memory) or some [object](https://en.wikipedia.org/wiki/Object_(computer_science)) such as a [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)). The **hardware** of a [general purpose computer](https://en.wikipedia.org/wiki/General_purpose_computer) is unable to discriminate(区分) between for example a [memory address](https://en.wikipedia.org/wiki/Memory_address) and an [instruction code](https://en.wikipedia.org/wiki/Instruction_code_(programming))(指令代码), or between a [character](https://en.wikipedia.org/wiki/Character_(computing)), an [integer](https://en.wikipedia.org/wiki/Integer), or a [floating-point number](https://en.wikipedia.org/wiki/Floating-point_number), because it makes no intrinsic distinction(区分) between any of the possible values that a sequence of bits might *mean*.[[note 1\]](https://en.wikipedia.org/wiki/Type_system#cite_note-Burroughs-4) Associating a sequence of bits with a type conveys that [meaning](https://en.wiktionary.org/wiki/meaning) to the programmable hardware to form a *symbolic system* composed of that hardware and some program.
 
-A program associates each value with at least one specific type, but it also can occur that one value is associated with many [subtypes](https://en.wikipedia.org/wiki/Subtype). Other entities, such as [objects](https://en.wikipedia.org/wiki/Object_(computer_science)), [modules](https://en.wikipedia.org/wiki/Module_(programming)), communication channels, and [dependencies](https://en.wikipedia.org/wiki/Dependency_(computer_science)) can become associated with a type. Even a type can become associated with a type. An implementation of a *type system* could in theory associate identifications called *data type* (a type of a value), *class* (a type of an object), and *kind* (a *type of a type*, or **metatype**). These are the abstractions that typing can go through, on a hierarchy of levels contained in a system.
+> NOTE: 这段话所描述的其实就是interpretation model，参见参见`C-family-language\C-and-C++\Interpretation-model`。
 
-总结：程序为每个value关联一个类型，有可能出现的一种情况是一个value可以关联多个子类型。其他程序组成部分，比如object，module，等等，也都可以和一个类型相关联。显然类型系统中可以包含的类型是非常比较多，比较复杂的。类型系统一种理论上的实现方式是以hierarchy即层的方式来对各种类型进行定义。
+
 
 When a programming language evolves a more elaborate(复杂) type system, it gains a more finely grained(细化) rule set than basic type checking, but this comes at a price when the type inferences (and other properties) become [undecidable](https://en.wikipedia.org/wiki/Undecidable_problem)(不可判定), and when more attention must be paid by the programmer to annotate(注释) code or to consider computer-related operations and functioning. It is challenging to find a sufficiently expressive type system that satisfies all programming practices in a [type safe](https://en.wikipedia.org/wiki/Type_safe) manner.
 
@@ -75,13 +80,13 @@ Advantages provided by compiler-specified type systems include:
 
 总结：类型系统可以由编译器来实现（这是主流0），当然也可以由程序员来进行指定，无论是有谁，如果查询不符合类型规则，则程序的行为都可能是非法的。并且上面的内容还讨论了programmer-specified type systems和compiler-specified type systems各自的优势。
 
-#### Type errors
+### Type errors
 
 A type error is an unintended condition which might manifest(出现) in multiple stages of a program's development. Thus a facility for detection of the error is needed in the **type system**. In some languages, such as Haskell, for which [type inference](https://en.wikipedia.org/wiki/Type_inference) is automated, [lint](https://en.wikipedia.org/wiki/Lint_(software)) might be available to its compiler to aid in the detection of error.
 
 **Type safety** contributes to [program correctness](https://en.wikipedia.org/wiki/Program_correctness), but can only guarantee correctness at the cost of making the type checking itself an [undecidable problem](https://en.wikipedia.org/wiki/Undecidable_problem).In a *type system* with automated type checking a program may prove to run incorrectly yet be safely typed, and produce no compiler errors. [Division by zero](https://en.wikipedia.org/wiki/Division_by_zero) is an unsafe and incorrect operation, but a type checker running at [compile time](https://en.wikipedia.org/wiki/Compile_time) only doesn't scan for division by zero in most languages, and then it is left as a [runtime error](https://en.wikipedia.org/wiki/Runtime_error). To prove the absence of these more-general-than-types defects, other kinds of [formal methods](https://en.wikipedia.org/wiki/Formal_method), collectively known as [program analyses](https://en.wikipedia.org/wiki/Program_analysis_(computer_science)), are in common use. Alternatively, a sufficiently expressive type system, such as in dependently typed languages, can prevent these kinds of errors (for example, expressing *the type of non-zero numbers*). In addition [software testing](https://en.wikipedia.org/wiki/Software_testing) is an [empirical](https://en.wikipedia.org/wiki/Empirical) method for finding errors that the type checker cannot detect.
 
-### Type checking
+## Type checking
 
 The process of verifying and enforcing the constraints of types—*type checking*—may occur either at [compile-time](https://en.wikipedia.org/wiki/Compile-time) (a static check) or at [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)). If a language specification(语言规范) requires its typing rules strongly (i.e., more or less allowing only those automatic type conversions that do not lose information(即或多或少只允许那些不会丢失信息的自动类型转换)), one can refer to the process as *strongly typed*, if not, as *weakly typed*. The terms are not usually used in a strict sense.
 
@@ -213,13 +218,13 @@ It has been proposed, chiefly by [Gilad Bracha](https://en.wikipedia.org/wiki/Gi
 
 Optional typing is related to [gradual typing](https://en.wikipedia.org/wiki/Gradual_typing), but still distinct from it.[[18\]](https://en.wikipedia.org/wiki/Type_system#cite_note-19)[*better source needed*]
 
-### Polymorphism and types 
+## Polymorphism and types 
 
 Main article: [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
 
 The term *polymorphism* refers to the ability of code (especially, functions or classes) to act on values of multiple types, or to the ability of different instances of the same data structure to contain elements of different types. Type systems that allow polymorphism generally do so in order to improve the potential for code re-use: in a language with polymorphism, programmers need only implement a data structure such as a list or an [associative array](https://en.wikipedia.org/wiki/Associative_array) once, rather than once for each type of element with which they plan to use it. For this reason computer scientists sometimes call the use of certain forms of polymorphism *generic programming*. The type-theoretic foundations of polymorphism are closely related to those of [abstraction](https://en.wikipedia.org/wiki/Abstraction_(computer_science)), [modularity](https://en.wikipedia.org/wiki/Module_(programming)) and (in some cases) [subtyping](https://en.wikipedia.org/wiki/Subtype).
 
-#### Duck typing 
+### Duck typing 
 
 Main article: [Duck typing](https://en.wikipedia.org/wiki/Duck_typing)
 
@@ -233,72 +238,9 @@ Duck typing uses the premise that (referring to a value) "if it walks like a duc
 
 While one controlled experiment showed an increase in developer productivity for duck typing in single developer projects,[[21\]](https://en.wikipedia.org/wiki/Type_system#cite_note-22) other controlled experiments on API usability show the opposite.[[22\]](https://en.wikipedia.org/wiki/Type_system#cite_note-23)[[23\]](https://en.wikipedia.org/wiki/Type_system#cite_note-24)
 
-### Specialized type systems 
 
-Many type systems have been created that are specialized for use in certain environments with certain types of data, or for out-of-band [static program analysis](https://en.wikipedia.org/wiki/Static_program_analysis). Frequently, these are based on ideas from formal [type theory](https://en.wikipedia.org/wiki/Type_theory) and are only available as part of prototype research systems.
 
-#### Dependent types 
-
-Main article: [Dependent type](https://en.wikipedia.org/wiki/Dependent_type)
-
-[Dependent types](https://en.wikipedia.org/wiki/Dependent_type) are based on the idea of using scalars or values to more precisely describe the type of some other value. For example, {\displaystyle \mathrm {matrix} (3,3)}![{\displaystyle \mathrm {matrix} (3,3)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/04b6df3034e02a45990859737da4794e846b8c08) might be the type of a {\displaystyle 3\times 3}![3 \times 3](https://wikimedia.org/api/rest_v1/media/math/render/svg/ddc0d4d6106875f8006be1d898512ca5843bad8e) matrix. We can then define typing rules such as the following rule for matrix multiplication:
-
-{\displaystyle \mathrm {matrix} _{\mathrm {multiply} }:\mathrm {matrix} (k,m)\times \mathrm {matrix} (m,n)\to \mathrm {matrix} (k,n)}![{\displaystyle \mathrm {matrix} _{\mathrm {multiply} }:\mathrm {matrix} (k,m)\times \mathrm {matrix} (m,n)\to \mathrm {matrix} (k,n)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a9b5ca3ad745c07126727667fefc60055f0549ff)
-
-where {\displaystyle k}![k](https://wikimedia.org/api/rest_v1/media/math/render/svg/c3c9a2c7b599b37105512c5d570edc034056dd40), {\displaystyle m}![m](https://wikimedia.org/api/rest_v1/media/math/render/svg/0a07d98bb302f3856cbabc47b2b9016692e3f7bc), {\displaystyle n}![n](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b) are arbitrary positive integer values. A variant of [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) called [Dependent ML](https://en.wikipedia.org/wiki/Dependent_ML) has been created based on this type system, but because type checking for conventional dependent types is [undecidable](https://en.wikipedia.org/wiki/Decidable_set), not all programs using them can be type-checked without some kind of limits. Dependent ML limits the sort of equality it can decide to [Presburger arithmetic](https://en.wikipedia.org/wiki/Presburger_arithmetic).
-
-Other languages such as [Epigram](https://en.wikipedia.org/wiki/Epigram_(programming_language)) make the value of all expressions in the language decidable so that type checking can be decidable. However, in general [proof of decidability is undecidable](https://en.wikipedia.org/wiki/Halting_Problem), so many programs require hand-written annotations that may be very non-trivial. As this impedes the development process, many language implementations provide an easy way out in the form of an option to disable this condition. This, however, comes at the cost of making the type-checker run in an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when fed programs that do not type-check, causing the compilation to fail.
-
-#### Linear types 
-
-Main article: [Linear type](https://en.wikipedia.org/wiki/Linear_type)
-
-[Linear types](https://en.wikipedia.org/wiki/Linear_type), based on the theory of [linear logic](https://en.wikipedia.org/wiki/Linear_logic), and closely related to [uniqueness types](https://en.wikipedia.org/wiki/Uniqueness_type), are types assigned to values having the property that they have one and only one reference to them at all times. These are valuable for describing large [immutable values](https://en.wikipedia.org/wiki/Immutable_value) such as files, strings, and so on, because any operation that simultaneously destroys a linear object and creates a similar object (such as '`str= str + "a"`') can be optimized "under the hood" into an in-place mutation. Normally this is not possible, as such mutations could cause side effects on parts of the program holding other references to the object, violating [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency_(computer_science)). They are also used in the prototype operating system [Singularity](https://en.wikipedia.org/wiki/Singularity_(operating_system)) for interprocess communication, statically ensuring that processes cannot share objects in shared memory in order to prevent race conditions. The [Clean](https://en.wikipedia.org/wiki/Clean_(programming_language)) language (a [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language))-like language) uses this type system in order to gain a lot of speed (compared to performing a deep copy) while remaining safe.
-
-#### Intersection types 
-
-Main article: [Intersection type](https://en.wikipedia.org/wiki/Intersection_type)
-
-[Intersection types](https://en.wikipedia.org/wiki/Intersection_type) are types describing values that belong to *both* of two other given types with overlapping value sets. For example, in most implementations of C the signed char has range -128 to 127 and the unsigned char has range 0 to 255, so the intersection type of these two types would have range 0 to 127. Such an intersection type could be safely passed into functions expecting *either* signed or unsigned chars, because it is compatible with both types.
-
-Intersection types are useful for describing overloaded function types: For example, if "`int` → `int`" is the type of functions taking an integer argument and returning an integer, and "`float` → `float`" is the type of functions taking a float argument and returning a float, then the intersection of these two types can be used to describe functions that do one or the other, based on what type of input they are given. Such a function could be passed into another function expecting an "`int` → `int`" function safely; it simply would not use the "`float` → `float`" functionality.
-
-In a subclassing hierarchy, the intersection of a type and an ancestor type (such as its parent) is the most derived type. The intersection of sibling types is empty.
-
-The Forsythe language includes a general implementation of intersection types. A restricted form is [refinement types](https://en.wikipedia.org/wiki/Refinement_type).
-
-#### Union types 
-
-Main article: [Union type](https://en.wikipedia.org/wiki/Union_type)
-
-[Union types](https://en.wikipedia.org/wiki/Union_type) are types describing values that belong to *either* of two types. For example, in C, the signed char has a -128 to 127 range, and the unsigned char has a 0 to 255 range, so the union of these two types would have an overall "virtual" range of -128 to 255 that may be used partially depending on which union member is accessed. Any function handling this union type would have to deal with integers in this complete range. More generally, the only valid operations on a union type are operations that are valid on *both* types being unioned. C's "union" concept is similar to union types, but is not typesafe, as it permits operations that are valid on *either*type, rather than *both*. Union types are important in program analysis, where they are used to represent symbolic values whose exact nature (e.g., value or type) is not known.
-
-In a subclassing hierarchy, the union of a type and an ancestor type (such as its parent) is the ancestor type. The union of sibling types is a subtype of their common ancestor (that is, all operations permitted on their common ancestor are permitted on the union type, but they may also have other valid operations in common).
-
-#### Existential types 
-
-Main article: [Existential quantifier](https://en.wikipedia.org/wiki/Existential_quantifier)
-
-[Existential](https://en.wikipedia.org/wiki/Existential_quantifier) types are frequently used in connection with [record types](https://en.wikipedia.org/wiki/Record_(computer_science)) to represent [modules](https://en.wikipedia.org/wiki/Module_(programming)) and [abstract data types](https://en.wikipedia.org/wiki/Abstract_data_type), due to their ability to separate implementation from interface. For example, the type "T = ∃X { a: X; f: (X → int); }" describes a module interface that has a data member named *a* of type *X* and a function named *f* that takes a parameter of the *same* type *X* and returns an integer. This could be implemented in different ways; for example:
-
-- intT = { a: int; f: (int → int); }
-- floatT = { a: float; f: (float → int); }
-
-These types are both subtypes of the more general existential type T and correspond to concrete implementation types, so any value of one of these types is a value of type T. Given a value "t" of type "T", we know that "t.f(t.a)" is well-typed, regardless of what the abstract type *X* is. This gives flexibility for choosing types suited to a particular implementation while clients that use only values of the interface type—the existential type—are isolated from these choices.
-
-In general it's impossible for the typechecker to infer which existential type a given module belongs to. In the above example intT { a: int; f: (int → int); } could also have the type ∃X { a: X; f: (int → int); }. The simplest solution is to annotate every module with its intended type, e.g.:
-
-- intT = { a: int; f: (int → int); } **as** ∃X { a: X; f: (X → int); }
-
-Although abstract data types and modules had been implemented in programming languages for quite some time, it wasn't until 1988 that [John C. Mitchell](https://en.wikipedia.org/wiki/John_C._Mitchell) and [Gordon Plotkin](https://en.wikipedia.org/wiki/Gordon_Plotkin) established the formal theory under the slogan: "Abstract [data] types have existential type".[[24\]](https://en.wikipedia.org/wiki/Type_system#cite_note-25) The theory is a second-order [typed lambda calculus](https://en.wikipedia.org/wiki/Typed_lambda_calculus)similar to [System F](https://en.wikipedia.org/wiki/System_F), but with existential instead of universal quantification.
-
-#### Gradual typing 
-
-Main article: [Gradual typing](https://en.wikipedia.org/wiki/Gradual_typing)
-
-[Gradual typing](https://en.wikipedia.org/wiki/Gradual_typing) is a type system in which variables may be typed either at [compile-time](https://en.wikipedia.org/wiki/Compile-time) (which is static typing) or at [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) (which is dynamic typing), allowing software developers to choose either type paradigm as appropriate, from within a single language.[[25\]](https://en.wikipedia.org/wiki/Type_system#cite_note-26) In particular, gradual typing uses a special type named *dynamic*to represent statically-unknown types, and gradual typing replaces the notion of type equality with a new relation called *consistency* that relates the dynamic type to every other type. The consistency relation is symmetric but not transitive.[[26\]](https://en.wikipedia.org/wiki/Type_system#cite_note-27)
-
-### Explicit or implicit declaration and inference
+## Explicit or implicit declaration and inference
 
 Further information: [Type inference](https://en.wikipedia.org/wiki/Type_inference)
 
@@ -308,11 +250,13 @@ Numerical and string constants and expressions in code can and often do imply ty
 
 Type inference is in general possible, if it is [decidable](https://en.wikipedia.org/wiki/Decidability_(logic)) in the type theory in question. Moreover, even if inference is undecidable in general for a given type theory, inference is often possible for a large subset of real-world programs. Haskell's type system, a version of [Hindley–Milner](https://en.wikipedia.org/wiki/Type_inference#Hindley%E2%80%93Milner_type_inference_algorithm), is a restriction of [System Fω](https://en.wikipedia.org/wiki/System_F-omega) to so-called rank-1 polymorphic types, in which type inference is decidable. Most Haskell compilers allow arbitrary-rank polymorphism as an extension, but this makes type inference undecidable. (Type checking is decidable, however, and rank-1 programs still have type inference; higher rank polymorphic programs are rejected unless given explicit type annotations.)
 
-### Unified type system 
+## Unified type system 
+
+> NOTE: "unified" 的含义是 "统一的"。
 
 Some languages like [Perl 6](https://en.wikipedia.org/wiki/Perl_6) or [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) have a unified type system.[[27\]](https://en.wikipedia.org/wiki/Type_system#cite_note-28) This means that all [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) types including primitive types inherit from a single root object. Every type in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) inherits from the Object class. [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) has several primitive types that are not objects. Java provides wrapper object types that exist together with the primitive types so developers can use either the wrapper object types or the simpler non-object primitive types.
 
-### Compatibility: equivalence and subtyping 
+## Compatibility: equivalence and subtyping 
 
 A type-checker for a statically typed language must verify that the type of any [expression](https://en.wikipedia.org/wiki/Expression_(programming)) is consistent with the type expected by the context in which that expression appears. For example, in an [assignment statement](https://en.wikipedia.org/wiki/Assignment_statement) of the form `x := *e*`, the inferred type of the expression *e* must be consistent with the declared or inferred type of the variable `x`. This notion of consistency, called *compatibility*, is specific to each programming language.
 

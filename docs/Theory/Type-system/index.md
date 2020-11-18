@@ -27,3 +27,12 @@
 
 关于此，参见`OOP-and-type-system.md`。
 
+
+
+## 扩展type system
+
+目前我已经了解了如下两种扩展type system的方式:
+
+1) OOP中，定义new class，参见`./OOP-and-type-system`
+
+2) Type constructor，参见`./Type-constructor`
