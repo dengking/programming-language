@@ -95,9 +95,72 @@ In the [OCaml](https://en.wikipedia.org/wiki/OCaml) programming language, for ex
 
 > NOTE: 这段话以OCaml语言中的 **list type constructor** 为例，介绍了covariant的含义。
 
-On the other hand, "function from `Animal` to `String`" is a subtype of "function from `Cat` to `String`" because the **function type constructor** is **contravariant** in the parameter type. Here the subtyping relation of the simple types is reversed for the complex types.
+On the other hand, "function from `Animal` to `String`" is a **subtype** of "function from `Cat` to `String`" because the **function type constructor** is **contravariant** in the parameter type. Here the subtyping relation of the simple types is reversed for the complex types.
 
 > NOTE: 这段话以 **function type constructor**为例，介绍了contravariant。
+
+
+
+A programming language designer will consider variance when devising(设计) typing rules for language features such as arrays, inheritance, and [generic datatypes](https://en.wikipedia.org/wiki/Generic_datatype). By making **type constructors** **covariant** or **contravariant** instead of **invariant**, more programs will be accepted as well-typed. On the other hand, programmers often find contravariance unintuitive(不直观), and accurately tracking variance to avoid runtime type errors can lead to complex typing rules.
+
+### Formal definition
+
+Within the [type system](https://en.wikipedia.org/wiki/Type_system) of a [programming language](https://en.wikipedia.org/wiki/Programming_language), a typing rule or a type constructor is:
+
+- *covariant* if it preserves the [ordering of types (≤)](https://en.wikipedia.org/wiki/Subtype), which orders types from more specific to more generic;
+- *contravariant* if it reverses this ordering;
+- *bivariant* if both of these apply (i.e., both `I<A>` ≤ `I<B>` and `I<B>` ≤ `I<A>` at the same time);[[1\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-1)
+- *variant* if covariant, contravariant or bivariant;
+- *invariant* or *nonvariant* if not variant.
+
+The article considers how this applies to some common type constructors.
+
+#### C`#` examples
+
+For example, in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), if `Cat` is a subtype of `Animal`, then:
+
+- `IEnumerable<Cat>` is a subtype of `IEnumerable<Animal>`. The subtyping is preserved because `IEnumerable<T>` is **covariant** on `T`.
+- `Action<Animal>` is a subtype of `Action<Cat>`. The subtyping is reversed because `Action<T>` is **contravariant** on `T`.
+- Neither `IList<Cat>` nor `IList<Animal>` is a subtype of the other, because `IList<T>` is **invariant** on `T`.
+
+### Arrays
+
+#### Covariant arrays in Java and `C#`
+
+### Function types
+
+Languages with [first-class functions](https://en.wikipedia.org/wiki/First-class_function) have [function types](https://en.wikipedia.org/wiki/Function_type) like "a function expecting a `Cat` and returning an `Animal`" (written `Cat -> Animal` in [OCaml](https://en.wikipedia.org/wiki/OCaml) syntax or `Func<Cat,Animal>` in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) syntax).
+
+Those languages also need to specify when one function type is a **subtype** of another—that is, when it is safe to use a function of one type in a context that expects a function of a different type. It is safe to substitute a function *f* for a function *g* if *f* accepts a more **general** type of argument and returns a more **specific** type than *g*. For example, functions of type `Animal -> Cat`, `Cat -> Cat`, and `Animal -> Animal` can be used wherever a `Cat -> Animal` was expected. (One can compare this to the [robustness principle](https://en.wikipedia.org/wiki/Robustness_principle) of communication: "be liberal in what you accept and conservative in what you produce.") The general rule is:
+$$
+S_{1}\rightarrow S_{2}\leq T_{1}\rightarrow T_{2} \quad if \quad T_{1}\leq S_{1} \quad and \quad S_{2}\leq T_{2}
+$$
+
+
+Using [inference rule notation](https://en.wikipedia.org/wiki/Rule_of_inference) the same rule can be written as:
+$$
+T_{1}\leq S_{1}\quad S_{2}\leq T_{2} \over S_{1}\rightarrow S_{2}\leq T_{1}\rightarrow T_{2}
+$$
+
+
+In other words, the **→ type constructor** is *contravariant in the input type* and *covariant in the output type*. This rule was first stated formally by [John C. Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds),[[3\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-3) and further popularized in a paper by [Luca Cardelli](https://en.wikipedia.org/wiki/Luca_Cardelli).[[4\]](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#cite_note-4)
+
+> NOTE: 上述结论是非常重要的
+
+When dealing with [functions that take functions as arguments](https://en.wikipedia.org/wiki/Higher-order_function) (Higher-order function), this rule can be applied several times. 
+
+> NOTE: 原文的这段话的后半段是没有读懂的
+
+### Inheritance in object-oriented languages
+
+
+
+|                                                              |                                                              |                                                              |                                                              |                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Vererbung_T.svg/120px-Vererbung_T.svg.png)](https://en.wikipedia.org/wiki/File:Vererbung_T.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Inheritance_invariant.svg/120px-Inheritance_invariant.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_invariant.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Inheritance_covariant_return.svg/120px-Inheritance_covariant_return.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_covariant_return.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Inheritance_contravariant_argument.svg/120px-Inheritance_contravariant_argument.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_contravariant_argument.svg) | [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Inheritance_covariant_argument.svg/120px-Inheritance_covariant_argument.svg.png)](https://en.wikipedia.org/wiki/File:Inheritance_covariant_argument.svg) |
+| Subtyping of the parameter/return type of the method.        | *Invariance*. The signature of the overriding method is unchanged. | *Covariant return type*. The subtyping relation is in the same direction as the relation between ClassA and ClassB. | *Contravariant parameter type*. The subtyping relation is in the opposite direction to the relation between ClassA and ClassB. | *Covariant parameter type*. Not type safe.                   |
+
+  
 
 
 
