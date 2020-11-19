@@ -36,9 +36,13 @@ The most commonly recognized major classes of polymorphism are:
 
 #### Ad hoc polymorphism
 
-> NOTE: 特别polymorphism
+> NOTE: 特别多态
 
 *Main article:* [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)
+
+The term "[ad hoc](https://en.wikipedia.org/wiki/Ad_hoc)" in this context is not intended to be pejorative(轻蔑词); it refers simply to the fact that this type of polymorphism is not a fundamental feature of the type system. 
+
+
 
 [Implicit type conversion](https://en.wikipedia.org/wiki/Implicit_type_conversion) has also been defined as a form of polymorphism, referred to as "coercion(强制) polymorphism".[[2\]](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#cite_note-Luca-2)[[6\]](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#cite_note-Tucker2004-6)
 
