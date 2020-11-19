@@ -10,7 +10,7 @@ C++直接支持OOP，C++OOP是class-based OOP。
 
 ## Generic programming and template-meta programming
 
-C++直接支持generic programming 和 template-meta programming，它们都是通过template来实现的。
+C++直接支持generic programming 和 template-meta programming，它们都是通过template来实现的，参见`C++\Language-reference\Template`章节。
 
 ### Generic programming
 

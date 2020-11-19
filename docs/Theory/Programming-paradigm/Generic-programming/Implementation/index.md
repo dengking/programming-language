@@ -162,19 +162,19 @@ class DualWriter:
 
 Now you can create a **DualWriter** object:
 
-```
+```C++
 dual = DualWriter()
 ```
 
 and then whenever you execute
 
-```
+```C++
 print >>dual, x
 ```
 
 the value of **x** appears on both the standard output and standard error streams. Because you know that the **>>** mechanism assumes only the existence of the **write** method, you could define a tiny class that **>>** would accept because of duck typing. Suppose we wanted to do something similar in C++. It might appear at first to be impossible, because **<<** is a member of the **ostream** library classes, and you cannot easily define such a class of your own. However, when you write an expression such as:
 
-```
+```C++
 dual << "Hello, world!\n"
 ```
 
@@ -217,9 +217,13 @@ The distinction in C++ between **duck typing** and **inheritance** comes from C+
 
 In contrast, **compile-time duck typing** doesn't cost anything during runtime. Indeed, it is **duck typing** that makes it possible for the C++ library to define a single vector template that allows **vector** for any suitable type **T**, rather than requiring **T** to be derived from a class such as **vector_element**. The standard containers require their element types to be "assignable" and "copy constructible," but those notions are just ways of describing particular kinds of ducks. It is these notions' lack of inheritance requirements that lets us use types such as **vector**, even though **int** is not part of any inheritance hierarchy.
 
+
+
 ## wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
 
 > This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+
+
 
 ## wikipedia [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) # [Templates or generic types](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types) 
 
@@ -238,10 +242,6 @@ In contrast, **compile-time duck typing** doesn't cost anything during runtime. 
 
 
 ### Template and duck type and polymorphism
-
-按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:
-
-Template属于“single symbol to represent multiple different types”。
 
 
 

@@ -2,7 +2,7 @@
 
 template是c++的关键特性。
 
-## 维基百科[Template (C++)](https://en.wikipedia.org/wiki/Template_(C%2B%2B))
+## wikipedia [Template (C++)](https://en.wikipedia.org/wiki/Template_(C%2B%2B))
 
 ### [Technical overview](https://en.wikipedia.org/wiki/Template_(C%2B%2B)#Technical_overview)
 
@@ -37,5 +37,13 @@ Templates are parameterized by one or more [template parameters](https://en.cppr
 >
 > 至于template template parameter，它其实可以归入上述两者之一
 
+## Template and programming paradigm
 
+在`C++\Guide\Paradigm`中已经进行了总结。
+
+
+
+## Template and polymorphism
+
+参见`C++\Guide\Polymorphism`章节。
 

@@ -88,3 +88,14 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 
 [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) 不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
 
+
+
+在下面文章这描述了Behavior-based、inheritance-based
+
+1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
+
+收录在`Theory\Programming-paradigm\Generic-programming\Implementation`中
+
+2) wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
+
+> This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
