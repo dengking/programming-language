@@ -10,7 +10,7 @@ In [programming languages](https://en.wikipedia.org/wiki/Programming_language) a
 
 > NOTE: 这段话的意思是：在编程语言和类型理论中，多态性是向不同type的entity提供单一interface，或使用单一符号表示多个不同type。这段话总结了polymorphism的本质，在后面的《Polymorphism的本质》段会进行详细分析。
 >
-> 从上面这段话中，我们可以看到，**polymorphism** 和 [type](https://en.wikipedia.org/wiki/Data_type) ，或者更加具体来说 和  [type systems](https://en.wikipedia.org/wiki/Type_system) 密切相关，参见原文的[History](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#History)章节。
+> 从上面这段话中，我们可以看到，**polymorphism** 和 [type](https://en.wikipedia.org/wiki/Data_type) ，或者更加具体来说 和  [type systems](https://en.wikipedia.org/wiki/Type_system) 密切相关，参见原文的 [History](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#History) 章节。
 
 The most commonly recognized major classes of polymorphism are:
 
@@ -26,7 +26,7 @@ The most commonly recognized major classes of polymorphism are:
 
 > NOTE: 上述三者是major classes，其实还有一些其他类型的polymorphism，比如在原文See also中提及的：
 >
-> [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) types
+> [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**
 >
 > 在原文的[Types](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Types)段，描述了更多类型的polymorphism。
 

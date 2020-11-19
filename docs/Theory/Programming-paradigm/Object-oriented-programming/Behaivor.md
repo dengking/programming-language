@@ -14,7 +14,7 @@
 | wikipedia [Behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping) |                                                              |
 | `Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Subtyping-polymorphism\index.md` | "Subtyping polymorphism is based on behavior"                |
 
-下面几个词在OOP中是经常出现的，我觉得它们的有着相似的内涵，且它们斗鱼behavior有关:
+下面几个词在OOP中是经常出现的，我觉得它们的有着相似的内涵，且它们都与behavior有关:
 
 |           | 简介                                                   | 链接                                                         |
 | --------- | ------------------------------------------------------ | ------------------------------------------------------------ |
