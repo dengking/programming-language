@@ -1,20 +1,28 @@
 # Implementation of polymorphism
 
-在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中讨论了各种polymorphism，本章讨论c++中如何实现polymorphism，这是一个较大的话题。c++中提供了多种polymorphism，下面根据static/dynamic进行分类：
+在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中讨论了各种polymorphism，本章讨论c++中如何实现polymorphism，这是一个较大的话题。C++中提供了多种polymorphism:
+
+下面根据static/dynamic进行分类：
 
 | static                    | dynamic                     |
 | ------------------------- | --------------------------- |
 | - overload <br>- template | - sub-type / virtual method |
 
+下面是根据wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的分类方法进行的分类: 
 
+| classification                                               |                           |
+| ------------------------------------------------------------ | ------------------------- |
+| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | overload                  |
+| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | template                  |
+| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | sub-type / virtual method |
 
 正如在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中所总结的:
 
 > Polymorphism is a mapping/dispatch
 
-因此，无论是哪种实现方式，都需要考虑one-to-many的问题，即需要考虑使用set  of candidates中的哪一个来作为实现，那到底选择哪一个呢？显然这有一个**比较**/**排序**的过程，通俗来讲，选择最“**合适**” 的那一个，那到底哪个最**合适**呢？不同的polymorphism有不同的标准。
+因此，无论是哪种实现方式，都需要考虑one-to-many的问题，即需要考虑从set  of candidates中的选择哪一个来作为最终的实现。显然这有一个**比较**/**排序**的过程，通俗来讲，选择最“**合适**” 的那一个，那到底哪个最**合适**呢？不同的polymorphism有不同的标准。
 
-Overload、specialization、subclass都是对某种“特殊情况的说明”，compiler在进行选择/resolve的时候，应该选择**最最特殊情况**: 
+Function overload、template specialization、OOP subclass都是对某种“特殊情况的说明”，compiler在进行选择(select)/派发(dispatch)/resolve的时候，应该选择**最最特殊的实现**: 
 
 | Type of polymorphism  | 最最特殊的                      | 样例                                                         |
 | --------------------- | ------------------------------- | ------------------------------------------------------------ |

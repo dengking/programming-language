@@ -2,6 +2,8 @@
 
 “polymorphism”即“多态”，初次见到这个词语，我的第一印象是“多种形态”。
 
+
+
 ## wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
 
 In [programming languages](https://en.wikipedia.org/wiki/Programming_language) and [type theory](https://en.wikipedia.org/wiki/Type_theory), **polymorphism** is the provision(提供) of a single [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to entities of different [types](https://en.wikipedia.org/wiki/Data_type) or the use of a single symbol to represent multiple different types.
@@ -127,57 +129,31 @@ See also: [Duck typing](https://en.wikipedia.org/wiki/Duck_typing)
 
 ### Implementation aspects
 
-#### Static and dynamic polymorphism
-
-|                   Static(at compile time)                    |                     Dynamic(at run time)                     |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [static dispatch](https://en.wikipedia.org/wiki/Static_dispatch) | [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) |
-| [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) |
-|        [Static/early binding](Static/early binding )         | [Late/dynamic binding](https://en.wikipedia.org/wiki/Late_binding) |
-
-
-
-> NOTE: [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)和[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)都属于[Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)，而[Subtyping](https://en.wikipedia.org/wiki/Subtyping)则属于[dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)。
-
-| Static/dynamic                                               | Example                                                      |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)、[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism) |
-| [Dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [Subtyping](https://en.wikipedia.org/wiki/Subtyping)         |
-
-
-
-However, it is possible to achieve static polymorphism with subtyping through more sophisticated use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming), namely the [curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern).
-
-> NOTE: 这是c++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
-
-
-
-> NOTE: 原文关于实现的解释仅仅涉及了static和dynamic，其实不同的programming language的polymorphisim的实现是截然不同的，关于这些实现，将在不同的programming language中进行具体的展开，下面是对此的一些总结：
->
-> |      | static                                 | dynamic                                       |
-> | ---- | -------------------------------------- | --------------------------------------------- |
-> | 实现 | compiler实现，无需在内存中保存映射关系 | 需要在内存中保存所有的candidate之间的映射关系 |
-> | 例子 | c++ overload、template specialization  | c++ virtual method、python attribute find     |
->
-> 关于c++ implementation of polymorphism，参加文章`C-family-language\C++\Guide\Implementation-of-polymorphism\index.md`
+> NOTE: 参见`Theory\Programming-paradigm\Polymorphism\Implementation`章节
 
 
 
 ## Polymorphism的本质
 
+
+
 ### Polymorphism is a map/dispatch
 
-本节标题的含义是：多态是一种映射/派发；我觉得polymorphism的本质:
+本节标题的含义是：多态是一种映射/派发；下面是我polymorphism的本质的思考:
 
-描述了一种one-to-many关系:
+1) 描述了一种one-to-many关系:
 
-1) single [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to entities of different [types](https://en.wikipedia.org/wiki/Data_type) 
+polymorphism中的one-to-many关系的含义是多重的: 
 
-2) a single symbol to represent multiple different types
+- **single**(**one**) [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to **entities**(**many**) of different [types](https://en.wikipedia.org/wiki/Data_type) 
+- a **single**(**one**) symbol to represent multiple(**many**) different types
+- "一个抽象(**one**)，可能有多个(**many**)实现"(参见文章《Abstraction》)
 
-按照one-to-many关系, 自动实现**map/dispatch**:
+2) 按照one-to-many关系, 自动实现**map/dispatch**:
 
-这种**map/dispatch**是由**programming language实现**来提供的: **programming language的实现**按照one-to-many关系来实现**map/dispatch**，这就是标题中的**自动**的含义。显然，Polymorphism让我们不用写一堆的**if-else**判断。
+这种**map/dispatch**是由**programming language的实现**来提供的(或者说: 这种**map/dispatch**是programming language内置的dispatch机制): 
+
+**programming language的实现**按照one-to-many关系来实现**map/dispatch**，这就是标题中的**自动**的含义。显然，Polymorphism让我们不用写一堆的**if-else**判断。
 
 
 
@@ -198,15 +174,17 @@ However, it is possible to achieve static polymorphism with subtyping through mo
 
 ### Polymorphism是实现abstraction的基础
 
-**single**就是abstraction。
+"一个抽象，可能有多个实现"(参见文章《Abstraction》)，polymorphism能够自动的进行dispatch，从而选择合适的实现。
 
-一个抽象有多种实现，polymorphism能够自动的进行dispatch，从而选择合适的实现。
+**one/single**就是abstraction。
 
-TODO: 此处需要添加文章抽象中的内容。
+
+
+
 
 ## Polymorphism的价值
 
-1) 让programmer写出更加abstract的code
+1) 让programmer写出更加abstract的code，能够增强code reuse
 
 2) 使代码更加地generic（参见[generic programming](http://en.wikipedia.org/wiki/Generic_programming)），从而带来更好的扩展性
 
