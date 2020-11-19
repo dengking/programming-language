@@ -1,23 +1,41 @@
 # Metaprogramming
 
-在文章Meta中，总结了programming language中的各种meta，其中我们已经总结了：
+在文章Meta中，总结了programming language中的各种meta。
 
 > NOTE: meta是一种抽象
 
-## 维基百科[Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) 
 
-**Metaprogramming** is a programming technique in which [computer programs](https://en.wikipedia.org/wiki/Computer_program) have the ability to treat programs as their data. It means that a program can be designed to read, generate, analyze or transform other programs, and even modify itself while running. [[1\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-1)[[2\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-2) In some cases, this allows programmers to minimize the number of lines of code to express a solution, thus reducing the development time.[[3\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-3)  It also allows programs greater flexibility to efficiently handle new situations without recompilation.
+
+## wikipedia [Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) 
+
+**Metaprogramming** is a programming technique in which [computer programs](https://en.wikipedia.org/wiki/Computer_program) have the ability to **treat programs as their data**. It means that a program can be designed to **read**, **generate**, **analyze** or **transform** other programs, and even modify itself while running. [[1\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-1)[[2\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-2) In some cases, this allows programmers to minimize the number of lines of code to express a solution, thus reducing the development time.[[3\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-3)  It also allows programs greater flexibility to efficiently handle new situations without recompilation.
+
+> NOTE: 这一段中描述了metaprogramming的核心思想: "treat programs as their data"; 
+>
+> 结合使用C++、Python的经验来看，这是一种非常强大的能力，能够带来极大的灵活性，能够大大增加语言的power。
 
 **Metaprogramming** can be used to move computations from [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) to [compile-time](https://en.wikipedia.org/wiki/Compile-time), to generate code using compile time computations, and to enable [self-modifying code](https://en.wikipedia.org/wiki/Self-modifying_code). The language in which the **metaprogram** is written is called the [metalanguage](https://en.wikipedia.org/wiki/Self-modifying_code). The language of the programs that are manipulated is called the [attribute-oriented programming](https://en.wikipedia.org/wiki/Attribute-oriented_programming) language. The ability of a programming language to be its own metalanguage is called [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_science)) or "reflexivity".[[4\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-4) **Reflection** is a valuable language feature to facilitate metaprogramming.
 
-> NOTE: 上面所描述的是metaprogramming的核心思想。结合我们所使用的具体的programming（c++、python），发现其实它们都提供了对metaprogramming的支持。
+> NOTE: 
 >
 > 从metaprogramming的角度来看，我们编写的program就包含两类了：
 >
-> - program（使用**programming language**）
-> - metaprogram（使用**metaprogramming language**）
+> | classification of program |                                  |
+> | ------------------------- | -------------------------------- |
+> | program                   | 使用**programming language**     |
+> | metaprogram               | 使用**metaprogramming language** |
 >
-> c++和python都支持metaprogramming，它们的programming language和metaprogramming language是相同。具体到c++，它使用的template metaprogramming，所以它的template就属于metaprogram。
+> metaprogram是由language的实现来执行，下面是例子:
+>
+> 1) C++ metaprogram是由compiler来执行的(**static**)
+>
+> 2) Python metaprogram是由Python interpreter来执行的(**dynamic**)
+>
+> 第二段中的"**Metaprogramming** can be used to move computations from [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) to [compile-time](https://en.wikipedia.org/wiki/Compile-time)"是典型的compile time function execution，参见`Theory\Compile-time-and-run-time`章节。
+>
+> 大多数programming language的metalanguage和hosting language是相同的，比如: 
+>
+> C++和python都支持metaprogramming，它们的programming language和metaprogramming language是相同。具体到C++，它使用的template metaprogramming，所以它的template就属于metaprogram。
 
 ### Approaches 
 
@@ -46,18 +64,12 @@ Not all metaprogramming involves **generative programming**(产生式编程). If
 Main article: [Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))
 
 - [Common Lisp](https://en.wikipedia.org/wiki/Common_Lisp) and most [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) dialects.
-- Scheme [hygienic macros](https://en.wikipedia.org/wiki/Hygienic_macro)
-- [MacroML](https://en.wikipedia.org/wiki/MacroML)
-- [Template Haskell](https://en.wikipedia.org/wiki/Template_Haskell)
-- [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) macros
-- [Clojure](https://en.wikipedia.org/wiki/Clojure_(programming_language)) macros
-- [Nim](https://en.wikipedia.org/wiki/Nim_(programming_language))
+
+  
 
 #### Macro assemblers
 
-The [IBM/360](https://en.wikipedia.org/wiki/IBM/360) and derivatives had powerful [macro assembler](https://en.wikipedia.org/wiki/Macro_assembler) facilities that were often used to generate complete [assembly language](https://en.wikipedia.org/wiki/Assembly_language) programs[*citation needed*] or sections of programs (for different operating systems for instance). Macros provided with [CICS](https://en.wikipedia.org/wiki/CICS) [transaction processing](https://en.wikipedia.org/wiki/Transaction_processing) system had assembler macros that generated COBOL statements as a pre-processing step.
-
-Other assemblers, such as [MASM](https://en.wikipedia.org/wiki/MASM), also support macros.
+> NOTE: 暂未了解
 
 #### Metaclasses
 
@@ -80,15 +92,5 @@ Main article: [Template metaprogramming](https://en.wikipedia.org/wiki/Template_
 - [Common Lisp](https://en.wikipedia.org/wiki/Common_Lisp), [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)) and most Lisp dialects by using the quasiquote ("backquote") operator.[[11\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-11)
 - [Nim](https://en.wikipedia.org/wiki/Nim_(programming_language))
 
-> NOTE: c++是使用template metaprogramming的典范，所以将template metaprogramming放到了`C-family-language\C++\Language-reference\Template\Template-metaprogramming.md`。
+> NOTE: C++是使用template metaprogramming的典范，所以将template metaprogramming放到了`C-family-language\C++\Language-reference\Template\Template-metaprogramming.md`。
 
-#### Staged metaprogramming
-
-- [MetaML](https://en.wikipedia.org/w/index.php?title=MetaML&action=edit&redlink=1)
-- [MetaOCaml](https://en.wikipedia.org/wiki/OCaml#MetaOCaml)
-- [Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) using the [Lightweight Modular Staging](https://en.wikipedia.org/w/index.php?title=Lightweight_Modular_Staging&action=edit&redlink=1) Framework[[12\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-12)[[13\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-13)
-- [Terra](http://terralang.org/)
-
-#### With dependent types
-
-- Usage of [dependent types](https://en.wikipedia.org/wiki/Dependent_type) allows proving that generated code is never invalid.[[14\]](https://en.wikipedia.org/wiki/Metaprogramming#cite_note-14) However, this approach is bleeding-edge and is rarely found outside of research programming languages.

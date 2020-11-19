@@ -1,28 +1,16 @@
 # Template and duck typing and generics
 
-C++ template、Python duck typing、Java/C# generics，这是这三门主流programming language实现GP的方式，它们之间是有着可比性的。
+C++ template、Python duck typing、Java/C# generics，这是这三门主流programming language实现**GP**的方式，它们之间是有着可比性的: 
 
-在wikipedia [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) # [Templates or generic types](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types) 中对三者进行了比较
+它们都能够实现**GP**，下面是它们的对比: 
 
-> [Template](https://en.wikipedia.org/wiki/Template_metaprogramming), or [generic](https://en.wikipedia.org/wiki/Generic_programming) functions or methods apply the **duck test** in a [static typing](https://en.wikipedia.org/wiki/Type_system#Static_typing) context; this brings all the advantages and disadvantages of [static versus dynamic type checking](https://en.wikipedia.org/wiki/Type_system#Static_and_dynamic_type_checking_in_practice) in general. **Duck typing** can also be more flexible in that only the methods *actually called at runtime* need to be implemented, while templates require implementations of all methods that *can not be proven [unreachable](https://en.wikipedia.org/wiki/Unreachable_code) at compile time*.  
->
-> > NOTE: 上面这段话从static versusdynamic type的角度来进行比较
->
-> Languages like Python, Java and Objective-C are examples of duck typing because it is possible in them to construct new types in runtime via [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) and inspect whether these objects implement certain methods. On the other hand, there are languages that rely on **compile-time metaprogramming** techniques (like C++ and its template system) and thus do not fit into the category of duck typing; instead, at some point in the compilation pipeline, all placeholder types become substituted with some concrete types specified in a particular instantiation. Even though certain type erasure is possible in them, runtime inspection is limited.
+|                      | C++ template                                                 | Python duck typing                                           | Java/C# generics                                             |
+| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Type requirement** | concept(C++20) <br>参见: cppreference [Constraints and concepts](https://en.cppreference.com/w/cpp/language/constraints) | type hint(Python 3.5) <br>参见: [`typing`](https://docs.python.org/3/library/typing.html#module-typing) — Support for type hints[¶](https://docs.python.org/3/library/typing.html#module-typing) | [bounded quantification](https://en.wikipedia.org/wiki/Bounded_quantification) <br>参见: [Bounded Type Parameters](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) |
+| Static/dynamic       | static                                                       | dynamic                                                      | 暂时不确定                                                   |
+|                      | behavior-based                                               | behavior-based                                               | type/inheritance-based                                       |
 
-三者有着非常大的可比性。
 
-相同点:
-
-1) type requirement
-
-2) 都是GP的实现
-
-不同点:
-
-1) Template是static，compile time
-
-2) Duck type是dynamic，runtime
 
 ## drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
 
@@ -30,7 +18,7 @@ C++ template、Python duck typing、Java/C# generics，这是这三门主流prog
 
 The distinction in C++ between **duck typing** and **inheritance** comes from C++'s **static type system**, and is part of the price we pay for having C++ programs run as quickly as they do.
 
-> NOTE: 在C++中，duck typing和inheritance的差异源自于C++的static type system
+> NOTE: 第一段的意思是: "在C++中，duck typing和inheritance的差异源自于C++的static type system"。
 
 ### 正文
 
@@ -40,9 +28,9 @@ C++ offers two kinds of polymorphism—
 
 2) **compile-time polymorphism**, which is based on **templates** and is the foundation of **generic programming**. 
 
-When we wish to select from a set of classes at **runtime**, C++ requires that those classes be related by **inheritance**. When we wish to select from a set of types at compile time, the relationship between those types is more subtle(难以捉摸的、微妙的). The types need be related only indirectly, and only by their **behavior**.
+When we wish to select from a set of classes at **runtime**, C++ requires that those classes be related by **inheritance**. When we wish to select from a set of types at **compile time**, the relationship between those types is more subtle(难以捉摸的、微妙的). The types need be related only indirectly, and only by their **behavior**.
 
-> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`中，我们已经知道了“[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) types”。上面这一段中描述的使用template实现的polymorphism和使用duck type实现的polymorphism非常类似。
+> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`中，我们已经知道了“[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**”。上面这一段中描述的使用template实现的polymorphism和使用duck type实现的polymorphism非常类似。
 
 The C++ community does not have a generally accepted term for this kind of **behavior-based relationship** between types. Accordingly, people first learning about C++ generic programming are tempted to think that **inheritance** is involved somehow, just as it is for **object-oriented programming**. For example, on several occasions we have seen questions such as "Why isn't a **bidirectional iterator** derived from a **forward iterator**?" A student who asks that question has probably already formed a significant misconception about how templates deal with types.
 
@@ -229,11 +217,17 @@ The distinction in C++ between **duck typing** and **inheritance** comes from C+
 
 In contrast, **compile-time duck typing** doesn't cost anything during runtime. Indeed, it is **duck typing** that makes it possible for the C++ library to define a single vector template that allows **vector** for any suitable type **T**, rather than requiring **T** to be derived from a class such as **vector_element**. The standard containers require their element types to be "assignable" and "copy constructible," but those notions are just ways of describing particular kinds of ducks. It is these notions' lack of inheritance requirements that lets us use types such as **vector**, even though **int** is not part of any inheritance hierarchy.
 
-
-
 ## wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
 
-This works whether the arguments x and y are integers, strings, or any other type for which the expression x < y is sensible, or more specifically, for any type for which operator< is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+> This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+
+## wikipedia [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) # [Templates or generic types](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types) 
+
+> [Template](https://en.wikipedia.org/wiki/Template_metaprogramming), or [generic](https://en.wikipedia.org/wiki/Generic_programming) functions or methods apply the **duck test** in a [static typing](https://en.wikipedia.org/wiki/Type_system#Static_typing) context; this brings all the advantages and disadvantages of [static versus dynamic type checking](https://en.wikipedia.org/wiki/Type_system#Static_and_dynamic_type_checking_in_practice) in general. **Duck typing** can also be more flexible in that only the methods *actually called at runtime* need to be implemented, while templates require implementations of all methods that *can not be proven [unreachable](https://en.wikipedia.org/wiki/Unreachable_code) at compile time*.  
+>
+> > NOTE: 上面这段话从static versus dynamic type的角度来进行比较
+>
+> Languages like Python, Java and Objective-C are examples of duck typing because it is possible in them to construct new types in runtime via [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) and inspect whether these objects implement certain methods. On the other hand, there are languages that rely on **compile-time metaprogramming** techniques (like C++ and its template system) and thus do not fit into the category of duck typing; instead, at some point in the compilation pipeline, all placeholder types become substituted with some concrete types specified in a particular instantiation. Even though certain type erasure is possible in them, runtime inspection is limited.
 
 
 
@@ -245,9 +239,11 @@ This works whether the arguments x and y are integers, strings, or any other typ
 
 ### Template and duck type and polymorphism
 
-按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:Template属于“single symbol to represent multiple different types”。
+按照维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的说法:
 
-template是C++的典型特性，duck type是python的典型特性，从上面的对比来看，两者存在着一定的相似性，关于两者，在`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing`章节进行了深入分析。
+Template属于“single symbol to represent multiple different types”。
+
+
 
 在维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中已经提及了，下面是一些补充。
 

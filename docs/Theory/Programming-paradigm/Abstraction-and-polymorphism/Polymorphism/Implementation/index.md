@@ -56,7 +56,7 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 
 "一个抽象，可能有多个实现"，dispatch是指在这些implementations的method中选择一个。
 
-### substitution的含义
+### Substitution的含义
 
 一个抽象符号，可以被多种符合条件的具体符号替换。
 
@@ -78,7 +78,13 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 
 
 
+### Behavior-based and type-base and inheritance-based
 
 
 
+[**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) 是 type-based 
+
+[**Subtyping**](https://en.wikipedia.org/wiki/Subtyping) 是 inheritance-based
+
+[**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) 不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
 

@@ -1,22 +1,16 @@
-# Summary of my programming language
+# C++ VS Python
 
-截止目前为止，我已经接触了多种programming language，现在非常有必要对这些programming language的同与异进行总结了；
-
-主要以`python`，`c`，`c++`来作为研究对象。
+我的主要语言是`Python`，`C`，`C++`，本文对它们进行对比。
 
 对它们的对比，需要从多个角度来进行展开，主要以《Compilers Principles Techniques and Tools 2nd.pdf》为蓝本，然后加上一些我之前在computer science中所总结的内容；
 
 
 
-## compiler and interpreter  
+## Compiler and interpreter  
 
-参考内容：
+首先需要准确地理解compiler和interpreter，《Compilers Principles Techniques and Tools 2nd.pdf》chapter 1.1 Language Processors：
 
-- 《Compilers Principles Techniques and Tools 2nd.pdf》chapter 1.1 Language Processors
-
-首先需要准确地理解compiler和interpreter；
-
-Simply stated, a compiler is a program that can read a program in one language , *the source language* and **translate** it into an equivalent program in another language , *the target language*;
+> Simply stated, a compiler is a program that can read a program in one language , *the source language* and **translate** it into an equivalent program in another language , *the target language*;
 
 ```
 
@@ -33,7 +27,45 @@ target program
 
 python中，compiler的target language是[bytecode](https://en.wikipedia.org/wiki/Bytecode).（参见[Is Python interpreted or compiled? Yes.](https://nedbatchelder.com/blog/201803/is_python_interpreted_or_compiled_yes.html)）
 
-显然，`c`和`c++`结果编译达到的program是可以直接执行的，而python结果编译生成的program则需要python interpreter的解释执行；
+显然，`c`和`c++`经过编译生成的program是可以直接执行的，而python经过编译生成的program则需要python interpreter的解释执行；
+
+
+
+这就注定了**Python**的很多事情是由**interpreter**完成的，而C++的很多事情是由**compiler**完成的。前者是静态的，后者是动态的:
+
+Python的指令是非常抽象的，Python中由**interpreter**来选择**magic function**; C++中由compiler来选择**magic function**;
+
+
+
+## static VS dynamic
+
+C++的核心特性是: **static**; Python的核心特性是: **dynamic**; 这是它们的主要差别之一。
+
+Python很多runtime(**interpreter** / dynamic)执行的事情，C++都可以在compile time(**compiler** / static )完成: 
+
+1) C++ static stype VS Python dynamic type;
+
+> 参见下面的Type system章节
+
+2) C++ member detection idiom VS Python `hasattr` 
+
+3) C++ static polymorphism VS Python不支持static polymorphism
+
+4) C++ metaprogram是compile-time执行 VS Python metaprogram是run-time执行
+
+> 参见: `Theory\Programming-paradigm\Metaprogramming`章节
+
+### C++ 的“静” VS python的“动”
+
+C++的compile保证进行了严格的检查
+
+Python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
+
+参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
+
+
+
+
 
 
 
@@ -108,7 +140,7 @@ python和`c++`不同，它也是强类型的，但是python是duck type，python
 
 
 
-## type system
+## Type system
 
 ### constant
 
@@ -205,7 +237,7 @@ C++11中引入的range-for非常类似于python中的`for`。
 
 
 
-## c++ iteration vs python iteration
+## C++ iteration vs python iteration
 
 python通过magic function `__next__`、`__iter__`来支持iterator，c++显式定义了iterator类。
 
@@ -214,20 +246,6 @@ python通过magic function `__next__`、`__iter__`来支持iterator，c++显式�
 c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
 
 
-
-## 语言的标准与实现
-
-一种标准可以有多种实现。
-
-python和c++的实现方式是完全不同的，python是解释执行的，而c++是直接执行的。这就注定了Python的很多事情是interpreter完成的，而c++的很多事情是compiler完成的。前者是静态的，后者是动态的。可以看到，Python的指令是非常抽象的。python中由interpreter来选择magic function，而c++中由compiler来选择magic function。
-
-### C++ 的“静” VS python的“动”
-
-C++的compile保证进行了严格的检查
-
-python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.html#term-eafp)、[LBYL](https://docs.python.org/3.5/glossary.html#term-lbyl)
-
-参见：[Idiomatic Python: EAFP versus LBYL](https://devblogs.microsoft.com/python/idiomatic-python-eafp-versus-lbyl/)
 
 
 

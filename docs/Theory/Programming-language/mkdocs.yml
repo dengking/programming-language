@@ -1,6 +1,6 @@
 nav:
 #################### 首先介绍programming language的概念####################
-    - Programming-language: Programming-language.md
+    - Programming-language: index.md
 #################### 如何来掌握programming language，这是本章的核心思想##################    
     - How-to-master-programming-language: How-to-master-programming-language.md
     # programming language的设计

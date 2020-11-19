@@ -2,6 +2,8 @@
 
 这个话题在`Theory\Programming-language\Design-of-programming-language.md`的Specification of expectation of type in class-based OOP language章节中已经提及了，本文对duck type和template进行对比。
 
+
+
 ## 如何实现[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
 
 各种Polymorphism 的实现机制是不同的，实现机制在[Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)中进行了说明
@@ -28,10 +30,6 @@ https://docs.microsoft.com/en-us/cpp/cpp/run-time-type-information?view=vs-2019
 https://en.wikipedia.org/wiki/Reflection_(computer_programming)
 
 
-
-### c++ Concepts VS python type hint
-
-c++20引入的Concepts 和 python的type hint有着类似的出发点。
 
 
 
