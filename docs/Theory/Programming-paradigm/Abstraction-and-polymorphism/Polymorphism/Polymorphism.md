@@ -184,12 +184,6 @@ polymorphism中的one-to-many关系的含义是多重的:
 
 
 
-### Polymorphism是实现abstraction的基础
-
-"一个抽象，可能有多个实现"(参见文章《Abstraction》)，polymorphism能够自动的进行dispatch，从而选择合适的实现。
-
-**one/single**就是abstraction。
-
 
 
 

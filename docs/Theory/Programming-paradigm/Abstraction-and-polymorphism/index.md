@@ -1,4 +1,14 @@
-# Abstraction in programming language
+# Abstraction and polymorphism
+
+Program to abstraction and then dispatch: 从抽象到具体/实现。
+
+Polymorphism是现代programming language内置了dispatch机制，能够自动进行dispatch，从而大大增加了
+
+Polymorphism是实现abstraction的基础
+
+"一个抽象，可能有多个实现"(参见文章《Abstraction》)，polymorphism能够自动的进行dispatch，从而选择合适的实现。
+
+**one/single**就是abstraction。
 
 
 
@@ -188,3 +198,6 @@ Mixin and AOP：https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Parameterized_
 ### TODO: OOP VS GP
 
 > TODO 重点比较OOP和duck type
+
+
+
