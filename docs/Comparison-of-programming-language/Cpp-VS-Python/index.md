@@ -51,9 +51,7 @@ Python很多runtime(**interpreter** / dynamic)执行的事情，C++都可以在c
 
 3) C++ static polymorphism VS Python不支持static polymorphism
 
-4) C++ metaprogram是compile-time执行 VS Python metaprogram是run-time执行
 
-> 参见: `Theory\Programming-paradigm\Metaprogramming`章节
 
 ### C++ 的“静” VS python的“动”
 
@@ -65,9 +63,17 @@ Python则是完全动态的，它有[EAFP](https://docs.python.org/3.5/glossary.
 
 
 
+## Programming paradigm
 
+### Generic programming
 
+参见`Theory\Programming-paradigm\Generic-programming\Implementation`章节；
 
+### Metaprogramming
+
+C++ metaprogram是compile-time(static)执行 VS Python metaprogram是run-time(dynamic)执行
+
+参见: `Theory\Programming-paradigm\Metaprogramming`章节。
 
 
 

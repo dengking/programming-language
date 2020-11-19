@@ -19,6 +19,8 @@ C++ template、Python duck typing、Java/C# generics，这是这三门主流prog
 The distinction in C++ between **duck typing** and **inheritance** comes from C++'s **static type system**, and is part of the price we pay for having C++ programs run as quickly as they do.
 
 > NOTE: 第一段的意思是: "在C++中，duck typing和inheritance的差异源自于C++的static type system"。
+>
+> 这篇文章重要强调的是template和duck typing都是behavior-based的
 
 ### 正文
 
@@ -237,38 +239,3 @@ In contrast, **compile-time duck typing** doesn't cost anything during runtime. 
 
 
 
-## draft
-
-
-
-### Template and duck type and polymorphism
-
-
-
-在维基百科[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中已经提及了，下面是一些补充。
-
-https://stackoverflow.com/questions/11502433/what-is-the-difference-between-polymorphism-and-duck-typing
-
-
-
-https://softwareengineering.stackexchange.com/questions/121778/is-duck-typing-a-subset-of-polymorphism
-
-
-
-https://dev.to/middlebrooks314/duck-typing-1gnn
-
-
-
-https://subscription.packtpub.com/book/application_development/9781788293181/8/08lvl1sec92/polymorphism-and-duck-typing
-
-
-
-https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types
-
-
-
-## draft
-
-[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism 更加类似于 [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism)，都是:
-
-"when one or more types are not specified by name but by **abstract symbols** that can represent any type."

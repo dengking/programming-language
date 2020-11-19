@@ -26,7 +26,7 @@ The most commonly recognized major classes of polymorphism are:
 
 > NOTE: 上述三者是major classes，其实还有一些其他类型的polymorphism，比如在原文See also中提及的：
 >
-> [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**
+> [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**，在后面的"[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) types"章节进行了具体介绍。
 >
 > 在原文的[Types](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Types)段，描述了更多类型的polymorphism。
 
@@ -126,6 +126,18 @@ See also: [Duck typing](https://en.wikipedia.org/wiki/Duck_typing)
 > NOTE: 这是原文放在[See also](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#See_also)段中的一段话，我将它移到了这里，因为duck typing也是一种polymorphsim，并且python就是采用的duck typing。[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism 更加类似于 [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism)，都是:
 >
 > "when one or more types are not specified by name but by **abstract symbols** that can represent any type."
+>
+> 下面是关于duck typing和polymorphism的一些补充。
+>
+> https://stackoverflow.com/questions/11502433/what-is-the-difference-between-polymorphism-and-duck-typing
+>
+> https://softwareengineering.stackexchange.com/questions/121778/is-duck-typing-a-subset-of-polymorphism
+>
+> https://dev.to/middlebrooks314/duck-typing-1gnn
+>
+> https://subscription.packtpub.com/book/application_development/9781788293181/8/08lvl1sec92/polymorphism-and-duck-typing
+>
+> 
 
 ### Implementation aspects
 

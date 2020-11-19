@@ -99,3 +99,22 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 2) wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
 
 > This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+
+
+
+
+
+## draft
+
+
+
+### 如何实现[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
+
+各种Polymorphism 的实现机制是不同的，实现机制在[Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)中进行了说明
+
+Ad hoc polymorphism的实现机制是[Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
+
+Subtyping的实现方式是[Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
+
+[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) types
+
