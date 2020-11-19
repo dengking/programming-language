@@ -11,4 +11,5 @@ nav:
     #################### fluent api在OOP中有着广泛的应用####################
     - Fluent-API: Fluent-API.md
     - Glossary: Glossary
+    - Behavior: Behavior.md
     - Summary-of-OO: Summary-of-OO.md
