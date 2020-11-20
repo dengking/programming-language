@@ -2,6 +2,46 @@
 
 
 
+## 发展概述
+
+### C++11
+
+引入 Lambda functions and expressions ，参见:
+
+1) Wikipedia [C++11#Lambda functions and expressions](https://infogalactic.com/info/C%2B%2B11#Lambda_functions_and_expressions)
+
+2) cppreference [C++11](https://en.cppreference.com/w/cpp/11) # [variadic templates](https://en.cppreference.com/w/cpp/language/parameter_pack)
+
+
+
+### C++14
+
+新增 generic lambda特性，参见: 
+
+1) cppreference [C++14](https://en.cppreference.com/w/cpp/14) # [generic lambdas](https://en.cppreference.com/w/cpp/language/lambda)
+
+2) Wikipedia [C++14 # Generic lambdas](https://infogalactic.com/info/C%2B%2B14#Generic_lambdas)
+
+新增 lambda init-capture/Lambda capture expressions，参见:
+
+1) cppreference [C++14](https://en.cppreference.com/w/cpp/14) # [lambda init-capture](https://en.cppreference.com/w/cpp/language/lambda)
+
+2) Wikipedia [C++14 # Lambda capture expressions](https://infogalactic.com/info/C%2B%2B14#Lambda_capture_expressions)
+
+
+
+### C++17
+
+新增 lambda capture of `*this` 特性，参见: 
+
+1) cppreference [C++17](https://en.cppreference.com/w/cpp/17) # [lambda capture of `*this`](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)
+
+新增 constexpr lambda 特性，参见:
+
+1) cppreference [C++17](https://en.cppreference.com/w/cpp/17) # [constexpr lambda](https://en.cppreference.com/w/cpp/language/lambda)
+
+
+
 ## microsoft [Lambda Expressions in C++](https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=vs-2019)
 
 > NOTE: 这篇讲解地非常好
