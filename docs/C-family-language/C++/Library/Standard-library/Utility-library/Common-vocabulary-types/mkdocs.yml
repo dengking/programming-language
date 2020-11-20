@@ -1,5 +1,6 @@
 nav:
     - Vocabulary-type: index.md
+    - tuple: tuple
     - optional: optional.md
     - any: any.md
     - variant: variant.md

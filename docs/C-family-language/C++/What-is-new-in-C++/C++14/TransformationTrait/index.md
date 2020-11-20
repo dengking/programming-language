@@ -58,3 +58,30 @@ The Abseil `meta` library provides aliases for the following type traits that yi
 
 
 
+## Before C++14
+
+在C++14之前，可以自定义的方式来实现:
+
+### [nlohmann](https://github.com/nlohmann)/[json](https://github.com/nlohmann/json)/[`cpp_future.hpp`](https://github.com/nlohmann/json/blob/develop/include/nlohmann/detail/meta/cpp_future.hpp) 
+
+```C++
+#pragma once
+
+#include <cstddef> // size_t
+#include <type_traits> // conditional, enable_if, false_type, integral_constant, is_constructible, is_integral, is_same, remove_cv, remove_reference, true_type
+
+namespace nlohmann
+{
+namespace detail
+{
+// alias templates to reduce boilerplate
+template<bool B, typename T = void>
+using enable_if_t = typename std::enable_if<B, T>::type;
+
+template<typename T>
+using uncvref_t = typename std::remove_cv<typename std::remove_reference<T>::type>::type;
+}
+}
+
+```
+
