@@ -34,3 +34,9 @@ Generic programming
 
 从语言的实现来进行对比。
 
+
+
+## Wikipedia [Comparison of programming languagesComparison of programming languages](https://infogalactic.com/info/Comparison_of_programming_languages)
+
+
+

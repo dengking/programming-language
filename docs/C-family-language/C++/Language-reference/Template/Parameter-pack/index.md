@@ -1,5 +1,35 @@
 # Parameter pack
 
+本文中的FP的含义是functional programming；
+
+## 概述
+
+1) Parameter pack是linear structure
+
+2) 对Parameter pack使用FP的方式来进行操作。
+
+### 发展概述
+
+#### C++11
+
+C++11引入Variadic templates: 
+
+不足: 
+
+不能够直接支持FP apply/reduce，需要通过recursion来实现；
+
+#### C++14
+
+
+
+#### C++17
+
+特性: [fold expression(since C++17)](https://en.cppreference.com/w/cpp/language/fold)
+
+直接支持FP apply/reduce；
+
+
+
 
 
 ## cppreference [Parameter pack(since C++11)](https://en.cppreference.com/w/cpp/language/parameter_pack)
@@ -232,57 +262,272 @@ f(h(args...) + args...);// expands to
 
 #### Parenthesized initializers
 
+A pack expansion may appear inside the parentheses of a [direct initializer](https://en.cppreference.com/w/cpp/language/direct_initialization), a [function-style cast](https://en.cppreference.com/w/cpp/language/explicit_cast), and other contexts ([member initializer](https://en.cppreference.com/w/cpp/language/initializer_list), [new-expression](https://en.cppreference.com/w/cpp/language/new), etc.) in which case the rules are identical to the rules for a **function call expression** above
 
+```C++
+Class c1(&args...);             // calls Class::Class(&E1, &E2, &E3)
+Class c2 = Class(n, ++args...); // calls Class::Class(n, ++E1, ++E2, ++E3);
+::new((void *)p) U(std::forward<Args>(args)...) // std::allocator::allocate
+
+```
 
 
 
 #### Brace-enclosed initializers
 
+In a *braced-init-list* (brace-enclosed list of initializers and other *braced-init-list*s, used in [list-initialization](https://en.cppreference.com/w/cpp/language/list_initialization) and some other contexts), a **pack expansion** may appear as well:
+
+```C++
+#include <iostream>
+template<typename ... Ts>
+void func(Ts ... args)
+{
+	const int size = sizeof...(args) + 2;
+	int res[size] = { 1, args..., 2 };
+	// since initializer lists guarantee sequencing, this can be used to
+	// call a function on each element of a pack, in order:
+	int dummy[sizeof...(Ts)] = { (std::cout << args <<" ", 0)... };
+	std::cout << std::endl;
+	for (auto &&i : dummy)
+	{
+		std::cout << i << " ";
+	}
+	std::cout << std::endl;
+}
+
+int main()
+{
+	func(1, 2, 3, 4, 5, 6);
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 输出如下:
+>
+> ```C++
+> 1 2 3 4 5 6 
+> 0 0 0 0 0 0
+> ```
+>
+> 重点是理解: `int dummy[sizeof...(Ts)] = { (std::cout << args <<" ", 0)... };`
+>
+> 1) `std::cout << args <<" ", 0`是 [comma expression](https://en.cppreference.com/w/cpp/language/operator_other) ，它的返回值是 `0`
+
 
 
 #### Template argument lists
 
+Pack expansions can be used anywhere in a template argument list, provided the template has the parameters to match the expansion.
 
+```C++
+template<class A, class B, class...C> void func(A arg1, B arg2, C...arg3)
+{
+    container<A,B,C...> t1;  // expands to container<A,B,E1,E2,E3> 
+    container<C...,A,B> t2;  // expands to container<E1,E2,E3,A,B> 
+    container<A,C...,B> t3;  // expands to container<A,E1,E2,E3,B> 
+}
+```
 
 #### Function parameter list
 
+In a function parameter list, if an ellipsis appears in a parameter declaration (whether it names a function parameter pack (as in, *Args* `**...**` *args*) or not) the parameter declaration is the pattern:
 
+``` C++
+#include <iostream>
+template<typename ...Ts>
+void f(Ts...)
+{
+}
+
+template<typename ...Ts, int ... N>
+void g(Ts (&...arr)[N])
+{
+}
+
+int main()
+{
+	f('a', 1);  // Ts... expands to void f(char, int)
+	f(0.1);     // Ts... expands to void f(double)
+	int n[1];
+	g<const char, int>("a", n); // Ts (&...arr)[N] expands to
+								// const char (&)[2], int(&)[1]
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
+Note: In the pattern `Ts (&...arr)[N]`, the ellipsis is the innermost element, not the last element as in all other pack expansions.
+
+Note: `Ts (&...)[N]` is not allowed because the C++11 grammar requires the parenthesized ellipsis to have a name: [CWG #1488](http://www.open-std.org/jtc1/sc22/wg21/docs/cwg_active.html#1488).
 
 
 
 #### Template parameter list
 
+Pack expansion may appear in a **template parameter list**:
+
+```C++
+template<typename... T> struct value_holder
+{
+    template<T... Values> // expands to a non-type template parameter 
+    struct apply { };     // list, such as <int, char, int(&)[5]>
+};
+```
+
 #### Base specifiers and member initializer lists
 
+A **pack expansion** may designate the list of base classes in a [class declaration](https://en.cppreference.com/w/cpp/language/class). Typically, this also means that the constructor needs to use a **pack expansion** in the [member initializer list](https://en.cppreference.com/w/cpp/language/initializer_list) to call the constructors of these bases:
 
+```C++
+#include <iostream>
+template<class ... Mixins>
+class X: public Mixins...
+{
+public:
+	X(const Mixins &... mixins) :
+					Mixins(mixins)...
+	{
+		std::cout << __FILE__ << " " << __LINE__ << " " << __PRETTY_FUNCTION__  << std::endl;
+	}
+};
+class T1
+{
+public:
+	T1()
+	{
+		std::cout << __FILE__ << " " << __LINE__ << " " << __PRETTY_FUNCTION__  << std::endl;
+	}
+};
 
-#### Lambda captures
+class T2
+{
+public:
+	T2()
+	{
+		std::cout << __FILE__ << " " << __LINE__ << " " << __PRETTY_FUNCTION__  << std::endl;
+	}
+};
+int main()
+{
+	T1 t1;
+	T2 t2;
+	X<T1, T2> x(t1, t2);
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 输出如下: 
+>
+> ```c++
+> test.cpp 17 T1::T1()
+> test.cpp 26 T2::T2()
+> test.cpp 9 X<Mixins>::X(const Mixins& ...) [with Mixins = {T1, T2}]
+> 
+> ```
+>
+> 
+
+#### Lambda captures (since C++14)
+
+A parameter pack may appear in the capture clause of a [lambda](https://en.cppreference.com/w/cpp/language/lambda) expression
+
+```C++
+#include <iostream>
+
+void print_all()
+{
+	// base case
+	std::cout << std::endl;
+}
+
+template<class T, class ... Ts>
+void print_all(T const &first, Ts const &... rest)
+{
+	std::cout << first << " ";
+
+	print_all(rest...);
+}
+
+template<class ...Args>
+void g(Args ...args)
+{
+	print_all(args...);
+}
+template<class ...Args>
+void f(Args ... args)
+{
+//	auto lm = [&, args ...] {	return g(args...);};
+//	lm();
+	print_all(args...);
+}
+int main()
+{
+	f("hello", "world");
+}
+// g++ --std=c++11 test.cpp
+
+```
 
 
 
 #### The sizeof... operator
 
+The [sizeof...](https://en.cppreference.com/w/cpp/language/sizeof...) operator is classified as a pack expansion as well
+
+```C++
+#include <iostream>
+
+template<class ... Types>
+struct count
+{
+	static const std::size_t value = sizeof...(Types);
+};
+
+int main()
+{
+	std::cout << count<int, double>::value << std::endl;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
 #### Alignment specifier
 
-
+Pack expansions are allowed in both the lists of types and the lists of expressions used by the keyword [alignas](https://en.cppreference.com/w/cpp/language/alignas)。
 
 #### Attribute list
 
-
+Pack expansions are allowed in the lists of [attributes](https://en.cppreference.com/w/cpp/language/attributes), as in `[[attributes...]]`. For example: `void [[attributes...]] function()`。
 
 #### Fold-expressions (since C++17)
 
-
+In [fold-expressions](https://en.cppreference.com/w/cpp/language/fold), the pattern is the entire subexpression that does not contain an unexpanded parameter pack.
 
 #### Using-declarations (since C++17)
+
+In [using declaration](https://en.cppreference.com/w/cpp/language/using_declaration), ellipsis may appear in the list of declarators, this is useful when deriving from a parameter pack:
+
+```C++
+template<typename ... bases>
+struct X: bases...
+{
+	using bases::g...;
+};
+X<B, D> x; // OK: B::g and D::g introduced
+
+```
 
 
 
 ## cppreference `sizeof...` operator
 
 Queries the number of elements in a [parameter pack](parameter_pack.html).
-
-
 
 ### Example
 
@@ -305,6 +550,7 @@ int main()
 		std::cout << i << ' ';
 }
 // g++ --std=c++11 test.cpp
+
 ```
 
 
@@ -400,3 +646,12 @@ int main()
 
 
 
+
+
+## Operations
+
+### Iteration
+
+riptutorial [Iterating over a parameter pack](https://riptutorial.com/cplusplus/example/3208/iterating-over-a-parameter-pack)
+
+Often, we need to perform an operation over every element in a **variadic template parameter pack**. There are many ways to do this, and the solutions get easier to read and write with C++17. Suppose we simply want to print every element in a pack. The simplest solution is to recurse:
