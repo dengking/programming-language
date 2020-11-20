@@ -657,4 +657,4 @@ int main()
 
 riptutorial [Iterating over a parameter pack](https://riptutorial.com/cplusplus/example/3208/iterating-over-a-parameter-pack)
 
-Often, we need to perform an operation over every element in a **variadic template parameter pack**. There are many ways to do this, and the solutions get easier to read and write with C++17. Suppose we simply want to print every element in a pack. The simplest solution is to recurse:
+Often, we need to perform an operation over every element in a **variadic template parameter pack**. There are many ways to do this, and the solutions get easier to read and write with `C++17`. Suppose we simply want to print every element in a pack. The simplest solution is to recurse:
