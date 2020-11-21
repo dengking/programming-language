@@ -66,7 +66,7 @@ preprocessing instruction
 
 ## cppreference [Replacing text macros](https://en.cppreference.com/w/cpp/preprocessor/replace)
 
-
+### `#` and `##` operators
 
 
 
@@ -109,16 +109,4 @@ expands to the time of translation, a character string literal of the form "hh:m
 #### `__STDCPP_DEFAULT_NEW_ALIGNMENT__`(C++17)
 
 expands to an [std::size_t](https://en.cppreference.com/w/cpp/types/size_t) literal whose value is the alignment guaranteed by a call to alignment-unaware [operator new](https://en.cppreference.com/w/cpp/memory/new/operator_new) (larger alignments will be passed to alignment-aware overload, such as [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new)([std::size_t](http://en.cppreference.com/w/cpp/types/size_t), [std::align_val_t](http://en.cppreference.com/w/cpp/memory/new/align_val_t)) (macro constant)
-
-
-
-
-
-
-
-
-
-
-
-
 

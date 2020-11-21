@@ -14,7 +14,7 @@ C++的设计目标之一是要兼容C，C++继承了非常C的大部分内容，
 
 本文讨论的主题是: 如何在这两门语言相互使用，这大概就是本文的标题Language linkage，跨语言进行link的含义。
 
-### Use C in C++
+## Use C in C++
 
 本节讨论在C++中使用C的情况，前面我们已经介绍了: 大多数情况下C++是可以兼容C的，但是对于一些特殊情况，则需要进行特殊处理，这是本节重点关注的内容。
 
@@ -42,19 +42,29 @@ extern "C" {
 
 参见: 
 
-cnblogs [extern “C”的作用详解](https://www.cnblogs.com/xiangtingshen/p/10980055.html) 这篇文章介绍地还可以。
+1) cnblogs [extern “C”的作用详解](https://www.cnblogs.com/xiangtingshen/p/10980055.html) 
 
-cnblogs [extern "C"的用法解析](https://www.cnblogs.com/rollenholt/archive/2012/03/20/2409046.html) 这篇更好。
+这篇文章介绍地还可以。
 
-geeksforgeeks [Name Mangling and extern “C” in C++](https://www.geeksforgeeks.org/extern-c-in-c/) 结合了具体的例子，比较好。
+2) cnblogs [extern "C"的用法解析](https://www.cnblogs.com/rollenholt/archive/2012/03/20/2409046.html) 
 
+这篇更好。
 
+3) geeksforgeeks [Name Mangling and extern “C” in C++](https://www.geeksforgeeks.org/extern-c-in-c/) 
 
+结合了具体的例子，比较好。
 
+4) stackoverflow [Combining C++ and C - how does #ifdef __cplusplus work?](https://stackoverflow.com/questions/3789340/combining-c-and-c-how-does-ifdef-cplusplus-work)
 
-### Use C++ in C
+#### `__cplusplus`
 
-反过来，在C中，可以使用C++吗？这个问题应该是：有些是可以的（比如function），但是有些无法实现的（比如OOP）。由于C++是C的超集，因此当混合使用两者的时候，需要使用g++来进行编译；
+参见`C-and-C++\From-source-code-to-exec\Preprocess`章节。
+
+## Use C++ in C
+
+反过来，在C中，可以使用C++吗？这个问题应该是：有些是可以的（比如function），但是有些无法实现的（比如OOP）。由于C++是C的超集，因此当混合使用两者的时候，需要使用`g++`/`gcc --std=c++**`来进行编译；
+
+> NOTE: 使用`g++`/`gcc --std=c++**`来进行编译是我的经验之谈，我参与的项目是这样做的。这样做的原因是: `g++`/`gcc --std=c++**`告诉compiler按照C++来进行编译，C++是C的超集。
 
 ### Use C++ function in C
 
@@ -80,9 +90,9 @@ geeksforgeeks [Name Mangling and extern “C” in C++](https://www.geeksforgeek
 
 本节介绍一些使用了`extern "C"`的例子:
 
-[`sqlite3.h`](https://github.com/LuaDist/libsqlite3/blob/master/sqlite3.h) 
+1) [`sqlite3.h`](https://github.com/LuaDist/libsqlite3/blob/master/sqlite3.h) 
 
-wikipedia [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
+2) wikipedia [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
 
 > NOTE: 其中也列举了很多案例
 
