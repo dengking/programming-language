@@ -90,3 +90,61 @@ C++17 fixes this flaw, and the **structured bindings** allow us to write code as
 auto[x, y] = calculateSinCos_Tuple(param);
 ```
 
+
+
+## geeksforgeeks [Structured binding in C++](https://www.geeksforgeeks.org/structured-binding-c/)
+
+
+
+
+
+```C++
+#include <bits/stdc++.h> 
+#include <map> 
+using namespace std; 
+  
+int main() 
+{ 
+    // Creating a map with key and value  
+    // fields as String 
+    map<string, string> sites; 
+      
+    sites.insert({ "GeeksforGeeks", "Coding Resources" }); 
+    sites.insert({ "StackOverflow", "Q-A type" }); 
+    sites.insert({ "Wikipedia", "Resources + References" }); 
+  
+    for (auto & [ key, value ] : sites)  
+    { 
+       cout << key.c_str() << " " << value.c_str() << endl; 
+    } 
+      
+    return 0; 
+} 
+```
+
+
+
+
+
+## cppreference [Structured binding declaration (since C++17)](https://en.cppreference.com/w/cpp/language/structured_binding)
+
+## 思考
+
+1) Python  `a, b = b, a` swaps two variables，那C++中呢？
+
+2) 下面程序在C++中的运行结果如何呢？
+
+```python
+
+x = [0, 1]
+i = 0
+i, x[i] = 1, 2         # i is updated, then x[i] is updated
+print(x)
+```
+
+Python中的运行结果如下:
+
+```
+[0, 2]
+```
+
