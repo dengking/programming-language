@@ -33,7 +33,7 @@ copy(InputIterator first, InputIterator last, OutputIterator result)
 
 ## Anatomy of a Concept
 
-> NOTE: 解剖
+> NOTE: "anatomy"的含义是"解剖"。
 
 A **concept** is a set of requirements consisting of valid expressions, associated types, invariants, and complexity guarantees. A type that satisfies the requirements is said to **model** the concept. A concept can extend the requirements of another concept, which is called **refinement**.
 
@@ -48,6 +48,10 @@ A **concept** is a set of requirements consisting of valid expressions, associat
 3) **Invariants** are run-time characteristics of the objects that must always be true, that is, the functions involving the objects must preserve these characteristics. The invariants often take the form of pre-conditions and post-conditions.
 
 4) **Complexity Guarantees** are maximum limits on how long the execution of one of the valid expressions will take, or how much of various resources its computation will use.
+
+> NOTE: concept是GP的重要组成部分，C++20添加了concept特性以支持generic programming concept，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming\Concepts`章节；boost很早就采用了concept technique，它的The Boost Concept Check Library (BCCL) 支持concept，参见`C++\Library\Boost\Boost-Concept-Check-Library`章节。
+
+
 
 ## Traits
 

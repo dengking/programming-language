@@ -3,6 +3,8 @@ nav:
     # boost社区，其中说明了boost库编写的一些内容
     - Boost-community: Boost-community
     - Boost-Book: Boost-Book
+    # 编程技巧相关
+    - Boost-Concept-Check-Library: Boost-Concept-Check-Library
     # data structure    
     - Boost-Graph-Library: Boost-Graph-Library
     - Boost-Property-Tree: Boost-Property-Tree
@@ -11,7 +13,7 @@ nav:
     # 算法相关
     - Boost-Range: Boost-Range
     - Boost-Algorithm-Library: Boost-Algorithm-Library
-    - Boost-Concept-Check-Library: Boost-Concept-Check-Library
+    
     # 多态相关    
     - Boost-Poly-Collection: Boost-Poly-Collection
     # meta programming    
