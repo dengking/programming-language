@@ -37,7 +37,7 @@ Python的指令是非常抽象的，Python中由**interpreter**来选择**magic 
 
 
 
-## static VS dynamic
+## Static VS dynamic
 
 C++的核心特性是: **static**; Python的核心特性是: **dynamic**; 这是它们的主要差别之一。
 
@@ -220,7 +220,7 @@ python lack declaration，但是python中也提供了类似的语法，python这
 
 c语言没有；
 
-## python and c++
+## Python and c++
 
 ```
 pMeanRate = tanhx(pMeanRate, 2);
@@ -239,13 +239,19 @@ pMeanRate = tanhx(pMeanRate, 2);
 
 python通过magic function `__next__`、`__iter__`来支持iterator，c++显式定义了iterator类。
 
-### C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python `for`
+### Implicit iterator/foreach
 
-C++11中引入的range-for非常类似于python中的`for`。
+关于implicit iterator/foreach，参见工程discrete的`Relation-structure-computation\Computation\Repetition\Iteration`章节。这两种语言都支持这种模式的iteration。
+
+Python的iteration默认是implicit iterator/foreach。
+
+C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) 实现implicit iterator/foreach。
 
 
 
-### reverse iteration
+
+
+### Reverse iteration
 
 c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
 
@@ -253,7 +259,7 @@ c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
 
 
 
-## function and `->`
+## Function and `->`
 
 python的Function definitions[¶](https://docs.python.org/3/reference/compound_stmts.html#function-definitions)和c++的[Function declaration](https://en.cppreference.com/w/cpp/language/function)中，都引入了`->`符合，两种语言中`->`的一个共性是：`->`对函数的返回类型进行说明，c++中将此称为“ Trailing return type”，python中将此称为 	““return” annotation”。
 
@@ -261,7 +267,7 @@ python的Function definitions[¶](https://docs.python.org/3/reference/compound_s
 
 
 
-## specifier
+## Specifier
 
 python中基本上没有什么specifier，但是在`c++`和`c`中存在着大量的specifier，为什么呢？
 
@@ -278,7 +284,7 @@ python中基本上没有什么specifier，但是在`c++`和`c`中存在着大量
 
 
 
-## name
+## Name
 
 在cppreference [Declarations](https://en.cppreference.com/w/cpp/language/declarations)中关于“name”的描述
 
