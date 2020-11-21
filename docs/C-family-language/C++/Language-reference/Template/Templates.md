@@ -47,9 +47,7 @@ Templates are parameterized by one or more [template parameters](https://en.cppr
 
 ## Template and programming paradigm
 
-在`C++\Guide\Paradigm`中已经进行了总结。
-
-
+参见`./Programming-paradigm`章节。
 
 ## Template and polymorphism
 
