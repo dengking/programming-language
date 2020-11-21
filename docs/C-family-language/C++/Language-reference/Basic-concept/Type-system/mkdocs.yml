@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Type-system: Type-system
     - Type-operation: Type-operation
+    - Type-inference: Type-inference

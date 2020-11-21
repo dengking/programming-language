@@ -18,7 +18,7 @@ The main uses of concepts are:
 
 
 
-3) Selecting function template overloads and class template specializations based on type properties
+3) Selecting **function template overloads** and **class template specializations** based on type properties
 
 > NOTE: static polymorphism，能够替代SFINAE
 

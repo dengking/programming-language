@@ -28,7 +28,13 @@ There are three kinds of templates: *function templates*, *class templates* and,
 
 ## cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)
 
-Templates are parameterized by one or more [template parameters](https://en.cppreference.com/w/cpp/language/template_parameters), of three kinds: type template parameters, non-type template parameters, and template template parameters.
+Templates are parameterized by one or more [template parameters](https://en.cppreference.com/w/cpp/language/template_parameters), of three kinds: 
+
+1) type template parameters
+
+2) non-type template parameters
+
+3) template template parameters.
 
 > NOTE: 虽然上述列举了三种template parameter，但是，可以简单的认为c++模板主要允许programmer参数化：
 >
@@ -36,6 +42,8 @@ Templates are parameterized by one or more [template parameters](https://en.cppr
 > - value，non-type template parameter
 >
 > 至于template template parameter，它其实可以归入上述两者之一
+
+
 
 ## Template and programming paradigm
 

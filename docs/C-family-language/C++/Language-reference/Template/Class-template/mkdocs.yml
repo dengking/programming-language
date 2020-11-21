@@ -3,3 +3,4 @@ nav:
     - Member-templates: Member-templates.md
     - Template-and-virtual: Template-and-virtual.md
     - Template-and-inheritance: Template-and-inheritance.md
+    - Class-template-specialization: Class-template-specialization

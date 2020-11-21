@@ -1,18 +1,13 @@
 nav:
     - Introduction: index.md
-######### 首先介绍template metaprogramming的概念，c++ template就是属于这个流派##########
-    - Template-metaprogramming: Template-metaprogramming.md
-######### 然后介绍c++ template##########    
+    ######### 然后介绍c++ template##########    
     - Templates: Templates.md
-######### 在Template-metaprogramming.md中已经提及，可以将template看做是一种functional programming，那么它就有它的
-# parameter和argument，所以这个认知对于理解template parameter和template argument是非常重要的    
-    - Template-parameters-and-template-arguments: Template-parameters-and-template-arguments
-    - Specialization: Specialization
+    ######### 在Template-metaprogramming.md中已经提及，可以将template看做是一种functional programming，那么它就有它的
+    # parameter和argument，所以这个认知对于理解template parameter和template argument是非常重要的    
+    - Template-parameters-and-arguments: Template-parameters-and-arguments
     - Class-template: Class-template
     - Function-template: Function-template
+    - Variable-template: Variable-template
     - Parameter-pack: Parameter-pack
-    # concept是c++20引入的一个非常重要的特性    
-    - Concepts: Concepts
-    # 描述模板的实现
-    - Implementation: Implementation
+    - Programming-paradigm: Programming-paradigm
     

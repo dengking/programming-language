@@ -2,7 +2,7 @@
 
 编译器如何编译template？这个问题其实是在探讨编译器是如何实现模板的，本章对这个问题进行展开，描述C++ template的实现。理解template的实现，对于掌握、运用template至关重要。
 
-遺憾的是，在cppreference中，并沒有对此的专门描述，我們只能夠搜集一些素材自己進行总结。这个问题也可以通过如下的方式进行Google：
+遗憾的是，在cppreference中，并沒有对此的专门描述，我们只能够搜集一些素材自己進行总结。这个问题也可以通过如下的方式进行Google：
 
 - Google c++ template mechanism
 - Google c++ compiler template
@@ -11,8 +11,9 @@
 
 Template is a kind of static polymorphism，对于这个结论，我们需要从下面两个方面进行深入的分析：
 
-1. 从“polymorphism”：既然template是一种polymorphism，那么它的实现思路可以使用在`C++\Guide\Implementation-of-polymorphism`中描述的思想
-2. 从“static”：既然是static，那么它就发生于compile-time，那么“The definition of a template must be visible at the point of implicit instantiation, which is why template libraries typically provide all template definitions in the headers”（截取自cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)）
+1) 从“polymorphism”：既然template是一种polymorphism，那么它的实现思路可以使用在`C++\Guide\Implementation-of-polymorphism`中描述的思想
+
+2) 从“static”：既然是static，那么它就发生于compile-time，那么“The definition of a template must be visible at the point of implicit instantiation, which is why template libraries typically provide all template definitions in the headers”（截取自cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)）
 
 ## Specialization and instantiation of template
 
