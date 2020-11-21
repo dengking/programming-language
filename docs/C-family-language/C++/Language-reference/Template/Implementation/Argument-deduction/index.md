@@ -1,6 +1,25 @@
 # Template argument deduction
 
+## 发展概述
 
+### C++14
+
+C++14 return type deduction for function 特性，参见: 
+
+- [C++14](https://en.cppreference.com/w/cpp/14) # [return type deduction for functions](https://en.cppreference.com/w/cpp/language/function#Return_type_deduction_.28since_C.2B.2B14.29)
+
+### C++17
+
+C++17 新增 class template argument deduction 特性，参见: 
+
+- cppreference [C++17](https://en.cppreference.com/w/cpp/17) # [class template argument deduction](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction)
+
+- Wikipedia C++17
+
+C++17 新增 "Use of auto as the type for a non-type template parameter"，参见
+
+- cppreference [C++17](https://en.cppreference.com/w/cpp/17) # non-type [template parameters](https://en.cppreference.com/w/cpp/language/template_parameters) declared with `auto`
+- Wikipedia C++17
 
 ## cppreference [Template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction)
 

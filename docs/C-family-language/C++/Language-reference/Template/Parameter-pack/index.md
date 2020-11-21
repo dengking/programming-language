@@ -562,7 +562,7 @@ int main()
 
 > NOTE: 这是C++17中增强parameter pack的新特性。
 >
-> 它使用的是functional programming中的reduce: 对一个sequence执行一个函数；需要注意的是，这是在compile time执行的，显然它是C++ 对 compile time computation的增强。
+> 它使用的是functional programming中的reduce: 对一个sequence执行一个函数；需要注意的是，这是在compile time执行的，即它是compile time function execution，显然它是C++ 对 compile time computation的增强，参见`C-and-C++\Compile-time-and-run-time\Compile-time-function-execution`章节。
 
 Reduces ([folds](https://en.wikipedia.org/wiki/Fold_(higher-order_function))) a [parameter pack](parameter_pack.html) over a binary operator.
 
@@ -655,6 +655,52 @@ int main()
 
 ### Iteration
 
-riptutorial [Iterating over a parameter pack](https://riptutorial.com/cplusplus/example/3208/iterating-over-a-parameter-pack)
+**riptutorial [Iterating over a parameter pack](https://riptutorial.com/cplusplus/example/3208/iterating-over-a-parameter-pack)**
 
 Often, we need to perform an operation over every element in a **variadic template parameter pack**. There are many ways to do this, and the solutions get easier to read and write with `C++17`. Suppose we simply want to print every element in a pack. The simplest solution is to recurse:
+
+```C++
+#include <iostream>
+
+void print_all()
+{
+	// base case
+	std::cout << std::endl;
+}
+
+template<class T, class ... Ts>
+void print_all(T const &first, Ts const &... rest)
+{
+	std::cout << first << " ";
+
+	print_all(rest...);
+}
+
+template<class ...Args>
+void g(Args ...args)
+{
+	print_all(args...);
+}
+template<class ...Args>
+void f(Args ... args)
+{
+//	auto lm = [&, args ...] {	return g(args...);};
+//	lm();
+	print_all(args...);
+}
+int main()
+{
+	f("hello", "world");
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 输出如下:
+>
+> ```C++
+> hello world
+> ```
+
+
+

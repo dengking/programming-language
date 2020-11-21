@@ -1,12 +1,30 @@
 # wikipedia [Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))
 > 维基百科的[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))对concept的介绍是比较简洁清晰的，可以作为prime来进行阅读。
+>
+> C++ concept是对GP concept的一种实现，同时结合C++的实现进行了很多的扩展。
 
 
 ## [Main uses](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Main_uses)
 
 > NOTE: 原文的main use章节的总结是非常好的
 
+The main uses of concepts are:
 
+1) Introducing type-checking to template programming
+
+> NOTE: type requirement是GP的核心内容
+
+2) Simplified compiler diagnostics for failed template instantiations
+
+
+
+3) Selecting function template overloads and class template specializations based on type properties
+
+> NOTE: static polymorphism，能够替代SFINAE
+
+4) Constraining automatic type deduction
+
+> NOTE: 这个用法还不太了解，需要进行扩展
 
 ## [Compiler diagnostics](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Compiler_diagnostics)
 

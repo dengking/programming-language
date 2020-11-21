@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - Dynamic-Dispatch: Dynamic-Dispatch.md
-    - Covariance-and-contravariance: Covariance-and-contravariance.md
+    - Behavioral-subtyping: Behavioral-subtyping.md

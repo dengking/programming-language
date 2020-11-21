@@ -11,6 +11,8 @@
 在c和`c++`中都有[Storage duration和Linkage](https://en.cppreference.com/w/c/language/storage_duration)的概念，在对这两个概念的理解过程中，我发现这两个概念是和program的编译、运行有着非常密切的关联；后来想想，这其实是必然的，c++和c是[Compiled language](https://en.wikipedia.org/wiki/Compiled_language)，如果我们站在c和c++语言的设计者的角度来思考，他们在设计这两门语言的时候，肯定也需要考虑程序在编译过程、链接过程、运行过程中可能涉及到的一些细节，所以这门语言需要提供各种各样的**specifier**来供programmer对这些过程、性质进行控制（或者说对这些过程进行描述）；
 
 > NOTE: 一个典型的例子是`static`，programmer可以用它来对storage duration、linkage进行描述，关于此，参见cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)。
+>
+> 我们跟应该从一个语言的设计者的角度来进行思考：语言的设计者为什么会提供这些关键字呢？显然他们提供这些关键字来允许用户即程序员来控制object的storage duration属性和linkage属性，storage duration属性和linkage属性才是语言的设计者在进行思考的时候，觉得这些关键字需要开放给程序员由它们来进行控制。有了这样的认知，那么就更能深刻理解每个关键字的含义了。
 
 从根本上来说，我们使用programming language来描述计算（在文章[Language](https://dengking.github.io/Post/Language/Language/)中有对此的分析），越是底层的语言，需要考虑的计算细节越多，所以语言的设计者需要提供specifier来对这些内容进行描述，进行控制。
 

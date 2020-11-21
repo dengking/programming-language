@@ -26,15 +26,15 @@ TMP metaprogram可以以如下方式来实现compile time function execution:
 
 
 
-## 演进
+## 发展概述
 
 C++的一个发展发现就是充分发挥compile-time computation。
 
-| feature        | 引入版本 | 章节                                                         | 说明 |
-| -------------- | -------- | ------------------------------------------------------------ | ---- |
-| `constexpr`    | C++11    | 参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier.md` |      |
-| `constexpr if` | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` |      |
-|                |          |                                                              |      |
+| feature         | 引入版本 | 章节                                                         | 说明  |
+| --------------- | -------- | ------------------------------------------------------------ | ----- |
+| `constexpr`     | C++11    | 参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier.md` | 非TMP |
+| `constexpr if`  | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` | 非TMP |
+| fold expression | C++17    |                                                              | TMP   |
 
 
 
@@ -50,11 +50,16 @@ Compile time function execution给予了C++非常强大的灵活性，下面对�
 
 ## 为什么需要compile time function execution？
 
-Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性、高性能
+Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性、高性能。
+
+> NOTE: 这说明C++的metaprogramming不仅仅是template metaprogramming，还包括`constexpr`。
 
 
 
 ## Application
 
+1) 对dispatch进行控制:
 
+- SFINAE
+- constexpr if
 
