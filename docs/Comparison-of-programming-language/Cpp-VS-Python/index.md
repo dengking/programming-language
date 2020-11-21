@@ -91,9 +91,9 @@ declaration和definition是两个非常接近且容易混淆的概念，在此�
 
 
 
-## resource management
+## Resource management
 
-此处的resource为：network connection，file
+此处的resource为：network connection、file、...。
 
 `c++`中使用RAII，python中使用`with`，而`c`中，则没有特别的机制，所有的一切都需要programmer显示地调用与执行，c中经常使用`goto`。
 
@@ -115,7 +115,7 @@ declaration和definition是两个非常接近且容易混淆的概念，在此�
 
 python、java的resource management所采用的是[Dispose pattern](https://en.wikipedia.org/wiki/Dispose_pattern)。
 
-## magic function的使用
+## Magic function的使用
 
 c中压根就没有magic function，c compiler在编译source code的时候，无需为其生成或者选择指定的函数；
 
@@ -196,7 +196,7 @@ programming language需要提供interface来供用户对type进行operate，下�
 
 
 
-## scope
+## Scope
 
 这三种programming language采用的都是static scope，都是基于block scope
 
@@ -204,7 +204,7 @@ programming language需要提供interface来供用户对type进行operate，下�
 
 
 
-## python display vs `c`, `c++` Initialization
+## Python display vs `c`, `c++` Initialization
 
 [`c` Initialization](https://en.cppreference.com/w/c/language/initialization) , [`c++` Initialization](https://en.cppreference.com/w/cpp/language/initialization) 实现对variable的initialize；
 
@@ -212,7 +212,7 @@ python lack declaration，但是python中也提供了类似的语法，python这
 
 
 
-## exception
+## Exception
 
 `c++`和python都提供了exception机制；由于python是由python interpreter解释执行，而`c++`程序是由OS直接运行，因此两者的exception和OS之间的关联是不同的；python中的exception会导致python interpreter的执行路径改变，基本上不会涉及到OS；而`c++`中的exception，则会转换为OS的signal，最终可能导致程序终止运行；
 
@@ -233,19 +233,17 @@ pMeanRate = tanhx(pMeanRate, 2);
 
 初次接触c++ 17引入的structured binding特性，我第一想法就是它非常类似于python的tuple assignment。
 
-## C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python `for`
-
-C++11中引入的range-for非常类似于python中的`for`。
-
-
-
-
-
 
 
 ## C++ iteration vs python iteration
 
 python通过magic function `__next__`、`__iter__`来支持iterator，c++显式定义了iterator类。
+
+### C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) VS python `for`
+
+C++11中引入的range-for非常类似于python中的`for`。
+
+
 
 ### reverse iteration
 

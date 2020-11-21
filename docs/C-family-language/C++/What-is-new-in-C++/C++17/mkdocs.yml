@@ -1,2 +1,4 @@
 nav:
+    - Introduction: index.md
     - Temporary-materialization: Temporary-materialization
+    - Structured-binding: Structured-binding
