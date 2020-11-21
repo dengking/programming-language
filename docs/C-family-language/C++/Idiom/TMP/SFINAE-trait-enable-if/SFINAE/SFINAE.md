@@ -25,7 +25,7 @@ SFINAE 超过type的限制，允许programmer灵活地进行dispatch，比如：
 
 
 
-## 维基百科[Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
+## wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
 
 
 
