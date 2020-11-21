@@ -50,7 +50,7 @@ Functions are C++ entities that associate a sequence of [statements](https://en.
 
 ### Termination
 
-> NOTE: 函数终止
+> NOTE: 函数终止，参见`./Function-termination`章节。
 
 A function can terminate by [returning](https://en.cppreference.com/w/cpp/language/return) or by [throwing](https://en.cppreference.com/w/cpp/language/throw) an [exception](https://en.cppreference.com/w/cpp/language/exceptions).
 
@@ -113,7 +113,7 @@ There are no cv-qualified function types (not to be confused with the types of [
 
 ### [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 
-> NOTE: 参见`C++\Language-reference\Functions\Function-as-first-class-citizen\Function-objects`章节。
+> NOTE: 参见`C++\Language-reference\Functions\First-class-function\Function-objects`章节。
 
 
 

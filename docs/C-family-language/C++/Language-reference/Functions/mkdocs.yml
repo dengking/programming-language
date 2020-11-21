@@ -8,7 +8,8 @@ nav:
     - Function-overload: Function-overload
     - Lambda-expression: Lambda-expression
     # 变参函数
-    - Variadic-function: Variadic-function
+    - Variadic-function: Variadic-function.md
     - First-class-function: First-class-function
     - TMP: TMP
+    - Function-termination: Function-termination
     
