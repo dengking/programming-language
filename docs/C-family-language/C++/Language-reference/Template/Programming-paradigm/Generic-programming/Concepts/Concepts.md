@@ -67,7 +67,3 @@ The intent of concepts is to model semantic categories (Number, Range, RegularFu
 ### [Partial ordering of constraints](https://en.cppreference.com/w/cpp/language/constraints#Partial_ordering_of_constraints)
 
 
-
-## Summary
-
-concept是explicit的，它是对named requirement的formal definition，它能够让我们的code更加地expressive、readable。

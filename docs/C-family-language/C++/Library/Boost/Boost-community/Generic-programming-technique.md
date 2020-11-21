@@ -1,6 +1,6 @@
-# [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)
+# boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)
 
-> NOTE: 这篇文章非常值得一读，原文它总结了boost library的实现中所使用到的generic programming technique。
+> NOTE: 这篇文章非常值得一读，原文它总结了boost library的实现中所使用到的generic programming technique，关于C++ generic programming，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming`章节。
 
 ## Introduction
 
@@ -33,23 +33,25 @@ copy(InputIterator first, InputIterator last, OutputIterator result)
 
 ## Anatomy of a Concept
 
+> NOTE: 解剖
+
 A **concept** is a set of requirements consisting of valid expressions, associated types, invariants, and complexity guarantees. A type that satisfies the requirements is said to **model** the concept. A concept can extend the requirements of another concept, which is called **refinement**.
 
 > NOTE: **refinement**的意思是“细化”，这个词语一定要注意，在boost library的doc中它出现的频率非常高。
 
-- **Valid Expressions** are C++ expressions which must compile successfully for the objects involved in the expression to be considered *models* of the concept.
+1) **Valid Expressions** are C++ expressions which must compile successfully for the objects involved in the expression to be considered *models* of the concept.
 
-  > NOTE: **Valid Expressions**的含义非常重要
+> NOTE: **Valid Expressions**的含义非常重要
 
-- **Associated Types** are types that are related to the modeling type in that they participate in one or more of the **valid expressions**. Typically associated types can be accessed either through typedefs nested within a class definition for the modeling type, or they are accessed through a [traits class](https://www.boost.org/community/generic_programming.html#traits).
+2) **Associated Types** are types that are related to the modeling type in that they participate in one or more of the **valid expressions**. Typically associated types can be accessed either through typedefs nested within a class definition for the modeling type, or they are accessed through a [traits class](https://www.boost.org/community/generic_programming.html#traits).
 
-- **Invariants** are run-time characteristics of the objects that must always be true, that is, the functions involving the objects must preserve these characteristics. The invariants often take the form of pre-conditions and post-conditions.
+3) **Invariants** are run-time characteristics of the objects that must always be true, that is, the functions involving the objects must preserve these characteristics. The invariants often take the form of pre-conditions and post-conditions.
 
-- **Complexity Guarantees** are maximum limits on how long the execution of one of the valid expressions will take, or how much of various resources its computation will use.
+4) **Complexity Guarantees** are maximum limits on how long the execution of one of the valid expressions will take, or how much of various resources its computation will use.
 
 ## Traits
 
-A traits class provides a way of associating information with a compile-time entity (a type, integral constant, or address). 
+A traits class provides a way of associating information with a **compile-time entity** (a type, integral constant, or address). 
 
 > NOTE: 此处使用entity的概念来定义trait，更加地准确。
 
@@ -128,12 +130,12 @@ An *adaptor* is a class template which builds on another type or types to provid
 
 ## Policy Classes
 
-A policy class is a template parameter used to transmit **behavior**. An example from the standard library is `std::allocator`, which supplies（提供） memory management behaviors to standard [containers](http://en.cppreference.com/w/cpp/container).
+A policy class is a template parameter used to transmit(传输) **behavior**. An example from the standard library is `std::allocator`, which supplies（提供） memory management behaviors to standard [containers](http://en.cppreference.com/w/cpp/container).
 
 Policy classes have been explored in detail by [Andrei Alexandrescu](http://www.moderncppdesign.com/) in [this chapter](http://www.informit.com/articles/article.aspx?p=167842) of his book, *Modern C++ Design*. He writes:
 
-> In brief, policy-based class design fosters assembling a class with complex behavior out of many little classes (called policies), each of which takes care of only one behavioral or structural aspect. As the name suggests, a policy establishes an interface pertaining to a specific issue. You can implement policies in various ways as long as you respect the policy interface.
+> In brief, policy-based class design fosters(促进) assembling a class with complex behavior out of many little classes (called policies), each of which takes care of only one behavioral or structural aspect. As the name suggests, a policy establishes an interface pertaining(关于) to a specific issue. You can implement policies in various ways as long as you respect the **policy interface**.
 >
 > Because you can mix and match policies, you can achieve a combinatorial set of behaviors by using a small core of elementary components.
 
-Andrei's description of **policy classes** suggests that their power is derived from granularity（粒度） and orthogonality（正交）. Less-granular policy interfaces have been shown to work well in practice, though. [This paper](http://svn.boost.org/svn/boost/tags/release/Boost_1_30_2/boost/libs/utility/iterator_adaptors.pdf) describes an old version of [`iterator_adaptor`](https://www.boost.org/doc/libs/release/libs/iterator/doc/iterator_adaptor.html) that used non-orthogonal policies. There is also precedent in the standard library: [`std::char_traits`](http://en.cppreference.com/w/cpp/string/char_traits), despite its name, acts as a policies class that determines the behaviors of [std::basic_string](http://en.cppreference.com/w/cpp/string/basic_string).
+Andrei's description of **policy classes** suggests that their power is derived from granularity（粒度） and orthogonality（正交）. **Less-granular policy interfaces** have been shown to work well in practice, though. [This paper](http://svn.boost.org/svn/boost/tags/release/Boost_1_30_2/boost/libs/utility/iterator_adaptors.pdf) describes an old version of [`iterator_adaptor`](https://www.boost.org/doc/libs/release/libs/iterator/doc/iterator_adaptor.html) that used non-orthogonal policies. There is also precedent in the standard library: [`std::char_traits`](http://en.cppreference.com/w/cpp/string/char_traits), despite its name, acts as a policies class that determines the behaviors of [std::basic_string](http://en.cppreference.com/w/cpp/string/basic_string).

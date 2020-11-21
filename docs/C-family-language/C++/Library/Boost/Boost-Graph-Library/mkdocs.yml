@@ -1,7 +1,3 @@
 nav:
     - Boost-Graph-Library: Boost-Graph-Library.md
-    - A-Quick-Tour-of-the-Boost-Graph-Library: A-Quick-Tour-of-the-Boost-Graph-Library.md
-    - Boost-Graph-Library-Tutorial: Boost-Graph-Library-Tutorial
-    - The-Boost-Graph-Interface: The-Boost-Graph-Interface
-    - Visitor-Concepts: Visitor-Concepts
-    - Algorithms: Algorithms
+   

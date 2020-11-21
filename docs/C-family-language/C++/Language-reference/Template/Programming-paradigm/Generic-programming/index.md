@@ -1,10 +1,6 @@
 # Generic programming
 
-
-
 在`Theory\Programming-paradigm\Generic-programming`中讨论了generic programming，其中所描述的是思想，其中已经涉及了C++中的generic programming。
-
-
 
 在C++ Core Guidelines: [Templates and generic programming](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-templates)中，对C++中Generic programming的介绍如下:
 
@@ -12,9 +8,7 @@
 
 简而言之，C++中的generic programming是通过template来实现的。
 
-在 boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) 介绍了一些GP technique。
-
-我觉得关于C++ GP介绍的最好的文章是：boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)。
+在 boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) 介绍了一些GP technique，我觉得它是关于C++ GP介绍的非常好的的文章，它向我们展示了GP的核心technique，在`C++\Library\Boost\Boost-community\Generic-programming-technique`中收录了这篇文章。
 
 
 
