@@ -1,12 +1,10 @@
 nav:
     - Introduction: index.md
-    
+    # 维基百科对concept的介绍    
+    - Wikipedia-concept(Cpp): Wikipedia-concept(Cpp).md
+    - cppreference-Concepts: cppreference-Concepts.md
     # 这是Bjarne Stroustrup的文章    
     - Concepts-The-Future-of-Generic-Programming: Concepts-The-Future-of-Generic-Programming.md
-    # 维基百科对concept的介绍    
-    - Wikipedia-concept: Wikipedia-concept.md
-    
-    - Concepts: Concepts.md
     - Pre-C++20-concept: Pre-C++20-concept
     # concept的应用    
     - Application: Application

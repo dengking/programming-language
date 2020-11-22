@@ -28,8 +28,6 @@ C++20之前，这个语言并没有显式定义concept的语法，C++20引入了
 
 
 
-
-
 ### Summary
 
 concept是explicit的，它是对named requirement的formal definition，它能够让我们的code更加地expressive、readable。

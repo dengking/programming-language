@@ -200,14 +200,6 @@ C++17 `constexpr if` 能够对上述代码进行简化，参见`C++\Language-ref
 
 
 
-## concept and sfinae
-
-SFINAE是一种事前检查，C++ concept也是一种事前检查，不过C++ concept的语法更加清晰易读。
-
-https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae
-
-
-
 ## TO READ
 
 

@@ -3,6 +3,8 @@
 >
 > C++ concept是对GP concept的一种实现，同时结合C++的实现进行了很多的扩展。
 
+Concepts are named **[Boolean](https://en.wikipedia.org/wiki/Boolean_value) predicates** on template parameters, evaluated at [compile time](https://en.wikipedia.org/wiki/Compile_time). A concept may be associated with a template ([class](https://en.wikipedia.org/wiki/Class_(C%2B%2B)) template, [function](https://en.wikipedia.org/wiki/Function_(computer_programming)) template, or [member function](https://en.wikipedia.org/wiki/Member_function) of a class template), in which case it serves as a *constraint*: it limits the set of arguments that are accepted as template parameters.
+
 
 ## [Main uses](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Main_uses)
 
@@ -25,6 +27,23 @@ The main uses of concepts are:
 4) Constraining automatic type deduction
 
 > NOTE: 这个用法还不太了解，需要进行扩展
+
+## Example: EqualityComparable
+
+```C++
+template<typename T>
+concept EqualityComparable = requires(T a, T b) {
+    { a == b } -> std::same_as<bool>;
+    { a != b } -> std::same_as<bool>;
+};
+
+void f(const EqualityComparable auto&); // constrained function template declaration
+
+template <EqualityComparable T>
+void f(const T&); // constrained function template declaration
+
+f(42); // OK, int satisfies EqualityComparable
+```
 
 ## [Compiler diagnostics](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Compiler_diagnostics)
 
@@ -67,11 +86,20 @@ note:   concept 'RandomAccessIterator()' was not satisfied
 
 ## [Overload resolution](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Overload_resolution)
 
-> NOTE: concept可以作为 [SFINAE](https://en.wikipedia.org/wiki/SFINAE) and [tag dispatching](https://en.wikipedia.org/w/index.php?title=Tag_dispatching&action=edit&redlink=1) 的替代方案
+> NOTE: concept可以作为 [SFINAE](https://en.wikipedia.org/wiki/SFINAE) and [tag dispatching](https://en.wikipedia.org/w/index.php?title=Tag_dispatching&action=edit&redlink=1) 的替代方案，它能够实现相同的功能
+
+Concepts can be used to choose function template overloads and class template specializations based on properties of their template arguments, as an alternative to [SFINAE](https://en.wikipedia.org/wiki/SFINAE) and [tag dispatching](https://en.wikipedia.org/w/index.php?title=Tag_dispatching&action=edit&redlink=1). If an argument satisfies more than one concept, the overload associated with the more constrained concept is chosen.
+
+
 
 ## [Type deduction](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B)#Type_deduction)
 
+Concepts may be used instead of the unconstrained type deduction placeholder `auto` in variable declarations and function return types:
 
+```C++
+auto     x1 = f(y); // the type of x1 is deduced to whatever f returns
+Sortable auto x2 = f(y); // the type of x2 is deduced, but only compiles if it satisfies Sortable
+```
 
 ## TO READ
 

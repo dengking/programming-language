@@ -28,9 +28,11 @@ int main()
 
 
 
-## Empty Base Optimization
+## MoreCppIdiom#[Empty Base Optimization](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Empty_Base_Optimization)
 
+### 22.0.1 Intent
 
+Optimize storage for data members of empty class types
 
 ### 22.0.3 Motivation
 
@@ -70,7 +72,11 @@ int main()
 
 ```
 
-EBCO makes use of this exemption(豁免) in a **systematic**(系统的) way. It may not be desirable to naively move the **empty classes** from **member-list** to **base-class-list** because that may expose interfaces that are otherwise hidden from the users. For instance, the following way of applying EBCO will apply the optimization but may have undesirable side-effects: The signatures of the functions (if any in `E1`, `E2`) are now visible to the users of `class Foo` (although they can’t call them because of private inheritance).
+EBCO makes use of this exemption(豁免) in a **systematic**(系统的) way. 
+
+It may not be desirable to naively move the **empty classes** from **member-list** to **base-class-list** because that may expose interfaces that are otherwise hidden from the users. For instance, the following way of applying EBCO will apply the optimization but may have undesirable side-effects: The signatures of the functions (if any in `E1`, `E2`) are now visible to the users of `class Foo` (although they can’t call them because of private inheritance).
+
+> NOTE: 这个例子所阐述的是"naively move the **empty classes** from **member-list** to **base-class-list**"的弊端: 基类(`class E1`、`class E2`)的function被暴露给了子类`class Foo`。
 
 ```C++
 #include <iostream>
@@ -104,6 +110,8 @@ int main()
 ```
 
 A practical way of using EBCO is to combine the empty members into a single member that flattens the storage. The following template `BaseOptimization` applies EBCO on its first two type parameter. The `Foo` class above has been rewritten to use it.
+
+> NOTE: 这个例子所展示的更好的做法: "combine the empty members into a single member that flattens the storage"，其实这是符合"Composition-over-inheritance"的。
 
 ```C++
 #include <iostream>
@@ -139,5 +147,93 @@ int main()
 
 ```
 
-With this technique, there is no change in the inheritance relationship of the `Foo` class. It also avoids the problem of accidentally overriding a function from the base classes. Note that in the approach shown above it is critical that the base classes do not conflict with each other. That is, `Base1` and `Base2` are part of independent hierarchies.
+With this technique, there is no change in the **inheritance relationship** of the `Foo` class. It also avoids the problem of accidentally overriding a function from the base classes. Note that in the approach shown above it is critical that the base classes do not conflict with each other. That is, `Base1` and `Base2` are part of independent hierarchies.
+
+#### Caveat
+
+**Object identity issues** do not appear to be consistent across compilers. The addresses of the empty objects may or may not be the same. For instance, the pointer returned by `first` and `second` member methods of `BaseOptimization` class may be the same on some compilers and different on others. See more discussion on stackoverflow [boost compressed_pair and addresses of empty objects](https://stackoverflow.com/questions/7694158/boost-compressed-pair-and-addresses-of-empty-objects)
+
+### 22.0.5 Known Uses
+
+• [boost::compressed_pair](http://www.boost.org/doc/libs/1_47_0/libs/utility/compressed_pair.htm) makes use of this technique to optimize the size of the pair.
+• A C++03 emulation of `unique_ptr` also uses this idiom.
+
+## stackoverflow [When do programmers use Empty Base Optimization (EBO)](https://stackoverflow.com/questions/4325144/when-do-programmers-use-empty-base-optimization-ebo)
+
+
+
+[A](https://stackoverflow.com/a/4325624)
+
+EBO is important in the context of [policy based design](http://en.wikipedia.org/wiki/Policy-based_design), where you generally inherit *privately* from multiple policy classes. If we take the example of a thread safety policy, one could imagine the pseudo-code :
+
+```cpp
+class MTSafePolicy
+{
+public:
+  void lock() { mutex_.lock(); }
+  void unlock() { mutex_.unlock(); }
+
+private:
+  Mutex mutex_;
+};
+
+class MTUnsafePolicy
+{
+public:
+  void lock() { /* no-op */ }
+  void unlock() { /* no-op */ }
+};
+```
+
+Given a policy based-design class such as :
+
+```cpp
+template<class ThreadSafetyPolicy>
+class Test : ThreadSafetyPolicy
+{
+  /* ... */
+};
+```
+
+Using the class with a `MTUnsafePolicy` simply add no size overhead the class `Test` : it's a perfect example of *don't pay for what you don't use*.
+
+
+
+## csdn [C++ EBO 空基类最优化](https://blog.csdn.net/zhangxiao93/article/details/76038001)
+
+
+
+```C++
+class Empty
+{
+public:
+    typedef int TYPENAME;//typedef
+    enum color{red,green,yellow};//enum
+    void hello(){ cout << "hello" << endl; }//non-virtual 函数
+    static int xx;//static 成员变量
+
+};
+class HoldAnInt : private Empty
+{
+public:
+    void newFunc()
+    {
+        hello();
+        cout << "new Func" << endl;
+    }
+private:
+    int x;
+};
+
+
+int main()
+{
+    cout << sizeof(Empty) << endl;//1.
+    cout << sizeof(HoldAnInt) << endl;//4
+    HoldAnInt a;
+    a.newFunc();// hello newFunc
+    getchar();
+    return 0;
+}
+```
 
