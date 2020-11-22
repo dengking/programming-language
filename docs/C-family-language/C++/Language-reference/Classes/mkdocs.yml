@@ -7,5 +7,6 @@ nav:
     - Subtype-polymorphism: Subtype-polymorphism
     - Interface: Interface
     - Lifetime: Lifetime
+    - Empty-base-optimization: Empty-base-optimization
 ######### 这是c++中非常常见的三种容易混淆的情况##########    
     - Overload-VS-override-VS-name-hiding: Overload-VS-override-VS-name-hiding.md
