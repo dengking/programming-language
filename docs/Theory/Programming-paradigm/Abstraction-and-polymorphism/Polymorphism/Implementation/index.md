@@ -102,6 +102,10 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 
 
 
+duck typing是天生的behavior-based
+
+inheritance-based其实也能够实现behavior-based，但是它是更加constrained，因为它强制要求了type inheritance关系；
+
 
 
 ## draft
