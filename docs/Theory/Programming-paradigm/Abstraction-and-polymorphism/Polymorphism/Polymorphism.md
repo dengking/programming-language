@@ -184,10 +184,6 @@ polymorphism中的one-to-many关系的含义是多重的:
 
 
 
-
-
-
-
 ## Polymorphism的价值
 
 1) 让programmer写出更加abstract的code，能够增强code reuse
