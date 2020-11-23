@@ -1,2 +1,3 @@
 nav:
-    - Abstraction-in-programming-language: Abstraction-in-programming-language.md
+    - Introduction: index.md
+    - Polymorphism: Polymorphism

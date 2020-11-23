@@ -115,9 +115,15 @@ container指各种常见的数据结构，一般programming language的standard 
 
 **Design to an abstraction, not an implementation**
 
-它的意思是，designer在设计programming language的时候，是基于**abstract machine**来进行设计的，而不是specific to an concrete platform（physical machine、OS），然后由各个platform的开发者来完成abstraction到implementation的映射，即在该platform上实现这门语言。这是很多programming language实现cross platform的关键所在。
+它的意思是，designer在设计programming language的时候，是基于**abstract machine**来进行设计的，而不是specific to an concrete platform（physical machine、OS），然后由各个platform的开发者来完成abstraction到implementation的dispatch/map(映射)，即在该platform上实现这门语言。这是很多programming language实现cross platform的关键所在。
 
-> NOTE: 这是我仿照OOP design principle中的: "Program to an 'interface', not an 'implementation'"而总结的，其实两者背后的思想是相同的，关于OOP design principle，参见: `Theory\Design-pattern\OOP-design-pattern\Principle`。
+> NOTE: 
+>
+> "一个抽象(abstract)可以有多个实现(implementation)"，参见文章Abstraction。
+>
+> 这是我仿照OOP design principle中的: "Program to an 'interface', not an 'implementation'"而总结的，其实两者背后的思想是相同的，关于OOP design principle，参见: `Theory\Design-pattern\OOP-design-pattern\Principle`。
+>
+> 
 
 ### Example
 
@@ -128,6 +134,8 @@ container指各种常见的数据结构，一般programming language的standard 
 | Java     | 见下                                                         |
 | Python   | python、java的跨平台是依赖于VM，这些VM也是由实现提供，比如VM for windows，VM for linux，由这些VM实现来完成abstract machine 到 physical machine 的映射。 |
 | C++      | 跨平台由具体实现（compiler等）完成，MCVC for windows、gcc for linux，由这些compiler来完成abstract machine 到 physical machine的映射。 |
+
+
 
 ### Abstract machine
 

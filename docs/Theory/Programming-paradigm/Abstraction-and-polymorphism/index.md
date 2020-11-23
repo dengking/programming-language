@@ -1,5 +1,11 @@
 # Abstraction and polymorphism
 
+本章讨论abstraction 和 polymorphism，它们是现代programming language的核心所在。
+
+## Program/design to an abstraction
+
+conceptual model->使用programming language描述->implementation conceptual model->引入concrete->polymorphism: dispatch to concrete/implementation automatically
+
 Program to abstraction and then dispatch: 从抽象到具体/实现。
 
 Polymorphism是现代programming language内置了dispatch机制，能够自动进行dispatch，从而大大增加了
