@@ -36,9 +36,11 @@ The authors claim the following as advantages of [interfaces](https://en.wikiped
 
 Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wiki/Dynamic_dispatch) and [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming), which are central features of object-oriented programming.
 
-> NOTE: OOP的核心特性：polymorphism。
+> NOTE: Program to an 'interface', not an 'implementation'是OOP的核心principle，它是符合"program to an abstraction"的，参见`Theory\Programming-paradigm\Abstraction-and-polymorphism\Program-to-an-abstraction`章节。
+>
+> polymorphism是OOP的核心特性。
 
-> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Behaivor.md`中，对interface进行了描述。
+> NOTE: 在`Theory\Programming-paradigm\Abstraction-and-polymorphism\Program-to-an-abstraction`中，对interface进行了描述。
 
 ### Composition over inheritance
 
