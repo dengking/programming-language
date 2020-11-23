@@ -2,7 +2,7 @@
 
 
 
-## 维基百科[SOLID](https://en.wikipedia.org/wiki/SOLID)
+## wikipedia [SOLID](https://en.wikipedia.org/wiki/SOLID)
 
 ### Concepts
 

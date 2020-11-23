@@ -2,23 +2,62 @@
 
 本章讨论abstraction 和 polymorphism，它们是现代programming language的核心所在。
 
-## Program/design to an abstraction
-
-conceptual model->使用programming language描述->implementation conceptual model->引入concrete->polymorphism: dispatch to concrete/implementation automatically
-
-Program to abstraction and then dispatch: 从抽象到具体/实现。
-
-Polymorphism是现代programming language内置了dispatch机制，能够自动进行dispatch，从而大大增加了
-
-Polymorphism是实现abstraction的基础
-
-"一个抽象，可能有多个实现"(参见文章《Abstraction》)，polymorphism能够自动的进行dispatch，从而选择合适的实现。
-
-**one/single**就是abstraction。
 
 
+## Abstraction and polymorphism概述
 
-## Abstraction in programming language
+> NOTE: 描述思路如下:
+>
+> conceptual model->使用programming language描述->implementation conceptual model->一个抽象可以有多个concrete/implementation->polymorphism: dispatch to concrete/implementation automatically
+>
+> 参考:
+>
+> 1) 文章Abstraction
+>
+> 2) 文章Abstraction-and-model
+>
+> 3) 文章Abstract-and-concrete
+
+Abstraction and polymorphism是现代programming language的核心所在，本节对它们进行概述。
+
+1) 作为software engineer，我们需要解决现实世界中的各种问题，这个过程其实是: **abstraction**(抽象) 并 **model**(建模)，然后使用**programming language**来实现/描述conceptual model，最后将此model应用于实际，从而使实际问题得解;
+
+如何来描述concept？这在文章Abstraction中进行了讨论。
+
+实现conceptual model: 
+
+- Program to abstraction
+
+- Design to abstraction
+
+2) 一个abstraction可以有多个concrete/implementation;
+
+Concrete: 
+
+- Is-a: concept之间的关系: 从更加abstract的concept到更加concrete的concept
+- 对某种具体的情况进行说明: specialization
+
+Implementation: 实现抽象的概念
+
+3) Dispatch: 从abstract到concrete/implementation
+
+4) Polymorphism: dispatch to concrete/implementation **automatically**
+
+Polymorphism是现代programming language内置了dispatch机制，能够自动进行dispatch，从而选择最最**具体**(**concrete**)的/**合适**的**实现**(implementation)，从而大大增加了研发效率;
+
+> NOTE: 在`./Polymorphism/Implementation`中会对此进行说明
+
+### 总结
+
+下面是我之前想到的一些观点: 
+
+1) Program to abstraction and then dispatch
+
+2) Polymorphism是实现abstraction的基础
+
+
+
+## Abstraction in programming language history
 
 > NOTE: 本节从programming language的发展史来思考abstraction。
 
@@ -50,9 +89,23 @@ Polymorphism是实现abstraction的基础
 
 
 
+
+
+## Program to abstraction
+
+"Program to abstraction"现代programming language中的核心思想。
+
+下面是一些thought:
+
+> 依赖于抽象而不是具体，即上层依赖于抽象的接口，底层实现具体。上层到底层的映射，依赖于多态，它可以是compiler time完成，也可以是run time完成。比如get_token，实现静态多态，实现了多个具体实现版本，由compiler进行派发，进行选择
+>
+> 上述"依赖于抽象而不是具体"，其实就是program to abstraction。
+
+
+
 ## Abstraction in [object-oriented programming](http://en.wikipedia.org/wiki/Object-oriented_programming)
 
-> NOTE: 当今，OOP language普遍流行，这背后有着深刻的原因，其中非常重要的一点是: OOP对concept的描述。
+> NOTE: 当今，OOP paradigm普遍流行，这背后有着深刻的原因，其中非常重要的一点是: OOP对concept的描述。
 
 思考这样的一个问题：如何使用面向对象方式来描述上述kernel control path概念和task概念？
 
@@ -127,35 +180,6 @@ class ThreadTask(Task):
 
 
 
-## Definition of abstraction
-
-“abstraction”在软件工程中随处可见，那如何来定义抽象呢？不同的programming paradigm有着不同的描述方式：
-
-- OOP class
-- generic programming：duck type、concept
-
-> NOTE: 在文章`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`中对于两者进行了比较。
-
-在文章[Abstraction](./Abstraction.md)的“抽象与实现”章节中，我们已经总结了
-
-> 一种抽象，可能有多种实现。
-
-再来看上述两种programming paradigm中的描述方式，可以发现它们都满足“一种抽象，可能有多种实现”，这就是polymorphism。
-
-
-
-
-
-## Program to abstraction
-
-现代programming language中的核心思想。
-
-下面是一些草稿:
-
-> 依赖于抽象而不是具体，即上层依赖于抽象的接口，底层实现具体。上层到底层的映射，依赖于多态，它可以是compiler time完成，也可以是run time完成。比如get_token，实现静态多态，实现了多个具体实现版本，由compiler进行派发，进行选择
->
-> 上述"依赖于抽象而不是具体"，其实就是program to abstraction。
-
 
 
 ## Abstraction in programming paradigm
@@ -204,6 +228,29 @@ Mixin and AOP：https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Parameterized_
 ### TODO: OOP VS GP
 
 > TODO 重点比较OOP和duck type
+
+
+
+
+
+
+
+
+
+## Definition of abstraction
+
+“abstraction”在软件工程中随处可见，那如何来定义抽象呢？不同的programming paradigm有着不同的描述方式：
+
+- OOP class
+- generic programming：duck type、concept
+
+> NOTE: 在文章`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`中对于两者进行了比较。
+
+在文章[Abstraction](./Abstraction.md)的“抽象与实现”章节中，我们已经总结了
+
+> 一种抽象，可能有多种实现。
+
+再来看上述两种programming paradigm中的描述方式，可以发现它们都满足“一种抽象，可能有多种实现”，这就是polymorphism。
 
 
 
