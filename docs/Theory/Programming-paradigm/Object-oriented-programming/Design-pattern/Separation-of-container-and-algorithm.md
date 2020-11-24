@@ -10,3 +10,8 @@
 
 > The iterator pattern decouples [algorithms](https://en.wikipedia.org/wiki/Algorithm) from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.
 
+
+
+## Generic programming
+
+separation of container and algorithm也是generic programming的思想。

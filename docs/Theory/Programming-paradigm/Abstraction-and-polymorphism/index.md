@@ -51,7 +51,9 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 
 下面是我之前想到的一些观点: 
 
-1) Program to abstraction and then dispatch
+1) Program to an abstraction and then dispatch to concrete automatically
+
+这是我们遵循"Program to an abstraction"的原因，在`./Program to an abstraction` 章节中会对此进行详细说明。
 
 2) Polymorphism是实现abstraction的基础
 
@@ -66,7 +68,60 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 
 
 
-## Abstraction in [object-oriented programming](http://en.wikipedia.org/wiki/Object-oriented_programming)
+
+## Abstraction in programming paradigm
+
+许多programming paradigm都遵循abstraction principle，本节对它们进行总结。
+
+### OOP VS AOP
+
+|         | 抽象内容                                                  | 方向         |
+| ------- | --------------------------------------------------------- | ------------ |
+| **AOP** | 抽象出 *cross-cutting concerns* 即 横切关注点 或者 aspect | 是**横向**的 |
+| **OOP** | 抽象出 base class、object、class                          | 是**纵向**的 |
+
+两者都能够让我们**抽象**出公共部分，实现code reuse。
+
+#### AOP VS Mixin
+
+AOP是一种编程思想，它告诉我们使用aspect来进行抽象；
+
+Mixin是OOP中的一种技巧，目的是促进code reuse，参见`Theory\Programming-paradigm\Object-oriented-programming\Assemble\Mixin`;
+
+两者都能够让我们实现code reusage。
+
+Mixin and AOP：https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Parameterized_Base_Class，在`C++\Idiom\TMP\Parameterized-Base-Class\Parameterized-Base-Class`中收录了这篇文章。
+
+
+
+#### Good article
+
+1) 在 [C++11实现一个轻量级的AOP框架](https://www.cnblogs.com/qicosmos/p/4772389.html) 中进行了介绍:
+
+> AOP（Aspect-Oriented Programming，面向方面编程），可以解决面向对象编程中的一些问题，是OOP的一种有益补充。面向对象编程中的继承是一种从上而下的关系，不适合定义从左到右的横向关系，如果继承体系中的很多无关联的对象都有一些公共行为，这些公共行为可能分散在不同的组件、不同的对象之中，通过继承方式提取这些公共行为就不太合适了。使用AOP还有一种情况是为了提高程序的可维护性，AOP将程序的非核心逻辑都“横切”出来，将非核心逻辑和核心逻辑分离，使我们能集中精力在核心逻辑上，例如图1所示的这种情况。
+
+2) [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918):
+
+
+
+### AOP VS Meta-programming
+
+1) [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918):
+
+> To me AOP is some kind of "meta-programming".
+
+2) Python使用metaclass来实现AOP
+
+
+
+### TODO: OOP VS GP
+
+> TODO 重点比较OOP和duck type
+
+
+
+
+### Abstraction in [object-oriented programming](http://en.wikipedia.org/wiki/Object-oriented_programming)
 
 > NOTE: 当今，OOP paradigm普遍流行，这背后有着深刻的原因，其中非常重要的一点是: OOP对concept的描述。
 
@@ -136,61 +191,6 @@ class ThreadTask(Task):
 参见：维基百科[Abstract type](https://en.wikipedia.org/wiki/Abstract_type)
 
 参见：工程[programming-language](https://dengking.github.io/programming-language)的文章[Introduction to Objects](https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-objects)
-
-
-
-
-
-
-
-
-
-## Abstraction in programming paradigm
-
-### OOP VS AOP
-
-|         | 抽象内容                                                  | 方向         |
-| ------- | --------------------------------------------------------- | ------------ |
-| **AOP** | 抽象出 *cross-cutting concerns* 即 横切关注点 或者 aspect | 是**横向**的 |
-| **OOP** | 抽象出 base class、object、class                          | 是**纵向**的 |
-
-两者都能够让我们**抽象**出公共部分，实现code reuse。
-
-#### AOP VS Mixin
-
-AOP是一种编程思想，它告诉我们使用aspect来进行抽象；
-
-Mixin是OOP中的一种技巧，目的是促进code reuse，参见`Theory\Programming-paradigm\Object-oriented-programming\Assemble\Mixin`;
-
-两者都能够让我们实现code reusage。
-
-Mixin and AOP：https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Parameterized_Base_Class，在`C++\Idiom\TMP\Parameterized-Base-Class\Parameterized-Base-Class`中收录了这篇文章。
-
-
-
-#### Good article
-
-1) 在 [C++11实现一个轻量级的AOP框架](https://www.cnblogs.com/qicosmos/p/4772389.html) 中进行了介绍:
-
-> AOP（Aspect-Oriented Programming，面向方面编程），可以解决面向对象编程中的一些问题，是OOP的一种有益补充。面向对象编程中的继承是一种从上而下的关系，不适合定义从左到右的横向关系，如果继承体系中的很多无关联的对象都有一些公共行为，这些公共行为可能分散在不同的组件、不同的对象之中，通过继承方式提取这些公共行为就不太合适了。使用AOP还有一种情况是为了提高程序的可维护性，AOP将程序的非核心逻辑都“横切”出来，将非核心逻辑和核心逻辑分离，使我们能集中精力在核心逻辑上，例如图1所示的这种情况。
-
-2) [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918):
-
-
-
-### AOP VS Meta-programming
-
-1) [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918):
-
-> To me AOP is some kind of "meta-programming".
-
-2) Python使用metaclass来实现AOP
-
-
-
-### TODO: OOP VS GP
-
-> TODO 重点比较OOP和duck type
 
 
 

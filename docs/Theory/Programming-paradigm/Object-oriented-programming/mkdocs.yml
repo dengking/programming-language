@@ -5,11 +5,11 @@ nav:
     - Thinking-in-java: Thinking-in-java
     #################### class-based OOP是我们最常用的####################    
     - Class-based-OOP: Class-based-OOP
-
+    - Prototype-based-OOP: Prototype-based-OOP
     # 
     - Assemble: Assemble
-    #################### fluent api在OOP中有着广泛的应用####################
-    - Fluent-API: Fluent-API.md
+    
     - Glossary: Glossary
     - Behavior: Behavior.md
+    - Subtyping-polymorphism: Subtyping-polymorphism
     - Summary-of-OO: Summary-of-OO.md

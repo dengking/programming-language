@@ -21,6 +21,8 @@
 
 #### [Shared with non-OOP predecessor languages](https://en.wikipedia.org/wiki/Object-oriented_programming#Shared_with_non-OOP_predecessor_languages)
 
+
+
 #### [Objects and classes](https://en.wikipedia.org/wiki/Object-oriented_programming#Objects_and_classes)
 
 > NOTE: 在[Class-based OOP](./Class-based-OOP/Class-based-OOP.md)中会对此进行介绍。

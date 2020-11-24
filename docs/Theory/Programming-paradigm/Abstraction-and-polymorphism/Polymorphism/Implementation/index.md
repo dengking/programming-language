@@ -1,6 +1,22 @@
 # Implementation of polymorphism
 
-本文讨论implementation of polymorphism。
+
+
+## 内容概述
+
+本文讨论implementation of polymorphism，可以从多个方面对implementation of polymorphism进行思考:
+
+1) dispatch发生的时间: compile-time/runtime
+
+2) 比较算法: 基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现
+
+3) relationship between abstract and concrete:
+
+主要是描述abstract 和 concrete之间的关系:
+
+- inheritance-based
+- behavior-based
+- type-based
 
 
 
@@ -78,7 +94,7 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 
 
 
-### Behavior-based and type-base and inheritance-based
+## Behavior-based and type-based and inheritance-based
 
 
 
@@ -92,9 +108,19 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 
 在下面文章这描述了Behavior-based、inheritance-based
 
-1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
+### 1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
 
-收录在`Theory\Programming-paradigm\Generic-programming\Implementation`中
+> NOTE: 这篇文章收录在`Theory\Programming-paradigm\Generic-programming\Implementation`中
+
+When we wish to select from a set of classes at **runtime**, C++ requires that those classes be related by **inheritance**. When we wish to select from a set of types at **compile time**, the relationship between those types is more subtle(难以捉摸的、微妙的). The types need be related only indirectly, and only by their **behavior**.
+
+> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`中，我们已经知道了“[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**”。上面这一段中描述的使用template实现的polymorphism和使用duck type实现的polymorphism非常类似。
+
+The C++ community does not have a generally accepted term for this kind of **behavior-based relationship** between types. Accordingly, people first learning about C++ generic programming are tempted to think that **inheritance** is involved somehow, just as it is for **object-oriented programming**. For example, on several occasions we have seen questions such as "Why isn't a **bidirectional iterator** derived from a **forward iterator**?" A student who asks that question has probably already formed a significant misconception about how templates deal with types.
+
+> NOTE: 上面这段话的意思是：当人们刚开始学习C++ generic programming 的时候，会和object-oriented programming混淆，OOP是基于inheritance的，即要求“classes be related by **inheritance**”；而generic programming是基于duck type的，即“types need be related only indirectly, and only by their **behavior**”
+
+
 
 2) wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
 

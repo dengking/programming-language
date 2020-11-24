@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - Template-is-behavior-based: Template-is-behavior-based
     - Named-requirements: Named-requirements
     # concept是c++20引入的一个非常重要的特性    
     - Concepts: Concepts

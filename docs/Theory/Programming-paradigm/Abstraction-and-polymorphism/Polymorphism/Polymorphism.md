@@ -14,11 +14,11 @@ In [programming languages](https://en.wikipedia.org/wiki/Programming_language) a
 
 The most commonly recognized major classes of polymorphism are:
 
-|                                                              | 说明                                                         | 实现方式                                                     | paradigm |                |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- | -------------- |
-| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | defines a common **interface** for an arbitrary set of individually specified types. | - [Function overloading](https://en.wikipedia.org/wiki/Function_overloading) <br>- [Operator overloading](https://en.wikipedia.org/wiki/Operator_overloading) |          |                |
-| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | when one or more types are not specified by name but by **abstract symbols** that can represent any type. | - [Generic function](https://en.wikipedia.org/wiki/Generic_function) <br>- [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) | GP、FP   | behavior-based |
-| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | (also called *subtype polymorphism* or *inclusion polymorphism*) <br>when a name denotes instances of many different classes related by some common superclass.[[3\]](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#cite_note-gbooch-3) | - [Virtual function](https://en.wikipedia.org/wiki/Virtual_function) <br>- [Single and dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) <br>- [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch) <br>- [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch) | OOP      | inheritance    |
+|                                                              | 说明                                                         | 实现方式                                                     | paradigm |                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- | ----------------- |
+| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | defines a common **interface** for an arbitrary set of individually specified types. | - [Function overloading](https://en.wikipedia.org/wiki/Function_overloading) <br>- [Operator overloading](https://en.wikipedia.org/wiki/Operator_overloading) |          |                   |
+| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | when one or more types are not specified by name but by **abstract symbols** that can represent any type. | - [Generic function](https://en.wikipedia.org/wiki/Generic_function) <br>- [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) | GP、FP   | behavior-based    |
+| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | (also called *subtype polymorphism* or *inclusion polymorphism*) <br>when a name denotes instances of many different classes related by some common superclass.[[3\]](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#cite_note-gbooch-3) | - [Virtual function](https://en.wikipedia.org/wiki/Virtual_function) <br>- [Single and dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) <br>- [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch) <br>- [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch) | OOP      | inheritance-based |
 
 > NOTE:
 >
@@ -76,13 +76,13 @@ Parametric polymorphism is ubiquitous(普遍存在) in **functional programming*
 
 *Main article:* [Subtyping](https://en.wikipedia.org/wiki/Subtyping)
 
-> NOTE: 在OOP中，普遍存在
+> NOTE: 在OOP中，普遍存在；由于subtyping涉及很多OOP的内容，将subtyping相关的内容放到了`Theory\Programming-paradigm\Object-oriented-programming\Subtyping-polymorphism`章节中
 
 [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
 
 [Object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language) offer subtype polymorphism using *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* (also known as *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)*). 
 
-> NOTE:  *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* 和  *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)* 可以看做是同义词
+> NOTE:  *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* 和  *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)* 可以密切相关但是又有所不同，这在`Theory\Programming-paradigm\Object-oriented-programming\Subtyping-polymorphism`章节进行了介绍。
 
 
 
