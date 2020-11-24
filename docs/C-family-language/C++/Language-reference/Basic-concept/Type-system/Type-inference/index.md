@@ -1,6 +1,91 @@
 # Template argument deduction
 
+
+
+## wikipedia C++11 # [Type inference](https://en.wikipedia.org/wiki/C++11#Type_inference)
+
+In C++03 (and C), to use a variable, its type must be specified explicitly. However, with the advent of **template types** and **template metaprogramming** techniques, the type of something, particularly the well-defined **return value of a function**, may not be easily expressed. Thus, storing intermediates in variables is difficult, possibly needing knowledge of the internals of a given metaprogramming library.
+
+> NOTE: 难以描述type，解决思路是由compiler来进行type inference。
+
+C++11 allows this to be mitigated(缓解) in two ways. 
+
+### First approche: `auto`
+
+First, the **definition** of a variable with an explicit initialization can use the `auto` keyword.[[11\]](https://en.wikipedia.org/wiki/C++11#cite_note-11)[[12\]](https://en.wikipedia.org/wiki/C++11#cite_note-12) This creates a variable of the specific type of the initializer:
+
+```c++
+auto some_strange_callable_type = std::bind(&some_function, _2, _1, some_object);
+auto other_variable = 5;
+```
+
+The type of `some_strange_callable_type` is simply whatever the particular template function override of `std::bind` returns for those particular arguments. This type is easily determined procedurally(自动的) by the compiler as part of its **semantic analysis** duties, but is not easy for the user to determine upon inspection. The type of `other_variable` is also well-defined, but it is easier for the user to determine. It is an `int`, which is the same type as the integer literal.
+
+This use of the keyword `auto` in C++ re-purposes the semantics of this keyword, which was originally used in the typeless predecessor language [B ](https://en.wikipedia.org/wiki/B_(programming_language)#Examples)in a related role of denoting an untyped [automatic variable](https://en.wikipedia.org/wiki/Automatic_variable) definition.
+
+`auto` is also useful for reducing the verbosity of the code. For instance, instead of writing
+
+```C++
+for (std::vector<int>::const_iterator itr = myvec.cbegin(); itr != myvec.cend(); ++itr)
+```
+
+the programmer can use the shorter
+
+```C++
+for (auto itr = myvec.cbegin(); itr != myvec.cend(); ++itr)
+```
+
+which can be further compacted since "`myvec`" implements begin/end iterators:
+
+```C++
+for (auto& x : myvec)
+```
+
+This difference grows as the programmer begins to nest containers, though in such cases `typedef`s are a good way to decrease the amount of code.
+
+### Second approche: `decltype` 
+
+Further, the keyword `decltype` can be used to determine the type of **expression** at compile-time. For example:
+
+```
+int some_int;
+decltype(some_int) other_integer_variable = 5;
+```
+
+This is more useful in conjunction with `auto`, since the type of auto variable is known only to the compiler. However, `decltype` can also be very useful for expressions in code that makes heavy use of [operator overloading](https://en.wikipedia.org/wiki/Operator_overloading) and specialized types.
+
+> NOTE:  最后一句话没有搞懂
+> 
+
+The type denoted by `decltype` can be different from the type deduced by `auto`.
+
+```C++
+#include <vector>
+int main()
+{
+    const std::vector<int> v(1);
+    auto a = v[0];        // a has type int
+    decltype(v[0]) b = 1; // b has type const int&, the return type of
+                          //   std::vector<int>::operator[](size_type) const
+    auto c = 0;           // c has type int
+    auto d = c;           // d has type int
+    decltype(c) e;        // e has type int, the type of the entity named by c
+    decltype((c)) f = c;  // f has type int&, because (c) is an lvalue
+    decltype(0) g;        // g has type int, because 0 is an rvalue
+}
+```
+
 ## 发展概述
+
+### C++11
+
+`auto`
+
+
+
+`decltype`
+
+
 
 ### C++14
 

@@ -1,8 +1,8 @@
 nav:
     - Introduction: index.md
     
-# 查询类型
+    # 查询类型
     # 查询静态类型
-    - decltype: decltype
+    - decltype: decltype.md
     # 查询动态类型
     - typeid: typeid
