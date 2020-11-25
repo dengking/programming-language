@@ -152,6 +152,14 @@ C++14 return type deduction for function 特性，参见:
 
 - [C++14](https://en.cppreference.com/w/cpp/14) # [return type deduction for functions](https://en.cppreference.com/w/cpp/language/function#Return_type_deduction_.28since_C.2B.2B14.29)
 
+
+
+C++14 `decltype(auto)`
+
+对C++ 11 `auto` + `decltype` + trailing return type的简化，参见`./decltype`。
+
+
+
 ### C++17
 
 C++17 新增 class template argument deduction 特性，参见: 
