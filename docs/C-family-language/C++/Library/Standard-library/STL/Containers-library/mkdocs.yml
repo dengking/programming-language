@@ -4,4 +4,5 @@ nav:
     - Thread-safety: Thread-safety.md
     - Sequence-container: Sequence-container
     - Associative-container: Associative-container
+    - Container-adaptors: Container-adaptors
     - Emplace_back: Emplace_back
