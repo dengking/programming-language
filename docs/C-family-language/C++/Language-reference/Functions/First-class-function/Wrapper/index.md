@@ -405,3 +405,27 @@ https://en.cppreference.com/w/cpp/utility/functional/mem_fn
 https://codereview.stackexchange.com/questions/180221/c-member-function-wrapper-for-interfacing-with-c-apis
 
 https://codereview.stackexchange.com/questions/148824/simple-wrapper-for-member-function-pointers-with-known-signature
+
+
+
+
+
+## Generic forwarding function template
+
+在`C++\Language-reference\Basic-concept\Type-system\Type-inference`章节也对这个问题进行了探讨。
+
+需要总结C++在此之上的发展:
+
+C++11: 
+
+1) perfect forwarding
+
+2) `decltype`
+
+3)  *[trailing-return-type](https://en.wikipedia.org/wiki/Trailing-return-type)* 
+
+
+
+C++14:
+
+1) `decltype(auto)`
