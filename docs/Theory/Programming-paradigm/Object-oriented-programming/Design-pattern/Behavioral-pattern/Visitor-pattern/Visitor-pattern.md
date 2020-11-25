@@ -2,7 +2,7 @@
 
 “visitor”的意思是“访问者”，在Visitor pattern中，有专门的class来“扮演” “visitor”的角色。
 
-## 维基百科的[Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)
+## wikipedia [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)
 
 > It is one way to follow the [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle).
 
@@ -112,7 +112,7 @@ int main() {
 
 那能否将这个方法放到基类中呢？应该是不能的，这就是double dispatch所解决的问题。
 
-## [Refactoring.Guru](https://refactoring.guru/)的[Visitor](https://refactoring.guru/design-patterns/visitor)
+## [Refactoring.Guru](https://refactoring.guru/) [Visitor](https://refactoring.guru/design-patterns/visitor)
 
 > **Visitor** is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
 
@@ -180,7 +180,7 @@ class Industry is
 
 
 
-## [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)
+## stackoverflow [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)
 
 ### [A](https://stackoverflow.com/a/28321270)
 
@@ -190,13 +190,15 @@ class Industry is
 
 在visitor pattern中，由于存在着多种element，存在着多种visitor，所以最终到底要调用哪个algorithm，依赖于这两者，在文章[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)中对此进行了详细的分析。在[Multiple-dispatch](../../../Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch.md)中对此文章进行了收录。
 
+
+
 ## Example
 
 ### In compiler
 
-#### 维基百科[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节
+#### wikipedia [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) # [Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)
 
-在维基百科[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节，总结了 [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) 在compiler的实现中的应用：
+在wikipedia [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节，总结了 [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) 在compiler的实现中的应用：
 
 > Because the compiler traverses the tree several times to determine syntactic correctness, it is important to make traversing the tree a simple operation. The compiler executes a specific set of operations, depending on the type of each node, upon reaching it, so it often makes sense to use the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern).
 
@@ -204,7 +206,7 @@ class Industry is
 
 
 
-#### [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)的[A](https://stackoverflow.com/a/37236417)
+#### stackoverflow [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)的[A](https://stackoverflow.com/a/37236417)
 
 在这回答中给出了:
 

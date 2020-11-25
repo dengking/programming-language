@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - Visitor-pattern: Visitor-pattern
     - Iterator-pattern: Iterator-pattern
     - Observer-pattern: Observer-pattern
