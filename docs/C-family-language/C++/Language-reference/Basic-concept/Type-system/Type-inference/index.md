@@ -1,4 +1,4 @@
-# Template argument deduction
+# Type inference
 
 
 
@@ -6,7 +6,44 @@
 
 In C++03 (and C), to use a variable, its type must be specified explicitly. However, with the advent of **template types** and **template metaprogramming** techniques, the type of something, particularly the well-defined **return value of a function**, may not be easily expressed. Thus, storing intermediates in variables is difficult, possibly needing knowledge of the internals of a given metaprogramming library.
 
-> NOTE: 难以描述type，解决思路是由compiler来进行type inference。
+> NOTE: 难以描述type，在wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)中描述了这种情况的一个典型的案例:
+>
+> It is sometimes desirable to write a generic forwarding function that returns the same type as the wrapped function, regardless of the type it is instantiated with. Without `decltype`, it is not generally possible to accomplish this.[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8) An example, which also utilizes the *[trailing-return-type](https://en.wikipedia.org/wiki/Trailing-return-type)*:[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8)
+>
+> ```C++
+> #include <iostream>
+> int g_IntValue = 1;
+> int& foo(int& i)
+> {
+> 	std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	return g_IntValue;
+> }
+> float foo(float& f)
+> {
+> 	std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	return 0.0;
+> }
+> 
+> template<class T>
+> auto transparent_forwarder(T& t) -> decltype(foo(t))
+> {
+> 	return foo(t);
+> }
+> 
+> int main()
+> {
+> 	int i = 0;
+> 	float j = 0.0;
+> 	transparent_forwarder(i);
+> 	transparent_forwarder(j);
+> }
+> // g++ --std=c++11 test.cpp
+> 
+> ```
+>
+> 在`./decltype`章节中描述了更多的案例。
+>
+> 解决思路是由compiler来进行type inference。
 
 C++11 allows this to be mitigated(缓解) in two ways. 
 
@@ -74,6 +111,12 @@ int main()
     decltype(0) g;        // g has type int, because 0 is an rvalue
 }
 ```
+
+## Type inference and generic programming
+
+通过上面的描述可以看出，type inference是generic programming所必须的；
+
+
 
 ## 发展概述
 

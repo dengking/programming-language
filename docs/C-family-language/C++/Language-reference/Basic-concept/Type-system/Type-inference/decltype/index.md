@@ -2,7 +2,7 @@
 
 
 
-## 维基百科[decltype](https://en.wikipedia.org/wiki/Decltype)
+## wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)
 
 In 2002, [Bjarne Stroustrup](https://en.wikipedia.org/wiki/Bjarne_Stroustrup) proposed that a standardized version of the operator be added to the C++ language, and suggested the name "decltype", to reflect that the operator would yield the "declared type" of an expression.
 
@@ -92,6 +92,12 @@ decltype((a->x)) x5; // type is const double&
 > NOTE: 原文中的上述例子在下面的microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019)中有更好的解释
 
 ## microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019)
+
+The **`decltype`** type specifier yields the type of a specified expression. The **`decltype`** type specifier, together with the [`auto` keyword](https://docs.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-160), is useful primarily to developers who write **template libraries**. 
+
+1) Use **`auto`** and **`decltype`** to declare a **template function** whose return type depends on the types of its template arguments. Or, 
+
+2) Use **`auto`** and **`decltype`** to declare a **template function** that wraps a call to another function, and then returns the return type of the **wrapped function**.
 
 
 
