@@ -1,2 +1,3 @@
 nav:
     - decltype: index.md
+    - decltype-and-std-declval: decltype-and-std-declval.md

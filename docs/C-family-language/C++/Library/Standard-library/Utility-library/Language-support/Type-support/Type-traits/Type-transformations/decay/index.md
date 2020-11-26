@@ -14,7 +14,9 @@
 >
 > Here, `std::decay_t` will strip the `const&` from the type given by `decltype`, because `decltype(x)` will not result in what would have been `T` in a template, but in what would have been `T const&`.
 
+## What is decay？
 
+参见 `C++\Language-reference\Basic-concept\Type-system\Type-operation\Type-conversion\Implicit-conversion\Decay` 章节。
 
 
 
@@ -38,44 +40,73 @@
 
 ### [A](https://stackoverflow.com/a/25732651)
 
-`<joke>` It's obviously used to decay radioactive `std::atomic` types into non-radioactive ones.`</joke>` 
+
 
 [N2609](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n2069.html) is the paper that proposed `std::decay`. The paper explains:
 
-> Simply put, `decay<T>::type` is the **identity type-transformation** except if `T` is an array type or a reference to a function type. In those cases the `decay<T>::type` yields a pointer or a pointer to a function, respectively.
+> NOTE: 下面收录了这个paper。
 
-The motivating example is C++03 `std::make_pair`:
+### [A](https://stackoverflow.com/a/25732639)
+
+When dealing with template functions that take parameters of a template type, you often have universal parameters. Universal parameters are almost always references of one sort or another. They're also const-volatile qualified. As such, most type traits don't work on them as you'd expect:
 
 ```cpp
-template <class T1, class T2> 
-inline pair<T1,T2> make_pair(T1 x, T2 y)
-{ 
-    return pair<T1,T2>(x, y); 
+#include <type_traits>
+#include <iostream>
+
+template<class T>
+void func(T &&param)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	if (std::is_same<T, int>::value)
+		std::cout << "param is an int\n";
+	else
+		std::cout << "param is not an int\n";
 }
-```
 
-which accepted its parameter**s by value** to make string literals work:
-
-```cpp
-std::pair<std::string, int> p = make_pair("foo", 0);
-```
-
-If it accepted its parameters by reference, then `T1` will be deduced as an array type, and then constructing a `pair<T1, T2>` will be ill-formed.
-
-But obviously this leads to significant inefficiencies. Hence the need for `decay`, to apply the set of transformations that occurs when pass-by-value occurs, allowing you to get the efficiency of taking the parameters by reference, but still get the type transformations needed for your code to work with string literals, array types, function types and the like:
-
-```cpp
-template <class T1, class T2> 
-inline pair< typename decay<T1>::type, typename decay<T2>::type > 
-make_pair(T1&& x, T2&& y)
-{ 
-    return pair< typename decay<T1>::type, 
-                 typename decay<T2>::type >(std::forward<T1>(x), 
-                                            std::forward<T2>(y)); 
+int main()
+{
+	int three = 3;
+	func(three);  //prints "param is not an int"!!!!
 }
+// g++ --std=c++11 test.cpp
+
 ```
 
-**Note:** this is not the actual C++11 `make_pair` implementation - the C++11 `make_pair` also unwraps `std::reference_wrapper`s.
+http://coliru.stacked-crooked.com/a/24476e60bd906bed
+
+The solution here is to use `std::decay`:
+
+```cpp
+#include <type_traits>
+#include <iostream>
+
+template<class T>
+void func(T &&param)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	if (std::is_same<typename std::decay<T>::type, int>::value)
+		std::cout << "param is an int\n";
+	else
+		std::cout << "param is not an int\n";
+}
+
+int main()
+{
+	int three = 3;
+	func(three);  //prints "param is not an int"!!!!
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+http://coliru.stacked-crooked.com/a/8cbd0119a28a18bd
+
+```c++
+
+```
+
+
 
 
 
@@ -101,6 +132,12 @@ std::pair<std::string,int> p = std::make_pair("foo", 42);
 
 If the arguments to `make_pair()` were passed **by const reference**, the above code would fail to compile because we suddenly create a temporary `pair` object of the type `std::pair<const char[4],int>` (and this instantiation fails because arrays are not constructible with the `T()` syntax, nor are they copy-constructible).
 
+> NOTE: 理解上面这段话的前提:
+>
+> 1) string literal的type是: array
+>
+> 2) array pass by reference，参见 `C-and-C++\Pointer-and-array\Array\Array-in-template` 章节
+
 The problem with the current definition of `std::make_pair()` is that it leads to excessive **copying** of objects and hence great inefficiencies. With the advent of **Rvalue References** and **perfect forwarding** (see [n2027](http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2006/n2027.html)) we can easily remove all these inefficiencies:
 
 ```c++
@@ -111,7 +148,7 @@ inline pair<T1,T2> make_pair(T1&& x, T2&& y)
 }
 ```
 
-But alas(悲哀), the above will still not compile and the reason is the same as before: we instantiate `pair` with an array type. However, with the proposed type-trait, the efficient version of `std::make_pair()` may be specified as follows:
+But alas(悲哀), the above will still not compile and the reason is the same as before: we instantiate `pair` with an **array type**. However, with the proposed **type-trait**, the efficient version of `std::make_pair()` may be specified as follows:
 
 ```C++
 template <class T1, class T2> 
@@ -136,7 +173,7 @@ The implementation may be found [here](http://boost.cvs.sourceforge.net/boost/bo
 
 ## cppreference [std::decay](https://en.cppreference.com/w/cpp/types/decay)
 
-Applies 1) lvalue-to-rvalue, 2) array-to-pointer, and 3) function-to-pointer **implicit conversions** to the type `T`, removes cv-qualifiers, and defines the resulting type as the member typedef `type`.
+Applies 1) lvalue-to-rvalue, 2) array-to-pointer, and 3) function-to-pointer **implicit conversions** to the type `T`, removes **cv-qualifiers**, and defines the resulting type as the member typedef `type`.
 
 > NOTE: cppreference [`implicit conversion`](https://en.cppreference.com/w/cpp/language/implicit_cast)
 
@@ -172,6 +209,31 @@ public:
         >::type
     >::type type;
 };
+// g++ --std=c++11 test.cpp
+
+```
+
+### Example
+
+```C++
+#include <iostream>
+#include <type_traits>
+
+template <typename T, typename U>
+struct decay_equiv :
+    std::is_same<typename std::decay<T>::type, U>::type
+{};
+
+int main()
+{
+    std::cout << std::boolalpha
+              << decay_equiv<int, int>::value << '\n'
+              << decay_equiv<int&, int>::value << '\n'
+              << decay_equiv<int&&, int>::value << '\n'
+              << decay_equiv<const int&, int>::value << '\n'
+              << decay_equiv<int[2], int*>::value << '\n'
+              << decay_equiv<int(int), int(*)(int)>::value << '\n';
+}
 // g++ --std=c++11 test.cpp
 
 ```
