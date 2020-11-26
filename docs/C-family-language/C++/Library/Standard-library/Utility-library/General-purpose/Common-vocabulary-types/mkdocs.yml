@@ -4,3 +4,4 @@ nav:
     - optional: optional.md
     - any: any.md
     - variant: variant.md
+    - integer_sequence: integer_sequence

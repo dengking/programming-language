@@ -48,7 +48,7 @@ the name of a variable, a **function**, a [template parameter object](https://en
 
 #### Lvalue function call expression
 
-> NOTE: 本节标题中的lvalue function是我创造的一个概念，与它相对的一个概念是rvalue expression，下面是它们的定义:
+> NOTE: 本节标题中的**lvalue function**是我创造的一个概念，与它相对的一个概念是**rvalue expression**，下面是它们的定义:
 >
 > | 概念            | 说明                                                   |
 > | --------------- | ------------------------------------------------------ |
@@ -59,7 +59,7 @@ the name of a variable, a **function**, a [template parameter object](https://en
 >
 > | expression                      | value category | 说明                                                         |
 > | ------------------------------- | -------------- | ------------------------------------------------------------ |
-> | Lvalue function call expression | lvalue         | 这种情况是非常具有代表性的，后面的很多operator expressin都可以归入这个范畴 |
+> | Lvalue function call expression | lvalue         | 这种情况是非常具有代表性的，后面的很多operator expression都可以归入这个范畴 |
 > | Rvalue function call expression | rvalue         |                                                              |
 >
 > 
