@@ -456,66 +456,16 @@ decltype((a->x)) x5; // type is const double&
 
 2) wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype) # [Semantics](https://en.wikipedia.org/wiki/Decltype#Semantics)
 
+3) arne-mertz [Modern C++ Features – decltype and std::declval](https://arne-mertz.de/2017/01/decltype-declval/) # decltype does not execute anything
 
-
-## `std::declval`
-
-`std::declval`是经常和`decltype`一起使用的。
-
-### cppreference [std::declval](https://en.cppreference.com/w/cpp/utility/declval)
+Whatever expression we pass to `decltype` does not get executed. That means, that we don’t pay any runtime overhead and don’t see any side effects. For example, `decltype(std::cout << "Hello world!\n")` will result in `std::ostream&`, but not a single character will be printed to our console.
 
 ```C++
-template<class T>
-typename std::add_rvalue_reference<T>::type declval() noexcept;
-```
-
-
-
-Converts any type `T` to a **reference type**, making it possible to use **member functions** in `decltype` expressions without the need to go through constructors.
-
-> NOTE: 这段已经将 `std::declval` 的用途 总结得非常好了，结合下面的例子来看: `NonDefault` 是 没有 constructor的，通过 
->
-> `decltype(std::declval<NonDefault>().foo()) n2 = n1;`
->
-> 可以实现: "use **member functions** in `decltype` expressions without the need to go through constructors"。
->
-> `std::declval` 是一个抽象层: 它屏蔽了 `T` 是否有 constructor 的细节，使programmer以 **generic** 的方式来 "use **member functions** in `decltype` expressions"，显然它是对generic programming的enhance。
->
-> 
-
-`declval` is commonly used in templates where acceptable template parameters may have no constructor in common, but have the same member function whose return type is needed.
-
-Note that `declval` can only be used in [unevaluated contexts](https://en.cppreference.com/w/cpp/language/expressions#Unevaluated_expressions) and is not required to be defined; it is an error to evaluate an expression that contains this function. Formally, the program is ill-formed if this function is [odr-used](https://en.cppreference.com/w/cpp/language/definition#ODR-use).
-
-> NOTE: `decltype`是  [unevaluated contexts](https://en.cppreference.com/w/cpp/language/expressions#Unevaluated_expressions) 。
-
-```C++
-#include <utility>
 #include <iostream>
-
-struct Default
-{
-	int foo() const
-	{
-		return 1;
-	}
-};
-
-struct NonDefault
-{
-	NonDefault() = delete;
-	int foo() const
-	{
-		return 1;
-	}
-};
 
 int main()
 {
-	decltype(Default().foo()) n1 = 1;                   // type of n1 is int
-//  decltype(NonDefault().foo()) n2 = n1;               // error: no default constructor
-	decltype(std::declval<NonDefault>().foo()) n2 = n1; // type of n2 is int
-	std::cout << "n1 = " << n1 << '\n' << "n2 = " << n2 << '\n';
+	decltype(std::cout << "Hello world!\n") s = std::cout;
 }
 // g++ --std=c++11 test.cpp
 
@@ -523,16 +473,32 @@ int main()
 
 
 
+```C++
+#include <iostream>
+class Foo;//forward declaration
+
+int main()
+{
+	Foo f(int); //ok. Foo is still incomplete
+	using f_result = decltype(f(11));
+	//f_result is Foo
+}
+// g++ --std=c++11 test.cpp
+
+```
+
 
 
 ## TO READ
 
 
 
-https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019#remarks
-
 https://riptutorial.com/cplusplus/example/18513/decltype
 
-https://stackoverflow.com/questions/18815221/what-is-decltype-and-how-is-it-used
+> NOTE: 这篇内容非常一般
+
+
 
 https://arne-mertz.de/2017/01/decltype-declval/
+
+> NOTE: 这篇内容非常一般
