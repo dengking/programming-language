@@ -14,6 +14,6 @@
 
 C++提供了丰富的type operation，除了本章介绍的内容，在下面章节中也涉及了type operation:
 
-1) `C++\Library\Standard-library\Utility-library\Language-support\Type_support`
+1) `C++\Library\Standard-library\Utility-library\Language-support\Type-support` (标准库的支持)
 
 2) `C-and-C++\Interpretation-model`
