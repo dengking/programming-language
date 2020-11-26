@@ -2,4 +2,5 @@ nav:
     - Introduction: index.md
     - stackoverflow-How-do-I-use-array-in-C++: stackoverflow-How-do-I-use-array-in-C++.md
     - cppreference-Array-declaration: cppreference-Array-declaration.md
+    - Array-in-template: Array-in-template.md
     - Implementation: Implementation.md

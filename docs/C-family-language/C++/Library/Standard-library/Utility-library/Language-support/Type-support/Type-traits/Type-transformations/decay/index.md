@@ -132,6 +132,8 @@ The type-trait has been part of boost since 1.33.0, and is used in libraries suc
 
 The implementation may be found [here](http://boost.cvs.sourceforge.net/boost/boost/boost/type_traits/decay.hpp?view=markup).
 
+
+
 ## cppreference [std::decay](https://en.cppreference.com/w/cpp/types/decay)
 
 Applies 1) lvalue-to-rvalue, 2) array-to-pointer, and 3) function-to-pointer **implicit conversions** to the type `T`, removes cv-qualifiers, and defines the resulting type as the member typedef `type`.

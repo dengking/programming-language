@@ -1,5 +1,3 @@
-
-
 # stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)
 
 This FAQ is split into five parts:
@@ -820,7 +818,7 @@ Although you cannot assign arrays directly, you *can* assign structs and classes
 
 > NOTE: "array-to-pointer decay"使得pass by pointer非常便利。
 >
-> 
+> Array的"parameter passing"在当将array作为function template的argument的时候，是比较容易出错的一个问题，在`./Array-in-template`中对此进行了讨论。
 
 #### Pass by pointer
 
