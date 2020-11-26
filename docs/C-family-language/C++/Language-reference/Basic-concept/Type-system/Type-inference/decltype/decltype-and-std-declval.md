@@ -40,3 +40,8 @@ int main()
 
 
 ### decltype returns
+
+
+
+### Use cases
+

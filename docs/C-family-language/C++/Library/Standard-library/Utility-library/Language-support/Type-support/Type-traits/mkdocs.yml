@@ -1,4 +1,5 @@
 nav:
     - Constants: Constants
-    - Relationships-and-property-queries: Relationships-and-property-queries
+    - Relationships: Relationships
     - Type-modifications: Type-modifications
+    - Type-transformations: Type-transformations
