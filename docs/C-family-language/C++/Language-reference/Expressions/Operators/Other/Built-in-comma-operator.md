@@ -2,7 +2,7 @@
 
 是在学习cppreference [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)的时候，发现的Built-in comma operator。
 
-需要注意的是：[Built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)的left-hand argument是[Discarded-value expressions](https://en.cppreference.com/w/cpp/language/expressions#Discarded-value_expressions)
+需要注意的是：[Built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)的left-hand argument是[Discarded-value expressions](https://en.cppreference.com/w/cpp/language/expressions#Discarded-value_expressions) 。
 
 ## cppreference [Built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)
 
