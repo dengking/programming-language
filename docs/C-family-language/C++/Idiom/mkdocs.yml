@@ -3,13 +3,11 @@ nav:
     ########## oop##########
     - OOP: OOP
     #################### template metaprogramming和Generic-programming密切相关####################    
-    - TMP: TMP
+    - Generic-programming: Generic-programming
     ########## 函数相关相关##########   
     - Function: Function
-    ########## STL相关##########
-    - STL: STL
     ########## AOP#############
     - AOP: AOP
     ########## Exception#############
-    - Exception: Exception
+    - Error-handling: Error-handling
     - Type-Erasure: Type-Erasure
