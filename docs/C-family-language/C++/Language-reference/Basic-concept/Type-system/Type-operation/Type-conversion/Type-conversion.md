@@ -48,7 +48,7 @@ Converting to `int` from some smaller integer type, or to `double` from float is
 
 - Otherwise, if the conversion is between numeric types of the same kind (integer-to-integer or floating-to-floating), the conversion is valid, but the value is implementation-specific (and may not be portable).
 
-总结：上面主要描述的是**conversions between arithmetic types**
+> NOTE：上面主要描述的是**conversions between arithmetic types**
 
 Some of these conversions may imply a loss of precision, which the compiler can signal with a warning. This warning can be avoided with an **explicit conversion**.
 
@@ -120,7 +120,7 @@ This function takes an argument of type `B`, but it could as well be called with
 fn (foo);
 ```
 
-总结：经过验证，这里调用的是copy constructor；那这反映的是c++的什么特性呢？
+> NOTE：经过验证，这里调用的是copy constructor；那这反映的是c++的什么特性呢？
 
 This may or may not be what was intended. But, in any case, it can be prevented by marking the affected constructor with the `explicit` keyword:
 
@@ -155,7 +155,7 @@ int main ()
 }
 ```
 
-需要对比这个例子和上一个例子的差异所在，在添加了关键字`explicit`后，现在`B bar = foo;`和`fn (foo);`这些存在隐式转换的写法都是不允许的。
+> NOTE: 需要对比这个例子和上一个例子的差异所在，在添加了关键字`explicit`后，现在`B bar = foo;`和`fn (foo);`这些存在隐式转换的写法都是不允许的。
 
 Additionally, constructors marked with `explicit` cannot be called with the assignment-like syntax; In the above example, `bar` could not have been constructed with:
 
@@ -265,7 +265,7 @@ int main () {
 }
 ```
 
-Wikipedia上关于[downcast](https://en.wikipedia.org/wiki/Downcasting)的介绍。
+> NOTE: Wikipedia上关于[downcast](https://en.wikipedia.org/wiki/Downcasting)的介绍。
 
 **Compatibility note:** This type of `dynamic_cast` requires *Run-Time Type Information (RTTI)* to keep track of **dynamic types**. Some compilers support this feature as an option which is disabled by default. This needs to be enabled for **runtime type checking** using `dynamic_cast` to work properly with these types.
 

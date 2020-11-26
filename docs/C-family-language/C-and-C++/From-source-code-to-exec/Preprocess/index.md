@@ -93,7 +93,7 @@ expands to an [std::size_t](https://en.cppreference.com/w/cpp/types/size_t) lite
 
 ​	
 
-#### `__pretty_function__`
+#### `__PRETTY_FUNCTION__`
 
 stackoverflow [What's the difference between __PRETTY_FUNCTION__, __FUNCTION__, __func__?](https://stackoverflow.com/questions/4384765/whats-the-difference-between-pretty-function-function-func)
 

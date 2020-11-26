@@ -1,3 +1,5 @@
 nav:
-    - Array: Array.md
+    - Introduction: index.md
+    - stackoverflow-How-do-I-use-array-in-C++: stackoverflow-How-do-I-use-array-in-C++.md
+    - cppreference-Array-declaration: cppreference-Array-declaration.md
     - Implementation: Implementation.md

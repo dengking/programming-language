@@ -1,6 +1,18 @@
-# Array
 
-## stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)
+
+# stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)
+
+This FAQ is split into five parts:
+
+1. [arrays on the type level and accessing elements](https://stackoverflow.com/questions/4810668/)
+2. [array creation and initialization](https://stackoverflow.com/questions/4984228/)
+3. [assignment and parameter passing](https://stackoverflow.com/questions/4810672/)
+4. [multidimensional arrays and arrays of pointers](https://stackoverflow.com/questions/4810676/)
+5. [common pitfalls when using arrays](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c/7439261#7439261)
+
+
+
+## 1 [Arrays on the type level and accessing elements](https://stackoverflow.com/questions/4810668/)
 
 ### Arrays on the type level
 
@@ -16,6 +28,7 @@ int main()
 	static_assert(!std::is_same<int[8], int[9]>::value, "distinct size");
 }
 // g++ --std=c++11 test.cpp
+
 ```
 
 Note that the size is part of the type, that is, array types of different size are **incompatible types** that have absolutely nothing to do with each other. `sizeof(T[n])` is equivalent to `n * sizeof(T)`.
@@ -26,9 +39,12 @@ int main()
 	static_assert(sizeof(int[8])==8*sizeof(int), "same size");
 }
 // g++ --std=c++11 test.cpp
+
 ```
 
 #### Array-to-pointer decay
+
+> NOTE: 这是[implicit/standard conversion](implicit/standard conversion)，它是自动由compiler执行的，参见`C++\Language-reference\Basic-concept\Type-system\Type-operation\Type-conversion\Implicit-conversion`章节。
 
 The only "connection" between `T[n]` and `T[m]` is that both types can implicitly be *converted* to `T*`, and the result of this conversion is a pointer to the first element of the array. That is, anywhere a `T*` is required, you can provide a `T[n]`, and the compiler will silently provide that pointer:
 
@@ -43,11 +59,13 @@ the_actual_array: |   |   |   |   |   |   |   |   |   int[8]
                     |  pointer_to_the_first_element   int*
 ```
 
-This conversion is known as "array-to-pointer decay", and it is a major source of confusion. The size of the array is lost in this process, since it is no longer part of the type (`T*`). 
+This conversion is known as "**array-to-pointer decay**", and it is a major source of confusion. The size of the array is lost in this process, since it is no longer part of the type (`T*`). 
 
-Pro: Forgetting the size of an array on the type level allows a pointer to point to the first element of an array of *any* size. 
+**Pro**: Forgetting the size of an array on the type level allows a pointer to point to the first element of an array of *any* size. 
 
-Con: Given a pointer to the first (or any other) element of an array, there is no way to detect how large that array is or where exactly the pointer points to relative to the bounds of the array. [Pointers are extremely stupid](https://stackoverflow.com/questions/4261074/).
+**Con**: Given a pointer to the first (or any other) element of an array, there is no way to detect how large that array is or where exactly the pointer points to relative to the bounds of the array. [Pointers are extremely stupid](https://stackoverflow.com/questions/4261074/).
+
+
 
 #### Arrays are not pointers
 
@@ -66,7 +84,13 @@ int main()
 One important context in which an array does *not* decay into a pointer to its first element is when the `&` operator is applied to it. In that case, the `&` operator yields a pointer to the *entire* array, not just a pointer to its **first element**. Although in that case the *values* (the addresses) are the same, a pointer to the first element of an array and a pointer to the entire array are completely distinct types:
 
 ```cpp
-static_assert(!std::is_same<int*, int(*)[8]>::value, "distinct element type");
+#include <type_traits>
+int main()
+{
+	static_assert(!std::is_same<int*, int(*)[8]>::value, "distinct element type");
+}
+// g++ --std=c++11 test.cpp
+
 ```
 
 
@@ -97,17 +121,17 @@ If you are unfamiliar with the C declarator syntax, the parenthesis in the type 
 
 - `int(*)[8]` is a pointer to an array of 8 integers.
 
-  > NOTE: `int(*ptr)[8]`
+    > NOTE: `int(*ptr)[8]`
 
 - `int*[8]` is an array of 8 pointers, each element of type `int*`.
 
-  > NOTE: `int* array[8]`
+    > NOTE: `int* array[8]`
 
-#### Accessing elements
+### Accessing elements
 
 C++ provides two syntactic variations to access individual elements of an array. Neither of them is superior to the other, and you should familiarize yourself with both.
 
-##### Pointer arithmetic
+#### Pointer arithmetic
 
 Given a pointer `p` to the first element of an array, the expression `p+i` yields a pointer to the i-th element of the array. By dereferencing that pointer afterwards, one can access individual elements:
 
@@ -154,7 +178,7 @@ x: | | |    x+3  |          x+7  |     int*
 
 Note that in the depicted case, `x` is a pointer *variable* (discernible by the small box next to `x`), but it could just as well be the result of a function returning a pointer (or any other expression of type `T*`).
 
-##### Indexing operator
+#### Indexing operator
 
 Since the syntax `*(x+i)` is a bit clumsy, C++ provides the alternative syntax `x[i]`:
 
@@ -190,7 +214,7 @@ int main()
 > ```c++
 > test.cpp: 在函数‘int main()’中:
 > test.cpp:7:43: 错误：ISO C++ 不允许比较指针和整数的值 [-fpermissive]
->   bool equal = &x[i] == &*(x + i) == (x + i);
+> bool equal = &x[i] == &*(x + i) == (x + i);
 > ```
 >
 > 问题原因在于对`==`的错误使用，`&x[i] == &*(x + i) == (x + i)`等价于:
@@ -279,6 +303,10 @@ int main()
 Note that it is illegal to provide `&x[n]` as the second argument since this is equivalent to `&*(x+n)`, and the sub-expression `*(x+n)` technically invokes [undefined behavior](https://stackoverflow.com/questions/3144904/) in C++ (but not in C99).
 
 Also note that you could simply provide `x` as the first argument. That is a little too terse（简洁） for my taste, and it also makes template argument deduction a bit harder for the compiler, because in that case the first argument is an array but the second argument is a pointer. (Again, array-to-pointer decay kicks in.)
+
+## 4 [Multidimensional arrays and arrays of pointers](https://stackoverflow.com/questions/4810676/)
+
+Programmers often confuse multidimensional arrays with arrays of pointers.
 
 ### Multidimensional arrays
 
@@ -369,7 +397,7 @@ int main()
 
 
 
-#### Anonymous multidimensional arrays
+#### Anonymous(匿名) multidimensional arrays
 
 With anonymous multidimensional arrays, all dimensions *except the first* must be known at compile time:
 
@@ -418,6 +446,10 @@ This is how an anonymous multidimensional array looks like in memory:
 ```
 
 Note that the array itself is still allocated as a single block in memory.
+
+### Arrays of pointers
+
+You can overcome the restriction of fixed width by introducing another level of indirection.
 
 #### Named arrays of pointers
 
@@ -546,9 +578,9 @@ And here is how it looks like in memory:
           +---+
 ```
 
-#### Conversions
+### Conversions
 
-##### Array-to-pointer decay
+
 
 **Array-to-pointer decay** naturally extends to **arrays of arrays** and **arrays of pointers**:
 
@@ -607,12 +639,12 @@ int main()
 > ```c++
 > test.cpp: 在函数‘int main()’中:
 > test.cpp:19:30: 错误：不能在初始化时将‘int (**)[2]’转换为‘int**’
->   int** pointer_to_pointer = &pointer_to_array;
+> int** pointer_to_pointer = &pointer_to_array;
 > ```
 >
 > 上述编译报错给我们的提示是：`&pointer_to_array`的类型是`int (**)[2]`。
 
-##### Two dimension array to `**pointer`
+#### Two dimension array to `**pointer`
 
 However, there is no **implicit conversion** from `T[h][w]` to `T**`. If such an **implicit conversion** did exist, the result would be a pointer to the first element of an array of `h` pointers to `T` (each pointing to the first element of a line in the original 2D array), but that pointer array does not exist anywhere in memory yet. If you want such a **conversion**, you must create and fill the required pointer array manually:
 
@@ -749,7 +781,7 @@ int main()
 >
 > 采用“Two dimension array to `**pointer`”中描述的方法。
 
-
+## 3 [Assignment and parameter passing](https://stackoverflow.com/questions/4810672/)
 
 ### Assignment
 
@@ -782,11 +814,13 @@ This is more flexible than what true array assignment could provide because it i
 
 Although you cannot assign arrays directly, you *can* assign structs and classes which *contain* array members. That is because [array members are copied memberwise](https://stackoverflow.com/questions/4164279/) by the assignment operator which is provided as a default by the compiler. If you define the assignment operator manually for your own struct or class types, you must fall back to manual copying for the array members.
 
-#### Parameter passing
+### Parameter passing
 
-Arrays cannot be passed by value. You can either pass them by pointer or by reference.
+**Arrays cannot be passed by value**. You can either pass them **by pointer** or **by reference**.
 
-##### Pass by pointer
+> NOTE: "array-to-pointer decay"使得pass by pointer非常便利。
+
+#### Pass by pointer
 
 Since arrays themselves cannot be passed by value, usually a pointer to their first element is passed by value instead. This is often called "**pass by pointer**". Since the size of the array is not retrievable via that pointer, you have to pass a second parameter indicating the size of the array (the classic C solution) or a second pointer pointing after the last element of the array (the C++ iterator solution):
 
@@ -854,7 +888,7 @@ int sum(const int p[8], std::size_t n)   // the 8 has no meaning here
 
 
 
-##### Pass by reference
+#### Pass by reference
 
 Arrays can also be passed by reference:
 
@@ -901,9 +935,9 @@ Note that you can only call such a function template with an actual array of int
 
 
 
-### 5. Common pitfalls when using arrays.
+## 5. Common pitfalls when using arrays.
 
-#### 5.1 Pitfall: Trusting type-unsafe linking.
+### 5.1 Pitfall: Trusting type-unsafe linking.
 
 OK, you’ve been told, or have found out yourself, that globals (namespace scope variables that can be accessed outside the translation unit) are Evil™. But did you know how truly Evil™ they are? Consider the program below, consisting of two files [main.cpp] and [numbers.cpp]:
 
@@ -1028,11 +1062,11 @@ The same paragraph details the variation that is allowed:
 
 This allowed variation does not include declaring a name as an array in one translation unit, and as a pointer in another **translation unit**.
 
-#### 5.2 Pitfall: Doing premature optimization (`memset` & friends).
+### 5.2 Pitfall: Doing premature optimization (`memset` & friends).
 
 
 
-#### 5.3 Pitfall: Using the C idiom to get number of elements.
+### 5.3 Pitfall: Using the C idiom to get number of elements.
 
 With deep C experience it’s natural to write …
 
@@ -1164,7 +1198,7 @@ int main()
 > ```c#
 > test.cpp: 在函数‘void display(const int*)’中:
 > test.cpp:11:47: 错误：对‘n_items(const int*&)’的调用没有匹配的函数
->  #define N_ITEMS( array )       n_items( array )
+> #define N_ITEMS( array )       n_items( array )
 > 
 > ```
 >
@@ -1174,7 +1208,7 @@ How it works: the array is passed *by reference* to `n_items`, and so it does no
 
 With C++11 you can use this also for arrays of local type, and it's the type safe **C++ idiom** for finding the number of elements of an array.
 
-#### 5.4 C++11 & C++14 pitfall: Using a `constexpr` array size function.
+### 5.4 C++11 & C++14 pitfall: Using a `constexpr` array size function.
 
 With C++11 and later it's natural, but as you'll see dangerous!, to replace the C++03 function
 
@@ -1240,144 +1274,4 @@ int main()
 > ```
 > 42
 > ```
->
-
-
-
-## cppreference [Array declaration](https://en.cppreference.com/w/cpp/language/array)
-
-
-
-### initialize array
-
-https://www.dummies.com/programming/cpp/initializing-an-array-in-c/
-
-https://stackoverflow.com/questions/4057948/initializing-a-member-array-in-constructor-initializer
-
-https://stackoverflow.com/questions/2983819/how-initialize-array-of-classes
-
-
-
-
-
-## pointer and array
-
-一维array会decay to 一级pointer，显然两者能够进行对应；static array vs dynamic array，其实dynamic array就是一个pointer；
-
-因为array和memory的结构的相同：都是sequence，这就导致了两者的类似；
-
-array和pointer有着相同的arithmetic；
-
-上述两个相似点，导致了pointer和array的很多地方的相似；
-
-Multidimensional array和multiple-level pointer有着对应关系的；可以使用一个multiple-level pointer来访问一个multidimensional array，典型的例子：
-
-- `char **argv`和`char* argv[]`
-- 
-
-
-
-Multidimensional array和multiple-level pointer都可以使用containing关系来进行理解；
-
-
-
-
-
-n-dimensional array、array of pointer、multiple-degree and n-dimensional array
-
-https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c?noredirect=1&lq=1
-
-
-
-## Multidimensional arrays
-
-Multidimensional arrays是典型的containing关系，我们是可以使用recursion来对它进行计算的；
-
-[n-dimensional c++ array. How`s that possible?](https://stackoverflow.com/questions/11583747/n-dimensional-c-array-hows-that-possible)
-
-I find a library analogy very useful to visualizing arrays of multiple dimensions:
-
-- 8-dimensional array is a library
-- 7-dimensional array is a floor in a library
-- 6-dimensional array is a room on a floor in a library
-- 5-dimensional array is a bookcase in a room on a floor in a library
-- 4-dimensional array is a shelf in a bookcase in a room on a floor in a library
-- 3-dimensional array is a book on a shelf in a bookcase in a room on a floor in a library
-- 2-dimensional array is a page in a book on a shelf in a bookcase in a room on a floor in a library
-- 1-dimensional array is a line on a page in a book on a shelf in a bookcase in a room on a floor in a library
-- 0-dimensional array is a character in a line on a page in a book on a shelf in a bookcase in a room on a floor in a library
-
-
-
-## Get length of array in C and C++
-
-### Length in term of element in the array
-
-关于此，在“5.3 Pitfall: Using the C idiom to get number of elements.”中进行了详细说明；
-
-### Length in term of byte
-
-当我们使用c api来操作array的时候，需要使用length in term of byte，主要使用`sizeof`。
-
-## [With arrays, why is it the case that a[5] == 5[a]?](https://stackoverflow.com/questions/381542/with-arrays-why-is-it-the-case-that-a5-5a)
-
-As Joel points out in [Stack Overflow podcast #34](https://stackoverflow.blog/2008/12/18/podcast-34/), in [C Programming Language](https://rads.stackoverflow.com/amzn/click/com/0131103628) (aka: K & R), there is mention of this property of arrays in C: `a[5] == 5[a]`
-
-Joel says that it's because of pointer arithmetic but I still don't understand. **Why does `a[5] == 5[a]`**?
-
-
-
-### [A](https://stackoverflow.com/a/381549)
-
-The C standard defines the `[]` operator as follows:
-
-```
-a[b] == *(a + b)
-```
-
-Therefore `a[5]` will evaluate to:
-
-```c
-*(a + 5)
-```
-
-and `5[a]` will evaluate to:
-
-```c
-*(5 + a)
-```
-
-`a` is a pointer to the first element of the array. `a[5]` is the value that's 5 **elements** further from `a`, which is the same as `*(a + 5)`, and from elementary school math we know those are equal (addition is [commutative](https://en.wikipedia.org/wiki/commutative)).
-
-### [A](https://stackoverflow.com/a/381554)
-
-```c++
-#include <iostream>
-
-int main(int argc, char** argv)
-{
-	std::cout << std::boolalpha << std::endl;
-	bool Equal = "ABCD"[2] == 2["ABCD"];
-	std::cout << Equal << std::endl;
-	Equal = 2["ABCD"] == 'C';
-	std::cout << Equal << std::endl;
-	Equal = "ABCD"[2] == 'C';
-	std::cout << Equal << std::endl;
-}
-
-```
-
-
-
-
-
-## TODO
-
-[2 Dimensional Char Array C++](https://stackoverflow.com/questions/27697879/2-dimensional-char-array-c)
-
-[Two-Dimensional Char Array](http://www.cplusplus.com/forum/beginner/53734/)
-
-[valarray](http://www.cplusplus.com/reference/valarray/valarray/)
-
-[Promoting a raw pointer to valarray](https://stackoverflow.com/questions/15077173/promoting-a-raw-pointer-to-valarray)
 
