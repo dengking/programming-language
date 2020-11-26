@@ -819,6 +819,8 @@ Although you cannot assign arrays directly, you *can* assign structs and classes
 **Arrays cannot be passed by value**. You can either pass them **by pointer** or **by reference**.
 
 > NOTE: "array-to-pointer decay"使得pass by pointer非常便利。
+>
+> 
 
 #### Pass by pointer
 

@@ -1,12 +1,14 @@
 # Array
 
+本章讨论array，重要参考如下两篇文章:
+
+1) stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c)
+
+2) cppreference [Array declaration](https://en.cppreference.com/w/cpp/language/array)
 
 
-## cppreference [Array declaration](https://en.cppreference.com/w/cpp/language/array)
 
-
-
-### initialize array
+## Initialize array
 
 https://www.dummies.com/programming/cpp/initializing-an-array-in-c/
 
@@ -18,7 +20,7 @@ https://stackoverflow.com/questions/2983819/how-initialize-array-of-classes
 
 
 
-## pointer and array
+## Pointer and array
 
 一维array会decay to 一级pointer，显然两者能够进行对应；static array vs dynamic array，其实dynamic array就是一个pointer；
 
@@ -30,14 +32,11 @@ array和pointer有着相同的arithmetic；
 
 Multidimensional array和multiple-level pointer有着对应关系的；可以使用一个multiple-level pointer来访问一个multidimensional array，典型的例子：
 
-- `char **argv`和`char* argv[]`
-- 
+1 `char **argv`和`char* argv[]`
 
 
 
 Multidimensional array和multiple-level pointer都可以使用containing关系来进行理解；
-
-
 
 
 
@@ -51,7 +50,7 @@ https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c?noredirect=
 
 Multidimensional arrays是典型的containing关系，我们是可以使用recursion来对它进行计算的；
 
-[n-dimensional c++ array. How`s that possible?](https://stackoverflow.com/questions/11583747/n-dimensional-c-array-hows-that-possible)
+### stackoverflow [n-dimensional c++ array. How`s that possible?](https://stackoverflow.com/questions/11583747/n-dimensional-c-array-hows-that-possible)
 
 I find a library analogy very useful to visualizing arrays of multiple dimensions:
 
@@ -76,6 +75,8 @@ I find a library analogy very useful to visualizing arrays of multiple dimension
 ### Length in term of byte
 
 当我们使用c api来操作array的时候，需要使用length in term of byte，主要使用`sizeof`。
+
+
 
 ## [With arrays, why is it the case that a[5] == 5[a]?](https://stackoverflow.com/questions/381542/with-arrays-why-is-it-the-case-that-a5-5a)
 
