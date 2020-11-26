@@ -48,29 +48,3 @@ The comma in various comma-separated lists, such as function argument lists (`f(
 
 
 
-## Examples
-
-### Use expression SFINAE on the return type
-
-#### cppreference [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
-
-其中给出的例子非常具有代表性。
-
-#### [What is decltype with two arguments?](https://stackoverflow.com/questions/16044514/what-is-decltype-with-two-arguments)
-
-
-
-[A](https://stackoverflow.com/a/16044577)
-
-```c++
-#include <type_traits>
-
-int main()
-{
-	static_assert(std::is_same<decltype(42, 3.14), double>::value, "Will not fire");
-}
-
-```
-
-> NOTE: `42, 3.14`中的`,`为comma operator。
-

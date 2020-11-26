@@ -2,7 +2,7 @@
 
 ## cppreference [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
 
-A common idiom is to use expression SFINAE on the return type, where the expression uses the comma operator, whose left subexpression is the one that is being examined (cast to `void` to ensure the **user-defined operator comma** on the returned type is not selected), and the right subexpression has the type that the function is supposed to return.
+A common idiom is to use expression SFINAE on the return type, where the expression uses the **comma operator**, whose left subexpression is the one that is being examined (cast to `void` to ensure the **user-defined operator comma** on the returned type is not selected), and the right subexpression has the type that the function is supposed to return.
 
 > NOTE: “cast to `void` to ensure the **user-defined operator comma** on the returned type is not selected”是利用[Discarded-value expressions](https://en.cppreference.com/w/cpp/language/expressions#Discarded-value_expressions)的性质。
 
@@ -259,3 +259,36 @@ Normative wording:
 > p7 **The substitution occurs in all types and expressions** that are used in the function type and in template parameter declarations. **The expressions include not only constant expressions** such as those that appear in array bounds or as nontype template arguments **but also general expressions** (i.e., non-constant expressions) **inside** `sizeof`, **`decltype`**, and other contexts that allow non-constant expressions.
 >
 > p8 If a substitution results in an invalid type or expression, type deduction fails. An invalid type or expression is one that would be ill-formed if written using the substituted arguments. [...]
+
+
+
+
+
+
+
+## Examples
+
+### Use expression SFINAE on the return type
+
+#### cppreference [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
+
+其中给出的例子非常具有代表性。
+
+#### [What is decltype with two arguments?](https://stackoverflow.com/questions/16044514/what-is-decltype-with-two-arguments)
+
+
+
+[A](https://stackoverflow.com/a/16044577)
+
+```c++
+#include <type_traits>
+
+int main()
+{
+	static_assert(std::is_same<decltype(42, 3.14), double>::value, "Will not fire");
+}
+
+```
+
+> NOTE: `42, 3.14`中的`,`为comma operator。
+
