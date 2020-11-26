@@ -112,26 +112,6 @@ int main()
 }
 ```
 
-## 为什么需要type inference? 
-
-### 更好的支持generic programming
-
-通过上面的描述可以看出，**type inference**是**generic programming**所必须的，在下面文章中对此进行了说明:
-
-1) 在wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)中对此有着很好的总结: 
-
-> With the introduction of [templates](https://en.wikipedia.org/wiki/Template_(programming)) into the C++ programming language, and the advent of [generic programming](https://en.wikipedia.org/wiki/Generic_programming) techniques pioneered by the [Standard Template Library](https://en.wikipedia.org/wiki/Standard_Template_Library), the need for a mechanism for obtaining the type of an [expression](https://en.wikipedia.org/wiki/Expression_(programming)), commonly referred to as `typeof`, was recognized. In generic programming, it is often difficult or impossible to express types that depend on template parameters,[[2\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1478-2)[[3\]](https://en.wikipedia.org/wiki/Decltype#cite_note-cleanup-3) in particular the return type of function template instantiations.[[2\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1478-2)
->
-> One of the cited main motivations for the `decltype` proposal was the ability to write **perfect [forwarding function](https://en.wikipedia.org/wiki/Wrapper_function) templates**.[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8) 
-
-2) `./decltype`
-
-一个典型的需求就是: **perfect forwarding function template**。
-
-### Make C++ more expressive
-
-减轻programmer的工作量，让programmer写更少的code。
-
 
 
 ## 发展概述
@@ -172,6 +152,32 @@ C++17 新增 "Use of auto as the type for a non-type template parameter"，参�
 
 - cppreference [C++17](https://en.cppreference.com/w/cpp/17) # non-type [template parameters](https://en.cppreference.com/w/cpp/language/template_parameters) declared with `auto`
 - Wikipedia C++17
+
+## 为什么需要type inference? 
+
+从上面的**发展概述**来看，C++的一个非常重要的方向是对"type inference"的增强，那我们就需要思考: "为什么需要type inference"。
+
+### 更好的支持generic programming
+
+通过上面的描述可以看出，**type inference**是**generic programming**所必须的，在下面文章中对此进行了说明:
+
+1) 在wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)中对此有着很好的总结: 
+
+> With the introduction of [templates](https://en.wikipedia.org/wiki/Template_(programming)) into the C++ programming language, and the advent of [generic programming](https://en.wikipedia.org/wiki/Generic_programming) techniques pioneered by the [Standard Template Library](https://en.wikipedia.org/wiki/Standard_Template_Library), the need for a mechanism for obtaining the type of an [expression](https://en.wikipedia.org/wiki/Expression_(programming)), commonly referred to as `typeof`, was recognized. In generic programming, it is often difficult or impossible to express types that depend on template parameters,[[2\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1478-2)[[3\]](https://en.wikipedia.org/wiki/Decltype#cite_note-cleanup-3) in particular the return type of function template instantiations.[[2\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1478-2)
+>
+> One of the cited main motivations for the `decltype` proposal was the ability to write **perfect [forwarding function](https://en.wikipedia.org/wiki/Wrapper_function) templates**.[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8) 
+
+2) `./decltype`
+
+一个典型的需求就是: **perfect forwarding function template**。
+
+### Make C++ more expressive
+
+减轻programmer的工作量，让programmer写更少的code。
+
+
+
+
 
 ## cppreference [Template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction)
 
