@@ -94,3 +94,81 @@ void f1(T& buff) {
 
 
 
+It is because *arrays* cannot be passed *by value* to a function. So in order to make it work, the array decays into a pointer which then gets passed to the function *by value*.
+
+In other words, passing an array by value is akin to *initializing* an array with another array, but in C++ *an array* cannot be *initialized* with another array:
+
+```cpp
+char buff[3] = {0,0,0};
+char x[3] = buff; //error 
+```
+
+So if an array appears on the right hand side of `=`, the left hand side has to be either `pointer` or `reference` type:
+
+```cpp
+char *y = buff; //ok - pointer
+char (&z)[3] = buff; //ok - reference
+```
+
+Demo : http://www.ideone.com/BlfSv
+
+It is exactly for the same reason `auto` is inferred differently in each case below (note that `auto` comes with C++11):
+
+```cpp
+auto a = buff; //a is a pointer - a is same as y (above)
+std::cout << sizeof(a) << std::endl; //sizeof(a) == sizeof(char*)
+
+auto & b = buff; //b is a reference to the array - b is same as z (above)
+std::cout << sizeof(b) << std::endl; //sizeof(b) == sizeof(char[3])
+```
+
+Output:
+
+```cpp
+4 //size of the pointer
+3 //size of the array of 3 chars
+```
+
+Demo : http://www.ideone.com/aXcF5
+
+
+
+### C string 
+
+```C++
+#include <iostream>
+
+template<class T>
+void f(T buff)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << "f:buff size:" << sizeof(buff) << std::endl;       //prints 4
+}
+
+template<class T>
+void f1(T &buff)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << "f:buff size:" << sizeof(buff) << std::endl;       //prints 3
+}
+
+int main(int argc, char *argv[])
+{
+	f("abc");
+	f1("abc");
+	return 0;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序的输出如下:
+>
+> ```C++
+> void f(T) [with T = const char*]
+> f:buff size:8
+> void f1(T&) [with T = const char [4]]
+> f:buff size:4
+> ```
+>
+> 
