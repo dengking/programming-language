@@ -149,9 +149,9 @@ See also: [Duck typing](https://en.wikipedia.org/wiki/Duck_typing)
 
 
 
-### Polymorphism is a map/dispatch
+### Polymorphism: dispatch to concrete/implementation **automatically**
 
-本节标题的含义是：多态是一种映射/派发；下面是我polymorphism的本质的思考:
+下面是我polymorphism的本质的思考:
 
 1) 描述了一种one-to-many关系:
 

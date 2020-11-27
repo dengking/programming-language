@@ -10,19 +10,17 @@
 
 ### 1) dispatch发生的时间
 
-1 compile-time
+1 static: compile-time
 
-2 runtime
+2 dynamic: runtime
 
-dispatch发生于runtime，显然是late binding，因此，如果采用这种实现方式，则它需要存储映射关系。
+dispatch发生于runtime，显然是late binding，因此，如果采用这种实现方式，则它需要存储映射关系。在下面的 wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # [Implementation aspects](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Implementation_aspects) 章节中也对这个问题进行了讨论。
 
 ### 2) 比较算法
 
 基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现
 
 ### 3) relationship between abstract and concrete
-
-
 
 主要是描述abstract 和 concrete之间的关系:
 
@@ -33,6 +31,8 @@ dispatch发生于runtime，显然是late binding，因此，如果采用这种�
 
 
 ## wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # [Implementation aspects](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Implementation_aspects)
+
+
 
 ### Static and dynamic polymorphism
 
@@ -59,7 +59,7 @@ Polymorphism can be distinguished by when the **implementation** is selected: st
 
 However, it is possible to achieve static polymorphism with subtyping through more sophisticated use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming), namely the [curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern).
 
-> NOTE: 这是c++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
+> NOTE: 这是C++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
 
 
 
@@ -89,6 +89,8 @@ Dispatch描述的是**method/implementation dispatch**、**method/implementation
 一个抽象符号，可以被多种符合条件的具体符号替换。
 
 依然符合"一种抽象多种实现"
+
+
 
 ## Polymorphism总结
 

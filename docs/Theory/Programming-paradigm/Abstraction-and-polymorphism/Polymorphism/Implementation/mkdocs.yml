@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
+    - Late-binding: Late-binding.md
     - Dynamic-Dispatch: Dynamic-Dispatch.md
+    
