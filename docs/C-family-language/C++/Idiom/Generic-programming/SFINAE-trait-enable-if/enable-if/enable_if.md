@@ -8,13 +8,13 @@
 
 ### [Introduction](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#core.enable_if.introduction)
 
-The `enable_if` family of templates is a set of tools to allow a **function template** or a **class template specialization** to include or exclude itself from a set of matching functions or specializations based on properties of its template arguments. For example, one can define function templates that are only enabled for, and thus only match, an arbitrary set of types defined by a traits class. The `enable_if` templates can also be applied to enable class template specializations. Applications of `enable_if` are discussed in length in [[1\]](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#REF1) and [[2\]](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#REF2).
+The `enable_if` family of templates is a set of tools to allow a **function template** or a **class template specialization** to include or exclude itself from a set of **matching functions** or **specializations** based on properties of its template arguments. For example, one can define function templates that are only enabled for, and thus only match, an arbitrary set of types defined by a traits class. The `enable_if` templates can also be applied to enable class template specializations. Applications of `enable_if` are discussed in length in [[1\]](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#REF1) and [[2\]](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#REF2).
 
 > NOTE: 通过`enable_if`来实现对SFINAE的控制
 
 #### [Background](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#core.enable_if.introduction.background)
 
-The `enable_if` templates are tools for controlled creation of the SFINAE conditions.
+The `enable_if` templates are tools for controlled creation of the **SFINAE conditions**.
 
 > NOTE: 这段话的思想在下一篇中表述为“enable_if - a compile-time switch for templates”
 

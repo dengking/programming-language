@@ -36,11 +36,15 @@ Function overload、template specialization、OOP subclass都是对某种“特�
 
 ### Static polymorphism and template metaprogramming
 
-c++的static polymorphism是由compiler来实现，C++的实现允许programmer通过template metaprogramming来对static polymorphism的过程进行控制，这是C++的核心特性，主要的实现方式：
+C++的static polymorphism是由compiler来实现，C++的实现允许programmer通过**template metaprogramming**来对static polymorphism的过程进行控制，这是C++的核心特性，主要的实现方式：
 
 - trait
 - sfinae
 - `enable_if`
+- tag dispatch
+- `void_t` C++17
+- concept C++20
+- constexp if C++17
 
 上诉三者在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if`中总结了。
 
