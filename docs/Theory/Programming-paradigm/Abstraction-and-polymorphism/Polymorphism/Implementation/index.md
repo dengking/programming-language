@@ -36,9 +36,11 @@ Abstraction 和 polymorphism是现代programming language的核心，因此无�
 
 触发我思考这个问题的是下面这篇文章，其中描述了behavior-based、inheritance-based，我基于其中提出的behavior-based、inheritance-based，综合考虑了一些其他类型的polymorphism，进一步进行了整理。
 
-### 1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
 
-> NOTE: 这篇文章收录在`Theory\Programming-paradigm\Generic-programming\Implementation`中
+
+### drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
+
+> NOTE: 这篇文章收录在`C++\Language-reference\Template\Programming-paradigm\Generic-programming\Template-is-behavior-based`中
 
 When we wish to select from a set of classes at **runtime**, C++ requires that those classes be related by **inheritance**. When we wish to select from a set of types at **compile time**, the relationship between those types is more subtle(难以捉摸的、微妙的). The types need be related only indirectly, and only by their **behavior**.
 
@@ -62,15 +64,29 @@ The C++ community does not have a generally accepted term for this kind of **beh
 
 [Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) 
 
+Inheritance-based其实也能够实现behavior-based，但是它是更加constrained，因为它强制要求了type inheritance关系；
+
 #### Specialization-based
 
-C++ template specialization。
+C++ template specialization。之所以将它归为"type-based"，是因为C++要求primary template、specialization属于同一个。
 
 ### Behavior-based
 
+
+
 #### Duck typing
 
+Duck typing是天生的behavior-based:
 
+> if it quacks like a duck, and it fly like a duck, it is a duck
+
+#### C++ Template
+
+C++ Template也是behavior-based，参见:
+
+1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
+
+2) `C++\Language-reference\Template\Programming-paradigm\Generic-programming\Template-is-behavior-based`章节
 
 ### Name-based
 
@@ -78,25 +94,9 @@ C++ template specialization。
 
 [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) 
 
-### Behavior-based and type-based and inheritance-based
 
-
-
-是 type-based 
-
-是 inheritance-based
 
 [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) 不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
-
-> 
-
-
-
-duck typing是天生的behavior-based
-
-inheritance-based其实也能够实现behavior-based，但是它是更加constrained，因为它强制要求了type inheritance关系；
-
-
 
 
 
@@ -184,19 +184,17 @@ Static polymorphism的dispatch发生于compile time，显然是early binding，�
 
 
 
-## Polymorphism总结
+## Dispatch采用的比较算法
 
-不同的语言、不同的polymorphism，实现dispatch的方式是不同的，dispatch的对象也不同:
+不同的polymorphism采用的比较算法是不同的，下面对此进行总结:
 
-|                                                              | substitution      | dispatch/method selection |
-| ------------------------------------------------------------ | ----------------- | ------------------------- |
-| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | no                | yes                       |
-| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | yes(里氏替换法则) | yes                       |
-| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | yes               | no                        |
+Subtyping polymorphism: 基于class hierarchy；
 
-上面所总结的仅仅是表面的内容，各种具体的programming language的实现，比这个要复杂，具体到programming language，又存在着千差万别，上述总结是可能存在错误的。
+C++ template specialization、overload: 基于type odering；
 
+Python polymorphism: 基于class hierarchy；
 
+具体参见各programming language中的描述。
 
 ## draft
 
