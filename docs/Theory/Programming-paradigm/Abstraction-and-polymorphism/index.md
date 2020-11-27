@@ -36,10 +36,10 @@ Abstraction and polymorphism是现代programming language的核心所在，本�
 
 2) 一个abstraction可以有多个concrete/implementation;
 
-Concrete: 
+Concrete的一些例子: 
 
 - Is-a: concept之间的关系: 从更加abstract的concept到更加concrete的concept
-- 对某种具体的情况进行说明: 比如 template specialization、subclass
+- 对某种具体的情况进行说明: 比如 C++ template specialization、OOP subclass(参见对应章节)
 
 Implementation: 实现抽象的概念
 
@@ -55,11 +55,11 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 
 下面是我之前想到的一些观点: 
 
-1) **Program to an abstraction and then dispatch to concrete automatically**
+1) **Program to an abstraction and polymorphism**
 
 这是我们遵循"Program to an abstraction"的原因，在`./Program to an abstraction` 章节中会对此进行详细说明。
 
-2) Polymorphism是实现abstraction的基础
+2) Polymorphism是实现conceptual model/abstraction model的基础
 
 
 

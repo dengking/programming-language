@@ -9,5 +9,6 @@ nav:
     - Function-template: Function-template
     - Variable-template: Variable-template
     - Parameter-pack: Parameter-pack
+    - SFINAE: SFINAE
     - Programming-paradigm: Programming-paradigm
     

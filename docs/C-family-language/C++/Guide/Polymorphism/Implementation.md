@@ -10,11 +10,11 @@
 
 下面是根据wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的分类方法进行的分类: 
 
-| classification                                               |                           |
-| ------------------------------------------------------------ | ------------------------- |
-| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | overload                  |
-| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | template                  |
-| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | sub-type / virtual method |
+| classification                                               |                          |
+| ------------------------------------------------------------ | ------------------------ |
+| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | overload                 |
+| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | template                 |
+| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | subtype / virtual method |
 
 正如在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中所总结的:
 

@@ -1,12 +1,10 @@
 # Implementation of polymorphism
 
+需要注意的是: 本文所描述的implementation并不局限于某种特定的programing language，而是对implementation of polymorphism中可能涉及的问题、解决方案的总结。现代programming language，往往支持多种programming paradigm，并且再加上它们的实现方式的特殊，导致了它们的polymorphism的implementation是存在巨大差异的，因此很难进行统一的、简单的描述。
 
+## Common issue 
 
-## 内容概述
-
-在前面我们已经知道: 
-
-本文讨论implementation of polymorphism，可以从多个方面对implementation of polymorphism进行思考:
+本节讨论在implementation of polymorphism中的一些common issue:
 
 ### 1) dispatch发生的时间
 
@@ -14,101 +12,39 @@
 
 2 dynamic: runtime
 
-dispatch发生于runtime，显然是late binding，因此，如果采用这种实现方式，则它需要存储映射关系。在下面的 wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # [Implementation aspects](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Implementation_aspects) 章节中也对这个问题进行了讨论。
+在下面的"Static and dynamic polymorphism"章节进行了总结。
 
-### 2) 比较算法
+### 2) relationship between abstract and concrete
 
-基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现
+描述abstract 和 concrete之间的关系，在下面的"Relationship between abstract and concrete"章节进行了总结。
 
-### 3) relationship between abstract and concrete
+### 3) dispatch采用的比较算法
 
-主要是描述abstract 和 concrete之间的关系:
+> 基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现。
 
-- inheritance-based
-- behavior-based
-- type-based
+无论是哪种polymorphism，在实现的时候都需要考虑one-to-many的问题，即需要考虑从set  of candidates(concrete/implementation)中的选择哪一个来作为最终的实现。显然这有一个**比较**/**排序**的过程，在文章`Abstract-and-concrete`、`Abstraction-and-polymorphism`(`Theory\Programming-paradigm\Abstraction-and-polymorphism`)中，都是采用的informal的描述: 选择**最合适**的那一个。
 
+到底哪个**最合适**的呢？不同的polymorphism有不同的标准，采用不同的比较算法，当考虑实现的时候，需要进行准确、formal定义。
 
+> NOTE: 显然这是涉及ordering theory的
 
-## wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # [Implementation aspects](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Implementation_aspects)
+Dispatch所采用的比较算法是会考虑relationship between abstract and concrete的。
 
+## Relationship between abstract and concrete
 
+Abstraction 和 polymorphism是现代programming language的核心，因此无论使用何种programming language，当我们按照"program to abstraction"原则进行开发的时候，都需要描述abstract和concrete/implementation，因此都涉及描述abstract和concrete/implementation之间的relationship(关系)
 
-### Static and dynamic polymorphism
+### Type-based
 
-*Main articles:* [Static polymorphism](https://en.wikipedia.org/wiki/Static_polymorphism)*,* [Late binding](https://en.wikipedia.org/wiki/Late_binding)*, and* [Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
+inheritance-based
 
-Polymorphism can be distinguished by when the **implementation** is selected: statically (at compile time) or dynamically (at run time, typically via a [virtual function](https://en.wikipedia.org/wiki/Virtual_function)). This is known respectively as *[static dispatch](https://en.wikipedia.org/wiki/Static_dispatch)* and *[dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch),* and the corresponding forms of polymorphism are accordingly called *static polymorphism* and *dynamic polymorphism*.
-
-|                   Static(at compile time)                    |                     Dynamic(at run time)                     |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [static dispatch](https://en.wikipedia.org/wiki/Static_dispatch) | [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) |
-| [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) |
-|        [Static/early binding](Static/early binding )         | [Late/dynamic binding](https://en.wikipedia.org/wiki/Late_binding) |
-
-
-
-> NOTE: [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)和[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)都属于[Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)，而[Subtyping](https://en.wikipedia.org/wiki/Subtyping)则属于[dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism)。
-
-| Static/dynamic                                               | Example                                                      |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)、[Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism) |
-| [Dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [Subtyping](https://en.wikipedia.org/wiki/Subtyping)         |
-
-
-
-However, it is possible to achieve static polymorphism with subtyping through more sophisticated use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming), namely the [curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern).
-
-> NOTE: 这是C++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
-
-
-
-> NOTE: 原文关于实现的解释仅仅涉及了static和dynamic，其实不同的programming language的polymorphisim的实现是截然不同的，关于这些实现，将在不同的programming language中进行具体的展开，下面是对此的一些总结：
->
-> |      | static                                 | dynamic                                       |
-> | ---- | -------------------------------------- | --------------------------------------------- |
-> | 实现 | compiler实现，无需在内存中保存映射关系 | 需要在内存中保存所有的candidate之间的映射关系 |
-> | 例子 | C++ overload、template specialization  | C++ virtual method、python attribute find     |
->
-> 关于C++ implementation of polymorphism，参加文章`C-family-language\C++\Guide\Implementation-of-polymorphism\index.md`
-
-
-
-## Dispatch 和 substitute的含义
-
-在polymorphism中，dispatch 和 substitute是出现频率非常高的词语；我们需要考虑在polymorphism中它们的含义是什么。
-
-Dispatch描述的是**method/implementation dispatch**、**method/implementation selection**，在wikipedia [Static dispatch](https://en.wikipedia.org/wiki/Static_dispatch) 中有如下描述:
-
-> It is a form of *method dispatch,* which describes how a language or environment will select which implementation of a method or function to use.
-
-"一个抽象，可能有多个实现"，dispatch是指在这些implementations的method中选择一个。
-
-### Substitution的含义
-
-一个抽象符号，可以被多种符合条件的具体符号替换。
-
-依然符合"一种抽象多种实现"
-
-
-
-## Polymorphism总结
-
-不同的语言、不同的polymorphism，实现dispatch的方式是不同的，dispatch的对象也不同:
-
-|                                                              | substitution      | dispatch/method selection |
-| ------------------------------------------------------------ | ----------------- | ------------------------- |
-| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | no                | yes                       |
-| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | yes(里氏替换法则) | yes                       |
-| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | yes               | no                        |
-
-上面所总结的仅仅是表面的内容，各种具体的programming language的实现，比这个要复杂，具体到programming language，又存在着千差万别，上述总结是可能存在错误的。
+### Behavior-based
 
 
 
 
 
-## Behavior-based and type-based and inheritance-based
+### Behavior-based and type-based and inheritance-based
 
 
 
@@ -145,6 +81,106 @@ The C++ community does not have a generally accepted term for this kind of **beh
 duck typing是天生的behavior-based
 
 inheritance-based其实也能够实现behavior-based，但是它是更加constrained，因为它强制要求了type inheritance关系；
+
+
+
+
+
+## Dispatch example
+
+在文章`Abstract-and-concrete`中，对dispatch的定义如下: 
+
+> 将从abstract到concrete/implementation的过程称为**dispatch**
+
+本节对各种programming language的polymorphism的dispatch进行总结，下面是一些例子: 
+
+| programming language | polymorphism              | dispatch                       |
+| -------------------- | ------------------------- | ------------------------------ |
+| **C++**              | subtyping                 | (virtual)method                |
+|                      | ad hoc(function overload) | function                       |
+|                      | Parametric                | template specialization        |
+| **Python**           | subtyping/duck typing     | attribute(method、member data) |
+
+
+
+## Substitution的含义
+
+一个抽象符号，可以被多种符合条件的具体符号替换。
+
+依然符合"一种抽象多种实现"
+
+
+
+## Static and dynamic polymorphism
+
+本节对static 和 dynamic polymorphism进行总结。
+
+### wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # [Implementation aspects](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Implementation_aspects) # Static and dynamic polymorphism
+
+
+
+*Main articles:* [Static polymorphism](https://en.wikipedia.org/wiki/Static_polymorphism)*,* [Late binding](https://en.wikipedia.org/wiki/Late_binding)*, and* [Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
+
+Polymorphism can be distinguished by when the **implementation** is selected: statically (at compile time) or dynamically (at run time, typically via a [virtual function](https://en.wikipedia.org/wiki/Virtual_function)). This is known respectively as *[static dispatch](https://en.wikipedia.org/wiki/Static_dispatch)* and *[dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch),* and the corresponding forms of polymorphism are accordingly called *static polymorphism* and *dynamic polymorphism*.
+
+|                   Static(at compile time)                    |                     Dynamic(at run time)                     |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| [static dispatch](https://en.wikipedia.org/wiki/Static_dispatch) | [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) |
+| [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) |
+|        [Static/early binding](Static/early binding )         | [Late/dynamic binding](https://en.wikipedia.org/wiki/Late_binding) |
+
+
+
+> NOTE: 
+>
+> 现代programming language的 [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) 应该属于 [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) ;
+>
+> 现代programming language的 [Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) 应该属于 [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) ;
+>
+> 不同programming language实现 [Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism) 的方式不同，参见`Theory\Programming-paradigm\Generic-programming\Implementation`章节。
+
+
+
+However, it is possible to achieve static polymorphism with subtyping through more sophisticated use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming), namely the [curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern).
+
+> NOTE: 这是C++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
+
+### Implementation
+
+#### Dynamic polymorphism
+
+Dynamic polymorphism的dispatch发生于runtime，显然是late binding；因此，如果采用这种实现方式，则它需要存储**abstraction**和所有的**candidate**、**concrete**、**implementation**之间的**映射关系**。
+
+由于dispatch发生于runtime，则必然存在overhead。
+
+#### Static polymorphism
+
+Static polymorphism的dispatch发生于compile time，显然是early binding，由compiler进行dispatch；因此，如果采用这种实现方式，无需在内存中保存**映射关系**。
+
+由于dispatch发生于compile time，没有任何overhead。
+
+#### Example
+
+|      | static                                | dynamic                                       |
+| ---- | ------------------------------------- | --------------------------------------------- |
+| 实现 | compiler实现，                        | 需要在内存中保存所有的candidate之间的映射关系 |
+| 例子 | C++ overload、template specialization | C++ virtual method、python attribute find     |
+
+关于C++ implementation of polymorphism，参加文章`C-family-language\C++\Guide\Implementation-of-polymorphism\index.md`
+
+
+
+## Polymorphism总结
+
+不同的语言、不同的polymorphism，实现dispatch的方式是不同的，dispatch的对象也不同:
+
+|                                                              | substitution      | dispatch/method selection |
+| ------------------------------------------------------------ | ----------------- | ------------------------- |
+| [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | no                | yes                       |
+| [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | yes(里氏替换法则) | yes                       |
+| [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | yes               | no                        |
+
+上面所总结的仅仅是表面的内容，各种具体的programming language的实现，比这个要复杂，具体到programming language，又存在着千差万别，上述总结是可能存在错误的。
 
 
 
