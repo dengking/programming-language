@@ -34,7 +34,7 @@ Dispatch所采用的比较算法是会考虑relationship between abstract and co
 
 Abstraction 和 polymorphism是现代programming language的核心，因此无论使用何种programming language，当我们按照"program to abstraction"原则进行开发的时候，都需要描述(one)abstract和(multiple)concrete/implementation，因此都涉及描述abstract和concrete/implementation之间的relationship(关系)，或者说: 如何将multiple concrete/implementation 聚集在一起。不同的programming language、不同的polymorphism采用不同的方式，本节对此进行总结。
 
-触发我思考这个问题的是下面这篇文章，其中描述了Behavior-based、inheritance-based。
+触发我思考这个问题的是下面这篇文章，其中描述了behavior-based、inheritance-based，我基于其中提出的behavior-based、inheritance-based，综合考虑了一些其他类型的polymorphism，进一步进行了整理。
 
 ### 1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
 
