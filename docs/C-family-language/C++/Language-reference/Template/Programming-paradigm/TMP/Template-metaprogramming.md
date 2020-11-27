@@ -2,7 +2,7 @@
 
 c++ template是属于template metaprogramming流派的，在`Theory\Programming-paradigm\Metaprogramming`中对Metaprogramming进行了介绍。
 
-## 维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)
+## wikipedia [Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)
 
 **Template metaprogramming** (**TMP**) is a [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) technique in which [templates](https://en.wikipedia.org/wiki/Generic_programming) are used by a [compiler](https://en.wikipedia.org/wiki/Compiler) to generate temporary [source code](https://en.wikipedia.org/wiki/Source_code), which is merged by the compiler with the rest of the source code and then compiled. The **output** of these templates include [compile-time](https://en.wikipedia.org/wiki/Compile_time) [constants](https://en.wikipedia.org/wiki/Constant_(programming)), [data structures](https://en.wikipedia.org/wiki/Data_structure), and complete [functions](https://en.wikipedia.org/wiki/Function_(computer_science)). The use of templates can be thought of as [compile-time execution](https://en.wikipedia.org/wiki/Compile_time_function_execution). The technique is used by a number of languages, the best-known being [C++](https://en.wikipedia.org/wiki/C%2B%2B), but also [Curl](https://en.wikipedia.org/wiki/Curl_programming_language), [D](https://en.wikipedia.org/wiki/D_programming_language), and [XL](https://en.wikipedia.org/wiki/XL_Programming_Language).
 

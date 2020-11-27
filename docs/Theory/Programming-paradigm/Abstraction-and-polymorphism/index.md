@@ -35,11 +35,11 @@ Abstraction and polymorphism是现代programming language的核心所在，本�
 Concrete: 
 
 - Is-a: concept之间的关系: 从更加abstract的concept到更加concrete的concept
-- 对某种具体的情况进行说明: specialization
+- 对某种具体的情况进行说明: 比如 template specialization、subclass
 
 Implementation: 实现抽象的概念
 
-3) Dispatch: 从abstract到concrete/implementation
+3) Dispatch: 从abstract到concrete/implementation的过程
 
 4) Polymorphism: dispatch to concrete/implementation **automatically**
 

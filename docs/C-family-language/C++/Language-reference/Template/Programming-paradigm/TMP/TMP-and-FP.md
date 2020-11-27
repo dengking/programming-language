@@ -1,4 +1,4 @@
-non-type template parameter的computation，重要以template parameter pack的computation、recursion为基础来进行总结。
+non-type template parameter的computation，主要以template parameter pack的computation、recursion为基础来进行总结。
 
 
 
@@ -23,3 +23,21 @@ template metaprogramming can be seen as a form of functional programming
 
 
 ## template recursion function
+
+
+
+
+
+## TMP VS functional programming
+
+C++: template and functional programming 
+
+parse tree、recursion 
+
+https://en.wikipedia.org/wiki/Expression_templates 
+
+https://en.wikipedia.org/wiki/Spirit_Parser_Framework 
+
+https://www.drdobbs.com/cpp/the-spirit-parser-library-inline-parsing/184401692 
+
+这让我想到了：template is Turing-complete的
