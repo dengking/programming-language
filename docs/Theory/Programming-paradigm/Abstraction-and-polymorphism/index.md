@@ -34,6 +34,8 @@ Abstraction and polymorphism是现代programming language的核心所在，本�
 
 - Design to abstraction
 
+
+
 2) 一个abstraction可以有多个concrete/implementation;
 
 Concrete的一些例子: 

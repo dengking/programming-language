@@ -32,31 +32,9 @@ Dispatch所采用的比较算法是会考虑relationship between abstract and co
 
 ## Relationship between abstract and concrete
 
-Abstraction 和 polymorphism是现代programming language的核心，因此无论使用何种programming language，当我们按照"program to abstraction"原则进行开发的时候，都需要描述abstract和concrete/implementation，因此都涉及描述abstract和concrete/implementation之间的relationship(关系)
+Abstraction 和 polymorphism是现代programming language的核心，因此无论使用何种programming language，当我们按照"program to abstraction"原则进行开发的时候，都需要描述(one)abstract和(multiple)concrete/implementation，因此都涉及描述abstract和concrete/implementation之间的relationship(关系)，或者说: 如何将multiple concrete/implementation 聚集在一起。不同的programming language、不同的polymorphism采用不同的方式，本节对此进行总结。
 
-### Type-based
-
-inheritance-based
-
-### Behavior-based
-
-
-
-
-
-### Behavior-based and type-based and inheritance-based
-
-
-
-[**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) 是 type-based 
-
-[**Subtyping**](https://en.wikipedia.org/wiki/Subtyping) 是 inheritance-based
-
-[**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) 不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
-
-
-
-在下面文章这描述了Behavior-based、inheritance-based
+触发我思考这个问题的是下面这篇文章，其中描述了Behavior-based、inheritance-based。
 
 ### 1) drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
 
@@ -75,6 +53,42 @@ The C++ community does not have a generally accepted term for this kind of **beh
 2) wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
 
 > This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+
+
+
+### Type-based
+
+#### Inheritance-based
+
+[Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) 
+
+#### Specialization-based
+
+C++ template specialization。
+
+### Behavior-based
+
+#### Duck typing
+
+
+
+### Name-based
+
+需要有相同的name，下面是一些例子: 
+
+[Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) 
+
+### Behavior-based and type-based and inheritance-based
+
+
+
+是 type-based 
+
+是 inheritance-based
+
+[**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) 不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
+
+> 
 
 
 
