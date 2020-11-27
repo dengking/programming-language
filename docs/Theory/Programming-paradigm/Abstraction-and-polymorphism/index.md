@@ -10,7 +10,7 @@
 >
 > conceptual model->使用programming language描述->implementation conceptual model->一个抽象可以有多个concrete/implementation->polymorphism: dispatch to concrete/implementation automatically
 >
-> 参考:
+> 在下面文章中，其实已经对abstraction and polymorphism进行了描述
 >
 > 1) 文章Abstraction
 >
@@ -22,9 +22,13 @@ Abstraction and polymorphism是现代programming language的核心所在，本�
 
 1) 作为software engineer，我们需要解决现实世界中的各种问题，这个过程其实是: **abstraction**(抽象) 并 **model**(建模)，然后使用**programming language**来实现/描述conceptual model，最后将此model应用于实际，从而使实际问题得解;
 
-如何来描述concept？这在文章Abstraction中进行了讨论。
+**如何来描述concept？**
 
-实现conceptual model: 
+这在文章Abstraction中进行了讨论。在programming language中，我们往往使用OOP class来进行描述。
+
+**如何实现conceptual model？**
+
+在文章[Abstraction-principle](./Abstraction-principle.md)中，提出了如下原则: 
 
 - Program to abstraction
 
@@ -51,7 +55,7 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 
 下面是我之前想到的一些观点: 
 
-1) Program to an abstraction and then dispatch to concrete automatically
+1) **Program to an abstraction and then dispatch to concrete automatically**
 
 这是我们遵循"Program to an abstraction"的原因，在`./Program to an abstraction` 章节中会对此进行详细说明。
 

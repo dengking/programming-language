@@ -1,6 +1,6 @@
 # Implementation of polymorphism
 
-在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中讨论了各种polymorphism，本章讨论c++中如何实现polymorphism，这是一个较大的话题。C++中提供了多种polymorphism:
+在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism`中讨论了各种polymorphism，本章讨论C++中如何实现polymorphism，这是一个较大的话题。C++中提供了多种polymorphism:
 
 下面根据static/dynamic进行分类：
 

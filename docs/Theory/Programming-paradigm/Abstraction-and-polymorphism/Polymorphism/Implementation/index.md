@@ -4,13 +4,25 @@
 
 ## 内容概述
 
+在前面我们已经知道: 
+
 本文讨论implementation of polymorphism，可以从多个方面对implementation of polymorphism进行思考:
 
-1) dispatch发生的时间: compile-time/runtime
+### 1) dispatch发生的时间
 
-2) 比较算法: 基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现
+1 compile-time
 
-3) relationship between abstract and concrete:
+2 runtime
+
+dispatch发生于runtime，显然是late binding，因此，如果采用这种实现方式，则它需要存储映射关系。
+
+### 2) 比较算法
+
+基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现
+
+### 3) relationship between abstract and concrete
+
+
 
 主要是描述abstract 和 concrete之间的关系:
 

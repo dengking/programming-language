@@ -4,7 +4,7 @@
 
 ## SFINAE and conditional compiling/dispatch
 
-SFINAE是compiler 编译 template 的**特性**(或者说: 机制、原理)，static polymorphism
+SFINAE是compiler 编译 template 的**特性**(或者说: 机制、原理)，是实现 static polymorphism
 
 在cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)中有如下介绍：
 
