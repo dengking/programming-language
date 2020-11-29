@@ -42,10 +42,17 @@ C++支持template function、template class，它们都可以通过SFINA来进�
 
 
 
-SFINAE 超过type的限制，允许programmer灵活地进行dispatch，比如：
+## SFINAE的condition
 
-- 基于concept进行dispatch
-- 根据消息类型来进行dispatch，消息类型是enum，是integer，不是type，无法按照type来进行dispatch，只能使用SFIANE（AMUSTAPI是一个非常好的例子）
+C++支持非常灵活的SFINAE的condition，下面是对这些condition的一个简单分类: 
+
+1) Type-based condition
+
+基于type requirement/concept进行dispatch，type requirement/concept是generic programming中的概念，参见 `Theory\Programming-paradigm\Generic-programming`章节。
+
+2) Non-type-based condition
+
+之前写过一个应用: 根据消息类型来进行dispatch，消息类型是enum，是integer，不是type，无法按照type来进行dispatch，只能使用`constexpr` function + `std::enable_if`来表达condition(AMUSTAPI是一个非常好的例子)，这种做法超过type的限制，允许programmer灵活地进行dispatch。
 
 
 

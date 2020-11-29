@@ -19,8 +19,6 @@ nav:
     - Object-Generator: Object-Generator
     #
     - Tag-Dispatching: Tag-Dispatching
-    # reflection
-    - Member-Detector: Member-Detector
     # Deduce
     - Return-Type-Resolver: Return-Type-Resolver
     #

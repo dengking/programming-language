@@ -1,8 +1,6 @@
 # Type requirement
 
-在generic programming中，表达type requirement是非常重要的一个内容，generic将此称为**concept**，关于此，参见`Theory\Programming-paradigm\Generic-programming\Type-requirement`章节。
 
-具体到C++，则是指在使用template的过程中，我们需要对template parameter添加type requirement/restriction/constrain，比如希望它具备某种特性，显然这就是`C++` concept所要解决的问题，它是`C++`20的feature，那在此之前，我们要如何实现呢？本文对各种可用的实现方式进行总结。
 
 ## `static_assert`
 
