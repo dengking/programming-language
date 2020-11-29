@@ -407,3 +407,8 @@ https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function
 https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function
 
 https://stackoverflow.com/questions/18570285/using-sfinae-to-detect-a-member-function
+
+
+
+
+

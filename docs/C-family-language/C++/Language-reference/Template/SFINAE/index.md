@@ -139,7 +139,7 @@ int main()
 
 > NOTE: 上述代码是detection idiom 
 
-When `T` has the nested type `foobar` defined, the instantiation of the first `test` works and the null pointer constant is successfully passed. (And the resulting type of the expression is `yes`.) If it does not work, the only available function is the second `test`, and the resulting type of the expression is `no`. An ellipsis is used not only because it will accept any argument, but also because its **conversion rank** is lowest, so a call to the first function will be preferred if it is possible; this removes ambiguity.
+When `T` has the nested type `foobar` defined, the instantiation of the first `test` works and the null pointer constant is successfully passed. (And the resulting type of the expression is `yes`.) If it does not work, the only available function is the second `test`, and the resulting type of the expression is `no`. An **ellipsis** is used not only because it will accept any argument, but also because its **conversion rank** is lowest, so a call to the first function will be preferred if it is possible; this removes ambiguity.
 
 > NOTE: 这个技巧需要好好学习
 
@@ -179,7 +179,7 @@ int main()
 
 ```
 
-> NOTE: 上述代码也是detection idiom。
+> NOTE: 
 >
 > 运行结果如下:
 >
@@ -188,7 +188,13 @@ int main()
 > true
 > ```
 >
-> 
+> 通过上述运行结果来看，`void_t`并没有生效，具体原因在cppreference [std::void_t](https://en.cppreference.com/w/cpp/types/void_t) 中给出了解释。
+>
+> 关于正确的实现，参见
+>
+> 1) `C++\Library\Standard-library\Utility-library\Language-support\Type-support\Type-traits\Type-transformations\void_t`章节。
+>
+> 2) `C++\Language-reference\Template\Programming-paradigm\Idioms\Detection`章节
 
 ## cppreference [sfinae](https://en.cppreference.com/w/cpp/language/sfinae)
 
