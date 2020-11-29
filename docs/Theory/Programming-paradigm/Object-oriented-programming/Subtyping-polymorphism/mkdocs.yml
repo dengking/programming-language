@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Dynamic-Dispatch: Dynamic-Dispatch.md
     - Behavioral-subtyping: Behavioral-subtyping.md
+    - Dispatch: Dispatch

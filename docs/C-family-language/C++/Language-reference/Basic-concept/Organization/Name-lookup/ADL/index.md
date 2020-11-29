@@ -7,7 +7,7 @@ ADL是compiler的一种行为，可以将compiler的name lookup分为两种：
 
 ## ADL在C++中的广泛应用
 
-今天阅读cppreference Argument-dependent lookup方知，我们的`std::cout << "Test\n";`既然蕴藏着如此之多的玄机：
+今天阅读cppreference Argument-dependent lookup方知，我们的`std::cout << "Test\n";`竟然蕴藏着如此之多的玄机：
 
 - `std::cout`是一个object，它没有成员函数`operator<<`
 
@@ -15,7 +15,7 @@ ADL是compiler的一种行为，可以将compiler的name lookup分为两种：
 
 - 当我们编写`std::cout << "Test\n";`的时候，compiler会使用ADL来进行查找：
 
-  > There is no operator<< in global namespace, but ADL examines std namespace because the left argument is in `std` and finds `std::operator<<(std::ostream&, const char*)` 
+  > There is no `operator<<` in global namespace, but ADL examines `std` namespace because the left argument is in `std` and finds `std::operator<<(std::ostream&, const char*)` 
 
 这让我想到了之前在阅读代码的时候，有很多类似的写法：
 
@@ -235,19 +235,15 @@ In the following contexts **ADL-only lookup** (that is, lookup in associated nam
 
 
 
+## ADL and multiple dispatch
 
+ADL和OOP multiple dispatch是有着相似之处的: 
 
-## [What is “Argument-Dependent Lookup” (aka ADL, or “Koenig Lookup”)?](https://stackoverflow.com/questions/8111677/what-is-argument-dependent-lookup-aka-adl-or-koenig-lookup)
+1) 都将多个argument纳入了考虑
+
+## stackoverflow [What is “Argument-Dependent Lookup” (aka ADL, or “Koenig Lookup”)?](https://stackoverflow.com/questions/8111677/what-is-argument-dependent-lookup-aka-adl-or-koenig-lookup)
 
 > NOTE: 这篇文章介绍的更多一些
-
-
-
-http://www.gotw.ca/gotw/030.htm
-
-https://quuxplusone.github.io/blog/2019/04/26/what-is-adl/
-
-https://stackoverflow.com/questions/18086292/is-bjarne-wrong-about-this-example-of-adl-or-do-i-have-a-compiler-bug
 
 
 
@@ -543,4 +539,12 @@ void Orange::String::swap(Orange::String&)
 After swap:
 world hello
 ```
+
+## TODO
+
+http://www.gotw.ca/gotw/030.htm
+
+https://quuxplusone.github.io/blog/2019/04/26/what-is-adl/
+
+https://stackoverflow.com/questions/18086292/is-bjarne-wrong-about-this-example-of-adl-or-do-i-have-a-compiler-bug
 

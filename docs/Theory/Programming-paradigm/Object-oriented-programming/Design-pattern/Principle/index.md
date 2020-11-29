@@ -6,6 +6,28 @@
 
 在进入具体的design pattern之前，有必要对oop中的design principle进行阐述，因为各种的design pattern其实都是贯彻着这些思想的，经典书籍[Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns)对其有着非常好的总结，所以本文的很多内容都是从其中摘录的。
 
+## Abstraction principle
+
+OOP中的各种design pattern其实都遵循abstraction principle(参见文章Abstraction-principle):
+
+1) program to an abstraction
+
+2) design to an abstraction
+
+在`Theory\Programming-paradigm\Abstraction-and-polymorphism`中提出了:
+
+> **Program to an abstraction and polymorphism**
+
+OOP的subtyping polymorphism(dynamic dispatch)是连接抽象与具体的桥梁。
+
+### [Design by contract](https://en.wikipedia.org/wiki/Design_by_contract) and [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
+
+两者其实本质上都在描述相同的内容，面向抽象，而不是面向具体。抽象是科学的思考方式，其实，这一段的描述，需要从对抽象的描述开始：解决问题，我们往往是先建立起抽象模型，这个抽象模型来解决具体的问题。
+
+
+
+
+
 ## wikipedia [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns)
 
 > NOTE: 原书是这个领域的开山之作。
@@ -16,7 +38,13 @@ Chapter 1 is a discussion of [object-oriented](https://en.wikipedia.org/wiki/Obj
 
 1) "Program to an 'interface', not an '**implementation'**." (Gang of Four 1995:18)
 
-> NOTE: interface是abstraction，implementation是concrete。关于abstraction、concrete，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)，它是OOP的核心思想，SOLID中的“D”即[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)表达的是和这相同的含义。
+> NOTE: 
+>
+> 上述principle其实是"Abstraction principle"在OOP design pattern中的实践；interface是abstraction，implementation是concrete。
+>
+> 关于abstraction、concrete，参见文章Abstract-and-concrete。
+>
+> SOLID中的“D”即[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)表达的是和这相同的含义。
 >
 > 它是实现[Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)的关键实现。
 
@@ -54,6 +82,8 @@ Use of an interface also leads to [dynamic binding](https://en.wikipedia.org/wik
 
 ### Parameterized types
 
+> NOTE: "Parameterized types"即"参数化类型"，它是generic programming的核心思想。
+
 The authors also discuss so-called **parameterized types**, which are also known as [generics](https://en.wikipedia.org/wiki/Generic_programming) (Ada, Eiffel, [Java](https://en.wikipedia.org/wiki/Generics_in_Java), C#, VB.NET, and Delphi) or templates (C++). These allow any type to be defined without specifying all the other types it uses—the unspecified types are supplied as 'parameters' at the point of use.
 
 The authors admit that delegation and parameterization are very powerful but add a warning:
@@ -63,12 +93,6 @@ The authors admit that delegation and parameterization are very powerful but add
 The authors further distinguish between '[Aggregation](https://en.wikipedia.org/wiki/Object_composition#Aggregation)', where one object 'has' or 'is part of' another object (implying that an aggregate object and its owner have identical lifetimes) and **acquaintance**, where one object merely 'knows of' another object. Sometimes acquaintance is called 'association' or the 'using' relationship. Acquaintance objects may request operations of each other, but they aren't responsible for each other. Acquaintance is a weaker relationship than aggregation and suggests much [looser coupling](https://en.wikipedia.org/wiki/Loose_coupling) between objects, which can often be desirable for maximum maintainability in a design.
 
 
-
-## [Design by contract](https://en.wikipedia.org/wiki/Design_by_contract) and [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
-
-两者其实本质上都在描述相同的内容，面向抽象，而不是面向具体。抽象是科学的思考方式，其实，这一段的描述，需要从对抽象的描述开始：解决问题，我们往往是先建立起抽象模型，这个抽象模型来解决具体的问题。
-
-dynamic dispatch是连接抽象与具体的桥梁。
 
 
 
