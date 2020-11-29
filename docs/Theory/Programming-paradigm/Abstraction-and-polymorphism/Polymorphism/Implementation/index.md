@@ -18,17 +18,13 @@
 
 描述abstract 和 concrete之间的关系，在下面的"Relationship between abstract and concrete"章节进行了总结。
 
-### 3) dispatch采用的比较算法
 
-> 基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现。
 
-无论是哪种polymorphism，在实现的时候都需要考虑one-to-many的问题，即需要考虑从set  of candidates(concrete/implementation)中的选择哪一个来作为最终的实现。显然这有一个**比较**/**排序**的过程，在文章`Abstract-and-concrete`、`Abstraction-and-polymorphism`(`Theory\Programming-paradigm\Abstraction-and-polymorphism`)中，都是采用的informal的描述: 选择**最合适**的那一个。
+### 3) dispatch的搜索和排序
 
-到底哪个**最合适**的呢？不同的polymorphism有不同的标准，采用不同的比较算法，当考虑实现的时候，需要进行准确、formal定义。
+参见下面的"dispatch的搜索和排序"章节。
 
-> NOTE: 显然这是涉及ordering theory的
 
-Dispatch所采用的比较算法是会考虑relationship between abstract and concrete的。
 
 ## Relationship between abstract and concrete
 
@@ -184,7 +180,48 @@ Static polymorphism的dispatch发生于compile time，显然是early binding，�
 
 
 
-## Dispatch采用的比较算法
+### Static polymorphism VS Dynamic polymorphism
+
+上面内容其实已经对Static polymorphism 和 Dynamic polymorphism进行了比较，下面是一些补充内容: 
+
+https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
+https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
+
+##  Dispatch的搜索和排序
+
+> NOTE: dispatch的过程可以看做是"搜索和排序"。
+
+无论是哪种polymorphism，在实现的时候都需要考虑one-to-many的问题，即需要考虑从set  of candidates(concrete/implementation)中的选择哪一个来作为最终的实现。
+
+显然，dispatch的过程**可能**涉及到了如下步骤:
+
+> NOTE: 上面用到了**可能**这个词语，这是因为programming language实现polymorphism的差异性，并且有的implementation，将下面的两个步骤合并在一起了，比如OOP subtyping polymorphism，它的搜索和排序都是沿着class hierarchy自底向上进行的，由于class hierarchy已经是有序的了，因此，它在**搜索**过程中已经进行了**排序**。
+
+### 1) 搜索
+
+> 如何找到所有的candidates(concrete/implementation)
+
+搜索到所有的candidates。一般，programming language的实现，往往需要搜索所有的candidates，搜索过程往往遵循: "**try my best原则**"，即:
+
+即使在**当前搜索节点**没有找到符合条件的candidate，并不会终止搜索进程，而是会继续在**下一个搜索节点**中寻找，直至完成了所有的搜索节点。
+
+综合来看，下列polymorphism的实现都遵循了这个原则: 
+
+1 OOP subtyping polymorphism: 它的搜索是沿着class hierarchy自底向上进行的，逐个节点进行搜索，直到root节点；典型的例子就是Python attribute find algorithm。
+
+2 C++ SFINAE
+
+### 2) 排序
+
+> 基于什么标准来对multiple concrete进行排序/比较，选择最最concrete/合适的实现。
+
+对candidates进行**比较**/**排序**，在文章`Abstract-and-concrete`、`Abstraction-and-polymorphism`(`Theory\Programming-paradigm\Abstraction-and-polymorphism`)中，都是采用的informal的描述: 选择**最合适**的那一个。
+
+到底哪个**最合适**的呢？不同的polymorphism有不同的标准，采用不同的比较算法，当考虑实现的时候，需要进行准确、formal定义。
+
+> NOTE: 显然这是涉及ordering theory的
+
+Dispatch所采用的比较算法是会考虑relationship between abstract and concrete的。
 
 不同的polymorphism采用的比较算法是不同的，下面对此进行总结:
 
