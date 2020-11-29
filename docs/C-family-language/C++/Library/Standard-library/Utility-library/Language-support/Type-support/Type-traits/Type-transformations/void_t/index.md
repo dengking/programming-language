@@ -82,7 +82,7 @@ int main()
 > 
 > ```
 >
-> 
+> 关于上述程序中`decltype`、`std::declval`的分析，参见`C++\Language-reference\Basic-concept\Type-system\Type-inference\decltype`章节。
 
 ## Application
 
@@ -200,6 +200,8 @@ using void_t = void;
 ```
 
 > NOTE: 需要注意的是，这种实现方式在C++11中是无法生效的，具体原因参见本节第一段。
+
+
 
 ## TO READ
 

@@ -141,7 +141,7 @@ int main()
 
 When `T` has the nested type `foobar` defined, the instantiation of the first `test` works and the null pointer constant is successfully passed. (And the resulting type of the expression is `yes`.) If it does not work, the only available function is the second `test`, and the resulting type of the expression is `no`. An **ellipsis** is used not only because it will accept any argument, but also because its **conversion rank** is lowest, so a call to the first function will be preferred if it is possible; this removes ambiguity.
 
-> NOTE: 这个技巧需要好好学习
+> NOTE: 这个技巧需要好好学习，关于 ellipsis parameter，参见`C++\Language-reference\Expressions\Operators\Other\Catch-all-operator`章节。
 
 ### C++11 simplification
 
@@ -195,6 +195,10 @@ int main()
 > 1) `C++\Library\Standard-library\Utility-library\Language-support\Type-support\Type-traits\Type-transformations\void_t`章节。
 >
 > 2) `C++\Language-reference\Template\Programming-paradigm\Idioms\Detection`章节
+
+With the standardisation of the detection idiom in the [Library fundamental v2 (n4562)](http://en.cppreference.com/w/cpp/experimental/lib_extensions_2) proposal, the above code could be re-written as follows:
+
+> NOTE: 参见 `C++\Library\Standard-library\Extensions\Version-2\The-C++detection-idiom` 章节。
 
 ## cppreference [sfinae](https://en.cppreference.com/w/cpp/language/sfinae)
 

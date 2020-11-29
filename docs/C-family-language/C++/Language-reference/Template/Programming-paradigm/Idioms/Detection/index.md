@@ -67,3 +67,10 @@ int main()
 
 ```
 
+
+
+
+
+## std::experimental::is_detected
+
+参见 `C++\Library\Standard-library\Extensions\Version-2\The-C++detection-idiom` 章节。

@@ -1,2 +1,3 @@
 nav:
     - Memory-model: Memory-model.md
+    - Transactional-memory: Transactional-memory

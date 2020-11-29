@@ -4,8 +4,6 @@
 
 ## wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)
 
-
-
 In 2002, [Bjarne Stroustrup](https://en.wikipedia.org/wiki/Bjarne_Stroustrup) proposed that a standardized version of the operator be added to the C++ language, and suggested the name "decltype", to reflect that the operator would yield the "declared type" of an expression.
 
 > NOTE: 所谓“declared type”，其实就是[Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)
@@ -383,10 +381,6 @@ Next, examine the types that are returned by the four **`decltype`** statements 
 | `decltype(var);`    | **`int`**       | The type of variable `var`.                                  |
 | `decltype(a->x);`   | **`double`**    | The type of the member access.                               |
 | `decltype((a->x));` | `const double&` | The inner parentheses cause the statement to be evaluated as an expression instead of a member access. And because `a` is declared as a **`const`** pointer, the type is a reference to **`const double`**. |
-
-### cppreference [decltype specifier](https://en.cppreference.com/w/cpp/language/decltype)
-
-
 
 
 

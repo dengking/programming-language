@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - decltype: decltype
+    - Return-type-deduction-for-functions: Return-type-deduction-for-functions.md

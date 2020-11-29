@@ -14,7 +14,7 @@ With the provision(规定) of `decltype`, **late-specified return types**, and *
 
 > NOTE: 上面这段话的总结是非常好的，它让明确说明了C++ 11 引入 `decltype`、`std::declval` 的意图，掌握**意图**是我们准确使用的前提:
 >
-> 1) 显然，`decltype`、`std::declval` 在一定程度上补偿了 C++0x 中 lack of concepts 的局限，显然在C++11中， 我们可以使用 `decltype`、`std::declval` 来实现 C++20 concept 的功能
+> 1) 显然，`decltype`、`std::declval` 在一定程度上补偿了 C++0x 中 lack of concepts 的局限，显然在C++11中， 我们可以使用 `decltype`、`std::declval` 来实现 C++20 concept 的功能，从我目前的认知来看，detection idiom( 基于`decltype`、`std::declval`、`std::enalble_if`、`std::void_` ) + SFINAE能够实现C++20 concept一部分的功能。
 >
 > 2) "obtain an object of a known type in a non-using context, e.g. given the declaration" 意味着:  [unevaluated contexts](https://en.cppreference.com/w/cpp/language/expressions#Unevaluated_expressions) 。
 
