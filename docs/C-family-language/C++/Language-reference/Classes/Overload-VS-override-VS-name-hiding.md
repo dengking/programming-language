@@ -1,14 +1,14 @@
 # Overload VS override VS name hiding
 
-在阅读[How to Return a Smart Pointer AND Use Covariance](https://www.fluentcpp.com/2017/09/12/how-to-return-a-smart-pointer-and-use-covariance/)时，其中提及了name hiding，这让我想起了前段时间Google过overload by return type，显然c++是不允许overload by return type的。
+在阅读fluentcpp [How to Return a Smart Pointer AND Use Covariance](https://www.fluentcpp.com/2017/09/12/how-to-return-a-smart-pointer-and-use-covariance/) 时，其中提及了name hiding，这让我想起了前段时间Google过overload by return type，显然c++是不允许overload by return type的。
 
 
 
 ## overload
 
-[Overloading by return type](https://stackoverflow.com/questions/9568852/overloading-by-return-type)
+stackoverflow [Overloading by return type](https://stackoverflow.com/questions/9568852/overloading-by-return-type)
 
-[Why isn't the overloading with return types allowed? (at least in usually used languages)](https://softwareengineering.stackexchange.com/questions/317082/why-isnt-the-overloading-with-return-types-allowed-at-least-in-usually-used-l)
+softwareengineering [Why isn't the overloading with return types allowed? (at least in usually used languages)](https://softwareengineering.stackexchange.com/questions/317082/why-isnt-the-overloading-with-return-types-allowed-at-least-in-usually-used-l)
 
 ## override
 

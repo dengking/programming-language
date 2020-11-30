@@ -3,3 +3,4 @@ nav:
     - Operator-overloading: Operator-overloading.md
     # 
     - Overload-resolution: Overload-resolution
+    - Overload-in-OOP: Overload-in-OOP

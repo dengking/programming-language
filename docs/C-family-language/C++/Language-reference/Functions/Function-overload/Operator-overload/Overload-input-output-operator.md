@@ -1,6 +1,6 @@
 
 示例代码如下：
-```
+```C++
 #include<iostream>
 using namespace std;
 class Test {
