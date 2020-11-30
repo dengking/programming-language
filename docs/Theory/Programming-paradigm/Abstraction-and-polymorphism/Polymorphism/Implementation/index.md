@@ -6,7 +6,7 @@
 
 本节讨论在implementation of polymorphism中的一些common issue:
 
-### 1) dispatch发生的时间
+### Dispatch发生的时间
 
 1 static: compile-time
 
@@ -14,13 +14,15 @@
 
 在下面的"Static and dynamic polymorphism"章节进行了总结。
 
-### 2) relationship between abstract and concrete
+### Relationship between abstract and concrete
 
 描述abstract 和 concrete之间的关系，在下面的"Relationship between abstract and concrete"章节进行了总结。
 
+### Dispatch考虑的因素/参数
 
+不同的dispatch考虑的因素/参数的个数是不同的，不同的实现会带来一些差异，在下面的"Dispatch考虑的因素/参数"章节进行了介绍。
 
-### 3) dispatch的搜索和排序
+### Dispatch的搜索和排序
 
 参见下面的"dispatch的搜索和排序"章节。
 
@@ -186,6 +188,52 @@ Static polymorphism的dispatch发生于compile time，显然是early binding，�
 
 https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
 https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
+
+
+
+## Dispatch考虑的因素/参数
+
+不同的dispatch考虑的因素/参数的个数是不同的，根据个数，其实可以分为:
+
+### Single dispatch
+
+最终的concrete/implementation由一个 因素/参数 决定; 当concrete/implementation仅由单个 因素/参数 决定时，需要使用single dispatch。
+
+能够表示 one-to-many 关系；
+
+
+
+### Multiple dispatch
+
+最终的concrete/implementation由多个 因素/参数 决定; 当concrete/implementation由多个 因素/参数 决定时，需要使用multiple dispatch。
+
+能够表示 many-to-many 关系；
+
+### Emulating(模拟) multiple dispatch using multiple single dispatch
+
+本节标题的含义是: 使用使用多个single dispatch来实现/模拟multiple dispatch相同的效果。
+
+
+
+### Examples
+
+下面是一些典型的例子:
+
+1 C++ function overload 
+
+考虑所有的function argument，可以看做是multiple dispatch。
+
+2 Subtyping polymorphism
+
+对于支持OOP的programming language，在实现subtyping polymorphism的时候，需要考虑是采用single dispatch还是采用multiple dispatch，参见 `Theory\Programming-paradigm\Object-oriented-programming\Subtyping-polymorphism\Dispatch` 章节。
+
+3 C++ template specialization
+
+考虑所有的template parameter，可以看做是multiple dispatch。
+
+
+
+
 
 ##  Dispatch的搜索和排序
 
