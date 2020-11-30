@@ -6,27 +6,25 @@
 
 关于single dispatch和multiple dispatch的讨论，参见`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism\Implementation`章节。
 
-## Dynamic dispatch
 
-### wikipedia [Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
+
+## wikipedia [Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), **dynamic dispatch** is the process of selecting which implementation of a [polymorphic](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) operation ([method](https://en.wikipedia.org/wiki/Method_(computer_programming)) or function) to call at [run time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)). It is commonly employed in, and considered a prime characteristic of, [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) (OOP) languages and systems.[[1\]](https://en.wikipedia.org/wiki/Dynamic_dispatch#cite_note-1)
 
 
 
-#### [Single and multiple dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch#Single_and_multiple_dispatch)
+### [Single and multiple dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch#Single_and_multiple_dispatch)
 
 
 
-#### [Dynamic dispatch mechanisms](https://en.wikipedia.org/wiki/Dynamic_dispatch#Dynamic_dispatch_mechanisms)
+### [Dynamic dispatch mechanisms](https://en.wikipedia.org/wiki/Dynamic_dispatch#Dynamic_dispatch_mechanisms)
 
 > NOTE: 描述如何试下dynamic dispatch
 
-## Multiple dispatch
 
 
-
-### wikipedia [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
+## wikipedia [Multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
 
 
@@ -36,11 +34,11 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), **dynamic
 
 > NOTE:最后一段话是点睛之笔。关于"route"这个词，参见文章`Abstract-and-concrete`。
 
-#### Examples
+### Examples
 
 **Languages with built-in multiple dispatch**
 
-##### C#
+#### C#
 
 [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) introduced support for dynamic multimethods in version 4[[8\]](https://en.wikipedia.org/wiki/Multiple_dispatch#cite_note-8) (April 2010) using the '`dynamic`' keyword. 
 
@@ -104,15 +102,29 @@ a/s
 s/s
 ```
 
-## Double dispatch
+#### C++
 
-### wikipedia [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch) 
+> NOTE: 参见:
+>
+> 1) `C++\Language-reference\Classes\Subtype-polymorphism`章节
+>
+> 2) `C++\Pattern\Visitor-pattern`章节
+>
+> 其中收录了: thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) ，这篇文章非常好。
+
+
+
+
+
+
+
+## wikipedia [Double dispatch](https://en.wikipedia.org/wiki/Double_dispatch) 
 
 In [software engineering](https://en.wikipedia.org/wiki/Software_engineering), **double dispatch** is a special form of [multiple dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch), and a mechanism that dispatches a function call to different concrete functions depending on the runtime types of two objects involved in the call.
 
 
 
-### TODO
+## TODO
 
 [Double Dispatch: the next best thing with respect to Dependency Injection](https://dzone.com/articles/double-dispatch-next-best)
 

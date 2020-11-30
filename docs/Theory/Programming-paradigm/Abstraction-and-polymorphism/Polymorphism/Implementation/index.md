@@ -199,7 +199,7 @@ https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-patter
 
 最终的concrete/implementation由一个 因素/参数 决定; 当concrete/implementation仅由单个 因素/参数 决定时，需要使用single dispatch。
 
-能够表示 one-to-many 关系；
+能够表示 one-to-many 关系: 当仅仅涉及一个abstraction时，一个abstraction有多个concrete/implementation(one-to-many)，single dispatch能够实现abstraction到concrete/implementation的dispatch；
 
 
 
@@ -207,13 +207,33 @@ https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-patter
 
 最终的concrete/implementation由多个 因素/参数 决定; 当concrete/implementation由多个 因素/参数 决定时，需要使用multiple dispatch。
 
-能够表示 many-to-many 关系；
+能够表示 many-to-many 关系: 当涉及多个abstraction(遵循 program to abstraction principle )，每个abstraction都有多个concrete/implementation，因此就出现了非常多的可能**组合**(many-to-many,参见下面的**组合分析**)，multiple dispatch能够实现根据这多个abstraction找到它们对应concrete/implementation组合所对应的最终concrete/implementation。关于此的一个典型例子就是 thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) :
+
+`Intersect`的实现依赖于它的两个parameter，按照program to abstraction principle，`Intersect`的两个parameter应该是pointer to interface，每个interface都有多个concrete/implementation，显然这是many-to-many关系，显然对于每一种可能的组合都有对应的implementation，因此需要使用multiple dispatch才能够实现。
+
+关于此的另外一个例子是: 有多类listener、多类event，每类listener对不同的event的的处理是不同的，显然这就涉及multiple dispatch。
+
+#### 组合分析
+
+在thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) 中提及了**组合分析**:
+
+> A telling sign that **multiple dispatch** may be in order is when you have some operation that involves more than one class and there is no single obvious class where this operation belongs. Think of simulating a sound when a drumstick（鸡腿） hits a drum. There are many kinds of drumsticks, and many kinds of drums; their **combinations** produce different sounds. Say we want to write a function (or family of functions) that determines which sound is produced. Should this function be a method of the `Drum` class or the `DrumStick` class? Forcing this decision is one of the follies（罪恶） of classical OOP, and **multiple dispatch** helps us solve it naturally without adding a kludg（组装）e into our design.
+
+ 
+
+#### See also
+
+下面是讲述Multiple dispatch非常好的文章:
+
+1) thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)
+
+收录在 `C++\Pattern\Visitor-pattern` 章节。
 
 ### Emulating(模拟) multiple dispatch using multiple single dispatch
 
-本节标题的含义是: 使用使用多个single dispatch来实现/模拟multiple dispatch相同的效果。
+本节标题的含义是: 使用使用多个single dispatch来实现/模拟multiple dispatch相同的效果。显然这种实现方式势必会引入两个method、两次method invocation。
 
-
+关于此的一个典型的例子是 thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) 中提出的方法。
 
 ### Examples
 
@@ -221,7 +241,7 @@ https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-patter
 
 1 C++ function overload 
 
-考虑所有的function argument，可以看做是multiple dispatch。
+考虑所有的function argument，可以看做是multiple dispatch。关于此的一个典型的例子是 thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) 中给出的样例程序。
 
 2 Subtyping polymorphism
 

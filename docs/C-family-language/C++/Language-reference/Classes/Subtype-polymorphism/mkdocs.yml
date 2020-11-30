@@ -3,3 +3,4 @@ nav:
 ########## 继承是OOP非常重要的内容##########    
     - Inheritance: Inheritance
     - Implementation: Implementation
+    - Dispatch: Dispatch

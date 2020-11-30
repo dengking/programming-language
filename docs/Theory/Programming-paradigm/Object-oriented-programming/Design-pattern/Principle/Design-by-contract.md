@@ -8,6 +8,10 @@
 
 It prescribes that software designers should define [formal](https://en.wikipedia.org/wiki/Formal_methods), precise and verifiable interface specifications for [software components](https://en.wikipedia.org/wiki/Component-based_software_engineering#Software_component), which extend the ordinary definition of [abstract data types](https://en.wikipedia.org/wiki/Abstract_data_type) with [preconditions](https://en.wikipedia.org/wiki/Precondition), [postconditions](https://en.wikipedia.org/wiki/Postcondition) and [invariants](https://en.wikipedia.org/wiki/Invariant_(computer_science)). These specifications are referred to as "contracts", in accordance with a [conceptual metaphor](https://en.wikipedia.org/wiki/Conceptual_metaphor) with the conditions and obligations of business contracts.
 
+
+
+
+
 ## C++
 
 ### drdobbs [Programming with Contracts in C++](https://www.drdobbs.com/cpp/programming-with-contracts-in-c/184405997)
