@@ -2,7 +2,7 @@
 
 本文是对cppreference [Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)的阅读理解，说实话，它比较不好理解，记得初次阅读它的时候，我完全被其中的一些列的概念给混淆了，经历了一段时间的探索、学习、使用后，现在再来阅读它，有了完全不同的感受：
 
-- 我觉得它对C++语言总结地非常好，如果能够充分地理解它，就能够建立起对c++语言的高屋建瓴的视角
+- 我觉得它对C++语言总结地非常好，如果能够充分地理解它，就能够建立起对C++语言的高屋建瓴的视角
 - 我觉得如果有compiler principle（参见工程[**compiler principle**](https://dengking.github.io/compiler-principle/)）、programming language的基础知识，那么理解起来会更加容易
 - 需要将它和c语言的[Basic concepts](https://en.cppreference.com/w/c/language/basic_concepts)对比起来看
 
@@ -123,5 +123,5 @@ Declared objects and declared references that are not [non-static data members](
 
 文章thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)中的论述较好地展示出了两者之间用法的不同:
 
-compiler默认情况下是将dependent name作为identifier，通过keyword `typename`来告诉compiler，这个name表示的是type，通过keyword `template`来告诉compiler，这个name表示的是template；
+compiler默认情况下是将dependent name作为**identifier**，通过keyword `typename`来告诉compiler，这个name表示的是**type**，通过keyword `template`来告诉compiler，这个name表示的是**template**；
 

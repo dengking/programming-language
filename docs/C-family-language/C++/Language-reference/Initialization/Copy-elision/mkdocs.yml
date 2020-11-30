@@ -1,3 +1,2 @@
 nav:
-# Copy elision
-    - Copy-elision: Copy-elision.md
+    - Introduction: index.md

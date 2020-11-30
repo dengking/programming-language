@@ -1,5 +1,7 @@
 # Copy elision
 
+Copy elision是对compiler optimization principle的遵循，参见 `C-and-C++\From-source-code-to-exec\Compile\Optimization` 章节。
+
 ## cppreference [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)
 
 
@@ -10,7 +12,7 @@
 
 This is not just a matter of convenience but in fact an optimization. If the parameter (s) binds to an **lvalue** (another non-const object), a copy of the object is made automatically while creating the parameter (s). However, when s binds to an rvalue (temporary object, literal), the copy is typically elided, which saves a call to a copy constructor and a destructor. In the earlier version of the assignment operator where the parameter is accepted as **const reference**, **copy elision** does not happen when the **reference** binds to an **rvalue**. This results in an additional object being created and destroyed.
 
-## 维基百科[Copy elision](https://en.wikipedia.org/wiki/Copy_elision#Return_value_optimization)
+## wikipedia [Copy elision](https://en.wikipedia.org/wiki/Copy_elision#Return_value_optimization)
 
 In [C++](https://en.wikipedia.org/wiki/C%2B%2B) [computer programming](https://en.wikipedia.org/wiki/Computer_programming), **copy elision** refers to a [compiler optimization](https://en.wikipedia.org/wiki/Compiler_optimization) technique that eliminates unnecessary [copying of objects](https://en.wikipedia.org/wiki/Object_copy). The `C++` language standard generally allows implementations to perform any optimization, provided the resulting program(优化后的程序)'s observable behavior is the same *as if*, i.e. pretending, the program were executed exactly as mandated by the standard.
 
@@ -314,5 +316,5 @@ int main() {
 Most commercial-grade compilers support copy elision & (N)RVO (depending on optimization settings).
 
 
-## [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)
+## wikipedia [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)
 

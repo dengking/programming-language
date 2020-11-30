@@ -2,11 +2,7 @@
 
 ## C++
 
-### [`static_cast`](https://en.cppreference.com/w/cpp/language/static_cast) VS [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 
 
-`static_cast` 是 compile-time
-
-`dynamic_cast` 是 run-time
 
 ### [`static_assert`](https://en.cppreference.com/w/cpp/language/static_assert) VS [`assert`](https://en.cppreference.com/w/cpp/error/assert) 
 
@@ -62,9 +58,11 @@ run-time
 - array sizes，参见[Array declaration](https://en.cppreference.com/w/cpp/language/array)
 - [switch statement](https://en.cppreference.com/w/cpp/language/switch)
 
+### Run-time concept
 
+`virtual`
 
-### Static polymorphism VS runtime polymorphism 
+### Static polymorphism VS dynamic polymorphism 
 
 参见`C++\Guide\Implementation-of-polymorphism\`章节。
 
@@ -72,10 +70,17 @@ run-time
 
 ### Static type and dynamic type
 
-参见`C-family-language\C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md`。
+参见`C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type\Polymorphic-type`。
+
+#### [`static_cast`](https://en.cppreference.com/w/cpp/language/static_cast) VS [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 
+
+`static_cast` 是 compile-time type conversion
+
+`dynamic_cast` 是 run-time type conversion
+
+#### `decltype` VS `typeid`
+
+参见 `C++\Language-reference\Basic-concept\Type-system\Type-operation\Query-type` 章节。
 
 
 
-### Run-time concept
-
-`virtual`

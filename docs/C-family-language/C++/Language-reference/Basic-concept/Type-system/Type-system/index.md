@@ -4,6 +4,8 @@
 
 ## cppreference [Type](https://en.cppreference.com/w/cpp/language/type)
 
+
+
 ### [Type classification](https://en.cppreference.com/w/cpp/language/type#Type_classification)
 
 
@@ -97,7 +99,7 @@ std::function<inline void(int)> f;// error: neither are function specifiers
 
 *Type-id* may be used in the following situations:
 
-- to specify the target type in [cast expressions](expressions.html#Conversions);
+1) to specify the target type in [cast expressions](expressions.html#Conversions);
 
 Example:
 
@@ -106,9 +108,7 @@ int* p;               // declaration of a pointer to int
 static_cast<int*>(p); // type-id is "int*"
 ```
 
-
-
-- as arguments to [sizeof](sizeof.html), [alignof](alignof.html), [alignas](alignas.html), [new](new.html), and [typeid](typeid.html);
+2) as arguments to [sizeof](sizeof.html), [alignof](alignof.html), [alignas](alignas.html), [new](new.html), and [typeid](typeid.html);
 
 Example:
 
@@ -121,7 +121,7 @@ int (*(*x[2])())[3];      // declaration of an array of 2 pointers to functions
 new (int (*(*[2])())[3]); // type-id is "int (*(*[2])())[3]"
 ```
 
-- on the right-hand side of a [type alias](type_alias.html) declaration;
+3) on the right-hand side of a [type alias](type_alias.html) declaration;
 
 Example:
 
@@ -131,9 +131,7 @@ sizeof(struct{ int x; });    // error: cannot define new types in a sizeof expre
 using t = struct { int x; }; // creates a new type and declares t as an alias of that type
 ```
 
-
-
-- as the template argument for a [template type parameter](template_parameters.html#Template_type_arguments);
+4) as the template argument for a [template type parameter](template_parameters.html#Template_type_arguments);
 
 ```C++
 void f(int);                    // declaration of a function taking int and returning void
@@ -150,8 +148,6 @@ std::function<auto(int) -> void> y = f; // same
 ### [Static type](https://en.cppreference.com/w/cpp/language/type#Static_type)
 
 The type of an expression that results from the **compile-time** analysis of the program is known as the *static type* of the expression. The **static type** does not change while the program is executing.
-
-​	
 
 ### [Dynamic type](https://en.cppreference.com/w/cpp/language/type#Dynamic_type)
 
@@ -183,7 +179,7 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 #### Polymorphic type
 
-Polymorphic type是OOP class type的一种，在`C++\Language-reference\Basic-concept\Type-system\Type-system\Polymorphic-type`章节进行了描述。
+Polymorphic type是OOP class type的一种，在`C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type`章节进行了描述。
 
 ### Type classified by object layout
 
@@ -205,15 +201,7 @@ Polymorphic type是OOP class type的一种，在`C++\Language-reference\Basic-co
 
 参见`Byte-type.md`。
 
-## cppreference [typeid](https://en.cppreference.com/w/cpp/language/typeid)
+## Type operation
 
-参见本章的`typeid`。
-
-## cppreference [decltype](https://en.cppreference.com/w/cpp/language/decltype) 
-
-参见本章的`decltype`。
-
-## Type cast and conversion
-
-参见`Type-conversion`章节。
+参见 `./Type-operation`。
 

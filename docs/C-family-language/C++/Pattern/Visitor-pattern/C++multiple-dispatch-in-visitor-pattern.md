@@ -430,13 +430,13 @@ Rectangle x Rectangle [names this=9Rectangle, r=9Rectangle]
 
 Success! Even though we're dealing solely in pointers to `Shape`, the right intersections are computed. Why does this work?
 
+#### 调用详情
+
 As I've mentioned before, the key here is use C++'s **virtual function dispatch capability**, **twice**. Let's trace through one execution to see what's going on. We have:
 
 ```c++
 pr1->Intersect(pe.get());
 ```
-
-#### 调用详情
 
 `pr1` is a pointer to `Shape`, and `Intersect` is a **virtual method**. Therefore, the **runtime type**'s `Intersect` is called here, which is `Rectangle::Intersect`. The argument passed into the method is another pointer to `Shape` which at runtime points to an `Ellipse` (`pe`). `Rectangle::Intersect` calls `s->IntersectWith(this)`. The compiler sees that `s` is a `Shape*`, and `IntersectWith` is a **virtual method**, so this is *another* virtual dispatch. What gets called is `Ellipse::IntersectWith`. But which **overload** of this method is called?
 
@@ -454,7 +454,7 @@ virtual void Intersect(const Shape* s) const {
 
 > NOTE: 非常重要的一点
 
-What happens eventually is that the call `pr1->Intersect(pe.get())` gets routed to `Ellipse::IntersectWith(const Rectangle*)`, thanks to two virtual dispatches and one use of method overloading. The end result is double dispatch! [[4\]](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/#id9)
+What happens eventually is that the call `pr1->Intersect(pe.get())` gets **routed** to `Ellipse::IntersectWith(const Rectangle*)`, thanks to two virtual dispatches and one use of method overloading. The end result is double dispatch! [[4\]](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/#id9)
 
 But wait a second, how did we end up with `Ellipse::IntersectWith(Rectangle)`? Shouldn't `pr1->Intersect(pe.get())` go to `Rectangle::IntersectWith(Ellipse)` instead? Well, yes and no. Yes because this is what you'd expect from how the call is syntactically structured. No because you almost certainly want double dispatches to be symmetric. I'll discuss this and other related issues in the next section.
 

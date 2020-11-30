@@ -14,9 +14,15 @@ object概念对于理解后面的内容非常重要，因为后续的很多概�
 
 ### Storage
 
-cppreference中，习惯使用"storage"这个词语，它其实是对memory的一个更加抽象的描述，即它摒弃了实现细节，这是programming language的language reference中惯常的做法，因为对于想C++这样的general purpose programming language，它并不specific to某种具体的实现。所以读者需要对这种表达方式习惯。
+cppreference中，习惯使用"storage"这个词语，它其实是对memory的一个更加抽象的描述，即它摒弃了实现细节，这是programming language的language reference中惯常的做法，因为对于像C++这样的general purpose programming language，它并不specific to某种具体的实现。所以读者需要对这种表达方式习惯。
 
-
+> NOTE: 
+>
+> Design to an abstraction principle；
+>
+> 参见: `Theory\Programming-language\Design-of-programming-language`。
+>
+> 
 
 ### Object and OOP object
 
@@ -40,7 +46,7 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 
 4) cppreference [Object](https://en.cppreference.com/w/cpp/language/object): [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary);
 
-> NOTE: 在lifetime中，对对3)、4)进行说明。
+> NOTE: 在`./Lifetime-and-storage-duration`中，对3)、4)进行说明。
 
 ## cppreference [Object](https://en.cppreference.com/w/cpp/language/object)
 
@@ -337,9 +343,9 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 
 **type** 决定了 **interpretation** of **memory representation**，进而决定了 **value**。关于这个观点，在cppreference [reinterpret_cast conversion](https://en.cppreference.com/w/cpp/language/reinterpret_cast)中的描述是可以佐证的：
 
-Converts between **types** by **reinterpreting** the underlying **bit** pattern.
+> Converts between **types** by **reinterpreting** the underlying **bit** pattern.
 
-在工程hardware的，`CPU\Endianess\Endianness.md`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，programmer无需关注endian。
+在工程hardware的，`CPU\Endianess\Endianness`中，我们将会进一步看到，“interpretion of memory representation”还涉及到endian，这在大多数情况下，programmer无需关注endian。
 
 #### Aliase to an existing object
 

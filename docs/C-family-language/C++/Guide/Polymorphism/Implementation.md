@@ -8,7 +8,7 @@
 | ------------------------- | --------------------------- |
 | - overload <br>- template | - sub-type / virtual method |
 
-下面是根据wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的分类方法进行的分类: 
+下面是根据 wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中的分类方法进行的分类: 
 
 | classification                                               |                          |
 | ------------------------------------------------------------ | ------------------------ |
@@ -62,3 +62,8 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 在`C++\Language-reference\Classes\Subtype-polymorphism\Implementation`章节对此进行深入分析。
 
+
+
+## Overload of virtual function
+
+我们已经知道，在C++中，virtual function对应的是dynamic polymorphism，而overload对应的是static polymorphism，那 "overload of virtual function" 该如何理解呢？C++中是否支持 "overload of virtual function" 呢？在 `C++\Language-reference\Functions\Function-overload\Overload-in-OOP` 章节对此进行了描述。
