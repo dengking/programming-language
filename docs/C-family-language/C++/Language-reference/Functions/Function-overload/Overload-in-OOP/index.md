@@ -147,41 +147,19 @@ C++是支持overload virtual function的，因此在subclass中，是可以**ove
 
 ### Static polymorphism: overload resolution
 
-既然是overload，因此compiler在编译的时候，就需要进行**overload resolution**，因此对于 `IntersectWith(this)` ，compiler是需要将其**dispatch**到**overload set**中的一个的，那到底**dispatch**到哪一个呢？显然这是由 `this` 的**static type**所决定的，需要注意的是，这里是 static type，而不是 dynamic type，因为
+既然`IntersectWith`是overloaded，因此compiler在编译的时候，就需要进行**overload resolution**，因此对于 `IntersectWith(this)` ，compiler是需要将其**dispatch**到**overload set**中的一个的，那到底**dispatch**到哪一个呢？显然这是由 `this` 的**static type**所决定的，需要注意的是，这里是 **static type**，而不是 **dynamic type**，因为 overload resolution 是static context，它是static polymorphism。关于这一点，在 eli.thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) 中，作者进行了专门的说明:
 
+> `s->IntersectWith` is called with `this`, which the compiler knows is a pointer to `Rectangle`, *statically*. If you wondered why I define `Intersect` in each subclass rather than doing it once in `Shape`, even though its code is exactly the same for each subclass, this is the reason. Had I defined it in `Shape`, the compiler would think the type of `this` is `Shape*` and would always dispatch to the `IntersectWith(const Shape*)` overload. Defining this method in each subclass helps the compiler leverage overloading to call the right method.
 
+重复运用 `this` 的 static type info来帮助compiler进行statically dispatch。
+
+通过static polymorphism，compiler 从 **overload set** 中选择了最最overloaded concrete/implementation。
 
 ### Dynamic polymorphism
 
+`s->IntersectWith(this);`
 
-
-### `*this` and overload resolution
-
-
-
-
-
-
-
-1 dynamic polymorphism
-
-`IntersectWith`是virtual function，因此`s->IntersectWith`就涉及了dynamic polymorphism。
-
-2 static polymorphism
-
-通过上面的描述可知，`IntersectWith` 是overload函数，因此这就是涉及了overload resolution，它的入参类型是 `this` ，`this`的concrete type是已知的，因此compiler能够进行准确的overload resolution。
-
-
-
-static type of this。
-
-
-
-1 overload of virtual function
-
-2 `*this` and overload resolution
-
-
+由于`IntersectWith`是virtual function，因此compiler最终会进行特殊的编译，采用late binding以实现dynamic polymorphism。
 
 
 

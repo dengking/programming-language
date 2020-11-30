@@ -115,9 +115,9 @@ int main()
 
 在 `C++\Language-reference\Basic-concept\Type-system\Type-operation\Query-type\typeid` 中对上述例子中 `typeid(*this)` 的用法进行了详细的说明。
 
+#### `s->IntersectWith(this);`
 
-
-
+`IntersectWith`是overloaded virtual function，因此compiler会首先进行static polymorphism(overload resolution)，然后进行dynamic polymorphism，在进行overload resolution的时候，就需要考虑`this`的static type从而进行dispatch。关于这一点，在 `C++\Language-reference\Functions\Function-overload\Overload-in-OOP` 中进行了专门的介绍。
 
 
 

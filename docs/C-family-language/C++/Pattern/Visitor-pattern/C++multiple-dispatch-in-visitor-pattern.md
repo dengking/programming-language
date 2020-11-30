@@ -7,6 +7,14 @@
 > NOTE: 导读: 
 >
 > `Intersect`的实现依赖于它的两个parameter，按照program to abstraction principle，`Intersect`的两个parameter应该是pointer to interface，每个interface都有多个concrete/implementation，显然这是many-to-many关系，显然对于每一种可能的组合都有对应的implementation，因此需要使用multiple dispatch才能够实现。
+>
+> 这篇文章中给出的例子非常具有代表性，能够体现很多C++ feature，在下面章节中，都引用了这篇文章中的例子: 
+>
+> 1) `C++\Language-reference\Functions\Function-overload\Overload-in-OOP`
+>
+> 2) `C++\Language-reference\Basic-concept\Type-system\Type-operation\Query-type\typeid`
+>
+> 3) `C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type`
 
 ### Polymorphism, single dispatch, multiple dispatch
 
@@ -431,6 +439,8 @@ Rectangle x Rectangle [names this=9Rectangle, r=9Rectangle]
 Success! Even though we're dealing solely in pointers to `Shape`, the right intersections are computed. Why does this work?
 
 #### 调用详情
+
+> NOTE: 在 `C++\Language-reference\Functions\Function-overload\Overload-in-OOP` 中对上述例子中的调用详情进行了深入分析。
 
 As I've mentioned before, the key here is use C++'s **virtual function dispatch capability**, **twice**. Let's trace through one execution to see what's going on. We have:
 

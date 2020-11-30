@@ -62,8 +62,14 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 在`C++\Language-reference\Classes\Subtype-polymorphism\Implementation`章节对此进行深入分析。
 
+## Mix static polymorphism and dynamic polymorphism
 
+需要注意的是，C++并没有绝对地区分 static 和 dynamic，C++是允许 mix static polymorphism and dynamic polymorphism，这增加了C++的 power同时不可避免的增加了C++的complexity。下面是mix static polymorphism and dynamic polymorphism的方式: 
 
-## Overload of virtual function
+### Overload of virtual function
 
 我们已经知道，在C++中，virtual function对应的是dynamic polymorphism，而overload对应的是static polymorphism，那 "overload of virtual function" 该如何理解呢？C++中是否支持 "overload of virtual function" 呢？在 `C++\Language-reference\Functions\Function-overload\Overload-in-OOP` 章节对此进行了描述。
+
+### Virtual function in class template
+
+TODO 需要添加章节链接。
