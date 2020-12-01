@@ -1,6 +1,6 @@
-# Separation of container and algorithm
+# Separation of algorithm and structure principle
 
-将容器与算法进行分离。
+将算法与结构进行分离原则。
 
 在维基百科[Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)中有如下描述：
 
@@ -14,4 +14,4 @@
 
 ## Generic programming
 
-separation of container and algorithm也是generic programming的思想。
+Separation of algorithm and structure也是generic programming的思想。
