@@ -127,7 +127,7 @@ C++ Template也是behavior-based，参见:
 
 本节对static 和 dynamic polymorphism进行总结。
 
-### wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # [Implementation aspects](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)#Implementation_aspects) # Static and dynamic polymorphism
+### wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # Static and dynamic polymorphism
 
 
 
@@ -187,6 +187,7 @@ Static polymorphism的dispatch发生于compile time，显然是early binding，�
 上面内容其实已经对Static polymorphism 和 Dynamic polymorphism进行了比较，下面是一些补充内容: 
 
 https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
+
 https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
 
 
@@ -207,11 +208,13 @@ https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-patter
 
 最终的concrete/implementation由多个 因素/参数 决定; 当concrete/implementation由多个 因素/参数 决定时，需要使用multiple dispatch。
 
-能够表示 many-to-many 关系: 当涉及多个abstraction(遵循 program to abstraction principle )，每个abstraction都有多个concrete/implementation，因此就出现了非常多的可能**组合**(many-to-many,参见下面的**组合分析**)，multiple dispatch能够实现根据这多个abstraction找到它们对应concrete/implementation组合所对应的最终concrete/implementation。关于此的一个典型例子就是 thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) :
+能够表示 many-to-many 关系: 当涉及多个abstraction(遵循 program to abstraction principle )，每个abstraction都有多个concrete/implementation，因此就出现了非常多的可能**组合**(many-to-many,参见下面的**组合分析**)，multiple dispatch能够实现根据这多个abstraction找到它们对应concrete/implementation组合所对应的最终concrete/implementation。关于此的例子:
+
+1 thegreenplace [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/) :
 
 `Intersect`的实现依赖于它的两个parameter，按照program to abstraction principle，`Intersect`的两个parameter应该是pointer to interface，每个interface都有多个concrete/implementation，显然这是many-to-many关系，显然对于每一种可能的组合都有对应的implementation，因此需要使用multiple dispatch才能够实现。
 
-关于此的另外一个例子是: 有多类listener、多类event，每类listener对不同的event的的处理是不同的，显然这就涉及multiple dispatch。
+2 有多类listener、多类event，每类listener对不同的event的的处理是不同的，显然这就涉及multiple dispatch。
 
 #### 组合分析
 

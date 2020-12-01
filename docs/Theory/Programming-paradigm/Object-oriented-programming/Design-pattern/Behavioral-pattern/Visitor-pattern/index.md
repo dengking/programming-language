@@ -38,6 +38,13 @@ There was another reason for the refusal. It was highly likely that after this f
 
 ### Solution
 
+> NOTE: 在visitor pattern中需要解决的一个问题是：如何构建node class到export方法的映射，即为不同的node class指定对应的export方法。原文给出了两种方式：
+>
+> - conditional，即通过`if else`语句来实现映射
+> - [Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
+>
+> 显然[Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)有着明显优势，下面对此进行分析
+
 The **Visitor pattern** suggests that you place the new **behavior** into a separate class called *visitor*, instead of trying to integrate it into existing classes. The original object that had to perform the **behavior** is now passed to one of the visitor’s methods as an **argument**, providing the method access to all necessary data contained within the object.
 
 > NOTE: 上诉 "behavior" 其实就是 algorithm。
@@ -68,22 +75,30 @@ foreach (Node node in graph)
 }
 ```
 
-You might ask, why don’t we use **method overloading**? That’s when you give all methods the same name, even if they support different sets of parameters. Unfortunately, even assuming that our programming language supports it at all (as Java and C# do), it won’t help us. Since the exact class of a node object is unknown in advance, the overloading mechanism won’t be able to determine the correct method to execute. It’ll default to the method that takes an object of the base `Node` class.
+You might ask, why don’t we use **method overloading**? That’s when you give all methods the same name, even if they support different sets of parameters. Unfortunately, even assuming that our programming language supports it at all (as Java and `C#` do), it won’t help us. Since the exact class of a node object is unknown in advance, the **overloading mechanism** won’t be able to determine the correct method to execute. It’ll default to the method that takes an object of the base `Node` class.
 
-
-
-> 原文的Solution章节描述了如何使用visitor patter够解决上述问题。
+> NOTE: 下面是采用overload的样例代码: 
 >
-> 需要解决的一个问题是：如何构建node class到export方法的映射，即为不同的node class指定对应的export方法。原文给出了两种方式：
+> ```c++
+> class ExportVisitor implements Visitor is
+>     method do(City c) { ... }
+>     method do(Industry f) { ... }
+>     method do(SightSeeing ss) { ... }
+>     // ...
+>     
+> foreach (Node node in graph)
+> 	exportVisitor.do(node)
+> 	// ...
+> }    
+> ```
 >
-> - conditional，即通过`if else`语句来实现映射
-> - [Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
+> overload mechanism是static polymorphism，compiler只有知道准确的type才能够进行准确的static dispatch，在`foreach`中，`node`的static type是`Node`类型(abstract)，不是`City`、`Industry`、`SightSeeing`等 concrete type，因此compiler无法进行准确的static dispatch。
 >
-> 显然[Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)有着明显优势，下面对此进行分析
+> 关于static type，参见 `C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type`
 
 
 
-### Double dispatch
+#### Double dispatch
 
 Instead of letting the client select a proper version of the method to call, how about we delegate this choice to objects we’re passing to the visitor as an argument? Since the objects know their own classes, they’ll be able to pick a proper method on the visitor less awkwardly. They “accept” a visitor and tell it what visiting method should be executed.
 
