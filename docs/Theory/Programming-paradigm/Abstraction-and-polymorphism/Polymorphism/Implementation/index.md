@@ -12,7 +12,7 @@
 
 2 dynamic: runtime
 
-在下面的"Static and dynamic polymorphism"章节进行了总结。
+在`./Static-and-dynamic-polymorphism`中进行了总结。
 
 ### Relationship between abstract and concrete
 
@@ -123,73 +123,6 @@ C++ Template也是behavior-based，参见:
 
 
 
-## Static and dynamic polymorphism
-
-本节对static 和 dynamic polymorphism进行总结。
-
-### wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) # Static and dynamic polymorphism
-
-
-
-*Main articles:* [Static polymorphism](https://en.wikipedia.org/wiki/Static_polymorphism)*,* [Late binding](https://en.wikipedia.org/wiki/Late_binding)*, and* [Dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch)
-
-Polymorphism can be distinguished by when the **implementation** is selected: statically (at compile time) or dynamically (at run time, typically via a [virtual function](https://en.wikipedia.org/wiki/Virtual_function)). This is known respectively as *[static dispatch](https://en.wikipedia.org/wiki/Static_dispatch)* and *[dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch),* and the corresponding forms of polymorphism are accordingly called *static polymorphism* and *dynamic polymorphism*.
-
-|                   Static(at compile time)                    |                     Dynamic(at run time)                     |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [static dispatch](https://en.wikipedia.org/wiki/Static_dispatch) | [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) |
-| [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) | [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) |
-|        [Static/early binding](Static/early binding )         | [Late/dynamic binding](https://en.wikipedia.org/wiki/Late_binding) |
-
-
-
-> NOTE: 
->
-> 现代programming language的 [Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) 应该属于 [Static polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) ;
->
-> 现代programming language的 [Subtyping polymorphism](https://en.wikipedia.org/wiki/Subtyping) 应该属于 [dynamic polymorphism](https://en.wikipedia.org/wiki/Polymorphism_%28computer_science%29#Static_and_dynamic_polymorphism) ;
->
-> 不同programming language实现 [Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism) 的方式不同，参见`Theory\Programming-paradigm\Generic-programming\Implementation`章节。
-
-
-
-However, it is possible to achieve static polymorphism with subtyping through more sophisticated use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming), namely the [curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern).
-
-> NOTE: 这是C++中的一个idiom，在`C++\Idiom\Curiously-recurring-template-pattern`中对此有描述。
-
-### Implementation
-
-#### Dynamic polymorphism
-
-Dynamic polymorphism的dispatch发生于runtime，显然是late binding；因此，如果采用这种实现方式，则它需要存储**abstraction**和所有的**candidate**、**concrete**、**implementation**之间的**映射关系**。
-
-由于dispatch发生于runtime，则必然存在overhead。
-
-#### Static polymorphism
-
-Static polymorphism的dispatch发生于compile time，显然是early binding，由compiler进行dispatch；因此，如果采用这种实现方式，无需在内存中保存**映射关系**。
-
-由于dispatch发生于compile time，没有任何overhead。
-
-#### Example
-
-|      | static                                | dynamic                                       |
-| ---- | ------------------------------------- | --------------------------------------------- |
-| 实现 | compiler实现，                        | 需要在内存中保存所有的candidate之间的映射关系 |
-| 例子 | C++ overload、template specialization | C++ virtual method、python attribute find     |
-
-关于C++ implementation of polymorphism，参加文章`C-family-language\C++\Guide\Implementation-of-polymorphism\index.md`
-
-
-
-### Static polymorphism VS Dynamic polymorphism
-
-上面内容其实已经对Static polymorphism 和 Dynamic polymorphism进行了比较，下面是一些补充内容: 
-
-https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c/
-
-https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c/
-
 
 
 ## Dispatch考虑的因素/参数
@@ -272,7 +205,7 @@ https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-patter
 
 > 如何找到所有的candidates(concrete/implementation)
 
-搜索到所有的candidates。一般，programming language的实现，往往需要搜索所有的candidates，搜索过程往往遵循: "**try my best原则**"，即:
+搜索到所有的candidates。一般，programming language的实现，往往需要搜索所有的candidates，搜索过程往往遵循: "**try my best principle**"，即:
 
 即使在**当前搜索节点**没有找到符合条件的candidate，并不会终止搜索进程，而是会继续在**下一个搜索节点**中寻找，直至完成了所有的搜索节点。
 

@@ -1,5 +1,4 @@
 nav:
     - Introduction: index.md
-    - Late-binding: Late-binding.md
-    - Dynamic-Dispatch: Dynamic-Dispatch.md
+    - Static-and-dynamic-polymorphism: Static-and-dynamic-polymorphism
     
