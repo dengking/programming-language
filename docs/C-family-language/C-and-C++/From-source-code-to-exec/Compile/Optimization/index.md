@@ -21,3 +21,28 @@ Compiler是遵循 "optimization principle" 的，即它总是尽可能地去opti
 ### Copy elision
 
 参见 `C++\Language-reference\Initialization\Copy-elision` 章节。
+
+
+
+## Give hint to compiler
+
+本节标题的含义是: 给编译器提示；虽然当今compiler比较强大，但是毕竟它不是万能的，作为programmer，我们可以给予它一些hint，让能够满足我们的目的: 
+
+1) 让compiler能够更好地优化code
+
+关于此的一个例子就是`inline`
+
+2) 让compiler实现static polymorphism
+
+含义是: 让compiler选择(statically)正确的实现
+
+例子:
+
+1 multiple dispatch，参见
+
+- `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Behavioral-pattern\Visitor-pattern`
+- `C++\Pattern\Visitor-pattern`
+
+2 primary template 和 specialization
+
+当两者处于不同header file的时候，在使用的时候，需要将它们都包含到同一个translation unit中才能够生效。

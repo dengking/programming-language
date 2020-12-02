@@ -16,7 +16,9 @@
 
 参见`C++\Guide\Plymorphism`。
 
+### Overload is multiple dispatch
 
+按照`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism\Implementation`中的理论，我们可以认为: overload is multiple dispatch，因为: compiler overload resolution需要考虑所有的function argument，所以可以看做是multiple dispatch。
 
 ## TODO
 
