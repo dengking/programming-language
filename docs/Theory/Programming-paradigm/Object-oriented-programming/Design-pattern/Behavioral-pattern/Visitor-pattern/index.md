@@ -1,14 +1,74 @@
 # Visitor pattern
 
-“visitor”的意思是“访问者”，在Visitor pattern中，有专门的class来“扮演” “visitor”的角色。
+## Principle in visitor pattern
 
-Visitor pattern是典型的遵循 "separation of algorithm and structure principle" 的，这种separation，能够实现 open-closed principle，在一定程度上能够实现 N * M code reuse。
+Visitor pattern是典型的遵循:
 
-many-to-many: 多种类型的node、多种类型的behavior/algorithm。
+1 separation of algorithm and structure principle
+
+2 program to abstraction principle
+
+Abstract visitor class抽象地表示behavior/algorithm。
+
+遵循上述separation principle和 abstraction principle的visitor pattern能够实现:
+
+1 open-closed：对于已知的structure(所有的node type是已知的)，可以扩展新的algorithm(添加新的visitor)，而无需修改structure。
+
+2 `N * M` code reuse:  对于已有的structure，可以添加新的visitor，扩展新的algorithm
+
+## 实现概括
+
+下面是对它的概括: 
+
+1 Traverse: 对structure进行traverse，以遍历(iteration)的方式来实现
+
+> NOTE: 对structure的iteration是一种非常常见的computation，参见工程discrete的`Relation-structure-computation\Computation\Computation-on-structure`章节
+
+2 Many-to-many: structure由多种类型的node组成(所有的node type是已知的)，对每种类型的node，可以执行多种类型的behavior/algorithm；每种behavior/algorithm，需要支持所有类型的node。
+
+3 由visitor来抽象地表示behavior/algorithm，对每种类型的node，它定义了visiting method来统一描述对该类型node的的computation，显然，visitor class中，会定义一系列的visiting method: 
+
+对于支持overload的programming language，显然这些visiting method的name可以一致；
+
+对于不支持overload的programming language，显然这些visiting method的name无法一致；
+
+
+
+### Dispatch in visitor pattern
+
+由于是many-to-many关系，肯定需要进行两次dispatch:
+
+1 abstract visitor to concrete visitor(select visitor implementation)，通常采用subtyping polymorphism来实现
+
+2 为node选择visiting method(select visiting method)
+
+
+
+下面是各种可能的实现方式: 
+
+#### Conditional if + subtyping polymorphism
+
+client 根据node type进行conditional if，select visiting method；
+
+abstract visitor class的subtyping polymorphism
+
+#### Double dispatch 
+
+由node来`accept` abstract visitor object，在 node的`accept` method中，select proper visiting method: 
+
+对于支持 function overload 的programming language: 
 
 mix static polymorphism(function overload) 和 dynamic polymorphism(virtual function)
 
-## [Refactoring.Guru](https://refactoring.guru/) [Visitor](https://refactoring.guru/design-patterns/visitor)
+对于不支持 function overload 的programming language: 
+
+
+
+这样做的好处是能够实现clean client；
+
+## [Refactoring.Guru](https://refactoring.guru/) # [Visitor](https://refactoring.guru/design-patterns/visitor)
+
+> NOTE: 这篇文章非常好，循序渐进地介绍visitor pattern
 
 **Visitor** is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
 
@@ -38,7 +98,7 @@ There was another reason for the refusal. It was highly likely that after this f
 
 ### Solution
 
-> NOTE: 在visitor pattern中需要解决的一个问题是：如何构建node class到export方法的映射，即为不同的node class指定对应的export方法。原文给出了两种方式：
+> NOTE: 在visitor pattern中需要解决的一个问题是：如何构建node class到visiting method(`export`)的映射，即为不同的node class指定对应的export方法。原文给出了两种方式：
 >
 > - conditional，即通过`if else`语句来实现映射
 > - [Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
@@ -61,7 +121,7 @@ class ExportVisitor implements Visitor is
     // ...
 ```
 
-But how exactly would we call these methods, especially when dealing with the whole graph? These methods have different signatures, so we can’t use **polymorphism**. To pick a proper **visitor** method that’s able to process a given object, we’d need to check its class. Doesn’t this sound like a nightmare?
+But how exactly would we call these methods, especially when dealing with the whole graph? These methods have different signatures, so we can’t use **polymorphism**. To pick a proper **`visitor`** method that’s able to process a given object, we’d need to check its class. Doesn’t this sound like a nightmare?
 
 > NOTE: 由于 subtyping polymorphism 要求function signature的一致，所以"we can’t use **polymorphism**"。
 
@@ -100,7 +160,9 @@ You might ask, why don’t we use **method overloading**? That’s when you give
 
 #### Double dispatch
 
-Instead of letting the client select a proper version of the method to call, how about we delegate this choice to objects we’re passing to the visitor as an argument? Since the objects know their own classes, they’ll be able to pick a proper method on the visitor less awkwardly. They “accept” a visitor and tell it what visiting method should be executed.
+Instead of letting the client **select** a proper version of the method to call, how about we **delegate** this choice to **objects** we’re passing to the **visitor** as an argument? Since the **objects** know their own classes, they’ll be able to pick a proper method on the **visitor** less awkwardly. They “**accept**” a visitor and tell it what **visiting method** should be executed.
+
+> NOTE: 这段总结的非常好
 
 ```pseudocode
 // Client code
