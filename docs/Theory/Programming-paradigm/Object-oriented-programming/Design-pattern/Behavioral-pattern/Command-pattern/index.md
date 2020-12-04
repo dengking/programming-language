@@ -4,7 +4,7 @@
 
 > You can treat [Visitor](https://refactoring.guru/design-patterns/visitor) as a powerful version of the [Command](https://refactoring.guru/design-patterns/command) pattern. Its objects can execute operations over various objects of different classes.
 
-上面这段话中的its所指的是visitor。
+上面这段话中的"its"所指的是visitor。
 
 
 
