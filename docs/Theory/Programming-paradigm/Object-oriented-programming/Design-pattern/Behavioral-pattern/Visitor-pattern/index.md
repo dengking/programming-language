@@ -8,11 +8,11 @@ Visitor pattern是典型的遵循:
 
 2 program to abstraction principle
 
-Abstract visitor class抽象地表示behavior/algorithm。
+Abstract visitor class抽象地表示behavior/algorithm，它可以有多种实现。
 
 遵循上述separation principle和 abstraction principle的visitor pattern能够实现:
 
-1 open-closed：对于已知的structure(所有的node type是已知的)，可以扩展新的algorithm(添加新的visitor)，而无需修改structure。
+1 open-closed：对于已知的structure(所有的node type是已知的)，可以扩展新的algorithm(添加新的concrete visitor)，而无需修改structure。
 
 2 `N * M` code reuse:  对于已有的structure，可以添加新的visitor，扩展新的algorithm
 
@@ -26,7 +26,7 @@ Abstract visitor class抽象地表示behavior/algorithm。
 
 2 Many-to-many: structure由多种类型的node组成(所有的node type是已知的)，对每种类型的node，可以执行多种类型的behavior/algorithm；每种behavior/algorithm，需要支持所有类型的node。
 
-3 由visitor来抽象地表示behavior/algorithm，对每种类型的node，它定义了visiting method来统一描述对该类型node的的computation，显然，visitor class中，会定义一系列的visiting method: 
+3 由visitor来抽象地表示behavior/algorithm，对每种类型的node，它定义了**visiting method**来统一描述对该类型node的的computation，显然，visitor class中，会定义一系列的visiting method: 
 
 对于支持overload的programming language，显然这些visiting method的name可以一致；
 
@@ -40,35 +40,47 @@ Abstract visitor class抽象地表示behavior/algorithm。
 
 1 abstract visitor to concrete visitor(select visitor implementation)，通常采用subtyping polymorphism来实现
 
-2 为node选择visiting method(select visiting method)
-
-
+2 为node选择**visiting method**(select **visiting method**)
 
 下面是各种可能的实现方式: 
 
-#### Conditional if + subtyping polymorphism
+#### Conditional if + subtyping polymorphism (cumbersome)
 
-client 根据node type进行conditional if，select visiting method；
+1 Client 根据 node type 进行conditional if，select visiting method，在[Refactoring.Guru](https://refactoring.guru/) # [Visitor](https://refactoring.guru/design-patterns/visitor) # Solution 段中给出了样例代码:  
 
-abstract visitor class的subtyping polymorphism
+```pseudocode
+foreach (Node node in graph)
+    if (node instanceof City)
+        exportVisitor.doForCity((City) node)
+    if (node instanceof Industry)
+        exportVisitor.doForIndustry((Industry) node)
+    // ...
+}
+```
 
-#### Double dispatch 
 
-由node来`accept` abstract visitor object，在 node的`accept` method中，select proper visiting method: 
+
+2 abstract visitor class的subtyping polymorphism
+
+#### Double dispatch (clean)
+
+由node来`accept` abstract visitor object，在 node的`accept` method中，由于它知道node的static type，因此它可以select proper visiting method: 
 
 对于支持 function overload 的programming language: 
 
-mix static polymorphism(function overload) 和 dynamic polymorphism(virtual function)
+Mix static polymorphism(function overload) 和 dynamic polymorphism(virtual function)。
 
 对于不支持 function overload 的programming language: 
 
-
+无法使用 static polymorphism，可以使用 dynamic polymorphism。
 
 这样做的好处是能够实现clean client；
 
 ## [Refactoring.Guru](https://refactoring.guru/) # [Visitor](https://refactoring.guru/design-patterns/visitor)
 
-> NOTE: 这篇文章非常好，循序渐进地介绍visitor pattern
+> NOTE: 这篇文章非常好，循序渐进地介绍visitor pattern: 
+>
+> 首先介绍 conditional if + subtyping polymorphism 的方式，然后介绍double dispatch的方式；
 
 **Visitor** is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
 
@@ -113,7 +125,7 @@ Now, what if that behavior can be executed over objects of different classes? Fo
 
 > NOTE: 对每类node，可以指定不同的behavior/algorithm。
 
-```C++
+```pseudocode
 class ExportVisitor implements Visitor is
     method doForCity(City c) { ... }
     method doForIndustry(Industry f) { ... }
@@ -125,7 +137,7 @@ But how exactly would we call these methods, especially when dealing with the wh
 
 > NOTE: 由于 subtyping polymorphism 要求function signature的一致，所以"we can’t use **polymorphism**"。
 
-```c++
+```pseudocode
 foreach (Node node in graph)
     if (node instanceof City)
         exportVisitor.doForCity((City) node)
@@ -139,7 +151,7 @@ You might ask, why don’t we use **method overloading**? That’s when you give
 
 > NOTE: 下面是采用overload的样例代码: 
 >
-> ```c++
+> ```pseudocode
 > class ExportVisitor implements Visitor is
 >     method do(City c) { ... }
 >     method do(Industry f) { ... }
@@ -184,22 +196,132 @@ class Industry is
     // ...
 ```
 
+I confess(承认). We had to change the node classes after all. But at least the change is trivial and it lets us add further behaviors without altering the code once again.
 
+> NOTE: 不可能完全不修改node classes，而是少量修改，可控修改。
+>
+> Open-close principle；
+
+Now, if we extract a common interface for all visitors, all existing nodes can work with any visitor you introduce into the app. If you find yourself introducing a new behavior related to nodes, all you have to do is implement a new visitor class.
+
+> NOTE: abstract visitor class
+
+### Structure
+
+![](./structure-en.png)
+
+
+
+### Pseudocode
+
+In this example, the **Visitor** pattern adds XML export support to the class hierarchy of geometric shapes.
+
+![](./example.png)
+
+```pseudocode
+// The element interface declares an `accept` method that takes
+// the base visitor interface as an argument.
+interface Shape is
+    method move(x, y)
+    method draw()
+    method accept(v: Visitor)
+
+// Each concrete element class must implement the `accept`
+// method in such a way that it calls the visitor's method that
+// corresponds to the element's class.
+class Dot implements Shape is
+    // ...
+
+    // Note that we're calling `visitDot`, which matches the
+    // current class name. This way we let the visitor know the
+    // class of the element it works with.
+    method accept(v: Visitor) is
+        v.visitDot(this)
+
+class Circle implements Shape is
+    // ...
+    method accept(v: Visitor) is
+        v.visitCircle(this)
+
+class Rectangle implements Shape is
+    // ...
+    method accept(v: Visitor) is
+        v.visitRectangle(this)
+
+class CompoundShape implements Shape is
+    // ...
+    method accept(v: Visitor) is
+        v.visitCompoundShape(this)
+
+
+// The Visitor interface declares a set of visiting methods that
+// correspond to element classes. The signature of a visiting
+// method lets the visitor identify the exact class of the
+// element that it's dealing with.
+interface Visitor is
+    method visitDot(d: Dot)
+    method visitCircle(c: Circle)
+    method visitRectangle(r: Rectangle)
+    method visitCompoundShape(cs: CompoundShape)
+
+// Concrete visitors implement several versions of the same
+// algorithm, which can work with all concrete element classes.
+//
+// You can experience the biggest benefit of the Visitor pattern
+// when using it with a complex object structure such as a
+// Composite tree. In this case, it might be helpful to store
+// some intermediate state of the algorithm while executing the
+// visitor's methods over various objects of the structure.
+class XMLExportVisitor implements Visitor is
+    method visitDot(d: Dot) is
+        // Export the dot's ID and center coordinates.
+
+    method visitCircle(c: Circle) is
+        // Export the circle's ID, center coordinates and
+        // radius.
+
+    method visitRectangle(r: Rectangle) is
+        // Export the rectangle's ID, left-top coordinates,
+        // width and height.
+
+    method visitCompoundShape(cs: CompoundShape) is
+        // Export the shape's ID as well as the list of its
+        // children's IDs.
+
+
+// The client code can run visitor operations over any set of
+// elements without figuring out their concrete classes. The
+// accept operation directs a call to the appropriate operation
+// in the visitor object.
+class Application is
+    field allShapes: array of Shapes
+
+    method export() is
+        exportVisitor = new XMLExportVisitor()
+
+        foreach (shape in allShapes) do
+            shape.accept(exportVisitor)
+```
+
+If you wonder why we need the `accept` method in this example, my article [Visitor and Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch) addresses this question in detail.
 
 
 
 ### Applicability
 
-在原文的Problem章节提出的问题和Real-World Analogy章节提出的例子之间存在着一定的共性，通过两者我们可以总结适合使用visitor pattern来解决的问题：
+> 在原文的Problem章节提出的问题和Real-World Analogy章节提出的例子之间存在着一定的共性，通过两者我们可以总结适合使用visitor pattern来解决的问题：
+>
+> 1 需要遍历不同类型的object
+>
+> 2 对不同类型的object需要执行特定的操作
+>
+> 其实原文的Intent章节中的配图已经形象的地展示出了visitor pattern。在原文的Applicability章节对此进行了总结。
 
-- 需要遍历不同类型的object
-- 对不同类型的object需要执行特定的操作
-
-其实原文的Intent章节中的配图已经形象的地展示出了visitor pattern。在原文的Applicability章节对此进行了总结。
 
 
+### Relations with Other Patterns
 
-不可能完全不修改node classes，而是少量修改，可控修改。
+
 
 ## wikipedia [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern)
 
