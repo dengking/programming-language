@@ -228,3 +228,11 @@ https://stackoverflow.com/questions/32079697/observer-pattern-visitor-pattern-fo
 
 
 design pattern充分利用dynamic dispatch和static dispatch，只要我们遵循design-by-context，那么就可以在不修改的design（抽象模型）的情况下，进行扩展，dispatch是建立抽象与具体的桥梁。
+
+
+
+## Abstraction principle in design pattern
+
+各种design pattern，其实提供了对一些常见问题的非常好的abstraction，这些abstraction经历过时间的考验的。
+
+另外各种design pattern的实现，都遵循program to abstraction。
