@@ -1,0 +1,7 @@
+command是对各种operation的更加abstract的描述；
+
+iterator是对各种container的更加abstract的描述；
+
+
+
+command 和 visitor都对应的是operation。

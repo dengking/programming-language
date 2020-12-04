@@ -6,6 +6,8 @@
 
 上面这段话中的its所指的是visitor。
 
+
+
 ## refactoring.guru [Command](https://refactoring.guru/design-patterns/command)
 
 
