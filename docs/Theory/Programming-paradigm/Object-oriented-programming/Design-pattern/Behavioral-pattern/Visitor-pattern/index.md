@@ -160,6 +160,8 @@ You might ask, why don’t we use **method overloading**? That’s when you give
 
 #### Double dispatch
 
+However, the **Visitor pattern** addresses this problem. It uses a technique called [Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch), which helps to execute the proper method on an object without cumbersome conditionals. 
+
 Instead of letting the client **select** a proper version of the method to call, how about we **delegate** this choice to **objects** we’re passing to the **visitor** as an argument? Since the **objects** know their own classes, they’ll be able to pick a proper method on the **visitor** less awkwardly. They “**accept**” a visitor and tell it what **visiting method** should be executed.
 
 > NOTE: 这段总结的非常好
