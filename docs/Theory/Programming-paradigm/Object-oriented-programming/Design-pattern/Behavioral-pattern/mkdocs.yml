@@ -6,4 +6,5 @@ nav:
     - Publish-subscribe-pattern: Publish-subscribe-pattern
     - Strategy-pattern: Strategy-pattern
     - State-pattern: State-pattern
-    - Command: Command
+    - Command-pattern: Command-pattern
+    - Interpreter-pattern: Interpreter-pattern
