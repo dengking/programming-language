@@ -6,7 +6,7 @@
 
 上面这段话中的"its"所指的是visitor。
 
-
+command是横切关注点，command pattern其实体现了 AOP。
 
 ## refactoring.guru [Command](https://refactoring.guru/design-patterns/command)
 
