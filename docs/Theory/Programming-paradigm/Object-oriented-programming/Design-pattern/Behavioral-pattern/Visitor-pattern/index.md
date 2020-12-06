@@ -439,17 +439,25 @@ int main() {
 
 
 
-## stackoverflow [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)
-
-### [A](https://stackoverflow.com/a/28321270)
-
-这个回答是非常好的，在[Summary-of-design-pattern](../../Summary-of-design-pattern.md)中对它进行了分析。
-
 ## Visitor pattern and double dispatch
 
 在visitor pattern中，由于存在着多种element，存在着多种visitor，所以最终到底要调用哪个algorithm，依赖于这两者，在文章[A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/2016/a-polyglots-guide-to-multiple-dispatch/)中对此进行了详细的分析。在[Multiple-dispatch](../../../Programming-paradigm/Object-oriented-programming/Polymorphism/Subtyping-polymorphism/Multiple-dispatch.md)中对此文章进行了收录。
 
+## Visitor pattern and modification of state
 
+在使用visitor pattern的时候，是否允许visitor来修改node的state？这个问题是值得讨论的。
+
+stackoverflow [Command Pattern vs. Visitor Pattern](https://stackoverflow.com/questions/2857880/command-pattern-vs-visitor-pattern)
+
+Is it generally acceptable to allow a Visitor to modify **state** of the Receiver, or should that be a Command pattern instead?
+
+[A](https://stackoverflow.com/a/2858021)
+
+The purpose of the **visitor pattern** is to allow new operations to be added to a class heirarchy without modification to that heirarchy. I've never seen anyone suggesting that only read-only operations are acceptable. The only limitation is that the added operations should only use the public interface of the class heirarchy.
+
+[A](https://stackoverflow.com/a/6779729)
+
+Microsoft's example of a visitor modifying the receiver is the [ExpressionVisitor](http://msdn.microsoft.com/en-us/library/bb546136(v=VS.90).aspx). The purpose of the ExpressionVisitor class is to modify an Expression tree. So I guess Microsoft at least thinks it's acceptable.
 
 ## Example
 

@@ -5,3 +5,4 @@ nav:
     - Singleton-pattern: Singleton-pattern
     - Builder-pattern: Builder-pattern
     - Dependency-injection: Dependency-injection
+    - Prototype: Prototype

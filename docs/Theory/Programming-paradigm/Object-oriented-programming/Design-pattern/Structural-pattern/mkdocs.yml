@@ -4,3 +4,4 @@ nav:
     - Composite-pattern: Composite-pattern
     - Delegation-pattern: Delegation-pattern
     - Facade-pattern: Facade-pattern
+    - Composite: Composite

@@ -1,8 +1,28 @@
 # Summary of design pattern
 
+## Algorithm and structure
+
+iterator pattern 和 visitor pattern都和algorithm-and-structure有关，关于此，在refactoring.guru [Visitor](https://refactoring.guru/design-patterns/visitor) 中有描述: 
+
+> You can use [Visitor](https://refactoring.guru/design-patterns/visitor) to execute an operation over an entire [Composite](https://refactoring.guru/design-patterns/composite) tree.
+>
+> > NOTE: [Composite](https://refactoring.guru/design-patterns/composite) tree就是structure
+>
+> You can use [Visitor](https://refactoring.guru/design-patterns/visitor) along with [Iterator](https://refactoring.guru/design-patterns/iterator) to traverse a complex data structure and execute some operation over its elements, even if they all have different classes.
+>
+> > NOTE: 这就是典型的algorithm-and-structure
 
 
-## Iterator pattern VS visitor pattern
+
+refactoring.guru [Composite](https://refactoring.guru/design-patterns/composite)中有这样的描述:
+
+> You can use [Iterators](https://refactoring.guru/design-patterns/iterator) to traverse [Composite](https://refactoring.guru/design-patterns/composite) trees.
+>
+> You can use [Visitor](https://refactoring.guru/design-patterns/visitor) to execute an operation over an entire [Composite](https://refactoring.guru/design-patterns/composite) tree.
+
+
+
+### Iterator pattern VS visitor pattern
 
 
 
@@ -14,7 +34,7 @@ Iterator pattern是指创建iterator以便于遍历container，visitor pattern�
 
 
 
-### [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)
+### stackoverflow [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)
 
 #### [A](https://stackoverflow.com/a/28321270)
 
@@ -202,11 +222,17 @@ The other good example I know of shows up in abstract syntax tree manipulations.
 
 [Iterator vs Visitor Design Pattern and How](https://stackoverflow.com/questions/21933629/iterator-vs-visitor-design-pattern-and-how)
 
+## Assemble design pattern
 
+每种design pattern都提出了一种核心思想/抽象思路，现实问题往往非常复杂，仅仅依靠一种design pattern是难以描述的，因此就需要assemble多种 design pattern来描述复杂的现实问题。
 
-## Observer pattern and visitor pattern
+### Node is like event/message
 
-### Observer pattern + Visitor pattern for message system
+在visitor pattern中，需要traverse node in  the structure，对于不同type的node，需要执行不同的algorithm，其实这非常类似于与event/message driven model的，即对于不同type的event/message，执行不同的callback；
+
+#### Observer pattern and visitor pattern
+
+#### Observer pattern + Visitor pattern for message system
 
 https://stackoverflow.com/questions/32079697/observer-pattern-visitor-pattern-for-message-system
 
@@ -236,3 +262,37 @@ design pattern充分利用dynamic dispatch和static dispatch，只要我们遵�
 各种design pattern，其实提供了对一些常见问题的非常好的abstraction，这些abstraction经历过时间的考验的。
 
 另外各种design pattern的实现，都遵循program to abstraction。
+
+## Command and iterator 
+
+command是对各种operation的更加abstract的描述；
+
+iterator是对各种container的更加abstract的描述；
+
+## Command pattern VS  visitor pattern
+
+command 和 visitor都对应的是operation/algorithm。
+
+关于此，在 refactoring.guru [Visitor](https://refactoring.guru/design-patterns/visitor) 中有这样的描述: 
+
+> You can treat [Visitor](https://refactoring.guru/design-patterns/visitor) as a powerful version of the [Command](https://refactoring.guru/design-patterns/command) pattern. Its objects can execute operations over various objects of different classes.
+
+
+
+### TODO
+
+stackoverflow [visitor vs servant vs command patterns](https://stackoverflow.com/questions/31986332/visitor-vs-servant-vs-command-patterns)
+
+## Message/event/request processing pattern
+
+这些pattern往往都和AOP有关。
+
+在refactoring.guru [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)、refactoring.guru [Command](https://refactoring.guru/design-patterns/command) 中，都有如下总结: 
+
+[Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility), [Command](https://refactoring.guru/design-patterns/command), [Mediator](https://refactoring.guru/design-patterns/mediator) and [Observer](https://refactoring.guru/design-patterns/observer) address various ways of connecting senders and receivers of requests:
+
+- *Chain of Responsibility* passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
+- *Command* establishes unidirectional connections between senders and receivers.
+- *Mediator* eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
+- *Observer* lets receivers dynamically subscribe to and unsubscribe from receiving requests.
+
