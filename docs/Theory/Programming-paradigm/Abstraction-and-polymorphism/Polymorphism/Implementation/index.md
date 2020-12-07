@@ -112,6 +112,8 @@ C++ Template也是behavior-based，参见:
 
 2) virtual function而没有virtual data
 
+于此类似的是: 在 generic programming中，有"type requirement is more about behavior-based";
+
 ### Type determine everything
 
 无论是behavior-based还是inheritance-based，它们本质上都是type-based: 
