@@ -28,7 +28,9 @@ The purpose of **bounded quantification** is to allow for [polymorphic functions
 
 ### Example
 
-This kind of **type constraint** can be expressed in [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) with a **generic interface**. The following example demonstrates how to describe types that can be compared to each other and use this as typing information in [polymorphic functions](https://en.wikipedia.org/wiki/Polymorphic_function). The `Test.min` function uses simple bounded quantification and does not preserve the type of the assigned types, in contrast with the `Test.Fmin` function which uses F-bounded quantification.
+This kind of **type constraint** can be expressed in [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) with a **generic interface**. The following example demonstrates how to describe types that can be compared to each other and use this as typing information in [polymorphic functions](https://en.wikipedia.org/wiki/Polymorphic_function). The `Test.min` function uses simple bounded quantification and does not preserve the type of the assigned type
+
+s, in contrast with the `Test.Fmin` function which uses F-bounded quantification.
 
 ```C++
 interface Comparable<T> {
