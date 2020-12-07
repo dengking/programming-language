@@ -230,7 +230,13 @@ The other good example I know of shows up in abstract syntax tree manipulations.
 
 在visitor pattern中，需要traverse node in  the structure，对于不同type的node，需要执行不同的algorithm，其实这非常类似于与event/message driven model的，即对于不同type的event/message，执行不同的callback；
 
-#### Observer pattern and visitor pattern
+### Observer pattern and visitor pattern
+
+event source就是是一个abstract structure，event source会产生各种event，对于每种event，不同的listener需要执行不同的algorithm，这个过程其实非常类似于visitor:
+
+1) 将event source看做是由这些event组成的abstract structure，则整个过程就是对这个abstract structure的visit；
+
+2) call back
 
 #### Observer pattern + Visitor pattern for message system
 

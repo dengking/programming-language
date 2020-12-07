@@ -20,19 +20,11 @@ Python标准库的设计和c++标准库的设计是一种典范，值的借鉴�
 
 ### Type requirement is more about behavior-based
 
-本节标题的意思是: type requirement往往是**behavior-based**。
-
-**behavior-based**是我在阅读 drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971) 时，其中提出的一个概念，我觉得"**behavior-based**"这个词总结地非常好:
-
-1) 可以对object这些哪些操作(比如call、iterate)
-
-2) object具备/哪些attribute(member data、member function)，这也可以看做是一种behavior
-
-"Type requirement is more about behavior-based"是我的经验之谈，主要是缘于:
+本节标题的意思是: type requirement往往是**behavior-based**。在`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism\Implementation`中，提出了"Polymorphism is more about behavior-based"，本节标题的含义与此类似；这是我的经验之谈，主要源于:
 
 1) Python、C++都是让user-defined class通过实现**magic function**来为这个**类型**添加某种**特性**/**behavior**，从而使它满足type requirement，所以在学习时，需要将**feature**/**behavior**和对应的**magic function**关联起来。所谓**magic function**，其实就是实现了特定功能的函数，在上层函数中，这个函数会被调用。比如OOP中的virtual function。
 
-2) polymorphism的dispatch是对function/method的dispatch
+
 
 ### Example of `***able`
 

@@ -70,6 +70,12 @@ C++ template specialization。之所以将它归为"type-based"，是因为C++�
 
 ### Behavior-based
 
+**behavior-based**是我在阅读 drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971) 时，其中提出的一个概念，我觉得"**behavior-based**"这个词总结地非常好:
+
+1) 可以对object这些哪些操作(比如call、iterate)
+
+2) object具备/哪些attribute(member data、member function)，这也可以看做是一种behavior
+
 
 
 #### Duck typing
@@ -94,9 +100,25 @@ C++ Template也是behavior-based，参见:
 
 
 
-[**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) 不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
+### [Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)  
 
+对于Parametric polymorphism，不同的programming language使用的实现方式不同，具体参见`Programming-paradigm\Generic-programming\Implementation`章节。
 
+### Polymorphism is more about behavior-based
+
+本节标题的意思是: Polymorphism往往是**behavior-based**。这是我的经验之谈，主要源于:
+
+1) polymorphism的dispatch是对function/method的dispatch
+
+2) virtual function而没有virtual data
+
+### Type determine everything
+
+无论是behavior-based还是inheritance-based，它们本质上都是type-based: 
+
+1) 因为type determine everything，因此behavior是type决定的 
+
+2) inheritance更是不用说，也是如此
 
 ## Dispatch example
 
@@ -119,7 +141,7 @@ C++ Template也是behavior-based，参见:
 
 一个抽象符号，可以被多种符合条件的具体符号替换。
 
-依然符合"一种抽象多种实现"
+依然符合"一种抽象多种实现"。
 
 
 

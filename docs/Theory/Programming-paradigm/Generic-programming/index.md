@@ -26,6 +26,8 @@ Such software entities are known as
 
 4) *parameterized types* in the influential 1994 book *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))*.[[3\]](https://en.wikipedia.org/wiki/Generic_programming#cite_note-GoF-3)
 
+> NOTE: "parameterized type" 的意思是: 参数化类型，"the influential 1994 book *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))*"，在 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Principle` 章节中进行了引用。
+
 > NOTE: 通过上面四段话，我们可以看到，同一个概念在不同的领域有着不同的名称，其实它们表达了相同的内涵。
 
 
@@ -124,9 +126,7 @@ C++ uses templates to enable generic programming techniques. The C++ Standard Li
 
 ## Implementation of generic programming
 
-参见`./Implementation`。
-
-
+在`./Implementation`中，讨论了C++、Python、Java/`C#`实现generic programming的方式；
 
 
 

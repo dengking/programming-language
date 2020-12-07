@@ -11,3 +11,4 @@ nav:
     ########## Exception#############
     - Error-handling: Error-handling
     - Type-Erasure: Type-Erasure
+    - Mixin: Mixin

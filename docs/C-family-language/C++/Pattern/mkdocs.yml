@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Books: Books.md
     - Singleton: Singleton
+    - Factory: Factory
     - Visitor-pattern: Visitor-pattern

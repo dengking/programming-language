@@ -1,10 +1,12 @@
 # Curiously recurring template pattern
 
-模板递归模式，它在c++中有着广泛的用途。
+模板递归模式，它在C++中有着广泛的用途。
 
-## 维基百科[Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
+## wikipedia [Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
 
+The **curiously recurring template pattern** (**CRTP**) is an idiom in [C++](https://en.wikipedia.org/wiki/C%2B%2B) in which a class `X` derives from a class [template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)) instantiation using `X` itself as template argument.[[1\]](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#cite_note-1) More generally it is known as **F-bound polymorphism**, and it is a form of [*F*-bounded quantification](https://en.wikipedia.org/wiki/F-bounded_quantification).
 
+> NOTE: 关于 **F-bound polymorphism**，参见 `Theory\Programming-paradigm\Generic-programming\Generics` 章节。
 
 ### Static polymorphism
 
@@ -185,9 +187,11 @@ int main()
 {
 	Printer{cout}.println("hello").println(500);
 }
+// g++ --std=c++11 test.cpp
+
 ```
 
-编译`g++ --std=c++11 test.cpp`
+
 
 ```c++
 #include<iostream>
