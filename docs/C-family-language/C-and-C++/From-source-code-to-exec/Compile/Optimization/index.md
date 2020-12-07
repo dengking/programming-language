@@ -8,6 +8,8 @@ Compiler是遵循 "optimization principle" 的，即它总是尽可能地去opti
 
 1 将operation转移到compile time完成，从而去除runtime overhead，比如 `typeid`
 
+compiler会尽可能地运用所有的已知信息(最多的是type info)来进行optimization。
+
 2 去除冗余操作，从而降低runtime overhead，比如 Copy elision
 
 作为programmer，我们谨记 compiler 的 optimization principle 是能够帮助我们理解很多 C++ implementation相关的设计的。下面是一些例子:
@@ -46,3 +48,10 @@ Compiler是遵循 "optimization principle" 的，即它总是尽可能地去opti
 2 primary template 和 specialization
 
 当两者处于不同header file的时候，在使用的时候，需要将它们都包含到同一个translation unit中才能够生效。
+
+3 CRTR都是give hint to compiler
+
+它都是generic programming中的技巧，参见 `Generic-programming\Curiously-recurring-template-pattern` 章节。
+
+4 tag dispatch
+

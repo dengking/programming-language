@@ -6,9 +6,28 @@
 
 The **curiously recurring template pattern** (**CRTP**) is an idiom in [C++](https://en.wikipedia.org/wiki/C%2B%2B) in which a class `X` derives from a class [template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)) instantiation using `X` itself as template argument.[[1\]](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#cite_note-1) More generally it is known as **F-bound polymorphism**, and it is a form of [*F*-bounded quantification](https://en.wikipedia.org/wiki/F-bounded_quantification).
 
-> NOTE: 关于 **F-bound polymorphism**，参见 `Theory\Programming-paradigm\Generic-programming\Generics` 章节。
+> NOTE: 关于 **F-bound polymorphism**，参见 `Theory\Programming-paradigm\Generic-programming\Implementation\Type-requirement\Generics` 章节。
+
+### General form
+
+```C++
+// The Curiously Recurring Template Pattern (CRTP)
+template <class T>
+class Base
+{
+    // methods within Base can use template to access members of Derived
+};
+class Derived : public Base<Derived>
+{
+    // ...
+};
+```
+
+
 
 ### Static polymorphism
+
+Typically, the base class template will take advantage of the fact that **member function bodies** (definitions) are not instantiated until long after their declarations, and will use members of the derived class within its own member functions, via the use of a [cast](https://en.wikipedia.org/wiki/Type_conversion); e.g.:
 
 ```c++
 #include <iostream>
@@ -53,20 +72,33 @@ int main()
 
 ```
 
-> NOTE: 上述代码展示了两种：
+> NOTE: 上述代码展示了两种static polymorphism：
 >
-> - method
-> - static method
+> 1 method
+>
+> 2 static method
 >
 > 上述`static_cast<T*>(this)`对应的是cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)中的`2)`。
 
-In the above example, note in particular that the function `Base<Derived>::interface()`, though *declared* before the existence of the `struct Derived` is known by the compiler (i.e., before `Derived` is declared), is not actually *instantiated* by the compiler until it is actually *called* by some later code which occurs *after* the declaration of `Derived` (not shown in the above example), so that at the time the function "`implementation`" is instantiated, the declaration of `Derived::implementation()` is known.
+In the above example, note in particular that the function `Base<Derived>::interface()`, though *declared* before the existence of the `struct Derived` is known by the compiler (i.e., before `Derived` is declared), is not actually *instantiated* by the compiler until it is actually ***called*** by some later code which occurs ***after*** the declaration of `Derived` (not shown in the above example), so that at the time the function "`implementation`" is **instantiated**, the declaration of `Derived::implementation()` is known.
 
-> NOTE: 原文的这一段所解释的其实是在`interface()`中，调用了`implementation()`方法，而这个方法在`struct Base`中是没有声明的。这段解释的含义是： `Base<Derived>::interface()`并不会被*instantiated*直到通过`struct Derived`的对象调用了`interface()`方法，这样就保证了`Derived::implementation()` is known。这是compiler编译template的机制，参见`C++\Language-reference\Template\Templates.md`的`Lazyness of template instantiation`段。具体的可执行的例子参见下面的文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)。
+> NOTE: 
+>
+> CRTP是充分运用compiler的:
+>
+> 1) Lazyness of template instantiation特性: 直到在`main()`中`d.interface();`时，才instance `interface()` member method
+>
+> 关于"Lazyness of template instantiation"特性，参见 `C++\Language-reference\Template\Implementation` 章节
+>
+> 2) optimization原则: 当compiler instance `interface()` member method的时候，它已经知道了`Derived` 的完整的type info，所以compiler会选择`Derived`的implementation。
+>
+> 关于 optimization原则，参见 `C-and-C++\From-source-code-to-exec\Compile\Optimization` 章节。
+>
+> 原文的这一段所解释的其实是在`interface()`中，调用了`implementation()`方法，而这个方法在`struct Base`中是没有声明的。这段解释的含义是： `Base<Derived>::interface()`并不会被*instantiated*直到通过`struct Derived`的对象调用了`interface()`方法，这样就保证了`Derived::implementation()` is known。这是compiler编译template的机制，参见`C++\Language-reference\Template\Templates.md`的`Lazyness of template instantiation`段。具体的可执行的例子参见下面的文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)。
+>
+> 上述例子充分展现了compiler 编译 template的机制。
 
-
-
-To elaborate on the above example, consider a base class with **no virtual functions**. Whenever the base class calls another member function, it will always call its own base class functions. When we derive a class from this base class, we inherit all the member variables and member functions that weren't overridden (no constructors or destructors). If the derived class calls an inherited function which then calls another member function, that function will never call any derived or overridden member functions in the derived class.
+This technique achieves a similar effect to the use of [virtual functions](https://en.wikipedia.org/wiki/Virtual_function), without the costs (and some flexibility) of [dynamic polymorphism](https://en.wikipedia.org/wiki/Dynamic_polymorphism). This particular use of the CRTP has been called "simulated dynamic binding" by some.[[9\]](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#cite_note-9) 
 
 However, if base class member functions use CRTP for all member function calls, the overridden functions in the derived class will be selected at compile time. This effectively emulates the virtual function call system at compile time without the costs in size or function call overhead
 
@@ -157,7 +189,7 @@ int main()
 
 
 
-> NOTE: 按照下面的文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)中的`struct Comparisons`例子，`struct counter`是一个mixin class。
+> NOTE: 按照文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)中的`struct Comparisons`例子，`struct counter`是一个mixin class。
 
 > NOTE: `struct counter`将destructor声明为`protected`，这与我们平时的将destructor声明为public virtual是不同的，它这样做的原因是：
 >
