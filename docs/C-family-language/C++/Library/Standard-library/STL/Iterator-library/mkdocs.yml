@@ -1,13 +1,8 @@
 nav:
-# 首先阅读这篇入门文章
-    - Iterator-primer: Iterator-primer.md
-#     
     - Iterator-library: Iterator-library.md
-    - Iterator-hierarchy: Iterator-hierarchy.md
-#
+# 首先阅读这篇入门文章
+    - Primer: Primer
     - Iterator-adaptors: Iterator-adaptors
-#    
     - Stream-iterators: Stream-iterators
-    # 
-    - Iterator-operations: Iterator-operations.md
-    - Range-access: Range-access.md
+    - Operations: Operations
+    - Range: Range

@@ -2,7 +2,7 @@
 
 
 
-## geeksforgeeks[Introduction to Iterators in C++](https://www.geeksforgeeks.org/introduction-iterators-c/)
+## geeksforgeeks [Introduction to Iterators in C++](https://www.geeksforgeeks.org/introduction-iterators-c/)
 
 ![](./C_Iterator.jpg)
 
@@ -26,7 +26,7 @@ Instead of being defined by specific types, each category of iterator is defined
 
 > NOTE: 
 
-> NOTE: STL是基于template的，而template是基于behavior的，所以在STL中，下面罗列的几种类型的iterator并没有对应的type，这一点和我们习惯的对OOP的认知是相左的。但是有些iterator定义了对应的type的，这些iterator并不属于下面罗列的几种类型的iterator，下面对这两种情况进行总结：
+> NOTE: STL是基于template的，而template是基于behavior-based的，所以在STL中，下面罗列的几种类型的iterator并没有对应的type，这一点和我们习惯的对OOP的认知是相左的。但是有些iterator定义了对应的type的，这些iterator并不属于下面罗列的几种类型的iterator，下面对这两种情况进行总结：
 >
 > 没有定义iterator type：
 >

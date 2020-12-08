@@ -41,3 +41,39 @@ https://en.wikipedia.org/wiki/Spirit_Parser_Framework
 https://www.drdobbs.com/cpp/the-spirit-parser-library-inline-parsing/184401692 
 
 这让我想到了：template is Turing-complete的
+
+
+
+## recursion
+
+```C++
+#include <iostream>
+ 
+void tprintf(const char* format) // base function
+{
+    std::cout << format;
+}
+ 
+template<typename T, typename... Targs>
+void tprintf(const char* format, T value, Targs... Fargs) // recursive variadic function
+{
+    for ( ; *format != '\0'; format++ ) {
+        if ( *format == '%' ) {
+           std::cout << value;
+           tprintf(format+1, Fargs...); // recursive call
+           return;
+        }
+        std::cout << *format;
+    }
+}
+ 
+int main()
+{
+    tprintf("% world% %\n","Hello",'!',123);
+    return 0;
+}
+```
+
+
+
+上述例子是: 递归关系 + 终止条件
