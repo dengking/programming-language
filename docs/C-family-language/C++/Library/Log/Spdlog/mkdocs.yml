@@ -1,2 +1,3 @@
 nav:
-    - spdlog: spdlog.md
+    - Introduction: index.md
+    - Asynchronous-logging: Asynchronous-logging
