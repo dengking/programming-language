@@ -6,10 +6,6 @@
 
 
 
-```
-
-```
-
 ## [`thread_pool.h`](https://github.com/gabime/spdlog/blob/v1.x/include/spdlog/details/thread_pool.h) 
 
 ### `enum class async_msg_type`
@@ -99,3 +95,52 @@ private:
 
 ```
 
+
+
+## [`mpmc_blocking_q.h`](https://github.com/gabime/spdlog/blob/v1.x/include/spdlog/details/mpmc_blocking_q.h) 
+
+### `class mpmc_blocking_queue`
+
+```C++
+#include <condition_variable>
+#include <mutex>
+
+template<typename T>
+class mpmc_blocking_queue
+{
+public:
+	/**
+	 * @brief try to enqueue and block if no room left
+	 *
+	 * @param item
+	 */
+	void enqueue(T &&item);
+	/**
+	 * @brief enqueue immediately. overrun oldest message in the queue if no room left.
+	 *
+	 * @param item
+	 */
+	void enqueue_nowait(T &&item);
+	/**
+	 * @brief try to dequeue item. if no item found. wait upto timeout and try again
+	 * Return true, if succeeded dequeue item, false otherwise
+	 *
+	 * @param popped_item
+	 * @param wait_duration
+	 * @return
+	 */
+	bool dequeue_for(T &popped_item, std::chrono::milliseconds wait_duration);
+private:
+	std::mutex queue_mutex_;
+	std::condition_variable push_cv_;
+	std::condition_variable pop_cv_;
+	spdlog::details::circular_q<T> q_;
+};
+
+```
+
+
+
+## [circular_q.h](https://github.com/gabime/spdlog/blob/v1.x/include/spdlog/details/circular_q.h)
+
+在工程discrete的`Structure\Data-structure\Array\Circular-array\spdlog-circular_q`章节收录了中
