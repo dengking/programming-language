@@ -1,4 +1,4 @@
-# [spdlog](https://github.com/gabime/spdlog)
+# [**spdlog**](https://github.com/gabime/spdlog)
 
 ## Design pattern
 
@@ -28,9 +28,9 @@
 `global registry` aggregate `logger` aggregate `sink` has a `formatter`、`log level`
 ```
 
+下面对各个structure进行说明: 
 
-
-### Registry
+## 1 Registry
 
 参见[5. Logger registry](https://github.com/gabime/spdlog/wiki/5.-Logger-registry)。
 
@@ -40,13 +40,20 @@ singleton
 
 
 
-### Logger
+## 2 Logger
 
-实现文件`logger.h`
+|                    | synchronous logger                                  | asynchronous logger                  |
+| ------------------ | --------------------------------------------------- | ------------------------------------ |
+| **logger class**   | `logger.h:class logger`                             | `async_logger.h: class async_logger` |
+| **logger factory** | `details:synchronous_factory.h:synchronous_factory` | `async.h:async_factory_impl`         |
+|                    |                                                     |                                      |
+|                    |                                                     |                                      |
 
 
 
-### Sink
+
+
+## 3 Sink
 
 参见[4. Sinks](https://github.com/gabime/spdlog/wiki/4.-Sinks)。
 
@@ -54,23 +61,13 @@ singleton
 
 
 
-### Config
+## Config
 
 
 
 ## `_mt` VS `_st`
 
 参见[1.1. Thread Safety](https://github.com/gabime/spdlog/wiki/1.1.-Thread-Safety)、[2. Creating loggers](https://github.com/gabime/spdlog/wiki/2.-Creating-loggers)
-
-
-
-## 线程模型
-
-### thread pool
-
-实现类`class SPDLOG_API thread_pool`，实现文件`thread_pool.h`。
-
-`class SPDLOG_API registry`有成员变量`std::shared_ptr<thread_pool> tp_;`
 
 
 
@@ -87,40 +84,4 @@ singleton
 ## [Asynchronous logging](https://github.com/gabime/spdlog/wiki/6.-Asynchronous-logging)
 
 参见 `./Asynchronous-logging` 章节。
-
-## 代码阅读
-
-
-
-### `common.h`
-
-```c++
-#ifdef SPDLOG_COMPILED_LIB /*使用Compiled library version*/
-
-#undef SPDLOG_HEADER_ONLY
-
-#if defined(_WIN32) && defined(SPDLOG_SHARED_LIB) /*win32*/
-
-#ifdef spdlog_EXPORTS
-#define SPDLOG_API __declspec(dllexport)
-#else
-#define SPDLOG_API __declspec(dllimport)
-#endif
-
-#else /*非win32*/
-
-#define SPDLOG_API
-
-#endif /*end win32*/
-
-#define SPDLOG_INLINE
-
-#else /*不使用Compiled library version*/
-
-#define SPDLOG_API
-#define SPDLOG_HEADER_ONLY
-#define SPDLOG_INLINE inline
-
-#endif /*end 使用Compiled library version*/
-```
 

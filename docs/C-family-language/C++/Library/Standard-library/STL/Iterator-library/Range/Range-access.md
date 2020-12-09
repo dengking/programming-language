@@ -16,6 +16,34 @@ C++11为了支持[Range-based for loop](https://en.cppreference.com/w/cpp/langua
 
 
 
+## Example
+
+### rosettacode [Loop over multiple arrays simultaneously](https://rosettacode.org/wiki/Loop_over_multiple_arrays_simultaneously)
+
+```C++
+#include <iostream>
+#include <iterator>
+
+int main(int argc, char *argv[])
+{
+	char lowers[] = { 'a', 'b', 'c' };
+	char uppers[] = { 'A', 'B', 'C' };
+	int nums[] = { 1, 2, 3 };
+
+	auto ilow = std::begin(lowers);
+	auto iup = std::begin(uppers);
+	auto inum = std::begin(nums);
+
+	for (; ilow != std::end(lowers) and iup != std::end(uppers) and inum != std::end(nums); ++ilow, ++iup, ++inum)
+	{
+		std::cout << *ilow << *iup << *inum << "\n";
+	}
+}
+
+```
+
+
+
 
 
 ## User-defined overloads and ADL
