@@ -12,6 +12,8 @@ C++20: range library
 
 关于range，参见`./Range`。
 
-### Range的优势
+为什么会朝着range的方向发展呢？下面进行了介绍:
 
-隐藏iterator、隐藏iterator操作，其实是一种sugar，使code更加expressive。基于range的generic programming，正重塑C++ STL。
+## Range over iterator
+
+隐藏iterator、隐藏iterator操作，其实是一种sugar，使code更加expressive、abstract。基于range的generic programming，正重塑C++ STL。
