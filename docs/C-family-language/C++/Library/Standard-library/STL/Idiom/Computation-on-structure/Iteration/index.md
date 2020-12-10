@@ -14,4 +14,4 @@ C++20: range library
 
 ### Range的优势
 
-隐藏iterator、隐藏iterator操作，其实是一种sugar，使code更加expressive。
+隐藏iterator、隐藏iterator操作，其实是一种sugar，使code更加expressive。基于range的generic programming，正重塑C++ STL。
