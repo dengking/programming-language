@@ -10,9 +10,11 @@
 
 ### wikipedia [Range as an alternative to iterator](https://en.wikipedia.org/wiki/Range_(computer_programming)#Range_as_an_alternative_to_iterator)
 
+Another meaning of *range* in computer science is an alternative to [iterator](https://en.wikipedia.org/wiki/Iterator). When used in this sense, range is defined as "a pair of begin/end iterators packed together".[[1\]](https://en.wikipedia.org/wiki/Range_(computer_programming)#cite_note-itersmustgo-1) It is argued [[1\]](https://en.wikipedia.org/wiki/Range_(computer_programming)#cite_note-itersmustgo-1) that "Ranges are a superior abstraction" (compared to iterators) for several reasons, including better safety.
 
+In particular, such ranges are supported in [Boost C++ Libraries](https://en.wikipedia.org/wiki/Boost_C%2B%2B_Libraries)[[2\]](https://en.wikipedia.org/wiki/Range_(computer_programming)#cite_note-2) and the [D](https://en.wikipedia.org/wiki/D_(programming_language)) standard library.[[3\]](https://en.wikipedia.org/wiki/Range_(computer_programming)#cite_note-3)
 
-### Range is an abstraction as iterator is
+### Range is an abstraction as iterator be
 
 和iterator类似，range也是一种抽象，它是**behavior-defined**（参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`），只要支持`begin`和`end`、iteration操作，那么就可以作为range，这就包括了c++的各种容器，正如cppreference [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for)中所述：
 

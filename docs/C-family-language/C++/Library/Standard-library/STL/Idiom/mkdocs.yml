@@ -1,8 +1,7 @@
 nav:
     - Introduction: index.md
-    - Range-based-idiom: Range-based-idiom
     - Clear-and-minimize: Clear-and-minimize.md
     - Shrink-to-fit: Shrink-to-fit.md
     - Erase_if: Erase_if
-    - Functional-programming: Functional-programming
-    - Zip: Zip
+    - Computation-on-structure: Computation-on-structure
+    

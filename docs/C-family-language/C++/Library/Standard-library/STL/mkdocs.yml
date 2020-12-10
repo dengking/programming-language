@@ -5,5 +5,5 @@ nav:
     - Iterator-library: Iterator-library
     - Algorithm: Algorithm
 # range是c++引入的新特性    
-    - Range: Range
+    - Ranges-library-C++20: Ranges-library-C++20
     - Idiom: Idiom
