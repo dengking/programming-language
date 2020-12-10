@@ -32,7 +32,11 @@ compiler会尽可能地运用所有的已知信息(最多的是type info)来进�
 
 1) 让compiler能够更好地优化code
 
-关于此的一个例子就是`inline`
+关于此的例子有:
+
+`inline`
+
+`likely` 和 `unlikely`
 
 2) 让compiler实现static polymorphism
 

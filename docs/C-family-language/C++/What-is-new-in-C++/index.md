@@ -42,7 +42,7 @@ C++不断引入新的特性，我们需要从更高地层次来思考这些特�
 
 参见`C-and-C++\Compile-time-and-run-time`章节。
 
-#### Template-meta programming
+#### Template
 
 C++的一个发展发现是对template-meta programming的强化。
 
@@ -75,3 +75,12 @@ C++的一个发展发现是对template-meta programming的强化。
 |                                                              |          |      |
 |                                                              |          |      |
 
+
+
+#### Uniform
+
+C++的一个非常重要的方向是对很多implementation-specific进行uniform，提供uniform syntax，这包括:
+
+1) C++ 11 attribute: `C++\Language-reference\Attribute`
+
+2) C++11 uniform initialization: `C++\Language-reference\Initialization\Uniform-initialization`
