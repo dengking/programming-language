@@ -22,7 +22,7 @@ As part of the movement of C++ away from “traits” types, C++14 added type al
 ... make_unsigned_t<T> ...
 ```
 
-> NOTE: 简化了变成，强化了TMP。
+> NOTE: 简化了编程，强化了TMP。
 
 
 
