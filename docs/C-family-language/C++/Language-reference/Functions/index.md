@@ -35,3 +35,4 @@ Function是programming language的核心：
 
 1) return multiple value: structured binding
 
+2) `std::apply`、`std::invoke`

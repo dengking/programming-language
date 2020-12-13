@@ -208,12 +208,14 @@ int main()
 
 ## `constexpr if` statements (C++17)
 
-本地地址：`file:///D:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/language/if.html`
+参见 `C++\Language-reference\Statements\Selection-statements\Constexpr-if`章节。
 
 ## microsoft [constexpr (C++)](https://docs.microsoft.com/en-us/cpp/cpp/constexpr-cpp?view=vs-2019)
 
 
 
-## [Difference between `constexpr` and `const`](https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const)
+## Difference between `constexpr` and `const`
+
+stackoverflow [Difference between `constexpr` and `const`](https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const)
 
 

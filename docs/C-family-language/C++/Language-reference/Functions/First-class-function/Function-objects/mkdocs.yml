@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - std-utility-library-function-object: std-utility-library-function-object
+    - std-function-object: std-function-object
     - Application: Application

@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - Invokation: Invokation
+    - std-result_of: std-result_of.md
+    # 变参函数
+    - Variadic-function: Variadic-function.md
