@@ -10,9 +10,15 @@
 
 其实本节标题的"Named requirement is behavior based"是和"Template-is-behavior-based"章节的观点是重复的，我在此处添加的目的仅仅是为了提示。
 
-可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中描述的各种requirement，requirement规定了对type、object of the type可以执行哪些operation/behavior(这其实就是behavior-based)，operation/behavior是通过expression来进行形式化地表达/描述的，对于这些operation/behavior，要么在language层提供了uniform syntax来进行描述，要么在standard library提供了uniform interface/API，（基本上）每种operation/behavior都有对应的magic function。除此之外，standard library还提供了trait来对其进行static reflection。
+可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中描述的各种requirement，requirement规定了对type、object of the type可以执行哪些operation/behavior(这其实就是behavior-based)，operation/behavior是通过expression来进行形式化地表达/描述的，对于这些operation/behavior，要么在language层提供了uniform syntax来进行描述，要么在standard library提供了uniform interface/API，（基本上）每种operation/behavior都有对应的**magic function**，显然这是符合**uniform function model**的。除此之外，standard library还提供了trait来对其进行static reflection。
 
 总的来说: 它是基于behavior，而非基于type的。
+
+> NOTE: 
+>
+> 在 `./Magic-function` 中，对C++ magic function进行了总结。
+>
+> 关于 **uniform function model** ，参见 `C++\Language-reference\Basic-concept`。
 
 ### Syntax
 
@@ -22,7 +28,7 @@
 
 在standard library中提供了uniform interface/API来描述对type、object的operation/behavior，典型的例子是: 
 
-| Named requirement                                            | Interface/API                                                | Trait                                                        |
+| Named requirement                                            | Interface/API/Magic function                                 | Trait                                                        |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [*Swappable*](https://en.cppreference.com/w/cpp/named_req/Swappable) | [std::swap](https://en.cppreference.com/w/cpp/algorithm/swap) and the user-defined `swap()` | [std::is_swappable](https://en.cppreference.com/w/cpp/types/is_swappable) |
 
@@ -55,6 +61,8 @@ Some of these requirements are being formalized in C++20 using the [concepts](ht
 | [CopyAssignable](https://en.cppreference.com/w/cpp/named_req/CopyAssignable) | `t = v`                    | [std::is_copy_assignable](https://en.cppreference.com/w/cpp/types/is_copy_assignable) |
 | [Destructible](https://en.cppreference.com/w/cpp/named_req/Destructible) | `u.~T()`                   | [std::is_destructible](https://en.cppreference.com/w/cpp/types/is_destructible) |
 
+> NOTE: 每一种都有其对应的magic function
+
 ### Type properties
 
 
@@ -63,7 +71,7 @@ Some of these requirements are being formalized in C++20 using the [concepts](ht
 
 
 
-| Named requirement                                            | Interface/API                                                | Trait                                                        |
+| Named requirement                                            | Interface/API/Magic function                                 | Trait                                                        |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [*Swappable*](https://en.cppreference.com/w/cpp/named_req/Swappable) | [std::swap](https://en.cppreference.com/w/cpp/algorithm/swap) and the user-defined `swap()` | [std::is_swappable](https://en.cppreference.com/w/cpp/types/is_swappable) |
 | [*Callable*](https://en.cppreference.com/w/cpp/named_req/Callable) | [std::invoke](https://en.cppreference.com/w/cpp/utility/functional/invoke) | [std::is_invocable](https://en.cppreference.com/w/cpp/types/is_invocable) |
@@ -75,3 +83,5 @@ Some of these requirements are being formalized in C++20 using the [concepts](ht
 #### Container element
 
 ### Iterator
+
+

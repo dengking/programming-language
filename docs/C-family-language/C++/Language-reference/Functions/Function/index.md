@@ -30,23 +30,13 @@
 
 [Friend](https://en.cppreference.com/w/cpp/language/friend) function
 
-## Callable 
-
-本节标题的callable是指C++中支持function call expression的，它包括: 
-
-| 类别                  | explanation                                                  | 章节                                                         |
-| --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| function lvalue       | function is not object                                       |                                                              |
-| reference to function | reference不是object，所以它无法归入function object中         |                                                              |
-| function object       | cppreference [FunctionObject](https://en.cppreference.com/w/cpp/named_req/FunctionObject) | [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects) |
-
 
 
 ## cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)
 
 Functions are C++ entities that associate a sequence of [statements](https://en.cppreference.com/w/cpp/language/statements) (a *function body*) with a *name* and a list of zero or more *function parameters*.
 
-> NOTE: 有一点需要注意的是，function的value category是rvalue，这在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中是由特殊说明的，这是因为function满足: `i`特性，即"has identity"，参见`C++\Language-reference\Expressions\Value-categories`，但是"Functions are not objects"。
+> NOTE: 有一点需要注意的是，function的value category是lvalue，这在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中是由特殊说明的，这是因为function满足: `i`特性，即"has identity"，参见`C++\Language-reference\Expressions\Value-categories`，但是"Functions are not objects"。
 
 ### Termination
 
@@ -58,7 +48,7 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 ### [Coroutine](https://en.cppreference.com/w/cpp/language/coroutines) is a kind of function
 
-> NOTE: 符合uniform function model，参见 `C++\Language-reference\Basic-concept\index.md` 
+> NOTE: 符合uniform function model，参见 `C++\Language-reference\Basic-concept\index` 
 >
 > 暂时还没有学习coroutine。
 
@@ -72,7 +62,7 @@ A function can terminate by [returning](https://en.cppreference.com/w/cpp/langua
 
 ### Functions are not objects
 
-> NOTE: 在`C++\Language-reference\Basic-concept\index.md`的"Thoughts"段中也进行了说明。
+> NOTE: 在`C++\Language-reference\Basic-concept\index`的"Thoughts"段中也进行了说明。
 
 Functions are not objects: there are no arrays of functions and functions cannot be **passed by value** or returned from other functions. Pointers and references to functions are allowed, and may be used where functions themselves cannot.
 
@@ -113,15 +103,33 @@ There are no cv-qualified function types (not to be confused with the types of [
 
 ### [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 
-> NOTE: 参见`C++\Language-reference\Functions\First-class-function\Function-objects`章节。
+Besides **function lvalues**, the **function call expression** supports pointers to functions, and any value of class type that overloads the function-call operator(**functor**) or is convertible to function pointer (including [lambda-expressions](https://en.cppreference.com/w/cpp/language/lambda)) (since C++11). Together, these types are known as [*FunctionObject*s](https://en.cppreference.com/w/cpp/named_req/FunctionObject), and they are used **ubiquitously**(无所不在) through the C++ standard library, see for example, usages of [*BinaryPredicate*](https://en.cppreference.com/w/cpp/named_req/BinaryPredicate) and [*Compare*](https://en.cppreference.com/w/cpp/named_req/Compare).
 
+> NOTE: 
+>
+> 在`C++\Language-reference\Functions\First-class-function\Function-objects`章节中对function object进行了专门讨论。
+>
+> 在`C++\Language-reference\Functions\First-class-function\Function-objects\Functor`章节中对functor进行了专门讨论。
 
+#### Function call expression
 
+本节讨论C++中支持function call expression的，它包括: 
 
+| 类别                  | explanation                                                  | 章节                                                         |
+| --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| function lvalue       | function is not object，就是我们平时所说的function           |                                                              |
+| reference to function | reference不是object，所以它无法归入function object中         |                                                              |
+| function object       | cppreference [FunctionObject](https://en.cppreference.com/w/cpp/named_req/FunctionObject)，上面这段中列出的:<br>- pointers to functions <br>- functor | [Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects) |
 
+## Function call expression and Invokation expression
 
+上面总结了C++ function call expression支持的类型，虽然它们都能够用于function call expression，但是它们的syntax并不相同，即不是uniform(主要是pointer to member function)，因此这就造成了generic programming的时候，需要由programmer进行abstraction和implementation，造成programmer的负担；C++17提出的callable named requirement解决了这个问题，在其中将uniform invokation interface，称为Invokation expression；参见`C++\Language-reference\Functions\Generic-programming\Callable`章节。
 
+## Function lvalue and reference to function and function object
 
+它们的相同点是: 都能够用于 Function call expression，不同点，在 cppreference [C++ named requirements: *FunctionObject*](https://en.cppreference.com/w/cpp/named_req/FunctionObject) 中进行了描述: 
+
+> Functions and references to functions are not function object types, but can be used where function object types are expected due to **function-to-pointer** [implicit conversion](https://en.cppreference.com/w/cpp/language/implicit_cast).
 
 
 

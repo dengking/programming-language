@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Callable-and-function: Callable-and-function
+    - Function: Function
     - Function-declaration: Function-declaration
     # 函数调用中也包含一些内容
     - Function-call: Function-call

@@ -187,3 +187,12 @@ c++语言是在不断地演进的，那c++标准委员会的专家们是以什�
 
 上述standard library，更加具体来说就是[Language support library](https://en.cppreference.com/w/cpp/utility#Language_support)。
 
+例子包括:
+
+1 `std::swap`
+
+2 `std::declval`
+
+3 `std::invoke`
+
+> NOTE: tag: prefer standard library over extending the core language

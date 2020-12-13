@@ -1,7 +1,7 @@
 nav:
     - C++: C++.md
     # c++的哲学
-    - Philosophy: Philosophy.md
+    - Philosophy: Philosophy
     - Person: Person
     # C++的命名规范
     - C++-name-conversion: C++-name-conversion.md

@@ -99,18 +99,22 @@ reference to function、reference to function。
 
 下面分情况进行详细说明: 
 
-**Operator is a kind of function**
+#### **Operator is a kind of function**
 
 参见 `C++\Language-reference\Expressions\Operators\index.md` ，其中对此进行了详细说明。
 
-**Member method is a kind of function**
+#### **Member method is a kind of function**
 
 参见`C++\Language-reference\Classes\Members\Non-static-member\Function-member`，其中对此进行了详细说明。
 
-**Coroutine is a kind of function**
+#### **Coroutine is a kind of function**
 
 [Coroutines (C++20)](https://en.cppreference.com/w/cpp/language/coroutines)是C++20引入的新特性，它也可以看做是一种function，参见:
 
 1) cppreference [Coroutines (C++20)](https://en.cppreference.com/w/cpp/language/coroutines)
 
 2) cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions)
+
+#### Named requirement and magic function 
+
+每种named requirement都有对应的magic function，参见 `C++\Language-reference\Template\Programming-paradigm\Generic-programming\Named-requirements` 章节。
