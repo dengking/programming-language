@@ -14,15 +14,13 @@
 
 
 
-## 发展概述: 如何描述type requirement/concept?
+## Type requirement/concept
 
 > NOTE: 在`Theory\Programming-paradigm\Generic-programming`中我们知道，generic programming中将type requirement称为concept。
 >
 > 因此本节标题中为了避免混淆，两者都用上了。
 
 在generic programming中，非常重要的一点是描述type requirement/concept；具体到C++，则是指在使用template的过程中，我们需要对template parameter添加type requirement/restriction/constrain，比如希望它**具备某种特性**/**满足某种条件**，各个版本的C++都提供了解决方法，本文对各种可用的方法进行总结。
-
-> 显然这就是`C++` concept所要解决的问题，它是`C++`20的feature，那在此之前，我们要如何实现呢？
 
 Type requirement/concept也是C++中用于控制static polymorphism的，因此它在C++中尤为重要，本节对此进行梳理。
 
@@ -32,15 +30,15 @@ Type requirement/concept也是C++中用于控制static polymorphism的，因此�
 >
 > 2) `C++\Language-reference\Template\Programming-paradigm\Idioms\Polymorphism`
 
-### Type requirement/concept examples
+### Classification
 
-Type requirement/concept基本上涉及了所有与type相关的内容，C++对此提供了丰富的支持，下面列举一些例子: 
+Type requirement/concept基本上涉及了所有与type相关的内容，C++对此提供了丰富的支持，下面是对它的分类: 
 
-#### Behavior
+#### Behavior-based
 
-支持哪些operation，显然这是behavior，可以通过expression来进行表达；参见:
+对于behavior-based的type requirement的，behavior常常是以expression的方式来进行表达，所以可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中使用**expression**来表达这些concept。参见:
 
-1) `./Named-requirements`
+1) `./Named-requirements`，在`./Named-requirements`中对此进行了详细的说明
 
 #### Member
 
@@ -52,54 +50,48 @@ Type是否有指定member，比如typedef。
 
 #### ......
 
+### 发展概述
 
+本节描述generic programming的发展概述，下面是一些素材:
 
-### C++11
-
-`decltype`、`std::declval`: 让programmer能够方便地表达expression、member，再借助SFINE，从而便利的实现**compile-time detection**/**compile-time introspection**/**compile-time reflection**。
-
-`<type_traits>`
-
-`std::enable_if`
-
-C++17
-
-`std::void_t`
-
-
-
-
-
-### 文档中的描述: Named requirements
-
-> NOTE: 本节标题的含义是: 在设计/技术文档中的描述方式是: named requirements，这种描述方式一般采用的是偏向于自然语言的，它是informal的
-
-在`Theory\Programming-paradigm\Generic-programming\Type-requirement`的《Specification-of-type-requirement》章节中，已经提及了C++的named requirement，按照其中的思想来理解cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)是非常容易的。
-
-需要注意的是，C++ named requirement是generic programming的concept，在c++20中它们都可以使用concept feature进行formalize。（基本上）named requirement是通过对应的magic function来实现的，也就是它是基于behavior，而非基于type的。
-
-Named requirement或者说concept是基于behavior的，behavior常常是以expression的方式来进行表达，所以可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中使用expression来表达这些concept。
-
-### 代码中的描述
-
-> NOTE: 本节讨论如何来编码实现named requirements，它是formal的。
+1) 
 
 |           | 实现方式                                              |
 | --------- | ----------------------------------------------------- |
 | pre C++20 | SFINAE + `enable_if` + `type_trait`，后面简称为SFINAE |
 | C++20     | concept                                               |
 
+2) boost [Declval](https://www.boost.org/doc/libs/1_54_0/libs/utility/doc/html/declval.html)
+
+这篇文章非常好，它告诉了我们在C++20之前，如何来实现C++20 concept的功能。
+
+#### C++11
+
+`decltype`、`std::declval`: 让programmer能够方便地表达expression、member，再借助SFINE，从而便利:
+
+1) 实现**compile-time detection**/**compile-time introspection**/**compile-time reflection**
+
+2) 描述type requirement
+
+`<type_traits>`
+
+`std::enable_if`
+
+#### C++17
+
+`std::void_t`
+
+#### C++20
+
+C++20 引入了concept feature，参见 `./Concepts`
 
 
 
+## SFINAE VS concept
 
+1) SFINAE是一种事前检查，C++ concept也是一种事前检查，不过C++ concept的语法更加清晰易读。
 
-
-### SFINAE VS concept
-
-SFINAE是一种事前检查，C++ concept也是一种事前检查，不过C++ concept的语法更加清晰易读。
-
-
+2) 都能够用于对static polymorphism进行控制
 
 #### stackoverflow [Will Concepts replace SFINAE?](https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae)
 

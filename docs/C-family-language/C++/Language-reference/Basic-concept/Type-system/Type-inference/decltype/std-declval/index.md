@@ -4,19 +4,25 @@
 
 ## boost [Declval](https://www.boost.org/doc/libs/1_54_0/libs/utility/doc/html/declval.html)
 
-> NOTE: 这篇文章说明了C++11引入`declval`、`decltype`的意图。
+> NOTE: 这篇文章说明了C++11引入`std::decltype`的意图: 
+>
+> C++11引入了`declval`，从而允许**expression SFINAE**；为了便于书写expression，需要`std::declval`；
+>
+> 它们的组合，能够让我们在C++11中实现C++20 concept的部分功能。
 
 ### [Overview](https://www.boost.org/doc/libs/1_54_0/libs/utility/doc/html/declval.html#declval.overview)
 
 The motivation for `declval` was introduced in [N2958: Moving Swap Forward](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2958.html#Value). Here follows a rewording of this chapter.
 
-With the provision(规定) of `decltype`, **late-specified return types**, and **default template-arguments** for **function templates** a new generation of SFINAE patterns will emerge to at least partially compensate(补偿) the lack of concepts on the C++0x timescale. Using this technique, it is sometimes necessary to obtain an object of a known type in a non-using context, e.g. given the declaration
+With the provision(规定) of `decltype`, **late-specified return types**, and **default template-arguments** for **function templates** a new generation of **SFINAE patterns** will emerge to at least partially compensate(补偿) the lack of **concepts** on the C++0x timescale. Using this technique, it is sometimes necessary to obtain an object of a known type in a non-using context, e.g. given the declaration
 
 > NOTE: 上面这段话的总结是非常好的，它让明确说明了C++ 11 引入 `decltype`、`std::declval` 的意图，掌握**意图**是我们准确使用的前提:
 >
 > 1) 显然，`decltype`、`std::declval` 在一定程度上补偿了 C++0x 中 lack of concepts 的局限，显然在C++11中， 我们可以使用 `decltype`、`std::declval` 来实现 C++20 concept 的功能，从我目前的认知来看，detection idiom( 基于`decltype`、`std::declval`、`std::enalble_if`、`std::void_` ) + SFINAE能够实现C++20 concept一部分的功能。
 >
 > 2) "obtain an object of a known type in a non-using context, e.g. given the declaration" 意味着:  [unevaluated contexts](https://en.cppreference.com/w/cpp/language/expressions#Unevaluated_expressions) 。
+>
+> 3) "new generation of SFINAE pattern"指的是expression template，在expression template中，我们常常是需要"obtain an object of a known type in a non-using context"才能够完整的表达一个expression。
 
 ```C++
 template<class T>
@@ -49,11 +55,11 @@ template<class T>
 typename std::add_rvalue_reference<T>::type declval(); // not used
 ```
 
-which ensures that we can also use cv void as template parameter. The careful reader might have noticed that `declval()` already exists under the name `create()` as part of the definition of the semantics of the type trait is_convertible in the C++0x standard.
+which ensures that we can also use cv void as template parameter. The careful reader might have noticed that `declval()` already exists under the name `create()` as part of the definition of the semantics of the type trait `is_convertible` in the C++0x standard.
 
-The provision of a new library component that allows the production of values in unevaluated expressions is considered important to realize constrained templates in C++0x where concepts are not available. This extremely light-weight function is expected to be part of the daily tool-box of the C++0x programmer.
+The provision(提供) of a new library component that allows the production of values in **unevaluated expressions** is considered important to realize constrained templates in C++0x where concepts are not available. This extremely light-weight function is expected to be part of the daily tool-box of the C++0x programmer.
 
-
+> NOTE: 这段话总结的非常好
 
 ## cppreference [std::declval](https://en.cppreference.com/w/cpp/utility/declval)
 

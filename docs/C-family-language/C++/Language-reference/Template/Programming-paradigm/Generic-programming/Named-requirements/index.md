@@ -2,23 +2,35 @@
 
 前面已经对named requirements进行了详细介绍。
 
+在`Theory\Programming-paradigm\Generic-programming\Type-requirement`的《Specification-of-type-requirement》章节中，已经提及了C++的named requirement，按照其中的思想来理解cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)是非常容易的。
+
+需要注意的是，C++ named requirement是generic programming的concept，在C++20中它们都可以使用concept feature进行formalize。
+
 ## Named requirement is behavior-based
 
 其实本节标题的"Named requirement is behavior based"是和"Template-is-behavior-based"章节的观点是重复的，我在此处添加的目的仅仅是为了提示。
 
-可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中描述的各种type requirement的Requirements要求object of the type能够满足各种**Expression**(可以对type、object执行哪些operation)，这其实就是behavior-based。
+可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中描述的各种requirement，requirement规定了对type、object of the type可以执行哪些operation/behavior(这其实就是behavior-based)，operation/behavior是通过expression来进行形式化地表达/描述的，对于这些operation/behavior，要么在language层提供了uniform syntax来进行描述，要么在standard library提供了uniform interface/API，（基本上）每种operation/behavior都有对应的magic function。除此之外，standard library还提供了trait来对其进行static reflection。
 
-uniform syntax
+总的来说: 它是基于behavior，而非基于type的。
 
-各个concept都有对应的syntax
+### Syntax
 
-uniform interface
+在language层提供了uniform syntax来描述对type、object的operation/behavior，典型的例子是Basic named requirement，每种都有其对应的syntax。
 
-各个concept都有对应的standard library interface
+### Interface/API
 
-uniform concept
+在standard library中提供了uniform interface/API来描述对type、object的operation/behavior，典型的例子是: 
 
-C++提供了concept来对这些named requirement进行校验
+| Named requirement                                            | Interface/API                                                | Trait                                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [*Swappable*](https://en.cppreference.com/w/cpp/named_req/Swappable) | [std::swap](https://en.cppreference.com/w/cpp/algorithm/swap) and the user-defined `swap()` | [std::is_swappable](https://en.cppreference.com/w/cpp/types/is_swappable) |
+
+
+
+### Supported operations trait
+
+C++ standard library的`Utility library#Language support#Type support#Type traits#Supported operations`提供了trait来对这些named requirement进行校验。
 
 ## cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)
 
@@ -34,7 +46,14 @@ Some of these requirements are being formalized in C++20 using the [concepts](ht
 
 ### Basic
 
-
+| Named requirement                                            | Expression(uniform syntax) | Trait                                                        |
+| ------------------------------------------------------------ | -------------------------- | ------------------------------------------------------------ |
+| [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible) | `T u`                      | [std::is_default_constructible](https://en.cppreference.com/w/cpp/types/is_default_constructible) |
+| [MoveConstructible](https://en.cppreference.com/w/cpp/named_req/MoveConstructible)(C++11) | `T u = rv;`                | [std::is_move_constructible](https://en.cppreference.com/w/cpp/types/is_move_constructible) |
+| [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) | `T u = v;`                 | [std::is_copy_constructible](https://en.cppreference.com/w/cpp/types/is_copy_constructible) |
+| [MoveAssignable](https://en.cppreference.com/w/cpp/named_req/MoveAssignable)(C++11) | `t = rv`                   | [std::is_move_assignable](https://en.cppreference.com/w/cpp/types/is_move_assignable) |
+| [CopyAssignable](https://en.cppreference.com/w/cpp/named_req/CopyAssignable) | `t = v`                    | [std::is_copy_assignable](https://en.cppreference.com/w/cpp/types/is_copy_assignable) |
+| [Destructible](https://en.cppreference.com/w/cpp/named_req/Destructible) | `u.~T()`                   | [std::is_destructible](https://en.cppreference.com/w/cpp/types/is_destructible) |
 
 ### Type properties
 
@@ -44,10 +63,12 @@ Some of these requirements are being formalized in C++20 using the [concepts](ht
 
 
 
-| concept                                                      |      | chapter                                                      |
-| ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| [Swappable](https://en.cppreference.com/w/cpp/named_req/Swappable) (C++11) |      | `C-family-language\C++\Idiom\OOP\Resource-management\Non-throwing-swap` |
-|                                                              |      |                                                              |
+| Named requirement                                            | Interface/API                                                | Trait                                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [*Swappable*](https://en.cppreference.com/w/cpp/named_req/Swappable) | [std::swap](https://en.cppreference.com/w/cpp/algorithm/swap) and the user-defined `swap()` | [std::is_swappable](https://en.cppreference.com/w/cpp/types/is_swappable) |
+| [*Callable*](https://en.cppreference.com/w/cpp/named_req/Callable) | [std::invoke](https://en.cppreference.com/w/cpp/utility/functional/invoke) | [std::is_invocable](https://en.cppreference.com/w/cpp/types/is_invocable) |
+
+
 
 ### Container
 
