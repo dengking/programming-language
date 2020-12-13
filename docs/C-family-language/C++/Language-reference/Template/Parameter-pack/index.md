@@ -704,3 +704,10 @@ int main()
 
 
 
+## Examples
+
+### `std::declval`
+
+[C++ named requirements: *Callable*](https://en.cppreference.com/w/cpp/named_req/Callable): 
+
+`INVOKE<R>(f, std::declval<ArgTypes>()...)`
