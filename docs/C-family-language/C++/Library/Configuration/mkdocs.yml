@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - XML: XML
-    - Json: Json.md
+    - Json: Json
+    - Ini: Ini
