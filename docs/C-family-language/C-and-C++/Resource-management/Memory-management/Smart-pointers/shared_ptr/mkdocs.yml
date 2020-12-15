@@ -1,3 +1,4 @@
 nav:
-    - shared_ptr: shared_ptr.md
+    - Introduction: index.md
     - pointer_cast: pointer_cast.md
+    - shared_ptr-and-this: shared_ptr-and-this
