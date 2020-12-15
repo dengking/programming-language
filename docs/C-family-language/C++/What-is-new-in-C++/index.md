@@ -34,15 +34,15 @@ python的官方文档的“What’s New in Python[¶](https://docs.python.org/3/
 
 
 
-### C++发展方向
+## C++发展方向
 
 C++不断引入新的特性，我们需要从更高地层次来思考这些特性对C++的具体改进，这样我们能够梳理清楚C++的发展脉络，下面是我总结的一些方面:
 
-#### Compile-time computation
+### Compile-time computation
 
 参见`C-and-C++\Compile-time-and-run-time`章节。
 
-#### Template
+### Template
 
 C++的一个发展发现是对template-meta programming的强化。
 
@@ -55,7 +55,7 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 
-#### Value-semantic
+### Value-semantic
 
 充分发挥value-semantic。
 
@@ -67,7 +67,7 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 
-#### User-defined literal
+### User-defined literal
 
 | feature                                                      | 引入版本 | 章节 |
 | ------------------------------------------------------------ | -------- | ---- |
@@ -77,10 +77,17 @@ C++的一个发展发现是对template-meta programming的强化。
 
 
 
-#### Uniform
+### Uniform
 
 C++的一个非常重要的方向是对很多implementation-specific进行uniform，提供uniform syntax，这包括:
 
 1) C++ 11 attribute: `C++\Language-reference\Attribute`
 
 2) C++11 uniform initialization: `C++\Language-reference\Initialization\Uniform-initialization`
+
+
+
+### C++ Has Become More Pythonic
+
+参见`./preshing-C++Has-Become-More-Pythonic`。
+
