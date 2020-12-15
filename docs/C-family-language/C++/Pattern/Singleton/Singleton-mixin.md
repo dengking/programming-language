@@ -43,9 +43,11 @@ This would be a generic solution, and you can plug the `Singleton` class to all 
 
 ## Implementation
 
+### Mixin from above
+
 ```C++
 /**
- * @brief 单例
+ * @brief 单例mixin
  *
  * @tparam DerivedClass
  */
@@ -59,5 +61,137 @@ public:
 		return instance;
 	}
 };
+
+class Singleton: public SingletonMixin<Singleton>
+{
+private:
+	Singleton()
+	{
+	}
+};
+int main()
+{
+	Singleton::GetInstance();
+}
+// g++ test.cpp
+
+```
+
+上述实现方式，将`DerivedClass`的constructor声明为private，则上述代码是会编译报错的:
+
+```C++
+test.cpp: In instantiation of ‘static DerivedClass& SingletonMixin<DerivedClass>::GetInstance() [with DerivedClass = Singleton]’:
+test.cpp:26:13:   required from here
+test.cpp:20:2: error: ‘Singleton::Singleton()’ is private
+  Singleton()
+  ^
+test.cpp:12:23: error: within this context
+   static DerivedClass instance;
+```
+
+
+
+### Mixin from below
+
+#### 实现方式一
+
+```C++
+#include <iostream>
+
+/**
+ * @brief 单例mixin
+ *
+ * @tparam DerivedClass
+ */
+template<class SingletonClass>
+class SingletonMixin: public SingletonClass
+{
+public:
+	/** Singleton creation function */
+	static SingletonClass& GetInstance()
+	{
+		static SingletonClass _instance;
+		return _instance;
+	}
+};
+
+class Singleton
+{
+public:
+	void Test()
+	{
+		std::cout << this << std::endl;
+	}
+protected:
+	Singleton()
+	{
+	}
+};
+
+int main()
+{
+	SingletonMixin<Singleton>::GetInstance().Test();
+	SingletonMixin<Singleton>::GetInstance().Test();
+}
+// g++ test.cpp
+
+```
+
+上述代码编译报错如下:
+
+```C++
+test.cpp: In instantiation of ‘static SingletonClass& SingletonMixin<SingletonClass>::GetInstance() [with SingletonClass = Singleton]’:
+test.cpp:35:29:   required from here
+test.cpp:28:2: error: ‘Singleton::Singleton()’ is protected
+  Singleton()
+  ^
+test.cpp:15:25: error: within this context
+   static SingletonClass _instance;
+```
+
+
+
+#### 实现方式二
+
+```C++
+#include <iostream>
+
+/**
+ * @brief 单例mixin
+ *
+ * @tparam DerivedClass
+ */
+template<class SingletonClass>
+class SingletonMixin: public SingletonClass
+{
+public:
+	/** Singleton creation function */
+	static SingletonMixin& GetInstance()
+	{
+		static SingletonMixin _instance;
+		return _instance;
+	}
+};
+
+class Singleton
+{
+public:
+	void Test()
+	{
+		std::cout << this << std::endl;
+	}
+protected:
+	Singleton()
+	{
+	}
+};
+
+int main()
+{
+	SingletonMixin<Singleton>::GetInstance().Test();
+	SingletonMixin<Singleton>::GetInstance().Test();
+}
+// g++ test.cpp
+
 ```
 

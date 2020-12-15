@@ -76,7 +76,7 @@ protected:
 
 ```
 
-The **constructor** can either be public or protected depending on the need. A **protected constructor** can ensure that the class will only be possible to be constructed by subclasses in this case the Singleton [MixIn](https://wiki.c2.com/?MixIn).
+The **constructor** can either be public or protected depending on the need. A **protected constructor** can ensure that the class will only be possible to be constructed by **subclasses** in this case the Singleton [MixIn](https://wiki.c2.com/?MixIn).
 
 The [MixIn](https://wiki.c2.com/?MixIn) can be used like:
 

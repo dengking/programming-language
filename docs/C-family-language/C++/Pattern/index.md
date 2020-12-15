@@ -4,7 +4,7 @@
 
 ## 参考
 
-### [Design Patterns in Modern C++](https://www.apress.com/cn/book/9781484236024)
+### apress [Design Patterns in Modern C++](https://www.apress.com/cn/book/9781484236024)
 
 source code：[design-patterns-in-modern-cpp](https://github.com/Apress/design-patterns-in-modern-cpp)
 
@@ -16,4 +16,14 @@ source code：[design-patterns-in-modern-cpp](https://github.com/Apress/design-p
 
 
 
-### 网站[c++patterns](https://cpppatterns.com/)
+### 网站 [c++patterns](https://cpppatterns.com/)
+
+
+
+### apibook [*API Design for C++*](https://apibook.com/blog/) # [Chapter 3 Patterns](http://www.apibook.com/Chapter_3.pdf)
+
+已经下载到了本地。
+
+
+
+### caiorss.github [CPP / C++ Notes - Design Patterns](https://caiorss.github.io/C-Cpp-Notes/cpp-design-patterns.html)

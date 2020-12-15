@@ -3,3 +3,4 @@ nav:
     - Singleton: Singleton
     - Factory: Factory
     - Visitor-pattern: Visitor-pattern
+    - Decorator: Decorator
