@@ -79,13 +79,25 @@ C++的一个发展发现是对template-meta programming的强化。
 
 ### Uniform
 
-C++的一个非常重要的方向是对很多implementation-specific进行uniform，提供uniform syntax，这包括:
+C++的一个非常重要的方向是uniform，uniform促进了对各种差异的abstraction，促进了generic programming。主要包括如下方面:
+
+1 对很多implementation-specific进行uniform，提供uniform/consistent syntax，这包括:
 
 1) C++ 11 attribute: `C++\Language-reference\Attribute`
 
 2) C++11 uniform initialization: `C++\Language-reference\Initialization\Uniform-initialization`
 
+2 对复杂的、常用的运算进行uniform，提供uniform/consistent interface
 
+"统一"意味着"抽象"，因为着需要polymorphism。
+
+1) C++17 `std::invoke`
+
+http://www.cplusplus2017.info/c17-stdinvoke-stdapply/ 
+
+> `std::invoke` it’s universal interface for calling anything it’s callable.
+
+2) `std::decay`
 
 ### C++ Has Become More Pythonic
 

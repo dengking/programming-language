@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - Partial-function-application: Partial-function-application.md
     - Operator-function-object: Operator-function-object.md
-    - std-function: std-function.md
+    - std-function: std-function

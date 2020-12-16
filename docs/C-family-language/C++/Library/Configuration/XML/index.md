@@ -136,6 +136,10 @@ There is also something of an ecosystem built around TinyXML, with a more iterat
 
 TinyXML uses the zLib license, which is more or less the MIT License with a different name.
 
+## stackoverflow [What is the best open XML parser for C++? [duplicate]](https://stackoverflow.com/questions/170686/what-is-the-best-open-xml-parser-for-c)
 
+[A](https://stackoverflow.com/a/170912)
+
+[**RapidXML**](http://rapidxml.sourceforge.net/)
 
 ## [pugixml](https://pugixml.org/)

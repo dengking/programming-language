@@ -326,3 +326,8 @@ http://en.wikipedia.org/wiki/Type_erasure
 `void*`
 
 dynamic_cast `void*`
+
+
+
+## wizmann [C++类型擦除与`std::function`性能探索](https://wizmann.tk/cpp-type-erasure-and-std-function.html)
+

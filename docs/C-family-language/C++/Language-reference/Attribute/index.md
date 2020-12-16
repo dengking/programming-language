@@ -76,3 +76,13 @@ clang [Attributes in Clang](https://clang.llvm.org/docs/AttributeReference.html)
 #### gcc
 
 gcc [6 Extensions to the C Language Family](https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html#C-Extensions)
+
+## microsoft [Attributes in C++](https://docs.microsoft.com/en-us/cpp/cpp/attributes?view=msvc-160)
+
+### C++ Standard Attributes
+
+### `[[noreturn]]`
+
+
+
+### `[[carries_dependency]]`

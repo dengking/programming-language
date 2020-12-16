@@ -359,3 +359,7 @@ int main()
 // g++ -g --std=c++11 test.cpp -lpthread
 ```
 
+
+
+## wizmann [C++类型擦除与`std::function`性能探索](https://wizmann.tk/cpp-type-erasure-and-std-function.html)
+
