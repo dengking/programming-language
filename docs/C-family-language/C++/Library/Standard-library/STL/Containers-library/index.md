@@ -38,31 +38,16 @@ Container adaptors provide a different interface for sequential containers.
 | [queue](https://en.cppreference.com/w/cpp/container/queue)   | adapts a container to provide queue (FIFO data structure) (class template) |
 | [priority_queue](https://en.cppreference.com/w/cpp/container/priority_queue) | adapts a container to provide priority queue (class template) |
 
+## Common issue
 
+参见 `./Common-issue` 章节，涉及到的主题有:
 
-### Iterator invalidation
+1 Iterator invalidation
 
-在[Iterator-invalidation](./Iterator-invalidation.md)中对此进行了详细讨论；
+2 Thread safety
 
+3 ......
 
-
-### Thread safety
-
-在[Thread safety](./Thread-safety.md)中对此进行了详细讨论；
-
-
-
-
-
-## Memory management
-
-STL的container library，对于dynamic container，都涉及如下问题：
-
-- expand
-
-- shrink
-
-除[array](https://en.cppreference.com/w/cpp/container/array)(C++11)，其他的container都是dynamic container；
 
 
 
