@@ -1,6 +1,6 @@
 # Coercion by Member Template
 
-
+"coercion"的意思是"强迫、强制"。
 
 ## More C++ Idioms/[Coercion by Member Template](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Coercion_by_Member_Template)
 
@@ -10,7 +10,11 @@ To increase the flexibility of a class template's interface by allowing the clas
 
 ### Motivation
 
-It is often useful to extend a relationship between two types to class templates specialized with those types. For example, suppose that class `D` derives from class `B`. A pointer to an object of type `D` can be assigned to a pointer to `B;` C++ supports that implicitly. However, types composed of these types do not share the relationship of the composed types. That applies to class templates as well, so a `Helper<D>` object normally cannot be assigned to a `Helper<B>` object.
+It is often useful to extend a relationship between two types to class templates specialized with those types. 
+
+> NOTE: 目的: 将两个type之间的relationship推广到"class templates specialized with those types"。
+
+For example, suppose that class `D` derives from class `B`. A pointer to an object of type `D` can be assigned to a pointer to `B;` C++ supports that implicitly. However, types composed of these types do not share the relationship of the composed types. That applies to class templates as well, so a `Helper<D>` object normally cannot be assigned to a `Helper<B>` object.
 
 ```c++
 class B {};
@@ -39,7 +43,7 @@ hb = hd; // Not allowed but could be very useful
 >
 > 即没有`operator=`，则无法进行conversion。
 
-There are cases where such conversions are useful, such as allowing conversion from `std::unique_ptr<D>` to `std::unique_ptr<B>`. That is quite intuitive, but isn't supported without using the Coercion by Member Template Idiom.
+There are cases where such conversions are useful, such as allowing conversion from `std::unique_ptr<D>` to `std::unique_ptr<B>`. That is quite intuitive, but isn't supported without using the **Coercion by Member Template Idiom**.
 
 ### Solution and Sample Code
 
