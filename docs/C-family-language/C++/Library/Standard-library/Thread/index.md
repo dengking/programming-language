@@ -16,3 +16,7 @@
 https://exceptionshub.com/c-terminate-called-without-an-active-exception.html
 
 https://en.cppreference.com/w/cpp/thread/condition_variable
+
+
+
+## thispointer [C++11 Multi-threading Tutorials](https://thispointer.com/category/c/c-11/c11-threads/)

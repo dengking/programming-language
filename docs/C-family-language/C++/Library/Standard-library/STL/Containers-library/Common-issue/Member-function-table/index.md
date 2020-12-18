@@ -14,11 +14,11 @@ STL container的接口的定义、命名是遵循一定的规范的，从它的M
 >
 > 1) begin 和 end
 >
-> 2) `c***` c的含义是const
+> 2) `cbegin` `c`的含义是const
 >
 > 参见下面的"`cbegin` and `begin`"章节。
 >
-> 3) 
+> 3) `rbegin` `r`的含义是reverse
 
 
 
