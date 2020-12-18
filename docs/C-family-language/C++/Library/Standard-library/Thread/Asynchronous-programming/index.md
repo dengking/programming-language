@@ -14,17 +14,17 @@ The standard library provides facilities to obtain values that are returned and 
 
 
 
-## Mode: Asynchronous task and `std::future`
+## Mode: asynchronous task and `std::future`
 
 从cppreference [Thread support library # Futures](https://en.cppreference.com/w/cpp/thread#Futures) 中的内容可以看出，C++为asynchronous programming提供了非常统一、抽象的使用模式: 
 
-1 从下面的"Asynchronous task"章节可知，C++支持多种方式来实现asynchronous task
+1 从下面的内容可知，C++支持多种方式来实现asynchronous task
 
 2 [std::future](https://en.cppreference.com/w/cpp/thread/future) 是获取这些asynchronous task的return value的统一方式
 
 3 `std::promise`、`std::future`都是操作shared state的facility。
 
-
+### Asynchronous task
 
 在 cppreference [Thread support library # Futures](https://en.cppreference.com/w/cpp/thread#Futures) 中这样介绍asynchronous task:
 

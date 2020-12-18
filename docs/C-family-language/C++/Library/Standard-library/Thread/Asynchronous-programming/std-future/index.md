@@ -16,11 +16,13 @@ The class template `std::future` provides a mechanism to access the result of **
 
 3 When the asynchronous operation is ready to send a result to the creator, it can do so by modifying *shared state* (e.g. [std::promise::set_value](https://en.cppreference.com/w/cpp/thread/promise/set_value)) that is linked to the creator's `std::future`.
 
+> NOTE: 进行了非常好的抽象
+
 ### `std::future` VS `std::shared_future`
 
 Note that `std::future` references shared state that is not shared with any other asynchronous return objects (as opposed to [std::shared_future](https://en.cppreference.com/w/cpp/thread/shared_future)).
 
-
+### Example
 
 ```C++
 #include <iostream>
@@ -48,6 +50,51 @@ int main()
     f3.wait();
     std::cout << "Done!\nResults are: "
               << f1.get() << ' ' << f2.get() << ' ' << f3.get() << '\n';
+    t.join();
+}
+// g++ --std=c++11 test.cpp -lpthread
+
+```
+
+> NOTE: 上述代码在"g++ (GCC) 4.8.5 20150623 (Red Hat 4.8.5-28)"中，编译报错如下: 
+>
+> ```C++
+> test.cpp: In lambda function:
+> test.cpp:18:26: error: ‘class std::promise<int>’ has no member named ‘set_value_at_thread_exit’
+>      std::thread( [&p]{ p.set_value_at_thread_exit(9); }).detach();
+> ```
+>
+> 
+
+#### Example with exceptions
+
+```C++
+#include <thread>
+#include <iostream>
+#include <future>
+
+int main()
+{
+    std::promise<int> p;
+    std::future<int> f = p.get_future();
+
+    std::thread t([&p]{
+        try {
+            // code that may throw
+            throw std::runtime_error("Example");
+        } catch(...) {
+            try {
+                // store anything thrown in the promise
+                p.set_exception(std::current_exception());
+            } catch(...) {} // set_exception() may throw too
+        }
+    });
+
+    try {
+        std::cout << f.get();
+    } catch(const std::exception& e) {
+        std::cout << "Exception from the thread: " << e.what() << '\n';
+    }
     t.join();
 }
 // g++ --std=c++11 test.cpp -lpthread
