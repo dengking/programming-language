@@ -108,19 +108,35 @@ Now as fetching data from DB and file are independent of each other and also tim
 
 One way to do is create a new thread pass a **promise** as an argument to thread function and fetch data from associated `std::future` object in calling thread.
 
+> NOTE: 使用 `std::promise` + `std::future` 的模式，参见 `C++\Library\Standard-library\Thread\Asynchronous-programming\std-async-and-future` 章节。
+
 The other easy way is using `std::async`.
 
 ### Calling `std::async` with function pointer as callback
 
 Now let’s modify the above code and call `fetchDataFromDB()` asynchronously using `std::async()` i.e.
 
+```C++
+#include <thread>
+#include <future>
+#include <chrono>
+std::future<std::string> resultFromDB = std::async(std::launch::async, fetchDataFromDB, "Data");
+// Do Some Stuff
+//Fetch Data from DB
+// Will block till data is available in future<std::string> object.
+std::string dbData = resultFromDB.get();
+
+```
+
+
+
 **`std::async()` does following things,**
 
-- It automatically creates a thread (Or picks from internal thread pool) and a promise object for us.
-- Then passes the std::promise object to thread function and returns the associated std::future object.
-- When our passed argument function exits then its value will be set in this promise object, so eventually return value will be available in std::future object.
+- It automatically creates a thread (Or picks from internal thread pool) and a **promise object** for us.
+- Then passes the `std::promise` object to thread function and returns the associated `std::future` object.
+- When our passed argument function exits then its value will be set in this promise object, so eventually return value will be available in `std::future` object.
 
-Now change the above example and use std::async to read data from DB asyncronously i.e.
+Now change the above example and use `std::async` to read data from DB asyncronously i.e.
 
 Checkout the compete example as follows,
 
