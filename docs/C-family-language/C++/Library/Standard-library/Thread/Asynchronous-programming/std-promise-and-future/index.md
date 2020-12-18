@@ -1,4 +1,4 @@
-# `std::future`
+# `std::future` and `std::promise`
 
 
 
