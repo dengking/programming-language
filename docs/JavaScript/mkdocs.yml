@@ -3,4 +3,5 @@ nav:
     - DOM: DOM
     - Event-driven-model: Event-driven-model
     - Software: Software
-    - Asynchronous-JavaScript: Asynchronous-JavaScript
+    - Asynchronous-programming: Asynchronous-programming
+    - Implementation: Implementation

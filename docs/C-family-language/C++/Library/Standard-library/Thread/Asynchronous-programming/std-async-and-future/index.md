@@ -1,4 +1,4 @@
-# Execute a task asynchronously
+# `std::async` and `std::future`
 
 如何启动？如何获取结果？
 
@@ -34,13 +34,15 @@ Non **asynchronous behaviour** i.e. Function will be called when other thread wi
 
 #### `std::launch::async | std::launch::deferred`
 
-Its the default behaviour. With this launch policy it can run asynchronously or not depending on the load on system. But we have no control over it.
+Its the default behaviour. With this **launch policy** it can run asynchronously or not depending on the load on system. But we have no control over it.
 
 If we do not specify an launch policy. Its behaviour will be similar to **`std::launch::async | std::launch::deferred`**.
 
+
+
 We are going to use `std::launch::async` launch policy in this article.
 
-We can pass any callback in std::async i.e.
+We can pass any callback in `std::async` i.e.
 
 - Function Pointer
 - Function Object
@@ -134,17 +136,135 @@ std::string dbData = resultFromDB.get();
 
 - It automatically creates a thread (Or picks from internal thread pool) and a **promise object** for us.
 - Then passes the `std::promise` object to thread function and returns the associated `std::future` object.
-- When our passed argument function exits then its value will be set in this promise object, so eventually return value will be available in `std::future` object.
+- When our passed argument `function` exits then its value will be set in this promise object, so eventually return value will be available in `std::future` object.
 
 Now change the above example and use `std::async` to read data from DB asyncronously i.e.
 
 Checkout the compete example as follows,
 
+```C++
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <future>
+using namespace std::chrono;
+std::string fetchDataFromDB(std::string recvdData)
+{
+	// Make sure that function takes 5 seconds to complete
+	std::this_thread::sleep_for(seconds(5));
+	//Do stuff like creating DB Connection and fetching Data
+	return "DB_" + recvdData;
+}
+std::string fetchDataFromFile(std::string recvdData)
+{
+	// Make sure that function takes 5 seconds to complete
+	std::this_thread::sleep_for(seconds(5));
+	//Do stuff like fetching Data File
+	return "File_" + recvdData;
+}
+int main()
+{
+	// Get Start Time
+	system_clock::time_point start = system_clock::now();
+	std::future<std::string> resultFromDB = std::async(std::launch::async, fetchDataFromDB, "Data");
+	//Fetch Data from File
+	std::string fileData = fetchDataFromFile("Data");
+	//Fetch Data from DB
+	// Will block till data is available in future<std::string> object.
+	std::string dbData = resultFromDB.get();
+	// Get End Time
+	auto end = system_clock::now();
+	auto diff = duration_cast<std::chrono::seconds>(end - start).count();
+	std::cout << "Total Time Taken = " << diff << " Seconds" << std::endl;
+	//Combine The Data
+	std::string data = dbData + " :: " + fileData;
+	//Printing the combined Data
+	std::cout << "Data = " << data << std::endl;
+	return 0;
+}
+// g++ --std=c++11 test.cpp -lpthread
+
+```
+
+> NOTE: 上述程序的输出如下:
+>
+> ```
+> Total Time Taken = 5 Seconds
+> Data = DB_Data :: File_Data
+> ```
+
+Now it will take 5 seconds only.
+
+### Calling `std::async` with Function Object as callback
+
+```C++
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <future>
+using namespace std::chrono;
+/*
+ * Function Object
+ */
+struct DataFetcher
+{
+	std::string operator()(std::string recvdData)
+	{
+		// Make sure that function takes 5 seconds to complete
+		std::this_thread::sleep_for(seconds(5));
+		//Do stuff like fetching Data File
+		return "File_" + recvdData;
+	}
+};
+
+int main()
+{
+	//Calling std::async with function object
+	std::future<std::string> fileResult = std::async(DataFetcher(), "Data");
+	std::cout << fileResult.get() << std::endl;
+	return 0;
+}
+// g++ --std=c++11 test.cpp -lpthread
+
+```
+
+
+
+### Calling `std::async` with Lambda function as callback
+
+```C++
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <future>
+using namespace std::chrono;
+
+int main()
+{
+	//Calling std::async with lambda function
+	std::future<std::string> resultFromDB = std::async([](std::string recvdData)
+	{
+		std::this_thread::sleep_for (seconds(5));
+		//Do stuff like creating DB Connection and fetching Data
+					return "DB_" + recvdData;
+	}, "Data");
+	std::cout << resultFromDB.get() << std::endl;
+	return 0;
+}
+// g++ --std=c++11 test.cpp -lpthread
+
+```
+
+
+
 ## cpppatterns [Execute a task asynchronously](https://cpppatterns.com/patterns/execute-task-asynchronously.html)
 
-## DESCRIPTION
+### DESCRIPTION
 
-[`std::async`](http://en.cppreference.com/w/cpp/thread/async) provides a high-level way to accomplish asynchronous execution of tasks, abstracting over [`std::thread`](http://en.cppreference.com/w/cpp/thread/thread) and [`std::promise`](http://en.cppreference.com/w/cpp/thread/promise).
+[`std::async`](http://en.cppreference.com/w/cpp/thread/async) provides a high-level way to accomplish **asynchronous execution of tasks**, abstracting over [`std::thread`](http://en.cppreference.com/w/cpp/thread/thread) and [`std::promise`](http://en.cppreference.com/w/cpp/thread/promise).
 
 On [line 14](https://cpppatterns.com/patterns/execute-task-asynchronously.html#line14), we call `std::async`, passing `func` as the function to execute asynchronously. Arguments to `func` can be passed as additional arguments to `std::async`. The return value is a [`std::future`](http://en.cppreference.com/w/cpp/thread/future), representing an `int` value that will be returned from the task at some point in the future.
 
@@ -163,3 +283,60 @@ To request that the task is executed only when the result is needed, we use [`st
 On [line 18](https://cpppatterns.com/patterns/execute-task-asynchronously.html#line18), we use the `std::future`’s `get` member function to get the result of the asynchronous task. This blocks until the result is available.
 
 **Note**: It is important that we capture the future returned by `std::async`. If we do not, then the call will always block.
+
+```C++
+#include <future>
+int func()
+{
+	int some_value = 0;
+	// Do work...
+	return some_value;
+}
+int main()
+{
+	std::future<int> result_future = std::async(func);
+	// Do something...
+	int result = result_future.get();
+}
+// g++ --std=c++11 test.cpp -lpthread
+
+```
+
+
+
+
+
+## TODO: stackoverflow [Why should I use std::async?](https://stackoverflow.com/questions/17963172/why-should-i-use-stdasync)
+
+[A](https://stackoverflow.com/a/17973892)
+
+
+
+```C++
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <future>
+using namespace std::chrono;
+int doSomethingThatTakesTenSeconds()
+{
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	return 1;
+}
+int main()
+{
+	auto fut = std::async(std::launch::async, doSomethingThatTakesTenSeconds);
+	auto result1 = doSomethingThatTakesTenSeconds();
+	auto result2 = fut.get();
+	std::cout << result1 << std::endl;
+	std::cout << result2 << std::endl;
+	return 0;
+}
+// g++ --std=c++11 test.cpp -lpthread
+
+```
+
+
+
+## modernescpp [Asynchronous Function Calls](https://www.modernescpp.com/index.php/asynchronous-function-calls)

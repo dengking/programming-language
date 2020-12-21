@@ -39,4 +39,5 @@ nav:
     - Program-analysis: Program-analysis
     # 如何进行代码重构
     - Code-refactoring: Code-refactoring
+    - Pyramid-of-doom: Pyramid-of-doom
     

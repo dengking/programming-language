@@ -4,8 +4,6 @@ jQuery是最最能够体现JavaScript特性的library，它就像spring之于Jav
 
 
 
-
-
 ## Wikipedia [jQuery](https://infogalactic.com/info/JQuery)
 
 > NOTE: 这篇文章对jQuery的总结是非常好的，其中所总结的jQuery的设计思想是非常值得学习的。

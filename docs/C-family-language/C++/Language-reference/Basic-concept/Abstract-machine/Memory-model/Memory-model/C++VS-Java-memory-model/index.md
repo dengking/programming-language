@@ -1,0 +1,1 @@
+# stackoverflow [What are the similarities between the Java memory model and the C++11 memory model?](https://stackoverflow.com/questions/7363462/what-are-the-similarities-between-the-java-memory-model-and-the-c11-memory-mod)
