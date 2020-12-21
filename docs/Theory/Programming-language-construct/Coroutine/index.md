@@ -2,7 +2,9 @@
 
 越来越多的language支持Coroutine。
 
-## 维基百科[Coroutine](https://en.wikipedia.org/wiki/Coroutine)
+Coroutine是现代programming language实现"cooperative multitasking"的主要方式，支持coroutine的programming language基于了programmer来进行cooperative schedule task的能力，让programmer能够control schedule of task。相比之下，programmer是无法直接控制thread、process的schedule 。
+
+## wikipedia [Coroutine](https://en.wikipedia.org/wiki/Coroutine)
 
 **Coroutines** are [computer program](https://en.wikipedia.org/wiki/Computer_program) components that generalize [subroutines](https://en.wikipedia.org/wiki/Subroutine) for [non-preemptive multitasking](https://en.wikipedia.org/wiki/Non-preemptive_multitasking), by allowing execution to be suspended and resumed. **Coroutines** are well-suited for implementing familiar program components such as [cooperative tasks](https://en.wikipedia.org/wiki/Cooperative_multitasking), [exceptions](https://en.wikipedia.org/wiki/Exception_handling), [event loops](https://en.wikipedia.org/wiki/Event_loop), [iterators](https://en.wikipedia.org/wiki/Iterator), [infinite lists](https://en.wikipedia.org/wiki/Lazy_evaluation) and [pipes](https://en.wikipedia.org/wiki/Pipeline_(software)).
 
@@ -108,3 +110,5 @@ In situations where a coroutine would be the natural implementation of a mechani
 One important difference between threads and coroutines is that threads are typically preemptively scheduled while coroutines are not. Because threads can be rescheduled at any instant and can execute concurrently, programs using threads must be careful about [locking](https://en.wikipedia.org/wiki/Lock_(computer_science)). In contrast, because coroutines can only be rescheduled at specific points in the program and do not execute concurrently, programs using coroutines can often avoid locking entirely. (This property is also cited as a benefit of [event-driven](https://en.wikipedia.org/wiki/Event-driven_programming) or asynchronous programming.)
 
 Since fibers are cooperatively scheduled, they provide an ideal base for implementing coroutines above.[[20\]](https://en.wikipedia.org/wiki/Coroutine#cite_note-msdn-wrap-20) However, system support for fibers is often lacking compared to that for threads.
+
+## stackoverflow [What is a coroutine?](https://stackoverflow.com/questions/553704/what-is-a-coroutine)
