@@ -110,3 +110,5 @@ If `std::promise` object is destroyed before setting the value the calling `get(
 A part from this, if you want your thread to return multiple values at different point of time then just pass multiple `std::promise` objects in thread and fetch multiple return values from thier associated multiple `std::future` objects.
 
 In the next article we will see how to use `std::future` with `std::async` and `std::packaged_task`.
+
+## modernescpp [Promise and Future](https://www.modernescpp.com/index.php/promise-and-future)

@@ -45,3 +45,7 @@ The standard library provides facilities to obtain values that are returned and 
 3 [std::promise](https://en.cppreference.com/w/cpp/thread/promise)
 
 在 cppreference [std::future](https://en.cppreference.com/w/cpp/thread/future) 中，给出了包含上述三种 asynchronous task 的example。
+
+## TODO
+
+ncona [Futures, async, packaged_tasks and promises in C++](https://ncona.com/2018/02/futures-async-packaged_tasks-and-promises-in-c/)
