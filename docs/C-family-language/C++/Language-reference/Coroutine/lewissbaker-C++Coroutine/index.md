@@ -2,7 +2,7 @@
 
 [Asymmetric Transfer](https://lewissbaker.github.io/) 对 coroutine 的分析十分深入、易懂。
 
-## lewissbaker [Coroutine Theory](https://lewissbaker.github.io/2017/09/25/coroutine-theory)
+## [Coroutine Theory](https://lewissbaker.github.io/2017/09/25/coroutine-theory)
 
 > NOTE: 作者采用的是"对比"的思路来进行描述: 以我们熟知的subroutine即function为例来作为对照，来对coroutine进行描述，核心观点是在"In summary"段中提出的: 
 >
@@ -229,3 +229,8 @@ STACK                     REGISTERS               HEAP
 
 ### In summary
 
+## [Understanding operator co_await](https://lewissbaker.github.io/2017/11/17/understanding-operator-co-await)
+
+
+
+## [C++ Coroutines: Understanding the promise type](https://lewissbaker.github.io/2018/09/05/understanding-the-promise-type)
