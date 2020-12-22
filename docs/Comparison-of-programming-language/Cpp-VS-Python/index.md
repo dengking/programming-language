@@ -249,13 +249,9 @@ C++11 [range-for](https://en.cppreference.com/w/cpp/language/range-for) 实现im
 
 
 
-
-
 ### Reverse iteration
 
 c++通过`reverse_iterator`，python通过builtin `reverse`来实现。
-
-
 
 
 

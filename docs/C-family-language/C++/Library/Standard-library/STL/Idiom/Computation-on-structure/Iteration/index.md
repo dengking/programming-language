@@ -17,3 +17,5 @@ C++20: range library
 ## Range over iterator
 
 隐藏iterator、隐藏iterator操作，其实是一种sugar，使code更加expressive、abstract。基于range的generic programming，正重塑C++ STL。
+
+C++ range与Python非常类似了，能够让C++像Python那样进行编程。
