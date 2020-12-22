@@ -4,5 +4,3 @@ nav:
     - Basic-Language-construct: Basic-Language-construct
     # 基本上所有的programming language都使用了subroutine的概念
     - Subroutine: Subroutine
-    # 越来越多的语言支持Coroutine
-    - Coroutine: Coroutine
