@@ -1,4 +1,14 @@
-Thread-local storage (TLS)  
+# Cross-platform
+
+本章讨论C/C++ cross-platform。
+
+## wikipedia [Cross-platform software](https://en.wikipedia.org/wiki/Cross-platform_software)
+
+
+
+## Example
+
+### Thread-local storage (TLS)  
 
 这篇文章介绍了系统实现和各种编程语言的实现
 
