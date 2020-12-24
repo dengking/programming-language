@@ -459,34 +459,8 @@ The purpose of the **visitor pattern** is to allow new operations to be added to
 
 Microsoft's example of a visitor modifying the receiver is the [ExpressionVisitor](http://msdn.microsoft.com/en-us/library/bb546136(v=VS.90).aspx). The purpose of the ExpressionVisitor class is to modify an Expression tree. So I guess Microsoft at least thinks it's acceptable.
 
-## Example
+## Application
 
-### In compiler
+1) computation on structure
 
-#### wikipedia [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) # [Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)
-
-在wikipedia [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)的[Design patterns](https://en.wikipedia.org/wiki/Abstract_syntax_tree#Design_patterns)章节，总结了 [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) 在compiler的实现中的应用：
-
-> Because the compiler traverses the tree several times to determine syntactic correctness, it is important to make traversing the tree a simple operation. The compiler executes a specific set of operations, depending on the type of each node, upon reaching it, so it often makes sense to use the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern).
-
-这段话中的“the tree”只的是compiler构造的abstract syntax tree。compiler需要多次遍历这棵树，每次遍历执行一些操作，显然，这种场景是非常适合于使用visitor pattern的。
-
-
-
-#### stackoverflow [Visitor Pattern VS Iterator Pattern: visiting across hierarchy class?](https://stackoverflow.com/questions/28319129/visitor-pattern-vs-iterator-pattern-visiting-across-hierarchy-class)的[A](https://stackoverflow.com/a/37236417)
-
-在这回答中给出了:
-
-- LLVM [source code](http://llvm.org/docs/doxygen/html/InstVisitor_8h_source.html) 
-- CPython  AST 
-
-The other good example I know of shows up in abstract syntax tree manipulations. CPython and LLVM both use visitors. Using a visitor here prevents code that manipulates certain AST nodes from needing to know how to iterate over all the various AST nodes that might branch in complicated ways. 
-
-### Hierarchy structure
-
-对具有hierarchy structure的数据进行操作，都可以使用visitor pattern。
-
-比如
-
-- [JSqlParser](https://github.com/JSQLParser/JSqlParser/wiki)
-- [Mach7](https://github.com/solodon4/Mach7)
+参见`./Computation on structure`章节。

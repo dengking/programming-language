@@ -2,11 +2,11 @@
 
 目标在于提升[Software quality](https://en.wikipedia.org/wiki/Software_quality)，在维基百科[Software quality](https://en.wikipedia.org/wiki/Software_quality)中给出了如下标准：
 
-## 维基百科[Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)
+## wikipedia [Loose coupling](https://en.wikipedia.org/wiki/Loose_coupling)
 
 
 
-## 维基百科[Orthogonality (programming)](https://en.wikipedia.org/wiki/Orthogonality_(programming))
+## wikipedia [Orthogonality (programming)](https://en.wikipedia.org/wiki/Orthogonality_(programming))
 
 > NOTE: 之所以将这篇文章放到这里是因为在其首页说明了：
 >
@@ -20,7 +20,7 @@
 
 
 
-## 维基百科[Reusability](https://en.wikipedia.org/wiki/Reusability)
+## wikipedia [Reusability](https://en.wikipedia.org/wiki/Reusability)
 
 与此相关的有：
 

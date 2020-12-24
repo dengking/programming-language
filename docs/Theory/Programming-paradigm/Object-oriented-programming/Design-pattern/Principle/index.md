@@ -18,13 +18,44 @@ OOP中的各种design pattern其实都遵循abstraction principle(参见文章Ab
 
 > **Program to an abstraction and polymorphism**
 
-OOP的subtyping polymorphism(dynamic dispatch)是连接抽象与具体的桥梁。
+### Polymorphism
+
+Polymorphism(OOP主要使用subtyping polymorphism(dynamic dispatch))是连接抽象与具体的桥梁。
+
+
+
+### Good abstraction 
+
+各种design pattern，其实提供了对一些常见问题的非常好的abstraction，这些abstraction经历过时间的考验的。
+
+
+
+
 
 ### [Design by contract](https://en.wikipedia.org/wiki/Design_by_contract) and [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
 
 两者其实本质上都在描述相同的内容，面向抽象，而不是面向具体。抽象是科学的思考方式，其实，这一段的描述，需要从对抽象的描述开始：解决问题，我们往往是先建立起抽象模型，这个抽象模型来解决具体的问题。
 
 
+
+
+
+### Design pattern让我们避免使用if-else分支
+
+“Design pattern让我们避免使用if-else分支”，这是我学习了各种各样的设计模式后，产生的一种想法，在下面文章中，都谈到了这一点：
+
+- [Java设计模式——状态模式（STATE PATTERN）](https://blog.csdn.net/u012401711/article/details/52675873)
+- [Refactoring.Guru](https://refactoring.guru/)的[Visitor](https://refactoring.guru/design-patterns/visitor)
+
+这让我反思，使用if-else的坏处：
+
+- 如果情况少，还比较好处理，一旦情况非常多，那么无论是编程、还是维护都非常难
+- 使用if是不好扩展的
+- 性能（这一点需要证明），使用if条件判断，是否有dynamic dispatch或者static dispatch性能好呢？
+
+
+
+design pattern充分利用dynamic dispatch和static dispatch，只要我们遵循design-by-context，那么就可以在不修改的design（抽象模型）的情况下，进行扩展，dispatch是建立抽象与具体的桥梁。
 
 
 
@@ -102,4 +133,4 @@ The authors further distinguish between '[Aggregation](https://en.wikipedia.org/
 
 
 
-## TODO: 维基百科 [Programming principles](https://en.wikipedia.org/wiki/Category:Programming_principles)
+## TODO: wikipedia [Programming principles](https://en.wikipedia.org/wiki/Category:Programming_principles)
