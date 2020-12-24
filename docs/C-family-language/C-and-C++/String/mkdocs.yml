@@ -2,5 +2,6 @@ nav:
     - Introduction: index.md
     - C-string: C-string
     - C++string: C++string
+    - Char: Char
     - String-operation: String-operation
     - IO: IO

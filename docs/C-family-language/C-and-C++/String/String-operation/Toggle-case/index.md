@@ -78,3 +78,16 @@ static void ToUpper(std::string& S)
 }
 ```
 
+
+
+### stackoverflow [What does the “::” mean in “::tolower”?](https://stackoverflow.com/questions/5270780/what-does-the-mean-in-tolower) 
+
+> NOTE: 这是"Use a name in global namespace"，参见 `C++\Language-reference\Basic-concept\Organization\Scope` 章节。
+
+[A](https://stackoverflow.com/a/5270970)
+
+As to why the `::` is necessary: the standard defines two `tolower`'s, a function template in `std::`, and a simple function in both `::` and `std::`. Depending on which headers have been included (and that includes headers indirectly included from other headers, which you may not know about), either one, the other, or both may be visible. Using `::` ensures that the older one, from the C standard, is used. (If the one in `std::` is considered, the call will be ambiguous, since `transform` is a template itself, and the compiler will not be able to deduce the template arguments.)
+
+> NOTE: why？
+
+> NOTE: 关于后半段的内容，移到了`C-and-C++\String\Char`章节中。

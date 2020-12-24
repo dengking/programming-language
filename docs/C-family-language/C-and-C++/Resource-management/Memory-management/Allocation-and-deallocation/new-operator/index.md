@@ -1,5 +1,15 @@
 # `new` operator
 
+## 发展概述
+
+C++17 alignment
+
+
+
+## Uniform function model
+
+在 cppreference [Low level memory management](https://en.cppreference.com/w/cpp/memory/new) 中，给出了 new operator的function model。
+
 
 
 ## cppreference [new expression](https://en.cppreference.com/w/cpp/language/new)
@@ -21,7 +31,11 @@ Creates and initializes objects with dynamic [storage duration](https://en.cppre
 
 2 a [placeholder type specifier](https://en.cppreference.com/w/cpp/language/auto) (since C++11), or include 
 
+> NOTE: 其实就是`auto`用法
+
 3 a class template name whose argument is to be deduced by [class template argument deduction](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction) (since C++17).
+
+> NOTE: 并不清楚它的具体用法 
 
 2) Same, but `type` cannot include parentheses:
 
@@ -59,9 +73,21 @@ The new-expression allocates storage by calling the appropriate [allocation func
 
 > NOTE: overload new operator，在  [allocation function](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中给出了所有的原型
 
+As described in [allocation function](https://en.cppreference.com/w/cpp/memory/new/operator_new), the C++ program may provide global and class-specific replacements for these functions. If the new-expression begins with the optional `::` operator, as in `::new T` or `::new T[n]`, **class-specific replacements** will be ignored (the function is [looked up](https://en.cppreference.com/w/cpp/language/lookup) in global [scope](https://en.cppreference.com/w/cpp/language/scope)). Otherwise, if `T` is a class type, lookup begins in the class scope of `T`.
+
+> NOTE: 这描述的是C++中常见的"use the name in the global namespace"技巧，参见 `C++\Language-reference\Basic-concept\Organization\Scope\Scope-resolution-operator` 章节。
+>
+> 
 
 
 
+##### Placement new
+
+参见 `./Placement-new` 章节。
+
+
+
+## cnblogs [C++ 内存分配操作符new和delete详解](https://www.cnblogs.com/Philip-Tell-Truth/p/6567808.html)
 
 
 
@@ -73,6 +99,3 @@ https://stackoverflow.com/questions/9603696/use-new-operator-to-initialise-an-ar
 
 
 
-
-
-## cnblogs [C++ 内存分配操作符new和delete详解](https://www.cnblogs.com/Philip-Tell-Truth/p/6567808.html)

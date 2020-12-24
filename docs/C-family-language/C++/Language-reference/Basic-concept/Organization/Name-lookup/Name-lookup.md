@@ -55,11 +55,11 @@ A *qualified* name is a name that appears on the right hand side of the **scope 
 
 If there is nothing on the left hand side of the `::`, the lookup considers only declarations made in the **global namespace scope** (or introduced into the global namespace by a [using declaration](https://en.cppreference.com/w/cpp/language/namespace)). This makes it possible to refer to such names even if they were hidden by a local declaration:
 
+> NOTE: 上面仅仅提及了 [using declaration](https://en.cppreference.com/w/cpp/language/namespace) 而没有 [using-directives](https://en.cppreference.com/w/cpp/language/namespace)；刚刚看了[using-directives](https://en.cppreference.com/w/cpp/language/namespace)的介绍，我想到的一个问题是：visibility和name lookup的关系是什么？
+
 > NOTE: 
 >
-> 上面仅仅提及了 [using declaration](https://en.cppreference.com/w/cpp/language/namespace)而没有[using-directives](https://en.cppreference.com/w/cpp/language/namespace)；刚刚看了[using-directives](https://en.cppreference.com/w/cpp/language/namespace)的介绍，我想到的一个问题是：visibility和name lookup的关系是什么？
->
-> 总结：下面的代码就是local declaration的例子
+> 上面第一段话所介绍的"If there is nothing on the left hand side of the `::`"，是"Use a name in global namespace"用法，参见`C++\Language-reference\Basic-concept\Organization\Scope`章节。下面的例子非常好的体现了这个用法: 
 
 ```cpp
 #include <iostream>
@@ -70,9 +70,13 @@ int main() {
 }
 ```
 
+
+
 Before **name lookup** can be performed for the name on the right hand side of `::`, lookup must be completed for the name on its left hand side (unless a [decltype](https://en.cppreference.com/w/cpp/language/decltype) expression is used, or there is nothing on the left). This lookup, which may be **qualified** or **unqualified**, depending on whether there's another `::` to the left of that name, considers only namespaces, class types, enumerations, and templates whose specializations are types:
 
-> NOTE：从这段话可以推测出，对qualified name的lookup是从左到右的。
+> NOTE：
+>
+> 从这段话可以推测出，对qualified name的lookup是从左到右的。
 
 ```cpp
 struct A {
