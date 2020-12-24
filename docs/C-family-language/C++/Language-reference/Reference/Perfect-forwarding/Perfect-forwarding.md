@@ -11,9 +11,11 @@ Perfect forwarding是一直以来困扰C++ programmer的问题（在文章thegre
 | Reference collapsing rule                          | 主要用于实现`std::forward`       |      |
 | Special type deduction rules for rvalue references | 主要用于实现forwarding reference |      |
 
-上述两者，在文章thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)的Reference collapsing and special type deduction for rvalues中进行了总结；
+上述两者，在文章thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 的"Reference collapsing and special type deduction for rvalues"中进行了总结；
 
 forwarding reference既可以reference **lvalue**又可以reference **rvalue**，所以它是universal，这是它的另外一个名称universal reference中universal的含义；
+
+> NOTE: 这是一种uniform
 
 实现perfect forwarding：
 

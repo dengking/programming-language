@@ -119,9 +119,9 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > #### Variable and object
 >
-> 两种都是runtime概念，variable是一种object，但是不是所有的object都是variable（variable还包括reference）。
+> 两种都是runtime概念，variable是一种object，但是不是所有的object都是variable（variable还包括reference，reference不是object）。
 >
-> c++中variable的概念和object的概念密切相关，在下面文章中描述了此：
+> C++中variable的概念和object的概念密切相关，在下面文章中描述了此：
 >
 > learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutorial/introduction-to-variables/)
 >
@@ -218,6 +218,10 @@ int main(void)
 ```
 
 > NOTE: 是否需要考虑alignment问题？
+
+
+
+
 
 ### Object representation and value representation
 

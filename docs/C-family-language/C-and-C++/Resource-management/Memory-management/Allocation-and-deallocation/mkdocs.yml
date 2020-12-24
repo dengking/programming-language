@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - new-operator: new-operator
+    - delete-operator: delete-operator

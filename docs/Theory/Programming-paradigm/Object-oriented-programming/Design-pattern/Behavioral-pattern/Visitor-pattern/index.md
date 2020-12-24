@@ -464,3 +464,8 @@ Microsoft's example of a visitor modifying the receiver is the [ExpressionVisito
 1) computation on structure
 
 参见`./Computation on structure`章节。
+
+## TODO
+
+fluentcpp [On Design Patterns in C++](https://www.fluentcpp.com/2020/12/18/on-design-patterns-in-cpp/)
+

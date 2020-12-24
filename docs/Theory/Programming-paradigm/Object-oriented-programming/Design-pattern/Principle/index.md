@@ -22,7 +22,9 @@ OOP中的各种design pattern其实都遵循abstraction principle(参见文章Ab
 
 Polymorphism(OOP主要使用subtyping polymorphism(dynamic dispatch))是连接抽象与具体的桥梁。
 
+正如在fluentcpp [On Design Patterns in C++](https://www.fluentcpp.com/2020/12/18/on-design-patterns-in-cpp/) 中所述:
 
+> The main reason is that design patterns rely heavily on polymorphism, and the book exclusively uses **runtime polymorphism** in its examples, that is inheritance and virtual methods.
 
 ### Good abstraction 
 
