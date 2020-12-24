@@ -123,3 +123,22 @@ static uint64_t load64_le(uint8_t const* V)
 
 
 https://blog.csdn.net/Javaxuxuexi/article/details/93312804
+
+
+
+## draft
+
+### 20201224
+
+关于alias to an existing object，在`C++\Language-reference\Basic-concept\Data-model\Object\Object.md`中进行了说明，本段只是进行总结。
+
+C++支持两种方式来实现alias to an existing object：
+
+- reference
+- pointer
+
+参见: 
+
+- `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
+- reference: `C++\Language-reference\Reference`
+

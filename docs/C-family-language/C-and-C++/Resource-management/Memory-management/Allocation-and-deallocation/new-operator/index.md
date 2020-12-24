@@ -75,4 +75,4 @@ https://stackoverflow.com/questions/9603696/use-new-operator-to-initialise-an-ar
 
 
 
-# [C++ 内存分配操作符new和delete详解](https://www.cnblogs.com/Philip-Tell-Truth/p/6567808.html)
+## cnblogs [C++ 内存分配操作符new和delete详解](https://www.cnblogs.com/Philip-Tell-Truth/p/6567808.html)

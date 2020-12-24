@@ -74,8 +74,10 @@ std::map<int, int> my_map
 
 ### Fully qualified name
 
+"fully qualified name"相当于一个path。
 
-#### 维基百科[Fully qualified name](https://en.wikipedia.org/wiki/Fully_qualified_name) 
+
+#### wikipedia [Fully qualified name](https://en.wikipedia.org/wiki/Fully_qualified_name) 
 
 In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), a **fully qualified name** is an **unambiguous** name that specifies which [object](https://en.wikipedia.org/wiki/Object_(computer_science)), [function](https://en.wikipedia.org/wiki/Function_(computer_science)), or [variable](https://en.wikipedia.org/wiki/Variable_(programming)) a call refers to without regard to the context of the call(**fully qualified name**是一个明确的name，它指定调用引用的对象，函数或变量，而不考虑调用的上下文。). In a [hierarchical structure](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)), a name is fully qualified when it "is complete in the sense that it includes
 
@@ -119,6 +121,6 @@ The term **fully qualified file name** means a file on a computer whose exact na
 
 ### Qualified name  in programming language
 
-### [python qualified name](https://docs.python.org/3/glossary.html#term-qualified-name)
+### python [python qualified name](https://docs.python.org/3/glossary.html#term-qualified-name)
 
 显然，python quantified name是按照quantify name来构造的。

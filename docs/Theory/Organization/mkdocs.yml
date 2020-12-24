@@ -17,5 +17,5 @@ nav:
     - Name-lookup: Name-lookup.md    
     # 拓展目光
     - Organization-is-everywhere: Organization-is-everywhere.md
-    
+    - Scope-resolution-operator: Scope-resolution-operator.md
     

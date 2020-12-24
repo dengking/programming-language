@@ -418,3 +418,13 @@ The “**`bind2nd(plus<int>(), 41)`**” might take you a couple of minutes to g
 
 
 ## arne-mertz [algorithms and the KISS principle](https://arne-mertz.de/2019/05/algorithms-and-the-kiss-principle/)
+
+
+
+## Thoughts
+
+### Intentional programming
+
+相比于`for` loop，algorithm(比如`std::for_each`、`std::transform`等)的含义是更加精准、明确，符合[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)，能够让code更加得readable。
+
+关于这个观点，参见 stackoverflow [Should I use std::for_each?](https://stackoverflow.com/questions/6260600/should-i-use-stdfor-each) 。

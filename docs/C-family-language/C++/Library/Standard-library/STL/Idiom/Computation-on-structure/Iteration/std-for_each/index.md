@@ -28,7 +28,7 @@ std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, "\n"));
 >
 > 1) 相比于`for` loop，`std::for_each`的含义是更加精准、明确，符合[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)，能够让code更加得readable
 >
-> 2) 
+> 2) 符合 "Prefer algorithm over hand-write loop" 原则
 
 ## tutorialcup [C++ for_each Loop](https://www.tutorialcup.com/cplusplus/for-each-loop.htm)
 

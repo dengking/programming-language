@@ -43,9 +43,11 @@ Otherwise, see
 - [Template argument deduction](https://en.cppreference.com/w/cpp/language/function_template)
 - [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
 
+
+
 ## cppreference [Qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup)
 
-A *qualified* name is a name that appears on the right hand side of the scope resolution operator `::` (see also [qualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers)). A qualified name may refer to a
+A *qualified* name is a name that appears on the right hand side of the **scope resolution operator** `::` (see also [qualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers)). A qualified name may refer to a
 
 - class member (including static and non-static functions, types, templates, etc)
 - namespace member (including another namespace)
@@ -53,7 +55,9 @@ A *qualified* name is a name that appears on the right hand side of the scope re
 
 If there is nothing on the left hand side of the `::`, the lookup considers only declarations made in the **global namespace scope** (or introduced into the global namespace by a [using declaration](https://en.cppreference.com/w/cpp/language/namespace)). This makes it possible to refer to such names even if they were hidden by a local declaration:
 
-> NOTE: 上面仅仅提及了 [using declaration](https://en.cppreference.com/w/cpp/language/namespace)而没有[using-directives](https://en.cppreference.com/w/cpp/language/namespace)；刚刚看了[using-directives](https://en.cppreference.com/w/cpp/language/namespace)的介绍，我想到的一个问题是：visibility和name lookup的关系是什么？
+> NOTE: 
+>
+> 上面仅仅提及了 [using declaration](https://en.cppreference.com/w/cpp/language/namespace)而没有[using-directives](https://en.cppreference.com/w/cpp/language/namespace)；刚刚看了[using-directives](https://en.cppreference.com/w/cpp/language/namespace)的介绍，我想到的一个问题是：visibility和name lookup的关系是什么？
 >
 > 总结：下面的代码就是local declaration的例子
 
@@ -116,11 +120,11 @@ int main() {
 }
 ```
 
-#### Enumerators
+### Enumerators
 
 If the lookup of the left-hand side name comes up with an [enumeration](https://en.cppreference.com/w/cpp/language/enum) (either scoped or unscoped), the lookup of the right-hand side must result in an enumerator that belongs that enumeration, otherwise the program is ill-formed.
 
-#### Class members
+### Class members
 
 If the lookup of the **left** hand side name comes up with a `class`/`struct` or `union` name, the name on the **right** hand side of `::` is looked up in the scope of that class (and so may find a declaration of a member of that class or of its base), with the following exceptions
 
@@ -158,7 +162,7 @@ int main()
 }
 ```
 
-#### Namespace members
+### Namespace members
 
 If the name on the **left** of `::` refers to a namespace or if there is nothing on the left of `::` (in which case it refers to the **global namespace**), the name that appears on the **right** hand side of `::` is looked up in the scope of that namespace, except that
 

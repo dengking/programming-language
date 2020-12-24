@@ -35,7 +35,7 @@
 
 参见:
 
-*nested-name-specifier*	-	a [sequence of names and scope resolution operators `**::**`](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers)
+*nested-name-specifier*	-	a [sequence of names and scope resolution operators `::`](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers)
 
 *attr(C++11)*	-	 optional list of 
 
