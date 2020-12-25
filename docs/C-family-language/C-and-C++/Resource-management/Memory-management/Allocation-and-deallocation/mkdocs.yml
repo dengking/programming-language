@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - new-operator: new-operator
-    - delete-operator: delete-operator
+    - C-dynamic-memory-allocation: C-dynamic-memory-allocation
+    - C++: C++

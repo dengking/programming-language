@@ -50,6 +50,18 @@ Type决定了sequence of bits的含义。
 
 
 
+
+
+## wikipedia [Memory address # Contents of each memory location](https://en.wikipedia.org/wiki/Memory_address#Contents_of_each_memory_location)
+
+See also: [binary data](https://en.wikipedia.org/wiki/Binary_data)
+
+Each memory location in a [stored-program computer](https://en.wikipedia.org/wiki/Stored-program_computer) holds a [binary number](https://en.wikipedia.org/wiki/Binary_number) or [decimal number](https://en.wikipedia.org/wiki/Decimal_number) *of some sort*. Its interpretation, as data of some [data type](https://en.wikipedia.org/wiki/Data_type) or as an instruction, and use are determined by the [instructions](https://en.wikipedia.org/wiki/Instruction_(computer_science)) which retrieve and manipulate it.
+
+> NOTE: 上面这段话，对interpretation model的总结是非常好的。
+
+
+
 ## Aliasing: 按照指定类型来进行解释
 
 

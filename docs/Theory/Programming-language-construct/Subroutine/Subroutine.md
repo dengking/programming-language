@@ -2,7 +2,7 @@
 
 "subroutine"就是我们平时所说的“函数”，我们对它习以为常，
 
-## 维基百科[Subroutine](https://en.wikipedia.org/wiki/Subroutine)
+## wikipedia [Subroutine](https://en.wikipedia.org/wiki/Subroutine)
 
 In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), a **subroutine** is a sequence of program instructions that performs a specific task, packaged as a unit. This unit can then be used in programs wherever that particular [task](https://en.wikipedia.org/wiki/Task_(computing)) should be performed.
 
@@ -138,3 +138,36 @@ There are some seemingly obvious optimizations of procedure calls that cannot be
 
 A method used to eliminate this overhead is *inline expansion* or *inlining* of the subprogram's body at each [call site](https://en.wikipedia.org/wiki/Call_site) (versus branching to the subroutine and back). Not only does this avoid the call overhead, but it also allows the [compiler](https://en.wikipedia.org/wiki/Compiler) to [optimize](https://en.wikipedia.org/wiki/Code_optimization) the procedure's *body* more effectively by taking into account the context and arguments at that call. The inserted body can be optimized by the compiler. Inlining however, will usually increase the code size, unless the program contains only one call to the subroutine, or the subroutine body is less code than the call overhead.
 
+
+
+
+
+## draft
+
+### 20201215
+
+本章总结“subroute”即“函数”相关内容。这部分内容已经转移到了到了工程[programming-language](https://dengking.github.io/programming-language/)。
+
+
+
+#### subroutine梳理思路
+
+subroutine是thread的执行单位。
+
+subroutine的执行过程可以以树的形式来进行展示，在tree中进行了总结。
+
+subroutine的时间复杂度、空间复杂度的分析，在算法分析中进行总结。
+
+#### calling convention and call by value、by reference
+
+
+
+#### calling convention
+
+每次调用还是都需要new一个栈帧
+
+每次调用函数，还需要保存上一个函数的context
+
+
+
+#### 将subroutine和coroutine进行总结

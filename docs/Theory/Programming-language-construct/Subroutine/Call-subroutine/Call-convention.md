@@ -1,3 +1,3 @@
 # Call convention
 
-这部分内容放到了工程[programming-language](https://dengking.github.io/programming-language/)的[ABI](https://dengking.github.io/programming-language/ABI)章节中。
+不同的programming language有着不同的实现，因此无法进行统一的描述，将这部分内容放到了具体的programming language的implementation中。
