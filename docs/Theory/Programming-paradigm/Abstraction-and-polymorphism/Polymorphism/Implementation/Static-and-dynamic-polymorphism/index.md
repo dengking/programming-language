@@ -60,6 +60,12 @@ Dynamic polymorphism的dispatch发生于runtime，显然是late binding；因此
 
 由于dispatch发生于runtime，则必然存在overhead。
 
+**Example**:
+
+1) Python
+
+2) virtual and abstraction
+
 ### Static polymorphism
 
 Static polymorphism的dispatch发生于compile time，显然是early binding，由compiler进行dispatch；因此，如果采用这种实现方式，无需在内存中保存**映射关系**。

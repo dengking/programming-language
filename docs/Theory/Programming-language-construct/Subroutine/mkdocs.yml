@@ -5,8 +5,8 @@ nav:
 ##########     
     - Argument-and-parameter: Argument-and-parameter
     - Call-subroutine: Call-subroutine
-    - Activation-tree: Activation-tree.md
     - Evaluation-strategy: Evaluation-strategy
     - Function-object: Function-object.md
     - First-class-function: First-class-function.md
     - Variadic-function: Variadic-function.md
+    - Analysis: Analysis
