@@ -1,4 +1,0 @@
-nav:
-    - Destructor: Destructor.md
-    - Virtual-destructor: Virtual-destructor.md
-    - Process-exit-and-destructor: Process-exit-and-destructor.md

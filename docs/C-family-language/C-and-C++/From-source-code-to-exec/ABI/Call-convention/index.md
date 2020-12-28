@@ -91,8 +91,6 @@ This calling convention causes a "typical" ARM subroutine to
 
 
 
-
-
 ## osdev [Calling Conventions](https://wiki.osdev.org/Calling_Conventions)
 
 

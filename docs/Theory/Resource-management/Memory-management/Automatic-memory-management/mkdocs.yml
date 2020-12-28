@@ -1,5 +1,4 @@
 nav:
-    - Automatic-memory-management: Automatic-memory-management.md
-    - Garbage-collection: Garbage-collection.md
-    - Reference-counting: Reference-counting.md
-    - Automatic-Reference-Counting: Automatic-Reference-Counting.md
+    - Introduction: index.md
+    - Garbage-collection: Garbage-collection
+    - Reference-counting: Reference-counting

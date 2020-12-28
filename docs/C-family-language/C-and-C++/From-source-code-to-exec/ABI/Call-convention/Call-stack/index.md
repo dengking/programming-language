@@ -1,6 +1,6 @@
 # Call stack
 
-## 维基百科[Call stack](https://en.wikipedia.org/wiki/Call_stack)
+## wikipedia [Call stack](https://en.wikipedia.org/wiki/Call_stack)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **call stack** is a [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) [data structure](https://en.wikipedia.org/wiki/Data_structure) that stores information about the active [subroutines](https://en.wikipedia.org/wiki/Subroutine) of a [computer program](https://en.wikipedia.org/wiki/Computer_program). This kind of stack is also known as an **execution stack**, **program stack**, **control stack**, **run-time stack**, or **machine stack**, and is often shortened to just "the stack". Although maintenance of the call stack is important for the proper functioning of most [software](https://en.wikipedia.org/wiki/Software), the details are normally hidden and automatic in [high-level programming languages](https://en.wikipedia.org/wiki/High-level_programming_language). Many computer [instruction sets](https://en.wikipedia.org/wiki/Instruction_set) provide special instructions for manipulating stacks.
 
@@ -21,6 +21,14 @@ In [high-level programming languages](https://en.wikipedia.org/wiki/High-level_p
 > NOTE: 原文中本段的“**return state**”概念需要注意，它包含了return address。
 
 
+
+### Use
+
+#### Unwinding
+
+Returning from the called function will pop the top frame off the stack, perhaps leaving a return value. 
+
+> NOTE: C++是典型的充分运用stack unwind的programming language。
 
 ## Thoughts of call stack
 

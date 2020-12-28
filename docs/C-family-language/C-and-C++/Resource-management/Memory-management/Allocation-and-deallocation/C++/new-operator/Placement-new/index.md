@@ -120,7 +120,7 @@ It's useful if you want to separate allocation from initialization. STL uses pla
 
 ### [A](https://stackoverflow.com/a/222817)
 
-I've used it in real-time programming. We typically *don't* want to perform any dynamic allocation (or deallocation) after the system starts up, because there's no guarantee how long that is going to take.
+I've used it in **real-time** programming. We typically *don't* want to perform any dynamic allocation (or deallocation) after the system starts up, because there's no guarantee how long that is going to take.
 
 What I can do is preallocate a large chunk of memory (large enough to hold any amount of whatever that the class may require). Then, once I figure out at runtime how to construct the things, placement new can be used to construct objects right where I want them. One situation I know I used it in was to help create a heterogeneous [circular buffer](http://en.wikipedia.org/wiki/Circular_buffer).
 

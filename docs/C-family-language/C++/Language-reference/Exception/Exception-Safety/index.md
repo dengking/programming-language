@@ -2,16 +2,31 @@
 
 
 
-## 维基百科[Exception safety](https://en.wikipedia.org/wiki/Exception_safety)
+## wikipedia [Exception safety](https://en.wikipedia.org/wiki/Exception_safety)
 
 There are several levels of exception safety (in decreasing order of safety):
 
-- **No-throw guarantee**
-- **Strong exception safety**
-- **Basic exception safety**
-- **No exception safety**
+### No-throw guarantee
+
+also known as **failure transparency**: Operations are guaranteed to succeed and satisfy all requirements even in exceptional situations. If an exception occurs, it will be handled internally and not observed by clients.
+
+### Strong exception safety
+
+also known as **commit or rollback semantics**: Operations can fail, but failed operations are guaranteed to have no side effects, leaving the original values intact(原封不动).[[4\]](https://en.wikipedia.org/wiki/Exception_safety#cite_note-4)
+
+### Basic exception safety
+
+also known as a **no-leak guarantee**: Partial execution of failed operations can result in side effects, but all [invariants](https://en.wikipedia.org/wiki/Invariant_(computer_science)) are preserved and there are no [resource leaks](https://en.wikipedia.org/wiki/Resource_leak) (including [memory leaks](https://en.wikipedia.org/wiki/Memory_leak)). Any stored data will contain valid values which may differ from the original values.
+
+### No exception safety
+
+No guarantees are made.
 
 
+
+Usually, at least basic exception safety is required to write robust code in such languages. Higher levels of safety can sometimes be difficult to achieve, and might incur an overhead due to extra copying. A key mechanism for exception safety is a `finally` clause, or similar [exception handling syntax](https://en.wikipedia.org/wiki/Exception_handling_syntax), which ensure that certain code is *always* run when a block is exited, including by exceptions. Several languages have constructs that simplify this, notably using the [dispose pattern](https://en.wikipedia.org/wiki/Dispose_pattern), named as `using`, `with`, or `try`-with-resources.
+
+> NOTE: 这其实和resource management密切相关的
 
 ## microsoft [How to: Design for exception safety](https://docs.microsoft.com/en-us/cpp/cpp/how-to-design-for-exception-safety?view=vs-2019)
 
@@ -47,4 +62,28 @@ It's almost as though exceptions are viewed as a *mysterious attack* on otherwis
 > 不用说，这并不会导致错误处理的健康关系!
 > 标准化是一个需要广泛支持变革的民主过程，在标准化过程中，我遇到了许多广为流传的迷信。
 > 为了开始讨论通用组件中的异常安全性，有必要面对其中的一些问题。
+
+
+
+## How to improve exception safety? 
+
+我们需要考虑的是如何来improve exception safety。
+
+### Preallocate
+
+#### Copy and swap idiom
+
+Copy and swap idiom能够提供strong exception safety:
+
+> Get the new data ready before we replace the old
+
+即在修改正确，先将需要的resource准备好。
+
+参见 `C++\Idiom\OOP\Copy-and-swap` 章节。
+
+#### Placement new
+
+参见`C++\Idiom\OOP\Scope-Guard`章节 。
+
+### Stack unwind
 

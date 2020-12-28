@@ -1,12 +1,13 @@
 nav:
     - Introduction: index.md
     - Class: Class.md
-    - Members: Members
-    - Special-member-functions: Special-member-functions
+    - Member: Member
+    - Special-member-function: Special-member-function
     - Member-access: Member-access
     - Subtype-polymorphism: Subtype-polymorphism
     - Interface: Interface
     - Lifetime: Lifetime
     - Empty-base-optimization: Empty-base-optimization
+    - Specifier: Specifier
 ######### 这是c++中非常常见的三种容易混淆的情况##########    
     - Overload-VS-override-VS-name-hiding: Overload-VS-override-VS-name-hiding.md

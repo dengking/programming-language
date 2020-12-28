@@ -26,3 +26,5 @@ nav:
     - Temporary-Base-Class: Temporary-Base-Class
     - Counted-Body: Counted-Body
     - Non-copyable: Non-copyable
+    - RAII: RAII
+    - Scope-Guard: Scope-Guard
