@@ -22,19 +22,22 @@ An **inherited class** is called a **subclass** of its parent class or super cla
 >
 > 是可以通过delegation来实现inheritance类似的效果的，参见 `Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition` 章节。
 
-Inheritance should not be confused with [subtyping](https://en.wikipedia.org/wiki/Subtyping).[[3\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-3)[[4\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-4) In some languages inheritance and subtyping agree,[[a\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-5) whereas in others they differ; in general, **subtyping** establishes an [is-a](https://en.wikipedia.org/wiki/Is-a) relationship, whereas inheritance only reuses implementation and establishes a **syntactic relationship**, not necessarily a **semantic relationship** (inheritance does not ensure [behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping)). To distinguish these concepts, subtyping is also known as *interface inheritance*, whereas inheritance as defined here is known as *implementation inheritance* or *code inheritance*.[[5\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-Mikhajlov-6) Still, inheritance is a commonly used mechanism for establishing subtype relationships.[[6\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-7)
+### Inheritance VS subtyping
 
-> NOTE: 最能体现 inheritance 和 subtyping 差异的是 mixin。
+Inheritance should not be confused with [subtyping](https://en.wikipedia.org/wiki/Subtyping).[[3\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-3)[[4\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-4) In some languages inheritance and subtyping agree,[[a\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-5) whereas in others they differ; in general, **subtyping** establishes an [is-a](https://en.wikipedia.org/wiki/Is-a) relationship, whereas inheritance only reuses implementation and establishes a **syntactic(语法) relationship**, not necessarily a **semantic relationship** (inheritance does not ensure [behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping)). To distinguish these concepts, subtyping is also known as *interface inheritance*, whereas inheritance as defined here is known as *implementation inheritance* or *code inheritance*.[[5\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-Mikhajlov-6) Still, inheritance is a commonly used mechanism for establishing subtype relationships.[[6\]](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#cite_note-7)
+
+> NOTE: 上面这一段所描述的是inheritance VS subtyping，在 `Theory\Programming-paradigm\Object-oriented-programming\Subtyping-polymorphism\Subtyping-VS-inheritance` 章节中，对这个话题进行了专门的描述。
 >
-> 相比于 inheritance，subtyping更加强调implement interface语义。
->
-> Java中提供了inheritance 和 implement 语义，但是C++中没有。
+
+### Inheritance VS composition
 
 Inheritance is contrasted with [object composition](https://en.wikipedia.org/wiki/Object_composition), where one object *contains* another object (or objects of one class contain objects of another class); see [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance). Composition implements a [has-a](https://en.wikipedia.org/wiki/Has-a) relationship, in contrast to the is-a relationship of subtyping.
 
 > NOTE: 关于 composition over inheritance，参见 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Principle\Composition-over-inheritance` 章节。
 
 ### Types
+
+
 
 ## wikipedia Inheritance semantics / [Behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping)
 
