@@ -32,17 +32,39 @@ Policy classes have some similarity to [callbacks](https://en.wikipedia.org/wiki
 
 ### Inheritance and composition
 
-A key feature of the *policy* idiom is that, usually (though it is not strictly necessary), the host class will [derive](https://en.wikipedia.org/wiki/Inheritance_(computer_science)) from (make itself a [child class](https://en.wikipedia.org/wiki/Subclass_(computer_science)) of) each of its **policy classes** using (public) [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance). (Alternatives are for the host class to merely contain a member variable of each policy class type, or else to inherit the policy classes privately; however inheriting the policy classes publicly has the major advantage that a policy class can add new methods, inherited by the instantiated host class and accessible to its users, which the host class itself need not even know about.) A notable feature of this aspect of the policy idiom is that, relative to [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), policies invert(颠倒) the relationship between [base class](https://en.wikipedia.org/wiki/Superclass_(computer_science)) and derived class - whereas in OOP interfaces are traditionally represented by ([abstract](https://en.wikipedia.org/wiki/Virtual_function#Abstract_classes_and_pure_virtual_functions)) base classes and implementations of interfaces by derived classes, in policy-based design the derived (host) class represents the interfaces and the base (policy) classes implement them. In the case of policies, the public inheritance does not represent an **is-a** relationship between the host and the policy classes. While this would traditionally be considered evidence of a design defect(缺点) in OOP contexts, this doesn't apply in the context of the **policy idiom**.
+A key feature of the *policy* idiom is that, usually (though it is not strictly necessary), the host class will [derive](https://en.wikipedia.org/wiki/Inheritance_(computer_science)) from (make itself a [child class](https://en.wikipedia.org/wiki/Subclass_(computer_science)) of) each of its **policy classes** using (public) [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance). (Alternatives are for the host class to merely contain a member variable of each policy class type(composition), or else to inherit the policy classes privately; however inheriting the policy classes publicly has the major advantage that a policy class can add new methods, inherited by the instantiated host class and accessible to its users, which the host class itself need not even know about.) 
 
 > NOTE: 之前在实现AMUST API的时候，使用的是multiple inheritance。
 >
 > 上面这段话中涉及了composition和inheritance，它让我想到了"composition over inheritance"。
 >
-> policy-based design中，inheritance的目的是: code reuse
+> policy-based design中，inheritance、composition的目的是: code reuse
+
+A notable feature of this aspect of the policy idiom is that, relative to [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), policies invert(颠倒) the relationship between [base class](https://en.wikipedia.org/wiki/Superclass_(computer_science)) and derived class - whereas in OOP interfaces are traditionally represented by ([abstract](https://en.wikipedia.org/wiki/Virtual_function#Abstract_classes_and_pure_virtual_functions)) base classes and implementations of interfaces by derived classes, in policy-based design the derived (host) class represents the interfaces and the base (policy) classes implement them. In the case of policies, the public inheritance does not represent an **is-a** relationship between the host and the policy classes. While this would traditionally be considered evidence of a design defect(缺点) in OOP contexts, this doesn't apply in the context of the **policy idiom**.
+
+> NOTE: 上面这段话其实所描述的topic是"Subtyping-VS-inheritance"，在`Theory\Programming-paradigm\Object-oriented-programming\Subtyping-polymorphism\Subtyping-VS-inheritance`中对它进行了专门的描述；
+>
+> 显然，policy-based design所使用的是inheritance，而非subtyping。
+
+### A disadvantage of policy
 
 A disadvantage of policies in their current incarnation is that the policy interface doesn't have a direct, explicit representation in [code](https://en.wikipedia.org/wiki/Source_code), but rather is defined implicitly, via [duck typing](https://en.wikipedia.org/wiki/Duck_typing), and must be documented separately and manually, in [comments](https://en.wikipedia.org/wiki/Comment_(computer_programming)). The main idea is to use commonality-variability analysis to divide the type into the fixed implementation and interface, the policy-based class, and the different policies. The trick is to know what goes into the main class, and what policies should one create. The article mentioned above gives the following answer: wherever we would need to make a possible limiting design decision, we should postpone(推迟) that decision, we should delegate it to an appropriately named policy.
 
-> NOTE: template is behavior-based
+> NOTE: 上面这段话虽然短，但是观点/知识是比较密集的，下面逐个进行梳理: 
+>
+> 1) Template is behavior-based，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming\Template-is-behavior-based`章节
+>
+> 2) Explicit VS implict: "policy interface doesn't have a direct, explicit representation in [code](https://en.wikipedia.org/wiki/Source_code), but rather is defined implicitly, via [duck typing](https://en.wikipedia.org/wiki/Duck_typing)"
+>
+> 上述**fixed implementation**对应的是commonality，它需要"goes into the main class"，**interface, the policy-based class**对应的是variability，它需要由policy来实现。
+>
+> 3) Commonality-variability analysis: 参见相关章节
+>
+> 4) 上述**fixed implementation**对应的是commonality，它需要"goes into the main class"，**interface, the policy-based class**对应的是variability，它需要由policy来实现。
+>
+> 显然，policy-based design也是遵循"program to an abstraction and polymorphism"原则的。
+
+---
 
 Policy classes can contain implementation, type definitions and so forth. Basically, the designer of the main template class will define what the policy classes should provide, what customization points they need to implement.
 
@@ -52,7 +74,65 @@ Policy-based design may incorporate other useful techniques. For example, the [t
 
 This will be achieved dynamically by [concepts](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))[[3\]](https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design#cite_note-3) in future versions of C++.
 
+#### Simple example 
 
+Presented below is a simple (contrived) example of a C++ [hello world program](https://en.wikipedia.org/wiki/Hello_world_program), where the text to be printed and the method of printing it are decomposed using policies. In this example, *HelloWorld* is a host class where it takes two policies, one for specifying how a message should be shown and the other for the actual message being printed. Note that the generic implementation is in `Run` and therefore the code is unable to be compiled unless both policies (`Print` and `Message`) are provided.
+
+```C++
+#include <iostream>
+#include <string>
+
+template <typename OutputPolicy, typename LanguagePolicy>
+class HelloWorld : private OutputPolicy, private LanguagePolicy {
+ public:
+  // Behavior method.
+  void Run() const {
+    // Two policy methods.
+    Print(Message());
+  }
+
+ private:
+  using LanguagePolicy::Message;
+  using OutputPolicy::Print;
+};
+
+class OutputPolicyWriteToCout {
+ protected:
+  template <typename MessageType>
+  void Print(MessageType&& message) const {
+    std::cout << message << std::endl;
+  }
+};
+
+class LanguagePolicyEnglish {
+ protected:
+  std::string Message() const { return "Hello, World!"; }
+};
+
+class LanguagePolicyGerman {
+ protected:
+  std::string Message() const { return "Hallo Welt!"; }
+};
+
+int main() {
+  // Example 1
+  typedef HelloWorld<OutputPolicyWriteToCout, LanguagePolicyEnglish>
+      HelloWorldEnglish;
+
+  HelloWorldEnglish hello_world;
+  hello_world.Run();  // Prints "Hello, World!".
+
+  // Example 2
+  // Does the same, but uses another language policy.
+  typedef HelloWorld<OutputPolicyWriteToCout, LanguagePolicyGerman>
+      HelloWorldGerman;
+
+  HelloWorldGerman hello_world2;
+  hello_world2.Run();  // Prints "Hallo Welt!".
+}
+```
+
+Designers can easily write more `OutputPolicy`s by adding new classes with the member function `Print` and take those as new `OutputPolicy`s.
 
 ## drdobbs [Policy-Based Design in the Real World](https://www.drdobbs.com/policy-based-design-in-the-real-world/184401861)
 

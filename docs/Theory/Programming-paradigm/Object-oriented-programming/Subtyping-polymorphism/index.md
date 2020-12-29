@@ -32,6 +32,12 @@ The concept of subtyping is related to the linguistic notions of [hyponymy](http
 
 
 
+## How to implementation subtyping in OOP?
+
+现代programming language，往往使用inheritance + override 来供programmer使用subtyping polymorphism。
+
+在programming language实现层，不同的programming language使用的实现方式是不同的。
+
 ## Subtyping polymorphism is based on behavior
 
 本节标题的是含义是: Subtyping polymorphism是基于behavior的，意思是: Subtyping polymorphism中能够polymorphism的只有behavior，data member是无法polymorphism；关于behavior，参见`Theory\Programming-paradigm\Object-oriented-programming\Behaivor.md`。关于这个观点，下面是例证:

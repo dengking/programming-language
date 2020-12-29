@@ -20,6 +20,8 @@ Subtyping and inheritance are independent (orthogonal) relationships. They may c
 > subtype: 对应的是subtyping
 >
 > derived type: 对应的是inheritance
+>
+> 显然这两个词语能够非常好的体现出subtyping和inheritance，后续使用使用它们更好。
 
 The first case is illustrated by independent types, such as `Boolean` and `Float`.
 
