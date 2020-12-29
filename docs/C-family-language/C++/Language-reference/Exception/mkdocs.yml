@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - Best-practices-for-exception-handling: Best-practices-for-exception-handling.md
     - Dynamic-exception-specification: Dynamic-exception-specification.md
-    - Exception-Safety: Exception-Safety
+    - Exception-Safe: Exception-Safe
