@@ -2,7 +2,7 @@
 
 “delegation ”即“委托、授权”。
 
-## 维基百科[Delegation (computing)](https://en.wikipedia.org/wiki/Delegation_(computing))
+## wikipedia [Delegation (computing)](https://en.wikipedia.org/wiki/Delegation_(computing))
 
 > NOTE: 这篇对delegation的总结是比较全面的
 
@@ -36,7 +36,15 @@ The term *delegation* is also used loosely for various other relationships betwe
 
 ## Delegation VS inheritance
 
-这其实就是composition VS inheritance，composition over inheritance；
+这其实就是composition VS inheritance，需要遵循"composition over inheritance"；
+
+## Example
+
+1、strategy pattern，参见 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Behavioral-pattern\Strategy-pattern`
+
+2、composition over inheritance，参见 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Principle\Composition-over-inheritance`
+
+3、[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)就是典型的使用delegation的
 
 ## C++ delegating constructor
 
@@ -49,3 +57,4 @@ geeksforgeeks [Delegation vs Inheritance in Java](https://www.geeksforgeeks.org/
 stackoverflow [What is a C++ delegate?](https://stackoverflow.com/questions/9568150/what-is-a-c-delegate)
 
 wikipedia [Delegation pattern](https://en.wikipedia.org/wiki/Delegation_pattern)
+

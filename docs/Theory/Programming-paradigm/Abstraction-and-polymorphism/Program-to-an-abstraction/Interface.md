@@ -62,3 +62,22 @@ wikipedia [Kernel_(operating_system)](https://en.wikipedia.org/wiki/Kernel_(oper
 
 
 
+
+
+### 20201230
+
+#### OOP
+
+program to an abstraction，其实本质上是program to an interface，因为interface是 对abstraction的描述；
+
+subtyping是interface inheritance，显然它是program to an interface；
+
+在wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)中有这样的描述: 
+
+> Composition and interfaces
+>
+> The C++ examples in this section demonstrate the principle of using composition and interfaces to achieve code reuse and polymorphism.
+
+ 
+
+显然，无论是subtyping 还是 composition，都是program to an abstraction，所以 最终都是program to an interface。

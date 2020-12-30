@@ -8,7 +8,58 @@
 | wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1) |                                                              |
 |                                                              |                                                              |
 
+## How to compare? 
 
+本段对inheritance和composition进行对比，将从以下方面对两者进行对比。
+
+### Relation
+
+通过relation对两者进行对比。
+
+| is-a        | has-a       |
+| ----------- | ----------- |
+| inheritance | composition |
+
+### Code reuse、polymorphism、extendibility/flexibility、information hiding/encapsulation
+
+从code reuse、polymorphism、extendibility、information hiding的角度对两者进行对比
+
+| 标准                          | composition | inheritance |
+| ----------------------------- | ----------- | ----------- |
+| **code reuse**                | 能够实现    | 能够实现    |
+| **dynamic polymorphism**      | 能够实现    | 能够实现    |
+| **extendibility/flexibility** | 强          | 弱          |
+| **information hiding**        | 强          | 弱          |
+
+**information hiding**的分析，参见:
+
+wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)	
+
+**extendibility/flexibility**的分析，参见:
+
+1、wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) # Benefits
+
+2、jianshu [策略模式(Strategy Pattern)](https://www.jianshu.com/p/422acad380dd)
+
+上述表格的绘制，还参考了:
+
+1、stackoverflow [Prefer composition over inheritance?](https://stackoverflow.com/questions/49002/prefer-composition-over-inheritance)
+
+2、wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)	
+
+3、isocpp faq: What are some disciplines for using multiple inheritance? [¶](https://isocpp.org/wiki/faq/multiple-inheritance#mi-disciplines) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
+
+
+
+
+
+## Example 
+
+建议首先阅读下面这些能够体现"Composition over inheritance"的具体案例，然后再来阅读下面的分析，因为这些具体的案例是非常详实的。
+
+### Behavior pattern
+
+参见 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Behavioral-pattern\Strategy-pattern` 章节
 
 ## wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)
 
@@ -17,6 +68,18 @@
 ### Example
 
 > NOTE: 本段给出了两个对比的例子，第一个例子使用inheritance，第二个例子使用Composition and interfaces。
+>
+> 下面对Inheritance example和Composition and interfaces example进行对比: 
+>
+> **Inheritance example**: 通过Inheritance的方式来获得behavior；
+>
+> **Composition and interfaces example**: 通过Composition的来获得behavior；
+>
+> 由子类来注入behavior的implementation；
+>
+> 非常类似于behavioral pattern（参见`Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern`）的做法，尤其类似于strategy pattern（`Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern\Strategy-pattern`）。
+>
+> 在下面的“Benefits”章节会对Composition and interfaces example的优势进行更加深入的分析。
 
 #### Inheritance
 
@@ -579,23 +642,11 @@ int main()
 
 
 
-#### Comparison
-
-下面对Inheritance example和Composition and interfaces example进行对比: 
-
-Inheritance example: 通过Inheritance的方式来获得behavior；
-
-Composition and interfaces example: 通过Composition的来获得behavior；
-
-由子类来注入behavior的implementation；
-
-非常类似于behavioral pattern（参见`Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern`）的做法，尤其类似于strategy pattern（`Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern\Strategy-pattern`）。
-
-在下面的“Benefits”章节会对Composition and interfaces example的优势进行更加深入的分析。
-
 ### Benefits
 
-To favor composition over inheritance is a design principle that gives the design higher flexibility. It is more natural to build **business-domain classes** out of various **components** than trying to find commonality between them and creating a family tree. 
+To favor composition over inheritance is a design principle that gives the design higher **flexibility**. It is more natural to build **business-domain classes** out of various **components** than trying to find **commonality** between them and creating a family tree. 
+
+> NOTE: 关于上述commonality，参见"Commonality-and-variability-analysis"章节
 
 > NOTE: 结合“Example”节中给出的例子来分析上面这段话的中的一些概念:
 >
@@ -626,10 +677,10 @@ The authors refer to [inheritance](https://en.wikipedia.org/wiki/Inheritance_(ob
 >
 > 根据下面章节的内容，我们可以总结出相比于composition，inheritance的劣势为:
 >
-> | 劣势                                                         | 说明                                     |
-> | ------------------------------------------------------------ | ---------------------------------------- |
-> | "inheritance breaks encapsulation"                           | white-box reuse显然break encapsulation了 |
-> | “any change in the parent's implementation will force the subclass to change” |                                          |
+> | 标准                          |                                                              |
+> | ----------------------------- | ------------------------------------------------------------ |
+> | **information hiding**        | "inheritance breaks encapsulation"                           |
+> | **extendibility/flexibility** | “any change in the parent's implementation will force the subclass to change” |
 
 #### Inheritance breaks encapsulation
 
@@ -641,7 +692,7 @@ The authors discuss the tension between inheritance and encapsulation at length 
 
 They warn that the implementation of a subclass can become so bound up with the implementation of its parent class that **any change in the parent's implementation will force the subclass to change**. Furthermore, they claim that a way to avoid this is to inherit only from **abstract classes**—but then, they point out that there is minimal code reuse.
 
-> NOTE: 上面总结了相较于composition，inheritance的劣势，
+> NOTE: 上面总结了相较于composition，inheritance的劣势: extendibility/flexibility太差；
 >
 > ABC无法实现code reuse
 
@@ -655,13 +706,8 @@ To the authors, 'delegation' is an extreme form of object composition that can a
 
 > NOTE: 上面作者都是在对composition和inheritance进行讨论，composition是has-a关系、inheritance是is-a关系。
 >
-> [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)就是典型的使用delegation的。	
-
-
 
 ## stackoverflow [Prefer composition over inheritance?](https://stackoverflow.com/questions/49002/prefer-composition-over-inheritance)
-
-
 
 
 
@@ -685,29 +731,4 @@ To the authors, 'delegation' is an extreme form of object composition that can a
 
 ### wikipedia [Is-a](https://en.wikipedia.org/wiki/Is-a)
 
-
-
-## 对比
-
-本段对inheritance和composition进行对比:
-
-
-
-| is-a        | has-a       |
-| ----------- | ----------- |
-| inheritance | composition |
-
-
-
-| 标准                     | composition | inheritance |
-| ------------------------ | ----------- | ----------- |
-| **code reuse**           | 能够实现    | 能够实现    |
-| **dynamic polymorphism** | 能够实现    | 能够实现    |
-| **extendibility**        | 强          | 弱          |
-
-> NOTE: 上述表格的绘制，参考了:
->
-> - stackoverflow [Prefer composition over inheritance?](https://stackoverflow.com/questions/49002/prefer-composition-over-inheritance)
-> - wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wiki/Design_Patterns#Introduction,_Chapter_1)	
-> - isocpp faq: What are some disciplines for using multiple inheritance? [¶](https://isocpp.org/wiki/faq/multiple-inheritance#mi-disciplines) [Δ](https://isocpp.org/wiki/faq/multiple-inheritance#)
 

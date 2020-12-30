@@ -69,11 +69,13 @@ Inheritance **inherit** implementation，implementation是由derived type(上)�
 
 现代programming language是如何来处理subtyping VS inheritance？或者说: 是否区分interface inheritance和implementation/code inheritance: 
 
-区分: Java，Java中提供了inheritance 和 implement 语义，但是C++中没有
+区分: Java，Java中提供了inheritance 和 implement 语义；可以显示定义interface，
 
-未区分: C++，Python
+未区分: C++，Python，没有区分；使用duck type，implicit interface
 
-
+> NOTE: 参见 wikipedia [*Modern C++ Design*#Policy-based design](https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design#Policy-based_design) 
+>
+> implicit VS explicit
 
 ## 体现 inheritance 和 subtyping 差异的example
 
