@@ -83,7 +83,10 @@ Copy and swap idiom能够提供strong exception safety:
 
 #### Placement new
 
-参见`C++\Idiom\OOP\Scope-Guard`章节 。
+
+
+
 
 ### Stack unwind
 
+参见`C++\Idiom\OOP\Scope-Guard`章节 。

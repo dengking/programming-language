@@ -203,7 +203,7 @@ If there is one single piece of C++ code that I could recommend every C++ progra
 
 I decided to try using a (slightly modified) version of ScopeGuard for a smallish Win32 GUI program I was working on. Win32 as you may know has many different types of resources that need to be closed in different ways (e.g. kernel handles are usually closed with `CloseHandle()`, GDI `BeginPaint()` needs to be paired with `EndPaint()`, etc.) I used ScopeGuard with all these resources, and also for allocating working buffers with `new` (e.g. for character set conversions to/from Unicode).
 
-**What amazed me was how much \*shorter\* the program was.** Basically, it's a win-win: your code gets shorter and more robust at the same time. Future code changes *can't leak anything*. They just can't. How cool is that?
+**What amazed me was how much *shorter* the program was.** Basically, it's a win-win: your code gets shorter and more robust at the same time. Future code changes *can't leak anything*. They just can't. How cool is that?
 
 [A](https://stackoverflow.com/a/64824020)
 
@@ -219,3 +219,28 @@ I decided to try using a (slightly modified) version of ScopeGuard for a smallis
 
 其中比较了Scope guard and RAII
 
+3、[ricab](https://github.com/ricab)/**[scope_guard](https://github.com/ricab/scope_guard)**
+
+在其中的introduction段，有着非常好的介绍。
+
+## `scoped_***`
+
+boost [`scoped_ptr`](http://www.boost.org/doc/libs/1_44_0/libs/smart_ptr/scoped_ptr.htm)
+
+cppreference [std::scoped_lock](https://en.cppreference.com/w/cpp/thread/scoped_lock)
+
+boost [Boost ScopeExit](http://www.boost.org/doc/libs/release/libs/scope_exit/doc/html/index.html)
+
+## Implementation
+
+下面是一些implementation，在`./Implementation`中，也给出了一些implementation。
+
+pizer.wordpress. [scope guards revisited [C++0x style]](https://pizer.wordpress.com/2008/11/22/scope-guards-revisited-c0x-style/)
+
+https://www.boost.org/doc/libs/1_75_0/libs/scope_exit/doc/html/scope_exit/tutorial.html
+
+https://en.cppreference.com/w/cpp/experimental/scope_exit
+
+## TODO
+
+stackoverflow [C++11 scope exit guard, a good idea?](https://stackoverflow.com/questions/3669833/c11-scope-exit-guard-a-good-idea)
