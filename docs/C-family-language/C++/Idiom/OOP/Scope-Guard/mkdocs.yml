@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
     - Implementation: Implementation
+    - Generic-Change-the-Way-You-Write-Exception-Safe-Code: Generic-Change-the-Way-You-Write-Exception-Safe-Code
+    - Systematic-Error-Handling-in-C++: Systematic-Error-Handling-in-C++

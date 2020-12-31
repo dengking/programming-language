@@ -1,6 +1,9 @@
 # [Neargye](https://github.com/Neargye)/[scope_guard](https://github.com/Neargye/scope_guard)
 
+## References
 
+- [Andrei Alexandrescu "Systematic Error Handling in C++"](https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C)
+- [Andrei Alexandrescu “Declarative Control Flow"](https://youtu.be/WjTrfoiB0MQ)
 
 ## [Examples](https://github.com/Neargye/scope_guard/blob/master/example)
 

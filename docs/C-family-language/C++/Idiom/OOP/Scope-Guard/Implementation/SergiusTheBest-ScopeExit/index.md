@@ -8,7 +8,17 @@ ScopeExit library provides an efficient and convenient way to execute statements
 - `SCOPE_SUCCESS` - statements are executed on scope exit when no exceptions have been thrown
 - `SCOPE_FAILURE` - statements are executed when scope is leaving due to an exception
 
+## Competing C++ scope exit/guard libraries
 
+- [offa/scope-guard](https://github.com/offa/scope-guard)
+- [Neargye/scope_guard](https://github.com/Neargye/scope_guard)
+- [ricab/scope_guard](https://github.com/ricab/scope_guard)
+- [Simple-Look Scope Guard for Visual C++ 2010](https://www.codeproject.com/Articles/124130/Simple-Look-Scope-Guard-for-Visual-C)
+
+## Other resources
+
+- [Scope guards in D Programming Language](https://tour.dlang.org/tour/en/gems/scope-guards)
+- [Andrei Alexandrescu “Declarative Control Flow"](https://youtu.be/WjTrfoiB0MQ)
 
 ## Sample
 
