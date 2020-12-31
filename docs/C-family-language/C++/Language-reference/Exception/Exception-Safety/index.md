@@ -69,9 +69,11 @@ It's almost as though exceptions are viewed as a *mysterious attack* on otherwis
 
 我们需要考虑的是如何来improve exception safety。
 
-### Preallocate
+### Predo
 
-#### Copy and swap idiom
+#### Preallocate
+
+##### Copy and swap idiom
 
 Copy and swap idiom能够提供strong exception safety:
 
@@ -81,9 +83,13 @@ Copy and swap idiom能够提供strong exception safety:
 
 参见 `C++\Idiom\OOP\Copy-and-swap` 章节。
 
-#### Placement new
+##### Placement new
 
 
+
+#### Temporary
+
+将file copy到temporary，参见 `C++\Idiom\OOP\Scope-Guard\Declarative-Control-Flow` 章节。
 
 
 

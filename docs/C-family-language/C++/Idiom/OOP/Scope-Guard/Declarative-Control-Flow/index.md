@@ -109,6 +109,12 @@ void move_file_transact(const path &from, const path &to)
 
 ```
 
+> NOTE: 
+>
+> 如果`bf::copy_file_transact(from, to);`成功，则说明copy成功了，如果跑出exception，后续过程不会执行；
+>
+> 如果`bf::remove(from);`跑出exception，则说明删除`from`失败，则需要将之前的copy undo。
+
 ### What Tools Do We Have?
 
 1、RAII tenuous
@@ -352,6 +358,8 @@ auto ANONYMOUS_VARIABLE(SCOPE_FAIL_STATE) \
 
 ```
 
+
+
 ### Transactional Copy
 
 ```C++
@@ -365,6 +373,8 @@ void copy_file_transact(const path &from, const path &to)
 
 ```
 
+
+
 ### Transactional Move
 
 ```C++
@@ -377,3 +387,115 @@ void move_file_transact(const path &from, const path &to)
 
 ```
 
+### Please Note
+
+Only `SCOPE_SUCCESS` may throw
+
+
+
+### Postconditions
+
+```C++
+#include <string>
+int string2int(const std::string &s)
+{
+	int r;
+	SCOPE_SUCCESS{assert(int2string(r) == s);};
+	// ...
+	return r;
+}
+
+```
+
+
+
+### Changing of the Guard
+
+```C++
+void process(char *const buf, size_t len)
+{
+	if (!len)
+		return;
+	const auto save = buf[len - 1];
+	buf[len - 1] = 255;
+	SCOPE_EXIT{	buf[len - 1] = save;};
+	for (auto p = buf;;)
+	switch (auto c = *p++)
+	{
+		// ...
+	}
+}
+
+```
+
+
+
+### Scoped Changes
+
+```C++
+bool g_sweeping;
+void sweep()
+{
+	g_sweeping = true;
+	SCOPE_EXIT{	g_sweeping = false;};
+	auto r = getRoot();
+	assert(r);
+	r->sweepAll();
+}
+
+```
+
+### No RAII Type? No Problem!
+
+```C++
+void fileTransact(int fd)
+{
+	enforce(flock(fd, LOCK_EX) == 0);
+	SCOPE_EXIT
+	{
+		enforce(flock(fd, LOCK_UN) == 0);
+	};
+	// ...
+}
+
+```
+
+No need to add a type for occasional RAII idioms
+
+### Remarks
+
+1、All examples taken from production code
+
+2、Declarative focus
+
+◦ Declare contingency(偶发事件) actions by context
+
+3、`SCOPE_*` more frequent than try in new code
+
+4、The latter remains in use for actual handling
+
+4、Flattened flow
+
+5、 Order still matters
+
+---
+
+Only detail left: `std::uncaught_exceptions()`
+
+---
+
+### Credits
+
+1、Evgeny Panasyuk: compiler-specific bits
+
+github.com/panaseleus/stack_unwinding
+
+2、Daniel Marinescu: folly implementation
+
+github.com/facebook/folly
+
+3、Herb: got it in C++17
+
+4、Michael: Implemented it in Visual Studio 2015
+
+5、Ville Voutilainen implemented it for gcc
