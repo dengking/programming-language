@@ -1,6 +1,16 @@
 # [CppCon 2015](https://channel9.msdn.com/Events/CPP/CppCon-2015) Declarative Control Flow
 
+## Abstract
 
+Presentation Slides, PDFs, Source Code and other presenter materials are available at: https://github.com/cppcon/cppcon2015 
+
+Getting **exception handling** right is a perennial(永久的、持续不断的) problem in C++ that has eluded(逃避的) systematization(系统化).
+
+> NOTE: 这段话的意思是: 在C++中，没有对exception handling
+
+— Not for much longer. New language and library developments make it possible to handle exceptions in a **declarative** manner, leading to drastic(强烈的) code simplification. This talk discusses an alternative approach to handling exceptional flow that eliminates the need for small ancillary(辅助的) RAII classes, try/catch statements that rethrow, and other cleanup mechanisms. The popular **Scope Guard idiom** gets a spectacular(壮观的、引人入胜的) generalization. Statements specify in a declarative manner actions to be taken if the current scope is left normally or via an exception. The resulting code is simpler, smaller, and easier to maintain. 
+
+— Andrei Alexandrescu is a researcher, software engineer, and author. He wrote three best-selling books on programming (Modern C++ Design, C++ Coding Standards, and The D Programming Language) and numerous articles and papers on wide-ranging topics from programming to language design to Machine Learning to Natural Language Processing. Andrei holds a PhD in Computer Science from the University of Washington and a BSc in Electrical Engineering from University "Politehnica" Bucharest. He works as a Research Scientist for Facebook.Website: http://erdani.comTwitter handle: @incomputable — Videos Filmed & Edited by Bash Films: http://www.BashFilms.com
 
 ## Slide
 
@@ -498,4 +508,4 @@ github.com/facebook/folly
 
 4、Michael: Implemented it in Visual Studio 2015
 
-5、Ville Voutilainen implemented it for gcc
+5、Ville Voutilainen implemented it for gcc7

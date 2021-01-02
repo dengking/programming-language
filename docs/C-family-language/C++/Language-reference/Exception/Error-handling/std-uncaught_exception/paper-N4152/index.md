@@ -1,0 +1,1 @@
+# isocpp [N4152 uncaught_exceptions](https://isocpp.org/files/papers/N4152.pdf)
