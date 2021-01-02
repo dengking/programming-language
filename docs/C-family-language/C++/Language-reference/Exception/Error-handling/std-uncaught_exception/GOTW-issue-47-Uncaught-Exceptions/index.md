@@ -1,6 +1,8 @@
 # [GotW #47 Uncaught Exceptions](http://www.gotw.ca/gotw/047.htm)
 
-> NOTE: 这篇文章其实在说明:  `bool uncaught_exception() noexcept;`是无用的
+> NOTE: 这篇文章其实在说明: 在class `A`的destructor中，使用 `bool uncaught_exception() noexcept;` 来判断在object of `A`的lifetime中是否有exception被抛出是无法实现的，根本原因在于:  `bool uncaught_exception() noexcept;` 仅仅返回一个状态值，而这个状态可能在object of `A`之前就已经变更了；那么就可能存在这样的情况: 另外一个class `B`的destructor中，使用了object of `A`，而object of `B`由于exception stack unwinding，当它的destructor被执行的时候， `bool uncaught_exception() noexcept;`  返回为true，显然此时的exception状态在object of `A`之前就已经变更了。
+>
+> 总的来说: 使用  `bool uncaught_exception() noexcept;`  来查询exception状态是可以的，但是用它来判断exception状态变化(是否新抛出了exception)是不可靠的，尤其是在一个exception stack unwinding中使用的时候。在C++17中，提出的`int uncaught_exceptions() noexcept;`可以用于准确地、可靠地判断exception状态变化(是否新抛出了exception)。
 >
 > 本文中作者频繁的使用了"moral"这个词语，它表明的意思是: "道德的"，引申的含义是: 设计理念上的。"immoral"被翻译为不符合最佳设计理念的、不符合最佳设计规范的。
 >
@@ -53,13 +55,13 @@ As it turns out, this specification is deceptively(欺诈地、看似) close to 
 ### **2.** Consider the following code:
 
 ```C++
-    T::~T() {
-      if( !std::uncaught_exception() ) {
+T::~T() {
+    if( !std::uncaught_exception() ) {
         // ... code that could throw ...
-      } else {
+    } else {
         // ... code that won't throw ...
-      }
     }
+}
 ```
 
 Is this a good technique? Present arguments for and against.
@@ -184,16 +186,16 @@ The idea is that "we'll use the path that could throw as long as it's safe to th
 One problem is that the above code won't actually work as expected in some situations. Consider:
 
 ```C++
-    //  Why the wrong solution is wrong
-    //
-    U::~U() {
-      try {
+//  Why the wrong solution is wrong
+//
+U::~U() {
+    try {
         T t;
         // do work
-      } catch( ... ) {
+    } catch( ... ) {
         // clean up
-      }
     }
+}
 ```
 
 If a `U` object is destroyed due to stack unwinding during to exception propagation, `T::~T` will fail to use the "code that could throw" path even though it safely could.
