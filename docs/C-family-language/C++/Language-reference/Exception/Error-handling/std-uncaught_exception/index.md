@@ -2,7 +2,7 @@
 
 ## 发展概述
 
-在1998 [GOTW issue 47: Uncaught Exceptions](http://www.gotw.ca/gotw/047.htm) 中，指出，使用 `bool uncaught_exception() throw();` 无法实现
+在1998 [GOTW issue 47: Uncaught Exceptions](http://www.gotw.ca/gotw/047.htm) 中，指出，`bool uncaught_exception() throw();`的问题； 
 
 在 2014 [paper N4152](https://isocpp.org/files/papers/N4152.pdf) 中提出 `int uncaught_exceptions() noexcept;`，最终在 C++2017被标准化了。
 

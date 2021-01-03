@@ -22,7 +22,7 @@
 
 1、What is unclear about the existing SO questions regarding this topic? If you read them you'll also see that this may be referred to as RAII (Resource Acquisition Is Initialization). For example, [Does ScopeGuard use really lead to better code?](http://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code). – [James Adkison](https://stackoverflow.com/users/4505712/james-adkison) [Jul 12 '15 at 6:33](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c#comment50710306_31365013) 
 
-> NOTE: stackoverflow [Does ScopeGuard use really lead to better code?](http://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code) 也是一篇非常好的文章
+> NOTE: stackoverflow [Does ScopeGuard use really lead to better code?](http://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code) 也是一篇非常好的文章，下面收录了这篇文章。
 
 2、No, **scope guards** *are based on* RAII, just as e.g. a `for` loop is based on jumps, but you wouldn't call a `for` loop a jump, would you? `for` loops are at a higher level of abstraction, and are a more specialized concept, than jumps. Scope guards are at a higher level of abstraction, and are a more specialized concept, than RAII. – [Cheers and hth. - Alf](https://stackoverflow.com/users/464581/cheers-and-hth-alf) [Jul 12 '15 at 7:57](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c#comment50711299_31365013) 
 
@@ -185,11 +185,15 @@ auto main() -> int
 
 The rôle of the `function` here is to avoid templating so that `Scope_guard` instances can be declared as such, and passed around. An alternative, slightly more complex and with slightly constrained usage, but possibly marginally more efficient, is to have a class templated on a functor type, and use C++11 `auto` for declarations, with the scope guard instance created by a factory function. Both these techniques are simple C++11 ways to do what Marginean did with reference lifetime extension for C++03.
 
+> NOTE: 比较了两种实现first-class function的方式。
+
 ## stackoverflow [Does ScopeGuard use really lead to better code?](https://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code)
 
 [A](https://stackoverflow.com/a/48663)
 
-It definitely improves your code. Your tentatively formulated claim, that it's obscure and that code would merit from a `catch` block is simply not true in C++ because RAII is an established idiom. Resource handling in C++ *is* done by resource acquisition and garbage collection is done by implicit destructor calls.
+> NOTE: 作者的观点是: 使用RAII，而不是try...catch...
+
+It definitely improves your code. Your tentatively(短暂的) formulated claim, that it's obscure and that code would merit(值得) from a `catch` block is simply not true in C++ because RAII is an established idiom. Resource handling in C++ *is* done by resource acquisition and garbage collection is done by implicit destructor calls.
 
 On the other hand, explicit `catch` blocks would bloat the code and introduce subtle errors because the code flow gets much more complex and resource handling has to be done explicitly.
 
@@ -199,7 +203,7 @@ RAII (including `ScopeGuard`s) isn't an obscure technique in C++ but firmly esta
 
 Yes.
 
-If there is one single piece of C++ code that I could recommend every C++ programmer spend 10 minutes learning, it is ScopeGuard (now part of the freely available [Loki library](http://loki-lib.sourceforge.net/)).
+If there is one single piece of C++ code that I could recommend every C++ programmer spend 10 minutes learning, it is `ScopeGuard` (now part of the freely available [Loki library](http://loki-lib.sourceforge.net/)).
 
 I decided to try using a (slightly modified) version of ScopeGuard for a smallish Win32 GUI program I was working on. Win32 as you may know has many different types of resources that need to be closed in different ways (e.g. kernel handles are usually closed with `CloseHandle()`, GDI `BeginPaint()` needs to be paired with `EndPaint()`, etc.) I used ScopeGuard with all these resources, and also for allocating working buffers with `new` (e.g. for character set conversions to/from Unicode).
 

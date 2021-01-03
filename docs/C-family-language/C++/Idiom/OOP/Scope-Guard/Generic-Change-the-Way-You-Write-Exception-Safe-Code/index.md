@@ -46,7 +46,9 @@ void User::AddFriend(User& newFriend)
 
 Surprisingly, the two-liner `User::AddFriend` hides a pernicious(险恶的) bug. In an **out-of-memory condition**, `vector::push_back` can fail by throwing an exception. In that case, you will end up having the friend added to the database, but not to the in-memory information.
 
-Now we've got a problem, haven't we? In any circumstance, this **inconsistent** information is dangerous. It is likely that many parts of your application are based on the assumption that the database is in sync with the in-memory information.
+Now we've got a problem, haven't we? In any circumstance, this **inconsistent** information is dangerous. It is likely that many parts of your application are based on the assumption that the database is **in sync with** the in-memory information.
+
+> NOTE: "in sync with"是"consistent"的同义词
 
 A simple approach to the problem is to switch the two lines of code:
 

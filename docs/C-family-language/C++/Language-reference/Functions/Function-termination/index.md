@@ -1,10 +1,12 @@
 # Function termination
 
+## Function termination方式
+
 在 cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions) 中，说明了function termination: 
 
 > A function can terminate by [returning](https://en.cppreference.com/w/cpp/language/return) or by [throwing](https://en.cppreference.com/w/cpp/language/throw) an [exception](https://en.cppreference.com/w/cpp/language/exceptions).
 
-
+关于exception，参见 `C++\Language-reference\Exception` 章节。
 
 ## Function return value
 
