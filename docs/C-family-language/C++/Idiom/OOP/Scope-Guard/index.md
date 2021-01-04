@@ -8,13 +8,41 @@
 
 下面是总结: 
 
-| time | 简介                                                         | 作者                                    |                                                              |
-| ---- | ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------ |
-| 2000 | 首次提出`ScopeGuard`                                         | Andrei Alexandrescu and Petru Marginean | drdobbs [Generic: Change the Way You Write Exception-Safe Code — Forever](https://www.drdobbs.com/cpp/generic-change-the-way-you-write-excepti/184403758) |
-| 2012 | `ScopeGuard` C++11                                           | Andrei Alexandrescu                     | - channel9 [C++ and Beyond 2012: Andrei Alexandrescu - Systematic Error Handling in C++](https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C) |
-| 2015 | [CppCon 2015](https://channel9.msdn.com/Events/CPP/CppCon-2015)  提出 "Declarative Control Flow" | Andrei Alexandrescu                     | - channel9 [Declarative Control Flow](https://channel9.msdn.com/Events/CPP/CppCon-2015/CPPConD03V023) <br>- youtu [Andrei Alexandrescu “Declarative Control Flow"](https://youtu.be/WjTrfoiB0MQ) |
+### 时间: 1998/2000
 
 
+
+| time | 简介                 | 作者                                    |                                                              |
+| ---- | -------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| 2000 | 首次提出`ScopeGuard` | Andrei Alexandrescu and Petru Marginean | drdobbs [Generic: Change the Way You Write Exception-Safe Code — Forever](https://www.drdobbs.com/cpp/generic-change-the-way-you-write-excepti/184403758) |
+
+
+
+### 时间: 2012
+
+
+
+| time | 简介               | 作者                |                                                              |
+| ---- | ------------------ | ------------------- | ------------------------------------------------------------ |
+| 2012 | `ScopeGuard` C++11 | Andrei Alexandrescu | - channel9 [C++ and Beyond 2012: Andrei Alexandrescu - Systematic Error Handling in C++](https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C) |
+
+使用C++11的如下特性对`ScopeGuard`的实现进行升级:
+
+1、parameter pack
+
+2、perfect forwarding
+
+### 时间: 2012
+
+
+
+| time | 简介                                                         | 作者                |                                                              |
+| ---- | ------------------------------------------------------------ | ------------------- | ------------------------------------------------------------ |
+| 2015 | [CppCon 2015](https://channel9.msdn.com/Events/CPP/CppCon-2015)  提出 "Declarative Control Flow" | Andrei Alexandrescu | - channel9 [Declarative Control Flow](https://channel9.msdn.com/Events/CPP/CppCon-2015/CPPConD03V023) <br>- youtu [Andrei Alexandrescu “Declarative Control Flow"](https://youtu.be/WjTrfoiB0MQ) |
+
+实现automatic commit/rollback，使用C++17: 
+
+1、`std::uncaught_exceptions`
 
 ## stackoverflow [What is ScopeGuard in C++?](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c)
 
@@ -248,3 +276,5 @@ https://en.cppreference.com/w/cpp/experimental/scope_exit
 ## TODO
 
 stackoverflow [C++11 scope exit guard, a good idea?](https://stackoverflow.com/questions/3669833/c11-scope-exit-guard-a-good-idea)
+
+https://metacpan.org/pod/Scope::Guard

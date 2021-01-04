@@ -1,222 +1,23 @@
-# Scope guard
+# C++ and Beyond 2012: Andrei Alexandrescu - Systematic Error Handling in C++
 
-## 发展历程
+## Abstract
 
-在 [ricab](https://github.com/ricab)/**[scope_guard](https://github.com/ricab/scope_guard)** 中给出了总结:
+Writing code that is resilient upon errors (API failures, exceptions, invalid memory access, and more) has always been a pain point in all languages. This being still largely an unsolved (and actually rather loosely-defined) problem, C++11 makes no claim of having solved it. However, C++11 is a more expressive language, and as always more expressive features can be put to good use toward devising better error-safe idioms and libraries.
 
-> The concept of "scope guard" was [proposed](http://drdobbs.com/184403758) by Andrei Alexandrescu and Petru Marginean and it is well known in the C++ community. It has been proposed for standardization (see [N4189](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4189.pdf)) but is still not part of the standard library, as of March 2018.
+This talk is a thorough visit through error resilience and how to achieve it in C++11. After a working definition, we go through a number of approaches and techniques, starting from the simplest and going all the way to file systems, storage with different performance and error profiles (think HDD vs. RAID vs. Flash vs. NAS), and more. As always, scaling up from in-process to inter-process to cross-machine to cross-datacenter entails different notions of correctness and resilience and different ways of achieving such.
 
-下面是总结: 
+To quote a classic, "one more thing"! An old acquaintance—[ScopeGuard](http://www.drdobbs.com/article/print?articleId=184403758&siteSectionName=cpp)—will be present, with the note that ScopeGuard11 is much better (and much faster) than its former self.
 
-| time | 简介                                                         | 作者                                    |                                                              |
-| ---- | ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------ |
-| 2000 | 首次提出`ScopeGuard`                                         | Andrei Alexandrescu and Petru Marginean | drdobbs [Generic: Change the Way You Write Exception-Safe Code — Forever](https://www.drdobbs.com/cpp/generic-change-the-way-you-write-excepti/184403758) |
-| 2012 | C++11`ScopeGuard`                                            | Andrei Alexandrescu                     | - channel9 [C++ and Beyond 2012: Andrei Alexandrescu - Systematic Error Handling in C++](https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C) |
-| 2015 | [CppCon 2015](https://channel9.msdn.com/Events/CPP/CppCon-2015) Andrei Alexandrescu 提出 "Declarative Control Flow" | Andrei Alexandrescu                     | - channel9 [Declarative Control Flow](https://channel9.msdn.com/Events/CPP/CppCon-2015/CPPConD03V023) <br>- youtu [Andrei Alexandrescu “Declarative Control Flow"](https://youtu.be/WjTrfoiB0MQ) |
+## Slide
 
+> NOTE: channel9 [C++ and Beyond 2012: Andrei Alexandrescu - Systematic Error Handling in C++](https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C) 中给出的slide下载链接无法下载，在paper-N4152中，附带了它的slide。
 
+## TODO
 
-## stackoverflow [What is ScopeGuard in C++?](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c)
+channel9 [C++ and Beyond 2012: Andrei Alexandrescu - Systematic Error Handling in C++](https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C)
 
-**COMMENTS**
+https://isocpp.org/blog/2012/12/systematic-error-handling-in-c-andrei-alexandrescu
 
-1、What is unclear about the existing SO questions regarding this topic? If you read them you'll also see that this may be referred to as RAII (Resource Acquisition Is Initialization). For example, [Does ScopeGuard use really lead to better code?](http://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code). – [James Adkison](https://stackoverflow.com/users/4505712/james-adkison) [Jul 12 '15 at 6:33](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c#comment50710306_31365013) 
+https://www.developerfusion.com/media/148072/c-and-beyond-2012-andrei-alexandrescu-systematic-error-handling-in-c/
 
-> NOTE: stackoverflow [Does ScopeGuard use really lead to better code?](http://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code) 也是一篇非常好的文章
-
-2、No, **scope guards** *are based on* RAII, just as e.g. a `for` loop is based on jumps, but you wouldn't call a `for` loop a jump, would you? `for` loops are at a higher level of abstraction, and are a more specialized concept, than jumps. Scope guards are at a higher level of abstraction, and are a more specialized concept, than RAII. – [Cheers and hth. - Alf](https://stackoverflow.com/users/464581/cheers-and-hth-alf) [Jul 12 '15 at 7:57](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c#comment50711299_31365013) 
-
-> NOTE: 这一段对"Scope guard and RAII"的总结是非常好的，显然scope guard是一个非常好的abstraction
-
-3、I have a modern, simple, documented, and carefully tested implementation [here](https://ricab.github.io/scope_guard/) – [ricab](https://stackoverflow.com/users/563765/ricab) [Aug 15 '18 at 22:20](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c#comment90686382_31365013)
-
-> NOTE: 收录了这个implementation
-
-[A](https://stackoverflow.com/a/31365171)
-
-`ScopeGuard` was once a particular implementation of scope guards [by Petru Marginean and Andrei Alexandrescu](http://www.drdobbs.com/cpp/generic-change-the-way-you-write-excepti/184403758). The idea is to let the destructor of a guard object call a user specified cleanup action at the end of a scope (read: block), unless the scope guard is *dismissed*. Marginean came up with an ingenious(有独创性的) idea of declaring a scope guard object for C++03, based on lifetime extension of a reference to `const`.
-
-Today “scope guard” is more the general idea.
-
-Scope guards are based on RAII (automatic destructor calls used for cleanup), just as e.g. a `for` loop is based on jumps, but one wouldn't ordinarly call a `for` loop a jump-based piece of code, because that loses most of the information of what it is about, and likewise one does not ordinarily refer to scope guards as RAII. `for` loops are at a higher level of abstraction, and are a more specialized concept, than jumps. Scope guards are at a higher level of abstraction, and are a more specialized concept, than RAII.
-
-> NOTE: 和前面的comment 2重复；
-
-------
-
-In C++11 scope guards can be trivially implemented in terms of `std::function`, with the cleanup action supplied in each place via a lambda expression.
-
-Example:
-
-```cpp
-#include <functional>       // std::function
-#include <utility>          // std::move
-
-namespace my {
-    using std::function;
-    using std::move;
-
-    class Non_copyable
-    {
-    private:
-        auto operator=( Non_copyable const& ) -> Non_copyable& = delete;
-        Non_copyable( Non_copyable const& ) = delete;
-    public:
-        auto operator=( Non_copyable&& ) -> Non_copyable& = default;
-        Non_copyable() = default;
-        Non_copyable( Non_copyable&& ) = default;
-    };
-
-    class Scope_guard
-        : public Non_copyable
-    {
-    private:
-        function<void()>    cleanup_;
-
-    public:
-        friend
-        void dismiss( Scope_guard& g ) { g.cleanup_ = []{}; }
-
-        ~Scope_guard() { cleanup_(); }
-
-        template< class Func >
-        Scope_guard( Func const& cleanup )
-            : cleanup_( cleanup )
-        {}
-
-        Scope_guard( Scope_guard&& other )
-            : cleanup_( move( other.cleanup_ ) )
-        { dismiss( other ); }
-    };
-
-}  // namespace my
-
-#include <iostream>
-void foo() {}
-auto main() -> int
-{
-    using namespace std;
-    my::Scope_guard const final_action = []{ wclog << "Finished! (Exit from main.)\n"; };
-
-    wcout << "The answer is probably " << 6*7 << ".\n";
-}
-// g++ --std=c++11 test.cpp
-
-```
-
-> NOTE: 上述程序编译报错如下:
->
-> ```C++
-> test.cp: In function ‘int main()’:
-> test.cp:48:88: error: use of deleted function ‘my::Scope_guard::Scope_guard(const my::Scope_guard&)’
->      my::Scope_guard const final_action = []{ wclog << "Finished! (Exit from main.)\n"; };
->                                                                                         ^
-> test.cp:19:11: note: ‘my::Scope_guard::Scope_guard(const my::Scope_guard&)’ is implicitly declared as deleted because ‘my::Scope_guard’ declares a move constructor or move assignment operator
->      class Scope_guard
-> 
-> ```
->
-> 下面是正确版本:
-
-```C++
-#include <functional>       // std::function
-#include <utility>          // std::move
-
-namespace my {
-    using std::function;
-    using std::move;
-
-    class Non_copyable
-    {
-    private:
-        auto operator=( Non_copyable const& ) -> Non_copyable& = delete;
-        Non_copyable( Non_copyable const& ) = delete;
-    public:
-        auto operator=( Non_copyable&& ) -> Non_copyable& = default;
-        Non_copyable() = default;
-        Non_copyable( Non_copyable&& ) = default;
-    };
-
-    class Scope_guard
-        : public Non_copyable
-    {
-    private:
-        function<void()>    cleanup_;
-
-    public:
-        friend
-        void dismiss( Scope_guard& g ) { g.cleanup_ = []{}; }
-
-        ~Scope_guard() { cleanup_(); }
-
-        template< class Func >
-        Scope_guard( Func const& cleanup )
-            : cleanup_( cleanup )
-        {}
-
-        Scope_guard( Scope_guard&& other )
-            : cleanup_( move( other.cleanup_ ) )
-        { dismiss( other ); }
-    };
-
-}  // namespace my
-
-#include <iostream>
-void foo() {}
-auto main() -> int
-{
-    using namespace std;
-    my::Scope_guard const final_action([]{ wclog << "Finished! (Exit from main.)\n"; });
-
-    wcout << "The answer is probably " << 6*7 << ".\n";
-}
-// g++ --std=c++11 test.cpp
-
-```
-
-> NOTE: 输出如下:
->
-> ```C++
-> The answer is probably 42.
-> Finished! (Exit from main.)
-> ```
->
-> 
-
-The rôle of the `function` here is to avoid templating so that `Scope_guard` instances can be declared as such, and passed around. An alternative, slightly more complex and with slightly constrained usage, but possibly marginally more efficient, is to have a class templated on a functor type, and use C++11 `auto` for declarations, with the scope guard instance created by a factory function. Both these techniques are simple C++11 ways to do what Marginean did with reference lifetime extension for C++03.
-
-## stackoverflow [Does ScopeGuard use really lead to better code?](https://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code)
-
-I came across [this article](http://www.ddj.com/cpp/184403758) written by Andrei Alexandrescu and Petru Marginean many years ago, which presents and discusses a utility class called `ScopeGuard` for writing **exception-safe code**. I'd like to know if coding with these objects truly leads to better code or if it obfuscates(使模糊) **error handling**, in that perhaps the guard's callback would be better presented in a catch block? Does anyone have any experience using these in actual production code?
-
-[A](https://stackoverflow.com/a/48663)
-
-It definitely improves your code. Your tentatively formulated claim, that it's obscure(隐晦的) and that code would merit(值得) from a `catch` block is simply not true in C++ because **RAII** is an established idiom. Resource handling in C++ *is* done by resource acquisition and **garbage collection** is done by implicit destructor calls.
-
-On the other hand, explicit `catch` blocks would bloat(膨胀) the code and introduce subtle errors because the code flow gets much more complex and resource handling has to be done explicitly.
-
-RAII (including `ScopeGuard`s) isn't an obscure technique in C++ but firmly established best-practice.
-
-[A](https://stackoverflow.com/a/550945)
-
-Yes.
-
-If there is one single piece of C++ code that I could recommend every C++ programmer spend 10 minutes learning, it is `ScopeGuard` (now part of the freely available [Loki library](http://loki-lib.sourceforge.net/)).
-
-I decided to try using a (slightly modified) version of `ScopeGuard` for a smallish Win32 GUI program I was working on. Win32 as you may know has many different types of resources that need to be closed in different ways (e.g. kernel handles are usually closed with `CloseHandle()`, GDI `BeginPaint()` needs to be paired with `EndPaint()`, etc.) I used `ScopeGuard` with all these resources, and also for allocating working buffers with `new` (e.g. for character set conversions to/from Unicode).
-
-**What amazed me was how much *shorter* the program was.** Basically, it's a **win-win**: your code gets **shorter** and more **robust** at the same time. Future code changes *can't leak anything*. They just can't. How cool is that?
-
-[A](https://stackoverflow.com/a/64824020)
-
-
-
-## Scope guard and RAII
-
-1、stackoverflow [What is ScopeGuard in C++?](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c) 
-
-其中阐述了scope guard 和 RAII之间的关系
-
-2、stackoverflow [Does ScopeGuard use really lead to better code?](https://stackoverflow.com/questions/48647/does-scopeguard-use-really-lead-to-better-code) # [A](https://stackoverflow.com/a/64824020) 
-
-其中，对两者进行了对比
+https://cppandbeyond.com/2012/12/
