@@ -1,2 +1,4 @@
 nav:
-    - Atomic-operations-library: Atomic-operations-library.md
+    - Introduction: index.md
+    - Memory-ordering: Memory-ordering
+    - Implementation: Implementation
