@@ -1,5 +1,7 @@
 # Function termination
 
+
+
 ## Function termination方式
 
 在 cppreference [Functions](https://en.cppreference.com/w/cpp/language/functions) 中，说明了function termination: 
@@ -7,6 +9,8 @@
 > A function can terminate by [returning](https://en.cppreference.com/w/cpp/language/return) or by [throwing](https://en.cppreference.com/w/cpp/language/throw) an [exception](https://en.cppreference.com/w/cpp/language/exceptions).
 
 关于exception，参见 `C++\Language-reference\Exception` 章节。
+
+由于function也是一个scope，因此function termination，其实是scope exit，因此当function termination的时候，在 `Exception\Stack-unwinding` 章节中，我们知道，scope exit的时候，一个非常重要的过程是: stack unwinding，因此当function termination的时候，一个非常重要的过程就是stack unwinding。
 
 ## Function return value
 

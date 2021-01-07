@@ -1,8 +1,8 @@
-# Stack unwind
+# Stack unwinding
 
-"stack unwind"是function的运行机制之一，参见 `C-and-C++\From-source-code-to-exec\ABI\Call-convention\Call-stack`。C++中的stack unwind有如下特点:
+"stack unwind"是C++的运行机制之一，参见 `C-and-C++\From-source-code-to-exec\ABI\Call-convention\Call-stack`。C++中的stack unwind有如下特点:
 
-1) 每个scope都有一个stack
+1) 每个scope都有一个stack，在scope exit的时候，会执行stack unwinding
 
 2) stack unwind过程中，会调用destructor
 

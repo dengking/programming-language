@@ -1,4 +1,5 @@
 nav:
     - SergiusTheBest-ScopeExit: SergiusTheBest-ScopeExit
-    - Neargye-ScopEexit: Neargye-ScopEexit
+    - Neargye-ScopExit: Neargye-ScopExit
     - ricab-scope_guard: ricab-scope_guard
+    - boost-ScopeExit: boost-ScopeExit

@@ -1,34 +1,20 @@
-# Destructor
-
-本章讨论destructor。
-
-## cppreference [Destructors](https://en.cppreference.com/w/cpp/language/destructor)
-
-
-
-## microsoft [Destructors (C++)](https://docs.microsoft.com/en-us/cpp/cpp/destructors-cpp?view=vs-2019)
-
-> NOTE: microsoft 的这篇写的也不错
-
-
-
-## Destructor and inheritance
+# Destructor and inheritance
 
 对于OOP，思考destructor和inheritance之间的关系是非常重要的，下面是一些主题：
 
-### Invokation order of  destructor in a class hierarchy
+## Invokation order of  destructor in a class hierarchy
 
 本节标题的含义是：在一个class hierarchy中，destructor的调用次序。
 
 与本节相关的内容有：
 
-- `C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Pure-virtual-function-and-abstract-class\Pure-virtual-method-called`
+1、`C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Pure-virtual-function-and-abstract-class\Pure-virtual-method-called`
 
-### Destructor and polymorphism
+## Destructor and polymorphism
 
 本节的内容基于stackoverflow [When to use virtual destructors?](https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors)整理的：
 
-#### Make base classes' destructors `virtual` 
+### Make base classes' destructors `virtual` 
 
 > To sum up, always make base classes' destructors `virtual` when they're meant to be manipulated polymorphically.
 
@@ -36,13 +22,13 @@
 
 简单地说就是：允许继承，并且允许runtime polymorphism。
 
-#### Make the base classes' destructor **`protected` and nonvirtual**
+### Make the base classes' destructor **`protected` and nonvirtual**
 
 > If you want to prevent the deletion of an instance through a **base class pointer**, you can make the base class destructor **protected and nonvirtual**; by doing so, the compiler won't let you call `delete`on a base class pointer.
 
 简单地说就是：允许继承，但是不允许runtime polymorphism。
 
-在维基百科[Curiously recurring template pattern#Object counter](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Object_counter)中列举了这样的例子，在`C++\Idiom\Templates-and-generic-programming\Curiously-recurring-template-pattern`中收录了这篇文章：
+在 wikipedia [Curiously recurring template pattern#Object counter](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Object_counter)中列举了这样的例子，在`C++\Idiom\Templates-and-generic-programming\Curiously-recurring-template-pattern`中收录了这篇文章：
 
 Object counter：
 
@@ -145,7 +131,7 @@ https://stackoverflow.com/questions/5150748/protected-constructor-and-accessibil
 
 
 
-#### Make the destructor `public` and nonvirtual
+### Make the destructor `public` and nonvirtual
 
 典型的例子就是STL的container，它们这样的目的是避免STL的用户继承其中的class。在维基百科[Standard Template Library](https://en.wikipedia.org/wiki/Standard_Template_Library)中对此进行了说明：
 
@@ -153,6 +139,7 @@ https://stackoverflow.com/questions/5150748/protected-constructor-and-accessibil
 
 
 
-#### Guideline: destructor of any base class must be [public and virtual or protected and non-virtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#discussion-make-base-class-destructors-public-and-virtual-or-protected-and-nonvirtual)
+### Guideline: destructor of any base class must be [public and virtual or protected and non-virtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#discussion-make-base-class-destructors-public-and-virtual-or-protected-and-nonvirtual)
 
 在cppreference `virtual function specifier#Virtual destructor`中提及了这个。
+

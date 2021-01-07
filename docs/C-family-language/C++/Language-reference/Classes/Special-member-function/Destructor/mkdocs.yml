@@ -1,5 +1,5 @@
 nav:
-    - Destructor: Destructor.md
+    - Introduction: index.md
     - cppreference-Destructors: cppreference-Destructors.md
     - Virtual-destructor: Virtual-destructor
     - Process-exit-and-destructor: Process-exit-and-destructor.md

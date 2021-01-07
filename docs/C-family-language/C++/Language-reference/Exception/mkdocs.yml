@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
-    - Best-practices-for-exception-handling: Best-practices-for-exception-handling.md
+    - Idiom: Idiom
     - Dynamic-exception-specification: Dynamic-exception-specification.md
+    - Function-try-block: Function-try-block
     - Exception-Safety: Exception-Safety
     - Error-handling: Error-handling    

@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
     - decltype: decltype
-    - Return-type-deduction-for-functions: Return-type-deduction-for-functions.md
+    - Template-argument-deduction: Template-argument-deduction
+    - Return-type-deduction: Return-type-deduction
+    - Class-template-argument-deduction(CTAD): Class-template-argument-deduction(CTAD)

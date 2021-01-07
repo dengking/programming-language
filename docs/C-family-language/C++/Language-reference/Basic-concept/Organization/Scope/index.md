@@ -1,28 +1,84 @@
 # Scope
 
-本文讨论c++的scope。
+本文讨论c++的scope，scope是C++中的重要概念，C++中的很多内容、概念都是基于scope建立的，下面是于此相关的内容的梳理:
+
+一、static、compile-time
+
+scope是一个静态的概念，compiler根据scope规则进行compile；
+
+二、dynamic、runtime:
+
+C++中的很多dynamic、runtime内容，其实可以使用scope来进行理解和刻画，关于此，参见 `C++\Language-reference\Basic-concept\Execution-model` 章节。
+
+
 
 ## cppreference [Scope](https://en.cppreference.com/w/cpp/language/scope)
 
 > NOTE: 
 
+Each [name](https://en.cppreference.com/w/cpp/language/name) that appears in a C++ program is only valid in some possibly discontiguous(不连接的) portion of the source code called its *scope*.
+
+
+
 ### Block scope
 
 > NOTE: block scope非常重要，它是后面将要介绍的这些scope的基石，后面会对其进行专门的介绍。
+>
+> 
+>
+> 
+>
+> C++ block是compound statement的同义词: [block (compound statement)](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) ，因此后续当需要找 [compound statement](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) 的scope规则的时候，可以查看这一段。
+>
+> Function block应该就是属于block scope；
+>
+> 可以认为C++中每个block scope都有一个自己的stack。
 
 The potential scope of a variable introduced by a declaration in a [block (compound statement)](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) begins at the point of declaration and ends at the end of the block. Actual scope is the same as potential scope unless there is a nested block with a declaration that introduces identical name
 
 > NOET: 上面这一段引入了potential scope和actual scope的概念，这两个概念其实是为了描述具备nesting关系的两个scope中定义了两个相同的variable的情况。原文给出了例子。
 
+```C++
+int main()
+{
+    int a = 0; // scope of the first 'a' begins
+    ++a; // the name 'a' is in scope and refers to the first 'a'
+    {
+        int a = 1; // scope of the second 'a' begins
+                   // scope of the first 'a' is interrupted
+        a = 42;    // 'a' is in scope and refers to the second 'a'                 
+    } // block ends, scope of the second 'a' ends
+      //             scope of the first 'a' resumes
+} // block ends, scope of the first 'a' ends
+int b = a; // Error: name 'a' is not in scope
+```
 
+#### Exception handler
+
+The potential scope of a name declared in an exception handler begins at the point of declaration and ends when the exception handler ends, and is not in scope in another exception handler or in the enclosing block.
+
+```C++
+try {   
+    f();
+} catch(const std::runtime_error& re) { // scope of re begins
+    int n = 1; // scope of n begins
+    std::cout << re.what(); // re is in scope
+} // scope of re ends, scope of n ends
+ catch(std::exception& e) {
+    std::cout << re.what(); // error: re is not in scope
+    ++n; // error: n is not in scope
+}
+```
+
+#### Other [compound statement](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) 
+
+> NOTE: 原文这一段对各种 [compound statement](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) 的scope进行了介绍。
 
 ### Function parameter scope
 
+> NOTE: 
 
 
-### Function scope
-
-> NOTE: 原文特别强调了label。
 
 ### Namespace scope
 
@@ -60,24 +116,8 @@ The top-level scope of a translation unit ("file scope" or "global scope") is al
 
 需要注意的是，上述的nesting关系仅仅描述了部分，而没有包含所有的。
 
+## `{}` and scope
 
-
-## Block scope
-
-c++中使用`{}`来定义block，也就是在c++中`{}`所包围的区域就是一个scope，c++是允许nesting block的。
+C++中，`{}`对应一个scope，也就是在c++中`{}`所包围的区域就是一个scope，c++是允许nesting scope的。
 
 按照这个原则，我们再来联系c++的function、class 、namespace 、Enumeration 的declaration，显然它们都是使用的`{}`，所以它们都是一个scope。
-
-
-
-## Scope and object lifetime
-
-关于scope和object lifetime，参见:
-
-1) [Declarations](https://en.cppreference.com/w/cpp/language/declarations)的Notes段中有描述
-
-2) 参见 `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration` 章节
-
-### Scope and resource management
-
-c++中的RAII就是基于scope的，所以c++的scope和resource management之间有着强烈的关联。
