@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - cppreference-Destructors: cppreference-Destructors.md
-    - Virtual-destructor: Virtual-destructor
-    - Process-exit-and-destructor: Process-exit-and-destructor.md
+    - Destructor-execution: Destructor-execution
+    - Destructor-and-inheritance: Destructor-and-inheritance    
     - Destructor-and-exception: Destructor-and-exception
