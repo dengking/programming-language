@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
     - modernescpp-C++Memory-Model: modernescpp-C++Memory-Model
+    - Herb-Sutter: Herb-Sutter
+    - Bjarne-Stroustrup: Bjarne-Stroustrup
