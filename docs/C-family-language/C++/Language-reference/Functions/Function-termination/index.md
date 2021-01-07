@@ -10,7 +10,15 @@
 
 关于exception，参见 `C++\Language-reference\Exception` 章节。
 
-由于function也是一个scope，因此function termination，其实是scope exit，因此当function termination的时候，在 `Exception\Stack-unwinding` 章节中，我们知道，scope exit的时候，一个非常重要的过程是: stack unwinding，因此当function termination的时候，一个非常重要的过程就是stack unwinding。
+按照在 `Execution-model` 章节讨论的内容: 
+
+当function termination的时候，一个非常重要的过程是: stack unwinding；
+
+关于stack unwinding，参见:
+
+1、 `C++\Language-reference\Exception\Stack-unwinding` 
+
+2、`C-and-C++\From-source-code-to-exec\ABI\Call-convention\Call-stack`
 
 ## Function return value
 

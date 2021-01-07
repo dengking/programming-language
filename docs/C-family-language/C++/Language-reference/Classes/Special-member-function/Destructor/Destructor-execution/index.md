@@ -1,8 +1,18 @@
-# Process exit and destructor
+
+
+# Destructor execution
+
+当object的lifetime终结的时候，destructor会被执行，那何时终结呢？参见: 
+
+1、`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration`章节
+
+2、`C++\Language-reference\Basic-concept\Execution-model`
+
+## Process exit and destructor
 
 process可能normally exit也可能abnormally exit，当它exit的时候，destructor是否会被执行呢？
 
-## 通过scope、RAII来触发destructor被执行
+### 通过block scope来触发destructor被执行
 
 有的时候，我们需要在`main`函数退出时，destructor被执行，可以采取下面的措施：
 

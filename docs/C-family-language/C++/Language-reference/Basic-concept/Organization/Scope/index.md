@@ -26,7 +26,9 @@ Each [name](https://en.cppreference.com/w/cpp/language/name) that appears in a C
 >
 > C++ block是compound statement的同义词: [block (compound statement)](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) ，因此后续当需要找 [compound statement](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) 的scope规则的时候，可以查看这一段。
 >
-> 
+> Block scope是一个非常重要的概念，在下面文章中使用到了它:
+>
+> 1、cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)
 
 The potential scope of a variable introduced by a declaration in a [block (compound statement)](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) begins at the point of declaration and ends at the end of the block. Actual scope is the same as potential scope unless there is a nested block with a declaration that introduces identical name
 

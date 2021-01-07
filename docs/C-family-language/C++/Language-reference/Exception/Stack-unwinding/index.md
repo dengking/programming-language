@@ -1,12 +1,12 @@
 # Stack unwinding
 
-"stack unwind"是C++的运行机制之一，参见 `C-and-C++\From-source-code-to-exec\ABI\Call-convention\Call-stack`。C++中的stack unwind有如下特点:
+"stack unwind"是C++的运行机制之一，参见
 
-1) 每个scope都有一个stack，在scope exit的时候，会执行stack unwinding
+1、 `C-and-C++\From-source-code-to-exec\ABI\Call-convention\Call-stack`
 
-2) stack unwind过程中，会调用destructor
+2、`C++\Language-reference\Basic-concept\Execution-model`
 
-在 stackoverflow [What is stack unwinding?](https://stackoverflow.com/questions/2331316/what-is-stack-unwinding) 中，对它进行了非常好的介绍。
+
 
 ## stackoverflow [What is stack unwinding?](https://stackoverflow.com/questions/2331316/what-is-stack-unwinding)
 
@@ -81,24 +81,4 @@ However, specifically in the case of C++, stack unwinding has to do with how C++
 ## Exception and stack unwind
 
 参见`./Exception-and-stack-unwind`。
-
-## Application
-
-
-
-### RAII
-
-### Scope 
-
-
-
-1) Scope guard
-
-C++对stack unwind有着非常充分的运用，很多idiom都是建立在stack unwind之上的。
-
-2) [boost::scoped_ptr](http://www.boost.org/doc/libs/1_41_0/libs/smart_ptr/scoped_ptr.htm) 
-
-3) [boost::mutex::scoped_lock](http://www.google.com/codesearch/p?hl=en#so90T49b54s/przyklady/cpprec.zip|g3JV5CE7tsM/12-02.cpp&q=mutex::scoped_lock)
-
-
 
