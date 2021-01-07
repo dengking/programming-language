@@ -149,3 +149,8 @@ Java、C++和C都提供了memory model，在C++和C中，programmer可以直接�
 
 关于abstract machine，参见工程[automata-and-formal-language](https://dengking.github.io/automata-and-formal-language)。
 
+
+
+### 相关文章
+
+1、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g)

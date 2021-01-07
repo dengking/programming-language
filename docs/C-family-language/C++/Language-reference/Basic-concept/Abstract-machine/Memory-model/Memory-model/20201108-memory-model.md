@@ -106,12 +106,6 @@ There are three levels of the contract in C++11.
 
 
 
-## stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g)
-
-
-
-
-
 ## davmac.wordpress [Understanding the C/C++ memory model](https://davmac.wordpress.com/2018/01/28/understanding-the-c-c-memory-model/)
 
 

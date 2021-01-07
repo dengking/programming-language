@@ -24,3 +24,10 @@ For each C/C++11 synchronization operation and architecture, the document aims t
 | Seq_Cst Fence:    | MFENCE                                                 |
 
 > NOTE: load对应的read、store对应的是write
+
+
+
+## TODO
+
+https://www.decadent.org.uk/pipermail/cpp-threads/2008-December/001933.html
+
