@@ -22,17 +22,11 @@ Each [name](https://en.cppreference.com/w/cpp/language/name) that appears in a C
 
 ### Block scope
 
-> NOTE: block scope非常重要，它是后面将要介绍的这些scope的基石，后面会对其进行专门的介绍。
->
-> 
->
-> 
+> NOTE: 
 >
 > C++ block是compound statement的同义词: [block (compound statement)](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) ，因此后续当需要找 [compound statement](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) 的scope规则的时候，可以查看这一段。
 >
-> Function block应该就是属于block scope；
->
-> 可以认为C++中每个block scope都有一个自己的stack。
+> 
 
 The potential scope of a variable introduced by a declaration in a [block (compound statement)](https://en.cppreference.com/w/cpp/language/statements#Compound_statements) begins at the point of declaration and ends at the end of the block. Actual scope is the same as potential scope unless there is a nested block with a declaration that introduces identical name
 

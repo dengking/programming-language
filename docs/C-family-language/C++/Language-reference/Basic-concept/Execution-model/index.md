@@ -24,11 +24,27 @@ c++中的RAII就是基于scope的，所以c++的scope和resource management之�
 
 
 
+## Function execution
+
+> NOTE: 在阅读本章内容之前，需要有如下认知: 
+>
+> 1、cppreference [Statements](https://en.cppreference.com/w/cpp/language/statements#Compound_statements)
+>
+> > Compound statements or *blocks* are brace-enclosed sequences of statements.
+>
+> C++ block是compound statement的同义词
+>
+> 1、cppreference [Scope # Block scope](https://en.cppreference.com/w/cpp/language/scope#Block_scope)
+>
+> 3、cppreference [Function declaration](https://en.cppreference.com/w/cpp/language/function)
+
+1、Function execution有**stack frame**，当function termination的时候，会执行stack unwinding；
+
+2、Function block/scope中的每个block都有自己是一个stack frame，它的stack frame是nested in enclosing block的stack frame的。当block的scope结束时，会执行stack unwinding；
+
+> 因此可以说，C++中每个block(scope)都有一个自己的stack。
 
 
-## 基于scope + function来进行刻画execution model
-
-对于与function Invokation相关的，大多数 都是可以使用scope来进行刻画
 
 基于scope的
 
@@ -45,3 +61,7 @@ c++中的RAII就是基于scope的，所以c++的scope和resource management之�
 1、C++ execution model，最最典型的是scope exit
 
 2、C++ object lifetime
+
+
+
+对于与function Invokation相关的，大多数 都是可以使用scope来进行刻画
