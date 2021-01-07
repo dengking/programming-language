@@ -6,22 +6,6 @@
 
 Scope是一个静态/compile-time概念，C++中很多dynamic/runtime概念，其实也是基于它而创建的，因此，后面的内容中，很多都和scope相关。
 
-## Object lifetime
-
-
-
-### Scope and object lifetime
-
-关于scope和object lifetime，参见:
-
-1) [Declarations](https://en.cppreference.com/w/cpp/language/declarations)的Notes段中有描述
-
-2) 参见 `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration` 章节
-
-### Scope and resource management
-
-c++中的RAII就是基于scope的，所以c++的scope和resource management之间有着强烈的关联。
-
 
 
 ## Function execution
@@ -34,34 +18,71 @@ c++中的RAII就是基于scope的，所以c++的scope和resource management之�
 >
 > C++ block是compound statement的同义词
 >
-> 1、cppreference [Scope # Block scope](https://en.cppreference.com/w/cpp/language/scope#Block_scope)
+> 2、cppreference [Scope # Block scope](https://en.cppreference.com/w/cpp/language/scope#Block_scope)
+>
+> 每个block有一个独立的scope
 >
 > 3、cppreference [Function declaration](https://en.cppreference.com/w/cpp/language/function)
+>
+> 每个function有一个独立的scope
 
-1、Function execution有**stack frame**，当function termination的时候，会执行stack unwinding；
+1、Function execution有**stack frame**，当function termination的时候，会进行**stack unwinding**；
 
-2、Function block/scope中的每个block都有自己是一个stack frame，它的stack frame是nested in enclosing block的stack frame的。当block的scope结束时，会执行stack unwinding；
+function termination->scope exit
 
-> 因此可以说，C++中每个block(scope)都有一个自己的stack。
+2、可以认为: function中的每个block都有自己独立的stack frame，它的stack frame是nested in enclosing block的stack frame的。当block结束时，会执行stack unwinding；
 
+block termination->scope exit
 
+> thought: C++中每个block(scope)都有一个自己的stack frame。
 
-基于scope的
+因此: 在function execution中: 
 
-基于stack unwinding的
+1、scope enter时，入栈，allocation，construct object，constructor被执行
 
+2、scope exit时，出栈，执行stack unwinding，deallocation，destruct object，destructor被执行；
 
+由于C++中，scope是nesting的，因此上述过程也是nesting的；
 
-每个function scope都 有自己的stack
-
-在function scope中的block scope
+> thought: 对于与function Invokation相关的，大多数 都是可以使用scope来进行刻画
 
 在scope exit的时候，会执行stack unwinding，C++ 的很多feature都是建立在stack unwinding上；
 
-1、C++ execution model，最最典型的是scope exit
-
-2、C++ object lifetime
 
 
+## Object lifetime
 
-对于与function Invokation相关的，大多数 都是可以使用scope来进行刻画
+### Scope and object lifetime
+
+关于scope和object lifetime，参见:
+
+1) [Declarations](https://en.cppreference.com/w/cpp/language/declarations)的Notes段中有描述
+
+2) 参见 `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration` 章节
+
+3、cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)
+
+> Together with the [scope](https://en.cppreference.com/w/cpp/language/scope) of the name, they control two independent properties of the name: its *storage duration* and its *linkage*.
+
+
+
+## Scope based
+
+一、RAII
+
+C++中的RAII就是基于scope的，所以C++的scope和resource management之间有着强烈的关联。
+
+基于RAII的:
+
+1、scope guard
+
+
+
+### `scoped_***`
+
+boost [`scoped_ptr`](http://www.boost.org/doc/libs/1_44_0/libs/smart_ptr/scoped_ptr.htm)
+
+cppreference [std::scoped_lock](https://en.cppreference.com/w/cpp/thread/scoped_lock)
+
+boost [Boost ScopeExit](http://www.boost.org/doc/libs/release/libs/scope_exit/doc/html/index.html)
+

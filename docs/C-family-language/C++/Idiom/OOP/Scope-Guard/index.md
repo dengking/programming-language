@@ -255,14 +255,6 @@ I decided to try using a (slightly modified) version of ScopeGuard for a smallis
 
 在其中的introduction段，有着非常好的介绍。
 
-## `scoped_***`
-
-boost [`scoped_ptr`](http://www.boost.org/doc/libs/1_44_0/libs/smart_ptr/scoped_ptr.htm)
-
-cppreference [std::scoped_lock](https://en.cppreference.com/w/cpp/thread/scoped_lock)
-
-boost [Boost ScopeExit](http://www.boost.org/doc/libs/release/libs/scope_exit/doc/html/index.html)
-
 
 
 ## Implementation
