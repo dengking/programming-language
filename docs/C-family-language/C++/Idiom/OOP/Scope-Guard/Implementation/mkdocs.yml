@@ -3,3 +3,4 @@ nav:
     - Neargye-ScopExit: Neargye-ScopExit
     - ricab-scope_guard: ricab-scope_guard
     - boost-ScopeExit: boost-ScopeExit
+    - evgeny-panasyuk-stack_unwinding: evgeny-panasyuk-stack_unwinding
