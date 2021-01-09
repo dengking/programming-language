@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - TODO-Atomicity-on-x86: TODO-Atomicity-on-x86
+    - TODO-Implementation-on-x86: TODO-Implementation-on-x86
