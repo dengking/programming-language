@@ -2,5 +2,6 @@ nav:
     - Introduction: index.md
     - Guide: Guide
     - Atomic-operations-library: Atomic-operations-library
+    - Lock-Free-Programming: Lock-Free-Programming
 
     
