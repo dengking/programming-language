@@ -235,26 +235,7 @@ There are two exceptions from that:
 
 > NOTE: 这段内容是值得一读的
 
-### TODO [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
+### [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
 
-> NOTE: 这是一种常见的error，这种error是和lifetime相关的
+> NOTE: 这是一种常见的memory error，它和 object lifetime相关的，这部分内容放到了 `Ordering-and-object-lifetime\Access-outside-of-object-lifetime` 中。
 
-Before the lifetime of an object has started but after the storage which the object will occupy has been allocated
-
-> NOTE: "after the storage which the object will occupy has been allocated"的意思是: storage已经被分配了; "before the lifetime of an object has started"说明: initialization还没有完成
-
-or,
-
-after the lifetime of an object has ended and before the storage which the object occupied is reused or released, 
-
-> NOTE: "before the storage which the object occupied is reused or released"说明: storage还没有给回收; "after the lifetime of an object has ended"说明: deinitialization已经完成了
-
-the following uses of the glvalue expression that identifies that object are undefined:
-
-> NOTE: 需要补充
-
-During construction and destruction, other restrictions apply, see [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction).
-
-> NOTE: 与此相关的一个idiom是: `C++\Idiom\OOP\Calling-Virtual-During-Initialization`
-
-> NOTE:  [dangling references](https://en.cppreference.com/w/cpp/language/reference#Dangling_references) 也是一种access outside of lifetime error，参见`C++\Language-reference\Reference\Reference`章节。

@@ -154,3 +154,6 @@ C++支持两种方式来实现alias to an existing object：
 - `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
 - reference: `C++\Language-reference\Reference`
 
+### 20210110
+
+interpretation model主要描述的是compiler的行为。

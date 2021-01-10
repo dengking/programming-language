@@ -1,5 +1,6 @@
 nav:
-    - Memory-allocation: Memory-allocation.md
-    - Memory-leak: Memory-leak
-    - Smart-pointers: Smart-pointers
+    - Introduction: index.md
+    - Allocation-and-deallocation: Allocation-and-deallocation
+    - Memory-access: Memory-access
     - GC: GC
+    - Memory-error: Memory-error

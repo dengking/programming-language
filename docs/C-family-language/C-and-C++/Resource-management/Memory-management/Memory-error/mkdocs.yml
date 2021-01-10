@@ -9,3 +9,4 @@ nav:
     - Dangling-and-wild-pointer: Dangling-and-wild-pointer
     - OOM: OOM
     - Buffer-overflow: Buffer-overflow
+    - Memory-leak: Memory-leak

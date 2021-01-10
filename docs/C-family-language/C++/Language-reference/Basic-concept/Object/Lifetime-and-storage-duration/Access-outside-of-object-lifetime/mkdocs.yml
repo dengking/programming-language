@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - Access-outside-of-object-lifetime: Access-outside-of-object-lifetime

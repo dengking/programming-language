@@ -2,7 +2,9 @@
 
 dangling pointer和我们平时所说的wild pointer是同一个意思；
 
-## 维基百科[Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)	
+它主要是由于 "Access outside of object lifetime"而导致的，参见 `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Access-outside-of-object-lifetime` 章节。
+
+## wikipedia [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)	
 
 
 
