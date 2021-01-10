@@ -8,7 +8,7 @@
 
 ## 原因
 
-C++支持iterator、pointer、reference等indirection，pointee object的释放，pointer的如果仍然去访问，则就导致了access out of object lifetime，下面对上述几种example中的原因进行总结。
+C++支持iterator、pointer、reference等indirection，pointee object的释放，pointer的如果仍然去访问，则就导致了access out of object lifetime的发生，它对应的memory error中的"Dangling-and-wild-pointer"，下面对上述几种example中的原因进行总结。
 
 
 
