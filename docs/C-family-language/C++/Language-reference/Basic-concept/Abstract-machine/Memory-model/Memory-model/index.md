@@ -38,6 +38,12 @@
 
 
 
+## Memory model and consistency model and memory ordering
+
+需要注意的是: consistency model其实所讨论的就是memory的问题，因此一个programming language的memory model是需要定义它的consistency model的，它需要明确定义它的consistency。
+
+
+
 ## TODO
 
 

@@ -1,5 +1,3 @@
-
-
 # stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g)
 
 C++11 introduced a standardized memory model, but what exactly does that mean? And how is it going to affect C++ programming?
@@ -226,9 +224,9 @@ The answer is great, but "37 0" example is simply wrong. Sequential consistency 
 
 @hamilyon: You are mistaken. See e.g. [stackoverflow.com/a/14851782](https://stackoverflow.com/a/14851782), or really any tutorial on sequential consistency. By definition, sequential consistency applies to *all* loads and stores, including across multiple memory locations. (It is expensive, not natural, on any modern CPU.) – [Nemo](https://stackoverflow.com/users/768469/nemo) [Jul 6 '20 at 16:04](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g#comment110984513_6319356)
 
-## [A](https://stackoverflow.com/a/18520606)
+## TODO: [A](https://stackoverflow.com/a/18520606)
 
-I will just give the analogy with which I understand memory consistency models (or memory models, for short). It is inspired by Leslie Lamport's seminal paper ["Time, Clocks, and the Ordering of Events in a Distributed System"](http://dl.acm.org/citation.cfm?id=359545.359563). The analogy is apt(恰当的) and has fundamental significance, but may be overkill for many people. However, I hope it provides a mental image (a pictorial representation) that facilitates reasoning about memory consistency models.
+I will just give the analogy with which I understand memory consistency models (or memory models, for short). It is inspired by Leslie Lamport's seminal paper ["Time, Clocks, and the Ordering of Events in a Distributed System"](http://dl.acm.org/citation.cfm?id=359545.359563). The analogy is apt(恰当的) and has fundamental significance, but may be overkill(过犹不及，意思是: 太高深了，一般人可能搞不懂) for many people. However, I hope it provides a mental image (a pictorial representation) that facilitates reasoning about memory consistency models.
 
 Let’s view the histories of all memory locations in a **space-time diagram** in which the horizontal(水平的) axis represents the address space (i.e., each memory location is represented by a point on that axis) and the vertical(垂直的) axis represents time (we will see that, in general, there is not a universal notion of time). The history of values held by each memory location is, therefore, represented by a vertical(垂直的) column at that memory address. Each value change is due to one of the threads writing a new value to that location. By a ***memory image***, we will mean the aggregate/combination of values of all memory locations observable ***at a particular time*** by ***a particular thread***.
 

@@ -5,3 +5,4 @@ nav:
     - modernescpp-C++Memory-Model: modernescpp-C++Memory-Model
     - Herb-Sutter: Herb-Sutter
     - Bjarne-Stroustrup: Bjarne-Stroustrup
+    - Atomic-operations-library: Atomic-operations-library

@@ -22,8 +22,9 @@ These semantics then give optimizing compilers a higher degree of freedom when a
 
 Most research in the area of memory models revolves around:
 
-- Designing a **memory model** that allows a maximal degree of freedom for compiler optimizations while still giving sufficient guarantees about race-free and (perhaps more importantly) race-containing programs.
-- Proving program optimizations that are correct with respect to such a memory model.
+1、Designing a **memory model** that allows a maximal degree of freedom for compiler optimizations while still giving sufficient guarantees about race-free and (perhaps more importantly) race-containing programs.
+
+2、Proving program optimizations that are correct with respect to such a memory model.
 
 
 
