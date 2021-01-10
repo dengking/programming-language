@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Kohei-Otsuka-Memory-Model-Basic: Kohei-Otsuka-Memory-Model-Basic
+    - zhihu-C++11-memory-order: zhihu-C++11-memory-order
