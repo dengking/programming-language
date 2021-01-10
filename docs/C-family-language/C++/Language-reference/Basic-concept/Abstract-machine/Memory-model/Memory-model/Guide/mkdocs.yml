@@ -9,5 +9,9 @@ nav:
     - Herb-Sutter: Herb-Sutter
     - sciencedirect-Shared-Memory-Application-Programming: sciencedirect-Shared-Memory-Application-Programming 
     - Memory-ordering: Memory-ordering
+    - Acquire-release-semantic: Acquire-release-semantic
     - Acquire-release-VS-Fences: Acquire-release-VS-Fences
     - Acquire-release-VS-sequential-consistency: Acquire-release-VS-sequential-consistency
+    - Memory-fence: Memory-fence
+    - Release-consume: Release-consume 
+    - Sequential-consistency-and-atomicity: Sequential-consistency-and-atomicity
