@@ -1,10 +1,10 @@
-# [Segmentation fault at the alignment step](https://groups.google.com/forum/#!topic/rna-star/-3slzCzJGnk)
+# groups.google [Segmentation fault at the alignment step](https://groups.google.com/forum/#!topic/rna-star/-3slzCzJGnk)
 
 
 
 
 
-# [SIMD intrinsics - segmentation fault](https://stackoverflow.com/questions/25596379/simd-intrinsics-segmentation-fault)
+# stackoverflow [SIMD intrinsics - segmentation fault](https://stackoverflow.com/questions/25596379/simd-intrinsics-segmentation-fault)
 
 I am running the following code:
 
@@ -128,5 +128,5 @@ Ensuring proper alignment is one of the challenges of using SIMD instruction set
 
 
 
-# [Segmentation Fault (SIGSEGV) vs Bus Error (SIGBUS)](https://www.geeksforgeeks.org/segmentation-fault-sigsegv-vs-bus-error-sigbus/)
+# geeksforgeeks [Segmentation Fault (SIGSEGV) vs Bus Error (SIGBUS)](https://www.geeksforgeeks.org/segmentation-fault-sigsegv-vs-bus-error-sigbus/)
 

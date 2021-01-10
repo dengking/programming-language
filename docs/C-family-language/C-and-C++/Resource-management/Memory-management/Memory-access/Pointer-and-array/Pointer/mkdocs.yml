@@ -3,4 +3,5 @@ nav:
     - Pointer: Pointer.md
     - Multiple-level-pointer: Multiple-level-pointer.md
     - Pointer-and-integer: Pointer-and-integer.md
+    - Smart-pointers: Smart-pointers
     

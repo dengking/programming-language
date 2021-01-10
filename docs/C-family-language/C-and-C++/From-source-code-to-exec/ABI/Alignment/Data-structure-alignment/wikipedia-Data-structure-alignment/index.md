@@ -1,4 +1,4 @@
-# 维基百科[Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment)
+# wikipedia [Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment)
 
 **Data structure alignment** refers to the way data is arranged and accessed in [computer memory](https://en.wikipedia.org/wiki/Computer_memory). It consists of three separate but related issues: **data alignment**, **data structure padding**, and **packing**.
 

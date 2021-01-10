@@ -6,7 +6,7 @@
 
 
 
-## 维基百科[C++11#Control and query object alignment](https://en.wikipedia.org/wiki/C++11#Control_and_query_object_alignment)
+## wikipedia [C++11#Control and query object alignment](https://en.wikipedia.org/wiki/C++11#Control_and_query_object_alignment)
 
 
 

@@ -7,7 +7,7 @@ nav:
     - VS-C-VS-C++: VS-C-VS-C++
     # 下面三者必须要放到一起，因为它们是密切相关的
     - Resource-management: Resource-management
-    - Pointer-and-array: Pointer-and-array
+
     - String: String
     
     

@@ -8,6 +8,8 @@ file、network connection、memory等，都可以看做是resource。
 
 ## 对resource的操作
 
+最最基本操作: read、write
+
 construct、new
 
 copy 

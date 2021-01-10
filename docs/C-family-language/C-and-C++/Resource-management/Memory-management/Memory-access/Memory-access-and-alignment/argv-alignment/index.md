@@ -1,4 +1,4 @@
-# [C - memory align argv?](https://stackoverflow.com/questions/29139186/c-memory-align-argv)
+# stackoverflow [C - memory align argv?](https://stackoverflow.com/questions/29139186/c-memory-align-argv)
 
 I am on Linux, coding in C and tried to play with the **align attribute** for **argv variables**, but with no luck :
 
@@ -24,7 +24,7 @@ The `argv` arguments are supplied by the C startup code or the OS directly. No a
 
 
 
-# [passing arguments](https://www.student.cs.uwaterloo.ca/~cs350/F15/assignments/a2b-hints.html)
+# uwaterloo [passing arguments](https://www.student.cs.uwaterloo.ca/~cs350/F15/assignments/a2b-hints.html)
 
 - To pass arguments (`argv`) to a user program, you will have to load the arguments into the program's address space. In addition to the argument strings themselves, you have to create the `argv` array in the user program's address space - `argv` is an array of pointers to the actual argument strings.
 

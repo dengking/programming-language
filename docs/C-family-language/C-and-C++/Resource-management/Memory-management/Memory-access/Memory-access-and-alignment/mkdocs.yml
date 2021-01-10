@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - argv-alignment: argv-alignment
+    - TODO-pointer-and-alignment: TODO-pointer-and-alignment.md
+    - quarkslab-Unaligned-accesses-in-C-C++what-why-and-solutions-to-do-it-properly: quarkslab-Unaligned-accesses-in-C-C++what-why-and-solutions-to-do-it-properly
+    - pzemtsov -A-bug-story-data-alignment-on-x86: pzemtsov -A-bug-story-data-alignment-on-x86
+    - SEGFAULT-and-alignment: SEGFAULT-and-alignment

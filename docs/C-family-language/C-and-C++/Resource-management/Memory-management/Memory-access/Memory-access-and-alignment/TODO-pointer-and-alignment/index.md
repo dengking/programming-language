@@ -1,4 +1,4 @@
-# [Should I worry about the alignment during pointer casting?](https://stackoverflow.com/questions/13881487/should-i-worry-about-the-alignment-during-pointer-casting)
+# stackoverflow [Should I worry about the alignment during pointer casting?](https://stackoverflow.com/questions/13881487/should-i-worry-about-the-alignment-during-pointer-casting)
 
 
 
@@ -158,7 +158,7 @@ Regarding your 3 questions:
 
 
 
-# [Output from arbitrary dereferenced pointer](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer)
+# stackoverflow [Output from arbitrary dereferenced pointer](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer)
 
 I fill the memory as follows:
 
@@ -299,10 +299,10 @@ Misaligned access is generally a bad idea on any architecture. Some will throw a
 
 
 
-# [How to Access Safely Unaligned Data](https://www.alfonsobeato.net/arm/how-to-access-safely-unaligned-data/)
+# alfonsobeato [How to Access Safely Unaligned Data](https://www.alfonsobeato.net/arm/how-to-access-safely-unaligned-data/)
 
 
 
 
 
-# [EXP36-C. Do not cast pointers into more strictly aligned pointer types](https://wiki.sei.cmu.edu/confluence/display/c/EXP36-C.+Do+not+cast+pointers+into+more+strictly+aligned+pointer+types)
+# cmu.edu [EXP36-C. Do not cast pointers into more strictly aligned pointer types](https://wiki.sei.cmu.edu/confluence/display/c/EXP36-C.+Do+not+cast+pointers+into+more+strictly+aligned+pointer+types)
