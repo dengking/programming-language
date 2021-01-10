@@ -1,0 +1,13 @@
+nav:
+    - Introduction: index.md
+    # 下面这两篇，着重讲的是memory model的意义，从高角度来进行的阐述，阐述了为什么需要memory model
+    - Bjarne-Stroustrup: Bjarne-Stroustrup    
+    - stackoverflow-C++Memory-model: stackoverflow-C++Memory-model
+    
+    - modernescpp-C++Memory-Model: modernescpp-C++Memory-Model
+    
+    # 下面着重从atomic library的用法出发来进行阐述
+    - Herb-Sutter: Herb-Sutter
+    - sciencedirect-Shared-Memory-Application-Programming: sciencedirect-Shared-Memory-Application-Programming 
+   
+    - Kohei-Otsuka-Memory-Model-Basic: Kohei-Otsuka-Memory-Model-Basic
