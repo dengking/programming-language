@@ -304,9 +304,48 @@ int main()
 
 
 
+## Why should I use `std::async`?
 
+为什么要使用`std::async`？本节讨论这个问题。
 
-## TODO: stackoverflow [Why should I use std::async?](https://stackoverflow.com/questions/17963172/why-should-i-use-stdasync)
+### stackoverflow [C++: Simple return value from std::thread?](https://stackoverflow.com/questions/7686939/c-simple-return-value-from-stdthread)
+
+[A](https://stackoverflow.com/a/7687050)
+
+> NOTE: 这个回答能够回答本节的问题，即:" `std::async` (higher-level wrapper for threads and futures)"，这样我们可以写更少的code 
+
+See [this video tutorial](https://www.youtube.com/watch?v=o0pCft99K74&list=PL1835A90FC78FF8BE&index=4) on C++11 futures.
+
+Explicitly with threads and futures:
+
+```cpp
+#include <thread>
+#include <future>
+
+void func(std::promise<int> && p) {
+    p.set_value(1);
+}
+
+std::promise<int> p;
+auto f = p.get_future();
+std::thread t(&func, std::move(p));
+t.join();
+int i = f.get();
+```
+
+Or with `std::async` (higher-level wrapper for threads and futures):
+
+```cpp
+#include <thread>
+#include <future>
+int func() { return 1; }
+std::future<int> ret = std::async(&func);
+int i = ret.get();
+```
+
+I can't comment whether it works on *all* platforms (it seems to work on Linux, but doesn't build for me on Mac OSX with GCC 4.6.1).
+
+### stackoverflow [Why should I use std::async?](https://stackoverflow.com/questions/17963172/why-should-i-use-stdasync)
 
 [A](https://stackoverflow.com/a/17973892)
 

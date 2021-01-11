@@ -4,4 +4,4 @@ nav:
     - Iterator-invalidation: Iterator-invalidation
     - Thread-safety: Thread-safety
     - Member-function-table: Member-function-table
-    - Emplace_back: Emplace_back    
+    - Emplace: Emplace    
