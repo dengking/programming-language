@@ -2,15 +2,15 @@
 
 下面是C++中关于class的一些specifier:
 
-default
+|          | 章节                                                         |      |
+| -------- | ------------------------------------------------------------ | ---- |
+| default  |                                                              |      |
+| delete   |                                                              |      |
+| explicit | `C++\Language-reference\Classes\Special-member-function\Constructor\User-defined-conversion\Explicit-specifier` |      |
+| final    |                                                              |      |
+| override | `C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Virtual-function\Override-specifier` |      |
 
-delete
 
-explicit
-
-final
-
-override
 
 ## Use specific to make it explicit principle
 
@@ -20,7 +20,11 @@ CppCoreGuidelines [C.80: Use `=default` if you have to be explicit about using t
 
 CppCoreGuidelines [C.81: Use `=delete` when you want to disable default behavior (without wanting an alternative)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c81-use-delete-when-you-want-to-disable-default-behavior-without-wanting-an-alternative)
 
+### microsoft [Explicitly Defaulted and Deleted Functions](https://docs.microsoft.com/en-us/cpp/cpp/explicitly-defaulted-and-deleted-functions?view=msvc-160)
 
+
+
+### Example
 
 下面是关于此的一些example:
 

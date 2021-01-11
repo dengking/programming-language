@@ -8,6 +8,10 @@
 `registry` has a `thread pool` has a `message queue`
 ```
 
+关于此，参见下面的 "[2. Creating loggers#Creating asynchronous loggers](https://github.com/gabime/spdlog/wiki/2.-Creating-loggers#creating-asynchronous-loggers)"章节。
+
+
+
 ### `registry`
 
 ```C++
@@ -72,6 +76,8 @@ int main(int, char* [])
 
 ## [2. Creating loggers#Creating asynchronous loggers](https://github.com/gabime/spdlog/wiki/2.-Creating-loggers#creating-asynchronous-loggers)
 
+
+
 ```c++
 #include "spdlog/async.h"
 void async_example()
@@ -89,7 +95,7 @@ For **asynchronous logging**, spdlog uses a shared **global thread pool** with a
 
 For this, it creates fixed number of **pre-allocated slots** in the **message queue** (~256 bytes per slot in 64 bits) and can be modified using `spdlog::init_thread_pool(queue_size, backing_threads_count)`
 
-When trying to log a message and the queue is full, the caller will **block** (default behavior) until a slot becomes available (default), or overrun oldest message immediately in the queue with the new one (if the logger was constructed with `async_overflow_policy==overrun_oldest`).
+When trying to log a message and the queue is full, the caller will **block** (default behavior) until a slot becomes available (default), or **overrun** oldest message immediately in the queue with the new one (if the logger was constructed with `async_overflow_policy==overrun_oldest`).
 
 ## [6. Asynchronous logging](https://github.com/gabime/spdlog/wiki/6.-Asynchronous-logging)
 
