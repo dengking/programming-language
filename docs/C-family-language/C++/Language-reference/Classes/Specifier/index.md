@@ -2,13 +2,14 @@
 
 下面是C++中关于class的一些specifier:
 
-|          | 章节                                                         |      |
-| -------- | ------------------------------------------------------------ | ---- |
-| default  |                                                              |      |
-| delete   |                                                              |      |
-| explicit | `C++\Language-reference\Classes\Special-member-function\Constructor\User-defined-conversion\Explicit-specifier` |      |
-| final    |                                                              |      |
-| override | `C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Virtual-function\Override-specifier` |      |
+|                   | 章节                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| default           |                                                              |
+| delete            |                                                              |
+| explicit          | `C++\Language-reference\Classes\Special-member-function\Constructor\User-defined-conversion\Explicit-specifier` |
+| final             |                                                              |
+| override          | `C++\Language-reference\Classes\Subtype-polymorphism\Inheritance\Virtual-function\Override-specifier` |
+| Access-specifiers | `C++\Language-reference\Classes\Member-access`               |
 
 
 

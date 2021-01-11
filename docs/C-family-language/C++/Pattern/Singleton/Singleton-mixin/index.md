@@ -45,14 +45,88 @@ This would be a generic solution, and you can plug the `Singleton` class to all 
 
 ### Mixin from above
 
+#### 错误的实现方式
+
 ```C++
 /**
  * @brief 单例mixin
  *
  * @tparam DerivedClass
  */
+class noncopyable
+{
+public:
+	noncopyable() = default;
+	~noncopyable() = default;
+	// C++ 11
+	// =======
+	// We can use the better technique of deleting the methods
+	// we don't want.
+
+	// Note: Scott Meyers mentions in his Effective Modern
+	//       C++ book, that deleted functions should generally
+	//       be public as it results in better error messages
+	//       due to the compilers behavior to check accessibility
+	//       before deleted status
+	noncopyable(const noncopyable&) = delete;
+	noncopyable& operator=(const noncopyable&) = delete;
+};
+
 template<typename DerivedClass>
-class SingletonMixin
+class SingletonMixin: public noncopyable
+{
+public:
+	static DerivedClass& GetInstance()
+	{
+		static DerivedClass instance;
+		return instance;
+	}
+};
+
+class Singleton: public SingletonMixin<Singleton>
+{
+
+};
+int main()
+{
+	Singleton::GetInstance();
+    Singleton s;
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+通过上述code来看，它无法实现singleton，在`main()`中，可以看到`Singleton s;`能够编译通过；
+
+#### 错误的实现方式
+
+```C++
+/**
+ * @brief 单例mixin
+ *
+ * @tparam DerivedClass
+ */
+class noncopyable
+{
+public:
+	noncopyable() = default;
+	~noncopyable() = default;
+	// C++ 11
+	// =======
+	// We can use the better technique of deleting the methods
+	// we don't want.
+
+	// Note: Scott Meyers mentions in his Effective Modern
+	//       C++ book, that deleted functions should generally
+	//       be public as it results in better error messages
+	//       due to the compilers behavior to check accessibility
+	//       before deleted status
+	noncopyable(const noncopyable&) = delete;
+	noncopyable& operator=(const noncopyable&) = delete;
+};
+
+template<typename DerivedClass>
+class SingletonMixin: public noncopyable
 {
 public:
 	static DerivedClass& GetInstance()
@@ -65,17 +139,18 @@ public:
 class Singleton: public SingletonMixin<Singleton>
 {
 private:
-	Singleton()
-	{
-	}
+    Singleton(){};    
 };
 int main()
 {
 	Singleton::GetInstance();
+    Singleton s;
 }
-// g++ test.cpp
+// g++ --std=c++11 test.cpp
 
 ```
+
+
 
 上述实现方式，将`DerivedClass`的constructor声明为private，则上述代码是会编译报错的:
 
@@ -195,3 +270,4 @@ int main()
 
 ```
 
+能够正常编译通过。
