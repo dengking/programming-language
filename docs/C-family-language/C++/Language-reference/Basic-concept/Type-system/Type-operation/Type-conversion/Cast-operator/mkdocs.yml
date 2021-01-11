@@ -3,6 +3,6 @@ nav:
     - Prefer-cast-function-to-C-style-cast: Prefer-cast-function-to-C-style-cast.md
     - Express-cast-intent: Express-cast-intent.md
     - static_cast: static_cast.md
-    - dynamic_cast: dynamic_cast.md  
+    - dynamic_cast: dynamic_cast
     - const_cast: const_cast.md
     - reinterpret_cast: reinterpret_cast.md

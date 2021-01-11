@@ -191,20 +191,3 @@ Note: an implicit conversion and `static_cast` can perform this conversion as we
 ### Notes
 
 
-
-## `c++` `isinstanceof` `issubclass`
-
-http://www.cplusplus.com/forum/general/50090/
-
-https://www.gamedev.net/forums/topic/322781-c-instanceof/
-
-https://www.tutorialspoint.com/cplusplus-equivalent-of-instanceof
-
-https://stackoverflow.com/questions/27595076/instanceof-equivalent-in-c
-
-https://stackoverflow.com/questions/500493/c-equivalent-of-javas-instanceof
-
-
-
-
-
