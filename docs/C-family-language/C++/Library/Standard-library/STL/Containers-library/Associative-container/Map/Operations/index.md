@@ -187,15 +187,3 @@ https://en.cppreference.com/w/cpp/algorithm/remove
 http://www.cplusplus.com/forum/general/131917/
 
 
-
-## Operation: `values` like python dict
-
-
-
-[How to copy all Values from a Map to a Vector in C++](https://thispointer.com/how-to-copy-all-values-from-a-map-to-a-vector-in-c/)
-
-[Getting a list of values from a map](https://stackoverflow.com/questions/4195611/getting-a-list-of-values-from-a-map)
-
-
-
-[How to retrieve all keys (or values) from a std::map and put them into a vector?](https://stackoverflow.com/questions/110157/how-to-retrieve-all-keys-or-values-from-a-stdmap-and-put-them-into-a-vector)
