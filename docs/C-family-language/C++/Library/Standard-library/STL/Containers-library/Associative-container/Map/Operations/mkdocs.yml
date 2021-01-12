@@ -3,3 +3,4 @@ nav:
     - std-for_each-map: std-for_each-map.md
     - emplace: emplace
     - Values-like-python-dict: Values-like-python-dict
+    - Erase_if: Erase_if
