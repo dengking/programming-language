@@ -2,7 +2,7 @@
 
 
 
-## 维基百科[Erase–remove idiom](https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom)
+## wikipedia [Erase–remove idiom](https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom)
 
 ### Motivation
 
@@ -13,6 +13,14 @@
 
 
 > NOTE: 关于`algorithm` library的`std::remove`、`std::remove_if`，参见：https://en.cppreference.com/w/cpp/algorithm/remove
+
+
+
+### Limitation
+
+The erase–remove idiom cannot be used for containers that return `const_iterator` (e.g.: [set](https://en.wikipedia.org/wiki/Set_(C%2B%2B)))[[5\]](https://en.wikipedia.org/wiki/Erase–remove_idiom#cite_note-Erase–remove_idiom_with_std::set-5)
+
+`std::remove` and `std::remove_if` do not maintain elements that are removed (unlike `std::partition`, `std::stable_partition`). Thus, erase–remove can only be used with containers holding elements with full value semantics without incurring resource leaks.[[6\]](https://en.wikipedia.org/wiki/Erase–remove_idiom#cite_note-effective_stl-6)
 
 ### Example
 
@@ -65,11 +73,13 @@ Its very common practice to remove element(s) from collection(s) like vector. Th
 
 Let’s see couple of methods to understand it further – **erase**() and **remove**() (and **remove_if**()).
 
-- `erase`: – STL containers provide erase method to remove an **element** or a **range** of elements from the container. `erase` method **reduces** the size of the container.
-- `remove`:– `remove` and `remove_if` methods are also a part of STL algorithm.
-  - These methods pushes the element(s), which matches the ‘remove’ criteria, to end of the container.
-  - `remove` method returns an iterator pointing to the first removed element.
-  - The removed element is still part of the container **but** it is pushed to the **end** of container.
+1、`erase`: – STL containers provide erase method to remove an **element** or a **range** of elements from the container. `erase` method **reduces** the size of the container.
+
+2、`remove`:– `remove` and `remove_if` methods are also a part of STL algorithm.
+
+- These methods pushes the element(s), which matches the ‘remove’ criteria, to end of the container.
+- `remove` method returns an iterator pointing to the first removed element.
+- The removed element is still part of the container **but** it is pushed to the **end** of container.
 
 ### Example
 

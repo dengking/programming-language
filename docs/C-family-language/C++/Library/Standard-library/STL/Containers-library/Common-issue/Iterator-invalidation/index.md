@@ -2,11 +2,9 @@
 
 使用container需要格外关注的一件事情就是：iterator invalidation。
 
-可以将iterator看做是pointer， 显然一个iterator所指向的memory如果被修改了，那么再次使用这个iterator去取这个memory的内容，那么就可能取到的是invalid的内容。从这个角度来出发，再结合各种container的实现细节，就可以方便的判断出是否发生了invalidation。
-
-## cppreference [Containers library#Iterator invalidation](https://en.cppreference.com/w/cpp/container)
 
 
+## Iterator类似于pointer
 
 对于不同的container，它的iterator的实现是不同的：
 
@@ -24,22 +22,41 @@
 
 - a pointer to dict item type
 
+
+
+## Iterator invalidation的原因
+
 不管如何，iterator最终都是pointer，所以一旦底层的memory发生了变化，那么这个iterator就invalidation了。
+
+可以将iterator看做是pointer， 显然一个iterator所指向的memory如果被修改了，那么再次使用这个iterator去取这个memory的内容，那么就可能取到的是invalid的内容。使用invalid iterator 来access memory，属于access outside of object lifetime；
+
+### 造成memory被修改的原因
+
+不同的container，memory被修改的原因是不同的，从这个角度来出发，再结合各种container的实现细节，就可以方便的判断出是否发生了invalidation。可能的原因如下:
+
+1、realloc
+
+2、rehash
+
+## cppreference [Containers library#Iterator invalidation](https://en.cppreference.com/w/cpp/container)
+
+
 
 
 
 ## `std::vector` iterator invalidation
 
-参考：
-
-- [c++ std::vector and Iterator Invalidation example](https://thispointer.com/stdvector-and-iterator-invalidation/)
-
 `std::vector`是dynamic array，下面行为会造成`realloc`
 
-- An element is inserted to vector at any location
-- An element is deleted from vector.
+1、An element is inserted to vector at any location
 
-### Iterator Invalidation Example on Element Deletion in vector:
+2、An element is deleted from vector.
+
+### cppreference [std::vector # Iterator invalidation](https://en.cppreference.com/w/cpp/container/vector#Iterator_invalidation)
+
+### thispointer [c++ std::vector and Iterator Invalidation example](https://thispointer.com/stdvector-and-iterator-invalidation/)
+
+#### Iterator Invalidation Example on Element Deletion in vector:
 
 For example, in the below code we are deleting an element from vector using `erase` function. This `erase` function invalidates the current pointer. So if after calling the `erase()` function , if one uses the same invalidated iterator then it can result in **undefined behavior**.
 
@@ -102,7 +119,7 @@ if(it != vecArr.end())
 
 As, `erase()` function returns an iterator pointing to the **new location** of the element that followed the last element erased by the same function. Also, if the element deleted was the last element of the container then it returns the **end** of the container.
 
-### Iterator Invalidation Example on Element Insertion in vector:
+#### Iterator Invalidation Example on Element Insertion in vector:
 
 When a new element is inserted in vector then it internally shifts its elements and hence the old iterators become invalidated.
 
@@ -165,6 +182,18 @@ it = vecArr.begin();
 
 
 
+## `std::unordered_map` Iterator invalidation
+
+### cppreference [std::unordered_map # Iterator invalidation](https://en.cppreference.com/w/cpp/container/unordered_map#Iterator_invalidation)
+
+
+
+## Example
+
+
+
+
+
 ## TO READ
 
 https://www.geeksforgeeks.org/iterator-invalidation-cpp/
@@ -172,3 +201,4 @@ https://www.geeksforgeeks.org/iterator-invalidation-cpp/
 https://stackoverflow.com/questions/16904454/what-is-iterator-invalidation
 
 https://wiki.c2.com/?IteratorInvalidationProblem
+

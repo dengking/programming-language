@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - Erase-remove: Erase-remove
+    - Erase-while-iterating: Erase-while-iterating

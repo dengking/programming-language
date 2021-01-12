@@ -12,38 +12,45 @@ C++ STL提供了多种container，需要结合这些container的实现来选择�
 
 ### For containers based on an array
 
-- [`std::vector`](https://en.cppreference.com/w/cpp/container/vector) 
+1、[`std::vector`](https://en.cppreference.com/w/cpp/container/vector) 
 
-- [std::deque](https://en.cppreference.com/w/cpp/container/deque) （它不是完全基于array的）
+2、[std::deque](https://en.cppreference.com/w/cpp/container/deque) （它不是完全基于array的）
 
 使用[Erase-remove idiom](./Erase-remove/Erase-remove-idiom.md)。
 
 ### For containers based on linked list
 
-- [std::forward_list](https://en.cppreference.com/w/cpp/container/forward_list)
-- [std::list](https://en.cppreference.com/w/cpp/container/list)
+1、[std::forward_list](https://en.cppreference.com/w/cpp/container/forward_list)
+
+2、[std::list](https://en.cppreference.com/w/cpp/container/list)
 
 
 
 这些container提供了`remove`、`remove_if`成员函数，使用这些成员函数，可以满足需求；
 
-也可以使用algorithm library提供的`std::remove`、`std::remove_if`，所以它们也可以使用使用[Erase-remove idiom](./Erase-remove/Erase-remove-idiom.md)。
+也可以使用algorithm library提供的`std::remove`、`std::remove_if`，所以它们也可以使用[Erase-remove idiom](./Erase-remove/Erase-remove-idiom.md)。
 
 ### For containers based on search tree
 
-- [std::set](https://en.cppreference.com/w/cpp/container/set)
-- [std::multiset](https://en.cppreference.com/w/cpp/container/multiset)
-- [std::map](https://en.cppreference.com/w/cpp/container/map)
-- [std::multimap](https://en.cppreference.com/w/cpp/container/multimap)
+1、[std::set](https://en.cppreference.com/w/cpp/container/set)
 
-这些container无法使用使用iterate-delete 方式。
+2、[std::multiset](https://en.cppreference.com/w/cpp/container/multiset)
+
+3、[std::map](https://en.cppreference.com/w/cpp/container/map)
+
+4、[std::multimap](https://en.cppreference.com/w/cpp/container/multimap)
+
+这些container无法使用，使用iterate-delete 方式。
 
 ### For containers based on hash table
 
-- [unordered_set](https://en.cppreference.com/w/cpp/container/unordered_set)(C++11) 
-- [unordered_map](https://en.cppreference.com/w/cpp/container/unordered_map)(C++11) 
-- [unordered_multiset](https://en.cppreference.com/w/cpp/container/unordered_multiset)(C++11) 
-- [unordered_multimap](https://en.cppreference.com/w/cpp/container/unordered_multimap)(C++11) 
+1、[unordered_set](https://en.cppreference.com/w/cpp/container/unordered_set)(C++11) 
+
+2、[unordered_map](https://en.cppreference.com/w/cpp/container/unordered_map)(C++11) 
+
+3、[unordered_multiset](https://en.cppreference.com/w/cpp/container/unordered_multiset)(C++11) 
+
+4、[unordered_multimap](https://en.cppreference.com/w/cpp/container/unordered_multimap)(C++11) 
 
 
 
@@ -53,6 +60,5 @@ C++ STL提供了多种container，需要结合这些container的实现来选择�
 
 C++20提供了`std::erase_if`系列函数：
 
-- [std::erase, std::erase_if (std::forward_list)](https://en.cppreference.com/w/cpp/container/forward_list/erase2)
+1、[std::erase, std::erase_if (std::forward_list)](https://en.cppreference.com/w/cpp/container/forward_list/erase2)
 
-  

@@ -261,11 +261,15 @@ I decided to try using a (slightly modified) version of ScopeGuard for a smallis
 
 下面是一些implementation，在`./Implementation`中，也给出了一些implementation。
 
-pizer.wordpress. [scope guards revisited [C++0x style]](https://pizer.wordpress.com/2008/11/22/scope-guards-revisited-c0x-style/)
+1、pizer.wordpress. [scope guards revisited [C++0x style]](https://pizer.wordpress.com/2008/11/22/scope-guards-revisited-c0x-style/)
 
-https://www.boost.org/doc/libs/1_75_0/libs/scope_exit/doc/html/scope_exit/tutorial.html
+2、https://www.boost.org/doc/libs/1_75_0/libs/scope_exit/doc/html/scope_exit/tutorial.html、
 
-https://en.cppreference.com/w/cpp/experimental/scope_exit
+3、https://en.cppreference.com/w/cpp/experimental/scope_exit
+
+4、[Chuyu-Team](https://github.com/Chuyu-Team)/**[CPPHelper](https://github.com/Chuyu-Team/CPPHelper)**
+
+
 
 ## TODO
 

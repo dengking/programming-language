@@ -49,3 +49,13 @@ int main(void) {
 
 ### APUE 11.4 Thread Creation
 The typeless pointer passed to pthread_create and pthread_exit can be used to pass more than a single value. The pointer can be used to pass the address of a structure containing more complex information. Be careful that the memory used for the structure is still valid when the caller has completed. If the structure was allocated on the caller’s stack, for example, the memory contents might have changed by the time the structure is used. If a thread allocates a structure on its stack and passes a pointer to this structure to pthread_exit, then the stack might be destroyed and its memory reused for something else by the time the caller of pthread_join tries to use it.
+
+
+
+### Iterator/pointer invalidation
+
+Iterator invalidation，参见 `C++\Library\Standard-library\STL\Containers-library\Common-issue\Iterator-invalidation` 章节；
+
+Pointer invalidation，参见:
+
+1、stackoverflow [What exactly is invalidation of reference/pointer?](https://stackoverflow.com/questions/51748529/what-exactly-is-invalidation-of-reference-pointer)
