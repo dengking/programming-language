@@ -363,3 +363,112 @@ int main()
 
 ## wizmann [C++类型擦除与`std::function`性能探索](https://wizmann.tk/cpp-type-erasure-and-std-function.html)
 
+
+
+
+
+## `std::function` is generic and a good abstraction
+
+`std::function` is generic and a good abstraction，所有callable都可以包装为`std::function`:
+
+1、lambda
+
+2、method
+
+3、member function
+
+此处需要添加一些例子来进行说明:
+
+1、spdlog的thread_pool
+
+2、`generic_thread_pool`
+
+
+
+## `std::function` and member function
+
+### stackoverflow [Using generic std::function objects with member functions in one class](https://stackoverflow.com/questions/7582546/using-generic-stdfunction-objects-with-member-functions-in-one-class)
+
+> NOTE: 非常好的一篇文章
+
+[A](https://stackoverflow.com/a/7582576)
+
+A non-static member function must be called with an object. That is, it always implicitly passes "this" pointer as its argument.
+
+Because your `std::function` signature specifies that your function doesn't take any arguments (`<void(void)>`), you must *bind* the first (and the only) argument.
+
+```cpp
+std::function<void(void)> f = std::bind(&Foo::doSomething, this);
+```
+
+If you want to bind a function with parameters, you need to specify placeholders:
+
+```cpp
+using namespace std::placeholders;
+std::function<void(int,int)> f = std::bind(&Foo::doSomethingArgs, this, std::placeholders::_1, std::placeholders::_2);
+```
+
+Or, if your compiler supports C++11 lambdas:
+
+```cpp
+std::function<void(int,int)> f = [=](int a, int b) {
+    this->doSomethingArgs(a, b);
+}
+```
+
+(I don't have a C++11 capable compiler at hand *right now*, so I can't check this one.)
+
+[A](https://stackoverflow.com/a/7582574)
+
+Either you need
+
+```cpp
+std::function<void(Foo*)> f = &Foo::doSomething;
+```
+
+> NOTE: pointer to member function
+
+so that you can call it on any instance, or you need to bind a specific instance, for example `this`
+
+```cpp
+std::function<void(void)> f = std::bind(&Foo::doSomething, this);
+```
+
+
+
+[A](https://stackoverflow.com/a/40394121)
+
+If you need to store a member function **without** the class instance, you can do something like this:
+
+```cpp
+class MyClass
+{
+public:
+    void MemberFunc(int value)
+    {
+      //do something
+    }
+};
+
+// Store member function binding
+auto callable = std::mem_fn(&MyClass::MemberFunc);
+
+// Call with late supplied 'this'
+MyClass myInst;
+callable(&myInst, 123);
+```
+
+What would the storage type look like without *auto*? Something like this:
+
+```cpp
+std::_Mem_fn_wrap<void,void (__cdecl TestA::*)(int),TestA,int> callable
+```
+
+You can also pass this function storage to a standard function binding
+
+```cpp
+std::function<void(int)> binding = std::bind(callable, &testA, std::placeholders::_1);
+binding(123); // Call
+```
+
+Past and future notes: An older interface *std::mem_func* existed, but has since been deprecated. A proposal exists, post C++17, to make [pointer to member functions callable](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0312r0.pdf). This would be most welcome.

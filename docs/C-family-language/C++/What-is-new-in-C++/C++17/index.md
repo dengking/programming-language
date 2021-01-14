@@ -9,3 +9,16 @@
 3) cppreference [C++17](https://en.cppreference.com/w/cpp/17)
 
 4) wikipedia [C++17](https://en.wikipedia.org/wiki/C++17)
+
+## New feature
+
+### Library
+
+| feature            | 章节                   |                                                              |
+| ------------------ | ---------------------- | ------------------------------------------------------------ |
+| parallel algorithm | `./Parallel-algorithm` | [Parallel](https://en.wikipedia.org/wiki/Parallel_computing) versions of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) algorithms[[41\]](https://en.wikipedia.org/wiki/C%2B%2B17#cite_note-41) |
+|                    |                        |                                                              |
+|                    |                        |                                                              |
+
+
+

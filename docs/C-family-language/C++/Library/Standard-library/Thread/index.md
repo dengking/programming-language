@@ -7,6 +7,10 @@
 
 ## cppreference [Thread support library](https://en.cppreference.com/w/cpp/thread)
 
+
+
+
+
 ## Errors
 
 ### terminate called without an active exception
@@ -20,3 +24,4 @@ https://en.cppreference.com/w/cpp/thread/condition_variable
 
 
 ## thispointer [C++11 Multi-threading Tutorials](https://thispointer.com/category/c/c-11/c11-threads/)
+

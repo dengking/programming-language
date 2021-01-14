@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Temporary-materialization: Temporary-materialization
     - Structured-binding: Structured-binding
+    - Parallel-algorithm: Parallel-algorithm

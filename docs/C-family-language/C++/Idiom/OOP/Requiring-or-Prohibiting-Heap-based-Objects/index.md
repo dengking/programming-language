@@ -1,6 +1,6 @@
 # Requiring or Prohibiting Heap-based Objects
 
-
+"Requiring"的含义是"要求"，"Prohibiting"的含义是"禁止"。
 
 ## More C++ Idioms [Requiring or Prohibiting Heap-based Objects](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Requiring_or_Prohibiting_Heap-based_Objects)
 

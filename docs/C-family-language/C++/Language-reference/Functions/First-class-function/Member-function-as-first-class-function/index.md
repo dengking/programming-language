@@ -34,3 +34,15 @@ async([this]()
 ```
 
 ## reddit [What is the proper way to pass a member function to std::async?](https://www.reddit.com/r/learnprogramming/comments/2gavlf/c11_what_is_the_proper_way_to_pass_a_member/)
+
+
+
+## 使用`std::function`
+
+参见`std::function`章节。
+
+
+
+## 使用pointer to member function
+
+参见`./Pointer-to-member-function`。
