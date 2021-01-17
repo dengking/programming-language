@@ -55,6 +55,14 @@ int main()
 
 ### C++17: fold expression
 
+参见`./C++17-Fold-expression`章节。
+
+## Len
+
+参见:
+
+1、参见 `./sizeof-parameter-pack` 章节
+
 
 
 ## Examples
@@ -65,3 +73,18 @@ int main()
 
 `INVOKE<R>(f, std::declval<ArgTypes>()...)`
 
+
+
+### Adder
+
+参见`../../eli.thegreenplace-Variadic-templates-in-C++`。
+
+
+
+### `tprintf`
+
+参见 cppreference [Parameter pack(since C++11)](https://en.cppreference.com/w/cpp/language/parameter_pack)。
+
+### All
+
+参见 `./C++17-Fold-expression`。

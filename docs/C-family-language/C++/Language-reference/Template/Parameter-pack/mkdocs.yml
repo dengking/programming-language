@@ -1,6 +1,5 @@
 nav:
     - Parameter-pack: index.md
-    - sizeof-parameter-pack: sizeof-parameter-pack
-    - Fold-expression: Fold-expression
-    
-    - Eli-Bendersky-Variadic templates-in-Cpp: Eli-Bendersky-Variadic templates-in-Cpp.md
+    - eli.thegreenplace-Variadic-templates-in-C++: eli.thegreenplace-Variadic-templates-in-C++    
+    - Operations: Operations
+    - Variadic-template-VS-ellipsis: Variadic-template-VS-ellipsis

@@ -1,6 +1,6 @@
-[TOC]
+# new VS malloc
 
-# [Out of memory](https://en.wikipedia.org/wiki/Out_of_memory) 的处理
+## [Out of memory](https://en.wikipedia.org/wiki/Out_of_memory) 的处理
 
  the [C standard function](https://en.wikipedia.org/wiki/C_standard_function) for allocating memory, `malloc()`, will return [NULL](https://en.wikipedia.org/wiki/Null_pointer) and a well-behaved application should handle this situation. `malloc`通过返回值是否为NULL来判断是否分配成功
 

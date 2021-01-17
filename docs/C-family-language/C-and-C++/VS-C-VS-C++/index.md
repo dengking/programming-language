@@ -14,7 +14,11 @@ C++支持OOP，因此很多概念就需要向OOP扩展，在`C++\Language-refere
 
 ### Type system
 
-C++在C的基础上对type system做了很多改进，使得相比于C而言，C++有着更好的type safety，在wikipedia [Type safety](https://en.wikipedia.org/wiki/Type_safety#C++) 中对此进行了非常好的总结:
+C++在C的基础上对type system做了很多改进，使得相比于C而言，C++有着更好的type safety，主要是通过: 充分发挥static type实现的；
+
+> NOTE: 可以作为static type VS dynamic type的素材。
+
+在wikipedia [Type safety](https://en.wikipedia.org/wiki/Type_safety#C++) 中对此进行了非常好的总结:
 
 > Some features of C++ that promote more type-safe code:
 >
@@ -32,14 +36,15 @@ c中有[effective type](https://en.cppreference.com/w/c/language/object)的概�
 
 #### `new`和`malloc`
 
-
+这在 `Resource-management\Memory-management\Allocation-and-deallocation\VS-malloc-VS-new` 章节进行了介绍。
 
 #### CV
 
 C++在CV方面，比C要严格：
 
-- string literal：c中的类型`char *`，c++中是`const char *`
-- C-style cast会drop掉CV，C++的各种type cast函数如`reinterpret_cast`、`static_cast`等，都需要保持CV，C++中需要通过`const_cast`来drop掉CV，相比于C的implicit，C++的是explicit，这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-conversion\reinterpret_cast.md#CV`段中进行了详细介绍
+1、string literal：c中的类型`char *`，c++中是`const char *`
+
+2、C-style cast会drop掉CV，C++的各种type cast函数如`reinterpret_cast`、`static_cast`等，都需要保持CV，C++中需要通过`const_cast`来drop掉CV，相比于C的implicit，C++的是explicit，这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-conversion\reinterpret_cast.md#CV`段中进行了详细介绍
 
 #### Type conversion
 
@@ -49,13 +54,19 @@ C++在CV方面，比C要严格：
 
 关于这一点，在`C++\Language-reference\Basic-concept\Type-system\Type-punning`中进行了详细比较。
 
-#### `std::variant` VS union
+##### `std::variant` VS union
 
 C++17引入的`std::variant` 是对union的改进，关于此，参见`C++\Library\Standard-library\Utility-library\Common-vocabulary-types`。
 
 #### `std::any` VS `void*`
 
 C++17引入的`std::any` 是对`void*`的改进，关于此，参见`C++\Library\Standard-library\Utility-library\Common-vocabulary-types`。
+
+
+
+#### Variadic template VS ellipsis 
+
+参见 `C++\Language-reference\Template\Parameter-pack\Variadic template-VS-ellipsis` 章节。
 
 ### Generic programming 
 

@@ -1,6 +1,6 @@
 # Variadic CRTP
 
-
+在重要使用的是 [Parameter pack(since C++11)](https://en.cppreference.com/w/cpp/language/parameter_pack) 中的 "Base specifiers and member initializer lists" 语法点。
 
 ## fluentcpp [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/)
 
@@ -125,10 +125,13 @@ In general customizing the aspects of a class with template parameters is called
 
 To quote an example from Modern C++ Design, there are several ways to manage the life cycle of a `Singleton` object. Indeed, if a singleton depends on another singleton, their order of destruction matters. So the `Singleton` class defines a lifetime “policy” as a template parameter, that allows to choose between four options:
 
-- the singleton is destroyed when the program exists,
-    - the singleton can be re-initialized after its destruction if is needed then (“phoenix(死而复生的) singleton”),
-- the singleton has a longevity(长寿) that allows to customize the order of destructions of singletons,
-- the singleton is never destroyed.
+1、the singleton is destroyed when the program exists,
+
+- the singleton can be re-initialized after its destruction if is needed then (“phoenix(死而复生的) singleton”),
+
+2、the singleton has a longevity(长寿) that allows to customize the order of destructions of singletons,
+
+3、the singleton is never destroyed.
 
 To implement this choice, the `Singleton` class has a `LifetimePolicy` template parameter:
 

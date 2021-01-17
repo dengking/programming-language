@@ -74,15 +74,19 @@ Template parameter pack (appears in [alias template](https://en.cppreference.com
 
 > NOTE: 在下面可以看到，上述三种类型的argument(non-types, types, or templates)的对应的template parameter pack的声明方式是不同的。
 
-| Syntax                                                       | Explanation                                                  |                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- |
-| `type ... Args(optional)`                                    | A non-type **template parameter pack** with an optional name | `template<std::size_t... Is>`                           |
-| `typename|class ... Args(optional)`                          | A type **template parameter pack** with an optional name     |                                                         |
-| `template < parameter-list > typename | class ... Args(optional)` | A **template template parameter pack** with an optional name |                                                         |
-| `Args ... args(optional)`                                    | A **function parameter pack** with an optional name          |                                                         |
-| `pattern ...`                                                | **Parameter pack expansion**:<br>expands to comma-separated list of zero or more `pattern`s. <br>Pattern must include at least one parameter pack. | 对pack中的每个元素都执行pattern操作，后面会进行详细介绍 |
+|      | Syntax                                                       | Explanation                                                  |                                                         |
+| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- |
+| 1    | `type ... Args(optional)`                                    | A non-type **template parameter pack** with an optional name | `template<std::size_t... Is>`                           |
+| 2    | `typename|class ... Args(optional)`                          | A type **template parameter pack** with an optional name     |                                                         |
+| 3    | `template < parameter-list > typename | class ... Args(optional)` | A **template template parameter pack** with an optional name |                                                         |
+| 4    | `Args ... args(optional)`                                    | A **function parameter pack** with an optional name          |                                                         |
+| 5    | `pattern ...`                                                | **Parameter pack expansion**:<br>expands to comma-separated list of zero or more `pattern`s. <br>Pattern must include at least one parameter pack. | 对pack中的每个元素都执行pattern操作，后面会进行详细介绍 |
 
-> NOTE: 关于 expand的grammar，在下面的pack expansion章节会进行介绍
+> NOTE: 
+>
+> 关于 expand的grammar，在下面的pack expansion章节会进行介绍；
+>
+> 关于(3)的例子，参见 [joboccara](https://github.com/joboccara)/**[NamedType](https://github.com/joboccara/NamedType)** ，其中有着运用。
 
 ### Explanation(说明)
 
@@ -474,6 +478,12 @@ int main()
 > test.cpp 9 X<Mixins>::X(const Mixins& ...) [with Mixins = {T1, T2}]
 > 
 > ```
+>
+> 使用它的一个例子是: fluentcpp strong type，参见:
+>
+> 1、`Curiously-recurring-template-pattern\Variadic-CRTP` 章节
+>
+> 2、`C++\Expert\Fluentcpp\joboccara-NamedType`章节
 >
 > 
 

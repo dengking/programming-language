@@ -1,4 +1,4 @@
-# [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
+# eli.thegreenplace [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
 
 > NOTE: 这篇文章展示了如下例子：
 >
@@ -9,6 +9,12 @@
 
 
 Prior to C++11, the only way to write functions that take an arbitrary number of arguments was to use **variadic functions** like `printf`, with the ellipsis syntax (`...`) and the accompanying `va_` family of macros. If you've ever written code using this approach you know how cumbersome(麻烦) it is. In addition to being type unsafe (all **type resolution** has to be done explicitly with casts in `va_arg`, at runtime), it's also tricky to get right. The `va_`macros perform low-level memory manipulation, and I've seen a lot of code that segfaults(段错误) because it isn't using them carefully enough.
+
+> NOTE: 
+>
+> 1、interpretation model
+>
+> 2、static type VS dynamic type
 
 But what always bothered me most with this approach is leaving something that is clearly known at **compile-time**, to **run-time**. Yes, when we write a variadic function we don't know all the ways it's going to be used. But when the compiler puts the whole program together, *it does know*. It sees perfectly well all the invocations of the function throughout the program, and all the possible argument types it gets passed (types are, after all, resolved at compile-time in C++).
 
@@ -47,7 +53,6 @@ std::string ssum = adder(s1, s2, s3, s4);
 
 > NOTE: 下面是完整的可执行程序
 >
-> 编译:`g++ --std=c++11 test.cpp`
 
 ```c++
 #include <string>
@@ -73,6 +78,7 @@ std::string s1 = "x", s2 = "aa", s3 = "bb", s4 = "yy";
 std::string ssum = adder(s1, s2, s3, s4);
 std::cout<<ssum<<std::endl;
 }
+// g++ --std=c++11 test.cpp
 ```
 
 

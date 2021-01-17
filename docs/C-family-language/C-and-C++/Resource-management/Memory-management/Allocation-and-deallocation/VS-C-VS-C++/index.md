@@ -1,4 +1,8 @@
-# Dynamic memory management
+# 关于本章
+
+本章讨论C++、C在Dynamic memory management之间的差异。
+
+## draft
 
 C++中的dynamic memory management主要是通过[new](https://en.cppreference.com/w/cpp/language/new)、[delete](https://en.cppreference.com/w/cpp/language/delete)，它们都是operator，是语言内置的，用户无法替换实现，C++标准库提供的[Dynamic memory management library](https://en.cppreference.com/w/cpp/memory)，可以实现更加高级的dynamic memory management。
 
