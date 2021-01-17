@@ -82,7 +82,7 @@ Template parameter pack (appears in [alias template](https://en.cppreference.com
 | `Args ... args(optional)`                                    | A **function parameter pack** with an optional name          |                                                         |
 | `pattern ...`                                                | **Parameter pack expansion**:<br>expands to comma-separated list of zero or more `pattern`s. <br>Pattern must include at least one parameter pack. | 对pack中的每个元素都执行pattern操作，后面会进行详细介绍 |
 
-
+> NOTE: 关于 expand的grammar，在下面的pack expansion章节会进行介绍
 
 ### Explanation(说明)
 
@@ -130,15 +130,33 @@ int main()
 
 > NOTE: 
 >
-> "parameter pack是linear structure"，之所以强调此的原因是: 我们应该将parameter pack看做是一个linear structure，后续对它的computation都是基于traverse on linear structure。
+> ## "parameter pack是linear structure"
 >
-> 对Pack expansion的解释: 
+> 之所以强调此的原因是: 我们应该将parameter pack看做是一个linear structure，后续对它的computation都是基于traverse on linear structure。
+>
+> ## 对Pack expansion的解释
 >
 > 将pattern看做是一个function/operation，则pack expansion的过程其实就是对其中的所有的parameter pack(是一个linear structure)**顺序**执行这个function/operation，其实这个过程非常类似于functional programming中的apply: apply a function(pattern) to linear structure(s)；显然这个function/pattern的入参个数需要和出现在pack expansion中的parameter pack的个数相同。
 >
-> 按照上述描述，pack expansion的grammar中，将pattern放在前面，因此它可以简记为: apply pattern to linear structure。
+> ### grammar
+>
+> 按照上述描述，pack expansion的grammar: `pattern ...`中，将pattern放在前面，因此它可以简记为: apply pattern to linear structure。
+>
+> ### 结果
 >
 > expansion的结果: comma-separated list of zero or more `pattern`s。
+>
+> ## Parameter and argument
+>
+> 正如函数有parameter和argument，pack同样有: 
+>
+> 1、type/parameter pack
+>
+> 2、argument pack
+>
+> 下面介绍的operation一般作用于argument pack
+>
+> ## Operation
 >
 > 可以对parameter pack这些的一些常见pattern/operation: 
 >
@@ -148,15 +166,19 @@ int main()
 > - fold，参见[fold expression(since C++17)](https://en.cppreference.com/w/cpp/language/fold)
 > - apply
 >
-> type/parameter pack
->
-> argument pack
+> ### Operaton on multiple pack
 >
 > 对multiple pack可能的expand情况: 
 >
 > 1、expand multiple pack simultaneously
 >
-> 2、nesting: 先expand inner，然后expand outer
+> 将一个pattern共识expand到multiple pack
+>
+> 2、nesting expand: 先expand inner，然后expand outer
+>
+> 嵌套: 内部一个expand，然后外部一个expand
+>
+> 对于上述的两种情况，下面都有对应的例子。
 
 A **pattern** followed by an **ellipsis**, in which the name of at least one **parameter pack** appears at least once, is *expanded* into zero or more comma-separated instantiations of the pattern, where the name of the **parameter pack** is replaced by each of the elements from the **pack**, in order.
 
@@ -177,6 +199,8 @@ int main()
 }
 
 ```
+
+#### Expand multiple pack simultaneously
 
 If the names of two parameter packs appear in the same pattern, they are expanded simultaneously, and they must have the same length:
 
@@ -215,6 +239,8 @@ int main()
 ```
 
 > NOTE: 上面就是 parameter pack `Args1` 和 `Args2` 一起出现在`Pair<Args1, Args2>` pattern中。
+
+#### Nesting expand
 
 If a **pack expansion** is nested within another **pack expansion**, the **parameter packs** that appear inside the innermost **pack expansion** are expanded by it, and there must be another pack mentioned in the enclosing pack expansion, but not in the innermost one:
 
@@ -544,187 +570,3 @@ X<B, D> x; // OK: B::g and D::g introduced
 ```
 
 
-
-## cppreference `sizeof...` operator
-
-Queries the number of elements in a [parameter pack](parameter_pack.html).
-
-### Example
-
-```c++
-#include <iostream>
-#include <array>
-#include <type_traits>
-
-template<typename ... Ts>
-constexpr auto make_array(Ts&&... ts) -> std::array<std::common_type_t<Ts...>,sizeof...(ts)>
-{
-	return {	std::forward<Ts>(ts)...};
-}
-
-int main()
-{
-	auto b = make_array(1, 2, 3);
-	std::cout << b.size() << '\n';
-	for (auto i : b)
-		std::cout << i << ' ';
-}
-// g++ --std=c++11 test.cpp
-
-```
-
-
-
-## cppreference [fold expression](https://en.cppreference.com/w/cpp/language/fold)(since C++17)
-
-> NOTE: 这是C++17中增强parameter pack的新特性。
->
-> 它使用的是functional programming中的reduce: 对一个sequence执行一个函数；需要注意的是，这是在compile time执行的，即它是compile time function execution，显然它是C++ 对 compile time computation的增强，参见`C-and-C++\Compile-time-and-run-time\Compile-time-function-execution`章节。
-
-Reduces ([folds](https://en.wikipedia.org/wiki/Fold_(higher-order_function))) a [parameter pack](parameter_pack.html) over a binary operator.
-
-
-
-### Example: `all`
-
-```c++
-
-template<typename ... Args>
-bool all(Args ... args)
-{
-	return (... && args);
-}
-int main()
-{
-	 // within all(), the unary left fold expands as
-	 //  return ((true && true) && true) && false;
-	 // b is false
-	bool b = all(true, true, true, false);
-
-}
-// g++ --std=c++17
-```
-
-
-
-### Example: endianness swap
-
-```C++
-#include <cstddef> // std::size_t
-#include <type_traits>
-#include <utility>
-
-// compile-time endianness swap based on http://stackoverflow.com/a/36937049
-template<class T, std::size_t ... N>
-constexpr T bswap_impl(T i, std::index_sequence<N...>)
-{
-	return (((i >> N*CHAR_BIT & std::uint8_t(-1)) << (sizeof(T)-1-N)*CHAR_BIT) | ...);
-}
-template<class T, class U = std::make_unsigned_t<T>>
-constexpr U bswap(T i)
-{
-	return bswap_impl<U>(i, std::make_index_sequence<sizeof(T)> { });
-}
-
-int main()
-{
-    static_assert(bswap<std::uint16_t>(0x1234u)==0x3412u);
-    static_assert(bswap<std::uint64_t>(0x0123456789abcdefULL)==0xefcdab8967452301ULL);
-}
-// g++ --std=c++17 test.cpp
-
-```
-
-
-
-### Example: `push_back`
-
-```c++
-#include <iostream>
-#include <vector> // std::vector
-#include <type_traits> // std::is_constructible_v
-#include <utility> // std::forward
-
-template<typename T, typename ... Args>
-void push_back_vec(std::vector<T>& v, Args&&... args)
-{
-	static_assert((std::is_constructible_v<T, Args&&> && ...));
-	(v.push_back(std::forward<Args>(args)), ...);
-}
-
-int main()
-{
-	std::vector<int> v;
-	push_back_vec(v, 6, 2, 45, 12);
-	push_back_vec(v, 1, 2, 9);
-	for (int i : v)
-		std::cout << i << ' ';
-}
-// g++ --std=c++17 test.cpp
-
-```
-
-
-
-
-
-## Operations
-
-### Iteration
-
-**riptutorial [Iterating over a parameter pack](https://riptutorial.com/cplusplus/example/3208/iterating-over-a-parameter-pack)**
-
-Often, we need to perform an operation over every element in a **variadic template parameter pack**. There are many ways to do this, and the solutions get easier to read and write with `C++17`. Suppose we simply want to print every element in a pack. The simplest solution is to recurse:
-
-```C++
-#include <iostream>
-
-void print_all()
-{
-	// base case
-	std::cout << std::endl;
-}
-
-template<class T, class ... Ts>
-void print_all(T const &first, Ts const &... rest)
-{
-	std::cout << first << " ";
-
-	print_all(rest...);
-}
-
-template<class ...Args>
-void g(Args ...args)
-{
-	print_all(args...);
-}
-template<class ...Args>
-void f(Args ... args)
-{
-//	auto lm = [&, args ...] {	return g(args...);};
-//	lm();
-	print_all(args...);
-}
-int main()
-{
-	f("hello", "world");
-}
-// g++ --std=c++11 test.cpp
-
-```
-
-> NOTE: 输出如下:
->
-> ```C++
-> hello world
-> ```
-
-
-
-## Examples
-
-### `std::declval`
-
-[C++ named requirements: *Callable*](https://en.cppreference.com/w/cpp/named_req/Callable): 
-
-`INVOKE<R>(f, std::declval<ArgTypes>()...)`
