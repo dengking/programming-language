@@ -42,7 +42,7 @@
 
 ## Get Started
 
-As it is a header-only library, download the latest version of the file and include it in your project and as it uses the tinyxml2 library, be sure you have it installed and linked to your project.
+As it is a **header-only library**, download the latest version of the file and include it in your project and as it uses the tinyxml2 library, be sure you have it installed and linked to your project.
 
 Let's consider this example: we have a file that contains multiple IDs informations (name and age) about employees for an certain office (name). In XML, it could be written this way
 
@@ -152,6 +152,8 @@ Once your structures are created, you can load your file, get the `XmlElement *`
 > NOTE: 这段话让我想到了: 
 >
 > 1、make it computational-Structuralization
+>
+> 首先描述结构，然后基于结构来进行parse
 >
 > 2、formal language and  CFG
 

@@ -38,10 +38,6 @@ python的官方文档的“What’s New in Python[¶](https://docs.python.org/3/
 
 C++不断引入新的特性，我们需要从更高地层次来思考这些特性对C++的具体改进，这样我们能够梳理清楚C++的发展脉络，下面是我总结的一些方面:
 
-### Compile-time computation
-
-参见`C-and-C++\Compile-time-and-run-time`章节。
-
 
 
 ### Value-semantic
@@ -117,11 +113,19 @@ C++另外一个非常重要的发展方向是: simplify; simplify能够大大增
 
 
 
-### Performance
+### Performance optimization
 
 C++另外一个非常大的发展方向是: 提高C++ program的performance:
 
-1、concurrent/parallel computing
+#### 一、concurrent/parallel computing
 
-2、compile-time computation
+参见
+
+1、`C++\Language-reference\Basic-concept\Abstract-machine\Memory-model`
+
+2、`C++\Library\Standard-library\Thread`
+
+#### 二、compile-time computation
+
+参见`C-and-C++\Compile-time-and-run-time\Compile-time-computation`章节。
 

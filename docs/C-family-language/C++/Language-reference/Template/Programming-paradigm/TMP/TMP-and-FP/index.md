@@ -1,10 +1,6 @@
 # TMP and FP
 
-
-
 non-type template parameter的computation，主要以template parameter pack的computation、recursion为基础来进行总结。
-
-
 
 
 

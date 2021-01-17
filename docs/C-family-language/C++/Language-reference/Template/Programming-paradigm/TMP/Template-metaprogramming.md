@@ -212,8 +212,9 @@ microsoft [Trivial, standard-layout, POD, and literal types](https://docs.micros
 
 #### SFINAE
 
-- 控制overload resolution，即function template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Function-template-SFINAE.md`中对此进行了分析
-- 控制template specification，即class template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Clasas-template-SFINAE.md`中对此进行了分析
+1、控制overload resolution，即function template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Function-template-SFINAE.md`中对此进行了分析
+
+2、控制template specification，即class template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Clasas-template-SFINAE.md`中对此进行了分析
 
 
 

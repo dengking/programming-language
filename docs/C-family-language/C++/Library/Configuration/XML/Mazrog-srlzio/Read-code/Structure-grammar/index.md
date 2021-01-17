@@ -1,5 +1,7 @@
 # [srlzio](https://github.com/Mazrog/srlzio)/[srlzio](https://github.com/Mazrog/srlzio/tree/master/srlzio)/[**srlzio.hpp**](https://github.com/Mazrog/srlzio/blob/master/srlzio/srlzio.hpp)
 
+> NOTE: 这部分代码是可以使用`g++ --std=c++11` 编译通过的。
+
 ## `struct dict`
 
 ```C++
@@ -35,6 +37,8 @@ struct dict
 
 2、`dict`是允许recursive contain
 
+3、`dict`使用的是static container，即`std::array`、`std::tuple`
+
 由于`dict`抽象了element type，因此，它的element type可以是它自己，这样就可以实现recursive contain；这对于XML是非常重要的，因为XML中最最重要但就是contain关系，下面是一些简单的例子: 
 
 a、attribute、leaf、node: node `contain` leaf `contain` attribute；
@@ -45,7 +49,7 @@ b、node就是用了`dict`的recursive contain，从code可以看出
 
 ### compile `struct dict` in C++11
 
-上述代码，在`gcc --std=c++11 test.cpp`中是可以编译通过的，warning如下:
+上述代码，在`g++ --std=c++11 test.cpp`中是可以编译通过的，warning如下:
 
 ```C++
 test.cpp:11:12: 警告：‘get’ function uses ‘auto’ type specifier without trailing return type [默认启用]

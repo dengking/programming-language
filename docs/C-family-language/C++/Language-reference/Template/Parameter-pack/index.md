@@ -4,9 +4,17 @@
 
 ## 概述
 
-1) Parameter pack是linear structure
+一、Parameter pack是linear structure
 
-2) 对Parameter pack使用FP的方式来进行操作。
+二、对Parameter pack使用FP的方式来进行操作。
+
+三、parameter pack大大提高了C++ generic programming，使得如下成为可能: 
+
+1、`std::tuple`
+
+最能体现parameter pack意义的是: `std::tuple`
+
+四、parameter pack大大提高了C++ compile time computation
 
 ## 发展概述
 
@@ -16,8 +24,6 @@
 
 1) Wikipedia [C++11#Variadic templates](https://infogalactic.com/info/C%2B%2B11#Variadic_templates) 
 2) cppreference [C++11](https://en.cppreference.com/w/cpp/11)# [variadic templates](https://en.cppreference.com/w/cpp/language/parameter_pack)
-
-
 
 不足: 
 
@@ -29,7 +35,9 @@
 
 ### C++17
 
-新增特性: [fold expression(since C++17)](https://en.cppreference.com/w/cpp/language/fold)，直接支持FP apply/reduce，参见:
+新增特性: [fold expression(since C++17)](https://en.cppreference.com/w/cpp/language/fold)，直接支持FP apply/reduce，目的是simplify C++。 
+
+参见:
 
 1) Wikipedia [C++17#Folding expressions](https://infogalactic.com/info/C%2B%2B17)
 
@@ -76,7 +84,7 @@ Template parameter pack (appears in [alias template](https://en.cppreference.com
 
 
 
-### Explanation
+### Explanation(说明)
 
 #### Variadic class template
 
@@ -122,11 +130,13 @@ int main()
 
 > NOTE: 
 >
-> "parameter pack是linear structure"，之所以强调此的原因是: 我们应该将parameter pack看做是一个linear structure；
+> "parameter pack是linear structure"，之所以强调此的原因是: 我们应该将parameter pack看做是一个linear structure，后续对它的computation都是基于traverse on linear structure。
 >
 > 对Pack expansion的解释: 
 >
 > 将pattern看做是一个function/operation，则pack expansion的过程其实就是对其中的所有的parameter pack(是一个linear structure)**顺序**执行这个function/operation，其实这个过程非常类似于functional programming中的apply: apply a function(pattern) to linear structure(s)；显然这个function/pattern的入参个数需要和出现在pack expansion中的parameter pack的个数相同。
+>
+> 按照上述描述，pack expansion的grammar中，将pattern放在前面，因此它可以简记为: apply pattern to linear structure。
 >
 > expansion的结果: comma-separated list of zero or more `pattern`s。
 >
@@ -138,8 +148,15 @@ int main()
 > - fold，参见[fold expression(since C++17)](https://en.cppreference.com/w/cpp/language/fold)
 > - apply
 >
-> 
+> type/parameter pack
 >
+> argument pack
+>
+> 对multiple pack可能的expand情况: 
+>
+> 1、expand multiple pack simultaneously
+>
+> 2、nesting: 先expand inner，然后expand outer
 
 A **pattern** followed by an **ellipsis**, in which the name of at least one **parameter pack** appears at least once, is *expanded* into zero or more comma-separated instantiations of the pattern, where the name of the **parameter pack** is replaced by each of the elements from the **pack**, in order.
 
