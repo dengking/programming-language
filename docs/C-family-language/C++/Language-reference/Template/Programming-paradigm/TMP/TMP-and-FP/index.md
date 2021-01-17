@@ -1,14 +1,18 @@
+# TMP and FP
+
+
+
 non-type template parameter的computation，主要以template parameter pack的computation、recursion为基础来进行总结。
 
 
 
 
 
-#### Template metaprogramming and functional programming and non-type template parameter
+## Template metaprogramming and functional programming and non-type template parameter
 
 上面这段话对于理解template metaprogramming是非常重要的：
 
-template metaprogramming can be seen as a form of functional programming
+> template metaprogramming can be seen as a form of functional programming
 
 在后面，我们会学习到template parameter和template argument，如果将template metaprogramming看做是一种functional programming的话，这个概念是非常容易理解的。
 

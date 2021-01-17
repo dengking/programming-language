@@ -42,17 +42,6 @@ C++不断引入新的特性，我们需要从更高地层次来思考这些特�
 
 参见`C-and-C++\Compile-time-and-run-time`章节。
 
-### Template
-
-C++的一个发展发现是对template-meta programming的强化。
-
-| feature                                                      | 引入版本 | 章节                                               |
-| ------------------------------------------------------------ | -------- | -------------------------------------------------- |
-| [Constraints and concepts](https://en.cppreference.com/w/cpp/language/constraints) | C++20    |                                                    |
-| [Abbreviated function templates](https://en.cppreference.com/w/cpp/language/function_template#Abbreviated_function_template) | C++20    |                                                    |
-| [class template argument deduction](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction) | C++17    |                                                    |
-| Type transformation `_t` aliases [¶](https://isocpp.org/wiki/faq/cpp14-library#type-transformation-aliases) [Δ](https://isocpp.org/wiki/faq/cpp14-library#) | C++14    | `C++\What-is-new-in-C++\C++14\TransformationTrait` |
-
 
 
 ### Value-semantic
@@ -75,19 +64,19 @@ C++的一个发展发现是对template-meta programming的强化。
 |                                                              |          |      |
 |                                                              |          |      |
 
+### Generic programming and template meta-programming
 
-
-### Uniform
+#### Uniform
 
 C++的一个非常重要的方向是uniform，uniform促进了对各种差异的abstraction，促进了generic programming。主要包括如下方面:
 
-1 对很多implementation-specific进行uniform，提供uniform/consistent syntax，这包括:
+一、对很多implementation-specific进行uniform，提供uniform/consistent syntax，这包括:
 
 1) C++ 11 attribute: `C++\Language-reference\Attribute`
 
 2) C++11 uniform initialization: `C++\Language-reference\Initialization\Uniform-initialization`
 
-2 对复杂的、常用的运算进行uniform，提供uniform/consistent interface
+二、对复杂的、常用的运算进行uniform，提供uniform/consistent interface
 
 "统一"意味着"抽象"，因为着需要polymorphism。
 
@@ -99,7 +88,40 @@ http://www.cplusplus2017.info/c17-stdinvoke-stdapply/
 
 2) `std::decay`
 
-### C++ Has Become More Pythonic
+
+
+#### Template
+
+C++的一个发展发现是对template-meta programming的强化。
+
+| feature                                                      | 引入版本 | 章节                                               |
+| ------------------------------------------------------------ | -------- | -------------------------------------------------- |
+| [Constraints and concepts](https://en.cppreference.com/w/cpp/language/constraints) | C++20    |                                                    |
+| [Abbreviated function templates](https://en.cppreference.com/w/cpp/language/function_template#Abbreviated_function_template) | C++20    |                                                    |
+| [class template argument deduction](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction) | C++17    |                                                    |
+| Type transformation `_t` aliases [¶](https://isocpp.org/wiki/faq/cpp14-library#type-transformation-aliases) [Δ](https://isocpp.org/wiki/faq/cpp14-library#) | C++14    | `C++\What-is-new-in-C++\C++14\TransformationTrait` |
+
+
+
+### Simplify
+
+C++另外一个非常重要的发展方向是: simplify; simplify能够大大增加C++ programmer的研发效率；
+
+这包括:
+
+1、type inference，参见: `C++\Language-reference\Basic-concept\Type-system\Type-inference`
+
+#### C++ Has Become More Pythonic
 
 参见`./preshing-C++Has-Become-More-Pythonic`。
+
+
+
+### Performance
+
+C++另外一个非常大的发展方向是: 提高C++ program的performance:
+
+1、concurrent/parallel computing
+
+2、compile-time computation
 

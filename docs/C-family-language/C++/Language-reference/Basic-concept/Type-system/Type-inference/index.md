@@ -168,7 +168,7 @@ C++17 新增 "Use of auto as the type for a non-type template parameter"，参�
 
 一个典型的需求就是: **perfect forwarding function template**。
 
-### Make C++ more expressive
+### Simplify C++/ Make C++ more expressive
 
 减轻programmer的工作量，让programmer写更少的code。
 
