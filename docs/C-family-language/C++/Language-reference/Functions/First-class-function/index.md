@@ -38,6 +38,8 @@ private:
 
 > TODO: 思考一个问题: `std::thread`并不是template，它是如何实现generic的？`std::thread`是底层thread的wrapper，它会将constructor入参转换为function pointer；关于实现的code，function to pointer，显然这是decay。
 >
+> 这非常重要，如何实现转换。
+>
 > 可以参见:
 >
 > 1、https://github.com/llvm-mirror/libcxx/blob/master/include/thread
