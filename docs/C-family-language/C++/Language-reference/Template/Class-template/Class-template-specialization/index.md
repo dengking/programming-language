@@ -182,6 +182,13 @@ class unique_ptr<_Tp[], _Dp>
 
 
 
-## Usage
+## stackoverflow [Understanding (simple?) C++ Partial Template Specialization](https://stackoverflow.com/questions/6138439/understanding-simple-c-partial-template-specialization)
 
-- trait
+## Example
+
+1、trait
+
+2、[Mazrog](https://github.com/Mazrog)/**[srlzio](https://github.com/Mazrog/srlzio)**
+
+其中对partial template specialization的运用非常值得借鉴
+

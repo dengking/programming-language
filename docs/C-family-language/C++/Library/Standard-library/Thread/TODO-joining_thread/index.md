@@ -181,6 +181,14 @@ task1 says: hello
 
 Read up on detaching C++ threads and joining C++ threads.
 
+
+
+### TODO
+
+https://exceptionshub.com/c-terminate-called-without-an-active-exception.html
+
+
+
 ## How to do?
 
 
@@ -426,6 +434,8 @@ If you don't carefully handle the lifetime and the variables of your child threa
 
 
 
+## Implementation
+
 
 
 ### `gsl::joining_thread`
@@ -433,3 +443,5 @@ If you don't carefully handle the lifetime and the variables of your child threa
 #### github [Implement joining_thread #808](https://github.com/microsoft/GSL/pull/808)
 
 
+
+### [jthread](https://en.cppreference.com/w/cpp/thread/jthread) (C++20)

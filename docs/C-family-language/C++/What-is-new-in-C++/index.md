@@ -107,6 +107,12 @@ C++另外一个非常重要的发展方向是: simplify; simplify能够大大增
 
 1、type inference，参见: `C++\Language-reference\Basic-concept\Type-system\Type-inference`
 
+> draft: C++ 的一个发展方向是: simplify，比如type deduction、auto，记得有一位expert的目标是simplify C++;
+>
+> 其实提供更好的compiler报错信息也是一种简化，因此C++中提供了更多的specifier(比如override等等)、concept等概念
+
+
+
 #### C++ Has Become More Pythonic
 
 参见`./preshing-C++Has-Become-More-Pythonic`。
