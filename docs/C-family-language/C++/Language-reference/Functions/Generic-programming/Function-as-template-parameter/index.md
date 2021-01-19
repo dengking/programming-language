@@ -165,3 +165,23 @@ When the function is used in a template parameter it 'decays' into a pointer to 
 My comment above refers to template parameters taking a non-type function pointer parameter. In this case the template instantiation can be inlined as the compiler knows the value of the pointer at compile time. In jalf's example the template takes a type parameter and the type of the template parameter and the value of the function argument together determine the function called, a function object can be better optimized. – [CB Bailey](https://stackoverflow.com/users/19563/cb-bailey) [Jul 23 '09 at 20:46](https://stackoverflow.com/questions/1174169/function-passed-as-template-argument#comment994693_1174193)
 
 > NOTE: 上面描述的decay是非常重要的
+
+
+
+## Application
+
+### Functional programming
+
+#### STL algorithm
+
+STL algorithm充分运用了function as template parameter，下面是非常好的例子:
+
+1、`Library\Standard-library\STL\Containers-library\Associative-container\Map\Operations\Values-like-python-dict`
+
+其中给出了非常好的例子；
+
+
+
+### AOP
+
+其实，感觉此处的AOP和functional programming有些类似；
