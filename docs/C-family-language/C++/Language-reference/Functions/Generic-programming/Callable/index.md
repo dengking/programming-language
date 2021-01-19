@@ -182,7 +182,7 @@ See code [@Wandbox](https://wandbox.org/permlink/1n2G8lrKs3QpKXQz)
 
 We can also look at more sophisticated, production-ready implementation at MSVC/STL code here [@Github](https://github.com/microsoft/STL/blob/master/stl/inc/type_traits#L1588). Surprisingly the code for `invoke` is located in the `type_traits` header and not in `<functional>`.
 
-## (Bonus) Compilation Speed And Costs
+#### (Bonus) Compilation Speed And Costs
 
 If you wonder about the cost of extra compilation time and runtime performance of code with `std::invoke`, you can see this early preview text available for Patrons:
 [Understanding std::invoke, CppCon 2020 Presentation notes, Compilation Speed of std::invoke](https://www.patreon.com/posts/43262190)
@@ -259,19 +259,23 @@ where *INVOKE(f, t1, t2, ..., tN)* is defined as follows:
 
 > NOTE: 从下面的描述可以看出，callable concept包含了C++中所有的可以进行invoke的情况，它是对它们的统一描述，显然这是uniform。
 
-1 if `f` is a [pointer to member function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions) of class `T`:
+一、 if `f` is a [pointer to member function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions) of class `T`:
 
-- If [std::is_base_of](http://en.cppreference.com/w/cpp/types/is_base_of)`<T,` [std::remove_reference_t](http://en.cppreference.com/w/cpp/types/remove_reference)`<decltype(t1)>>::value` is true, then `INVOKE(f, t1, t2, ..., tN)` is equivalent to `(t1.*f)(t2, ..., tN)`
-- otherwise, if [std::remove_cvref_t](http://en.cppreference.com/w/cpp/types/remove_cvref)`<decltype(t1)>` is a specialization of [std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper), then `INVOKE(f, t1, t2, ..., tN)` is equivalent to `(t1.get().*f)(t2, ..., tN)` (since C++17)
-- otherwise, if `t1` does not satisfy the previous items, then `INVOKE(f, t1, t2, ..., tN)` is equivalent to `((*t1).*f)(t2, ..., tN)`.
+1、If [std::is_base_of](http://en.cppreference.com/w/cpp/types/is_base_of)`<T,` [std::remove_reference_t](http://en.cppreference.com/w/cpp/types/remove_reference)`<decltype(t1)>>::value` is true, then `INVOKE(f, t1, t2, ..., tN)` is equivalent to `(t1.*f)(t2, ..., tN)`
 
-2 otherwise, if N == 1 and `f` is a [pointer to data member](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members) of class `T`:
+2、otherwise, if [std::remove_cvref_t](http://en.cppreference.com/w/cpp/types/remove_cvref)`<decltype(t1)>` is a specialization of [std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper), then `INVOKE(f, t1, t2, ..., tN)` is equivalent to `(t1.get().*f)(t2, ..., tN)` (since C++17)
 
-- If [std::is_base_of](http://en.cppreference.com/w/cpp/types/is_base_of)`<T,` [std::remove_reference_t](http://en.cppreference.com/w/cpp/types/remove_reference)`<decltype(t1)>>::value` is true, then `INVOKE(f, t1)` is equivalent to `t1.*f`
-- otherwise, if [std::remove_cvref_t](http://en.cppreference.com/w/cpp/types/remove_cvref)`<decltype(t1)>` is a specialization of [std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper), then `INVOKE(f, t1)` is equivalent to `t1.get().*f` (since C++17)
-- otherwise, if `t1` does not satisfy the previous items, then `INVOKE(f, t1)` is equivalent to `(*t1).*f`
+3、otherwise, if `t1` does not satisfy the previous items, then `INVOKE(f, t1, t2, ..., tN)` is equivalent to `((*t1).*f)(t2, ..., tN)`.
 
-3 otherwise, `INVOKE(f, t1, t2, ..., tN)` is equivalent to `f(t1, t2, ..., tN)` (that is, `f` is a [*FunctionObject*](https://en.cppreference.com/w/cpp/named_req/FunctionObject))
+二、 otherwise, if N == 1 and `f` is a [pointer to data member](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members) of class `T`:
+
+1、If [std::is_base_of](http://en.cppreference.com/w/cpp/types/is_base_of)`<T,` [std::remove_reference_t](http://en.cppreference.com/w/cpp/types/remove_reference)`<decltype(t1)>>::value` is true, then `INVOKE(f, t1)` is equivalent to `t1.*f`
+
+2、otherwise, if [std::remove_cvref_t](http://en.cppreference.com/w/cpp/types/remove_cvref)`<decltype(t1)>` is a specialization of [std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper), then `INVOKE(f, t1)` is equivalent to `t1.get().*f` (since C++17)
+
+3、otherwise, if `t1` does not satisfy the previous items, then `INVOKE(f, t1)` is equivalent to `(*t1).*f`
+
+三、 otherwise, `INVOKE(f, t1, t2, ..., tN)` is equivalent to `f(t1, t2, ..., tN)` (that is, `f` is a [*FunctionObject*](https://en.cppreference.com/w/cpp/named_req/FunctionObject))
 
 ### Notes
 
@@ -296,3 +300,4 @@ In addition, the following standard library facilities accept any *Callable* typ
 | [std::packaged_task](https://en.cppreference.com/w/cpp/thread/packaged_task) |
 | [std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper) |
 
+> NOTE: 可以认为，上述这些，在内部实现中，都使用了`std::invoke`

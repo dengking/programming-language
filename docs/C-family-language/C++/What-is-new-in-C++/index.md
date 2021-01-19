@@ -131,6 +131,8 @@ C++另外一个非常大的发展方向是: 提高C++ program的performance:
 
 2、`C++\Library\Standard-library\Thread`
 
+3、C++17 execution policy
+
 #### 二、compile-time computation
 
 参见`C-and-C++\Compile-time-and-run-time\Compile-time-computation`章节。

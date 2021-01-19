@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
+    - Function-as-template-parameter: Function-as-template-parameter
     - Callable: Callable
-    - std-result_of: std-result_of.md
+    - std-result_of: std-result_of
     # 变参函数
-    - Variadic-function: Variadic-function.md
+    - Variadic-function: Variadic-function
