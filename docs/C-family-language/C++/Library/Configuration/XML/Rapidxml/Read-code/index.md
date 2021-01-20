@@ -5,7 +5,7 @@
 Defined in [rapidxml.hpp](http://rapidxml.sourceforge.net/rapidxml.hpp)
 Base class for [xml_document](http://rapidxml.sourceforge.net/manual.html#classrapidxml_1_1xml__document)
 
-#### Description
+### Description
 
 This class is used by the parser to create new nodes and attributes, without overheads of **dynamic memory allocation**. In most cases, you will not need to use this class directly. However, if you need to create nodes manually or modify names/values of nodes, you are encouraged to use [memory_pool](http://rapidxml.sourceforge.net/manual.html#classrapidxml_1_1memory__pool) of relevant [xml_document](http://rapidxml.sourceforge.net/manual.html#classrapidxml_1_1xml__document) to allocate the memory. Not only is this faster than allocating them by using `new` operator, but also their lifetime will be tied to the lifetime of document, possibly simplyfing memory management.
 
@@ -37,7 +37,7 @@ To obtain absolutely top performance from the parser, it is important that all n
 
 
 
-### Source code
+### macro
 
 ```C++
 // Pool sizes
@@ -65,3 +65,99 @@ To obtain absolutely top performance from the parser, it is important that all n
 #endif
 ```
 
+
+
+### `class memory_pool`
+
+
+
+#### 数据结构
+
+```C++
+struct header
+{
+    char *previous_begin;
+};
+
+char *m_begin;// Start of raw memory making up current pool
+char *m_ptr;// First free byte in current pool
+char *m_end;// One past last available byte in current pool
+char m_static_memory[RAPIDXML_STATIC_POOL_SIZE];    // Static raw memory
+```
+
+
+
+#### `char *align(char *ptr)`
+
+```c++
+char *align(char *ptr)
+{
+    std::size_t alignment = ((RAPIDXML_ALIGNMENT - (std::size_t(ptr) & (RAPIDXML_ALIGNMENT - 1))) & (RAPIDXML_ALIGNMENT - 1));
+    return ptr + alignment;
+}
+        
+```
+
+下面的描述以假设`RAPIDXML_ALIGNMENT`为16($2^4$)为前提进行展开，显然，`align`的目的是: 使返回值的后`4`位为0，显然这样它就是multiple of 16:
+
+1、由`ptr + alignment`可知，`alignment`表示`ptr`需要向后移动多少位；
+
+2、 `(std::size_t(ptr) & (RAPIDXML_ALIGNMENT - 1))` 是取`ptr`的后四位；
+
+3、`(RAPIDXML_ALIGNMENT - (std::size_t(ptr) & (RAPIDXML_ALIGNMENT - 1))`
+
+计算的是 要向前移动多少位，后四位才能够归0，这样才能够被16整除。
+
+4、最后的 `& (RAPIDXML_ALIGNMENT - 1)` 表示取后四位；
+
+
+
+####  `void *allocate_aligned(std::size_t size)`
+
+
+
+```C++
+ void *allocate_aligned(std::size_t size)
+ {
+     // Calculate aligned pointer
+     char *result = align(m_ptr);
+
+     // If not enough memory left in current pool, allocate a new pool
+     if (result + size > m_end)
+     {
+         // Calculate required pool size (may be bigger than RAPIDXML_DYNAMIC_POOL_SIZE)
+         std::size_t pool_size = RAPIDXML_DYNAMIC_POOL_SIZE;
+         if (pool_size < size)
+             pool_size = size;
+
+         // Allocate
+         std::size_t alloc_size = sizeof(header) + (2 * RAPIDXML_ALIGNMENT - 2) + pool_size;     // 2 alignments required in worst case: one for header, one for actual allocation
+         char *raw_memory = allocate_raw(alloc_size);
+
+         // Setup new pool in allocated memory
+         char *pool = align(raw_memory);
+         header *new_header = reinterpret_cast<header *>(pool);
+         new_header->previous_begin = m_begin;
+         m_begin = raw_memory;
+         m_ptr = pool + sizeof(header);
+         m_end = raw_memory + alloc_size;
+
+         // Calculate aligned pointer again using new pool
+         result = align(m_ptr);
+     }
+
+     // Update pool and return aligned pointer
+     m_ptr = result + size;
+     return result;
+ }
+```
+
+> NOTE: 上面这段代码让我想到了:
+>
+> 1、cppreference object中的placement
+>
+> 2、placement new
+>
+> 3、object 的lifetime is bound by its storage
+>
+> 

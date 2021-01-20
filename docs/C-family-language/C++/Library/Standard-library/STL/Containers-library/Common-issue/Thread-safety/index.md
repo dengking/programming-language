@@ -23,6 +23,10 @@ i.e. it's safe to access distinct elements of the same container, so for example
 
 Apart from that, the same rules apply to containers as for the rest of the standard library (see 17.6.5.9 [res.on.data.races]), as [Mr.C64's answer](https://stackoverflow.com/a/12931932/981959) says, and additionally [container.requirements.dataraces] lists some non-const member functions of containers that can be called safely because they only return non-const references to elements, they don't actually modify anything (in general any non-const member function must be considered a modification.)
 
+## stackoverflow [Concurrent access to different keys in Map C++](https://stackoverflow.com/questions/32839569/concurrent-access-to-different-keys-in-map-c)
+
+
+
 
 
 ## stackoverflow [Safe parallel read-only access to a STL container](https://stackoverflow.com/questions/10833512/safe-parallel-read-only-access-to-a-stl-container)
@@ -35,6 +39,13 @@ A data-race, from the C++11 specification in sections 1.10/4 and 1.10/21, requir
 
 > NOTE: 从data race的本质来进行分析的；
 
+
+
+## stackoverflow [std::map thread-safety](https://stackoverflow.com/questions/15067160/stdmap-thread-safety)
+
+[A](https://stackoverflow.com/a/15067564)
+> NOTE: 这个回答是比较深刻的
+
 ## cppreference [Containers library # Thread safety](https://en.cppreference.com/w/cpp/container#Thread_safety)
 
 
@@ -44,3 +55,16 @@ A data-race, from the C++11 specification in sections 1.10/4 and 1.10/21, requir
 Different elements in the same container can be modified concurrently by different threads, except for the elements of `std::vector<bool>` (for example, a vector of [std::future](https://en.cppreference.com/w/cpp/thread/future) objects can be receiving values from multiple threads).
 
 > NOTE: 在 stackoverflow [C++11 STL containers and thread safety](https://stackoverflow.com/questions/12931787/c11-stl-containers-and-thread-safety) # [A](https://stackoverflow.com/a/12938588) 中，对此进行了解释；
+
+
+
+## 总结
+
+1、可能的情况比较复杂，难以用简单的几句话概括
+
+2、thread safety包括两个方面:
+
+a、container本身的thread safety
+
+b、container中元素的thread safety
+
