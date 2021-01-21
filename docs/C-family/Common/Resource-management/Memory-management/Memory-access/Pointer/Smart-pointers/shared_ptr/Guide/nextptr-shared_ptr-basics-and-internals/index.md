@@ -70,7 +70,7 @@ A *`shared_ptr`* control block at least includes
 
 1、a pointer to the managed object or the object itself, 
 
-2、a reference counter, and 
+2、a **reference counter**, and 
 
 > NOTE: reference counter是在control block中，而不是在object中
 
@@ -80,7 +80,7 @@ A *`shared_ptr`* control block at least includes
 
 And depending on how a *shared_ptr* is initialized, the control block can also contain other data, most notably, a deleter and an allocator. The following figure corresponds to the example in the previous section. It shows the conceptual memory layout of the two *`shared_ptr`* instances managing the object:
 
-![shared_ptr control block](https://cdn.nextptr.com/images/uimages/ST5xPgtrtB0ZluZibn6rSw3p.png)
+![shared_ptr control block](./conceptual-memory-layout.png)
 
 ------
 
@@ -146,9 +146,11 @@ std::cout << *sp << "\n"; //Hello
 
 ### **2.2. Reference Counter**
 
-The reference counter, which is incremented and decremented atomically, tracks the number of owning *shared_ptr* instances. The reference count increases as a new *shared_ptr* is constructed, and it decreases as an owning *shared_ptr* is destroyed. One exception to that is the reference count is left unchanged when a *shared_ptr* is *moved* because the move-constructor transfers the ownership from the source to the newly constructed *shared_ptr*. The managed object is disposed of when the reference count reaches zero.
+> NOTE: 讲述了reference counter的原理
 
-> NOTE: 是否有copy constructor？
+The reference counter, which is incremented and decremented atomically, tracks the number of owning *shared_ptr* instances. The reference count increases as a new *shared_ptr* is constructed, and it decreases as an owning *shared_ptr* is destroyed. One exception to that is the reference count is left unchanged when a *shared_ptr* is *moved* because the **move-constructor transfers the ownership** from the source to the newly constructed *shared_ptr*. The managed object is disposed of when the reference count reaches zero.
+
+> NOTE: 是否有copy constructor？有的，参见 cppreference [std::shared_ptr<T>::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr/shared_ptr)。
 
 *std::shared_ptr* ownership is also affected by the copy and move assignment operators. The copy assignment operator decreases the reference count of the destination (LHS) *shared_ptr* and increases the reference count of the source (RHS) *shared_ptr*. Whereas, the move assignment operator decreases the reference count of the destination (LHS) but does not change the reference count of the source (RHS).
 
