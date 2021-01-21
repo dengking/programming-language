@@ -2,8 +2,10 @@ nav:
     - Introduction: index.md
     - Pointer: Pointer
     - Pointer-to-void: Pointer-to-void
-    - Smart-pointers: Smart-pointers
     - Multiple-level-pointer: Multiple-level-pointer
     - Pointer-and-integer: Pointer-and-integer
+    
+    - Smart-pointers: Smart-pointers
+
 
     

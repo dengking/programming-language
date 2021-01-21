@@ -1,5 +1,5 @@
 nav:
-    - Smart-pointer: Smart-pointer.md
+    - Introduction: index.md
     - CppCoreGuidelines-Passing-Smart-Pointers: CppCoreGuidelines-Passing-Smart-Pointers
     - unique_ptr: unique_ptr
     - shared_ptr: shared_ptr

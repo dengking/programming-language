@@ -19,6 +19,7 @@ class SPDLOG_API registry
 {
 private:
 	std::shared_ptr<thread_pool> tp_;
+    std::unordered_map<std::string, std::shared_ptr<logger>> loggers_;
 };
 ```
 
@@ -38,6 +39,89 @@ private:
 };
 
 ```
+
+
+
+### `async_msg`
+
+```C++
+using async_logger_ptr = std::shared_ptr<spdlog::async_logger>;
+struct async_msg : log_msg_buffer
+{
+    async_msg_type msg_type{async_msg_type::log};
+    async_logger_ptr worker_ptr;
+    
+    
+};
+```
+
+
+
+### `async_logger`
+
+```C++
+class SPDLOG_API async_logger final : public std::enable_shared_from_this<async_logger>, public logger
+{
+private:
+    std::weak_ptr<details::thread_pool> thread_pool_;
+};
+```
+
+
+
+```C++
+// send the log message to the thread pool
+SPDLOG_INLINE void spdlog::async_logger::sink_it_(const details::log_msg &msg)
+{
+    if (auto pool_ptr = thread_pool_.lock())
+    {
+        pool_ptr->post_log(shared_from_this(), msg, overflow_policy_);
+    }
+    else
+    {
+        throw_spdlog_ex("async log: thread pool doesn't exist anymore");
+    }
+}
+```
+
+
+
+必须要破环:
+
+1、registry-(`shared_ptr`)->thread_pool
+
+2、registry-(`shared_ptr`)->logger
+
+3、async_logger-(`weak_ptr`)->thread_pool
+
+4、thread_pool的message queue-(`shared_ptr`)->async_logger
+
+显然环在3、4，因此在3中只能够使用`weak_ptr`。
+
+当thread_pool的message queue的所有的message被处理完成了，则
+
+
+它使用smart pointer的目的是: 
+
+1、只有当所有的asynchronous message被处理了，才能够析构它所依赖的，asynchronous message直接依赖的就是`async_logger`，因此它有member `async_logger_ptr worker_ptr`，显然，只有当所有的asynchronous message被处理完了，才可能析构`async_logger`；
+
+2、asynchronous message之间存在着复杂的依赖关系: 它要入queue，要有异步thread来对它进行处理；
+
+3、为了简化它的使用，不能够让用户显式地调用`stop`函数来通知`thread_pool`
+
+4、对于logger object，它必须要使用pointer，因为只有pointer才能够实现dynamic polymorphism，才能够一定程度上实现type erasure:
+
+```C++
+std::unordered_map<std::string, std::shared_ptr<logger>> loggers_;
+```
+
+5、按照它的这种依赖关系，什么时候才能够析构: asynchronous message都被处理了
+
+6、`async_logger`、`thread_pool`、asynchronous message是非常典型的场景，它们之间有着依赖关系；
+
+7、`async_logger`往`thread_pool`中`post_log`，即将消息放到队列中，是在方法: `spdlog::async_logger::sink_it_`中实现的；在`thread_pool`的实现中，会调用`spdlog::async_logger`的`backend_sink_it_`方法来处理消息；
+
+8、`thread_pool`并不直接依赖`async_logger`，如果`async_logger`中使用`shared_ptr<async_logger>`会怎样？
 
 
 
