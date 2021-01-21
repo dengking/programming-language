@@ -2,11 +2,11 @@
 
 “Smart pointer”即“智能指针”
 
-## 维基百科[Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)
+## wikipedia [Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)
 
 > NOTE: smart pointer不仅仅能够用于memory management，还能够用于其他的resource management。
 
-> NOTE: smart pointer能够解决的问题其实就是manual memory management所面临的问题，在`Manual-memory-management\Manual-memory-management.md`中对这些问题进行了总结。
+> NOTE: smart pointer能够解决的问题其实就是manual memory management所面临的问题，在`Manual-memory-management`中对这些问题进行了总结。
 >
 
 
