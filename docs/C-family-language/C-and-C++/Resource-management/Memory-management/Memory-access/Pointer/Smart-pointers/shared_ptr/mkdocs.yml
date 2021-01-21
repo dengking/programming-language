@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
+    - Guide: Guide
     - pointer_cast: pointer_cast.md
     - shared_ptr-and-this: shared_ptr-and-this
+    - weak_ptr: weak_ptr

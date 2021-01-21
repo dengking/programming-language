@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
-    - CppCoreGuidelines-Passing-Smart-Pointers: CppCoreGuidelines-Passing-Smart-Pointers
     - unique_ptr: unique_ptr
     - shared_ptr: shared_ptr
-    - weak_ptr: weak_ptr
     - auto_ptr: auto_ptr.md
+    - CppCoreGuidelines-Passing-Smart-Pointers: CppCoreGuidelines-Passing-Smart-Pointers    
