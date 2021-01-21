@@ -1,3 +1,3 @@
 nav:
-    - nextptr-shared_ptr-basics-and-internals-with-example: nextptr-shared_ptr-basics-and-internals-with-example
+    - nextptr-shared_ptr-basics-and-internals: nextptr-shared_ptr-basics-and-internals
     - nextptr-Using-weak_ptr-for-circular-references: nextptr-Using-weak_ptr-for-circular-references
