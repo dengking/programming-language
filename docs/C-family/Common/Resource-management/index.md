@@ -36,6 +36,18 @@ RAII等都是C++的resource management策略。
 
 
 
+### Smart pointer
+
+
+
+### 总结
+
+RAII是典型的基于object lifetime来实现resource management；
+
+Smart pointer也可以解读为是基于object lifetime的: 
+
+1、`share_ptr` object的个数决定了resource lifetime
+
 ## Example of resource management
 
 movable but not copyable：
@@ -47,3 +59,13 @@ movable but not copyable：
 [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
 
 > `std::thread` is not [*CopyConstructible*](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) or [*CopyAssignable*](https://en.cppreference.com/w/cpp/named_req/CopyAssignable), although it is [*MoveConstructible*](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) and [*MoveAssignable*](https://en.cppreference.com/w/cpp/named_req/MoveAssignable).
+
+
+
+## Ownership
+
+resource的ownership是一个非常重要的话题，在下面的内容中有所涉及:
+
+1、smart pointer
+
+2、move semantic

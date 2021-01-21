@@ -2,7 +2,17 @@
 
 ## **1. Overview**
 
-The C++11 *`std::shared_ptr<T>`* is a shared ownership smart pointer type. Several *`shared_ptr`* instances can share the management of an object's lifetime through a common *control block*. The managed object is deleted when the last owning *`shared_ptr`* is destroyed (or is made to point to another object). Memory management by *`shared_ptr`* is deterministic because the timing of a managed object's destruction is predictable and in the developer's control. Hence, *`std::shared_ptr`* brings deterministic automatic memory management to C++, without the overhead of garbage collection. Here is a basic example of *`shared_ptr`*:
+The C++11 *`std::shared_ptr<T>`* is a **shared ownership smart pointer type**. Several *`shared_ptr`* instances can share the management of an object's lifetime through a common *control block*. The managed object is deleted when the last owning *`shared_ptr`* is destroyed (or is made to point to another object). 
+
+Memory management by *`shared_ptr`* is deterministic because the timing of a managed object's destruction is predictable and in the developer's control. Hence, *`std::shared_ptr`* brings deterministic automatic memory management to C++, without the overhead of garbage collection. 
+
+> NOTE: 这段话让我想起来:
+>
+> 1、make it computational、control theory
+>
+> 2、multithread and dangling pointer
+
+Here is a basic example of *`shared_ptr`*:
 
 ```C++
 //some struct
