@@ -139,7 +139,7 @@ int main()
 
 ### Acquire shared ownership
 
-在下面的文章中，涉及了这个topic: 
+本节标题的含义是: 获取对某个object/resource的shared ownership，在下面的文章中，涉及了这个topic: 
 
 #### cppreference [std::shared_ptr # Notes](https://en.cppreference.com/w/cpp/memory/shared_ptr)
 
@@ -157,11 +157,13 @@ Constructing a new `shared_ptr` using the raw underlying pointer owned by anothe
 >
 > 
 
-#### 补充: `enable_shared_from_this` 和 `shared_from_this`
+####  `enable_shared_from_this` 和 `shared_from_this`
 
-参见 `./shared_ptr-and-this`。
+这也是实现"Acquire shared ownership"的一种方式，参见 `./shared_ptr-and-this`。
 
 ### Release shared ownership
+
+本节标题的含义是: 释放对某个object/resource的shared ownership。
 
 #### cppreference [shared_ptr::reset](https://en.cppreference.com/w/cpp/memory/shared_ptr/reset)
 
