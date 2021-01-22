@@ -64,11 +64,82 @@ If multiple threads of execution access the same `shared_ptr` without synchroniz
 >
 > 没有理解上面这段话的含义；
 
+### Example
+
+#### Subtyping polymorphism
+
+下面这个例子展示了`std::shared_ptr` + subtyping polymorphism:
+
+```C++
+#include <iostream>
+#include <memory>
+#include <thread>
+#include <chrono>
+#include <mutex>
+
+struct Base
+{
+	Base()
+	{
+		std::cout << "  Base::Base()\n";
+	}
+	// Note: non-virtual destructor is OK here
+	~Base()
+	{
+		std::cout << "  Base::~Base()\n";
+	}
+};
+
+struct Derived: public Base
+{
+	Derived()
+	{
+		std::cout << "  Derived::Derived()\n";
+	}
+	~Derived()
+	{
+		std::cout << "  Derived::~Derived()\n";
+	}
+};
+
+void thr(std::shared_ptr<Base> p)
+{
+	std::this_thread::sleep_for(std::chrono::seconds(3));
+	std::shared_ptr<Base> lp = p; // thread-safe, even though the
+								  // shared use_count is incremented
+	{
+		static std::mutex io_mutex;
+		std::lock_guard<std::mutex> lk(io_mutex);
+		std::cout << "local pointer in a thread:\n" << "  lp.get() = " << lp.get() << ", lp.use_count() = " << lp.use_count() << '\n';
+	}
+}
+
+int main()
+{
+	std::shared_ptr<Base> p = std::make_shared<Derived>();
+
+	std::cout << "Created a shared Derived (as a pointer to Base)\n" << "  p.get() = " << p.get() << ", p.use_count() = " << p.use_count() << '\n';
+	std::thread t1(thr, p), t2(thr, p), t3(thr, p);
+	p.reset(); // release ownership from main
+	std::cout << "Shared ownership between 3 threads and released\n" << "ownership from main:\n" << "  p.get() = " << p.get() << ", p.use_count() = " << p.use_count() << '\n';
+	t1.join();
+	t2.join();
+	t3.join();
+	std::cout << "All threads completed, the last one deleted Derived\n";
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
 ## 如何维护shared ownership?
+
+### Acquire  shared ownership
 
 在下面的文章中，涉及了这个topic: 
 
-### cppreference [std::shared_ptr # Notes](https://en.cppreference.com/w/cpp/memory/shared_ptr)
+#### cppreference [std::shared_ptr # Notes](https://en.cppreference.com/w/cpp/memory/shared_ptr)
 
 The ownership of an object can only be shared with another `shared_ptr` by 
 
@@ -83,3 +154,11 @@ Constructing a new `shared_ptr` using the raw underlying pointer owned by anothe
 > 1、learncpp [std::shared_ptr](https://www.learncpp.com/cpp-tutorial/15-6-stdshared_ptr/)，在 `Guide\learncpp-std-shared_ptr` 中收录了这篇文章
 >
 > 
+
+
+
+### Release shared ownership
+
+#### cppreference [shared_ptr::reset](https://en.cppreference.com/w/cpp/memory/shared_ptr/reset)
+
+如何release shared ownership？在 "cppreference [std::shared_ptr # Notes](https://en.cppreference.com/w/cpp/memory/shared_ptr) # Example "中展示的例子，演示了用法；
