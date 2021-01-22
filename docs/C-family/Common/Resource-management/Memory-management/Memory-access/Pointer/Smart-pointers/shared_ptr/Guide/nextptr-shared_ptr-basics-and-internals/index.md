@@ -553,7 +553,9 @@ int main() {
 }
 ```
 
-### **2.5. Allocator**
+
+
+### 2.5. Allocator
 
 The control block itself is allocated by an allocator that must satisfy the [Allocator](https://en.cppreference.com/w/cpp/named_req/Allocator) requirements. When a custom allocator is not provided, the *std::allocator* is used that dynamically allocates the control block. The control block keeps a copy of the allocator, which is *type-erased* like the deleter. There are two ways to use a custom allocator. One is to provide a custom allocator when initializing the *shared_ptr* with a managed object pointer, as shown below. Note that this *shared_ptr* constructor also requires a deleter:
 
@@ -569,7 +571,9 @@ Another way to use a custom allocator is to utilize *std::allocate_shared* that 
 auto sp = std::allocate_shared<SomeData>(Allocator<SomeData>());
 ```
 
-## **3. Conclusion**
+
+
+## 3. Conclusion
 
 > NOTE: 重要是对比`shared_ptr`和raw pointer
 

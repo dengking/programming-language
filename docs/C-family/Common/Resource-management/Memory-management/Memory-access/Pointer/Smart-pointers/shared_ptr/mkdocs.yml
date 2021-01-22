@@ -1,6 +1,9 @@
 nav:
     - Introduction: index.md
     - Guide: Guide
-    - pointer_cast: pointer_cast.md
+    - Implementation: Implementation
+
     - shared_ptr-and-this: shared_ptr-and-this
+    - std-make_shared: std-make_shared
     - weak_ptr: weak_ptr
+    - pointer_cast: pointer_cast.md    

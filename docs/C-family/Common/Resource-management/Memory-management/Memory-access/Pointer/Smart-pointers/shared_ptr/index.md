@@ -135,7 +135,9 @@ int main()
 
 ## 如何维护shared ownership?
 
-### Acquire  shared ownership
+对于shared ownership，可以acquire、release；
+
+### Acquire shared ownership
 
 在下面的文章中，涉及了这个topic: 
 
@@ -155,7 +157,9 @@ Constructing a new `shared_ptr` using the raw underlying pointer owned by anothe
 >
 > 
 
+#### 补充: `enable_shared_from_this` 和 `shared_from_this`
 
+参见 `./shared_ptr-and-this`。
 
 ### Release shared ownership
 

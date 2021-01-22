@@ -3,7 +3,8 @@ nav:
     - Construct-On-First-Use: Construct-On-First-Use
     - Nifty-Counter: Nifty-Counter
     ########## resource相关########## 
-    - Resource-management: Resource-management   
+    - RAII-based: RAII-based
+    - Resource-Return: Resource-Return
     #################### virtual相关####################    
     - Virtual-Constructor: Virtual-Constructor
     - Virtual-Friend-Function: Virtual-Friend-Function  
@@ -17,7 +18,7 @@ nav:
     # Control the granularity of access to the implementation details of a class
     - Attorney-Client: Attorney-Client
     # 控制object是否能够创建于heap
-    - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects
+    - Requiring-or-Prohibiting: Requiring-or-Prohibiting
     #
     - Temporary-Proxy: Temporary-Proxy
     #
@@ -25,6 +26,5 @@ nav:
     #
     - Temporary-Base-Class: Temporary-Base-Class
     - Counted-Body: Counted-Body
-    - Non-copyable: Non-copyable
-    - RAII: RAII
-    - Scope-Guard: Scope-Guard
+
+
