@@ -367,6 +367,8 @@ auto sp = std::allocate_shared<SomeData>(Allocator<SomeData>());
 
 ## **3. Conclusion**
 
-The *std::shared_ptr<`T`>* is a handy yet straightforward utility. But under its simplicity lie extensive details that make it work. Dereferencing a *shared_ptr* is nearly as fast as a raw pointer, but constructing or copying a *shared_ptr* is certainly more expensive. Nonetheless, for most applications, this cost is reasonable for automatic memory management.
+> NOTE: 重要是对比`shared_ptr`和raw pointer
+
+The *std::shared_ptr<`T`>* is a handy yet straightforward utility. But under its simplicity lie extensive details that make it work. Dereferencing a *shared_ptr* is nearly as fast as a **raw pointer**, but constructing or copying a *shared_ptr* is certainly more expensive. Nonetheless, for most applications, this cost is reasonable for **automatic memory management**.
 
 
