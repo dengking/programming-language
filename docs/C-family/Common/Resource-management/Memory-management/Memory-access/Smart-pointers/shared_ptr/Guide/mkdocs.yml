@@ -1,3 +1,5 @@
 nav:
     - nextptr-shared_ptr-basics-and-internals: nextptr-shared_ptr-basics-and-internals
     - nextptr-Using-weak_ptr-for-circular-references: nextptr-Using-weak_ptr-for-circular-references
+    - learncpp-std-shared_ptr: learncpp-std-shared_ptr
+    - Strong-exception-safety: Strong-exception-safety

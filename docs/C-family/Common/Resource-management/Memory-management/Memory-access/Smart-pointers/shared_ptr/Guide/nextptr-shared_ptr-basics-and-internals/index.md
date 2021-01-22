@@ -372,9 +372,11 @@ The reference counter, which is incremented and decremented atomically, tracks t
 
 > NOTE: 是否有copy constructor？有的，参见 cppreference [std::shared_ptr<T>::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr/shared_ptr)。
 
+#### Copy and move assignment operators
+
 *std::shared_ptr* ownership is also affected by the copy and move assignment operators. The copy assignment operator decreases the reference count of the destination (LHS) *shared_ptr* and increases the reference count of the source (RHS) *shared_ptr*. Whereas, the move assignment operator decreases the reference count of the destination (LHS) but does not change the reference count of the source (RHS).
 
-> NOTE: 为什么这样设计？参见:
+> NOTE: 上面这段话貌似有误；参见:
 >
 > 1、cppreference [std::shared_ptr<T>::operator=](https://en.cppreference.com/w/cpp/memory/shared_ptr/operator%3D)
 
