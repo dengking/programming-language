@@ -10,19 +10,23 @@ OOP、behavior、interface、magic function
 
 ### Expression
 
-可以使用expression来描述某种behavior，进而去:
+可以使用expression来描述某种behavior、运行，进而去:
 
-1、运行
+1、runtime computation: 运行、计算，其实就是我们的program
 
-2、校验、reflection，这其实就是"Concept/named requirement"
+2、compile type computation: 校验、reflection，这其实就是下面的"Concept/named requirement"
+
+
 
 #### Concept/named requirement
 
 1、concept也是使用expression来表达的，比如expression SFINAE， 另外还有constexpr，
 
-2、`std::declval`就是用于构造expression
+2、`std::declval`就是用于构造expression、declval 方便地表达expression
 
 3、Concept/named requirement其实就是compile-time expression，其实是compile-time computation
+
+
 
 ## draft: Mixin 给予或删除
 
