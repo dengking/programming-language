@@ -4,13 +4,15 @@
 
 The C++11 *`std::shared_ptr<T>`* is a **shared ownership smart pointer type**. Several *`shared_ptr`* instances can share the management of an object's lifetime through a common *control block*. The managed object is deleted when the last owning *`shared_ptr`* is destroyed (or is made to point to another object). 
 
-Memory management by *`shared_ptr`* is deterministic because the timing of a managed object's destruction is predictable and in the developer's control. Hence, *`std::shared_ptr`* brings deterministic automatic memory management to C++, without the overhead of garbage collection. 
+Memory management by *`shared_ptr`* is deterministic because the timing of a managed object's destruction is predictable and in the developer's control. Hence, *`std::shared_ptr`* brings deterministic **automatic memory management** to C++, without the overhead of garbage collection. 
 
 > NOTE: 这段话让我想起来:
 >
 > 1、make it computational、control theory
 >
 > 2、multithread and dangling pointer
+>
+> 3、automatic memory management  VS manual memory management，以及manual memory management的弊端，典型的就是dangling pointer
 
 Here is a basic example of *`shared_ptr`*:
 
@@ -98,7 +100,9 @@ Next, we talk about the details of the most relevant parts of the **control bloc
 
 ### 2.1. Pointer to Managed Object (or Managed Object)
 
-A control block contains a pointer to the managed object, which is used for deleting the object. One interesting fact is that the managed pointer in the control block could be different in type (and even value) from the raw pointer in the *shared_ptr*. This leads to a few fascinating use cases. In the following example, the types of the raw pointer and the managed pointer are different, but they are compatible and have the same values:
+A control block contains a pointer to the **managed object**, which is used for deleting the object. 
+
+One interesting fact is that the **managed pointer in the control block** could be different in type (and even value) from the **raw pointer in the *shared_ptr***. This leads to a few fascinating use cases. In the following example, the types of the raw pointer and the managed pointer are different, but they are compatible and have the same values:
 
 ```C++
 //A shared_ptr<void> managing an int
@@ -124,9 +128,144 @@ auto pa = std::shared_ptr<A>(new B()); //OK
 pa.reset(); //Calls B's destructor
 ```
 
+> NOTE: 完整的测试程序参见下面 。
+
 The inheritance example above is rather contrived(人为的、不自然的). It shows that despite the destructor being not *virtual*, the correct derived class (*B*) destructor is invoked when the base class (*A*) *shared_ptr* is *reset*. That works because the control block is destroying the object through `*B`**, not through the raw pointer `*A`**. Nevertheless, the destructor should be declared *virtual* in the classes that are meant to be used polymorphically. This example intends to merely show how a *shared_ptr* works.
 
-> NOTE: value semantic
+> NOTE: 
+>
+> ```C++
+> //shared_ptr<A> managing a B object
+> //raw pointer is A* and managed pointer is B*
+> ```
+>
+> 理解上面这段话是理解上述**注释**的前提，下面是一些解释:
+>
+> 1、`std::shared_ptr<A>(new B())`，说明`std::shared_ptr` object中，raw pointer的type是 `A*`，因此"raw pointer is `A*`"
+>
+> 2、由于"the control block is destroying the object through `*B`**, not through the raw pointer `*A`**. "，因此 "managed pointer is `B*`"
+>
+> 上面这个例子能够非常好的value semantic VS reference semantic；结合下面的测试程序，能够更好地体现作者的意思；
+
+
+
+> NOTE: 
+>
+> 测试程序1如下:
+>
+> ```C++
+> #include <memory>
+> #include <iostream>
+> #include <thread>
+> #include <atomic>
+> #include <vector>
+> 
+> //Another example
+> //Inheritance with no virtual destructor
+> struct A
+> {
+> 	virtual void test()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	//stuff..
+> 	~A()
+> 	{
+> 		std::cout << "~A\n";
+> 	} //not virtual
+> };
+> struct B: A
+> {
+> 	//stuff..
+> 	~B()
+> 	{
+> 		std::cout << "~B\n";
+> 	} //not virtual
+> 	virtual void test()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> 
+> int main()
+> {
+> 
+> 	//shared_ptr<A> managing a B object
+> 	//raw pointer is A* and managed pointer is B*
+> 	auto pa = std::shared_ptr<A>(new B()); //OK
+> 	pa->test();
+> 	pa.reset(); //Calls B's destructor
+> }
+> // g++ --std=c++11 test.cpp
+> 
+> ```
+>
+> 输出如下:
+>
+> ```C++
+> virtual void B::test()
+> ~B
+> ~A
+> 
+> ```
+>
+> 测试程序2如下:
+>
+> ```C++
+> #include <memory>
+> #include <iostream>
+> #include <thread>
+> #include <atomic>
+> #include <vector>
+> 
+> //Another example
+> //Inheritance with no virtual destructor
+> struct A
+> {
+> 	//stuff..
+> 	~A()
+> 	{
+> 		std::cout << "~A\n";
+> 	} //not virtual
+> };
+> struct B: A
+> {
+> 	//stuff..
+> 	~B()
+> 	{
+> 		std::cout << "~B\n";
+> 	} //not virtual
+> 	void test2()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> 
+> int main()
+> {
+> 
+> 	//shared_ptr<A> managing a B object
+> 	//raw pointer is A* and managed pointer is B*
+> 	auto pa = std::shared_ptr<A>(new B()); //OK
+> 	pa->test2();
+> 	pa.reset(); //Calls B's destructor
+> }
+> // g++ --std=c++11 test.cpp
+> 
+> ```
+>
+> 上述程序，编译报错如下:
+>
+> ```C++
+> test.cpp: 在函数‘int main()’中:
+> test.cpp:36:6: 错误：‘struct A’没有名为‘test2’的成员
+>   pa->test2();
+> 
+> ```
+>
+> 
+
+
 
 #### Aliasing constructor
 
@@ -144,14 +283,79 @@ auto ep = std::shared_ptr<Egg>(new Egg());
 
 //Aliasing constructor to construct shared_ptr<Yolk>
 //yp shares ownership with ep but points to subobject ep->y
-auto yp = std::shared_ptr<Yolk>(ep, &ep->y);     
+auto yp = std::shared_ptr<Yolk>(ep, &ep->y);  
 ```
+
+> NOTE: 测试程序如下:
+>
+> ```C++
+> #include <memory>
+> #include <iostream>
+> #include <thread>
+> #include <atomic>
+> #include <vector>
+> 
+> struct Yolk
+> {
+> 	~Yolk()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	void test()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> struct White
+> {
+> 	~White()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> struct Egg
+> {
+> 	~Egg()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	White w;
+> 	Yolk y;
+> };
+> 
+> int main()
+> {
+> 
+> 	//shared_ptr<A> managing a B object
+> 	auto ep = std::shared_ptr<Egg>(new Egg());
+> 
+> 	//Aliasing constructor to construct shared_ptr<Yolk>
+> 	//yp shares ownership with ep but points to subobject ep->y
+> 	auto yp = std::shared_ptr<Yolk>(ep, &ep->y);
+> 	yp->test();
+> }
+> // g++ --std=c++11 test.cpp
+> 
+> ```
+>
+> 输出如下:
+>
+> ```
+> void Yolk::test()
+> Egg::~Egg()
+> Yolk::~Yolk()
+> White::~White()
+> ```
+>
+> 
 
 The in-depth treatment of **aliasing constructor** deserves(应得) its own space. I encourage you to check out "[Aliasing constructed shared_ptr as key of map or set](https://www.nextptr.com/question/qa1355324734/aliasing-constructed-shared_ptr-as-key-of-map-or-set)" for a more persuasive use case.
 
 > NOTE: 这段话的意思是:  **aliasing constructor** 是一个较大的topic，需要专门进行介绍
 
 There is more discussion about the managed object pointer in the 'Deleter' section below when we talk about the *type erasure*.
+
+#### *std::make_shared*
 
 Before we delve(钻研) into more intricate(复杂的) details, let's talk about the *std::make_shared*. We mentioned above that the control block could either contain a pointer to the managed object or the object itself. The control block is dynamically allocated. Constructing the managed object in-place within the **control block** can avoid the two separate memory allocations for the object and the control block, resulting in an uncomplicated(简单的) control block and better performance. The *std::make_shared* is a preferred way to construct a *shared_ptr* because it builds the managed object within the control block:
 

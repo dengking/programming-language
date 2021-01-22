@@ -1,6 +1,6 @@
+# `std::make_shared`
 
-
-## [std::make_shared](https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared)
+## cppreference [std::make_shared](https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared)
 
 `make_shard`使用的是Object-Generator idiom，参见`C++\Idiom\Template-metaprogramming\Object-Generator`。
 
