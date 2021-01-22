@@ -123,7 +123,11 @@ std::unordered_map<std::string, std::shared_ptr<logger>> loggers_;
 
 8、`thread_pool`并不直接依赖`async_logger`，如果`async_logger`中使用`shared_ptr<async_logger>`会怎样？
 
+9、在使用`thread_pool`的时候，是使用的`std::weak_ptr`，因此，programmer能够判断object是否还在，如果还在，则可以使用，否则就不再使用；当queue中的所有的message都处理完成后，则`async_logger`的reference counter也就归0了，因此可以安全地将它析构了。
 
+10、如果`async_logger`中也使用`shared_ptr<thread_pool>`会发生什么事情？
+
+11、一个误区: 包含`shared_ptr` data member的object的destructor在执行的时候，并不会理会`shared_ptr` 的target object的destruction。
 
 ## [1. QuickStart](https://github.com/gabime/spdlog/wiki/1.-QuickStart) 
 

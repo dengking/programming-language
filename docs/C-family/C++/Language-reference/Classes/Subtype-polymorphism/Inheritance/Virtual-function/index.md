@@ -276,6 +276,8 @@ A useful guideline is that the destructor of any base class must be [public and 
 
 ### During construction and destruction
 
+> NOTE: access outside of object lifetime
+
 When a virtual function is called directly or indirectly from a constructor or from a destructor (including during the construction or destruction of the class’s non-static data members, e.g. in a member [initializer list](https://en.cppreference.com/w/cpp/language/initializer_list)), and the object to which the call applies is the object under construction or destruction, the function called is the final overrider in the constructor’s or destructor’s class and not one overriding it in a more-derived class. In other words, during construction or destruction, the more-derived classes do not exist.
 
 When constructing a complex class with multiple branches, within a constructor that belongs to one branch, polymorphism is restricted to that class and its bases: if it obtains a pointer or reference to a base subobject outside this subhierarchy, and attempts to invoke a virtual function call (e.g. using explicit member access), the behavior is undefined:
