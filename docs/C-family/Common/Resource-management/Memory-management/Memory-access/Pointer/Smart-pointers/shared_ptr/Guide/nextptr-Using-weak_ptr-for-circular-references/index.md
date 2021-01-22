@@ -104,6 +104,8 @@ struct Forth {
 
 Using *shared_ptr* for cyclic dependency causes the lifetime of *Back* and *Forth* to depend on each other. The instances of *Back* and *Forth* can stay in memory and cause memory-leak even when no other part of the application can reach them because they are both holding the *shared_ptr* to each other.
 
+> NOTE: 所谓的memory leak是指它们永远不会被释放
+
 Following illustration shows the memory-leak when all other strong references to both *Back* and *Forth* are destroyed, and no part of the application can reach them:
 
 ![Circular Strong References](./circular-strong-reference.png)
@@ -112,9 +114,11 @@ Following illustration shows the memory-leak when all other strong references to
 
 ## Dealing with Circular References
 
-There are several ways to avoid the memory-leak mentioned above, and depending on an application, the workarounds could be very involved and ugly. For instance, in some cases, we might be able to change one of the references (e.g., the reference to *Back* in *Forth*) to a raw pointer. By doing that, we are letting only one class control the lifetime of the other and avoid a memory leak. However, that solution is too specific and is not applicable in those situations where the lives of *Back* and *Forth* should be entirely independent of each other. It is ideal to use weak references (*weak_ptr*) in these circumstances where classes need to have cyclic links without controlling the lifetime of each other.
+There are several ways to avoid the memory-leak mentioned above, and depending on an application, the workarounds could be very involved(复杂的) and ugly. For instance, in some cases, we might be able to change one of the references (e.g., the reference to *Back* in *Forth*) to a raw pointer. By doing that, we are letting only one class control the lifetime of the other and avoid a memory leak. However, that solution is too specific and is not applicable in those situations where the lives of *Back* and *Forth* should be entirely independent of each other. It is ideal to use weak references (*weak_ptr*) in these circumstances where classes need to have **cyclic links** without controlling the lifetime of each other.
 
-Let's take a more realistic example where we use weak references to avoid circular references. In an event-driven application (e.g., a UI application), there are sources of events and listeners that consume events. A *Listener* is registered with a *Source* for consuming events. An ostensibly simple approach is that a *Source* keeps a strong reference to a *Listener* to dispatch events:
+> NOTE: cyclic line
+
+Let's take a more realistic(现实的) example where we use weak references to avoid circular references. In an event-driven application (e.g., a UI application), there are sources of events and listeners that consume events. A *Listener* is registered with a *Source* for consuming events. An ostensibly(表面上) simple approach is that a *Source* keeps a strong reference to a *Listener* to dispatch events:
 
 ```c++
 struct Event {
@@ -147,7 +151,7 @@ private:
 };
 ```
 
-But the above design causes the lifetime of a *Listener* to be influenced by the lifetime of a *Source*. The situation could be further exacerbated if a *Listener* is a big object and stays in memory for longer than it should. The existence of a *Source* and a *Listener* should be mutually independent, and only their respective holders should control their lifetimes.
+But the above design causes the lifetime of a *Listener* to be influenced by the lifetime of a *Source*. The situation could be further exacerbated(恶化) if a *Listener* is a big object and stays in memory for longer than it should. The existence of a *Source* and a *Listener* should be mutually independent, and only their respective holders should control their lifetimes.
 
 It is tempting to use cyclic references here between *Source* and *Listener* so that they both can explicitly detach from one another when the time comes. But that would require both *Source* and *Listener* to be expressly disposed of by their holders, which might not be feasible or be very tricky at best. A better way is to use a weak reference from *Source* to *Listener*, as shown below:
 
@@ -176,10 +180,10 @@ private:
 
 Following illustration shows the relationships between *Source*, *Listener*, and their respective holders:
 
-![Source Listener Weak Reference](https://cdn.nextptr.com/images/uimages/W-gpKUpFVYzgbdzctByn2ApW.png)
+![Source Listener Weak Reference](./weak-reference.png)
 
-By having a weak reference to a *Listener*, we have separated the lifetimes of *Source* and *Listener*. A *Source* converts the *weak_ptr<Listener>* to a temporary *shared_ptr<Listener>* on-demand when it has to dispatch an event. When a *Listener* is destroyed, its *Source* cannot forward the events, and that can be handled appropriately depending on the application.
+By having a weak reference to a *Listener*, we have separated the lifetimes of *Source* and *Listener*. A *Source* converts the *`weak_ptr<Listener>`* to a temporary *`shared_ptr<Listener>`* on-demand when it has to dispatch an event. When a *Listener* is destroyed, its *Source* cannot forward the events, and that can be handled appropriately depending on the application.
 
 ## **Conclusion**
 
-A reference type that guarantees the existence of the referred object is of paramount importance for writing a safer code. *std::shared_ptr* is a strong reference that provides this assurance. However, the firm control over the lifetime of an object by *shared_ptr* is not desirable in some cases. In those cases, a *weak_ptr* that can be converted to a strong reference on-demand is preferable for a more straightforward design.
+A reference type that guarantees the existence of the referred object is of paramount(至高无上的) importance for writing a safer code. *std::shared_ptr* is a strong reference that provides this assurance. However, the firm control over the lifetime of an object by *shared_ptr* is not desirable in some cases. In those cases, a *weak_ptr* that can be converted to a strong reference on-demand is preferable for a more straightforward design.
