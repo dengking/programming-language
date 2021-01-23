@@ -56,6 +56,10 @@ T x = T(T(f())); // only one call to default constructor of T, to initialize
 
 ## Non-mandatory elision of copy/move (since C++11) operations
 
+
+
+
+
 ## Notes
 
 Copy elision is the only allowed form of optimization (until C++14)one of the two allowed forms of optimization, alongside [allocation elision and extension](https://en.cppreference.com/w/cpp/language/new#Allocation), (since C++14) that can change the observable side-effects. Because some compilers do not perform copy elision in every situation where it is allowed (e.g., in debug mode), programs that rely on the side-effects of copy/move constructors and destructors are not portable.
