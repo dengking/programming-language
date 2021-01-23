@@ -31,13 +31,17 @@ and that variable is declared
 
 then [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution) to select the constructor to use for initialization of the returned value or, for `co_return`, to select the overload of `promise.return_value()` (since C++20) is performed *twice*:
 
-1、first as if *expression* were an rvalue expression (thus it may select the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)), and
+#### first
+
+1、first as if *expression* were an **rvalue expression** (thus it may select the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)), and
 
 a、if the first overload resolution failed or
 
 b、it succeeded, but did not select the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) (formally, the first parameter of the selected constructor was not an rvalue reference to the (possibly cv-qualified) type of *expression*)(until C++20)
 
+> NOTE: b、没有搞懂
 
+#### second
 
 2、then overload resolution is performed as usual, with *expression* considered as an lvalue (so it may select the [copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor)).
 

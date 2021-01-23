@@ -54,7 +54,7 @@ T x = T(T(f())); // only one call to default constructor of T, to initialize
 
 
 
-
+## Non-mandatory elision of copy/move (since C++11) operations
 
 ## Notes
 
