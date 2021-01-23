@@ -2,15 +2,13 @@
 
 Copy elision是对compiler optimization principle的遵循，参见 `C-and-C++\From-source-code-to-exec\Compile\Optimization` 章节。
 
-## cppreference [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)
-
 
 
 ## by value and by reference
 
-显然by value涉及到copy constructor，并且构造的对象在函数调用结束后就会被release掉；但是by reference则不存在。
+显然by value涉及到copy，并且构造的对象在函数调用结束后就会被release掉；但是by reference则不存在。
 
-This is not just a matter of convenience but in fact an optimization. If the parameter (s) binds to an **lvalue** (another non-const object), a copy of the object is made automatically while creating the parameter (s). However, when s binds to an rvalue (temporary object, literal), the copy is typically elided, which saves a call to a copy constructor and a destructor. In the earlier version of the assignment operator where the parameter is accepted as **const reference**, **copy elision** does not happen when the **reference** binds to an **rvalue**. This results in an additional object being created and destroyed.
+> This is not just a matter of convenience but in fact an optimization. If the parameter (s) binds to an **lvalue** (another non-const object), a copy of the object is made automatically while creating the parameter (s). However, when s binds to an rvalue (temporary object, literal), the copy is typically elided, which saves a call to a copy constructor and a destructor. In the earlier version of the assignment operator where the parameter is accepted as **const reference**, **copy elision** does not happen when the **reference** binds to an **rvalue**. This results in an additional object being created and destroyed.
 
 ## wikipedia [Copy elision](https://en.wikipedia.org/wiki/Copy_elision#Return_value_optimization)
 
@@ -314,7 +312,4 @@ int main() {
 - conditional initialization
 
 Most commercial-grade compilers support copy elision & (N)RVO (depending on optimization settings).
-
-
-## wikipedia [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)
 

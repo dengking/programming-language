@@ -6,7 +6,13 @@
 
 ### [R.32: Take a `unique_ptr` parameter to express that a function assumes ownership of a `widget`](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-uniqueptrparam)
 
-If a function should take ownership of a Widget, you should take the `std::unique_ptr<Widget>` by copy. The consequence is that the caller has to move the `std::unique_ptr<Widget>` to make the code to run.
+If a function should take ownership of a `Widget`, you should take the `std::unique_ptr<Widget>` by **copy**. The consequence is that the caller has to move the `std::unique_ptr<Widget>` to make the code to run.
+
+> NOTE: 
+>
+> 1、[std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr) 是 "satisfies the requirements of [*MoveConstructible*](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) and [*MoveAssignable*](https://en.cppreference.com/w/cpp/named_req/MoveAssignable), but not the requirements of either [*CopyConstructible*](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) or [*CopyAssignable*](https://en.cppreference.com/w/cpp/named_req/CopyAssignable)"，而下面的 `sink(std::unique_ptr<Widget> uniqPtr)` 的入参是 pass-by-value，因此，它只能够使用  [*MoveConstructible*](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) ，而不能够使用  [*CopyConstructible*](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) ，因此，它就需要它的调用者，在调用的时候: `std::move(uniqPtr)`，其实它的这个用法和我们使用`std::string` **pass-by-value**是一样的
+>
+> 2、下面的idiom让我想起了resource return idiom
 
 ```c++
 #include <memory>
@@ -71,7 +77,7 @@ int main(){
 
 
 
-The call (1) is fine but the call (2) breaks because you can not copy an std::unique_ptr. If your function only wants to use the Widget, it should take its parameter by pointer of by reference. The difference between a pointer and a reference is that a pointer can be a null pointer.
+The call (1) is fine but the call (2) breaks because you can not copy an `std::unique_ptr`. If your function only wants to use the `Widget`, it should take its parameter by pointer of by reference. The difference between a pointer and a reference is that a pointer can be a null pointer.
 
 ```c++
 void useWidget(Widget* wid);

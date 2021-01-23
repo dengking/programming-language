@@ -4,7 +4,7 @@
 
 ## 使用scope来进行描述
 
-Scope是一个静态/compile-time概念，但是C++中很多dynamic/runtime概念，其实也是基于它而创建的，从后面的内容可以看到，很多都和scope相关，或者说是**一致**的，这种static(program static structure)和dynamic(object lifetime、execution)的**一致性**，能够帮助programmer理解program的execution。
+Scope是一个静态/compile-time概念，但是C++中很多**dynamic/runtime概念**，其实也是基于它而创建的，从后面的内容可以看到，很多**dynamic/runtime概念**都和scope相关，或者说是**一致**的，这种static(program static structure)和dynamic(object lifetime、execution)的**一致性**，能够帮助programmer理解program的execution。
 
 ## Function execution
 
@@ -72,7 +72,7 @@ C++对stack unwind有着非常充分的运用，很多idiom都是建立在stack 
 
 一、RAII
 
-C++中的RAII就是基于scope的，所以C++的scope和resource management之间有着强烈的关联。
+C++中的RAII和scope密切相关，所以C++的scope和resource management之间有着强烈的关联。
 
 基于RAII的:
 

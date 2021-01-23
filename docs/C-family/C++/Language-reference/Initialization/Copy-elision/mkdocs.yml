@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - cppreference-Copy-elision: cppreference-Copy-elision
+    - RVO: RVO

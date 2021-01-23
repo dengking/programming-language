@@ -26,6 +26,16 @@ OOP、behavior、interface、magic function
 
 3、Concept/named requirement其实就是compile-time expression，其实是compile-time computation
 
+## Summary
+
+> NOTE: 总结这样的table非常重要， 能够对C++ OOP有完整的认知
+
+| concept/named requirement | expression | magic function |
+| ------------------------- | ---------- | -------------- |
+|                           |            |                |
+|                           |            |                |
+|                           |            |                |
+
 
 
 ## draft: Mixin 给予或删除
