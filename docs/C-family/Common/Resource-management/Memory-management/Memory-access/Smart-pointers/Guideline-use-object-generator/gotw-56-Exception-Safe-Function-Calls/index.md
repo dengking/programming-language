@@ -1,0 +1,7 @@
+# gotw 056 [Exception-Safe Function Calls](http://www.gotw.ca/gotw/056.htm) 
+
+在 阅读 stackoverflow [Exception safety and make_unique](https://stackoverflow.com/questions/19472550/exception-safety-and-make-unique) 的如下comment中，发现的这篇文章:
+
+
+
+> `multiple allocations in an expression` but each of those allocations via `new T` *is* a separate expression, so you have the opposite: one allocation per each of multiple expressions. That the function call is *itself* an expression containing the other 2 doesn't change that. But aside from the wording, you were on the right track. By my reading, the rule, as formulated by Sutter, is to perform each allocation within its own **statement** or **sequence** them by returning from a separate function call, thereby avoiding weird ordering & leaks: [gotw.ca/gotw/056.htm](http://www.gotw.ca/gotw/056.htm) (oldie-but-goodie) – [underscore_d](https://stackoverflow.com/users/2757035/underscore-d) [Aug 13 '16 at 11:25](https://stackoverflow.com/questions/19472550/exception-safety-and-make-unique/19472607#comment65220154_19472550) 
