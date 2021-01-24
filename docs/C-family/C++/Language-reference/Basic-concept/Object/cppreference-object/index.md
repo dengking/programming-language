@@ -48,6 +48,48 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 
 > NOTE: 在`./Lifetime-and-storage-duration`中，对3)、4)进行说明。
 
+
+
+## Object是C++ programming language的核心概念
+
+C++允许programmer管理memory -> 在cppreference中，使用object（在cppreference）概念来对此进行统一描述；
+
+### Value semantic and reference semantic
+
+Every object has a value;
+
+Value semantic：Copy object
+
+Reference semantic：Reference object
+
+| reference        | value category |
+| ---------------- | -------------- |
+| lvalue reference | lvalue         |
+| rvalue reference | rvalue         |
+
+### C++很多内容都是建立在object上的
+
+显然，使用object概念可以将上面这些内容串联起来，往更深层次来思考：C++中的很多问题都可以归为object的问题：
+
+- RAII：基于scope的对object的lifetime管理
+- MOVE：cross scope，即越过scope的限制
+- dangling pointer、dangling reference
+- ......
+
+Object lifetime、Object value、Object type，这将会在`C++\Language-reference\Basic-concept\Data-model\Object`中描述；
+
+
+
+#### Object、type、value
+
+关于三种的关系，在akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)中有一定的阐述；
+
+**Object**的是标准中定义的一个抽象概念，在实际交流、表述中，我们更多地是使用value，即value semantic，value是比object更加具体一些的概念，它能够表达type，并且对于实际的application，我们关注的是value，而不是像object这样非常底层的；[如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)就是一个典型的例子；这也是为什么：Value semantic is default；
+
+
+
+
+
 ## cppreference [Object](https://en.cppreference.com/w/cpp/language/object)
 
 C++ programs create, destroy, refer to, access, and manipulate *objects*.

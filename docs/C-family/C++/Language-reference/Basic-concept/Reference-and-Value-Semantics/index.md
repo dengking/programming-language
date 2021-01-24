@@ -28,7 +28,9 @@
 
 
 
-但问题是，像C#的[using statement](https://link.zhihu.com/?target=http%3A//msdn.microsoft.com/en-us/library/yh598w02%28v%3Dvs.80%29.aspx)和Java的[try-with-resources statement](https://link.zhihu.com/?target=http%3A//docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)同样具有RAII的特点，但仍然有人会提出["RAII: Why is unique to C++?"](https://link.zhihu.com/?target=http%3A//swiftcoder.wordpress.com/2009/02/18/raii-why-is-it-unique-to-c/)这样的问题。原因即在于C++独有的值语义：**程序员通过**值语义可以方便直观地控制对象生命期（object lifetime），让RAII用起来更自然。
+但问题是，像`C#`的[using statement](https://link.zhihu.com/?target=http%3A//msdn.microsoft.com/en-us/library/yh598w02%28v%3Dvs.80%29.aspx)和Java的[try-with-resources statement](https://link.zhihu.com/?target=http%3A//docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)同样具有RAII的特点，但仍然有人会提出["RAII: Why is unique to C++?"](https://link.zhihu.com/?target=http%3A//swiftcoder.wordpress.com/2009/02/18/raii-why-is-it-unique-to-c/)这样的问题。原因即在于C++独有的值语义：**程序员通过**值语义可以方便直观地控制对象生命期（object lifetime），让RAII用起来更自然。
+
+> NOTE: C++ programmer能够control object lifetime。
 
 更何况像这段代码，
 
@@ -99,34 +101,27 @@ zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihua
 
 ### Object
 
-C++允许programmer管理memory -> 在cppreference中，使用object（在cppreference）概念来对此进行统一描述；
+理解本节内容的一个非常重要的前提是: 理解C++ data model: object，参见 `C++\Language-reference\Basic-concept\Object` 章节。
 
-Every object has a value;
-
-Value semantic：Copy object
-
-Reference semantic：Reference object
-
-显然，使用object概念可以将上面这些内容串联起来，往更深层次来思考：C++中的很多问题都可以归为object的问题：
-
-- RAII：基于scope的对object的lifetime管理
-- MOVE：cross scope，即越过scope的限制
-- dangling pointer、dangling reference
-- ......
-
-Object lifetime、Object value、Object type，这将会在`C++\Language-reference\Basic-concept\Data-model\Object`中描述；
-
-#### C++是兼容并包的
+### C++是兼容并包的
 
 C++是兼容并包的语言，它既包含value semantic又包含reference semantic；
 
 
 
-#### Object、type、value
+### C++对value semantic的增强
 
-关于三种的关系，在akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)中有一定的阐述；
+C++如下是对value semantic的增强:
 
-**Object**的是标准中定义的一个抽象概念，在实际交流、表述中，我们更多地是使用value，即value semantic，value是比object更加具体一些的概念，它能够表达type，并且对于实际的application，我们关注的是value，而不是像object这样非常底层的；[如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)就是一个典型的例子；这也是为什么：Value semantic is default；
+1、copy elision
+
+2、RVO
+
+3、move semantic
+
+
+
+
 
 ### Value semantic is default
 
@@ -167,12 +162,6 @@ C++中需要通过reference semantic才能够实现runtime polymorphism，关于
 
 
 
-### Pass-by-value and pass-by-reference
-
-这两者是最最能够体现value-semantic和reference-semantic的。
-
-
-
 ### Value category
 
 这在`C++\Language-reference\Expressions\Value-categories`章节进行了讨论。
@@ -180,6 +169,10 @@ C++中需要通过reference semantic才能够实现runtime polymorphism，关于
 ### 性能
 
 value semantic和reference semantic和program的性能是存在一定关联的，这其中有着复杂的原因，其中一个非常重要的原因是: Compiler optimization，这在`C++\Language-reference\Basic-concept\Reference-and-Value-Semantics\Value-and-reference-semantics.md`中进行了深入讨论。
+
+
+
+
 
 ### TO READ
 

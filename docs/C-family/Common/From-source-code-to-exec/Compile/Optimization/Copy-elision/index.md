@@ -1,24 +1,8 @@
 # Copy elision
 
-Copy elision是对compiler optimization principle的遵循，参见 `C-and-C++\From-source-code-to-exec\Compile\Optimization` 章节。
+Copy elision是compiler optimization 的一种常用手段，显然它是avoid copy optimization technique在C++ compiler中的运用。
 
-参见 `C++\Language-reference\Initialization\Copy-elision` 章节。
-
-
-
-## 增强value semantic
-
-C++如下是对value semantic的增强:
-
-1、copy elision
-
-2、move semantic
-
-### by value and by reference
-
-显然by value涉及到copy，并且构造的对象在函数调用结束后就会被release掉；但是by reference则不存在。
-
-> This is not just a matter of convenience but in fact an optimization. If the parameter (s) binds to an **lvalue** (another non-const object), a copy of the object is made automatically while creating the parameter (s). However, when s binds to an rvalue (temporary object, literal), the copy is typically elided, which saves a call to a copy constructor and a destructor. In the earlier version of the assignment operator where the parameter is accepted as **const reference**, **copy elision** does not happen when the **reference** binds to an **rvalue**. This results in an additional object being created and destroyed.
+在cppreference中，将"Copy-elision"放到了"Initialization"章节中，所以本章内容原本是放在 `C++\Language-reference\Initialization\Copy-elision` 章节的。
 
 
 
