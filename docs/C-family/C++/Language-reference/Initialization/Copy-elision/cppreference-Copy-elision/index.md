@@ -25,6 +25,8 @@ The copy/move constructors need not be present or accessible:
 > NOTE: 需要注意的是:
 >
 > 1、上面仅仅说明了copy/move constructors need not be present or accessible，而没有说明destructor，在下面的"1、return"中，对destructor进行了说明。
+>
+> 2、这样的设计是否会存在: programmer并不想让这个object被copy，如何来保证呢？在 stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization) # [A](https://stackoverflow.com/a/12953129) 中，提及了于此相关的内容。
 
 ### 1、return
 
@@ -66,7 +68,13 @@ This is an optimization: even when it takes place and the copy/move (since C++11
 
 > NOTE: 上面这段话的意思是: 在C++17之前的版本中，当compiler执行"elision of copy/move "时，即使"copy/move (since C++11) constructor"没有被调用，"copy/move (since C++11) constructor still must be present and accessible (as if no optimization happened at all), otherwise the program is ill-formed"
 >
-> 这样设计的目的是: 在C++ programming language层，并没有规定elision of copy/move ，因此implementation的optimization，必须要保证即使执行了optimization，还是要遵循C++ programming language规范，不能够打破规范；
+> 这样设计的目的是: 
+>
+> 1、在C++ programming language层，并没有规定elision of copy/move ，因此implementation的optimization，必须要保证即使执行了optimization，还是要遵循C++ programming language规范，不能够打破规范；
+>
+> 2、stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization) # [A](https://stackoverflow.com/a/12953129) 中提及的:
+>
+> > If a call to a copy or move constructor is elided, that constructor must still exist and must be accessible. This ensures that copy elision does not allow copying objects which are not normally copyable, e.g. because they have a private or deleted copy/move constructor.
 
 ### 1、return
 
@@ -85,6 +93,8 @@ This variant of **copy elision** is known as **NRVO**, "**named return value opt
 In the initialization of an object, when the source object is a **nameless temporary** and is of the same class type (ignoring [cv-qualification](https://en.cppreference.com/w/cpp/language/cv)) as the target object. 
 
 > NOTE: "nameless temporary "，显然是rvalue。
+
+#### RVO
 
 When the nameless temporary is the operand of a return statement, this variant of copy elision is known as RVO, "**return value optimization**".
 
@@ -105,6 +115,12 @@ Return value optimization is mandatory and no longer considered as copy elision;
 When **copy elision** occurs, the implementation treats the source and target of the omitted copy/move (since C++11) operation as simply two different ways of referring to the same object, and the destruction of that object occurs at the later of the times when the two objects would have been destroyed without the optimization (except that, if the parameter of the selected constructor is an rvalue reference to object type, the destruction occurs when the target would have been destroyed) (since C++17).
 
 > NOTE: 上面这段话是什么意思？没有读懂
+
+Multiple copy elisions may be chained to eliminate multiple copies.
+
+> NOTE: 原文这里仅仅一段话，在 stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization) # [A](https://stackoverflow.com/a/12953145) 中，对这段话进行了专门的注解:
+>
+> 
 
 ### 5、RVO and NRVO in [constant expression](https://en.cppreference.com/w/cpp/language/constant_expression) and [constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) (since C++11)
 
@@ -216,6 +232,10 @@ Copy elision is the only allowed form of optimization (until C++14)one of the tw
 >
 > 2、[Allocation elision and extension](https://en.cppreference.com/w/cpp/language/new#Allocation)
 >
+> "Optimization that can change the observable side-effects"意味中打破As-if-rule，因此，这段话总结了compiler打破As-if rule的optimization。在下面文章中，也涉及了这个topic:
+>
+> 1、stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization) # [A](https://stackoverflow.com/a/12953129)
+>
 > 
 
 Because some compilers do not perform copy elision in every situation where it is allowed (e.g., in debug mode), programs that rely on the side-effects of copy/move constructors and destructors are not portable.
@@ -226,7 +246,7 @@ Because some compilers do not perform copy elision in every situation where it i
 
 In a return statement or a throw-expression, if the compiler cannot perform copy elision but the conditions for copy elision are met or would be met, except that the source is a function parameter, the compiler will attempt to use the move constructor even if the object is designated by an lvalue; see [return statement](https://en.cppreference.com/w/cpp/language/return#Notes) for details.
 
-
+> NOTE: 这其实描述的是RVO
 
 
 
