@@ -1,2 +1,5 @@
 nav:
-    - unique_ptr: unique_ptr.md
+    - Introduction: index.md
+    - std-make_unique: std-make_unique
+    - Copy-constructor-for-a-class-with-unique_ptr: Copy-constructor-for-a-class-with-unique_ptr
+    
