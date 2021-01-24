@@ -8,7 +8,5 @@ nav:
     - Zero-initialization: Zero-initialization.md
     - Constant-initialization: Constant-initialization.md
     - Aggregate-initialization: Aggregate-initialization.md
-    # Copy elision
-    - Copy-elision: Copy-elision
     # 实际的运用
     - Initialization-of-struct: Initialization-of-struct.md

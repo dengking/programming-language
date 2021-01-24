@@ -290,7 +290,17 @@ using wstring_view = basic_string_view<wchar_t>;
 
 
 
+### github [martinmoene](https://github.com/martinmoene)/**[string-view-lite](https://github.com/martinmoene/string-view-lite)**
+
+
+
+### [abseil-cpp](https://github.com/abseil/abseil-cpp)/[absl](https://github.com/abseil/abseil-cpp/tree/master/absl)/[strings](https://github.com/abseil/abseil-cpp/tree/master/absl/strings)/[**string_view.h**](https://github.com/abseil/abseil-cpp/blob/master/absl/strings/string_view.h)
+
+
+
 ## TODO
 
 stackoverflow [What is string_view?](https://stackoverflow.com/questions/20803826/what-is-string-view)
+
+
 

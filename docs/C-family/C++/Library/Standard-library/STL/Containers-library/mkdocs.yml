@@ -4,3 +4,4 @@ nav:
     - Sequence-container: Sequence-container
     - Associative-container: Associative-container
     - Container-adaptors: Container-adaptors
+    - View: View
