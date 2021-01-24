@@ -4,9 +4,107 @@
 
 
 
+## Guide
+
+### C++是兼容并包的
+
+"C++是兼容并包的"语言，它既包含value semantic又包含reference semantic，而现代很多主流programming language仅仅只有reference semantic。
+
+> NOTE: 关于"C++是兼容并包的"，参见 philosophy章节。
+
+### Value semantic and reference semantic是建立在object概念上的
+
+Object对应的是storage，它是最最底层的概念，参见`Object`章节；
+
+#### Every object has a value
+
+在object章节中，对这个topic进行了讨论。
+
+#### Reference semantic: Reference to an object
+
+只有先创建了一个object后，才能够reference它，否则是dangling；
+
+
+
+| reference        | value category |
+| ---------------- | -------------- |
+| lvalue reference | lvalue         |
+| rvalue reference | rvalue         |
+
+
+
+### What is value semantic and reference semantic?
+
+#### 从assignment的角度来进行区分
+
+reference semantic 对应的是 bind、reference object；
+
+value semantic 对应是 copy object；
+
+下面是akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)中的例子
+
+> In C++, `A = B` means that the value of `B` was assigned to `A`. In languages like C# and Java, `A = B` means that the reference `A` now points to whatever `B` was pointing to. Very different.
+
+
+
+> In C++, you can instantiate instances (objects) of a Class (user defined type) with the normal value semantics of the built in types. For example,
+>
+> ```c++
+> float a;
+> MyClass b;
+> ```
+>
+> We can also declare a pointer reference if we want:
+>
+> ```c++
+> MyClass* c = new MyClass();
+> ```
+>
+> In `C#`, we can only declare a reference:
+>
+> ```c++
+> MyClass c = new MyClass();
+> ```
+>
+> So, `C#` and Java have reduced functionality compared to C++.
+
+
+
+### Value semantic is default in C++
+
+在C++中，value semantic is default，即默认是value semantic，如果要使用reference semantic，则需要使用`&`、`&&`。而在java、python中则正好相反，reference semantic is default；
+
+
+
+### Runtime polymorphism
+
+C++中需要通过reference、pointer才能够实现runtime polymorphism，关于此，在`C++\Language-reference\Classes\Subtype-polymorphism`章节进行了讨论。
+
+
+
+### Value category
+
+这在`C++\Language-reference\Expressions\Value-categories`章节进行了讨论。
+
+### 性能
+
+value semantic和reference semantic和program的性能是存在一定关联的，这其中有着复杂的原因，其中一个非常重要的原因是: Compiler optimization，这在下面文章中进行了讨论:
+
+1、`C++\Language-reference\Basic-concept\Reference-and-Value-Semantics\Value-and-reference-semantics`
+
+
+
 ## zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)
 
+> NOTE: C++ programming给予了programmer对object(或者更加彻底的说: memory、data)的control(比如control object lifetime)，这是很多其他的programming language中没有的，并且C++使用object建立起了很多C++的核心特性，比如RAII等，这是C++相对其它programming language的一个特色、优势。这篇文章对这个topic的探讨是比较深刻的；
+>
+> > NOTE: 需要从control theory的角度来进行理解
+>
+> 在"object"章节对这个主题也有描述。
+
 [值语义](https://link.zhihu.com/?target=http%3A//www.parashift.com/c%2B%2B-faq/val-vs-ref-semantics.html)是很多OO语言（比如python、java）里没有的概念。在这些语言里，几乎所有的变量都是引用语义(**Reference Semantics**)，GC掌管了所有对象的生命期管理事务， 程序员无需为此操心，只需要用变量去对象池中去引用即可。值语义虽然也有出场的机会，例如Java里的[Primitive Data Type](https://link.zhihu.com/?target=http%3A//docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.htmlPrimitive)，但毕竟不是重点，所以往往被忽视。
+
+
 
 还有一个很重要的原因，在OO语言里，
 
@@ -95,23 +193,11 @@ void consumer()
 
 
 
-## SUMMARY
-
-zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118)中的内容是非常精简但是内容丰富，需要对一些内容进行扩展，经过仔细梳理、思考发现，C++中的很多内容都与它有着密切的关联，下面对此进行梳理。
-
-### Object
-
-理解本节内容的一个非常重要的前提是: 理解C++ data model: object，参见 `C++\Language-reference\Basic-concept\Object` 章节。
-
-### C++是兼容并包的
-
-C++是兼容并包的语言，它既包含value semantic又包含reference semantic；
 
 
+## C++发展概述
 
 ### C++对value semantic的增强
-
-C++如下是对value semantic的增强:
 
 1、copy elision
 
@@ -119,62 +205,19 @@ C++如下是对value semantic的增强:
 
 3、move semantic
 
+下面是一个简单的总结:
 
+| feature                   | 引入版本 | 章节                                                 | 说明 |
+| ------------------------- | -------- | ---------------------------------------------------- | ---- |
+| move semantic             | C++11    | 参见`C++\Language-reference\Reference\Move-semantic` |      |
+| Temporary materialization | C++17    | 参见参见`C++\Guide\Temporary`                        |      |
+|                           |          |                                                      |      |
 
+### 对reference semantic的增强
 
+1、rvalue reference
 
-### Value semantic is default
-
-在c++中，value semantic is default，即默认是value semantic，如果要实现reference semantic，则需要使用`&`。而在java、python中则正好相反，reference semantic is default；
-
-下面是akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)中的例子
-
-> In C++, `A = B` means that the value of `B` was assigned to `A`. In languages like C# and Java, `A = B` means that the reference `A` now points to whatever `B` was pointing to. Very different.
-
-
-
-> In C++, you can instantiate instances (objects) of a Class (user defined type) with the normal value semantics of the built in types. For example,
->
-> ```c++
-> float a;
-> MyClass b;
-> ```
->
-> We can also declare a pointer reference if we want:
->
-> ```c++
-> MyClass* c = new MyClass();
-> ```
->
-> In `C#`, we can only declare a reference:
->
-> ```c++
-> MyClass c = new MyClass();
-> ```
->
-> So, C# and Java have reduced functionality compared to C++.
-
-
-
-### Runtime polymorphism
-
-C++中需要通过reference semantic才能够实现runtime polymorphism，关于此，在`C++\Language-reference\Classes\Subtype-polymorphism`章节进行了讨论。
-
-
-
-### Value category
-
-这在`C++\Language-reference\Expressions\Value-categories`章节进行了讨论。
-
-### 性能
-
-value semantic和reference semantic和program的性能是存在一定关联的，这其中有着复杂的原因，其中一个非常重要的原因是: Compiler optimization，这在`C++\Language-reference\Basic-concept\Reference-and-Value-Semantics\Value-and-reference-semantics.md`中进行了深入讨论。
-
-
-
-
-
-### TO READ
+## TO READ
 
 https://stackoverflow.com/questions/3106110/what-is-move-semantics/3109981#3109981
 

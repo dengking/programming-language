@@ -42,15 +42,7 @@ C++不断引入新的特性，我们需要从更高地层次来思考这些特�
 
 ### Value-semantic
 
-充分发挥value-semantic。
-
-| feature                   | 引入版本 | 章节                                                 | 说明 |
-| ------------------------- | -------- | ---------------------------------------------------- | ---- |
-| move semantic             | C++11    | 参见`C++\Language-reference\Reference\Move-semantic` |      |
-| Temporary materialization | C++17    | 参见参见`C++\Guide\Temporary`                        |      |
-|                           |          |                                                      |      |
-
-
+充分发挥value-semantic，参见 `C++\Language-reference\Basic-concept\Reference-and-Value-Semantics` 章节。
 
 ### User-defined literal
 
@@ -121,19 +113,5 @@ C++另外一个非常重要的发展方向是: simplify; simplify能够大大增
 
 ### Performance optimization
 
-C++另外一个非常大的发展方向是: 提高C++ program的performance:
-
-#### 一、concurrent/parallel computing
-
-参见
-
-1、`C++\Language-reference\Basic-concept\Abstract-machine\Memory-model`
-
-2、`C++\Library\Standard-library\Thread`
-
-3、C++17 execution policy
-
-#### 二、compile-time computation
-
-参见`C-and-C++\Compile-time-and-run-time\Compile-time-computation`章节。
+C++另外一个非常大的发展方向是: 提高C++ program的performance，这个主题，放到了 `C++\Guide\Optimization` 章节了。
 

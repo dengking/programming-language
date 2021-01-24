@@ -1,13 +1,13 @@
-# Optimization
+# Performance  optimization
 
 一、无论是compiler还是programmer，都需要遵循optimization principle。因此，我们后续谈论optimization的时候，会从两个方面来进行描述:
 1、compiler(实现层)执行的optimization
 
 2、programmer执行的optimization
 
-二、C++的一个发展方向: optimization。
+二、C++的一个发展方向: performance optimization。
 
-本文对C++ optimization进行总结。
+本文对C++ Performance  optimization进行总结。
 
 ## Avoid copy
 
@@ -107,3 +107,20 @@ C++compiler的template argument，deduction使用reference是符合optimization�
 它都是generic programming中的技巧，参见 `Generic-programming\Curiously-recurring-template-pattern` 章节。
 
 4 tag dispatch
+
+
+
+## Concurrent/parallel computing
+
+参见
+
+1、`C++\Language-reference\Basic-concept\Abstract-machine\Memory-model`
+
+2、`C++\Library\Standard-library\Thread`
+
+3、C++17 execution policy
+
+## Compile-time computation
+
+参见`C-and-C++\Compile-time-and-run-time\Compile-time-computation`章节。
+

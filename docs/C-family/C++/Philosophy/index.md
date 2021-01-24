@@ -120,7 +120,9 @@ C++语言就是在这样的发展中，逐渐变大庞杂。
 
 ### C++是兼容并包的
 
-c++提供了极大的选择空间，这就意味着它需要提供各种各样的program technique。一个典型的例子是：c++语言的概念比其他的programming language要多得多：比如在python、java，它们仅仅有reference semantic，而c++囊括了：value semantic、reference semantic。
+c++提供了极大的选择空间，这就意味着它需要提供各种各样的program technique。下面是典型的例子：
+
+1、C++语言的概念比其他的programming language要多得多：比如在python、java，它们仅仅有reference semantic，而c++囊括了：value semantic、reference semantic。
 
 
 
