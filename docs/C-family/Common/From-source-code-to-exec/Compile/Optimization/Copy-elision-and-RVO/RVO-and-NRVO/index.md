@@ -1,14 +1,95 @@
-# RVO
+# RVO and NRVO
 
+## 内容简介
 
+在如下文章中介绍了RVO和NRVO
 
-RVO有多种方式:
+1、cppreference [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)
+
+2、stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)
+
+3、wikipedia [Copy elision](https://en.wikipedia.org/wiki/Copy_elision#Return_value_optimization) # Return value optimization
+
+### compiler执行optimization的步骤/优先级
+
+总的来说，compiler执行optimization的步骤/优先级大致如下: 
 
 1、copy elision
 
-2、两阶段overload resolution
+compiler会优先执行copy elision，如果copy elision不能执行，则会执行下一步；
 
-## boost [Implicit Move when returning a local object](https://www.boost.org/doc/libs/master/doc/html/move/move_return.html)
+2、*two-stage overload resolution*(两阶段overload resolution)
+
+compiler会优先选择move construction，最后才选择copy construction；
+
+compiler是会严格遵循optimization principle的，它会主动将这部分optimization完成，无需由programmer来承担，这在一定程度上simplify C++了。
+
+> NOTE: 关于此，在后面的move-and-return中会结合move来进行讨论。
+
+
+
+## cppreference [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision) # [Notes](https://en.cppreference.com/w/cpp/language/copy_elision#Notes) (since C++11)
+
+In a return statement or a throw-expression, if the compiler cannot perform copy elision but the conditions for copy elision are met or would be met, except that the source is a function parameter, the compiler will attempt to use the **move constructor** even if the object is designated by an lvalue; see [return statement](https://en.cppreference.com/w/cpp/language/return#Notes) for details.
+
+> NOTE: 这其实描述的是RVO
+
+## cppreference [`return` statement](https://en.cppreference.com/w/cpp/language/return) # RVO
+
+> NOET: cppreference [`return` statement](https://en.cppreference.com/w/cpp/language/return) 中并没有RVO章节，它是我添加上去的。
+
+**Returning by value** may involve construction and copy/move of a **temporary object**, unless [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision) is used. 
+
+
+> NOTE: 上面这段话的意思是: 如果没有使用  [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision) ，则"**Returning by value** may involve construction and copy/move of a **temporary object**, "
+
+Specifically, the conditions for copy/move are as follows:
+
+### Automatic move from local variables and parameters(since C++11)
+
+If *`expression`* is a (possibly parenthesized) [id-expression](https://en.cppreference.com/w/cpp/language/identifiers) that names a variable whose type is either
+
+> NOTE: "id-expression"意味着: 它是lvalue。
+
+1、a non-volatile object type or
+
+2、a non-volatile rvalue reference to object type(since C++20)
+
+> NOTE: 2、暂时不懂
+
+and that variable is declared
+
+1、in the body or
+
+2、as a parameter of the innermost enclosing function or lambda expression,
+
+> NOTE: 2、暂时不懂
+
+then [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution) to select the constructor to use for initialization of the returned value or, for `co_return`, to select the overload of `promise.return_value()` (since C++20) is performed *twice*:
+
+> NOTE: *two-stage overload resolution*(两阶段overload resolution)
+
+#### first
+
+1、first as if *expression* were an **rvalue expression** (thus it may select the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)), and
+
+a、if the first overload resolution failed or
+
+b、it succeeded, but did not select the [move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) (formally, the first parameter of the selected constructor was not an rvalue reference to the (possibly cv-qualified) type of *expression*)(until C++20)
+
+> NOTE: b、没有搞懂
+
+#### second
+
+2、then overload resolution is performed as usual, with *expression* considered as an lvalue (so it may select the [copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor)).
+
+### Guaranteed copy elision(since C++17)
+
+If *expression* is a prvalue, the result object is initialized directly by that expression. This does not involve a copy or move constructor when the types match (see [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)).
+
+
+
+
 
 
 
@@ -260,6 +341,5 @@ int main() {
   std::string result = f();
 }
 ```
-
 
 

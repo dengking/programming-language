@@ -1,4 +1,24 @@
-# Copy elision
+# 关于本章
+
+本章讨论Copy elision、RVO，两者之间的关系如下:
+
+Copy elision是一种重要的optimization思路，在C++ implementation中，有着非常广泛的应用；其中非常重要的一个应用就是: RVO。因此本章将RVO的内容也收录了进来，当然RVO，除了使用copy elision外，还应用了一些其它的technique。
+
+本章重要参考的文章有:
+
+1、cppreference [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)
+
+2、stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization)
+
+3、cppreference [`return` statement](https://en.cppreference.com/w/cpp/language/return)
+
+4、wikipedia [Copy elision](https://en.wikipedia.org/wiki/Copy_elision#Return_value_optimization)
+
+本章对上述这些文章进行了一定的整理。
+
+
+
+## Copy elision
 
 Copy elision是compiler optimization 的一种常用手段，显然它是avoid copy optimization technique在C++ compiler中的运用。
 

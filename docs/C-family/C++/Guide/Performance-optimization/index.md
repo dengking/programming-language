@@ -9,6 +9,10 @@
 
 本文对C++ Performance  optimization进行总结。
 
+## Optimization的方向/how to optimize
+
+C++中的很多Optimization technique和`Software-analysis\Performance-optimization`总结的各种Optimization technique是一脉相承的。
+
 ## Avoid copy
 
 Performance optimization中，"avoid copy"是非常重要的一种优化思路，C++无论是在实现(compiler)还是在language层，都贯穿了这个思路，本文将对C++ avoid copy进行总结，下面将分两个部分来进行总结。
@@ -63,7 +67,7 @@ C++ emplace可以作为一个例子，另外它的实现还依赖于placement ne
 
 ### Placement new
 
-
+参见 `Resource-management\Memory-management\Allocation-and-deallocation\C++\new-operator\Placement-new` 章节。
 
 ## Compiler type deduction
 

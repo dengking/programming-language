@@ -42,7 +42,7 @@ C++不断引入新的特性，我们需要从更高地层次来思考这些特�
 
 ### Value-semantic
 
-充分发挥value-semantic，参见 `C++\Language-reference\Basic-concept\Reference-and-Value-Semantics` 章节。
+C++的一个发展方向就是充分发挥value-semantic，在 `C++\Language-reference\Basic-concept\Reference-and-Value-Semantics` 章节对这个主题进行了探讨。
 
 ### User-defined literal
 
@@ -93,25 +93,11 @@ C++的一个发展发现是对template-meta programming的强化。
 
 ### Simplify
 
-C++另外一个非常重要的发展方向是: simplify; simplify能够大大增加C++ programmer的研发效率；
-
-这包括:
-
-1、type inference，参见: `C++\Language-reference\Basic-concept\Type-system\Type-inference`
-
-> draft: C++ 的一个发展方向是: simplify，比如type deduction、auto，记得有一位expert的目标是simplify C++;
->
-> 其实提供更好的compiler报错信息也是一种简化，因此C++中提供了更多的specifier(比如override等等)、concept等概念
-
-
-
-#### C++ Has Become More Pythonic
-
-参见`./preshing-C++Has-Become-More-Pythonic`。
+C++另外一个非常重要的发展方向是: simplify; simplify能够大大增加C++ programmer的研发效率，在`C++\Guide\Simplify` 章节中对这个主题进行了详细探讨。
 
 
 
 ### Performance optimization
 
-C++另外一个非常大的发展方向是: 提高C++ program的performance，这个主题，放到了 `C++\Guide\Optimization` 章节了。
+C++另外一个非常大的发展方向是: 提高C++ program的performance，在 `C++\Guide\Optimization` 章节中对这个主题进行了详细探讨。
 

@@ -288,17 +288,9 @@ Copy elision is the only allowed form of optimization (until C++14)one of the tw
 >
 > 1、stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization) # [A](https://stackoverflow.com/a/12953129)
 >
-> 
+> 这部分内容被收录到了"As-if-rule"章节中。
 
 Because some compilers do not perform copy elision in every situation where it is allowed (e.g., in debug mode), programs that rely on the side-effects of copy/move constructors and destructors are not portable.
 
 > NOTE: 这是cross-plateform的建议
-
-### (since C++11)
-
-In a return statement or a throw-expression, if the compiler cannot perform copy elision but the conditions for copy elision are met or would be met, except that the source is a function parameter, the compiler will attempt to use the move constructor even if the object is designated by an lvalue; see [return statement](https://en.cppreference.com/w/cpp/language/return#Notes) for details.
-
-> NOTE: 这其实描述的是RVO
-
-
 
