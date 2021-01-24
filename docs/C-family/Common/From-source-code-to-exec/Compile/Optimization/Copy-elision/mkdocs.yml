@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - stackoverflow-What-are-copy-elision-and-RVO: stackoverflow-What-are-copy-elision-and-RVO
     - cppreference-Copy-elision: cppreference-Copy-elision
-    - RVO-and-NRVO: RVO-and-NRVO
+

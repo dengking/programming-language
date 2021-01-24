@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - Copy-elision-and-RVO: Copy-elision-and-RVO
+    - Optimization-in-function-return: Optimization-in-function-return
     - inline: inline

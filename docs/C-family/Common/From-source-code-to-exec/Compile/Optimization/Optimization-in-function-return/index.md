@@ -1,8 +1,10 @@
-# RVO and NRVO
+# Optimization in function return
+
+
 
 ## 内容简介
 
-在如下文章中介绍了RVO和NRVO
+在如下文章中介绍了Optimization in function return，参考文章如下:
 
 1、cppreference [Copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)
 
@@ -12,9 +14,9 @@
 
 ### compiler执行optimization的步骤/优先级
 
-总的来说，compiler执行optimization的步骤/优先级大致如下: 
+总的来说，compiler执行function return optimization的步骤/优先级大致如下: 
 
-1、copy elision
+1、copy elision: RVO、NRVO
 
 compiler会优先执行copy elision，如果copy elision不能执行，则会执行下一步；
 
@@ -87,7 +89,30 @@ b、it succeeded, but did not select the [move constructor](https://en.cpprefere
 
 If *expression* is a prvalue, the result object is initialized directly by that expression. This does not involve a copy or move constructor when the types match (see [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision)).
 
+## boost [Implicit Move when returning a local object](https://www.boost.org/doc/libs/master/doc/html/move/move_return.html)
 
+The C++ standard specifies situations where an implicit move operation is safe and the compiler can use it in cases were the (Named) Return Value Optimization) can't be used. The typical use case is when a function returns a named (non-temporary) object by value and the following code will perfectly compile in C++11:
+
+```C++
+//Even if movable can't be copied
+//the compiler will call the move-constructor
+//to generate the return value
+//
+//The compiler can also optimize out the move
+//and directly construct the object 'm'
+movable factory()
+{
+   movable tmp;
+   m = ...
+   //(1) moved instead of copied
+   return tmp;
+};
+
+//Initialize object
+movable m(factory());
+```
+
+In compilers without rvalue references and some non-conforming compilers (such as Visual C++ 2010/2012) the line marked with `(1)` would trigger a compilation error because `movable` can't be copied. Using a explicit `::boost::move(tmp)` would workaround this limitation but it would code suboptimal in C++11 compilers (as the compile could not use (N)RVO to optimize-away the copy/move).
 
 
 
@@ -212,9 +237,9 @@ MoveOnly::~MoveOnly()
 
 
 
+### Resource return idiom
 
-
-
+参见"Resource-Return"章节。
 
 ## wikipedia [Copy elision](https://en.wikipedia.org/wiki/Copy_elision#Return_value_optimization) # Return value optimization
 

@@ -26,5 +26,6 @@ compiler会尽可能地运用所有的已知信息(最多的是type info)来进�
 
 
 
-### RVO
+### Optimization in function return
 
+参见`./Optimization-in-function-return`章节。
