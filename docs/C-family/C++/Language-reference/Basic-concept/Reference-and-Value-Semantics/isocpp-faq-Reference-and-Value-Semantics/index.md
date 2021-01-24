@@ -6,7 +6,9 @@
 
 ## isocpp faq Reference and Value Semantics [¶](https://isocpp.org/wiki/faq/value-vs-ref-semantics) [Δ](https://isocpp.org/wiki/faq/value-vs-ref-semantics#)
 
-> NOTE: 原文的内容是比较好的， 但是没有较好地将它们串联起来，也就是读者不容易领悟作者重要表达的思路、思想，因此需要在此将作者的书写思路进行说明: 作者首先说明了value semantic 和 reference semantic，然后着重对两者进行对比，作者对两者的对比，着力点在于分析value semantic在speed上的优势以及它取得这种优势的原因，这个分析占用了原文的大部分内容。
+> NOTE: 原文的内容是比较好的， 但是没有较好地将它们串联起来，也就是读者不容易领悟作者重要表达的思路、思想，因此需要在此将作者的书写思路进行说明: 
+>
+> 作者首先说明了value semantic 和 reference semantic，然后着重对两者进行对比;作者对两者的对比，着力点在于分析value semantic在speed上的优势以及它取得这种优势的原因，这个分析占用了原文的大部分内容。
 >
 > 有了上述认知，就能够更快的掌握原文的内容了。
 

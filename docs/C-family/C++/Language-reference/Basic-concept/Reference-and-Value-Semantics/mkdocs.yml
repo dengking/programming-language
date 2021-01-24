@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Value-semantics: Value-semantics.md
-    - Value-and-reference-semantics: Value-and-reference-semantics.md
+    - akrzemi1-Value-semantics: akrzemi1-Value-semantics
+    - isocpp-faq-Reference-and-Value-Semantics: isocpp-faq-Reference-and-Value-Semantics

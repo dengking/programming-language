@@ -1,8 +1,4 @@
-# Value semantic
-
-
-
-## akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)
+# akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)
 
 One of these things is *value semantics*. This feature is easily missed by programmers that come into C++ from heavy-OO world, especially that there is no language keyword associated with it. In this post I will try to describe what it is and how it can be useful.
 
@@ -12,7 +8,7 @@ One of these things is *value semantics*. This feature is easily missed by progr
 >
 > java也是如此。
 
-### What is a value? What is an object?
+## What is a value? What is an object?
 
 The concept of a *value* has been exhaustively described in [Elements of Programming](http://www.elementsofprogramming.com/) by Alexander Stepanov and Paul McJones. It is hard to define a value, but we can show the meaning by examples. 
 
@@ -41,7 +37,7 @@ An l-value, the one on the left-hand side of the assignment, needs to name an ob
 
 We must be able to query `x` for its address (because under this address we will store a new value), but we do not have to query the literal 2 for address.
 
-### Value semantics
+## Value semantics
 
 *Value semantics* is the programming style, or the way of thinking, where we focus on **values** that are stored in the **objects** rather than **objects** themselves. The **objects** are only used to convey values: we do not care about object’s identity.
 
@@ -70,13 +66,13 @@ Here, the **stream** may be a global which allocated resources necessary for wri
 
 
 
-### Why we use value semantics
+## Why we use value semantics
 
-#### First
+### First
 
 First, you get **value semantics** by default. When declaring function arguments or return values, if you specify only the type name (like `int`) you get **value semantics** (you pass and return *by value*). If you wan to use **reference semantics**, you must make an extra effort to add a reference or pointer type symbol.
 
-#### Second
+### Second
 
 Second, we use **value semantics** in function declarations, because it closely follows the notation and reasoning from **mathematics**. In mathematics you operate on values. For instance, you define a function as follows:
 $$
@@ -101,15 +97,15 @@ auto f( int x, int y ) -> int
 }
 ```
 
-#### Third
+### Third
 
 Third, we do not run into any **memory management** issues. No **dangling references** to nonexistent objects, no expensive and unnecessary free store allocation, no memory leaks, no smart or dumb pointers. The support for **value semantics** in C++ — passing variables by value — eliminates all those problems.
 
-#### Fourth
+### Fourth
 
 Fourth, we avoid any *reference aliasing* problems. Andrew Koenig has neatly illustrated the problem of **reference aliasing** in [this article](http://drdobbs.com/blogs/cpp/232400151). In multi-threaded environment passing by value and ensuring that each thread has its own copy of the value helps avoid any unnecessary data races. Then you do not need to synchronize on such values, and the program runs faster, and is safer because it avoids any **deadlocks**.
 
-#### Fifth
+### Fifth
 
 Fifth, for [referential transparency](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/referential transparency). This means that you get no surprises where your data is modified behind the scenes without you being able to see that. For instance, consider this example from Dave Abrahams:
 
@@ -158,27 +154,27 @@ The **value-semantic** approach isn’t entirely pure (in functional programming
 >
 > `advance`是reference semantic
 
-### Why we do not use value semantics
+## Why we do not use value semantics
 
-#### First
+### First
 
 Whether we pass **by value** or **by reference** often depends on a programming style. For one instance, if you think in OO terms, where you want to create an object, and let it live for a significant amount of time, and want different parties to modify the object, you need to pass **by reference**. This is the case for globals like `std::cout` that need to be accessible from different places in the code, and it always has to be this very object at this very address. In other words if this is the address of the object that you are interested it, **value semantics** will not do — even if you are not operating on addresses explicitly.
 
 Since we mention addresses, this is the right place to mention pointers here. They are very peculiar（特殊的）, because they are objects that store values. However, the values they store are addresses in memory which can hardly be used for anything else than *referring* to objects. Therefore at the higher level of abstraction passing and returning pointers to and from functions is usually considered passing by reference (reference semantics), even though technically you are **passing values**. But note that there is a limit to the analogy between **pass-by-pointer** and **pass-by-reference**, as nicely outlined in [this article](http://javadude.com/articles/passbyvalue.htm).
 
-#### Second
+### Second
 
 Next, the reason people often resort to allocating objects in free store (on the heap) and returning a (more or less) smart pointer to it, is that value semantics does not play well with OO techniques that require access to objects via references or pointers to enable **virtual function calls**. It is also not easy to pass polymorphic types by value, because we are risking [slicing](http://en.wikipedia.org/wiki/Object_slicing). There are techniques to overcome this difficulty, like [type erasure](https://akrzemi1.wordpress.com/2013/11/18/type-erasure-part-i/), but they require some non-trivial effort to implement. They are used in `std::function`, `std::shared_ptr` (for storing allocator). There are libraries that assist with implementing type erasure like, well, [type_erasure](https://github.com/boost-vault/Miscellaneous/blob/master/type_erasure.zip) or [Adobe Poly Library](http://stlab.adobe.com/group__poly__related.html).
 
-#### Third
+### Third
 
 One other common reason for choosing not to use **value semantics** is the fear for performance hit. Is this fear justified? The very short answer is: sometimes it is, sometimes it isn’t and sometimes it is avoiding **value semantics** that hits your performance.
 
 
 
-### Performance of value semantics
+## Performance of value semantics
 
-#### Return-by-value
+### Return-by-value
 
 C++ encourages **value semantics**. The language is designed to make **value semantics** as useful and as fast as possible. Passing by value may be faster than you think. Let’s consider this example:
 
@@ -195,7 +191,7 @@ vector<string> poems = getPoems();
 
 How many times does the copy constructor of `vector<string>` get called? The answer is: not even once! This is because we do not require the two copies of the value — we only want to hand the value over. This is where the [move constructor](https://akrzemi1.wordpress.com/2011/08/11/move-constructor/) is chosen. Move constructor for a typical vector implementation costs six pointer assignments regardless of the types being stored or the vector’s size. So, let’s rephrase the question: how many times the move constructors gets called? In efficient compiler with all global optimizations enabled: most probably, not even once! This is owing to the compiler optimization technique known as [copy elision](http://definedbehavior.blogspot.com/2011/08/value-semantics-copy-elision.html).
 
-#### Pass-by-value
+### Pass-by-value
 
 Now, how about passing the arguments by value? First, let’s consider the situation where in the function implementation you need to make the copy of the argument. It is often the case when we implement the copy assignment and want to provide strong (commit-or-rollback) guarantee. In such cases **passing by value**, and not making the **local copy** is more efficient in general and equally efficient as passing by reference in the worst case. This is very well described by Dave Abrahams in [this article](http://web.archive.org/web/20140113221447/http://cpp-next.com/archive/2009/08/want-speed-pass-by-value/).
 
@@ -221,7 +217,7 @@ Here, if we passed the dictionary by value to function `remainingRoom` we would 
 
 > NOTE: 并没有读懂上面这段话。
 
-### Passing by value is not copying
+## Passing by value is not copying
 
 While we were able to see that sometimes **passing by value** requires the call to copy **constructor**, in general this is not so. Have a look at this example.
 
@@ -255,7 +251,7 @@ Notice that function `increment` takes the argument and **returns by value**. Ye
 
 
 
-### More…
+## More…
 
 Value semantics are a way of thinking about the program and computations. It cannot be comprehensively described in a short post. I just wanted to provide an overview of the idea. There is a lot more to be learned. Just to give you a couple of references:
 
@@ -263,7 +259,7 @@ Value semantics are a way of thinking about the program and computations. It can
 2. [N2479](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2479.pdf) — this proposal tries to formally define the *value*.
 3. [“Fundamentals of Generic Programming”](http://www.stepanovpapers.com/DeSt98.pdf) provides a definition of a *Regular Type*, which is also a core of value semantics.
 
-### Comments
+## Comments
 
 [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
 
@@ -296,7 +292,7 @@ But let me note that just comparing two things does not imply that they are **op
 
 Next, the difference in assignment you show between Java and `C++` is of course true, but I believe saying only this would be to little to show the nature of value and reference semantics. I only put a short link to [this article](http://javadude.com/articles/passbyvalue.htm) by Scott Stanchfield, but I believe it is very enlightening. I also used to think that passing by pointer (not by reference!) as in Java is no different than passing by reference. But now I can see it is different, and Scott explains it very well.
 
-#### Gunnar Hansen *says:*
+### Gunnar Hansen *says:*
 
 [February 19, 2012 at 6:09 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-264)
 
@@ -314,7 +310,7 @@ All 3 of the essential characteristics of an OO language are demonstrated using 
 
 I never said they were opposite, but neither is there any difference, because the two concepts are orthogonal. In other words, they have nothing to do with each other.
 
-#### [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
+### [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
 
 [February 19, 2012 at 8:19 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-265)
 
@@ -338,7 +334,7 @@ When you only use two thirds of OO, (inheritance and encapsulation) but do not u
 
 
 
-#### Gunnar Hansen *says:*
+### Gunnar Hansen *says:*
 
 [February 20, 2012 at 5:53 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-268)
 
@@ -354,7 +350,7 @@ These objects will behave polymorphically, which means that the method actually 
 
 You missed the point. The fact that I did declare `draw` a **virtual function** means that I’m invoking the polymorphism feature of C++. That means that a **VTable** reference is embedded in the object at construction time. This means that **polymorphic behavior** is built into the object, and not at all dependent on **value semantics**.
 
-#### [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
+### [Andrzej Krzemieński](https://akrzemi1.wordpress.com/) *says:*
 
 [February 20, 2012 at 10:29 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-270)
 
@@ -518,7 +514,7 @@ This wouldn’t even compile. But even if it would, it would pick the wrong func
 
 
 
-#### Gunnar Hansen *says:*
+### Gunnar Hansen *says:*
 
 [March 2, 2012 at 2:13 pm](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/#comment-282)
 
