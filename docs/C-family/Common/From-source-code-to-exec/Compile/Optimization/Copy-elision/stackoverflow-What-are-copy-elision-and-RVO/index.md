@@ -163,41 +163,83 @@ and explained:
 
 > Here the criteria for elision can be combined to eliminate two calls to the copy constructor of class `Thing`: the copying of the local automatic object `t` into the temporary object for the return value of function `f()` and the copying of that temporary object into object `t2`. Effectively, the construction of the local object `t` can be viewed as directly initializing the global object `t2`, and that object’s destruction will occur at program exit. Adding a move constructor to Thing has the same effect, but it is the move construction from the temporary object to `t2` that is elided.
 
+> NOTE: 
+>
+> 上述例子，所解释的其实就是: "Multiple copy elisions may be chained to eliminate multiple copies."
 
-
-
+## [A](https://stackoverflow.com/a/12953150)
 
 ### Common forms of copy elision
 
 (Named) Return value optimization is a common form of copy elision. It refers to the situation where an object returned by value from a method has its copy elided. The example set forth in the standard illustrates **named return value optimization**, since the object is named.
 
 ```cpp
-class Thing {
+#include <iostream>
+#include <utility>
+class Thing
+{
 public:
-  Thing();
-  ~Thing();
-  Thing(const Thing&);
+	Thing()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	~Thing()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	Thing(const Thing&)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
 };
-Thing f() {
-  Thing t;
-  return t;
+Thing f()
+{
+	Thing t;
+	return t;
 }
-Thing t2 = f();
+
+int main()
+{
+
+	Thing t2 = f();
+}
+// g++ -std=c++11  -Wall -pedantic -pthread main.cpp && ./a.out
+
 ```
 
 Regular **return value optimization** occurs when a temporary is returned:
 
 ```cpp
-class Thing {
+#include <iostream>
+#include <utility>
+class Thing
+{
 public:
-  Thing();
-  ~Thing();
-  Thing(const Thing&);
+	Thing()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	~Thing()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	Thing(const Thing&)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
 };
-Thing f() {
-  return Thing();
+Thing f()
+{
+	return Thing();
 }
-Thing t2 = f();
+
+int main()
+{
+
+	Thing t2 = f();
+}
+// g++ -std=c++11  -Wall -pedantic -pthread main.cpp && ./a.out
+
 ```
 
 Other common places where copy elision takes place is when a **temporary is passed by value**:

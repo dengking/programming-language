@@ -120,7 +120,59 @@ Multiple copy elisions may be chained to eliminate multiple copies.
 
 > NOTE: 原文这里仅仅一段话，在 stackoverflow [What are copy elision and return value optimization?](https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization) # [A](https://stackoverflow.com/a/12953145) 中，对这段话进行了专门的注解:
 >
+> ```cpp
+> #include <iostream>
+> #include <utility>
+> class Thing
+> {
+> public:
+> 	Thing()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	~Thing()
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> 	Thing(const Thing&)
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 	}
+> };
+> Thing f()
+> {
+> 	Thing t;
+> 	return t;
+> }
 > 
+> int main()
+> {
+> 
+> 	Thing t2 = f();
+> }
+> // g++ -std=c++11  -Wall -pedantic -pthread main.cpp && ./a.out
+> 
+> ```
+>
+> > NOTE: 输出如下:
+> >
+> > ```
+> > Thing::Thing()
+> > Thing::~Thing()
+> > 
+> > ```
+> >
+> > 
+>
+> and explained:
+>
+> > Here the criteria for elision can be combined to eliminate two calls to the copy constructor of class `Thing`: 
+> >
+> > the copying of the local automatic object `t` into the temporary object for the return value of function `f()` and the copying of that temporary object into object `t2`. 
+> >
+> > Effectively, the construction of the local object `t` can be viewed as directly initializing the global object `t2`, and that object’s destruction will occur at program exit. Adding a move constructor to `Thing` has the same effect, but it is the move construction from the temporary object to `t2` that is elided.
+>
+> 即使是move construction，也会被elided。
 
 ### 5、RVO and NRVO in [constant expression](https://en.cppreference.com/w/cpp/language/constant_expression) and [constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) (since C++11)
 

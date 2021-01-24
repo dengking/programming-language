@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Copy-elision: Copy-elision
     - inline: inline
