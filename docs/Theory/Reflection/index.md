@@ -1,8 +1,8 @@
-# [Reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming))
+# wikipedia [Reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming))
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), **reflection** is the ability of a [computer program](https://en.wikipedia.org/wiki/Computer_program) to examine, [introspect](https://en.wikipedia.org/wiki/Introspection_(computer_science)), and modify its own structure and behavior at [runtime](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)).[[1\]](https://en.wikipedia.org/wiki/Reflection_(computer_programming)#cite_note-1)
 
-***SUMMARY*** : 关于reflection和[introspect](https://en.wikipedia.org/wiki/Introspection_(computer_science))之间的差异参见[introspect](https://en.wikipedia.org/wiki/Introspection_(computer_science))
+> NOTE : 关于reflection和[introspect](https://en.wikipedia.org/wiki/Introspection_(computer_science))之间的差异参见[introspect](https://en.wikipedia.org/wiki/Introspection_(computer_science))
 
 
 
@@ -18,7 +18,7 @@ The earliest computers were programmed in their native [assembly language](https
 
 **Reflection** helps programmers make generic software libraries to display data, process different formats of data, perform [serialization](https://en.wikipedia.org/wiki/Serialization) or deserialization of data for communication, or do bundling and unbundling of data for containers or bursts of communication.
 
-***TRANSLATION*** : 反射帮助程序员制作通用软件库以显示数据，处理不同格式的数据，执行数据的序列化或反序列化以进行通信，或者为容器或突发通信进行数据的捆绑和分拆。
+> NOTE : 反射帮助程序员制作通用软件库以显示数据，处理不同格式的数据，执行数据的序列化或反序列化以进行通信，或者为容器或突发通信进行数据的捆绑和分拆。
 
 Effective use of reflection almost always requires a plan: A design framework, encoding description, object library, a map of a database or entity relations.
 
@@ -46,7 +46,7 @@ A language supporting reflection provides a number of features available at runt
 
 - Evaluate a string as if it were a source-code statement at runtime.
 
-  ***SUMMARY*** : 看到此处，想到了python的`eval()`[¶](https://docs.python.org/3/library/functions.html#eval)
+  > NOTE: 看到此处，想到了python的`eval()`[¶](https://docs.python.org/3/library/functions.html#eval)
 
 - Create a new interpreter for the language's bytecode to give a new meaning or purpose for a programming construct.
 

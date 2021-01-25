@@ -1,4 +1,4 @@
-# [Type introspection](https://en.wikipedia.org/wiki/Type_introspection)
+# wikipedia [Type introspection](https://en.wikipedia.org/wiki/Type_introspection)
 
 
 
@@ -52,5 +52,5 @@ True
 
 In Python 2 but not Python 3, declaring `class Foo` instead of `class Foo(object)` will result in `type` returning the generic `instance` type instead of the class.[[5\]](https://en.wikipedia.org/wiki/Type_introspection#cite_note-5)
 
-***SUMMARY*** : 参见`youdao/programming-language-python/python2to3`，其中总结了python2和python3之间的差异
+> NOTE: 参见`youdao/programming-language-python/python2to3`，其中总结了python2和python3之间的差异
 
