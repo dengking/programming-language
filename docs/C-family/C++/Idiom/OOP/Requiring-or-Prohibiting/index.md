@@ -46,6 +46,12 @@ OOP、behavior、interface、magic function
 
 3、behavior、interface/magic function、able(在fluentcpp strong type的实现中，就非常多地使用"able"这个词语)
 
+## draft
+
+对于某种类型，可以对其给予、禁止某种behavior，这主要通过magic function来实现的。
+
+
+
 ## Example
 
 1、fluentcpp strong type

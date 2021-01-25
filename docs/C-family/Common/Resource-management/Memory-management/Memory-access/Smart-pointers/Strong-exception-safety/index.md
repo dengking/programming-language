@@ -91,3 +91,7 @@ make_shared<T>(args...).swap(mysharedptr);
 ```
 
 Assignment from `make_shared<T>` is almost equivalent, the only difference being the relative order of the deletion of the old `T` and the destruction of the temporary `shared_ptr`, which is not observable.
+
+
+
+## stackoverflow [std::shared_ptr: reset() vs. assignment](https://stackoverflow.com/questions/31438714/stdshared-ptr-reset-vs-assignment)
