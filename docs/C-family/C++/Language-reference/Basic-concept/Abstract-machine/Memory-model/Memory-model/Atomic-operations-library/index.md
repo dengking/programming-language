@@ -20,3 +20,8 @@
 std::atomic<int> order::c(0);   // or {0} for a more C++11 experience
 ```
 
+## TODO
+
+### stackoverflow [What exactly is std::atomic?](https://stackoverflow.com/questions/31978324/what-exactly-is-stdatomic)
+
+> NOTE: 非常好的内容

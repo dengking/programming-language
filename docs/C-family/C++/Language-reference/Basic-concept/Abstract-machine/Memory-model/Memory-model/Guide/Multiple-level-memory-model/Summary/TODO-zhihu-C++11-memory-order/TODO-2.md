@@ -1,5 +1,7 @@
 # [A](https://www.zhihu.com/question/24301047/answer/83422523)
 
+> NOTE: 没有阅读
+
 作者：Furion W
 链接：https://www.zhihu.com/question/24301047/answer/83422523
 来源：知乎
@@ -131,54 +133,7 @@
 
 ### 2.1.2.2 在有缓存的体系结构下实现SC
 
-对于带有缓存的体系结构，这种数据的副本（缓存）的出现引入了三个额外的问题：
 
-- - 缓存一致性协议(cache coherence protocols)
-
-    - - [2]指出cache coherence的定义是
-
-        - - 一个写操作最终要对所有处理器可见（[1]对cache coherence的条件1,2的结合）
-            - 对同一地址的写操作串行化（[1]对cache coherence的条件3）
-
-        - cache coherence的定义不能推出SC（不充分）：SC要求对所有地址的写操作串行化。因此我们并不用cache coherence定义SC, 它仅作为一种传递新值(newly written value)的机制。
-
-    - 检查写完成(detecting write completion)
-
-    - - 假设图3 中的处理器带有直写缓存(write through cache)，P2 缓存了 Data. 
-
-            ![img](https://pic3.zhimg.com/50/077571b7430c749bd049d59da092cf29_hd.jpg?source=1940ef5c)![img](https://pic3.zhimg.com/80/077571b7430c749bd049d59da092cf29_720w.jpg?source=1940ef5c)
-            
-            图3. 违反SC的直写缓存（引自[2] Figure 3b）
-
-        - 考虑如下执行次序：
-
-1. 1. 1. 1. P1 先完成了 Data 在内存上的写操作；
-            2. P1 没有等待 Data 的写结果传播到 P2 的缓存中,继续进行 Head 的写操作；
-            3. P2 读取到了内存中 Head 的新值；
-            4. P2 继续执行，读到了缓存中 Data 的旧值。
-
-- - - 这**违反SC**，因此我们需要延后每个处理器发布写确认通知的时间：直至别的处理器发回写确认通知，才发射下一个写操作。
-
-    - 维护写原子性(maintaining write atomicity): “写原子性”是我们在2.1.2中谈到的SC的两个要求之一。“将值的改变传播给多个处理器的缓存”这一操作是非原子操作（非瞬发完成的），因此需要采取特殊措施提供写原子性的假象。因此我们提出两个要求，这两个要求将共同保证写原子性的实现。
-
-    - - 要求1：针对同一地址的写操作被串行化(serialized). 图4阐述了对这个条件的需求：如果对 A 的写操作不是序列化的，那么 P3 和 P4 输出（寄存器 1,2）的结果将会不同,这违反了次序一致性。这种情况可以在基于网络（而不是总线）的系统中产生，由于消息可经不同路径传递，这种系统不 供它们传递次序的保证。
-
-            ![img](https://pic1.zhimg.com/50/978a9e33a2cba304710e377c7bbc49ed_hd.jpg?source=1940ef5c)![img](https://pic1.zhimg.com/80/978a9e33a2cba304710e377c7bbc49ed_720w.jpg?source=1940ef5c)
-            
-            图4. 引自[2] Figure 4. Example for serialization of writes.
-
-- - - 要求2：对一个新写的值的读操作，必须要等待所有（别的）缓存对该写操作都返回确认通知后才进行。考虑图2b中的程序
-
-1. 1. 1. 1. P2 读 A 为 1
-            2. “P2 对 B 的更新”先于“P1 对 A 的更新”到达 P3
-            3. P3 获得 B 的新值，获得 A 的旧值
-
-- - - - 这使得 P2 和 P3 看到的对值 A, B 的写操作次序不同，**违反的了写原子性要求**。
-
-**
-
-2.1.3 实现SC的总结**
-注意到，与特定硬件优化，如重叠写(overlapping writes)、缓存(cache)等技术相结合时，要保证这种SC是有代价的。[1] Chapter 5.6给出了为保证SC, 一个写操作的耗时从 50 cycles 变为 170 cycles 的例子。同时，SC的要求同样会限制编译器优化。
 
 
 
@@ -186,20 +141,23 @@
 
 为获得好的性能，我们可以引入放松内存一致性模型(relaxed memory consistency model**s**)，**这些**模型主要通过两种方式优化程序（读写）：
 
-- - 放松对程序次序的要求：这种放松与此前所述的“在无缓存的体系结构中采用的优化”类似，**仅适用于**对不同地址的操作对(opeartion pairs)间使用。
-    - 放松对写原子性的要求：一些模型允许读操作在“一个写操作未对所有处理器可见”前返回值。这种放松**仅适用于**基于缓存的体系结构。
+- 放松对程序次序的要求：这种放松与此前所述的“在无缓存的体系结构中采用的优化”类似，**仅适用于**对不同地址的操作对(opeartion pairs)间使用。
+
+- 放松对写原子性的要求：一些模型允许读操作在“一个写操作未对所有处理器可见”前返回值。这种放松**仅适用于**基于缓存的体系结构。
 
 我们用A->B表示 A 先于 B 完成，[1] Chapter 5.6 根据放松的操作对次序，给出了多种内存模型：
 
-- - 放松 W->R的模型, 称为total store ordering或processor consistency. 这种序列模型仍保持了写(store)操作间的次序；
+- 放松 W->R的模型, 称为total store ordering或processor consistency. 这种序列模型仍保持了写(store)操作间的次序；
 
-    - 放松 W->W的模型, 称为partial store ordering
+- 放松 W->W的模型, 称为partial store ordering
 
-    - 放松 R->W 和 R->R的模型有很多种：
+- 放松 R->W 和 R->R的模型有很多种：
 
-    - - Weak ordering
-        - Power PC consistency model
-        - Release consistency
+  - Weak ordering
+
+  - Power PC consistency model
+  - Release consistency
+
 
 通过放松这些次序，处理器可能获得显著的性能提升。
 
@@ -225,9 +183,11 @@
 
 将导致未定义行为。原子变量 data_ready 通过内存模型关系中的 happens-before 和 synchronized-with, 为它们 供了必要的顺序:
 
-1. 1. 写 data(3)在写 data_ready(4)前发生(happens-before);
-    2. 写 data_ready(4)在读出 data_ready 的值为真(1)前发生(happens-before); 
-    3. data_ready 的值为真(1)在读 data(2)前发生(happens-before).
+1、 写 data(3)在写 data_ready(4)前发生(happens-before);
+
+2、写 data_ready(4)在读出 data_ready 的值为真(1)前发生(happens-before); 
+
+3、data_ready 的值为真(1)在读 data(2)前发生(happens-before).
 
 通过 happens-before 的传递性及引入原子变量,我们保证了读写间的顺序。 默认的原子操作使得写变量在读变量之前发生,然而原子操作也有用其他可选的操作方式,我们在此先介绍 synchronized-with 和 happens-before 关系。 
 
@@ -261,18 +221,20 @@ Inter-thread happens-before 可以与 sequenced-before 关系结合:如果 A seq
 
 C++11  述了 6 种可以应用于原子变量的内存次序: 
 
-- - momory_order_relaxed,
-    - memory_order_consume,
-    - memory_order_acquire,
-    - memory_order_release,
-    - memory_order_acq_rel,
-    - memory_order_seq_cst.
+- momory_order_relaxed,
+
+- memory_order_consume,
+- memory_order_acquire,
+- memory_order_release,
+- memory_order_acq_rel,
+- memory_order_seq_cst.
 
 虽然共有 6 个选项,但它们表示的是三种内存模型: 
 
-- - sequential consistent(memory_order_seq_cst),
-    - relaxed(memory_order_seq_cst).
-    - acquire release(memory_order_consume, memory_order_acquire, memory_order_release, memory_order_acq_rel),
+- sequential consistent(memory_order_seq_cst),
+
+- relaxed(memory_order_seq_cst).
+- acquire release(memory_order_consume, memory_order_acquire, memory_order_release, memory_order_acq_rel),
 
 这些不同的内存序模型在不同的CPU架构下会有不同的代价。这允许专家通过采用更合理的内存序获得更大的性能 升；同时允许在对性能要求不是那么严格的程序中采用默认的内存序,使得程序更容易理解。
 

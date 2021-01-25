@@ -31,3 +31,4 @@ For each C/C++11 synchronization operation and architecture, the document aims t
 
 https://www.decadent.org.uk/pipermail/cpp-threads/2008-December/001933.html
 
+stackoverflow [Where is the lock for a std::atomic?](https://stackoverflow.com/questions/50298358/where-is-the-lock-for-a-stdatomic)

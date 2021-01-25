@@ -52,7 +52,17 @@ There is no ordering constraint. Following operations may be reordered before, a
 
 ### Summary
 
-Finally, it is important to observe(注意) that not all **memory ordering options** are adapted(适合) to all member functions. Atomic operations are of three kinds: *load, store*—the load() and store() member functions—and *read_modify_write*—all the other member functions. Table 8.2 lists the memory ordering options available to each type of atomic operation.
+Finally, it is important to observe(注意) that not all **memory ordering options** are adapted(适合) to all member functions. Atomic operations are of three kinds: 
+
+1、*load, store*—the load() and store() member functions—and 
+
+2、*read_modify_write*—
+
+3、all the other member functions. 
+
+> NOTE: 上面将atomic operation的分类是较好的
+
+Table 8.2 lists the memory ordering options available to each type of atomic operation.
 
 > NOTE: 这段话的意思是: atomic operation 和 memory ordering option的组合是有条件的，不允许随意的组合；
 
@@ -69,6 +79,16 @@ Table 8.2. Memory Order Options for Atomic Operations
 |                   | `memory_order_consume`        |
 |                   | `memory_order_relaxed`        |
 | Read-modify-write | all available options         |
+
+> NOTE: 
+>
+> 一、store对应的是write，load对应的是read，上述table也是符合write-release-read-acquire的，从上面的table可以看出:
+>
+> 1、Store不能够跟`memory_order_acquire`、`memory_order_consume`组合
+>
+> 2、Load不能够跟`memory_order_release`组合
+
+
 
 The rest of this section provides a very qualitative(高质量的) discussion of the differences between the different memory ordering options, so that readers can feel more or less at ease when dealing with references on this subject. A couple of examples will also be examined. There are, in this subject, a substantial number of subtleties that are beyond the scope of this book. Readers willing to go deeper into this subject should consult the exhaustive discussion presented in [14].
 

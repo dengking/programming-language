@@ -8,7 +8,4 @@
 
 ## 综述C++ multiple level memory model
 
-在下面的文章中，对C++ multiple level memory model进行了非常好的阐述:
-
-1、
-
+参见`./Summary`章节。
