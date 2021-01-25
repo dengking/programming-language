@@ -4,13 +4,39 @@
 
 ## 为什么需要mixin?
 
-对于一些常见功能，比如factor、singleto、clone等，它们的实现模式是非常类似的，为了促进code reuse，使用mixin来将这些概念给予给子类；
+### 1、code reuse
+
+mixin最大的好处就是code reuse；
+
+a、mixin常见功能、behavior
+
+对于一些常见功能，比如factory、singleton、clone等，它们的实现模式是非常类似的，为了促进code reuse，使用mixin来将这些概念给予给子类；
+
+b、Requiring-or-Prohibiting
+
+参见"Requiring-or-Prohibiting"相关章节；
 
 ## 实现方式
+
+### Mixin from above
 
 下面是一些实现方式:
 
 1) CRTR + inheritance
+
+### Mixin from below
+
+1、Parameterized Base Class，参见相关章节；
+
+
+
+### Summary
+
+1、上述两种实现方式，都需要使用inheritance。
+
+2、在文章 fluentcpp [Mixin Classes: The Yang of the CRTP](https://www.fluentcpp.com/2017/12/12/mixin-classes-yang-crtp/) 中，对两者有一定的对比，下面是一个非常形象的图，这篇文章收录在 "Parameterized-Base-Class" 章节了。
+
+![Mixin classes CRTP](https://www.fluentcpp.com/wp-content/uploads/2017/12/mixin_classes.jpg)
 
 
 
@@ -20,7 +46,9 @@
 
 2) Factory mixin: `C++\Pattern\Factory`
 
-## [Mixins For Cee Plus Plus](https://proxy.c2.com/cgi/fullSearch?search=MixinsForCeePlusPlus)
+3、......
+
+## c2 [Mixins For Cee Plus Plus](https://proxy.c2.com/cgi/fullSearch?search=MixinsForCeePlusPlus)
 
 In the context of C++ [[CeePlusPlus](https://wiki.c2.com/?CeePlusPlus)] the term mixin is usually used to match [BjarneStroustrup](https://wiki.c2.com/?BjarneStroustrup)'s definition:
 
