@@ -60,7 +60,7 @@ std::future<std::result_of_t<std::decay_t<Function>(std::decay_t<Args>...)>>
 
 ## cppreference [Template parameters and template arguments](https://en.cppreference.com/w/cpp/language/template_parameters)
 
-
+> NOTE: 其中对function as template argument进行了说明，其实就是转换为function pointer。
 
 
 
@@ -123,7 +123,7 @@ The following does **not** work in the above program, at least in [Visual C++](h
     doOperation<add3>();
 ```
 
-[A](https://stackoverflow.com/a/1174193)
+### [A](https://stackoverflow.com/a/1174193)
 
 > NOTE: 这个回答给出了能够接受function pointer、functor的写法；
 
@@ -154,7 +154,7 @@ The problem with this is that if it makes it tricky for the compiler to inline t
 
 > NOTE: functor VS function pointer，在下面的**Comments**章节中，也对这个topic进行了讨论
 
-### Comments
+#### Comments
 
 There is an advantage to using functors over function pointers. The functor can be instanciated inside the class and thus provides more opertunity to the compiler for optimizations (such as inlining). The compiler would be hard pressed to optimize a call over a function pointer. – [Martin York](https://stackoverflow.com/users/14065/martin-york) [Jul 23 '09 at 20:41](https://stackoverflow.com/questions/1174169/function-passed-as-template-argument#comment994667_1174193)
 
@@ -165,6 +165,12 @@ When the function is used in a template parameter it 'decays' into a pointer to 
 My comment above refers to template parameters taking a non-type function pointer parameter. In this case the template instantiation can be inlined as the compiler knows the value of the pointer at compile time. In jalf's example the template takes a type parameter and the type of the template parameter and the value of the function argument together determine the function called, a function object can be better optimized. – [CB Bailey](https://stackoverflow.com/users/19563/cb-bailey) [Jul 23 '09 at 20:46](https://stackoverflow.com/questions/1174169/function-passed-as-template-argument#comment994693_1174193)
 
 > NOTE: 上面描述的decay是非常重要的
+
+
+
+
+
+
 
 
 
