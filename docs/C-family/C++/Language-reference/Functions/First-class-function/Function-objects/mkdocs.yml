@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - std-function-object: std-function-object
+    - Functor: Functor
     - Application: Application

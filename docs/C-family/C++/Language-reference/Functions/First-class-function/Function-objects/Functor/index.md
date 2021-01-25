@@ -1,16 +1,16 @@
 ## Functor
 
-### [Functor](https://en.wikipedia.org/wiki/Functor)
+## wikipedia [Functor](https://en.wikipedia.org/wiki/Functor)
 
 
 
-### [In Functional Programming, what is a functor?](https://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor)
+## stackoverflow [In Functional Programming, what is a functor?](https://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor)
 
 
 
 
 
-### [What are C++ functors and their uses?](https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses)
+## stackoverflow [What are C++ functors and their uses?](https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses)
 
 [A](https://stackoverflow.com/a/356993)
 

@@ -1,0 +1,10 @@
+# [C++17: I See a Monad in Your Future!](https://bartoszmilewski.com/2014/02/26/c17-i-see-a-monad-in-your-future/)
+
+[If you prefer, you may watch the [video](https://t.co/tEHQmdlTvo) of my talk on this topic (here are the [slides](http://nwcpp.org/talks/2014/ISeeAMonadInYourFuture.pptx)).]
+
+If you thought you were safe from functional programming in your cozy(舒适的) C++ niche, think again! First the lambdas and function objects and now the monad camouflaged(伪装) as `std::future`. But do not despair(绝望), it’s all just patterns. You won’t find them in the Gang of Four book, but once you see them, they will become obvious.
+
+> NOTE: 如果您认为在您舒适的c++领域中可以避免函数式编程，那么请三思! 首先是lambdas和函数对象，现在的单子伪装为' std::future '。
+> 但不要绝望，这只是模式。你不会在“四人帮”的书中找到他们，但是一旦你看到他们，他们就会变得很明显。
+
+Let me give you some background: I was very disappointed with the design of C++11 `std::future`. I described my misgivings(担忧) in: [Broken Promises — C++0x futures](https://bartoszmilewski.com/2009/03/03/broken-promises-c0x-futures/). I also made a few suggestions as how to fix it: [Futures Done Right](https://bartoszmilewski.com/2009/03/10/futures-done-right/). Five years went by and, lo and behold, a proposal to improve `std::future` and related API, [N3721](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3721.pdf), was presented to the Standards Committee for discussion. I thought it would be a no brainer, since the proposal was fixing obvious holes in the original design. A week ago I attended the meetings of the C++ Standards Committee in Issaquah — since it was within driving distance from me — and was I in for a surprise! Apparently some design patterns that form the foundation of functional programming are not obvious to everybody. So now I find myself on the other side of the discussion and will try to explain why the improved design of `std::future` is right.

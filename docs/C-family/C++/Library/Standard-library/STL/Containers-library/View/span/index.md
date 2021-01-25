@@ -136,6 +136,25 @@ Note that these different span implementations have some differences in what met
 
 **Further reading:** You can find all the details and design considerations in the final official proposal before C++17, P0122R7: [span: bounds-safe views for sequences of objects](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0122r7.pdf) by Neal Macintosh and Stephan J. Lavavej. It's a bit long though. Also, in C++20, the span comparison semantics changed (following [this short paper](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1085r2.md) by Tony van Eerd).
 
+### [A](https://stackoverflow.com/a/61216722)
+
+A `span<T>` is this:
+
+```cpp
+template <typename T>
+struct span
+{
+    T * ptr_to_array;   // pointer to a contiguous C-style array of data
+                        // (which memory is NOT allocated or deallocated 
+                        // by the span)
+    std::size_t length; // number of elements in the array
+
+    // Plus a bunch of constructors and convenience accessor methods here
+}
+```
+
+It is a light-weight wrapper around a C-style array, preferred by C++ developers whenever they are using C libraries and want to wrap them with a C++-style data container for "type safety" and "C++-ishness" and "feelgoodery". :)
+
 ## Implementation
 
 
