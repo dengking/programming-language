@@ -1,6 +1,6 @@
 # Acquire-release semantic
 
-1、在介绍acquire-release的时候，都以这样的一个例子: 只有当flag被write thread置位后，read thread才能够执行操作，我们将此称为write-flag-notify-read-model，可以看到，其中的实现方式都是: read-acquire-write-release；
+1、在介绍acquire-release的时候，都以这样的一个例子: 只有当flag被write thread置位后，read thread才能够执行操作，这其实就是synchronize-with，我们将它的实现方式简记为: write-release-flag-notify-read-acquire-model，可以看到，其中的实现方式都是: read-acquire-write-release；
 
 2、需要ready之后才能够去读，需要禁止的操作: 在未ready之前就去read，即禁止CPU/compiler将acquire之后的read、write reorder到它之前；
 
