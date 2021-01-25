@@ -1,6 +1,6 @@
 # Multiple inheritance
 
-
+在使用policy based design的时候，使用到了Multiple inheritance;
 
 ## 两种class hierarchy
 
@@ -83,6 +83,12 @@ C++引入的Virtual inheritance特性就是为了解决前面提到的[the diamo
 virtual base class是virtual inheritance的base class。
 
 ## TODO cppreference [Virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
+
+
+
+
+
+
 
 ## TODO 维基百科[Virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance)
 
@@ -375,4 +381,10 @@ virtual void Object::draw()
 
 ## Virtual class
 
-维基百科[Virtual class](https://en.wikipedia.org/wiki/Virtual_class)
+wikipedia [Virtual class](https://en.wikipedia.org/wiki/Virtual_class)
+
+
+
+## TODO
+
+### stackoverflow [How to use parameterized base class constructor downstream of virtual inheritance](https://stackoverflow.com/questions/34732563/how-to-use-parameterized-base-class-constructor-downstream-of-virtual-inheritanc)
