@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    
+    - Prefer-use-object-generator: Prefer-use-object-generator
+    - Prefer-not-use-reset: Prefer-not-use-reset
