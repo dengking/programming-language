@@ -1,0 +1,10 @@
+nav:
+    - Introduction: index.md
+    - Summary: Summary
+    - Sequential-consistency: Sequential-consistency
+    - Acquire-release: Acquire-release
+    - Release-consume: Release-consume
+    - Relaxed: Relaxed
+    
+    - Acquire-release-VS-Fences: Acquire-release-VS-Fences
+    - Acquire-release-VS-sequential-consistency: Acquire-release-VS-sequential-consistency

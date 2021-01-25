@@ -1,14 +1,8 @@
 nav:
     - Introduction: index.md
     - Why-need-memory-model: Why-need-memory-model
-    
-    # 下面着重从atomic library的用法出发来进行阐述
-    - Herb-Sutter: Herb-Sutter
-    - sciencedirect-Shared-Memory-Application-Programming: sciencedirect-Shared-Memory-Application-Programming 
-    - Memory-ordering: Memory-ordering
-    - Acquire-release-semantic: Acquire-release-semantic
-    - Acquire-release-VS-Fences: Acquire-release-VS-Fences
-    - Acquire-release-VS-sequential-consistency: Acquire-release-VS-sequential-consistency
+    - Multiple-level-memory-model: Multiple-level-memory-model
+    - C++VS-Java-memory-model: C++VS-Java-memory-model
+    - modernescpp-C++Memory-Model: modernescpp-C++Memory-Model
     - Memory-fence: Memory-fence
-    - Release-consume: Release-consume 
-    - Sequential-consistency-and-atomicity: Sequential-consistency-and-atomicity
+    
