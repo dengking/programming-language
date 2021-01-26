@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - Memory-ordering: Memory-ordering
+    - std-atomic_flag: std-atomic_flag
     - Implementation: Implementation
