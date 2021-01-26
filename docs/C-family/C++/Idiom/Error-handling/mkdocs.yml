@@ -1,3 +1,4 @@
 nav:
-    - Polymorphic-Exception: Polymorphic-Exception.md
-    - Construction-Tracker: Construction-Tracker.md
+    - Introduction: index.md
+    - Polymorphic-Exception: Polymorphic-Exception
+    - Construction-Tracker: Construction-Tracker

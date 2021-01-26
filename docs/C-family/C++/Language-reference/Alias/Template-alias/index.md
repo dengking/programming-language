@@ -2,8 +2,9 @@
 
 有两种实现方式：
 
-- C++11 using
-- [Type-Generator idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Generator)（参见`C-family-language\C++\Idiom\Template-metaprogramming\Type-Generator`章节）
+1、C++11 using
+
+2、[Type-Generator idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Generator)（参见`C-family-language\C++\Idiom\Template-metaprogramming\Type-Generator`章节）
 
 ## wikipedia [C++11#Template aliases](https://en.wikipedia.org/wiki/C%2B%2B11#Template_aliases)
 

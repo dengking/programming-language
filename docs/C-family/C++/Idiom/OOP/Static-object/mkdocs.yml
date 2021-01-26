@@ -1,0 +1,7 @@
+nav:
+
+    ########## initialization相关##########
+    - Construct-On-First-Use: Construct-On-First-Use
+    - Nifty-Counter: Nifty-Counter
+    - Attach-by-Initialization: Attach-by-Initialization
+

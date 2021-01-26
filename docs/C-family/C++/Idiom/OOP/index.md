@@ -139,12 +139,6 @@ proxy/temporary class
 
 
 
-### 
-
-
-
-
-
 [Temporary Base Class](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Temporary_Base_Class)
 
 

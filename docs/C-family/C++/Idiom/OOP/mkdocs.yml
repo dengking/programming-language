@@ -1,4 +1,5 @@
 nav:
+    
     ########## initialization相关##########
     - Construct-On-First-Use: Construct-On-First-Use
     - Nifty-Counter: Nifty-Counter
@@ -11,6 +12,8 @@ nav:
     - Calling-Virtual-During-Initialization: Calling-Virtuals-During-Initialization
     - Polymorphic-Value-Types: Polymorphic-Value-Types
     - Base-from-Member: Base-from-Member
+    
+    - Covariant-Return-Types: Covariant-Return-Types
     # 命名参数
     - Named-Parameter: Named-Parameter
     # 命名构造函数

@@ -1,6 +1,6 @@
 # Copy constructor for a class with `unique_ptr`
 
-
+对一个有`unique_ptr`类型成员变量的class，它的copy constructor要如何写？
 
 ## stackoverflow [Copy constructor for a class with unique_ptr](https://stackoverflow.com/questions/16030081/copy-constructor-for-a-class-with-unique-ptr)
 
@@ -9,6 +9,8 @@ How do I implement a copy constructor for a class that has a `unique_ptr` member
 [A](https://stackoverflow.com/a/16030118)
 
 Since the `unique_ptr` can not be shared, you need to either deep-copy its content or convert the `unique_ptr` to a `shared_ptr`.
+
+> NOTE: 下面code，使用的是deep copy
 
 ```cpp
 class A
