@@ -74,4 +74,4 @@ They are different relations, where one is a subset of the other. The subset is 
 
 [A](https://stackoverflow.com/a/65337588)
 
-From thread a perspective, it looks as if x.store happens before y.store. However, from thread b perspective, it can look as if they are reordered. https://koheiotsuka701.medium.com/memory-model-basic-d8b5f8fddd5f
+From thread `a` perspective, it looks as if `x.store` happens before `y.store`. However, from thread b perspective, it can look as if they are reordered. https://koheiotsuka701.medium.com/memory-model-basic-d8b5f8fddd5f
