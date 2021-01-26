@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
-    - Access-outside-of-object-lifetime: Access-outside-of-object-lifetime
+    - Pure-virtual-method-called: Pure-virtual-method-called
+    - Use-shared_ptr-to-solve-dangling-pointer: Use-shared_ptr-to-solve-dangling-pointer
+    - dangling-pointer-and-control-theory-and-reference-counting: dangling-pointer-and-control-theory-and-reference-counting.md

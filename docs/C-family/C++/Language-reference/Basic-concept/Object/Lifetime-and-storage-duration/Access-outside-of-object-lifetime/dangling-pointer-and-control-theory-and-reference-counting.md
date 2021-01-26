@@ -1,4 +1,4 @@
-[TOC]
+
 
 # use `shared_ptr` to control object lifetime to avoid dangling pointer
 
