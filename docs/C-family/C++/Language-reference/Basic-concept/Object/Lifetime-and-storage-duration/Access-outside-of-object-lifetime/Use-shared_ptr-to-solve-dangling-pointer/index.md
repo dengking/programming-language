@@ -2,7 +2,7 @@
 
 # `shard_ptr` and multiple-thread
 
-### Multiple-thread share a pointer and [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)
+## Multiple-thread share a pointer and [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)
 
 当一个pointer由多个thread访问，那么对于这个pointer的管理就变得棘手了：
 
@@ -164,3 +164,6 @@ int main()
 
 在`CApi`的析构函数中，直接将`m_Serializer`析构掉，`CSerialization`使用了RAII，如果在它的destructor中，没有`Del(this)`，则导致了[Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)。
 
+## TODO
+
+将spdlog中`std::shared_ptr`的使用，作为一个例子来说明这个问题；

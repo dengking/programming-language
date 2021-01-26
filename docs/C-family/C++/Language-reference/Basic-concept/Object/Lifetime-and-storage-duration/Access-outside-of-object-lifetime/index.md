@@ -101,3 +101,10 @@ iterator invalidate和object lifetime，Access outside  of lifetime of object �
 dangling pointer and object lifetime and `vector<std::string>` and，realloc and move
 
 
+
+### Example6 Calling Virtual During Initialization
+
+Calling Virtual During Initialization
+
+### Example7 cppreference [virtual function specifier](https://en.cppreference.com/w/cpp/language/virtual) # During construction and destruction
+

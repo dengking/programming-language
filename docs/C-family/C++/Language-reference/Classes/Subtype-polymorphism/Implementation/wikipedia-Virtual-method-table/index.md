@@ -1,8 +1,4 @@
-# Virtual method table
-
-
-
-## wikipedia [Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
+# wikipedia [Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
 
 A **virtual method table** (**VMT**), **virtual function table**, **virtual call table**, [dispatch table](https://en.wikipedia.org/wiki/Dispatch_table), **vtable**, or **vftable** is a mechanism used in a [programming language](https://en.wikipedia.org/wiki/Programming_language) to support [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch) (or [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) [method](https://en.wikipedia.org/wiki/Method_(computer_programming)) [binding](https://en.wikipedia.org/wiki/Name_binding)).
 
