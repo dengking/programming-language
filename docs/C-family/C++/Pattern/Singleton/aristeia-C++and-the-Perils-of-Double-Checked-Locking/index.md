@@ -6,6 +6,8 @@
 
 1、`pInstance`是shared variable，会有multiple thread对它concurrently进行read、write
 
+> NOTE: 可以使用read-acquire-write-release，来保证write的value能够被及时、正确的read到；
+
 2、compiler reordering 导致的问题，在"4 DCLP and Instruction Ordering"章节中进行的描述
 
 3、processor reordering 导致的问题，在"4 DCLP and Instruction Ordering"章节中进行的描述
@@ -165,7 +167,7 @@ Step 2: Construct a `Singleton` object in the allocated memory.
 
 Step 3: Make `pInstance` point to the allocated memory.
 
-### 现实的Instruction ordering
+### 现实的Instruction ordering以及导致的问题
 
 Of critical importance is the observation that compilers are not constrained to perform these steps in this order! In particular, compilers are sometimes allowed to swap steps 2 and 3. Why they might want to do that is a question we’ll address in a moment. For now, let’s focus on what happens if they do.
 
@@ -424,7 +426,7 @@ Such a possibility is a serious problem for DCLP. Correct Singleton initializati
 
 > NOTE: 
 >
-> 1、使用memory barrier来控制CPU对shared variable的read、write的reordering
+> 1、使用memory barrier来控制CPU对shared variable的read、write的reordering，保证write被写入到memory中，保证write已经生效，保证后续的能够看到前面写的值；
 
 The general solution to **cache coherency problems** is to use memory barriers (i.e., fences): instructions recognized by compilers, linkers, and other optimizing entities that constrain the kinds of reorderings that may be performed on reads and writes of shared memory in multiprocessor systems. In the case of DCLP, we need to use **memory barriers** to ensure that `pInstance` isn’t seen to be non-null until writes to the `Singleton` have been completed. Here’s pseudocode that closely follows an example given in [1]. We show only placeholders for the statements that insert **memory barriers**, because the actual code is platform-specific (typically in assembler).
 
@@ -451,13 +453,13 @@ Singleton* Singleton::instance()
 
 > NOTE: 
 >
-> 1、上述第二个`//... // insert memory barrier`保证它的之前的write已经生效了，从而避免了前面的另外一个thread看到的相反的
+> 1、上述第二个`//... // insert memory barrier`保证它的之前的write已经生效了，从而避免了前面的另外一个thread看到的相反的，从而保证了理想的instruction order。
 >
 > 2、第一个`//... // insert memory barrier`的目的是什么呢？
 
 Arch Robison (author of [12], but this is from personal communication) points out that this is overkill:
 
-> Technically, you don’t need full bidirectional barriers. The first barrier must prevent downwards migration of `Singleton`’s construction (by another thread); the second barrier must prevent upwards migration of `pInstance`’s initialization. These are called ”acquire” and ”release” operations, and may yield better performance than full barriers on hardware (such as Itainum) that makes the distinction.
+> Technically, you don’t need full bidirectional barriers. The first barrier must prevent downwards(向下) migration of `Singleton`’s construction (by another thread); the second barrier must prevent upwards migration of `pInstance`’s initialization. These are called ”acquire” and ”release” operations, and may yield better performance than full barriers on hardware (such as Itainum) that makes the distinction.
 
 > NOTE: 典型的acquire-release 
 
