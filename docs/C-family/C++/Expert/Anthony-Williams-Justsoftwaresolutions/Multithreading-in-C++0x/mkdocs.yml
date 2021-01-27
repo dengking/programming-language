@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - Part-6-Lazy-initialization-and-double-checked-locking-with-atomics: Part-6-Lazy-initialization-and-double-checked-locking-with-atomics

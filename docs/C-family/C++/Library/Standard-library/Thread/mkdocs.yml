@@ -1,6 +1,5 @@
 nav:
     - Thread: index.md
     - Asynchronous-programming: Asynchronous-programming
-    - CCiA: CCiA
     - TODO-joining_thread: TODO-joining_thread
     - TODO-read-write-lock: TODO-read-write-lock

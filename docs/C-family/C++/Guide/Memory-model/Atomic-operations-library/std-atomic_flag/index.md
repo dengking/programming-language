@@ -91,8 +91,18 @@ But I just don't understand why it would work!
 
 Imagine thread 1 calls `lock()` and `test_and_set()` returns 0 as the old value --> thread 1 has acquired the lock.
 
-But then thread 2 comes along and tries the same. Now since there has occurred no "store synchronization" (release,seq_cst_acq_rel) thread 1's store to `spin_lock` should be of type relaxed.
+But then thread 2 comes along and tries the same. Now since there has occurred no "store synchronization" (`release` ,`seq_cst_acq_rel`) thread 1's store to `spin_lock` should be of type relaxed.
 
 But from this follows that it cannot imao be synchronized with thread 2's read of spin_lock. This should make it possible for thread 2 to read the value 0 from `spin_lock` and thus acquire the lock as well.
 
 Where is my mistake?
+
+[A](https://stackoverflow.com/a/14791524)
+
+Your mistake is in forgetting that `spin_lock` is an `atomic_flag` and thus `test_and_set` is an atomic operation. The `memory_order_acquire` and `memory_order_release` is needed to prevent reads from migrating to before the lock operation or writes from migrating to after the unlock. The lock itself is protected by atomicity which always includes visibility.
+
+> NOTE: 
+>
+> 1、lock acquire release
+>
+> 2、这一段给出的介绍是比较好的，它让我理解了: lock、acquire semantic、release semantic之间的关联
