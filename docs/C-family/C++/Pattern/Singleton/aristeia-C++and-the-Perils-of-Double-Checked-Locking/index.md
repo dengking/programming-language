@@ -6,7 +6,7 @@
 
 1、`pInstance`是shared variable，会有multiple thread对它concurrently进行read、write
 
-> NOTE: 可以使用read-acquire-write-release，来保证write的value能够被及时、正确的read到；
+> NOTE: 可以使用read-acquire-write-release来实现happens-before relation，来保证write的value能够被及时、正确的read到；
 
 2、compiler reordering 导致的问题，在"4 DCLP and Instruction Ordering"章节中进行的描述
 
