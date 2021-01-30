@@ -16,6 +16,10 @@ function: 说明它需要支持the function call expression
 
 object: 说明它需要是object，那么这就排除了function lvalue、reference to function
 
+### Function object也是first class citizen
+
+C++中object是first class citizen，因此function object也是first class citizen；
+
 ### cppreference [Function #Function objects](https://en.cppreference.com/w/cpp/language/functions#Function_objects)
 
 Besides **function lvalues**, the **function call expression** supports 
