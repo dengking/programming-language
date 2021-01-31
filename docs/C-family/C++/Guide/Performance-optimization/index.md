@@ -69,6 +69,12 @@ C++ emplace可以作为一个例子，另外它的实现还依赖于placement ne
 
 参见 `Resource-management\Memory-management\Allocation-and-deallocation\C++\new-operator\Placement-new` 章节。
 
+
+
+### SSO
+
+
+
 ## Compiler type deduction
 
 ### reference
