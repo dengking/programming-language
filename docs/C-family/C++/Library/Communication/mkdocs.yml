@@ -1,3 +1,4 @@
 nav:
-    - Evented-IO-library: Evented-IO-library.md
-    - ZeroMQ: ZeroMQ
+    - Introduction: index.md
+    - library-ZeroMQ: library-ZeroMQ
+    - library-libsourcey: library-libsourcey
