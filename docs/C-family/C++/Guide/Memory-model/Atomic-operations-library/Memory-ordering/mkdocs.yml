@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - std-memory_order: std-memory_order
+    - std-atomic_signal_fence: std-atomic_signal_fence
