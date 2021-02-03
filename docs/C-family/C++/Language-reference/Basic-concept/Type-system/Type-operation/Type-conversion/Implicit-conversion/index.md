@@ -267,11 +267,11 @@ Such expression `e` is said to be *contextually implicitly converted* to the spe
 
 ### Lvalue to rvalue conversion
 
-
+> NOTE: 参见"Lvalue-to-rvalue-conversion"章节
 
 ### Array to pointer conversion
 
-
+> NOTE: 参见 `Resource-management\Memory-management\Memory-access\Array` 章节
 
 ### Temporary materialization
 
