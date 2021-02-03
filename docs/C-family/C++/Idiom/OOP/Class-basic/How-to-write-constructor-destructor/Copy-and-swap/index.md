@@ -288,11 +288,8 @@ And so concludes the **copy-and-swap idiom**.
 
 
 
-## [c++patterns](https://cpppatterns.com/)
+## TODO [c++patterns](https://cpppatterns.com/) # [Copy-and-swap](https://cpppatterns.com/patterns/copy-and-swap.html)
 
 
 
-
-
-## ==TODO== want speed pass by value c++
 

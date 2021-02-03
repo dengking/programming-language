@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    
+    - What-is-evaluation-of-expressions: What-is-evaluation-of-expressions
+    - josephmansfield-C++sequenced-before-graphs: josephmansfield-C++sequenced-before-graphs

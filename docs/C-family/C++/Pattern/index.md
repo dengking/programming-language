@@ -27,3 +27,8 @@ source code：[design-patterns-in-modern-cpp](https://github.com/Apress/design-p
 
 
 ### caiorss.github [CPP / C++ Notes - Design Patterns](https://caiorss.github.io/C-Cpp-Notes/cpp-design-patterns.html)
+
+## GitHub
+
+https://github.com/search?l=C%2B%2B&o=desc&q=design+pattern&s=stars&type=Repositories
+

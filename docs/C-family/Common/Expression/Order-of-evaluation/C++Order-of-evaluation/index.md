@@ -78,12 +78,16 @@ int main()
 > NOTE: 
 >
 > 1、"Evaluation of Expressions"是language designer规定的，language implementation需要遵循它来翻译我们的code
+>
+> 2、side effect 和 value computation 分别是指什么？
 
 Evaluation of each expression includes:
 
 1、*value computations*: calculation of the value that is returned by the expression. This may involve determination of the identity of the object (glvalue evaluation, e.g. if the expression returns a reference to some object) or reading the value previously assigned to an object (prvalue evaluation, e.g. if the expression returns a number, or some other value)
 
 2、Initiation of *side effects*: access (read or write) to an object designated by a volatile glvalue, modification (writing) to an object, calling a library I/O function, or calling a function that does any of those operations.
+
+
 
 ### Ordering
 
@@ -144,3 +148,11 @@ When calling a function (whether or not the function is inline, and whether or n
 ## Sequence point rules (until C++11)
 
 > NOTE: 未阅读
+
+
+
+
+
+## Summary
+
+1、是基于side effect、value computation而定义的，从最终结果来进行定义，而对执行的过程，没有加以限制，这基于了充分的optimization空间，如果限制地太死，显然，就无法充分发挥compiler、CPU的optimization能力
