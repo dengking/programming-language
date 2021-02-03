@@ -1,8 +1,7 @@
-# Implicit conversions
+# cppreference [Implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion)
 
-在阅读本文前，建议先阅读accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/)，在`C++\Language-reference\Functions\Overload-resolution\accu-Overload-Resolution.md`中收录了这篇文章，并对其进行了详细注解。
-
-## cppreference [Implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion)
+> 在阅读本文前，建议先阅读accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/)，在`C++\Language-reference\Functions\Overload-resolution\accu-Overload-Resolution.md`中收录了这篇文章，并对其进行了详细注解。
+>
 
 Implicit conversions are performed whenever an expression of some type `T1` is used in context that does not accept that type, but accepts some other type `T2`; in particular:
 
@@ -18,7 +17,7 @@ Implicit conversions are performed whenever an expression of some type `T1` is u
 
 
 
-### Order of the conversions
+## Order of the conversions
 
 > NOTE:
 >
@@ -32,7 +31,7 @@ Implicit conversions are performed whenever an expression of some type `T1` is u
 > - Standard conversion sequence
 > - User-defined conversion
 
-#### Implicit conversion sequence
+### Implicit conversion sequence
 
 **Implicit conversion sequence** consists of the following, in this order:
 
@@ -59,7 +58,7 @@ When considering the **argument** to a **constructor** or to a **user-defined co
 
 When converting from one built-in type to another built-in type, only a **standard conversion sequence** is allowed.
 
-#### Standard conversion sequence 
+### Standard conversion sequence 
 
 A **standard conversion sequence** consists of the following, in this order:
 
@@ -70,7 +69,7 @@ A **standard conversion sequence** consists of the following, in this order:
 | 3)    | zero or one *function pointer conversion*;                   | (since C++17)                                                |
 | 4)    | zero or one *qualification conversion*.                      |                                                              |
 
-#### User-defined conversion
+### User-defined conversion
 
 > NOTE: 关于User-defined conversion，参见 `C++\Language-reference\Classes\Special-member-functions\Constructor\User-defined-conversion` 章节
 
@@ -85,7 +84,7 @@ A **standard conversion sequence** consists of the following, in this order:
 >
 > 
 
-#### Implicitly convertible
+### Implicitly convertible
 
 An expression `e` is said to be *implicitly convertible to `T2`* if and only if `T2` can be [copy-initialized](https://en.cppreference.com/w/cpp/language/copy_initialization) from `e`, that is the declaration `T2 t = e;` is well-formed (can be compiled), for some invented temporary `t`. Note that this is different from [direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) (`T2 t(e)`), where **explicit** constructors and conversion functions would additionally be considered.
 
@@ -94,7 +93,7 @@ An expression `e` is said to be *implicitly convertible to `T2`* if and only if 
 | `T2 t = e;` | [copy-initialized](https://en.cppreference.com/w/cpp/language/copy_initialization) | **implicit** conversion |
 | `T2 t(e)`   | [direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) | **explicit** conversion |
 
-#### Contextual conversions(since C++11)
+### Contextual conversions(since C++11)
 
 **Contextual conversion to bool **:
 
@@ -262,15 +261,24 @@ Such expression `e` is said to be *contextually implicitly converted* to the spe
 
 
 
+## Value transformations
 
-### Value transformations
 
-#### Lvalue to rvalue conversion
 
-#### Array to pointer conversion
+### Lvalue to rvalue conversion
 
-#### Temporary materialization
 
-#### Function to pointer
 
-### Numeric promotions
+### Array to pointer conversion
+
+
+
+### Temporary materialization
+
+
+
+### Function to pointer
+
+
+
+## Numeric promotions

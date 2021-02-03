@@ -1,8 +1,8 @@
 # What is Evaluation of Expressions？
 
-最近越多的多篇文章中，都谈及了side effect，那它到底什么是呢？C++官方文档在cppreference [Order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order) # [Evaluation of Expressions](https://en.cppreference.com/w/cpp/language/eval_order#Evaluation_of_Expressions) 中给出了definition，但是它并不容易理解，本文就是对Evaluation of Expressions进行讨论，其中就会涉及side effect。
+1、C++官方文档在cppreference [Order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order) # [Evaluation of Expressions](https://en.cppreference.com/w/cpp/language/eval_order#Evaluation_of_Expressions) 中给出了definition，但是它并不容易理解，本文就是对Evaluation of Expressions进行讨论，其中就会涉及side effect。
 
-
+2、最近越多的多篇文章中，都谈及了side effect，那它到底什么是呢？在cppreference [Order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order) # [Evaluation of Expressions](https://en.cppreference.com/w/cpp/language/eval_order#Evaluation_of_Expressions) 中，对它进行了讨论，因此，将它收录在本章；
 
 ## cppreference [Order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order) # [Evaluation of Expressions](https://en.cppreference.com/w/cpp/language/eval_order#Evaluation_of_Expressions) 
 
@@ -10,13 +10,13 @@
 >
 > 1、"Evaluation of Expressions"是language designer规定的，language implementation需要遵循它来翻译我们的code
 >
-> 
+> 2、*value computations* 和 *side effects*是两个正交概念
 
 Evaluation of each expression includes:
 
 1、*value computations*: calculation of the value that is returned by the expression. This may involve determination of the identity of the object (glvalue evaluation, e.g. if the expression returns a reference to some object) or reading the value previously assigned to an object (prvalue evaluation, e.g. if the expression returns a number, or some other value)
 
-
+> NOTE: "calculation of the value that is returned by the expression"是容易理解的
 
 2、Initiation of *side effects*: access (read or write) to an object designated by a volatile glvalue, modification (writing) to an object, calling a library I/O function, or calling a function that does any of those operations.
 
@@ -28,7 +28,7 @@ Evaluation of each expression includes:
 
 ### 以postfix `++` and `--` 和 prefix `++` and `--` 为例来进行说明
 
-在 josephmansfield [C++ sequenced-before graphs](https://josephmansfield.uk/articles/c++-sequenced-before-graphs.html) 中，对此有着非常好的总结:
+对于 "postfix `++` and `--` "，我们知道，它是先返回值，然后执行increment、decrement，那用cppreference evaluation of expression中的专业说法如何来进行解释呢？在 josephmansfield [C++ sequenced-before graphs](https://josephmansfield.uk/articles/c++-sequenced-before-graphs.html) 中，对此有着非常好的总结:
 
 > 4、The value computation of postfix `++` and `--` is sequenced before their side effects.
 >
@@ -43,8 +43,6 @@ Evaluation of each expression includes:
 ## 问题: 为什么分为两个部分?
 
 可以看到，上述对 [Evaluation of Expressions](https://en.cppreference.com/w/cpp/language/eval_order#Evaluation_of_Expressions) 的定义分为了两个部分，那为什么要这样就行划分呢？
-
-
 
 
 
