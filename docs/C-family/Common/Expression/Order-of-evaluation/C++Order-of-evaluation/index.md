@@ -4,7 +4,7 @@ Order of evaluation of any part of any expression, including order of evaluation
 
 > NOTE: 
 >
-> 1、为什么C++标准没有对此进行规定？
+> 1、为什么C++标准没有对此进行规定？参见下面的"Summary"章节。
 
 ## No left-to-right or right-to-left evaluation 
 
@@ -75,17 +75,7 @@ int main()
 
 ### Evaluation of Expressions
 
-> NOTE: 
->
-> 1、"Evaluation of Expressions"是language designer规定的，language implementation需要遵循它来翻译我们的code
->
-> 2、side effect 和 value computation 分别是指什么？
-
-Evaluation of each expression includes:
-
-1、*value computations*: calculation of the value that is returned by the expression. This may involve determination of the identity of the object (glvalue evaluation, e.g. if the expression returns a reference to some object) or reading the value previously assigned to an object (prvalue evaluation, e.g. if the expression returns a number, or some other value)
-
-2、Initiation of *side effects*: access (read or write) to an object designated by a volatile glvalue, modification (writing) to an object, calling a library I/O function, or calling a function that does any of those operations.
+> NOTE: 在`What-is-evaluation-of-expressions`章节对这个topic进行了讨论。
 
 
 
@@ -115,9 +105,19 @@ Evaluation of each expression includes:
 
 ### Rules
 
-1)
+> NOTE: 
+
+#### Full expression
 
 > NOTE: 其实描述的是两个*full expression*之间的order
+
+1)
+
+
+
+#### Operand and the result of the operator
+
+> NOTE: 显然operator是更加关注value的
 
 2)
 
@@ -129,7 +129,21 @@ Evaluation of each expression includes:
 
 When calling a function (whether or not the function is inline, and whether or not explicit function call syntax is used), every value computation and side effect associated with any **argument expression**, or with the postfix expression designating the called function, is *sequenced before* execution of every expression or statement in the **body of the called function**.
 
+#### Assignment
 
+> NOTE: 显然，assignment是更加关注value的
+
+8) 
+
+The side effect (modification of the left argument) of the built-in [assignment](https://en.cppreference.com/w/cpp/language/operator_assignment#Builtin_direct_assignment) operator and of all built-in [compound](https://en.cppreference.com/w/cpp/language/operator_assignment#Builtin_compound_assignment) assignment operators is *sequenced after* the value computation (but not the side effects) of both left and right arguments, and is *sequenced before* the value computation of the assignment expression (that is, before returning the reference to the modified object)
+
+> NOTE: 
+>
+> 1、先计算left argument 和 right argument的value
+>
+> 2、对于assignment operator而言，它需要首先完成它的side effect(将value写入到memory)，然后再完成它的value computation
+
+#### Function call
 
 11) A function call that is not *sequenced before* or *sequenced after* another function call is *indeterminately sequenced* (the program must behave [as if](https://en.cppreference.com/w/cpp/language/as_if) the CPU instructions that constitute different function calls were not interleaved, even if the functions were inlined).
 
