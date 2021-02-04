@@ -1,5 +1,6 @@
 nav:
     - C++Core-Guidelines: C++Core-Guidelines
+    - Design-and-implementation: Design-and-implementation
     # 总结c++支持的programming paradigm
     - Paradigm: Paradigm
     # 总结c++中polymorphism的实现
@@ -16,3 +17,4 @@ nav:
     - Simplify: Simplify
     - Performance-optimization: Performance-optimization
     - Memory-model: Memory-model
+    
