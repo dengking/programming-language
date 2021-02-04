@@ -72,6 +72,6 @@ The **Concurrency in Action** says "It’s also a transitive relation: if A **in
 
 They are different relations, where one is a subset of the other. The subset is transitive; the superset is not. In particular, if `A` inter-thread happens-before `B` and `B` is sequenced-before `C`, this doesn't necessarily mean that `A` happens-before `C` (even though `A` happens-before `B` and `B` happens-before `C`). – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 16:23](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90129770_51580966)
 
-[A](https://stackoverflow.com/a/65337588)
+### [A](https://stackoverflow.com/a/65337588)
 
 From thread `a` perspective, it looks as if `x.store` happens before `y.store`. However, from thread b perspective, it can look as if they are reordered. https://koheiotsuka701.medium.com/memory-model-basic-d8b5f8fddd5f
