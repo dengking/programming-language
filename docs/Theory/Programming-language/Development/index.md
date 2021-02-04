@@ -1,12 +1,10 @@
 # Development
 
+作为programmer，我们使用programming language进行develop，本文对研发过程中的一些内容进行总结。
+
 ## Programming paradigm
 
 有很多语言都号称是支持“multiple [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigms)”，我们有必要了解programming paradigm的知识，参见[Programming paradigm](../../Programming-paradigm/index.md)。
-
-
-
-
 
 ## Common in development
 
