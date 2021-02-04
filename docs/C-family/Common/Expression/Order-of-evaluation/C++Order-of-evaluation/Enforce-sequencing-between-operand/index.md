@@ -19,3 +19,16 @@ Is it true that c += 2 will be always evaluated first, and c in second expressio
 [A](https://stackoverflow.com/a/7784819)
 
 Yes, it is guaranteed by the standard, as long as that comma is a non-overloaded comma operator. Quoting n3290 §5.18:
+
+## josephmansfield [C++ sequenced-before graphs](https://josephmansfield.uk/articles/c++-sequenced-before-graphs.html)
+
+### Example: `i++ || i++`
+
+```C++
+i++ || i++
+```
+
+![An sequenced-before graph for i++ || i++.](https://josephmansfield.uk/media/images/sequencing-graphs/logical-or.png)
+
+This demonstrates the ability of some operators (namely `||`, `&&`, and `,`) to enforce sequencing between their operands. The standard states that every value computation and side effect associated with the left operand is sequenced before those of the right operand.
+

@@ -80,7 +80,17 @@ Evaluation of each expression includes:
 
 
 
-## Operator with side effect
+## Side effect
+
+
+
+1、Google: c++ side effects
+
+2、stackoverflow [What exactly is a 'side-effect' in C++?](https://stackoverflow.com/questions/9563600/what-exactly-is-a-side-effect-in-c)
+
+
+
+### Operator with side effect
 
 1、Google: operators with side effects c++
 
@@ -91,11 +101,5 @@ Evaluation of each expression includes:
 1、josephmansfield [C++ sequenced-before graphs](https://josephmansfield.uk/articles/c++-sequenced-before-graphs.html)
 
 > Both the assignment and the increment have side effects (i.e. they modify the value of an object).
-
-
-
-## Google: c++ side effects
-
-stackoverflow [What exactly is a 'side-effect' in C++?](https://stackoverflow.com/questions/9563600/what-exactly-is-a-side-effect-in-c)
 
 

@@ -8,6 +8,12 @@
 
 
 
+## josephmansfield [C++ sequenced-before graphs](https://josephmansfield.uk/articles/c++-sequenced-before-graphs.html)
+
+For those who want to read more, look up [value categories](http://en.cppreference.com/w/cpp/language/value_category). The left operand of `=` is an lvalue, which means that we don't care about its value. **Lvalue-to-rvalue conversion** can be thought of as reading the value from an object.
+
+
+
 ## cppreference [Implicit conversions # Value transformations # Lvalue to rvalue conversion](https://en.cppreference.com/w/cpp/language/implicit_conversion#Lvalue_to_rvalue_conversion)
 
 A [glvalue](https://en.cppreference.com/w/cpp/language/value_category#glvalue) of any non-function, non-array type `T` can be implicitly converted to a [prvalue](https://en.cppreference.com/w/cpp/language/value_category#prvalue) of the same type. If `T` is a non-class type, this conversion also removes cv-qualifiers.

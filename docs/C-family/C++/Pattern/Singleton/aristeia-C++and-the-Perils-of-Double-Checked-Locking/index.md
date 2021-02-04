@@ -213,7 +213,7 @@ Given the above translation, consider the following sequence of events:
 
 ### 导致的问题: Access outside of object lifetime
 
-
+> NOTE: 关于Access outside of object lifetime，参见相关章节。
 
 ### 根本解决方法: constraint relative instruction ordering
 
@@ -241,6 +241,16 @@ Oh, Odysseus, don’t let thyself be lured by sirens’ voices; for much trouble
 
 > NOTE: 翻译为: 哦，奥德修斯，不要让你自己被塞壬的声音所诱惑; 因为有许多麻烦在等着你和你的伙伴们!
 
+
+
+#### Under the hook: 我们所不知道的
+
+> NOTE: 
+>
+> 隐藏在"what we know"之下有很多可能的情况是我们所不知的。上面这段就描述了各种我们所不知的；
+>
+> 上面这段话的字面意思: 但这只是我们所能保证的范围，也就是我们所知道的范围。
+
 Both standards define correct program behavior in terms of the observable behavior of an abstract machine. But not everything about this machine is observable. For example, consider this simple function:
 
 ```C++
@@ -256,14 +266,6 @@ void Foo()
 
 This function looks silly, but it might plausibly(似乎合理的) be the result of inlining some other functions called by `Foo`.
 
-#### Under the hook: 我们所不知道的
-
-> NOTE: 
->
-> 隐藏在"what we know"之下有很多可能的情况是我们所不知的。上面这段就描述了各种我们所不知的；
->
-> 上面这段话的字面意思: 但这只是我们所能保证的范围，也就是我们所知道的范围。
-
 In both C and C++, the standards guarantee that `Foo` will print "5,10", so we know that that will happen. But that’s about the extent of what we’re guaranteed, hence of what we know.  (后面开始描述我们所不知的)We don’t know whether statements 1-3 will be executed at all, and in fact a good optimizer will get rid of them. If statements 1-3 are executed, we know that statement 1 will precede(领先) statements 2-4 and—assuming that the call to `printf` isn’t inlined and the result further optimized—we know that statement 4 will follow statements 1-3, but we know nothing about the relative ordering of statements 2 and 3. Compilers might choose to execute statement 2 first, statement 3 first, or even to execute them both in parallel, assuming the hardware has some way to do it. Which it might well have. Modern processors have a large word size and several execution units. Two or more arithmetic units are common. (For example, the Pentium 4 has three integer ALUs, PowerPC’s G4e has four, and Itanium has six.) Their machine language allows compilers to generate code that yields parallel execution of two or more instructions in a single clock cycle.
 
 #### Optimizing compilers: reorder your code 
@@ -278,10 +280,13 @@ When performing these kinds of optimizations, compilers and linkers for C and C+
 
 That being the case, how can one write C and C++ multithreaded programs that actually work? By using system-specific libraries defined for that purpose. Libraries like Posix threads (pthreads) [6] give precise specifications for the execution semantics of various synchronization primitives. These libraries impose restrictions on the code that **library-conformant compilers** are permitted to generate, thus forcing such compilers to emit code that respects the execution ordering constraints on which those libraries depend. That’s why threading packages have parts written in assembler or issue system calls that are themselves written in assembler (or in some unportable language): you have to go outside standard C and C++ to express the ordering constraints that multithreaded programs require. DCLP tries to get by using only language constructs. That’s why DCLP isn’t reliable.
 
+---
+
+
+
 > NOTE: 下面作者总结了各种programmer可能使用的奇技淫巧来实现组织compiler进行instruction reorder。
 
-As a rule, programmers don’t like to be pushed around by their compilers. Perhaps you are such a programmer. If so, you may be tempted to try to outsmart your compiler by adjusting your source code so that `pInstance` remains unchanged until after Singleton’s construction is complete. For example, you
-might try inserting use of a temporary variable:
+As a rule, programmers don’t like to be pushed around by their compilers. Perhaps you are such a programmer. If so, you may be tempted to try to outsmart your compiler by adjusting your source code so that `pInstance` remains unchanged until after Singleton’s construction is complete. For example, you might try inserting use of a temporary variable:
 
 #### Inserting use of a temporary variable
 

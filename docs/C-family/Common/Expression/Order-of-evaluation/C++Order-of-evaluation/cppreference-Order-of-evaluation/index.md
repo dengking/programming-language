@@ -61,6 +61,8 @@ int main()
 >
 > 显然是和原网页中的输出不同的
 
+
+
 ## Sequenced-before rules (since C++11)
 
 > NOTE: 
@@ -72,6 +74,8 @@ int main()
 > 通过上述描述可以看出，C++11对于Order of evaluation的限制还是比较松散的: 存在"unsequenced"的情况
 >
 > 2、典型的order and relation，参见 工程discrete的"Relation"章节
+
+
 
 ### Evaluation of Expressions
 
@@ -169,4 +173,4 @@ The side effect (modification of the left argument) of the built-in [assignment]
 
 ## Summary
 
-1、是基于side effect、value computation而定义的，从最终结果来进行定义，而对执行的过程，没有加以限制，这基于了充分的optimization空间，如果限制地太死，显然，就无法充分发挥compiler、CPU的optimization能力
+1、是基于side effect、value computation而定义的，从最终结果来进行定义，而对执行的过程，没有加以限制，这给予了compiler充分的optimization空间，如果限制地太死，显然，就无法充分发挥compiler、CPU的optimization能力
