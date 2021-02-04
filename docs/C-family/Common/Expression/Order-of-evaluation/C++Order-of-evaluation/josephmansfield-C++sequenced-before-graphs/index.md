@@ -4,7 +4,9 @@
 >
 > 1、这篇文章介绍了一种基于AST来分析expression evaluation，进而判断undefined behavior的方法，这种方法能够让programmer分析出expression是否存在undefined behavior，其实这种方法应该就是compiler检查expression的方法；
 >
-> 2、这篇文章对Lvalue-to-rvalue conversion的解释也是比较好的
+> 2、本文中给出的方法是典型的: relation structure computation。
+>
+> 3、这篇文章对Lvalue-to-rvalue conversion的解释也是比较好的
 
 ```C++
 i = i++

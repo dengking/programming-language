@@ -1,10 +1,24 @@
 # cppreference [Order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order)
 
+
+
+## Guide
+
+1、是基于side effect、value computation而定义的，从最终结果来进行定义，而对执行的过程，没有加以限制，这给予了compiler充分的optimization空间，如果限制地太死，显然，就无法充分发挥compiler、CPU的optimization能力
+
+2、通过这段描述可以看出，C++对Order of evaluation并没有进行严格的限制，它的限制是非常松散的，那C++的限制有哪些呢？C++是基于Sequenced-before relation而建立的，参见下面的"Sequenced-before rules (since C++11)"章节
+
+> NOTE: 主要描述C++11，对C++11之前，并不考虑
+
+3、正是这种松散，可能带来一些问题，后面会进行总结
+
+---
+
 Order of evaluation of any part of any expression, including order of evaluation of function arguments is *unspecified* (with some exceptions listed below). The compiler can evaluate operands and other subexpressions in any order, and may choose another order when the same expression is evaluated again.
 
 > NOTE: 
 >
-> 1、为什么C++标准没有对此进行规定？参见下面的"Summary"章节。
+> 1、为什么C++标准没有对此进行规定？参见"Guide"章节。
 
 ## No left-to-right or right-to-left evaluation 
 
@@ -12,11 +26,7 @@ Order of evaluation of any part of any expression, including order of evaluation
 >
 > 1、下面这段的描述，是和直觉相悖的。
 >
-> 2、通过这段描述可以看出，C++对Order of evaluation并没有进行严格的限制，它的限制是非常松散的，那C++的限制有哪些呢？C++是基于Sequenced-before relation而建立的，参见下面的"Sequenced-before rules (since C++11)"章节
->
-> > NOTE: 主要描述C++11，对C++11之前，并不考虑
->
-> 3、正是这种松散，可能带来一些问题，后面会进行总结
+> 
 
 There is no concept of **left-to-right** or **right-to-left** evaluation in C++. This is not to be confused with left-to-right and right-to-left associativity of operators: the expression `a() + b() + c()` is parsed as `(a() + b()) + c()` due to left-to-right associativity of operator`+`, but the function call to `c` may be evaluated first, last, or between `a()` or `b()` at run time:
 
@@ -73,7 +83,7 @@ int main()
 >
 > 通过上述描述可以看出，C++11对于Order of evaluation的限制还是比较松散的: 存在"unsequenced"的情况
 >
-> 2、典型的order and relation，参见 工程discrete的"Relation"章节
+> 2、典型的relation-structure-computation，参见 工程discrete的"Relation"章节
 
 
 
@@ -110,6 +120,10 @@ int main()
 ### Rules
 
 > NOTE: 
+>
+> 1、下面虽然罗列了非常多的rule，其实大多数rule是非常符合我们的惯常思维的
+>
+> 2、少部分不符合惯常思维的rule，需要进行额外的思考
 
 #### Full expression
 
@@ -133,7 +147,7 @@ int main()
 
 When calling a function (whether or not the function is inline, and whether or not explicit function call syntax is used), every value computation and side effect associated with any **argument expression**, or with the postfix expression designating the called function, is *sequenced before* execution of every expression or statement in the **body of the called function**.
 
-#### Assignment
+#### Built-in [assignment](https://en.cppreference.com/w/cpp/language/operator_assignment#Builtin_direct_assignment) 
 
 > NOTE: 显然，assignment是更加关注value的
 
@@ -146,6 +160,10 @@ The side effect (modification of the left argument) of the built-in [assignment]
 > 1、先计算left argument 和 right argument的value
 >
 > 2、对于assignment operator而言，它需要首先完成它的side effect(将value写入到memory)，然后再完成它的value computation
+
+#### Built-in [comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)
+
+9)
 
 #### Function call
 
@@ -170,7 +188,3 @@ The side effect (modification of the left argument) of the built-in [assignment]
 
 
 
-
-## Summary
-
-1、是基于side effect、value computation而定义的，从最终结果来进行定义，而对执行的过程，没有加以限制，这给予了compiler充分的optimization空间，如果限制地太死，显然，就无法充分发挥compiler、CPU的optimization能力
