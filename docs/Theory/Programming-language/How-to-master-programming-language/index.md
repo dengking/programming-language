@@ -37,11 +37,27 @@ Programming language是在不断演进的，各种programming language都会有�
 
 作为开发者，在学习programming language的时候，可以从这些新特性，即从what is new入手来进行学习，首先搞清楚设计者引入这些新特性的意图、这些新特性所能够解决的问题、application，然后再去了解它们的grammar、具体用法。这种学习方式是更加高效的。
 
+
+
+### Prefer changes to the libraries over changes to the core language
+
+> NOTE: 这是我在阅读 wikipedia [C++11](https://en.wikipedia.org/wiki/C%2B%2B11)时，想到的:
+>
+> Although one of the design goals was to prefer changes to the libraries over changes to the [core language](https://en.wikipedia.org/wiki/Core_language),[[4\]](https://en.wikipedia.org/wiki/C%2B%2B11#cite_note-4) C++11 does make several additions to the core language. 
+
+语言的演进：不改变核心语言，使用library来进行扩展，Python，C++使用这个思路。
+
+
+
 ## 首先学习property，然后学习描述这些property的specifier
 
 为了准确地使用programming language提供的specifier，我们需要首先理解这些specifier所描述的property，这就是本机标题的含义。
 
 关于此的一个典型例子就是C++ [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)，programmer可以用它来对storage duration、linkage进行描述，因此，在此之前，我们需要首先搞清楚storage duration、linkage的概念 。
+
+
+
+
 
 ## Philosophy
 

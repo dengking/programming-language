@@ -1,10 +1,8 @@
-# Atomic operations library implementation
-
-## cl.cam.ac.uk [C/C++11 mappings to processors](https://www.cl.cam.ac.uk/~pes20/cpp/cpp0xmappings.html)
+# cl.cam.ac.uk [C/C++11 mappings to processors](https://www.cl.cam.ac.uk/~pes20/cpp/cpp0xmappings.html)
 
 For each C/C++11 synchronization operation and architecture, the document aims to provide an instruction sequence that implements the operation on given architecture. This is not the only approach — one could provide a mapping that shows the necessary barriers (or other synchronization mechanism) *between* two program-order adjacent memory operations (either atomic or non-atomic). A good example of this approach is Doug Lea's [cookbook for JVM compiler writers](http://g.oswego.edu/dl/jmm/cookbook.html). While that approach can result in higher-performance mappings, we do not use it here because the resulting tables would be large and we have not investigated correct mappings for all the combinations. The per-operation approach that we take here would benefit from an optimisation pass that removes redundant synchronisation between adjacent operations.
 
-### Architectures
+## Architectures
 
 ### x86 (including x86-64)
 
@@ -27,8 +25,3 @@ For each C/C++11 synchronization operation and architecture, the document aims t
 
 
 
-## TODO
-
-https://www.decadent.org.uk/pipermail/cpp-threads/2008-December/001933.html
-
-stackoverflow [Where is the lock for a std::atomic?](https://stackoverflow.com/questions/50298358/where-is-the-lock-for-a-stdatomic)
