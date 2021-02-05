@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Automatic-Reference-Counting: Automatic-Reference-Counting.md
     - Implement-reference-count-use-std-atomic: Implement-reference-count-use-std-atomic
+    - Library-CPP-ARC: Library-CPP-ARC
