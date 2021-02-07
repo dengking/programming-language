@@ -1,6 +1,18 @@
-# (用C/C++实现一个日期类，重载运算符=，==，+，-，++，--，>，>=，<，<=等)[https://blog.csdn.net/wangiijing/article/details/51472589]
+# Examples
 
-```
+本章章节overload operator的典型例子。
+
+1、[joboccara](https://github.com/joboccara)/**[NamedType](https://github.com/joboccara/NamedType)**
+
+2、[CPPTraits](https://github.com/macmade/CPPTraits)/[Unit-Tests](https://github.com/macmade/CPPTraits/tree/master/Unit-Tests)/[XS-TypeTraits.cpp](https://github.com/macmade/CPPTraits/blob/master/Unit-Tests/XS-TypeTraits.cpp)
+
+3、overload `new` operator: 
+
+a、[macmade](https://github.com/macmade)/**[CPP-ARC](https://github.com/macmade/CPP-ARC)**
+
+## csdn [用C/C++实现一个日期类，重载运算符=，==，+，-，++，--，>，>=，<，<=等](https://blog.csdn.net/wangiijing/article/details/51472589)
+
+```C++
 #include<iostream>  
 #include<windows.h>  
   

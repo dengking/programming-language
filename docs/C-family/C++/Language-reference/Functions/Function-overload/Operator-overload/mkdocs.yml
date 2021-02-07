@@ -1,4 +1,3 @@
 nav:
     - Introduction: index.md
-    - Overload-input-output-operator: Overload-input-output-operator.md
-    - Overload-subscript-operator: Overload-subscript-operator.md
+    - Examples: Examples

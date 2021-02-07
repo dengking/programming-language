@@ -4,7 +4,7 @@
 
 ## cppreference [Template parameters and template arguments](https://en.cppreference.com/w/cpp/language/template_parameters)
 
-#### Non-type template parameter
+### Non-type template parameter
 
 > NOTE: Non-type template parameter即非类型模板参数，显然，它所参数化的不是type，而是value，显然non-type template parameter相当于function parameter，而对应的template entity其实相当于一个function，关于此的最最典型的例子是维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)的Compile-time class generation段所枚举的`factorial`例子。使用Non-type template parameter可以实现functional programming，这是一种compile-time computation，这个观点在维基百科[Template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming)中已经提出。
 >
@@ -12,7 +12,18 @@
 >
 > https://github.com/boostorg/array/blob/develop/include/boost/array.hpp
 
+| syntax                                |      |               |
+| ------------------------------------- | ---- | ------------- |
+| *type* *name*(optional)               | (1)  |               |
+| *type* *name*(optional) `=` *default* | (2)  |               |
+| *type* `...` *name*(optional)         | (3)  | (since C++11) |
+| *placeholder* *name*                  | (4)  | (since C++17) |
 
+> NOTE: 
+>
+> 1、通过上述syntax可以看出，`name`是optional的，我们将省略了`name`的称为anonymous non type template parameter，典型的例子为: 
+>
+> a、detection idiom
 
 A non-type template parameter must have a *structural type*, which is one of the following types (optionally cv-qualified, the qualifiers are ignored):
 
@@ -46,7 +57,7 @@ A non-type template parameter must have a *structural type*, which is one of the
 >
 > 上述[lvalue reference type](https://en.cppreference.com/w/cpp/language/reference#lvalue_references)对应的是下面的For lvalue reference parameters
 
-#### [Template non-type arguments](https://en.cppreference.com/w/cpp/language/template_parameters#Template_non-type_arguments)
+### [Template non-type arguments](https://en.cppreference.com/w/cpp/language/template_parameters#Template_non-type_arguments)
 
 (until C++17)
 
@@ -128,15 +139,15 @@ Array and function types may be written in a template declaration, but they are 
 
 ## String literal and non-type template parameter
 
-### [Non-type template parameters](https://stackoverflow.com/questions/5687540/non-type-template-parameters)
+### stackoverflow [Non-type template parameters](https://stackoverflow.com/questions/5687540/non-type-template-parameters)
 
 
 
-### [Literal Classes as Non-type Template Parameters in C++20](https://blog.keha.dev/posts/cpp20-class-as-non-type-template-param/)
+### keha [Literal Classes as Non-type Template Parameters in C++20](https://blog.keha.dev/posts/cpp20-class-as-non-type-template-param/)
 
 
 
-### [String literals not allowed as non type template parameters](https://stackoverflow.com/questions/5547852/string-literals-not-allowed-as-non-type-template-parameters)
+### stackoverflow [String literals not allowed as non type template parameters](https://stackoverflow.com/questions/5547852/string-literals-not-allowed-as-non-type-template-parameters)
 
 > NOTE: 这篇文章的解释是非常好的
 
