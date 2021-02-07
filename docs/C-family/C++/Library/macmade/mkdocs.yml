@@ -1,3 +1,4 @@
 nav:
     - Library-CPP-ARC: Library-CPP-ARC
     - Library-CPPTraits: Library-CPPTraits
+    - Library-CrashGuard: Library-CrashGuard

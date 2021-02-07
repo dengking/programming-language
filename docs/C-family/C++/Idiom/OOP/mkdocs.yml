@@ -1,8 +1,4 @@
 nav:
-    
-    ########## initialization相关##########
-    - Construct-On-First-Use: Construct-On-First-Use
-    - Nifty-Counter: Nifty-Counter
     ########## resource相关########## 
     - RAII-based: RAII-based
     - Resource-Return: Resource-Return
@@ -29,5 +25,6 @@ nav:
     #
     - Temporary-Base-Class: Temporary-Base-Class
     - Counted-Body: Counted-Body
+    - Pointer-to-implementation-PImpl: Pointer-to-implementation-PImpl
 
 

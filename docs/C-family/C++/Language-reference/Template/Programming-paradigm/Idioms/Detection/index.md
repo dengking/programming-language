@@ -1,6 +1,10 @@
+# Detection idiom
 
 
-#### wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
+
+## wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
+
+
 
 ```c++
 #include <iostream>
@@ -71,6 +75,6 @@ int main()
 
 
 
-## std::experimental::is_detected
+## `std::experimental::is_detected`
 
 参见 `C++\Library\Standard-library\Extensions\Version-2\The-C++detection-idiom` 章节。
