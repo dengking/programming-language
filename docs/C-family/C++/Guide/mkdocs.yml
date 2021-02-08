@@ -14,6 +14,7 @@ nav:
     - Header-only-library: Header-only-library.md
     - Transaction: Transaction
     - Strong-type: Strong-type
+    - Incomplete-type: Incomplete-type
     - Simplify: Simplify
     - Performance-optimization: Performance-optimization
     - Memory-model: Memory-model
