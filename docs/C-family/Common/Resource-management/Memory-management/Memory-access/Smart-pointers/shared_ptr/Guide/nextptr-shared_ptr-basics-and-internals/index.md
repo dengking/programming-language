@@ -529,7 +529,7 @@ The deleter is *type-erased* for two reasons:
 
 2、Second, a deleter is a function object (or a function pointer), e.g., *function<`void(T\*)`>*. This indirection makes *shared_ptr* independent of the details of how the managed object is deleted. This loose-coupling of *shared_ptr* with the deleter makes it quite flexible.
 
-For instance, in the example below, a `vector<shared_ptr<T>>` can be in its compilation unit entirely oblivious to the knowledge of how an incomplete type *T* is deleted:
+For instance, in the example below, a `vector<shared_ptr<T>>` can be in its compilation unit entirely oblivious(不在意的) to the knowledge of how an incomplete type *T* is deleted:
 
 ```C++
 //A compilation unit

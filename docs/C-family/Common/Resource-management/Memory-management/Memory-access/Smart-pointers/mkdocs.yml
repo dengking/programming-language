@@ -5,3 +5,4 @@ nav:
     - auto_ptr: auto_ptr.md
     - CppCoreGuidelines-Passing-Smart-Pointers: CppCoreGuidelines-Passing-Smart-Pointers    
     - Guideline-strong-exception-safety: Guideline-strong-exception-safety
+    - Guideline-Incomplete-type: Guideline-Incomplete-type
