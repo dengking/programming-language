@@ -2,7 +2,7 @@
 
 
 
-## 维基百科[Dispose pattern](https://en.wikipedia.org/wiki/Dispose_pattern)
+## wikipedia [Dispose pattern](https://en.wikipedia.org/wiki/Dispose_pattern)
 
 The dispose pattern is primarily used in languages whose [runtime environment](https://en.wikipedia.org/wiki/Runtime_environment) have [automatic garbage collection](https://en.wikipedia.org/wiki/Automatic_garbage_collection) (see motivation below), and thus may be styled as *manual* resource management in languages with [*automatic* memory management](https://en.wikipedia.org/wiki/Automatic_memory_management).
 

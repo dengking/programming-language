@@ -7,7 +7,7 @@ process在其生命周期内会占用一定的system resource，所以它就涉�
 
 关于process可能占用的resource，参见工程[Linux-OS](https://dengking.github.io/Linux-OS/)。
 
-## 维基百科[Resource management (computing)](https://en.wikipedia.org/wiki/Resource_management_(computing))
+## wikipedia [Resource management (computing)](https://en.wikipedia.org/wiki/Resource_management_(computing))
 
 
 
@@ -22,5 +22,3 @@ process在其生命周期内会占用一定的system resource，所以它就涉�
 不同语言的resource management策略也是不同的。
 
 
-
-### [Dispose of pattern](https://en.wikipedia.org/wiki/Dispose_pattern)
