@@ -2,7 +2,7 @@
 
 
 
-## Generic interface
+## Generic interface and type erasure and incomplete type
 
 正如creference [Pointers to void](https://en.cppreference.com/w/c/language/pointer)中所言：
 
@@ -12,9 +12,11 @@
 
 1、void是type-less、是incomplete type，programmer无法直接操作void pointer，必须要先将它[static_cast](static_cast.html) or [explicit cast](explicit_cast.html)为complete type才能够进行操作；
 
-关于incomplete type，参见 `Incomplete-type` 章节。
+关于incomplete type，参见 `Incomplete-type` 章节，在其中讨论了delete void pointer的内容。
 
 2、Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void`，在这个过程中，就丢失了type，显然这就是type erasure，关于type erasure，参见 `Type-Erasure` 章节。
+
+
 
 ## cppreference Pointer to `void`
 
@@ -44,19 +46,39 @@ If the original pointer is pointing to a base class subobject within an object o
 
 Pointers to void are used to pass objects of unknown type, which is common in C interfaces: [std::malloc](../memory/c/malloc.html) returns `void*`, [std::qsort](../algorithm/qsort.html) expects a user-provided callback that accepts two `const void*` arguments. [pthread_create](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_create.html) expects a user-provided callback that accepts and returns `void*`. In all cases, it is the **caller**'s responsibility to cast the pointer to the correct type before use.
 
-TO READ:
-
-stackoverflow [Why type cast a void pointer?](https://stackoverflow.com/questions/16986214/why-type-cast-a-void-pointer)
 
 
+## stackoverflow [What does void mean in C, C++, and C#?](https://stackoverflow.com/questions/1043034/what-does-void-mean-in-c-c-and-c)
 
-## void pointer and alignment
+
+
+### [A](https://stackoverflow.com/a/1043107)
+
+Basically it means "nothing" or "no type"
+
+There are 3 basic ways that void is used:
+
+1、Function argument: `int myFunc(void)` -- the function takes nothing.
+
+2、Function return value: `void myFunc(int)` -- the function returns nothing
+
+3、Generic data pointer: `void* data` -- 'data' is a pointer to data of unknown type, and cannot be dereferenced
+
+> NOTE: 所以，it is the caller's responsibility to convert the pointer to the **correct type** before use.
+
+Note: the `void` in a function argument is optional in C++, so `int myFunc()` is exactly the same as `int myFunc(void)`, and it is left out completely in C#. It is always required for a return value.
+
+
+
+## `void` pointer and alignment
 
 alignment如何保证？
 
 错误观点:  `void*`应该具备最大的alignment，这样才能够保证它能够容纳下所有类型的pointer。
 
 正确理解: `void*`类型的变量用于保存pointer的值，由于它是incomplete type，所以programmer无法直接对其进行操作（直接`+`、`*`一个`void*`，编译器会报错的，这样的program是无法编译通过的），programmer必须先将它转换为complete type pointer。由于无法直接使用`void*`，所以考虑考虑它的alignment是没有意义的。需要考虑的是：`void*`的值是否满足它的destination type的alignment，如果不满足，则是会发生undefined behavior的。
+
+
 
 ## Pointer to void VS pointer to `char` 
 
@@ -77,47 +99,7 @@ alignment如何保证？
 
 然后按照byte( `unsigned char`)进行操作。
 
-TO READ:
 
-https://stackoverflow.com/questions/10058234/void-vs-char-pointer-arithmetic
-
-https://bytes.com/topic/c/answers/618725-void-vs-char
-
-https://github.com/RIOT-OS/RIOT/issues/5497
-
-https://codeforwin.org/2017/11/c-void-pointer-generic-pointer-use-arithmetic.html
-
-https://www.geeksforgeeks.org/dangling-void-null-wild-pointers/
-
-https://groups.google.com/forum/#!topic/comp.lang.c/kz6ORGo6GD8
-
-http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
-
-http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
-
-
-
-
-
-### stackoverflow [What does void mean in C, C++, and C#?](https://stackoverflow.com/questions/1043034/what-does-void-mean-in-c-c-and-c)
-
-
-
-#### [A](https://stackoverflow.com/a/1043107)
-
-Basically it means "nothing" or "no type"
-
-There are 3 basic ways that void is used:
-
-1. Function argument: `int myFunc(void)` -- the function takes nothing.
-
-2. Function return value: `void myFunc(int)` -- the function returns nothing
-
-3. Generic data pointer: `void* data` -- 'data' is a pointer to data of unknown type, and cannot be dereferenced
-
-    > NOTE: 所以，it is the caller's responsibility to convert the pointer to the **correct type** before use.
-
-Note: the `void` in a function argument is optional in C++, so `int myFunc()` is exactly the same as `int myFunc(void)`, and it is left out completely in C#. It is always required for a return value.
 
 
 
@@ -197,4 +179,26 @@ list *listAddNodeTail(list *list, void *value)
 
 
 
+
+
+
+## TO READ
+
+https://stackoverflow.com/questions/10058234/void-vs-char-pointer-arithmetic
+
+https://bytes.com/topic/c/answers/618725-void-vs-char
+
+https://github.com/RIOT-OS/RIOT/issues/5497
+
+https://codeforwin.org/2017/11/c-void-pointer-generic-pointer-use-arithmetic.html
+
+https://www.geeksforgeeks.org/dangling-void-null-wild-pointers/
+
+https://groups.google.com/forum/#!topic/comp.lang.c/kz6ORGo6GD8
+
+http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
+
+http://computer-programming-forum.com/47-c-language/6e45270da06116ac.htm
+
+stackoverflow [Why type cast a void pointer?](https://stackoverflow.com/questions/16986214/why-type-cast-a-void-pointer)
 
