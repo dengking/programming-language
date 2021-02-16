@@ -1,4 +1,4 @@
-# C dynamic memory allocation
+# Dynamic memory allocation
 
 
 
