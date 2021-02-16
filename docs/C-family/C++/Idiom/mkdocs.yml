@@ -8,6 +8,5 @@ nav:
     - AOP: AOP
     ########## Exception#############
     - Error-handling: Error-handling
-    - Type-Erasure: Type-Erasure
     - Mixin: Mixin
     - gertrudandcope-C++Idioms: gertrudandcope-C++Idioms
