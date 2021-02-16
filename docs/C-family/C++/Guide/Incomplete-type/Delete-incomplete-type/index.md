@@ -64,6 +64,8 @@ And then it says:
 
 Wow... are compilers required to diagnose this situation like g++ does? Or is it undefined behavior?
 
+
+
 > NOTE: 显然，compiler不会选择destructor、class-specific operator delete，因此这就导致了undefined behavior
 
 [A](https://stackoverflow.com/a/4325223)

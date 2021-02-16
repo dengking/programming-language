@@ -1,6 +1,6 @@
-
-
 # Pointer to `void` 
+
+
 
 ## Generic interface
 
@@ -10,8 +10,11 @@
 
 显然pointer to void是C中实现**generic programming**的方式，这种generic是通过**type erasure**来实现的：
 
-- void是type-less、是incomplete type，programmer无法直接操作void pointer，必须要先将它[static_cast](static_cast.html) or [explicit cast](explicit_cast.html)为complete type才能够进行操作
-- Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void`，在这个过程中，就丢失了type
+1、void是type-less、是incomplete type，programmer无法直接操作void pointer，必须要先将它[static_cast](static_cast.html) or [explicit cast](explicit_cast.html)为complete type才能够进行操作；
+
+关于incomplete type，参见 `Incomplete-type` 章节。
+
+2、Pointer to object of any type can be [implicitly converted](implicit_cast.html) to pointer to `void`，在这个过程中，就丢失了type，显然这就是type erasure，关于type erasure，参见 `Type-Erasure` 章节。
 
 ## cppreference Pointer to `void`
 
