@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - wikipedia-interface: wikipedia-interface
+    - Compatibility: Compatibility
