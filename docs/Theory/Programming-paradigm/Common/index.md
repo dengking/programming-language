@@ -18,7 +18,9 @@ FP: 非常适合于computation on structure
 
 ## 博采众长，充分发挥各种programming paradigm的优势
 
-前面我们知道每种paradigm都有着各自的优势，能够解决一些问题，所以现代programming language往往会采用多种paradigm，即“博采众长”，显然，这样的做法，让programming language更加地强大，让programmer通过灵活运用、结合多种paradigm从而充分发挥programming language的powered。
+1、前面我们知道每种paradigm都有着各自的优势，能够解决一些问题，所以现代programming language往往会采用多种paradigm，即“博采众长”，显然，这样的做法，让programming language更加地强大，让programmer通过灵活运用、结合多种paradigm从而充分发挥programming language的powered。
+
+2、现代programming language往往是multi-paradigm的，这样能够极大的增强语言的power，比如C++、Python同时支持OOP、generic programming；
 
 下面是阐述了这个思想的素材:
 
@@ -54,6 +56,8 @@ FP: 非常适合于computation on structure
 
 2、polymorphism
 
+Polymorphism在各种programming paradigm都有体现: generic programming中体现了polymorphism、OOP中也体现了polymorphism；
+
 3、code reuse
 
 4、information hiding
@@ -63,34 +67,4 @@ FP: 非常适合于computation on structure
 5、extendibility
 
 如何进行可扩展
-
-
-
-# draft: 非常好的总结
-
-无论是polymorphism、还是generic programming，都可以使用behavior-based和inheritance-based角度来进行分析；
-现代programming language往往是multi-paradigm的，这样能够极大的增强语言的power，比如C++、Python同时支持OOP、generic programming；
-
-Abstraction所带来的优势是: code reuse，oop抽象出class，通过inheritance、combination来实现code reuse；generic programming 抽象出 concept，实现了N * M;
-
-polymorphism在各种programming paradigm都有体现: generic programming中体现了polymorphism、OOP中也体现了polymorphism；
-
-
-
-## Draft: Domain-specific programming paradigm
-
-本节标题的含义是: 特定领域的programming paradigm。
-
-本章所讲述的programming paradigm是software engineering中通用的programming paradigm，与此相对立的是domain-specific programming paradigm，它是指在特定领域，为了更加高效地解决特定问题，而设计的programming paradigm，这其实非常类似于**domain-specific language**，下面是一些例子: 
-
-|                                                              | first class citizen |
-| ------------------------------------------------------------ | ------------------- |
-| OOP                                                          | object              |
-| [process-oriented programming](https://en.wikipedia.org/wiki/Process-oriented_programming), | process             |
-| TensorFlow tensor-oriented programming                       | Tensor              |
-| numpy ndarray-oriented programming                           | ndarray             |
-
-在下面文章中，描述了**domain-specific language**:
-
-1) `C++\Idiom\TMP\Expression-Template`
 
