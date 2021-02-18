@@ -1,4 +1,4 @@
-# Behavior
+# Behavior-based and interface
 
 在`Theory\Programming-paradigm\Object-oriented-programming\index.md`的“Behavior and data member”章节中已经说明了:
 
@@ -33,8 +33,11 @@
 
 Interface在OOP中占据着核心地位，关于interface，参见:
 
-- cs.utah.edu [Interfaces](https://www.cs.utah.edu/~germain/PPS/Topics/interfaces.html) 
-- stackoverflow [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
+1、cs.utah.edu [Interfaces](https://www.cs.utah.edu/~germain/PPS/Topics/interfaces.html) 
+
+2、stackoverflow [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
+
+
 
 ### "program to interface" 
 
