@@ -1,2 +1,3 @@
 nav:
-    - Dangling-pointer: Dangling-pointer.md
+    - Introduction: index.md
+    - How-to-solve-dangling-pointer: How-to-solve-dangling-pointer.md
