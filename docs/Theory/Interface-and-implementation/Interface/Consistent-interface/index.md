@@ -15,3 +15,5 @@
 5、magic function: 其实就是约定好的interface
 
 6、Java interface
+
+7、design by  contact
