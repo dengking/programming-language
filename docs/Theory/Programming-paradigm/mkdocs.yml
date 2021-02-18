@@ -1,6 +1,9 @@
 nav:
     - Introduction: index.md
     - Programming-paradigm: Programming-paradigm.md
+    
+    - Common: Common
+
     ########## 面向对象编程##########    
     - Object-oriented-programming: Object-oriented-programming
     ########## 面向切面编程########    
@@ -13,9 +16,9 @@ nav:
     - Generic-programming: Generic-programming
     ########## 元编程##########
     - Metaprogramming: Metaprogramming
+    # 下面三种是密切相关的
     - Expression-oriented-programming: Expression-oriented-programming
     - Symbolic-programming: Symbolic-programming
     - Dataflow-programming: Dataflow-programming
-    - Abstraction: Abstraction
-    #################### 多态是面向对象的核心####################    
-    - Polymorphism: Polymorphism
+    
+    - Comparison: Comparison

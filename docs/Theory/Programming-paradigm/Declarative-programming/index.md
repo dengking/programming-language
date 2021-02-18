@@ -1,6 +1,10 @@
 # Declarative programming
 
-在 ybrikman [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/) 中，对 declarative programming 有着非常好的描述:
+
+
+## ybrikman [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/)
+
+> NOTE: 在 ybrikman [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/) 中，对 declarative programming 有着非常好的描述:
 
 Here’s the gist: in most mainstream languages, you describe *how* to solve a particular problem; in declarative languages, you merely describe *the result you want*, and the language itself figures out how to get there.
 

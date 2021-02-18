@@ -1,28 +1,20 @@
 # Programming paradigm
 
-Programming paradigm所表示的是编程的理念、思想，它指导着programming language的设计，进而影响programming language的方方面面，在programming language中，有相应的construct来实现它。在学习各种programming paradigm的时候，我觉得应该抓住各种paradigm的思想，然后再结合programming language对这种paradigm的实现，关于这个观点，在维基百科[Generic programming#Stepanov–Musser and other generic programming paradigms](https://en.wikipedia.org/wiki/Generic_programming#Stepanov%E2%80%93Musser_and_other_generic_programming_paradigms)中有这样的描述：
+
+
+## Introduction to programming paradigm
+
+Programming paradigm所表达的是编程的理念、思想，它指导着programming language的设计，进而影响programming language的方方面面，在programming language中，有相应的construct来实现它。在学习各种programming paradigm的时候，我觉得应该抓住各种paradigm的思想，然后再学习具体的programming language对具体programming paradigm的实现，关于这个观点，在wikipedia [Generic programming#Stepanov–Musser and other generic programming paradigms](https://en.wikipedia.org/wiki/Generic_programming#Stepanov%E2%80%93Musser_and_other_generic_programming_paradigms)中有这样的描述：
 
 > In this article we distinguish the high-level [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) of *generic programming*, above, from the lower-level programming language *genericity mechanisms* used to implement them (see [Programming language support for genericity](https://en.wikipedia.org/wiki/Generic_programming#Programming_language_support_for_genericity)). 
 
 上面这段话中的“high-level [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) of *generic programming*”就是generic programming这种paradigm的核心思想，而“lower-level programming language *genericity mechanisms* used to implement them ”即为programming language对它的实现。
 
-programming language的设计者在设计实现某种paradigm的时候，需要考虑的问题是非常之多的，工作量也是非常之大的，所以它可能会将对某种paradigm的实现分为多个版本来进行实现，在某个版本中提供初级的实现，然后在后续版本中提供更多的、高级的实现。一个典型的例子就是c++对generic programming的实现，generic programming的核心思想中明确地提出了concept，但是c++知道c++20版本才提供显式定义concept的实现，在此之前的版本，用户只能够通过`SFINAE`、`enable_if`来间接地描述concept。关于这一点是我在阅读[Generic Programming in ConceptC++](http://www.generic-programming.org/languages/conceptcpp.html)时，受到的启发
-
-> ConceptC++ is an extension to the C++ Programming Language that introduces first-class support for Generic Programming. It is the first attempt to introduce **complete** support for Generic Programming into a mainstream programming language. 
-
-## 博采众长
-
-另外非常重要的一点是：每种paradigm，有着各自的优势，能够解决一些问题，所以现代programming language往往会采用多种paradigm，即“博采众长”，显然，这样的做法，让programming language更加地强大，让programmer通过灵活运用、结合多种paradigm从而充分发挥programming language的powered。关于这个思想，在下面文章中有提及:
-
-1) stackoverflow [Aspect Oriented Programming vs. Object-Oriented Programming](https://stackoverflow.com/questions/232884/aspect-oriented-programming-vs-object-oriented-programming) # [A](https://stackoverflow.com/a/232918)
-
-> Why "vs"? It is not "vs". You can use Aspect Oriented programming in combination with functional programming, but also in combination with Object Oriented one.
-
-当然，也不可避免的会带来programming language的复杂度的提高，一个典型的例子就是C++，它的两个典型的paradigm是OOP和generic programming。
 
 
 
-## 维基百科[Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) 
+
+## wikipedia [Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) 
 
 **Programming paradigms** are a way to classify [programming languages](https://en.wikipedia.org/wiki/Programming_language) based on their features. Languages can be classified into multiple paradigms.
 
@@ -83,67 +75,6 @@ For [parallel computing](https://en.wikipedia.org/wiki/Parallel_computing), usin
 > NOTE：上面这段中的关于在parallel computing中使用programming model而非language的解释可以结合在*[programming models](https://en.wikipedia.org/wiki/Programming_model)*解释相结合。由于the execution model of **parallel hardware** often must expose features of the hardware in order to achieve high performance， The large amount of variation in parallel hardware causes a concurrent need for a similarly large number of parallel execution models.这就导致了It is impractical to make a new language for each execution model, hence it is a common practice to invoke the behaviors of the parallel execution model via an API. 
 
 
-
-## 维基百科[Comparison of programming paradigms](https://en.wikipedia.org/wiki/Comparison_of_programming_paradigms)
-
-> NOTE: 对于有一定编程经验的人员，推荐首先阅读这篇文章，它对programming paradigm的总结是非常好的，在其[Pseudocode examples comparing various paradigms](https://en.wikipedia.org/wiki/Comparison_of_programming_paradigms#Pseudocode_examples_comparing_various_paradigms)段所列举的例子非常具有启发性，胜过了一堆理论的描述。
-
-
-
-## Comparison of programming paradigms
-
-本段是我总结的对各种programming paradigm的比较。
-
-### OOP VS Procedural programming
-
-维基百科[Procedural programming](https://en.wikipedia.org/wiki/Procedural_programming)
-
-Procedural programming的一种典型写法就是：
-
-```c++
-pthread_mutex_t lock;
-pthread_mutex_init(&lock, NULL);
-pthread_mutex_lock(&lock);
-pthread_mutex_unlock(&lock);
-pthread_mutex_destroy(&lock);
-```
-
-它的模式是：定义一个`struct`，然后定义各种对这个`struct`进行操作的函数。可以参见redis的实现。
-
-OOP中，则完全不同，OOP中，整个程序是object之间的交互，object之间是通过发送message来进行交互的。
-
-
-
-### [Declarative programming](https://en.wikipedia.org/wiki/Declarative_programming) VS [Imperative programming](https://en.wikipedia.org/wiki/Imperative_programming)
-
-这两种是典型的对立的两种paradigm。
-
-
-
-### OOP VS FP
-
-OOP是有state的，FP（functional programming）是没有state的。
-
-### 更多
-
-在`Theory\Programming-paradigm\Abstraction\Abstraction-in-programming-language`中以abstraction的角度对programming paradigm进行了分析。
-
-## Draft: Domain-specific programming paradigm
-
-本节标题的含义是: 特定领域的programming paradigm。
-
-本章所讲述的programming paradigm是software engineering中通用的programming paradigm，与此相对立的是domain-specific programming paradigm，它是指在特定领域，为了更加高效地解决特定问题，而设计的programming paradigm，这其实非常类似于**domain-specific language**，下面是一些例子: 
-
-|                                                              | first class citizen |
-| ------------------------------------------------------------ | ------------------- |
-| OOP                                                          | object              |
-| [process-oriented programming](https://en.wikipedia.org/wiki/Process-oriented_programming), | process             |
-| TensorFlow tensor-oriented programming                       | Tensor              |
-| numpy ndarray-oriented programming                           | ndarray             |
-
-在下面文章中，描述了**domain-specific language**:
-
-1) `C++\Idiom\TMP\Expression-Template`
 
 
 
