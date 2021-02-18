@@ -2,6 +2,8 @@
 
 本章讨论各种programming paradigm都可能会涉及到的topic。
 
+
+
 ## 循序渐进地实现
 
 Programming language的设计者在设计实现某种paradigm的时候，需要考虑的问题是非常之多的，工作量也是非常之大的，所以它可能会将对某种paradigm的实现分为多个版本来进行实现: 在某个版本中提供初级的实现，然后在后续版本中提供更多的、高级的实现。一个典型的例子就是C++对generic programming的实现，generic programming的核心思想中明确地提出了concept，但是c++知道C++20版本才提供显式定义concept的实现，在此之前的版本，用户只能够通过`SFINAE`、`enable_if`等来间接地描述concept。关于这一点是我在阅读[Generic Programming in ConceptC++](http://www.generic-programming.org/languages/conceptcpp.html)时，受到的启发
