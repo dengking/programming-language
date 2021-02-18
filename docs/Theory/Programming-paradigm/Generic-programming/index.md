@@ -1,6 +1,6 @@
 # Generic programming
 
-如何使代码更加地generic，即更加地通用？这是所有的programming language都需要考虑的一个问题，`c++`中通过template来实现generic，python中的duck type也能够使程序更加地generic，需要注意的是，严格说来，这里所说的generic并不是本文接下来要讨论的generic programming。我是在思考“如何使代码更加地generic”而想到generic programming的。[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)的核心思想是：
+如何使代码更加地generic(即更加地通用)？这是所有的programming language都需要考虑的一个问题，`c++`中通过template来实现generic，python中的duck type也能够使程序更加地generic，需要注意的是，严格说来，这里所说的generic并不是本文接下来要讨论的generic programming。我是在思考“如何使代码更加地generic”而想到generic programming的。[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)的核心思想是：
 
 > 抽象出类型并使用concept进行formal description，algorithm/function基于concept来进行设计和实现，从而达到使程序更加地generic的目的。
 
@@ -10,7 +10,11 @@
 
 **Generic programming** is a style of [computer programming](https://en.wikipedia.org/wiki/Computer_programming) in which [algorithms](https://en.wikipedia.org/wiki/Algorithm) are written in terms of [types](https://en.wikipedia.org/wiki/Data_type) *to-be-specified-later* that are then *instantiated* when needed for specific types provided as [parameters](https://en.wikipedia.org/wiki/Parameter_(computer_programming)). 
 
-> NOTE: C++ 的template就是典型的案例；上述描述让我想到了symbol。
+> NOTE: 
+>
+> 1、C++ 的template就是典型的案例；
+>
+> 2、上述描述让我想到了symbol。
 
 This approach, pioneered by [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) in 1973,[[1\]](https://en.wikipedia.org/wiki/Generic_programming#cite_note-Lee2008-1)[[2\]](https://en.wikipedia.org/wiki/Generic_programming#cite_note-2) permits writing common [functions](https://en.wikipedia.org/wiki/Function_(computer_science)) or [types](https://en.wikipedia.org/wiki/Type_(computer_science)) that differ only in the set of types on which they operate when used, thus reducing [duplication](https://en.wikipedia.org/wiki/Duplicate_code). 
 
@@ -26,9 +30,11 @@ Such software entities are known as
 
 4) *parameterized types* in the influential 1994 book *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))*.[[3\]](https://en.wikipedia.org/wiki/Generic_programming#cite_note-GoF-3)
 
-> NOTE: "parameterized type" 的意思是: 参数化类型，"the influential 1994 book *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))*"，在 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Principle` 章节中进行了引用。
-
-> NOTE: 通过上面四段话，我们可以看到，同一个概念在不同的领域有着不同的名称，其实它们表达了相同的内涵。
+> NOTE: 
+>
+> 1、"parameterized type" 的意思是: 参数化类型，"the influential 1994 book *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns_(book))*"，在 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Principle` 章节中进行了引用。
+>
+> 2、通过上面四段话，我们可以看到，同一个概念在不同的领域有着不同的名称，其实它们表达了相同的内涵。
 
 
 
@@ -36,7 +42,7 @@ The term "generic programming" was originally coined by [David Musser](https://e
 
 > NOTE: 这段话更加具体地阐述了generic programming的思想：从具体的algorithm、data structure中**抽象**出对type的fundamental requirement，然后使用形式化的[concept](https://en.wikipedia.org/wiki/Concept_(generic_programming))来进行描述， [generic functions](https://en.wikipedia.org/wiki/Generic_function) 的实现是基于这些concept的。关于concept，在`./Concept(generic-programming)`中进行了描述。
 >
-> [C++20 concept特性](https://en.wikipedia.org/wiki/Concepts_(C++))是对上面这一段中描述的[concept](https://en.wikipedia.org/wiki/Concept_(generic_programming))的实现。
+> [C++20 concept特性](https://en.wikipedia.org/wiki/Concepts_(C++)) 是对上面这一段中描述的 [concept](https://en.wikipedia.org/wiki/Concept_(generic_programming)) 的实现。
 >
 > 关于抽象，参见:
 >
@@ -120,17 +126,13 @@ C++ uses templates to enable generic programming techniques. The C++ Standard Li
 
 
 
-#### Genericity in .NET [C#, VB.NET]
-
-
-
 ## Implementation of generic programming
 
 在`./Implementation`中，讨论了C++、Python、Java/`C#`实现generic programming的方式；
 
 
 
-## Generic programming and reusable code 
+## Generic programming and code reuse
 
 在维基百科[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)的第一段中就表达了该观点：
 
