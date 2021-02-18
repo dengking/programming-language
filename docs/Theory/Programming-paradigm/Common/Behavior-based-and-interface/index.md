@@ -1,5 +1,11 @@
 # Behavior-based and interface
 
+
+
+## 为什么采用"behavior"这个词?
+
+本节解释为什么采用"behavior"这个词语。
+
 在`Theory\Programming-paradigm\Object-oriented-programming\index.md`的“Behavior and data member”章节中已经说明了:
 
 > 后续为了描述的统一性，使用**behavior**来表示method、function member
@@ -10,18 +16,10 @@
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `Theory\Programming-paradigm\Object-oriented-programming\Thinking-in-java\Introduction-to-Objects.md` | TODO: 将object看做是computer，"behavior"                     |
 | `C++\Language-reference\Classes\Subtype-polymorphism\index.md` | 在C++，dynamic polymorphism是behavior（function），只有virtual method（virtual table），而不是data/value的。 |
-| `Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern\index.md` |                                                              |
+| `Theory\Design-pattern\OOP-design-pattern\Behavioral-pattern\index.md` | 可以看到，它使用的是behavior这个词                           |
 | wikipedia [Behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping) |                                                              |
 | `Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Subtyping-polymorphism\index.md` | "Subtyping polymorphism is based on behavior"                |
 | Wikipedia method overriding                                  | override的是method，method是behavior                         |
-
-下面几个词在OOP中是经常出现的，我觉得它们的有着相似的内涵，且它们都与behavior有关:
-
-|           | 简介                                                   | 链接                                                         |
-| --------- | ------------------------------------------------------ | ------------------------------------------------------------ |
-| protocol  | 约定好protocol，其实就是约定好interface                | [Protocol (object-oriented programming)](https://en.wikipedia.org/wiki/Protocol_(object-oriented_programming)) |
-| contract  | design by contract，其实很大一部分内容是约定好protocol | wikipedia [Design by contract](https://en.wikipedia.org/wiki/Design_by_contract) <br> |
-| interface | interface是对behavior的formal description              |                                                              |
 
 
 
@@ -29,7 +27,27 @@
 
 前面已经提及了interface，本节描述它和behavior的关系。
 
-### Interface in OOP
+### The interface principle
+
+这是[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章[What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)中提出的一个观点，虽然它描述的是C++世界，但是我觉得它对interface的阐释是比较好的，这篇文章收录在了`gotw-What's-In-a-Class-The-Interface-Principle` 章节。
+
+
+
+### Interface is a description of behavior
+
+本节标题的含义是interface是对behavior的description，或者说实现: 
+
+1、使用interface来实现behavior，interface可以是explicit的，也可以是implicit
+
+2、design by contact
+
+
+
+### "program to interface" 
+
+参见: `Theory\Design-pattern\OOP-design-pattern\Principle\index.md`
+
+#### Interface in OOP
 
 Interface在OOP中占据着核心地位，关于interface，参见:
 
@@ -39,18 +57,15 @@ Interface在OOP中占据着核心地位，关于interface，参见:
 
 
 
-### "program to interface" 
-
-参见: `Theory\Design-pattern\OOP-design-pattern\Principle\index.md`
 
 
+## Behavior-based in programming paradigm
 
-### Interface is formal description of behavior
+### GP
 
-本节标题的含义是interface是对behavior的formal description。
+在Generic programming中，提出了"Type requirement is more about behavior-based"，参见 `Theory\Programming-paradigm\Generic-programming\Implementation\Type-requirement` 章节。
 
+### OOP
 
+在object oriented programming: "Polymorphism is more about behavior-based"，参见 `Theory\Programming-paradigm\Common\Abstraction-and-polymorphism\Polymorphism\Implementation` 章节。
 
-### The interface principle
-
-这是[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章[What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)中提出的一个观点，虽然它描述的是C++世界，但是我觉得它对interface的阐释是比较好的，这篇文章收录在了`C++\Language-reference\Classes\The-interface-principle.md`。
