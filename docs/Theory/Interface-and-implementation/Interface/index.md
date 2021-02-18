@@ -2,6 +2,8 @@
 
 我们一直都在接触“接口”这个词语，在之前的描述中，我把“接口”定义为：对抽象的描述。有必要看看，它总结地比较好。
 
+
+
 ## Guide
 
 1、wikipedia [Interface (computing)](https://en.wikipedia.org/wiki/Interface_(computing))
@@ -55,6 +57,8 @@ b、Java interface: explicit interface
 
 其中也对这个topic进行了讨论。
 
+
+
 ## 与interface相关得到词语
 
 下面几个词在OOP中是经常出现的，我觉得它们的有着相似的内涵，且它们都与behavior、interface有关:
@@ -82,39 +86,15 @@ a、wikipedia [Kernel_(operating_system)](https://en.wikipedia.org/wiki/Kernel_(
 
 b、Abstraction and architecture，参见工程software-engineering的`Software-design\Principle\Abstraction`章节
 
-## Interface and OOP
-
-### OOP
-
-program to an abstraction，其实本质上是program to an interface，因为interface是 对abstraction的描述；
-
-subtyping是interface inheritance，显然它是program to an interface；
-
-在wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)中有这样的描述: 
-
-> Composition and interfaces
->
-> The C++ examples in this section demonstrate the principle of using composition and interfaces to achieve code reuse and polymorphism.
-
- 
-
-显然，无论是subtyping 还是 composition，都是program to an abstraction，所以 最终都是program to an interface。
-
-### Interface in OOP
-
-Interface在OOP中占据着核心地位，关于interface，参见:
-
-1、cs.utah.edu [Interfaces](https://www.cs.utah.edu/~germain/PPS/Topics/interfaces.html) 
-
-2、stackoverflow [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
-
 
 
 ## "program to interface"  principle
 
+参见: 
 
+1、`Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Principle`
 
-参见: `Theory\Design-pattern\OOP-design-pattern\Principle\index.md`
+2、`Theory\Programming-paradigm\Common\Abstraction-and-polymorphism\Program-to-an-abstraction`
 
 
 

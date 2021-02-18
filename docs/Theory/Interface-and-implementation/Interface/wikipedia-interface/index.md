@@ -22,6 +22,10 @@ In computing, an **interface** is a shared boundary across which two or more sep
 
 ### Programming to the interface
 
+> NOTE: 
+>
+> 1、这段关于Programming to the interface的描述是非常好的
+
 The use of interfaces allows for a programming style called *programming to the interface*. The idea behind this approach is to base programming logic on the interfaces of the objects used, rather than on internal implementation details. Programming to the interface reduces dependency on implementation specifics and makes code more reusable.[[12\]](https://en.wikipedia.org/wiki/Interface_(computing)#cite_note-12)
 
 Pushing this idea to the extreme, [inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control) leaves the *context* to inject the code with the specific implementations of the interface that will be used to perform the work.
