@@ -24,13 +24,13 @@ Opaque pointers are a way to hide the [implementation](https://en.wikipedia.org/
 >
 > 1、information hiding
 >
-> 2、
+> 2、关于 [binary code compatibility](https://en.wikipedia.org/wiki/Binary_code_compatibility) ，参见 `Theory\Interface-and-implementation\Interface\Compatibility\Binary-code-compatibility` 章节
 
 This technique is described in *[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)* as the [Bridge pattern](https://en.wikipedia.org/wiki/Bridge_pattern). It is sometimes referred to as "**[handle](https://en.wikipedia.org/wiki/Handle_(computing)) classes**",[[2\]](https://en.wikipedia.org/wiki/Opaque_pointer#cite_note-eckel20000-2) the "**Pimpl idiom**" (for "pointer to implementation idiom"),[[3\]](https://en.wikipedia.org/wiki/Opaque_pointer#cite_note-3) "**Compiler firewall idiom**",[[4\]](https://en.wikipedia.org/wiki/Opaque_pointer#cite_note-4) "**d-pointer"** or "**Cheshire Cat**", especially among the C++ community.[[2\]](https://en.wikipedia.org/wiki/Opaque_pointer#cite_note-eckel20000-2)
 
-### Examples
 
-#### C
+
+### C Example: 
 
 `obj.h`
 
@@ -115,3 +115,170 @@ int main()
 
 
 This example demonstrates a way to achieve the [information hiding](https://en.wikipedia.org/wiki/Information_hiding) ([encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_science))) aspect of [object-oriented programming](https://en.wikipedia.org/wiki/Object-Oriented_Programming) using the C language. If someone wanted to change the definition of `struct obj`, it would be unnecessary to recompile any other modules in the program that use the `obj.h` header file unless the [API](https://en.wikipedia.org/wiki/API) was also changed. Note that it may be desirable for the functions to check that the passed pointer is not `NULL`, but such checks have been omitted above for brevity.
+
+### C++ Example: **d-pointer pattern**
+
+#### C++14 版本
+
+> NOTE: 
+>
+> 1、由于`PublicClass` 有 `std::unique_ptr<CheshireCat>` member，而`std::unique_ptr<CheshireCat>`是不支持copy的，因此在 Copy constructor 中，需要使用deep copy `std::unique_ptr<CheshireCat>`的 content，通过下面的code可以看出，它是通过`std::make_unique<CheshireCat>(*other.d_ptr_)` 来实现的，关于这一点，参见:
+>
+> a、[Copy constructor for a class with unique_ptr](https://stackoverflow.com/questions/16030081/copy-constructor-for-a-class-with-unique-ptr)
+>
+> 2、理解下面程序的一个要点是理解: `*other.d_ptr_`。那如何来理解呢？其实将`std::unique_ptr`看做普通pointer即可，显然这是dereference。
+
+`PublicClass.h`
+
+```C++
+/* PublicClass.h */
+
+#include <memory>
+
+class PublicClass {
+ public:
+  PublicClass();                               // Constructor
+  PublicClass(const PublicClass&);             // Copy constructor
+  PublicClass(PublicClass&&);                  // Move constructor
+  PublicClass& operator=(const PublicClass&);  // Copy assignment operator
+  PublicClass& operator=(PublicClass&&);       // Move assignment operator
+  ~PublicClass();                              // Destructor
+
+  // Other operations...
+
+ private:
+  struct CheshireCat;                   // Not defined here
+  std::unique_ptr<CheshireCat> d_ptr_;  // Opaque pointer
+};
+
+```
+
+`PublicClass.cpp`
+
+```C++
+/* PublicClass.cpp */
+
+#include "PublicClass.h"
+
+struct PublicClass::CheshireCat {
+  int a;
+  int b;
+};
+
+PublicClass::PublicClass()
+    : d_ptr_(std::make_unique<CheshireCat>()) {
+  // Do nothing.
+}
+
+PublicClass::PublicClass(const PublicClass& other)
+    : d_ptr_(std::make_unique<CheshireCat>(*other.d_ptr_)) {
+  // Do nothing.
+}
+
+PublicClass::PublicClass(PublicClass&& other) = default;
+
+PublicClass& PublicClass::operator=(const PublicClass &other) {
+  *d_ptr_ = *other.d_ptr_;
+  return *this;
+}
+
+PublicClass& PublicClass::operator=(PublicClass&&) = default;
+
+PublicClass::~PublicClass() = default;
+
+```
+
+#### C++11 版本
+
+> NOTE: 
+>
+> 1、由于C++11是不支持`std::make_unique`，因此需要由programmer来实现上面程序中 `std::make_unique<CheshireCat>(*other.d_ptr_)` 的工作
+
+```C++
+/* PublicClass.h */
+
+#include <memory>
+
+class PublicClass {
+ public:
+  PublicClass();                               // Constructor
+  PublicClass(const PublicClass&);             // Copy constructor
+  PublicClass(PublicClass&&);                  // Move constructor
+  PublicClass& operator=(const PublicClass&);  // Copy assignment operator
+  PublicClass& operator=(PublicClass&&);       // Move assignment operator
+  ~PublicClass();                              // Destructor
+
+  // Other operations...
+
+ private:
+  struct CheshireCat;                   // Not defined here
+  std::unique_ptr<CheshireCat> d_ptr_;  // Opaque pointer
+};
+
+```
+
+
+
+`PublicClass.cpp` C++11 版本
+
+```C++
+/* PublicClass.cpp */
+
+#include "PublicClass.h"
+
+struct PublicClass::CheshireCat {
+  int a;
+  int b;
+};
+
+PublicClass::PublicClass()
+    : d_ptr_(new CheshireCat) {
+  // Do nothing.
+}
+
+PublicClass::PublicClass(const PublicClass& other)
+    : d_ptr_(new CheshireCat(*other.d_ptr_)) {
+  // Do nothing.
+}
+
+PublicClass::PublicClass(PublicClass&& other) = default;
+
+PublicClass& PublicClass::operator=(const PublicClass &other) {
+  *d_ptr_ = *other.d_ptr_;
+  return *this;
+}
+
+PublicClass& PublicClass::operator=(PublicClass&&) = default;
+
+PublicClass::~PublicClass() = default;
+
+```
+
+
+
+`main.cpp`
+
+```C++
+#include "PublicClass.h"
+int main()
+{
+	PublicClass o;
+}
+// g++ --std=c++11 -g main.cpp PublicClass.cpp
+```
+
+#### Summary
+
+> NOTE: 
+>
+> 1、本段其实是对上述例子所展示的**d-pointer pattern**进行总结
+
+The **d-pointer pattern** is one of the implementations of the *opaque pointer*. It is commonly used in C++ classes due to its advantages (noted below). A **d-pointer** is a private data member of the class that points to an instance of a structure. This method allows class declarations to omit private data members, except for the d-pointer itself.[[6\]](https://en.wikipedia.org/wiki/Opaque_pointer#cite_note-6) As a result,
+
+1、more of the class implementation is hidden
+
+2、adding new data members to the private structure does not affect [binary compatibility](https://en.wikipedia.org/wiki/Binary_compatibility)
+
+3、the header file containing the class declaration only needs to include those files needed for the class interface, rather than for its implementation.
+
+One side benefit is that compilations are faster because the header file changes less often. Note, possible disadvantage of d-pointer pattern is **indirect member access through pointer** (in example, pointer to object in dynamic storage), which is sometimes slower than access to plain, not-a-pointer member. The d-pointer is heavily used in the [Qt](https://en.wikipedia.org/wiki/Qt_(toolkit)) [[7\]](https://en.wikipedia.org/wiki/Opaque_pointer#cite_note-7) and [KDE](https://en.wikipedia.org/wiki/KDE) libraries.
