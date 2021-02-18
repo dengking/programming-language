@@ -16,7 +16,7 @@ encode=serialization
 
 decode=deserialization
 
-## 维基百科 [Serialization](https://en.wikipedia.org/wiki/Serialization)
+## wikipedia [Serialization](https://en.wikipedia.org/wiki/Serialization)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), in the context of data storage, **serialization** (or serialisation) is the process of translating [data structures](https://en.wikipedia.org/wiki/Data_structure) or [object](https://en.wikipedia.org/wiki/Object_(computer_science)) state into a format that can be **stored** (for example, in a [file](https://en.wikipedia.org/wiki/Computer_file) or memory [buffer](https://en.wikipedia.org/wiki/Data_buffer)) or **transmitted** (for example, across a [network](https://en.wikipedia.org/wiki/Computer_network) connection link) and **reconstructed** later (possibly in a different computer environment). When the resulting series of bits is reread according to the [**serialization format**](https://en.wikipedia.org/wiki/Category:Data_serialization_formats), it can be used to create a semantically identical clone of the original object. For many complex objects, such as those that make extensive use of [references](https://en.wikipedia.org/wiki/Reference_(computer_science)), this process is not straightforward. Serialization of object-oriented [objects](https://en.wikipedia.org/wiki/Object_(computer_science)) does not include any of their associated [methods](https://en.wikipedia.org/wiki/Method_(computer_science)) with which they were previously linked.
 
