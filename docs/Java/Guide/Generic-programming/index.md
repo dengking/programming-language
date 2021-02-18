@@ -95,11 +95,21 @@ Hope this helps!
 
 我是通过C++ template来学习generic programming的，在阅读了"Interface as method parameter"章节的example后，我的想法是: 
 
-1、如果使用C++ template来实现上述"Interface as method parameter"章节的example，我们使用类比思维: 我觉得上述example也是符合generic programming的: 
+1、如果使用C++ template来实现上述"Interface as method parameter"章节的example，会发现Java interface相当于C++ template parameter，如果我们使用类比思维来进行分析的话，可以发现: 上述example也是符合generic programming的，因此: 
 
-a、Java interface特性让programmer能够explicit、formal描述interface，Java通过interface来进行generic programming，java是interface是完全behavior-based的；Java interface能够让programmer来实现concept。
+a、Java interface特性让programmer能够explicit、formal描述interface
 
-b、相比于C++ template behavior based的implicit，java interface是explicit。
+b、Java通过interface来进行generic programming，java是interface是完全behavior-based的；
+
+c、Java interface能够让programmer来实现concept。
+
+d、相比于C++ template behavior based的implicit，java interface是explicit。
+
+关于我的这个观点，在 wikipedia [Concept (generic programming)](https://en.wikipedia.org/wiki/Concept_(generic_programming)) 中有证据:
+
+> As generics in [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) and [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) have some similarities to C++'s [templates](https://en.wikipedia.org/wiki/Template_(C%2B%2B)), the role of concepts there is played by [interfaces](https://en.wikipedia.org/wiki/Protocol_(object-oriented_programming)).
+>
+> > NOTE: 上面这段话中的concept指的是[Concept (generic programming)](https://en.wikipedia.org/wiki/Concept_(generic_programming)) 。
 
 关于Java interface，参见:
 
