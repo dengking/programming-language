@@ -116,11 +116,9 @@ AOP中的一个cross-cutting concern对应的就是一个layer。
 
 1、公共(common)操作，比如:
 
-1) 每次执行某些操作，都需要记录日志、校验权限、更新统计信息
+a) 每次执行某些操作，都需要记录日志、校验权限、更新统计信息
 
-2) ......
-
-
+b) ......
 
 2、Python的标准库中，大量的使用aspect-oriented programming。
 
