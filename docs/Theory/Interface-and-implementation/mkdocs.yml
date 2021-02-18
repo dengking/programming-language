@@ -1,3 +1,4 @@
 nav:
-    - Interface: Interface.md
+    - Introduction: index.md
+    - Interface: Interface
     
