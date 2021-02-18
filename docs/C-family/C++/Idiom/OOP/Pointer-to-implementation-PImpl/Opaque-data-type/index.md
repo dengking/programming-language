@@ -1,10 +1,12 @@
 # Opaque data type
 
-1、在学习"pointer to implementation idiom"的时候，发现了Opaque    pointer，进而又发现了"Opaque data type"。
+1、在学习"pointer to implementation idiom"的时候，发现了Opaque pointer，进而又发现了"Opaque data type"。
 
-2、"opaque"的中文意思是"晦涩的、不透明的"；显然它的反义词是"transparent"，即透明的。
+2、"opaque"的中文意思是"晦涩的、不透明的"，在本文中，它的准确含义是"invisible"，即"不可见的"；显然它的反义词是"visible"，即"可见的"。在 wikipedia [Opaque data type](https://en.wikipedia.org/wiki/Opaque_data_type) 中，介绍的反义词是 "**transparent**"，相比之下，我觉得"visible"是更好的。
 
 3、显然，"opaque"就意味着information hiding: information是"opaque"，则意味着hiding。
+
+4、使用C++ programming language的术语来说明，"Opaque data type"是"incomplete type"。
 
 ## wikipedia [Opaque data type](https://en.wikipedia.org/wiki/Opaque_data_type)
 
@@ -20,12 +22,22 @@ Typical examples of opaque data types include [handles](https://en.wikipedia.org
 >
 > 1、这一段的描述中的handle让我想到了file descriptor
 >
-> 2、这一段总结非常好，它说明清楚了很多C library的做法
+> 2、这一段总结非常好，它说明清楚了很多C library的做法，现在想起来Linux system call大多数都是采用的这种做法
 
 An [opaque pointer](https://en.wikipedia.org/wiki/Opaque_pointer) is a special case of an opaque data type, a datatype that is declared to be a [pointer](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) to a [record](https://en.wikipedia.org/wiki/Record_(computer_science)) or [data structure](https://en.wikipedia.org/wiki/Data_structure) of some unspecified data type. For example, the [standard library](https://en.wikipedia.org/wiki/Standard_library) that forms part of the specification of the [C programming language](https://en.wikipedia.org/wiki/C_(programming_language)) provides functions for [file](https://en.wikipedia.org/wiki/Computer_file) [input and output](https://en.wikipedia.org/wiki/Input_and_output) that return or take values of type "pointer to `FILE`" that represent file streams (see [C file input/output](https://en.wikipedia.org/wiki/C_file_input/output)), but the concrete implementation of the type `FILE` is not specified.[[3\]](https://en.wikipedia.org/wiki/Opaque_data_type#cite_note-3)
 
-
+> NOTE: 
+>
+> 1、 [opaque pointer](https://en.wikipedia.org/wiki/Opaque_pointer) 会进行专门的说明
 
 ### Uses in various languages
 
 Some languages, such as [C](https://en.wikipedia.org/wiki/C_programming_language), allow the declaration of opaque [records](https://en.wikipedia.org/wiki/Record_(computer_science)) (structs), whose size and fields are hidden from the client. The only thing that the client can do with an object of such a type is to take its [memory address](https://en.wikipedia.org/wiki/Memory_address), to produce an [opaque pointer](https://en.wikipedia.org/wiki/Opaque_pointer).
+
+
+
+The information which is missing in the interface may be declared in its [implementation](https://en.wikipedia.org/wiki/Implementation_(computing)), or in another "friends-only" interface. This second option allows the hidden information to be shared by two or more modules.
+
+> NOTE: 
+>
+> 1、interface and  implementation
