@@ -39,5 +39,3 @@ Inheritance is contrasted with [object composition](https://en.wikipedia.org/wik
 
 
 
-## wikipedia Inheritance semantics / [Behavioral subtyping](https://en.wikipedia.org/wiki/Behavioral_subtyping)
-
