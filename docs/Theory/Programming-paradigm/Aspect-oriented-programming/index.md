@@ -112,9 +112,9 @@ AOP中的一个cross-cutting concern对应的就是一个layer。
 
 
 
-## Example
+## Application
 
-公共(common)操作，比如:
+1、公共(common)操作，比如:
 
 1) 每次执行某些操作，都需要记录日志、校验权限、更新统计信息
 
@@ -122,9 +122,9 @@ AOP中的一个cross-cutting concern对应的就是一个layer。
 
 
 
-python的标准库中，大量的使用aspect-oriented programming。
+2、Python的标准库中，大量的使用aspect-oriented programming。
 
-
+3、AOP是非常适合于 流程型 的architecture，比如 message processing **system**
 
 ## OOP VS AOP
 
