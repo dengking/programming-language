@@ -124,7 +124,7 @@ This example demonstrates a way to achieve the [information hiding](https://en.w
 >
 > 1、由于`PublicClass` 有 `std::unique_ptr<CheshireCat>` member，而`std::unique_ptr<CheshireCat>`是不支持copy的，因此在 Copy constructor 中，需要使用deep copy `std::unique_ptr<CheshireCat>`的 content，通过下面的code可以看出，它是通过`std::make_unique<CheshireCat>(*other.d_ptr_)` 来实现的，关于这一点，参见:
 >
-> a、[Copy constructor for a class with unique_ptr](https://stackoverflow.com/questions/16030081/copy-constructor-for-a-class-with-unique-ptr)
+> a、stackoverflow [Copy constructor for a class with unique_ptr](https://stackoverflow.com/questions/16030081/copy-constructor-for-a-class-with-unique-ptr)
 >
 > 2、理解下面程序的一个要点是理解: `*other.d_ptr_`。那如何来理解呢？其实将`std::unique_ptr`看做普通pointer即可，显然这是dereference。
 

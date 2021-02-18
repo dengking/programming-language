@@ -1,6 +1,6 @@
 # Copy constructor for a class with `unique_ptr`
 
-对一个有`unique_ptr`类型成员变量的class，它的copy constructor要如何写？
+对一个有`unique_ptr`类型成员变量的class，它的copy constructor要如何写？总的来说，需要deep copy，关于此，在 `Smart-pointers\Guideline-deep-copy` 章节进行了讨论。
 
 ## stackoverflow [Copy constructor for a class with unique_ptr](https://stackoverflow.com/questions/16030081/copy-constructor-for-a-class-with-unique-ptr)
 
@@ -105,6 +105,6 @@ If you want to use your class in a `std::vector`, you basically have to decide i
 
 
 
-## 使用`std::make_unique_ptr`
+## 使用`std::make_unique`
 
 具体的例子参见 wikipedia [Opaque pointer](https://en.wikipedia.org/wiki/Opaque_pointer)，它他收录在 `C++\Idiom\OOP\Pointer-to-implementation-PImpl\Opaque-data-type\Opaque-pointer` 章节中。

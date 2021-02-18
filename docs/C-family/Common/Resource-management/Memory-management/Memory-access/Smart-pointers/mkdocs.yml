@@ -6,3 +6,4 @@ nav:
     - CppCoreGuidelines-Passing-Smart-Pointers: CppCoreGuidelines-Passing-Smart-Pointers    
     - Guideline-strong-exception-safety: Guideline-strong-exception-safety
     - Guideline-Incomplete-type: Guideline-Incomplete-type
+    - Guideline-deep-copy: Guideline-deep-copy
