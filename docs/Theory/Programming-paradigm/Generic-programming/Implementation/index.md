@@ -10,7 +10,7 @@ C++ template、Python duck typing、Java/C# generics，这是这三门主流prog
 | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Type requirement** | concept(C++20) <br>参见: cppreference [Constraints and concepts](https://en.cppreference.com/w/cpp/language/constraints) | type hint(Python 3.5) <br>参见: [`typing`](https://docs.python.org/3/library/typing.html#module-typing) — Support for type hints[¶](https://docs.python.org/3/library/typing.html#module-typing) | [bounded quantification](https://en.wikipedia.org/wiki/Bounded_quantification) <br>参见: [Bounded Type Parameters](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) |
 | **Static/dynamic**   | static                                                       | dynamic                                                      | 暂时不确定                                                   |
-|                      | behavior-based                                               | behavior-based                                               | inheritance-based                                            |
+|                      | behavior-based                                               | behavior-based                                               | behavior-based                                               |
 | **章节**             | `C++\Language-reference\Template`                            |                                                              | `./Type-requirement`                                         |
 
 在generic programming中，非常重要的一点是type requirement，在`./Type-requirement`中会进行详细的说明。
