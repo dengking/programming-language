@@ -80,7 +80,7 @@ a、wikipedia [Kernel_(operating_system)](https://en.wikipedia.org/wiki/Kernel_(
 
 > The kernel's [interface](https://en.wikipedia.org/wiki/Application_programming_interface) is a [low-level](https://en.wikipedia.org/wiki/High-_and_low-level) [abstraction layer](https://en.wikipedia.org/wiki/Abstraction_layer). When a [process](https://en.wikipedia.org/wiki/Process_(computing)) requests a service to the kernel, it must invoke a [system call](https://en.wikipedia.org/wiki/System_call)
 
-
+b、Abstraction and architecture，参见工程software-engineering的`Software-design\Principle\Abstraction`章节
 
 ## Interface and OOP
 
