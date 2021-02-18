@@ -10,7 +10,6 @@ nav:
     - Assemble: Assemble
     
     - Glossary: Glossary
-    - Behavior: Behavior.md
     - Subtyping-polymorphism: Subtyping-polymorphism
-    - Summary-of-OO: Summary-of-OO.md
+    - Summary-of-OO: Summary-of-OO
     - Class-diagram: Class-diagram

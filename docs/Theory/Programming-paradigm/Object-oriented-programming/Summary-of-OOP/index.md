@@ -37,7 +37,7 @@ run model都是：user-defined action是subroutine，使用self、this来指向o
 
 
 
-## [object-oriented programming](https://www.pcmag.com/encyclopedia/term/object-oriented-programming)
+## pcmag [object-oriented programming](https://www.pcmag.com/encyclopedia/term/object-oriented-programming)
 
 | OOP         | Traditional Programming  |
 | ----------- | ------------------------ |
