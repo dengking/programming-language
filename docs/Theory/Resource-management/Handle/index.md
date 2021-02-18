@@ -30,7 +30,7 @@ Common resource handles include [file descriptors](https://en.wikipedia.org/wiki
 >
 > 使用handle的优势:
 >
-> a、opacity，因此可以避免dangling
+> a、opacity(不透明)，因此可以避免dangling
 >
 > 使用handle的劣势:
 >
@@ -50,11 +50,9 @@ A [handle leak](https://en.wikipedia.org/wiki/Handle_leak) is a type of [softwar
 
 > NOTE: 
 >
-> 1、"Security"是一个非常重要的问题
+> 1、"Security"是一个非常重要的问题，这一段从"Security"的角度对handle进行分析
 >
 > 2、a handle functions as a *[capability](https://en.wikipedia.org/wiki/Capability-based_security)*: it not only identifies an object, but also associates [access rights](https://en.wikipedia.org/wiki/Access_control)".
->
-> 这段话非常重要
 
 In [secure computing](https://en.wikipedia.org/wiki/Computer_security) terms, because access to a resource via a handle is mediated(中转) by another system, a handle functions as(充当) a *[capability](https://en.wikipedia.org/wiki/Capability-based_security)*: it not only identifies an object, but also associates [access rights](https://en.wikipedia.org/wiki/Access_control). For example, while a filename is forgeable(可以伪造的) (it is just a guessable(可以推测的) identifier), a handle is *given* to a user by an external system, and thus represents not just identity, but also *granted* access.
 
@@ -111,3 +109,65 @@ Like other [desktop environments](https://en.wikipedia.org/wiki/Desktop_environm
 > NOTE: 翻译如下:
 >
 > "最近，由于可用内存的增加和改进的虚拟内存算法使得使用更简单的指针变得更有吸引力，双重间接句柄已经不再受欢迎。然而，许多操作系统仍然将这个术语应用于指向不透明的“私有”数据结构的指针——不透明指针——或者从一个进程传递到其客户机的内部数组的索引。"
+
+
+
+## stackoverflow [What is a handle in C++?](https://stackoverflow.com/questions/1303123/what-is-a-handle-in-c)
+
+
+
+[A](https://stackoverflow.com/a/1303130)
+
+A **handle** can be anything from an **integer index** to a **pointer to a resource in kernel space**. The idea is that they provide an abstraction of a resource, so you don't need to know much about the resource itself to use it.
+
+> NOTE: 
+>
+> 1、handle is a good abstraction
+
+For instance, the `HWND` in the Win32 API is a handle for a Window. By itself it's useless: you can't glean(收集) any information from it. But pass it to the right API functions, and you can perform a wealth of different tricks with it. Internally you can think of the `HWND` as just an index into the GUI's table of windows (which may not necessarily be how it's implemented, but it makes the magic make sense).
+
+EDIT: Not 100% certain what specifically you were asking in your question. This is mainly talking about pure C/C++.
+
+[A](https://stackoverflow.com/a/1303180)
+
+> NOTE: 这个回答给出了一些code，便于从实现上进行理解
+
+A handle is a pointer or index with no **visible type** attached to it. Usually you see something like:
+
+> NOTE: 
+>
+> 1、上面这段话强调了"no visible type"，即他认为handle是opaque的
+
+```cpp
+ typedef void* HANDLE;
+ HANDLE myHandleToSomething = CreateSomething();
+```
+
+So in your code you just pass `HANDLE` around as an opaque value.
+
+In the code that uses the object, it casts the pointer to a real structure type and uses it:
+
+```cpp
+ int doSomething(HANDLE s, int a, int b) {
+     Something* something = reinterpret_cast<Something*>(s);
+     return something->doit(a, b);
+ }
+```
+
+Or it uses it as an index to an array/vector:
+
+```cpp
+ int doSomething(HANDLE s, int a, int b) {
+     int index = (int)s;
+     try {
+         Something& something = vecSomething[index];
+         return something.doit(a, b);
+     } catch (boundscheck& e) {
+         throw SomethingException(INVALID_HANDLE);
+     }
+ }
+```
+
+
+
+﻿
