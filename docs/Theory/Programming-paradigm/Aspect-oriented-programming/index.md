@@ -124,9 +124,13 @@ b) ......
 
 3、AOP是非常适合于 流程型 的architecture，比如 message processing **system**
 
+
+
 ## OOP VS AOP
 
 参见`Theory\Programming-paradigm\Abstraction\Abstraction-in-programming-language`。
+
+
 
 ## Implementation
 
