@@ -173,8 +173,6 @@ Duck type可以看做是GP的一种实现。
 
 ## [Design by contact](https://en.wikipedia.org/wiki/Design_by_contract) and type requirement
 
-
-
 如果从[Design by contact](https://en.wikipedia.org/wiki/Design_by_contract)的角度来看的话，上面所说的expectation就是一种contact，programmer只有遵循了这个contact才能够正确地使用standard library。
 
 
