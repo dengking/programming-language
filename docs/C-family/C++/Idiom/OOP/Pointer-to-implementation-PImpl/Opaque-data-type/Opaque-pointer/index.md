@@ -192,7 +192,7 @@ PublicClass::~PublicClass() = default;
 
 > NOTE: 
 >
-> 1、由于C++11是不支持`std::make_unique`，因此需要由programmer来实现上面程序中 `std::make_unique<CheshireCat>(*other.d_ptr_)` 的工作
+> 1、由于C++11是不支持`std::make_unique`，因此需要由programmer来实现上面程序中 `std::make_unique<CheshireCat>(*other.d_ptr_)` 的工作，在下面解释了实现code
 
 ```C++
 /* PublicClass.h */
@@ -219,7 +219,11 @@ class PublicClass {
 
 
 
-`PublicClass.cpp` C++11 版本
+`PublicClass.cpp` 
+
+> NOTE: 
+>
+> 1、参见 cppreference [`std::unique_ptr<T,Deleter>::operator*`](https://en.cppreference.com/w/cpp/memory/unique_ptr/operator*)
 
 ```C++
 /* PublicClass.cpp */
