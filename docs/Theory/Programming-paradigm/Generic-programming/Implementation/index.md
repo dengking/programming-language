@@ -14,3 +14,18 @@ C++ template、Python duck typing、Java/C# generics，这是这三门主流prog
 | **章节**             | `C++\Language-reference\Template`                            |                                                              | `./Type-requirement`                                         |
 
 在generic programming中，非常重要的一点是type requirement，在`./Type-requirement`中会进行详细的说明。
+
+
+
+### Python
+
+Python通过duck type来实现generic programming，duck type是python的核心，python的很多standard library都是建立在这个机制上，python通过`able`来define the expectations of type。
+
+### C++
+
+`C++`通过template来实现generic programming，template是c++的核心，C++的很多standard library都是建立在此机制上，C++通过[named requirement](https://en.cppreference.com/w/cpp/named_req)来define the expectations of type。
+
+### Java
+
+Java通过interface、generics来实现generic programming，Java的很多standard library都是建立在此机制上，Java通过generics来define the expectations of type。
+

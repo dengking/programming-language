@@ -54,7 +54,7 @@ C++ overload operator
 
 
 
-#### More
+#### See more
 
 1、C++ cppreference [C++ Named requirements](https://en.cppreference.com/w/cpp/named_req)
 
@@ -78,25 +78,19 @@ callable
 
 `C++`通过[named requirement](https://en.cppreference.com/w/cpp/named_req)来定义这些特性，Python中也有类似的概念，但是貌似python并没有像`C++`这样进行显式地定义。
 
-
-
-## Generic programming
-
-Python通过duck type来实现generic programming，duck type是python的核心，python的很多standard library都是建立在这个机制上，python通过`able`来define the expectations of type。
-
-`C++`通过template来实现generic programming，template是c++的核心，C++的很多standard library都是建立在此机制上，C++通过[named requirement](https://en.cppreference.com/w/cpp/named_req)来define the expectations of type。
-
-Java通过interface、generics来实现generic programming，Java的很多standard library都是建立在此机制上，Java通过generics来define the expectations of type。
+### Summary
 
 通过上面的分析，我们已经知道Python able、C++ named requirement、Java generics本质上是相同的东西: specification of type requirement。
 
-Python standard library、C++ standard library的设计是一种典范，值的借鉴学习。
+
 
 ## Type requirement is more about behavior-based
 
 本节标题的意思是: type requirement往往是**behavior-based**。在`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism\Implementation`中，提出了"Polymorphism is more about behavior-based"，本节标题的含义与此类似；这是我的经验之谈，主要源于:
 
 1、Python、C++、Java都是让user-defined class通过实现**magic function**来为这个**类型**添加某种**特性**/**behavior**，从而使它满足type requirement，所以在学习时，需要将**feature**/**behavior**和对应的**magic function**关联起来。所谓**magic function**，其实就是实现了特定功能的函数，在上层函数中，这个函数会被调用。比如OOP中的virtual function。
+
+2、Java interface、C++ named requirement、Python able，这些应该都将它们放到behavior-based中
 
 
 
