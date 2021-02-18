@@ -1,21 +1,40 @@
 # Consistent interface
 
-我们需要consistent interface，它就好比是protocol
+"consistent interface"这个词是我在阅读 accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442) 时，其中提出的。在software engineering的很多情况下，我们都需要约定 interface，下面对此进行一个总结:
 
-## thoughts
+## Subtyping polymorphism
 
-1、subtyping polymorphism: 约定好interface
+OOP subtyping能够实现consistent interface。
 
-OOP subtyping能够实现consistent interface
+## Program to an abstraction
 
-2、program to an abstraction: 需要约定好interface
+参见 "Program-to-an-abstraction" 章节。
 
-3、generic programming: 需要约定好interface
+## Generic programming-behavior based
 
-4、behavior based: 需要约定好interface
+需要约定好interface
 
-5、magic function: 其实就是约定好的interface
+## Magic function
 
-6、Java interface
+Magic function其实就是约定好的interface。
 
-7、design by  contact
+## Java interface
+
+
+
+## Design by  contact
+
+
+
+## Compiler
+
+consistent interface是compiler进行dispatch的前提条件，否则compiler无法进行dispatch。
+
+
+
+## C++ trait is a consistent interface
+
+trait 是一种interface/abstraction，关于此参见: `C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\Trait`
+
+
+

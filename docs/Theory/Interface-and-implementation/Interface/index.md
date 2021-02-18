@@ -100,11 +100,7 @@ b、Abstraction and architecture，参见工程software-engineering的`Software-
 
 ## Uniform/consistent interface
 
-统一的描述方式，其实和一致性接口类似，最最典型的例子就是: unified initialization
-
-#### C++ trait is an interface
-
-trait 是一种interface/abstraction，关于此参见: `C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\Trait`
+这在 `Consistent-interface` 中进行了描述。
 
 
 
