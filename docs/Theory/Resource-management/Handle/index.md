@@ -12,13 +12,15 @@ A **resource handle**
 
 2、can be a [pointer](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) that allows access to further information. 
 
-Common resource handles include [file descriptors](https://en.wikipedia.org/wiki/File_descriptor), [network sockets](https://en.wikipedia.org/wiki/Network_socket), [database connections](https://en.wikipedia.org/wiki/Database_connection), [process identifiers](https://en.wikipedia.org/wiki/Process_identifier) (PIDs), and [job IDs](https://en.wikipedia.org/wiki/Job_ID). PIDs and job IDs are explicitly visible integers; while file descriptors and sockets (which are often implemented as a form of file descriptor) are represented as integers, they are typically considered opaque. In traditional implementations, file descriptors are indices into a (per-process) [file descriptor table](https://en.wikipedia.org/wiki/File_descriptor_table), thence a (system-wide) [file table](https://en.wikipedia.org/wiki/File_table).
+Common resource handles include [file descriptors](https://en.wikipedia.org/wiki/File_descriptor), [network sockets](https://en.wikipedia.org/wiki/Network_socket), [database connections](https://en.wikipedia.org/wiki/Database_connection), [process identifiers](https://en.wikipedia.org/wiki/Process_identifier) (PIDs), and [job IDs](https://en.wikipedia.org/wiki/Job_ID). PIDs and job IDs are explicitly visible integers; while file descriptors and sockets (which are often implemented as a form of file descriptor) are represented as integers, they are typically considered **opaque**. In traditional implementations, file descriptors are indices into a (per-process) [file descriptor table](https://en.wikipedia.org/wiki/File_descriptor_table), thence a (system-wide) [file table](https://en.wikipedia.org/wiki/File_table).
 
 > NOTE: 
 >
 > 1、通过前面的描述可以看出，handle是无处不在的，尤其是在OS、DBMS中
 >
-> 2、opaque VS visible
+> 2、很多情况下handle是opaque的，即"invisible"，关于"opaque"，参见 "Opaque-data-type" 章节；在 wikipedia [Opaque data type](https://en.wikipedia.org/wiki/Opaque_data_type) 中，也提及了handle:
+>
+> > Typical examples of opaque data types include [handles](https://en.wikipedia.org/wiki/Handle_(computing)) for [resources](https://en.wikipedia.org/wiki/Resource_(computer_science)) provided by an [operating system](https://en.wikipedia.org/wiki/Operating_system) to [application software](https://en.wikipedia.org/wiki/Application_software). 
 
 ### Comparison to pointers
 
@@ -43,6 +45,8 @@ While a [pointer](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) 
 > 1、"tombstone"的表面意思是"墓石"
 >
 > 2、最后一段话，点明了handle的实现
+>
+> 3、显然handle的opacity，能够有效避免dangling
 
 A [handle leak](https://en.wikipedia.org/wiki/Handle_leak) is a type of [software bug](https://en.wikipedia.org/wiki/Software_bug) that occurs when a computer program asks for a handle to a resource but does not free the handle when it is no longer used; this is a form of [resource leak](https://en.wikipedia.org/wiki/Resource_leak), similar to a [memory leak](https://en.wikipedia.org/wiki/Memory_leak) for a pointer to memory.
 
