@@ -2,42 +2,44 @@ nav:
     - Introduction: index.md
     # 首先描述programming language的概念，然后抛出问题：面对如此之多的programming language，我们如何来进行掌握
     - Programming-language: Programming-language
+    # 大多数programming language都会提供的construct
+    - Programming-language-construct: Programming-language-construct
+    # 如何来组织大型project的各种construct
+    # 如何来对program进行组织
+    - Organization: Organization    
     # 程序的lifetime，从source code到exec
     - Lifetime: Lifetime
 
-###################################################type system相关内容################################################
+    #type system相关内容################################################
     # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
     # 很多programming language都支持reflection，reflection和type system密切相关，两者最好放在一起
     - Reflection: Reflection
-###################################################大多数programming language都会提供的construct################################################    
-    - Programming-language-construct: Programming-language-construct
-###################################################如何来组织大型project的各种construct################################################    
-    # 如何来对program进行组织
-    - Organization: Organization
+    
 
 ###################################################重要概念################################################    
     - First-class-citizen: First-class-citizen
+    - Pyramid-of-doom: Pyramid-of-doom
+    
 ###################################################################################################    
     # 编程范式
     - Programming-paradigm: Programming-paradigm
     - Programming-model: Programming-model
-    # 设计模式
-    - Design-pattern: Design-pattern
+    
 ###################################################大多数programming language都会涉及到的一些编程问题################################################       
     # 每种语言中都会设计到resource management
     - Resource-management: Resource-management
     # 如何进行序列化？
-    - Serialization: Serialization
+    - Serialization-and-deserialization: Serialization-and-deserialization
     # Invariant是进行判别的一个非常重要的概念
     - Invariant: Invariant
     # 
     - Compile-time-and-run-time: Compile-time-and-run-time
     # 大多数programming language都会涉及error handling
     - Error-handling: Error-handling
-###################################################大多数programming language都会涉及到的一些编程问题################################################               
+
     - Program-analysis: Program-analysis
     # 如何进行代码重构
     - Code-refactoring: Code-refactoring
-    - Pyramid-of-doom: Pyramid-of-doom
+
     
