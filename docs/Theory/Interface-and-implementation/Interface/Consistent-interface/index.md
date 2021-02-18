@@ -6,7 +6,9 @@
 
 1、subtyping polymorphism: 约定好interface
 
-2、program  to an abstraction: 需要约定好interface
+OOP subtyping能够实现consistent interface
+
+2、program to an abstraction: 需要约定好interface
 
 3、generic programming: 需要约定好interface
 

@@ -41,9 +41,19 @@
 
 ## Explicit 和 implicit interface
 
+于此相关的内容有:
 
+1、`Java\Guide\Generic-programming`
 
+其中讨论了C++ VS Java generic programming，其实是比较C++ template和Java interface:
 
+a、C++ template: implicit interface
+
+b、Java interface: explicit interface
+
+2、`Theory\Programming-paradigm\Object-oriented-programming\Subtyping-polymorphism\Subtyping-VS-inheritance`
+
+其中也对这个topic进行了讨论。
 
 ## 与interface相关得到词语
 
