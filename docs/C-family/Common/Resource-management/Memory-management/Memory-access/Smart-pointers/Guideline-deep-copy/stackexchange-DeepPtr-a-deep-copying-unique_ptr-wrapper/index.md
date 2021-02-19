@@ -328,3 +328,33 @@ You have two possible solutions for this:
 2、transparent cloning, based on template specialization of a factory function, by the derived type. I needed to implement something similar for the same reason (deep copy of polymorphic pointers). You can see [here](https://codereview.stackexchange.com/questions/54371/polymorphic-owned-reference-wrapper-for-class-hierarchies) my implementation.
 
 See the use of `to_polymorphic` functions in my question, and how they instantiate the correct cloning function, transparently.
+
+
+
+## [A](https://codereview.stackexchange.com/a/103804)
+
+> Edit: I'll leave this answer for completeness but you probably shouldn't inherit from a smart pointer or be very careful when doing so: [is-it-ok-to-inherit-from-the-c11-smart-pointers-and-override-the-relative-oper](https://stackoverflow.com/questions/12539581/is-it-ok-to-inherit-from-the-c11-smart-pointers-and-override-the-relative-oper)
+
+It seems to me like there's lot of code that simply wraps the functionality of the `unique_ptr`. Putting aside that having a copyable `unique_ptr` seems a bit dubious (although it seems like a reasonable thing in this context) why don't we inherit from `unique_ptr` and provide the **copy operators**?
+
+```cpp
+template <typename T>
+struct pimpl_ptr : public std::unique_ptr<T>
+{
+    using std::unique_ptr<T>::unique_ptr;
+    pimpl_ptr() {};
+    pimpl_ptr(pimpl_ptr<T> const& other)
+    { 
+        auto value = *other.get();
+        this->reset(new T(value));
+    }
+    pimpl_ptr<T>& operator=(pimpl_ptr<T> const& other)
+    {
+        auto value = *other.get();
+        this->reset(new T(value));
+        return *this;
+    }
+};
+```
+
+There's probably a handful of improvements that could be made, as per Loki Astari's answer, but I think conceptually this will do the same but in less lines of code.
