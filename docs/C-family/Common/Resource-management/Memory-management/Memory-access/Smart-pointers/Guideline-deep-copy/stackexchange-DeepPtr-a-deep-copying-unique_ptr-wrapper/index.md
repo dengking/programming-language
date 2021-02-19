@@ -319,7 +319,11 @@ auto ptr2 = ptr1;
 
 The last line will populate `ptr2` with a `Base` instance that has all the sliced values from `ptr2`'s `Derived` instance (because `ptr2`'s constructor calls `new T`, which resolves to `new Base` - not `new Derived`).
 
-> NOTE: 典型的object slicing: 将subclass object赋值给base class object
+> NOTE: 
+>
+> 1、典型的object slicing: 将subclass object赋值给base class object
+>
+> 2、上述例子在 CppCoreGuidelines [C.67: A polymorphic class should suppress copying](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c67-a-polymorphic-class-should-suppress-copying) 中给出了更好的说明，参见其中的例子
 
 You have two possible solutions for this:
 
