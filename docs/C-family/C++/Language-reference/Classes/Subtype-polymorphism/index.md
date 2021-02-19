@@ -54,9 +54,7 @@ C++的value semantic是不支持runtime polymorphsim的，reference semantic是�
 
 ### Virtual return type 
 
-Covariant 
-
-
+Covariant，参见 `Return-Covariant-Types` 章节。
 
 ### Virtual inheritance
 
