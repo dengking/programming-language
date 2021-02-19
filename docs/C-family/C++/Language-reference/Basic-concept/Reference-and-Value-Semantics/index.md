@@ -178,8 +178,6 @@ void consumer()
 
 ### 右值引用与完美转发
 
-
-
 右值引用还有一个作用是实现完美转发。[完美转发可以在一定程度上让代码保持简洁](https://link.zhihu.com/?target=http%3A//www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm)，但同时，这也引入了一些[令人讨厌的坑](https://link.zhihu.com/?target=http%3A//scottmeyers.blogspot.com/2012/10/copying-constructors-in-c11.html)。个人感觉意义不如移动语义的重大，所以这里不再展开了。
 
 \---------------
@@ -216,6 +214,8 @@ void consumer()
 ### 对reference semantic的增强
 
 1、rvalue reference
+
+
 
 ## TO READ
 
