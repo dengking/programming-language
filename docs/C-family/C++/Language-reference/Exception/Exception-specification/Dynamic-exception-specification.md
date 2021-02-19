@@ -18,15 +18,13 @@ No, it is not considered good practice. On the contrary, it is generally conside
 
 http://www.gotw.ca/publications/mill22.htm goes into a lot more detail about why, but the problem is partly that the compiler is unable to enforce this, so it has to be checked at runtime, which is usually undesirable. And it is not well supported in any case. (MSVC ignores exception specifications, except throw(), which it interprets as a guarantee that no exception will be thrown.
 
-
+> NOTE: 上面给出的链接指向的是: gotw [A Pragmatic Look at Exception Specifications](http://www.gotw.ca/publications/mill22.htm)，后面对这篇文章进行了专门的阅读。
+>
+> 
 
 ### devblogs.microsoft [The sad history of the C++ `throw(…)` exception specifier](https://devblogs.microsoft.com/oldnewthing/20180928-00/?p=99855)
 
 This has made a lot of people very angry and [has been widely regarded as a bad move](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0003r0.html#2.0).
-
-
-
-### gotw [A Pragmatic Look at Exception Specifications](http://www.gotw.ca/publications/mill22.htm)
 
 
 
