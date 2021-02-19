@@ -6,3 +6,4 @@ nav:
     - Lifetime-and-storage-duration: Lifetime-and-storage-duration
     # 描述object的layout    
     - Layout: Layout    
+    - Object-slicing: Object-slicing
