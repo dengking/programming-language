@@ -12,6 +12,10 @@
 
 关于exception，有多个方面的内容需要了解。
 
+## 内容概述
+
+Exception safety: C++是支持exception的，实现strong exception safety具有非常重要的意义，因此如何实现strong exception safety是C++中非常重要的一个topic。
+
 ## cppreference [Exceptions](https://en.cppreference.com/w/cpp/language/exceptions)
 
 When declaring a function, [exception specifications](https://en.cppreference.com/w/cpp/language/except_spec) and [noexcept specifiers](https://en.cppreference.com/w/cpp/language/noexcept_spec) may be provided to limit the types of the exceptions a function may throw.

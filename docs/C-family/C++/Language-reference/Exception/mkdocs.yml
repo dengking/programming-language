@@ -5,4 +5,4 @@ nav:
     - Function-try-block: Function-try-block
     - Exception-Safety: Exception-Safety
     - library-Error-handling: library-Error-handling
-    
+    - boost-Lessons-Learned-from-Specifying-Exception-Safety-for-the-C++Standard-Library: boost-Lessons-Learned-from-Specifying-Exception-Safety-for-the-C++Standard-Library
