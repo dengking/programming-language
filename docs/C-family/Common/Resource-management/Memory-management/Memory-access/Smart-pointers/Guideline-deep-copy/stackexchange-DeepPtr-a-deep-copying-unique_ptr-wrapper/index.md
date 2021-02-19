@@ -303,7 +303,7 @@ See here https://codereview.stackexchange.com/a/93353/507
 
 You already accepted Loki's answer (and he made good points) but there is one comment I wanted to add regarding this:
 
-> •Any other pitfalls that could be caused by this class.
+> Any other pitfalls that could be caused by this class.
 
 Your class has no information on the concrete type held within, causing slicing in the presence of derived classes;
 
@@ -319,9 +319,11 @@ auto ptr2 = ptr1;
 
 The last line will populate `ptr2` with a `Base` instance that has all the sliced values from `ptr2`'s `Derived` instance (because `ptr2`'s constructor calls `new T`, which resolves to `new Base` - not `new Derived`).
 
+> NOTE: 典型的object slicing: 将subclass object赋值给base class object
+
 You have two possible solutions for this:
 
-1、intrusive cloning (your class hierarchy rooted in Base needs to implement a `virtual Base* clone() = 0` where each specialization of Base returns it's own instance); this cloning implementation would be then used for deep copy;
+1、intrusive(入侵式的) cloning (your class hierarchy rooted in `Base` needs to implement a `virtual Base* clone() = 0` where each specialization of `Base` returns it's own instance); this cloning implementation would be then used for deep copy;
 
 2、transparent cloning, based on template specialization of a factory function, by the derived type. I needed to implement something similar for the same reason (deep copy of polymorphic pointers). You can see [here](https://codereview.stackexchange.com/questions/54371/polymorphic-owned-reference-wrapper-for-class-hierarchies) my implementation.
 

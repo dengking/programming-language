@@ -7,3 +7,4 @@ nav:
     - Guideline-strong-exception-safety: Guideline-strong-exception-safety
     - Guideline-Incomplete-type: Guideline-Incomplete-type
     - Guideline-deep-copy: Guideline-deep-copy
+    - Guideline-covariance: Guideline-covariance
