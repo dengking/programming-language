@@ -1,6 +1,8 @@
 # Exception
 
-正如在文章[**Lessons Learned from Specifying Exception-Safety for the C++ Standard Library**](https://www.boost.org/community/exception_safety.html)，中所述：“exception”已经“built-in to the core C++ language”。
+正如在文章boost [**Lessons Learned from Specifying Exception-Safety for the C++ Standard Library**](https://www.boost.org/community/exception_safety.html) 中所述：
+
+> “exception”已经“built-in to the core C++ language”。
 
 在阅读cppreference中关于standard library的描述中，我们可以看到其中往往都有Exceptions说明，比如[`std::swap`](https://en.cppreference.com/w/cpp/algorithm/swap)。
 
@@ -18,7 +20,4 @@ When declaring a function, [exception specifications](https://en.cppreference.co
 
 Errors that arise during exception handling are handled by [std::terminate](https://en.cppreference.com/w/cpp/error/terminate) and [std::unexpected](https://en.cppreference.com/w/cpp/error/unexpected) (until C++17).
 
-
-
-## cppreference [Error handling](https://en.cppreference.com/w/cpp/error)
 
