@@ -164,7 +164,9 @@ There is an even more important way in which exceptions can enhance correctness:
 
 > NOTE: 
 >
-> 1、"contractual"的含义是"契约的"
+> 1、"contractual"的含义是"契约的"；
+>
+> 2、在进行generic programming的时候，是允许client指定template argument的，这就是下面这段话中的"configurability by client code"的含义，因此"exception-safety in a generic component"通常取决于它的template argument的，在进行generic programming的时候，就需要generic component和client之间约定关于exception safety的contract，这就是下面这段话中的"exception-safety in a generic component usually depends on a contract between the component and its clients"；由于有exception safety的contract，因此需要将exception-safety进行分级。
 
 A non-generic component can be described as exception-safe in isolation, but because of its configurability by client code, exception-safety in a generic component usually depends on a contract between the component and its clients. For example, the designer of a generic component might require that an operation which is used in the component's destructor not throw any exceptions.[2](https://www.boost.org/community/exception_safety.html#footnote2) The generic component might, in return, provide one of the following guarantees:
 
@@ -176,7 +178,19 @@ A non-generic component can be described as exception-safe in isolation, but bec
 
 ### Basic guarantee 
 
-The basic guarantee is a simple minimum standard for exception-safety to which we can hold all components. It says simply that after an exception, the component can still be used as before. Importantly, the preservation of invariants allows the component to be destroyed, potentially as part of stack-unwinding. This guarantee is actually less useful than it might at first appear. If a component has many valid states, after an exception we have no idea what state the component is in; only that the state is valid. The options for recovery in this case are limited: either destruction or resetting the component to some known state before further use. Consider the following example:
+The basic guarantee is a simple minimum standard for exception-safety to which we can hold all components. It says simply that after an exception, the component can still be used as before. Importantly, the preservation of invariants allows the component to be destroyed, potentially as part of stack-unwinding. This guarantee is actually less useful than it might at first appear. If a component has many valid states, after an exception we have no idea what state the component is in; only that the state is valid. The options for recovery in this case are limited: either destruction or resetting the component to some known state before further use. 
+
+> NOTE: 
+>
+> 1、通过上面这段话可知作者的最终结论: "This guarantee is actually less useful than it might at first appear"，简而言之是: "Basic guarantee"是非常鸡肋的，在实际中，可能没有太多价值。这在最后一段话中进行了详细说明:  "If a component has many valid states, after an exception we have no idea what state the component is in; only that the state is valid. The options for recovery in this case are limited: either destruction or resetting the component to some known state before further use. "
+>
+> 简而言之: 它是unpredictable，因此是uncomputational，因此非常鸡肋
+>
+> 2、"It says simply that after an exception, the component can still be used as before. Importantly, the preservation of invariants allows the component to be destroyed, potentially as part of stack-unwinding"
+>
+> 这段话的意思是: 在出现exception后，component 是仍然能够使用的，这意味中它能够实现"preservation of invariants"，实现"preservation of invariants"能够"allows the component to be destroyed, potentially as part of stack-unwinding"，显然这意味中，它能够避免resource leak。
+
+Consider the following example:
 
 ```C++
 template <class X> 
@@ -195,9 +209,19 @@ void print_random_sequence()
 } 
 ```
 
-Since all we know about v after an exception is that it is valid, the function is allowed to print any random sequence of `X`s.[3](https://www.boost.org/community/exception_safety.html#footnote3) It is “safe” in the sense that it is not allowed to crash, but its output may be unpredictable.
+Since all we know about `v` after an exception is that it is valid, the function is allowed to print any random sequence of `X`s.[3](https://www.boost.org/community/exception_safety.html#footnote3) It is “safe” in the sense that it is not allowed to crash, but its output may be unpredictable.
+
+> 3 In practice of course, this function would make an extremely poor random sequence generator!
 
 ### Strong guarantee 
+
+> NOTE: 
+>
+> 1、 “commit-or-rollback” 让我想到了 "transaction "
+>
+> 2、strong guarantee能够保证"the program state is simple and predictable in case of an exception"，显然这是computational的，这就决定了Strong guarantee有着非常高的价值，在实际开发中，是programmer的追求
+>
+> 3、最后一段话的总结是非常好的 
 
 The *strong* guarantee provides full “commit-or-rollback” semantics. In the case of C++ standard containers, this means, for example, that if an exception is thrown all iterators remain valid. We also know that the container has exactly the same elements as before the exception was thrown. A transaction that has no effects if it fails has obvious benefits: the program state is simple and predictable in case of an exception. In the C++ standard library, nearly all of the operations on the node-based containers list, set, multiset, map, and multimap provide the *strong* guarantee.[4](https://www.boost.org/community/exception_safety.html#footnote4)).
 
@@ -205,19 +229,49 @@ The *strong* guarantee provides full “commit-or-rollback” semantics. In the 
 
 The *no-throw* guarantee is the strongest of all, and it says that an operation is guaranteed not to throw an exception: it always completes successfully. This guarantee is necessary for most destructors, and indeed the destructors of C++ standard library components are all guaranteed not to throw exceptions. The *no-throw* guarantee turns out to be important for other reasons, as we shall see.[5](https://www.boost.org/community/exception_safety.html#footnote5)
 
+> 5 All type parameters supplied by clients of the C++ standard library are required not to throw from their destructors. In return, all components of the C++ standard library provide at least the *basic* guarantee.
+
+> NOTE: 
+>
+> 1、现实情况中，No-throw guarantee可能无法实现，这在下面的"5 What level of exception-safety should a component specify?"中进行了说明。
+
 ## 4 Legal Wrangling
 
-Inevitably, the contract can get more complicated: a quid pro quo arrangement is possible. Some components in the C++ Standard Library give one guarantee for arbitrary type parameters, but give a stronger guarantee in exchange for additional promises from the client type that no exceptions will be thrown. For example, the standard container operation `vector<T>::erase` gives the *basic* guarantee for any `T`, but for types whose copy constructor and copy assignment operator do not throw, it gives the *no-throw* guarantee.[6](https://www.boost.org/community/exception_safety.html#footnote6)
+> NOTE: 本节标题的含义是: 法律纠纷
+
+Inevitably(不可避免地), the contract can get more complicated: a quid pro quo arrangement is possible. Some components in the C++ Standard Library give one guarantee for arbitrary type parameters, but give a stronger guarantee in exchange for additional promises from the client type that no exceptions will be thrown. For example, the standard container operation `vector<T>::erase` gives the *basic* guarantee for any `T`, but for types whose copy constructor and copy assignment operator do not throw, it gives the *no-throw* guarantee.[6](https://www.boost.org/community/exception_safety.html#footnote6)
+
+> NOTE: 翻译如下:
+>
+> "不可避免的是，合同可能会变得更加复杂:双方可能会达成一项交换安排。
+> c++标准库中的一些组件为任意类型参数提供了一种保证，但又提供了更强的保证，以交换客户端类型的额外承诺，即不会抛出异常。
+> 例如，标准容器操作' vector<T>::erase '为任何' T '提供了*basic*保证，但对于复制构造函数和复制赋值操作符不抛出的类型，它提供了no-throw保证。"
+>
+> 1、这段话论述了C++ STL的exception safety和template argument的exception safety之间的关联，简单概括起来就是: 如果template argument的exception safety越高，则C++ STL的exception safety也越高
+>
+> 2、"Some components in the C++ Standard Library give one guarantee for arbitrary type parameters, but give a stronger guarantee in exchange for additional promises from the client type that no exceptions will be thrown."
+>
+> 这段话是难以理解的，难点在第二句: "that no exceptions will be thrown"引导的是"promises"的同位语从句；前面的翻译基本上是比较准确的。
+
+
 
 ## 5 What level of exception-safety should a component specify?
 
+> NOTE: 
+>
+> 1、这段话的`insert`例子，体现了performance和exception safety的tradeoff
+>
+> 2、copy and swap来实现strong exception safety
+>
+> 3、在这一段中，作者提出了 "“natural”(本质的) level of safety "，即一些operation，它的本质的level of safety，显然，它是programmer无法逾越的，它就相当于天花板
+
 From a client's point-of-view, the strongest possible level of safety would be ideal. Of course, the *no-throw* guarantee is simply impossible for many operations, but what about the *strong* guarantee? For example, suppose we wanted atomic behavior for `vector<T>::insert`. Insertion into the middle of a vector requires copying elements after the insertion point into later positions, to make room for the new element. If copying an element can fail, rolling back the operation would require “undoing” the previous copies...which depends on copying again. If copying back should fail (as it likely would), we have failed to meet our guarantee.
 
-One possible alternative would be to redefine `insert` to build the new array contents in a fresh piece of memory each time, and only destroy the old contents when that has succeeded. Unfortunately, there is a non-trivial cost if this approach is followed: insertions near the end of a vector which might have previously caused only a few copies would now cause every element to be copied. The *basic* guarantee is a “natural” level of safety for this operation, which it can provide without violating its performance guarantees. In fact all of the operations in the library appear to have such a “natural” level of safety.
+One possible alternative would be to redefine `insert` to build the new array contents in a fresh piece of memory each time, and only destroy the old contents when that has succeeded. Unfortunately, there is a non-trivial cost if this approach is followed: insertions near the end of a vector which might have previously caused only a few copies would now cause every element to be copied. The *basic* guarantee is a “natural”(本质的) level of safety for this operation, which it can provide without violating its performance guarantees. In fact all of the operations in the library appear to have such a “natural”(本质的) level of safety.
 
 Because performance requirements were already a well-established part of the draft standard and because performance is a primary goal of the STL, there was no attempt to specify more safety than could be provided within those requirements. Although not all of the library gives the *strong* guarantee, almost any operation on a standard container which gives the *basic* guarantee can be made *strong* using the “make a new copy” strategy described above:
 
-```
+```C++
 template <class Container, class BasicOp> 
 void MakeOperationStrong( Container& c, const BasicOp& op ) 
 { 
@@ -229,13 +283,23 @@ void MakeOperationStrong( Container& c, const BasicOp& op )
 
 This technique can be folded into a wrapper class to make a similar container which provides stronger guarantees (and different performance characteristics).[8](https://www.boost.org/community/exception_safety.html#footnote8)
 
+> 8 This suggests another potential use for the oft-wished-for but as yet unseen `container_traits<>` template: automated container selection to meet exception-safety constraints.
+
 ## 6 Should we take everything we can get?
 
-By considering a particular implementation, we can hope to discern a natural level of safety. The danger in using this to establish requirements for a component is that the implementation might be restricted. If someone should come up with a more-efficient implementation which we'd like to use, we may find that it's incompatible with our exception-safety requirements. One might expect this to be of no concern in the well-explored domains of data structures and algorithms covered by the STL, but even there, advances are being made. A good example is the recent *introsort* algorithm [[6\]](https://www.boost.org/community/exception_safety.html#reference6), which represents a substantial improvement in worst-case complexity over the well-established *quicksort*.
+By considering a particular implementation, we can hope to discern(识别、辨别) a natural(本质的) level of safety. The danger in using this to establish requirements for a component is that the implementation might be restricted. If someone should come up with a more-efficient implementation which we'd like to use, we may find that it's incompatible with our exception-safety requirements. One might expect this to be of no concern in the well-explored domains of data structures and algorithms covered by the STL, but even there, advances are being made. A good example is the recent *introsort* algorithm [[6\]](https://www.boost.org/community/exception_safety.html#reference6), which represents a substantial improvement in worst-case complexity over the well-established *quicksort*.
+
+> NOTE: 翻译如下:
+>
+> "通过考虑一种特殊的执行方式，我们可以希望辨别出一种本质的安全水平。
+> 使用它来建立组件需求的危险在于，实现可能受到限制。
+> 如果有人想出了我们想要使用的更高效的实现，我们可能会发现它与我们的异常安全需求不兼容。
+> 人们可能认为这在STL所涵盖的数据结构和算法领域中是无关的，但即使在那里，也取得了进展。
+> 最近推出的introsort算法就是一个很好的例子，它在最坏情况的复杂度方面比成熟的快速排序有了很大的改进。"
 
 To determine exactly how much to demand of the standard components, I looked at a typical real-world scenario. The chosen test case was a “composite container.” Such a container, built of two or more standard container components, is not only commonly needed, but serves as a simple representative case for maintaining invariants in larger systems:
 
-```
+```c++
 // SearchableStack - A stack which can be efficiently searched 
 // for any value. 
 template <class T> 
@@ -254,7 +318,7 @@ class SearchableStack
 
 The idea is that the list acts as a stack of set iterators: every element goes into the set first, and the resulting position is pushed onto the list. The invariant is straightforward: the set and the list should always have the same number of elements, and every element of the set should be referenced by an element of the list. The following implementation of the push function is designed to give the *strong* guarantee within the natural levels of safety provided by set and list:
 
-```
+```c++
 template <class T>                                // 1 
 void SearchableStack<T>::push(const T& t)         // 2 
 {                                                       // 3 
@@ -288,7 +352,7 @@ The test program started with the basics: reinforcement and instrumentation, esp
 
 Finally, a scheme was designed that could cause an operation to throw an exception at each possible point of failure. At the beginning of every client-supplied operation which is allowed to throw an exception, a call to `ThisCanThrow` was added. A call to `ThisCanThrow` also had to be added everywhere that the generic operation being tested might throw an exception, for example in the global operator `new`, for which an instrumented replacement was supplied.
 
-```
+```c++
 // Use this as a type parameter, e.g. vector<TestClass> 
 struct TestClass 
 { 
@@ -307,7 +371,7 @@ struct TestClass
 
 `ThisCanThrow` simply decrements a “throw counter” and, if it has reached zero, throws an exception. Each test takes a form which begins the counter at successively higher values in an outer loop and repeatedly attempts to complete the operation being tested. The result is that the operation throws an exception at each successive step along its execution path that can possibly fail. For example, here is a simplified version of the function used to test the *strong* guarantee: [12](https://www.boost.org/community/exception_safety.html#footnote12)
 
-```
+```c++
 extern int gThrowCounter; // The throw counter
 void ThisCanThrow() 
 { 

@@ -25,3 +25,6 @@ When declaring a function, [exception specifications](https://en.cppreference.co
 Errors that arise during exception handling are handled by [std::terminate](https://en.cppreference.com/w/cpp/error/terminate) and [std::unexpected](https://en.cppreference.com/w/cpp/error/unexpected) (until C++17).
 
 
+
+
+
