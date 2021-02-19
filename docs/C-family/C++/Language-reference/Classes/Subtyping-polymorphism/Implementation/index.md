@@ -66,3 +66,9 @@ Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-
 
   > NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
 
+
+
+## draft
+
+为什么reference semantic才能够实现virtual：
+value semantic时，它的concrete type是已知的，compiler能够直接选择implementation
