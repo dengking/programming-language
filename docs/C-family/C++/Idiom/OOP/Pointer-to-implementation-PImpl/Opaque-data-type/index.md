@@ -6,7 +6,7 @@
 
 3、显然，"opaque"就意味着information hiding: information是"opaque"，则意味着hiding。
 
-4、使用C++ programming language的术语来说明，"Opaque data type"是"incomplete type"。
+4、使用C++ programming language的术语来说明，"Opaque data type"是"incomplete type"。另外它还涉及forward declaration。
 
 ## wikipedia [Opaque data type](https://en.wikipedia.org/wiki/Opaque_data_type)
 
