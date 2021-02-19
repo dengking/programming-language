@@ -89,3 +89,9 @@ std::unique_ptr<Node<int,int,int,int>> test5 =
 ```
 
 `std::make_unique` creates a *new* pointer. It doesn't reuse an existing pointer. So since test4 is already there, it has to copy it. After test5 is constructed, test4 is still there (so can't do a move) and test5 is holding a new object, copied from test4.
+
+
+
+## wikipedia [Opaque pointer](https://en.wikipedia.org/wiki/Opaque_pointer)
+
+> NOTE: 在这篇文章中也给出了例子，它被收录在 `Opaque-data-type\Opaque-pointer` 章节
