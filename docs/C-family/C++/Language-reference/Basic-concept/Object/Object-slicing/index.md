@@ -311,3 +311,13 @@ int main()
 
 ```
 
+
+
+## TODO
+
+https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Polymorphic_Exception
+
+
+https://isocpp.org/wiki/faq/value-vs-ref-semantics#pass-by-value
+
+在其中也谈及了object slice
