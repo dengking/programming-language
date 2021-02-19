@@ -224,6 +224,8 @@ class PublicClass {
 > NOTE: 
 >
 > 1、参见 cppreference [`std::unique_ptr<T,Deleter>::operator*`](https://en.cppreference.com/w/cpp/memory/unique_ptr/operator*)
+>
+> 
 
 ```C++
 /* PublicClass.cpp */
