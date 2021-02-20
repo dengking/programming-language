@@ -90,13 +90,45 @@ In order to instantiate a function template, every template argument must be kno
 
 
 
+## Explicit template arguments
+
+> NOTE: 主要讲述如何获得template argument
+
+Template arguments of a function template may be obtained from
+
+1、template argument deduction
+
+2、default template arguments
+
+3、specified explicitly
+
+> NOTE: template argument只有如上三种来源
+
+There is no way to explicitly specify template arguments to [overloaded operators](https://en.cppreference.com/w/cpp/language/operators), [conversion functions](https://en.cppreference.com/w/cpp/language/cast_operator), and constructors, because they are called without the use of the function name.
+
+> NOTE: magic function的局限性
+
 ## Template argument substitution
 
+> NOTE: 前面讲述了如何获得template argument，后续就是执行substitution
 
+### Substitution
+
+When all **template arguments** have been specified, deduced or obtained from default template arguments, every use of a template parameter in the function parameter list is replaced with the corresponding template arguments.
+
+### [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae) 
+
+Substitution failure (that is, failure to replace template parameters with the deduced or provided template arguments) of a function template removes the function template from the [overload set](https://en.cppreference.com/w/cpp/language/overload_resolution). This allows a number of ways to manipulate overload sets using template metaprogramming: see [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae) for details.
+
+### Decay to pointer
+
+After substitution, all function parameters of array and function type are adjusted to pointers and all top-level cv-qualifiers are dropped from function parameters (as in a regular [function declaration](https://en.cppreference.com/w/cpp/language/function#Function_declaration)).
 
 ## [Function template overloading](https://en.cppreference.com/w/cpp/language/function_template#Function_template_overloading)
 
 Function templates and non-template functions may be overloaded.
+
+> NOTE: 这段话如何来进行理解
 
 A non-template function is always distinct from a template specialization with the same type. Specializations of different function templates are always distinct from each other even if they have the same type. Two function templates with the same return type and the same parameter list are distinct and can be distinguished with explicit template argument list.
 
@@ -108,11 +140,15 @@ A non-template function is always distinct from a template specialization with t
 
 ## [Function overloads vs function specializations](https://en.cppreference.com/w/cpp/language/function_template#Function_overloads_vs_function_specializations)
 
-Note that only non-template and **primary template overloads** participate in overload resolution. The **specializations** are not overloads and are not considered. Only after the **overload resolution** selects the best-matching **primary function template**, its specializations are examined to see if one is a better match.
+Note that only **non-template** and **primary template overloads** participate in **overload resolution**. The **specializations** are not overloads and are not considered. Only after the **overload resolution** selects the best-matching **primary function template**, its specializations are examined to see if one is a better match.
 
-> NOTE: 显然，这种设计让整体都变得简单，简而言之：compiler首先执行overload resolution，然后执行specializaiton resolution。
+> NOTE: 
 >
-> 这种设计验证了在`C++\Language-reference\Template\Implementation\index.md`中总结的“Partial template specialization是primary template的附庸”观点。
+> 1、显然，这种设计让整体都变得简单，简而言之：compiler首先执行overload resolution，然后执行specializaiton resolution。
+>
+> 2、C++严格区分overload 和 specialization
+>
+> 3、这种设计验证了在`C++\Language-reference\Template\Implementation`中总结的“Partial template specialization是primary template的附庸”观点。
 
 ```c++
 #include <iostream>
@@ -139,11 +175,15 @@ int main()
 
 ```
 
-上述程序的输出如下:
-
-```C++
-15 void f(T*) [with T = int]
-```
+> NOTE: 
+>
+> 上述程序的输出如下:
+>
+> ```C++
+> 15 void f(T*) [with T = int]
+> ```
+>
+> 
 
 
 
@@ -359,3 +399,6 @@ T adder(T) [T = int]
 
 compiler生成上述代码的过程是值的推敲的，一个值的推敲的点是：base condition，即`T adder(T v)`的到达。
 
+## Function template specialization
+
+> NOTE: 原文省略了
