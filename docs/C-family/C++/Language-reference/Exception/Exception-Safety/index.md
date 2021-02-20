@@ -51,3 +51,24 @@ Copy and swap idiom能够提供strong exception safety:
 ### Stack unwind
 
 参见`C++\Idiom\OOP\Scope-Guard`章节 。
+
+
+
+## Implementation of strong guarantee may depend on stronger guarantee
+
+本节标题的含义是: 实现 "strong guarantee" 可能依赖于 "stronger guarantee"，这是我在阅读 "boost [Lessons Learned from Specifying Exception-Safety for the C++ Standard Library](https://www.boost.org/community/exception_safety.html) # 6 Should we take everything we can get? "时，根据 "First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11)" 总结而来的，后来经过仔细思考，发现这是一个普遍的规律，它提醒了我:
+
+1、高层是需要底层的exception safety来实现exception safety的
+
+2、no throw guarantee的重要价值
+
+它是可靠的、它是最最强的guarantee、可以依靠它来实现strong exception safety
+
+### Examples
+
+1、copy-and-swap: swap是no throw的，这个idiom依赖于此，实现了strong exception safety
+
+2、"boost [Lessons Learned from Specifying Exception-Safety for the C++ Standard Library](https://www.boost.org/community/exception_safety.html) # 6 Should we take everything we can get? ": 其中的`SearchableStack<T>::push(const T& t)`例子，能够非常好的说明这个规律
+
+
+

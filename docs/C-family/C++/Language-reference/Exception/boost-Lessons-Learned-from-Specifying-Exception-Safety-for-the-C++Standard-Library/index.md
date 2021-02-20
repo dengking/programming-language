@@ -375,6 +375,21 @@ What does our code actually require of the library? We need to examine the lines
 
 I learned a great deal by approaching the question this way during standardization. First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11). Also, I took advantage of all of the natural level of safety to implement this simple example. Finally, the analysis revealed a requirement on iterators which I had previously overlooked when operations were considered on their own. The conclusion was that we should provide as much of the natural level of safety as possible. Faster but less-safe implementations could always be provided as extensions to the standard components. [10](https://www.boost.org/community/exception_safety.html#footnote10)
 
+> NOTE: 翻译如下:
+>
+> "通过在标准化过程中以这种方式处理这个问题，我学到了很多东西。
+> 首先，为复合容器指定的保证实际上依赖于来自其组件的更强的保证(第11行中的*no-throw*保证)。
+> 此外，我利用了所有的自然安全级别来实现这个简单的示例。
+> 最后，分析揭示了对迭代器的需求，这是我以前在单独考虑操作时忽略的。
+> 结论是，我们应该提供尽可能多的自然安全水平。
+> 更快但不太安全的实现总是可以作为标准组件的扩展提供"
+>
+> 1、上面这段话是作者的总结之言
+>
+> 2、"First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11)"
+>
+> 这段话其实揭示了一个规律: 高层是需要底层的exception safety来实现exception safety的，在"Implementation of strong guarantee may depend on stronger guarantee"中对此进行了总结
+
 > 10 The prevalent philosophy in the design of STL was that functionality that wasn't essential to all uses should be left out in favor of efficiency, as long as that functionality could be obtained when needed by adapting the base components. This departs from that philosophy, but it would be difficult or impossible to obtain even the *basic* guarantee by adapting a base component that doesn't already have it.
 
 ## 7 Automated testing for exception-safety
