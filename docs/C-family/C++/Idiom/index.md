@@ -2,8 +2,9 @@
 
 本章总结C++的idiom，主要参考：
 
-- wikibooks [More C++ Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms)
-- cppreference [Idioms](https://en.cppreference.com/w/cpp/language)
+1、wikibooks [More C++ Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms)
+
+2、cppreference [Idioms](https://en.cppreference.com/w/cpp/language)
 
 
 
@@ -19,7 +20,7 @@ The world is invited to catalog(编目) reusable pieces of C++ knowledge (simila
 
 ## What is idiom
 
-在`Theory\Design-pattern\Software-design-pattern.md`的`Classification and list`段中的描述是：
+在`Theory\Design-pattern\Software-design-pattern`的`Classification and list`段中的描述是：
 
 > The most basic and low-level patterns are often called *idioms*. They usually apply only to a single programming language.
 
@@ -28,3 +29,5 @@ The world is invited to catalog(编目) reusable pieces of C++ knowledge (simila
 ## 分类
 
 本章主要基于programming paradigm来对idiom进行分类，另外还包含一些专题。
+
+C++ idiom非常多，其实很难进行分类，有些idiom可以归入多种类别中。
