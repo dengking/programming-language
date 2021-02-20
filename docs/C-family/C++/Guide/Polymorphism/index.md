@@ -1,4 +1,4 @@
-# Implementation of polymorphism
+# C++ polymorphism
 
 在`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism`中讨论了各种polymorphism，本章讨论C++中如何实现polymorphism，这是一个较大的话题。C++中提供了多种polymorphism:
 
