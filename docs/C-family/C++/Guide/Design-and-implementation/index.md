@@ -2,7 +2,7 @@
 
 Design and implementation of C++涉及的内容非常多，本文将涉及的内容进行梳理，以期作为了解C++ design 和 implementation的guideline。
 
-## How to design programming language?
+## How to design C++ programming language?
 
 Programming language norm/standard是一种contract，在进行design的时候：
 
@@ -24,3 +24,6 @@ b、side effect
 
 2、......
 
+## C++ implementation
+
+在`./C++implementation`章节进行了论述。
