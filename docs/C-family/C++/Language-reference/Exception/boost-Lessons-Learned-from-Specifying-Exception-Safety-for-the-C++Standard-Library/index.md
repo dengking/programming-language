@@ -225,6 +225,8 @@ Since all we know about `v` after an exception is that it is valid, the function
 
 The *strong* guarantee provides full “commit-or-rollback” semantics. In the case of C++ standard containers, this means, for example, that if an exception is thrown all iterators remain valid. We also know that the container has exactly the same elements as before the exception was thrown. A transaction that has no effects if it fails has obvious benefits: the program state is simple and predictable in case of an exception. In the C++ standard library, nearly all of the operations on the node-based containers list, set, multiset, map, and multimap provide the *strong* guarantee.[4](https://www.boost.org/community/exception_safety.html#footnote4)).
 
+> 4 It is worth noting that mutating algorithms usually cannot provide the *strong* guarantee: to roll back a modified element of a range, it must be set back to its previous value using `operator=`, which itself might throw. In the C++ standard library, there are a few exceptions to this rule, whose rollback behavior consists only of destruction: `uninitialized_copy`, `uninitialized_fill`, and `uninitialized_fill_n`.
+
 ### No-throw guarantee
 
 The *no-throw* guarantee is the strongest of all, and it says that an operation is guaranteed not to throw an exception: it always completes successfully. This guarantee is necessary for most destructors, and indeed the destructors of C++ standard library components are all guaranteed not to throw exceptions. The *no-throw* guarantee turns out to be important for other reasons, as we shall see.[5](https://www.boost.org/community/exception_safety.html#footnote5)
@@ -361,13 +363,19 @@ What does our code actually require of the library? We need to examine the lines
 > 首先，erase失败了，在这种情况下没有其他可行的方法来产生必要的结果。
 > 第二点，也是更普遍的一点，由于其类型参数的可变性，泛型组件很少能确保任何替代方案成功。"
 >
-> 作者想要表达的意思是: 
+> 作者想要表达的意思是: 给`set_impl.erase(i);` 添加 `try`/`catch` block 其实是于事无补的，因为如果`set_impl.erase(i);` 抛出exception，即使添加 `try`/`catch` block ，也无法保证`SearchableStack<T>::push`实现strong safety、维护class invariant，因为 "there are no viable alternative ways to produce the necessary result" 。
 
 
 
 4、Line 11: for the same reasons, we also depend on being able to pass the `i` to the `erase` function: we need the *no-throw* guarantee from the copy constructor of `set<T>::iterator`.
 
+> NOTE: 
+>
+> 1、关于 "*no-throw* guarantee from the copy constructor of `set<T>::iterator`"，在`STL-exception-safety`章节中有着专门的总结
+
 I learned a great deal by approaching the question this way during standardization. First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11). Also, I took advantage of all of the natural level of safety to implement this simple example. Finally, the analysis revealed a requirement on iterators which I had previously overlooked when operations were considered on their own. The conclusion was that we should provide as much of the natural level of safety as possible. Faster but less-safe implementations could always be provided as extensions to the standard components. [10](https://www.boost.org/community/exception_safety.html#footnote10)
+
+> 10 The prevalent philosophy in the design of STL was that functionality that wasn't essential to all uses should be left out in favor of efficiency, as long as that functionality could be obtained when needed by adapting the base components. This departs from that philosophy, but it would be difficult or impossible to obtain even the *basic* guarantee by adapting a base component that doesn't already have it.
 
 ## 7 Automated testing for exception-safety
 
