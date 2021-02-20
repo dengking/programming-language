@@ -1,5 +1,3 @@
-
-
 # Destructor execution
 
 当object的lifetime终结的时候，destructor会被执行，那何时终结呢？参见: 
@@ -14,7 +12,7 @@ process可能normally exit也可能abnormally exit，当它exit的时候，destr
 
 ### 通过block scope来触发destructor被执行
 
-有的时候，我们需要在`main`函数退出时，destructor被执行，可以采取下面的措施：
+有的时候，我们需要在`main`函数退出时，destructor未被执行，可以采取下面的措施：
 
 - 对于automatic variable，可以将它声明在`{}`来确保它的destructor被执行
 - 对于heap variable，可以通过RAII+smart pointer+`{}`来确保它的destructor被执行
