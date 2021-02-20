@@ -34,25 +34,43 @@ expression、statement
 
 构建起一个完整的编译流程，对于理解C++非常重要。
 
-draft:
+| 步骤                        | 子步骤                                                | 章节          |
+| --------------------------- | ----------------------------------------------------- | ------------- |
+| Name lookup                 |                                                       | `Name-lookup` |
+|                             | [ADL](https://en.cppreference.com/w/cpp/language/adl) |               |
+| Template argument deduction |                                                       |               |
+|                             |                                                       |               |
+| Overload resolution         |                                                       |               |
+|                             |                                                       |               |
+| Access checking             |                                                       |               |
 
-需要补充C++ compile流程，下面是素材:
+说明:
 
-素材1: 
+1、上述步骤，从上到下依次执行
 
-https://stackoverflow.com/questions/55205874/deletion-of-copy-ctor-copy-assignment-public-private-or-protected:
+2、上述table的绘制，参考了如下文章:
 
-Name lookup and overload resolution happen before access checking. 
+a、stackoverflow [Deletion of copy-ctor & copy-assignment - public, private or protected?](https://stackoverflow.com/questions/55205874/deletion-of-copy-ctor-copy-assignment-public-private-or-protected) # [A](https://stackoverflow.com/a/55206034)
 
-素材2:
+> Name lookup and overload resolution happen before access checking. 
 
-https://herbsutter.com/gotw/_100/
+由此可知: Name lookup > Access checking。
 
 
 
-#### Name lookup
+b、cppreference [Function template](https://en.cppreference.com/w/cpp/language/function_template)
 
-参见 `Language-reference\Basic-concept\Organization\Name-lookup` 章节。
+> Template argument deduction takes place after the function template [name lookup](https://en.cppreference.com/w/cpp/language/lookup) (which may involve [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)) and before [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution).
+
+由此可知: Name lookup( [ADL](https://en.cppreference.com/w/cpp/language/adl)) > Template argument deduction  > overload resolution。
+
+
+
+c、[GotW #100: Compilation Firewalls (Difficulty: 6/10)](https://herbsutter.com/gotw/_100/)
+
+> C++ took the deliberate design decision to perform overload resolution before accessibility checking for safety reasons. For example, it was felt that changing the accessibility of a function from p*rivate* to *public* shouldn’t change the meaning of legal calling code.
+
+它解释了为什么 Name lookup > Access checking。
 
 
 
