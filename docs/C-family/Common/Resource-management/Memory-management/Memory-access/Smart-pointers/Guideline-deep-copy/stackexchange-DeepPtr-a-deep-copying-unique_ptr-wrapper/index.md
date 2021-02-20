@@ -189,9 +189,9 @@ I though you said on move you wanted to move the object not copy it.
     }
 ```
 
-This does a copy on move construction. Also you should mark you move constructor as `noexcept`. This will give you several advantages when using the object with STL containers (the STL will default to copy even if move is available if the move is not not marked noexcept. This is to provide the strong exception guarantee).
+This does a copy on move construction. Also you should mark you move constructor as `noexcept`. This will give you several advantages when using the object with STL containers (the STL will default to copy even if move is available if the move is not not marked `noexcept`. This is to provide the strong exception guarantee).
 
-Note: You should only mark it as noexcept if it will not throw. So you should not do that if you are going to copy only; if you change this to do an actual move then add `noexcept`.
+Note: You should only mark it as `noexcept` if it will not throw. So you should not do that if you are going to copy only; if you change this to do an actual move then add `noexcept`.
 
 > NOTE: 上面这两段话的核心观点是:
 >
