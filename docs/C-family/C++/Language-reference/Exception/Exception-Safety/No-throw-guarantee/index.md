@@ -127,21 +127,35 @@ So be careful: some functions can be made non-throwing, but others should be all
 
 在下面文章中涉及到了这个内容:
 
-1、stackoverflow [How can an implementation guarantee that copy constructor of an iterator is no throw?](https://stackoverflow.com/questions/13428851/how-can-an-implementation-guarantee-that-copy-constructor-of-an-iterator-is-no-t) # [A](https://stackoverflow.com/a/13430036)
+a、stackoverflow [How can an implementation guarantee that copy constructor of an iterator is no throw?](https://stackoverflow.com/questions/13428851/how-can-an-implementation-guarantee-that-copy-constructor-of-an-iterator-is-no-t) # [A](https://stackoverflow.com/a/13430036)
 
 > none of them have to use any dynamically allocated memory
 
 一般，如果不dynamically allocated memory，基本上能够保证no throw guarantee。
 
-2、一般，释放resource是能够保证no throw guarantee的。
+b、stackoverflow [confusion about non-throw functions](https://stackoverflow.com/questions/11841963/confusion-about-non-throw-functions) # [A](https://stackoverflow.com/a/11842328)
 
+2、一般，释放resource的operation是能够保证no throw guarantee的。
 
+## `std::nothrow` and `noexcpet`
 
-
+`std::nothrow`是一个constant；`noexcpet`是一个key word；
 
 ## 哪些需要no throw guarantee/`noexcept`?
 
-CppCoreGuidelines [C.37: Make destructors `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-dtor-noexcept)
+本节对C++中需要提供no throw guarantee的进行总结。
+
+### Destructor no throw
+
+参见 `C++\Language-reference\Classes\Special-member-function\Destructor\Destructor-and-exception` 章节。
+
+
+
+### Swap no throw
+
+参见 `Non-throwing-swap` 章节。
+
+
 
 CppCoreGuidelines [C.44: Prefer default constructors to be simple and non-throwing](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c44-prefer-default-constructors-to-be-simple-and-non-throwing)
 
@@ -149,7 +163,9 @@ CppCoreGuidelines [C.66: Make move operations `noexcept`](https://github.com/iso
 
 CppCoreGuidelines [C.83: For value-like types, consider providing a `noexcept` swap function](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-swap)
 
-CppCoreGuidelines [C.85: Make `swap` `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-swap-noexcept)
+
+
+
 
 CppCoreGuidelines [C.86: Make `==` symmetric with respect of operand types and `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-eq)
 
@@ -160,3 +176,43 @@ CppCoreGuidelines [C.89: Make a `hash` `noexcept`](https://github.com/isocpp/Cpp
 CppCoreGuidelines [E.16: Destructors, deallocation, and `swap` must never fail](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#e16-destructors-deallocation-and-swap-must-never-fail)
 
 Deallocation functions, including `operator delete`, must be `noexcept`. `swap` functions must be `noexcept`. Most destructors are implicitly `noexcept` by default. Also, [make move operations `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-move-noexcept).
+
+
+
+
+
+### why std::swap non-throwing
+
+
+
+http://cpptruths.blogspot.de/2011/09/tale-of-noexcept-swap-for-user-defined.html
+
+
+
+### move and swap and no-throw
+
+http://www.gotw.ca/gotw/059.htm
+
+http://cpptruths.blogspot.com/2011/09/tale-of-noexcept-swap-for-user-defined.html
+
+https://zhehao.me/effectives/ecpp/it25/
+
+https://blog.ycshao.com/2017/10/22/effective-c-item-25-consider-support-for-a-non-throwing-swap/
+
+https://rules.sonarsource.com/cpp/tag/cpp11/RSPEC-5018
+
+
+
+https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#c66-make-move-operations-noexcept
+
+https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#c85-make-swap-noexcept
+
+https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#Rc-swap-fail
+
+
+
+https://stackoverflow.com/questions/36010810/implementing-the-swap-in-the-copy-and-swap-idiom
+
+
+
+https://stackoverflow.com/questions/27665995/on-noexcept-arguments
