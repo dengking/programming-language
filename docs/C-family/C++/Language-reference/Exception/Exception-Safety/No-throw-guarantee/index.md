@@ -1,5 +1,7 @@
 # No throw guarantee
 
+
+
 ## Why need no throw guarantee？
 
 首先需要搞清楚为什么需要non throw guarantee。

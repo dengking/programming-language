@@ -389,16 +389,51 @@ I learned a great deal by approaching the question this way during standardizati
 > 2、"First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11)"
 >
 > 这段话其实揭示了一个规律: 高层是需要底层的exception safety来实现exception safety的，在"Implementation of strong guarantee may depend on stronger guarantee"中对此进行了总结，这是一个非常重要的规律
+>
+> 3、"Faster but less-safe implementations could always be provided as extensions to the standard components"
+>
+> 这段话，体现了"performance and exception safety tradeoff"
 
-> 10 The prevalent philosophy in the design of STL was that functionality that wasn't essential to all uses should be left out in favor of efficiency, as long as that functionality could be obtained when needed by adapting the base components. This departs from that philosophy, but it would be difficult or impossible to obtain even the *basic* guarantee by adapting a base component that doesn't already have it.
+> 10 The prevalent(流行的) philosophy in the design of STL was that functionality that wasn't essential to all uses should be left out in favor of efficiency, as long as that functionality could be obtained when needed by adapting the base components. This departs from that philosophy, but it would be difficult or impossible to obtain even the *basic* guarantee by adapting a base component that doesn't already have it.
 
 ## 7 Automated testing for exception-safety
 
 As part of the standardization process, I produced an exception-safe reference implementation of the STL. Error-handling code is seldom rigorously tested in real life, in part because it is difficult to cause error conditions to occur. It is very common to see error-handling code which crashes the first time it is executed ...in a shipping product! To bolster confidence that the implementation actually worked as advertised, I designed an automated test suite, based on an exhaustive technique due to my colleague Matt Arnold.
 
-The test program started with the basics: reinforcement and instrumentation, especially of the global operators `new` and `delete`.[11](https://www.boost.org/community/exception_safety.html#footnote11)Instances of the components (containers and algorithms) were created, with type parameters chosen to reveal as many potential problems as possible. For example, all type parameters were given a pointer to heap-allocated memory, so that leaking a contained object would be detected as a memory leak.
+> NOTE: 翻译如下:
+>
+> "作为标准化过程的一部分，我生成了STL的异常安全参考实现。
+> 在现实生活中，很少对错误处理代码进行严格的测试，部分原因是它很难导致错误条件的发生。
+> 错误处理代码在第一次执行时崩溃是很常见的……
+> 在一个运输产品中!
+> 为了增强对实现确实像宣传的那样工作的信心，我设计了一个自动化测试套件，基于我的同事Matt Arnold提出的详尽的技术。"
+>
+> 1、这段话，作者所阐述的意思是: 在软件开发阶段，由于error condition是难以模拟的，因此"Error-handling code is seldom rigorously tested in real life"，这就造成了"It is very common to see error-handling code which crashes the first time it is executed ...in a shipping product!"。为了解决这个问题，作者提出了一个解决方案: "an automated test suite"。
+
+The test program started with the basics: reinforcement(强化) and instrumentation(仪器化、仪表化), especially of the global operators `new` and `delete`.[11](https://www.boost.org/community/exception_safety.html#footnote11)Instances of the components (containers and algorithms) were created, with type parameters chosen to reveal as many potential problems as possible. For example, all type parameters were given a pointer to heap-allocated memory, so that leaking a contained object would be detected as a memory leak.
+
+> NOTE: 
+>
+> 1、上面这段提及的测试思路是非常值得学习的: 
+>
+> a、它的整体思路是: 将不易观察的**测试对象**转换为另外一种易于观察的**测试对象**来进行测试，具体而言: 想要测试components是否leak，将它转换为观察memory leak来进行测试，因为memory leak是容易观察的，这就是最后一句话: "so that leaking a contained object would be detected as a memory leak"的含义。 
+>
+> b、实现上，它需要:
+>
+> - overload global operators `new` and `delete`
+> - all type parameters were given a pointer to heap-allocated memory
+>
+> 2、这种测试方案是"less intrusive"，参见本节最后一段
 
 Finally, a scheme was designed that could cause an operation to throw an exception at each possible point of failure. At the beginning of every client-supplied operation which is allowed to throw an exception, a call to `ThisCanThrow` was added. A call to `ThisCanThrow` also had to be added everywhere that the generic operation being tested might throw an exception, for example in the global operator `new`, for which an instrumented replacement was supplied.
+
+> NOTE: 翻译如下:
+>
+> "最后，设计了一个方案，它可以导致一个操作在每个可能的失败点抛出异常。
+> 在每个允许抛出异常的客户端提供的操作开始时，都会添加对' ThisCanThrow '的调用。
+> 还必须在被测试的泛型操作可能抛出异常的地方添加对' ThisCanThrow '的调用，例如在全局操作符' new '中，为其提供了一个工具化的替换。"
+>
+> 简而言之: 在可能抛出exception的地方，都添加对`ThisCanThrow()`的调用。
 
 ```c++
 // Use this as a type parameter, e.g. vector<TestClass> 
@@ -417,7 +452,18 @@ struct TestClass
 };
 ```
 
-`ThisCanThrow` simply decrements a “throw counter” and, if it has reached zero, throws an exception. Each test takes a form which begins the counter at successively higher values in an outer loop and repeatedly attempts to complete the operation being tested. The result is that the operation throws an exception at each successive step along its execution path that can possibly fail. For example, here is a simplified version of the function used to test the *strong* guarantee: [12](https://www.boost.org/community/exception_safety.html#footnote12)
+`ThisCanThrow` simply decrements a “throw counter” and, if it has reached zero, throws an exception. Each test takes a form which begins the counter at successively(连续的、先后的) higher values in an outer loop and repeatedly attempts to complete the operation being tested. The result is that the operation throws an exception at each successive step along its execution path that can possibly fail. For example, here is a simplified version of the function used to test the *strong* guarantee: [12](https://www.boost.org/community/exception_safety.html#footnote12)
+
+> NOTE: 翻译如下:
+>
+> "' ThisCanThrow '只是将" throw计数器"减1，如果计数器达到0，则抛出异常。
+> 每个测试都采用一种形式，该形式以外部循环中连续较高的值开始计数器，并反复尝试完成被测试的操作。
+> 结果是，该操作在其执行路径上的每一个后续步骤都抛出一个可能失败的异常。
+> 例如，下面是用于测试强保证的函数的简化版本"
+>
+> 
+
+> 12 Note that this technique requires that the operation being tested be exception-neutral. If the operation ever tries to recover from an exception and proceed, the throw counter will be negative, and subsequent operations that might fail will not be tested for exception-safety.
 
 ```c++
 extern int gThrowCounter; // The throw counter
@@ -454,7 +500,13 @@ void StrongCheck(const Value& v, const Operation& op)
 
 Notably, this kind of testing is much easier and less intrusive with a generic component than with non-generics, because testing-specific type parameters can be used without modifying the source code of the component being tested. Also, generic functions like `StrongCheck` above were instrumental in performing the tests on a wide range of values and operations.
 
+> NOTE: 
+>
+> 1、并没有读懂上述code
+
 ## 8 Further Reading
+
+> NOTE: 这一段没有阅读
 
 To my knowledge, there are currently only two descriptions of STL exception-safety available. The original specification [[2\]](https://www.boost.org/community/exception_safety.html#reference2) for the reference exception-safe implementation of the STL is an informal specification, simple and self-explanatory (also verbose), and uses the *basic-* and *strong-*guarantee distinctions outlined in this article. It explicitly forbids leaks, and differs substantively from the final C++ standard in the guarantees it makes, though they are largely identical. I hope to produce an updated version of this document soon.
 
