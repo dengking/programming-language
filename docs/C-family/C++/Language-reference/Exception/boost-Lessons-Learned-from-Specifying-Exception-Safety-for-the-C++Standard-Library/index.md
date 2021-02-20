@@ -388,7 +388,7 @@ I learned a great deal by approaching the question this way during standardizati
 >
 > 2、"First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11)"
 >
-> 这段话其实揭示了一个规律: 高层是需要底层的exception safety来实现exception safety的，在"Implementation of strong guarantee may depend on stronger guarantee"中对此进行了总结
+> 这段话其实揭示了一个规律: 高层是需要底层的exception safety来实现exception safety的，在"Implementation of strong guarantee may depend on stronger guarantee"中对此进行了总结，这是一个非常重要的规律
 
 > 10 The prevalent philosophy in the design of STL was that functionality that wasn't essential to all uses should be left out in favor of efficiency, as long as that functionality could be obtained when needed by adapting the base components. This departs from that philosophy, but it would be difficult or impossible to obtain even the *basic* guarantee by adapting a base component that doesn't already have it.
 
