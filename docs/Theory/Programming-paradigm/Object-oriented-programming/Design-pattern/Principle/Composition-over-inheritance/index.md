@@ -57,7 +57,7 @@ wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wik
 
 建议首先阅读下面这些能够体现"Composition over inheritance"的具体案例，然后再来阅读下面的分析，因为这些具体的案例是非常详实的。
 
-### Behavior pattern
+### Strategy pattern
 
 参见 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Behavioral-pattern\Strategy-pattern` 章节
 
