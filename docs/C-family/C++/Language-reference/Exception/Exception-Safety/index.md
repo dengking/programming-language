@@ -2,6 +2,8 @@
 
 本章讨论Exception safety，会对各种等级的exception safety分章节进行介绍，同时还会讨论如何实现各种等级的exception safety。
 
+
+
 ## 为什么我们需要考虑exception safety?
 
 1、resource management
@@ -13,6 +15,8 @@
 关于这个观点，在下面文章中，有介绍:
 
 a、boost [Lessons Learned from Specifying Exception-Safety for the C++ Standard Library](https://www.boost.org/community/exception_safety.html)
+
+
 
 ## Guide
 
