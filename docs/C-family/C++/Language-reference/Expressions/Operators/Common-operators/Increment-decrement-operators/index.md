@@ -1,4 +1,8 @@
-# Increment/decrement operators
+# Increment-decrement operators
+
+
+
+## cppreference [Increment/decrement operators](Increment/decrement operators)
 
 
 
@@ -9,7 +13,6 @@ Increment/decrement operators are unary operators that increment/decrement the v
 They can have **postfix** form:
 
 ```C
-
 expr ++		
 expr --		
 
@@ -18,7 +21,6 @@ expr --
 As well as the **prefix** form:
 
 ```
-
 ++ expr		
 -- expr		
 
@@ -71,27 +73,27 @@ Unlike `C++` (and some implementations of C), the increment/decrement expression
 
 
 
-## [C: What is the difference between ++i and i++?](https://stackoverflow.com/questions/24853/c-what-is-the-difference-between-i-and-i)
+## stackoverflow [C: What is the difference between ++i and i++?](https://stackoverflow.com/questions/24853/c-what-is-the-difference-between-i-and-i)
 
 
 
-## [A](https://stackoverflow.com/a/24858)
+### [A](https://stackoverflow.com/a/24858)
 
-- `++i` will increment the value of `i`, and then return the incremented value.
+1、`++i` will increment the value of `i`, and then return the incremented value.
 
-  ```c
-   i = 1;
-   j = ++i;
-   (i is 2, j is 2)
-  ```
+```c
+ i = 1;
+ j = ++i;
+ (i is 2, j is 2)
+```
 
-- `i++` will increment the value of `i`, but return the original value that `i` held before being incremented.
+2、`i++` will increment the value of `i`, but return the original value that `i` held before being incremented.
 
-  ```c
-   i = 1;
-   j = i++;
-   (i is 2, j is 1)
-  ```
+```c
+ i = 1;
+ j = i++;
+ (i is 2, j is 1)
+```
 
 For a `for` loop, either works. `++i` seems more common, perhaps because that is what is used in [K&R](https://en.wikipedia.org/wiki/The_C_Programming_Language).
 
@@ -105,8 +107,9 @@ As *On Freund* notes, it's different for a C++ object, since `operator++()` is a
 
 
 
-## [A](https://stackoverflow.com/a/24874)
+### [A](https://stackoverflow.com/a/24874)
 
 The reason `++i` *can* be slightly faster than `i++` is that `i++` can require a local copy of the value of i before it gets incremented, while `++i` never does. In some cases, some compilers will optimize it away if possible... but it's not always possible, and not all compilers do this.
 
 I try not to rely too much on compilers optimizations, so I'd follow Ryan Fox's advice: when I can use both, I use `++i`.
+
