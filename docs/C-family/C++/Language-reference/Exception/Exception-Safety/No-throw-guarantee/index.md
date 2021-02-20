@@ -121,6 +121,12 @@ So be careful: some functions can be made non-throwing, but others should be all
 
 一般，如果不dynamically allocated memory，基本上能够保证no throw guarantee。
 
+2、一般，释放resource是能够保证no throw guarantee的。
+
+
+
+
+
 ## 哪些需要no throw guarantee/`noexcept`?
 
 CppCoreGuidelines [C.37: Make destructors `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-dtor-noexcept)
