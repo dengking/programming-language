@@ -8,7 +8,7 @@ nav:
     - Utility-library: Utility-library
     # 标准库的实现
     - Implementation: Implementation
-    - Expanding-std: Expanding-std.md
+    - Expanding-std: Expanding-std
     - Extensions: Extensions
     
     
