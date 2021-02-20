@@ -8,7 +8,15 @@
 
 ## How to implement strong exception safety?
 
-1、实现"commit-or-rollback" semantics、transaction，那如何实现呢？下面是我的一些总结:
+1、实现"commit-or-rollback" semantics、transaction
+
+2、保证resource的安全，不会leak
+
+> NOTE:
+>
+> ? RAII，是否是basic exception safety？
+
+那如何实现呢？下面是我的一些总结:
 
 a、使用explicit try-catch 
 
@@ -36,3 +44,15 @@ void SearchableStack<T>::push(const T& t)         // 2
 b、使用Scope-Guard idiom
 
 这种方法不需要使用explicit try-catch ，参见 `Scope-Guard` 章节
+
+
+
+c、RAII
+
+这是C++中非常重要的一种idiom，参见 `RAII` 章节
+
+
+
+d、copy-and-swap
+
+它是一种广泛采用的实现strong exception safety的idiom，参见 `Copy-and-swap` 章节
