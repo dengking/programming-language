@@ -2,6 +2,6 @@ nav:
     - Introduction: index.md
     - drdobbs-Generic-Change-the-Way-You-Write-Exception-Safe-Code: drdobbs-Generic-Change-the-Way-You-Write-Exception-Safe-Code
     - Systematic-Error-Handling-in-C++: Systematic-Error-Handling-in-C++
-    - Declarative-Control-Flow: Declarative-Control-Flow
+    - CppCon2015-Declarative-Control-Flow: CppCon2015-Declarative-Control-Flow
     - Implementation: Implementation    
     - Transaction: Transaction
