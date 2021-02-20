@@ -107,7 +107,7 @@ So be careful: some functions can be made non-throwing, but others should be all
 
 ### Implementation of strong guarantee may depend on stronger guarantee
 
-参见 `Exception-Safety # Implementation of strong guarantee may depend on stronger guarantee` 段: 
+参见 `Exception-Safety\Level-of-exception-safety # Implementation of strong guarantee may depend on stronger guarantee` 段: 
 
 > 它是可靠的、它是最最强的guarantee、可以依靠它来实现strong exception safety
 
