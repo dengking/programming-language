@@ -299,6 +299,10 @@ By considering a particular implementation, we can hope to discern(识别、辨�
 
 To determine exactly how much to demand of the standard components, I looked at a typical real-world scenario. The chosen test case was a “composite container.” Such a container, built of two or more standard container components, is not only commonly needed, but serves as a simple representative case for maintaining invariants in larger systems:
 
+> NOTE: 
+>
+> 1、将下面的例子作为维护class invariant的典型例子
+
 ```c++
 // SearchableStack - A stack which can be efficiently searched 
 // for any value. 
@@ -316,7 +320,13 @@ class SearchableStack
 }; 
 ```
 
-The idea is that the list acts as a stack of set iterators: every element goes into the set first, and the resulting position is pushed onto the list. The invariant is straightforward: the set and the list should always have the same number of elements, and every element of the set should be referenced by an element of the list. The following implementation of the push function is designed to give the *strong* guarantee within the natural levels of safety provided by set and list:
+### Invariant 
+
+The idea is that the list acts as a stack of set iterators: every element goes into the set first, and the resulting position is pushed onto the list. The invariant is straightforward: the set and the list should always have the same number of elements, and every element of the set should be referenced by an element of the list. The following implementation of the push function is designed to give the *strong* guarantee within the natural levels of safety provided by `set` and `list`:
+
+> NOTE: 
+>
+> 1、最后一段话的意思是: 基于 `set` 和 `list` 的 "natural levels of safety" 来实现"*strong* guarantee"
 
 ```c++
 template <class T>                                // 1 
@@ -337,10 +347,25 @@ void SearchableStack<T>::push(const T& t)         // 2
 
 What does our code actually require of the library? We need to examine the lines where non-const operations occur:
 
-- Line 4: if the insertion fails but `set_impl` is modified in the process, our invariant is violated. We need to be able to rely on the *strong* guarantee from `set<T>::insert`.
-- Line 7: likewise, if `push_back` fails, but `list_impl` is modified in the process, our invariant is violated, so we need to be able to rely on the *strong* guarantee from list<T>::insert.
-- Line 11: here we are “rolling back” the insertion on line 4. If this operation should fail, we will be unable to restore our invariant. We absolutely depend on the *no-throw* guarantee from `set<T>::erase`.[9](https://www.boost.org/community/exception_safety.html#footnote9)
-- Line 11: for the same reasons, we also depend on being able to pass the `i` to the `erase` function: we need the *no-throw* guarantee from the copy constructor of `set<T>::iterator`.
+1、Line 4: if the insertion fails but `set_impl` is modified in the process, our invariant is violated. We need to be able to rely on the *strong* guarantee from `set<T>::insert`.
+
+2、Line 7: likewise, if `push_back` fails, but `list_impl` is modified in the process, our invariant is violated, so we need to be able to rely on the *strong* guarantee from `list<T>::insert`.
+
+3、Line 11: here we are “rolling back” the insertion on line 4. If this operation should fail, we will be unable to restore our invariant. We absolutely depend on the *no-throw* guarantee from `set<T>::erase`.[9](https://www.boost.org/community/exception_safety.html#footnote9)
+
+> 9 One might be tempted to surround the `erase` operation with a `try`/`catch` block to reduce the requirements on `set<T>` and the problems that arise in case of an exception, but in the end that just begs the question. First, `erase` just failed and in this case there are no viable alternative ways to produce the necessary result. Second and more generally, because of the variability of its type parameters a generic component can seldom be assured that any alternatives will succeed.
+>
+> 翻译如下:
+>
+> "人们可能会试图用' try ' / ' catch '块来包围erase操作，以减少对' `set<T>` '的需求和出现异常时出现的问题，但最后这只是回避了问题。
+> 首先，erase失败了，在这种情况下没有其他可行的方法来产生必要的结果。
+> 第二点，也是更普遍的一点，由于其类型参数的可变性，泛型组件很少能确保任何替代方案成功。"
+>
+> 作者想要表达的意思是: 
+
+
+
+4、Line 11: for the same reasons, we also depend on being able to pass the `i` to the `erase` function: we need the *no-throw* guarantee from the copy constructor of `set<T>::iterator`.
 
 I learned a great deal by approaching the question this way during standardization. First, the guarantee specified for the composite container actually depends on stronger guarantees from its components (the *no-throw* guarantees in line 11). Also, I took advantage of all of the natural level of safety to implement this simple example. Finally, the analysis revealed a requirement on iterators which I had previously overlooked when operations were considered on their own. The conclusion was that we should provide as much of the natural level of safety as possible. Faster but less-safe implementations could always be provided as extensions to the standard components. [10](https://www.boost.org/community/exception_safety.html#footnote10)
 
