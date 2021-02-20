@@ -100,6 +100,10 @@ namespace std {
 }
 ```
 
+> NOTE: 
+>
+> 1、需要注意的是，上面是full specialization
+
 ### Common usage styles of `swap`
 
 Adding it in two places takes care of two different common usage styles of swap :
@@ -189,7 +193,11 @@ namespace std
 };
 ```
 
->  NOTE: 上面代码中的`throw ()`其实是`noexcept`含义
+>  NOTE: 
+>
+>  1、上面代码中的`throw ()`其实是`noexcept`含义
+>
+>  2、需要注意的是，上面是full specialization
 
 Therefore, it is a good idea to define a specialization of `std::swap` for the types that are amenable to an exception safe, efficient swap implementation. The `C++` standard does not currently allow us to add new templates to the `std` namespace, but it does allow us to specialize templates (e.g. `std::swap`) from that namespace and add them back in it.
 
@@ -199,15 +207,51 @@ Therefore, it is a good idea to define a specialization of `std::swap` for the t
 
 ## Caveats
 
-Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a subtle issue. As per the C++98 standard, only the **full specialization** of `std::swap` is allowed to be defined inside `std` namespace for the **user-defined types**. **Partial specializations** or **function overloading** is not allowed by the language. Trying to achieve the similar effect for template classes (e.g., `Matrix<T>`) results into overloading of `std::swap` in `std` namepspace, which is technically **undefined behavior**. This is not necessarily the ideal state of affairs as indicated by some people in a spectacularly long discussion thread on comp.lang.c++.moderated newsgroup.[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-1) There are two possible solutions, both imperfect, to this issue:
+> NOTE:  
+>
+> 1、本段所讨论的是将user defined type的`swap`函数添加到`std`中的问题，这是extending `std`，这在`C++\Library\Standard-library\Extending-std`中进行了讨论；
+>
+> 2、对于non-throwing swap idiom，推荐使用[Swap values idiom](https://cpppatterns.com/patterns/swap-values.html)，即下面的solution 1，关于此，参见`C++\Idiom\Templates-and-generic-programming\Swappable`，这种方式的另外一个优势是: 更加简单，可以写更少的代码
 
-1、Standard-compliant solution. Leveraging on Koenig lookup, define an overloaded swap function template in the same namespace as that of the class being swapped. Not all compilers may support this correctly, but this solution is compliant to the standard.[[2\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-2)
+Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a subtle issue. As per the C++98 standard, only the **full specialization** of `std::swap` is allowed to be defined inside `std` namespace for the **user-defined types**. **Partial specializations** or **function overloading** is not allowed by the language. Trying to achieve the similar effect for template classes (e.g., `Matrix<T>`) results into **overloading** of `std::swap` in `std` namepspace, which is technically **undefined behavior**. This is not necessarily the ideal state of affairs as indicated by some people in a spectacularly(非常地) long discussion thread on comp.lang.c++.moderated newsgroup.[[1\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-1) There are two possible solutions, both imperfect, to this issue:
+
+> NOTE: 翻译如下:
+>
+> "对模板类使用非抛出swap习惯用法(例如，' `Matrix<T>` ')可能是一个微妙的问题。
+> 根据c++ 98标准，只有' std::swap '的完全特化才允许在用户定义类型的' std '命名空间中定义。
+> 语言不允许部分专门化或函数重载。
+> 试图在模板类(例如，' Matrix<T> ')中实现类似的效果会导致' std '命名空间中的' std::swap '的重载，这在技术上是未定义的行为。
+> 这并不一定是像一些人在“compl .lang.c++”的冗长讨论中指出的那样理想的状态。
+> 主持的新闻组。
+> 对于这个问题，有两种可能的解决方案，但都不完美:"
+>
+> 1、上面这段话让我想到了: full specialization、partial specialization、overload之间的关联
+>
+> 2、"Trying to achieve the similar effect for template classes (e.g., `Matrix<T>`) results into **overloading** of `std::swap` in `std` namepspace" 要如何理解？
+>
+> `Matrix<T>`是一个template classe，因此，它的写法如下: 
+>
+> ```C++
+> template<typename T>
+> void swap(Matrix<T> &l, Matrix<T> &r)
+> {
+> }
+> 
+> ```
+>
+> 
+>
+> 
+
+1、Standard-compliant solution. Leveraging on **Koenig lookup**(**ADL**), define an overloaded swap function template in the same namespace as that of the class being swapped. Not all compilers may support this correctly, but this solution is compliant to the standard.[[2\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-2)
+
+> NOTE: 目前主流的compiler都是支持ADL的
 
 2、Fingers-crossed solution. Partially specialize `std::swap` and ignore the fact that this is technically undefined behavior, hoping that nothing will happen and wait for a fix in the next language standard.
 
 > NOTE: 这种做法相当于什么都没有做
 
-> NOTE:  Caveats所讨论的是将user defined type的`swap`函数添加到`std`中的问题，这是extending namespace `std`，这在`C++\Library\Standard-library\Extending-std`中进行了讨论；对于non-throwing swap idiom，推荐使用[Swap values idiom](https://cpppatterns.com/patterns/swap-values.html)，即上述solution 1，关于此，参见`C++\Idiom\Templates-and-generic-programming\Swappable`。
+
 
 
 
@@ -369,3 +413,8 @@ world hello
 
 
 
+
+
+
+
+Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a subtle issue. As per the C++98 standard, only the **full specialization** of `std::swap` is allowed to be defined inside `std` namespace for the user-defined types. Partial specializations or function overloading is not allowed by the language. Trying to achieve the similar effect for template classes (e.g., `Matrix<T>`) results into overloading of `std::swap` in `std` namepspace, which is technically undefined behavior. This is not necessarily the ideal state of affairs as indicated by some people in a spectacularly long discussion thread on comp.lang.c++.moderated newsgroup. There are two possible solutions, both imperfect, to this issue:
