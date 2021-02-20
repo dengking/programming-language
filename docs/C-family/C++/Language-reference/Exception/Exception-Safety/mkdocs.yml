@@ -1,2 +1,4 @@
 nav:
     - Exception-safety: Exception-safety.md
+    - wikipedia-Exception-safety: wikipedia-Exception-safety
+    - STL-exception-safety: STL-exception-safety
