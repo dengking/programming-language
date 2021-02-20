@@ -2,7 +2,7 @@
 
 对于polymorphic type（参见`C++\Language-reference\Basic-concept\Type-system\Type-system\Type-system.md#Polymorphic type`），目前的实现普遍化会为其提供RTTI。
 
-## 维基百科[Run-time type information](https://en.wikipedia.org/wiki/Run-time_type_information)
+## wikipedia [Run-time type information](https://en.wikipedia.org/wiki/Run-time_type_information)
 
 
 

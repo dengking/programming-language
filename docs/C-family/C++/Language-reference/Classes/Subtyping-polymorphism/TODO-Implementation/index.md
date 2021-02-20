@@ -72,3 +72,8 @@ Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-
 
 为什么reference semantic才能够实现virtual：
 value semantic时，它的concrete type是已知的，compiler能够直接选择implementation
+
+## TODO
+
+pabloariasal [Understandig Virtual Tables in C++](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
+

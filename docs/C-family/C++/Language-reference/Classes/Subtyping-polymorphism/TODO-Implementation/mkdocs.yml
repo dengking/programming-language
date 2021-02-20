@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - wikipedia-Virtual-method-table: wikipedia-Virtual-method-table
-    - TODO-shaharmike-Cpp-vtable: TODO-shaharmike-Cpp-vtable
+    - shaharmike-Cpp-vtable: shaharmike-Cpp-vtable
+    - RTTI: RTTI

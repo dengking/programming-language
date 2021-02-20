@@ -1,1 +1,0 @@
-pabloariasal [Understandig Virtual Tables in C++](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
