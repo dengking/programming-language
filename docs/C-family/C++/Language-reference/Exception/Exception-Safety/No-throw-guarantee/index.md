@@ -1,8 +1,8 @@
 # No throw guarantee
 
-## Why need non throw function？
+## Why need no throw guarantee？
 
-首先需要搞清楚为什么需要non throw function。
+首先需要搞清楚为什么需要non throw guarantee。
 
 ### stackoverflow [confusion about non-throw functions](https://stackoverflow.com/questions/11841963/confusion-about-non-throw-functions)
 
@@ -45,7 +45,7 @@ On the other hand, other exception specifications are useless and have been just
 
 Now, if you use a `noexcept` specification in a function that might actually throw, all bets are off. Even if your compiler does not terminate the program when an exception leaves the function (VS does not do it for runtime efficiency reasons, for instance), your code might not do what you thought because of optimisations. For example:
 
-```
+```c++
 void f() noexcept
 {
   a();
@@ -69,7 +69,7 @@ EDIT: Now for the second part of your question: how to make a function non-throw
 
 First you need to ask yourself whether your function should really be non-throwing. For instance:
 
-```
+```c++
 class C
 {
   C* CreateInstance()
@@ -81,7 +81,7 @@ class C
 
 Since operator `new` can throw a `std::bad_alloc`, `CreateInstance()` can throw. You could try to avoid it with a try-catch block, handling or swallowing any exceptions that may be thrown inside the `try` block, but would that really be sensible? For instance:
 
-```
+```c++
 C* CreateInstance()
 {
   try
@@ -110,6 +110,8 @@ So be careful: some functions can be made non-throwing, but others should be all
 参见 `Exception-Safety\Level-of-exception-safety # Implementation of strong guarantee may depend on stronger guarantee` 段: 
 
 > 它是可靠的、它是最最强的guarantee、可以依靠它来实现strong exception safety
+
+
 
 ## How to implement no throw guarantee?
 
