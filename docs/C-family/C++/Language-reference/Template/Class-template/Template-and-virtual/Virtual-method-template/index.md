@@ -1,5 +1,3 @@
-
-
 # Virtual method template 
 
 前面已经知道virtual method template是不可行的，那是否有方法来实现类似的效果呢？
@@ -16,7 +14,7 @@
 
 下面是我目前想到的解决方案：
 
-### 使用template class，将这些模板参数放到class级别
+### 1、使用template class，将这些模板参数放到class级别
 
 "template class with non-template virtual method"是可行的，但是这种方案的不能够解决所有的问题，比如类似如下的形式:
 
@@ -30,7 +28,7 @@ void Test(T t)
 
 
 
-### 使用`void*` type erasure
+### 2、使用`void*` type erasure
 
 1、这种方案是使用C generic programming的思路，它其实对应的是type erasure，但是感觉它不是C++的做法。
 
@@ -38,9 +36,9 @@ void Test(T t)
 
 > Type Erasure as the Glue between OO and Generic Programming
 
+3、在 `Type-erasure-OOP-GP` 章节中，对它进行了介绍
 
-
-### 使用policy-based design
+### 3、使用policy-based design
 
 这种做法是非常符合C++ template meta programming的:
 
@@ -58,7 +56,13 @@ void Test(T t)
 
 
 
-使用第一种方式的一个需要注意的点是：不是同一种类型，无法进行多态。
+### 推荐的解决方案
+
+推荐"3、使用policy-based design"。
+
+
+
+## TODO
 
 https://stackoverflow.com/questions/7968023/c-virtual-template-method
 
