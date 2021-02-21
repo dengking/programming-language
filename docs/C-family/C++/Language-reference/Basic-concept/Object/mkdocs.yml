@@ -5,5 +5,6 @@ nav:
     # object的storage duration和lifetime是两个非常重要的概念    
     - Lifetime-and-storage-duration: Lifetime-and-storage-duration
     # 描述object的layout    
-    - Layout: Layout    
+    - Layout: Layout 
+    - Object-operation: Object-operation    
     - Object-slicing: Object-slicing
