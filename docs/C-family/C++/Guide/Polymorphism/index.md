@@ -56,7 +56,11 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 ### Overload + template
 
-在`C++\Language-reference\Template\Function-template`章节对此进行深入分析。
+在如下章节中进行了分析:
+
+1、`C++\Language-reference\Template\Function-template`
+
+2、`Specialization-and-overload`
 
 ## Implementation of dynamic polymorphism
 
