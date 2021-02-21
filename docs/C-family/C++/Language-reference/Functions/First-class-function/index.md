@@ -10,10 +10,10 @@ Function as first class citizen是一个非常有用的特性，但是C++并不�
 
 下面是总结: 
 
-|                                | 优势                    | 劣势 |
-| ------------------------------ | ----------------------- | ---- |
-| `std::function`                | 1、can be passed around |      |
-| function as template parameter |                         |      |
+|                                | 优势                    | 劣势   |
+| ------------------------------ | ----------------------- | ------ |
+| `std::function`                | 1、can be passed around | 性能？ |
+| function as template parameter |                         |        |
 
 ### Function as template parameter
 
@@ -23,13 +23,7 @@ Function as first class citizen是一个非常有用的特性，但是C++并不�
 
 ### `std::function`
 
-Example:
-
-1、[spdlog](https://github.com/gabime/spdlog)/[include](https://github.com/gabime/spdlog/tree/v1.x/include)/[spdlog](https://github.com/gabime/spdlog/tree/v1.x/include/spdlog)/[details](https://github.com/gabime/spdlog/tree/v1.x/include/spdlog/details)/[**thread_pool.h**](https://github.com/gabime/spdlog/blob/v1.x/include/spdlog/details/thread_pool.h)
-
-2、[spdlog](https://github.com/gabime/spdlog)/[include](https://github.com/gabime/spdlog/tree/v1.x/include)/[spdlog](https://github.com/gabime/spdlog/tree/v1.x/include/spdlog)/[details](https://github.com/gabime/spdlog/tree/v1.x/include/spdlog/details)/[**periodic_worker.h**](https://github.com/gabime/spdlog/blob/v1.x/include/spdlog/details/periodic_worker.h)
-
-
+参见 `std-function` 章节。
 
 ## TO RAED
 
