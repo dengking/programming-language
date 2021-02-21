@@ -2,7 +2,7 @@ nav:
     - C++Core-Guidelines: C++Core-Guidelines
     - Design-and-implementation: Design-and-implementation
     # 总结c++支持的programming paradigm
-    - Paradigm: Paradigm
+    - Programming-paradigm: Programming-paradigm
     # 总结c++中polymorphism的实现
     - Polymorphism: Polymorphism
     - Serialization: Serialization
