@@ -182,6 +182,8 @@ If they were doing that, then your implementation change from vector to list cau
 > 你从未打算让任何人在常数时间内获得元素的数量，但你无法阻止它。"
 >
 > 1、这一段作者的意思是: 使用`std::distance`虽然能够保证code编译通过，但是complexity却改变了，并且这种改变容易让人忽视的
+>
+> 2、上述code说明了使用`std::distance`的优势，概括起来说其实就是"program to abstraction and polymorphism"
 
 Perhaps you think that none of these problems so far are very serious or very likely to happen in practice. Well, ok, I will admit that I made all this up. I have never changed an `std::vector` to a different kind of vector, and changing an `std::vector` to an `std::list` is extremely rare and has never caused me the kind of grief that I described above. But here's something quite similar that has actually happened to me.
 
