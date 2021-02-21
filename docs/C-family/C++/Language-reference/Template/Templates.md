@@ -38,8 +38,9 @@ Templates are parameterized by one or more [template parameters](https://en.cppr
 
 > NOTE: 虽然上述列举了三种template parameter，但是，可以简单的认为c++模板主要允许programmer参数化：
 >
-> - type，type template parameter（duck type，参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`）
-> - value，non-type template parameter
+> 1、type，type template parameter（duck type，参见`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`）
+>
+> 2、value，non-type template parameter
 >
 > 至于template template parameter，它其实可以归入上述两者之一
 
