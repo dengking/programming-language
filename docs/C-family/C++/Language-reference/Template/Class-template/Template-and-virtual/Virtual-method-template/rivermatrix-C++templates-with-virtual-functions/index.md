@@ -1,5 +1,11 @@
 # rivermatrix [C++ Templates with Virtual Functions?](https://rivermatrix.com/soft-eng/cpp/2014/10/27/c-templates-with-virtual-functions/)
 
+> NOTE: 
+>
+> 1、这篇文章，存在一定的错误，质量一般 ，但是对使用policy-based design来实现virtual method template的介绍还是不错的
+>
+> 
+
 C++ offers two forms of polymorphism: 
 
 1、virtual functions and overrides / implementations
