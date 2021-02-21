@@ -1,11 +1,18 @@
-# Template and inheritance
+# Class template inheritance
 
+本章讨论class template inheritance，主要讨论两种情况:
 
+a、Inherit from class template
 
-## Specialize-template-method-of-base-class
+b、Class template inherit from non-template class
+## Inherit from class template
 
-https://stackoverflow.com/questions/39808971/specialize-the-bases-templated-member-function-in-derived-class
-## Inherit-from-template-class
+本节标题的是含义是: 一个class继承一个class template，显然:
+
+1、要么这个class也是一个class template
+
+2、要么这个class需要特化它的parent class template
+
 https://stackoverflow.com/questions/8810224/inheriting-from-a-template-class-in-c
 
 https://www.cprogramming.com/tutorial/templates.html
@@ -14,9 +21,9 @@ https://www.tutorialspoint.com/cplusplus/cpp_templates.htm
 
 
 
-### [Derived template-class access to base-class member-data](https://stackoverflow.com/questions/1120833/derived-template-class-access-to-base-class-member-data)
+### stackoverflow [Derived template-class access to base-class member-data](https://stackoverflow.com/questions/1120833/derived-template-class-access-to-base-class-member-data)
 
-
+### 我的实践
 
 ```c++
 #include "stddef.h"
@@ -157,13 +164,17 @@ int main()
 
 
 
-#### Why am I getting errors when my template-derived-class uses a member it inherits from its template-base-class? [¶](https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members) [Δ](https://isocpp.org/wiki/faq/templates#)
+### Why am I getting errors when my template-derived-class uses a member it inherits from its template-base-class? [¶](https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members) [Δ](https://isocpp.org/wiki/faq/templates#)
 
 
 
-## 模板类继承一个非模板类
+## Class template inherit from non-template class
+
+本节标题的含义是: 模板类继承一个非模板类
 
 模板类继承一个非模板类，如下模板类`Child`继承非模板类`Base`，在模板类`C`中，有一个`C2`类型的成员变量`m_c2`，这个类型需要一个类型为`Base`的入参，那这就出现了一个问题：如何将模板类`C`的特化后的类对象作为入参传入呢？下面是一个简单的测试出现，结果是可以的，其实显而易见，特化后的模板类是一个基础自`Base`的普通类。
+
+### 我的实践
 
 ```c++
 class Base
@@ -222,3 +233,8 @@ v.push_back( new Child<int>());
 }
 ```
 
+
+
+## Specialize-template-method-of-base-class
+
+https://stackoverflow.com/questions/39808971/specialize-the-bases-templated-member-function-in-derived-class
