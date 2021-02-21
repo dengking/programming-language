@@ -12,7 +12,7 @@
 
 ## Full specialization and partial specialization
 
-
+参见 `Template-specialization` 章节。
 
 ## Function specialization and function overload
 
