@@ -231,9 +231,9 @@ It is important to remember this rule while ordering the header files of a trans
 >
 > 1、原文这里给出了非常多的内容，暂时没有阅读
 >
-> 2、下面是一些补充内容
+> 
 
-
+### 下面是一些补充内容:
 
 ### Example: stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)
 
