@@ -93,7 +93,7 @@ C++20 引入了concept feature，参见 `./Concepts`
 
 2) 都能够用于对static polymorphism进行控制
 
-#### stackoverflow [Will Concepts replace SFINAE?](https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae)
+### stackoverflow [Will Concepts replace SFINAE?](https://stackoverflow.com/questions/28133118/will-concepts-replace-sfinae)
 
 > NOTE: 问题中的SFINAE，应该指的是SFINAE + `enable_if` + `type_trait` idiom。
 
