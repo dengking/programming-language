@@ -9,6 +9,16 @@ October 15, 2007
 > 1、其实 type erasure 所创造的是一个更大的abstraction
 >
 > 2、这篇文章提出了: C++ iterator type erasure: `any_iterator` 
+>
+> 3、本文提出了消除interface 和 implementation 之间的dependency、compiler firewall如下方法:
+>
+> a、pimpl idiom
+>
+> b、abstract base class
+>
+> c、type erasure
+>
+> 
 
 
 
@@ -87,6 +97,10 @@ In the next three sections, I will illustrate the problem with an example from t
 
 ### An Example from the Real World
 
+> NOTE: 
+>
+> 1、这一段中给出的例子其实是有些牵强的，因为在实际中，应该很少有人会给用户提供generic programming的interface，因为这样的interface是有compile-time dependency，这就导致了implementation的更改需要client进行recompile
+
 Suppose you have a class `number_cruncher` that calculates and stores a sequence of numbers. Further, suppose that `number_cruncher` wants to expose to its clients a way to iterate over the stored numbers and retrieve them.
 
 In the old days, predating the STL, the interface of `number_cruncher` might have exposed a callback for retrieving the numbers, or perhaps some form of `get_first()`/`get_next()` idiom. In an evironment where the STL and generic programming are used, such an interface would raise more than a few eyebrows. Here, the interface of `number_cruncher` will expose a pair of iterators, like this:
@@ -102,17 +116,33 @@ public:
 };
 ```
 
+> NOTE: 
+>
+> 1、iterator是generic programming的技术，因此上述code是使用了generic programming
+
 Now suppose you change the type of the collection which internally holds the items from `std::vector` to some other kind of vector. (Yes, there are other kinds of vectors.) In the sense of OO programming, what have you just done? You have changed an implementation detail. And what happens? The world recompiles. By using a typedef for the iterator that you expose, you were able to ensure that your clients did not have to change their code. Nonetheless(尽管如此), their code depends on the type of the iterator, and thus on the type of the collection that you use to store your numbers. In the pre-STL design mentioned earlier, this dependency can easily be eliminated, e.g., by using the `pimpl` idiom, or by exposing the number cruncher's interface via an **abstract base class**. This option is now gone. By using the typedef for the iterators, you have introduced a **compile-time dependency** that cannot be eliminated. Depending on the context in which your class is used, that may or may not be a serious issue.
 
 > NOTE: 
 >
-> 1、iterator是generic programming的技术，因此上述是使用了generic programming
+> 下面是对上面这段话的一些注解: 
+>
+> 1、iterator是generic programming的技术，因此上述code是使用了generic programming
 >
 > 2、上述iterator引入了"compile-time dependency"，这就导致一旦修改了implementation，就需要recompile
 >
-> 3、在OOP中，使用 `pimpl` idiom 是能够避免recompile的
+> 3、"Nonetheless(尽管如此), their code depends on the type of the iterator, and thus on the type of the collection that you use to store your numbers."
+>
+> client code 依赖于"type of iterator"，因此就间接依赖于 "the type of  the collection"
+>
+> 4、那如何避免上述的dependency呢？作者给出了两种方法:
+>
+> a、在OOP中，使用 `pimpl` idiom 是能够避免recompile的
+>
+> b、在OOP中，"exposing the number cruncher's interface via an **abstract base class**"
 
-But it gets worse. Suppose that the implementation of `number_cruncher` changes in such a way that there are frequent insertions to the internal collection of numbers. Having anticipated(预期) a change of that kind, you have carefully specified `number_cruncher`'s interface to state that it will expose a pair of input iterators, dereferencing to something that converts to a double, with incrementing and dereferencing both having O(1) complexity. Therefore, you are within your rights when you change the internal type of your collection from `std::vector<double>` to `std::list<double>`. Again, your clients will have to recompile. But it is also possible that before, when you were exposing vector iterators, some of your clients may have said, gee, I wonder how many elements there are in this number cruncher. Let me do:
+But it gets worse. Suppose that the implementation of `number_cruncher` changes in such a way that there are frequent insertions to the internal collection of numbers. Having anticipated(预期) a change of that kind, you have carefully specified `number_cruncher`'s interface to state that it will expose a pair of **input iterators**, dereferencing to something that converts to a double, with incrementing and dereferencing both having O(1) complexity. Therefore, you are within your rights(有权) when you change the internal type of your collection from `std::vector<double>` to `std::list<double>`. Again, your clients will have to recompile. But it is also possible that before, when you were exposing vector iterators, some of your clients may have said, gee, I wonder how many elements there are in this number cruncher. Let me do:
+
+> NOTE: 最后一段话的意思是: 在修改为  `std::list<double>` 之前，你的client写了如下code:，显然如下code是需要iterator type是random access iterator的
 
 ```C++
 size_t numItems = 
@@ -274,6 +304,43 @@ It seems to me that as far as the trade-off between OO purity and efficiency is 
 So assume that you are in a similar situation as I was with my bad number cruncher interface. Your clients demand a more OO-compliant design, and they are perfectly willing to pay a performance penalty on the order of magnitude of a virtual function call for each iterator operation. This is the time to consider *type erasure* as a solution. So what is type erasure, and how can it help us out here?
 
 ### Type Erasure as the Glue between OO and Generic Programming
+
+In their book on C++ template metaprogramming[[4](https://www.artima.com/cppsource/type_erasure2.html#notes)], Dave Abrahams and Aleksey Gurtovoy define **type erasure** as "the process of turning a wide variety of types with a common interface into one type with *that same interface*."
+
+> NOTE: 
+>
+> 1、上述definition是非常好的
+
+The most widely known and used examples of type erasure are `boost::any`[[5](https://www.artima.com/cppsource/type_erasure2.html#notes)] and `boost::function`[[6](https://www.artima.com/cppsource/type_erasure2.html#notes)]. I'll discuss `boost::any` in detail in the second part of this article. `boost::function` is a class template that takes one template argument, **a function type**. Choosing a function type amounts to(等价于) choosing a return type and a list of argument types for a function. Suppose we instantiate `boost::function` as follows:
+
+```
+boost::function<int (int)> foo;
+```
+
+The variable `foo` can now hold anything that's callable with an `int` as its only argument, and whose return type is convertible to `int`. This could be a **function pointer**, a **user-defined functor**, the result of a `boost::bind`, or what have you. Clearly, this matches the above definition of type erasure.
+
+> NOTE: 此处关于 `boost::funciton` 是 type erasure的介绍是非常好的
+
+The relevance(关联) of this in the context of object-oriented programming is that an interface can now say to the client programmer: "I need you to give me something that's callable as specified by this here function type. What it really is, I don't care. You can give me different things at run time. Also, you can change your client code so it gives me something other than it did before, and you won't have to recompile me." Or, referring to a return value rather than an argument, an interface could say: "I'll give you something that's callable as specified by this here function type. What it really is, you won't know. It could change at run time. I might also change it at compile time, but don't worry, you won't have to recompile because of that."
+
+> NOTE: 
+>
+> 1、通过上面这段话，可以看出type erasure的优势: 
+>
+> a、消除了compiler-dependency，这样就避免了recompile
+>
+> b、generic: type erasure是非常generic的
+>
+> 显然作者的思路就是: 使用 **type-erasing iterator class** 来替代前面的iterator，从而解决前面描述的各种问题
+
+It should be clear now that our problem with iterator types could be solved by a **type-erasing iterator class**, that is, an iterator that can hold concrete iterators of all manner of type, as long as they have a suitable **commonality**. An interface such as the one of our `number_cruncher` could then say to its clients: "I will give you a pair of input iterators which dereference to something that converts to `double`. If you insist on knowing, I can tell you that what you're getting is the result of a **type erasure**. But that's irrelevant to you, because you will never know what the real type was before the erasure. In fact, before the erasure, the iterator category may have been better than 'input.' But you won't know that, and you will only ever see the input iterator interface. Any change that I make to the actual, un-erased type of the iterator, be it at runtime or at compile time, will go completely unnoticed by you."
+
+> NOTE: 
+> 1、上面这段话中的commonality让我想到了 "commonality-and-variability analysis"
+>
+> 2、上面这段话让我想到: 使用type erasure也能够实现Compiler firewall 
+
+In the second part of this article, I will discuss how type erasure can be implemented in C++. Specifically, I will present my `any_iterator`[[2](https://www.artima.com/cppsource/type_erasure2.html#notes)], a class template that provides type erasure for C++ iterators.
 
 ## Implementing Type Erasure in C++, with an Emphasis on Iterator Type Erasure
 
