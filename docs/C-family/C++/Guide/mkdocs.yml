@@ -14,6 +14,7 @@ nav:
     - Header-only-library: Header-only-library.md
     - Transaction: Transaction
     - Simplify: Simplify
+    - Uniform-consistent-interface-API-syntax: Uniform-consistent-interface-API-syntax
     - Performance-optimization: Performance-optimization
     - Memory-model: Memory-model
     - Type-system: Type-system

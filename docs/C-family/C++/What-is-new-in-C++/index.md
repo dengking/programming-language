@@ -54,29 +54,9 @@ C++的一个发展方向就是充分发挥value-semantic，在 `C++\Language-ref
 
 ### Generic programming and template meta-programming
 
-#### Uniform
+#### 提供 uniform、consistent的interface、API、syntax
 
-C++的一个非常重要的方向是uniform，uniform促进了对各种差异的abstraction，促进了generic programming。主要包括如下方面:
-
-一、对很多implementation-specific进行uniform，提供uniform/consistent syntax，这包括:
-
-1) C++ 11 attribute: `C++\Language-reference\Attribute`
-
-2) C++11 uniform initialization: `C++\Language-reference\Initialization\Uniform-initialization`
-
-二、对复杂的、常用的运算进行uniform，提供uniform/consistent interface
-
-"统一"意味着"抽象"，因为着需要polymorphism。
-
-1) C++17 `std::invoke`
-
-http://www.cplusplus2017.info/c17-stdinvoke-stdapply/ 
-
-> `std::invoke` it’s universal interface for calling anything it’s callable.
-
-2) `std::decay`
-
-
+参见 `Uniform-consistent-interface-API-syntax` 章节。
 
 #### Template
 
