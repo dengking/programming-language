@@ -76,4 +76,4 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 ### Virtual function in class template
 
-TODO 需要添加章节链接。
+参见 `Template-and-virtual` 章节。
