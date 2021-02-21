@@ -5,6 +5,7 @@ nav:
     ######### 在Template-metaprogramming.md中已经提及，可以将template看做是一种functional programming，那么它就有它的
     # parameter和argument，所以这个认知对于理解template parameter和template argument是非常重要的    
     - Template-parameters-and-arguments: Template-parameters-and-arguments
+    - Template-specialization: Template-specialization
     - Class-template: Class-template
     - Function-template: Function-template
     - Variable-template: Variable-template

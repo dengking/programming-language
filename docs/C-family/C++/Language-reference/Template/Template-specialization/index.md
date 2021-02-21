@@ -6,10 +6,10 @@
 
 primary template和template specialization是两个相对的概念，关于两者之间的关系，在下面章节中进行了介绍:
 
-| 路径                                                      | 章节                                                    | 观点                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
-| `C++\Language-reference\Template\Implementation\index.md` | Partial template specialization是primary template的附庸 | Partial template specialization是primary template的附庸      |
-| `C++\Guide\Implementation-of-polymorphism\index.md`       |                                                         | Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**） |
+| 路径                                             | 章节                                                    | 观点                                                         |
+| ------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ |
+| `C++\Language-reference\Template\Implementation` | Partial template specialization是primary template的附庸 | Partial template specialization是primary template的附庸      |
+| `C++\Guide\Polymorphism`                         |                                                         | Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**） |
 
 
 
@@ -183,6 +183,8 @@ class unique_ptr<_Tp[], _Dp>
 
 
 ## stackoverflow [Understanding (simple?) C++ Partial Template Specialization](https://stackoverflow.com/questions/6138439/understanding-simple-c-partial-template-specialization)
+
+
 
 ## Example
 
