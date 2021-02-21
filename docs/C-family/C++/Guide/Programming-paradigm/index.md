@@ -24,7 +24,13 @@ C++通过template来实现:
 
 ### Generic programming
 
-参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming`章节。
+参见如下章节:
+
+1、`C++\Language-reference\Template\Programming-paradigm\Generic-programming`
+
+2、`C++\Language-reference\Functions\Generic-programming`
+
+3、`C++\Idiom\Generic-programming`
 
 ### TMP: Template-meta programming
 
