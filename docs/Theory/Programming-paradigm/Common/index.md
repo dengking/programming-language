@@ -36,7 +36,7 @@ FP: 非常适合于computation on structure
 
 3、[CppCoreGuidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) [T.5: Combine generic and OO techniques to amplify their strengths, not their costs](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rt-generic-oo)
 
-
+4、artima [On the Tension Between Object-Oriented and Generic Programming in C++](https://www.artima.com/cppsource/type_erasure.html)
 
 ## 理解各种programming paradigm的核心思想
 
