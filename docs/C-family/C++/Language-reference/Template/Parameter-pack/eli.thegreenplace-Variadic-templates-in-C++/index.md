@@ -81,7 +81,19 @@ std::cout<<ssum<<std::endl;
 // g++ --std=c++11 test.cpp
 ```
 
-
+> NOTE: 
+>
+> 下面是compiler生成的code：
+>
+> ```c++
+> T adder(T, Args...) [T = int, Args = <int, int, int, int>]
+> T adder(T, Args...) [T = int, Args = <int, int, int>]
+> T adder(T, Args...) [T = int, Args = <int, int>]
+> T adder(T, Args...) [T = int, Args = <int>]
+> T adder(T) [T = int]
+> ```
+>
+> compiler生成上述代码的过程是值的推敲的，一个值的推敲的点是：base condition，即`T adder(T v)`的到达。
 
 `adder` will accept any number of arguments, and will compile properly as long as it can apply the `+` operator to them. This checking is done by the compiler, at compile time. There's nothing magical about it - it follows C++'s usual template and overload resolution rules.
 
@@ -518,7 +530,7 @@ print_container(msi);
 >
 > 
 
-> NOTE: 上诉程序的另外一种写法如下：
+> NOTE: 上述程序的另外一种写法如下：
 
 ```c++
 #include<iostream>
