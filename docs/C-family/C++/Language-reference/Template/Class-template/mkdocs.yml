@@ -2,4 +2,4 @@ nav:
     - Class-template: index.md
     - Member-templates: Member-templates.md
     - Template-and-virtual: Template-and-virtual
-    - Template-and-inheritance: Template-and-inheritance
+    - Class-template-inheritance: Class-template-inheritance
