@@ -174,8 +174,6 @@ class unique_ptr<_Tp[], _Dp>
 };
 ```
 
-## wikipedia [Partial template specialization](https://en.wikipedia.org/wiki/Partial_template_specialization)
-
 
 
 ## fluentcpp [Template Partial Specialization In C++](https://www.fluentcpp.com/2017/08/11/how-to-do-partial-template-specialization-in-c/)
