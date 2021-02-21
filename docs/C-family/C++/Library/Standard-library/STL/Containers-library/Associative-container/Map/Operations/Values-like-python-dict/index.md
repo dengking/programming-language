@@ -140,7 +140,7 @@ int main()
 
 ## stackoverflow [Getting a list of values from a map](https://stackoverflow.com/questions/4195611/getting-a-list-of-values-from-a-map)
 
-[A](https://stackoverflow.com/a/4195743)
+### [A](https://stackoverflow.com/a/4195743)
 
 A `map` element is defined as a `map::value_type`, and the type of it is a `pair<A,B>`. `first` is the key and `second` is the value. You can write a [functor](http://en.wikipedia.org/wiki/Function_object) to extract `second` from a `value_type`, and copy that in to a `vector` (or a `list`, or whatever you want.) The best way to do the copying is to use `transform`, which does just what its name implies: it takes a value of one type and transforms it to a different type of value.
 
@@ -199,7 +199,7 @@ transform(my_map.begin(), my_map.end(), back_inserter(my_vals), [](const MyMap::
 
 
 
-[A](https://stackoverflow.com/a/771482)
+### [A](https://stackoverflow.com/a/771482)
 
 You could probably use [`std::transform`](http://en.cppreference.com/w/cpp/algorithm/transform) for that purpose. I would maybe prefer Neils version though, depending on what is more readable.
 

@@ -128,7 +128,7 @@ std::stack<double, std::vector<double>> stack2;
 
 ## Application
 
-### Generic STL container printer
+### Generic container printer
 
 1、stackoverflow [What are some uses of template template parameters?](https://stackoverflow.com/questions/213761/what-are-some-uses-of-template-template-parameters) # [A](https://stackoverflow.com/a/14311714)
 
