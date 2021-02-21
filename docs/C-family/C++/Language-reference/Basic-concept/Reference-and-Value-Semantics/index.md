@@ -18,7 +18,9 @@ Object对应的是storage，它是最最底层的概念，参见`Object`章节�
 
 #### Every object has a value
 
-在object章节中，对这个topic进行了讨论。
+在`Object`章节中，对这个topic进行了讨论。
+
+于此直接相关的是: object value representation(参见 `Object`章节)，这是最最能够体现value semantic的。
 
 #### Reference semantic: Reference to an object
 
@@ -31,7 +33,9 @@ Object对应的是storage，它是最最底层的概念，参见`Object`章节�
 | lvalue reference | lvalue         |
 | rvalue reference | rvalue         |
 
+#### Value semantic and object lifetime and RAII
 
+关于这一点，在 zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 中有着非常好的总结，后面收录了这篇文章。
 
 ### What is value semantic and reference semantic?
 
@@ -78,9 +82,13 @@ value semantic 对应是 copy object；
 
 ### Runtime polymorphism
 
-C++中需要通过reference、pointer才能够实现runtime polymorphism，关于此，在`C++\Language-reference\Classes\Subtype-polymorphism`章节进行了讨论。
+C++中需要通过reference、pointer才能够实现runtime polymorphism，我们将此成为call-by-reference-pointer，关于此，在下面章节中有说明:
 
+1、`C++\Language-reference\Classes\Subtyping-polymorphism`章节进行了讨论。
 
+2、`call-by-reference-pointer` 
+
+与call-by-reference-pointer相对的是call by value，在 `call-by-reference-pointer` 章节中，对两种进行了讨论。
 
 ### Value category
 
