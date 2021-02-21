@@ -276,3 +276,45 @@ So assume that you are in a similar situation as I was with my bad number crunch
 ### Type Erasure as the Glue between OO and Generic Programming
 
 ## Implementing Type Erasure in C++, with an Emphasis on Iterator Type Erasure
+
+
+
+### Implementing Type Erasure in C++: A Closer Look at `boost::any`
+
+
+
+### Beyond `boost::any`
+
+
+
+### Implementing Iterator Type Erasure in C++: The `any_iterator`
+
+
+
+### Determining the Granularity of the Iterator Type Erasure
+
+
+
+### Conversion between Different `any_iterator` Types
+
+
+
+### Mundane Uses of the `any_iterator`
+
+
+
+### Other Attempts at C++ Iterator Type Erasure
+
+
+
+
+
+### Outlook: C++ Concepts and the `any_iterator`
+
+
+
+## Acknowledgements
+
+
+
+## Share your opinion
