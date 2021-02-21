@@ -67,24 +67,3 @@ https://stackoverflow.com/questions/2354210/can-a-class-member-function-template
 https://www.experts-exchange.com/questions/20558666/virtual-template-function-workaround.html
 
 
-
-### [On the Tension Between Object-Oriented and Generic Programming in C++](https://www.artima.com/cppsource/type_erasure.html)
-
-> `void*`就是一种典型的type erasure
->
-> 
-
-上述使用`void*`让我想起来：C++ Programming: `Void*` Vs. Templates：
-
-http://ixodoi.expertscolumn.com/article/c-programming-void-vs-templates
-
-`void*`是c的generic programming。
-
-duck type是python的generic programming。
-
-template是`c++`的generic programming。
-
-
-
-这让我想起来visitor pattern。
-
