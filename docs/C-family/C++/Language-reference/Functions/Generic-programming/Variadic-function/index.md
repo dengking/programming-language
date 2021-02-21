@@ -12,7 +12,7 @@
 
 
 
-## [Variable number of arguments in C++?](https://stackoverflow.com/questions/1657883/variable-number-of-arguments-in-c)
+## stackoverflow [Variable number of arguments in C++?](https://stackoverflow.com/questions/1657883/variable-number-of-arguments-in-c)
 
 ### [A](https://stackoverflow.com/a/1657924)
 

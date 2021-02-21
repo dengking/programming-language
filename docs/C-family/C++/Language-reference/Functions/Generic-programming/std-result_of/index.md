@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [std::result_of, std::invoke_result](https://en.cppreference.com/w/cpp/types/result_of)
 
 ```c++
