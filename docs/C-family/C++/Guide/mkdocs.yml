@@ -3,8 +3,7 @@ nav:
     - Design-and-implementation: Design-and-implementation
     # 总结c++支持的programming paradigm
     - Programming-paradigm: Programming-paradigm
-    # 总结c++中polymorphism的实现
-    - Polymorphism: Polymorphism
+
     - Serialization: Serialization
     - Command-line: Command-line
     # 如何进行注释，如何根据注释生成文档
