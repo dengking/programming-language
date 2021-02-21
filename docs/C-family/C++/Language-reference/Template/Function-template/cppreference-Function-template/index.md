@@ -128,13 +128,53 @@ After substitution, all function parameters of array and function type are adjus
 
 Function templates and non-template functions may be overloaded.
 
-> NOTE: 这段话如何来进行理解
+> NOTE: 下面这篇文章对此有着非常好的描述。
+>
+> 1、ibm [Overloading function templates (C++ only)](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.2.0/com.ibm.zos.v2r2.cbclx01/overloading_function_templates.htm)
+>
+> You may overload a function template either by a non-template function or by another function template.
+>
+> Non-template functions take precedence over template functions. The following example describes this:
+>
+> ```C++
+> #include <iostream>
+> using namespace std;
+> 
+> template<class T> void f(T x, T y)
+> {
+> 	cout << "Template" << endl;
+> }
+> 
+> void f(int w, int z)
+> {
+> 	cout << "Non-template" << endl;
+> }
+> 
+> int main()
+> {
+> 	f(1, 2);
+> 	f('a', 'b');
+> 	f(1, 'b');
+> }
+> // g++ test.cpp
+> 
+> ```
+>
+> The following is the output of the above example:
+>
+> ```C++
+> Non-template
+> Template
+> Non-template
+> ```
+>
+> The function call `f(1, 2)` could match the argument types of both the template function and the non-template function. The non-template function is called because a non-template function takes precedence in overload resolution.
 
-A non-template function is always distinct from a template specialization with the same type. Specializations of different function templates are always distinct from each other even if they have the same type. Two function templates with the same return type and the same parameter list are distinct and can be distinguished with explicit template argument list.
+A non-template function is always distinct from a **template specialization** with the same type. Specializations of different **function templates** are always distinct from each other even if they have the same type. Two function templates with the same return type and the same parameter list are distinct and can be distinguished with explicit template argument list.
 
 > NOTE: 
 >
-> C++的overload resolution本就复杂，现在加上template就使得问题更加复杂了，所以原文的这一段非常难以理解也是可想而知的。
+> 1、基于 "[Function overloads vs function specializations](https://en.cppreference.com/w/cpp/language/function_template#Function_overloads_vs_function_specializations)" 段中关于"overload 和 specialization"的讨论来理解上面这段话是非常容易的
 
 
 
@@ -146,7 +186,7 @@ Note that only **non-template** and **primary template overloads** participate i
 >
 > 1、显然，这种设计让整体都变得简单，简而言之：compiler首先执行overload resolution，然后执行specializaiton resolution。
 >
-> 2、C++严格区分overload 和 specialization
+> 2、C++严格区分overload 和 specialization，这个观点在 "stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading) # [A](https://stackoverflow.com/a/7108123)" 中给出了
 >
 > 3、这种设计验证了在`C++\Language-reference\Template\Implementation`中总结的“Partial template specialization是primary template的附庸”观点。
 
@@ -185,11 +225,21 @@ int main()
 >
 > 
 
+It is important to remember this rule while ordering the header files of a translation unit. For more examples of the interplay(相互影响) between **function overloads** and **function specializations**, expand below:
+
+> NOTE: 
+>
+> 1、原文这里给出了非常多的内容，暂时没有阅读
+>
+> 2、下面是一些补充内容
 
 
-#### Example: stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)
 
-在stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)的回答[A](https://stackoverflow.com/a/7108123)中，对overload + template的resolution过程进行了更加详细的介绍，下面是对其中内容的整理：
+### Example: stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)
+
+[A](https://stackoverflow.com/a/7108123)
+
+> 在stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)的回答[A](https://stackoverflow.com/a/7108123)中，对overload + template的resolution过程进行了更加详细的介绍，下面是对其中内容的整理：
 
 Short story: overload when you can, specialise when you need to.
 
@@ -217,20 +267,25 @@ foo(new int); // calls foo<int>(int*);
 
 ```
 
-对于上述三个`foo`之间的关系，需要准确判断：
-
-- `template <typename T> void foo(T)`
-- `template <typename T> void foo(T*) // overload of foo(T)` 
-
-上述两个function template之间的关系是overload，两者是不同的template。
-
-- `template <> void foo<int>(int*) // specialisation of foo(T*)`
-
-是对`template <typename T> void foo(T*)`的specialisation ，它和`template <typename T> void foo(T)`之间没有关联。
-
-**resolution过程**：compiler 首先进行“overload resolution“，所以它首先找到`template <typename T> void foo(T*)`；然后进行”specialisation resolution“，所以它找到`template <> void foo<int>(int*)`，所以最终的输出为：`foo(int*)`
-
-
+> NOTE:
+>
+> 对于上述三个`foo`之间的关系，需要准确判断：
+>
+> 1、`template <typename T> void foo(T)`
+>
+> 2、`template <typename T> void foo(T*) // overload of foo(T)` 
+>
+> 上述两个function template之间的关系是overload，两者是不同的template。
+>
+> 1、`template <> void foo<int>(int*) // specialisation of foo(T*)`
+>
+> 是对`template <typename T> void foo(T*)`的specialisation ，它和`template <typename T> void foo(T)`之间没有关联。
+>
+> **resolution过程**：
+>
+> Compiler 首先进行“overload resolution“，所以它首先找到`template <typename T> void foo(T*)`；然后进行”specialisation resolution“，所以它找到`template <> void foo<int>(int*)`，所以最终的输出为：`foo(int*)`
+>
+> 
 
 ```C++
 #include <iostream>
@@ -254,31 +309,33 @@ foo(new int); // calls foo<int>(int*);
 
 ```
 
-对于上述三个`foo`之间的关系，需要准确判断：
+> NOTE:
+>
+> 对于上述三个`foo`之间的关系，需要准确判断：
+>
+> 1、`template <typename T> void foo(T)`
+>
+> 2、`template<> void foo<int*>(int*) // specialisation of foo(T)` 
+>
+> 上述两个function template之间的关系是specialisation 。
+>
+> 1、`template<typename T> void foo(T*) // overload of foo(T*)`
+>
+> **resolution过程**：
+>
+> compiler 首先进行“overload resolution“，所以它首先找到`template <typename T> void foo(T*)`，由于没有对它的specialisation，所以它最终输出：`foo(T*)`
 
-- `template <typename T> void foo(T)`
-- `template<> void foo<int*>(int*) // specialisation of foo(T)` 
-
-上述两个function template之间的关系是specialisation 。
-
-- `template<typename T> void foo(T*) // overload of foo(T*)`
-
-**resolution过程**：compiler 首先进行“overload resolution“，所以它首先找到`template <typename T> void foo(T*)`，由于没有对它的specialisation，所以它最终输出：`foo(T*)`
-
-总结：
-
-The compiler does **overload resolution** before it even looks at specialisations. So, in both cases, overload resolution chooses `foo(T*)`. However, only in the first case does it find `foo<int>(int*)` because in the second case the `int*` specialisation is a specialisation of `foo(T)`, not `foo(T*)`.
+The compiler does **overload resolution** before it even looks at **specialisations**. So, in both cases, overload resolution chooses `foo(T*)`. However, only in the first case does it find `foo<int>(int*)` because in the second case the `int*` specialisation is a specialisation of `foo(T)`, not `foo(T*)`.
 
 
 
-
-
-#### 准确表达overload and specialization
+### 准确表达overload and specialization
 
 C++的语法是比较冗杂的，有时候稍微的差异，表达的含义却是天差地别，这一点在template + overload的时候尤其明显，下面结合如下两篇文章中的内容进行说明：
 
-- stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)
-- accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442)
+1、stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)
+
+2、accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442)
 
 在stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading)中给出了如下例子：
 
@@ -352,10 +409,11 @@ struct is_pointer< T* >{
 
 简而言之：
 
-- `template< typename T > struct is_pointer`
-- `template< typename T > struct is_pointer< T* >//partial specialization`
+1、`template< typename T > struct is_pointer`
 
-#### Variadic function template
+2、`template< typename T > struct is_pointer< T* >//partial specialization`
+
+### thegreenplace [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
 
 在文章thegreenplace [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)中讨论了variadic function template，下面是其中的例子：
 
