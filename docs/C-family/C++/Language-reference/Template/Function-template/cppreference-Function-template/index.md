@@ -329,50 +329,6 @@ The compiler does **overload resolution** before it even looks at **specialisati
 
 
 
-### thegreenplace [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
-
-在文章thegreenplace [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)中讨论了variadic function template，下面是其中的例子：
-
-```c++
-#include <string>
-#include <iostream>
-template<typename T>
-T adder(T v) {
-  std::cout << __PRETTY_FUNCTION__ << "\n";
-  return v;
-}
-
-template<typename T, typename... Args>
-T adder(T first, Args... args) {
-  std::cout << __PRETTY_FUNCTION__ << "\n";
-  return first + adder(args...);
-}
-
-int main()
-{
-long sum = adder(1, 2, 3, 8, 7);
-std::cout<<sum<<std::endl;
-    
-std::string s1 = "x", s2 = "aa", s3 = "bb", s4 = "yy";
-std::string ssum = adder(s1, s2, s3, s4);
-std::cout<<ssum<<std::endl;
-}
-```
-
-> 编译:`g++ --std=c++11 test.cpp`
-
-下面是compiler生成的code：
-
-```c++
-T adder(T, Args...) [T = int, Args = <int, int, int, int>]
-T adder(T, Args...) [T = int, Args = <int, int, int>]
-T adder(T, Args...) [T = int, Args = <int, int>]
-T adder(T, Args...) [T = int, Args = <int>]
-T adder(T) [T = int]
-```
-
-compiler生成上述代码的过程是值的推敲的，一个值的推敲的点是：base condition，即`T adder(T v)`的到达。
-
 ## Function template specialization
 
 > NOTE: 原文省略了
