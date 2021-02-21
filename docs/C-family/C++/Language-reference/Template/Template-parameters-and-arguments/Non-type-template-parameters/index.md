@@ -27,23 +27,23 @@
 
 A non-type template parameter must have a *structural type*, which is one of the following types (optionally cv-qualified, the qualifiers are ignored):
 
-- [lvalue reference type](https://en.cppreference.com/w/cpp/language/reference#lvalue_references) (to object or to function);
+1、[lvalue reference type](https://en.cppreference.com/w/cpp/language/reference#lvalue_references) (to object or to function);
 
-- an [integral type](https://en.cppreference.com/w/cpp/language/type);
+2、an [integral type](https://en.cppreference.com/w/cpp/language/type);
 
-- a [pointer type](https://en.cppreference.com/w/cpp/language/pointer) (to object or to function);
+3、a [pointer type](https://en.cppreference.com/w/cpp/language/pointer) (to object or to function);
 
-- a [pointer to member type](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_members) (to member object or to member function);
+4、a [pointer to member type](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_members) (to member object or to member function);
 
-- an [enumeration type](https://en.cppreference.com/w/cpp/language/enum);
+5、an [enumeration type](https://en.cppreference.com/w/cpp/language/enum);
 
-- [std::nullptr_t](https://en.cppreference.com/w/cpp/types/nullptr_t); (since C++11)
+6、[std::nullptr_t](https://en.cppreference.com/w/cpp/types/nullptr_t); (since C++11)
 
-- a [floating-point type](https://en.cppreference.com/w/cpp/language/type);
+7、a [floating-point type](https://en.cppreference.com/w/cpp/language/type);
 
-- a [literal](https://en.cppreference.com/w/cpp/named_req/LiteralType) class type with the following properties: (since C++20)
+8、a [literal](https://en.cppreference.com/w/cpp/named_req/LiteralType) class type with the following properties: (since C++20)
 
-  > NOTE: 关于此的例子参见[Literal Classes as Non-type Template Parameters in C++20](https://ctrpeach.io/posts/cpp20-class-as-non-type-template-param/)
+> NOTE: 关于此的例子参见[Literal Classes as Non-type Template Parameters in C++20](https://ctrpeach.io/posts/cpp20-class-as-non-type-template-param/)
 
 
 
@@ -69,17 +69,31 @@ A non-type template parameter must have a *structural type*, which is one of the
 
 In particular, this implies that string literals, addresses of array elements, and addresses of non-static members cannot be used as template arguments to instantiate templates whose corresponding non-type template parameters are pointers to objects.
 
-> NOTE: 上述给出了冗杂的限制，其实总的来说，只要compiler能够在compile-time或者这个value，那么它就可以用做argument。正如在[这篇文章](https://stackoverflow.com/a/5687562)中所总结的：
+> NOTE: 上述给出了冗杂的限制，其实总的来说，只要compiler能够在compile-time或者这个value，那么它就可以用做argument。正如在stackoverflow [Non-type template parameters](https://stackoverflow.com/questions/5687540/non-type-template-parameters) # [A](https://stackoverflow.com/a/5687562)中所总结的：
 >
 > A non-type template argument provided within a template argument list is an expression whose value can be determined at compile time. Such arguments must be:
 
+## stackoverflow [Non-type template parameters](https://stackoverflow.com/questions/5687540/non-type-template-parameters)
+
+I understand that the non-type template parameter should be a **constant integral expression**. Can someone shed light why is it so ?
+
+```cpp
+template <std::string temp>
+void foo()
+{
+     // ...
+}
+```
+
+> ```cpp
+> error C2993: 'std::string' : illegal type for non-type template parameter 'temp'.
+> ```
+
+I understand what a constant integral expression is. What are the reasons for not allowing non-constant types like `std::string` as in the above snippet ?
+
+### [A](https://stackoverflow.com/a/5687575)
 
 
-## Example
-
-### Pointer and reference 
-
-https://stackoverflow.com/a/5687575
 
 ```c++
 #include <string>
@@ -112,36 +126,27 @@ int main() {
 
 
 
+### [A](https://stackoverflow.com/a/5687562)
 
+A non-type template argument provided within a template argument list is an expression whose value can be determined at compile time. Such arguments must be:
 
-> c++ string can not be non type template parameter：
->
-> https://stackoverflow.com/questions/5547852/string-literals-not-allowed-as-non-type-template-parameters
->
->
-> https://blog.keha.dev/posts/cpp20-class-as-non-type-template-param/
->
-> https://stackoverflow.com/Questions/5687540/non-type-template-parameters
+> constant expressions, addresses of functions or objects with external linkage, or addresses of static class members.
 
+Also, string literals are objects with **internal linkage**, so you can't use them as template arguments. You cannot use a **global pointer**, either. Floating-point literals are not allowed, given the obvious possibility of rounding-off errors.
 
+## Pointer and reference as non-type template argument example
 
+stackoverflow [Non-type template parameters](https://stackoverflow.com/questions/5687540/non-type-template-parameters) # [A](https://stackoverflow.com/a/5687575) 中给出了例子
 
+stackoverflow [How do you pass a templated class instance as a template parameter to another template?](https://stackoverflow.com/questions/45559355/how-do-you-pass-a-templated-class-instance-as-a-template-parameter-to-another-te)
 
-Array and function types may be written in a template declaration, but they are automatically replaced by pointer to object and pointer to function as appropriate.
-
-> 关于它的例子参见：
->
-> https://stackoverflow.com/questions/45559355/how-do-you-pass-a-templated-class-instance-as-a-template-parameter-to-another-te
-
-
+> NOTE: 其中给出了一些例子
 
 
 
 ## String literal and non-type template parameter
 
-### stackoverflow [Non-type template parameters](https://stackoverflow.com/questions/5687540/non-type-template-parameters)
-
-
+c++ string can not be non type template parameter，在下面文章中对此进行了讨论:
 
 ### keha [Literal Classes as Non-type Template Parameters in C++20](https://blog.keha.dev/posts/cpp20-class-as-non-type-template-param/)
 
@@ -151,5 +156,8 @@ Array and function types may be written in a template declaration, but they are 
 
 > NOTE: 这篇文章的解释是非常好的
 
-> Because string literals are objects with **internal linkage** (two string literals with the same value but in different modules are different objects), you can't use them as template arguments either:
+Because string literals are objects with **internal linkage** (two string literals with the same value but in different modules are different objects), you can't use them as template arguments either:
 
+TODO [A](https://stackoverflow.com/a/5548016)
+
+> NOTE: 这个解释是非常好的，目前还没有阅读
