@@ -69,7 +69,7 @@ A non-type template parameter must have a *structural type*, which is one of the
 
 In particular, this implies that string literals, addresses of array elements, and addresses of non-static members cannot be used as template arguments to instantiate templates whose corresponding non-type template parameters are pointers to objects.
 
-> NOTE: 上诉给出了冗杂的限制，其实总的来说，只要compiler能够在compile-time或者这个value，那么它就可以用做argument。正如在[这篇文章](https://stackoverflow.com/a/5687562)中所总结的：
+> NOTE: 上述给出了冗杂的限制，其实总的来说，只要compiler能够在compile-time或者这个value，那么它就可以用做argument。正如在[这篇文章](https://stackoverflow.com/a/5687562)中所总结的：
 >
 > A non-type template argument provided within a template argument list is an expression whose value can be determined at compile time. Such arguments must be:
 
