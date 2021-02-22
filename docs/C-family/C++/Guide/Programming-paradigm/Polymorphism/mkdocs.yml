@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - Specialization-and-overload: Specialization-and-overload
-    - Custom-polymorphism: Custom-polymorphism
+    - Custom-polymorphism-and-multiple-dispatch: Custom-polymorphism-and-multiple-dispatch
+    - TODO-informit-Design-Patterns-with-Signature-Based-Polymorphism: TODO-informit-Design-Patterns-with-Signature-Based-Polymorphism
