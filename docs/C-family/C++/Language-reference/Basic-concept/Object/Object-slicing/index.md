@@ -1,6 +1,8 @@
 # Object slicing
 
-已经多次在其他文章中遇到了object  slicing，本文对它进行总结。
+1、已经多次在其他文章中遇到了object  slicing，本文对它进行总结。
+
+2、object slicing是能够体现value semantic的
 
 ## stackoverflow [What is object slicing?](https://stackoverflow.com/questions/274626/what-is-object-slicing)
 
