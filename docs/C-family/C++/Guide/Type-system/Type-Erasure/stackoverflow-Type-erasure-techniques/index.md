@@ -294,4 +294,53 @@ int main()
 
 ## Comments
 
+### Type safe
+
 @Xeo: I much prefer the first technic, because of the type safety it provides (using RTTI). – [Matthieu M.](https://stackoverflow.com/users/147192/matthieu-m) [Mar 27 '11 at 16:15](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment6175272_5450159)
+
+@Matthieu: I consider the second example also type safe. You always know the exact type you're operating on. Or am I missing something? – [Xeo](https://stackoverflow.com/users/500104/xeo) [Mar 27 '11 at 16:18](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment6175302_5450159)
+
+@Xeo: the `As` embeds a `static_cast`, but you are not sure, at all, if you actually store a `T`. – [Matthieu M.](https://stackoverflow.com/users/147192/matthieu-m) [Mar 27 '11 at 16:21](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment6175320_5450159)
+
+@Matthieu: You're right. Normally such an `As`(s) function wouldn't be implemented that way. Like I said, by no means safe-to-use! :) – [Xeo](https://stackoverflow.com/users/500104/xeo) [Mar 27 '11 at 16:23](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment6175339_5450159)
+
+### [Boost.TypeErasure](https://www.boost.org/doc/libs/1_71_0/doc/html/boost_typeerasure.html)
+
+You may be interested in the [`type_erasure` library](http://steven_watanabe.users.sourceforge.net/type_erasure/libs/type_erasure/doc/html/index.html), developed by Steven Watanabe, which should be accepted in Boost in a close future. I did not delve into the implementation, but the result is pretty awesome! AFAIK, the library uses a `void *` for data, and a statically constructed vtable containing function pointers for behavior. – [Luc Touraille](https://stackoverflow.com/users/20984/luc-touraille) [Aug 15 '12 at 14:59](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment15957446_5450159)
+
+> NOTE: 
+>
+> 1、 [`type_erasure` library](http://steven_watanabe.users.sourceforge.net/type_erasure/libs/type_erasure/doc/html/index.html) 已经被 boost accept了，这个链接是无效的，直接访问 [Boost.TypeErasure](https://www.boost.org/doc/libs/1_71_0/doc/html/boost_typeerasure.html)
+
+
+
+## [A](https://stackoverflow.com/a/6044720)
+
+All **type erasure** techniques in C++ are done with **function pointers** (for behaviour) and `void*` (for data). The "different" methods simply differ in the way they add semantic sugar. Virtual functions, e.g., are just semantic sugar for
+
+```cpp
+struct Class {
+    struct vtable {
+        void (*dtor)(Class*);
+        void (*func)(Class*,double);
+    } * vtbl
+};
+```
+
+iow: function pointers.
+
+That said, there's one technique I particularly like, though: It's `shared_ptr<void>`, simply because it blows the minds off of people who don't know you can do this: You can store any data in a `shared_ptr<void>`, and still have the correct destructor called at the end, because the `shared_ptr` constructor is a function template, and will use the type of the actual object passed for creating the deleter by default:
+
+> NOTE: 这段话的意思是: 
+>
+> "说,有一个我特别喜欢的技术,尽管:共享的指针,因为它吹了头脑的人都不知道你可以这样做:您可以在一个共享存储任何数据指针,并仍有正确的析构函数被称为最后,因为共享指针构造函数是一个函数模板,并使用实际的类型对象通过创建默认删除器:"
+
+```cpp
+{
+    const shared_ptr<void> sp( new A );
+} // calls A::~A() here
+```
+
+Of course, this is just the usual `void*`/function-pointer type erasure, but very conveniently packaged.
+
+> NOTE: 这段话的意思是: `shared_ptr<void>` 从本质上来说是使用了: `void*`/function-pointer type erasure，但是它的封装是非常好的。
