@@ -1,8 +1,8 @@
 # Type Erasure
 
-## Summary
+## Implementation summary
 
-本节对各种type erasure technique进行总结。
+本节对各种实现type erasure的technique进行总结。
 
 ### OOP interface + template implementation
 

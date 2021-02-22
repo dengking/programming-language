@@ -346,6 +346,8 @@ That said, there's one technique I particularly like, though: It's `shared_ptr<v
 > NOTE: 这段话的意思是: 
 >
 > "说,有一个我特别喜欢的技术,尽管:共享的指针,因为它吹了头脑的人都不知道你可以这样做:您可以在一个共享存储任何数据指针,并仍有正确的析构函数被称为最后,因为共享指针构造函数是一个函数模板,并使用实际的类型对象通过创建默认删除器:"
+>
+> 1、`std::share_ptr` 的实现应该是非常类似于前面 `class Any_VoidPtr`的
 
 ```cpp
 {
