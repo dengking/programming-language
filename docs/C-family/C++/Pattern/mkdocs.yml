@@ -4,3 +4,4 @@ nav:
     - Factory: Factory
     - Visitor-pattern: Visitor-pattern
     - Decorator: Decorator
+    - Adapter-pattern: Adapter-pattern

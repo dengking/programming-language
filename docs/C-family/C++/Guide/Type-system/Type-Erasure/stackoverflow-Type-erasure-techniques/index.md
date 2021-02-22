@@ -311,6 +311,8 @@ You may be interested in the [`type_erasure` library](http://steven_watanabe.use
 > NOTE: 
 >
 > 1、 [`type_erasure` library](http://steven_watanabe.users.sourceforge.net/type_erasure/libs/type_erasure/doc/html/index.html) 已经被 boost accept了，这个链接是无效的，直接访问 [Boost.TypeErasure](https://www.boost.org/doc/libs/1_71_0/doc/html/boost_typeerasure.html)
+>
+> 2、custom virtual table
 
 ### External polymorphism pattern
 
