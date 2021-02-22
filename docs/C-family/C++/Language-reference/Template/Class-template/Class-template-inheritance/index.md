@@ -170,9 +170,9 @@ int main()
 
 ## Class template inherit from non-template class
 
-本节标题的含义是: 模板类继承一个非模板类
+本节标题的含义是: 类模板继承一个非模板类
 
-模板类继承一个非模板类，如下模板类`Child`继承非模板类`Base`，在模板类`C`中，有一个`C2`类型的成员变量`m_c2`，这个类型需要一个类型为`Base`的入参，那这就出现了一个问题：如何将模板类`C`的特化后的类对象作为入参传入呢？下面是一个简单的测试出现，结果是可以的，其实显而易见，特化后的模板类是一个基础自`Base`的普通类。
+类模板继承一个非模板类，如下类模板`Child`继承非模板类`Base`，在类模板`C`中，有一个`C2`类型的成员变量`m_c2`，这个类型需要一个类型为`Base`的入参，那这就出现了一个问题：如何将模板类`C`的特化后的类对象作为入参传入呢？下面是一个简单的测试出现，结果是可以的，其实显而易见，特化后的模板类是一个继承自`Base`的普通类。
 
 ### 我的实践
 
@@ -233,7 +233,15 @@ v.push_back( new Child<int>());
 }
 ```
 
+### OOP interface + template implementation
 
+这是一种非常重要的用法，在如下领域应用了这种方法: 
+
+1、type  erasure，参见 `Type-Erasure` 章节
+
+2、external polymorphism，参见:
+
+a、`External-polymorphism-pattern` 章节
 
 ## Specialize-template-method-of-base-class
 
