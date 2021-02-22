@@ -58,9 +58,14 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 >
 > 上诉是从control theory的角度来分析的。
 
-2、在C++ programming language的设计规范中，使用更加高级的、更加抽象的"object"抽象概念来对memory、data进行统一描述，object是C++的data model 
+2、在C++ programming language的设计规范中，使用更加高级的、更加抽象的"object"抽象概念来对memory、data进行统一描述，object是C++的data model 、data abstraction(在 [Bjarne Stroustrup's definition of C++](http://www.research.att.com/~bs/glossary.html#GC++) 中，提及了data abstraction这个词 )
 
-> NOTE: design to an abstraction
+> NOTE: 
+>
+> 1、design to an abstraction
+>
+> 2、[Bjarne Stroustrup's definition of C++](http://www.research.att.com/~bs/glossary.html#GC++): 
+> "a general-purpose programming language [...] that supports procedural programming, data abstraction, object-oriented programming, and generic programming." 
 
 ### draft: C++很多内容都是建立在object上的
 
@@ -88,18 +93,20 @@ C++ programs create, destroy, refer to, access, and manipulate *objects*.
 
 > NOTE: 在上一节我们描述了C++ program的组成（是静态的、compile-time的），上面这段话描述了C++ program在runtime所做的事情。上述描述和C的[Objects and alignment](https://en.cppreference.com/w/c/language/object)中的描述相同。
 >
-> 下面总结了对object的manipulation:
+> 下面总结了对object的manipulation、operation:
 >
 > - create
 > - destroy
 > - refer to
 > - access
->
 > - stored in arrays
 > - copied
 > - assigned
+> - ......
 >
 > 对于非object，无法执行全部上述这些manipulation。
+>
+> 关于object operation，参见 `Object-operation` 章节。
 
 ### Object property
 
@@ -200,7 +207,11 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > NOTE: 
 >
-> object本质上是 *a region of storage* ，因此宽泛的说: 任何storage都可以用作object。Implicit creation本质上其实是给定 a region of storage，然后将它deserialization为指定type的object（关于deserialization，参见后面的"Serialization and deserialization"章节），这种做法是非常类似于C中的做法；
+> 1、object本质上是 *a region of storage* ，因此宽泛的说: 任何storage都可以用作object。
+>
+> 2、Implicit creation本质上其实是给定 a region of storage，然后将它deserialization为指定type的object（关于deserialization，参见后面的"Serialization and deserialization"章节），这种做法是非常类似于C中的做法；
+>
+> 3、placement new
 >
 > 原文是根据storage来进行分类的，下面是我使用table的方式重新进行组织的。
 
@@ -208,7 +219,7 @@ A *variable* is an object or a reference that is not a non-static data member, t
 
 > NOTE: 只有 [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 才能够implicit creation。implicit creation和object layout是否有关联？我觉得是有关联的，原因如下:
 >
-> 1) `C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Object-layout.md`中描述的trivial type是可以使用`memcpy`的，并且其中还讨论了lifetime
+> 1) `C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Object-layout`中描述的trivial type是可以使用`memcpy`的，并且其中还讨论了lifetime
 >
 > 2)  [implicit-lifetime types](https://en.cppreference.com/w/cpp/language/lifetime#Implicit-lifetime_types) 中提及了trivial
 >
@@ -434,30 +445,3 @@ type决定了object的size、alignment；
 > Converts between types by reinterpreting the underlying bit pattern.
 
 
-
-## Serialization and deserialization
-
-序列化与反序列化。按照C++中的说法，deserialization也可以叫做reinterpret。
-
-| 概念            | 解释                                                | 需要考虑的问题                                               |
-| --------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| serialization   | 给定一个object，得到它的object representation       | 一般使用**byte type**                                        |
-| deserialization | 给定一个memory region，按照指定type进行interpretion | - memory address是否满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement<br>- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing) |
-
-C++中，serialization and deserialization都是可以通过`reinterpret_cast`来实现的。
-
-从上面可以看出，这些内容是密切相关的：
-
-- deserialization
-- `reinterpret_cast`
-- [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
-- [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) 
-
-可以这样来总结它们之间的关联：在C++中，一般通过`reinterpret_cast`来进行deserialization，在进行deserialization的时候，需要考虑[Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)，strict aliasing的目的是：满足type的[Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment) requirement。
-
-
-
-参见：
-
-- byte type：`C-family-language\C++\Language-reference\Basic-concept\Type-system\Type-system\Byte-type.md`
-- strict aliasing：`C-family-language\C-and-C++\Pointer-array-alias\Alias`

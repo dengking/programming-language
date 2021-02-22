@@ -6,6 +6,23 @@
 
 ## Object operation and magic function
 
+### draft
+
+object operation包含了object lifetime
+
+下面总结了对object的manipulation、operation:
+
+- create
+- destroy
+- refer to
+- access
+- stored in arrays
+- copied
+- assigned
+- ......
+
+### draft
+
 1、new、construct: 对应的是constructor
 
 2、serialization-deserialization，或者说 获得value representation
