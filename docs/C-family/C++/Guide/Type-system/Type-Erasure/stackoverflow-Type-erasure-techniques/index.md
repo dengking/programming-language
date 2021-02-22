@@ -316,7 +316,7 @@ You may be interested in the [`type_erasure` library](http://steven_watanabe.use
 
 ### External polymorphism pattern
 
-Side note: the pattern used i.a. by Boost.Any is called the external polymorphism pattern – [wmamrak](https://stackoverflow.com/users/469659/wmamrak) [Dec 4](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment18828402_5450159)
+Side note: the pattern used i.a. by `Boost.Any` is called the external polymorphism pattern – [wmamrak](https://stackoverflow.com/users/469659/wmamrak) [Dec 4](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment18828402_5450159)
 
 > NOTE: 
 >
