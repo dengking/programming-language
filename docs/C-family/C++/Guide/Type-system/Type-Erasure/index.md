@@ -4,11 +4,13 @@
 
 本节对各种type erasure technique进行总结。
 
-### OOP interface
+### OOP interface + template implementation
 
-1、C++的实现方式是: Virtual function、consistent type、consistent interface
+1、C++的实现方式是: 
 
-2、声明一个abstract base class，在其中定义[pure]virtual method(consistent interface)，然后让各个[sub|implementation]class[template]来implement(通过inheritance)这个abstract base class，从而实现了consistent type、consistent interface。
+声明一个abstract base class，在其中定义[pure]virtual method(consistent interface)，然后让各个[sub|implementation]class[template]来implement(通过inheritance)这个abstract base class
+
+2、从而实现了consistent type、consistent interface:
 
 consistent interface: behavior
 
