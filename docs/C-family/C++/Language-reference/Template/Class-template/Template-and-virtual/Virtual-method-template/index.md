@@ -20,7 +20,7 @@
 
 ```C++
 template<typename T>
-void Test(T t)
+virtual void Test(T t)
 {}
 ```
 
@@ -28,9 +28,11 @@ void Test(T t)
 
 
 
-### 2、使用`void*` type erasure
+### 2、使用type erasure
 
-1、这种方案是使用C generic programming的思路，它其实对应的是type erasure，但是感觉它不是C++的做法。
+想要实现polymorphism，但是受限于template的type无法进行统一的描述，那如果将type去除  + polymorphism就是能够满足需求了，显然这就是type erasure能够达到的。
+
+1、使用 **void pointer**，这种方案是使用C generic programming的思路，它其实对应的是type erasure，但是感觉它不是C++的做法。
 
 2、按照artima [On the Tension Between Object-Oriented and Generic Programming in C++](https://www.artima.com/cppsource/type_erasure.html) 中的说法，它是:
 
