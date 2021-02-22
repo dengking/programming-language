@@ -312,7 +312,13 @@ You may be interested in the [`type_erasure` library](http://steven_watanabe.use
 >
 > 1、 [`type_erasure` library](http://steven_watanabe.users.sourceforge.net/type_erasure/libs/type_erasure/doc/html/index.html) 已经被 boost accept了，这个链接是无效的，直接访问 [Boost.TypeErasure](https://www.boost.org/doc/libs/1_71_0/doc/html/boost_typeerasure.html)
 
+### External polymorphism pattern
 
+Side note: the pattern used i.a. by Boost.Any is called the external polymorphism pattern – [wmamrak](https://stackoverflow.com/users/469659/wmamrak) [Dec 4](https://stackoverflow.com/questions/5450159/type-erasure-techniques#comment18828402_5450159)
+
+> NOTE: 
+>
+> 1、关于 External polymorphism pattern，参见`External-polymorphism-pattern` 章节
 
 ## [A](https://stackoverflow.com/a/6044720)
 
@@ -328,6 +334,10 @@ struct Class {
 ```
 
 iow: function pointers.
+
+> NOTE: 
+>
+> 1、这一段关于vtable的描述，我觉得是非常好的，它直达本质
 
 That said, there's one technique I particularly like, though: It's `shared_ptr<void>`, simply because it blows the minds off of people who don't know you can do this: You can store any data in a `shared_ptr<void>`, and still have the correct destructor called at the end, because the `shared_ptr` constructor is a function template, and will use the type of the actual object passed for creating the deleter by default:
 
