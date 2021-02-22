@@ -8,7 +8,7 @@
 
 其中提及了"external polymorphism"，于是我Google了一下，检索结果中包含 wiki.c2 [External Polymorphism](https://proxy.c2.com/cgi/fullSearch?search=ExternalPolymorphism) ，这篇文章总结地不错，通过其中的内容，我发现我之前很多的做法其实都可以归为 external polymorphism，显然我们使用 external polymorphism 的目的是为了实现 custom polymorphism，即自定义polymorphism。我又联想到了之前总结的custom virtual table，显然它也是为了实现 custom polymorphism；我又联想到了之前阅读的visitor pattern中实现multiple dispatch，其中是明确反对custom polymorphism、external polymorphism的，因此这就是导致了我编写本文。
 
-## Custom polymorphism
+## Custom polymorphism and multiple dispatch
 
 1、C++语言原生并不不支持multiple dispatch，有的时候，需要进行multiple dispatch，因此一个思路就是: custom polymorphism；但是，对于通过custom polymorphism来实现multiple dispatch的方式，有的人是反对的，参见 `C++\Pattern\Visitor-pattern` 章节，其中对此进行了讨论。
 
@@ -45,3 +45,13 @@ This allows classes which are not related by inheritance and/or have no virtual 
 This pattern capitalizes on both c++ features and on other basic patterns (Adapter or Decorator) to give appearance of polymorphic behavior of otherwise unrelated class.
 
  
+
+## 如何实现multiple dispatch
+
+1、Emulating(模拟) multiple dispatch using multiple single dispatch
+
+参见 `Programming-paradigm\Common\Abstraction-and-polymorphism\Polymorphism\Implementation` 章节
+
+2、借助external polymorphism
+
+参见 `wiki.c2-External-Polymorphism` 章节
