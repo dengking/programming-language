@@ -329,6 +329,10 @@ You have two possible solutions for this:
 
 1、intrusive(入侵式的) cloning (your class hierarchy rooted in `Base` needs to implement a `virtual Base* clone() = 0` where each specialization of `Base` returns it's own instance); this cloning implementation would be then used for deep copy;
 
+> NOTE: 
+>
+> 1、virtual clone
+
 2、transparent cloning, based on template specialization of a factory function, by the derived type. I needed to implement something similar for the same reason (deep copy of polymorphic pointers). You can see [here](https://codereview.stackexchange.com/questions/54371/polymorphic-owned-reference-wrapper-for-class-hierarchies) my implementation.
 
 See the use of `to_polymorphic` functions in my question, and how they instantiate the correct cloning function, transparently.
