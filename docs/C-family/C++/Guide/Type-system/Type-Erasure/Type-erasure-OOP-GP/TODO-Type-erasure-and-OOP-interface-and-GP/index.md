@@ -2,9 +2,9 @@
 
 本文讨论如下三种technique:
 
-1、type erasure: 去除type，提供统一的type; 不依赖inheritance、implementation; static polymorphism;
+1、type erasure: 去除type，提供统一的type; 不依赖inheritance、implementation; dynamic polymorphism;
 
-2、OOP interface: 统一type; 依赖于inheritance、implementation; static polymorphism;
+2、OOP interface: 统一type; 依赖于inheritance、implementation; dynamic  polymorphism;
 
 Java主要是利用它 来实现generic  programming
 
@@ -23,3 +23,5 @@ Java主要是利用它 来实现generic  programming
 
 
 ## 如何进行tradeoff?
+
+其实前面已经对它们的差异进行了梳理。
