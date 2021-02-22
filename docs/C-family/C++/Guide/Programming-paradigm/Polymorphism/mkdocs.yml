@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - Specialization-and-overload: Specialization-and-overload
+    - Custom-polymorphism: Custom-polymorphism
