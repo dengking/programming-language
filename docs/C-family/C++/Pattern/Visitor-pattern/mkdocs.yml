@@ -1,2 +1,3 @@
 nav:
-    - C++multiple-dispatch-in-visitor-pattern: C++multiple-dispatch-in-visitor-pattern.md
+    - Introduction: index.md
+    - thegreenplace-A-polyglot's-guide-to-multiple-dispatch: thegreenplace-A-polyglot's-guide-to-multiple-dispatch
