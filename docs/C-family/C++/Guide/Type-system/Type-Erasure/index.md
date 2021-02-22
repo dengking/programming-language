@@ -20,7 +20,7 @@ consistent type: type、data
 
 对于像UST table这样的class template，我创建了多个specialization，同时我想要创建table name 到 object 的映射关系。显然，实现"table name 到 object 的映射关系"的做好的做法是: 将它们存到一个map中，但是由于各个specialization的type是不一致的，因此无法定义这样的map，那有没有解决方案呢？我的做法是: 声明一个abstract base class，在其中定义[pure]virtual method(consistent interface)，然后让各个class template来implement(通过inheritance)这个abstract base class。
 
-> NOTE: 其实我的上述实现思路，即使用map来进行映射，是属于典型的custom virtual table，这种实现方式是不推荐的。
+> NOTE: 其实我的上述实现思路，即使用map来进行映射，是属于典型的custom virtual table-generic function pattern，这种实现方式是不推荐的。
 
 ### Function pointer for behavior and void pointer for data
 
