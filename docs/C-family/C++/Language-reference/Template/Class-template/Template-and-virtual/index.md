@@ -146,4 +146,6 @@ class A
 };
 ```
 
+## 如何模拟？
 
+在 `Virtual-method-template` 章节进行了讨论。
