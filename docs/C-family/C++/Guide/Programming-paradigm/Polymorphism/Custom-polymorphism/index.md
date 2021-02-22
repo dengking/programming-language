@@ -1,4 +1,4 @@
-# Custom polymorphism、multiple dispatch
+# Custom polymorphism and multiple dispatch
 
 ## 起因
 
