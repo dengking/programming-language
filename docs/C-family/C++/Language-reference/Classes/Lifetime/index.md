@@ -1,20 +1,33 @@
 # 关于本章
 
-在`C++\Language-reference\Basic-concept\Data-model\Object\Object-lifetime-and-storage-duration`章节中，我们介绍了object的lifetime大体流程，本章对OOP object的lifetime中的activity进行详细描述。
+## 描述原则
+
+在工程discrete的`Make-it-computational`章节，我们知道，实现"computational"的前提必要条件有:
+
+1、Structuralization-and-formalization
+
+2、Ordering
+
+按照这个思路，我们在描述OOP lifetime的相关问题的时候，也是遵循这个思路的: 
+
+1、Structuralization: 基于class hierarchy
+
+2、Ordering: 需要梳理 order:
+
+a、基于class hierarchy的order
+
+b、the order of declaration of the members and the order of initialization、deinitialization
+
+## 内容概述
+
+在`C++\Language-reference\Basic-concept\Data-model\Object\Lifetime-and-storage-duration`章节中，我们介绍了object的lifetime大体流程，本章对OOP object的lifetime中的activity进行详细描述。
 
 本章描述的重点是: 
 
-| activity         | 说明                                                         |
-| ---------------- | ------------------------------------------------------------ |
-| allocation       | 不描述                                                       |
-| initialization   | 详细描述: <br>- 基于class hierarchy来描述: initialization order<br>- member data initialization: <br>- - initialization order |
-| deinitialization | 详细描述:                                                    |
-| deallocation     | 不描述                                                       |
+| activity         | 说明                                                         | magic function |
+| ---------------- | ------------------------------------------------------------ | -------------- |
+| allocation       | 不描述                                                       |                |
+| initialization   | 详细描述思路: <br>- 基于class hierarchy来描述: initialization order<br>- member data initialization: <br>- initialization order | constructor    |
+| deinitialization | 详细描述:<br>- TODO                                          | destructor     |
+| deallocation     | 不描述                                                       |                |
 
-除了描述这些细节，我们还描述与此相关的问题。
-
-## TODO
-
-### the order of declaration of the members in c++ and the order of destruction
-
-[Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )

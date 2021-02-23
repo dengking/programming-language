@@ -49,7 +49,17 @@ C++ 并不直接move，更多的还是swap
 
 对应的magic function是destructor，在`Destructor`章节进行描述。
 
+## Common issue
 
+C++ magic function的一些Common issue:
+
+1、template
+
+2、virtual
+
+3、delete
+
+4、default
 
 ## Rule of zero、three、five
 
