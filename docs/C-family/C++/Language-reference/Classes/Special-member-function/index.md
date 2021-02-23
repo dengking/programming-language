@@ -64,13 +64,13 @@ virtual化，充分发挥dynamic polymorphism。
 
 ### Requiring or Prohibiting
 
+1、behavior-based
 
+2、movable、copyable
 
- movable、copyable
+3、delete、private
 
-3、delete
-
-### default
+### Default
 
 使用default行为。
 
