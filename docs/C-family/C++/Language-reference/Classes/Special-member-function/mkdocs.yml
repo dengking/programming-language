@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
+    - Common-issue: Common-issue
     - Constructor: Constructor
     - Destructor: Destructor
     - Assignment: Assignment
-    - Implicitly-defined: Implicitly-defined.md

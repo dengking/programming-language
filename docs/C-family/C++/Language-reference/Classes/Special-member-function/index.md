@@ -38,41 +38,25 @@ copy: 可以copy from lvalue、copy from rvalue
 
 因此包含四个 magic function。
 
+
+
 ### Swap
 
-交换两个object的value
+交换两个object的value。
+
+
 
 ### Move
 
-C++ 并不直接move，更多的还是swap
+C++ 并不直接move，更多的还是swap。
+
+
 
 ### Destroy
 
 对应的magic function是destructor，在`Destructor`章节进行描述。
 
-## Common issue
 
-C++ magic function的一些Common issue:
-
-### Template
-
-模板化。
-
-### Virtual
-
-virtual化，充分发挥dynamic polymorphism。
-
-### Requiring or Prohibiting
-
-1、behavior-based
-
-2、movable、copyable
-
-3、delete、private
-
-### Default
-
-使用default行为。
 
 ## Rule of zero、three、five
 
