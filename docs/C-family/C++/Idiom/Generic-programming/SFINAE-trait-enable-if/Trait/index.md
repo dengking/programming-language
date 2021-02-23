@@ -436,9 +436,7 @@ is_specialized(std::string): 0
 
 ## What is Traits?
 
-### trait is a kind of metafunction and is an kind of abstraction
 
-trait是典型的metafunction，参见`C++\Idiom\Templates-and-generic-programming\Metafunction`。
 
 ### boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)中关于trait的定义
 
@@ -466,46 +464,71 @@ Traits of `std::iterator`, please visit [Templates](http://www.bogotobogo.com/cp
 
 For template specialization, please visit [Template Specialization](http://www.bogotobogo.com/cplusplus/template_specialization_function_class.php).
 
-### 文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)
+下面总结了trait的一些特征:
 
-在文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)中，对trait的介绍也非常好:
+### Trait is a metafunction 
 
-> They are a **meta programming technique** which appears to use types and their sub types like functions at compile time, to control what the compiler actually compiles.
+Trait是典型的metafunction(参见`C++\Idiom\Templates-and-generic-programming\Metafunction`)，trait提供了compile time query static info的consistent interface。
 
-正如上面这段话中所言，trait是一种meta programming technique。
+关于这一点，在下面文章中有说明: 
+
+1、在文章galowicz [What is a Type Trait?](https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/)中，对trait的介绍也非常好:
+
+> They are a **meta programming technique** which appears to use types and their sub types like **functions** at compile time, to control what the compiler actually compiles.
+
+正如上面这段话中所言，trait是一种meta programming technique，上述 "**functions** at compile time"，其实就是metafunction 。
+
+
+
+### Trait is a consistent interface and is an kind of abstraction
+
+这是在 accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442) 中提出的，我觉得总结地非常好。
+
+### Traits is non intrusive
+
+这是在 boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) # Trait 段中提出的，我觉得非常好，它说明了trait的特征。
 
 
 
 ## Implementation of trait
 
-
+### Primary class template and specialization  
 
 在[An introduction to C++ Traits](https://accu.org/index.php/journals/442)有这样的一段话：
 
 > First, **a generic template** is defined that implements the **default behaviour**.
 
-trait class往往会定义一个template class（primary template class），然后提供这个template的各种specification，显然在primary template class中需要提供trait的一种默认实现/默认值，下面分情况对它进行讨论：
-
-- trait是一个变量，trait variable
-
-- trait是一个method，trait function
-
-- trait是一个type，trait type
-
-参见[Example.md](./Example.md)，其中发布列举了对应上述三种情况的例子，这些例子回答了上述问题。
+trait class往往会定义一个template class（primary class template ），然后提供这个template的各种specification(可能是full specialization、partial specialization)，显然在primary template class中需要提供trait的一种默认实现/默认值。
 
 
 
 关于Template specialization，参见：
 
-- cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
-- cppreference [partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)
+1、cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
+
+2、cppreference [partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)
+
+
+
+### Trait的information
+
+下面分情况对它进行讨论：
+
+1、trait是一个变量，trait variable
+
+2、trait是一个method，trait function
+
+3、trait是一个type，trait type
+
+参见[Example.md](./Example.md)，其中发布列举了对应上述三种情况的例子，这些例子回答了上述问题。
 
 
 
 ## C++14 TransformationTrait
 
 C++14 TransformationTrait对trait进行强化，参见`C++\What-is-new-in-C++\C++14\TransformationTrait`。
+
+
 
 ## TO READ
 
