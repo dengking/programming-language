@@ -1,10 +1,34 @@
 # boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html)
 
-> NOTE: 这篇文章非常值得一读，原文它总结了boost library的实现中所使用到的generic programming technique，关于C++ generic programming，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming`章节。
+> NOTE: 
+>
+> 1、这篇文章非常值得一读，原文它总结了boost library的实现中所使用到的generic programming technique，关于C++ generic programming，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming`章节。
+>
+> 2、我就是通过这篇文章，开始了generic programming的学习的
+>
+> 3、本文着重介绍了generic programming的一些technique，其中，最最让我印象深刻的是对"concept"的介绍，非常好，通过"Anatomy of a Concept"章节的描述可以看出: boost 是遵循经典的generic programming的思想的。
+>
+> concept是GP的重要组成部分，C++20添加了concept特性以支持generic programming concept，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming\Concepts`章节；boost很早就采用了concept technique，它的The Boost Concept Check Library (BCCL) 支持concept，参见`C++\Library\Boost\Boost-Concept-Check-Library`章节。
 
 ## Introduction
 
+Generic programming is about generalizing software components so that they can be easily reused in a wide variety of situations. In C++, class and function templates are particularly effective mechanisms for generic programming because they make the generalization possible without sacrificing efficiency.
+
+> NOTE: 
+>
+> generic programming能够保证
+>
+> 1、"reused": code reuse
+>
+> 2、"effective "、"sacrificing efficiency": performance、static polymorphism
+
 > NOTE: 原文的这一节主要讲述generic programming
+
+### C generic programming
+
+As a simple example of generic programming, we will look at how one might generalize the `memcpy()` function of the C standard library. An implementation of `memcpy()` might look like the following:
+
+
 
 ```c++
 void* memcpy(void* region1, const void* region2, size_t n)
@@ -18,7 +42,17 @@ void* memcpy(void* region1, const void* region2, size_t n)
 }
 ```
 
+### C++ generic programming
 
+> NOTE:
+>
+> 1、这一段关于C++ 和 C generic  programming的比较是非常好的，通过这一段可知: 相比于C void pointer，C++ concept是更加强大的、抽象的，因此能够实现更大的power
+
+The `memcpy()` function is already generalized to some extent by the use of `void*` so that the function can be used to copy **arrays** of different kinds of data. But what if the data we would like to copy is not in an **array**? Perhaps it is in a linked list. Can we generalize the notion of copy to any sequence of elements? Looking at the body of `memcpy()`, the function's **minimal requirements** are that it needs to *traverse* through the sequence using some sort of pointer, *access* elements pointed to, *write* the elements to the destination, and *compare* pointers to know when to stop. The C++ standard library groups requirements such as these into **concepts**, in this case the [Input Iterator](http://en.cppreference.com/w/cpp/concept/InputIterator) concept (for `region2`) and the [Output Iterator](http://en.cppreference.com/w/cpp/concept/OutputIterator) concept (for `region1`).
+
+
+
+If we rewrite the `memcpy()` as a function template, and use the [Input Iterator](http://en.cppreference.com/w/cpp/concept/InputIterator) and [Output Iterator](http://en.cppreference.com/w/cpp/concept/OutputIterator) concepts to describe the requirements on the template parameters, we can implement a highly reusable `copy()` function in the following way:
 
 ```c++
 template <typename InputIterator, typename OutputIterator>
@@ -31,6 +65,33 @@ copy(InputIterator first, InputIterator last, OutputIterator result)
 }
 ```
 
+Using the generic `copy()` function, we can now copy elements from any kind of sequence, including a linked list that exports iterators such as `std::list `.
+
+```C++
+#include <list>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+  const int N = 3;
+  std::vector<int> region1(N);
+  std::list<int> region2;
+
+  region2.push_back(1);
+  region2.push_back(0);
+  region2.push_back(3);
+  
+  std::copy(region2.begin(), region2.end(), region1.begin());
+
+  for (int i = 0; i < N; ++i)
+    std::cout << region1[i] << " ";
+  std::cout << std::endl;
+}
+```
+
+
+
 ## Anatomy of a Concept
 
 > NOTE: "anatomy"的含义是"解剖"。
@@ -41,15 +102,25 @@ A **concept** is a set of requirements consisting of valid expressions, associat
 
 1) **Valid Expressions** are C++ expressions which must compile successfully for the objects involved in the expression to be considered *models* of the concept.
 
-> NOTE: **Valid Expressions**的含义非常重要
+> NOTE: 
+>
+> 1、**Valid Expressions**的含义非常重要
+>
+> 2、**Valid Expressions** 是behavior-based
+>
+> 3、**Valid Expressions** 是 compile-time、static
 
 2) **Associated Types** are types that are related to the modeling type in that they participate in one or more of the **valid expressions**. Typically associated types can be accessed either through typedefs nested within a class definition for the modeling type, or they are accessed through a [traits class](https://www.boost.org/community/generic_programming.html#traits).
 
 3) **Invariants** are run-time characteristics of the objects that must always be true, that is, the functions involving the objects must preserve these characteristics. The invariants often take the form of pre-conditions and post-conditions.
 
+> NOTE: 
+>
+> 1、invariant是dynamic的
+
 4) **Complexity Guarantees** are maximum limits on how long the execution of one of the valid expressions will take, or how much of various resources its computation will use.
 
-> NOTE: concept是GP的重要组成部分，C++20添加了concept特性以支持generic programming concept，参见`C++\Language-reference\Template\Programming-paradigm\Generic-programming\Concepts`章节；boost很早就采用了concept technique，它的The Boost Concept Check Library (BCCL) 支持concept，参见`C++\Library\Boost\Boost-Concept-Check-Library`章节。
+The concepts used in the C++ Standard Library are documented at the [C++ reference website](http://en.cppreference.com/w/).
 
 
 
