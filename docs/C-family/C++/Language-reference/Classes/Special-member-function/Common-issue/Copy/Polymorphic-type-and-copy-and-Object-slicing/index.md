@@ -1,4 +1,16 @@
-# Object slicing
+# Polymorphic type and copy and object slicing
+
+## 概述
+
+对于polymorphic type，如果要copy，优先使用`virtual clone`，而不是 assignment operator，问题的根源在于 object slicing。因此，就需要不使用 `=`，而是调用 `clone`来deep copy。
+
+### CppCoreGuidelines 
+
+CppCoreGuidelines [C.67: A polymorphic class should suppress copying](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-copy-virtual)
+
+CppCoreGuidelines [C.130: For making deep copies of polymorphic classes prefer a virtual `clone` function instead of copy construction/assignment](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-copy)
+
+## Object  slicing
 
 1、已经多次在其他文章中遇到了object  slicing，本文对它进行总结。
 
@@ -147,109 +159,106 @@ Note that, for pure convenience, `B`'s `operator=` covariantly overrides the ret
 > NOTE: 
 >
 > 完整的测试程序如下，这个测试程序是对 wikipedia [Object slicing](https://en.wikipedia.org/wiki/Object_slicing) 中的例子的稍微改写。
-
-```C++
-#include <stdexcept>
-#include <exception>
-#include <string>
-#include <iostream>
-
-class bad_assignment: public std::exception
-{
-	const char* what() const throw ()
-	{
-		return "bad assignment";
-	}
-};
-
-class A
-{
-public:
-	int a_var; // 为了测试便利将它放在public
-	A(int a) :
-					a_var(a)
-	{
-	}
-	virtual ~A() = default;
-	virtual A& operator=(const A &a)
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		assign(a);
-		return *this;
-	}
-
-protected:
-	void assign(const A &a)
-	{
-		// copy members of A from a to this
-		a_var = a.a_var;
-	}
-};
-
-class B: public A
-{
-public:
-	int b_var; // 为了测试便利将它放在public
-	B(int a, int b) :
-					A(a), b_var(b)
-	{
-	}
-	virtual ~B() = default;
-	virtual B& operator=(const A &a)
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		if (const B *b = dynamic_cast<const B*>(&a))
-			assign(*b);
-		else
-			throw bad_assignment();
-		return *this;
-	}
-
-protected:
-	void assign(const B &b)
-	{
-		A::assign(b); // Let A's assign() copy members of A from b to this
-		// copy members of B from b to this
-		b_var = b.b_var;
-	}
-};
-
-B& getB()
-{
-	static B b(1, 2);
-	return b;
-}
-
-int main()
-{
-	// Normal assignment by value to a
-	A a(3);
-	//a.a_var == 3
-	a = getB();
-	// a.a_var == 1, b.b_var not copied to a
-
-	B b2(3, 4);
-	//b2.a_var == 3 ,b2.b_var == 4
-	A &a2 = b2;
-
-	a2 = getB();
-	if (b2.a_var == getB().a_var && b2.b_var == getB().b_var)
-	{
-		std::cout << "success" << std::endl;
-	}
-	else
-	{
-		std::cout << "fail" << std::endl;
-	}
-	return 0;
-}
-// g++ --std=c++11 -Wall -pedantic -pthread main.cpp && ./a.out
-
-
-```
-
-> NOTE: 
 >
+> ```C++
+> #include <stdexcept>
+> #include <exception>
+> #include <string>
+> #include <iostream>
+> 
+> class bad_assignment: public std::exception
+> {
+> 	const char* what() const throw ()
+> 	{
+> 		return "bad assignment";
+> 	}
+> };
+> 
+> class A
+> {
+> public:
+> 	int a_var; // 为了测试便利将它放在public
+> 	A(int a) :
+> 					a_var(a)
+> 	{
+> 	}
+> 	virtual ~A() = default;
+> 	virtual A& operator=(const A &a)
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 		assign(a);
+> 		return *this;
+> 	}
+> 
+> protected:
+> 	void assign(const A &a)
+> 	{
+> 		// copy members of A from a to this
+> 		a_var = a.a_var;
+> 	}
+> };
+> 
+> class B: public A
+> {
+> public:
+> 	int b_var; // 为了测试便利将它放在public
+> 	B(int a, int b) :
+> 					A(a), b_var(b)
+> 	{
+> 	}
+> 	virtual ~B() = default;
+> 	virtual B& operator=(const A &a)
+> 	{
+> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
+> 		if (const B *b = dynamic_cast<const B*>(&a))
+> 			assign(*b);
+> 		else
+> 			throw bad_assignment();
+> 		return *this;
+> 	}
+> 
+> protected:
+> 	void assign(const B &b)
+> 	{
+> 		A::assign(b); // Let A's assign() copy members of A from b to this
+> 		// copy members of B from b to this
+> 		b_var = b.b_var;
+> 	}
+> };
+> 
+> B& getB()
+> {
+> 	static B b(1, 2);
+> 	return b;
+> }
+> 
+> int main()
+> {
+> 	// Normal assignment by value to a
+> 	A a(3);
+> 	//a.a_var == 3
+> 	a = getB();
+> 	// a.a_var == 1, b.b_var not copied to a
+> 
+> 	B b2(3, 4);
+> 	//b2.a_var == 3 ,b2.b_var == 4
+> 	A &a2 = b2;
+> 
+> 	a2 = getB();
+> 	if (b2.a_var == getB().a_var && b2.b_var == getB().b_var)
+> 	{
+> 		std::cout << "success" << std::endl;
+> 	}
+> 	else
+> 	{
+> 		std::cout << "fail" << std::endl;
+> 	}
+> 	return 0;
+> }
+> // g++ --std=c++11 -Wall -pedantic -pthread main.cpp && ./a.out
+> 
+> 
+> ```
 > 1、上述程序的输出为: 
 >
 > ```C++
@@ -312,6 +321,188 @@ int main()
 
 
 ```
+
+
+
+## CppCoreGuidelines [C.67: A polymorphic class should suppress copying](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-copy-virtual)
+
+### Reason
+
+A *polymorphic class* is a class that defines or inherits at least one virtual function. It is likely that it will be used as a base class for other derived classes with polymorphic behavior. If it is accidentally passed by value, with the implicitly generated copy constructor and assignment, we risk slicing: only the base portion of a derived object will be copied, and the polymorphic behavior will be corrupted.
+
+### Example, bad
+
+```c++
+class B { // BAD: polymorphic base class doesn't suppress copying
+public:
+    virtual char m() { return 'B'; }
+    // ... nothing about copy operations, so uses default ...
+};
+
+class D : public B {
+public:
+    char m() override { return 'D'; }
+    // ...
+};
+
+void f(B& b)
+{
+    auto b2 = b; // oops, slices the object; b2.m() will return 'B'
+}
+
+D d;
+f(d);
+```
+
+> NOTE: 完整的测试程序如下:
+>
+> ```C++
+> #include <iostream>
+> #include <typeinfo>
+> 
+> class B // BAD: polymorphic base class doesn't suppress copying
+> {
+> public:
+> 	virtual char m()
+> 	{
+> 		return 'B';
+> 	}
+> 	// ... nothing about copy operations, so uses default ...
+> };
+> 
+> class D: public B
+> {
+> public:
+> 	char m() override
+> 	{
+> 		return 'D';
+> 	}
+> 	// ...
+> };
+> 
+> void f(B &b)
+> {
+> 	auto b2 = b; // oops, slices the object; b2.m() will return 'B'
+> 	std::cout << typeid(b2).name() << std::endl;
+> 	std::cout << b2.m() << std::endl;
+> }
+> 
+> int main()
+> {
+> 	D d;
+> 	f(d);
+> }
+> // g++ --std=c++11 -Wall -pedantic test.cpp && ./a.out
+> 
+> ```
+>
+> 输出如下:
+>
+> ```C++
+> 1B
+> B
+> ```
+>
+> 
+
+### Example
+
+```C++
+class B { // GOOD: polymorphic class suppresses copying
+public:
+    B(const B&) = delete;
+    B& operator=(const B&) = delete;
+    virtual char m() { return 'B'; }
+    // ...
+};
+
+class D : public B {
+public:
+    char m() override { return 'D'; }
+    // ...
+};
+
+void f(B& b)
+{
+    auto b2 = b; // ok, compiler will detect inadvertent copying, and protest
+}
+
+D d;
+f(d);
+
+```
+
+> NOTE: non-copyable
+
+> NOTE: 完整测试程序如下:
+>
+> ```C++
+> #include <iostream>
+> #include <typeinfo>
+> 
+> class B // BAD: polymorphic base class doesn't suppress copying
+> {
+> public:
+> 	B(const B&) = delete;
+> 	B& operator=(const B&) = delete;
+> 	virtual char m()
+> 	{
+> 		return 'B';
+> 	}
+> 	// ... nothing about copy operations, so uses default ...
+> };
+> 
+> class D: public B
+> {
+> public:
+> 	char m() override
+> 	{
+> 		return 'D';
+> 	}
+> 	// ...
+> };
+> 
+> void f(B &b)
+> {
+> 	auto b2 = b; // oops, slices the object; b2.m() will return 'B'
+> 	std::cout << typeid(b2).name() << std::endl;
+> 	std::cout << b2.m() << std::endl;
+> }
+> 
+> int main()
+> {
+> 	D d;
+> 	f(d);
+> }
+> // g++ --std=c++11 -Wall -pedantic test.cpp && ./a.out
+> 
+> ```
+>
+> 编译报错如下:
+>
+> ```C++
+> test.cpp: 在函数‘void f(B&)’中:
+> test.cpp:28:12: 错误：使用了被删除的函数‘B::B(const B&)’
+>   auto b2 = b; // oops, slices the object; b2.m() will return 'B'
+>             ^
+> test.cpp:7:2: 错误：在此声明
+>   B(const B&) = delete;
+> ```
+>
+> 
+
+### Note
+
+If you need to create deep copies of polymorphic objects, use `clone()` functions: see [C.130](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-copy).
+
+### Exception
+
+Classes that represent exception objects need both to be polymorphic and copy-constructible.
+
+### Enforcement
+
+- Flag a polymorphic class with a non-deleted copy operation.
+- Flag an assignment of polymorphic class objects.
 
 
 
