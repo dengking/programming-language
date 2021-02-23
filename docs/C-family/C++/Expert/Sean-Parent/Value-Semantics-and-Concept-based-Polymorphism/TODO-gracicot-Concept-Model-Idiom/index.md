@@ -1,0 +1,1 @@
+# gracicot [Concept-Model Idiom Part One: A new look at polymorphism](https://gracicot.github.io/conceptmodel/2017/09/13/concept-model-part1.html)
