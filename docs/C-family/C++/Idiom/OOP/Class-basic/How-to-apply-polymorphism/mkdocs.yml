@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Virtual-Constructor: Virtual-Constructor
+    - Virtual-Friend-Function: Virtual-Friend-Function
+    - Polymorphic-Value-Types: Polymorphic-Value-Types
