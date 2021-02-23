@@ -197,7 +197,9 @@ An *adaptor* is a class template which builds on another type or types to provid
 
 ## Type Generators
 
-
+> NOTE:
+>
+> 1、C++11已经将它标准化了
 
 ## Object Generators
 
