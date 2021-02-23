@@ -7,4 +7,3 @@ nav:
     # 描述object的layout    
     - Layout: Layout 
     - Object-operation: Object-operation    
-    - Object-slicing: Object-slicing
