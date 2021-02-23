@@ -17,6 +17,7 @@
 |                 | move                          |
 |                 | swap                          |
 |                 | serialization-deserialization |
+|                 | ......                        |
 | destroy         |                               |
 
 
@@ -53,13 +54,25 @@ C++ 并不直接move，更多的还是swap
 
 C++ magic function的一些Common issue:
 
-1、template
+### Template
 
-2、virtual
+模板化。
+
+### Virtual
+
+virtual化，充分发挥dynamic polymorphism。
+
+### Requiring or Prohibiting
+
+
+
+ movable、copyable
 
 3、delete
 
-4、default
+### default
+
+使用default行为。
 
 ## Rule of zero、three、five
 
