@@ -79,7 +79,7 @@ public:
 	{
 	}
 	/**
-	 * @brief copy constructor
+	 * @brief copy constructor，使用了virtual clone
 	 *
 	 * @param other
 	 */
@@ -103,7 +103,12 @@ public:
 	{
 		Clear();
 	}
-
+	/**
+	 * @brief 使用了virtual clone
+	 *
+	 * @param other
+	 * @return
+	 */
 	Any_Virtual& operator=(Any_Virtual const &other)
 	{
 		Clear();
@@ -147,6 +152,14 @@ enum Operation
 	CopyTag, DeleteTag
 };
 
+/**
+ * @brief 这就是 custom virtual table
+ *
+ * @tparam T
+ * @param in
+ * @param out
+ * @param op
+ */
 template<class T>
 void Operate(void *const&in, void *&out, Operation op)
 {
@@ -263,6 +276,7 @@ int main()
 	std::cin.get();
 }
 // g++ -Wall -pedantic main.cpp && ./a.out
+
 ```
 
 > NOTE: 输出如下:
@@ -340,6 +354,8 @@ iow: function pointers.
 > NOTE: 
 >
 > 1、这一段关于vtable的描述，我觉得是非常好的，它直达本质
+
+### `shared_ptr<void>`
 
 That said, there's one technique I particularly like, though: It's `shared_ptr<void>`, simply because it blows the minds off of people who don't know you can do this: You can store any data in a `shared_ptr<void>`, and still have the correct destructor called at the end, because the `shared_ptr` constructor is a function template, and will use the type of the actual object passed for creating the deleter by default:
 
