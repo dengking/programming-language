@@ -98,7 +98,17 @@ int main()
 
 A **concept** is a set of requirements consisting of valid expressions, associated types, invariants, and complexity guarantees. A type that satisfies the requirements is said to **model** the concept. A concept can extend the requirements of another concept, which is called **refinement**.
 
-> NOTE: **refinement**的意思是“细化”，这个词语一定要注意，在boost library的doc中它出现的频率非常高。
+> NOTE: 
+>
+> 1、**refinement**的意思是“细化”，这个词语一定要注意，在boost library的doc中它出现的频率非常高。
+>
+> 2、类比:
+>
+> GP concept <--> OOP interface
+>
+> GP concept model <--> OOP interface implementation
+>
+> GP concept refinement<--> OOP class inheritance
 
 1) **Valid Expressions** are C++ expressions which must compile successfully for the objects involved in the expression to be considered *models* of the concept.
 
