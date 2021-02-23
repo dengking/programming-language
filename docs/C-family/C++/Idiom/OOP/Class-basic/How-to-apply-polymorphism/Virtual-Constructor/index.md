@@ -2,6 +2,18 @@
 
 How to copy an object that is accessible only by an interface that it implements?
 
+## 为什么C++不提供virtual constructor？
+
+### stackoverflow [Why do we not have a virtual constructor in C++?](https://stackoverflow.com/questions/733360/why-do-we-not-have-a-virtual-constructor-in-c)
+
+Why does C++ not have a virtual constructor?
+
+[A](https://stackoverflow.com/a/733382)
+
+> NOTE: 这个回答是容易理解的，通过阅读它，我
+
+
+
 
 
 ## fluentcpp [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)
@@ -182,6 +194,18 @@ public:
 ```
 
 
+
+## When to use virtual constructor?
+
+如果一个class有一个成员，它的类型是pointer to polymorphic type object，那么这个polymorphic type就可能需要virtual constructor。
+
+下面是一些例子:
+
+1、stackoverflow [Type erasure techniques](https://stackoverflow.com/questions/5450159/type-erasure-techniques)
+
+2、stackexchange [DeepPtr: a deep-copying unique_ptr wrapper in C++](https://codereview.stackexchange.com/questions/103744/deepptr-a-deep-copying-unique-ptr-wrapper-in-c)
+
+3、
 
 ## TO READ
 
