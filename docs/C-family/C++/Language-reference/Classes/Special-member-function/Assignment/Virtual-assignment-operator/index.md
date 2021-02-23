@@ -1,5 +1,15 @@
 # Virtual assignment operator
 
+## 不应该使用virtual assignment operator
+
+在下面文章中提出了这个观点:
+
+1、sonarsource [Assignment operators should not be "virtual"](https://rules.sonarsource.com/cpp/RSPEC-3657)
+
+2、[C++ Core Guidelines C.60](https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#c60-make-copy-assignment-non-virtual-take-the-parameter-by-const-and-return-by-non-const) - Make copy assignment non-virtual, take the parameter by `const&`, and return by non-const`&`
+
+3、[C++ Core Guidelines C.63](https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#c63-make-move-assignment-non-virtual-take-the-parameter-by--and-return-by-non-const-) - Make move assignment non-virtual, take the parameter by `&&`, and return by non-const `&`
+
 
 
 ## sonarsource [Assignment operators should not be "virtual"](https://rules.sonarsource.com/cpp/RSPEC-3657)
@@ -7,6 +17,10 @@
 C++ does not support polymorphic copy or move assignment operators. 
 
 For example, the signature of a copy assignment operator on a "Base" class would be `Base& operator=(const Base& other)`. And on a "Derived" class that extends "Base", it would be `Derived& operator=(const Derived& other)`.
+
+> NOTE: 
+>
+> 1、上述说法是片面的，还是有办法实现virtual assignment operator的，下面的
 
 Because these are two entirely different **method signatures**, the second method does not override the first, and adding `virtual` to the "Base" signature does not change which method is called.
 
@@ -111,8 +125,16 @@ public:
 >
 > 
 
-## See
+### See
 
 1、[C++ Core Guidelines C.60](https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#c60-make-copy-assignment-non-virtual-take-the-parameter-by-const-and-return-by-non-const) - Make copy assignment non-virtual, take the parameter by `const&`, and return by non-const`&`
 
 2、[C++ Core Guidelines C.63](https://github.com/isocpp/CppCoreGuidelines/blob/036324/CppCoreGuidelines.md#c63-make-move-assignment-non-virtual-take-the-parameter-by--and-return-by-non-const-) - Make move assignment non-virtual, take the parameter by `&&`, and return by non-const `&`
+
+
+
+## 实现 virtual assignment operator
+
+如果实在要使用virtual assignment operator，那如何实现呢？本节讨论这个。
+
+在 stackoverflow [What is object slicing?](https://stackoverflow.com/questions/274626/what-is-object-slicing) # [A](https://stackoverflow.com/a/14461532) 中，给出了virtual assignment operator的实现，这篇文章收录在了`Object-slicing` 章节。
