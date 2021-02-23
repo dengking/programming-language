@@ -1,5 +1,7 @@
 # sean-parent [Value Semantics and Concept-based Polymorphism](https://sean-parent.stlab.cc/papers-and-presentations/#value-semantics-and-concept-based-polymorphism)
 
+> NOTE: 原文的内容不容易理解
+
 ## Outline of Talk
 
 1、Defining Value Semantics
@@ -221,3 +223,18 @@ int main()
 
 
 ## Deep problem #1
+
+Changed semantics of copy, assignment, and equality of my `document`
+
+> NOTE: 什么含义？是否是指由于引入了virtual，而导致`object_t`是一个polymorphic type，因此它的copy就涉及到了object slicing等问题
+
+1、leads to incidental data structures
+
+> NOTE:什么是"incidental data structures"？参见:
+>
+> 1、https://sean-parent.stlab.cc/presentations/2016-08-08-data-structures/2016-08-08-data-structures.pdf
+
+2、thread safety concerns
+
+> NOTE: 有什么thread safety concerns？
+
