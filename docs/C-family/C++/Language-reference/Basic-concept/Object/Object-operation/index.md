@@ -25,6 +25,8 @@
 |                 | serialization-deserialization |
 | destroy         |                               |
 
+
+
 ### Serialization deserialization
 
 获得: 
