@@ -1,10 +1,56 @@
-# Magic function
+# Object operation and special member function、magic function
 
-- [Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor)
-- [Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor)
-- [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) (since C++11)
-- [Copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment)
-- [Move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment) (since C++11)
-- [Destructor](https://en.cppreference.com/w/cpp/language/destructor)
 
-TODO: 需要增加各种operator、user defined conversion。
+
+## Object operation and magic function
+
+在 `Object-operation` 章节做了如下总结:
+
+| object lifetime | operation                     |
+| --------------- | ----------------------------- |
+| create          |                               |
+|                 | refer to                      |
+|                 | access                        |
+|                 | stored in arrays              |
+|                 | copy                          |
+|                 | assign                        |
+|                 | move                          |
+|                 | swap                          |
+|                 | serialization-deserialization |
+| destroy         |                               |
+
+
+
+### Create
+
+对应的magic function是constructor，在`Constructor`章节进行描述。
+
+
+
+### Copy
+
+copy: 可以copy from lvalue、copy from rvalue
+
+对应的magic function是: copy constructor、assignment operator
+
+对应的magic function是: lvalue copy constructor、rvalue copy constructor; lvalue assignment operator、rvalue assignment operator;
+
+因此包含四个 magic function。
+
+### Swap
+
+交换两个object的value
+
+### Move
+
+C++ 并不直接move，更多的还是swap
+
+### Destroy
+
+对应的magic function是destructor，在`Destructor`章节进行描述。
+
+
+
+## Rule of zero、three、five
+
+参见 `The-rule-of-zero-three-five` 章节。

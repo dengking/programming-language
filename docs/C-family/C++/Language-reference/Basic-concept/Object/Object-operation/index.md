@@ -6,35 +6,34 @@
 
 ## Object operation and magic function
 
-### draft
 
-object operation包含了object lifetime
 
-下面总结了对object的manipulation、operation:
+1、object operation包含了对object lifetime的控制
 
-- create
-- destroy
-- refer to
-- access
-- stored in arrays
-- copied
-- assigned
-- ......
+2、下面总结了对object的manipulation、operation:
 
-### draft
+| object lifetime | operation                     |
+| --------------- | ----------------------------- |
+| create          |                               |
+|                 | refer to                      |
+|                 | access                        |
+|                 | stored in arrays              |
+|                 | copy                          |
+|                 | assign                        |
+|                 | move                          |
+|                 | swap                          |
+|                 | serialization-deserialization |
+| destroy         |                               |
 
-1、new、construct: 对应的是constructor
+### Serialization deserialization
 
-2、serialization-deserialization，或者说 获得value representation
+获得: 
 
-3、copy: 可以copy from lvalue、copy from rvalue
+1、value representation
 
-对应的是: copy constructor、assignment operator
+2、object representation
 
-对应的是: lvalue copy constructor、rvalue copy constructor; lvalue assignment operator、rvalue assignment operator;
+### 其他
 
-因此包含四个 magic function
+object operation 和 magic function之间的对应关系主要涉及OOP，因此将这部分内容放到了`Classes`章节。
 
-4、swap: 交换两个object的value
-
-5、move: C++ 并不直接move，更多的还是swap
