@@ -14,12 +14,12 @@ Object lifetime就是典型的以"order"来对object进行描述；object是C fa
 
 下面是以表格的形式展示的Lifetime of an object，相比于cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) ，它更加的清晰、直观。
 
-| activity         | 说明                                               | 章节                                                         |
-| ---------------- | -------------------------------------------------- | ------------------------------------------------------------ |
-| allocation       | 这其实是**object creation**，会为object分配storage | `C++\Language-reference\Basic-concept\Data-model\Object\Object.md`的"Object creation"章节 |
-| initialization   | 初始化object                                       | `C++\Language-reference\Initialization`                      |
-| deinitialization | 反初始化object                                     |                                                              |
-| deallocation     | 回收object的storage                                |                                                              |
+| activity                     | 说明                                               | 章节                                                         |
+| ---------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
+| allocation                   | 这其实是**object creation**，会为object分配storage | `C++\Language-reference\Basic-concept\Data-model\Object\Object.md`的"Object creation"章节 |
+| initialization/construction  | 初始化object                                       | `C++\Language-reference\Initialization`                      |
+| deinitialization/destruction | 反初始化object                                     |                                                              |
+| deallocation                 | 回收object的storage                                |                                                              |
 
 需要注意的是：上面是按照发生顺序进行排列的，即：allocation->initialization->deinitialization->deallocation。
 

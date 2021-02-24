@@ -24,10 +24,10 @@ b、the order of declaration of the members and the order of initialization、de
 
 本章描述的重点是: 
 
-| activity         | 说明                                                         | magic function |
-| ---------------- | ------------------------------------------------------------ | -------------- |
-| allocation       | 不描述                                                       |                |
-| initialization   | 详细描述思路: <br>- 基于class hierarchy来描述: initialization order<br>- member data initialization: <br>- initialization order | constructor    |
-| deinitialization | 详细描述:<br>- TODO                                          | destructor     |
-| deallocation     | 不描述                                                       |                |
+| activity                     | 说明                                                         | magic function |
+| ---------------------------- | ------------------------------------------------------------ | -------------- |
+| allocation                   | 不描述                                                       |                |
+| initialization/construction  | 详细描述思路: <br>- 基于class hierarchy来描述: initialization order<br>- member data initialization: <br>- initialization order | constructor    |
+| deinitialization/destruction | 详细描述:<br>- TODO                                          | destructor     |
+| deallocation                 | 不描述                                                       |                |
 
