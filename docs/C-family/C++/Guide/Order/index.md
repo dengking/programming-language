@@ -50,3 +50,6 @@ C++语言对expression的evaluation的规定，参见`C-family-language\C-and-C+
 
 
 
+### `std::memory_order`
+
+https://en.cppreference.com/w/cpp/atomic/memory_order
