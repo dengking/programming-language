@@ -18,9 +18,7 @@
 
 interface对应的是abstract，implementation对应的是concrete
 
-### Information hiding
+### Information hiding/Separate interface from implementation
 
-与"Interface and implementation"密切相关的一个内容是Information hiding:
-
-需要将implementation进行hiding。
+在 `Separate-interface-from-implementation` 中进行了总结。
 
