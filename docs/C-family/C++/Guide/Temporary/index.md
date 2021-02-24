@@ -19,3 +19,11 @@
 ## Idiom using C++ temporary
 
 在C++中，有很多idiom都使用temporary，这在`C++\Idiom\OOP\index.md#Idiom concerning temporary/`中进行了总结。
+
+
+
+## Not use unmanned temporary
+
+这是我在阅读 [Differences between std::make_unique and std::unique_ptr with new](https://stackoverflow.com/questions/22571202/differences-between-stdmake-unique-and-stdunique-ptr-with-new) # [A](https://stackoverflow.com/a/22571331) 时，其中提及的:
+
+> `make_unique` is safe for creating temporaries, whereas with explicit use of `new` you have to remember the rule about not using unnamed temporaries.
