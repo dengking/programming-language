@@ -9,6 +9,8 @@
 > 1、make it computational ordering
 >
 > 2、"**one thread can observe the values change in an order different from the order another thread wrote them**"如何理解？
+>
+> TODO 这需要结合具体的例子来进行说明，使用 "order of write to shared data may be different among different threads " 可以检索到 相关的例子。
 
 The default behavior of all atomic operations in the library provides for *sequentially consistent ordering* (see discussion below). That default can hurt performance, but the library's atomic operations can be given an additional `std::memory_order` argument to specify the exact constraints, beyond atomicity, that the compiler and processor must enforce for that operation.
 
@@ -220,8 +222,6 @@ y.store(42, std::memory_order_relaxed); // D
 In particular, this may occur if D is completed before C in thread 2, either due to compiler reordering or at runtime.
 
 > NOTE: 这就是reordering。
-
-
 
 
 
