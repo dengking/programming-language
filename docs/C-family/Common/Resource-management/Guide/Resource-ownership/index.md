@@ -16,6 +16,10 @@ CppCoreGuidelines [R: Resource management](https://github.com/isocpp/CppCoreGuid
 
 1、提出了"owner"的概念
 
+2、 [R.1: Manage resources automatically using resource handles and RAII (Resource Acquisition Is Initialization)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-raii) 其中有"takes over ownership of the pointer"的描述
+
+3、[R.3: A raw pointer (a `T*`) is non-owning](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#r3-a-raw-pointer-a-t-is-non-owning)
+
 ### Owning and non-owning  
 
 这是在 CppCoreGuidelines [R.2: In interfaces, use raw pointers to denote individual objects (only)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-use-ptr) 的下面这段话: 
@@ -47,6 +51,10 @@ reader lock是shared，write lock是unique的；
 1、share ownership
 
 2、transfer/take over ownership
+
+> NOTE: 
+>
+> 1、"take over ownership"是我在阅读 CppCoreGuidelines [R.1: Manage resources automatically using resource handles and RAII (Resource Acquisition Is Initialization)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-raii) 时，其中提出的。
 
 ### Move semantic and ownership
 
