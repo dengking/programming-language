@@ -72,7 +72,7 @@ int main (void)
 
 There are several issues to be considered while determining the type of resource-management smart pointer to use to return a resource. Possible options are:
 
-- std::auto_ptr （已经废弃了）
+- s`td::auto_ptr` （已经废弃了）
 - boost::shared_ptr / [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr) (as of C++11)
 - [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr) in C++0x
 - User defined [Handle/Body](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Handle_Body) idiom
