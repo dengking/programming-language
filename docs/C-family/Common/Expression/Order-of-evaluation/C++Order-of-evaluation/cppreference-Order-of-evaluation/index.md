@@ -167,6 +167,20 @@ The side effect (modification of the left argument) of the built-in [assignment]
 
 #### Function call
 
+> NOTE: 关于 function call的order of  evaluation，在下面文章中进行了一些描述:
+>
+> 1、[GotW #102: Exception-Safe Function Calls (Difficulty: 7/10)](https://herbsutter.com/gotw/_102/)
+>
+> 这篇文章非常好
+>
+> 2、[Advantages of using std::make_unique over new operator [duplicate]](https://stackoverflow.com/questions/37514509/advantages-of-using-stdmake-unique-over-new-operator) # [A](https://stackoverflow.com/a/37514627)
+>
+> 这些文章，主要收录在如下章节中:
+>
+> 1、`Exception-Safe-Function-Call`
+>
+> 2、`Prefer-use-object-generator`
+
 11) A function call that is not *sequenced before* or *sequenced after* another function call is *indeterminately sequenced* (the program must behave [as if](https://en.cppreference.com/w/cpp/language/as_if) the CPU instructions that constitute different function calls were not interleaved, even if the functions were inlined).
 
 (since C++17) The rule 11 has one exception: function calls made by a standard library algorithm executing under [`std::execution::par_unseq`](https://en.cppreference.com/w/cpp/algorithm/execution_policy_tag_t) execution policy are unsequenced and may be arbitrarily interleaved.
@@ -179,7 +193,9 @@ The side effect (modification of the left argument) of the built-in [assignment]
 
 2、(since C++17) **sequenced before** the evaluation of the constructor arguments in a [new-expression](https://en.cppreference.com/w/cpp/language/new)；
 
-> NOTE: 这段话要如何理解？
+> NOTE: 这段话要如何理解？参见: 
+>
+> 1、stackoverflow [Exception safety and make_unique](https://stackoverflow.com/questions/19472550/exception-safety-and-make-unique) # [A](https://stackoverflow.com/a/44932594)
 
 ## Sequence point rules (until C++11)
 
