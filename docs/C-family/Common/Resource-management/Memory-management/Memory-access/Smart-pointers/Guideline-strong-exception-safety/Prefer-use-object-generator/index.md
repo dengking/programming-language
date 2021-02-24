@@ -24,6 +24,16 @@
 
 
 
+## Prefer use object generator
+
+CppCoreGuidelines 中的两个主要rule: 
+
+1、[R.11: Avoid calling `new` and `delete` explicitly](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-newdelete)
+
+2、[R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)
+
+
+
 ## stackoverflow [Exception safety and make_unique](https://stackoverflow.com/questions/19472550/exception-safety-and-make-unique)
 
 
@@ -189,17 +199,25 @@ It's not really about runtime efficiency. There is the bit about the control blo
 
 1、`make_unique` teaches users "never say `new`/`delete` and `new[]`/`delete[]`" without disclaimers.
 
-2、`make_unique` shares two advantages with `make_shared` (excluding the third advantage, increased efficiency). First, `unique_ptr<LongTypeName> up(new LongTypeName(args))` must mention `LongTypeName` twice, while `auto up = make_unique<LongTypeName>(args)` mentions it once.
+> NOTE: 翻译如下: 
+>
+> “make_unique”教给用户“在没有免责声明的情况下绝不说‘new’/‘delete’和‘new[]’/‘delete[]’”。
+
+2、`make_unique` shares two advantages with `make_shared` (excluding(除了) the third advantage, increased efficiency). 
+
+First, `unique_ptr<LongTypeName> up(new LongTypeName(args))` must mention `LongTypeName` twice, while `auto up = make_unique<LongTypeName>(args)` mentions it once.
 
 3、`make_unique` prevents the unspecified-evaluation-order leak triggered by expressions like `foo(unique_ptr<X>(new X)`, `unique_ptr<Y>(new Y))`. (Following the advice "never say `new`" is simpler than "never say `new`, unless you immediately give it to a named `unique_ptr`".)
 
 4、`make_unique` is carefully implemented for exception safety and is recommended over directly calling `unique_ptr` constructors.
 
+> NOTE: 提高exception safety
+
 #### When not to use `make_unique`
 
 - Don't use `make_unique` if you need a custom deleter or are adopting a raw pointer from elsewhere.
 
-## Sources
+#### Sources
 
 1、[Proposal of `std::make_unique`](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3588.txt).
 
