@@ -5,3 +5,4 @@ nav:
     - Delegation-pattern: Delegation-pattern
     - Facade-pattern: Facade-pattern
     - Composite: Composite
+    - Bridge-pattern: Bridge-pattern
