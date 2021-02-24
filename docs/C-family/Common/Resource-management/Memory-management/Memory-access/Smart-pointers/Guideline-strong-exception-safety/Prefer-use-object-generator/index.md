@@ -1,36 +1,14 @@
-# Smart pointer object generator
+# Prefer use object generator
 
-都触及到了相同的问题:
+1、`Exception-Safe-Function-Call`
 
-1、Exception safety 
-
-为了实现strong exception safety。
+a、其中讨论了function call的order of evaluation 和 exception safety、resource leak之间的问题
 
 2、CppCoreGuidelines [R: Resource management # Allocation and deallocation rule summary](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#r-resource-management):
 
-[R.10: Avoid `malloc()` and `free()`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-mallocfree)
+a、[R.11: Avoid calling `new` and `delete` explicitly](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-newdelete)
 
-
-
-[R.11: Avoid calling `new` and `delete` explicitly](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-newdelete)
-
-
-
-[R.12: Immediately give the result of an explicit resource allocation to a manager object](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-immediate-alloc)
-
-
-
-[R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)
-
-
-
-## Prefer use object generator
-
-CppCoreGuidelines 中的两个主要rule: 
-
-1、[R.11: Avoid calling `new` and `delete` explicitly](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-newdelete)
-
-2、[R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)
+b、[R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)
 
 
 
@@ -104,7 +82,7 @@ Exception safety is not (just) about "no exceptions" but rather about "guarantee
 
 As of C++17, the exception safety issue is fixed by a rewording of [[expr.call\]](http://eel.is/c++draft/expr.call#5)
 
-> The initialization of a parameter, including every associated value computation and side effect, is indeterminately sequenced with respect to that of any other parameter.
+> The initialization of a parameter, including every associated value computation and side effect, is indeterminately(不确定的) sequenced with respect to that of any other parameter.
 
 Here *indeterminately sequenced* means that one is sequenced before another, but it is not specified which.
 
@@ -132,7 +110,13 @@ f(std::unique_ptr<T>(new T));
 f(std::make_unique<T>());
 ```
 
-Neither of these calls can leak if there is an exception being thrown. However
+Neither of these calls can leak if there is an exception being thrown. 
+
+> NOTE: 
+>
+> 1、上述都不会leak？
+
+However
 
 ```cpp
 void f(std::unique_ptr<T>, std::unique_ptr<T>);
@@ -186,8 +170,9 @@ None of the reasons involve improving runtime efficiency the way using `make_sha
 
 `std::make_unique` and `std::make_shared` are there for two reasons:
 
-1. So that you don't have to explicitly list the template type arguments.
-2. Additional exception safety over using `std::unique_ptr` or `std::shared_ptr` constructors. (See the Notes section [here](http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared).)
+1、So that you don't have to explicitly list the template type arguments.
+
+2、Additional exception safety over using `std::unique_ptr` or `std::shared_ptr` constructors. (See the Notes section [here](http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared).)
 
 It's not really about runtime efficiency. There is the bit about the control block and the `T` being allocated all at once, but I think that's more a bonus and less a motivation for these functions to exist.
 
@@ -223,6 +208,14 @@ First, `unique_ptr<LongTypeName> up(new LongTypeName(args))` must mention `LongT
 
 2、[Herb Sutter's GotW #89 Solution: Smart Pointers](https://herbsutter.com/2013/05/29/gotw-89-solution-smart-pointers/)
 
+
+
+
+
+
+
+
+
 ## When use raw new？
 
 ### stackoverflow [Differences between std::make_unique and std::unique_ptr with new](https://stackoverflow.com/questions/22571202/differences-between-stdmake-unique-and-stdunique-ptr-with-new) # [A](https://stackoverflow.com/a/45210410)
@@ -233,4 +226,4 @@ A reason why you would have to use `std::unique_ptr(new A())` or `std::shared_pt
 
 ### stackoverflow  [Differences between std::make_unique and std::unique_ptr with new](https://stackoverflow.com/questions/22571202/differences-between-stdmake-unique-and-stdunique-ptr-with-new)  # [A](https://stackoverflow.com/a/22571331) # comment
 
-One reason I once had to use `std::unique_ptr<T>(new T())` was because the constructor of T was private. Even if the call to std::make_unique was in a public factory method of class T, it didn't compile because one of the underlying methods of `std::make_unique` could not access the private constructor. I didn't want to make that method friend because I didn't want to rely on the implementation of std::make_unique. So the only solution was, calling new in my factory method of class T, and then wrap it in an `std::unique_ptr<T>`. – [Patrick](https://stackoverflow.com/users/163551/patrick) [Jun 5 '19 at 7:09](https://stackoverflow.com/questions/22571202/differences-between-stdmake-unique-and-stdunique-ptr-with-new#comment99503613_22571331) 
+One reason I once had to use `std::unique_ptr<T>(new T())` was because the constructor of T was private. Even if the call to s`td::make_unique` was in a public factory method of class `T`, it didn't compile because one of the underlying methods of `std::make_unique` could not access the private constructor. I didn't want to make that method friend because I didn't want to rely on the implementation of `std::make_unique`. So the only solution was, calling new in my factory method of class T, and then wrap it in an `std::unique_ptr<T>`. – [Patrick](https://stackoverflow.com/users/163551/patrick) [Jun 5 '19 at 7:09](https://stackoverflow.com/questions/22571202/differences-between-stdmake-unique-and-stdunique-ptr-with-new#comment99503613_22571331) 
