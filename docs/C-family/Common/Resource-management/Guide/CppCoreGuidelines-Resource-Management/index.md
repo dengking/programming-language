@@ -34,7 +34,7 @@ The fundamental aim is to ensure that we don't leak any resources and that we do
 
 [R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)
 
-[R.14: Avoid `[\]` parameters, prefer `span`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-ap)
+[R.14: Avoid `[]` parameters, prefer `span`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-ap)
 
 [R.15: Always overload matched allocation/deallocation pairs](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-pair)
 
@@ -87,6 +87,8 @@ Where a resource is "ill-behaved" in that it isn't represented as a class with a
 > 1、上面这段话中的"ill-behaved"如何理解？
 >
 > 2、 [`finally`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Re-finally) 其实就是guard
+
+**See also**: [RAII](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Re-raii)
 
 ## TODO
 
