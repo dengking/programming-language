@@ -6,7 +6,9 @@ The fundamental aim is to ensure that we don't leak any resources and that we do
 >
 > 1、"don't leak any resources"需要 strong exception safety
 >
-> 2、resource ownership: 这里提出了**owner**的概念
+> 2、后续很多内容都是围绕 "don't leak any resources"而展开 
+>
+> 3、resource ownership: 这里提出了**owner**的概念
 
 
 
@@ -400,7 +402,7 @@ The allocation of `buf` might fail and leak the file handle.
 >
 > 1、上述code是典型的scope guard
 
-##### Example
+### Example
 
 ```c++
 void f(const string& name)
@@ -429,7 +431,7 @@ An array decays to a pointer, thereby losing its size, opening the opportunity f
 >
 > 1、关于span，参见 `C++\Library\Standard-library\STL\Containers-library\View\span` 章节
 
-##### Example
+### Example
 
 ```c++
 void f(int[]);          // not recommended
@@ -440,7 +442,7 @@ void f(int*);           // not recommended for multiple objects
 void f(gsl::span<int>); // good, recommended
 ```
 
-##### Enforcement
+### Enforcement
 
 Flag `[]` parameters. Use `span` instead.
 
