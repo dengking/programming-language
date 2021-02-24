@@ -19,3 +19,17 @@ Sounds like you are after the PIMPL compilation firewall idiom: [herbsutter.com/
 
 
 ## gertrudandcope [Handle/Body](https://sites.google.com/a/gertrudandcope.com/info/Publications/Patterns/C--Idioms#HandleBody)
+
+
+
+
+
+## cs.vu.nl [The Handle/Body Idiom](https://www.cs.vu.nl/~eliens/online/tutorials/objects/patterns/handle.html)
+
+
+
+## cs.sjsu [Handle-Body Idioms](http://www.cs.sjsu.edu/faculty/pearce/patterns/hanbod/hanbod.html)
+
+
+
+## wiki.c2 [Handle Body Pattern](https://proxy.c2.com/cgi/fullSearch?search=HandleBodyPattern)
