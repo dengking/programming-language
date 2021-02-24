@@ -1,8 +1,12 @@
 # CppCoreGuidelines [R: Resource management](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#S-resource)
 
-The fundamental aim is to ensure that we don't leak any resources and that we don't hold a resource longer than we need to. An entity that is responsible for releasing a resource is called an owner.
+The fundamental aim is to ensure that we don't leak any resources and that we don't hold a resource longer than we need to. An entity that is responsible for releasing a resource is called an **owner**.
 
-
+> NOTE: 
+>
+> 1、"don't leak any resources"需要 strong exception safety
+>
+> 2、resource ownership: 这里提出了**owner**的概念
 
 
 
@@ -39,6 +43,50 @@ The fundamental aim is to ensure that we don't leak any resources and that we do
 > NOTE: 这部分放到了smart pointer章节
 
 
+
+
+
+## [R.1: Manage resources automatically using resource handles and RAII (Resource Acquisition Is Initialization)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-raii)
+
+
+
+### Reason
+
+To avoid leaks and the complexity of manual resource management. C++'s language-enforced constructor/destructor symmetry mirrors the symmetry inherent in resource acquire/release function pairs such as `fopen`/`fclose`, `lock`/`unlock`, and `new`/`delete`. Whenever you deal with a resource that needs paired acquire/release function calls, encapsulate that resource in an object that enforces pairing for you -- acquire the resource in its constructor, and release it in its destructor.
+
+> NOTE: 
+>
+> 总结的非常好。
+>
+> 1、RAII idiom、resource handle
+>
+> 2、object-based resource management
+>
+> 最终目的:
+>
+> 1、保证strong exception safety
+>
+> 2、no resource leakage
+>
+> 3、simplify
+>
+> 
+
+
+
+### Example, bad
+
+> NOTE: 原因给出的例子一般，比较容易理解
+
+### Note
+
+Where a resource is "ill-behaved" in that it isn't represented as a class with a destructor, wrap it in a class or use [`finally`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Re-finally)
+
+> NOTE: 
+>
+> 1、上面这段话中的"ill-behaved"如何理解？
+>
+> 2、 [`finally`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Re-finally) 其实就是guard
 
 ## TODO
 
