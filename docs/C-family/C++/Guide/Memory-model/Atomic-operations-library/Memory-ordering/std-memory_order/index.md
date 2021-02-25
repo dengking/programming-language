@@ -45,7 +45,10 @@ inline constexpr memory_order memory_order_seq_cst = memory_order::seq_cst;
 
 The default behavior of all atomic operations in the library provides for *sequentially consistent ordering* (see discussion below). That default can hurt performance, but the library's atomic operations can be given an additional `std::memory_order` argument to specify the exact constraints, beyond atomicity, that the compiler and processor must enforce for that operation.
 
+## Formal description
 
+参见 `Formal-description` 章节。
 
 ## Explanation
 
+参见 `Explanation` 章节。

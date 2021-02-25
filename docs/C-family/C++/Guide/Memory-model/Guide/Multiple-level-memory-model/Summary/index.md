@@ -70,8 +70,6 @@ abstraction，design to an abstraction
 
 ### C++ memory ordering
 
-C++ memory ordering**所限制的一个线程内的指令的执行顺序**。
-
 参见:
 
 1、zhihu [如何理解 C++11 的六种 memory order？](https://www.zhihu.com/question/24301047) # [A](https://www.zhihu.com/question/24301047/answer/1193956492)
