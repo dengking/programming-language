@@ -12,7 +12,7 @@
 
 3、modernescpp [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model)
 
-## 三种还是四种?
+## 三种还是四种还是六种?
 
 可以看到:
 
@@ -56,7 +56,7 @@
 
 四、cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)
 
-有四种:
+在 `Explanation` 段中给出了四种:
 
 1、[Relaxed ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) 
 
@@ -66,9 +66,19 @@
 
 4、[Sequentially-consistent ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Sequentially-consistent_ordering) 
 
+在 `Constants`中给出了六种:
+
+1、`memory_order_relaxed`
+
+2、`memory_order_consume`
+
+3、`memory_order_acquire`
+
+4、`memory_order_release`
+
+5、`memory_order_acq_rel`
+
+6、`memory_order_seq_cst`
 
 
-## Memory model的本质
-
-abstraction，design to an abstraction
 

@@ -1,12 +1,18 @@
 # cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Formal description
 
+> NOTE: 
+>
+> 1、C++的这个formal description的理论是非常好的，能够让programmer使用非常简洁、清晰的方式来描述 multi thread的行为，后续可以采用它的这套理论。
+>
+> 
+
 **Inter-thread synchronization** and **memory ordering** determine how *evaluations* and *side effects* of expressions are ordered between different threads of execution. 
 
 > NOTE: 
 >
 > 1、理解本节内容的前提条件是对C++ expression evaluation有一个较好的认知，参见 `C++Order-of-evaluation` 章节
 >
-> ### 2、手段 和 目标
+> ### 手段 和 目标
 >
 > 需要搞清楚**主被**、**因果**关系
 >
@@ -236,6 +242,10 @@ Regardless of threads, evaluation A *happens-before* evaluation B if any of the 
 2) A *inter-thread happens before* B
 
 > NOTE: 
+>
+> ### happens-before relation的脑图
+>
+> ![](./C++happens-before-relation.png)
 >
 > ### 综合 *sequenced-before* 和  *inter-thread happens before*
 >

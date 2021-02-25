@@ -1,9 +1,9 @@
 nav:
     - Introduction: index.md
     - Sequential-consistency: Sequential-consistency
-    - Acquire-release: Acquire-release
+    - Release-Acquire-ordering: Release-Acquire-ordering
     - Release-consume: Release-consume
-    - Relaxed: Relaxed
+    - Relaxed-ordering: Relaxed-ordering
     - Acquire-release-VS-Fences: Acquire-release-VS-Fences
     - Acquire-release-VS-sequential-consistency: Acquire-release-VS-sequential-consistency
         

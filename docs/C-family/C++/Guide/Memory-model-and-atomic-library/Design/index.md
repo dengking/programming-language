@@ -18,7 +18,9 @@ C++ memory model and atomic library是比较复杂的，本章对它的设计进
 
 能够容纳大多数hardware的feature/差异，让programmer以portable、standard方式，充分发挥hardware power。
 
-> NOTE: design to an abstraction
+> NOTE: 
+>
+> abstraction，design to an abstraction
 
 参考: 
 

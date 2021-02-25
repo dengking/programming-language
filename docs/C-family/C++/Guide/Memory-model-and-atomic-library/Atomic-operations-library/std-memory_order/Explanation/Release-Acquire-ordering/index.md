@@ -1,6 +1,10 @@
-# Acquire-release semantic
+# Release-Acquire ordering
 
-1、在介绍acquire-release的时候，都以这样的一个例子: 只有当flag被write thread置位后，read thread才能够执行操作，这其实就是synchronize-with，我们将它的实现方式简记为: write-release-flag-notify-read-acquire-model，可以看到，其中的实现方式都是: read-acquire-write-release；
+首先介绍 Acquire-release semantic，然后阅读 cppreference 中的说明。
+
+## Acquire-release semantic
+
+1、在介绍acquire-release的时候，都以这样的一个例子: 只有当flag被write thread置位后，read thread才能够执行操作，这其实就是"synchronizes-with"，按照在 "cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Formal description" 中总结的理论: "synchronizes-with"-> "Inter-thread happens-before"->"Happens-before"，"Happens-before"能够保证 "Visible side-effects"，我们将它的实现方式简记为: write-release-flag-notify-read-acquire-model，可以看到，其中的实现方式都是: read-acquire-write-release；
 
 2、需要ready之后才能够去读，需要禁止的操作: 在未ready之前就去read，即禁止CPU/compiler将acquire之后的read、write reorder到它之前；
 
@@ -12,11 +16,11 @@
 
 
 
-## stackoverflow [How to understand acquire and release semantics?](https://stackoverflow.com/questions/24565540/how-to-understand-acquire-and-release-semantics)
+### stackoverflow [How to understand acquire and release semantics?](https://stackoverflow.com/questions/24565540/how-to-understand-acquire-and-release-semantics)
 
 
 
-### [A](https://stackoverflow.com/a/24565699)
+[A](https://stackoverflow.com/a/24565699)
 
 > NOTE:这个回答是非常好的，结合了具体的例子，通俗易懂
 
@@ -45,7 +49,23 @@ if ( playerMoved ) {
 
 Most of above statements may be reordered because there's no **data dependency** between them, in fact, a superscalar(超标量) CPU may execute most of those statements simultaneously, or maybe would start working on the `Z` section sooner, since it doesn't affect `X` or `Y`, but might take longer.
 
-> NOTE: 没有dependency，则compiler/CPU是可以free to reorder的
+> NOTE: 
+>
+> 1、没有dependency，则compiler/CPU是可以free to reorder的
+>
+> 2、上述 `Z` section 指的是:
+>
+> ```C++
+>   // Keep the player above the world's surface.
+>   if ( playerPos.Z + dz > 0 ) {
+>      playerPos.Z += dz;
+>   }
+>   else {
+>      playerPos.Z = 0;
+>   }
+> ```
+>
+> 
 
 Here's the problem with that - lets say that you're attempting **lock-free programming**. You want to perform a whole bunch of memory writes to, maybe, fill in a shared queue. You signal that you're done by finally writing to a flag.
 
@@ -75,29 +95,15 @@ Normally, one would do this using explicit locks - mutexes, semaphores, etc, in 
 
 Creating lock-free data structures is possible on a CPU or compiler that doesn't support acquire/release ordering semantics, but it usually means that some slower memory ordering semantic is used. For instance, you could issue a full **memory barrier** - everything that came before this instruction has to actually be committed before this instruction, and everything that came after this instruction has to be committed actually after this instruction. But that might mean that I wait for a bunch of actually irrelevant memory writes from earlier in the instruction stream (perhaps function call prologue) that has nothing to do with the memory safety I'm trying to implement.
 
-Acquire says "only worry about stuff after me". Release says "only worry about stuff before me". Combining those both is a full **memory barrier**.
+Acquire says "only worry about stuff after me". Release says "only worry about stuff before me". Combining those both is a **full memory barrier**.
 
-> NOTE: 前面这两段话说明了: **memory barrier**、**Acquire semantic**、**Release semantic** 三者之间的关联。
-
-
-
-## stackoverflow [What's the difference between InterlockedCompareExchange Release() and Acquire()?](https://stackoverflow.com/questions/9764181/whats-the-difference-between-interlockedcompareexchange-release-and-acquire)
-
-[A](https://stackoverflow.com/a/9764313)
-
-The plain version uses a full barrier while the suffixed(带后缀的) versions only deals with loads **or** stores, this can be faster on some CPUs (Itanium-based processors etc)
-
-> NOTE: level
-
-MSDN has a article about [Acquire and Release Semantics](http://msdn.microsoft.com/en-us/library/ff540496.aspx) and the [Interlocked* API](http://msdn.microsoft.com/en-us/library/windows/desktop/ms684122(v=vs.85).aspx) as well as [this great blog post](http://blogs.msdn.com/b/oldnewthing/archive/2008/10/03/8969397.aspx). The [Linux memory barrier documentation](http://www.kernel.org/doc/Documentation/memory-barriers.txt) might also be useful...
-
-> NOTE: 上述  [this great blog post](http://blogs.msdn.com/b/oldnewthing/archive/2008/10/03/8969397.aspx) ，所链接的是下面的: microsoft [Acquire and release sound like bass fishing terms, but they also apply to memory models](https://devblogs.microsoft.com/oldnewthing/20081003-00/?p=20663).
+> NOTE: 前面这两段话说明了: **full memory barrier**、**Acquire semantic**、**Release semantic** 三者之间的关联。
 
 
 
 
 
-## microsoft [Acquire and release sound like bass fishing terms, but they also apply to memory models](https://devblogs.microsoft.com/oldnewthing/20081003-00/?p=20663)
+### microsoft [Acquire and release sound like bass fishing terms, but they also apply to memory models](https://devblogs.microsoft.com/oldnewthing/20081003-00/?p=20663)
 
 Many of the normal interlocked operations come with variants called `InterlockedXxxAcquire` and `InterlockedXxxRelease`. What do the terms `Acquire` and `Release` mean here?
 
@@ -144,40 +150,105 @@ As [the MSDN article on acquire and release semantics](http://msdn.microsoft.com
 
 
 
-## modernescpp [Acquire-Release Semantic](https://www.modernescpp.com/index.php/acquire-release-semantic)
+## cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Explanation # Relaxed ordering # Release-Acquire ordering
 
-### Synchronisation and ordering constraints
+If an atomic store in thread A is tagged `memory_order_release` and an atomic load in thread B from the same variable is tagged `memory_order_acquire`, all memory writes (non-atomic and relaxed atomic) that *happened-before* the atomic store from the point of view of thread A, become *visible side-effects* in thread B. That is, once the atomic load is completed, thread B is guaranteed to see everything thread A wrote to memory.
 
-The acquire-release semantic is based on one key idea. A release operation synchronises with an acquire operation on the same atomic and establishes, in addition, an ordering constraint. So, all read and write operations can not be moved before an **acquire operation**, all read and write operations can not be move behind a **release operation**. But what is an acquire or release operation? The reading of an atomic variable with `load` or `test_and_set` is an **acquire operation**. But in addition the acquiring of a lock. Of course, the opposite is also true. The releasing of a lock is a release operation. Accordingly, a `store` or `clear` operation on an atomic variable.
-
-> NOTE: 先acquire，然后release
+> NOTE: 
 >
-> read-acquire
+> 1、关于这段话的翻译、理解，参见 "Acquire-release semantic" 段的`1`，那段话是我按照上面这段话编写的。
+
+
+
+The synchronization is established only between the threads *releasing* and *acquiring* the same atomic variable. Other threads can see different order of memory accesses than either or both of the synchronized threads.
+
+> NOTE: 
 >
-> write-release
-
-It's worth to reason once more on the few last sentences from a different perspective. The lock of a mutex is an acquire operation, the unlock of a mutex a release operation. Figuratively speaking that implies, that an operation on a variable can not moved outside of a [critical section](https://www.modernescpp.com/index.php/threads-sharing-data). That hold for both directions. On the other side, a variable can be moved inside of a criticial section. Because the variable moves from the not protected to the protected area. Now with a little delay the picture.
-
-
-
-## modernescpp [Acquire-Release Fences](https://www.modernescpp.com/index.php/acquire-release-fences)
-
-Acquire and release fences guarantees similar [synchronisation and ordering constraints](https://www.modernescpp.com/index.php/synchronization-and-ordering-constraints) as atomics with [acquire-release semantic](https://www.modernescpp.com/index.php/acquire-release-semantic). Similar, because the differences are in the details.
-
-The most obvious difference between **acquire and release memory barriers (fences)** and **atomics with acquire-release semantic** is that **memory barriers** need no operations on atomics. But there is a more subtle difference. The acquire and release memory barriers are more heavyweight.
-
-> NOTE: 两种不同的technique:
+> 1、这段话总结地非常好
 >
-> 1、**acquire and release memory barriers (fences)** 
+> 2、"order of write to shared data may be different among different threads"
+
+### Implementation
+
+On strongly-ordered systems — x86, SPARC TSO, IBM mainframe, etc. — release-acquire ordering is automatic for the majority of operations. No additional CPU instructions are issued for this synchronization mode; only certain compiler optimizations are affected (e.g., the compiler is prohibited from moving non-atomic stores past the atomic store-release or performing non-atomic loads earlier than the atomic load-acquire). 
+
+On weakly-ordered systems (ARM, Itanium, PowerPC), special CPU load or memory fence instructions are used.
+
+> NOTE: 
 >
-> 2、**atomics with acquire-release semantic**
+> 1、参见: 
+> a、preshing [Weak vs. Strong Memory Models](https://preshing.com/20120930/weak-vs-strong-memory-models/)
+>
+> b、preshing [This Is Why They Call It a Weakly-Ordered CPU](https://preshing.com/20121019/this-is-why-they-call-it-a-weakly-ordered-cpu/)
 
-### Atomic operations versus memory barriers
+### Example of release-acquire synchronization
 
-To make my job of writing simpler, I will now simply speak of acquire operations, if I use memory barriers or atomic operations with acquire semantic. The same will hold for release operations.
+Mutual exclusion locks, such as [std::mutex](https://en.cppreference.com/w/cpp/thread/mutex) or [atomic spinlock](https://en.cppreference.com/w/cpp/atomic/atomic_flag), are an example of release-acquire synchronization: when the lock is released by thread A and acquired by thread B, everything that took place in the critical section (before the release) in the context of thread A has to be visible to thread B (after the acquire) which is executing the same critical section.
 
-The key idea of an acquire and a release operation is, that it establishes synchronisations and ordering constraints between thread. This will also hold for atomic operations with relaxed semantic or non-atomic operations. So you see, the acquire and release operations come in pairs. In addition, for the operations on atomic variables with acquire-release semantic must hold that these act on the same atomic variable. Said that I will in the first step look at these operations in isolation.
 
-I start with the acquire operation.
 
+```C++
+#include <thread>
+#include <atomic>
+#include <cassert>
+#include <string>
+
+std::atomic<std::string*> ptr;
+int data;
+
+void producer()
+{
+    std::string* p  = new std::string("Hello");
+    data = 42;
+    ptr.store(p, std::memory_order_release);
+}
+
+void consumer()
+{
+    std::string* p2;
+    while (!(p2 = ptr.load(std::memory_order_acquire)))
+        ;
+    assert(*p2 == "Hello"); // never fires
+    assert(data == 42); // never fires
+}
+
+int main()
+{
+    std::thread t1(producer);
+    std::thread t2(consumer);
+    t1.join(); t2.join();
+}
+// #include <thread>
+#include <atomic>
+#include <cassert>
+#include <string>
+
+std::atomic<std::string*> ptr;
+int data;
+
+void producer()
+{
+    std::string* p  = new std::string("Hello");
+    data = 42;
+    ptr.store(p, std::memory_order_release);
+}
+
+void consumer()
+{
+    std::string* p2;
+    while (!(p2 = ptr.load(std::memory_order_acquire)))
+        ;
+    assert(*p2 == "Hello"); // never fires
+    assert(data == 42); // never fires
+}
+
+int main()
+{
+    std::thread t1(producer);
+    std::thread t2(consumer);
+    t1.join(); t2.join();
+}
+// g++   --std=c++11 -Wall -pedantic -pthread main.cpp && ./a.out
+
+```
 
