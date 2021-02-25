@@ -1,2 +1,4 @@
 nav:
-    - Singleton-pattern: Singleton-pattern.md
+    - Introduction: index.md
+    - TODO-Alternative-to-Singleton: TODO-Alternative-to-Singleton
+    
