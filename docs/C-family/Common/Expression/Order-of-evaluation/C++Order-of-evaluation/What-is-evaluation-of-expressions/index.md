@@ -20,6 +20,10 @@ Evaluation of each expression includes:
 
 2、Initiation of *side effects*: access (read or write) to an object designated by a volatile glvalue, modification (writing) to an object, calling a library I/O function, or calling a function that does any of those operations.
 
+## cppreference [std::memory_order # Formal description](https://en.cppreference.com/w/cpp/atomic/memory_order)
+
+> NOTE: 在这篇文章中，也大量描述了expression evaluation、value computation、side effect，
+
 
 
 ## 问题: side effect 和 value computation 分别是指什么？
@@ -78,15 +82,23 @@ Evaluation of each expression includes:
 
 给予compiler更多的optimization空间，从而实现更好的performance，显然是遵循optimization principle。
 
+### Value computation read and side effect write
 
+Value computation的过程可能涉及read from memory；
+
+Side effect的过程可能涉及write to memory；
+
+这是我在阅读 cppreference [std::memory_order # Formal description](https://en.cppreference.com/w/cpp/atomic/memory_order) 时，产生的思考，它的正确性暂时没有深入分析。
 
 ## Side effect
-
-
 
 1、Google: c++ side effects
 
 2、stackoverflow [What exactly is a 'side-effect' in C++?](https://stackoverflow.com/questions/9563600/what-exactly-is-a-side-effect-in-c)
+
+3、cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Formal description
+
+在其中也有关于side effect的描述。
 
 
 
