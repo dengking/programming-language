@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Design-and-implementation: Design-and-implementation    
     - Memory-ordering: Memory-ordering
     - std-atomic_flag: std-atomic_flag
+    - Implementation: Implementation
