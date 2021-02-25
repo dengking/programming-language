@@ -13,5 +13,5 @@ nav:
     - Simplify: Simplify
     - Uniform-consistent-interface-API-syntax: Uniform-consistent-interface-API-syntax
     - Performance-optimization: Performance-optimization
-    - Memory-model: Memory-model
+    - Memory-model-and-atomic-library: Memory-model-and-atomic-library
     - Type-system: Type-system
