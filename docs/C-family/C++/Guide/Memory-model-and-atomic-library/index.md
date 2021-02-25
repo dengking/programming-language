@@ -14,6 +14,10 @@
 
 参见 `Atomic-operations-library` 章节
 
+4、`Guide` 
+
+收录了一些较好的资源。
+
 ## TODO
 
 
