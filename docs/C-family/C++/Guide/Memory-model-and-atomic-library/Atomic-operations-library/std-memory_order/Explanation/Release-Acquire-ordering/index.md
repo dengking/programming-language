@@ -185,7 +185,7 @@ On weakly-ordered systems (ARM, Itanium, PowerPC), special CPU load or memory fe
 
 Mutual exclusion locks, such as [std::mutex](https://en.cppreference.com/w/cpp/thread/mutex) or [atomic spinlock](https://en.cppreference.com/w/cpp/atomic/atomic_flag), are an example of release-acquire synchronization: when the lock is released by thread A and acquired by thread B, everything that took place in the critical section (before the release) in the context of thread A has to be visible to thread B (after the acquire) which is executing the same critical section.
 
-
+### Example: producer-consumer
 
 ```C++
 #include <thread>
