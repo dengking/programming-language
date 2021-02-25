@@ -33,3 +33,7 @@ Sounds like you are after the PIMPL compilation firewall idiom: [herbsutter.com/
 
 
 ## wiki.c2 [Handle Body Pattern](https://proxy.c2.com/cgi/fullSearch?search=HandleBodyPattern)
+
+
+
+## stackoverflow [Handle Body Idiom in c++](https://stackoverflow.com/questions/12638566/handle-body-idiom-in-c)
