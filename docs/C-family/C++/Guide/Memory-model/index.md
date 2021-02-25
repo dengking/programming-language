@@ -1,34 +1,18 @@
 # 关于本章
 
-本章讨论C++ memory model。
+本章讨论C++ memory model和atomic-operations-library，将两种放到一起的原因是基于C++的设计的，参见`Design`章节。本章讨论了如下内容:
 
-
-
-## 为什么C++11引入memory model？
+1、为什么C++11引入memory model？
 
 参见 `Why-need-memory-model` 章节。
 
-## C++11 memory model feature
+2、C++ memory model和atomic-operations-library的设计
 
-抽象地描述/model了当前主流hardware:
+参见 `Design`章节 。
 
-1、multi-threaded by design(multicore)
+3、C++ atomic library
 
-2、has a well-defined *memory model*(memory reordering)
-
-能够容纳大多数hardware的feature/差异，让programmer以portable、standard方式，充分发挥hardware power。
-
-参考: 
-
-1、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g)
-
-
-
-## Memory model and consistency model and memory ordering
-
-需要注意的是: consistency model其实所讨论的就是memory的问题，因此一个programming language的memory model是需要定义它的consistency model的，它需要明确定义它的consistency。
-
-
+参见 `Atomic-operations-library` 章节
 
 ## TODO
 

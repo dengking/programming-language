@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
-    - Memory-ordering: Memory-ordering
+    - std-memory_order: std-memory_order
     - std-atomic_flag: std-atomic_flag
+    - Fence: Fence
     - Implementation: Implementation

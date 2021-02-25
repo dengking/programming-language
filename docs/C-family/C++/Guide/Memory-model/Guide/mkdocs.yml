@@ -1,8 +1,6 @@
 nav:
-    - Introduction: index.md
-    - Why-need-memory-model: Why-need-memory-model
-    - Multiple-level-memory-model: Multiple-level-memory-model
-    - C++VS-Java-memory-model: C++VS-Java-memory-model
+    - TODO-CSDN-wxj1992-C++memory-order: TODO-CSDN-wxj1992-C++memory-order
+
     - modernescpp-C++Memory-Model: modernescpp-C++Memory-Model
     - Memory-fence: Memory-fence
     

@@ -1,4 +1,8 @@
-# 关于本章
+# 综述C++ multiple level memory model
+
+本节标题的含义是: 多层次的memory model，它能够帮助我们建立对C++ memory model高屋建瓴的认识。
+
+关于各种memory model的描述；
 
 本章概述C++ memory model，主要参考:
 
@@ -8,7 +12,7 @@
 
 3、modernescpp [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model)
 
-## 三种还是四种memory model?
+## 三种还是四种?
 
 可以看到:
 
@@ -62,24 +66,9 @@
 
 4、[Sequentially-consistent ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Sequentially-consistent_ordering) 
 
+
+
 ## Memory model的本质
 
 abstraction，design to an abstraction
 
-
-
-### C++ memory ordering
-
-参见:
-
-1、zhihu [如何理解 C++11 的六种 memory order？](https://www.zhihu.com/question/24301047) # [A](https://www.zhihu.com/question/24301047/answer/1193956492)
-
-这篇文章对C++ memory ordering的分析是非常深刻的。
-
-2、stackoverflow [What do each memory_order mean?](https://stackoverflow.com/questions/12346487/what-do-each-memory-order-mean)
-
-
-
-## TODO `memory_ordering` and visibility
-
-stackoverflow [Does seq_cst ordering guarantee immediate visibility?](https://stackoverflow.com/questions/14846494/does-seq-cst-ordering-guarantee-immediate-visibility)
