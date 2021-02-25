@@ -2,7 +2,7 @@
 
 
 
-`std::memory_order` specifies how memory accesses, including regular, non-atomic memory accesses, are to be ordered around an atomic operation. Absent any constraints on a **multi-core system**, when multiple threads simultaneously read and write to several variables, **one thread can observe the values change in an order different from the order another thread wrote them**. Indeed, the apparent order of changes can even differ among multiple reader threads. Some similar effects can occur even on uniprocessor systems due to compiler transformations allowed by the memory model.
+`std::memory_order` specifies how memory accesses, including regular, non-atomic memory accesses, are to be ordered around an atomic operation. Absent any constraints on a **multi-core system**, when multiple threads simultaneously read and write to several variables, **one thread can observe the values change in an order different from the order another thread wrote them. Indeed, the apparent order of changes can even differ among multiple reader threads. Some similar effects can occur even on uniprocessor systems due to compiler transformations allowed by the memory model**.
 
 > NOTE: 
 >
@@ -11,6 +11,8 @@
 > 2、"**one thread can observe the values change in an order different from the order another thread wrote them**"如何理解？
 >
 > TODO 这需要结合具体的例子来进行说明，使用 "order of write to shared data may be different among different threads " 可以检索到 相关的例子。
+>
+> 3、"**one thread can observe the values change in an order different from the order another thread wrote them. Indeed, the apparent order of changes can even differ among multiple reader threads. Some similar effects can occur even on uniprocessor systems due to compiler transformations allowed by the memory model**"，这段话总结地非常好，它所描述的是memory reordering。
 
 The default behavior of all atomic operations in the library provides for *sequentially consistent ordering* (see discussion below). That default can hurt performance, but the library's atomic operations can be given an additional `std::memory_order` argument to specify the exact constraints, beyond atomicity, that the compiler and processor must enforce for that operation.
 
@@ -20,7 +22,9 @@ The default behavior of all atomic operations in the library provides for *seque
 
 > NOTE: 
 >
-> ### 手段 和 目标
+> 1、理解本节内容的前提条件是对C++ expression evaluation有一个较好的认知，参见 `C++Order-of-evaluation` 章节
+>
+> ### 2、手段 和 目标
 >
 > 需要搞清楚**主被**、**因果**关系
 >
@@ -34,7 +38,13 @@ The default behavior of all atomic operations in the library provides for *seque
 >
 > ### 如何理解side effect？
 >
-> 放到multicore中来理解: 一个thread运行于core1，它对memory的write，能够被运行于其他core的thread看到、
+> 可以简单地理解: 
+>
+> 1、放到multicore中来理解: 一个thread运行于core1，它对memory的write，能够被运行于其他core的thread看到。
+>
+> 2、side effect对应的是memory、state，与它相对的是value computation
+>
+> 正式的理解参见 `C++Order-of-evaluation` 。
 
 They are defined in the following terms:
 
@@ -46,7 +56,11 @@ Within the same thread, evaluation A may be *sequenced-before* evaluation B, as 
 
 ### Carries dependency
 
-> NOTE: 描述的是同一个thread内的order
+> NOTE: 
+>
+> 1、描述的是同一个thread内的order
+>
+> 2、这段话的内容是容易理解的
 
 Within the same thread, evaluation A that is *sequenced-before* evaluation B may also carry a dependency into B (that is, B depends on A), if any of the following is true
 
