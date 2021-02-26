@@ -6,7 +6,15 @@ C++ memory model and atomic library是比较复杂的，本章对它的设计进
 
 ## C++ memory model feature
 
-抽象地描述/model了当前主流hardware:
+总的来说:
+
+能够容纳当今主流的各种CPU memory model(hardware)，容纳它们的feature/差异，让programmer以portable、standard方式，充分发挥hardware power。抽象地描述/model了当前主流hardware。
+
+> NOTE: 
+>
+> abstraction and design to an abstraction
+
+下面是一些具体的点: 
 
 1、multi-threaded by design(multicore)
 
@@ -14,19 +22,23 @@ C++ memory model and atomic library是比较复杂的，本章对它的设计进
 
 3、multiple level，非常的灵活
 
-总的来说:
 
-能够容纳大多数hardware的feature/差异，让programmer以portable、standard方式，充分发挥hardware power。
-
-> NOTE: 
->
-> abstraction，design to an abstraction
 
 参考: 
 
 1、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g)
 
 2、modernescpp [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model)
+
+
+
+### CPU memory model and programming language memory model
+
+C++ memory model能够容纳当今大多数CPU memory model，让我想到了有必要强调一下"CPU memory model and programming language memory model"，关于 "programming language memory model"，参见 `Programming-language-Memory-model` 章节。
+
+> NOTE: 
+>
+> abstraction and design to an abstraction
 
 
 
