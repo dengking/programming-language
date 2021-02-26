@@ -23,8 +23,8 @@ nav:
     #
     - Address-Of: Address-Of
     #
-    - Temporary-Base-Class: Temporary-Base-Class
-    - Counted-Body: Counted-Body
+    - TODO-Temporary-Base-Class: TODO-Temporary-Base-Class
+
     - Pointer-to-implementation-PImpl: Pointer-to-implementation-PImpl
 
 
