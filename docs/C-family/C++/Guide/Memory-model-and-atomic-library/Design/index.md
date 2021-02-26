@@ -110,7 +110,11 @@ C++还提供了对memory order的控制。
 
 > NOTE: 上面这段话中的"cooperative"，我记得是preshing提出的，但是现在去看它的文章，却找不到了
 
+## 思维误区
 
+是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
+
+> NOTE: tag-order of write to shared data may be different among different threads
 
 
 
