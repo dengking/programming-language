@@ -4,13 +4,15 @@ Reference counting的优势:
 
 1、相对简单、容易实现
 
-## Draft: 无处不在的counting
+## 无处不在的counting
 
-技术，并且当count归0的时候，就执行某个操作，这在computer science中有着非常广泛的application:
+计数，并且当count归0的时候，就执行某个操作，这在computer science中有着非常广泛的application:
 
 
 
 ### Automatic resource management
+
+本节标题的含义是: 自动资源管理。
 
 需要注意的是，本节标题使用的是"resource"而不是"memory"，它的含义是: Reference counting不仅仅可以用于管理memory，还可以用于管理更加广泛的resource。下面是一些例子:
 
@@ -92,7 +94,7 @@ spdlog使用`std::shared_ptr`来实现reference counting。
 
 ### 那如何使用`std::atomic`来实现呢？
 
-TODO
+参见 `Implement-reference-count-use-std-atomic` 章节。
 
 
 

@@ -160,7 +160,9 @@ If an atomic store in thread A is tagged `memory_order_release` and an atomic lo
 >
 > 2、使用modification order来进行分析: 
 >
-> 在参与"Release-Acquire synchronization"的thread之间建立modification order，因此这些参与的thread会看到相同的modification order，而未参与的thread则无法保证看到这个modification order。
+> 在参与"Release-Acquire synchronization"(实现inter-thread happens before)的thread之间建立modification order，因此这些参与的thread会看到相同的modification order，而未参与的thread则无法保证看到这个modification order。
+>
+> 需要注意的是，release semantic 和 acquire semantic仅仅是关于memory reordering的，它们需要结合其它的控制语句(典型的是while)才能够实现"inter-thread happens before"。
 
 
 
