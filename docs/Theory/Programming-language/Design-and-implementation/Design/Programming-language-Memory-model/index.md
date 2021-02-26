@@ -29,3 +29,11 @@ Most research in the area of memory models revolves around:
 
 
 The [Java Memory Model](https://infogalactic.com/info/Java_Memory_Model) was the first attempt to provide a comprehensive threading memory model for a popular programming language.[[2\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-2) After it was established that threads could not be implemented safely as a [library](https://infogalactic.com/info/Library_(computing)) without placing certain restrictions on the implementation and, in particular, that the [C](https://infogalactic.com/info/C_(programming_language)) and [C++](https://infogalactic.com/info/C%2B%2B) standards ([C99](https://infogalactic.com/info/C99) and [C++03](https://infogalactic.com/info/C%2B%2B03)) lacked necessary restrictions,[[3\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-3)[[4\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-4) the C++ threading subcommittee(小组委员会) set to work on suitable **memory model**; in 2005, they submitted C working document n1131[[5\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-5) to get the C Committee on board with their efforts. The final revision of the proposed memory model, C++ n2429,[[6\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-6) was accepted into the C++ draft standard at the October 2007 meeting in Kona.[[7\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-7) The memory model was then included in the next C++ and C standards, [C++11](https://infogalactic.com/info/C%2B%2B11) and [C11](https://infogalactic.com/info/C11_(C_standard_revision)).[[8\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-8)[[9\]](https://infogalactic.com/info/Memory_model_(programming)#cite_note-9)
+
+
+
+## Programming language memory model and CPU memory model
+
+Programming language memory model 需要能够容纳下当今主流CPU memory model，案例包括:
+
+1、C++ memory model，参见 `C++\Guide\Memory-model-and-atomic-library\Design`
