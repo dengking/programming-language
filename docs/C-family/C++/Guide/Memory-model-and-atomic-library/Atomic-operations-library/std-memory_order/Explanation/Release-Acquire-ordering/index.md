@@ -191,6 +191,11 @@ On weakly-ordered systems (ARM, Itanium, PowerPC), special CPU load or memory fe
 
 Mutual exclusion locks, such as [std::mutex](https://en.cppreference.com/w/cpp/thread/mutex) or [atomic spinlock](https://en.cppreference.com/w/cpp/atomic/atomic_flag), are an example of release-acquire synchronization: when the lock is released by thread A and acquired by thread B, everything that took place in the critical section (before the release) in the context of thread A has to be visible to thread B (after the acquire) which is executing the same critical section.
 
+> NOTE: 
+> 1、lock、mutex  implementation
+>
+> 2、inter-thread happens before
+
 ### Example: producer-consumer
 
 ```C++
@@ -224,37 +229,52 @@ int main()
     std::thread t2(consumer);
     t1.join(); t2.join();
 }
-// #include <thread>
+
+// g++   --std=c++11 -Wall -pedantic -pthread main.cpp && ./a.out
+
+```
+
+### Example: transitive release-acquire ordering across three threads
+
+The following example demonstrates transitive release-acquire ordering across three threads
+
+```C++
+#include <thread>
 #include <atomic>
 #include <cassert>
-#include <string>
+#include <vector>
 
-std::atomic<std::string*> ptr;
-int data;
+std::vector<int> data;
+std::atomic<int> flag = {0};
 
-void producer()
+void thread_1()
 {
-    std::string* p  = new std::string("Hello");
-    data = 42;
-    ptr.store(p, std::memory_order_release);
+    data.push_back(42);
+    flag.store(1, std::memory_order_release);
 }
 
-void consumer()
+void thread_2()
 {
-    std::string* p2;
-    while (!(p2 = ptr.load(std::memory_order_acquire)))
+    int expected=1;
+    while (!flag.compare_exchange_strong(expected, 2, std::memory_order_acq_rel)) {
+        expected = 1;
+    }
+}
+
+void thread_3()
+{
+    while (flag.load(std::memory_order_acquire) < 2)
         ;
-    assert(*p2 == "Hello"); // never fires
-    assert(data == 42); // never fires
+    assert(data.at(0) == 42); // will never fire
 }
 
 int main()
 {
-    std::thread t1(producer);
-    std::thread t2(consumer);
-    t1.join(); t2.join();
+    std::thread a(thread_1);
+    std::thread b(thread_2);
+    std::thread c(thread_3);
+    a.join(); b.join(); c.join();
 }
-// g++   --std=c++11 -Wall -pedantic -pthread main.cpp && ./a.out
 
 ```
 
