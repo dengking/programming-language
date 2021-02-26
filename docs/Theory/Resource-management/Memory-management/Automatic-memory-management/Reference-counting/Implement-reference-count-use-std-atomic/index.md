@@ -41,7 +41,7 @@ smart_ptr(const smart_ptr& other) {
 }
 ```
 
-> NOTE: 上述是一个叫分散的实现
+> NOTE: 上述是一个比较分散的实现
 
 Herb Sutter says the increment of **refs** in Thread A can use `memory_order_relaxed` because "nobody does anything based on the action". Now as I understand `memory_order_relaxed`, if **refs** equals N at some point and two threads A and B execute the following code:
 
@@ -73,19 +73,29 @@ What is the value of **refs** observed by Thread 2 before the call to `fetch_add
 
 [Talk URL: C++ & Beyond 2012 - http://channel9.msdn.com/Shows/Going+Deep/Cpp-and-Beyond-2012-Herb-Sutter-atomic-Weapons-2-of-2 (@ 1:20:00)]
 
+### COMMENTS
+
+So the only reason we need memory_order_acq_rel in the destructor is so that when the following is run: `delete control_block_ptr`; it does not run before `refs` is set to 0? – [CppNoob](https://stackoverflow.com/users/422131/cppnoob) [Dec 24 '14 at 3:50](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm/27716387#comment43682821_27631173) 
 
 
-[A](https://stackoverflow.com/a/27716387)
+
+### [A](https://stackoverflow.com/a/27716387)
 
 Boost.Atomic library that emulates `std::atomic` provides [similar reference counting example and explanation](http://www.boost.org/doc/libs/1_57_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters), and it may help your understanding.
 
-> Increasing the reference counter can always be done with `memory_order_relaxed`: New references to an object can only be formed from an existing reference, and passing an existing reference from one thread to another must already provide any required synchronization.
->
-> It is important to enforce any possible access to the object in one thread (through an existing reference) to happen before deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
->
-> It would be possible to use `memory_order_acq_rel` for the fetch_sub operation, but this results in unneeded "acquire" operations when the reference counter does not yet reach zero and may impose a performance penalty.
+>NOTE: 原文引用的内容，下面收录了，因此这里copy。
 
->NOTE: 上述内容，下面也包含
+### [A](https://stackoverflow.com/a/44867508)
+
+From C++ reference on [`std::memory_order`](http://en.cppreference.com/w/cpp/atomic/memory_order):
+
+> memory_order_relaxed: Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation's atomicity is guaranteed
+
+There is also an example [below on that page](http://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering).
+
+So basically, `std::atomic::fetch_add()` is still atomic, even when with `std::memory_order_relaxed`, therefore concurrent `refs.fetch_add(1, std::memory_order_relaxed)` from 2 different threads will always increment `refs` by 2. The point of the memory order is how other non-atomic or `std::memory_order_relaxed` atomic operations can be reordered around the current atomic operation with memory order specified.
+
+> NOTE: 始终谨记: memory order只能怪控制single thread的ordering
 
 ## [Boost.Atomic](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic.html) # [Usage examples](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html) # [Reference counting](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters)
 
@@ -132,17 +142,19 @@ Increasing the reference counter can always be done with `memory_order_relaxed`:
 
 > NOTE: 
 >
-> 1、上面这段的后一句是对`class X`的用法的介绍，下面是字面的翻译: 
+> 上面这段的后一句是对`class X`的用法的介绍，下面是字面的翻译: 
 >
 > "对象的新引用只能从现有引用形成，并且将现有引用从一个线程传递到另一个线程必须已经提供了所需的同步"
 >
 > 从字面意思，我们可以推测知道:
 >
-> 1、`class X`的用法和`std::shared_ptr`类似的
+> 1、`class X`的用法和`std::shared_ptr`类似的: "New references to an object can only be formed from an existing reference"，即通过copy constructor。
 >
-> 2、`class X`不提供thread safety的保证
+> 2、`class X`的copy constructor不提供thread safety的保证，因此 "passing an existing reference from one thread to another must already provide any required synchronization"，那这是否意味着依赖于外部的"synchronization"来实现将`x->refcount_.fetch_add`的结果同步到了其它的thread。
+>
+> 
 
-It is important to enforce(强制) any possible access to the object in one thread (through an existing reference) to *happen before* deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
+It is important to enforce(强制) any possible access to the object in one thread (through an **existing reference**) to *happen before* deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
 
 It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation, but this results in unneeded "acquire" operations when the reference counter does not yet reach zero and may impose a performance penalty.
 
@@ -188,11 +200,17 @@ It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation
 
 2、n = 1: 确保有看到其它 thread 的更新，需要 acquire。
 
+> NOTE: 上述解释是有误的，上述实现中对acquire、release的使用，并没有上面描述的修改，上述实现中对acquire、release，在 [Boost.Atomic](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic.html) # [Usage examples](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html) # [Reference counting](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters) 中已经说得很清楚了。
+
 除了演讲[投影片中提到的例子](https://onedrive.live.com/?authkey=!AMtj_EflYn2507c&cid=4E86B0CF20EF15AD&id=4E86B0CF20EF15AD!24884&parId=4E86B0CF20EF15AD!180&o=OneUp) (影片中沒有细讲)，Boost  也有提供一些 [atomic 的使用例子](http://www.boost.org/doc/libs/1_57_0/doc/html/atomic/usage_examples.html)。要用的時候，还是多看些例子，看看能否直接拿來用 (C++11 应该和 Boost 的 API 差不多吧，有需要再来确认，還有查其它 C++11 的例子)，或是借此确认观念正确再來用 atomic。
 
 
 
 ## SUMMARY
+
+1、`refs` 是shared data
+
+2、是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的是memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
 
 ### 为什么increment的时候，可以使用`memory_order_relaxed`？
 
@@ -200,7 +218,7 @@ increment使用的是`control_block_ptr->refs.fetch_add(1, memory_order_relaxed)
 
 1、`memory_order_relaxed`是指能够out of order execution，但是它的结果还是可以准确的更新到**share variable**即`refs`上的，即另外一个thread能够看到更新后的value，因此它还是能够保证reference count的运行正常
 
-
+2、reordering发生于一个函数内，在 `increment` 中，它的上下文没有依赖它的，因此它可以使用relaxed、
 
 ### decrement的实现
 
@@ -208,23 +226,25 @@ increment使用的是`control_block_ptr->refs.fetch_add(1, memory_order_relaxed)
 
 1、`control_block_ptr->refs.fetch_sub(1, memory_order_acq_rel)`是atomic operation，它能够原子的decrement `refs`并返回它的原值；显然当原值为1的时候，则表示需要delete了
 
-2、`~smart_ptr()`的实现能够保证只有一个thread 在执行判断`== 1`的时候，条件满足，然后执行`delete`，因此保证了thread safe，不可能发生double delete
+2、`~smart_ptr()`的实现能够保证只有一个thread 在执行判断`== 1`的时候，条件满足，然后执行`delete`，因此保证了thread safe，不可能发生double delete；
 
 3、`refs`是shared variable，因此会有多个thread同时对它进行read、write；
 
 由于`delete control_block_ptr`是依赖于`refs`的，因此按照preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/)中的说法:
 
-1、`refs`是 **guard variable** 
+a、`refs`是 **guard variable** 
 
-2、`control_block_ptr`是**payload**
+b、`control_block_ptr`是**payload**
 
 由于`delete control_block_ptr`的执行，是依赖于`refs`的，因此对它的decrement(write)是需要release operation的；
 
 那为什么在`delete control_block_ptr`之前还需要acquire operation呢？是需要建立如下所述的happen before relation: 
 
-> It is important to enforce any possible access to the object in one thread (through an existing reference) to happen before deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
+> It is important to enforce any possible access to the object in one thread (through an existing reference) to **happen before** deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
 
-上述实现就是使用 "A Write-Release Can *Synchronize-With* a Read-Acquire"。
+让"reference count == 0 " happens-before "deleting the object"
+
+
 
 ## Implementation
 
@@ -233,4 +253,6 @@ increment使用的是`control_block_ptr->refs.fetch_add(1, memory_order_relaxed)
 1、`shared_ptr`，参见相关章节。
 
 2、[amin-jabri](https://github.com/amin-jabri)/**[atomic_shared_ptr](https://github.com/amin-jabri/atomic_shared_ptr)** 参见相关章节
+
+3、[chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[atomic_ref_count.h](https://github.com/chromium/chromium/blob/master/base/atomic_ref_count.h)**
 
