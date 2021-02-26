@@ -1,4 +1,4 @@
-# Implement reference count use std::atomic
+# Implement reference count use `std::atomic`
 
 在阅读 cppreference [std::memory_order # Relaxed ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) 时，其中有关于实现counter的描述:
 
@@ -152,7 +152,7 @@ Increasing the reference counter can always be done with `memory_order_relaxed`:
 >
 > 2、`class X`的copy constructor不提供thread safety的保证，因此 "passing an existing reference from one thread to another must already provide any required synchronization"，那这是否意味着依赖于外部的"synchronization"来实现将`x->refcount_.fetch_add`的结果同步到了其它的thread。
 >
-> 
+> 最后一句话是误区: 现代CPU是能够保证更改被其他的thread看到的，不需要programmer进行额外的同步，所不能保证的是，所有的thread看到的是相同的order。
 
 It is important to enforce(强制) any possible access to the object in one thread (through an **existing reference**) to *happen before* deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
 
@@ -210,7 +210,9 @@ It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation
 
 1、`refs` 是shared data
 
-2、是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的是memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
+2、是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
+
+> NOTE: tag-order of write to shared data may be different among different threads
 
 ### 为什么increment的时候，可以使用`memory_order_relaxed`？
 
