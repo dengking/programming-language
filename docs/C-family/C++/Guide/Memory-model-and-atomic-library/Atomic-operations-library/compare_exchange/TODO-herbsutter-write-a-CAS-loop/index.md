@@ -1,0 +1,1 @@
+# herbsutter [Reader Q&A: How to write a CAS loop using std::atomics](https://herbsutter.com/2012/08/31/reader-qa-how-to-write-a-cas-loop-using-stdatomics/)
