@@ -157,6 +157,10 @@ If an atomic store in thread A is tagged `memory_order_release` and an atomic lo
 > NOTE: 
 >
 > 1、关于这段话的翻译、理解，参见 "Acquire-release semantic" 段的`1`，那段话是我按照上面这段话编写的。
+>
+> 2、使用modification order来进行分析: 
+>
+> 在参与"Release-Acquire synchronization"的thread之间建立modification order，因此这些参与的thread会看到相同的modification order，而未参与的thread则无法保证看到这个modification order。
 
 
 

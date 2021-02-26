@@ -1,5 +1,17 @@
 # Acquire release memory order VS sequential consistency
 
+## 基于modification order来进行对比
+
+"cppreference或者说C++ language design中，对memory ordering的描述是基于modification order的"，在 `Release-Acquire-ordering`、`Sequentially-consistent-ordering` 章节中，都基于了**modification order** 来对它们进行了说明，参考其中的内容可以对比出它们之间的差异。
+
+
+
+## 基于producer-consumer来进行分析
+
+multiple-producer-multiple-consumer需要sequential consistency
+
+acquire release 能否实现multiple-producer-multiple-consumer？
+
 ## stackoverflow [What's are practical example where acquire release memory order differs from sequential consistency?](https://stackoverflow.com/questions/41858540/whats-are-practical-example-where-acquire-release-memory-order-differs-from-seq)
 
 
@@ -12,6 +24,3 @@
 
 
 
-
-
-# preshing [Acquire and Release Semantics](https://preshing.com/20120913/acquire-and-release-semantics/)

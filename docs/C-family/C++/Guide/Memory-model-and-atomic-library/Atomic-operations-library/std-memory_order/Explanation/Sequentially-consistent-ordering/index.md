@@ -1,13 +1,5 @@
 # Sequentially-consistent ordering
 
-1、cppreference或者说C++ language design中，对memory ordering的描述是基于modification order的，因此可以看到后续所有的ordering都是基于这个概念来建立的；这个概念比较抽象，对于不了解具体的、底层细节的programmer而言，初次可能无法完全掌握它们，因此在进行解释的时候，需要补充一些实现细节的文章。
-
-2、acquire-release: 在参与的thread之间建立modification order，因此这些参与的thread会看到相同的modification order，而未参与的thread则无法保证看到这个modification order。
-
-3、sequentially-consistent ordering是在所有的core之间建立modification order，需要注意的是，这里是所有的core，而不是所有的thread；因此每个shared data在全局只有一个modification order，因此从全局来看，所有的thread看到的所有的shared data的modification order是一致的，即它是全局一致的，因此就存在一个全局的single total modification order，这就保证了所有的thread看到相同的modification order。
-
-
-
 ## preshing [Memory Barriers Are Like Source Control Operations ](https://preshing.com/20120710/memory-barriers-are-like-source-control-operations/) #StoreLoad
 
 A StoreLoad barrier ensures that all stores performed before the barrier are visible to other processors, and that all loads performed after the barrier receive the latest value that is visible at the time of the barrier. In other words, it effectively prevents reordering of all stores before the barrier against all loads after the barrier, respecting the way a [sequentially consistent](http://preshing.com/20120612/an-introduction-to-lock-free-programming#sequential-consistency) multiprocessor would perform those operations.
@@ -54,9 +46,9 @@ Atomic operations tagged `memory_order_seq_cst` not only order memory the same w
 
 > NOTE: 
 >
-> 1、"establish a *single total modification order* of all atomic operations that are so tagged" 要如何理解？
+> 1、"establish a *single total modification order* of all atomic operations that are so tagged" 要如何理解？解答如下: 
 >
-> 参见本节开头的内容，其中已经包含了对这个的解释。
+> sequentially-consistent ordering是在所有的core之间建立modification order，需要注意的是，这里是所有的core，而不是所有的thread；因此每个shared data在全局只有一个modification order，因此从全局来看，所有的thread看到的所有的shared data的modification order是一致的，即它是全局一致的，因此就存在一个全局的single total modification order，这就保证了所有的thread看到相同的modification order。
 
 ###  (until C++20)
 

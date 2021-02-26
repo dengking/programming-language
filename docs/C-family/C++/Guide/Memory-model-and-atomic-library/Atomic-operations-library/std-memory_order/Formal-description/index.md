@@ -4,7 +4,7 @@
 >
 > 1、C++的这个formal description的理论是非常好的，能够让programmer使用非常简洁、清晰的方式来描述 multi thread的行为，后续可以采用它的这套理论。
 >
-> 
+> 2、cppreference或者说C++ language design中，对memory ordering的描述是基于modification order的，因此可以看到后续所有的ordering都是基于这个概念来建立的；这个概念比较抽象，对于不了解具体的、底层细节的programmer而言，初次可能无法完全掌握它们，因此在进行解释的时候，需要补充一些实现细节的文章。
 
 **Inter-thread synchronization** and **memory ordering** determine how *evaluations* and *side effects* of expressions are ordered between different threads of execution. 
 
