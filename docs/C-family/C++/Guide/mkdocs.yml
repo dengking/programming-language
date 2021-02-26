@@ -14,4 +14,6 @@ nav:
     - Uniform-consistent-interface-API-syntax: Uniform-consistent-interface-API-syntax
     - Performance-optimization: Performance-optimization
     - Memory-model-and-atomic-library: Memory-model-and-atomic-library
+    - Library-smart-pointers: Library-smart-pointers
     - Type-system: Type-system
+    
