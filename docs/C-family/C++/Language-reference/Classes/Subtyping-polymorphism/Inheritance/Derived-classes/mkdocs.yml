@@ -1,4 +1,5 @@
 nav:
-    - Derived-classes: Derived-classes.md
-    - TODO-Multiple-inheritance: TODO-Multiple-inheritance.md.md
-    - Super: Super.md
+    - Introduction: index.md
+    - Class-hierarchy: Class-hierarchy
+    - TODO-Multiple-inheritance: TODO-Multiple-inheritance
+    - TODO-Super: TODO-Super
