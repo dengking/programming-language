@@ -28,6 +28,20 @@ smart pointer符合[intentional programming](https://en.wikipedia.org/wiki/Inten
 - `shared_ptr`由reference count来管理
 - `unique_ptr`由scope来管理
 
+
+
+## C++ smart pointer应该覆盖所以pointer的功能
+
+1、dereference
+
+2、opaque pointer、incomplete type
+
+3、covariant return type
+
+无法覆盖的情况: smart pointer不支持 covariant return type，但是raw pointer是支持的，关于这个说法，参见 https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-copy
+
+
+
 ## wikipedia [Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)
 
 > NOTE: smart pointer不仅仅能够用于memory management，还能够用于其他的resource management。
