@@ -50,7 +50,7 @@ C inherit from A2
 
 1、mixin multiple、multiple CRTP
 
-参见 
+参见 `Variadic-CRTP`、
 
 2、implement multiple interface
 
