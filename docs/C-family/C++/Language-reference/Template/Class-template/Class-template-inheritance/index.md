@@ -5,6 +5,9 @@
 a、Inherit from class template
 
 b、Class template inherit from non-template class
+
+c、Variadic multiple inheritance
+
 ## Inherit from class template
 
 本节标题的是含义是: 一个class继承一个class template，显然:
