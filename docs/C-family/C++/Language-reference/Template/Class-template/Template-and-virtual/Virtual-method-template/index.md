@@ -62,7 +62,9 @@ virtual void Test(T t)
 
 推荐"3、使用policy-based design"。
 
+## 提及virtual method template的文章
 
+1、fluentcpp [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)
 
 ## TODO
 
