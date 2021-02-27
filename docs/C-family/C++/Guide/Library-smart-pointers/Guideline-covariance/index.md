@@ -26,7 +26,7 @@ double dispatch/polymorphism，相对比较简单
 
 2、fluentcpp [How to Return a Smart Pointer AND Use Covariance](https://www.fluentcpp.com/2017/09/12/how-to-return-a-smart-pointer-and-use-covariance/)
 
-比较复杂
+它的实现比较复杂
 
 ## TODO
 
