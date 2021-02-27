@@ -1,6 +1,10 @@
 # Virtual Constructor
 
-How to copy an object that is accessible only by an interface that it implements?
+1、本文讨论"How to copy an object that is accessible only by an interface that it implements?"
+
+2、首先回答的一个问题是: 为什么C++不提供virtual constructor
+
+2、然后回答，如何来实现walk-around
 
 ## 为什么C++不提供virtual constructor？
 
@@ -12,23 +16,106 @@ Why does C++ not have a virtual constructor?
 
 > NOTE: 这个回答是容易理解的，通过阅读它，我
 
+Virtual functions basically provide **polymorphic behavior**. That is, when you work with an object whose dynamic type is different than the static (compile time) type with which it is referred to, it provides behavior that is appropriate for the *actual* type of object instead of the static type of the object.
 
+> NOTE: 这段话其实是在介绍**polymorphic behavior**的含义
 
+Now try to apply that sort of behavior to a constructor. When you construct an object the **static type** is always the same as the actual object type since:
 
+> To construct an object, a constructor needs the exact type of the object it is to create [...] Furthermore [...]you cannot have a **pointer to a constructor**
+
+(Bjarne Stroustup (P424 The C++ Programming Language SE))
+
+[A](https://stackoverflow.com/a/733393)
+
+Hear it from the horse's mouth. :)
+
+From Bjarne Stroustrup's C++ Style and Technique FAQ [Why don't we have virtual constructors?](http://www.stroustrup.com/bs_faq2.html#virtual-ctor)
+
+> A virtual call is a mechanism to get work done given partial information. In particular, "virtual" allows us to call a function knowing only any interfaces and not the exact type of the object. To create an object you need complete information. In particular, you need to know the exact type of what you want to create. Consequently, a "call to a constructor" cannot be virtual.
+
+The FAQ entry goes on to give the code for a way to achieve this end without a virtual constructor.
+
+> NOTE: 原文中，虽然这个回答获赞较高，但是，我觉得上面的那个答案是更好的
+
+[A](https://stackoverflow.com/a/733436)
+
+> NOTE: 
+>
+> 1、这个回答也不错，它剖析的角度是从对比的角度来展开的: Python。Python中，"everything is an object"，因此class也是一个object，而Python的member function默认是virtual的，因此Python的constructor是virtual的，因此Python中就不需要abstract factory pattern
+
+Unlike object oriented languages such as Smalltalk or Python, where the constructor is a virtual method of the object representing the class (which means you don't need the GoF [abstract factory pattern](http://c2.com/cgi/wiki?AbstractFactoryPattern), as you can pass the object representing the class around instead of making your own), C++ is a class based language, and does not have objects representing any of the language's constructs. The class does not exist as an object at runtime, so you can't call a virtual method on it.
+
+This fits with the 'you don't pay for what you don't use' philosophy, though every large C++ project I've seen has ended up implementing some form of abstract factory or reflection.
 
 ## fluentcpp [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)
 
+How to copy an object that is accessible only by an interface that it implements?
+
 ### The classical problem
+
+Let’s take the example of the following interface:
+
+```C++
+class Interface
+{
+public:
+    virtual void doSomething() const = 0;
+    virtual ~Interface() = default;
+};
+```
+
+With one the classes implementing this interface:
+
+```C++
+class Implementation : public Interface
+{
+public:
+    virtual void doSomething() const override
+    {
+        /* ... */
+    }
+};
+```
+
+How to make a copy of the `Implementation` object?
+
+If you have access to the object itself, there is nothing easier:
+
+```C++
+Implementation x = // ...
+Implementation y = x;
+```
+
+But the existence of the `Interface` suggests that there *are* polymorphic contexts where the object is accessible only via the interface:
+
+```C++
+Interface& x = // ...
+Interface& y = ??
+```
 
 And there is a problem here because,  in C++, to construct an object we must spell out in the code the actual type of the object to be constructed (except in the case of implicit conversions). And here we don’t know what this type is. It could be `Implementation`, or any other class inheriting from `Interface`.
 
-> NOTE: 原文的这段话非常重要
+> NOTE: 
+>
+> 1、关于这段话的解释，参见 "为什么C++不提供virtual constructor？"段
+
+And even if, for some reason, we knew for sure that it *was* an `Implementation`, the calling code may not have access to this class, which is one of the purposes of having an interface in the first place.
+
+> NOTE: 
+>
+> 1、information hiding
+
+What to do then?
 
 
 
 ### The classical solution
 
 The classical solution is to “virtualize” the constructor, as Scott Meyers puts it. That is to say add a `clone` method in the interface, that delegates the object construction to the implementation itself. The interface then looks like:
+
+> NOTE: 
+> 1、delegate
 
 ```c++
 class Interface
@@ -70,7 +157,15 @@ Notice that the return type of the `clone` method differ between the interface i
 
 > NOTE: "covariance"概念非常重要。
 
+This technique allows the desired copy, but exhibits another classical problem: the call site receives the responsibility to delete the cloned object, but nothing ensures that it will do it. Particularly if there is an early return or an exception thrown further down the code, the object has a risk to leak.
+
+
+
 ### A modern solution
+
+> NOTE: 
+>
+> 1、其实就是使用resource return
 
 ```c++
 class Interface
@@ -115,6 +210,18 @@ std::unique_ptr<T> make_unique(Args&&... args)
 }
 ```
 
+Second, and much more annoyingly, the covariance doesn’t hold any more, because the `clone` method is no longer returning pointers. It now has to return an `std::unique_ptr<Interface>` in the interface AND in the implementation.
+
+
+
+In the above case it doesn’t cause any practical problem, given that `Implementation` already depends on `Interface` anyway. But let’s consider the case where an implementation inherits from **several interfaces**. The solution without smart pointers scales effortlessly(轻松地；毫不费劲地) because the `clone` method is independent from the interface:
+
+> NOTE: 翻译如下:
+>
+> "在上述情况下，它不会导致任何实际问题，因为实现已经依赖于接口。但是让我们考虑这样一种情况:一个实现继承了几个接口。没有智能指针的解决方案可以毫不费力地扩展，因为克隆方法独立于接口:"
+>
+> 
+
 
 
 ```c++
@@ -152,7 +259,19 @@ public:
 };
 ```
 
+But with smart pointers, the situation is different: the `clone` method, bound to `Interface1`, cannot be used for `Interface2`! And since the `clone` method doesn’t take any argument, there is no way to add a new overload returning a unique_ptr to `Interface2`.
+
+One solution that comes to mind is to use template methods. But there is no such such thing as a **template *virtual* method** so this solution is off the table.
+
+> NOTE: 
+>
+> 1、关于 template virtual method，参见 "Virtual-method-template" 章节
+
+Another idea would be to isolate the `clone` method in a `clonable` interface. But this would force the call site to `dynamic_cast` back and forth from the real interface to the clonable interface. Not good either.
+
 ### Clearing the ambiguity
+
+The alternative I would suggest is to use **different names** for the clone methods in the interfaces.
 
 ```c++
 class Interface1
@@ -192,6 +311,12 @@ public:
     }
 };
 ```
+
+But to be viable, this solution has to rely on a guideline for **interface designers**: if you choose to implement a clone method that returns a smart pointer, then **don’t call it just `clone`**.
+
+Rather, use a specific name, like `cloneInterfaceX`, that won’t conflict with the copy functions coming from the other interfaces.
+
+Now this is a solution for this particular problem, but there is a bigger C++ question behind this: **how to make smart pointers work with covariance**? You will have the answer on the next post, written by Raoul Borges who’s much more experienced than me on that question.
 
 
 
