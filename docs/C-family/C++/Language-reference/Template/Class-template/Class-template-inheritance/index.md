@@ -242,9 +242,9 @@ v.push_back( new Child<int>());
 
 1、type  erasure，参见 `Type-Erasure` 章节
 
-2、external polymorphism，参见:
+2、adapter external polymorphism pattern，参见:
 
-a、`External-polymorphism-pattern` 章节
+a、`Adapter-external-polymorphism-pattern` 章节
 
 ## Specialize-template-method-of-base-class
 
