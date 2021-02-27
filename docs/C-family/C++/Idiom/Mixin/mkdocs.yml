@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - Factory-mixin: Factory-mixin.md
+    - Parameterized-Base-Class: Parameterized-Base-Class
+    - Mixin-multiple: Mixin-multiple
