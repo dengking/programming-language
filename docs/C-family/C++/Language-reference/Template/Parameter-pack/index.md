@@ -16,7 +16,7 @@
 
 2、variadic class template
 
-`Variadic-multiple-inheritance`章节
+参见 `Variadic-multiple-inheritance`章节
 
 3、variadic function template
 
