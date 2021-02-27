@@ -214,6 +214,12 @@ It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation
 
 > NOTE: tag-order of write to shared data may be different among different threads
 
+3、在它是实现中，并没有使用acquire-release来实现inter-thread happens before，对于reference counting而言，它并不需要inter-thread happens before，它只需要
+
+a、atomic increment、decrement
+
+b、在`refs`为0的时候，释放资源，因此，需要使用acquire、release来控制ordering
+
 ### 为什么increment的时候，可以使用`memory_order_relaxed`？
 
 increment使用的是`control_block_ptr->refs.fetch_add(1, memory_order_relaxed)`，显然这是atomic operation，因此是free of data race的，需要注意的是: 
