@@ -55,8 +55,16 @@ Within the same thread, evaluation A may be *sequenced-before* evaluation B, as 
 > 1、描述的是同一个thread内的order
 >
 > 2、这段话的内容是容易理解的
+>
+> 3、Carries dependency是建立在sequenced-before基础上的
+>
+> 4、Carries dependency其实就是非常简单的dependency关系
+>
+> 5、compiler是能够分辨Carries dependency的，因此对于存在Carries dependency的，它是不会进行reordering的
 
 Within the same thread, evaluation A that is *sequenced-before* evaluation B may also carry a dependency into B (that is, B depends on A), if any of the following is true
+
+> NOTE: "A carry a dependency int B"的含义是: B 依赖于 A
 
 1) The value of A is used as an operand of B, **except**
 

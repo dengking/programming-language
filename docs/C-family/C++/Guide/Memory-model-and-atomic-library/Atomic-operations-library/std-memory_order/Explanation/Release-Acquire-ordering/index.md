@@ -150,7 +150,7 @@ As [the MSDN article on acquire and release semantics](http://msdn.microsoft.com
 
 
 
-## cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Explanation # Relaxed ordering # Release-Acquire ordering
+## cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Explanation # Release-Acquire ordering
 
 If an atomic store in thread A is tagged `memory_order_release` and an atomic load in thread B from the same variable is tagged `memory_order_acquire`, all memory writes (non-atomic and relaxed atomic) that *happened-before* the atomic store from the point of view of thread A, become *visible side-effects* in thread B. That is, once the atomic load is completed, thread B is guaranteed to see everything thread A wrote to memory.
 
@@ -158,19 +158,19 @@ If an atomic store in thread A is tagged `memory_order_release` and an atomic lo
 >
 > 1、关于这段话的翻译、理解，参见 "Acquire-release semantic" 段的`1`，那段话是我按照上面这段话编写的。
 >
-> 2、使用modification order来进行分析: 
->
-> 在参与"Release-Acquire synchronization"(实现inter-thread happens before)的thread之间建立modification order，因此这些参与的thread会看到相同的modification order，而未参与的thread则无法保证看到这个modification order。
->
-> 需要注意的是，release semantic 和 acquire semantic仅仅是关于memory reordering的，它们需要结合其它的控制语句(典型的是while)才能够实现"inter-thread happens before"。
+> 
 
-
+### 使用modification order来进行描述
 
 The synchronization is established only between the threads *releasing* and *acquiring* the same atomic variable. Other threads can see different order of memory accesses than either or both of the synchronized threads.
 
 > NOTE: 
 >
-> 1、这段话总结地非常好
+> 1、这段话总结地非常好，它是使用modification order来描述的: 
+>
+> 在参与"Release-Acquire synchronization"(实现inter-thread happens before)的thread之间建立modification order，因此这些参与的thread会看到相同的modification order，而未参与的thread则无法保证看到这个modification order。
+>
+> 需要注意的是，release semantic 和 acquire semantic仅仅是关于memory reordering的，它们需要结合其它的控制语句(典型的是while)才能够实现"inter-thread happens before"。
 >
 > 2、"order of write to shared data may be different among different threads"
 
@@ -183,6 +183,7 @@ On weakly-ordered systems (ARM, Itanium, PowerPC), special CPU load or memory fe
 > NOTE: 
 >
 > 1、参见: 
+>
 > a、preshing [Weak vs. Strong Memory Models](https://preshing.com/20120930/weak-vs-strong-memory-models/)
 >
 > b、preshing [This Is Why They Call It a Weakly-Ordered CPU](https://preshing.com/20121019/this-is-why-they-call-it-a-weakly-ordered-cpu/)
