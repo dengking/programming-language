@@ -1,6 +1,6 @@
 # Multiple inheritance
 
-在使用policy based design的时候，使用到了Multiple inheritance;
+
 
 ## 两种可能的class hierarchy
 
@@ -43,6 +43,16 @@ D inherit from C
 B inherit from A1
 
 C inherit from A2
+
+# 
+
+## When to use multiple inheritance
+
+1、mixin multiple、multiple CRTP
+
+参见 
+
+2、implement multiple interface
 
 
 

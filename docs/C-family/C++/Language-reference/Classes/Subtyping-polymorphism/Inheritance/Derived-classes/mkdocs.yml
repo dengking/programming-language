@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
     - Class-hierarchy: Class-hierarchy
-    - TODO-Multiple-inheritance: TODO-Multiple-inheritance
+    - Multiple-inheritance: Multiple-inheritance
     - TODO-Super: TODO-Super
