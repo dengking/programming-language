@@ -4,7 +4,11 @@
 
 ## More C++ Idioms/[Parameterized Base Class](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Parameterized_Base_Class)
 
+### Also Known As
 
+1、Mixin-from-below
+
+2、Parameterized Inheritance
 
 ### Motivation
 
@@ -55,7 +59,7 @@ Mixin classes are **template classes** that define a generic behaviour, and are 
 
 Here is an example. Let’s take a class representing the name of a person. It has a first name and a last name, and it can print out that name with a specific format:
 
-```
+```C++
 class Name
 {
 public:
@@ -93,7 +97,7 @@ We could add a `repeat` method to the `Name` class. But the concept of repeatedl
 
 The idea of the mixin class is to isolate the generic functionality into its own class, template this class on the type we want to plug in onto, and derive from that type:
 
-```
+```C++
 template<typename Printable>
 struct RepeatPrint : Printable
 {

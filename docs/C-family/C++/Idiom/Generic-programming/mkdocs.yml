@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
-    - Generic-programming: Generic-programming.md
-    - boost-Generic-Programming-Techniques: boost-Generic-Programming-Techniques.md
+
 #################### generic programming都是和template相关的 ####################    
     - Curiously-recurring-template-pattern: Curiously-recurring-template-pattern
     # 下面两者密切相关
