@@ -4,7 +4,9 @@
 
 ## fluentcpp [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/)
 
-> NOTE: "opt-in"的含义是"选择性加入"
+> NOTE: 
+>
+> 1、"opt-in"的含义是"选择性加入"，其实就是mixin
 
 The CRTP is a technique that allows to add extra features to a class. Variadic templates, brought by C++11, make this technique more powerful by adding a new aspect to it: composition.
 
