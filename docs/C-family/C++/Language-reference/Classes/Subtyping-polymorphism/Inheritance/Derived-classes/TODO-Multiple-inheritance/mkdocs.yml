@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - isocpp-Inheritance-Multiple-and-Virtual-Inheritance: isocpp-Inheritance-Multiple-and-Virtual-Inheritance
     - Virtual-inheritance: Virtual-inheritance
