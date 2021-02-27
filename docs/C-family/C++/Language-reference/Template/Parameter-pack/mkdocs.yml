@@ -1,5 +1,6 @@
 nav:
-    - Parameter-pack: index.md
+    - Introduction: index.md
+    - cppreference-Parameter-pack: cppreference-Parameter-pack
     - eli.thegreenplace-Variadic-templates-in-C++: eli.thegreenplace-Variadic-templates-in-C++    
     - Operations: Operations
     - Variadic-template-VS-ellipsis: Variadic-template-VS-ellipsis
