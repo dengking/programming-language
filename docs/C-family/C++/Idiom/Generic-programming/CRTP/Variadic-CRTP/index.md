@@ -7,6 +7,8 @@
 > NOTE: 
 >
 > 1、"opt-in"的含义是"选择性加入"，其实就是mixin
+>
+> 2、虽然CRTP有很多的application，但是variadic CRTP，我目前能够想到的application只有mixin multiple
 
 The CRTP is a technique that allows to add extra features to a class. Variadic templates, brought by C++11, make this technique more powerful by adding a new aspect to it: composition.
 
