@@ -43,5 +43,8 @@ class Serializable : public T,   /// Parameterized Base Class Idiom
 
 `Serializable <T>` can be used polymorphically as a `T` as well as a `ISerializable`. Above example works correctly only if `T` is a user-defined POD type without pointers.
 
-## Variadic multiple inheritance and mixin multiple
+## Variadic multiple inheritance 
 
+"Parameterized Base Class"其实采用的"template base class"用法，在C++ idiom的世界中，它特指的是一种实现 "Mixin-from-below" 的方法；
+
+与它类似的是: "Variadic multiple inheritance"其实采用的也是"template base class"用法。
