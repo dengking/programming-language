@@ -1,5 +1,5 @@
 nav:
-    - C++Core-Guidelines: C++Core-Guidelines
+    - CppCoreGuidelines: CppCoreGuidelines
     - Design-and-implementation: Design-and-implementation
     # 总结c++支持的programming paradigm
     - Programming-paradigm: Programming-paradigm
