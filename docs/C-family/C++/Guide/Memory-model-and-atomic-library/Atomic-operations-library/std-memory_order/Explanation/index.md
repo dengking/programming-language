@@ -52,11 +52,12 @@ All writes in other threads that release the same atomic variable are visible be
 
 ## Release-Consume ordering
 
-
+> NOTE: 参见 `Release-Consume-ordering` 章节
 
 ## Sequentially-consistent ordering
 
-
+> NOTE: 参见 `Sequentially-consistent-ordering` 章节
 
 ## Relationship with `volatile`
 
+TODO
