@@ -22,7 +22,7 @@
 
 
 
-## 术语: External Polymorphism and InternalPolymorphism
+## 术语: External Polymorphism and Internal Polymorphism
 
 Google了一下，发现下面这篇文章的介绍是比较好的。
 
