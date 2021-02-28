@@ -3,3 +3,4 @@ nav:
     - Specialization-and-overload: Specialization-and-overload
     - Assemble-polymorphism-and-multiple-dispatch: Assemble-polymorphism-and-multiple-dispatch
     - TODO-Static-and-dynamic-polymorphism: TODO-Static-and-dynamic-polymorphism
+    - Polymorphic-object-container: Polymorphic-object-container
