@@ -186,6 +186,10 @@ vv.push_back(move(v)); // 显式将v移动进vv
 
 ### `std::vector`的增长
 
+> NOTE: 
+>
+> 1、performance principle :prefer move over copy 
+
 又一个隐蔽的优化。当vector的存储容量需要增长时，通常会重新申请一块内存，并把原来的内容一个个复制过去并删除。对，复制并删除，改用移动就够了。
 
 对于像`vector<string>`这样的容器，如果频繁插入造成存储容量不可避免的增长时，移动语义可以带来悄无声息而且美好的优化。
@@ -193,6 +197,12 @@ vv.push_back(move(v)); // 显式将v移动进vv
 ### `std::unique_ptr`放入容器
 
 曾经，由于vector增长时会复制对象，像`std::unique_ptr`这样不可复制的对象是无法放入容器的。但实际上vector并不复制对象，而只是“移动”对象。所以随着移动语义的引入，`std::unique_ptr`放入`std::vector`成为理所当然的事情。
+
+> NOTE: 
+>
+> 1、"但实际上vector并不复制对象，而只是“移动”对象。所以随着移动语义的引入，`std::unique_ptr`放入`std::vector`成为理所当然的事情。"
+>
+> 上面这段话让我领悟了: performance principle :prefer move over copy 
 
 容器中存储`std::unique_ptr`有太多好处。想必每个人都写过这样的代码：
 
@@ -212,9 +222,17 @@ MyObj::~MyObj() {
 }
 ```
 
+> NOTE: 
+>
+> 1、上述写法违背了:
+>
+> CppCoreGuidelines R.11 Avoid calling new and delete explicitly
+
 繁琐暂且不说，异常安全也是大问题。使用`vector<unique_ptr<T>>`，完全无需显式析构，`unqiue_ptr`自会打理一切。完全不用写析构函数的感觉，你造吗？
 
 `unique_ptr`是非常轻量的封装，存储空间等价于**裸指针**，但安全性强了一个世纪。实际中需要共享所有权的对象（指针）是比较少的，但需要转移所有权是非常常见的情况。`auto_ptr`的失败就在于其转移所有权的繁琐操作。`unique_ptr`配合移动语义即可轻松解决所有权传递的问题。
+
+
 
 注：如果真的需要共享所有权，那么基于引用计数的`shared_ptr`是一个好的选择。`shared_ptr`同样可以移动。由于不需要线程同步，移动`shared_ptr`比复制更轻量。
 
