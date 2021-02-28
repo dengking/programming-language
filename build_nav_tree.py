@@ -107,7 +107,9 @@ class NavBuilder:
     Nav = 'nav'
 
     def __init__(self, root_dir='docs'):
+        
         self.root_dir = root_dir  # 根路径名称
+        self.start_path_in_os = os.path.join(os.path.dirname(os.path.realpath(__file__)), self.root_dir) # 本文件的在OS上的路径
         self.root_nav_label = self.Nav
         # 最终结果就是一棵树
         # 它表示这棵树的root节点，
@@ -146,8 +148,16 @@ class NavBuilder:
                         __split_file_path = split_file_path[1:-1]  # mkdocs文件中的文件路径不包括docs，所以从1开始
                         if __split_file_path:
                             current_file_path = os.path.join(*__split_file_path)
-                            child_node[child_node_label] = pathlib.Path(
-                                os.path.join(current_file_path, child_node_value)).as_posix()  # 补全路径，使用POSIX格式路径
+                            file_name_in_mkdocs_obj = pathlib.Path(
+                                os.path.join(current_file_path, child_node_value))# 补全路径
+                            file_name_in_os_obj = pathlib.Path(
+                                os.path.join(self.start_path_in_os, current_file_path, child_node_value))# 补全路径
+                            print(file_name_in_os_obj)
+                            if file_name_in_os_obj.is_file():
+                                child_node[child_node_label] = file_name_in_mkdocs_obj.as_posix()  # 使用POSIX格式路径
+                            else:
+                                log = "文件'{}'不存在".format(file_name_in_mkdocs_obj.as_posix())
+                                raise Exception(log)
                         else:
                             child_node[child_node_label] = child_node_value
                     else:
