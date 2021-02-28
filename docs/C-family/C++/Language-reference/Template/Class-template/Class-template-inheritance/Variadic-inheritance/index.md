@@ -1,4 +1,4 @@
-# Variadic multiple inheritance
+# Variadic inheritance
 
 需要使用template来抽象化地描述C++ class hierarchy，其实这是有一点难度的，但是C++11的很多新特性使得这成为了可能。那如何实现呢？参见下面文章:
 
