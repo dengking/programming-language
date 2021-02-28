@@ -20,4 +20,5 @@ nav:
     - Boost-Meta-programming: Boost-Meta-programming
     # generic programming
     - Boost-Iterator: Boost-Iterator
-    
+    - Boost-TypeErasure: Boost-TypeErasure
+    - Boost-Atomic: Boost-Atomic
