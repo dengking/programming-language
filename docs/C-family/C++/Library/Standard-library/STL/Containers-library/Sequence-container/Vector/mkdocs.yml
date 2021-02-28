@@ -1,3 +1,3 @@
 nav:
     - std-vector-bool: std-vector-bool.md
-    - Resize-reserve: Resize-reserve
+    - Resize-and-reserve: Resize-and-reserve

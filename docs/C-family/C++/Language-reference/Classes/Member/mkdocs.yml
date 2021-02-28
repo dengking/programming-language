@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Static-members: Static-members
+    - Static-member: Static-member
     - Non-static-member: Non-static-member

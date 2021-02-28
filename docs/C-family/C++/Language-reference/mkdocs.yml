@@ -13,8 +13,6 @@ nav:
     - Reference: Reference
     # 异常机制
     - Exception: Exception
-    # namespace
-    - Namespace: Namespace
     # 枚举相关的问题
     - Enum: Enum
     # 如何使用oop？

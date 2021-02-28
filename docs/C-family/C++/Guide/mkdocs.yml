@@ -9,7 +9,7 @@ nav:
     - Temporary: Temporary
     - Order: Order
     - Header-only-library: Header-only-library.md
-    - Transaction: Transaction
+    # - Transaction: Transaction
     - Simplify: Simplify
     - Uniform-consistent-interface-API-syntax: Uniform-consistent-interface-API-syntax
     - Performance-optimization: Performance-optimization

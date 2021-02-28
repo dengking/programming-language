@@ -16,11 +16,8 @@ nav:
     - Type-Generator: Type-Generator
     # 
     - Object-Generator: Object-Generator
-    #
-    - Tag-Dispatching: Tag-Dispatching
+
     # Deduce
     - Return-Type-Resolver: Return-Type-Resolver
     #
     - nullptr: nullptr
-    - Swappable: Swappable
-    - void_t: void_t

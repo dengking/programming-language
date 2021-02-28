@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - Googletest: Googletest
+    - Primer: Primer.md
+    - GoogleMock: GoogleMock

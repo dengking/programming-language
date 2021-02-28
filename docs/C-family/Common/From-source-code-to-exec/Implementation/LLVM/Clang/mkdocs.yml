@@ -1,8 +1,6 @@
 nav:
     - Introduction: index.md
     - Clang-Features-and-Goals: Clang-Features-and-Goals.md
-    - LLVM-Design-and-overview: LLVM-Design-and-overview
-    - Clang: Clang
     - Clang-Static-Analyzer: Clang-Static-Analyzer
     - Clang-Tidy: Clang-Tidy
     - compiler-rt: compiler-rt

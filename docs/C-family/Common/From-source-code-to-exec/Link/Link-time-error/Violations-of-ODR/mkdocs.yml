@@ -1,4 +1,3 @@
 nav:
-    - Introduction: index.md
+
     - Multiple-definition: Multiple-definition.md
-    - Undefined-reference-or-unresolved-external-symbol: Undefined-reference-or-unresolved-external-symbol

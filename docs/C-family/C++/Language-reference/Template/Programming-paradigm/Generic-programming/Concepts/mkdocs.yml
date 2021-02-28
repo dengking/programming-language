@@ -4,5 +4,3 @@ nav:
     # 这是Bjarne Stroustrup的文章    
     - Concepts-The-Future-of-Generic-Programming: Concepts-The-Future-of-Generic-Programming.md
     - Pre-C++20-concept: Pre-C++20-concept
-    # concept的应用    
-    - Application: Application

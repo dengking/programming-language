@@ -1,21 +1,12 @@
 nav:
     ########## resource相关########## 
+    - Class-basic: Class-basic
     - RAII-based: RAII-based
     - Resource-Return: Resource-Return
-    #################### virtual相关####################    
-    - Virtual-Constructor: Virtual-Constructor
-    - Virtual-Friend-Function: Virtual-Friend-Function  
-    - Calling-Virtual-During-Initialization: Calling-Virtuals-During-Initialization
-    - Polymorphic-Value-Types: Polymorphic-Value-Types
-    - Base-from-Member: Base-from-Member
-    
-    - Covariant-Return-Types: Covariant-Return-Types
     # 命名参数
     - Named-Parameter: Named-Parameter
-    # 命名构造函数
-    - Named-Constructor: Named-Constructor
     # Control the granularity of access to the implementation details of a class
-    - Attorney-Client: Attorney-Client
+    - TODO-Attorney-Client: TODO-Attorney-Client
     # 控制object是否能够创建于heap
     - Requiring-or-Prohibiting: Requiring-or-Prohibiting
     #
