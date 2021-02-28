@@ -1,6 +1,2 @@
 nav:
     - Introduction: index.md
-    - Expression-oriented-programming-language: Expression-oriented-programming-language.md
-    - Programming-paradigm: Programming-paradigm
-    - Lisp: Lisp
-    - Expression-problem: Expression-problem

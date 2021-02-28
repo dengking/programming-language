@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - Is-a: Is-a
-    - Subtyping-VS-inheritance: Subtyping-polymorphism-VS-inheritance
+    - Subtyping-VS-inheritance: Subtyping-VS-inheritance
     - Behavioral-subtyping: Behavioral-subtyping.md
     - Dispatch: Dispatch
     
