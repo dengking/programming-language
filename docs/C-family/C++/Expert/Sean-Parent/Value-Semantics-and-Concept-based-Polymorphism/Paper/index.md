@@ -236,6 +236,12 @@ int main()
 
 
 
+> NOTE: 
+>
+> 1、上述第一条的解释让我明白了CppCoreGuidelines [R.11: Avoid calling `new` and `delete` explicitly](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#r11-avoid-calling-new-and-delete-explicitly) 的原因，在CppCoreGuidelines [R.11: Avoid calling `new` and `delete` explicitly](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#r11-avoid-calling-new-and-delete-explicitly) 中，收录了这个点
+>
+> 2、上述例子非常好的展示了: "polymorphic object container"这个topic，在`Polymorphic-object-container`章节进行了详细的说明。
+
 ## Deep problem #1
 
 Changed semantics of copy, assignment, and equality of my `document`
