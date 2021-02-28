@@ -6,7 +6,7 @@ a、Inherit from class template
 
 b、Class template inherit from non-template class
 
-c、Variadic multiple inheritance
+c、Variadic inheritance
 
 ## Inherit from class template
 
