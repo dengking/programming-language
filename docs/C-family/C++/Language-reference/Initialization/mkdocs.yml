@@ -3,7 +3,6 @@ nav:
     # 首先描述cppreference中initialization的概念    
     - Initialization: Initialization.md
     - Uniform-initialization: Uniform-initialization
-    - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
     - Default-initialization: Default-initialization.md
     - Zero-initialization: Zero-initialization.md
     - Constant-initialization: Constant-initialization.md

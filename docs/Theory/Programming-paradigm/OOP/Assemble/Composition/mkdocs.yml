@@ -1,5 +1,4 @@
 nav:
     - Introduction: index.md
     - Has-a: Has-a.md
-    - TODO-Delegation: TODO-Delegation.md
-    - TODO-Forwarding(object-oriented-programming): TODO-Forwarding(object-oriented-programming).md
+    - Delegation-and-forwarding: Delegation-and-forwarding

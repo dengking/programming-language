@@ -1,7 +1,7 @@
 nav:
     - Bjarne-Stroustrup: Bjarne-Stroustrup.md
     - Herb-Sutter: Herb-Sutter
-    - Scott-Myers: Scott-Myers.md
+    - Scott-Meyers: Scott-Meyers
     - Andrei-Alexandrescu: Andrei-Alexandrescu
     - MattPD-cpplinks: MattPD-cpplinks
     - Martin-Moene: Martin-Moene

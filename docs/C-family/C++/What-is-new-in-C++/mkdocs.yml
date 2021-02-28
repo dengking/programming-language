@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
-    - preshing-C++Has-Become-More-Pythonic: preshing-C++Has-Become-More-Pythonic.md
     - C++11: C++11
     - C++14: C++14
     - C++17: C++17

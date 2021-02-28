@@ -1,5 +1,5 @@
 nav:
-    - Macro: Macro.md
+    - Introduction: index.md
     - Pros-and-cons-of-macro: Pros-and-cons-of-macro.md
     - plateform-macro: plateform-macro
     

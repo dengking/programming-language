@@ -1,4 +1,4 @@
 nav:
-    - Bjarne-Stroustrup: Bjarne-Stroustrup.md
+    - Introduction: index.md
     - Library-gcpp: Library-gcpp
     - Effective-Concurrency-Serial: Effective-Concurrency-Serial

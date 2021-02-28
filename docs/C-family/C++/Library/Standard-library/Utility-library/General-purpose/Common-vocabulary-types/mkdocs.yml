@@ -1,7 +1,7 @@
 nav:
-    - Vocabulary-type: index.md
+    - Introduction: index.md
     - tuple: tuple
     - optional: optional.md
     - any: any.md
-    - variant: variant.md
+    - variant: variant
     - integer_sequence: integer_sequence

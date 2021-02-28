@@ -1,5 +1,5 @@
 nav:
-    - Exception-safety: Exception-safety.md
+    - Introduction: index.md
     - boost-Lessons-Learned-from-Specifying-Exception-Safety-for-STL: boost-Lessons-Learned-from-Specifying-Exception-Safety-for-STL
     - wikipedia-Exception-safety: wikipedia-Exception-safety
     - STL-exception-safety: STL-exception-safety

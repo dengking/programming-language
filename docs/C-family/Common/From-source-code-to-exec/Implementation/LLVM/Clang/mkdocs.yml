@@ -1,5 +1,5 @@
 nav:
-    - Introduction: index.md
+
     - Clang-Features-and-Goals: Clang-Features-and-Goals.md
     - Clang-Static-Analyzer: Clang-Static-Analyzer
     - Clang-Tidy: Clang-Tidy
