@@ -1,6 +1,10 @@
 # Delete object of incomplete type
 
-1、在C++中，object of incomplete type是undefined behavior，原因在于:
+## Summary
+
+### C++
+
+1、在C++中，delete object of incomplete type是undefined behavior，原因在于:
 
 a、 compiler不会选择destructor、class-specific operator delete，因此这就导致了undefined behavior
 
@@ -11,6 +15,12 @@ a、 compiler不会选择destructor、class-specific operator delete，因此这
 2、比较意外的是 ，一些情况下，"Delete object of incomplete type" 是能够编译通过的，但是这样会招致undefined behavior，因此programmer需要添加check，这在下一章节描述如何实现check。
 
 3、需要注意的是: "Delete object of incomplete type"能否保证object的memory被回收是取决于allocator的，关于这一点，在 stackoverflow [Is it safe to delete a void pointer?](https://stackoverflow.com/questions/941832/is-it-safe-to-delete-a-void-pointer) # [A](https://stackoverflow.com/a/941953) 中进行了介绍。
+
+### C
+
+1、在C中，free object of incomplete type正常的、合法的。
+
+
 
 ## Opaque pointer
 
@@ -169,6 +179,8 @@ Am I missing something big here (and in that case sorry for the stupid question)
 
 ### stackoverflow [Is it safe to delete a void pointer?](https://stackoverflow.com/questions/941832/is-it-safe-to-delete-a-void-pointer)
 
+> NOTE: 标题中的delete，说明它是C++
+
 Suppose I have the following code:
 
 ```cpp
@@ -210,3 +222,29 @@ Deleting via a void pointer is undefined by the C++ Standard - see section 5.3.5
 And its footnote:
 
 > This implies that an object cannot be deleted using a pointer of type void* because there are no objects of type void
+
+
+
+### stackoverflow [Is it OK to free 'void*'?](https://stackoverflow.com/questions/2182103/is-it-ok-to-free-void)
+
+> NOTE: 标题中的free，说明它是C
+
+Consider:
+
+```c
+struct foo
+{
+    int a;
+    int b;
+};
+
+void* p = (void*)malloc(sizeof(struct foo));
+((foo*)p)->a; // Do something.
+free(p); // Is this safe?
+```
+
+[A](https://stackoverflow.com/a/2182108)
+
+Yes.
+
+malloc returns `void *` and free takes `void *`, so some of your casts are meaningless, and you're always freeing a `void *` even if you're starting with some other sort of pointer.
