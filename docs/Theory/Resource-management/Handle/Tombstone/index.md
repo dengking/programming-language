@@ -7,6 +7,8 @@
 > 2、"tombstone"的表明意思是"墓石"。
 >
 > 3、Tombstone可以看做是handle的实现，它是abstraction layer、intermediary
+>
+> 4、tombstone非常类似于virtual address，它们背后的思想都是abstraction
 
 **Tombstones** are a mechanism to detect [dangling pointers](https://en.wikipedia.org/wiki/Dangling_pointer) that can appear in certain computer [programming languages](https://en.wikipedia.org/wiki/Programming_language), e. g. [C](https://en.wikipedia.org/wiki/C_(programming_language)), [C++](https://en.wikipedia.org/wiki/C%2B%2B) and [assembly languages](https://en.wikipedia.org/wiki/Assembly_language), and to act as a containment(围堵策略) to their dangerous effects.
 

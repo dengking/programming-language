@@ -47,6 +47,8 @@ While a [pointer](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) 
 > 2、最后一段话，点明了handle的实现
 >
 > 3、显然handle的opacity，能够有效避免dangling
+>
+> 4、tombstone非常类似于virtual address，它们背后的思想都是abstraction
 
 A [handle leak](https://en.wikipedia.org/wiki/Handle_leak) is a type of [software bug](https://en.wikipedia.org/wiki/Software_bug) that occurs when a computer program asks for a handle to a resource but does not free the handle when it is no longer used; this is a form of [resource leak](https://en.wikipedia.org/wiki/Resource_leak), similar to a [memory leak](https://en.wikipedia.org/wiki/Memory_leak) for a pointer to memory.
 
