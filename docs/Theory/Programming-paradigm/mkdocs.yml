@@ -5,7 +5,7 @@ nav:
     - Common: Common
 
     ########## 面向对象编程##########    
-    - Object-oriented-programming: Object-oriented-programming
+    - OOP: OOP
     ########## 面向切面编程########    
     - Aspect-oriented-programming: Aspect-oriented-programming
     ########## 函数式编程##########
