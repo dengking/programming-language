@@ -1,4 +1,2 @@
 nav:
-    - Has-a: Has-a.md
-    - Is-a: Is-a.md
     - Introduction: index.md

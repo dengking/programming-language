@@ -2,7 +2,7 @@ nav:
     - Introduction: index.md
     - Alignment: Alignment
     - Application-binary-interface: Application-binary-interface.md
-    - Call-convention: Call-convention
+    # - Call-convention: Call-convention
     - Library: Library
     - Name-mangling: Name-mangling
     - Itanium-Cpp-ABI: Itanium-Cpp-ABI

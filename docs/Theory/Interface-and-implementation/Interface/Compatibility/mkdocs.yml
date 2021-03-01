@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    
+    - Backward-compatibility: Backward-compatibility
+    - Binary-code-compatibility: Binary-code-compatibility

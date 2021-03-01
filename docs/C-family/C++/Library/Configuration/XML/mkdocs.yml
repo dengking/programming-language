@@ -2,5 +2,5 @@ nav:
     - Introduction: index.md
     - Mazrog-srlzio: Mazrog-srlzio
     - Rapidxml: Rapidxml
-    - TinyXML: TinyXML
+
     - zeux-pugixml: zeux-pugixml

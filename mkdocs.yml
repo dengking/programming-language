@@ -90,6 +90,8 @@ nav:
     - Organization: Theory/Organization/Organization.md
     - Translation-unit: Theory/Organization/Translation-unit.md
     - Name-lookup: Theory/Organization/Name-lookup.md
+    - Name-bind:
+      - Introduction: Theory/Organization/Name-bind/index.md
     - Organization-is-everywhere: Theory/Organization/Organization-is-everywhere.md
     - Scope-resolution-operator: Theory/Organization/Scope-resolution-operator.md
   - Lifetime:
@@ -112,6 +114,7 @@ nav:
       - Downcast-and-upcast: Theory/Type-system/Type-conversion/Downcast-and-upcast.md
     - Type-relation:
       - Introduction: Theory/Type-system/Type-relation/index.md
+    - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
   - Reflection:
     - Introduction: Theory/Reflection/index.md
     - Type-introspection: Theory/Reflection/Type-introspection.md
@@ -120,6 +123,8 @@ nav:
     - Introduction: Theory/First-class-citizen/index.md
   - Pyramid-of-doom:
     - Introduction: Theory/Pyramid-of-doom/index.md
+    - Safe-navigation-operator:
+      - Introduction: Theory/Pyramid-of-doom/Safe-navigation-operator/index.md
   - Programming-paradigm:
     - Introduction: Theory/Programming-paradigm/index.md
     - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
@@ -136,6 +141,11 @@ nav:
             - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Ad-hoc-polymorphism/index.md
           - Parametric-polymorphism:
             - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Parametric-polymorphism/index.md
+          - Implementation:
+            - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/index.md
+            - Static-and-dynamic-polymorphism:
+              - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/index.md
+              - TODO-Concept-VS-interface: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/TODO-Concept-VS-interface.md
       - Behavior-based-and-interface:
         - Introduction: Theory/Programming-paradigm/Common/Behavior-based-and-interface/index.md
       - Code-reuse:
@@ -163,6 +173,7 @@ nav:
             - Forwarding: Theory/Programming-paradigm/OOP/Assemble/Composition/Delegation-and-forwarding/Forwarding.md
         - Mixin:
           - Introduction: Theory/Programming-paradigm/OOP/Assemble/Mixin/TODO-index.md
+        - TODO-Abstraction-and-relation: Theory/Programming-paradigm/OOP/Assemble/TODO-Abstraction-and-relation.md
       - Glossary:
         - Glossarys: Theory/Programming-paradigm/OOP/Glossary/Glossarys.md
         - Method: Theory/Programming-paradigm/OOP/Glossary/Method.md
@@ -176,10 +187,94 @@ nav:
         - Behavioral-subtyping: Theory/Programming-paradigm/OOP/Subtyping-polymorphism/Behavioral-subtyping.md
         - Dispatch:
           - Introduction: Theory/Programming-paradigm/OOP/Subtyping-polymorphism/Dispatch/index.md
+      - Design-pattern:
+        - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/index.md
+        - Books:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Books/index.md
+        - Goal:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Goal/index.md
+        - Principle:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/index.md
+          - Composition-over-inheritance:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/Composition-over-inheritance/index.md
+          - SOLID:
+            - SOLID: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/SOLID.md
+            - Single-Responsibility-Principle: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Single-Responsibility-Principle.md
+            - Open-closed-principle:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Open-closed-principle/index.md
+            - Liskov-substitution-principle: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Liskov-substitution-principle.md
+          - Design-by-contract: Theory/Programming-paradigm/OOP/Design-pattern/Principle/Design-by-contract.md
+        - Creational-pattern:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/index.md
+          - Factory:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Factory/index.md
+            - Abstract-factory-pattern:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Factory/Abstract-factory-pattern/index.md
+            - Factory-method-pattern:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Factory/Factory-method-pattern/index.md
+            - Summary: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Factory/Summary.md
+          - Singleton-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Singleton-pattern/index.md
+            - TODO-Alternative-to-Singleton:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Singleton-pattern/TODO-Alternative-to-Singleton/index.md
+          - Builder-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Builder-pattern/index.md
+          - Dependency-injection:
+            - Dependency-injection: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Dependency-injection/Dependency-injection.md
+          - Prototype:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Prototype/index.md
+        - Behavioral-pattern:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/index.md
+          - Visitor-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Visitor-pattern/index.md
+            - Code:
+              - Code: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Visitor-pattern/Code/Code.md
+            - Computation-on-structure:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Visitor-pattern/Computation-on-structure/index.md
+          - Iterator-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Iterator-pattern/index.md
+          - Observer-pattern:
+            - Observer-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
+            - Code:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Observer-pattern/Code/index.md
+          - Publish-subscribe-pattern:
+            - Publish-subscribe-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Publish-subscribe-pattern/Publish-subscribe-pattern.md
+          - Strategy-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Strategy-pattern/index.md
+          - State-pattern:
+            - State-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/State-pattern/State-pattern.md
+          - Command-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Command-pattern/index.md
+          - Interpreter-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Interpreter-pattern/index.md
+          - Chain-of-Responsibility:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Chain-of-Responsibility/index.md
+        - Structural-pattern:
+          - Decorator-pattern:
+            - Decorator-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Decorator-pattern/Decorator-pattern.md
+          - Adapter-pattern:
+            - Example: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Adapter-pattern/Example.md
+          - Delegation-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Delegation-pattern/index.md
+          - Facade-pattern:
+            - Facade-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Facade-pattern/Facade-pattern.md
+          - Bridge-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Bridge-pattern/index.md
+        - Dispose-pattern:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Dispose-pattern/index.md
+        - Fluent-API:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Fluent-API/index.md
+          - Method-cascading: Theory/Programming-paradigm/OOP/Design-pattern/Fluent-API/Method-cascading.md
+          - Method-chaining: Theory/Programming-paradigm/OOP/Design-pattern/Fluent-API/Method-chaining.md
+        - Computation-on-structure:
+          - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Computation-on-structure/index.md
+          - Separation-of-algorithm-and-structure: Theory/Programming-paradigm/OOP/Design-pattern/Computation-on-structure/Separation-of-algorithm-and-structure.md
+        - Summary-of-design-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Summary-of-design-pattern.md
       - Summary-of-OOP:
         - Introduction: Theory/Programming-paradigm/OOP/Summary-of-OOP/index.md
       - Class-diagram:
         - Introduction: Theory/Programming-paradigm/OOP/Class-diagram/index.md
+      - Glossary: Glossary
     - Aspect-oriented-programming:
       - Introduction: Theory/Programming-paradigm/Aspect-oriented-programming/index.md
     - Functional-programming:
@@ -202,6 +297,8 @@ nav:
       - Metaprogramming: Theory/Programming-paradigm/Metaprogramming/index.md
       - Metaclass: Theory/Programming-paradigm/Metaprogramming/Metaclass.md
       - TODO-Meta-object: Theory/Programming-paradigm/Metaprogramming/TODO-Meta-object.md
+    - Declarative-programming:
+      - Introduction: Theory/Programming-paradigm/Declarative-programming/index.md
     - Expression-oriented-programming:
       - Introduction: Theory/Programming-paradigm/Expression-oriented-programming/index.md
     - Symbolic-programming:
@@ -222,6 +319,10 @@ nav:
         - Introduction: Theory/Interface-and-implementation/Interface/wikipedia-interface/index.md
       - Compatibility:
         - Introduction: Theory/Interface-and-implementation/Interface/Compatibility/index.md
+        - Backward-compatibility:
+          - Introduction: Theory/Interface-and-implementation/Interface/Compatibility/Backward-compatibility/index.md
+        - Binary-code-compatibility:
+          - Introduction: Theory/Interface-and-implementation/Interface/Compatibility/Binary-code-compatibility/index.md
       - Consistent-interface:
         - Introduction: Theory/Interface-and-implementation/Interface/Consistent-interface/index.md
     - Separate-interface-from-implementation:
@@ -451,6 +552,8 @@ nav:
         - Introduction: C-family/C++/Expert/Anthony-Williams-Justsoftwaresolutions/index.md
         - CCiA:
           - Introduction: C-family/C++/Expert/Anthony-Williams-Justsoftwaresolutions/CCiA/index.md
+          - 6-Designing-lock-based-concurrent-data-structures:
+            - Introduction: C-family/C++/Expert/Anthony-Williams-Justsoftwaresolutions/CCiA/6-Designing-lock-based-concurrent-data-structures/index.md
         - Multithreading-in-C++0x:
           - Introduction: C-family/C++/Expert/Anthony-Williams-Justsoftwaresolutions/Multithreading-in-C++0x/index.md
           - Part-6-Lazy-initialization-and-double-checked-locking-with-atomics:
@@ -477,6 +580,7 @@ nav:
       - Introduction: C-family/C++/What-is-new-in-C++/index.md
       - C++11:
         - Introduction: C-family/C++/What-is-new-in-C++/C++11/index.md
+        - Unamed-namespace: C-family/C++/What-is-new-in-C++/C++11/Unamed-namespace.md
       - C++14:
         - Introduction: C-family/C++/What-is-new-in-C++/C++14/C++14.md
         - TransformationTrait:
@@ -504,6 +608,8 @@ nav:
             - Introduction: C-family/C++/Language-reference/Basic-concept/Reference-and-Value-Semantics/akrzemi1-Value-semantics/index.md
           - isocpp-faq-Reference-and-Value-Semantics:
             - Introduction: C-family/C++/Language-reference/Basic-concept/Reference-and-Value-Semantics/isocpp-faq-Reference-and-Value-Semantics/index.md
+          - By-value-and-by-reference:
+            - Introduction: C-family/C++/Language-reference/Basic-concept/Reference-and-Value-Semantics/By-value-and-by-reference/index.md
         - Abstract-machine:
           - Introduction: C-family/C++/Language-reference/Basic-concept/Abstract-machine/index.md
           - Memory-model:
@@ -564,12 +670,12 @@ nav:
           - Introduction: C-family/C++/Language-reference/Basic-concept/Type-system/index.md
           - Type-system:
             - Type-system: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/index.md
-            - Type-qualifier:
-              - Introduction: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/Type-qualifier/TODO-index.md
-              - Type-qualifier: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/Type-qualifier/Type-qualifier.md
-              - CV-type-qualifiers: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/Type-qualifier/CV-type-qualifiers.md
-              - Const: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/Type-qualifier/Const.md
-              - Volatile: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/Type-qualifier/Volatile.md
+            - TODO-Type-qualifier:
+              - Introduction: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/TODO-index.md
+              - Type-qualifier: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Type-qualifier.md
+              - CV-type-qualifiers: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/CV-type-qualifiers.md
+              - Const: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Const.md
+              - Volatile: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Volatile.md
             - OOP-class-type:
               - Introduction: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/OOP-class-type/index.md
               - Polymorphic-type: C-family/C++/Language-reference/Basic-concept/Type-system/Type-system/OOP-class-type/Polymorphic-type.md
@@ -630,6 +736,7 @@ nav:
           - Introduction: C-family/C++/Language-reference/Expressions/Value-categories/index.md
           - New-Value-Terminology: C-family/C++/Language-reference/Expressions/Value-categories/New-Value-Terminology.md
           - Value-categories: C-family/C++/Language-reference/Expressions/Value-categories/Value-categories.md
+          - TODO-prvalues: C-family/C++/Language-reference/Expressions/Value-categories/TODO-prvalues.md
         - Operators:
           - Introduction: C-family/C++/Language-reference/Expressions/Operators/index.md
           - Common-operators:
@@ -646,6 +753,9 @@ nav:
             - Introduction: C-family/C++/Language-reference/Expressions/Operators/Member-access-operators/index.md
           - Operator-overloading:
             - Introduction: C-family/C++/Language-reference/Expressions/Operators/Operator-overloading/index.md
+          - Other:
+            - Catch-all-operator: C-family/C++/Language-reference/Expressions/Operators/Other/Catch-all-operator.md
+            - Built-in-comma-operator: C-family/C++/Language-reference/Expressions/Operators/Other/Built-in-comma-operator.md
         - Literals:
           - Literals: C-family/C++/Language-reference/Expressions/Literals/Literals.md
           - String-literal: C-family/C++/Language-reference/Expressions/Literals/String-literal.md
@@ -656,6 +766,7 @@ nav:
           - Constant-expressions: C-family/C++/Language-reference/Expressions/Constant-expressions/Constant-expressions.md
           - constexpr:
             - Introduction: C-family/C++/Language-reference/Expressions/Constant-expressions/constexpr/index.md
+            - TODO-Literal-type: C-family/C++/Language-reference/Expressions/Constant-expressions/constexpr/TODO-Literal-type.md
       - Statements:
         - Iteration-statements:
           - For:
@@ -700,6 +811,7 @@ nav:
               - Operator-function-object: C-family/C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/Operator-function-object.md
               - std-function:
                 - Introduction: C-family/C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/std-function/index.md
+                - Examples: C-family/C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/std-function/Examples.md
             - Functor:
               - Introduction: C-family/C++/Language-reference/Functions/First-class-function/Function-objects/Functor/index.md
           - Wrapper:
@@ -731,13 +843,6 @@ nav:
         - Perfect-forwarding:
           - Introduction: C-family/C++/Language-reference/Reference/Perfect-forwarding/index.md
           - std-forward: C-family/C++/Language-reference/Reference/Perfect-forwarding/std-forward.md
-        - Move-semantic:
-          - zhihu-Rvalue-reference:
-            - Introduction: C-family/C++/Language-reference/Reference/Move-semantic/zhihu-Rvalue-reference/index.md
-          - stackoverflow-What-is-move-semantics:
-            - Introduction: C-family/C++/Language-reference/Reference/Move-semantic/stackoverflow-What-is-move-semantics/index.md
-          - wikipedia-rvalue-reference-and-move-semantic:
-            - Introduction: C-family/C++/Language-reference/Reference/Move-semantic/wikipedia-rvalue-reference-and-move-semantic/index.md
         - std-move-and-std-forward: C-family/C++/Language-reference/Reference/std-move-and-std-forward.md
         - Reference: C-family/C++/Language-reference/Reference/Reference.md
         - Pointer-VS-reference: C-family/C++/Language-reference/Reference/Pointer-VS-reference.md
@@ -768,6 +873,12 @@ nav:
             - Introduction: C-family/C++/Language-reference/Exception/Exception-Safety/TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know/index.md
         - library-Error-handling:
           - Introduction: C-family/C++/Language-reference/Exception/library-Error-handling/index.md
+          - std-uncaught_exception:
+            - Introduction: C-family/C++/Language-reference/Exception/library-Error-handling/std-uncaught_exception/index.md
+            - gotw-47-Uncaught-Exceptions:
+              - Introduction: C-family/C++/Language-reference/Exception/library-Error-handling/std-uncaught_exception/gotw-47-Uncaught-Exceptions/index.md
+            - paper-N4152:
+              - Introduction: C-family/C++/Language-reference/Exception/library-Error-handling/std-uncaught_exception/paper-N4152/index.md
       - Enum:
         - Introduction: C-family/C++/Language-reference/Enum/index.md
       - Classes:
@@ -798,6 +909,24 @@ nav:
               - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/index.md
               - Virtual-clone:
                 - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/Virtual-clone/index.md
+          - Move:
+            - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/index.md
+            - zhihu-Rvalue-reference:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/zhihu-Rvalue-reference/index.md
+            - stackoverflow-What-is-move-semantics:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/stackoverflow-What-is-move-semantics/index.md
+            - TODO-wikipedia-rvalue-reference-and-move-semantic:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/TODO-wikipedia-rvalue-reference-and-move-semantic/index.md
+            - TODO-thegreenplace-Understanding-lvalues-and-rvalues:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/TODO-thegreenplace-Understanding-lvalues-and-rvalues/index.md
+            - TODO-Understanding-the-warning-binding-r-value-to-l-value-reference:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/TODO-Understanding-the-warning-binding-r-value-to-l-value-reference/index.md
+            - TODO-thbecker-Rvalue-References-Explained:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/TODO-thbecker-Rvalue-References-Explained/index.md
+            - TODO-CppCoreGuidelines-For-Rvalue-References-In-APIs:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/TODO-CppCoreGuidelines-For-Rvalue-References-In-APIs/index.md
+            - std-move:
+              - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Move/std-move/index.md
           - Constructor:
             - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Constructor/index.md
             - Constructor:
@@ -809,7 +938,7 @@ nav:
             - User-defined-conversion:
               - User-defined-conversion: C-family/C++/Language-reference/Classes/Special-member-function/Constructor/User-defined-conversion/index.md
               - Explicit-specifier:
-                - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Constructor/User-defined-conversion/explicit-specifier/index.md
+                - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Constructor/User-defined-conversion/Explicit-specifier/index.md
           - Destructor:
             - Introduction: C-family/C++/Language-reference/Classes/Special-member-function/Destructor/index.md
             - cppreference-Destructors: C-family/C++/Language-reference/Classes/Special-member-function/Destructor/cppreference-Destructors.md
@@ -847,6 +976,8 @@ nav:
               - Introduction: C-family/C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/index.md
               - Override-specifier:
                 - Introduction: C-family/C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/Override-specifier/index.md
+              - Return-Covariant-Types:
+                - Introduction: C-family/C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/Return-Covariant-Types/index.md
             - Pure-virtual-function-and-abstract-class:
               - Introduction: C-family/C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Pure-virtual-function-and-abstract-class/index.md
           - TODO-Implementation:
@@ -869,6 +1000,7 @@ nav:
           - Introduction: C-family/C++/Language-reference/Classes/Lifetime/index.md
           - TODO-Order-and-constructor-and-destructor:
             - Introduction: C-family/C++/Language-reference/Classes/Lifetime/TODO-Order-and-constructor-and-destructor/index.md
+            - TODO-Constructors-and-member-initializer-lists: C-family/C++/Language-reference/Classes/Lifetime/TODO-Order-and-constructor-and-destructor/TODO-Constructors-and-member-initializer-lists.md
         - Empty-base-optimization:
           - Introduction: C-family/C++/Language-reference/Classes/Empty-base-optimization/index.md
         - Specifier:
@@ -877,6 +1009,7 @@ nav:
       - Initialization:
         - Introduction: C-family/C++/Language-reference/Initialization/index.md
         - Initialization: C-family/C++/Language-reference/Initialization/Initialization.md
+        - Value-initialization: C-family/C++/Language-reference/Initialization/Value-initialization.md
         - Uniform-initialization:
           - Introduction: C-family/C++/Language-reference/Initialization/Uniform-initialization/index.md
         - Default-initialization: C-family/C++/Language-reference/Initialization/Default-initialization.md
@@ -905,8 +1038,13 @@ nav:
           - Member-templates: C-family/C++/Language-reference/Template/Class-template/Member-templates.md
           - Template-and-virtual:
             - Introduction: C-family/C++/Language-reference/Template/Class-template/Template-and-virtual/index.md
+            - Virtual-method-template:
+              - Introduction: C-family/C++/Language-reference/Template/Class-template/Template-and-virtual/Virtual-method-template/index.md
           - Class-template-inheritance:
             - Introduction: C-family/C++/Language-reference/Template/Class-template/Class-template-inheritance/index.md
+            - Variadic-inheritance:
+              - Introduction: C-family/C++/Language-reference/Template/Class-template/Class-template-inheritance/Variadic-inheritance/index.md
+          - Friend-template: C-family/C++/Language-reference/Template/Class-template/Friend-template.md
         - Function-template:
           - Introduction: C-family/C++/Language-reference/Template/Function-template/index.md
           - cppreference-Function-template:
@@ -942,6 +1080,8 @@ nav:
             - Introduction: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/index.md
             - Template-is-behavior-based:
               - Introduction: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/Template-is-behavior-based/index.md
+              - drdobbs-Templates-and-Duck-Typing:
+                - Introduction: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/Template-is-behavior-based/drdobbs-Templates-and-Duck-Typing/index.md
             - Named-requirements:
               - Introduction: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/Named-requirements/index.md
               - Magic-function: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/Named-requirements/Magic-function.md
@@ -952,6 +1092,8 @@ nav:
               - Pre-C++20-concept:
                 - Introduction: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/index.md
                 - ConceptC++: C-family/C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/ConceptC++.md
+        - Implementation:
+          - Introduction: C-family/C++/Language-reference/Template/Implementation/index.md
       - Assertion:
         - Assert: C-family/C++/Language-reference/Assertion/Assert.md
       - Alias:
@@ -1025,12 +1167,18 @@ nav:
                     - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Values-like-python-dict/index.md
                   - TODO-Erase_if:
                     - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/TODO-Erase_if/index.md
+                  - Iteration:
+                    - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Iteration/index.md
             - Container-adaptors:
               - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Container-adaptors/index.md
               - priority_queue:
                 - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Container-adaptors/priority_queue/index.md
             - View:
               - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/View/index.md
+              - span:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/View/span/index.md
+                - Span-for-multidimensional-array:
+                  - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/View/span/Span-for-multidimensional-array/index.md
           - Iterator-library:
             - Introduction: C-family/C++/Library/Standard-library/STL/Iterator-library/index.md
             - Primer:
@@ -1058,6 +1206,8 @@ nav:
               - std-transform: C-family/C++/Library/Standard-library/STL/Algorithm/std-transform/std-transform.md
           - Ranges-library-C++20:
             - Introduction: C-family/C++/Library/Standard-library/STL/Ranges-library-C++20/index.md
+            - Primer:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Ranges-library-C++20/Primer/index.md
           - Idiom:
             - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/index.md
             - Clear-and-minimize: C-family/C++/Library/Standard-library/STL/Idiom/Clear-and-minimize.md
@@ -1070,6 +1220,29 @@ nav:
                 - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Erase_if/TODO-Erase-while-iterating/index.md
             - Computation-on-structure:
               - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/index.md
+              - Functional-programming:
+                - Prefer-algorithm-over-hand-write-loop: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Functional-programming/Prefer-algorithm-over-hand-write-loop.md
+              - Iteration:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/index.md
+                - Range:
+                  - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/index.md
+                  - Range-based-for-loop:
+                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-for-loop/index.md
+                  - Range-based-idiom:
+                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/index.md
+                    - Range-access:
+                      - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/Range-access/index.md
+                    - Range-based-algorithms: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/Range-based-algorithms.md
+                    - Copy-a-range-of-elements:
+                      - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/Copy-a-range-of-elements/index.md
+                - Itertools:
+                  - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Itertools/index.md
+                  - CPPItertools:
+                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Itertools/CPPItertools/index.md
+                  - Zip:
+                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Itertools/Zip/index.md
+                - std-for_each:
+                  - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/std-for_each/index.md
         - String:
           - Introduction: C-family/C++/Library/Standard-library/String/index.md
         - IO-library:
@@ -1138,6 +1311,8 @@ nav:
               - tuple:
                 - Introduction: C-family/C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/index.md
                 - Unpacking-Tuple: C-family/C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/Unpacking-Tuple.md
+                - murrayc-Modern-C++Variadic-template-parameters-and-tuples:
+                  - Introduction: C-family/C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/murrayc-Modern-C++Variadic-template-parameters-and-tuples/index.md
               - optional: C-family/C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional.md
               - any: C-family/C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/any.md
               - variant:
@@ -1196,6 +1371,10 @@ nav:
             - New-Iterator-Concepts: C-family/C++/Library/Boost/Boost-Iterator/Iterator-Concepts/New-Iterator-Concepts.md
           - Iterator-Facade: C-family/C++/Library/Boost/Boost-Iterator/Iterator-Facade.md
           - Iterator-Adaptor: C-family/C++/Library/Boost/Boost-Iterator/Iterator-Adaptor.md
+        - Boost-TypeErasure:
+          - Introduction: C-family/C++/Library/Boost/Boost-TypeErasure/index.md
+        - Boost-Atomic:
+          - Introduction: C-family/C++/Library/Boost/Boost-Atomic/index.md
       - Communication:
         - Introduction: C-family/C++/Library/Communication/index.md
         - library-ZeroMQ:
@@ -1227,12 +1406,29 @@ nav:
         - Introduction: C-family/C++/Library/Partow/index.md
         - Strtk:
           - Strtk: C-family/C++/Library/Partow/Strtk/Strtk.md
+          - Strtk-implementation: C-family/C++/Library/Partow/Strtk/Strtk-implementation.md
         - exprtk:
           - Introduction: C-family/C++/Library/Partow/exprtk/index.md
       - Configuration:
         - Introduction: C-family/C++/Library/Configuration/index.md
         - XML:
           - Introduction: C-family/C++/Library/Configuration/XML/index.md
+          - Mazrog-srlzio:
+            - Introduction: C-family/C++/Library/Configuration/XML/Mazrog-srlzio/index.md
+            - Read-code:
+              - Introduction: C-family/C++/Library/Configuration/XML/Mazrog-srlzio/Read-code/index.md
+              - Structure-grammar:
+                - Introduction: C-family/C++/Library/Configuration/XML/Mazrog-srlzio/Read-code/Structure-grammar/index.md
+              - Parsing:
+                - Introduction: C-family/C++/Library/Configuration/XML/Mazrog-srlzio/Read-code/Parsing/index.md
+          - Rapidxml:
+            - Introduction: C-family/C++/Library/Configuration/XML/Rapidxml/index.md
+            - Read-code:
+              - Introduction: C-family/C++/Library/Configuration/XML/Rapidxml/Read-code/index.md
+          - zeux-pugixml:
+            - Introduction: C-family/C++/Library/Configuration/XML/zeux-pugixml/index.md
+            - Read-code:
+              - Introduction: C-family/C++/Library/Configuration/XML/zeux-pugixml/Read-code/index.md
         - Json:
           - Introduction: C-family/C++/Library/Configuration/Json/index.md
         - Ini:
@@ -1261,9 +1457,12 @@ nav:
           - Introduction: C-family/C++/Library/macmade/Library-CPPTraits/index.md
         - Library-CrashGuard:
           - Introduction: C-family/C++/Library/macmade/Library-CrashGuard/index.md
+      - Folly:
+        - Introduction: C-family/C++/Library/Folly/index.md
     - Idiom:
       - Introduction: C-family/C++/Idiom/index.md
       - OOP:
+        - Introduction: C-family/C++/Idiom/OOP/index.md
         - Class-basic:
           - Introduction: C-family/C++/Idiom/OOP/Class-basic/index.md
           - How-to-write-constructor-destructor:
@@ -1290,6 +1489,8 @@ nav:
                 - Introduction: C-family/C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/drdobbs-Andrew-Koenig-Object-Swapping/index.md
               - Non-throwing-swap:
                 - Introduction: C-family/C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/Non-throwing-swap/index.md
+                - More-C++Idioms-Non-throwing-swap:
+                  - Introduction: C-family/C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/Non-throwing-swap/More-C++Idioms-Non-throwing-swap/index.md
               - Swappable:
                 - Introduction: C-family/C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/Swappable/index.md
           - How-to-apply-polymorphism:
@@ -1344,6 +1545,8 @@ nav:
           - Introduction: C-family/C++/Idiom/OOP/TODO-Temporary-Base-Class/index.md
         - Pointer-to-implementation-PImpl:
           - Introduction: C-family/C++/Idiom/OOP/Pointer-to-implementation-PImpl/index.md
+          - GotW-24-Compilation-Firewalls:
+            - Introduction: C-family/C++/Idiom/OOP/Pointer-to-implementation-PImpl/GotW-24-Compilation-Firewalls/index.md
           - GotW-100-Compilation-Firewalls:
             - Introduction: C-family/C++/Idiom/OOP/Pointer-to-implementation-PImpl/GotW-100-Compilation-Firewalls/index.md
           - TODO-GotW-101-Compilation-Firewalls-Part-2:
@@ -1354,6 +1557,16 @@ nav:
             - Introduction: C-family/C++/Idiom/OOP/Pointer-to-implementation-PImpl/Opaque-data-type/index.md
             - Opaque-pointer:
               - Introduction: C-family/C++/Idiom/OOP/Pointer-to-implementation-PImpl/Opaque-data-type/Opaque-pointer/index.md
+        - TODO-Safe-Bool:
+          - Introduction: C-family/C++/Idiom/OOP/TODO-Safe-Bool/index.md
+        - Static-object:
+          - Introduction: C-family/C++/Idiom/OOP/Static-object/index.md
+          - Construct-On-First-Use:
+            - Introduction: C-family/C++/Idiom/OOP/Static-object/Construct-On-First-Use/index.md
+          - Nifty-Counter:
+            - Introduction: C-family/C++/Idiom/OOP/Static-object/Nifty-Counter/index.md
+          - Attach-by-Initialization:
+            - Introduction: C-family/C++/Idiom/OOP/Static-object/Attach-by-Initialization/index.md
       - Generic-programming:
         - Introduction: C-family/C++/Idiom/Generic-programming/index.md
         - CRTP:
@@ -1374,8 +1587,7 @@ nav:
             - Example: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Example.md
             - Type-Trait:
               - Type-Traits: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Type-Trait/Type-Traits.md
-              - Type-traits-vs concepts: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Type-Trait/Type-traits-vs
-                  concepts.md
+              - Type-traits-vs-concepts: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Type-Trait/Type-traits-vs-concepts.md
             - Function-trait:
               - Function_trait: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Function-trait/Function_trait.md
           - enable-if:
@@ -1397,6 +1609,10 @@ nav:
           - Introduction: C-family/C++/Idiom/Generic-programming/Return-Type-Resolver/index.md
         - nullptr:
           - Introduction: C-family/C++/Idiom/Generic-programming/nullptr/index.md
+        - Coercion-by-Member-Template:
+          - Introduction: C-family/C++/Idiom/Generic-programming/Coercion-by-Member-Template/index.md
+        - Policy-based-design:
+          - Introduction: C-family/C++/Idiom/Generic-programming/Policy-based-design/index.md
       - AOP:
         - Introduction: C-family/C++/Idiom/AOP/index.md
         - Execute-Around-Pointer:
@@ -1465,6 +1681,7 @@ nav:
         - Introduction: C-family/C++/Guide/Design-and-implementation/index.md
         - C++design:
           - Introduction: C-family/C++/Guide/Design-and-implementation/C++design/index.md
+          - TODO-Program-order-and-memory-order: C-family/C++/Guide/Design-and-implementation/C++design/TODO-Program-order-and-memory-order.md
         - Data-dependency:
           - Introduction: C-family/C++/Guide/Design-and-implementation/Data-dependency/index.md
         - C++implementation:
@@ -1475,19 +1692,28 @@ nav:
           - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/index.md
           - Specialization-and-overload:
             - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Specialization-and-overload/index.md
-          - Custom-polymorphism-and-multiple-dispatch:
-            - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Custom-polymorphism-and-multiple-dispatch/index.md
+          - Assemble-polymorphism-and-multiple-dispatch:
+            - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/index.md
+            - Custom-polymorphism:
+              - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/Custom-polymorphism/index.md
+            - Signature-Based-polymorphism:
+              - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/Signature-Based-polymorphism/index.md
             - wiki.c2-External-Polymorphism:
-              - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Custom-polymorphism-and-multiple-dispatch/wiki.c2-External-Polymorphism/index.md
+              - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/wiki.c2-External-Polymorphism/index.md
               - Generic-function-pattern:
-                - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Custom-polymorphism-and-multiple-dispatch/wiki.c2-External-Polymorphism/Generic-function-pattern/index.md
-          - TODO-informit-Design-Patterns-with-Signature-Based-Polymorphism:
-            - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/TODO-informit-Design-Patterns-with-Signature-Based-Polymorphism/index.md
+                - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/wiki.c2-External-Polymorphism/Generic-function-pattern/index.md
+            - TODO-User-defined-static-polymorphism: C-family/C++/Guide/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/TODO-User-defined-static-polymorphism.md
+          - TODO-Static-and-dynamic-polymorphism:
+            - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/TODO-Static-and-dynamic-polymorphism/index.md
+          - Polymorphic-object-container:
+            - Introduction: C-family/C++/Guide/Programming-paradigm/Polymorphism/Polymorphic-object-container/index.md
       - Command-line:
         - Introduction: C-family/C++/Guide/Command-line/index.md
         - Command-line-arguments-parsing: C-family/C++/Guide/Command-line/Command-line-arguments-parsing.md
       - Comment:
         - Comment: C-family/C++/Guide/Comment/Comment.md
+        - Doxygen:
+          - Introduction: C-family/C++/Guide/Comment/Doxygen/index.md
       - Temporary:
         - Introduction: C-family/C++/Guide/Temporary/index.md
       - Order:
@@ -1495,6 +1721,8 @@ nav:
       - Header-only-library: C-family/C++/Guide/Header-only-library.md
       - Simplify:
         - Introduction: C-family/C++/Guide/Simplify/index.md
+        - preshing-C++Has-Become-More-Pythonicpreshing-C++Has-Become-More-Pythonic:
+          - Introduction: C-family/C++/Guide/Simplify/preshing-C++Has-Become-More-Pythonic/index.md
       - Uniform-consistent-interface-API-syntax:
         - Introduction: C-family/C++/Guide/Uniform-consistent-interface-API-syntax/index.md
       - Performance-optimization:
@@ -1635,6 +1863,9 @@ nav:
           - Introduction: C-family/C++/Guide/Library-smart-pointers/Guideline-covariance/index.md
           - fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance:
             - Introduction: C-family/C++/Guide/Library-smart-pointers/Guideline-covariance/fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance/index.md
+          - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
+            - Introduction: C-family/C++/Guide/Library-smart-pointers/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
+          - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C-family/C++/Guide/Library-smart-pointers/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
       - Type-system:
         - Strong-type:
           - Introduction: C-family/C++/Guide/Type-system/Strong-type/index.md
@@ -1714,6 +1945,7 @@ nav:
           - Language-linkage:
             - Introduction: C-family/Common/From-source-code-to-exec/Link/Linkage/Language-linkage/index.md
           - const-static-and-linkage: C-family/Common/From-source-code-to-exec/Link/Linkage/const-static-and-linkage.md
+          - TODO-Linkage-and-libraries: C-family/Common/From-source-code-to-exec/Link/Linkage/TODO-Linkage-and-libraries.md
         - Optimization:
           - Introduction: C-family/Common/From-source-code-to-exec/Link/Optimization/index.md
         - Link-time-error:
@@ -1725,11 +1957,9 @@ nav:
             - Object-Files-and-Symbols: C-family/Common/From-source-code-to-exec/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/Object-Files-and-Symbols.md
       - ABI:
         - Introduction: C-family/Common/From-source-code-to-exec/ABI/index.md
+        - Alignment:
+          - Introduction: C-family/Common/From-source-code-to-exec/ABI/Alignment/index.md
         - Application-binary-interface: C-family/Common/From-source-code-to-exec/ABI/Application-binary-interface.md
-        - Call-convention:
-          - Introduction: C-family/Common/From-source-code-to-exec/ABI/Call-convention/index.md
-          - Call-stack:
-            - Introduction: C-family/Common/From-source-code-to-exec/ABI/Call-convention/Call-stack/index.md
         - Library:
           - Library(computing): C-family/Common/From-source-code-to-exec/ABI/Library/Library(computing).md
           - Position-independent-code:
@@ -1763,6 +1993,10 @@ nav:
               - Introduction: C-family/Common/From-source-code-to-exec/Implementation/LLVM/Clang/Clang-Tidy/index.md
             - compiler-rt:
               - Introduction: C-family/Common/From-source-code-to-exec/Implementation/LLVM/Clang/compiler-rt/index.md
+            - Assembling-a-Complete-Toolchain: C-family/Common/From-source-code-to-exec/Implementation/LLVM/Clang/Assembling-a-Complete-Toolchain.md
+            - Clang-vs-Other-Open-Source-Compilers: C-family/Common/From-source-code-to-exec/Implementation/LLVM/Clang/Clang-vs-Other-Open-Source-Compilers.md
+            - Clang-application: C-family/Common/From-source-code-to-exec/Implementation/LLVM/Clang/Clang-application.md
+          - gcc-VS-LLVM: C-family/Common/From-source-code-to-exec/Implementation/LLVM/gcc-VS-LLVM.md
         - GCC:
           - Introduction: C-family/Common/From-source-code-to-exec/Implementation/GCC/index.md
           - 3-GCC-Command-Options:
@@ -1784,10 +2018,12 @@ nav:
       - Introduction: C-family/Common/specifiers/index.md
       - extern:
         - Introduction: C-family/Common/specifiers/extern/index.md
-      - static:
-        - Introduction: C-family/Common/specifiers/static/index.md
-        - Static-function: C-family/Common/specifiers/static/Static-function.md
-        - Static-in-header-file: C-family/Common/specifiers/static/Static-in-header-file.md
+      - TODO-static:
+        - Introduction: C-family/Common/specifiers/TODO-static/index.md
+        - Static-function: C-family/Common/specifiers/TODO-static/Static-function.md
+        - Static-in-header-file: C-family/Common/specifiers/TODO-static/Static-in-header-file.md
+        - C-static: C-family/Common/specifiers/TODO-static/C-static.md
+        - How-compiler-and-linker-resolve-static: C-family/Common/specifiers/TODO-static/How-compiler-and-linker-resolve-static.md
       - inline:
         - Introduction: C-family/Common/specifiers/inline/index.md
       - cv:
@@ -1863,6 +2099,7 @@ nav:
               - Introduction: C-family/Common/Resource-management/Memory-management/Memory-access/Pointer/Multiple-level-pointer/index.md
             - Pointer-and-integer:
               - Introduction: C-family/Common/Resource-management/Memory-management/Memory-access/Pointer/Pointer-and-integer/index.md
+            - Conversion: C-family/Common/Resource-management/Memory-management/Memory-access/Pointer/Conversion.md
           - Array:
             - Introduction: C-family/Common/Resource-management/Memory-management/Memory-access/Array/index.md
             - stackoverflow-How-do-I-use-array-in-C++:
@@ -1950,6 +2187,7 @@ nav:
         - Introduction: C-family/Common/Undefined-behavior/Example-of-undefined-behavior/index.md
     - Struct:
       - Pragma-pack: C-family/Common/Struct/Pragma-pack.md
+      - struct-compress-scheme: C-family/Common/Struct/struct-compress-scheme.md
     - Expression:
       - Introduction: C-family/Common/Expression/index.md
       - Order-of-evaluation:

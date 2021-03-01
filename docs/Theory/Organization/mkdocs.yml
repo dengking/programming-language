@@ -15,6 +15,7 @@ nav:
     - Translation-unit: Translation-unit.md
     # 此处讨论name lookup
     - Name-lookup: Name-lookup.md    
+    - Name-bind: Name-bind
     # 拓展目光
     - Organization-is-everywhere: Organization-is-everywhere.md
     - Scope-resolution-operator: Scope-resolution-operator.md
