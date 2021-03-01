@@ -2,3 +2,5 @@ nav:
     - Glossarys: Glossarys.md
     - Method: Method.md
     - TODO-Trait: TODO-Trait.md
+    - Inheritance: Inheritance.md
+    - Method-override: Method-override.md

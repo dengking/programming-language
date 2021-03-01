@@ -176,6 +176,8 @@ nav:
         - Glossarys: Theory/Programming-paradigm/OOP/Glossary/Glossarys.md
         - Method: Theory/Programming-paradigm/OOP/Glossary/Method.md
         - TODO-Trait: Theory/Programming-paradigm/OOP/Glossary/TODO-Trait.md
+        - Inheritance: Theory/Programming-paradigm/OOP/Glossary/Inheritance.md
+        - Method-override: Theory/Programming-paradigm/OOP/Glossary/Method-override.md
       - Subtyping-polymorphism:
         - Introduction: Theory/Programming-paradigm/OOP/Subtyping-polymorphism/index.md
         - Is-a:
@@ -252,6 +254,8 @@ nav:
             - Decorator-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Decorator-pattern/Decorator-pattern.md
           - Adapter-pattern:
             - Example: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Adapter-pattern/Example.md
+          - Composite-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Composite-pattern/index.md
           - Delegation-pattern:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Delegation-pattern/index.md
           - Facade-pattern:
