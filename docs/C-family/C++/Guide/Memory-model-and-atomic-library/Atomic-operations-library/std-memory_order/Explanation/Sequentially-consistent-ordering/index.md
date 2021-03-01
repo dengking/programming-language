@@ -165,3 +165,10 @@ thread `d`  没有 synchronize-with thread `a` ，因此，如果没有sequentia
 1、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g) # [A](https://stackoverflow.com/a/6319356)
 
 2、工程parallel-computing的`Sequential-consistency`章节
+
+
+
+## TODO
+
+stackoverflow [Memory Model in C++ : sequential consistency and atomicity](https://stackoverflow.com/questions/38425920/memory-model-in-c-sequential-consistency-and-atomicity)
+

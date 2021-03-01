@@ -21,3 +21,5 @@ nav:
     - Return-Type-Resolver: Return-Type-Resolver
     #
     - nullptr: nullptr
+    - Coercion-by-Member-Template: Coercion-by-Member-Template
+    - Policy-based-design: Policy-based-design

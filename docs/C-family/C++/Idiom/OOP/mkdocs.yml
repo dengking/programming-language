@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md     
     ########## resource相关########## 
     - Class-basic: Class-basic
     - RAII-based: RAII-based
@@ -17,5 +18,6 @@ nav:
     - TODO-Temporary-Base-Class: TODO-Temporary-Base-Class
 
     - Pointer-to-implementation-PImpl: Pointer-to-implementation-PImpl
-
+    - TODO-Safe-Bool: TODO-Safe-Bool
+    - Static-object: Static-object
 

@@ -4,3 +4,6 @@ nav:
     - Clang-Static-Analyzer: Clang-Static-Analyzer
     - Clang-Tidy: Clang-Tidy
     - compiler-rt: compiler-rt
+    - Assembling-a-Complete-Toolchain: Assembling-a-Complete-Toolchain.md
+    - Clang-vs-Other-Open-Source-Compilers: Clang-vs-Other-Open-Source-Compilers.md
+    - Clang-application: Clang-application.md

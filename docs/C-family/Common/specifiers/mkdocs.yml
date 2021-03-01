@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - extern: extern
-    - static: static
+    - TODO-static: TODO-static
     - inline: inline
     - cv: cv

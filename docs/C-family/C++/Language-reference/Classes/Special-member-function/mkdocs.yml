@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - Common-issue: Common-issue
     - Copy: Copy
+    - Move: Move
     - Constructor: Constructor
     - Destructor: Destructor
     - Assignment: Assignment

@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - GotW-24-Compilation-Firewalls: GotW-24-Compilation-Firewalls
     - GotW-100-Compilation-Firewalls: GotW-100-Compilation-Firewalls
     - TODO-GotW-101-Compilation-Firewalls-Part-2: TODO-GotW-101-Compilation-Firewalls-Part-2
     - cppreference-PImpl: cppreference-PImpl

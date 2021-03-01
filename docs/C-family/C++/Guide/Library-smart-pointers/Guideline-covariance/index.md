@@ -36,7 +36,7 @@ Alternatively, you can use the visitor pattern or something like my [Dynamic Dou
 
 3、virtual clone implementation都没有public，都是因为使用了"raw pointer weak strong exception ownership transfer"，因此不将其public能够在一定程度上环节，并且virtual clone implementation都使用了C++原生的pointer covariance
 
-4、都涉及构建class hierarchy
+4、都涉及构建class hierarchy(build class hierarchy)
 
 5、都涉及multiple polymorphic
 
@@ -46,11 +46,15 @@ Alternatively, you can use the visitor pattern or something like my [Dynamic Dou
 
 1、github [CppCodeReviewers](https://github.com/CppCodeReviewers)/**[Covariant-Return-Types-and-Smart-Pointers](https://github.com/CppCodeReviewers/Covariant-Return-Types-and-Smart-Pointers)**
 
-double dispatch/polymorphism，相对比较简单
+a、它所构建的class hierarchy是相对比较简单的
+
+b、它提供了consistent interface: `cloneable` type 
+
+c、double dispatch/polymorphism，相对比较简单
 
 2、fluentcpp [How to Return a Smart Pointer AND Use Covariance](https://www.fluentcpp.com/2017/09/12/how-to-return-a-smart-pointer-and-use-covariance/)
 
-它的实现比较复杂
+a、它的实现比较复杂，其复杂点在于build class hierarchy
 
 
 

@@ -4,7 +4,7 @@
 
 ## 概述
 
-### fluentcpp [Overview of std::map’s Insertion / Emplacement Methods in C++17](https://www.fluentcpp.com/2018/12/11/overview-of-std-map-insertion-emplacement-methods-in-cpp17/)
+### fluentcpp [Overview of `std::map`’s Insertion / Emplacement Methods in C++17](https://www.fluentcpp.com/2018/12/11/overview-of-std-map-insertion-emplacement-methods-in-cpp17/)
 
 Go ahead and try out the C++17 emplacement / insertion methods. They offer a tangible improvement in terms of expressiveness and code safety.
 
@@ -20,7 +20,7 @@ Here are [examples](https://wandbox.org/permlink/RlhIkZ7ubvgyw16r) of code using
 
 ## TODO Bug
 
-stackoverflow [Calling std::map::emplace() and avoiding unnecessary constructions](https://stackoverflow.com/questions/20830349/calling-stdmapemplace-and-avoiding-unnecessary-constructions)
+stackoverflow [Calling `std::map::emplace()` and avoiding unnecessary constructions](https://stackoverflow.com/questions/20830349/calling-stdmapemplace-and-avoiding-unnecessary-constructions)
 
 
 

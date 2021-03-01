@@ -1,2 +1,3 @@
 nav:
     - Introduction: index.md
+    - More-C++Idioms-Non-throwing-swap: More-C++Idioms-Non-throwing-swap

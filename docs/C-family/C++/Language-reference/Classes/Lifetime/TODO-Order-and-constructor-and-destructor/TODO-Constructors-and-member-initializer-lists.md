@@ -1,18 +1,18 @@
+# Constructors-and member initializer lists
 
-
-# [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list)
-
-
-
-
-
-# [Constructor initialization-list evaluation order](https://stackoverflow.com/questions/1242830/constructor-initialization-list-evaluation-order)
+## cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list)
 
 
 
 
 
-# 测试代码
+## stackoverflow [Constructor initialization-list evaluation order](https://stackoverflow.com/questions/1242830/constructor-initialization-list-evaluation-order)
+
+
+
+
+
+## 测试代码
 
 今天在碰到了一个与initialization-list evaluation order相关的问题，并且它还导致了进程core掉了，现在想来，`c++`的这种设计太容易出现错误了，并且这种错误是非常严重但是隐晦的。
 

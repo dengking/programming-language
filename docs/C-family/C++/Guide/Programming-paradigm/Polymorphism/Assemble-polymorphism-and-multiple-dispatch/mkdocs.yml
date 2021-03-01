@@ -1,3 +1,6 @@
 nav:
     - Introduction: index.md
+    - Custom-polymorphism: Custom-polymorphism
+    - Signature-Based-polymorphism: Signature-Based-polymorphism
     - wiki.c2-External-Polymorphism: wiki.c2-External-Polymorphism
+    - TODO-User-defined-static-polymorphism: TODO-User-defined-static-polymorphism.md

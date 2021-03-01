@@ -1,5 +1,5 @@
 nav:
-
+    - Introduction: index.md
     ########## initialization相关##########
     - Construct-On-First-Use: Construct-On-First-Use
     - Nifty-Counter: Nifty-Counter

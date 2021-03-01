@@ -1,2 +1,3 @@
 nav:
     - Introduction: index.md
+    - 6-Designing-lock-based-concurrent-data-structures: 6-Designing-lock-based-concurrent-data-structures

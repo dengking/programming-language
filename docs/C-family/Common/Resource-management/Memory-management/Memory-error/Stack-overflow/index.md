@@ -1,4 +1,4 @@
-# [Stack overflow](https://en.wikipedia.org/wiki/Stack_overflow)
+# wikipedia [Stack overflow](https://en.wikipedia.org/wiki/Stack_overflow)
 
 In software, a **stack overflow** occurs if the [call stack](https://en.wikipedia.org/wiki/Call_stack) pointer exceeds the [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) bound. The call stack may consist of a limited amount of [address space](https://en.wikipedia.org/wiki/Address_space), often determined at the start of the program. The size of the **call stack** depends on many factors, including the programming language, machine architecture, multi-threading, and amount of available memory. When a program attempts to use more space than is available on the call stack (that is, when it attempts to access memory beyond the call stack's bounds, which is essentially a [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)), the stack is said to *overflow*, typically resulting in a program crash.[[1\]](https://en.wikipedia.org/wiki/Stack_overflow#cite_note-fortran1-1)
 

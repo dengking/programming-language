@@ -1,4 +1,4 @@
-# [Understanding the warning: binding r-value to l-value reference](https://stackoverflow.com/questions/34240794/understanding-the-warning-binding-r-value-to-l-value-reference)
+# stackoverflow [Understanding the warning: binding r-value to l-value reference](https://stackoverflow.com/questions/34240794/understanding-the-warning-binding-r-value-to-l-value-reference)
 
 ## [A](https://stackoverflow.com/a/34240886)
 
@@ -100,11 +100,9 @@ const string& s = foo();
 bar(s);  // maybe an extra redundant copy made here, it's up to bar().
 ```
 
-***SUMMARY*** : 看了上面的介绍，我想到了一个新的问题：`const type &`和 `&&`之间，有哪些异同。
+> NOTE: 看了上面的介绍，我想到了一个新的问题：`const type &`和 `&&`之间，有哪些异同。
 
-# [Understanding the warning: binding r-value to l-value reference](https://stackoverflow.com/questions/34240794/understanding-the-warning-binding-r-value-to-l-value-reference) 实验代码
-
-## example one
+### Example one
 
 ```cpp
 #include <iostream>
@@ -197,7 +195,7 @@ int main(){
 
 输出如下：
 
-```
+```C++
 using const reference
 constructor
 hello
@@ -206,11 +204,13 @@ constructor
 hello world
 ```
 
-***SUMMARY*** ： 编译器的RVO非常厉害。
+ 编译器的RVO非常厉害。
 
 
 
-## example two
+
+
+### Example two
 
 
 
