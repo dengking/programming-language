@@ -1,7 +1,7 @@
 import logging
 import os
 import pathlib
-
+from collections import namedtuple
 from yaml import load as yaml_load, dump as yaml_dump
 
 try:
@@ -79,6 +79,10 @@ class DictionaryTreeBuilder:
         return path.split(os.sep)
 
 
+MkdocsTemplateFileName = 'mkdocs-template.yml'  # 模板文件
+MkdocsFileName = 'mkdocs.yml'
+
+
 class NavBuilder:
     """
     每个目录下都有一个配置文件mkdocs.yml，根据配置文件中的内容来进行组装，最终的组装结果是一棵树，下面描述的是组装过程：
@@ -102,27 +106,61 @@ class NavBuilder:
     非常类似于前缀树
 
     """
-    MkdocsTemplateFileName = 'mkdocs-template.yml'  # 模板文件
-    MkdocsFileName = 'mkdocs.yml'
+
     Nav = 'nav'
 
-    def __init__(self, root_dir='docs'):
-        
-        self.root_dir = root_dir  # 根路径名称
-        self.start_path_in_os = os.path.join(os.path.dirname(os.path.realpath(__file__)), self.root_dir) # 本文件的在OS上的路径
+    def __init__(self, repository_name=None, doc_dir_name='docs', repository_path_in_os=None,
+                 mkdocs_template_file_in_os=None, site_name=None):
+        """
+        :param doc_dir_name: 存放文档的目录名称
+        :param repository_path_in_os: repository在OS中的path
+        """
+
+        self.doc_dir_name = doc_dir_name  # 根路径名称
+        # 计算repository在OS中的路径，然后切换到这个path
+        if repository_path_in_os:
+            self.repository_path_in_os = repository_path_in_os
+        else:
+            self.repository_path_in_os = os.path.dirname(os.path.realpath(__file__))
+        print(self.repository_path_in_os)
+
+        if mkdocs_template_file_in_os:
+            self.mkdocs_template_file_in_os = mkdocs_template_file_in_os
+        else:
+            self.mkdocs_template_file_in_os = MkdocsTemplateFileName
+        print(self.mkdocs_template_file_in_os)
+
+        if repository_name:
+            if repository_name == os.path.split(self.repository_path_in_os)[-1]:
+                self.repository_name = repository_name
+            else:
+                raise Exception(
+                    "参数repository_name的值{}和参数repository_path_in_os的值不匹配".format(repository_name, repository_path_in_os))
+        else:
+            self.repository_name = os.path.split(self.repository_path_in_os)[-1]
+        print(self.repository_name)
+        print("切换到:{}".format(self.repository_path_in_os))
+        os.chdir(self.repository_path_in_os)  # 切到repository所在目录
+        # 存放doc的目录在OS上的路径
+        self.doc_path_in_os = os.path.join(self.repository_path_in_os, self.doc_dir_name)
         self.root_nav_label = self.Nav
         # 最终结果就是一棵树
         # 它表示这棵树的root节点，
         # key作为节点的label(type hint str)，
         # value作为节点的子节点(type hint: list of dict)
         self.root_nav_node = dict()
+        if site_name:
+            self.site_name = site_name
+        else:
+            self.site_name = self.repository_name
+        print("site_name:{}".format(self.site_name))
 
     def build(self):
         """
         从根目录开始，逐步添加目录
         :return:
         """
-        mkdocs_file_path = os.path.join(self.root_dir, self.MkdocsFileName)
+        mkdocs_file_path = os.path.join(self.doc_dir_name, MkdocsFileName)
         nav_path = self.root_nav_label
         self.__expand__(nav_path, mkdocs_file_path)
         self.__save__()
@@ -149,14 +187,14 @@ class NavBuilder:
                         if __split_file_path:
                             current_file_path = os.path.join(*__split_file_path)
                             file_name_in_mkdocs_obj = pathlib.Path(
-                                os.path.join(current_file_path, child_node_value))# 补全路径
+                                os.path.join(current_file_path, child_node_value))  # 补全路径
                             file_name_in_os_obj = pathlib.Path(
-                                os.path.join(self.start_path_in_os, current_file_path, child_node_value))# 补全路径
+                                os.path.join(self.doc_path_in_os, current_file_path, child_node_value))  # 补全路径
                             print(file_name_in_os_obj)
                             if file_name_in_os_obj.is_file():
                                 child_node[child_node_label] = file_name_in_mkdocs_obj.as_posix()  # 使用POSIX格式路径
                             else:
-                                log = "文件'{}'不存在".format(file_name_in_mkdocs_obj.as_posix())
+                                log = "文件'{}'不存在".format(file_name_in_os_obj.as_posix())
                                 raise Exception(log)
                         else:
                             child_node[child_node_label] = child_node_value
@@ -164,7 +202,7 @@ class NavBuilder:
                         # 目录，相当于non-terminal，需要进行扩展
                         current_file_path = os.path.join(*split_file_path[0:-1])
                         self.__expand__(os.path.join(nav_path, child_node_label),
-                                        os.path.join(current_file_path, child_node_value, self.MkdocsFileName))
+                                        os.path.join(current_file_path, child_node_value, MkdocsFileName))
         else:
             log = "配置文件'{}'不存在".format(mkdocs_file_path)
             raise Exception(log)
@@ -223,10 +261,13 @@ class NavBuilder:
                 raise Exception(log)
 
     def __save__(self):
-        with open(self.MkdocsTemplateFileName, encoding='utf-8') as template_f, open(self.MkdocsFileName, 'w',
-                                                                                     encoding='utf-8') as f:
+        with open(self.mkdocs_template_file_in_os, encoding='utf-8') as template_f, open(MkdocsFileName, 'w',
+                                                                                         encoding='utf-8') as f:
             mkdocs = yaml_load(template_f, Loader=Loader)
             mkdocs[self.Nav] = self.root_nav_node[self.Nav]
+            mkdocs["site_name"] = self.site_name
+            mkdocs["site_url"] = "https://dengking.github.io/{}".format(self.repository_name)
+            mkdocs["repo_url"] = "https://github.com/dengking/{}".format(self.repository_name)
             yaml_dump(mkdocs, f, default_flow_style=False)
 
     def __load__(self, mkdocs_file_path):
@@ -244,3 +285,57 @@ class NavBuilder:
                 log = "文件'{}'中没有nav".format(mkdocs_file_path)
                 raise Exception(log)
 
+
+"""
+1、需要保持repository name 和 folder name一致，这样就能够根据repository name 找到对应的folder
+"""
+repository_config = namedtuple("repository_config", "site_name")
+repository_list = {"compiler-principle": repository_config(None),
+                   "DB": repository_config(None),
+                   "decompose-redis": repository_config(None),
+                   "dengking.github.io": repository_config("Website of Kai"),
+                   "discrete": repository_config(None),
+                   "Hardware": repository_config(None),
+                   "Language": repository_config(None),
+                   "Linux-OS": repository_config(None),
+                   "machine-learning": repository_config(None),
+                   "Parallel-computing": repository_config(None),
+                   "programming-language": repository_config(None),
+                   "software-engineering": repository_config(None)
+                   }
+where_am_i = os.path.dirname(os.path.realpath(__file__))
+print(where_am_i)
+
+
+def build_all(relative_path):
+    """
+
+    Args:
+        relative_path: repository相对于本程序的路径，这样才能够根据本程序所在的路径找到repository所在的路径
+
+    Returns:
+
+    """
+    for repository_name, config in repository_list.items():
+        build(relative_path, repository_name, config.site_name)
+
+
+def build(relative_path, repository_name, site_name=None):
+    """
+
+    Args:
+        relative_path:
+        repository_name:
+        site_name:
+
+    Returns:
+
+    """
+    if site_name is None:
+        site_name = repository_list[repository_name].site_name
+    repository_path_in_os = os.path.join(where_am_i, relative_path, repository_name)
+    mkdocs_template_file_in_os = os.path.join(where_am_i, MkdocsTemplateFileName)
+
+    b = NavBuilder(repository_name=repository_name, repository_path_in_os=repository_path_in_os,
+                   mkdocs_template_file_in_os=mkdocs_template_file_in_os, site_name=site_name)
+    b.build()

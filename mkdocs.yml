@@ -8,7 +8,7 @@ google_analytics:
 - mkdocs.org
 markdown_extensions:
 - toc:
-    separator: '-'
+    separator: '#'
 - admonition
 - def_list
 - mdx_gh_links:
