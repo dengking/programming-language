@@ -30,8 +30,9 @@ markdown_extensions:
     - pymdownx.caret
     - pymdownx.critic
     - pymdownx.details
-    - pymdownx.emoji:
-        emoji_generator: '!!python/name:pymdownx.emoji.to_svg'
+    # 去除emoji，因为可能会导致编译错误
+    #- pymdownx.emoji:
+    #    emoji_generator: '!!python/name:pymdownx.emoji.to_svg'
     - pymdownx.inlinehilite
     - pymdownx.magiclink
     - pymdownx.mark
