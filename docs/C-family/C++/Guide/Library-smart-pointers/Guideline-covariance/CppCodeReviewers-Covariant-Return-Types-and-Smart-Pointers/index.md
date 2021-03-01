@@ -1,18 +1,23 @@
-# [CppCodeReviewers](https://github.com/CppCodeReviewers)/**[Covariant-Return-Types-and-Smart-Pointers](https://github.com/CppCodeReviewers/Covariant-Return-Types-and-Smart-Pointers)**
+# github [CppCodeReviewers](https://github.com/CppCodeReviewers)/**[Covariant-Return-Types-and-Smart-Pointers](https://github.com/CppCodeReviewers/Covariant-Return-Types-and-Smart-Pointers)**
 
 > NOTE: 
 >
 > 一、本文提出的解决方案简单总结就是使用两次polymorphism(简称为double dispatch)，简单来说就是在原来的virtual clone基础上，在套一层generic `clone` function实现external polymorphism: 
 >
-> 1、使用一个generic `clone` function实现external polymorphism，来实现return 具体类型的smart pointer，后续统一使用这个generic `clone` function，参见"Clone function"、"Preventing use of `Figure::clone`"
+> 一、使用一个generic `clone` function实现external polymorphism，来实现return 具体类型的smart pointer，后续统一使用这个generic `clone` function，参见"Clone function"、"Preventing use of `Figure::clone`"；
 >
-> 2、virtual clone + covariant return type
+> 1、由于generic `clone` function使用的是function template，因此，它使用的是static type；
 >
-> 二、在generic `clone` function 中，为什么要转换为 `base_type`？
+> 2、在generic `clone` function 中，为什么要转换为 `base_type`？
 >
-> 这是因为generic `clone` function 是 `base_type` 的friend，而不是 derived class 的friend，因此需要转换为 `base_type` 才能够编译通过。
-
-
+> 这是因为generic `clone` function 是 `base_type` 的friend，而不是 derived class 的friend，因此需要转换为 `base_type` 才能够编译通过，也就是说，统一在`base_type` 进行friend的校验。正是因为此，每个子类中，需要给出`clone`的具体实现，因此需要将它virtual化。
+>
+> 
+>
+> 二、virtual clone + covariant return type
+>
+> 
+>
 
 ```C++
 #include <iostream>

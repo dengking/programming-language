@@ -141,15 +141,79 @@ int main()
 }
 ```
 
+> NOTE: 上述代码中使用到了`std::make_unique  `, 这是c++14的，所以我将原文代码进行了修改，使它在c++11的compiler中能够编译通过。
+>
+> ```C++
+> #include <memory>
+> #include <utility>
+> 
+> 
+> // note: this implementation does not disable this overload for array types
+> template<typename T, typename... Args>
+> std::unique_ptr<T> make_unique(Args&&... args)
+> {
+>     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+> }
+> 
+> class cloneable
+> {
+> public:
+> 	virtual ~cloneable()
+> 	{
+> 	}
+> 
+> 	std::unique_ptr<cloneable> clone() const
+> 	{
+> 		return std::unique_ptr<cloneable>(this->clone_impl());
+> 	}
+> 
+> private:
+> 	virtual cloneable * clone_impl() const = 0;
+> };
+> 
+> ///////////////////////////////////////////////////////////////////////////////
+> 
+> class concrete: public cloneable
+> {
+> public:
+> 	std::unique_ptr<concrete> clone() const
+> 	{
+> 		return std::unique_ptr<concrete>(this->clone_impl());
+> 	}
+> 
+> private:
+> 	virtual concrete * clone_impl() const override
+> 	{
+> 		return new concrete(*this);
+> 	}
+> };
+> int main()
+> {
+> 	std::unique_ptr<concrete> c = make_unique<concrete>();
+> 	std::unique_ptr<concrete> cc = c->clone();
+> 
+> 	cloneable * p = c.get();
+> 	std::unique_ptr<cloneable> pp = p->clone();
+> }
+> // g++ --std=c++11 -Wall -pedantic -test.cpp
+> 
+> ```
+>
+> 
+
 Do you see what we did, here?
 
 By separating the concerns, we were able to use covariance at each level of the hierarchy to produce a `clone_impl` member function returning the exact type of pointer we wanted.
 
 And using a little (usually) annoying feature in C++, name hiding (i.e. when declaring a name in a derived class, this name hides all the symbols with the same name in the base class), we hide (not override) the clone() member function to return a smart pointer of the exact type we wanted.
 
+> NOTE: name hiding这个概念非常重要，参见`C++\Language-reference\Classes\Overload-VS-override-VS-name-hiding.md`
+
 When cloning from a concrete, we obtain a `unique_ptr<concrete>`, and when cloning from a `cloneable`, we obtain a `unique_ptr<cloneable>`.
 
 One could get uneasy at the idea of having a `clone_impl` member function using a RAII-unsafe transfer of ownership, but the problem is mitigated as the member function is private, and is called only by `clone`. This limits the risk as the user of the class can’t call it by mistake.
+
+> NOTE: 这些考虑是非常值得学习的
 
 This solves the problem but adds some amount of boilerplate code.
 
@@ -197,5 +261,70 @@ As you can see, the concrete class is now free of clutter.
 This effectively adds a polymorphic and covariant clone() to a hierarchy of class.
 
 This CRTP is the foundation of our general solution: Every next step will build upon it.
+
+
+
+> NOTE: 原文给出的代码是无法编译通过的，下面是修正过后的版本
+>
+> ```c++
+> #include <memory>
+> 
+> // note: this implementation does not disable this overload for array types
+> template<typename T, typename ... Args>
+> std::unique_ptr<T> make_unique(Args&&... args)
+> {
+> 	return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+> }
+> class cloneable
+> {
+> public:
+> 	virtual ~cloneable()
+> 	{
+> 	}
+> 
+> 	std::unique_ptr<cloneable> clone() const
+> 	{
+> 		return std::unique_ptr<cloneable>(this->clone_impl());
+> 	}
+> 
+> private:
+> 	virtual cloneable * clone_impl() const = 0;
+> };
+> 
+> template<typename Derived, typename Base>
+> class clone_inherit: public Base
+> {
+> public:
+> 	std::unique_ptr<Derived> clone() const
+> 	{
+> 		return std::unique_ptr<Derived>(static_cast<Derived *>(this->clone_impl()));
+> 	}
+> 
+> private:
+> 	virtual clone_inherit * clone_impl() const override
+> 	{
+> 		return new Derived(static_cast<const Derived&>(*this));
+> 	}
+> };
+> 
+> class concrete
+> : public clone_inherit<concrete, cloneable>
+> {
+> 
+> };
+> 
+> int main()
+> {
+> 	std::unique_ptr<concrete> c = make_unique<concrete>();
+> 	std::unique_ptr<concrete> cc = c->clone();
+> 
+> 	cloneable * p = c.get();
+> 	std::unique_ptr<cloneable> pp = p->clone();
+> }
+> 
+> ```
+>
+> 
+>
 
 ## Multiple Inheritance: Variadic templates to the rescue

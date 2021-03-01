@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
     - fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance: fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance
+    - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers: CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers
+    - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
