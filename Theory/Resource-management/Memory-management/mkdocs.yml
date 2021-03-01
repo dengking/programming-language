@@ -1,4 +1,8 @@
 nav:
+    - Introduction: index.md
     - Memory-management: Memory-management.md
+####################         
     - Manual-memory-management: Manual-memory-management
+#################### variable的概念跟memory management密切相关####################   
+    - Variable: Variable
     - Automatic-memory-management: Automatic-memory-management

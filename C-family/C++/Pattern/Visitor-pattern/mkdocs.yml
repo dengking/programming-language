@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - thegreenplace-A-polyglot's-guide-to-multiple-dispatch: thegreenplace-A-polyglot's-guide-to-multiple-dispatch
+    - TODO-gieseanw-Stop-reimplementing-the-virtual-table-and-start-using-double-dispatch: TODO-gieseanw-Stop-reimplementing-the-virtual-table-and-start-using-double-dispatch

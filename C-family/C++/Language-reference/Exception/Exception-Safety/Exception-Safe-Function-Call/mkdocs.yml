@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - gotw-56-Exception-Safe-Function-Calls: gotw-56-Exception-Safe-Function-Calls
+    - gotw-102-Exception-Safe-Function-Calls: gotw-102-Exception-Safe-Function-Calls

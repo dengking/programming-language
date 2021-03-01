@@ -1,0 +1,5 @@
+nav:
+    - Phases-of-translation: Phases-of-translation.md
+    - Separate-compilation-model.md: Separate-compilation-model.md
+    - One-pass-compiler: One-pass-compiler.md
+    

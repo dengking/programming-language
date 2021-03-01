@@ -3,11 +3,12 @@ nav:
     - Theory: Theory
     # 各种具体的programming  language
     - Python: Python
-    - C++: C++
-    - C: C
+    - C-family: C-family
+    - Rust: Rust
     - JavaScript: JavaScript
     - Java: Java
     - Eiffel: Eiffel
-    - Summary-of-my-programming-language: Summary-of-my-programming-language.md
-    # ABI
-    - ABI: ABI
+    - Go: Go
+    ########## 对比各种programming language##########    
+    - Comparison-of-programming-language: Comparison-of-programming-language
+    - Online-compiler: Online-compiler

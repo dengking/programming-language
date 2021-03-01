@@ -1,0 +1,25 @@
+nav:
+    - Introduction: index.md
+
+#################### generic programming都是和template相关的 ####################    
+    - CRTP: CRTP
+    # 下面两者密切相关
+    - Expression-Template: Expression-Template
+    - Recursive-Type-Composition: Recursive-Type-Composition
+    # trait是和template相关的
+    - SFINAE-trait-enable-if: SFINAE-trait-enable-if
+    # 
+    - Metafunction: Metafunction
+    # 
+    - Barton–Nackman-trick: Barton–Nackman-trick
+    #
+    - Type-Generator: Type-Generator
+    # 
+    - Object-Generator: Object-Generator
+
+    # Deduce
+    - Return-Type-Resolver: Return-Type-Resolver
+    #
+    - nullptr: nullptr
+    - Coercion-by-Member-Template: Coercion-by-Member-Template
+    - Policy-based-design: Policy-based-design

@@ -1,0 +1,91 @@
+# reference and pointer：
+The difference between pointers and references in C ++.md
+
+c++引用.md
+
+# value catagry
+C++中的左值、纯右值、将亡值.md
+
+lvalue和rvalue、传值和传引用、木桶.md
+
+## rvalue
+
+cpp-Rvalue-References.md
+
+cpp-Rvalue-References-Explained.md
+
+cpp-Guidelines-For-Rvalue-References-In-APIs.md
+
+isocpp-FAQ-References.md
+
+reference.md
+
+return-reference.md
+
+D:\github\learn-cpp\reference-and-pointer
+
+
+# function
+
+函数返回值的传递方式(值传递、指针传递、引用传递）.md
+
+# std::distance in C++
+https://www.geeksforgeeks.org/stddistance-in-c/
+
+# uppercase
+
+https://stackoverflow.com/questions/8693990/converting-to-uppercase-in-c
+
+# stringstream
+
+http://www.cplusplus.com/reference/sstream/stringstream/
+
+https://en.cppreference.com/w/cpp/io
+
+
+https://www.hackerrank.com/challenges/c-tutorial-stringstream/problem
+
+# list
+
+http://www.cplusplus.com/reference/list/list/
+
+# gdb thread
+
+https://stackoverflow.com/questions/9094422/how-to-check-if-a-stdthread-is-still-running
+
+# two end of a list one for a thread to pop, one for another thread to append c++
+
+two end of a list one for a thread to pop, one for another thread to append 
+
+
+https://stackoverflow.com/questions/38725768/threading-safe-stdlist-c
+
+# condition variable
+
+https://stackoverflow.com/questions/57219650/stdcondition-variablenotify-all-only-wakes-up-one-thread-in-my-threadpool
+
+http://www.cplusplus.com/reference/condition_variable/condition_variable/wait/
+
+# template
+https://stackoverflow.com/questions/8810224/inheriting-from-a-template-class-in-c
+https://stackoverflow.com/questions/602593/template-or-abstract-base-class
+https://stackoverflow.com/questions/1088290/define-statements-within-a-namespace
+https://www.fluentcpp.com/2019/05/14/3-types-of-macros-that-improve-c-code/
+https://stackoverflow.com/questions/281725/template-specialization-based-on-inherit-class
+http://www.gotw.ca/publications/mxc++-item-4.htm
+
+
+
+# 反射
+
+https://stackoverflow.com/questions/14695805/how-to-print-everything-from-an-struct-array-in-c
+
+http://www.cplusplus.com/forum/general/27038/
+
+https://stackoverflow.com/questions/2514401/getting-name-and-type-of-a-struct-field-from-its-object
+
+https://stackoverflow.com/questions/41453/how-can-i-add-reflection-to-a-c-application
+
+https://stackoverflow.com/questions/10452112/how-to-get-struct-member-with-a-string-using-macros-c/10452577
+
+https://www.codeproject.com/Questions/585692/Accessplusstructureplusvariableplusvalueplususingp

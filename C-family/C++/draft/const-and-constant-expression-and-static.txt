@@ -1,0 +1,34 @@
+const 语义是：变量的值是不能够修改的。它不一定是compile time的，它在compile time的情况是：`const int i = 0;`
+
+
+
+static表示的是compile time，但是他没有不能够进行修改的语义。
+
+constant expression表示的是常量表达式，它是在compile time进行evaluate的，它无法被修改，我觉得在某种程度上，它结合了const 和 static。
+
+constexp 表示的是这可以用于constant expression。
+
+https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const
+
+https://www.boost.org/doc/libs/1_69_0/libs/hana/doc/html/index.html#tutorial-appendix-constexpr
+
+https://stackoverflow.com/questions/4748083/when-should-you-use-constexpr-capability-in-c11
+
+https://www.codeproject.com/articles/417719/constants-and-constant-expressions-in-cplusplus
+
+https://www.cprogramming.com/c++11/c++11-compile-time-processing-with-constexpr.html
+
+
+const
+https://www.studytonight.com/cpp/const-keyword.php
+http://duramecho.com/ComputerInformation/WhyHowCppConst.html
+http://www.cplusplus.com/doc/tutorial/constants/
+https://stackoverflow.com/questions/583076/c-c-changing-the-value-of-a-const
+
+LiteralType
+
+https://en.cppreference.com/w/cpp/named_req/LiteralType
+
+Constant initialization
+
+https://en.cppreference.com/w/cpp/language/constant_initialization

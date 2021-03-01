@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Delete-incomplete-type: Delete-incomplete-type
+    - Check-incomplete-type: Check-incomplete-type

@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - Full-memory-barrier: Full-memory-barrier

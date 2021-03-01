@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - tuple: tuple
+    - optional: optional.md
+    - any: any.md
+    - variant: variant
+    - integer_sequence: integer_sequence

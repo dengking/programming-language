@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - Guide: Guide
+    - Library: Library

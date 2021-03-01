@@ -3,6 +3,7 @@ nav:
     - Language: Language
     # 描述编程相关的内容
     - Library: Library
+    - What-is-new: What-is-new
     # python的哲学
     - Philosophy: Philosophy
     - Style-guide: Style-guide
@@ -12,6 +13,7 @@ nav:
     - Pattern: Pattern
     # 编程工具
     - Programming-tool: Programming-tool
+    # 对应的是python doc中的how to
     - How-to: How-to
     - Software: Software
     - Glossary: Glossary

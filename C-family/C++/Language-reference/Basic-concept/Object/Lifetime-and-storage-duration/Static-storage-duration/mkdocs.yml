@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - TODO-Initialization-of-Static-Variables: TODO-Initialization-of-Static-Variables
+    - Static-local-object: Static-local-object.md
+    - Non-local-object: Non-local-object.md

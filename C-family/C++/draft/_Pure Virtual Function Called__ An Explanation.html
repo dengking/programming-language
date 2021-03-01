@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://www.artima.com/cppsource/pure_virtual.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>"Pure Virtual Function Called": An Explanation</title>
+
+<meta name="description" content="
+" pure="" virtual="" function="" called"="" is="" the="" dying="" message="" of="" occasional="" crashed="" c++="" program.="" what="" does="" it="" mean?="" you="" can="" find="" a="" couple="" simple,="" well-documented="" explanations="" out="" there="" that="" apply="" to="" problems="" easy="" diagnose="" during="" postmortem="" debugging.="" also="" another="" rather="" subtle="" bug="" generates="" same="" message.="" if="" have="" mysterious="" crash="" associated="" with="" message,="" might="" well="" mean="" your="" program="" went="" indirect="" on="" dangling="" pointer.="" this="" article="" covers="" all="" these="" explanations.="" "="">
+<meta name="keywords" content="C++">
+<meta name="author" content="Paul S. R. Chisholm">
+<link rel="stylesheet" type="text/css" href="./_Pure Virtual Function Called__ An Explanation_files/artima.css">
+<link rel="shortcut icon" href="https://www.artima.com/favicon.ico">
+</head>
+<body><table width="100%" bgcolor="#FFFFFF" style="margin-top: 5px">
+<tbody><tr>
+<td align="center">
+<div id="topbanner" style="height: 90px"><noscript><a href='https://www.artima.com/zcr/adclick.php?n=a86d37e9' target='_top'><img src='https://www.artima.com/zcr/adview.php?what=zone:1&amp;n=a86d37e9' border='0' alt='' /></a></noscript></div>
+</td>
+</tr>
+</tbody></table>
+<table width="100%" cellspacing="0">
+<tbody><tr>
+<td align="left" valign="bottom">
+<a href="https://www.artima.com/index.jsp"><img src="./_Pure Virtual Function Called__ An Explanation_files/a7.gif" alt="The Artima Developer Community" border="0" width="550" height="43"></a>
+</td>
+</tr></tbody></table>
+<table width="100%" bgcolor="#333333">
+<tbody><tr>
+<td align="center">
+<div class="ml">
+<a href="https://www.artima.com/articles" class="hl">Articles</a>&nbsp;|
+<a href="https://www.artima.com/news/index.jsp" class="hl">News</a>&nbsp;|
+<a href="https://www.artima.com/weblogs/index.jsp" class="hl">Weblogs</a>&nbsp;|
+<a href="https://www.artima.com/shop/catalog" class="hl">Books</a>&nbsp;|
+<a href="https://www.artima.com/forums/index.jsp" class="hl">Forums</a>
+</div>
+</td>
+</tr>
+</tbody></table>
+<table width="100%" bgcolor="#EEE8AA">
+<tbody><tr>
+<td align="center">
+<div class="sc">
+<a href="https://www.artima.com/cppsource/index.html">The C++ Source</a>&nbsp;| 
+<a href="https://www.artima.com/groups/group.jsp?group=cpp">C++ Community News</a>&nbsp;| 
+<a href="https://www.artima.com/forums/flat.jsp?forum=226&amp;thread=196881">Discuss</a>&nbsp;| 
+<a href="mailto:?subject=" pure="" virtual="" function="" called":="" an="" explanation&body="%0AThe" c++="" source="" %0a"pure="" explanation="" %0aby="" paul="" s.="" r.="" chisholm="" %0a%0ahttps:="" www.artima.com="" cppsource="" pure_virtual.html"="">Email</a>&nbsp;| 
+Previous&nbsp;| 
+Next
+</div>
+</td>
+</tr>
+</tbody></table>
+<table width="100%" bgcolor="#EEEEEE">
+<tbody><tr>
+<td align="center">
+<div class="sc">
+<span style="color: #555555">Sponsored Link</span> <span style="color: #888888">•</span> 
+<script language="JavaScript" type="text/javascript" src="./_Pure Virtual Function Called__ An Explanation_files/adx.js.download"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+   if (!document.phpAds_used) document.phpAds_used = ',';
+   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+   
+   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+   document.write ("https://www.artima.com/zcr/adjs.php?n=" + phpAds_random);
+   document.write ("&amp;what=zone:9&amp;target=_top");   document.write ("&amp;exclude=" + document.phpAds_used);
+   if (document.referrer)
+      document.write ("&amp;referer=" + escape(document.referrer));
+   document.write ("'><" + "/script>");
+//-->
+</script><noscript><a href='https://www.artima.com/zcr/adclick.php?n=a799ecf6' target='_top'><img src='https://www.artima.com/zcr/adview.php?what=zone:9&amp;n=a0587811' border='0' alt=''></a></noscript>
+</div>
+</td>
+</tr>
+</tbody></table>
+<br>
+<div class="vegies">
+<div class="tc">
+<span class="sts">The C++ Source</span><br>
+<span class="ts">"Pure Virtual Function Called": An Explanation</span><br>
+<span class="as">by Paul S. R. Chisholm</span><br>
+<span class="pd">February 26, 2007</span><br>
+</div>
+<p>
+
+</p><table align="right" border="0" cellpadding="5" cellspacing="0">
+
+<tbody><tr>
+
+<td align="center">
+
+<div style="margin-left: 15%;">
+
+<div class="adnotice">Advertisement</div>
+<script language="JavaScript" type="text/javascript" src="./_Pure Virtual Function Called__ An Explanation_files/adx.js.download"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+   if (!document.phpAds_used) document.phpAds_used = ',';
+   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+   
+   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+   document.write ("https://www.artima.com/zcr/adjs.php?n=" + phpAds_random);
+   document.write ("&amp;what=zone:2&amp;target=_top&amp;block=1&amp;blockcampaign=1");
+   document.write ("&amp;exclude=" + document.phpAds_used);
+   if (document.referrer)
+      document.write ("&amp;referer=" + escape(document.referrer));
+   document.write ("'><" + "/script>");
+//-->
+</script><noscript><a href='https://www.artima.com/zcr/adclick.php?n=a799ecf6' target='_top'><img src='https://www.artima.com/zcr/adview.php?what=zone:2&amp;n=a799ecf6' border='0' alt=''></a></noscript>
+</div>
+
+</td>
+
+</tr>
+
+</tbody></table>
+
+<p></p>
+
+<!-- TOP OF SUMMARY -->
+  <div class="summary">
+    <div class="summarytitle">
+      Summary
+    </div>"Pure virtual function called" is the dying message of
+    the occasional crashed C++ program. What does it mean? You can
+    find a couple of simple, well-documented explanations out there
+    that apply to problems easy to diagnose during postmortem
+    debugging. There is also another rather subtle bug that
+    generates the same message. If you have a mysterious crash
+    associated with that message, it might well mean your program
+    went indirect on a dangling pointer. This article covers all
+    these explanations.
+  </div>
+<!-- BOTTOM OF SUMMARY -->
+  <h1>Object-Oriented C++: The Programmer's View</h1>
+  <p>(If you know what pure virtual functions and abstract classes
+  are, you can skip this section.)</p>
+  <p>In C++, virtual functions let instances of related classes
+  have different behavior at run time (aka, <em>runtime
+  polymorphism</em>) :</p>
+  <pre class="indent">class Shape {
+public:
+        virtual double area() const;
+        double value() const;
+        // Meyers 3rd Item 7:
+        virtual ~Shape();
+protected:
+        Shape(double valuePerSquareUnit);
+private:
+        double valuePerSquareUnit_;
+};
+
+class Rectangle : public Shape {
+public:
+        Rectangle(double width, double height, double valuePerSquareUnit);
+        virtual double area() const;
+        // Meyers 3rd Item 7:
+        virtual ~Rectangle();
+// ...
+};
+
+class Circle : public Shape {
+public:
+        Circle(double radius, double valuePerSquareUnit);
+        virtual double area() const;
+        // Meyers 3rd Item 7:
+        virtual ~Circle();
+// ...
+};
+
+double
+Shape::value() const
+{
+        // Area is computed differently, depending
+        // on what kind of shape the object is:
+        return valuePerSquareUnit_ * area();
+}
+</pre>
+  <p>(The comments before the destructors refer to Item 7 in the
+  third edition of Scott Meyers's <i>Effective C++</i>: "Declare
+  destructors virtual in polymorphic base classes." This code
+  follows a convention used on several projects, where references
+  like this are put in the code, serving as reminders to
+  maintainers and reviewers. To some people, the point is obvious
+  and the reminder is distracting; but one person's distraction is
+  another person's helpful hint, and programmers in a hurry often
+  forget what should be "obvious.")</p>
+  <p>In C++, a function's interface is specified by declaring the
+  function. Member functions are declared in the class definition.
+  A function's implementation is specified by defining the
+  function. Derived classes can redefine a function, specifying an
+  implementation particular to that derived class (and classes
+  derived from <i>it</i>). When a virtual function is called, the
+  implementation is chosen based not on the static type of the
+  pointer or reference, but on the type of the object being pointed
+  to, which can vary at run time:</p>
+  <pre class="indent">print(shape-&gt;area());  // Might invoke Circle::area() or Rectangle::area().
+</pre>
+  <p>A <em>pure</em> virtual function is declared, but not
+  necessarily defined, by a base class. A class with a pure virtual
+  function is "abstract" (as opposed to "concrete"), in that it's
+  not possible to create instances of that class. A derived class
+  must define all inherited pure virtual functions of its base
+  classes to be concrete.</p>
+  <pre class="indent">class AbstractShape {
+public:
+        virtual double area() const = 0;
+        double value() const;
+        // Meyers 3rd Item 7:
+        virtual ~AbstractShape();
+protected:
+        AbstractShape(double valuePerSquareUnit);
+private:
+        double valuePerSquareUnit_;
+protected:
+        AbstractShape(double valuePerSquareUnit);
+private:
+        double valuePerSquareUnit_;
+};
+
+// Circle and Rectangle are derived from AbstractShape.
+
+// This will not compile, even if there's a matching public constructor:
+// AbstractShape* p = new AbstractShape(value);
+
+// These are okay:
+Rectangle* pr = new Rectangle(height, weight, value);
+Circle* pc = new Circle(radius, value);
+
+// These are okay, too:
+AbstractShape* p = pr;
+p = pc;
+
+</pre>
+  <h1>Object Oriented C++: Under the Covers</h1>
+  <p>(You can skip this section if you already know what a "vtbl"
+  is.)</p>
+  <p>How does all this run time magic happen? The usual
+  implementation is, every class with any virtual functions has an
+  array of function pointers, called a "vtbl". Every instance of
+  such as class has a pointer to its class's <em>vtbl</em>, as
+  depicted below.</p>
+  <center>
+    <img src="./_Pure Virtual Function Called__ An Explanation_files/pure_virtual_fig_1.png">
+    <p><strong>Figure 1. A class's vtbl points to the class's
+    instance member functions.</strong></p>
+  </center>
+  <p>If an abstract class with a pure virtual function doesn't
+  define the function, what goes in the corresponding place in the
+  <em>vtbl</em>? Traditionally, C++ implementors have provided a
+  special function, which prints "Pure virtual function called" (or
+  words to that effect), and then crashes the program.</p>
+  <center>
+    <img src="./_Pure Virtual Function Called__ An Explanation_files/pure_virtual_fig_2.png">
+    <p><strong>Figure 2. An abstract class's vtbl can have a
+    pointer to a special function.</strong></p>
+  </center>
+  <h1>Build 'em Up, Tear 'em Down</h1>
+  <p>When you construct an instance of a derived class, what
+  happens, exactly? If the class has a <em>vtbl</em>, the process
+  goes something like the following.</p>
+  <p>Step 1: Construct the top-level base part:.</p>
+  <ol type="a">
+    <li>Make the instance point to the base class's
+    <em>vtbl</em>.</li>
+    <li>Construct the base class instance member variables.</li>
+    <li>Execute the body of the base class constructor.</li>
+  </ol>
+  <p>Step 2: Construct the derived part(s) (recursively):</p>
+  <ol type="a">
+    <li>Make the instance point to the derived class's
+    <em>vtbl</em>.</li>
+    <li>Construct the derived class instance member variables.</li>
+    <li>Execute the body of the derived class constructor.</li>
+  </ol>
+  <p>Destruction happens in reverse order, something like this:</p>
+  <p>Step 1: Destruct the derived part:</p>
+  <ol type="a">
+    <li>(The instance already points to the derived class's
+    <em>vtbl</em>.)</li>
+    <li>Execute the body of the derived class destructor.</li>
+    <li>Destruct the derived class instance member variables.</li>
+  </ol>
+  <p>Step 2: Destruct the base part(s) (recursively):</p>
+  <ol type="a">
+    <li>Make the instance point to the base class's vtbl.</li>
+    <li>Execute the body of the base class destructor.</li>
+    <li>Destruct the base class instance member variables.</li>
+  </ol>
+  <h1>Two of the Classic Blunders</h1>
+  <p>What if you try to call a virtual function from a base class
+  constructor?</p>
+  <pre class="indent">// From sample program 1:
+AbstractShape(double valuePerSquareUnit)
+        : valuePerSquareUnit_(valuePerSquareUnit)
+{
+        // ERROR: Violation of Meyers 3rd Item 9!
+        std::cout &lt;&lt; "creating shape, area = " &lt;&lt; area() &lt;&lt; std::endl;
+}
+</pre>
+  <p>(Meyers, 3rd edition, Item 9: "Never call virtual functions
+  during construction or destruction.")</p>
+  <p>This is obviously an attempt to call a pure virtual function.
+  The compiler could alert us to this problem, and some compilers
+  do. If a base class destructor calls a pure virtual function
+  directly (sample program 2), you have essentially the same
+  situation.</p>
+  <p>If the situation is a little more complicated, the error will
+  be less obvious (and the compiler is less likely to help us):</p>
+  <pre class="indent">// From sample program 3:
+AbstractShape::AbstractShape(double valuePerSquareUnit)
+        : valuePerSquareUnit_(valuePerSquareUnit)
+{
+        // ERROR: Indirect violation of Meyers 3rd Item 9!
+        std::cout &lt;&lt; "creating shape, value = " &lt;&lt; value() &lt;&lt; std::endl;
+}
+</pre>
+  <p>The body of this base class constructor is in step 1(c) of the
+  construction process described above, which calls a instance
+  member function (<code>value()</code>), which in turn calls a
+  pure virtual function (<code>area()</code>). The object is still
+  an AbstractShape at this point. What happens when it tries to
+  call the pure virtual function? Your program likely crashes with
+  a message similar to, "Pure virtual function called."</p>
+  <p>Similarly, calling a virtual function indirectly from a base
+  class destructor (sample program 4) results in the same kind of
+  crash. The same goes for passing a partially-constructed (or
+  partially-destructed) object to any function that invokes virtual
+  functions.</p>
+  <p>These are the most commonly described root causes of the "Pure
+  Virtual Function Called" message. They're straightforward to
+  diagnose from postmortem debugging; the stack trace will point
+  clearly to the problem.</p>
+  <h1>Pointing Out Blame</h1>
+  <p>There's at least one other problem that can lead to this
+  message, which doesn't seem to be explicitly described anywhere
+  in print or on the net. (There have been some discussions on the
+  ACE mailing list that touch upon the problem but they don't go
+  into detail.)</p>
+  <p>Consider the following (buggy) code:</p>
+  <pre class="indent">        // From sample program 5:
+        AbstractShape* p1 = new Rectangle(width, height, valuePerSquareUnit);
+        std::cout &lt;&lt; "value = " &lt;&lt; p1-&gt;value() &lt;&lt; std::endl;
+        AbstractShape* p2 = p1;  // Need another copy of the pointer.
+        delete p1;
+        std::cout &lt;&lt; "now value = " &lt;&lt; p2-&gt;value() &lt;&lt; std::endl;
+</pre>
+  <p>Let's consider these lines one at a time.</p>
+  <pre class="indent">        AbstractShape* p1 = new Rectangle(width, height, valuePerSquareUnit);
+</pre>
+  <p>A new object is created. It's constructed in two stages: Step
+  1, where the object acts like a base class instance, and Step 2,
+  where it acts like a derived class instance.</p>
+  <pre class="indent">        std::cout &lt;&lt; "value = " &lt;&lt; p1-&gt;value() &lt;&lt; std::endl;
+</pre>
+  <p>Everything's working fine.</p>
+  <pre class="indent">        AbstractShape* p2 = p1;  // Need another copy of the pointer.
+</pre>
+  <p>Something odd might happen to <code>p1</code>, so let's make a
+  copy of it.</p>
+  <pre class="indent">        delete p1;
+</pre>
+  <p>The object is destructed in two stages: Step 1, where the
+  object acts like a derived class instance, and Step 2, where it
+  acts like a base class instance.</p>
+  <p>Note that the value of <code>p1</code> might change after the
+  call to <code>delete</code>. Compilers are allowed to "zero out"
+  (i.e., render unusable) pointers after destructing their
+  pointed-to data. Lucky (?) for us, we have another copy of the
+  pointer, <code>p2</code>, which didn't change.</p>
+  <pre class="indent">        std::cout &lt;&lt; "now value = " &lt;&lt; p2-&gt;value() &lt;&lt; std::endl;
+</pre>
+  <p>Uh oh.</p>
+  <p>This is another classic blunder: going indirect on a
+  "dangling" pointer. That's a pointer to an object that's been
+  deleted, or memory that's been freed, or both. C++ programmers
+  never write such code ... unless they're clueless (unlikely) or
+  rushed (all too likely).</p>
+  <p>So now <code>p2</code> points to an ex-object. What does that
+  thing look like? According to the C++ standard, it's "undefined".
+  That's a technical term that means, in theory, anything can
+  happen: the program can crash, or keep running but generate
+  garbage results, or send Bjarne Stroustrup e-mail saying how ugly
+  you are and how funny your mother dresses you. You can't depend
+  on anything; the behavior might vary from compiler to compiler,
+  or machine to machine, or run to run. In practice, there are
+  several common possibilities (which may or may not happen
+  consistently):</p>
+  <ul>
+    <li>The memory might be marked as deallocated. Any attempt to
+    access it would immediately be flagged as the use of a dangling
+    pointer. That's what some tools (BoundsChecker, Purify,
+    valgrind, and others) try to do. As we'll see, the Common
+    Language Runtime (CLR) from Microsoft's .NET Framework, and Sun
+    Studio 11's dbx debugger, work this way.</li>
+    <li>The memory might be deliberately scrambled. The memory
+    management system might write garbage-like values into the
+    memory after it's freed. (One such value is "dead beef":
+    0xDEADBEEF, unsigned decimal 3735928559, signed decimal
+    -559038737.)</li>
+    <li>The memory might be reused. If other code was executed
+    between the deletion of the object and the use of dangling
+    pointer, the memory allocation system might have created a new
+    object out of some or all of the memory used by the old object.
+    If you're lucky, this will look enough like garbage that the
+    program will crash immediately. Otherwise the program will
+    likely crash sometime later, possibly after curdling other
+    objects, often long after the root cause problem occurred. This
+    is the kind of problem that drives C++ programmers crazy (and
+    makes Java programmers overly smug).</li>
+    <li>The memory might have been left exactly the way it
+    was.</li>
+  </ul>
+  <p>The last is an interesting case. What was the object "exactly
+  the way it was"? In this case, it was an instance of the abstract
+  base class; certainly that's the way the <em>vtbl</em> was left.
+  What happens if we try to call a pure virtual member function for
+  such an object?</p>
+  <p>"Pure virtual function called".</p>
+  <p>(Exercise for the reader: Imagine a function that, unwisely
+  and unfortunately, returned a pointer or reference to a local
+  variable. This is a different kind of dangling pointer. How could
+  this also generate this message?)</p>
+  <h1>Meanwhile, Back in the Real World</h1>
+  <p>Nice theory. What happens in practice?</p>
+  <p>Consider five test programs, each with its own distinctive
+  defect:</p>
+  <ol type="1">
+    <li>Directly calling a virtual function from a base class
+    constructor.</li>
+    <li>Directly calling a virtual function from a base class
+    destructor.</li>
+    <li>Indirectly calling a virtual function from a base class
+    constructor.</li>
+    <li>Indirectly calling a virtual function from a base class
+    destructor.</li>
+    <li>Calling a virtual function via a dangling pointer.</li>
+  </ol>
+  <p>These were built and tested with several compilers (running on
+  x86 Windows XP unless stated otherwise):</p>
+  <ul>
+    <li>Visual C++ 8.0</li>
+    <li>Digital Mars C/C++ compiler version 8.42n</li>
+    <li>Open Watcom C/C++ version 1.4</li>
+    <li>SPARC Solaris 10, Sun Studio 11</li>
+    <li>gcc:</li>
+    <ul>
+      <li>x86 Linux (Red Hat 3.2), gcc 2.96 / 3.0 / 3.2.2</li>
+      <li>x86 Windows XP (Cygwin), gcc 3.4.4</li>
+      <li>SPARC Solaris 8, gcc 3.2.2</li>
+      <li>PowerPC Mac OS X.4 (Tiger), gcc 3.3 / 4.0</li>
+    </ul>
+  </ul>
+  <h1>Direct Invocation</h1>
+  <p>Some compilers recognized what was happening in the first two
+  examples, with various results.</p>
+  <p>Visual C++ 8.0, Open Watcom C/C++ 1.4, and gcc 4.x recognize
+  that a base class's constructor or destructor can't possibly
+  invoke a derived class's member function. As a result, these
+  compilers optimize away any runtime polymorphism, and treat the
+  call as an invocation of the base class member function. If that
+  member function is not defined, the program doesn't link. If the
+  member function is defined, the program runs without problems.
+  gcc 4.x produces a warning ("abstract virtual 'virtual double
+  AbstractShape::area() const' called from constructor" for the
+  first program, and similarly for the destructor for the second
+  program). Visual C++ 8.0 built the programs without any
+  complaint, even at the maximum warning level (/Wall); similarly
+  for Open Watcom C/C++ 1.4.</p>
+  <p>gcc 3.x and Digital Mars C/C++ compiler 8.42n rejected these
+  programs, complaining, respectively, "abstract virtual `virtual
+  double AbstractShape::area() const' called from constructor" (or
+  "from destructor") and "Error: 'AbstractShape::area' is a pure
+  virtual function".</p>
+  <p>Sun Studio 11 produced a warning, "Warning: Attempt to call a
+  pure virtual function AbstractShape::area() const will always
+  fail", but builds the programs. As promised, both crash, with the
+  message, "Pure virtual function called".</p>
+  <h1>Indirect Invocation</h1>
+  <p>The next two examples built without warning for all compilers.
+  (That's to be expected; this is not the kind of problem normally
+  caught by static analysis.) The resulting programs all crashed,
+  with various error messages:</p>
+  <ul>
+    <li>Visual C++ 8.0: "R6025 - pure virtual function call
+    (__vftpr[0] == __purecall)".</li>
+    <li>Digital Mars C/C++ compiler 8.42n: did not generate an
+    error message when the program crashed. (That's fine; this is
+    "undefined" behavior, and the compiler is free to do whatever
+    it wants.)</li>
+    <li>Open Watcom C/C++ 1.4: "pure virtual function
+    called!".</li>
+    <li>Sun Studio 11: "Pure virtual function called" (same as for
+    the first two programs).</li>
+    <li>gcc: "pure virtual method called".</li>
+  </ul>
+  <h1>Invocation via a Dangling Pointer</h1>
+  <p>The fifth example in the previous list always built without
+  warning and crashed when run. Again, this is to be expected. For
+  all compilers except Microsoft's, the error message was the same
+  as for the third and fourth examples. Sun's compiler generated
+  the same message, but Sun's debugger provided some additional
+  information.</p>
+  <p>Microsoft Visual C++ 8.0 has a number of runtime libraries.
+  Each handles this error in its own way.</p>
+  <ul>
+    <li>Win32 console application:</li>
+    <ul>
+      <li>When run without the debugger, the program crashes
+      silently.</li>
+      <li>When run in the debugger, a program built in debug mode
+      generates the message, "Unhandled exception ... Access
+      violation reading location 0xfeeefeee." This is clearly "dead
+      beef" behavior; when memory was freed, the runtime overwrote
+      it with garbage.</li>
+      <li>When built in release mode and run in the debugger, the
+      program produces the message, "Unhandled exception ...
+      Illegal Instruction".</li>
+    </ul>
+    <li>CLR console application:</li>
+    <ul>
+      <li>When built in debug mode, the message is, "Attempted to
+      read or write protected memory. This is often an indication
+      that other memory is corrupt." The debug runtime system has
+      marked the freed memory, and terminates the program when it
+      tries to use that memory.</li>
+      <li>When built in release mode, the program crashes with the
+      message, "Object reference not set to an instance of an
+      object."</li>
+    </ul>
+  </ul>
+  <p>When compiled with Sun Studio 11, and run in dbx with Run-Time
+  Checking, the program died with an new error: "Read from
+  unallocated (rua): Attempting to read 4 bytes at address 0x486a8
+  which is 48 bytes before heap block of size 40 bytes at 0x486d8".
+  This is the debugger's way of saying, "You just used something in
+  a block of memory, but this isn't a block of memory I think you
+  should be using." Once the object was destructed and its memory
+  deallocated, the program could no longer (legally) use that
+  object, or that memory, again.</p>
+  <h1>Owning Up</h1>
+  <p>How can you avoid these kind of problems?</p>
+  <p>It's easy for the problems in the first four example programs.
+  Pay attention to Scott Meyers, and (for the first two examples)
+  pay attention to any warning messages you get.</p>
+  <p>What about the "dangling pointer" problem in the fifth
+  example? Programmers, in any language, need to design in terms of
+  object ownership. Something (or some collection of things) owns
+  an object. Ownership might be:</p>
+  <ul>
+    <li>transferred to something else (or some other collection of
+    things), or</li>
+    <li>"loaned" without transferring ownership, or</li>
+    <li>shared, by using reference counts or garbage
+    collection.</li>
+  </ul>
+  <p>What kind of "thing" can own an object?</p>
+  <ul>
+    <li>Another object, obviously.</li>
+    <li>A collection of objects; for example, all the smart
+    pointers that point to the owned object.</li>
+    <li>A function. When a function is called, it may assume
+    ownership (transferred) or not (loaned). Functions always own
+    their local variables, but not necessarily what those local
+    variables point or refer to.</li>
+  </ul>
+  <p>In our example, there was no clear ownership. Some function
+  created an object, and pointed two pointers at it. Who owns the
+  object? Probably the function, in which case, it should be
+  responsible for avoiding the problem somehow. It could have used
+  one "dumb" pointer (and explicitly zeroed it out after deletion)
+  instead of two, or used some sort of smart pointers.</p>
+  <p>In real life, it's never that simple, except sometimes in
+  retrospect. Objects can be passed from one module to one very
+  different module, written by other person or another
+  organization. Object ownership issues span equally long
+  chasms.</p>
+  <p>Any time you pass an object around, you always need to know
+  the answer to the ownership question. It's a simple issue,
+  sometimes with a simple answer, but never a question that
+  magically answers itself. There is no substitute for thought.</p>
+  <p>Thinking for yourself doesn't mean thinking by yourself,
+  however; there is some good existing work that can help you. Tom
+  Cargill wrote up a pattern language, "Localized Ownership," that
+  describes strategies for these alternatives. Scott Meyers also
+  addresses this in Item 13, "Use objects to manage resources," and
+  Item 14, "Think carefully about copying behavior in
+  resource-managing classes," in the third edition of <i>Effective
+  C++</i>. See References for details.</p>
+  <h1>No Smart Pointer Panacea</h1>
+  <p>Reference-counted smart pointers are very helpful in avoiding
+  these kinds of problems. With smart pointers, ownership belongs
+  to the set of smart pointers that point to the object. When the
+  last such smart pointer stops pointing to that object, the object
+  is deleted. That would certainly solve the problem we've seen
+  here.</p>
+  <p>But many programmers are just beginning to use smart pointers,
+  and just beginning to learn how to use them. Even with smart
+  pointers, you can still run into these kinds of problems ... if
+  you use smart pointers in dumb ways.</p>
+  <p>But that's another problem for another day.</p>
+  <h1>References</h1>
+  <p>Tom Cargill, "Localized Ownership: Managing Dynamic Objects in
+  C++"; in Vlissides, Coplien, and Kerth, <i>Pattern Languages of
+  Program Design 2</i>, 1996, Addison-Wesley.</p>
+  <p>Scott Meyers, <i>Effective C++, Third Edition: 55 Specific
+  Ways to Improve Your Programs and Designs</i>, 2005,
+  Addison-Wesley.</p>
+<!-- TOP OF SHARE YOUR OPINION -->
+  <h1>Share Your Opinion</h1>
+  <p>Discuss this article in the Articles Forum topic, <a href="http://www.artima.com/forums/flat.jsp?forum=226&amp;thread=196881">
+  "Pure Virtual Function Called": An Explanation</a>.</p>
+<!-- BOTTOM OF SHARE YOUR OPINION -->
+<a name="resources" id="resources">
+  <h1>Resources</h1></a>
+  <p>Scott Meyers’ home page:<br>
+  <a href="http://www.aristeia.com/">http://www.aristeia.com/</a></p>
+<!-- TOP OF ABOUT THE AUTHOR -->
+  <h1>About the Author</h1>
+  <p><a href="http://www.linkedin.com/in/psrchisholm">Paul S. R.
+  Chisholm</a> has been developing software for 25 years. He
+  started at AT&amp;T Bell Laboratories, and has since worked at
+  Ascend Communications / Lucent Technologies, Cisco Systems, and
+  three small startups you've probably never heard of. He lives and
+  works in New Jersey.</p>
+<!-- BOTTOM OF ABOUT THE AUTHOR -->
+
+<br clear="all">
+<p>
+</p><center>
+<div class="sc">
+<a href="https://www.artima.com/cppsource/index.html">The C++ Source</a>&nbsp;| 
+<a href="https://www.artima.com/groups/group.jsp?group=cpp">C++ Community News</a>&nbsp;| 
+<a href="https://www.artima.com/forums/flat.jsp?forum=226&amp;thread=196881">Discuss</a>&nbsp;| 
+<a href="mailto:?subject=" pure="" virtual="" function="" called":="" an="" explanation&body="%0AThe" c++="" source="" %0a"pure="" explanation="" %0aby="" paul="" s.="" r.="" chisholm="" %0a%0ahttps:="" www.artima.com="" cppsource="" pure_virtual.html"="">Email</a>&nbsp;| 
+Previous&nbsp;| 
+Next
+</div>
+</center>
+</div>
+<hr width="100%">
+<table width="50%" align="center">
+<tbody><tr>
+<td>
+<div class="horizontaltextadbox">
+<div class="adheadline">Sponsored Links</div>
+<div id="sponsoredlinks">
+</div>
+</div>
+</td>
+</tr>
+</tbody></table>
+<hr width="100%">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3911176865765226";
+google_alternate_color = "ffffff";
+google_ad_width = 728;
+google_ad_height = 15;
+google_ad_format = "728x15_0ads_al";
+google_ad_channel = "";
+google_color_border = "ffffff";
+google_color_bg = "FFFFFF";
+google_color_link = "003090";
+google_color_text = "000000";
+google_color_url = "666666";
+//--></script>
+<script type="text/javascript" src="./_Pure Virtual Function Called__ An Explanation_files/f.txt">
+</script>
+<br>
+<br>
+<!-- SiteSearch Google -->
+<form method="get" action="https://www.google.com/custom">
+<table border="0" bgcolor="#ffffff">
+<tbody><tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<a href="https://www.google.com/">
+<img src="./_Pure Virtual Function Called__ An Explanation_files/Logo_25wht.gif" border="0" alt="Google"></a>
+</td>
+<td nowrap="nowrap">
+<input type="hidden" name="domains" value="Artima.com">
+<input type="text" name="q" size="31" maxlength="255" value="">
+<input type="submit" name="sa" value="Search">
+</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td nowrap="nowrap">
+<font size="-1" color="#000000">
+<input type="radio" name="sitesearch" value=""> Web
+<input type="radio" name="sitesearch" value="Artima.com" checked="checked">Artima.com
+</font>&nbsp;&nbsp;
+<input type="hidden" name="client" value="pub-3911176865765226">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:FFFFFF;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:150;L:https://www.artima.com/images/artima150.gif;S:https://www.artima.com;FORID:1;">
+<input type="hidden" name="hl" value="en">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google -->
+</center>
+<div class="sp">
+<div style="text-align: center">
+<a href="https://www.artima.com/copyright.html">Copyright</a> © 1996-2019 Artima, Inc. All Rights Reserved. - <a href="https://www.artima.com/privacy.html">Privacy Policy</a> - <a href="https://www.artima.com/termsofuse.html">Terms of Use</a>
+</div>
+</div>
+<br>
+<script language="JavaScript" type="text/javascript">
+<!--
+function initBannerVarForZone(zone) {
+        initBannerVarForZoneWithScript(zone, 'adjs_modified');
+}
+
+function initBannerVarForZoneWithScript(zone, phpScript) {
+
+        if (!document.phpAds_used) document.phpAds_used = ',';
+        phpAds_random = new String (Math.random());
+        phpAds_random = phpAds_random.substring(2,11);
+
+        var nextScriptSrc = 'https://www.artima.com/zcr/' + phpScript + '.php?n=' +
+                phpAds_random  +
+                '&amp;what=zone:' + zone + '&amp;target=_top&amp;block=1&amp;blockcampaign=1' +
+                '&amp;exclude=' + document.phpAds_used;
+
+        document.write("<script language='JavaScript' type='text/javascript' src='");
+        document.write(nextScriptSrc);
+        document.write("'><\/script>");
+
+}
+
+function replaceDiv(divID) {
+        document.getElementById(divID).innerHTML = phpadsbanner;
+}
+-->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+initBannerVarForZone(1);
+-->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+replaceDiv('topbanner');
+-->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+initBannerVarForZoneWithScript(4, 'textman');
+-->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+replaceDiv('sponsoredlinks');
+-->
+</script>
+
+
+</body></html>

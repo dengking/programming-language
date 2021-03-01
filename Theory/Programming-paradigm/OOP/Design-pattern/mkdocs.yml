@@ -1,0 +1,12 @@
+nav:
+    - Introduction: index.md
+    - Books: Books
+    - Goal: Goal
+    - Principle: Principle
+    - Creational-pattern: Creational-pattern
+    - Behavioral-pattern: Behavioral-pattern
+    - Structural-pattern: Structural-pattern
+    - Dispose-pattern: Dispose-pattern
+    - Fluent-API: Fluent-API
+    - Computation-on-structure: Computation-on-structure
+    - Summary-of-design-pattern: Summary-of-design-pattern.md

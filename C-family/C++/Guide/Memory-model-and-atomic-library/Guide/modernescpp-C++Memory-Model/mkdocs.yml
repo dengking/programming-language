@@ -1,0 +1,5 @@
+nav:
+    - 1-C++Memory-Model.md: 1-C++Memory-Model.md
+    - 2-Sequential-Consistency: 2-Sequential-Consistency.md
+    - Acquire-Release-Fences: Acquire-Release-Fences
+    - Acquire-Release-Semantic: Acquire-Release-Semantic

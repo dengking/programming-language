@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Has-a: Has-a.md
+    - Delegation-and-forwarding: Delegation-and-forwarding

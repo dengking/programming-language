@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Library-gcpp: Library-gcpp
+    - Effective-Concurrency-Serial: Effective-Concurrency-Serial

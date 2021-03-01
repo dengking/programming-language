@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - Programming-language-Memory-model: Programming-language-Memory-model
+###################################################syntax相关内容，静态的，compiler处理的################################################
+    # 基本上所有的programming language都会涉及到Syntax
+    - Syntax: Syntax    
+    

@@ -1,0 +1,144 @@
+.cpp-section
+{
+	padding: 8px 0px 0px 0px !important;
+	margin-bottom: 0.5em !important;
+	overflow: hidden;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: 'Helvetica', sans-serif;
+	letter-spacing: 0.25px;
+}
+
+.cpp-topline
+{
+	border-top: 1px solid #ddd;
+}
+
+.cpp-bottomline
+{
+	border-bottom: 1px solid #ddd;
+}
+
+.cpp-note-header
+{
+	font-weight: bold;
+	padding: 0px 0px 1em 0px !important;
+}
+
+.cpp-note
+{
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: #999;
+	border-radius: 5px;
+	padding: 0px 8px 0px 8px !important;
+	margin: 1em 0 1em 0;
+	overflow: hidden;
+	clear: both;
+}
+
+
+.cpp-article-header
+{
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: #999;
+	border-radius: 5px;
+	padding: 0px 8px 0px 8px !important;
+	margin: 1em 0 1em 0;
+	overflow: hidden;
+}
+
+.cpp-lightgraybackground
+{
+	background-color: #EEE;
+}
+
+.cpp-lightgreenbackground
+{
+	background-color: #E6FFE6;
+}
+
+.cpp-lightredbackground
+{
+	background-color: #FFE6E6;
+}
+
+.cpp-lightbluebackground
+{
+	background-color: #E6E6FF;
+}
+
+.cpp-lightyellowbackground
+{
+	background-color: #FFFFDD;
+}
+
+.cpp-lightbluegradient
+{
+	padding: 2px 4px 2px 4px !important;
+	background-image: linear-gradient(90deg, #cceeff, #ffffff 90%);
+}
+
+.cpp-definition
+{
+	font-weight: bold;
+}
+
+
+p.quiz-header
+{
+	font-weight: bold;
+}
+
+div.quiz
+{
+	padding-bottom: 8px !important;
+	border-bottom: 1px solid #ddd;
+}
+
+div.topline
+{
+	padding-top: 8px !important;
+	border-bottom: 1px solid #ddd;
+}
+
+
+div.solution_div
+{
+	border-left: 3px solid #39348F;
+	padding-left: 8px;
+}
+
+td.indented
+{
+    padding: 0 0 0 40px !important;
+}
+
+div.yellowBubble
+{
+	background:linear-gradient(#FFFF66,#CCCC00);border-radius:8px;padding-left:10px;padding-right:10px;padding-top:2px;padding-bottom:2px;font-size:8pt; text-align:center;
+}
+
+div.blueBubble
+{
+	background:linear-gradient(#94D0F8,#7AAEDA);border-radius:8px;padding-left:10px;padding-right:10px;padding-top:2px;padding-bottom:2px;font-size:8pt; color:#ffffff; text-align:center
+}
+
+div.greenBubble
+{
+	background:linear-gradient(#66FF66,#00CC00);border-radius:8px;padding-left:10px;padding-right:10px;padding-top:2px;padding-bottom:2px;font-size:8pt; color:#ffffff; text-align:center
+}
+
+.cpp-table-wrapper
+{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.cpp-image-wrapper
+{
+	overflow-x: auto;
+	display: block;
+}

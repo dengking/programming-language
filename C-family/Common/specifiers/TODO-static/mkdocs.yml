@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - Static-function: Static-function.md
+    - Static-in-header-file: Static-in-header-file.md
+    - C-static: C-static.md
+    - How-compiler-and-linker-resolve-static: How-compiler-and-linker-resolve-static.md

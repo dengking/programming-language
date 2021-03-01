@@ -1,0 +1,16 @@
+nav:
+    - Standard-library: Standard-library
+    - A-list-of-open-source-Cpp-libraries: A-list-of-open-source-Cpp-libraries.md
+    - Boost: Boost
+    - Communication: Communication
+    - Plugin-system: Plugin-system.md
+    - Abseil: Abseil
+    - Log: Log
+    - Math: Math
+    - Partow: Partow
+    - Configuration: Configuration
+    - Unit-testing: Unit-testing
+    - idealvin-co: idealvin-co
+    - chromium: chromium
+    - macmade: macmade
+    - Folly: Folly

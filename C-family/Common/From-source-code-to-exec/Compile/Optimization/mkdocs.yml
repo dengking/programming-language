@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - Copy-elision: Copy-elision
+    - Optimization-in-function-return: Optimization-in-function-return
+    - inline: inline
+    - Prevent-optimization: Prevent-optimization

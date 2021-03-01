@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Resource-ownership: Resource-ownership
+    - Object-based-resource-management: Object-based-resource-management
+    - CppCoreGuidelines-Resource-Management: CppCoreGuidelines-Resource-Management

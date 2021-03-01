@@ -1,0 +1,4 @@
+1. binary protocol、如何发生二进制结构体、二进制协议VS字符协议，bit stream VS char stream，字符型设备VS子节型设备
+2. 反射
+3. python binary parser
+4. c++ swap and copy-and-swap idiom

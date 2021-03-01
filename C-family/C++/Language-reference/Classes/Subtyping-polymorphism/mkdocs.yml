@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+########## 继承是OOP非常重要的内容##########    
+    - Inheritance: Inheritance
+    - TODO-Implementation: TODO-Implementation
+    - Dispatch: Dispatch
+    - TODO-Virtual-class: TODO-Virtual-class

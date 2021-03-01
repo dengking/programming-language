@@ -1,4 +1,4 @@
 nav:
-    - Reflection: Reflection.md
+    - Introduction: index.md
     - Type-introspection: Type-introspection.md
     - Summary: Summary.md

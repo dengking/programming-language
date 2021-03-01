@@ -1,0 +1,5 @@
+https://stackoverflow.com/questions/18613770/stl-container-as-a-template-parameter
+
+http://www.cs.technion.ac.il/users/yechiel/c++-faq/template-of-template.html
+
+https://stackoverflow.com/questions/12905951/why-cant-namespaces-be-template-parameters

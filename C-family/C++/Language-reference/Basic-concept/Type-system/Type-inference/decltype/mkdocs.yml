@@ -1,0 +1,4 @@
+nav:
+    - decltype: index.md
+    - std-declval: std-declval
+    - Application: Application.md

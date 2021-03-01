@@ -1,5 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Object: Object.md
-    - Object-storage: Object-storage.md
-    - Memory-model: Memory-model

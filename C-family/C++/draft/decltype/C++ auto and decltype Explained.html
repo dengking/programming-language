@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0062)http://thbecker.net/articles/auto_and_decltype/section_01.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script type="text/javascript">
+<!--
+function tact_me_con(){
+ // To confuse the crawlers
+ var a, b1, b2, b3 ,c ,d ,e, f, g
+ // To confuse the crawlers
+ a='<a href=\"mai'
+ // To confuse the crawlers
+ b1='dec'
+ // To confuse the crawlers
+ b2='l'
+ // To confuse the crawlers
+ b3='type'
+ // To confuse the crawlers
+ c='\">'
+ // To confuse the crawlers
+ a+='lto:'
+ // To confuse the crawlers
+ b3+='@'
+ // To confuse the crawlers
+ e='</a>'
+ // To confuse the crawlers
+ b3+='thbe'
+ // To confuse the crawlers
+ b3+='cker.net'
+ // To confuse the crawlers
+ d='contact'
+ // To confuse the crawlers
+ f=''
+ if(f)
+   g = 'blahblahblah'
+ else
+   g = a+b1+b2+b3+c+d+e
+ document.write(g)
+}
+//-->
+</script>
+
+
+
+<meta http-equiv="PRAGMA" content="NO-CACHE">
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+<meta http-equiv="EXPIRES" content="-1">
+
+<title>
+C++ auto and decltype Explained
+</title>
+
+<style>
+body, td, center, p, div { font-family: arial, helvetica, sans-serif; font-size: 16px;}
+a:focus, a:active {
+outline: none;
+-moz-outline-style: none;
+-webkit-outline-style: none;
+}
+</style>
+
+<link type="text/css" href="./C++ auto and decltype Explained_files/all_article_pages.css" rel="stylesheet">
+
+</head>
+
+<body lang="EN-US">
+
+<!-- Outer container defines width and centering -->
+<div style="margin: 0 auto 0 auto; width: 680px;">
+
+  <a href="http://www.greaterthanzero.com/" target="_blank">
+<div id="thb-banner-ad">
+
+    <div id="thb-ad-body" class="thb-ad-body-verbose">
+      Is your 401k bleeding money by not offering low-cost index funds?
+      Now there is a way to find out.
+    </div>
+
+<div id="thb-logo-with-company-name">
+  <img src="./C++ auto and decltype Explained_files/gtz-logo-small.gif">
+  <span class="thb-first-part-of-company-name"> GreaterThanZero</span><span class="thb-second-part-of-company-name">.com </span>
+</div>
+</div>
+</a>
+
+<hr>
+
+<a name="top"></a>
+
+<div class="thb-header-and-footer">
+  <a href="http://thbecker.net/home.htm"><img src="./C++ auto and decltype Explained_files/home.png"></a>
+  &nbsp;
+  <a href="http://thbecker.net/start_page_showing_articles.html"><img src="./C++ auto and decltype Explained_files/up.png"></a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_02.html"><img src="./C++ auto and decltype Explained_files/next.png"></a>
+
+<div class="thb-page-links thb-page-links-first-and-last">
+  1
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_02.html">2</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_03.html">3</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_04.html">4</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_05.html">5</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_06.html">6</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_07.html">7</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_08.html">8</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_09.html">9</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_10.html">10</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_11.html">11</a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_12.html">12</a>
+</div>
+</div>
+
+<hr>
+
+<h2>
+C++ auto and decltype Explained
+</h2>
+
+By Thomas Becker&nbsp;&nbsp;
+<a href="http://www.greaterthanzero.com/about" target="_blank">about me</a>&nbsp;&nbsp;
+<script type="text/javascript">
+<!--
+tact_me_con()
+//-->
+</script><a href="mailto:decltype@thbecker.net">contact</a>
+
+<br>&nbsp;<br>
+Last updated: May 2013
+
+<hr>
+
+<h3>Contents</h3>
+
+<ol>
+  <li><a href="http://thbecker.net/articles/auto_and_decltype/section_01.html#section_01">Introduction</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_02.html">The <code>auto</code> Keyword: The Basics</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_03.html">The <code>auto</code> Keyword: The Rest of the Story</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_04.html">When <code>auto</code> Is Not a Luxury</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_05.html">The <code>decltype</code> keyword: The Basics</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_06.html">How <code>decltype</code> Deduces the Type of an Expression: Case 1</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_07.html">How <code>decltype</code> Deduces the Type of an Expression: Case 2</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_08.html">An Example to Put You on Guard</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_09.html">Miscellaneous Properties of <code>decltype</code></a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_10.html">New in C++14</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_11.html">Summary and Epilogue</a>
+  </li><li><a href="http://thbecker.net/articles/auto_and_decltype/section_12.html">Acknowledgments</a>
+</li></ol>
+
+<hr>
+
+<h4>
+<a name="section_01"></a>Introduction
+</h4>
+
+<table>
+  <tbody><tr>
+    <td>
+
+      Most of the language features that were introduced with the C++11 Standard
+      are easy to learn, and the benefit that they provide is quite obvious. Looking
+      at them doesn't make you think, "Oh no, now I'm going to have to learn this."
+      Instead, your immediate reaction is, "Oh great, I've always wanted that." In some
+      cases, like lambdas, the syntax is a bit hairy, but that's of course not
+      much of a problem. For me, the one big exception to all this were rvalue references.
+      I had a really hard time wrapping my head around those. Therefore, I did what I always do
+      when I need to understand something: I scraped up all the information 
+      I could get my hands on, then wrote an
+      <a href="http://thbecker.net/articles/rvalue_references/section_01.html" target="_blank">
+      article on the subject.
+      </a>
+      It turned out that a lot of people were having the same problem,
+      and the article helped quite a few of them. Great, everybody's happy.
+
+      <p>
+      A while later, sometime in 2012, I noticed that there was another feature, or
+      rather, a pair of features, in C++11
+      that I had not fully understood, namely, the <code>auto</code> and <code>decltype</code>
+      keywords. With <code>auto</code> and <code>decltype</code>, unlike rvalue references,
+      the problem is not that they are difficult to grasp. On the contrary, the problem is that
+      the idea is deceptively easy, yet there are hidden subtleties that can trip you up.
+      </p>
+
+      Let's start with a good look at the <code>auto</code> keyword.
+      
+</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<div class="thb-header-and-footer thb-footer">
+  <a href="http://thbecker.net/home.htm"><img src="./C++ auto and decltype Explained_files/home.png"></a>
+  &nbsp;
+  <a href="http://thbecker.net/start_page_showing_articles.html"><img src="./C++ auto and decltype Explained_files/up.png"></a>
+  <a href="http://thbecker.net/articles/auto_and_decltype/section_02.html"><img src="./C++ auto and decltype Explained_files/next.png"></a>
+
+  <div class="thb-page-links thb-page-links-first-and-last">
+    1
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_02.html">2</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_03.html">3</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_04.html">4</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_05.html">5</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_06.html">6</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_07.html">7</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_08.html">8</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_09.html">9</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_10.html">10</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_11.html">11</a>
+    <a href="http://thbecker.net/articles/auto_and_decltype/section_12.html">12</a>
+  </div>
+
+  <a href="http://twitter.com/intent/user?screen_name=thomasintahoe" target="_blank">
+    <img src="./C++ auto and decltype Explained_files/follow-me-on-twitter-small.png" alt="Follow me on Twitter" class="thb-follow-me-on-twitter-button">
+  </a>
+</div>
+
+</div>
+<!-- end outer container -->
+
+
+
+</body></html>

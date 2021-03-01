@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - Clear-and-minimize: Clear-and-minimize.md
+    - Shrink-to-fit: Shrink-to-fit.md
+    - Erase_if: Erase_if
+    - Computation-on-structure: Computation-on-structure
+    

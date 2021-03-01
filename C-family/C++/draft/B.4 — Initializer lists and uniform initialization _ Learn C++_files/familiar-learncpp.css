@@ -1,0 +1,159 @@
+/*
+Name: Familiar Learncpp
+Description: Looks like SyntaxHighlighter.
+Version: 1.0
+Author: Aram Kocharyan
+URL: http://aramk.com/
+*/
+.crayon-theme-familiar-learncpp {
+	border-width: 1px !important;
+	text-shadow: none !important;
+}
+.crayon-theme-familiar-learncpp-inline {
+	border-width: 1px !important;
+	border-color: #ddd !important;
+	border-style: solid !important;
+	background: #fafafa !important;
+}
+.crayon-theme-familiar-learncpp .crayon-table .crayon-nums {
+	border-right-width: 3px !important;
+	border-right-style: solid !important;
+	border-right-color: #6ce26c !important;
+	padding-right: 5px !important;
+	color: #afafaf !important;
+}
+.crayon-theme-familiar-learncpp .crayon-striped-line {
+	background: #f9f9f9 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-striped-num {
+	color: #afafaf !important;
+}
+.crayon-theme-familiar-learncpp .crayon-line {
+	padding-left: 10px !important;
+}
+.crayon-theme-familiar-learncpp .crayon-marked-line {
+	background: #fffee2 !important;
+	border-width: 1px !important;
+	border-color: #e9e579 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-marked-num {
+	border-width: 1px !important;
+	color: #333333 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-marked-line.crayon-striped-line {
+	background: #faf8d1 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-marked-num.crayon-striped-num {
+	color: #333333 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-marked-line.crayon-top {
+}
+.crayon-theme-familiar-learncpp .crayon-marked-num.crayon-top {
+}
+.crayon-theme-familiar-learncpp .crayon-marked-line.crayon-bottom {
+}
+.crayon-theme-familiar-learncpp .crayon-marked-num.crayon-bottom {
+}
+.crayon-theme-familiar-learncpp .crayon-info {
+	background: #faf9d7 !important;
+	border-bottom-width: 1px !important;
+	border-bottom-color: #b1af5e !important;
+	border-bottom-style: solid !important;
+	color: #7e7d34 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-toolbar {
+	background: #eee !important;
+	border-bottom-width: 1px !important;
+	border-bottom-color: #dedede !important;
+	border-bottom-style: solid !important;
+}
+.crayon-theme-familiar-learncpp .crayon-toolbar > div {
+	float: left !important;
+}
+.crayon-theme-familiar-learncpp .crayon-toolbar .crayon-tools {
+	float: right !important;
+}
+.crayon-theme-familiar-learncpp .crayon-title {
+	color: #333 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-language {
+	color: #999 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-button {
+	background-color: transparent !important;
+}
+.crayon-theme-familiar-learncpp .crayon-button:hover {
+	background-color: #EEE !important;
+	color: #666;
+}
+.crayon-theme-familiar-learncpp .crayon-button.crayon-pressed:hover {
+	background-color: #EEE !important;
+	color: #666;
+}
+.crayon-theme-familiar-learncpp .crayon-button.crayon-pressed {
+	background-color: #BCBCBC !important;
+	color: #FFF;
+}
+.crayon-theme-familiar-learncpp .crayon-button.crayon-pressed:active {
+	background-color: #BCBCBC !important;
+	color: #FFF;
+}
+.crayon-theme-familiar-learncpp .crayon-button:active {
+	background-color: #BCBCBC !important;
+	color: #FFF;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-c {
+	color: #008800 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-s {
+	color: #CE0000 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-p {
+	color: #b85c00 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-ta {
+	color: #FF0000 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-k {
+	color: #800080 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-st {
+	color: #800080 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-r {
+	color: #800080 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-t {
+	color: #800080 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-m {
+	color: #800080 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-i {
+	color: #000 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-e {
+	color: #004ed0 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-v {
+	color: #002D7A !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-cn {
+	color: #002D7A !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-o {
+	color: #006fe0 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-sy {
+	color: #333 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-n {
+	color: #666 !important;
+	font-style: italic !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-f {
+	color: #999 !important;
+}
+.crayon-theme-familiar-learncpp .crayon-pre .crayon-h {
+	color: #006fe0 !important;
+}

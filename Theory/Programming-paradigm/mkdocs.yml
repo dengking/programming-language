@@ -1,7 +1,28 @@
 nav:
     - Introduction: index.md
     - Programming-paradigm: Programming-paradigm.md
-    - Object-oriented-programming: Object-oriented-programming
+    
+    - Common: Common
+
+    ########## 面向对象编程##########    
+    - OOP: OOP
+    ########## 面向切面编程########    
     - Aspect-oriented-programming: Aspect-oriented-programming
+    ########## 函数式编程##########
     - Functional-programming: Functional-programming
+    ########## 事件驱动编程##########    
     - Event-driven-programming: Event-driven-programming
+    ########## 泛型编程##########
+    - Generic-programming: Generic-programming
+    ########## 元编程##########
+    - Metaprogramming: Metaprogramming
+    
+    - Declarative-programming: Declarative-programming
+    
+    # 下面三种是密切相关的
+    - Expression-oriented-programming: Expression-oriented-programming
+    - Symbolic-programming: Symbolic-programming
+    - Dataflow-programming: Dataflow-programming
+    
+    - Comparison: Comparison
+    - Domain-specific-programming-paradigm: Domain-specific-programming-paradigm

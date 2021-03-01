@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Function-objects: Function-objects
+    - Wrapper: Wrapper
+    - Member-function-as-first-class-function: Member-function-as-first-class-function

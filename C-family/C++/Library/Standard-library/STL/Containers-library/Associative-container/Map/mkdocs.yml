@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Custom-type-as-key: Custom-type-as-key
+    - Operations: Operations

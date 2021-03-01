@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Unpacking-Tuple: Unpacking-Tuple.md
+    - murrayc-Modern-C++Variadic-template-parameters-and-tuples: murrayc-Modern-C++Variadic-template-parameters-and-tuples

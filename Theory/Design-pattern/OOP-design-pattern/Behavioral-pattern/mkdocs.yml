@@ -1,7 +1,0 @@
-nav:
-    - Visitor-pattern: Visitor-pattern
-    - Iterator-pattern: Iterator-pattern
-    - Observer-pattern: Observer-pattern
-    - Publish-subscribe-pattern: Publish-subscribe-pattern
-    - Strategy-pattern: Strategy-pattern
-    - State-pattern: State-pattern

@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - std-atomic_flag-and-spinlock: std-atomic_flag-and-spinlock

@@ -1,0 +1,9 @@
+nav:
+    - Introduction: index.md
+    - boost-Lessons-Learned-from-Specifying-Exception-Safety-for-STL: boost-Lessons-Learned-from-Specifying-Exception-Safety-for-STL
+    - wikipedia-Exception-safety: wikipedia-Exception-safety
+    - STL-exception-safety: STL-exception-safety
+    - Level-of-exception-safety: Level-of-exception-safety
+    - No-throw-guarantee: No-throw-guarantee
+    - Strong-exception-safety: Strong-exception-safety
+    - TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know: TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know

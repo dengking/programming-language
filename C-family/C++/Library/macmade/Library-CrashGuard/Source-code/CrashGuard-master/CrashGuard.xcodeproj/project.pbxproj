@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		050B83E41EB919CB0090EA12 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 050B83E31EB919CB0090EA12 /* libc++.tbd */; };
+		055FBCAF1E83D98D001301A9 /* CrashGuard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055FBCAE1E83D98D001301A9 /* CrashGuard.cpp */; };
+		055FBCB71E83D9D7001301A9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055FBCB61E83D9D7001301A9 /* main.cpp */; };
+		055FBCBD1E83DB29001301A9 /* libCrashGuard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC8A471E81E854007233F2 /* libCrashGuard.a */; };
+		055FBCC21E83DE74001301A9 /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055FBCBF1E83DD00001301A9 /* Handler.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		055FBCBB1E83DB25001301A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05BD894A1A13FF4700A43CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05EC8A461E81E854007233F2;
+			remoteInfo = CrashGuard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		055FBCB21E83D9D7001301A9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		050B83E31EB919CB0090EA12 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		05110D041C1F121C00EE6851 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		05110D051C1F121C00EE6851 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		055FBCAD1E83D97E001301A9 /* CrashGuard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CrashGuard.hpp; sourceTree = "<group>"; };
+		055FBCAE1E83D98D001301A9 /* CrashGuard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CrashGuard.cpp; sourceTree = "<group>"; };
+		055FBCB41E83D9D7001301A9 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		055FBCB61E83D9D7001301A9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		055FBCBF1E83DD00001301A9 /* Handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Handler.cpp; sourceTree = "<group>"; };
+		055FBCC11E83DD07001301A9 /* Handler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Handler.hpp; sourceTree = "<group>"; };
+		05DBA16F201E436000638A44 /* Release - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release - ccache.xcconfig"; sourceTree = "<group>"; };
+		05DBA170201E436000638A44 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		05DBA171201E436000638A44 /* Debug - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug - ccache.xcconfig"; sourceTree = "<group>"; };
+		05DBA172201E436000638A44 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		05DBA173201E436000638A44 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		05DBA174201E436000638A44 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		05DBA176201E436000638A44 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		05DBA177201E436000638A44 /* Architectures.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Architectures.xcconfig; sourceTree = "<group>"; };
+		05DBA179201E436000638A44 /* Issues.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Issues.xcconfig; sourceTree = "<group>"; };
+		05DBA17B201E436000638A44 /* Apple-APIs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Apple-APIs.xcconfig"; sourceTree = "<group>"; };
+		05DBA17C201E436000638A44 /* Generic-Issues.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Generic-Issues.xcconfig"; sourceTree = "<group>"; };
+		05DBA17D201E436000638A44 /* Security.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Security.xcconfig; sourceTree = "<group>"; };
+		05DBA17E201E436000638A44 /* Objective-C.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Objective-C.xcconfig"; sourceTree = "<group>"; };
+		05DBA17F201E436000638A44 /* Analysis-Policy.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Analysis-Policy.xcconfig"; sourceTree = "<group>"; };
+		05DBA180201E436000638A44 /* Deployment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Deployment.xcconfig; sourceTree = "<group>"; };
+		05DBA181201E436000638A44 /* Build-Options.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Build-Options.xcconfig"; sourceTree = "<group>"; };
+		05DBA182201E436000638A44 /* Swift-Compiler.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Swift-Compiler.xcconfig"; sourceTree = "<group>"; };
+		05DBA183201E436000638A44 /* Static-Analyzer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Static-Analyzer.xcconfig"; sourceTree = "<group>"; };
+		05DBA185201E436000638A44 /* Warnings-Policies.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Warnings-Policies.xcconfig"; sourceTree = "<group>"; };
+		05DBA186201E436000638A44 /* Code-Generation.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Code-Generation.xcconfig"; sourceTree = "<group>"; };
+		05DBA187201E436000638A44 /* Language.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Language.xcconfig; sourceTree = "<group>"; };
+		05DBA188201E436000638A44 /* General.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = General.xcconfig; sourceTree = "<group>"; };
+		05DBA189201E436000638A44 /* Search-Paths.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Search-Paths.xcconfig"; sourceTree = "<group>"; };
+		05DBA18A201E436000638A44 /* Apple-LLVM.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Apple-LLVM.xcconfig"; sourceTree = "<group>"; };
+		05DBA18D201E436000638A44 /* Modules.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Modules.xcconfig; sourceTree = "<group>"; };
+		05DBA18E201E436000638A44 /* Objective-C.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Objective-C.xcconfig"; sourceTree = "<group>"; };
+		05DBA18F201E436000638A44 /* C++.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "C++.xcconfig"; sourceTree = "<group>"; };
+		05DBA190201E436000638A44 /* Code-Generation.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Code-Generation.xcconfig"; sourceTree = "<group>"; };
+		05DBA191201E436000638A44 /* Address-Sanitizer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Address-Sanitizer.xcconfig"; sourceTree = "<group>"; };
+		05DBA192201E436000638A44 /* Language.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Language.xcconfig; sourceTree = "<group>"; };
+		05DBA193201E436000638A44 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		05DBA194201E436000638A44 /* Undefined-Behavior-Sanitizer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Undefined-Behavior-Sanitizer.xcconfig"; sourceTree = "<group>"; };
+		05DBA195201E436000638A44 /* Warning-Policies.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Warning-Policies.xcconfig"; sourceTree = "<group>"; };
+		05DBA197201E436000638A44 /* Objective-C-ARC.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Objective-C-ARC.xcconfig"; sourceTree = "<group>"; };
+		05DBA198201E436000638A44 /* Objective-C.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Objective-C.xcconfig"; sourceTree = "<group>"; };
+		05DBA199201E436000638A44 /* C++.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "C++.xcconfig"; sourceTree = "<group>"; };
+		05DBA19A201E436000638A44 /* All-Languages.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "All-Languages.xcconfig"; sourceTree = "<group>"; };
+		05DBA19B201E436000638A44 /* Preprocessing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Preprocessing.xcconfig; sourceTree = "<group>"; };
+		05DBA19E201E436000638A44 /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
+		05DBA19F201E436000638A44 /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
+		05EC8A471E81E854007233F2 /* libCrashGuard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCrashGuard.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		055FBCB11E83D9D7001301A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				050B83E41EB919CB0090EA12 /* libc++.tbd in Frameworks */,
+				055FBCBD1E83DB29001301A9 /* libCrashGuard.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EC8A441E81E854007233F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		050B83E21EB919CB0090EA12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				050B83E31EB919CB0090EA12 /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		055FBCA91E83D88A001301A9 /* CrashGuard */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCAA1E83D88A001301A9 /* include */,
+				055FBCAC1E83D88A001301A9 /* source */,
+			);
+			path = CrashGuard;
+			sourceTree = "<group>";
+		};
+		055FBCAA1E83D88A001301A9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCAB1E83D88A001301A9 /* XS */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		055FBCAB1E83D88A001301A9 /* XS */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCC01E83DD07001301A9 /* CrashGuard */,
+				055FBCAD1E83D97E001301A9 /* CrashGuard.hpp */,
+			);
+			path = XS;
+			sourceTree = "<group>";
+		};
+		055FBCAC1E83D88A001301A9 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCBE1E83DD00001301A9 /* CrashGuard */,
+				055FBCAE1E83D98D001301A9 /* CrashGuard.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		055FBCB51E83D9D7001301A9 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCB61E83D9D7001301A9 /* main.cpp */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		055FBCBE1E83DD00001301A9 /* CrashGuard */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCBF1E83DD00001301A9 /* Handler.cpp */,
+			);
+			path = CrashGuard;
+			sourceTree = "<group>";
+		};
+		055FBCC01E83DD07001301A9 /* CrashGuard */ = {
+			isa = PBXGroup;
+			children = (
+				055FBCC11E83DD07001301A9 /* Handler.hpp */,
+			);
+			path = CrashGuard;
+			sourceTree = "<group>";
+		};
+		05BD89491A13FF4700A43CD8 = {
+			isa = PBXGroup;
+			children = (
+				05110D041C1F121C00EE6851 /* LICENSE */,
+				05110D051C1F121C00EE6851 /* README.md */,
+				05DBA16E201E436000638A44 /* xcconfig */,
+				055FBCA91E83D88A001301A9 /* CrashGuard */,
+				055FBCB51E83D9D7001301A9 /* Test */,
+				05BD89531A13FF4700A43CD8 /* Products */,
+				050B83E21EB919CB0090EA12 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		05BD89531A13FF4700A43CD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05EC8A471E81E854007233F2 /* libCrashGuard.a */,
+				055FBCB41E83D9D7001301A9 /* Test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05DBA16E201E436000638A44 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA16F201E436000638A44 /* Release - ccache.xcconfig */,
+				05DBA170201E436000638A44 /* Common.xcconfig */,
+				05DBA171201E436000638A44 /* Debug - ccache.xcconfig */,
+				05DBA172201E436000638A44 /* Debug.xcconfig */,
+				05DBA173201E436000638A44 /* Release.xcconfig */,
+				05DBA174201E436000638A44 /* README.md */,
+				05DBA175201E436000638A44 /* Common */,
+				05DBA19D201E436000638A44 /* Scripts */,
+			);
+			name = xcconfig;
+			path = Submodules/xcconfig;
+			sourceTree = "<group>";
+		};
+		05DBA175201E436000638A44 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA176201E436000638A44 /* Signing.xcconfig */,
+				05DBA177201E436000638A44 /* Architectures.xcconfig */,
+				05DBA178201E436000638A44 /* Static-Analyzer */,
+				05DBA180201E436000638A44 /* Deployment.xcconfig */,
+				05DBA181201E436000638A44 /* Build-Options.xcconfig */,
+				05DBA182201E436000638A44 /* Swift-Compiler.xcconfig */,
+				05DBA183201E436000638A44 /* Static-Analyzer.xcconfig */,
+				05DBA184201E436000638A44 /* Swift-Compiler */,
+				05DBA189201E436000638A44 /* Search-Paths.xcconfig */,
+				05DBA18A201E436000638A44 /* Apple-LLVM.xcconfig */,
+				05DBA18B201E436000638A44 /* Apple-LLVM */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		05DBA178201E436000638A44 /* Static-Analyzer */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA179201E436000638A44 /* Issues.xcconfig */,
+				05DBA17A201E436000638A44 /* Issues */,
+			);
+			path = "Static-Analyzer";
+			sourceTree = "<group>";
+		};
+		05DBA17A201E436000638A44 /* Issues */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA17B201E436000638A44 /* Apple-APIs.xcconfig */,
+				05DBA17C201E436000638A44 /* Generic-Issues.xcconfig */,
+				05DBA17D201E436000638A44 /* Security.xcconfig */,
+				05DBA17E201E436000638A44 /* Objective-C.xcconfig */,
+				05DBA17F201E436000638A44 /* Analysis-Policy.xcconfig */,
+			);
+			path = Issues;
+			sourceTree = "<group>";
+		};
+		05DBA184201E436000638A44 /* Swift-Compiler */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA185201E436000638A44 /* Warnings-Policies.xcconfig */,
+				05DBA186201E436000638A44 /* Code-Generation.xcconfig */,
+				05DBA187201E436000638A44 /* Language.xcconfig */,
+				05DBA188201E436000638A44 /* General.xcconfig */,
+			);
+			path = "Swift-Compiler";
+			sourceTree = "<group>";
+		};
+		05DBA18B201E436000638A44 /* Apple-LLVM */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA18C201E436000638A44 /* Language */,
+				05DBA190201E436000638A44 /* Code-Generation.xcconfig */,
+				05DBA191201E436000638A44 /* Address-Sanitizer.xcconfig */,
+				05DBA192201E436000638A44 /* Language.xcconfig */,
+				05DBA193201E436000638A44 /* Warnings.xcconfig */,
+				05DBA194201E436000638A44 /* Undefined-Behavior-Sanitizer.xcconfig */,
+				05DBA195201E436000638A44 /* Warning-Policies.xcconfig */,
+				05DBA196201E436000638A44 /* Warnings */,
+				05DBA19B201E436000638A44 /* Preprocessing.xcconfig */,
+			);
+			path = "Apple-LLVM";
+			sourceTree = "<group>";
+		};
+		05DBA18C201E436000638A44 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA18D201E436000638A44 /* Modules.xcconfig */,
+				05DBA18E201E436000638A44 /* Objective-C.xcconfig */,
+				05DBA18F201E436000638A44 /* C++.xcconfig */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		05DBA196201E436000638A44 /* Warnings */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA197201E436000638A44 /* Objective-C-ARC.xcconfig */,
+				05DBA198201E436000638A44 /* Objective-C.xcconfig */,
+				05DBA199201E436000638A44 /* C++.xcconfig */,
+				05DBA19A201E436000638A44 /* All-Languages.xcconfig */,
+			);
+			path = Warnings;
+			sourceTree = "<group>";
+		};
+		05DBA19D201E436000638A44 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				05DBA19E201E436000638A44 /* ccache-config.sh */,
+				05DBA19F201E436000638A44 /* ccache.sh */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		05EC8A451E81E854007233F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		055FBCB31E83D9D7001301A9 /* Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 055FBCB81E83D9D7001301A9 /* Build configuration list for PBXNativeTarget "Test" */;
+			buildPhases = (
+				055FBCB01E83D9D7001301A9 /* Sources */,
+				055FBCB11E83D9D7001301A9 /* Frameworks */,
+				055FBCB21E83D9D7001301A9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				055FBCBC1E83DB25001301A9 /* PBXTargetDependency */,
+			);
+			name = Test;
+			productName = Test;
+			productReference = 055FBCB41E83D9D7001301A9 /* Test */;
+			productType = "com.apple.product-type.tool";
+		};
+		05EC8A461E81E854007233F2 /* CrashGuard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EC8A551E81E854007233F2 /* Build configuration list for PBXNativeTarget "CrashGuard" */;
+			buildPhases = (
+				05EC8A431E81E854007233F2 /* Sources */,
+				05EC8A441E81E854007233F2 /* Frameworks */,
+				05EC8A451E81E854007233F2 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrashGuard;
+			productName = CPPAtomic;
+			productReference = 05EC8A471E81E854007233F2 /* libCrashGuard.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05BD894A1A13FF4700A43CD8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "XS-Labs";
+				TargetAttributes = {
+					055FBCB31E83D9D7001301A9 = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = 326Y53CJMD;
+						ProvisioningStyle = Automatic;
+					};
+					05EC8A461E81E854007233F2 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 326Y53CJMD;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 05BD894D1A13FF4700A43CD8 /* Build configuration list for PBXProject "CrashGuard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05BD89491A13FF4700A43CD8;
+			productRefGroup = 05BD89531A13FF4700A43CD8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05EC8A461E81E854007233F2 /* CrashGuard */,
+				055FBCB31E83D9D7001301A9 /* Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		055FBCB01E83D9D7001301A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				055FBCB71E83D9D7001301A9 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EC8A431E81E854007233F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				055FBCC21E83DE74001301A9 /* Handler.cpp in Sources */,
+				055FBCAF1E83D98D001301A9 /* CrashGuard.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		055FBCBC1E83DB25001301A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05EC8A461E81E854007233F2 /* CrashGuard */;
+			targetProxy = 055FBCBB1E83DB25001301A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		055FBCB91E83D9D7001301A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+			};
+			name = Debug;
+		};
+		055FBCBA1E83D9D7001301A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+			};
+			name = Release;
+		};
+		05BD89571A13FF4700A43CD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05DBA171201E436000638A44 /* Debug - ccache.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					CrashGuard/include/,
+					Submodules/PIMPL/PIMPL/include,
+				);
+			};
+			name = Debug;
+		};
+		05BD89581A13FF4700A43CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05DBA16F201E436000638A44 /* Release - ccache.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					CrashGuard/include/,
+					Submodules/PIMPL/PIMPL/include,
+				);
+			};
+			name = Release;
+		};
+		05EC8A4F1E81E854007233F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05EC8A501E81E854007233F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		055FBCB81E83D9D7001301A9 /* Build configuration list for PBXNativeTarget "Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				055FBCB91E83D9D7001301A9 /* Debug */,
+				055FBCBA1E83D9D7001301A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05BD894D1A13FF4700A43CD8 /* Build configuration list for PBXProject "CrashGuard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05BD89571A13FF4700A43CD8 /* Debug */,
+				05BD89581A13FF4700A43CD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05EC8A551E81E854007233F2 /* Build configuration list for PBXNativeTarget "CrashGuard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EC8A4F1E81E854007233F2 /* Debug */,
+				05EC8A501E81E854007233F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05BD894A1A13FF4700A43CD8 /* Project object */;
+}

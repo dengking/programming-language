@@ -1,0 +1,12 @@
+nav:
+    - Introduction: index.md
+    # 首先描述cppreference中initialization的概念    
+    - Initialization: Initialization.md
+    - Value-initialization: Value-initialization.md
+    - Uniform-initialization: Uniform-initialization
+    - Default-initialization: Default-initialization.md
+    - Zero-initialization: Zero-initialization.md
+    - Constant-initialization: Constant-initialization.md
+    - Aggregate-initialization: Aggregate-initialization.md
+    # 实际的运用
+    - Initialization-of-struct: Initialization-of-struct.md

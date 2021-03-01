@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - josephmansfield-C++sequenced-before-graphs: josephmansfield-C++sequenced-before-graphs    
+    - What-is-evaluation-of-expressions: What-is-evaluation-of-expressions    
+    - cppreference-Order-of-evaluation: cppreference-Order-of-evaluation
+    - Enforce-sequencing-between-operand: Enforce-sequencing-between-operand

@@ -1,0 +1,16 @@
+https://www.ntu.edu.sg/home/ehchua/programming/cpp/cp10_IO.html
+
+https://stackoverflow.com/questions/28338775/what-is-iosiniosout
+
+https://www.cs.hmc.edu/~geoff/classes/hmc.cs070.200109/notes/io.html
+
+https://stackoverflow.com/questions/15388041/how-to-write-stdstring-to-file
+
+http://www.cplusplus.com/reference/ostream/ostream/write/
+
+
+https://stackoverflow.com/questions/33979451/writing-lines-to-txt-file-c/33979582
+
+https://stackoverflow.com/questions/213907/c-stdendl-vs-n
+
+Google std::endl \n

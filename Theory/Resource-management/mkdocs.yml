@@ -1,3 +1,4 @@
 nav:
-    - Resource-management: Resource-management.md
+    - Introduction: index.md
+    - Handle: Handle
     - Memory-management: Memory-management
