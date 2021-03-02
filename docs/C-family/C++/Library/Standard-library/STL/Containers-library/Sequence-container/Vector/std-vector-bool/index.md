@@ -16,7 +16,7 @@
 
 在下面文章中对此进行了解释：
 
-### [Why is vector not a STL container?](https://stackoverflow.com/questions/17794569/why-is-vectorbool-not-a-stl-container)
+### stackoverflow [Why is vector not a STL container?](https://stackoverflow.com/questions/17794569/why-is-vectorbool-not-a-stl-container)
 
 > For space-optimization reasons, the C++ standard (as far back as C++98) explicitly calls out `vector<bool>` as a special standard container where each bool uses only one bit of space rather than one byte as a normal bool would (implementing a kind of "dynamic bitset"). In exchange for this optimization it doesn't offer all the capabilities and interface of a normal standard container.
 >

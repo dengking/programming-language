@@ -1,6 +1,8 @@
 # Curiously recurring template pattern
 
-模板递归模式，它在C++中有着广泛的用途。
+模板递归模式，它在C++中有着非常非常广泛的用途。
+
+
 
 ## wikipedia [Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
 
@@ -106,6 +108,10 @@ However, if base class member functions use CRTP for all member function calls, 
 
 ### Object counter
 
+> NOTE: 
+>
+> 1、Object counter mixin
+
 ```c++
 #include <iostream>
 
@@ -189,15 +195,21 @@ int main()
 
 
 
-> NOTE: 按照文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)中的`struct Comparisons`例子，`struct counter`是一个mixin class。
-
-> NOTE: `struct counter`将destructor声明为`protected`，这与我们平时的将destructor声明为public virtual是不同的，它这样做的原因是：
+> NOTE: 
+>
+> 1、按照文章thegreenplace [The Curiously Recurring Template Pattern in C++](https://eli.thegreenplace.net/2011/05/17/the-curiously-recurring-template-pattern-in-c)中的`struct Comparisons`例子，`struct counter`是一个mixin class。
+>
+> 2、`struct counter`将destructor声明为`protected`，这与我们平时的将destructor声明为public virtual是不同的，它这样做的原因是：
 >
 > 避免直接使用`counter`类对象，让`counter`类为abstract class，因为它是一个mixin class。关于这一点，在`C++\Language-reference\Classes\Special-member-functions\Destructor\Destructor.md`的“Make the base classes' destructor **`protected` and nonvirtual**”节中进行了详细介绍。
+
+
 
 ### Polymorphic chaining
 
 [Method chaining](https://en.wikipedia.org/wiki/Method_chaining)
+
+#### Example: without derived class
 
 ```c++
 #include<iostream>
@@ -223,7 +235,7 @@ int main()
 
 ```
 
-
+#### Example: with derived class
 
 ```c++
 #include<iostream>
@@ -266,6 +278,8 @@ CoutPrinter().print("Hello ").SetConsoleColor(Color.red).println("Printer!"); //
 ```
 
 This happens because '`print`' is a function of the base - '`Printer`' - and then it returns a '`Printer`' instance.
+
+#### Solution
 
 The CRTP can be used to avoid such problem and to implement "**Polymorphic chaining**": 
 
@@ -339,6 +353,18 @@ int main()
 
 
 ### Polymorphic copy construction
+
+> NOTE: 
+>
+> 一、virtual clone mixin
+>
+> 二、下面的实现使用了"OOP interface + template implementation"的做法，至于为什么这样做，在下面的"Pitfalls"章节进行了说明；它是比之前总结的"OOP interface + template implementation"要复杂一些的，因为它是三层的:
+>
+> 1、OOP interface
+>
+> 2、base class template
+>
+> 3、implementation class
 
 When using polymorphism, one sometimes needs to create copies of objects by the base class pointer. A commonly used idiom for this is adding a virtual `clone` function that is defined in every derived class. The CRTP can be used to avoid having to duplicate that function or other similar functions in every derived class.
 
@@ -460,19 +486,67 @@ This allows obtaining copies of squares, circles or any other shapes by `shapePt
 
 
 
-> NOTE: 这叫做Virtual Constructor Idiom，参见`C++\Idiom\Virtual-Constructor\Virtual-Constructor.md`
+> NOTE: 
 >
-> 另外，与上述写法相关的有：
+> 1、这叫做Virtual Constructor Idiom，参见`C++\Idiom\Virtual-Constructor\Virtual-clone`
 >
-> [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)，收录于`C++\Idiom\Virtual-Constructor\Virtual-Constructor.md`
+> 
+
+
+
+### Pitfalls 
+
+One issue with static polymorphism is that without using a general base class like `AbstractShape` from the above example, derived classes cannot be stored homogeneously(同样地)--that is, putting different types derived from the same base class in the same container. For example, a container defined as `std::vector<Shape*>` does not work because `Shape` is not a class, but a template needing specialization. A container defined as `std::vector<Shape<Circle>*>` can only store `Circle`s, not `Square`s. This is because each of the classes derived from the CRTP base class `Shape` is a unique type. A common solution to this problem is to inherit from a shared base class with a virtual destructor, like the `AbstractShape` example above, allowing for the creation of a `std::vector<AbstractShape*>`.
+
+> NOTE: 
 >
-> [How to Return a Smart Pointer AND Use Covariance](https://www.fluentcpp.com/2017/09/12/how-to-return-a-smart-pointer-and-use-covariance/)，收录于`C++\Idiom\Covariant-Return-Types\Return-a-Smart-Pointer-AND-Use-Covariance.md`
->
-> 它们的实现依赖于static、dynamic的结合：
->
-> static部分是`class Shape`是模板类
->
-> dynamic部分是`clone()`是virtual method
+> 1、这一段的分析是非常好的
+
+
+
+
+
+## Application
+
+1、static polymorphism
+
+2、mixin
+
+exmaple:
+
+a、object counter mixin
+
+b、virtual clone mixin
+
+c、具体类型由derived class来指定(我在AMUST core的代码重构中，大量使用了这种方式)
+
+d、.....
+
+3、polymorphic chaining
+
+
+
+## 我的实践
+
+### Factory method
+
+```c++
+template<typename DerivedClass>
+class CUstApiMixin
+{
+public:
+	/**
+	 * 工厂方法
+	 * @param WorkDir
+	 * @return
+	 */
+	template<typename ...Args>
+	static DerivedClass* Factory(Args &&...args)
+	{
+		return new DerivedClass(std::forward<Args>(args)...);
+	}
+};
+```
 
 
 

@@ -1,4 +1,4 @@
-# Virtual Constructor
+# Virtual Constructor/clone
 
 1、本文讨论"How to copy an object that is accessible only by an interface that it implements?"
 
@@ -320,7 +320,7 @@ Now this is a solution for this particular problem, but there is a bigger C++ qu
 
 
 
-## When to use virtual constructor?
+## When to use virtual clone?
 
 如果一个class有一个成员，它的类型是pointer to polymorphic type object，那么这个polymorphic type就可能需要virtual constructor。
 
@@ -330,7 +330,15 @@ Now this is a solution for this particular problem, but there is a bigger C++ qu
 
 2、stackexchange [DeepPtr: a deep-copying unique_ptr wrapper in C++](https://codereview.stackexchange.com/questions/103744/deepptr-a-deep-copying-unique-ptr-wrapper-in-c)
 
-3、
+
+
+## Virtual clone mixin
+
+参见 `Generic-programming\CRTP` 章节。
+
+
+
+
 
 ## TO READ
 

@@ -27,3 +27,11 @@
 
 
 ## Range-based algorithm
+
+参见 `Range-based-algorithms` 章节
+
+
+
+## Functional programming: Higher-order function
+
+STL algorithm是典型的使用 FP的Higher-order function。

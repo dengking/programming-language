@@ -4,7 +4,9 @@
 
 `iterator_facade` is a base class template that implements the interface of standard iterators in terms of a few core functions and associated types, to be supplied by a derived iterator class.
 
-> NOTE: iterator facade让我想起了[Facade pattern](https://en.wikipedia.org/wiki/Facade_pattern)
+> NOTE: 
+>
+> 1、iterator facade让我想起了[Facade pattern](https://en.wikipedia.org/wiki/Facade_pattern)，它其实就是采用的Facade pattern
 
 ## Overview
 
@@ -25,8 +27,7 @@ functionality. We have identified the following core behaviors for iterators:
 
 > NOTE: 在`Theory\Programming-paradigm\Generic-programming\Templates-and-Duck-Typing\Templates-and-Duck-Typing.md`中同样使用了behavior这个词语，按照其中的总结的思想，不同类型的iterator的behavior是不同的
 
-In addition to the behaviors listed above, the **core interface elements** include the associated types
-exposed through iterator traits: `value_type`, `reference`, `difference_type`, and `iterator_category`.
+In addition to the behaviors listed above, the **core interface elements** include the associated types exposed through iterator traits: `value_type`, `reference`, `difference_type`, and `iterator_category`.
 
 > NOTE: 上面这段话中的core interface element所指的是，Iterator facade的需要由子类进行override的element，显然，上述的behavior的实现是需要由子类来实现的，这种下面有描述
 
