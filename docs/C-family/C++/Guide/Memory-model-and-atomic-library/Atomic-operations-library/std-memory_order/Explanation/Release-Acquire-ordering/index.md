@@ -279,3 +279,10 @@ int main()
 
 ```
 
+## Application
+
+典型的例子、并且是比较难以理解的是:
+
+1、double checked locking
+
+2、reference counting

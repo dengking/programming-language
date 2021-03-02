@@ -6,8 +6,8 @@
 
 对于object with static storage duration，C++语言有着特殊的设计，根据object的scope，我们进一步将它们分为:
 
-| classification                                | 描述章节           |
-| --------------------------------------------- | ------------------ |
-| Non-local object with static storage duration | `Non-local-object` |
-| Local object with static storage duration     |                    |
+| classification                                | 描述章节              |
+| --------------------------------------------- | --------------------- |
+| Non-local object with static storage duration | `Non-local-object`    |
+| Local object with static storage duration     | `Static-local-object` |
 

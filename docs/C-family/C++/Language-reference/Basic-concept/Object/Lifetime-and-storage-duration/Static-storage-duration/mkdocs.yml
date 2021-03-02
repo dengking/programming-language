@@ -3,3 +3,4 @@ nav:
     - TODO-Initialization-of-Static-Variables: TODO-Initialization-of-Static-Variables
     - Static-local-object: Static-local-object.md
     - Non-local-object: Non-local-object.md
+    - Magic-static-N2660: Magic-static-N2660

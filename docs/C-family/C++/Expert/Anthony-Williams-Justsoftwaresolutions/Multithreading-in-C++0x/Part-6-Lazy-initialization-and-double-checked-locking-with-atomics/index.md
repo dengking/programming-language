@@ -75,6 +75,14 @@ public:
 
 Note that in this case we return a `std::shared_ptr<const expensive_data>` rather than a reference to avoid a race condition on the data itself — this ensures that the copy held by the calling code will be valid (if out of date) even if another thread calls `invalidate_cache()` before the data can be used.
 
+> NOTE: 
+>
+> 一、这个技巧非常重要，它避免了dangling: 
+>
+> 一个thread access了被另外一个thread 释放的memory，关于此，参见 
+>
+> 1、stackoverflow [Does using .reset() on a std::shared_ptr delete all instances](https://stackoverflow.com/questions/21589595/does-using-reset-on-a-stdshared-ptr-delete-all-instances)
+
 This "works" in the sense that it avoids data races, but if the updates are rare and the reads are frequent then this may cause unnecessary serialization when multiple threads call `get_data()` concurrently. What other options do we have?
 
 ### Double-checked locking returns

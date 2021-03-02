@@ -1,0 +1,3 @@
+# n2660 [Dynamic Initialization and Destruction with Concurrency](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2660.htm)
+
+> NOTE: 在阅读 stackexchange [Modern C++ Singleton Template](https://codereview.stackexchange.com/questions/173929/modern-c-singleton-template) # [A](https://codereview.stackexchange.com/a/173935) 时，其中提及了C++11 [Magic Statics (N2660)](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2660.htm). 

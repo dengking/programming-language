@@ -1,8 +1,22 @@
 # Singleton
 
+## 要求
 
+为了确保只有一个object，需要满足如下要求:
 
-## stackoverflow [C++ Singleton design pattern](https://stackoverflow.com/questions/1008019/c-singleton-design-pattern)
+1、只能够通过class static method `getInstance()`获得对象，其它方式都不可，包括:
+
+a、`C c` 
+
+因此，需要将constructor私有化。
+
+2、不能够copy
+
+## Meyer's singleton
+
+Meyer's singleton就是利用static local object的特性来实现的，参见`Static-local-object`章节。
+
+### stackoverflow [C++ Singleton design pattern](https://stackoverflow.com/questions/1008019/c-singleton-design-pattern)
 
 [A](https://stackoverflow.com/a/1008289)
 
@@ -65,19 +79,11 @@ See this article that explains why double checked locking will not work on C++:
 [What are all the common undefined behaviours that a C++ programmer should know about?](https://stackoverflow.com/questions/367633/what-are-all-the-common-undefined-behaviour-that-c-programmer-should-know-about/367690#367690)
 [Dr Dobbs: C++ and The Perils of Double-Checked Locking: Part I](http://www.drdobbs.com/cpp/c-and-the-perils-of-double-checked-locki/184405726)
 
-## Thread safe
+#### Thread safe
 
 在 [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g) # [A](https://stackoverflow.com/a/6319356) 的如下comment中，对这个问题进行了讨论:
 
 In most cases there is no sence to implement the double-checked locking initialization in C++11 since local static variable initialization is already thread-safe. – [newbie](https://stackoverflow.com/users/2489083/newbie) [Jun 17 '15 at 21:29](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g#comment49844327_6319356)
 
 @newbie: True, C+11 codified common practice and made the "Meyers singleton" thread-safe. I was just providing an example of the sort of thing you can do with the low-level synchronization primitives. – [Nemo](https://stackoverflow.com/users/768469/nemo) [Jun 17 '15 at 22:34](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g#comment49845972_6319356)
-
-
-
-## stackexchange [Modern C++ Singleton Template](https://codereview.stackexchange.com/questions/173929/modern-c-singleton-template)
-
-
-
-## theimpossiblecode [C++11 generic singleton pattern](https://www.theimpossiblecode.com/blog/c11-generic-singleton-pattern/)
 
