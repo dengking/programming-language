@@ -142,6 +142,10 @@ Defined in header `<sstream>`
 
 > All three components are so designed that they confirm to the principles of **data abstraction**. Thus any object which holds data and *behaves like a container*, is a container. Similarly, any iterator which sweeps through the elements in a container is an **iterator**.
 >
+> > NOTE: 
+> >
+> > 1、duck typing and behavior-based
+>
 > If an iterator can be used to access elements of a data container, then what about streams? In keeping with the design, Streams too are data containers and so C++ provides us with iterators to iterate over the elements present in any stream. These iterators are called **Stream Iterators**. To use these iterators the *iterator* header file must be included.
 
 

@@ -6,4 +6,4 @@ nav:
     - Stream-iterators: Stream-iterators
     - Operations: Operations
     - const_iterator: const_iterator
-    - Custom-implementation: Custom-implementation
+    - Custom-iterator: Custom-iterator

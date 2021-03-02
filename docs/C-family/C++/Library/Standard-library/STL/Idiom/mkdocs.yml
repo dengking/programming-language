@@ -1,7 +1,16 @@
 nav:
     - Introduction: index.md
-    - Clear-and-minimize: Clear-and-minimize.md
-    - Shrink-to-fit: Shrink-to-fit.md
-    - Erase_if: Erase_if
-    - Computation-on-structure: Computation-on-structure
+    
+    - Guidelines: Guidelines
+    
+    - Iteration: Iteration
+    
+    - Clear-and-minimize: Clear-and-minimize
+
+    - Erase_if: Erase_if    
+    # range相关
+    - Range-access: Range-access
+    
+    - Copy-a-range-of-elements: Copy-a-range-of-elements
+    
     
