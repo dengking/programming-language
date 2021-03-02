@@ -17,45 +17,57 @@ Memory management by *`shared_ptr`* is deterministic because the timing of a man
 Here is a basic example of *`shared_ptr`*:
 
 ```C++
+#include <memory>
+#include <iostream>
+
 //some struct
-struct Some {
- int x;
+struct Some
+{
+	int x;
 };
 
-void useless(std::shared_ptr<Some> p) {
- //Change the underlying object
- p->x = 20;
+void useless(std::shared_ptr<Some> p)
+{
+	//Change the underlying object
+	p->x = 20;
 }
 
-void spam() {
+void spam()
+{
 
- //Create/initialize shared_ptr<Some>
- auto one = std::shared_ptr<Some>(new Some());
- //Another shared_ptr<Some> pointing nowhere 
- std::shared_ptr<Some> two;
+	//Create/initialize shared_ptr<Some>
+	auto one = std::shared_ptr<Some>(new Some());
+	//Another shared_ptr<Some> pointing nowhere
+	std::shared_ptr<Some> two;
 
- //Change the underlying object
- one->x = 10;
- //Read through shared_ptr
- std::cout << "x: " << one->x << "\n"; //x: 10
+	//Change the underlying object
+	one->x = 10;
+	//Read through shared_ptr
+	std::cout << "x: " << one->x << "\n"; //x: 10
 
- //Pass to a function by value. This increases the ref count.
- useless(one);
+	//Pass to a function by value. This increases the ref count.
+	useless(one);
 
- //Underlying object is changed
- std::cout << "x: " << one->x << "\n"; //x: 20
+	//Underlying object is changed
+	std::cout << "x: " << one->x << "\n"; //x: 20
 
- //Assign to another shared_ptr
- two = one;
+	//Assign to another shared_ptr
+	two = one;
 
- //'one' and 'two' are pointing to the same object
- std::cout << std::boolalpha << (one.get() == two.get()) << "\n"; //true
+	//'one' and 'two' are pointing to the same object
+	std::cout << std::boolalpha << (one.get() == two.get()) << "\n"; //true
 
- /*  On Return:
- 1. 'one' and 'two' are destroyed
- 2.  Ref count reaches zero
- 3. 'Some' is destroyed */
+	/*  On Return:
+	 1. 'one' and 'two' are destroyed
+	 2.  Ref count reaches zero
+	 3. 'Some' is destroyed */
 }
+int main()
+{
+	spam();
+}
+// g++ --std=c++11 -Wall -pedantic test.cpp && a.out
+
 ```
 
 This article is specific to general usage and internals of *`shared_ptr`*. It does not cover the fundamentals of smart pointers and assumes that the reader is familiar with those. Having looked at the basic usage, let's move on to the internals of *`shared_ptr`* that make it work.
@@ -73,6 +85,12 @@ This article is specific to general usage and internals of *`shared_ptr`*. It do
 > b、decrease reference counter in destructor
 >
 > `shared_ptr` object 的个数 和 control block中的reference counter的个数是一致的；
+>
+> 3、典型的object-based resource management
+>
+> 4、关于`shared_ptr`的code，参见 stackoverflow [How is the std::tr1::shared_ptr implemented?](https://stackoverflow.com/questions/9200664/how-is-the-stdtr1shared-ptr-implemented) # [A](https://stackoverflow.com/a/9201435)
+>
+> 通过阅读其中给出的code，可以很快的理解后面的内容。
 
 In a typical implementation, a *`shared_ptr`* contains only two pointers: 
 
@@ -90,7 +108,7 @@ A *`shared_ptr`* control block at least includes
 
 
 
-And depending on how a *shared_ptr* is initialized, the control block can also contain other data, most notably, a deleter and an allocator. The following figure corresponds to the example in the previous section. It shows the conceptual memory layout of the two *`shared_ptr`* instances managing the object:
+And depending on how a *shared_ptr* is initialized, the control block can also contain other data, most notably, a `deleter` and an `allocator`. The following figure corresponds to the example in the previous section. It shows the conceptual memory layout of the two *`shared_ptr`* instances managing the object:
 
 ![shared_ptr control block](./conceptual-memory-layout.png)
 
@@ -104,31 +122,86 @@ A control block contains a pointer to the **managed object**, which is used for 
 
 One interesting fact is that the **managed pointer in the control block** could be different in type (and even value) from the **raw pointer in the *shared_ptr***. This leads to a few fascinating use cases. In the following example, the types of the raw pointer and the managed pointer are different, but they are compatible and have the same values:
 
+> NOTE: 
+>
+> 1、关于上面这段话中给出的，参见 stackoverflow [How is the std::tr1::shared_ptr implemented?](https://stackoverflow.com/questions/9200664/how-is-the-stdtr1shared-ptr-implemented) # [A](https://stackoverflow.com/a/9201435) 中给出的example code是非常容易理解的
+
 ```C++
-//A shared_ptr<void> managing an int
-//The raw pointer is void*
-auto vp = std::shared_ptr<void>(new int()); //OK
-//However, we can't do much with 'vp'    
+#include <memory>
+#include <iostream>
 
-//Another example
-//Inheritance with no virtual destructor 
-struct A { 
- //stuff..
- ~A() { std::cout << "~A\n"; } //not virtual
-};
-struct B : A { 
- //stuff..
- ~B() { std::cout << "~B\n"; } //not virtual
-};
+int main()
+{
+	//A shared_ptr<void> managing an int
+	//The raw pointer is void*
+	auto vp = std::shared_ptr<void>(new int()); //OK
+	//However, we can't do much with 'vp'
 
-//shared_ptr<A> managing a B object
-//raw pointer is A* and managed pointer is B*
-auto pa = std::shared_ptr<A>(new B()); //OK
+}
+// g++ --std=c++11 -Wall -pedantic test.cpp && a.out
 
-pa.reset(); //Calls B's destructor
 ```
 
-> NOTE: 完整的测试程序参见下面 。
+#### `std::shared_ptr` OOP interface、subtyping polymorphism
+
+> NOTE: 
+> 1、原文并没有这样的标题，这个标题是我基于下面的example总结的
+>
+> 2、下面的例子体现了`std::shared_ptr` OOP interface、、subtyping polymorphism，它使用`std::shared_ptr` 来实现reference semantic，它等价于使用raw pointer的如下写法:
+>
+> ```C++
+> Base * ptr = new Derived;
+> ```
+>
+> 
+
+```C++
+#include <memory>
+#include <iostream>
+
+//Another example
+//Inheritance with no virtual destructor
+struct A
+{
+	//stuff..
+	~A()
+	{
+		std::cout << "~A\n";
+	} //not virtual
+};
+struct B: A
+{
+	//stuff..
+	~B()
+	{
+		std::cout << "~B\n";
+	} //not virtual
+};
+
+int main()
+{
+
+	//shared_ptr<A> managing a B object
+	//raw pointer is A* and managed pointer is B*
+	auto pa = std::shared_ptr<A>(new B()); //OK
+
+	pa.reset(); //Calls B's destructor
+
+}
+// g++ --std=c++11 -Wall -pedantic test.cpp && a.out
+
+```
+
+> NOTE: 输出如下:
+>
+> ```C++
+> virtual void B::test()
+> ~B
+> ~A
+> 
+> ```
+>
+> 下面有基于上述例子的变式 。
 
 The inheritance example above is rather contrived(人为的、不自然的). It shows that despite the destructor being not *virtual*, the correct derived class (*B*) destructor is invoked when the base class (*A*) *shared_ptr* is *reset*. That works because the control block is destroying the object through `*B`**, not through the raw pointer `*A`**. Nevertheless, the destructor should be declared *virtual* in the classes that are meant to be used polymorphically. This example intends to merely show how a *shared_ptr* works.
 
@@ -150,64 +223,6 @@ The inheritance example above is rather contrived(人为的、不自然的). It 
 
 
 > NOTE: 
->
-> 测试程序1如下:
->
-> ```C++
-> #include <memory>
-> #include <iostream>
-> #include <thread>
-> #include <atomic>
-> #include <vector>
-> 
-> //Another example
-> //Inheritance with no virtual destructor
-> struct A
-> {
-> 	virtual void test()
-> 	{
-> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-> 	}
-> 	//stuff..
-> 	~A()
-> 	{
-> 		std::cout << "~A\n";
-> 	} //not virtual
-> };
-> struct B: A
-> {
-> 	//stuff..
-> 	~B()
-> 	{
-> 		std::cout << "~B\n";
-> 	} //not virtual
-> 	virtual void test()
-> 	{
-> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-> 	}
-> };
-> 
-> int main()
-> {
-> 
-> 	//shared_ptr<A> managing a B object
-> 	//raw pointer is A* and managed pointer is B*
-> 	auto pa = std::shared_ptr<A>(new B()); //OK
-> 	pa->test();
-> 	pa.reset(); //Calls B's destructor
-> }
-> // g++ --std=c++11 test.cpp
-> 
-> ```
->
-> 输出如下:
->
-> ```C++
-> virtual void B::test()
-> ~B
-> ~A
-> 
-> ```
 >
 > 测试程序2如下:
 >
@@ -253,16 +268,16 @@ The inheritance example above is rather contrived(人为的、不自然的). It 
 > // g++ --std=c++11 test.cpp
 > 
 > ```
->
+> 
 > 上述程序，编译报错如下:
->
+> 
 > ```C++
-> test.cpp: 在函数‘int main()’中:
+>test.cpp: 在函数‘int main()’中:
 > test.cpp:36:6: 错误：‘struct A’没有名为‘test2’的成员
->   pa->test2();
+>pa->test2();
 > 
 > ```
->
+> 
 > 
 
 
@@ -354,6 +369,10 @@ The in-depth treatment of **aliasing constructor** deserves(应得) its own spac
 > NOTE: 这段话的意思是:  **aliasing constructor** 是一个较大的topic，需要专门进行介绍
 
 There is more discussion about the managed object pointer in the 'Deleter' section below when we talk about the *type erasure*.
+
+> NOTE: 
+>
+> 1、`std::shared_ptr`的实现也是依赖于type erasure technique的
 
 #### *std::make_shared*
 
@@ -527,7 +546,48 @@ The deleter is *type-erased* for two reasons:
 
 1、First, a deleter is an optional argument to a *shared_ptr* constructor, not a template parameter. Hence, a *shared_ptr's* type is deleter **agnostic**(不知的). 
 
+> NOTE: 这段话的意思是: deleter是不知道 "*shared_ptr's* type "
+
 2、Second, a deleter is a function object (or a function pointer), e.g., *function<`void(T\*)`>*. This indirection makes *shared_ptr* independent of the details of how the managed object is deleted. This loose-coupling of *shared_ptr* with the deleter makes it quite flexible.
+
+> NOTE: 
+>
+> 1、上面这一段中的"The deleter is *type-erased* "要如何理解？
+>
+> 结合 stackoverflow [How is the std::tr1::shared_ptr implemented?](https://stackoverflow.com/questions/9200664/how-is-the-stdtr1shared-ptr-implemented) # [A](https://stackoverflow.com/a/9201435) 中给出的source code:
+>
+> default deleter: 
+>
+> ```C++
+>     template<class U>
+>     struct default_deleter
+>     {
+>         void operator()(U* p) const { delete p; }
+>     };
+> 
+>     template<class U>
+>     explicit shared_ptr(U* pu) :pa(new auximpl<U,default_deleter<U> >(pu,default_deleter<U>())), pt(pu) {}
+> ```
+>
+> 显然，default deleter是直接使用 `delete p;`，而`p`可以是incomplete type(opaque pointer)
+>
+> custom deleter: 
+>
+> ```C++
+>     template<class U, class Deleter>
+>     struct auximpl: public aux
+>     {
+>         U* p;
+>         Deleter d;
+> 
+>         auximpl(U* pu, Deleter x) :p(pu), d(x) {}
+>         virtual void destroy() { d(p); } 
+>     };
+>     template<class U, class Deleter>
+>     shared_ptr(U* pu, Deleter d) :pa(new auximpl<U,Deleter>(pu,d)), pt(pu) {}
+> ```
+>
+> 显然`Deleter`是一个function pointer
 
 For instance, in the example below, a `vector<shared_ptr<T>>` can be in its compilation unit entirely oblivious(不在意的) to the knowledge of how an incomplete type *T* is deleted:
 

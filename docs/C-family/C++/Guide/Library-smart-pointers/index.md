@@ -36,11 +36,15 @@ smart pointer符合[intentional programming](https://en.wikipedia.org/wiki/Inten
 
 2、opaque pointer、incomplete type
 
+基本上能够覆盖
+
 3、covariant return type
 
 无法覆盖的情况: smart pointer不支持 covariant return type，但是raw pointer是支持的，关于这个说法，参见 https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rh-copy
 
+4、subtyping polymorphism
 
+能够覆盖
 
 ## wikipedia [Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)
 

@@ -8,3 +8,6 @@ nav:
     - Guideline-Incomplete-type: Guideline-Incomplete-type
     - Guideline-deep-copy: Guideline-deep-copy
     - Guideline-covariance: Guideline-covariance
+    - Guide-subtyping-polymorphism-reference-semantic: Guide-subtyping-polymorphism-reference-semantic
+    - Guideline-overhead: Guideline-overhead
+    - TODO-pointer_cast: TODO-pointer_cast.md
