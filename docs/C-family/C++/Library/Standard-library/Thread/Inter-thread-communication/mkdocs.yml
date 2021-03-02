@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - modernescpp-Synchronization-with-Atomics-in-C++20: modernescpp-Synchronization-with-Atomics-in-C++20
