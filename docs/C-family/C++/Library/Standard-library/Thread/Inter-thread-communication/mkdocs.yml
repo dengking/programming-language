@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - modernescpp-Synchronization-with-Atomics-in-C++20: modernescpp-Synchronization-with-Atomics-in-C++20
+    - TODO-modernescpp-Synchronization-with-Atomics: TODO-modernescpp-Synchronization-with-Atomics
+    - TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics: TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics

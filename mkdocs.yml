@@ -627,13 +627,18 @@ nav:
             - Storage-duration: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Storage-duration.md
             - Static-storage-duration:
               - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/index.md
-              - TODO-Initialization-of-Static-Variables:
-                - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-of-Static-Variables/index.md
-                - Initialization: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-of-Static-Variables/Initialization.md
+              - TODO-Initialization-Static-Object:
+                - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-Static-Object/index.md
+                - pabloariasal-C++Initialization-of-Static-Variables:
+                  - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-Static-Object/pabloariasal-C++Initialization-of-Static-Variables/index.md
                 - Static-Initialization-Order-Fiasco:
-                  - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-of-Static-Variables/Static-Initialization-Order-Fiasco/index.md
+                  - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-Static-Object/Static-Initialization-Order-Fiasco/index.md
+                - Construct-On-First-Use-Idiom:
+                  - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/TODO-Initialization-Static-Object/Construct-On-First-Use-Idiom/index.md
               - Static-local-object: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Static-local-object.md
               - Non-local-object: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Non-local-object.md
+              - Magic-static-N2660:
+                - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Magic-static-N2660/index.md
             - Thread-local-storage-duration:
               - Introduction: C-family/C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Thread-local-storage-duration/index.md
             - Access-outside-of-object-lifetime:
@@ -770,13 +775,15 @@ nav:
             - Introduction: C-family/C++/Language-reference/Expressions/Constant-expressions/constexpr/index.md
             - TODO-Literal-type: C-family/C++/Language-reference/Expressions/Constant-expressions/constexpr/TODO-Literal-type.md
       - Statements:
-        - Iteration-statements:
-          - For:
-            - For: C-family/C++/Language-reference/Statements/Iteration-statements/For/For.md
-        - Selection-statements:
-          - If: C-family/C++/Language-reference/Statements/Selection-statements/If.md
-          - Constexpr-if: C-family/C++/Language-reference/Statements/Selection-statements/Constexpr-if.md
-          - Switch: C-family/C++/Language-reference/Statements/Selection-statements/Switch.md
+        - Iteration:
+          - Introduction: C-family/C++/Language-reference/Statements/Iteration/index.md
+          - For-statement: C-family/C++/Language-reference/Statements/Iteration/For-statement.md
+          - Range-based-for-loop:
+            - Introduction: C-family/C++/Language-reference/Statements/Iteration/Range-based-for-loop/index.md
+        - Selection:
+          - If: C-family/C++/Language-reference/Statements/Selection/If.md
+          - Constexpr-if: C-family/C++/Language-reference/Statements/Selection/Constexpr-if.md
+          - Switch: C-family/C++/Language-reference/Statements/Selection/Switch.md
       - Functions:
         - Introduction: C-family/C++/Language-reference/Functions/index.md
         - Function:
@@ -1123,7 +1130,7 @@ nav:
       - Standard-library:
         - Introduction: C-family/C++/Library/Standard-library/index.md
         - STL:
-          - STL: C-family/C++/Library/Standard-library/STL/STL.md
+          - Introduction: C-family/C++/Library/Standard-library/STL/index.md
           - Containers-library:
             - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/index.md
             - Common-issue:
@@ -1198,53 +1205,47 @@ nav:
                 - Introduction: C-family/C++/Library/Standard-library/STL/Iterator-library/Operations/Iterator-to-pointer/index.md
             - const_iterator:
               - Introduction: C-family/C++/Library/Standard-library/STL/Iterator-library/const_iterator/index.md
-            - Custom-implementation:
-              - Introduction: C-family/C++/Library/Standard-library/STL/Iterator-library/Custom-implementation/index.md
+            - Custom-iterator:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Iterator-library/Custom-iterator/index.md
           - Algorithm:
             - Introduction: C-family/C++/Library/Standard-library/STL/Algorithm/index.md
             - std-copy:
               - std-copy: C-family/C++/Library/Standard-library/STL/Algorithm/std-copy/std-copy.md
             - std-transform:
-              - std-transform: C-family/C++/Library/Standard-library/STL/Algorithm/std-transform/std-transform.md
+              - Introduction: C-family/C++/Library/Standard-library/STL/Algorithm/std-transform/index.md
           - Ranges-library-C++20:
             - Introduction: C-family/C++/Library/Standard-library/STL/Ranges-library-C++20/index.md
             - Primer:
               - Introduction: C-family/C++/Library/Standard-library/STL/Ranges-library-C++20/Primer/index.md
           - Idiom:
             - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/index.md
-            - Clear-and-minimize: C-family/C++/Library/Standard-library/STL/Idiom/Clear-and-minimize.md
-            - Shrink-to-fit: C-family/C++/Library/Standard-library/STL/Idiom/Shrink-to-fit.md
+            - Guidelines:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Guidelines/index.md
+              - drdobbs-STL-Algorithms-Hand-Written-Loops:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Guidelines/drdobbs-STL-Algorithms-Hand-Written-Loops/index.md
+              - arne-mertz-algorithms-and-the-KISS-principle:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Guidelines/arne-mertz-algorithms-and-the-KISS-principle/index.md
+            - Iteration:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Iteration/index.md
+              - Zip:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Iteration/Zip/index.md
+              - library-CPPItertools:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Iteration/library-CPPItertools/index.md
+              - std-for_each:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Iteration/std-for_each/index.md
+            - Clear-and-minimize:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Clear-and-minimize/index.md
+              - Shrink-to-fit: C-family/C++/Library/Standard-library/STL/Idiom/Clear-and-minimize/Shrink-to-fit.md
             - Erase_if:
               - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Erase_if/index.md
               - Erase-remove:
                 - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Erase_if/Erase-remove/index.md
               - TODO-Erase-while-iterating:
                 - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Erase_if/TODO-Erase-while-iterating/index.md
-            - Computation-on-structure:
-              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/index.md
-              - Functional-programming:
-                - Prefer-algorithm-over-hand-write-loop: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Functional-programming/Prefer-algorithm-over-hand-write-loop.md
-              - Iteration:
-                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/index.md
-                - Range:
-                  - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/index.md
-                  - Range-based-for-loop:
-                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-for-loop/index.md
-                  - Range-based-idiom:
-                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/index.md
-                    - Range-access:
-                      - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/Range-access/index.md
-                    - Range-based-algorithms: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/Range-based-algorithms.md
-                    - Copy-a-range-of-elements:
-                      - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Range/Range-based-idiom/Copy-a-range-of-elements/index.md
-                - Itertools:
-                  - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Itertools/index.md
-                  - CPPItertools:
-                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Itertools/CPPItertools/index.md
-                  - Zip:
-                    - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/Itertools/Zip/index.md
-                - std-for_each:
-                  - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Computation-on-structure/Iteration/std-for_each/index.md
+            - Range-access:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Range-access/index.md
+            - Copy-a-range-of-elements:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Copy-a-range-of-elements/index.md
         - String:
           - Introduction: C-family/C++/Library/Standard-library/String/index.md
         - IO-library:
@@ -1281,6 +1282,12 @@ nav:
               - Introduction: C-family/C++/Library/Standard-library/Thread/TODO-read-write-lock/C++11-implementation/index.md
           - C++20-Semaphores:
             - Introduction: C-family/C++/Library/Standard-library/Thread/C++20-Semaphores/index.md
+          - Inter-thread-communication:
+            - Introduction: C-family/C++/Library/Standard-library/Thread/Inter-thread-communication/index.md
+            - TODO-modernescpp-Synchronization-with-Atomics:
+              - Introduction: C-family/C++/Library/Standard-library/Thread/Inter-thread-communication/TODO-modernescpp-Synchronization-with-Atomics/index.md
+            - TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics:
+              - Introduction: C-family/C++/Library/Standard-library/Thread/Inter-thread-communication/TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics/index.md
         - Atomic-operations-library:
           - Introduction: C-family/C++/Library/Standard-library/Atomic-operations-library/index.md
         - Utility-library:
@@ -1563,8 +1570,6 @@ nav:
           - Introduction: C-family/C++/Idiom/OOP/TODO-Safe-Bool/index.md
         - Static-object:
           - Introduction: C-family/C++/Idiom/OOP/Static-object/index.md
-          - Construct-On-First-Use:
-            - Introduction: C-family/C++/Idiom/OOP/Static-object/Construct-On-First-Use/index.md
           - Nifty-Counter:
             - Introduction: C-family/C++/Idiom/OOP/Static-object/Nifty-Counter/index.md
           - Attach-by-Initialization:
@@ -1597,7 +1602,7 @@ nav:
             - Analysis-of-enable_if: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/enable-if/Analysis-of-enable_if.md
             - enable_if-enum: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/enable-if/enable_if-enum.md
           - Tag-Dispatching:
-            - Tag-Dispatching: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Tag-Dispatching/Tag-Dispatching.md
+            - Introduction: C-family/C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Tag-Dispatching/index.md
         - Metafunction:
           - Metafunction: C-family/C++/Idiom/Generic-programming/Metafunction/Metafunction.md
         - "Barton\u2013Nackman-trick":
@@ -1647,11 +1652,14 @@ nav:
       - Introduction: C-family/C++/Pattern/index.md
       - Singleton:
         - Introduction: C-family/C++/Pattern/Singleton/index.md
-        - Extern-and-singleton: C-family/C++/Pattern/Singleton/Extern-and-singleton.md
-        - aristeia-C++and-the-Perils-of-Double-Checked-Locking:
-          - Introduction: C-family/C++/Pattern/Singleton/aristeia-C++and-the-Perils-of-Double-Checked-Locking/index.md
         - Singleton-mixin:
           - Introduction: C-family/C++/Pattern/Singleton/Singleton-mixin/index.md
+        - Avoid-singletons:
+          - Introduction: C-family/C++/Pattern/Singleton/Avoid-singletons/index.md
+        - aristeia-C++and-the-Perils-of-Double-Checked-Locking:
+          - Introduction: C-family/C++/Pattern/Singleton/aristeia-C++and-the-Perils-of-Double-Checked-Locking/index.md
+        - Global-VS-singleton:
+          - Introduction: C-family/C++/Pattern/Singleton/Global-VS-singleton/index.md
       - Factory:
         - Factory-mixin: C-family/C++/Pattern/Factory/Factory-mixin.md
       - Visitor-pattern:

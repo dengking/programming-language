@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Range: Range
-    - Itertools: Itertools
+    - Zip: Zip
+    - library-CPPItertools: library-CPPItertools
     - std-for_each: std-for_each
