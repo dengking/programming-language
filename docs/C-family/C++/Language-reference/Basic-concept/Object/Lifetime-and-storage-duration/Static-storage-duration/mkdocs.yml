@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - TODO-Initialization-of-Static-Variables: TODO-Initialization-of-Static-Variables
+    - TODO-Initialization-Static-Object: TODO-Initialization-Static-Object
     - Static-local-object: Static-local-object.md
     - Non-local-object: Non-local-object.md
     - Magic-static-N2660: Magic-static-N2660

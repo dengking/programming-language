@@ -162,5 +162,3 @@ int main()
 > ```
 >
 > 
-
-## isocpp What’s the “`static` initialization order ‘fiasco’ (problem)”? [¶](https://isocpp.org/wiki/faq/ctors#static-init-order) [Δ](https://isocpp.org/wiki/faq/ctors#)

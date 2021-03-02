@@ -1,12 +1,8 @@
-# Initialization of Static Variables
-
-
-
-## pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/)
+# pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/)
 
 > NOTE: 写的非常好的一篇文章
 
-### [Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#static-variables)
+## [Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#static-variables)
 
 As the compiler translates your program it must decide how to deal with variables introduced: When should a variable be initialized? What’s the initial value? When should it be destroyed?
 
@@ -22,7 +18,7 @@ There is, however, a category of variables that can (and should) be initialized 
 
 The lifetime of static variables doesn’t depend on the execution: they always exist; forever; no matter what. This leads to the beautiful property that they can be potentially evaluated and initialized at compile time.
 
-### [The Two Stages of Static Variable Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-two-stages-of-static-variable-initialization)
+## [The Two Stages of Static Variable Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-two-stages-of-static-variable-initialization)
 
 As discussed, variables with *static storage duration* must be initialized once before the program starts and destroyed after execution terminates.
 
@@ -36,11 +32,11 @@ After **static initialization**, **dynamic initialization** takes place. **Dynam
 
 
 
-### [The Green Zone - Constant Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-green-zone---constant-initialization)
+## [The Green Zone - Constant Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-green-zone---constant-initialization)
 
 
 
-#### [Force Const Initialization with `constexpr`](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#force-const-initialization-with-constexpr)
+## [Force Const Initialization with `constexpr`](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#force-const-initialization-with-constexpr)
 
 ```c++
 
@@ -82,7 +78,7 @@ int main()
 
 `constexpr` must be your first choice when declaring global variables (assuming you really need a global state to begin with). `constexpr` variables are not just initialized at compile time, but `constexpr` implies `const` and immutable state is always the right way.
 
-#### [Your Second Line of Defense: `constinit`](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#your-second-line-of-defense-constinit)
+## [Your Second Line of Defense: `constinit`](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#your-second-line-of-defense-constinit)
 
 `constinit` is a keyword introduced in the c++20 standard. It works just as `constexpr`, as it forces the compiler to evaluate a variable at compile time, but with the difference that it **doesn’t imply const**.
 
@@ -106,7 +102,7 @@ int main()
 }
 ```
 
-### [The Yellow Zone - Dynamic Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-yellow-zone---dynamic-initialization)
+## [The Yellow Zone - Dynamic Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-yellow-zone---dynamic-initialization)
 
 ```c++
 constexpr auto VERSION = std::string("3.4.1");
@@ -126,7 +122,7 @@ The future looks bright, however. Even when moving slowly, smart people have bee
 
 > NOTE: 这个非常有趣
 
-### [The Red Zone - Static Initialization Order Fiasco](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-red-zone---static-initialization-order-fiasco)
+## [The Red Zone - Static Initialization Order Fiasco](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-red-zone---static-initialization-order-fiasco)
 
 Dynamic initialization of static variables suffers from a very scary defect: the order in which variables are initialized at runtime is not always well-defined.
 
@@ -163,7 +159,7 @@ This program is ill-formed. It may print `14` or `0` (all static variables are a
 
 Note that this problem can only happen during the **dynamic initialization phase** and not during **static initialization**, as during **compile time** it is impossible to access a value defined in another **compilation unit**. This makes **compile time initialization** so much safer than **dynamic initialization**, as it doesn’t suffer from the **static initialization order fiasco**.
 
-### [Solving The Static Initialization Order Fiasco](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#solving-the-static-initialization-order-fiasco)
+## [Solving The Static Initialization Order Fiasco](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#solving-the-static-initialization-order-fiasco)
 
 Encountering the **static initialization order fiasco** is often a symptom of poor software design. IMHO the best way to solve it is by refactoring the code to break the initialization dependency of **globals** across **compilation units**. Make your modules self-contained and strive for **constant initialization**.
 

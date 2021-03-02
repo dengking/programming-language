@@ -1,6 +1,8 @@
 nav:
     - Introduction: index.md
-    - Extern-and-singleton: Extern-and-singleton.md
-    - aristeia-C++and-the-Perils-of-Double-Checked-Locking: aristeia-C++and-the-Perils-of-Double-Checked-Locking
+
+
     - Singleton-mixin: Singleton-mixin
     - Avoid-singletons: Avoid-singletons
+    - aristeia-C++and-the-Perils-of-Double-Checked-Locking: aristeia-C++and-the-Perils-of-Double-Checked-Locking    
+    - Global-VS-singleton: Global-VS-singleton    

@@ -1,4 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Initialization: Initialization.md
-    - Static-Initialization-Order-Fiasco: Static-Initialization-Order-Fiasco
