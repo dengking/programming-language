@@ -846,7 +846,7 @@ nav:
         - Function-termination:
           - Introduction: C-family/C++/Language-reference/Functions/Function-termination/index.md
         - Functional-programming:
-          - High-order-function: C-family/C++/Language-reference/Functions/Functional-programming/High-order-function.md
+          - Higher-order-function: C-family/C++/Language-reference/Functions/Functional-programming/Higher-order-function.md
       - Reference:
         - Introduction: C-family/C++/Language-reference/Reference/index.md
         - Perfect-forwarding:
@@ -1154,7 +1154,10 @@ nav:
             - Sequence-container:
               - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Sequence-container/index.md
               - Vector:
-                - std-vector-bool: C-family/C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool.md
+                - std-vector-bool:
+                  - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool/index.md
+                  - TODO-gotw-When-Is-a-Container-Not-a-Container:
+                    - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool/TODO-gotw-When-Is-a-Container-Not-a-Container/index.md
                 - Resize-and-reserve:
                   - Introduction: C-family/C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/Resize-and-reserve/index.md
               - List:
@@ -1246,6 +1249,11 @@ nav:
               - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Range-access/index.md
             - Copy-a-range-of-elements:
               - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/Copy-a-range-of-elements/index.md
+            - TODO-Filter-and-mapper:
+              - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/TODO-Filter-and-mapper/index.md
+              - TODO-Custom-filter-iterator: C-family/C++/Library/Standard-library/STL/Idiom/TODO-Filter-and-mapper/TODO-Custom-filter-iterator.md
+              - bastian.rieck-Implementing-filter-and-map:
+                - Introduction: C-family/C++/Library/Standard-library/STL/Idiom/TODO-Filter-and-mapper/bastian.rieck-Implementing-filter-and-map/index.md
         - String:
           - Introduction: C-family/C++/Library/Standard-library/String/index.md
         - IO-library:
@@ -1626,6 +1634,9 @@ nav:
           - Introduction: C-family/C++/Idiom/AOP/Execute-Around-Pointer/index.md
         - AspectC++:
           - Introduction: C-family/C++/Idiom/AOP/AspectC++/index.md
+        - "TODO-vitiy-C++11-functional-decomposition\u2013easy-way-to-do-AOP":
+          - Introduction: "C-family/C++/Idiom/AOP/TODO-vitiy-C++11-functional-decomposition\u2013\
+              easy-way-to-do-AOP/index.md"
       - Error-handling:
         - Introduction: C-family/C++/Idiom/Error-handling/index.md
         - Polymorphic-Exception:
@@ -1908,6 +1919,8 @@ nav:
             - Introduction: C-family/C++/Guide/Type-system/Reflection/Library-rttr/index.md
           - struct-RTTI:
             - Introduction: C-family/C++/Guide/Type-system/Reflection/struct-RTTI/index.md
+      - Guard:
+        - Introduction: C-family/C++/Guide/Guard/index.md
   - Common:
     - Introduction: C-family/Common/index.md
     - From-source-code-to-exec:
