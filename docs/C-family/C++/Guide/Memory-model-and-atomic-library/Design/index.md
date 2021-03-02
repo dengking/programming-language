@@ -102,13 +102,17 @@ C++还提供了对memory order的控制。
 
 3、"happens-before"关系需要由programmer来进行建立，C++为programmer提供了实现"happens-before"关系的方法(后面会进行介绍)，可以肯定的是，它的实现是会使用到 `std::memory_order` 的。
 
-### 总结
+## Lock-free VS lock-based
 
 1、C++ memory model 和 atomic library 基于了programmer实现让所有的thread 按照设计的order去access shared atomic variable，而不是去contention，从而可以实现lockfree programming
 
 2、对一个shared data的read、write order进行控制，从而避免data race，达到目的cooperative的目的，从而实现lockless programming。
 
-> NOTE: 上面这段话中的"cooperative"，我记得是preshing提出的，但是现在去看它的文章，却找不到了
+> NOTE: 
+>
+> 1、上面这段话中的"cooperative"，是在 preshing [Acquire and Release Semantics](https://preshing.com/20120913/acquire-and-release-semantics/) 中看到的，我觉得这个词是比较好的
+>
+> 2、参见工程parallel-computing的`Concurrent-computing\Concurrency-control\Non-blocking-VS-blocking`章节，其中对Lock-free VS lock-based进行了总结
 
 ## 思维误区
 
