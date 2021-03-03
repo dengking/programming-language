@@ -516,6 +516,14 @@ nav:
           - Introduction: C-family/C++/Expert/Herb-Sutter/Library-gcpp/index.md
         - Effective-Concurrency-Serial:
           - Introduction: C-family/C++/Expert/Herb-Sutter/Effective-Concurrency-Serial/index.md
+        - Lock-Free-Programming-or-How-to-Juggle-Razor-Blades:
+          - Introduction: C-family/C++/Expert/Herb-Sutter/Lock-Free-Programming-or-How-to-Juggle-Razor-Blades/index.md
+          - PPT:
+            - Introduction: C-family/C++/Expert/Herb-Sutter/Lock-Free-Programming-or-How-to-Juggle-Razor-Blades/PPT/index.md
+          - drdobbs-Writing-Lock-Free-Code-A-Corrected-Queue:
+            - Introduction: C-family/C++/Expert/Herb-Sutter/Lock-Free-Programming-or-How-to-Juggle-Razor-Blades/drdobbs-Writing-Lock-Free-Code-A-Corrected-Queue/index.md
+          - infoq-Lock-free-Programming-in-C++:
+            - Introduction: C-family/C++/Expert/Herb-Sutter/Lock-Free-Programming-or-How-to-Juggle-Razor-Blades/infoq-Lock-free-Programming-in-C++/index.md
       - Scott-Meyers:
         - Introduction: C-family/C++/Expert/Scott-Meyers/index.md
         - Top-C++Serial:
@@ -577,6 +585,12 @@ nav:
             - Introduction: C-family/C++/Expert/Sean-Parent/Value-Semantics-and-Concept-based-Polymorphism/TODO-mropert-Polymorphic-ducks/index.md
         - TODO-Better-Code-Runtime-Polymorphism:
           - Introduction: C-family/C++/Expert/Sean-Parent/TODO-Better-Code-Runtime-Polymorphism/index.md
+      - Erik-Rigtorp:
+        - Introduction: C-family/C++/Expert/Erik-Rigtorp/index.md
+        - Library-SPSCQueue:
+          - Introduction: C-family/C++/Expert/Erik-Rigtorp/Library-SPSCQueue/index.md
+        - Library-MPMCQueue:
+          - Introduction: C-family/C++/Expert/Erik-Rigtorp/Library-MPMCQueue/index.md
     - C++-name-conversion: C-family/C++/C++-name-conversion.md
     - What-is-new-in-C++:
       - Introduction: C-family/C++/What-is-new-in-C++/index.md
@@ -1856,7 +1870,8 @@ nav:
             - Introduction: C-family/C++/Guide/Library-smart-pointers/shared_ptr/Assignment-operator/index.md
           - weak_ptr:
             - weak_ptr: C-family/C++/Guide/Library-smart-pointers/shared_ptr/weak_ptr/weak_ptr.md
-          - pointer_cast: C-family/C++/Guide/Library-smart-pointers/shared_ptr/pointer_cast.md
+          - TODO-aliasing-constructor:
+            - Introduction: C-family/C++/Guide/Library-smart-pointers/shared_ptr/TODO-aliasing-constructor/index.md
         - auto_ptr: C-family/C++/Guide/Library-smart-pointers/auto_ptr.md
         - CppCoreGuidelines-Passing-Smart-Pointers:
           - Introduction: C-family/C++/Guide/Library-smart-pointers/CppCoreGuidelines-Passing-Smart-Pointers/index.md
@@ -1887,6 +1902,11 @@ nav:
           - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
             - Introduction: C-family/C++/Guide/Library-smart-pointers/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
           - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C-family/C++/Guide/Library-smart-pointers/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
+        - Guide-subtyping-polymorphism:
+          - Introduction: C-family/C++/Guide/Library-smart-pointers/Guide-subtyping-polymorphism/index.md
+        - Guideline-overhead:
+          - Introduction: C-family/C++/Guide/Library-smart-pointers/Guideline-overhead/index.md
+        - TODO-pointer_cast: C-family/C++/Guide/Library-smart-pointers/TODO-pointer_cast.md
       - Type-system:
         - Strong-type:
           - Introduction: C-family/C++/Guide/Type-system/Strong-type/index.md

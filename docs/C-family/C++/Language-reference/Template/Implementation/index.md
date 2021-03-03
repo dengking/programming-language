@@ -83,7 +83,9 @@ instantiation 是compiler真正的实现代码。
 
 ### Lazyness of template instantiation
 
-cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)中的“Instantiation of a class template doesn't instantiate any of its **member functions** unless they are also used.”其实已经揭示了lazyness of template instantiation。正如在process中有copy-on-write，template instantiation是instantiation-on-use。下面是member function被使用的场景(也就是它被instance的时候)
+cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)中的“Instantiation of a class template doesn't instantiate any of its **member functions** unless they are also used.”其实已经揭示了lazyness of template instantiation。正如在process中有copy-on-write，template instantiation是instantiation-on-use，后续将"Lazyness of template instantiation"简称为lazy initialization。
+
+下面是member function被使用的场景(也就是它被instance的时候)
 
 1) called 被调用
 
