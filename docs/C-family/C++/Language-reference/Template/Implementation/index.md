@@ -4,14 +4,15 @@
 
 遗憾的是，在cppreference中，并沒有对此的专门描述，我们只能够搜集一些素材自己進行总结。这个问题也可以通过如下的方式进行Google：
 
-- Google c++ template mechanism
-- Google c++ compiler template
+1、Google c++ template mechanism
+
+2、Google c++ compiler template
 
 ## Template is a kind of static polymorphism
 
 Template is a kind of static polymorphism，对于这个结论，我们需要从下面两个方面进行深入的分析：
 
-1) 从“polymorphism”：既然template是一种polymorphism，那么它的实现思路可以使用在`C++\Guide\Implementation-of-polymorphism`中描述的思想
+1) 从“polymorphism”：既然template是一种polymorphism，那么它的实现思路可以使用在`Polymorphism`中描述的思想
 
 2) 从“static”：既然是static，那么
 
@@ -50,7 +51,7 @@ Specializations may also be provided explicitly:
 
 
 
-> NOTE: function template不支持partial specialization，但是通过`enable_if` + SFINAE + trait技术，也可以实现类似于partial specialization的效果，这通常被称为function template SFINAE，在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE\Function-template-SFINAE.md`中对它进行了介绍。
+> NOTE: function template不支持partial specialization，但是通过`enable_if` + SFINAE + trait技术，也可以实现类似于partial specialization的效果，这通常被称为function template SFINAE，在`SFINAE\Function-template-SFINAE.md`中对它进行了介绍。
 
 When a **class template specialization** is referenced in context that requires a complete object type, or when a **function template specialization** is referenced in context that requires a function definition to exist, the template is *instantiated* (the code for it is actually compiled), unless the template was already explicitly specialized or explicitly instantiated. Instantiation of a class template doesn't instantiate any of its member functions unless they are also used. 
 
