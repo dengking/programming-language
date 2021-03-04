@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
 
-    - Compile-time-and-run-time: Compile-time-and-run-time
+
     - Declaration-and-definition: Declaration-and-definition
     - Specifiers: specifiers
 
@@ -14,6 +14,5 @@ nav:
     - Struct: Struct
 
     - SWIG: SWIG
-    - Wrapper: Wrapper
-    
-    - Cross-plateform: Cross-plateform
+
+

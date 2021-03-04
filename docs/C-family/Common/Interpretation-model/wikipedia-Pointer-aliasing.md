@@ -1,2 +1,0 @@
-# Pointer aliasing
-## wikipedia [Pointer aliasing](https://en.wikipedia.org/wiki/Pointer_aliasing)

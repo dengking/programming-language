@@ -4,29 +4,29 @@
 
 The C language standard precisely specifies the [observable behavior](https://en.cppreference.com/mwiki/index.php?title=c/language/as_if&action=edit&redlink=1) of C language programs, except for the ones in the following categories:
 
-- *undefined behavior* - there are no restrictions on the **behavior** of the program. Examples of **undefined behavior** are 
+1、*undefined behavior* - there are no restrictions on the **behavior** of the program. Examples of **undefined behavior** are 
 
-  - memory accesses outside of array bounds, 
+- memory accesses outside of array bounds, 
 
-  - signed integer overflow, 
+- signed integer overflow, 
 
-  - null pointer dereference, 
+- null pointer dereference, 
 
-  - modification of the same scalar [more than once](https://en.cppreference.com/w/c/language/eval_order) in an expression without sequence points, 
+- modification of the same scalar [more than once](https://en.cppreference.com/w/c/language/eval_order) in an expression without sequence points, 
 
-  - access to an object through a pointer of a different type, etc. 
+- access to an object through a pointer of a different type, etc. 
 
-    
+  
 
-    Compilers are not required to diagnose **undefined behavior** (although many simple     situations are diagnosed), and the compiled program is not required to do anything meaningful.
+  Compilers are not required to diagnose **undefined behavior** (although many simple     situations are diagnosed), and the compiled program is not required to do anything meaningful.
 
-- *unspecified behavior* - two or more behaviors are permitted and the implementation is not required to document the effects of each behavior. For example, [order of evaluation](https://en.cppreference.com/w/c/language/eval_order), whether identical [string literals](https://en.cppreference.com/w/c/language/string_literal) are distinct, etc. Each **unspecified behavior** results in one of a set of valid results and may produce a different result when repeated in the same program.
+2、*unspecified behavior* - two or more behaviors are permitted and the implementation is not required to document the effects of each behavior. For example, [order of evaluation](https://en.cppreference.com/w/c/language/eval_order), whether identical [string literals](https://en.cppreference.com/w/c/language/string_literal) are distinct, etc. Each **unspecified behavior** results in one of a set of valid results and may produce a different result when repeated in the same program.
 
-- *implementation-defined behavior* - unspecified behavior where each implementation documents how the choice is made. For example, number of bits in a byte, or whether **signed integer** right shift is arithmetic or logical.
+3、*implementation-defined behavior* - unspecified behavior where each implementation documents how the choice is made. For example, number of bits in a byte, or whether **signed integer** right shift is arithmetic or logical.
 
-  ***SUMMARY*** : [GNU C Implementation-Defined Behavior](https://gcc.gnu.org/onlinedocs/gcc/C-Implementation.html#C-Implementation)
+> NOTE: [GNU C Implementation-Defined Behavior](https://gcc.gnu.org/onlinedocs/gcc/C-Implementation.html#C-Implementation)
 
-- *locale-specific behavior* - implementation-defined behavior that depends on the [currently chosen locale](https://en.cppreference.com/w/c/locale/setlocale). For example, whether [islower](https://en.cppreference.com/w/c/string/byte/islower) returns true for any character other than the 26 lowercase Latin letters.
+4、*locale-specific behavior* - implementation-defined behavior that depends on the [currently chosen locale](https://en.cppreference.com/w/c/locale/setlocale). For example, whether [islower](https://en.cppreference.com/w/c/string/byte/islower) returns true for any character other than the 26 lowercase Latin letters.
 
 (Note: [Strictly conforming](https://en.cppreference.com/w/c/language/conformance) programs do not depend on any unspecified, undefined, or implementation-defined behavior)
 
@@ -94,7 +94,7 @@ exists_in_table:
 
 
 
-## 维基百科[Undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior)
+## wikipedia [Undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior)
 
 In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), **undefined behavior** (**UB**) is the result of executing computer code whose [behavior](https://en.wikipedia.org/wiki/Behavior) is not prescribed(规定的) by the [language specification](https://en.wikipedia.org/wiki/Language_specification) to which the code adheres(遵循), for the current state of the program. This happens when the [translator](https://en.wikipedia.org/wiki/Translator_(computing)) of the source code makes certain assumptions, but these assumptions are not satisfied during execution.
 

@@ -1,9 +1,8 @@
 nav:
     - C++: index.md
-
     # c++的发展，演进，不断引入的新特性
     - What-is-new-in-C++: What-is-new-in-C++
-    
+   
     #理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识
     # Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
     - Language-reference: Language-reference
@@ -18,13 +17,16 @@ nav:
     # C++的命名规范
     - C++-name-conversion: C++-name-conversion.md
     
-    # 总结c++支持的programming paradigm
+    # 总结c++支持的programming paradigm、idiom、pattern
     - Programming-paradigm: Programming-paradigm
     # 
     - Idiom: Idiom
     # c++的设计模式
     - Pattern: Pattern
-
+    
+    # Resource-management是C++中的核心内容
+    - Resource-management: Resource-management
+    
     # 对c++中的一些专题进行介绍
     - Guide: Guide
     # C++领域专家
@@ -32,10 +34,14 @@ nav:
     
     # 
     - IDE: IDE
+    
+########## 下面是相关的  ##########     
     # 讨论C++的设计与实现
     - C++design: C++design
     # 对C++ implementation 进行讨论
     - C++implementation: C++implementation
+    # cross-plateform是C++中非常重要的一个内容
+    - C++cross-plateform: C++cross-plateform
     
 
 

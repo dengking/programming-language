@@ -12,4 +12,6 @@ nav:
     - Go: Go
     ########## 对比各种programming language##########    
     - Comparison-of-programming-language: Comparison-of-programming-language
+    ##### 如何跨语言 #####
+    - Cross-language: Cross-language
     - Online-compiler: Online-compiler
