@@ -10,5 +10,5 @@ nav:
     - Guideline-covariance: Guideline-covariance
     - Guide-subtyping-polymorphism: Guide-subtyping-polymorphism
     - Guideline-overhead: Guideline-overhead
-    
+    - Guideline-custom-deleter: Guideline-custom-deleter
     - TODO-pointer_cast: TODO-pointer_cast.md
