@@ -1,6 +1,12 @@
-# C++ implementation
+# 关于本章
 
-本章对C++ implementation进行整理，显然这会涉及非常多的内容。对C++而言，它的implementation主要是由compiler来完成。
+1、在前面章节已经描述了compile model，总结了compiler是如何编译生成最终的object file的
+
+2、本章继续深入，探讨C++ compiler编译一个source file的细节，显然这会涉及非常多的内容。
+
+3、对C++而言，它的implementation主要是由compiler来完成。
+
+
 
 ## Compiler的局限
 
@@ -14,13 +20,19 @@
 
 C++11引入了memory model，给予了programmer解决上述问题的手段。
 
+
+
 ## Compiler optimization 
+
+
 
 ### Principle
 
 compiler AS-IF。那它的基准是什么？基准是：value computation、side effect，显然基准是 programming language standard中进行描述的，那标准是如何来进行描述的呢？
 
 C++ programming language是如何描述基准的，它留下了充足的optimization空间。
+
+
 
 ### 有哪些optimization？
 
@@ -116,6 +128,21 @@ expression、statement
 
 参见 `C++\Language-reference\Template\Implementation` 章节
 
+
+
 ## Implementation of polymorphism
 
 参见 `C++\Guide\Polymorphism` 章节。
+
+
+
+## See also
+
+在下面章节中，也涉及compile相关的内容:
+
+| 章节                                                         | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `C++\Guide\Implementation-of-polymorphism`                   | 汇总了C++ polymorphism的实现                                 |
+| `C++\Language-reference\Basic-concept\Organization\Name-lookup` | compile过程中的非常重要的一个环节是name lookup，在这个章节中对它进行了探讨 |
+
+

@@ -2,8 +2,9 @@ nav:
     - Home: index.md
     - Theory: Theory
     # 各种具体的programming  language
+    - C++: C++
+    - C: C        
     - Python: Python
-    - C-family: C-family
     - Rust: Rust
     - JavaScript: JavaScript
     - Java: Java

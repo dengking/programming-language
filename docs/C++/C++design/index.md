@@ -24,6 +24,3 @@ b、side effect
 
 2、......
 
-## C++ implementation
-
-在`./C++implementation`章节进行了论述。

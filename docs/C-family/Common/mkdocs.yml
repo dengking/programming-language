@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - From-source-code-to-exec: From-source-code-to-exec
+
     - Compile-time-and-run-time: Compile-time-and-run-time
     - Declaration-and-definition: Declaration-and-definition
     - Specifiers: specifiers

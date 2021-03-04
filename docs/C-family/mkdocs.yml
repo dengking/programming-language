@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
-    - C: C    
-    - C++: C++
+
     - Common: Common
 
     

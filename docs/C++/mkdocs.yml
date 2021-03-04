@@ -25,6 +25,9 @@ nav:
     - Style-guide: Style-guide
     # 
     - IDE: IDE
+    - C++design: C++design
+    # 对C++ implementation 进行讨论
+    - C++implementation: C++implementation
     # 对c++中的一些专题进行介绍
     - Guide: Guide
 
