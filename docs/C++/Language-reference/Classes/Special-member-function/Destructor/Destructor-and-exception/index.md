@@ -1,5 +1,23 @@
 # Destructor and exception
 
+## cppreference [Destructors](https://en.cppreference.com/w/cpp/language/destructor) # [Exceptions](https://en.cppreference.com/w/cpp/language/destructor#Exceptions)
+
+As any other function, a destructor may terminate by throwing an [exception](https://en.cppreference.com/w/cpp/language/exceptions) (this usually requires it to be explicitly declared `noexcept(false))` (since C++11), however if this destructor happens to be called during [stack unwinding](https://en.cppreference.com/w/cpp/language/throw#Stack_unwinding), [std::terminate](https://en.cppreference.com/w/cpp/error/terminate) is called instead.
+
+> NOTE: 
+>
+> 1、在cppreference中，[stack unwinding](https://en.cppreference.com/w/cpp/language/throw#Stack_unwinding) 特指由于exception而导致的提前退出
+
+Although [std::uncaught_exception](https://en.cppreference.com/w/cpp/error/uncaught_exception) may sometimes be used to detect stack unwinding in progress, it is generally considered bad practice to allow any destructor to terminate by throwing an exception. This functionality is nevertheless(然而) used by some libraries, such as [SOCI](https://github.com/SOCI/soci) and [Galera 3](http://galeracluster.com/downloads/), which rely on the ability of the destructors of nameless temporaries to throw exceptions at the end of the full expression that constructs the temporary.
+
+> NOTE: 
+>
+> 1、" [std::uncaught_exception](https://en.cppreference.com/w/cpp/error/uncaught_exception) may sometimes be used to detect stack unwinding in progress"，参见 `Scope-Guard` 章节
+>
+> 2、 "This functionality is nevertheless(然而) used by some libraries, such as [SOCI](https://github.com/SOCI/soci) and [Galera 3](http://galeracluster.com/downloads/), which rely on the ability of the destructors of nameless temporaries to throw exceptions at the end of the full expression that constructs the temporary."
+>
+> 这段话的意思是: 一些libraries，比如  [SOCI](https://github.com/SOCI/soci) and [Galera 3](http://galeracluster.com/downloads/)，它们通过让destructor 抛出exception来实现特殊的概念
+
 ## ibm [Stack unwinding (C++ only)](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.cbclx01/cplr155.htm) # Destructor and exception
 
 If during **stack unwinding** a **destructor** throws an **exception** and that exception is not handled, the `terminate()`function is called. The following example demonstrates this:

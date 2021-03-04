@@ -2,9 +2,13 @@
 
 "stack unwind"是C++的运行机制之一，参见
 
-1、 `C-and-C++\From-source-code-to-exec\ABI\Call-convention\Call-stack`
+1、 `Call-stack`
 
-2、`C++\Language-reference\Basic-concept\Execution-model`
+2、`Abstract-machine\Execution-model`
+
+在cppreference中，stack unwinding特指由于exception而导致的函数提前退出，关于此，参见:
+
+1、cppreference [Destructors](https://en.cppreference.com/w/cpp/language/destructor) # [Exceptions](https://en.cppreference.com/w/cpp/language/destructor#Exceptions)
 
 
 
