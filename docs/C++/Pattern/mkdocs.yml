@@ -5,3 +5,4 @@ nav:
     - Visitor-pattern: Visitor-pattern
     - Decorator: Decorator
     - Adapter-pattern: Adapter-pattern
+    - Mixin: Mixin
