@@ -910,28 +910,6 @@ nav:
         - Class-template-SFINAE: C++/Language-reference/Template/SFINAE/Class-template-SFINAE.md
         - Function-template-SFINAE: C++/Language-reference/Template/SFINAE/Function-template-SFINAE.md
         - Expression-SFINAE: C++/Language-reference/Template/SFINAE/Expression-SFINAE.md
-      - Programming-paradigm:
-        - Introduction: C++/Language-reference/Template/Programming-paradigm/index.md
-        - Template-metaprogramming:
-          - Template-metaprogramming: C++/Language-reference/Template/Programming-paradigm/TMP/Template-metaprogramming.md
-          - TMP-and-FP:
-            - Introduction: C++/Language-reference/Template/Programming-paradigm/TMP/TMP-and-FP/index.md
-        - Generic-programming:
-          - Introduction: C++/Language-reference/Template/Programming-paradigm/Generic-programming/index.md
-          - Template-is-behavior-based:
-            - Introduction: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Template-is-behavior-based/index.md
-            - drdobbs-Templates-and-Duck-Typing:
-              - Introduction: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Template-is-behavior-based/drdobbs-Templates-and-Duck-Typing/index.md
-          - Named-requirements:
-            - Introduction: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Named-requirements/index.md
-            - Magic-function: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Named-requirements/Magic-function.md
-          - Concepts:
-            - Introduction: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/index.md
-            - cppreference-Concepts: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/cppreference-Concepts.md
-            - Concepts-The-Future-of-Generic-Programming: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/Concepts-The-Future-of-Generic-Programming.md
-            - Pre-C++20-concept:
-              - Introduction: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/index.md
-              - ConceptC++: C++/Language-reference/Template/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/ConceptC++.md
       - Implementation:
         - Introduction: C++/Language-reference/Template/Implementation/index.md
         - Compile-error: C++/Language-reference/Template/Implementation/Compile-error.md
@@ -1340,6 +1318,28 @@ nav:
   - C++-name-conversion: C++/C++-name-conversion.md
   - Programming-paradigm:
     - Introduction: C++/Programming-paradigm/index.md
+    - OOP:
+      - Introduction: C++/Programming-paradigm/OOP/index.md
+    - Generic-programming:
+      - Introduction: C++/Programming-paradigm/Generic-programming/index.md
+      - Template-is-behavior-based:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Template-is-behavior-based/index.md
+        - drdobbs-Templates-and-Duck-Typing:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Template-is-behavior-based/drdobbs-Templates-and-Duck-Typing/index.md
+      - Named-requirements:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Named-requirements/index.md
+        - Magic-function: C++/Programming-paradigm/Generic-programming/Named-requirements/Magic-function.md
+      - Concepts:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Concepts/index.md
+        - cppreference-Concepts: C++/Programming-paradigm/Generic-programming/Concepts/cppreference-Concepts.md
+        - Concepts-The-Future-of-Generic-Programming: C++/Programming-paradigm/Generic-programming/Concepts/Concepts-The-Future-of-Generic-Programming.md
+        - Pre-C++20-concept:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/index.md
+          - ConceptC++: C++/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/ConceptC++.md
+    - TMP:
+      - Template-metaprogramming: C++/Programming-paradigm/TMP/Template-metaprogramming.md
+      - TMP-and-FP:
+        - Introduction: C++/Programming-paradigm/TMP/TMP-and-FP/index.md
     - AOP:
       - Introduction: C++/Programming-paradigm/AOP/index.md
       - Execute-Around-Pointer-idiom:
@@ -1349,6 +1349,8 @@ nav:
       - "TODO-vitiy-C++11-functional-decomposition\u2013easy-way-to-do-AOP":
         - Introduction: "C++/Programming-paradigm/AOP/TODO-vitiy-C++11-functional-decomposition\u2013\
             easy-way-to-do-AOP/index.md"
+    - FP:
+      - Introduction: C++/Programming-paradigm/FP/index.md
     - Polymorphism:
       - Introduction: C++/Programming-paradigm/Polymorphism/index.md
       - Specialization-and-overload:
@@ -1368,6 +1370,15 @@ nav:
         - Introduction: C++/Programming-paradigm/Polymorphism/TODO-Static-and-dynamic-polymorphism/index.md
       - Polymorphic-object-container:
         - Introduction: C++/Programming-paradigm/Polymorphism/Polymorphic-object-container/index.md
+    - Type-erasure-OOP-GP:
+      - Introduction: C++/Programming-paradigm/Type-erasure-OOP-GP/index.md
+      - ixodoi.expertscolumn-C++ Programming-void-pointer-VS-template:
+        - Introduction: C++/Programming-paradigm/Type-erasure-OOP-GP/ixodoi.expertscolumn-C++
+            Programming-void-pointer-VS-template/index.md
+      - TODO-artima-On-the-Tension-Between-OOP-and-GP-in-C++:
+        - Introduction: C++/Programming-paradigm/Type-erasure-OOP-GP/TODO-artima-On-the-Tension-Between-OOP-and-GP-in-C++/index.md
+      - TODO-Type-erasure-and-OOP-interface-and-GP:
+        - Introduction: C++/Programming-paradigm/Type-erasure-OOP-GP/TODO-Type-erasure-and-OOP-interface-and-GP/index.md
   - Idiom:
     - Introduction: C++/Idiom/index.md
     - OOP:
@@ -1865,15 +1876,6 @@ nav:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Type-Erasure/More-C++Idioms-Type-Erasure/index.md"
         - TODO-akrzemi1-Type-erasure:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Type-Erasure/TODO-akrzemi1-Type-erasure/index.md"
-        - Type-erasure-OOP-GP:
-          - Introduction: "C++/Guide/Type-\u76F8\u5173/Type-Erasure/Type-erasure-OOP-GP/index.md"
-          - ixodoi.expertscolumn-C++ Programming-void-pointer-VS-template:
-            - Introduction: "C++/Guide/Type-\u76F8\u5173/Type-Erasure/Type-erasure-OOP-GP/ixodoi.expertscolumn-C++\
-                \ Programming-void-pointer-VS-template/index.md"
-          - TODO-artima-On-the-Tension-Between-OOP-and-GP-in-C++:
-            - Introduction: "C++/Guide/Type-\u76F8\u5173/Type-Erasure/Type-erasure-OOP-GP/TODO-artima-On-the-Tension-Between-OOP-and-GP-in-C++/index.md"
-          - TODO-Type-erasure-and-OOP-interface-and-GP:
-            - Introduction: "C++/Guide/Type-\u76F8\u5173/Type-Erasure/Type-erasure-OOP-GP/TODO-Type-erasure-and-OOP-interface-and-GP/index.md"
       - Reflection:
         - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/index.md"
         - Library-rttr:

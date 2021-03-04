@@ -4,7 +4,7 @@ C++是一种multi-paradigm programming language，下面罗列了C++支持的pro
 
 ## OOP: Object-oriented programming
 
-C++直接支持OOP，C++OOP是class-based OOP。
+C++直接支持OOP，C++OOP是class-based OOP，参见 `OOP` 章节
 
 
 
@@ -26,21 +26,23 @@ C++通过template来实现:
 
 参见如下章节:
 
-1、`C++\Language-reference\Template\Programming-paradigm\Generic-programming`
+1、`C++\Programming-paradigm\Generic-programming`
 
 2、`C++\Language-reference\Functions\Generic-programming`
 
-3、`C++\Idiom\Generic-programming`
+
 
 ### TMP: Template-meta programming
 
-参见`C++\Language-reference\Template\Programming-paradigm\TMP`章节。
+参见如下章节:
+
+1、`C++\Programming-paradigm\GP-and-TMP\TMP`
 
 
 
 ## AOP
 
-C++并不直接支持AOP，但是C++可以使用AOP的思想来编写更加抽象的code。
+C++并不直接支持AOP，但是C++可以使用AOP的思想来编写更加抽象的code，参见 `AOP` 章节。
 
 
 
