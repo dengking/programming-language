@@ -4,7 +4,7 @@ nav:
     - Compile-time-and-run-time: Compile-time-and-run-time
     - Declaration-and-definition: Declaration-and-definition
     - Specifiers: specifiers
-    - VS-C-VS-C++: VS-C-VS-C++
+
     # 下面三者必须要放到一起，因为它们是密切相关的
     - Resource-management: Resource-management
     - String: String
@@ -12,7 +12,7 @@ nav:
     - Data-model: Data-model
     - Undefined-behavior: Undefined-behavior
     - Struct: Struct
-    - Expression: Expression
+
     - SWIG: SWIG
     - Wrapper: Wrapper
     

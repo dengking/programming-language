@@ -3,6 +3,7 @@ nav:
     - Expressions: Expressions.md
     - Full-expression: Full-expression.md
     - Value-categories: Value-categories
+    - C++Order-of-evaluation: C++Order-of-evaluation
 #################### operator相关 ####################    
     - Operators: Operators
     - Literals: Literals

@@ -9,7 +9,8 @@ nav:
     - Memory-allocation: Memory-allocation
     - sizeof: sizeof.md
     - Member-access-operators: Member-access-operators
+    - Other: Other
     # 运算符重载
     - Operator-overloading: Operator-overloading
-
-    - Other: Other
+    # 运算符优先级
+    - Operator-precedence: Operator-precedence

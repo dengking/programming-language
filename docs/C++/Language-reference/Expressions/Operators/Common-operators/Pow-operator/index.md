@@ -1,10 +1,4 @@
-# 关于本章
-
-本章对C family language中的operator相关的内容进行介绍。
-
-
-
-## pow operator
+# Pow operator
 
 需要注意的是，C++、C都没有pow operator，只能怪通过调用标准库函数来进行实现。
 

@@ -4,8 +4,7 @@ nav:
     - OOP: OOP
     #################### template metaprogramming和Generic-programming密切相关####################    
     - Generic-programming: Generic-programming
-    ########## AOP#############
-    - AOP: AOP
+
     ########## Exception#############
     - Error-handling: Error-handling
     - Mixin: Mixin
