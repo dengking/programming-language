@@ -72,7 +72,7 @@ expression、statement
 
 ### 参考了如下文章:
 
-### stackoverflow [Deletion of copy-ctor & copy-assignment - public, private or protected?](https://stackoverflow.com/questions/55205874/deletion-of-copy-ctor-copy-assignment-public-private-or-protected) # [A](https://stackoverflow.com/a/55206034)
+#### stackoverflow [Deletion of copy-ctor & copy-assignment - public, private or protected?](https://stackoverflow.com/questions/55205874/deletion-of-copy-ctor-copy-assignment-public-private-or-protected) # [A](https://stackoverflow.com/a/55206034)
 
 > Name lookup and overload resolution happen before access checking. 
 
@@ -80,11 +80,11 @@ expression、statement
 
 
 
-### cppreference [Function template](https://en.cppreference.com/w/cpp/language/function_template)
+#### cppreference [Function template](https://en.cppreference.com/w/cpp/language/function_template)
 
 > NOTE: 
 >
-> 1、这篇文章非常好，它其实是按照compiler编译function template的流程来进行编写的，通过这篇文章，大致可以树立清楚compiler 编译 function template的流程
+> 1、这篇文章非常好，它其实是按照compiler编译function template的流程来进行编写的，通过这篇文章，大致可以梳理清楚compiler 编译 function template的流程
 
 **Template argument deduction** 段
 
@@ -110,7 +110,7 @@ expression、statement
 
 
 
-### [GotW #100: Compilation Firewalls (Difficulty: 6/10)](https://herbsutter.com/gotw/_100/)
+#### [GotW #100: Compilation Firewalls (Difficulty: 6/10)](https://herbsutter.com/gotw/_100/)
 
 > C++ took the deliberate design decision to perform overload resolution before accessibility checking for safety reasons. For example, it was felt that changing the accessibility of a function from p*rivate* to *public* shouldn’t change the meaning of legal calling code.
 
@@ -118,7 +118,7 @@ expression、statement
 
 
 
-### stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading) # [A](https://stackoverflow.com/a/7108123)
+#### stackoverflow [Template Specialization VS Function Overloading](https://stackoverflow.com/questions/7108033/template-specialization-vs-function-overloading) # [A](https://stackoverflow.com/a/7108123)
 
 
 
@@ -133,16 +133,5 @@ expression、statement
 ## Implementation of polymorphism
 
 参见 `C++\Guide\Polymorphism` 章节。
-
-
-
-## See also
-
-在下面章节中，也涉及compile相关的内容:
-
-| 章节                                                         | 说明                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `C++\Guide\Implementation-of-polymorphism`                   | 汇总了C++ polymorphism的实现                                 |
-| `C++\Language-reference\Basic-concept\Organization\Name-lookup` | compile过程中的非常重要的一个环节是name lookup，在这个章节中对它进行了探讨 |
 
 

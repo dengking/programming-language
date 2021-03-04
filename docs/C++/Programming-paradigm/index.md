@@ -4,7 +4,9 @@ C++是一种multi-paradigm programming language，下面罗列了C++支持的pro
 
 ## OOP: Object-oriented programming
 
-C++直接支持OOP，C++OOP是class-based OOP，参见 `OOP` 章节
+C++直接支持OOP，C++OOP是class-based OOP，参见:
+
+1、 `OOP` 章节
 
 
 

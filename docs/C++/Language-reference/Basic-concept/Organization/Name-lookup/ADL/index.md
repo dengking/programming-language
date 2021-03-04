@@ -2,20 +2,21 @@
 
 ADL是compiler的一种行为，可以将compiler的name lookup分为两种：
 
-- ADL
-- ordinary lookup
+1、ADL
+
+2、ordinary lookup
 
 ## ADL在C++中的广泛应用
 
-今天阅读cppreference Argument-dependent lookup方知，我们的`std::cout << "Test\n";`竟然蕴藏着如此之多的玄机：
+今天阅读cppreference [Argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)方知，我们的`std::cout << "Test\n";`竟然蕴藏着如此之多的玄机：
 
-- `std::cout`是一个object，它没有成员函数`operator<<`
+1、`std::cout`是一个object，它没有成员函数`operator<<`
 
-- 在`<iostram>`中，定义了`std::operator<<(std::ostream&, const char*)`
+2、在`<iostram>`中，定义了`std::operator<<(std::ostream&, const char*)`
 
-- 当我们编写`std::cout << "Test\n";`的时候，compiler会使用ADL来进行查找：
+3、当我们编写`std::cout << "Test\n";`的时候，compiler会使用ADL来进行查找：
 
-  > There is no `operator<<` in global namespace, but ADL examines `std` namespace because the left argument is in `std` and finds `std::operator<<(std::ostream&, const char*)` 
+> There is no `operator<<` in global namespace, but ADL examines `std` namespace because the left argument is in `std` and finds `std::operator<<(std::ostream&, const char*)` 
 
 这让我想到了之前在阅读代码的时候，有很多类似的写法：
 
@@ -78,7 +79,7 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 ## ADL的重要意义
 
-在`C++\Language-reference\Classes\The-interface-principle.md`中对ADL and the Interface Principle进行了分析。
+在`C++\Language-reference\Classes\The-interface-principle`中对ADL and the Interface Principle进行了分析。
 
 ### ADL make C++ generic and extensible
 
@@ -86,15 +87,17 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 扩展性
 
-维基百科[Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
+wikipedia [Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
 
 > Functions found by ADL are considered part of a class's interface. In the C++ Standard Library, several algorithms use unqualified calls to `swap` from within the `std` namespace. As a result, the generic `std::swap` function is used if nothing else is found, but if these algorithms are used with a third-party class, `Foo`, found in another namespace that also contains `swap(Foo&, Foo&)`, that overload of `swap` will be used.
 
 典型的例子：
 
-- [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
-- [Swap values](https://cpppatterns.com/patterns/swap-values.html)
-- [Range-based for](http://en.cppreference.com/w/cpp/language/range-for)
+1、[Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
+
+2、[Swap values](https://cpppatterns.com/patterns/swap-values.html)
+
+
 
 
 
@@ -102,16 +105,29 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 Argument-dependent lookup, also known as ADL, or Koenig lookup, is the set of rules for looking up the **unqualified function names** in [function-call expressions](operator_other.html), including implicit function calls to [overloaded operators](operators.html). These **function names** are looked up in the namespaces of their arguments in addition to the scopes and namespaces considered by the usual [unqualified name lookup](lookup.html).
 
-> NOTE: 简而言之：在lookup function name的时候，考虑如下namespace：
+> NOTE: 
 >
-> - ADL: namespace of their argument
-> - ordinary lookup: scope and namespace considered by the usual [unqualified name lookup](lookup.html)（可能包含当前scope）
+> 一、使用ADL的场景:
 >
-> 思考：上述两者，谁先谁后？
+> "**unqualified function names** in [function-call expressions](operator_other.html), including implicit function calls to [overloaded operators](operators.html)"
+>
+> 二、简而言之：在lookup function name的时候，考虑如下namespace：
+>
+> 1、ADL: namespace of their argument
+>
+> 2、ordinary lookup: scope and namespace considered by the usual [unqualified name lookup](lookup.html)（可能包含当前scope）
+>
+> 三、次序
+>
+> 1、思考：上述两者，谁先谁后？
 >
 > 通过`swap`的例子来看，应该是首先进行ADL，然后进行ordinary lookup。在cpppatterns [Range-based algorithms](https://cpppatterns.com/patterns/range-based-algorithms.html)中对此进行了说明：
 >
-> On [lines 12–13](https://cpppatterns.com/patterns/range-based-algorithms.html#line12), we call `begin` and `end` on the range to get the respective iterators to the beginning and end of the range. We use using-declarations on [lines 7–8](https://cpppatterns.com/patterns/range-based-algorithms.html#line7) to allow these calls to be found via [argument-dependent lookup](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup) before using the standard [`std::begin`](http://en.cppreference.com/w/cpp/iterator/begin) and [`std::end`](http://en.cppreference.com/w/cpp/iterator/end) functions. With these iterators, we can now implement the algorithm over the elements between them.
+> > On [lines 12–13](https://cpppatterns.com/patterns/range-based-algorithms.html#line12), we call `begin` and `end` on the range to get the respective iterators to the beginning and end of the range. We use using-declarations on [lines 7–8](https://cpppatterns.com/patterns/range-based-algorithms.html#line7) to allow these calls to be found via [argument-dependent lookup](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup) before using the standard [`std::begin`](http://en.cppreference.com/w/cpp/iterator/begin) and [`std::end`](http://en.cppreference.com/w/cpp/iterator/end) functions. With these iterators, we can now implement the algorithm over the elements between them.
+>
+> 2、ADL优秀在parameter的name space中进行lookup，然后是current name space，这和Python的lookup顺序是有些类似的
+
+Argument-dependent lookup makes it possible to use operators defined in a different namespace. Example:
 
 ### Example
 
@@ -150,9 +166,15 @@ Otherwise, for every argument in a function call expression its type is examined
 
 ### Notes
 
-Because of **argument-dependent lookup**, **non-member functions** and **non-member operators** defined in the same namespace as a **class** are considered part of the **public interface** of that class (if they are found through ADL) [[1\]](adl.html#cite_note-1).
+Because of argument-dependent lookup, non-member functions and non-member operators defined in the same namespace as a class are considered part of the public interface of that class (if they are found through ADL) [[2\]](https://en.cppreference.com/w/cpp/language/adl#cite_note-2).
 
-> NOTE: 这非常重要，从interface的角度来理解。
+
+
+> NOTE: 
+>
+> 1、这非常重要，从interface的角度来理解。
+>
+> 2、上述观点是和[Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter)的文章[What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)中的观点一致的
 
 ADL is the reason behind the established idiom for swapping two objects in generic code:
 
@@ -161,13 +183,13 @@ using std::swap;
 swap(obj1, obj2);
 ```
 
-because calling [std::swap](../algorithm/swap.html)`(obj1, obj2)` directly would not consider the user-defined `swap()` functions that could be defined in the same namespace as the types of `obj1` or `obj2`, and just calling the unqualified `swap(obj1, obj2)` would call nothing if no user-defined overload was provided. In particular, [std::iter_swap](../algorithm/iter_swap.html) and all other standard library algorithms use this approach when dealing with [*Swappable*](../named_req/Swappable.html) types.
+because calling [std::swap](http://en.cppreference.com/w/cpp/algorithm/swap)(obj1, obj2) directly would not consider the user-defined swap() functions that could be defined in the same namespace as the types of obj1 or obj2, and just calling the unqualified swap(obj1, obj2) would call nothing if no user-defined overload was provided. In particular, [std::iter_swap](https://en.cppreference.com/w/cpp/algorithm/iter_swap) and all other standard library algorithms use this approach when dealing with [*Swappable*](https://en.cppreference.com/w/cpp/named_req/Swappable) types.
 
-**Name lookup rules** make it impractical to declare operators in global or user-defined namespace that operate on types from the `std` namespace, e.g. a custom `operator>>` or `operator+` for [std::vector](../container/vector.html) or for [std::pair](../utility/pair.html) (unless the element types of the vector/pair are user-defined types, which would add their namespace to ADL). Such operators would not be looked up from template instantiations, such as the standard library algorithms. See [dependent names](dependent_name.html) for further details.
+Name lookup rules make it impractical(不切实际的) to declare operators in global or user-defined namespace that operate on types from the std namespace, e.g. a custom operator>> or operator+ for [std::vector](https://en.cppreference.com/w/cpp/container/vector) or for [std::pair](https://en.cppreference.com/w/cpp/utility/pair) (unless the element types of the vector/pair are user-defined types, which would add their namespace to ADL). Such operators would not be looked up from template instantiations, such as the standard library algorithms. See [dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) for further details.
 
 > NOTE: 上面这一段话，没有搞懂
 
-ADL can find a [friend function](friend.html) (typically, an overloaded operator) that is defined entirely within a class or class template, even if it was never declared at namespace level.
+ADL can find a [friend function](https://en.cppreference.com/w/cpp/language/friend) (typically, an overloaded operator) that is defined entirely within a class or class template, even if it was never declared at namespace level.
 
 ```c++
 template<typename T>

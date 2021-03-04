@@ -8,15 +8,19 @@
 
 For example, to compile [std::cout](http://en.cppreference.com/w/cpp/io/cout) << [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl);, the compiler performs:
 
-- **unqualified name lookup** for the name `std`, which finds the declaration of namespace `std` in the header `<iostream>`
+1、**unqualified name lookup** for the name `std`, which finds the declaration of namespace `std` in the header `<iostream>`
 
-  >  NOTE: 因为`#include <iostream>`，则包含了namespace `std`的声明
+>  NOTE: 因为`#include <iostream>`，则包含了namespace `std`的声明
 
-- **qualified name lookup** for the name `cout`, which finds a variable declaration in the namespace `std`
+2、**qualified name lookup** for the name `cout`, which finds a variable declaration in the namespace `std`
 
-- **qualified name lookup** for the name `endl`, which finds a function template declaration in the namespace `std`
+3、**qualified name lookup** for the name `endl`, which finds a function template declaration in the namespace `std`
 
-- both [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl) for the name `operator <<` which finds multiple function template declarations in the namespace `std` and **qualified name lookup** for the name `std::ostream::operator<<` which finds multiple member function declarations in class `std::ostream`
+4、both [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl) for the name `operator <<` which finds multiple function template declarations in the namespace `std` and **qualified name lookup** for the name `std::ostream::operator<<` which finds multiple member function declarations in class `std::ostream`
+
+> NOTE: 
+>
+> 1、在 cppreference [Argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl) 中，对`std::cout << "Test\n";`有着更多的解释
 
 For function and function template names, **name lookup** can associate *multiple* declarations with the same name, and may obtain additional declarations from [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl). [Template argument deduction](https://en.cppreference.com/w/cpp/language/function_template) may also apply, and the set of declarations is passed to [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), which selects the declaration that will be used. [Member access](https://en.cppreference.com/w/cpp/language/access) rules, if applicable, are considered only after **name lookup** and **overload resolution**.
 
