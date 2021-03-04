@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - Data-type-in-advanced-language-and-machine-instruction: Data-type-in-advanced-language-and-machine-instruction.md
-    - Aliasing: Aliasing
+    - What-is-aliasing: What-is-aliasing
     - Strict-aliasing: Strict-aliasing
     - Type-punning: Type-punning
     - Type-punning-VS-type conversion-VS-alias: Type-punning-VS-type conversion-VS-alias.md

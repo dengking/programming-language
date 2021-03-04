@@ -1,4 +1,4 @@
 nav:
-    - Pragma-pack: Pragma-pack.md
+    - Pragma-pack-macro: Pragma-pack-macro.md
     - struct-compress-scheme: struct-compress-scheme.md
     - The-Lost-Art-of-Structure-Packing: The-Lost-Art-of-Structure-Packing
