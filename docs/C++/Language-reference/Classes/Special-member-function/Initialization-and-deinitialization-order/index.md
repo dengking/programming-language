@@ -1,6 +1,54 @@
-# Constructors-and member initializer lists
+# Initialization and deinitialization order 
 
-## cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list)
+本章探讨constructor、destructor的调用次序问题(order)，原则如下:
+
+1、constructor的调用次序: 沿着class hierarchy，自顶向下、自左至右进行初始化
+
+2、destructor的调用是和constructor的相反的，这样是为了保证stack ordering
+
+## cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list) # [Initialization order](https://en.cppreference.com/w/cpp/language/constructor#Initialization_order)
+
+> NOTE: 
+>
+> 一、"actual order of initialization"是由
+>
+> 1、class hierarchy
+>
+> 2、"non-static data member are initialized in order of declaration in the class definition"
+>
+> 
+>
+> 在下面解释了这样做的原因:
+>
+> 1、这样的order是compiler能够control的
+>
+> 2、保证initialization 和 deinitialization是stack ordering
+
+The order of **member initializers** in the list is irrelevant: the actual order of initialization is as follows:
+
+1) If the constructor is for the **most-derived class**, **virtual bases** are initialized in the order in which they appear in depth-first left-to-right traversal of the base class declarations (left-to-right refers to the appearance in **base-specifier lists**)
+
+> NOTE: 
+>
+> 1、"depth-first"的含义是什么？是否意味着 越"derived"，则越先被initialization
+
+2) Then, **direct bases** are initialized in left-to-right order as they appear in this class's **base-specifier list**
+
+3) Then, non-static data member are initialized in order of declaration in the class definition.
+
+4) Finally, the body of the constructor is executed
+
+(Note: if initialization order was controlled by the appearance in the member initializer lists of different constructors, then the [destructor](https://en.cppreference.com/w/cpp/language/destructor) wouldn't be able to ensure that the order of destruction is the reverse of the order of construction)
+
+
+
+## cppreference [Destructors](https://en.cppreference.com/w/cpp/language/destructor) # [Destruction sequence](https://en.cppreference.com/w/cpp/language/destructor#Destruction_sequence)
+
+For both user-defined or implicitly-defined destructors, after the body of the destructor is executed, the compiler calls the destructors for all non-static non-variant members of the class, in reverse order of declaration, then it calls the destructors of all direct non-virtual base classes in [reverse order of construction](https://en.cppreference.com/w/cpp/language/initializer_list#Initialization_order) (which in turn call the destructors of their members and their base classes, etc), and then, if this object is of most-derived class, it calls the destructors of all virtual bases.
+
+Even when the destructor is called directly (e.g. `obj.~Foo();`), the return statement in `~Foo()` does not return control to the caller immediately: it calls all those member and base destructors first.
+
+
 
 
 
@@ -12,12 +60,11 @@
 
 
 
-## 测试代码
+## 我踩过的坑
 
 今天在碰到了一个与initialization-list evaluation order相关的问题，并且它还导致了进程core掉了，现在想来，`c++`的这种设计太容易出现错误了，并且这种错误是非常严重但是隐晦的。
 
 ```c++
-
 class Turn {
 public:
 	virtual ~Turn() {
@@ -98,3 +145,10 @@ private:
 - 为什么什么的代码会core掉？
 
 这些问题既涉及到`c++`也设计到core dump，为此需要专门去了解相关内容。
+
+## TODO
+
+
+
+1、stackoverflow [Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )
+

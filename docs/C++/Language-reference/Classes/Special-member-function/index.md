@@ -20,23 +20,33 @@
 |                 | ......                        |
 | destroy         |                               |
 
+1、copy、swap是基础操作，能够用于实现assign
 
+2、move的实现很多都依赖于swap
 
 ### Create
 
-对应的magic function是constructor，在`Constructor`章节进行描述。
+1、对应的magic function是constructor
+
+参见如下章节:
+
+1、`Constructor`
 
 
 
 ### Copy
 
-copy: 可以copy from lvalue、copy from rvalue
+1、copy: 可以copy from lvalue、copy from rvalue
 
-对应的magic function是: copy constructor、assignment operator
+2、对应的magic function是: copy constructor、assignment operator
 
-对应的magic function是: lvalue copy constructor、rvalue copy constructor; lvalue assignment operator、rvalue assignment operator;
+3、对应的magic function是: lvalue copy constructor、rvalue copy constructor; lvalue assignment operator、rvalue assignment operator;
 
 因此包含四个 magic function。
+
+参见如下章节:
+
+1、`Copy` 章节
 
 
 
@@ -48,13 +58,23 @@ copy: 可以copy from lvalue、copy from rvalue
 
 ### Move
 
-C++ 并不直接move，更多的还是swap。
+1、C++ 并不直接move
+
+2、C++ move很多是基于swap而实现的
+
+参见如下章节:
+
+1、`Move`章节
 
 
 
 ### Destroy
 
-对应的magic function是destructor，在`Destructor`章节进行描述。
+1、对应的magic function是destructor
+
+参见如下章节:
+
+1、在`Destructor`章节
 
 
 

@@ -24,7 +24,9 @@ virtual化，充分发挥dynamic polymorphism。
 
 3、delete、private
 
+参见如下章节:
 
+1、 `Requiring-or-Prohibiting`
 
 ## Default
 
@@ -34,4 +36,6 @@ virtual化，充分发挥dynamic polymorphism。
 
 ## Implicitly defined
 
-compiler是会implicit生成这些magic function的，参见 `Implicitly-defined` 章节。
+compiler是会implicit生成这些magic function的，参见如下章节:
+
+1、`Implicitly-defined` 章节。

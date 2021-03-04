@@ -37,7 +37,7 @@ Function name lookup还涉及到的内容有：
 
 下面是涉及function name lookup的好文章: 
 
-- 文章gotw [Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中对此进行了描述
+1、文章gotw [Namespaces and the Interface Principle](http://www.gotw.ca/publications/mill08.htm)中对此进行了描述
 
 
 
