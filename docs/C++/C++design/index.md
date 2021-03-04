@@ -1,6 +1,6 @@
-# Design and implementation of C++
+# Design of C++
 
-Design and implementation of C++涉及的内容非常多，本文将涉及的内容进行梳理，以期作为了解C++ design 和 implementation的guideline。
+Design of C++涉及的内容非常多，本文将涉及的内容进行梳理，以期作为了解C++ design的guide。
 
 ## How to design C++ programming language?
 

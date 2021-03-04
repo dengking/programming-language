@@ -1,10 +1,6 @@
 nav:
     - C++: index.md
-    # c++的哲学
-    - Philosophy: Philosophy
-    - Expert: Expert
-    # C++的命名规范
-    - C++-name-conversion: C++-name-conversion.md
+
     # c++的发展，演进，不断引入的新特性
     - What-is-new-in-C++: What-is-new-in-C++
     
@@ -15,19 +11,31 @@ nav:
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
     # c++中的库
     - Library: Library
+
+    # c++的哲学
+    - Philosophy: Philosophy
+
+    # C++的命名规范
+    - C++-name-conversion: C++-name-conversion.md
+    
     # 总结c++支持的programming paradigm
     - Programming-paradigm: Programming-paradigm
     # 
     - Idiom: Idiom
     # c++的设计模式
     - Pattern: Pattern
-    # 代码风格
-    - Style-guide: Style-guide
+
+    # 对c++中的一些专题进行介绍
+    - Guide: Guide
+    # C++领域专家
+    - Expert: Expert
+    
     # 
     - IDE: IDE
+    # 讨论C++的设计与实现
     - C++design: C++design
     # 对C++ implementation 进行讨论
     - C++implementation: C++implementation
-    # 对c++中的一些专题进行介绍
-    - Guide: Guide
+    
+
 

@@ -73,7 +73,7 @@ C++的一个发展发现是对template-meta programming的强化。
 
 ### Simplify
 
-C++另外一个非常重要的发展方向是: simplify; simplify能够大大增加C++ programmer的研发效率，在`C++\Guide\Simplify` 章节中对这个主题进行了详细探讨。
+C++另外一个非常重要的发展方向是: simplify; simplify能够大大增加C++ programmer的研发效率，在`Simplify` 章节中对这个主题进行了详细探讨。
 
 
 
