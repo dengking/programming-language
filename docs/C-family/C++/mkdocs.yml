@@ -15,6 +15,8 @@ nav:
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
     # c++中的库
     - Library: Library
+    # 总结c++支持的programming paradigm
+    - Programming-paradigm: Programming-paradigm
     # 
     - Idiom: Idiom
     # c++的设计模式
