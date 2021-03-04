@@ -13,3 +13,4 @@ nav:
     - SFINAE: SFINAE
     - Programming-paradigm: Programming-paradigm
     - Implementation: Implementation
+    - Define-template-in-header-file: Define-template-in-header-file

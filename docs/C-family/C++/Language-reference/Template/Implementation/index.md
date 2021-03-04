@@ -87,7 +87,7 @@ cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)�
 
 下面是member function被使用的场景(也就是它被instance的时候)
 
-1) called 被调用
+1) called(被调用)
 
 借助于Lazyness of template instantiation，我们可以实现conditional compiling，这在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE.md#SFINAE and conditional compiling`中进行了详细介绍。
 
@@ -105,11 +105,23 @@ CRTP是充分运用Lazyness of template instantiation特性的，关于此在wik
 
 需要对template的完整的编译过程有一个高屋建瓴的理解，目前还没有遇到专门描述的文章；可以肯定的是：这个完整的过程，包含了前面描述的一些步骤，但是compiler需要考虑的问题，比上面描述的要多得多。下面是我总结的描述这个问题的内容: 
 
-- 1 先deduce 然后 substitute
-- 2 Primary template and template specializaiton
-- 3 SFINAE
-- 4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
-- 5 Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
+1、deduce 
+
+2、substitute
+
+3、Primary template and template specializaiton
+
+4、SFINAE
+
+下面的内容主要以`void_t`的实现为例来进行说明的，参考了如下文章: 
+
+1、stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
+
+在后面的"4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)"章节中，收录了这篇文章
+
+2、riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) 
+
+在后面的"5 Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) "章节中，收录了这篇文章
 
 ## 1 先deduce 然后 substitute
 
@@ -131,8 +143,9 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 本节标题描述的是：获得template argument的两种方式：
 
-- provided：由programmer 显式 提供
-- deduced：由compiler 隐式 提供；在`C++\Language-reference\Template\Implementation\Argument-deduction`章节进行专门分析
+1、provided：由programmer 显式 提供
+
+2、deduced：由compiler 隐式 提供；在`C++\Language-reference\Template\Implementation\Argument-deduction`章节进行专门分析
 
 本节标题中的内容是源自：素材: cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)。
 
@@ -140,7 +153,7 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 ### Deduction 
 
-在`C++\Language-reference\Template\Implementation\Argument-deduction`中对这个问题进行了描述。
+在`Template-argument-deduction`中对这个问题进行了描述。
 
 
 
@@ -169,10 +182,13 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 
 在stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)中有所涉及，下面是阅读该文章的一些总结：
 
-- compiler会逐个substitute Primary Class Template、Specialized Class Template
-- 首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用
-- 优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization 
-- cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
+1、compiler会逐个substitute Primary Class Template、Specialized Class Template
+
+2、首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用它
+
+3、优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization，即compiler会优先选择 "Specialized Class Template specialization"，这就是一次多态
+
+> 参见: cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 
 ### Partial template specialization是primary template的附庸
 
@@ -300,8 +316,9 @@ Informally "A is more specialized than B" means "A accepts a subset of the types
 
 Formally, to establish **more-specialized-than relationship** between partial specializations, each is first converted to a fictitious function template as follows:
 
-- the first function template has the same template parameters as the first partial specialization and has just one function parameter, whose type is a class template specialization with all the template arguments from the first partial specialization
-- the second function template has the same template parameters as the second partial specialization and has just one function parameter whose type is a class template specialization with all the template arguments from the second partial specialization.
+1、the first function template has the same template parameters as the first partial specialization and has just one function parameter, whose type is a class template specialization with all the template arguments from the first partial specialization
+
+2、the second function template has the same template parameters as the second partial specialization and has just one function parameter whose type is a class template specialization with all the template arguments from the second partial specialization.
 
 The function templates are then ranked as if for [function template overloading](https://en.cppreference.com/w/cpp/language/function_template#Function_template_overloading).
 
@@ -345,9 +362,11 @@ int main()
 
 ## 3 SFINAE
 
-SFINAE是C++ template的重要机制，在`C++\Idiom\Templates-and-generic-programming\SFINAE-trait-enable-if\SFINAE`中对SFINAE进行了深入分析。
+SFINAE是C++ template的重要机制，在`SFINAE`中对SFINAE进行了深入分析。
 
-## 4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)
+
+
+## 4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work) # [A](https://stackoverflow.com/a/27688405)
 
 > 這是我在学习`void_t`的实现的時候，遇到的一篇讲解的比较详细的、涉及template的实现的文章，我覺得非常好，遂收录在此。它结合了一个具体的案例对这个过程进行描述，非常好。
 
@@ -390,9 +409,9 @@ int main()
 
 ```
 
-[A](https://stackoverflow.com/a/27688405)
 
-### 1. Primary Class Template
+
+### 1、Primary Class Template
 
 When you write `has_member<A>::value`, the compiler looks up the name `has_member` and finds the *primary* class template, that is, this declaration:
 
@@ -405,13 +424,15 @@ struct has_member;
 
 The template argument list `<A>` is compared to the **template parameter list** of this primary template. Since the primary template has two parameters, but you only supplied one, the remaining parameter is defaulted to the **default template argument**: `void`. It's as if you had written `has_member<A, void>::value`.
 
-> NOTE: 上面这段话中的“template argument list `<A>` ”对应的是“`has_member<A>::value`”中的`A`。
+> NOTE: 
 >
-> compiler会编译source file，source file中，会`include`定义了primary class template、specialized class template 的header file，所以compiler会同时看到primary class template、specialized class template，并且primary class template在specialized class template之前。
+> 1、上面这段话中的“template argument list `<A>` ”对应的是“`has_member<A>::value`”中的`A`。
 >
-> 上面这段话中的**template parameter list**非常重要，后面会使用给它。
+> 2、compiler会编译source file，source file中，会`include`定义了primary class template、specialized class template 的header file，所以compiler会同时看到primary class template、specialized class template，并且primary class template在specialized class template之前。
+>
+> 3、上面这段话中的**template parameter list**非常重要，后面会使用给它。
 
-### 2. Specialized Class Template
+### 2、Specialized Class Template
 
 **Now**, the **template parameter list** is compared against any **specializations** of the template `has_member`. Only if no **specialization** matches, the definition of the **primary template** is used as a **fall-back**. So the **partial specialization** is taken into account:
 
@@ -435,8 +456,9 @@ The compiler tries to match the template arguments `A, void` with the patterns d
 
 > There are two reasons for this:
 >
-> - The expression inside `decltype` is explicitly excluded from **template argument deduction**. I guess this is because it can be arbitrarily complex.
-> - Even if we used a pattern without `decltype` like `void_t< T >`, then the deduction of `T` happens on the resolved alias template. That is, we resolve the alias template and later try to deduce the type `T` from the resulting pattern. The resulting pattern, however, is `void`, which is not dependent on `T` and therefore does not allow us to find a specific type for `T`. This is similar to the mathematical problem of trying to invert a constant function (in the mathematical sense of those terms).
+> 1、The expression inside `decltype` is explicitly excluded from **template argument deduction**. I guess this is because it can be arbitrarily complex.
+>
+> 2、Even if we used a pattern without `decltype` like `void_t< T >`, then the deduction of `T` happens on the resolved alias template. That is, we resolve the alias template and later try to deduce the type `T` from the resulting pattern. The resulting pattern, however, is `void`, which is not dependent on `T` and therefore does not allow us to find a specific type for `T`. This is similar to the mathematical problem of trying to invert a constant function (in the mathematical sense of those terms).
 
 > NOTE: 关于`decltype`是Non-deduced contexts，参加cppreference Template argument deduction，其中有专门说明。
 
@@ -458,7 +480,7 @@ struct has_member<A, void> : true_type
 { };
 ```
 
-### 3. Choice
+### 3、Choice
 
 **Now**, we can compare the **template parameter list** of this specialization with the template arguments supplied to the original `has_member<A>::value`. Both types match exactly, so this **partial specialization** is chosen.
 
@@ -505,8 +527,9 @@ But this does not *just* mean that all template-parameters of the partial specia
 
 How does this work? When I try to instantiate `has_foo<T>::value`, that will cause the compiler to try to look for the best specialization for `has_foo<T, void>`. We have two options: the primary, and this secondary one which involves having to instantiate that underlying expression:
 
-- If `T` *does* have a member function `foo()`, then whatever type that returns gets converted to `void`, and the specialization is preferred to the primary based on the template partial ordering rules. So `has_foo<T>::value` will be `true`
-- If `T` *doesn't* have such a member function (or it requires more than one argument), then substitution fails for the specialization and we only have the primary template to fallback on. Hence, `has_foo<T>::value` is `false`.
+1、If `T` *does* have a member function `foo()`, then whatever type that returns gets converted to `void`, and the specialization is preferred to the primary based on the template partial ordering rules. So `has_foo<T>::value` will be `true`
+
+2、If `T` *doesn't* have such a member function (or it requires more than one argument), then substitution fails for the specialization and we only have the primary template to fallback on. Hence, `has_foo<T>::value` is `false`.
 
 
 
