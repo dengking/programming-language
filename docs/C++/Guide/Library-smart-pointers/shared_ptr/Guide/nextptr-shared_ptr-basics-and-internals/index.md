@@ -546,7 +546,7 @@ The deleter is *type-erased* for two reasons:
 
 1、First, a deleter is an optional argument to a *shared_ptr* constructor, not a template parameter. Hence, a *shared_ptr's* type is deleter **agnostic**(不知的). 
 
-> NOTE: 这段话的意思是: deleter是不知道 "*shared_ptr's* type "
+> NOTE: 这段话的意思是: 通过"*shared_ptr's* type "是无法得知deleter的type的
 
 2、Second, a deleter is a function object (or a function pointer), e.g., *function<`void(T\*)`>*. This indirection makes *shared_ptr* independent of the details of how the managed object is deleted. This loose-coupling of *shared_ptr* with the deleter makes it quite flexible.
 
@@ -554,40 +554,9 @@ The deleter is *type-erased* for two reasons:
 >
 > 1、上面这一段中的"The deleter is *type-erased* "要如何理解？
 >
-> 结合 stackoverflow [How is the std::tr1::shared_ptr implemented?](https://stackoverflow.com/questions/9200664/how-is-the-stdtr1shared-ptr-implemented) # [A](https://stackoverflow.com/a/9201435) 中给出的source code:
+> 最最好的答案是: geidav [Custom deleters for smart pointers in modern C++](https://geidav.wordpress.com/2017/10/29/custom-deleters-for-smart-pointers-in-modern-c/)，其中有着非常好的解答。
 >
-> default deleter: 
->
-> ```C++
->     template<class U>
->     struct default_deleter
->     {
->         void operator()(U* p) const { delete p; }
->     };
-> 
->     template<class U>
->     explicit shared_ptr(U* pu) :pa(new auximpl<U,default_deleter<U> >(pu,default_deleter<U>())), pt(pu) {}
-> ```
->
-> 显然，default deleter是直接使用 `delete p;`，而`p`可以是incomplete type(opaque pointer)
->
-> custom deleter: 
->
-> ```C++
->     template<class U, class Deleter>
->     struct auximpl: public aux
->     {
->         U* p;
->         Deleter d;
-> 
->         auximpl(U* pu, Deleter x) :p(pu), d(x) {}
->         virtual void destroy() { d(p); } 
->     };
->     template<class U, class Deleter>
->     shared_ptr(U* pu, Deleter d) :pa(new auximpl<U,Deleter>(pu,d)), pt(pu) {}
-> ```
->
-> 显然`Deleter`是一个function pointer
+> 2、关于这一节的理解，还需要结合 geidav [Custom deleters for smart pointers in modern C++](https://geidav.wordpress.com/2017/10/29/custom-deleters-for-smart-pointers-in-modern-c/) 中的内容，其中提及了 "For example changing the allocation strategy of a factory, and with it the custom deleter of the returned `std::shared_ptr`s, doesn’t break source/binary compatibility and thereby, doesn’t require any recompilation of client software"，显然是和这一节的内容密切相关的。
 
 For instance, in the example below, a `vector<shared_ptr<T>>` can be in its compilation unit entirely oblivious(不在意的) to the knowledge of how an incomplete type *T* is deleted:
 
