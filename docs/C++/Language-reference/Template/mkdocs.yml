@@ -11,6 +11,5 @@ nav:
     - Variable-template: Variable-template
     - Parameter-pack: Parameter-pack
     - SFINAE: SFINAE
-    - Programming-paradigm: Programming-paradigm
     - Implementation: Implementation
     - Define-template-in-header-file: Define-template-in-header-file
