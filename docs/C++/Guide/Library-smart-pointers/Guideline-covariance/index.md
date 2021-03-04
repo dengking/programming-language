@@ -40,6 +40,16 @@ Alternatively, you can use the visitor pattern or something like my [Dynamic Dou
 
 5、都涉及multiple polymorphic
 
+6、都在derived classic中声明base，类似如下:
+
+```C++
+   //         desirable, but impossible in C++17
+   //         see: http://cplusplus.github.io/EWG/ewg-active.html#102
+   // using typename... Bases::Bases;
+```
+
+
+
 ### 不同点
 
 下面是一些差异: 
