@@ -1,6 +1,6 @@
-# Object operation and special member function、magic function
+# Object operation and special member function/magic function and concept
 
-
+object operation、magic function、concept之间有着对应关系，本文对此进行总结。
 
 ## Object operation and magic function
 
@@ -75,6 +75,23 @@
 参见如下章节:
 
 1、在`Destructor`章节
+
+
+
+## Concepts
+
+可以看到，上述每种operation
+
+### cppreference [Named Requirements](https://en.cppreference.com/w/cpp/named_req)
+
+| Basic                                                        |                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible) | specifies that an object of the type can be default constructed (named requirement) |
+| [MoveConstructible](https://en.cppreference.com/w/cpp/named_req/MoveConstructible)(C++11) | specifies that an object of the type can be constructed from rvalue (named requirement) |
+| [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) | specifies that an object of the type can be constructed from lvalue (named requirement) |
+| [MoveAssignable](https://en.cppreference.com/w/cpp/named_req/MoveAssignable)(C++11) | specifies that an object of the type can be assigned from rvalue (named requirement) |
+| [CopyAssignable](https://en.cppreference.com/w/cpp/named_req/CopyAssignable) | specifies that an object of the type can be assigned from lvalue (named requirement) |
+| [Destructible](https://en.cppreference.com/w/cpp/named_req/Destructible) | specifies that an object of the type can be destroyed        |
 
 
 
