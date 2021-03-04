@@ -23,3 +23,5 @@ nav:
     
     # 
     - Compile-time-and-run-time: Compile-time-and-run-time
+    # C++中的修饰符
+    - Specifiers: Specifiers

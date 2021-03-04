@@ -1,6 +1,6 @@
 # Memory model
 
-主要内容放到了Guide章节；
+Memory model的主要内容放到了`Guide/Memory-model-and-atomic-library`章节；
 
 ## TODO
 
