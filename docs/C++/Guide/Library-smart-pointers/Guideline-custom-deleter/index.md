@@ -84,6 +84,9 @@ auto Factory::Create(int typeId)
 }
 ```
 
+> NOTE: 
+> 1、上述实现思路是典型的: custom virtual table，它提供void pointer进行type erasure ，从而提供了consistent interface
+
 The applied type erasure doesn’t come for free. There are two penalties to pay:
 
 1、Destroying the pointer cannot be inlined anymore and therefore always requires an additional function call.
