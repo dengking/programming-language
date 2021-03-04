@@ -15,5 +15,5 @@ nav:
     - Performance-optimization: Performance-optimization
     - Memory-model-and-atomic-library: Memory-model-and-atomic-library
     - Library-smart-pointers: Library-smart-pointers
-    - Type-system: Type-system
+    - Type-相关: Type-相关
     - Guard: Guard
