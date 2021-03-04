@@ -1,4 +1,4 @@
-# [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
+# catb [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
 
 ## 1. Who should read this
 
@@ -6,7 +6,7 @@ This page is about a technique for reducing the memory footprint of programs in 
 
 You need to know this technique if you intend to write code for memory-constrained embedded systems, or operating-system kernels. It is useful if you are working with application data sets so large that your programs routinely hit memory limits. It is good to know in any application where you really, *really* care about optimizing your use of memory bandwidth and minimizing **cache-line** misses.
 
-***SUMMARY*** : 在[Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment)中也提及了[cache-line](https://en.wikipedia.org/wiki/CPU_cache)。
+> NOTE: 在[Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment)中也提及了[cache-line](https://en.wikipedia.org/wiki/CPU_cache)。
 
 Finally, knowing this technique is a gateway to other esoteric C topics. You are not an advanced C programmer until you have grasped these rules. You are not a master of C until you could have written this document yourself and can criticize it intelligently.
 
@@ -18,11 +18,11 @@ This document originated with "C" in the title, but many of the techniques discu
 
 This webpage exists because in late 2013 I found myself heavily applying an optimization technique that I had learned more than two decades previously and not used much since.
 
-***SUMMARY*** : 这个网页的存在是因为在2013年末我发现自己大量应用了一种优化技术，这种技术是我在二十多年前学到的并且从那时起就没用过多少。
+> NOTE : 这个网页的存在是因为在2013年末我发现自己大量应用了一种优化技术，这种技术是我在二十多年前学到的并且从那时起就没用过多少。
 
 I needed to reduce the memory footprint of a program that used thousands - sometimes hundreds of thousands - of C `struct` instances. The program was [cvs-fast-export](http://www.catb.org/~esr/cvs-fast-export) and the problem was that it was dying with out-of-memory errors on large repositories.
 
-***SUMMARY*** : out-of-memory的意思是内存不足，参见[Out of memory](https://en.wikipedia.org/wiki/Out_of_memory)。
+> NOTE : out-of-memory的意思是内存不足，参见[Out of memory](https://en.wikipedia.org/wiki/Out_of_memory)。
 
 There are ways to reduce memory usage significantly in situations like this, by rearranging the order of structure members in careful ways. This can lead to dramatic gains - in my case I was able to cut the working-set size by around 40%, enabling the program to handle much larger repositories without dying.
 
@@ -36,7 +36,7 @@ There are actually reasons for this that aren’t stupid. CS courses (rightly) s
 
 But the technique still has value in important situations, and will as long as memory is finite. This document is intended to save programmers from having to rediscover the technique, so they can concentrate effort on more important things.
 
-***SUMMARY*** : 实际上有些原因并不是愚蠢的。 CS课程（正确地）引导人们远离微观优化，寻找更好的算法。 机器资源的价格暴跌使得减少内存使用的必要性降低。 黑客过去常常学习如何做到这一点的方式是在奇怪的硬件架构上嗤之以鼻 - 现在这种不太常见的体验。
+> NOTE : 实际上有些原因并不是愚蠢的。 CS课程（正确地）引导人们远离微观优化，寻找更好的算法。 机器资源的价格暴跌使得减少内存使用的必要性降低。 黑客过去常常学习如何做到这一点的方式是在奇怪的硬件架构上嗤之以鼻 - 现在这种不太常见的体验。
 
 但是这种技术在重要情况下仍然具有价值，并且只要存储器是有限的。 本文档旨在帮助程序员不必重新发现该技术，因此他们可以将精力集中在更重要的事情上。
 
@@ -50,13 +50,13 @@ Storage for the basic C datatypes on an `x86` or ARM processor doesn’t normall
 
 The jargon(行话) for this is that basic C types on x86 and ARM are *self-aligned*. Pointers, whether 32-bit (4-byte) or 64-bit (8-byte) are **self-aligned** too.
 
-***SUMMARY*** : 不同类型的align requirement其实就等于`sizeof`
+> NOTE : 不同类型的align requirement其实就等于`sizeof`
 
 **Self-alignment** makes access faster because it facilitates generating single-instruction fetches and puts of the typed data. Without alignment constraints, on the other hand, the code might end up having to do two or more accesses spanning（跨越） **machine-word boundaries**. Characters are a special case; they’re equally **expensive** from anywhere they live inside a single **machine word**. That’s why they don’t have a preferred alignment.
 
-***SUMMARY*** : 最后一段话的意思是：对于`char`类型的数据，它们并没有preferred alignment，因为无论它们位于何处，被access的时候所需的耗费是相同的；
+> NOTE : 最后一段话的意思是：对于`char`类型的数据，它们并没有preferred alignment，因为无论它们位于何处，被access的时候所需的耗费是相同的；
 
-***SUMMARY*** : 在这篇文章中，描述了CPU 进行memory access的方式：[Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)，下面这个图片是取自这篇文章：
+> NOTE : 在这篇文章中，描述了CPU 进行memory access的方式：[Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)，下面这个图片是取自这篇文章：
 
 Figure 2. How processors see memory
 
@@ -70,7 +70,7 @@ I said "on modern processors" because on some older ones forcing your C program 
 - [Should I worry about the alignment during pointer casting?](https://stackoverflow.com/questions/13881487/should-i-worry-about-the-alignment-during-pointer-casting) 这篇文章中所介绍的和下面链接中的情况非常类似
 - 
 
-***SUMMARY*** : 关于illegal instruction fault在[Unaligned accesses in C/C++: what, why and solutions to do it properly](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html)中介绍了。
+> NOTE : 关于illegal instruction fault在[Unaligned accesses in C/C++: what, why and solutions to do it properly](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html)中介绍了。
 
 Also, **self-alignment** is not the only possible rule. Historically, some processors (especially those lacking [barrel shifters](https://en.wikipedia.org/wiki/Barrel_shifter)) have had more restrictive ones. If you do embedded systems, you might trip over one of these lurking in the underbrush. Be aware this is possible.
 
@@ -78,7 +78,7 @@ Also, **self-alignment** is not the only possible rule. Historically, some proce
 
 From when it was first written at the beginning of 2014 until late 2016, this section ended with the last paragraph. During that period I’ve learned something rather reassuring（使放心） from working with the source code for the reference implementation of NTP. It does packet analysis by reading packets off the wire directly into memory that the rest of the code sees as a `struct`, relying on the assumption of **minimal self-aligned padding**.
 
-***SUMMARY*** : NTP参见[Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)。
+> NOTE : NTP参见[Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)。
 
 The interesting news is that NTP has apparently being getting away with this for ***\*decades\**** across a very wide span of hardware, operating systems, and compilers, including not just Unixes but under Windows variants as well. This suggests that platforms with **padding rules** other than **self-alignment** are either nonexistent or confined to such specialized niches that they’re never either NTP servers or clients.
 
@@ -96,11 +96,11 @@ If you didn’t know anything about **data alignment**, you might assume that th
 
 In fact, the hidden assumption that **the allocated order of static variables is their source order is not necessarily valid**; the C standards don’t mandate it. I’m going to ignore this detail because (a) that hidden assumption is usually correct anyway, and (b) the actual purpose of talking about **padding** and **packing** outside structures is to prepare you for what happens inside them.
 
-***SUMMARY*** : 对于C standard并没有强制要求的标志我们是不能够依赖它的， 比如这里所述的：the allocated order of static variables is their source order；因为我们的source code其实并不总是符合编译器所认为的最优原则的，比如说上面的代码，显然它会造成3 bytes gap。其实编译器是完全可以进行优化来将这3 byte给去除的；
+> NOTE : 对于C standard并没有强制要求的标志我们是不能够依赖它的， 比如这里所述的：the allocated order of static variables is their source order；因为我们的source code其实并不总是符合编译器所认为的最优原则的，比如说上面的代码，显然它会造成3 bytes gap。其实编译器是完全可以进行优化来将这3 byte给去除的；
 
 Here’s what actually happens (on an x86 or ARM or anything else with **self-aligned** types). The storage for `p` starts on a self-aligned 4- or 8-byte boundary depending on the machine word size. This is *pointer alignment* - the **strictest** possible.
 
-***SUMMARY*** : 上面这段话其实是比较模糊的，按照前面的推理：alignment 等于 `sizeof`，那么`pointer alignment`就等于它的`sizeof`；上面这段话中说，`pointer alignment`取决于machine word size，那这说明`pointer alignement`和machine word size之间是存在着非常大的关联的，那到底是什么关联呢？是`pointer alignment`等于machine word size吗？这引发了我的思考：[What is the size of a pointer?](https://stackoverflow.com/questions/6751749/what-is-the-size-of-a-pointer) 按照我之前的想法：指针的大小必须能够保证它能够访问到这个内存空间，这说明指针类型的长度和内存空间的大小是存在着关联的；
+> NOTE : 上面这段话其实是比较模糊的，按照前面的推理：alignment 等于 `sizeof`，那么`pointer alignment`就等于它的`sizeof`；上面这段话中说，`pointer alignment`取决于machine word size，那这说明`pointer alignement`和machine word size之间是存在着非常大的关联的，那到底是什么关联呢？是`pointer alignment`等于machine word size吗？这引发了我的思考：[What is the size of a pointer?](https://stackoverflow.com/questions/6751749/what-is-the-size-of-a-pointer) 按照我之前的想法：指针的大小必须能够保证它能够访问到这个内存空间，这说明指针类型的长度和内存空间的大小是存在着关联的；
 
 这篇文章也比较好：[C语言指针的长度和类型](https://www.cnblogs.com/wuyudong/p/point-length-type.html) 
 
@@ -171,7 +171,7 @@ what can we say about `M` and `N`?
 
 First, in this case `N` will be zero. The address of `x`, coming right after `p`, is guaranteed to be **pointer-aligned**, which is never less strict than **int-aligned**.
 
-***SUMMARY*** : 因为这些align的值都是2的幂，所以它们之间存在着倍数的关系；
+> NOTE : 因为这些align的值都是2的幂，所以它们之间存在着倍数的关系；
 
 The value of `M` is less predictable. If the compiler happened to map `c` to the last byte of a machine word, the next byte (the first of `p`) would be the first byte of the next one and properly **pointer-aligned**. `M` would be zero.
 
@@ -237,7 +237,7 @@ struct foo2 {
 
 If the members were separate variables, `c` could start at any byte boundary and the size of `pad` might vary. Because `struct foo2` has the **pointer alignment** of its widest member, that’s no longer possible. Now `c` has to be **pointer-aligned**, and following padding of 7 bytes is locked in.
 
-***SUMMARY*** : 这段话给出了上述两种方式之间的差异所在；
+> NOTE : 这段话给出了上述两种方式之间的差异所在；
 
 Now let’s talk about **trailing padding** on structures. To explain this, I need to introduce a basic concept which I’ll call the *stride address* of a structure. It is the first address following the structure data that has the ***same alignment as the structure***.
 

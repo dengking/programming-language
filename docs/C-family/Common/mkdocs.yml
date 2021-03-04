@@ -5,14 +5,8 @@ nav:
     - Declaration-and-definition: Declaration-and-definition
     - Specifiers: specifiers
 
-    # 下面三者必须要放到一起，因为它们是密切相关的
-    - Resource-management: Resource-management
-    - String: String
     
-    - Data-model: Data-model
     - Undefined-behavior: Undefined-behavior
-    - Struct: Struct
 
-    - SWIG: SWIG
 
 

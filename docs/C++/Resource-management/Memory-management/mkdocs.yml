@@ -2,5 +2,6 @@ nav:
     - Introduction: index.md
     - Allocation-and-deallocation: Allocation-and-deallocation
     - Memory-access: Memory-access
+    - Pointer-and-array: Pointer-and-array
     - GC: GC
     - Memory-error: Memory-error
