@@ -1,10 +1,11 @@
 # Incomplete types and `shared_ptr` / `unique_ptr`
 
-之前在阅读`unique_tr` 和 `shared_ptr` 的文档中，其中提及了incomplete type 和 complete type，这个点，我目前还是不怎么了解的，下面是关于此的一些素材。
+之前在阅读`unique_tr` 和 `shared_ptr` 的文档中，其中提及了incomplete type 和 complete type，本文对此进行总结。
 
+## 为什么smart pointer需要支持incomplete-type？
+这是因为C++支持Opaque pointer，而C++ smart pointer是需要能够替代pointer的，因此它需要支持incomplete-type。
 
-
-## [GotW #100: Compilation Firewalls (Difficulty: 6/10)](https://herbsutter.com/gotw/_100/)
+## herbsutter [GotW #100: Compilation Firewalls (Difficulty: 6/10)](https://herbsutter.com/gotw/_100/)
 
 You still need to write the visible class’ destructor yourself and define it out of line in the implementation file, even if normally it’s the same as what the compiler would generate. This is because although both *unique_ptr* and *shared_ptr* can be instantiated with an **incomplete type**, *unique_ptr*’s destructor requires a **complete type** in order to invoke *delete* (unlike *shared_ptr* which captures more information when it’s constructed). By writing it yourself in the implementation file, you force it to be defined in a place where *impl* is already defined, and this successfully prevents the compiler from trying to automatically generate the destructor on demand in the caller’s code where *impl* is not defined.
 
@@ -208,6 +209,4 @@ struct ptr_impl : std::unique_ptr<impl>
 ```
 
 
-
-## Incomplete type and type erasure
 
