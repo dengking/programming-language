@@ -474,6 +474,8 @@ nav:
             - ADL: C++/Language-reference/Basic-concept/Organization/Name-lookup/ADL/index.md
           - Dependent-name-lookup:
             - Introduction: C++/Language-reference/Basic-concept/Organization/Name-lookup/Dependent-name-lookup/index.md
+            - thegreenplace-Dependent-name-lookup-for-C++templates:
+              - Introduction: C++/Language-reference/Basic-concept/Organization/Name-lookup/Dependent-name-lookup/thegreenplace-Dependent-name-lookup-for-C++templates/index.md
       - Type-system:
         - Introduction: C++/Language-reference/Basic-concept/Type-system/index.md
         - Type-system:
@@ -744,6 +746,8 @@ nav:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/index.md
             - Virtual-clone:
               - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/Virtual-clone/index.md
+          - Non-copyable:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Non-copyable/index.md
         - Move:
           - Introduction: C++/Language-reference/Classes/Special-member-function/Move/index.md
           - zhihu-Rvalue-reference:
@@ -762,18 +766,35 @@ nav:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Move/TODO-CppCoreGuidelines-For-Rvalue-References-In-APIs/index.md
           - std-move:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Move/std-move/index.md
+        - Swap:
+          - Introduction: C++/Language-reference/Classes/Special-member-function/Swap/index.md
+          - drdobbs-Andrew-Koenig-Object-Swapping:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Swap/drdobbs-Andrew-Koenig-Object-Swapping/index.md
+          - std-swap:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Swap/std-swap/index.md
+          - Non-throwing-swap:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Swap/Non-throwing-swap/index.md
+            - More-C++Idioms-Non-throwing-swap:
+              - Introduction: C++/Language-reference/Classes/Special-member-function/Swap/Non-throwing-swap/More-C++Idioms-Non-throwing-swap/index.md
+          - Swappable-concept:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Swap/Swappable-concept/index.md
+        - Assign:
+          - Introduction: C++/Language-reference/Classes/Special-member-function/Assign/index.md
+          - Virtual-assignment-operator:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Assign/Virtual-assignment-operator/index.md
+          - Non-assignable:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Assign/Non-assignable/index.md
         - Constructor:
           - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/index.md
           - Constructor:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Constructor/index.md
-            - Member-initializer-list: C++/Language-reference/Classes/Special-member-function/Constructor/Constructor/Member-initializer-list.md
             - Virtual-constructor: C++/Language-reference/Classes/Special-member-function/Constructor/Constructor/Virtual-constructor.md
+          - Default-constructors:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Default-constructors/index.md
+          - Member-initializer-list:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Member-initializer-list/index.md
           - Copy-constructor:
-            - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Copy-constructor/TODO-index.md
-          - User-defined-conversion:
-            - User-defined-conversion: C++/Language-reference/Classes/Special-member-function/Constructor/User-defined-conversion/index.md
-            - Explicit-specifier:
-              - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/User-defined-conversion/Explicit-specifier/index.md
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Copy-constructor/index.md
         - Destructor:
           - Introduction: C++/Language-reference/Classes/Special-member-function/Destructor/index.md
           - cppreference-Destructors: C++/Language-reference/Classes/Special-member-function/Destructor/cppreference-Destructors.md
@@ -785,10 +806,30 @@ nav:
               - Introduction: C++/Language-reference/Classes/Special-member-function/Destructor/Destructor-and-inheritance/Virtual-destructor/index.md
           - Destructor-and-exception:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Destructor/Destructor-and-exception/index.md
-        - Assignment:
-          - Introduction: C++/Language-reference/Classes/Special-member-function/Assignment/index.md
-          - Virtual-assignment-operator:
-            - Introduction: C++/Language-reference/Classes/Special-member-function/Assignment/Virtual-assignment-operator/index.md
+        - User-defined-conversion:
+          - User-defined-conversion: C++/Language-reference/Classes/Special-member-function/User-defined-conversion/index.md
+          - Explicit-specifier:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/User-defined-conversion/Explicit-specifier/index.md
+        - Idioms:
+          - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/index.md
+          - The-rule-of-zero-three-five:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/The-rule-of-zero-three-five/index.md
+            - Rule-of-Zero:
+              - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/The-rule-of-zero-three-five/Rule-of-Zero/index.md
+              - florianwolters-The-Rule-of-Zero:
+                - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/The-rule-of-zero-three-five/Rule-of-Zero/florianwolters-The-Rule-of-Zero/index.md
+            - Move-Constructor:
+              - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/The-rule-of-zero-three-five/Move-Constructor/index.md
+          - Calling-Virtual-During-Initialization:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Calling-Virtual-During-Initialization/index.md
+          - Base-from-Member:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Base-from-Member/index.md
+          - Copy-and-swap:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Copy-and-swap/index.md
+          - Named-Constructor:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Named-Constructor/index.md
+        - Initialization-and-deinitialization-order:
+          - Introduction: C++/Language-reference/Classes/Special-member-function/Initialization-and-deinitialization-order/index.md
       - Member-access:
         - Access-specifiers: C++/Language-reference/Classes/Member-access/Access-specifiers.md
       - Subtyping-polymorphism:
@@ -833,9 +874,6 @@ nav:
           - Introduction: C++/Language-reference/Classes/Interface/gotw-What's-In-a-Class-The-Interface-Principle/index.md
       - Lifetime:
         - Introduction: C++/Language-reference/Classes/Lifetime/index.md
-        - TODO-Order-and-constructor-and-destructor:
-          - Introduction: C++/Language-reference/Classes/Lifetime/TODO-Order-and-constructor-and-destructor/index.md
-          - TODO-Constructors-and-member-initializer-lists: C++/Language-reference/Classes/Lifetime/TODO-Order-and-constructor-and-destructor/TODO-Constructors-and-member-initializer-lists.md
       - Empty-base-optimization:
         - Introduction: C++/Language-reference/Classes/Empty-base-optimization/index.md
       - Specifier:
@@ -1385,34 +1423,6 @@ nav:
       - Introduction: C++/Idiom/OOP/index.md
       - Class-basic:
         - Introduction: C++/Idiom/OOP/Class-basic/index.md
-        - How-to-write-constructor-destructor:
-          - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/index.md
-          - The-rule-of-zero-three-five:
-            - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/The-rule-of-zero-three-five/index.md
-            - Rule-of-Zero:
-              - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/The-rule-of-zero-three-five/Rule-of-Zero/index.md
-              - florianwolters-The-Rule-of-Zero:
-                - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/The-rule-of-zero-three-five/Rule-of-Zero/florianwolters-The-Rule-of-Zero/index.md
-            - Move-Constructor:
-              - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/The-rule-of-zero-three-five/Move-Constructor/index.md
-          - Calling-Virtual-During-Initialization:
-            - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Calling-Virtual-During-Initialization/index.md
-          - Base-from-Member:
-            - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Base-from-Member/index.md
-          - Copy-and-swap:
-            - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Copy-and-swap/index.md
-          - Named-Constructor:
-            - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Named-Constructor/index.md
-          - Swap:
-            - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/index.md
-            - drdobbs-Andrew-Koenig-Object-Swapping:
-              - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/drdobbs-Andrew-Koenig-Object-Swapping/index.md
-            - Non-throwing-swap:
-              - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/Non-throwing-swap/index.md
-              - More-C++Idioms-Non-throwing-swap:
-                - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/Non-throwing-swap/More-C++Idioms-Non-throwing-swap/index.md
-            - Swappable:
-              - Introduction: C++/Idiom/OOP/Class-basic/How-to-write-constructor-destructor/Swap/Swappable/index.md
         - How-to-apply-polymorphism:
           - Introduction: C++/Idiom/OOP/Class-basic/How-to-apply-polymorphism/index.md
           - Virtual-Friend-Function:
@@ -1451,12 +1461,8 @@ nav:
         - Named-Parameter: C++/Idiom/OOP/Named-Parameter/Named-Parameter.md
       - TODO-Attorney-Client:
         - Attorney-Client: C++/Idiom/OOP/TODO-Attorney-Client/Attorney-Client.md
-      - Requiring-or-Prohibiting:
-        - Introduction: C++/Idiom/OOP/Requiring-or-Prohibiting/index.md
-        - Non-copyable:
-          - Introduction: C++/Idiom/OOP/Requiring-or-Prohibiting/Non-copyable/index.md
-        - Requiring-or-Prohibiting-Heap-based-Objects:
-          - Introduction: C++/Idiom/OOP/Requiring-or-Prohibiting/Requiring-or-Prohibiting-Heap-based-Objects/index.md
+      - Requiring-or-Prohibiting-Heap-based-Objects:
+        - Introduction: C++/Idiom/OOP/Requiring-or-Prohibiting-Heap-based-Objects/index.md
       - Temporary-Proxy:
         - Introduction: C++/Idiom/OOP/Temporary-Proxy/index.md
       - Address-Of:
@@ -1854,10 +1860,12 @@ nav:
         - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
           - Introduction: C++/Guide/Library-smart-pointers/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
         - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C++/Guide/Library-smart-pointers/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
-      - Guide-subtyping-polymorphism:
-        - Introduction: C++/Guide/Library-smart-pointers/Guide-subtyping-polymorphism/index.md
+      - Guideline-subtyping-polymorphism:
+        - Introduction: C++/Guide/Library-smart-pointers/Guideline-subtyping-polymorphism/index.md
       - Guideline-overhead:
         - Introduction: C++/Guide/Library-smart-pointers/Guideline-overhead/index.md
+      - Guideline-custom-deleter:
+        - Introduction: C++/Guide/Library-smart-pointers/Guideline-custom-deleter/index.md
       - TODO-pointer_cast: C++/Guide/Library-smart-pointers/TODO-pointer_cast.md
     - "Type-\u76F8\u5173":
       - Strong-type:
