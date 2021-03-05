@@ -2,8 +2,10 @@ nav:
     - Home: index.md
     - Theory: Theory
     # 各种具体的programming  language
-    - Python: Python
     - C-family: C-family
+    - C++: C++
+    - C: C        
+    - Python: Python
     - Rust: Rust
     - JavaScript: JavaScript
     - Java: Java
@@ -11,4 +13,6 @@ nav:
     - Go: Go
     ########## 对比各种programming language##########    
     - Comparison-of-programming-language: Comparison-of-programming-language
+    ##### 如何跨语言 #####
+    - Cross-language: Cross-language
     - Online-compiler: Online-compiler

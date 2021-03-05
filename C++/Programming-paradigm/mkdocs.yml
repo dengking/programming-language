@@ -1,0 +1,12 @@
+nav:
+    - Introduction: index.md
+    - OOP: OOP
+    - Generic-programming: Generic-programming
+    - TMP: TMP
+    - AOP: AOP
+    - FP: FP
+    # 总结c++中polymorphism的实现
+    - Polymorphism: Polymorphism    
+    
+    - Type-erasure-OOP-GP: Type-erasure-OOP-GP
+

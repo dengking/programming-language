@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Memory-access-and-alignment: Memory-access-and-alignment
-    - Pointer-and-array: Pointer-and-array    
-    - Pointer: Pointer
-    - Array: Array        

@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - PPT: PPT
+    - drdobbs-Writing-Lock-Free-Code-A-Corrected-Queue: drdobbs-Writing-Lock-Free-Code-A-Corrected-Queue
+    - infoq-Lock-free-Programming-in-C++: infoq-Lock-free-Programming-in-C++

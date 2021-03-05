@@ -1,0 +1,8 @@
+nav:
+    - Introduction: index.md
+    - Singleton: Singleton
+    - Factory: Factory
+    - Visitor-pattern: Visitor-pattern
+    - Decorator: Decorator
+    - Adapter-pattern: Adapter-pattern
+    - Mixin: Mixin

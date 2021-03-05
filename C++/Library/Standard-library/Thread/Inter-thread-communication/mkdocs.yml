@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - TODO-modernescpp-Synchronization-with-Atomics: TODO-modernescpp-Synchronization-with-Atomics
+    - TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics: TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics

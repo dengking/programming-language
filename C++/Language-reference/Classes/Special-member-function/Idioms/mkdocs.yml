@@ -1,0 +1,8 @@
+nav:
+    - Introduction: index.md
+    - The-rule-of-zero-three-five: The-rule-of-zero-three-five
+    - Calling-Virtual-During-Initialization: Calling-Virtual-During-Initialization
+    - Base-from-Member: Base-from-Member
+    - Copy-and-swap: Copy-and-swap
+    - Named-Constructor: Named-Constructor
+    

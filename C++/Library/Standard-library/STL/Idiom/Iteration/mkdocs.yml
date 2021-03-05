@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Zip: Zip
+    - library-CPPItertools: library-CPPItertools
+    - std-for_each: std-for_each

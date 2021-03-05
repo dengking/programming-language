@@ -1,5 +1,0 @@
-nav:
-    - Introduction: index.md
-    ######### 首先介绍template metaprogramming的概念，c++ template就是属于这个流派##########
-    - Template-metaprogramming: TMP
-    - Generic-programming: Generic-programming
