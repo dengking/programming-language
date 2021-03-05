@@ -99,7 +99,7 @@ std::function<inline void(int)> f;// error: neither are function specifiers
 
 *Type-id* may be used in the following situations:
 
-1) to specify the target type in [cast expressions](expressions.html#Conversions);
+1、to specify the target type in [cast expressions](https://en.cppreference.com/w/cpp/language/expressions#Conversions);
 
 Example:
 
@@ -108,7 +108,7 @@ int* p;               // declaration of a pointer to int
 static_cast<int*>(p); // type-id is "int*"
 ```
 
-2) as arguments to [sizeof](sizeof.html), [alignof](alignof.html), [alignas](alignas.html), [new](new.html), and [typeid](typeid.html);
+2、as arguments to [sizeof](https://en.cppreference.com/w/cpp/language/sizeof), [alignof](https://en.cppreference.com/w/cpp/language/alignof), [alignas](https://en.cppreference.com/w/cpp/language/alignas), [new](https://en.cppreference.com/w/cpp/language/new), and [typeid](https://en.cppreference.com/w/cpp/language/typeid);
 
 Example:
 
@@ -121,7 +121,7 @@ int (*(*x[2])())[3];      // declaration of an array of 2 pointers to functions
 new (int (*(*[2])())[3]); // type-id is "int (*(*[2])())[3]"
 ```
 
-3) on the right-hand side of a [type alias](type_alias.html) declaration;
+3、on the right-hand side of a [type alias](https://en.cppreference.com/w/cpp/language/type_alias) declaration;
 
 Example:
 
@@ -131,7 +131,13 @@ sizeof(struct{ int x; });    // error: cannot define new types in a sizeof expre
 using t = struct { int x; }; // creates a new type and declares t as an alias of that type
 ```
 
-4) as the template argument for a [template type parameter](template_parameters.html#Template_type_arguments);
+4、as the trailing return type of a [function](https://en.cppreference.com/w/cpp/language/function) declaration;
+
+5、as the trailing return type of a [function](https://en.cppreference.com/w/cpp/language/function) declaration;
+
+6、as the default argument of a [template type parameter](https://en.cppreference.com/w/cpp/language/template_parameters#Type_template_parameter);
+
+7、as the template argument for a [template type parameter](template_parameters.html#Template_type_arguments);
 
 ```C++
 void f(int);                    // declaration of a function taking int and returning void
@@ -139,7 +145,7 @@ std::function<void(int)> x = f; // type template parameter is a type-id "void(in
 std::function<auto(int) -> void> y = f; // same
 ```
 
-
+8、in [dynamic exception specification](https://en.cppreference.com/w/cpp/language/except_spec).
 
 ### [Elaborated type specifier](https://en.cppreference.com/w/cpp/language/type#Elaborated_type_specifier)
 
@@ -159,7 +165,11 @@ If some [glvalue expression](https://en.cppreference.com/w/cpp/language/value_ca
 
 ### [Incomplete type](https://en.cppreference.com/w/cpp/language/type#Incomplete_type)
 
-> NOTE: `void*`是典型的incomplete type。
+> NOTE: 
+>
+> 1、`void*`是典型的incomplete type。
+>
+> 2、参见 `Incomplete-type` 章节
 
 ## cppreference [Type support library](https://en.cppreference.com/w/cpp/types)
 
@@ -187,7 +197,7 @@ Polymorphic type是OOP class type的一种，在`C++\Language-reference\Basic-co
 
 |                      | 注解                                                         |
 | -------------------- | ------------------------------------------------------------ |
-| Trivial type         | 在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial.md`章节进行了描述 |
+| Trivial type         | 在`C++\Language-reference\Basic-concept\Data-model\Object\Object-layout\Trivial`章节进行了描述 |
 | Standard-layout type |                                                              |
 | POD type             |                                                              |
 
@@ -195,11 +205,11 @@ Polymorphic type是OOP class type的一种，在`C++\Language-reference\Basic-co
 
 ### Literal type
 
-在`C++\Language-reference\Basic-concept\Type-system\Type-system\Literal-type.md`中进行了描述。
+在`C++\Language-reference\Basic-concept\Type-system\Type-system\Literal-type`中进行了描述。
 
 ### Byte type
 
-参见`Byte-type.md`。
+参见`Byte-type`。
 
 ## Type operation
 

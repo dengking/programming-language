@@ -479,7 +479,7 @@ nav:
       - Type-system:
         - Introduction: C++/Language-reference/Basic-concept/Type-system/index.md
         - Type-system:
-          - Type-system: C++/Language-reference/Basic-concept/Type-system/Type-system/index.md
+          - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-system/index.md
           - TODO-Type-qualifier:
             - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/TODO-index.md
             - Type-qualifier: C++/Language-reference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Type-qualifier.md
