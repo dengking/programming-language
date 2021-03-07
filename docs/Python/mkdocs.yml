@@ -1,12 +1,14 @@
 nav:
     # 描述语言的一些原理
     - Language: Language
+    - What-is-new: What-is-new    
     # 描述编程相关的内容
-    - Library: Library
-    - What-is-new: What-is-new
+    - Standard-library: Standard-library
+    - Third-party-library: Third-party-library
+
     # python的哲学
     - Philosophy: Philosophy
-    - Style-guide: Style-guide
+    - Guide: Guide
     # python的编程范式
     - Paradigm: Paradigm
     # python设计模式

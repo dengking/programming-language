@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Software-event-driven-programming: Software-event-driven-programming
-    - Software-concurrency: Software-concurrency
-    - Software-pallets: software-pallets
-    - Software-static-web-generator: software-static-web-generator

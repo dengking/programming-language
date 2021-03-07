@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - Event-driven-programming: Event-driven-programming
+    - TODO-Concurrent-server: TODO-Concurrent-server
+    - Pallets: Pallets
+    - Static-web-generator: Static-web-generator
