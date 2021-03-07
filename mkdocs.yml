@@ -2211,37 +2211,58 @@ nav:
         - Type-system: Python/Language/Language-reference/Type-system/Type-system.md
     - Developer's-guide:
       - Introduction: Python/Language/Developer's-guide/index.md
-  - Library:
-    - Built-in:
-      - Introduction: Python/Library/Built-in/index.md
-      - Built-in-Functions:
-        - Summary-of-python-build-in-function: Python/Library/Built-in/Built-in-Functions/summary-of-python-build-in-function.md
-        - Hash:
-          - Introduction: Python/Library/Built-in/Built-in-Functions/hash/index.md
-        - Open:
-          - Introduction: Python/Library/Built-in/Built-in-Functions/open/index.md
-      - Built-in-Constants:
-        - Introduction: Python/Library/Built-in/Built-in-Constants/index.md
-      - Built-in-Types:
-        - Introduction: Python/Library/Built-in/Built-in-Types/index.md
-      - Built-in-Exceptions:
-        - Introduction: Python/Library/Built-in/Built-in-Exceptions/index.md
-    - Functional-Programming-Modules:
-      - Introduction: Python/Library/Functional-Programming-Modules/index.md
-      - Iterate: Python/Library/Functional-Programming-Modules/Iterate.md
-    - Python-Runtime-Services:
-      - Introduction: Python/Library/Python-Runtime-Services/index.md
-      - inspect-Inspect-live-objects: Python/Library/Python-Runtime-Services/inspect-Inspect-live-objects.md
   - What-is-new:
     - Introduction: Python/What-is-new/index.md
     - New-style-class:
       - Introduction: Python/What-is-new/New-style-class/index.md
       - Metaclass:
         - Metaclass-Programming-In-Python: Python/What-is-new/New-style-class/Metaclass/Metaclass-Programming-In-Python.md
+  - Standard-library:
+    - Built-in:
+      - Introduction: Python/Standard-library/Built-in/index.md
+      - Built-in-Functions:
+        - Summary-of-python-build-in-function: Python/Standard-library/Built-in/Built-in-Functions/summary-of-python-build-in-function.md
+        - Hash:
+          - Introduction: Python/Standard-library/Built-in/Built-in-Functions/hash/index.md
+        - Open:
+          - Introduction: Python/Standard-library/Built-in/Built-in-Functions/open/index.md
+      - Built-in-Constants:
+        - Introduction: Python/Standard-library/Built-in/Built-in-Constants/index.md
+      - Built-in-Types:
+        - Introduction: Python/Standard-library/Built-in/Built-in-Types/index.md
+      - Built-in-Exceptions:
+        - Introduction: Python/Standard-library/Built-in/Built-in-Exceptions/index.md
+    - Functional-Programming-Modules:
+      - Introduction: Python/Standard-library/Functional-Programming-Modules/index.md
+      - Iterate: Python/Standard-library/Functional-Programming-Modules/Iterate.md
+    - Python-Runtime-Services:
+      - Introduction: Python/Standard-library/Python-Runtime-Services/index.md
+      - inspect-Inspect-live-objects: Python/Standard-library/Python-Runtime-Services/inspect-Inspect-live-objects.md
+  - Third-party-library:
+    - Introduction: Python/Third-party-library/index.md
+    - Event-driven-programming:
+      - Introduciton: Python/Third-party-library/Event-driven-programming/index.md
+      - Eventlet:
+        - Introduction: Python/Third-party-library/Event-driven-programming/Eventlet/index.md
+      - Eevent:
+        - Introduction: Python/Third-party-library/Event-driven-programming/Eevent/index.md
+    - TODO-Concurrent-server:
+      - Introduction: Python/Third-party-library/TODO-Concurrent-server/index.md
+      - medium-How-Does-Python-Handle-Multiple-Web-Requests:
+        - Introduction: Python/Third-party-library/TODO-Concurrent-server/medium-How-Does-Python-Handle-Multiple-Web-Requests/index.md
+      - Greenlet:
+        - Greenlet: Python/Third-party-library/TODO-Concurrent-server/Greenlet/Greenlet.md
+    - Pallets:
+      - Flask:
+        - Deployment-Options:
+          - flask-Deployment-Options: Python/Third-party-library/Pallets/flask/Deployment-Options/flask-Deployment-Options.md
+    - Static-web-generator:
+      - Static-web-generator: Python/Third-party-library/Static-web-generator/static-web-generator.md
   - Philosophy:
     - The-Zen-of-Python: Python/Philosophy/The-Zen-of-Python.md
-  - Style-guide:
-    - Style-Guide-for-Python-Code: Python/Style-guide/Style-Guide-for-Python-Code.md
+  - Guide:
+    - Style-guide:
+      - Style-Guide-for-Python-Code: Python/Guide/Style-guide/Style-Guide-for-Python-Code.md
   - Paradigm:
     - AOP:
       - Introduction: Python/Paradigm/AOP/index.md
@@ -2261,23 +2282,6 @@ nav:
       - Introduction: Python/How-to/Iterate/Iterate.md
     - Lazy-import:
       - Lazy-importing: Python/How-to/Lazy-import/Lazy-importing.md
-  - Software:
-    - Introduction: Python/Software/index.md
-    - Software-event-driven-programming:
-      - Introduciton: Python/Software/Software-event-driven-programming/index.md
-      - Eventlet:
-        - Eventlet: Python/Software/Software-event-driven-programming/Eventlet/Eventlet.md
-      - Eevent:
-        - Gevent: Python/Software/Software-event-driven-programming/Eevent/Gevent.md
-    - Software-concurrency:
-      - Greenlet:
-        - Greenlet: Python/Software/Software-concurrency/Greenlet/Greenlet.md
-    - Software-pallets:
-      - Flask:
-        - Deployment-Options:
-          - flask-Deployment-Options: Python/Software/software-pallets/flask/Deployment-Options/flask-Deployment-Options.md
-    - Software-static-web-generator:
-      - Static-web-generator: Python/Software/software-static-web-generator/static-web-generator.md
   - Glossary:
     - Abstract-base-class: Python/Glossary/Abstract-base-class.md
   - Books: Python/Books.md

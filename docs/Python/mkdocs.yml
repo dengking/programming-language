@@ -17,6 +17,6 @@ nav:
     - Programming-tool: Programming-tool
     # 对应的是python doc中的how to
     - How-to: How-to
-    - Software: Software
+    
     - Glossary: Glossary
     - Books: Books.md
