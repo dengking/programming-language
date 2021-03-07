@@ -107,7 +107,7 @@ class NavBuilder:
 
     """
 
-    Nav = 'nav'bui
+    Nav = 'nav'
 
     def __init__(self, repository_name=None, doc_dir_name='docs', repository_path_in_os=None,
                  mkdocs_template_file_in_os=None, site_name=None):

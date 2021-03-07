@@ -234,11 +234,9 @@ nav:
           - Iterator-pattern:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Iterator-pattern/index.md
           - Observer-pattern:
-            - Observer-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Observer-pattern/Observer-pattern.md
-            - Code:
-              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Observer-pattern/Code/index.md
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Observer-pattern/index.md
           - Publish-subscribe-pattern:
-            - Publish-subscribe-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Publish-subscribe-pattern/Publish-subscribe-pattern.md
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Publish-subscribe-pattern/index.md
           - Strategy-pattern:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Strategy-pattern/index.md
           - State-pattern:
@@ -251,15 +249,19 @@ nav:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/Chain-of-Responsibility/index.md
         - Structural-pattern:
           - Decorator-pattern:
-            - Decorator-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Decorator-pattern/Decorator-pattern.md
-          - Adapter-pattern:
-            - Example: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Adapter-pattern/Example.md
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Decorator-pattern/index.md
+            - geeksforgeeks-The-Decorator-Pattern:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Decorator-pattern/geeksforgeeks-The-Decorator-Pattern/index.md
+            - wikipedia-Decorator-pattern:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Decorator-pattern/wikipedia-Decorator-pattern/index.md
+          - Adaptor-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Adaptor-pattern/index.md
           - Composite-pattern:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Composite-pattern/index.md
           - Delegation-pattern:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Delegation-pattern/index.md
           - Facade-pattern:
-            - Facade-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Facade-pattern/Facade-pattern.md
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Facade-pattern/index.md
           - Bridge-pattern:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Structural-pattern/Bridge-pattern/index.md
         - Dispose-pattern:
@@ -288,7 +290,7 @@ nav:
       - Implementation:
         - Introduction: Theory/Programming-paradigm/Generic-programming/Implementation/index.md
         - Type-requirement:
-          - Type-requirement: Theory/Programming-paradigm/Generic-programming/Implementation/Type-requirement/Type-requirement.md
+          - Introduction: Theory/Programming-paradigm/Generic-programming/Implementation/Type-requirement/index.md
           - Concept(generic-programming):
             - Introduction: Theory/Programming-paradigm/Generic-programming/Implementation/Type-requirement/Concept(generic-programming)/index.md
           - Generics:
@@ -1573,12 +1575,12 @@ nav:
         - Introduction: C++/Pattern/Visitor-pattern/TODO-gieseanw-Stop-reimplementing-the-virtual-table-and-start-using-double-dispatch/index.md
     - Decorator:
       - Introduction: C++/Pattern/Decorator/index.md
-    - Adapter-pattern:
-      - Introduction: C++/Pattern/Adapter-pattern/index.md
-      - Adapter-external-polymorphism-pattern:
-        - Introduction: C++/Pattern/Adapter-pattern/Adapter-external-polymorphism-pattern/index.md
+    - Adaptor-pattern:
+      - Introduction: C++/Pattern/Adaptor-pattern/index.md
+      - Adaptor-external-polymorphism-pattern:
+        - Introduction: C++/Pattern/Adaptor-pattern/Adaptor-external-polymorphism-pattern/index.md
         - TODO-paper-vanderbilt.edu-External-Polymorphism:
-          - Introduction: C++/Pattern/Adapter-pattern/Adapter-external-polymorphism-pattern/TODO-paper-vanderbilt.edu-External-Polymorphism/index.md
+          - Introduction: C++/Pattern/Adaptor-pattern/Adaptor-external-polymorphism-pattern/TODO-paper-vanderbilt.edu-External-Polymorphism/index.md
     - Mixin:
       - Introduction: C++/Pattern/Mixin/index.md
       - fluentcpp-Mixin-Classes-The-Yang-of-the-CRTP:
