@@ -122,7 +122,7 @@ b) ......
 
 2、Python的标准库中，大量的使用aspect-oriented programming。
 
-3、AOP是非常适合于 流程型 的architecture，比如 message processing **system**
+3、AOP是非常适合于 流程型(flow of handling request) 的architecture，比如 message processing **system**
 
 
 

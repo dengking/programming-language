@@ -12,10 +12,18 @@ In [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_p
 >
 > 2、同时还需要遵循相同的interface，以支持dynamic polymorphism
 
-The decorator pattern is often useful for adhering to the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), as it allows functionality to be divided between classes with unique areas of concern.[[2\]](https://en.wikipedia.org/wiki/Decorator_pattern#cite_note-2) The decorator pattern is structurally nearly identical to the [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain_of_responsibility_pattern), the difference being that in a chain of responsibility, exactly one of the classes handles the request, while for the decorator, all classes handle the request. 
+The decorator pattern is often useful for adhering to the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), as it allows functionality to be divided between classes with unique areas of concern.[[2\]](https://en.wikipedia.org/wiki/Decorator_pattern#cite_note-2) 
+
+The decorator pattern is structurally nearly identical to the [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain_of_responsibility_pattern), the difference being that in a chain of responsibility, exactly one of the classes handles the request, while for the decorator, all classes handle the request. 
 
 > NOTE: 
-> 1、这段话要如何理解？
+> 1、这段话要如何理解？关于这段话的理解，可以参考:
+>
+> a、refactoring.guru [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)
+>
+> > [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) and [Decorator](https://refactoring.guru/design-patterns/decorator) have very similar class structures. Both patterns rely on recursive composition to pass the execution through a series of objects. However, there are several crucial differences.
+> >
+> > The *CoR* handlers can execute arbitrary operations independently of each other. They can also stop passing the request further at any point. On the other hand, various *Decorators* can extend the object’s behavior while keeping it consistent with the base interface. In addition, decorators aren’t allowed to break the flow of the request.
 
 ## Overview 
 

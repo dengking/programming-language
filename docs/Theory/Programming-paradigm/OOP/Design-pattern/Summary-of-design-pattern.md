@@ -18,11 +18,23 @@
 
 
 
-## Command and iterator 
+## Abstraction
 
-command是对各种operation的更加abstract的描述；
+本节从Abstraction的角度来分析各种design pattern: 
 
-iterator是对各种container的更加abstract的描述；
+1、command是对各种operation的更加abstract的描述；
+
+2、iterator是对各种container的更加abstract的描述；
+
+## Structure
+
+本节从structure的角度来分析各种design pattern;
+
+1、composit pattern: tree
+
+2、chain of responsibility pattern: chain
+
+3、decorator pattern: chain
 
 ## Command pattern VS  visitor pattern
 
@@ -32,22 +44,58 @@ command 和 visitor都对应的是operation/algorithm。
 
 > You can treat [Visitor](https://refactoring.guru/design-patterns/visitor) as a powerful version of the [Command](https://refactoring.guru/design-patterns/command) pattern. Its objects can execute operations over various objects of different classes.
 
-
+decorator pattern VS 
 
 ### TODO
 
 stackoverflow [visitor vs servant vs command patterns](https://stackoverflow.com/questions/31986332/visitor-vs-servant-vs-command-patterns)
 
-## Message/event/request processing pattern
 
-这些pattern往往都和AOP有关。
 
-在refactoring.guru [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)、refactoring.guru [Command](https://refactoring.guru/design-patterns/command) 中，都有如下总结: 
+## Chain of responsibility VS decorator pattern
+
+这两种pattern是非常值得对比的，在下面的文章中对它们进行了对比:
+
+a、wikipedia [Decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern)
+
+b、refactoring.guru [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)
+
+### Dynamic pipeline flow of handling request
+
+两种pattern都能够Pipeline flow of handling request。
+
+## Message/event/request processing pattern/flow of request
+
+pipeline flow of request
+
+### refactoring.guru [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility)、
 
 [Chain of Responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility), [Command](https://refactoring.guru/design-patterns/command), [Mediator](https://refactoring.guru/design-patterns/mediator) and [Observer](https://refactoring.guru/design-patterns/observer) address various ways of connecting senders and receivers of requests:
 
-- *Chain of Responsibility* passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
-- *Command* establishes unidirectional connections between senders and receivers.
-- *Mediator* eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
-- *Observer* lets receivers dynamically subscribe to and unsubscribe from receiving requests.
+1、*Chain of Responsibility* passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
 
+2、*Command* establishes unidirectional connections between senders and receivers.
+
+3、*Mediator* eliminates(消除) direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
+
+4、*Observer* lets receivers dynamically subscribe to and unsubscribe from receiving requests.
+
+
+
+### refactoring.guru [Command](https://refactoring.guru/design-patterns/command) 
+
+### AOP
+
+对于 "flow of handling request" 即流程相关的，也非常适合用AOP来进行抽象。
+
+
+
+## Interface: [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern)、[Decorator](https://en.wikipedia.org/wiki/Decorator_pattern)、[Facade](https://en.wikipedia.org/wiki/Facade_pattern)
+
+这三种idiom都是围着interface转，在各自的Wikipedia page中，都对它们进行了对比，总结得不错:
+
+|                           Pattern                            |                            Intent                            |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|   [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern)   | Converts one interface to another so that it matches what the client is expecting |
+| [Decorator](https://en.wikipedia.org/wiki/Decorator_pattern) | Dynamically adds responsibility to the interface by wrapping the original code |
+|    [Facade](https://en.wikipedia.org/wiki/Facade_pattern)    |               Provides a simplified interface                |
