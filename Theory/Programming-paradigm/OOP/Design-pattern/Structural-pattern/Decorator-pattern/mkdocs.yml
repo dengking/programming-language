@@ -1,2 +1,4 @@
 nav:
-    - Decorator-pattern: Decorator-pattern.md
+    - Introduction: index.md
+    - geeksforgeeks-The-Decorator-Pattern: geeksforgeeks-The-Decorator-Pattern
+    - wikipedia-Decorator-pattern: wikipedia-Decorator-pattern

@@ -1,6 +1,6 @@
 nav:
     - Decorator-pattern: Decorator-pattern
-    - Adapter-pattern: Adapter-pattern
+    - Adaptor-pattern: Adaptor-pattern
     - Composite-pattern: Composite-pattern
     - Delegation-pattern: Delegation-pattern
     - Facade-pattern: Facade-pattern
