@@ -378,34 +378,7 @@ nav:
 - C-family:
   - Introduction: C-family/index.md
 - C++:
-  - C++: C++/index.md
-  - What-is-new-in-C++:
-    - Introduction: C++/What-is-new-in-C++/index.md
-    - Simplify:
-      - Introduction: C++/What-is-new-in-C++/Simplify/index.md
-      - preshing-C++Has-Become-More-Pythonicpreshing-C++Has-Become-More-Pythonic:
-        - Introduction: C++/What-is-new-in-C++/Simplify/preshing-C++Has-Become-More-Pythonic/index.md
-    - Uniform-consistent-interface-API-syntax:
-      - Introduction: C++/What-is-new-in-C++/Uniform-consistent-interface-API-syntax/index.md
-    - C++11:
-      - Introduction: C++/What-is-new-in-C++/C++11/index.md
-      - Unamed-namespace: C++/What-is-new-in-C++/C++11/Unamed-namespace.md
-    - C++14:
-      - Introduction: C++/What-is-new-in-C++/C++14/C++14.md
-      - TransformationTrait:
-        - Introduction: C++/What-is-new-in-C++/C++14/TransformationTrait/index.md
-    - C++17:
-      - Introduction: C++/What-is-new-in-C++/C++17/index.md
-      - Temporary-materialization:
-        - Introduction: C++/What-is-new-in-C++/C++17/Temporary-materialization/index.md
-      - Structured-binding:
-        - Introduction: C++/What-is-new-in-C++/C++17/Structured-binding/index.md
-      - Parallel-algorithm:
-        - Introduction: C++/What-is-new-in-C++/C++17/Parallel-algorithm/index.md
-    - C++20:
-      - Introduction: C++/What-is-new-in-C++/C++20/index.md
-      - span:
-        - Introduction: C++/What-is-new-in-C++/C++20/span/index.md
+  - Introduction: C++/index.md
   - Language-reference:
     - index: C++/Language-reference/index.md
     - Basic-concept:
@@ -978,6 +951,33 @@ nav:
       - Introduction: C++/Language-reference/Coroutine/index.md
       - lewissbaker-C++Coroutine:
         - Introduction: C++/Language-reference/Coroutine/lewissbaker-C++Coroutine/index.md
+  - What-is-new-in-C++:
+    - Introduction: C++/What-is-new-in-C++/index.md
+    - Simplify:
+      - Introduction: C++/What-is-new-in-C++/Simplify/index.md
+      - preshing-C++Has-Become-More-Pythonicpreshing-C++Has-Become-More-Pythonic:
+        - Introduction: C++/What-is-new-in-C++/Simplify/preshing-C++Has-Become-More-Pythonic/index.md
+    - Uniform-consistent-interface-API-syntax:
+      - Introduction: C++/What-is-new-in-C++/Uniform-consistent-interface-API-syntax/index.md
+    - C++11:
+      - Introduction: C++/What-is-new-in-C++/C++11/index.md
+      - Unamed-namespace: C++/What-is-new-in-C++/C++11/Unamed-namespace.md
+    - C++14:
+      - Introduction: C++/What-is-new-in-C++/C++14/C++14.md
+      - TransformationTrait:
+        - Introduction: C++/What-is-new-in-C++/C++14/TransformationTrait/index.md
+    - C++17:
+      - Introduction: C++/What-is-new-in-C++/C++17/index.md
+      - Temporary-materialization:
+        - Introduction: C++/What-is-new-in-C++/C++17/Temporary-materialization/index.md
+      - Structured-binding:
+        - Introduction: C++/What-is-new-in-C++/C++17/Structured-binding/index.md
+      - Parallel-algorithm:
+        - Introduction: C++/What-is-new-in-C++/C++17/Parallel-algorithm/index.md
+    - C++20:
+      - Introduction: C++/What-is-new-in-C++/C++20/index.md
+      - span:
+        - Introduction: C++/What-is-new-in-C++/C++20/span/index.md
   - Library:
     - Standard-library:
       - Introduction: C++/Library/Standard-library/index.md
@@ -1351,6 +1351,8 @@ nav:
         - Introduction: C++/Library/macmade/Library-CPPTraits/index.md
       - Library-CrashGuard:
         - Introduction: C++/Library/macmade/Library-CrashGuard/index.md
+      - Library-PIMPL:
+        - Introduction: C++/Library/macmade/Library-PIMPL/index.md
     - Folly:
       - Introduction: C++/Library/Folly/index.md
   - Philosophy:

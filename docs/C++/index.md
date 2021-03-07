@@ -24,4 +24,6 @@
 | [CppCon](https://cppcon.org/)                                |                                 |
 | [gotw](http://www.gotw.ca/)                                  |                                 |
 | [Guru of the Week](http://www.gotw.ca/gotw/)                 |                                 |
+| [MattPD](https://github.com/MattPD)/**[cpplinks](https://github.com/MattPD/cpplinks)** |                                 |
+| [rigtorp](https://github.com/rigtorp)/**[awesome-lockfree](https://github.com/rigtorp/awesome-lockfree)** |                                 |
 
