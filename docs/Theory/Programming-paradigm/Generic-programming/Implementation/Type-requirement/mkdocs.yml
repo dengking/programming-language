@@ -1,4 +1,4 @@
 nav:
-    - Type-requirement: Type-requirement.md
+    - Introduction: index.md
     - Concept(generic-programming): Concept(generic-programming)
     - Generics: Generics

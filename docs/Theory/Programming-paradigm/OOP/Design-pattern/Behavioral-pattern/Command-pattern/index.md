@@ -1,14 +1,18 @@
 # Command pattern
 
-是在阅读 refactoring.guru [Visitor](https://refactoring.guru/design-patterns/visitor) 时，其中有这样的描述:
+1、是在阅读 refactoring.guru [Visitor](https://refactoring.guru/design-patterns/visitor) 时，其中有这样的描述:
 
 > You can treat [Visitor](https://refactoring.guru/design-patterns/visitor) as a powerful version of the [Command](https://refactoring.guru/design-patterns/command) pattern. Its objects can execute operations over various objects of different classes.
 
 上面这段话中的"its"所指的是visitor。
 
-## Thoughts 
+2、我当前没有使用过command pattern，但是使用过"Active-object pattern"，在stackoverflow [Explain “Active-object” pattern](https://stackoverflow.com/questions/41676343/explain-active-object-pattern) # comments中有这样的描述: 
 
-command是一个非常好的抽象，它是横切关注点，command pattern其实运用了AOP。
+> Active-object is the [Command Pattern](https://sourcemaking.com/design_patterns/command), implemented concurrently.
+
+因此结合Active-object patter能够有助于了解command pattern。
+
+3、command是一个非常好的抽象，它是横切关注点，command pattern其实运用了AOP。
 
 command 和 message/event-driven model 中的 message/event 非常类似，它的另外一个同义词是 "request"。
 

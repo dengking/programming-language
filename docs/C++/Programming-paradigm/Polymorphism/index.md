@@ -72,7 +72,15 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 ### Overload of virtual function
 
-我们已经知道，在C++中，virtual function对应的是dynamic polymorphism，而overload对应的是static polymorphism，那 "overload of virtual function" 该如何理解呢？C++中是否支持 "overload of virtual function" 呢？在 `C++\Language-reference\Functions\Function-overload\Overload-in-OOP` 章节对此进行了描述。
+我们已经知道，在C++中，virtual function对应的是dynamic polymorphism，而overload对应的是static polymorphism，那 "overload of virtual function" 该如何理解呢？C++中是否支持 "overload of virtual function" 呢？答案是: 支持的。参见:
+
+1、在 `C++\Language-reference\Functions\Function-overload\Overload-in-OOP` 章节对此进行了描述。
+
+2、C++ visitor pattern，参见:
+
+a、`Theory\Programming-paradigm\OOP\Design-pattern\Behavioral-pattern\Visitor-pattern` 章节
+
+b、`C++\Pattern\Visitor-pattern`
 
 ### Virtual function in class template
 
