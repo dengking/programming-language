@@ -2,7 +2,60 @@
 
 本章描述C++ Subtype polymorphism的实现。
 
+## stackoverflow [Why do we need virtual table?](https://stackoverflow.com/questions/3004501/why-do-we-need-virtual-table)
 
+### [A](https://stackoverflow.com/a/3004555)
+
+Without virtual tables you wouldn't be able to make runtime polymorphism work since all references to functions would be bound at compile time. A simple example
+
+```cpp
+struct Base {
+  virtual void f() { }
+};
+
+struct Derived : public Base {
+  virtual void f() { }
+};
+
+void callF( Base *o ) {
+  o->f();
+}
+
+int main() {
+  Derived d;
+  callF( &d );
+}
+```
+
+Inside the function `callF`, you only know that `o` points to a `Base` object. However, at runtime, the code should call `Derived::f` (since `Base::f` is virtual). At compile time, the compiler can't know which code is going to be executed by the `o->f()` call since it doesn't know what `o` points to.
+
+Hence, you need something called a "virtual table" which is basically a **table of function pointers**. Each object that has virtual functions has a "**v-table pointer**" that points to the virtual table for objects of its type.
+
+The code in the `callF` function above then only needs to look up the entry for `Base::f` in the **virtual table** (which it finds based on the **v-table pointer** in the object), and then it calls the function that table entry points to. That *might* be `Base::f` but it is also possible that it points to something else - `Derived::f`, for instance.
+
+This means that due to the virtual table, you're able to have polymorphism at runtime because the actual function being called is determined at runtime by looking up a function pointer in the virtual table and then calling the function via that pointer - instead of calling the function directly (as is the case for non-virtual functions).
+
+
+
+## stackoverflow [What is vtable in C++ [duplicate]](https://stackoverflow.com/questions/3554909/what-is-vtable-in-c)
+
+### [A](https://stackoverflow.com/a/3555290)
+
+V-tables (or virtual tables) are how most C++ implementations do polymorphism. For each concrete implementation of a class, there is a **table of function pointers to all the virtual methods**. A pointer to this table (called the virtual table) exists as a data member in all the objects. When one calls a virtual method, we lookup the object's v-table and call the appropriate derived class method.
+
+> NOTE: 
+>
+> 1、每个polymorphic object，都有一个执行virtual table的pointer
+>
+> 2、最后一段话描述的是late binding、dynamic binding的过程
+
+### [A](https://stackoverflow.com/a/3554995)
+
+For all it's worth, it is not a standard C++ terminology. It is just an implementation detail used by the implementation to implement virtual functions/dynamic binding
+
+> NOTE: 
+>
+> 1、standard and implementation
 
 ## draft
 
@@ -60,11 +113,11 @@ Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-
 
 [Object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language) offer subtype polymorphism using *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* (also known as *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)*). In typical implementations, each class contains what is called a *[virtual table](https://en.wikipedia.org/wiki/Virtual_table)*—a table of functions that implement the polymorphic part of the class interface—and each object contains a pointer to the "vtable" of its class, which is then consulted whenever a polymorphic method is called. This mechanism is an example of:
 
-- *[late binding](https://en.wikipedia.org/wiki/Late_binding)*, because virtual function calls are not bound until the time of invocation;
+1、*[late binding](https://en.wikipedia.org/wiki/Late_binding)*, because virtual function calls are not bound until the time of invocation;
 
-- *[single dispatch](https://en.wikipedia.org/wiki/Single_dispatch)* (i.e. single-argument polymorphism), because virtual function calls are bound simply by looking through the vtable provided by the first argument (the `this` object), so the runtime types of the other arguments are completely irrelevant.
+2、*[single dispatch](https://en.wikipedia.org/wiki/Single_dispatch)* (i.e. single-argument polymorphism), because virtual function calls are bound simply by looking through the vtable provided by the first argument (the `this` object), so the runtime types of the other arguments are completely irrelevant.
 
-  > NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
+> NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
 
 
 
@@ -77,3 +130,14 @@ value semantic时，它的concrete type是已知的，compiler能够直接选择
 
 pabloariasal [Understandig Virtual Tables in C++](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
 
+
+
+## draft
+
+1、compiler会polymorphic type生成virtual table
+
+2、method resolution order
+
+overload resolution其实也是一种method resolution order
+
+C++ virtual function的调用其实也是一种method resolution order

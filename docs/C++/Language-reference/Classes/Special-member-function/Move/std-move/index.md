@@ -10,12 +10,13 @@
 >
 > > Sometimes, we want to move from **lvalues**. That is, sometimes we want the compiler to treat an **lvalue** as if it were an **rvalue**, so it can invoke the **move constructor**, even though it could be potentially unsafe. For this purpose, `C++11` offers a standard library function template called `std::move` inside the header `<utility>`. This name is a bit unfortunate, because `std::move` simply casts an **lvalue** to an **rvalue**; it does *not* move anything by itself. It merely *enables* moving. Maybe it should have been named `std::cast_to_rvalue` or `std::enable_move`, but we are stuck with the name by now.
 
-In particular, `std::move` produces an [xvalue expression](../language/value_category.html) that identifies its argument `t`. It is exactly equivalent to a `static_cast` to an rvalue reference type.
+In particular, `std::move` produces an [xvalue expression](https://en.cppreference.com/w/cpp/language/value_category) that identifies its argument `t`. It is exactly equivalent to a `static_cast` to an rvalue reference type.
 
-> NOTE:  为什么`std::move` produces an [xvalue expression](../language/value_category.html) ？这要如何来解释？
+> NOTE:  为什么`std::move` produces an [xvalue expression](https://en.cppreference.com/w/cpp/language/value_category) ？这要如何来解释？
 >
-> - 入参是lvalue reference to an object，`std::move`的返回值是一个rvalue reference to an object，则此时compiler就可以选择move semantic function，在这些function中，可以将这个object给move走；显然，这个object满足两个条件：`im`，所以它是一个xvalue
-> - 入参是rvalue reference to an object，这种情况允许吗？是允许的，因为它的入参是forwarding reference；
+> 1、入参是lvalue reference to an object，`std::move`的返回值是一个rvalue reference to an object，则此时compiler就可以选择move semantic function，在这些function中，可以将这个object给move走；显然，这个object满足两个条件：`im`，所以它是一个xvalue
+>
+> 2、入参是rvalue reference to an object，这种情况允许吗？是允许的，因为它的入参是forwarding reference；
 
 
 

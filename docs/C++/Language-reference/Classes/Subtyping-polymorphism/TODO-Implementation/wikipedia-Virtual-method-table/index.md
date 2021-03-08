@@ -4,13 +4,33 @@ A **virtual method table** (**VMT**), **virtual function table**, **virtual call
 
 Whenever a class defines a [virtual function](https://en.wikipedia.org/wiki/Virtual_function) (or method), most compilers add a **hidden member variable** to the class that points to an array of pointers to (virtual) functions called the **virtual method table**. These pointers are used at runtime to invoke the appropriate function implementations, because at compile time it may not yet be known if the base function is to be called or a derived one implemented by a class that inherits from the base class.
 
+> NOTE: 
+>
+> 1、是否是仅仅依赖于 **vpointer** 就能够找到最终的implementation？是否需要额外的lookup？
+>
+> 2、是否直接通过**vpointer**就能够获得concrete class的virtual table
+
 There are many different ways to implement such **dynamic dispatch**, but use of **virtual method tables** is especially common among [C++](https://en.wikipedia.org/wiki/C%2B%2B) and related languages (such as [D](https://en.wikipedia.org/wiki/D_(programming_language)) and [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language))). Languages that separate the programmatic interface of objects from the implementation, like [Visual Basic](https://en.wikipedia.org/wiki/Visual_Basic) and [Delphi](https://en.wikipedia.org/wiki/Object_Pascal), also tend to use this approach, because it allows objects to use a different implementation simply by using a different set of method pointers.
+
+> NOTE: 
+>
+> 1、virtual table的广泛用途
+>
+> 2、"Languages that separate the programmatic interface of objects from the implementation"是典型的information hiding
 
 Suppose a program contains three [classes](https://en.wikipedia.org/wiki/Class_(computer_programming)) in an [inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) hierarchy: a [superclass](https://en.wikipedia.org/wiki/Superclass_(computer_science)), `Cat`, and two [subclasses](https://en.wikipedia.org/wiki/Subclass_(computer_science)), `HouseCat` and `Lion`. Class `Cat` defines a [virtual function](https://en.wikipedia.org/wiki/Virtual_function) named `speak`, so its subclasses may provide an appropriate implementation (e.g. either `meow` or `roar`). When the program calls the `speak` function on a `Cat` reference (which can refer to an instance of `Cat`, or an instance of `HouseCat` or `Lion`), the code must be able to determine which implementation of the function the call should be *dispatched* to. This depends on the actual class of the object, not the class of the reference to it (`Cat`). The class can not generally be determined *statically*(that is, at [compile time](https://en.wikipedia.org/wiki/Compile_time)), so neither can the compiler decide which function to call at that time. The call must be dispatched to the right function *dynamically* (that is, at [run time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase))) instead.
 
-### Implementation
+> NOTE: 
+>
+> 1、"This depends on the actual class of the object, not the class of the reference to it (`Cat`). " 如何获知"the actual class of the object"
+
+## Implementation
 
 An object's **virtual method table** will contain the [addresses](https://en.wikipedia.org/wiki/Memory_address) of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's **virtual method table**. The **virtual method table** is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have **virtual method tables** with the same **layout**: the address of a given method will appear at **the same offset** for all type-compatible classes. Thus, fetching the method's address from a given offset into a **virtual method table** will get the method corresponding to the object's actual class.[[1\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-1)
+
+> NOTE: 
+>
+> 1、最后一句话貌似是关键所在
 
 The [C++](https://en.wikipedia.org/wiki/C%2B%2B) standards do not mandate exactly how dynamic dispatch must be implemented, but compilers generally use minor variations on the same basic model.
 
