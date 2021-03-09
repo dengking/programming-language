@@ -43,6 +43,10 @@ Note that the associativity is meaningful for member access operators, even thou
 | `a++   a--`       | Suffix/postfix [increment and decrement](https://en.cppreference.com/w/cpp/language/operator_incdec) | 会创建一个temporary |
 | `type()   type{}` | [Functional cast](https://en.cppreference.com/w/cpp/language/explicit_cast) | 会创建一个temporary |
 
+需要注意的是: `a++   a--`排在第二位的原因是: 它的value computation是直接return它自己，这是非常重要的；
+
+
+
 ### Member access的优先级再次之
 
 member access:
