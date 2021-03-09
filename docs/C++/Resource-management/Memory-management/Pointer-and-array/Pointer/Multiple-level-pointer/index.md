@@ -1,6 +1,8 @@
 # Multiple-level pointer
 
-“multiple-level pointer”即“多级指针”；在cppreference [const_cast conversion](https://en.cppreference.com/w/cpp/language/const_cast)中，使用multilevel pointer来表达“多级指针”。
+1、“multiple-level pointer”即“多级指针”；在cppreference [const_cast conversion](https://en.cppreference.com/w/cpp/language/const_cast)中，使用multilevel pointer来表达“多级指针”。
+
+2、"Multiple-level pointer"可以看做是pointer of pointer，即使用recursive definition来进行描述。
 
 ## stackoverflow [Why use double indirection? or Why use pointers to pointers?](https://stackoverflow.com/questions/5580761/why-use-double-indirection-or-why-use-pointers-to-pointers)
 
@@ -157,6 +159,9 @@ total words in my lol: 243
 ### [A](https://stackoverflow.com/a/5580790): change the value of the pointer passed to a function as the function argument
 
 One reason is you want to change the value of the pointer passed to a function as the **function argument**, to do this you require **pointer to a pointer**.
+
+> NOTE: 
+> 1、recursive definition
 
 In simple words, Use `**` when you want to preserve (OR retain change in) the Memory-Allocation or Assignment even outside of a function call. (So, Pass such function with double pointer arg.)
 
