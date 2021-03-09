@@ -607,3 +607,17 @@ person_money
 1、上述程序使用`long*`替代`int*`，这是因为一般`long` type length等于Word length等于pointer length
 
 2、上述程序没有使用`size_t`的原因是，intentional programming，上述程序所要表达的意图是arithmetic，显然long是更加符合arithmetic的
+
+## 补充图
+
+侯捷老师的一张图，比较直观。
+
+
+
+![在这里插入图片描述](./20201209204011460.png)
+
+
+
+### 从汇编角度理解
+
+![在这里插入图片描述](./20201209221003157.png)

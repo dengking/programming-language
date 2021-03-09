@@ -93,6 +93,8 @@ int main()
 >
 > a、`Pointer-to-function-and-function-type` 章节
 >
+> b、上述程序是存在错误的，参见`CSDN-C++虚函数和虚函数表详解`
+>
 > 2、输出如下: 
 
 ```C++
