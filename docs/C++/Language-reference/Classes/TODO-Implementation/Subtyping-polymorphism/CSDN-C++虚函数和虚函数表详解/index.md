@@ -51,7 +51,7 @@ cl /d1 reportSingleClassLayoutperson test.cpp
 
 测试结果：
 
-![在这里插入图片描述](E:\github\programming-language\docs\C++\Language-reference\Classes\Subtyping-polymorphism\TODO-Implementation\CSDN-C++虚函数和虚函数表详解\20201207202727940.png)
+![在这里插入图片描述](./20201207202727940.png)
 
 
 
@@ -61,7 +61,7 @@ cl /d1 reportSingleClassLayoutperson test.cpp
 
 直观的关系如图所示：
 
-![在这里插入图片描述](E:\github\programming-language\docs\C++\Language-reference\Classes\Subtyping-polymorphism\TODO-Implementation\CSDN-C++虚函数和虚函数表详解\20201207211501232.png)
+![在这里插入图片描述](./20201207211501232.png)
 
 ### （2）再创建一个子类teacher，重写了work虚函数
 
@@ -85,13 +85,53 @@ cl /d1 reportSingleClassLayoutteacher test.cpp
 
 测试结果：
 
-![在这里插入图片描述](E:\github\programming-language\docs\C++\Language-reference\Classes\Subtyping-polymorphism\TODO-Implementation\CSDN-C++虚函数和虚函数表详解\20201207211338653.png)如图，
+![在这里插入图片描述](./20201207211338653.png)如图，
 
 
 
 子类继承了父类的id和虚函数表的函数指针数据（注意，并不是和父类同一个虚函数表，见下面代码测试），因为重写了work函数，work函数前面作用域变为了`teacher::`。
 
+#### 多态实现原理
 
+此处可以理解虚函数多态的底层实现原理。
+
+虚函数多态条件：
+
+（1）指针调用
+
+（2）向上转型
+
+（3）存在虚函数
+
+
+
+```C++
+teacher t;
+person* p=&t
+p->work();  //因为加了虚函数，此处发生多态，即在运行期决定调用哪个函数。
+```
+
+ps：父类指针可以指向子类对象，因为子类对象中必定含有父类的数据信息，反之需要强制转型（有风险）。
+
+`p->work()`被编译器转为`person::work( p )`，`p`指向的`teacher`类对象的地址当作传入参数，作为调用哪个函数的依据。
+
+程序运行到此处时先去查找`p`指向的虚函数表，此处会带一个偏移量`x`，在虚函数表中偏移`x`位找到函数地址，如果这个函数没有被重写，那么函数指针地址为`&person::work`,此处我们重写了虚函数`work`，所以查找到的地址为`&teaher::work`。
+
+![在这里插入图片描述](./20201208091013780.png)
+
+### （3）创建一个无重写函数子类
+
+```C++
+class student :public person
+{
+public:
+	void stufunc();
+};
+```
+
+![在这里插入图片描述](./20201208091626284.png)
+
+子类正常继承父类虚函数表函数指针地址。
 
 ## 代码测试
 
@@ -237,6 +277,58 @@ int main()
 	return 0;
 }
 // g++ -Wall -pedantic test.cpp -g
+
+
+```
+
+
+
+```C++
+Vtable for person
+person::_ZTV6person: 5u entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI6person)
+16    (int (*)(...))person::work
+24    (int (*)(...))person::eat
+32    (int (*)(...))person::money
+
+Class person
+   size=16 align=8
+   base size=12 base align=8
+person (0x0x7fa63290b4e0) 0
+    vptr=((& person::_ZTV6person) + 16u)
+
+Vtable for teacher
+teacher::_ZTV7teacher: 5u entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI7teacher)
+16    (int (*)(...))teacher::work
+24    (int (*)(...))person::eat
+32    (int (*)(...))person::money
+
+Class teacher
+   size=16 align=8
+   base size=12 base align=8
+teacher (0x0x7fa632900138) 0
+    vptr=((& teacher::_ZTV7teacher) + 16u)
+  person (0x0x7fa63290b540) 0
+      primary-for teacher (0x0x7fa632900138)
+
+Vtable for student
+student::_ZTV7student: 5u entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI7student)
+16    (int (*)(...))person::work
+24    (int (*)(...))person::eat
+32    (int (*)(...))person::money
+
+Class student
+   size=16 align=8
+   base size=12 base align=8
+student (0x0x7fa6329001a0) 0
+    vptr=((& student::_ZTV7student) + 16u)
+  person (0x0x7fa63290b5a0) 0
+      primary-for student (0x0x7fa6329001a0)
 
 
 ```
