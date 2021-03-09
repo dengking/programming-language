@@ -64,7 +64,7 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 ## Implementation of dynamic polymorphism
 
-在`C++\Language-reference\Classes\Subtype-polymorphism\Implementation`章节对此进行深入分析。
+在`C++\Language-reference\Classes\Implementation`章节对此进行深入分析。
 
 ## Mix static polymorphism and dynamic polymorphism
 
