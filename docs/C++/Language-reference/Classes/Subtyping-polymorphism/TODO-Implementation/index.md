@@ -141,3 +141,7 @@ pabloariasal [Understandig Virtual Tables in C++](https://pabloariasal.github.io
 overload resolution其实也是一种method resolution order
 
 C++ virtual function的调用其实也是一种method resolution order
+
+## draft
+
+1、virtual table其实就是一个dispatch table

@@ -26,7 +26,7 @@ Suppose a program contains three [classes](https://en.wikipedia.org/wiki/Class_(
 
 ## Implementation
 
-An object's **virtual method table** will contain the [addresses](https://en.wikipedia.org/wiki/Memory_address) of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's **virtual method table**. The **virtual method table** is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have **virtual method tables** with the same **layout**: the address of a given method will appear at **the same offset** for all type-compatible classes. Thus, fetching the method's address from a given offset into a **virtual method table** will get the method corresponding to the object's actual class.[[1\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-1)
+An object's **virtual method table** will contain the [addresses](https://en.wikipedia.org/wiki/Memory_address) of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's **virtual method table**. The **virtual method table** is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings(兄妹) in an inheritance hierarchy) will have **virtual method tables** with the same **layout**: the address of a given method will appear at **the same offset** for all type-compatible classes. Thus, fetching the method's address from a given offset into a **virtual method table** will get the method corresponding to the object's actual class.[[1\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-1)
 
 > NOTE: 
 >
@@ -34,11 +34,17 @@ An object's **virtual method table** will contain the [addresses](https://en.wik
 
 The [C++](https://en.wikipedia.org/wiki/C%2B%2B) standards do not mandate exactly how dynamic dispatch must be implemented, but compilers generally use minor variations on the same basic model.
 
+### **virtual table pointer**, **vpointer** or **VPTR**
+
 Typically, the compiler creates a separate **virtual method table** for each class. When an object is created, a pointer to this table, called the **virtual table pointer**, **vpointer** or **VPTR**, is added as a hidden member of this object. As such, the compiler must also generate "hidden" code in the [constructors](https://en.wikipedia.org/wiki/Constructor_(object-oriented_programming)) of each class to initialize a new object's **virtual table pointer** to the address of its class's **virtual method table**.
 
 Many compilers place the virtual table pointer as the last member of the object; other compilers place it as the first; portable source code works either way.[[2\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-2) For example, [g++](https://en.wikipedia.org/wiki/G%2B%2B) previously placed the pointer at the end of the object.
 
-### Example
+> NOTE: 
+>
+> 1、将vpointer放在first member of the object是容易理解的: 总是能够获取它的virtual table，但是放在last member of object，如何实现呢？
+
+## Example
 
 Consider the following class declarations in [C++ syntax](https://en.wikipedia.org/wiki/C%2B%2B_syntax):
 

@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - CSDN-详解virtual-table: CSDN-详解virtual-table
     - wikipedia-Virtual-method-table: wikipedia-Virtual-method-table
     - shaharmike-Cpp-vtable: shaharmike-Cpp-vtable
     - RTTI: RTTI
