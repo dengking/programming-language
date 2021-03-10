@@ -1,22 +1,14 @@
 # Variadic functions
 
-## cppreference [Variadic functions](https://en.cppreference.com/w/cpp/utility/variadic)
+## C++中实现variadic function的方式
 
 
 
+### stackoverflow [Variable number of arguments in C++?](https://stackoverflow.com/questions/1657883/variable-number-of-arguments-in-c)
 
+#### [A](https://stackoverflow.com/a/1657924)
 
-## cppreference [Variadic arguments](https://en.cppreference.com/w/cpp/language/variadic_arguments)
-
-
-
-
-
-## stackoverflow [Variable number of arguments in C++?](https://stackoverflow.com/questions/1657883/variable-number-of-arguments-in-c)
-
-### [A](https://stackoverflow.com/a/1657924)
-
-You probably shouldn't, and you can probably do what you want to do in a safer and simpler way. Technically to use variable number of arguments in C you include stdarg.h. From that you'll get the `va_list` type as well as three functions that operate on it called `va_start()`, `va_arg()` and `va_end()`.
+You probably shouldn't, and you can probably do what you want to do in a safer and simpler way. Technically to use variable number of arguments in C you include `stdarg.h`. From that you'll get the `va_list` type as well as three functions that operate on it called `va_start()`, `va_arg()` and `va_end()`.
 
 ```cpp
 #include<stdarg.h>
@@ -37,12 +29,13 @@ int maxof(int n_args, ...)
 
 If you ask me, this is a mess. It looks bad, it's unsafe, and it's full of technical details that have nothing to do with what you're conceptually trying to achieve. Instead, consider using overloading or inheritance/polymorphism, builder pattern (as in `operator<<()` in streams) or default arguments etc. These are all safer: the compiler gets to know more about what you're trying to do so there are more occasions it can stop you before you blow your leg off.
 
-### [A](https://stackoverflow.com/a/16338804)
+#### [A](https://stackoverflow.com/a/16338804)
 
 In *C++11* you have two new options, as the [Variadic functions](http://en.cppreference.com/w/cpp/utility/variadic) reference page in the *Alternatives section* states:
 
-> - Variadic templates can also be used to create functions that take variable number of arguments. They are often the better choice because they do not impose restrictions on the types of the arguments, do not perform integral and floating-point promotions, and are type safe. (since C++11)
-> - If all variable arguments share a common type, a std::initializer_list provides a convenient mechanism (albeit with a different syntax) for accessing variable arguments.
+> 1、Variadic templates can also be used to create functions that take variable number of arguments. They are often the better choice because they do not impose restrictions on the types of the arguments, do not perform integral and floating-point promotions, and are type safe. (since C++11)
+>
+> 2、If all variable arguments share a common type, a `std::initializer_list` provides a convenient mechanism (albeit with a different syntax) for accessing variable arguments.
 
 Below is an example showing both alternatives (*see it live*):
 
@@ -134,7 +127,7 @@ int main()
 }
 ```
 
-and the alternative for *variadic templates* would be [variadic functions](http://en.cppreference.com/w/cpp/utility/variadic) although they are not *type-safe*and in general [error prone and can be unsafe to use](http://robertseacord.sys-con.com/node/158825/mobile) but the only other potential alternative would be to use *default arguments*, although that has limited use. The example below is a modified version of the sample code in the linked reference:
+and the alternative for *variadic templates* would be [variadic functions](http://en.cppreference.com/w/cpp/utility/variadic) although they are not *type-safe* and in general [error prone and can be unsafe to use](http://robertseacord.sys-con.com/node/158825/mobile) but the only other potential alternative would be to use *default arguments*, although that has limited use. The example below is a modified version of the sample code in the linked reference:
 
 ```cpp
 #include <iostream>
@@ -176,17 +169,24 @@ int main()
 
 Using *variadic functions* also comes with restrictions in the arguments you can pass which is detailed in the [draft C++ standard](http://www.open-std.org/Jtc1/sc22/wg21/docs/papers/2005/n1804.pdf) in section `5.2.2` *Function call* paragraph *7*:
 
-> When there is no parameter for a given argument, the argument is passed in such a way that the receiving function can obtain the value of the argument by invoking va_arg (18.7). The lvalue-to-rvalue (4.1), array-to-pointer (4.2), and function-to-pointer (4.3) standard conversions are performed on the argument expression. After these conversions, if the argument does not have arithmetic, enumeration, pointer, pointer to member, or class type, the program is ill-formed. If the argument has a non-POD class type (clause 9), the behavior is undefined. [...]
+> When there is no parameter for a given argument, the argument is passed in such a way that the receiving function can obtain the value of the argument by invoking `va_arg` (18.7). The lvalue-to-rvalue (4.1), array-to-pointer (4.2), and function-to-pointer (4.3) standard conversions are performed on the argument expression. After these conversions, if the argument does not have arithmetic, enumeration, pointer, pointer to member, or class type, the program is ill-formed. If the argument has a non-POD class type (clause 9), the behavior is undefined. [...]
 
 
 
 
 
-## **SUMMARY**:对比
-
-使用Variadic function，那么这个函数接收到的variadic arguments 是无法直接传入到另外一个variadic function的。可以使callee接收一个 [standard containers](http://en.cppreference.com/w/cpp/container)作为参数，然后将caller的variadic arguments装入到这个container中。这种做法有点类似于python中的`args`。
-
-这也体现了c++的强类型。
+## cppreference [Variadic functions](https://en.cppreference.com/w/cpp/utility/variadic)
 
 
 
+
+
+## cppreference [Variadic arguments](https://en.cppreference.com/w/cpp/language/variadic_arguments)
+
+
+
+
+
+## `Recursive-variadic-function`
+
+参见 `Recursive-variadic-function` 章节。

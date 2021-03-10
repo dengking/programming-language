@@ -20,6 +20,8 @@ TMP metaprogram可以以如下方式来实现compile time function execution:
 
 2) TMP metafunction，参见`C++\Idiom\TMP\Metafunction`，它其实不是严格意义上的function，但是它实现了类似于function的功能，所以将它放到这里。一些metafunction能够evaluation to constant at compile time，比如`std::is_same`。
 
+3) recursive variadic function，参见`Recursive-variadic-function`章节。
+
 ### 3) Static initialization
 
 参见`C++\Language-reference\Initialization`章节。

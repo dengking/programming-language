@@ -4,7 +4,7 @@ non-type template parameter的computation，主要以template parameter pack的c
 
 
 
-## Template metaprogramming and functional programming and non-type template parameter
+## TMP and FP and non-type template parameter
 
 上面这段话对于理解template metaprogramming是非常重要的：
 
@@ -17,14 +17,6 @@ non-type template parameter的computation，主要以template parameter pack的c
 需要注意的是，一般使用non-type template parameter来实现compile-time execution，它可以看做是一种典型的functional programming，而其他的template parameter，如type template parameter、template template parameter，其实就不属于functional programming的概念了。
 
 下面的`factorial`就是一个典型的例子；`factorial`的实现是典型的functional programming，使用`c++`的template metaprogramming可以实现compiler-time的functional programming。
-
-
-
-
-
-## template recursion function
-
-
 
 
 
@@ -43,37 +35,3 @@ https://www.drdobbs.com/cpp/the-spirit-parser-library-inline-parsing/184401692
 这让我想到了：template is Turing-complete的
 
 
-
-## Recursion
-
-```C++
-#include <iostream>
- 
-void tprintf(const char* format) // base function
-{
-    std::cout << format;
-}
- 
-template<typename T, typename... Targs>
-void tprintf(const char* format, T value, Targs... Fargs) // recursive variadic function
-{
-    for ( ; *format != '\0'; format++ ) {
-        if ( *format == '%' ) {
-           std::cout << value;
-           tprintf(format+1, Fargs...); // recursive call
-           return;
-        }
-        std::cout << *format;
-    }
-}
- 
-int main()
-{
-    tprintf("% world% %\n","Hello",'!',123);
-    return 0;
-}
-```
-
-
-
-上述例子是: 递归关系 + 终止条件

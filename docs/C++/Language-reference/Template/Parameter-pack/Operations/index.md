@@ -88,3 +88,24 @@ int main()
 ### All
 
 参见 `./C++17-Fold-expression`。
+
+
+
+
+
+## TODO
+
+
+
+stackoverflow [Variadic template pack expansion](https://stackoverflow.com/questions/25680461/variadic-template-pack-expansion)
+
+
+
+### iterating-over-a-parameter-pack
+
+https://riptutorial.com/cplusplus/example/3208/iterating-over-a-parameter-pack
+
+### count
+
+https://stackoverflow.com/questions/3628364/count-of-parameters-in-a-parameter-pack-is-there-a-c0x-std-lib-function-for-t
+

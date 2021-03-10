@@ -6,7 +6,7 @@
 
 一、Parameter pack是linear structure
 
-二、对Parameter pack使用FP的方式来进行操作。
+二、对Parameter pack使用FP的方式来进行操作，最最常见的是recursion(参见`Recursive-variadic-function`)。
 
 三、parameter pack大大提高了C++ generic programming，使得如下成为可能: 
 
@@ -22,6 +22,8 @@
 
 四、parameter pack大大提高了C++ compile time computation
 
+典型的就是`Recursive-variadic-function`。
+
 ## 发展概述
 
 ### C++11
@@ -29,6 +31,7 @@
 引入Variadic templates，参见: 
 
 1) Wikipedia [C++11#Variadic templates](https://infogalactic.com/info/C%2B%2B11#Variadic_templates) 
+
 2) cppreference [C++11](https://en.cppreference.com/w/cpp/11)# [variadic templates](https://en.cppreference.com/w/cpp/language/parameter_pack)
 
 不足: 
