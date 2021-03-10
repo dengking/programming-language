@@ -162,3 +162,7 @@ It is a light-weight wrapper around a C-style array, preferred by C++ developers
 ### [microsoft](https://github.com/microsoft)/**[GSL](https://github.com/microsoft/GSL)**/[include](https://github.com/microsoft/GSL/tree/master/include)/[gsl](https://github.com/microsoft/GSL/tree/master/include/gsl)/[**span**](https://github.com/Microsoft/GSL/blob/master/include/gsl/span)
 
 ### martinmoene [GSL-Lite](https://github.com/martinmoene/gsl-lite) 
+
+### boost beast span
+
+https://www.boost.org/doc/libs/master/boost/beast/core/span.hpp
