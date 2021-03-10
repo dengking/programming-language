@@ -1,8 +1,6 @@
 # Prefer use object generator
 
-1、`Exception-Safe-Function-Call`
-
-a、其中讨论了function call的order of evaluation 和 exception safety、resource leak之间的问题
+1、在 `Exception-Safe-Function-Call` 章节中讨论了function call的order of evaluation 和 exception safety、resource leak之间的问题
 
 2、CppCoreGuidelines [R: Resource management # Allocation and deallocation rule summary](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#r-resource-management):
 
