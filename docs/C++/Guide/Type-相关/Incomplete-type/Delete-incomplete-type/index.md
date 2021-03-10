@@ -167,6 +167,28 @@ Am I missing something big here (and in that case sorry for the stupid question)
 
 
 
+#### [A](https://stackoverflow.com/a/2517455)
+
+> NOTE: 这个回答非常好
+
+To combine several answers and add my own, without a class definition the calling code doesn't know:
+
+- whether the class has a declared destructor, or if the default destructor is to be used, and if so whether the default destructor is trivial,
+- whether the destructor is accessible to the calling code,
+- what base classes exist and have destructors,
+- whether the destructor is virtual. Virtual function calls in effect use a different calling convention from non-virtual ones. The compiler can't just "emit the code to call ~Body", and leave the linker to work out the details later,
+- (this just in, thanks GMan) whether `delete` is overloaded for the class.
+
+You can't call any member function on an incomplete type for some or all of those reasons (plus another that doesn't apply to destructors - you wouldn't know the parameters or return type). A destructor is no different. So I'm not sure what you mean when you say "why can't it do as it always does?".
+
+As you already know, the solution is to define the destructor of `Handle` in the TU which has the definition of `Body`, same place as you define every other member function of `Handle` which calls functions or uses data members of `Body`. Then at the point where `delete impl_;` is compiled, all the information is available to emit the code for that call.
+
+Note that the standard actually says, 5.3.5/5:
+
+> if the object being deleted has incomplete class type at the point of deletion and the complete class has a non-trivial destructor or a deallocation function, the behavior is undefined.
+
+I presume this is so that you can delete an incomplete POD type, same as you could `free` it in C. g++ gives you a pretty stern warning if you try it, though.
+
 ### TODO
 
 1、stackoverflow [Delete objects of incomplete type](https://stackoverflow.com/questions/4325154/delete-objects-of-incomplete-type)

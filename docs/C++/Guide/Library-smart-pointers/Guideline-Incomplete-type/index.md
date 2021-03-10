@@ -15,6 +15,89 @@ You still need to write the visible class’ destructor yourself and define it o
 >
 > 1、why "*unique_ptr* and *shared_ptr* can be instantiated with an **incomplete type**"？
 
+## stackoverflow [Is std::unique_ptr required to know the full definition of T?](https://stackoverflow.com/questions/6012157/is-stdunique-ptrt-required-to-know-the-full-definition-of-t)
+
+### [A](https://stackoverflow.com/a/6089065)
+
+Adopted from [here](http://howardhinnant.github.io/incomplete.html).
+
+Most templates in the C++ standard library require that they be instantiated with complete types. However `shared_ptr` and `unique_ptr` are *partial* exceptions. Some, but not all of their members can be instantiated with incomplete types. The motivation for this is to support idioms such as [pimpl](http://en.wikipedia.org/wiki/Opaque_pointer#C.2B.2B) using smart pointers, and without risking undefined behavior.
+
+Undefined behavior can occur when you have an incomplete type and you call `delete` on it:
+
+```
+class A;
+A* a = ...;
+delete a;
+```
+
+The above is legal code. It will compile. Your compiler may or may not emit a warning for above code like the above. When it executes, bad things will probably happen. If you're very lucky your program will crash. However a more probable outcome is that your program will silently leak memory as `~A()` won't be called.
+
+Using `auto_ptr<A>` in the above example doesn't help. You still get the same undefined behavior as if you had used a raw pointer.
+
+Nevertheless, using incomplete classes in certain places is very useful! This is where `shared_ptr` and `unique_ptr` help. Use of one of these smart pointers will let you get away with an incomplete type, except where it is necessary to have a complete type. And most importantly, when it is necessary to have a complete type, you get a compile-time error if you try to use the smart pointer with an incomplete type at that point.
+
+**No more undefined behavior:**
+
+If your code compiles, then you've used a complete type everywhere you need to.
+
+```
+class A
+{
+    class impl;
+    std::unique_ptr<impl> ptr_;  // ok!
+
+public:
+    A();
+    ~A();
+    // ...
+};
+```
+
+`shared_ptr` and `unique_ptr` require a complete type in different places. The reasons are obscure, having to do with a dynamic deleter vs a static deleter. The precise reasons aren't important. In fact, in most code it isn't really important for you to know exactly where a complete type is required. Just code, and if you get it wrong, the compiler will tell you.
+
+> NOTE: 
+> 1、上面这段话中的"dynamic deleter vs a static deleter"是什么含义？
+>
+> 这段话让我想起了
+
+However, in case it is helpful to you, here is a table which documents several members of `shared_ptr` and `unique_ptr` with respect to completeness requirements. If the member requires a complete type, then entry has a "C", otherwise the table entry is filled with "I".
+
+```
+Complete type requirements for unique_ptr and shared_ptr
+
+                            unique_ptr       shared_ptr
++------------------------+---------------+---------------+
+|          P()           |      I        |      I        |
+|  default constructor   |               |               |
++------------------------+---------------+---------------+
+|      P(const P&)       |     N/A       |      I        |
+|    copy constructor    |               |               |
++------------------------+---------------+---------------+
+|         P(P&&)         |      I        |      I        |
+|    move constructor    |               |               |
++------------------------+---------------+---------------+
+|         ~P()           |      C        |      I        |
+|       destructor       |               |               |
++------------------------+---------------+---------------+
+|         P(A*)          |      I        |      C        |
++------------------------+---------------+---------------+
+|  operator=(const P&)   |     N/A       |      I        |
+|    copy assignment     |               |               |
++------------------------+---------------+---------------+
+|    operator=(P&&)      |      C        |      I        |
+|    move assignment     |               |               |
++------------------------+---------------+---------------+
+|        reset()         |      C        |      I        |
++------------------------+---------------+---------------+
+|       reset(A*)        |      C        |      C        |
++------------------------+---------------+---------------+
+```
+
+Any operations requiring pointer conversions require complete types for both `unique_ptr` and `shared_ptr`.
+
+The `unique_ptr<A>{A*}` constructor can get away with an incomplete `A` only if the compiler is not required to set up a call to `~unique_ptr<A>()`. For example if you put the `unique_ptr` on the heap, you can get away with an incomplete `A`. More details on this point can be found in [BarryTheHatchet's](https://stackoverflow.com/users/560648/barrythehatchet) answer [here](https://stackoverflow.com/a/27624369/576911).
+
 
 
 ## stackoverflow [std::unique_ptr with an incomplete type won't compile](https://stackoverflow.com/questions/9954518/stdunique-ptr-with-an-incomplete-type-wont-compile)
@@ -177,7 +260,11 @@ public:
 
 because otherwise the compiler generates a default one, and it needs a complete declaration of `foo::impl` for this.
 
-If you have template constructors, then you're screwed(厄运临头), even if you don't construct the `impl_` member:
+If you have **template constructors**, then you're screwed(厄运临头), even if you don't construct the `impl_` member:
+
+> NOTE: 
+>
+> 1、没有读懂
 
 ```cpp
 template <typename T>
@@ -209,4 +296,8 @@ struct ptr_impl : std::unique_ptr<impl>
 ```
 
 
+
+## TODO
+
+1、stackoverflow [Unique_ptr and forward declaration](https://stackoverflow.com/questions/27336779/unique-ptr-and-forward-declaration)
 
