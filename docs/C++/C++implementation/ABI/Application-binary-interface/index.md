@@ -1,4 +1,6 @@
-# [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)
+# Application binary interface
+
+## wikipedia [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)
 
 In [computer software](https://en.wikipedia.org/wiki/Computer_software), an **application binary interface** (**ABI**) is an [interface](https://en.wikipedia.org/wiki/Interface_(computing)) between two **binary program modules**; often, one of these modules is a [library](https://en.wikipedia.org/wiki/Library_(computing)) or [operating system](https://en.wikipedia.org/wiki/Operating_system) facility, and the other is a program that is being run by a user.
 
@@ -6,7 +8,7 @@ An *ABI* defines how data structures or computational routines are accessed in [
 
 Adhering to an ABI (which may or may not be officially standardized) is usually the job of a [compiler](https://en.wikipedia.org/wiki/Compiler), operating system, or library author; however, an application programmer may have to deal with an ABI directly when writing a program in a mix of programming languages, which can be achieved by using [foreign function calls](https://en.wikipedia.org/wiki/Foreign_function_call).
 
-## Description
+### Description
 
 ABIs cover details such as:
 
@@ -16,13 +18,13 @@ ABIs cover details such as:
 - how an application should make [system calls](https://en.wikipedia.org/wiki/System_call) to the operating system and, if the ABI specifies **direct system calls** rather than **procedure calls** to system call stubs, the **system call numbers**
 - and in the case of a complete operating system ABI, the binary format of [object files](https://en.wikipedia.org/wiki/Object_file), program libraries and so on.
 
-## Complete ABIs
+### Complete ABIs
 
 A complete ABI, such as the [Intel Binary Compatibility Standard](https://en.wikipedia.org/wiki/Intel_Binary_Compatibility_Standard) (iBCS), allows a program from one operating system supporting that ABI to run without modifications on any other such system, provided that necessary shared libraries are present, and similar prerequisites are fulfilled.
 
 Other[*which?*] ABIs standardize details such as the [C++ name mangling](https://en.wikipedia.org/wiki/Name_mangling#Name_mangling_in_C++),  [exception](https://en.wikipedia.org/wiki/Exception_handling) propagation, and calling convention between compilers on the same platform, but do not require cross-platform compatibility.
 
-## Embedded ABIs
+### Embedded ABIs
 
 An *embedded-application binary interface* (EABI) specifies standard conventions for [file formats](https://en.wikipedia.org/wiki/File_format), data types, register usage, [stack frame](https://en.wikipedia.org/wiki/Stack_frame) organization, and function parameter passing of an [embedded](https://en.wikipedia.org/wiki/Embedded_system) software program, for use with an [embedded operating system](https://en.wikipedia.org/wiki/Embedded_operating_system).
 
@@ -36,7 +38,7 @@ Widely used EABIs include [PowerPC](https://en.wikipedia.org/wiki/PowerPC),[[4\]
 
 
 
-## [Difference between API and ABI](https://stackoverflow.com/questions/3784389/difference-between-api-and-abi)
+## stackoverflow [Difference between API and ABI](https://stackoverflow.com/questions/3784389/difference-between-api-and-abi)
 
 Q:
 

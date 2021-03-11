@@ -83,6 +83,58 @@ B2 *b2 = new B2();
 D  *d  = new D();
 ```
 
+### 完整code
+
+```C++
+class B1
+{
+public:
+	virtual ~B1()
+	{
+	}
+	void f0()
+	{
+	}
+	virtual void f1()
+	{
+	}
+	int int_in_b1;
+};
+
+class B2
+{
+public:
+	virtual ~B2()
+	{
+	}
+	virtual void f2()
+	{
+	}
+	int int_in_b2;
+};
+class D: public B1, public B2
+{
+public:
+	void d()
+	{
+	}
+	void f2()
+	{
+	}  // override B2::f2()
+	int int_in_d;
+};
+int main()
+{
+	B2 *b2 = new B2();
+	D *d = new D();
+}
+
+```
+
+---
+
+### Memory layout for the object
+
 g++ 3.4.6 from [GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) produces the following 32-bit memory layout for the object `b2`:[[nb 1\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-4)
 
 ```shell
@@ -119,9 +171,23 @@ Also note the [virtual destructors](https://en.wikipedia.org/wiki/Virtual_functi
 
 Overriding of the method `f2()` in class `D` is implemented by duplicating the virtual method table of `B2` and replacing the pointer to `B2::f2()` with a pointer to `D::f2()`.
 
-### Multiple inheritance and thunks
+> NOTE: 
+>
+> 1上面这段话中描述的内容，其实结合一张图来看是容易理解的，参见: 
+>
+> a、csdn [详解virtual table](https://blog.csdn.net/wangweixaut061/article/details/7019994) 
 
-The g++ compiler implements the [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance) of the classes `B1` and `B2` in class `D` using two virtual method tables, one for each base class. (There are other ways to implement multiple inheritance, but this is the most common.) This leads to the necessity for "pointer fixups", also called [thunks](https://en.wikipedia.org/wiki/Thunk_(programming)), when [casting](https://en.wikipedia.org/wiki/Type_conversion).
+## Multiple inheritance and thunks
+
+The g++ compiler implements the [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance) of the classes `B1` and `B2` in class `D` using two virtual method tables, one for each base class. (There are other ways to implement multiple inheritance, but this is the most common.) This leads to the necessity for "**pointer fixups**", also called [thunks](https://en.wikipedia.org/wiki/Thunk_(programming)), when [casting](https://en.wikipedia.org/wiki/Type_conversion).
+
+> NOTE: 
+>
+> 1、关于multiple inheritance的implementation，参见:"
+>
+> a、csdn [详解virtual table](https://blog.csdn.net/wangweixaut061/article/details/7019994) 
+>
+> 
 
 Consider the following C++ code:
 
@@ -133,7 +199,10 @@ B2 *b2 = d;
 
 While `d` and `b1` will point to the same memory location after execution of this code, `b2` will point to the location `d+8` (eight bytes beyond the memory location of `d`). Thus, `b2` points to the region within `d` that "looks like" an instance of `B2`, i.e., has the same memory layout as an instance of `B2`.
 
-### Invocation
+> NOTE: 
+> 1、在 wikipedia [Thunk](https://en.wikipedia.org/wiki/Thunk_(programming)) 中对上述内容也进行了详细的描述
+
+## Invocation
 
 A call to `d->f1()` is handled by dereferencing `d`'s `D::B1` **vpointer**, looking up the `f1` entry in the **virtual method table**, and then dereferencing that pointer to call the code.
 
@@ -147,7 +216,7 @@ Where *d refers to the virtual method table of D and [0] refers to the first met
 
 In the more general case, calling `B1::f1()` or `D::f2()` is more complicated:
 
-```
+```c++
 (*(*(d[+0]/*pointer to virtual method table of D (for B1)*/)[0]))(d)   /* Call d->f1() */
 (*(*(d[+8]/*pointer to virtual method table of D (for B2)*/)[0]))(d+8) /* Call d->f2() */
 ```
@@ -156,11 +225,11 @@ The call to d->f1() passes a B1 pointer as a parameter. The call to d->f2() pass
 
 By comparison, a call to `d->f0()` is much simpler:
 
-```
+```c++
 (*B1::f0)(d)
 ```
 
-### Efficiency
+## Efficiency
 
 A **virtual call** requires at least an extra indexed dereference and sometimes a "fixup" addition, compared to a non-virtual call, which is simply a jump to a compiled-in pointer. Therefore, calling **virtual functions** is inherently slower than calling **non-virtual functions**. An experiment done in 1996 indicates that approximately 6–13% of execution time is spent simply dispatching to the correct function, though the overhead can be as high as 50%.[[4\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-6)The cost of virtual functions may not be so high on modern CPU architectures due to much larger caches and better [branch prediction](https://en.wikipedia.org/wiki/Branch_predictor).
 
@@ -170,7 +239,7 @@ To avoid this overhead, compilers usually avoid using virtual method tables when
 
 Thus, the call to `f1` above may not require a table lookup because the compiler may be able to tell that `d` can only hold a `D` at this point, and `D` does not override `f1`. Or the compiler (or optimizer) may be able to detect that there are no subclasses of `B1` anywhere in the program that override `f1`. The call to `B1::f1` or `B2::f2` will probably not require a table lookup because the implementation is specified explicitly (although it does still require the 'this'-pointer fixup).
 
-### Comparison with alternatives
+## Comparison with alternatives
 
 The virtual method table is generally a good performance trade-off to achieve dynamic dispatch, but there are alternatives, such as [binary tree dispatch](https://en.wikipedia.org/w/index.php?title=Binary_tree_dispatch&action=edit&redlink=1), with higher performance but different costs.[[5\]](https://en.wikipedia.org/wiki/Virtual_method_table#cite_note-7)
 

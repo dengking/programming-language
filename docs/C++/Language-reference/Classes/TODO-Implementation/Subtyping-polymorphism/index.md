@@ -1,6 +1,62 @@
 # 关于本章
 
-本章描述C++ Subtype polymorphism的实现。
+## Implementation需要考虑的问题
+
+
+
+### 可能的class hierarchy
+
+C++ Subtype polymorphism的实现需要考虑如下可能的情况: 
+
+1、single inheritance
+
+2、multiple inheritance
+
+3、virtual inheritance
+
+### Object memory layout
+
+参见 `Class-memory-layout` 章节
+
+## 可行的方案
+
+下面是一种可行的实现方案:
+
+**dispatch table + method resolution order + pointer fixup(thunk)**
+
+compiler会polymorphic type采用上述实现方案。
+
+### Method selection
+
+
+
+#### 对于single inheritance、multiple inheritance
+
+使用 dispatch table即可，
+
+#### 对于virtual inheritance
+
+对于virtual inheritance，则需要使用dispatch table + method resolution order；
+
+关于此，参见:
+
+1、stackoverflow [Method resolution order in C++](https://stackoverflow.com/questions/3310910/method-resolution-order-in-c) # [A](https://stackoverflow.com/a/3310948)
+
+There is no MRO in C++ like Python. If a method is ambiguous, it is a compile-time error. Whether a method is virtual or not doesn't affect it, but virtual *inheritance* will.
+
+The algorithm is described in the C++ standard §[class.member.lookup] (10.2). Basically it will find the closest unambiguous implementation in the **superclass graph**. 
+
+
+
+### Subobject(static type) 和 entire object(dynamic type) 之间的转换
+
+这主要使用thunk来实现的
+
+1、entire object -> subobject 
+
+2、subobject -> entire object
+
+
 
 ## stackoverflow [Why do we need virtual table?](https://stackoverflow.com/questions/3004501/why-do-we-need-virtual-table)
 
@@ -35,11 +91,17 @@ The code in the `callF` function above then only needs to look up the entry for 
 
 This means that due to the virtual table, you're able to have polymorphism at runtime because the actual function being called is determined at runtime by looking up a function pointer in the virtual table and then calling the function via that pointer - instead of calling the function directly (as is the case for non-virtual functions).
 
+## vtable的本质: table of function pointer
+
+virtual table其实就是一个dispatch table
 
 
-## stackoverflow [What is vtable in C++ [duplicate]](https://stackoverflow.com/questions/3554909/what-is-vtable-in-c)
 
-### [A](https://stackoverflow.com/a/3555290)
+
+
+### stackoverflow [What is vtable in C++ [duplicate]](https://stackoverflow.com/questions/3554909/what-is-vtable-in-c)
+
+[A](https://stackoverflow.com/a/3555290)
 
 V-tables (or virtual tables) are how most C++ implementations do polymorphism. For each concrete implementation of a class, there is a **table of function pointers to all the virtual methods**. A pointer to this table (called the virtual table) exists as a data member in all the objects. When one calls a virtual method, we lookup the object's v-table and call the appropriate derived class method.
 
@@ -49,13 +111,15 @@ V-tables (or virtual tables) are how most C++ implementations do polymorphism. F
 >
 > 2、最后一段话描述的是late binding、dynamic binding的过程
 
-### [A](https://stackoverflow.com/a/3554995)
+[A](https://stackoverflow.com/a/3554995)
 
 For all it's worth, it is not a standard C++ terminology. It is just an implementation detail used by the implementation to implement virtual functions/dynamic binding
 
 > NOTE: 
 >
 > 1、standard and implementation
+
+
 
 ## draft
 
@@ -87,21 +151,21 @@ most derived class
 
 
 
-## draft2
-
-这个draft，是从`C++\Language-reference\Basic-concept\Type-system\Type-system\OOP-class-type\Polymorphic-type.md`中迁移过来的。
-
-### Implementation of dynamic type
+## Implementation of polymorphic type
 
 在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)中给出了这个问题的解答：
 
 > Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
 
-#### RTTI of polymorphic type
+对于polymorphic object的，在使用它的时候，一个非常重要的topic是: 得到dynamic type entire objec，因为它们一般都是通过static type subobject来进行使用的。
+
+
+
+### RTTI of polymorphic type
 
 对于polymorphic type，目前的实现普遍会使用RTTI，这在`C++\Language-reference\Basic-concept\Type-system\RTTI.md`中进行了描述。
 
-#### Virtual function table of polymorphic type
+### Virtual function table of polymorphic type
 
 Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI\Virtual-method-table.md`。
 
@@ -121,27 +185,21 @@ Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-
 
 
 
-## draft
 
-为什么reference semantic才能够实现virtual：
-value semantic时，它的concrete type是已知的，compiler能够直接选择implementation
+
+## 为什么reference semantic才能够实现dynamic polymorphism
+
+1、value semantic时，它的concrete type是已知的，compiler能够直接选择implementation
+
+2、一般，implementation是需要进行pointer pointer fixup
+
+
+
+
+
+
 
 ## TODO
 
 pabloariasal [Understandig Virtual Tables in C++](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
 
-
-
-## draft
-
-1、compiler会polymorphic type生成virtual table
-
-2、method resolution order
-
-overload resolution其实也是一种method resolution order
-
-C++ virtual function的调用其实也是一种method resolution order
-
-## draft
-
-1、virtual table其实就是一个dispatch table

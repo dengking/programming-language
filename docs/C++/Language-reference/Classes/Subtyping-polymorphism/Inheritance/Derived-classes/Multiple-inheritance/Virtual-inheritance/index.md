@@ -1,6 +1,6 @@
 # Virtual inheritance
 
-C++引入的Virtual inheritance特性就是为了解决前面提到的[the diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)的。
+C++引入的Virtual inheritance特性就是为了解决前面提到的 [the diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem) 的。
 
 virtual base class是virtual inheritance的base class。
 
