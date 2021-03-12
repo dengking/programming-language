@@ -102,7 +102,7 @@ If *`new_type`* is an **rvalue reference type**, `static_cast` converts the valu
 
 ### 4) discard value expression
 
-> NOTE: 关于discard value expression，参见`C++\Language-reference\Expressions\Expressions.md`
+> NOTE: 关于discard value expression，参见`Discarded-value-expressions` 章节
 
 ### 5) inverse of that implicit conversion
 
@@ -221,7 +221,7 @@ after move, v.size() = 0
 
 
 
-## 维基百科[static_cast](https://en.wikipedia.org/wiki/Static_cast)
+## wikipedia [static_cast](https://en.wikipedia.org/wiki/Static_cast)
 
 
 
