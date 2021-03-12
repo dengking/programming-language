@@ -2,7 +2,7 @@
 
 “SFINAE”是“Substitution failure is not an error”的缩写。"substitution"所表示是使用template argument来**substitute** template parameter。
 
-## Why SFINAE ?
+## Why need SFINAE ?
 
 本节讨论为什么C++ 会采用 SFINAE。在`C++\Guide\Polymorphism`中，我们已经知道:
 
@@ -10,9 +10,11 @@
 
 2) SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**static polymorphism**的过程进行控制"的基础。
 
+> NOTE: custom polymorphism
+
 本节对这个问题进行深入分析。
 
-### 遵循try my best原则
+### 遵循try my best principle
 
 > SFINAE遵循try my best原则
 
@@ -21,6 +23,8 @@
 SFINAE 是 compiler 编译机制(或者说: 原理)，它保证了compiler会对每个candidate都执行替换(校验)，中途出现错误则将当前candidate给drop调，并不会终止，而是去尝试下一个candidate，直至尝试了所有的candidate。这个过程是遵循在`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism\Implementation`中提出的"try my best原则"原则的，显然这样做的目标地是: 保证了compiler能够选择最合适的实现(implementation/concrete)；
 
 ### SFINAE是实现对**static polymorphism**的过程进行控制的基础
+
+> NOTE: custom polymorphism
 
 在cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)中有如下介绍：
 
@@ -104,7 +108,11 @@ int main()
 
 Although SFINAE was initially introduced to avoid creating ill-formed programs when unrelated template declarations were visible (e.g., through the inclusion of a header file), many developers later found the behavior useful for **compile-time introspection**. Specifically, it allows a template to determine certain properties of its **template arguments** at instantiation time.
 
-> NOTE: **compile-time introspection**是C++20的[concept](https://en.cppreference.com/w/cpp/language/constraints)所要解决的。
+> NOTE: 
+>
+> 1、**compile-time introspection**是C++20的[concept](https://en.cppreference.com/w/cpp/language/constraints)所要解决的。
+>
+> 2、static reflection
 
 ```c++
 #include <iostream>

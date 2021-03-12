@@ -1,8 +1,14 @@
 # Detection idiom
 
+## 涉及Detection idiom的章节
 
+1、`SFINAE`
 
-## wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
+2、`SFINAE\Expression-SFINAE`
+
+## Example
+
+### wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
 
 
 
@@ -75,6 +81,12 @@ int main()
 
 
 
-## `std::experimental::is_detected`
+### `std::experimental::is_detected`
 
 参见 `C++\Library\Standard-library\Extensions\Version-2\The-C++detection-idiom` 章节。
+
+
+
+### stackoverflow [What is “Expression SFINAE”?](https://stackoverflow.com/questions/12654067/what-is-expression-sfinae)
+
+收录在了`SFINAE\Expression-SFINAE`章节。

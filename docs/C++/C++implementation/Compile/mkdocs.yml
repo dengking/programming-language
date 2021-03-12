@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - As-if-rule: As-if-rule       
+    - As-if-rule: As-if-rule     
+    - Compile-flow: Compile-flow
     - Optimization: Optimization
-    - TODO-Interpretation-model: TODO-Interpretation-model

@@ -54,3 +54,70 @@ std::cout << span[1][1] << '\n'; //Outputs 4
 From the linked source, it seems, that it also supports runtime bounds, but I am not sure about proper syntax for those.
 
 ## library [nitronoid](https://github.com/nitronoid)/**[multi_span](https://github.com/nitronoid/multi_span)**
+
+```C++
+#include <stdex/multi_span>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <numeric>
+
+int main()
+{
+	using namespace std;
+	/*
+	 * Print a vector as a 2D matrix
+	 */
+
+	// Define a vector
+	vector<int> arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+
+	// Create a 2D-view over the vector
+	stdex::multi_span<int, 3, 4> my_view(arr);
+
+	// Print all elements of the vector, via the view
+	printf("2D view:\n");
+	for (int r = 0; r < my_view.extent<0>(); ++r)
+	{
+		for (int c = 0; c < my_view.extent<1>(); ++c)
+		{
+			printf("%d ", my_view(r, c));
+		}
+		printf("\n");
+	}
+	printf("\n");
+
+	/*
+	 * Sum the elements within a sliding 2D sub-view
+	 */
+
+	// Define the size of the sub-view
+	auto const wsize = 2;
+	// Obtain the bounds of our 2D-view
+	auto const range = my_view.bounds();
+
+	// Use static_bounds as counting iterators
+	using counting_iter = stdex::static_bounds<stdex::dynamic_range, stdex::dynamic_range>;
+	// Create a lazy 2D iterable sequence
+	counting_iter bnds( { range[0] - wsize + 1, range[1] - wsize + 1 });
+
+	// Iterate through the sequence, obtaining a 2D-coordinate
+	for_each(begin(bnds), end(bnds), [&](auto idx)
+	{
+		// Obtain a sub-view of our main view
+					auto const section = my_view.section(idx,
+									{	wsize, wsize});
+					// Print all elements in the sub-view
+					copy(begin(section), end(section), ostream_iterator<int>(cout, " "));
+					// Iterate over the sub-view and sum the elements within
+					auto const total = accumulate(begin(section), end(section), 0);
+					// Print the total
+					printf(": sums to %d.\n", total);
+				});
+	printf("\n");
+
+	return 0;
+}
+
+```
+

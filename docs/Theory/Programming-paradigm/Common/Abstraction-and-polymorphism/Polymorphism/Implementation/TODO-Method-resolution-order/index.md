@@ -1,5 +1,11 @@
 # Method resolution order
 
+1、class hierarchy是典型的non-linear structure，method resolution order是对它的traverse，显然method resolution order是一个linear structure
+
+2、在使用method resolution order来实现dynamic polymorphism的时候，往往是自底向上的: 即从most derived class开始，逐级向上进行search，显然这是符合polymorphism的要求的。
+
+3、一般，在支持multiple inheritance的时候，是需要使用 method resolution order
+
 ## Python method resolution order
 
 realpython [C3 Superclass Linearization (Optional)](https://realpython.com/lessons/c3-superclass-linearization-optional/)
@@ -10,7 +16,7 @@ realpython [C3 Superclass Linearization (Optional)](https://realpython.com/lesso
 
 
 
-2、method resolution order
+## draft
 
 overload resolution其实也是一种method resolution order
 

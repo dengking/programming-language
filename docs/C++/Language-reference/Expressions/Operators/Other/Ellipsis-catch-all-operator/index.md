@@ -1,18 +1,24 @@
-# Catch-all/ellipsis operator
+# Ellipsis/catch-all operator
 
-catch-all operator是指：
+1、Ellipsis/catch-all operator是指：
 
 ```
 ...
 ```
 
-它是我自己命名的，在标志中并没有这样的命名。
+在C++中，一般将它称为"ellipsis"。
+
+2、本文总结它在C++中的用法
 
 ## cppreference [Other operators](https://en.cppreference.com/w/cpp/language/operator_other)
 
+> NOTE:
+>
+> 1、其实涉及了`...`
 
+## 用法
 
-## Catch-all exception
+### Catch-all exception
 
 stackoverflow [C++ catching all exceptions](https://stackoverflow.com/questions/315948/c-catching-all-exceptions)
 
@@ -74,7 +80,7 @@ int main()
 
 
 
-## Catch-all argument /  **ellipsis parameter**
+### Catch-all argument /  **ellipsis parameter**
 
 这主要对应的是这种情况:
 
@@ -84,7 +90,7 @@ a(...)
 
 是通过学习detection idiom发现了这种用法的。
 
-### 标准
+#### 标准
 
 按照C++标准的说法，它叫做Variadic arguments，在cppreference的下列章节中对它进行了描述：
 
@@ -93,7 +99,7 @@ a(...)
 
 
 
-### wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) 
+#### wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) 
 
 > NOTE: 在这篇文章中对它有着比较好的说明:
 
@@ -141,7 +147,7 @@ When `T` has the nested type `foobar` defined, the instantiation of the first `t
 
 > NOTE: 这句话解释了在detection idiom中必须要使用 `test(...)`的原因。
 
-### Example: stackoverflow [What is “Expression SFINAE”?](https://stackoverflow.com/questions/12654067/what-is-expression-sfinae) `#` [A](https://stackoverflow.com/a/12654277)
+#### Example: stackoverflow [What is “Expression SFINAE”?](https://stackoverflow.com/questions/12654067/what-is-expression-sfinae) `#` [A](https://stackoverflow.com/a/12654277)
 
 
 
@@ -193,10 +199,10 @@ int main()
 > Couldn't call
 > ```
 
-### Example: stackoverflow [Templated check for the existence of a class member function?](https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function) `#` [A](https://stackoverflow.com/a/257382)
+#### Example: stackoverflow [Templated check for the existence of a class member function?](https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function) `#` [A](https://stackoverflow.com/a/257382)
 
 
 
-## Parameter pack
+### Parameter pack
 
 参见cppreference [Parameter pack(since C++11)](https://en.cppreference.com/w/cpp/language/parameter_pack)。

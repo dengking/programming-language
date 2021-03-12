@@ -2,6 +2,16 @@
 
 本章讨论compiler的optimization。
 
+
+
+## Principle
+
+compiler AS-IF。那它的基准是什么？基准是：value computation、side effect，显然基准是 programming language standard中进行描述的，那标准是如何来进行描述的呢？
+
+C++ programming language是如何描述基准的，它留下了充足的optimization空间。
+
+
+
 ## Compiler optimization principle
 
 Compiler是遵循 "optimization principle" 的，即它总是尽可能地去optimize生成的object file，它optimization的方向有:
@@ -22,10 +32,11 @@ compiler会尽可能地运用所有的已知信息(最多的是type info)来进�
 
 ### Copy elision
 
-参见 `./Copy-elision` 章节。
+参见 `Copy-elision` 章节。
 
 
 
 ### Optimization in function return
 
-参见`./Optimization-in-function-return`章节。
+参见`Optimization-in-function-return`章节。
+
