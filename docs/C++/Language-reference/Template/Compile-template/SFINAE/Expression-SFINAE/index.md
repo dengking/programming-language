@@ -12,6 +12,10 @@ C++11 Expression SFINAE给予了programmer"迂回"地实现concept的权利，�
 
 ### open-std [Solving the SFINAE problem for expressions](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2634.html)
 
+> NOTE: 
+>
+> 1、这篇文章是提出expression SFNIAE的提案
+
 ```c++
 #include <iostream>
 
@@ -353,12 +357,4 @@ int main()
 See also [this answer of mine](https://stackoverflow.com/a/9154394/500104), which uses the same technique in another environment (aka without traits).
 
 
-
-## Examples
-
-### Use expression SFINAE on the return type
-
-#### cppreference [Expression SFINAE](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
-
-其中给出的例子非常具有代表性。
 
