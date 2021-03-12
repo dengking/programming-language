@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
     - Expressions: Expressions.md
+    - Discarded-value-expressions: Discarded-value-expressions
     - Full-expression: Full-expression.md
     - Value-categories: Value-categories
     - C++Order-of-evaluation: C++Order-of-evaluation

@@ -1,8 +1,4 @@
-# Expressions
-
-
-
-## cppreference [Expressions](https://en.cppreference.com/w/cpp/language/expressions)
+# cppreference [Expressions](https://en.cppreference.com/w/cpp/language/expressions)
 
 An expression is a sequence of *operators* and their *operands*, that specifies a **computation**.
 
@@ -16,7 +12,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 
 
-### General
+## General
 
 - [value categories](https://en.cppreference.com/w/cpp/language/value_category) (lvalue, rvalue, glvalue, prvalue, xvalue) classify expressions by their values
 - [order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order) of arguments and subexpressions specify the order in which intermediate results are obtained
@@ -28,7 +24,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 > NOTE: 上述后三条在原文中和前两条不在一起，我觉得它们是所有的operator都会涉及到的问题，所以我将它们放到了一起。
 
-### Operators
+## Operators
 
 > NOTE: 
 >
@@ -59,28 +55,29 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 >
 >   在原文的[Unevaluated expressions](https://en.cppreference.com/w/cpp/language/expressions)章节对此进行了说明。
 
-#### Common operators
+### Common operators
 
 > NOTE： python中assignment的含义是bind。
 
 > NOTE : python中叫做Attribute references[¶](https://docs.python.org/3.3/reference/expressions.html#attribute-references)，`c++`中叫做member access。
 
-#### Special operators
+### Special operators
 
 > NOTE: 下面是对special operator的分类。
 
-##### Conversions
+#### Conversions
 
 > NOTE: 放到了type system章节，参见`C++\Language-reference\Basic-concept\Type-system\Type-conversion`。
 
-##### Memory allocation
+#### Memory allocation
 
-- [new expression](https://en.cppreference.com/w/cpp/language/new) allocates memory dynamically
-- [delete expression](https://en.cppreference.com/w/cpp/language/delete) deallocates memory dynamically
+1、[new expression](https://en.cppreference.com/w/cpp/language/new) allocates memory dynamically
+
+2、[delete expression](https://en.cppreference.com/w/cpp/language/delete) deallocates memory dynamically
 
 
 
-##### Other
+#### Other
 
 | operator                                                     | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -94,7 +91,7 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 
 
 
-### Primary expressions
+## Primary expressions
 
 > NOTE: primary expression的概念是比较重要的，因为有的时候，compiler的报错中，直接就使用primary expression。
 
@@ -126,7 +123,7 @@ Any expression in parentheses is also classified as a **primary expression**: th
 >
 > 通过上述错误，能够加深我们对primary expression的理解。
 
-#### Literals
+### Literals
 
 **Literals** are the tokens of a C++ program that represent constant values embedded in the source code.
 
@@ -148,7 +145,7 @@ Any expression in parentheses is also classified as a **primary expression**: th
 
 
 
-### Unevaluated expressions
+## Unevaluated expressions
 
 The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/language/typeid), [`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof), [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept), and [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) (since C++11) are expressions that are not evaluated (unless they are **polymorphic glvalues** and are the operands of `typeid`), since these operators only query the **compile-time** properties of their operands. Thus, `std::size_t n = sizeof(std::cout << 42);` does not perform console output.
 
@@ -186,57 +183,23 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 
 > NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将此作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
 
+### Unevaluated operands are *full expressions*  (since C++14)
+
 The unevaluated operands are considered to be *full expressions* even though they are syntactically operands in a larger expression (for example, this means that `sizeof(T())` requires an accessible `T::~T`). (since C++14)
 
 > NOTE: “for example, this means that `sizeof(T())` requires an accessible `T::~T`”没有搞懂。
+
+### [Requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) (since C++20)
 
 The [requires-expressions](https://en.cppreference.com/w/cpp/language/constraints) are also unevaluated expressions. An invocation of an [immediate function](https://en.cppreference.com/w/cpp/language/consteval) is always evaluated, even in an unevaluated operand.(since C++20)
 
 > NOTE: 各种特殊的规则，使得c++语言比较复杂。
 
-### Discarded-value expressions
-
-> NOTE: discarded-value expressions即“弃值表达式”。需要注意的是：discarded-value expressions，不是unevaluated expressions，discarded-value expressions会被evaluated，但是它的value会被discard。
-
-A *discarded-value expression* is an expression that is used for its **side-effects** only. The **value** calculated from such expression is discarded. Such expressions include the full expression of any [expression statement](https://en.cppreference.com/w/cpp/language/statements#Expression_statements), the left-hand argument of the [built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator), or the argument of a cast-expression that casts to the type `void`.
-
-> NOTE: 
->
-> #### built-in comma operator
->
-> 后面有专门关于[built-in comma operator](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)的描述；
->
-> #### cast-expression that casts to the type `void`
->
-> 可以利用“the argument of a cast-expression that casts to the type `void` is a discard-value expression”来实现一些效果，下面是一些案例：
->
-> - [Expression SFINAE on the return type](https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE)
->
->   > A common idiom is to use expression SFINAE on the return type, where the expression uses the comma operator, whose left subexpression is the one that is being examined (cast to `void` to ensure the user-defined operator comma on the returned type is not selected), and the right subexpression has the type that the function is supposed to return.
->
-> - https://stackoverflow.com/a/1486931 silence a warning about unused variables
->
->   ```c
->   // silence a warning about unused variables，https://stackoverflow.com/a/1486931
->   #define UNUSED(expr) do { (void)(expr); } while (0)
->   ```
->
->
-> Example: 在cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)的`4)`就是说明的discard value expression，Example也对此进行了说明。
-
-Array-to-pointer and function-to-pointer **conversions** are never applied to the **value** calculated by a **discarded-value expression**. The **lvalue-to-rvalue conversion** is applied if and only if the expression is a [volatile-qualified](https://en.cppreference.com/w/cpp/language/cv) glvalue and has one of the following forms (built-in meaning required, possibly parenthesized)
-
-- [id-expression](https://en.cppreference.com/w/cpp/language/identifiers)
-- array subscript expression
-- class member access expression
-- [indirection](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator)
-- pointer-to-member operation
-- conditional expression where both the second and the third operands are one of these expressions,
-- comma expression where the right operand is one of these expressions.
-
-In addition, if the lvalue is of volatile-qualified class type, a volatile copy-constructor is required to initialize the resulting **rvalue temporary**.
 
 
+## Discarded-value expressions
+
+> NOTE: 参见`Discarded-value-expressions`章节
 
 
 
