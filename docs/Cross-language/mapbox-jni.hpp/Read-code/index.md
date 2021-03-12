@@ -25,3 +25,10 @@ struct SuperTag<Tag, decltype(std::declval<typename Tag::SuperTag>(), 0)>
 
 ```
 
+上述实现:
+
+1、class SFINAE
+
+2、detection idiom: expression SFINAE: `decltype`+ `std::declval`
+
+3、`decltype(std::declval<typename Tag::SuperTag>(), 0)` 中的 comma 是 "built-in comma operator"，它的return value是 `0`，所以 `decltype(std::declval<typename Tag::SuperTag>(), 0)` 取的是 `0` 的 type，即 `int`
