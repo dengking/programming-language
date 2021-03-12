@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - SFINAE: SFINAE
     - Compile-error: Compile-error.md
