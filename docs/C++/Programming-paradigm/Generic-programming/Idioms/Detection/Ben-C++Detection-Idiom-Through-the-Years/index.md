@@ -1,4 +1,4 @@
-# **Ben's Blog** [C++ Detection Idiom Through the Years](https://people.eecs.berkeley.edu/~brock/blog/detection_idiom.php)
+# **Ben's Blog** [C++ Detection Idiom Through the Years](https://people.eecs.berkeley.edu/~brock/blog/detection_idiom.php) 
 
 This is a record, mostly for my own benefit, of different ways to write the detection idiom in C++. If you're looking for a tutorial-style guide to the detection idiom, I highly recommend Sy Brand's [blog post](https://blog.tartanllama.xyz/detection-idiom/) about the detection idiom as a stand-in(替代) for concepts.
 
@@ -48,6 +48,8 @@ In an older style of the detection idiom, you create a single class and use **ex
 > 1、理解上面这段话的一个前提是理解C++编译流程，参见`Compile-flow`章节
 >
 > 2、关于comma operator，参见 `Built-in-comma-operator` 章节
+>
+> 3、关于ellipsis operator，参见 `Ellipsis-catch-all-operator` 章节
 
 ```C++
 template<typename T>
@@ -72,3 +74,35 @@ struct has_get
 
 ```
 
+### Pre-C++11 Detection Idiom:
+
+If we restrict ourselves to pre-C++11, we lose `decltype`, which is the main driver of the detection idiom patterns above. We can, however, fairly easily emulate this by abusing `sizeof`.
+
+```C++
+template<typename T>
+T declval();
+
+template<typename T>
+struct has_get
+{
+	typedef char yes[1];
+	typedef char no[2];
+
+	template<typename U>
+	static yes& test_get(int (*)[sizeof(declval<U>().get(), 1)]);
+
+	template<typename U>
+	static no& test_get(...);
+
+	static const bool value = sizeof(test_get<T>(NULL)) == sizeof(yes);
+};
+
+```
+
+> NOTE: 
+>
+> 1、上述implementation是非常值得借鉴学习的
+
+
+
+Note that here we're using the size of the return value to check how the overloaded `test_get` function is resolved. Also, we have to define our own `declval`, since that does not exist pre-C++11. In the first `test_get`, we're passing a pointer to a fixed size array `int (*) [x]`, where `x`, the size of the array, is determined by our `sizeof` expression. Similar to the `decltype` expressions above, this will SFINAE out if our type does not have the method `get()`, and will return `1` otherwise.
