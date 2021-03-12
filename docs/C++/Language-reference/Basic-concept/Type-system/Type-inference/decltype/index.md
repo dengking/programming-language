@@ -483,6 +483,28 @@ int main()
 
 
 
+
+
+## stackoverflow [What is decltype with two arguments?](https://stackoverflow.com/questions/16044514/what-is-decltype-with-two-arguments)
+
+
+
+[A](https://stackoverflow.com/a/16044577)
+
+```c++
+#include <type_traits>
+
+int main()
+{
+	static_assert(std::is_same<decltype(42, 3.14), double>::value, "Will not fire");
+}
+
+```
+
+> NOTE: `42, 3.14`中的`,`为comma operator。
+
+
+
 ## TO READ
 
 
