@@ -154,3 +154,4 @@ struct is_pointer<T*>
 
 
 ## library [mapbox](https://github.com/mapbox)/ [jni.hpp](https://github.com/mapbox/jni.hpp)/[include](https://github.com/mapbox/jni.hpp/tree/master/include)/[jni](https://github.com/mapbox/jni.hpp/tree/master/include/jni)/[**traits.hpp**](https://github.com/mapbox/jni.hpp/blob/master/include/jni/traits.hpp)
+
