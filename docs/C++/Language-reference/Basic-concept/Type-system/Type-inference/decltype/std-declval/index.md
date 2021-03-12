@@ -122,3 +122,28 @@ int main()
 
 
 
+## Implementation
+
+在 "**Ben's Blog** [C++ Detection Idiom Through the Years](https://people.eecs.berkeley.edu/~brock/blog/detection_idiom.php) # Pre-C++11 Detection Idiom:" 章节中，给出了一个样例实现:
+
+```C++
+template<typename T>
+T declval();
+
+template<typename T>
+struct has_get
+{
+	typedef char yes[1];
+	typedef char no[2];
+
+	template<typename U>
+	static yes& test_get(int (*)[sizeof(declval<U>().get(), 1)]);
+
+	template<typename U>
+	static no& test_get(...);
+
+	static const bool value = sizeof(test_get<T>(NULL)) == sizeof(yes);
+};
+
+```
+
