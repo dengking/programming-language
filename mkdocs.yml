@@ -864,12 +864,12 @@ nav:
       - Overload-VS-override-VS-name-hiding: C++/Language-reference/Classes/Overload-VS-override-VS-name-hiding.md
       - TODO-Implementation:
         - Introduction: C++/Language-reference/Classes/TODO-Implementation/index.md
-        - Class-memory-layout:
-          - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/index.md
+        - Object-memory-layout:
+          - Introduction: C++/Language-reference/Classes/TODO-Implementation/Object-memory-layout/index.md
           - TODO-Memory-Layout-of-C++Object-in-Different-Scenarios:
-            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/TODO-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
-          - Dump-class-memory-layout:
-            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/Dump-class-memory-layout/index.md
+            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Object-memory-layout/TODO-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
+          - Dump-object-memory-layout:
+            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Object-memory-layout/Dump-object-memory-layout/index.md
         - Subtyping-polymorphism:
           - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/index.md
           - "CSDN-\u8BE6\u89E3virtual-table":
@@ -1428,16 +1428,31 @@ nav:
         - Introduction: C++/Programming-paradigm/Generic-programming/Template-is-behavior-based/index.md
         - drdobbs-Templates-and-Duck-Typing:
           - Introduction: C++/Programming-paradigm/Generic-programming/Template-is-behavior-based/drdobbs-Templates-and-Duck-Typing/index.md
-      - Named-requirements:
-        - Introduction: C++/Programming-paradigm/Generic-programming/Named-requirements/index.md
-        - Magic-function: C++/Programming-paradigm/Generic-programming/Named-requirements/Magic-function.md
       - Concepts:
         - Introduction: C++/Programming-paradigm/Generic-programming/Concepts/index.md
-        - cppreference-Concepts: C++/Programming-paradigm/Generic-programming/Concepts/cppreference-Concepts.md
-        - Concepts-The-Future-of-Generic-Programming: C++/Programming-paradigm/Generic-programming/Concepts/Concepts-The-Future-of-Generic-Programming.md
-        - Pre-C++20-concept:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/index.md
-          - ConceptC++: C++/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/ConceptC++.md
+        - stroustrup-paper-Concepts-The-Future-of-Generic-Programming:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Concepts/stroustrup-paper-Concepts-The-Future-of-Generic-Programming/index.md
+      - Named-requirements:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Named-requirements/index.md
+      - Pre-C++20-concept:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/index.md
+        - ConceptC++: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/ConceptC++.md
+        - Detection:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/index.md
+          - More-C++Idioms-Member-Detector:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/More-C++Idioms-Member-Detector/index.md
+          - tartanllama-Detection-Idiom-A-Stopgap-for-Concepts:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/tartanllama-Detection-Idiom-A-Stopgap-for-Concepts/index.md
+          - Ben-C++Detection-Idiom-Through-the-Years:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/Ben-C++Detection-Idiom-Through-the-Years/index.md
+        - static_assert:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/static_assert/index.md
+      - C++20-concept:
+        - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/index.md
+      - Idioms:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/index.md
+        - Custom-static-polymorphism:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/index.md
     - TMP:
       - Introduction: C++/Programming-paradigm/TMP/index.md
       - TMP-and-FP:
@@ -1455,21 +1470,24 @@ nav:
       - Introduction: C++/Programming-paradigm/FP/index.md
     - Polymorphism:
       - Introduction: C++/Programming-paradigm/Polymorphism/index.md
+      - Classification:
+        - Introduction: C++/Programming-paradigm/Polymorphism/Classification/index.md
+        - External-and-Internal-Polymorphism:
+          - Introduction: C++/Programming-paradigm/Polymorphism/Classification/External-and-Internal-Polymorphism/index.md
+        - TODO-Static-and-dynamic-polymorphism:
+          - Introduction: C++/Programming-paradigm/Polymorphism/Classification/TODO-Static-and-dynamic-polymorphism/index.md
+      - Custom-polymorphism:
+        - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/index.md
+        - Signature-Based-polymorphism:
+          - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/Signature-Based-polymorphism/index.md
+        - wiki.c2-External-Polymorphism:
+          - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/wiki.c2-External-Polymorphism/index.md
+          - Generic-function-pattern:
+            - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/wiki.c2-External-Polymorphism/Generic-function-pattern/index.md
+        - Assemble-and-multiple-dispatch:
+          - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/Assemble-and-multiple-dispatch/index.md
       - Specialization-and-overload:
         - Introduction: C++/Programming-paradigm/Polymorphism/Specialization-and-overload/index.md
-      - Assemble-polymorphism-and-multiple-dispatch:
-        - Introduction: C++/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/index.md
-        - Custom-polymorphism:
-          - Introduction: C++/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/Custom-polymorphism/index.md
-        - Signature-Based-polymorphism:
-          - Introduction: C++/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/Signature-Based-polymorphism/index.md
-        - wiki.c2-External-Polymorphism:
-          - Introduction: C++/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/wiki.c2-External-Polymorphism/index.md
-          - Generic-function-pattern:
-            - Introduction: C++/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/wiki.c2-External-Polymorphism/Generic-function-pattern/index.md
-        - TODO-User-defined-static-polymorphism: C++/Programming-paradigm/Polymorphism/Assemble-polymorphism-and-multiple-dispatch/TODO-User-defined-static-polymorphism.md
-      - TODO-Static-and-dynamic-polymorphism:
-        - Introduction: C++/Programming-paradigm/Polymorphism/TODO-Static-and-dynamic-polymorphism/index.md
       - Polymorphic-object-container:
         - Introduction: C++/Programming-paradigm/Polymorphism/Polymorphic-object-container/index.md
     - Type-erasure-OOP-GP:
