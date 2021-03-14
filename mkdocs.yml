@@ -1248,14 +1248,21 @@ nav:
                 - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/aherrmann-Unpacking-Tuples-in-C++14/index.md
               - murrayc-Modern-C++Variadic-template-parameters-and-tuples:
                 - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/murrayc-Modern-C++Variadic-template-parameters-and-tuples/index.md
-            - optional: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional.md
-            - any: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/any.md
+            - optional:
+              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional/index.md
+            - any:
+              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/any/index.md
             - variant:
               - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/variant/index.md
               - std-visit:
                 - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/variant/std-visit/index.md
             - integer_sequence:
               - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/index.md
+              - "CSDN-C++14-make_index_sequence\u539F\u7406":
+                - Introduction: "C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/CSDN-C++14-make_index_sequence\u539F\
+                    \u7406/index.md"
+              - stackoverflow-Implementation-C++14-make_integer_sequence:
+                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/stackoverflow-Implementation-C++14-make_integer_sequence/index.md
           - Hash:
             - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Hash/index.md
             - General-purpose-hash:

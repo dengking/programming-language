@@ -18,6 +18,8 @@ C++ Subtype polymorphism的实现需要考虑如下可能的情况:
 
 参见 `Class-memory-layout` 章节
 
+
+
 ## 可行的方案
 
 下面是一种可行的实现方案:
@@ -56,7 +58,13 @@ The algorithm is described in the C++ standard §[class.member.lookup] (10.2). B
 
 2、subobject -> entire object
 
+1、在 wikipedia [Thunk](https://en.wikipedia.org/wiki/Thunk) # Applications # Object-oriented programming 中对此进行了详细说明。
 
+2、在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)中提及了这个topic：
+
+> Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
+
+对于polymorphic object的，在使用它的时候，一个非常重要的topic是: 得到dynamic type entire objec，因为它们一般都是通过static type subobject来进行使用的。
 
 ## stackoverflow [Why do we need virtual table?](https://stackoverflow.com/questions/3004501/why-do-we-need-virtual-table)
 
@@ -97,8 +105,6 @@ virtual table其实就是一个dispatch table
 
 
 
-
-
 ### stackoverflow [What is vtable in C++ [duplicate]](https://stackoverflow.com/questions/3554909/what-is-vtable-in-c)
 
 [A](https://stackoverflow.com/a/3555290)
@@ -121,11 +127,25 @@ For all it's worth, it is not a standard C++ terminology. It is just an implemen
 
 
 
+
+
+## 为什么reference semantic才能够实现dynamic polymorphism
+
+1、value semantic时，它的concrete type是已知的，compiler能够直接选择implementation，显然这样是符合optimization principle的
+
+2、一般，implementation是需要进行pointer pointer fixup
+
+
+
+
+
+
+
 ## draft
 
 需要考虑，使用哪个实现方式，因为可能的实现方式是多个的。
 
-#### 实现方式
+### 实现方式
 
 wikipedia [Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
 
@@ -151,27 +171,9 @@ most derived class
 
 
 
-## Implementation of polymorphic type
-
-在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)`#`[Polymorphic objects](https://en.cppreference.com/w/cpp/language/object#Polymorphic_objects)中给出了这个问题的解答：
-
-> Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
-
-对于polymorphic object的，在使用它的时候，一个非常重要的topic是: 得到dynamic type entire objec，因为它们一般都是通过static type subobject来进行使用的。
 
 
-
-### RTTI of polymorphic type
-
-对于polymorphic type，目前的实现普遍会使用RTTI，这在`C++\Language-reference\Basic-concept\Type-system\RTTI.md`中进行了描述。
-
-### Virtual function table of polymorphic type
-
-Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-ABI\Virtual-method-table.md`。
-
-
-
-## draft3
+### draft3
 
 在wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中有如下总结，我觉得描述地非常好: 
 
@@ -182,16 +184,6 @@ Virtual function table参见`C-and-C++\From-source-code-to-exec\ABI\Itanium-Cpp-
 2、*[single dispatch](https://en.wikipedia.org/wiki/Single_dispatch)* (i.e. single-argument polymorphism), because virtual function calls are bound simply by looking through the vtable provided by the first argument (the `this` object), so the runtime types of the other arguments are completely irrelevant.
 
 > NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
-
-
-
-
-
-## 为什么reference semantic才能够实现dynamic polymorphism
-
-1、value semantic时，它的concrete type是已知的，compiler能够直接选择implementation
-
-2、一般，implementation是需要进行pointer pointer fixup
 
 
 

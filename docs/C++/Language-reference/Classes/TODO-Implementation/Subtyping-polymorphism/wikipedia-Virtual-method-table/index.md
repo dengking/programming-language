@@ -22,7 +22,11 @@ Suppose a program contains three [classes](https://en.wikipedia.org/wiki/Class_(
 
 > NOTE: 
 >
-> 1、"This depends on the actual class of the object, not the class of the reference to it (`Cat`). " 如何获知"the actual class of the object"
+> 一、"This depends on the actual class of the object, not the class of the reference to it (`Cat`). " 如何获知"the actual class of the object"
+>
+> 通过pointer adjustment，参见:
+>
+> a、wikipedia [Thunk](https://en.wikipedia.org/wiki/Thunk) # Applications # Object-oriented programming
 
 ## Implementation
 
@@ -30,7 +34,7 @@ An object's **virtual method table** will contain the [addresses](https://en.wik
 
 > NOTE: 
 >
-> 1、最后一句话貌似是关键所在
+> 1、最后一句话所指的是lookup
 
 The [C++](https://en.wikipedia.org/wiki/C%2B%2B) standards do not mandate exactly how dynamic dispatch must be implemented, but compilers generally use minor variations on the same basic model.
 

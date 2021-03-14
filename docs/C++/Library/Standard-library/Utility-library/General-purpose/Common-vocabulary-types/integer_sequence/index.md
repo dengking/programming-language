@@ -59,3 +59,9 @@ using index_sequence_for = std::make_index_sequence<sizeof...(T)>;
 2、`stackoverflow-Implementation-C++14-make_integer_sequence`
 
 算法复杂度: O(logN)
+
+
+
+## TODO
+
+fluentcpp [std::index_sequence and its Improvement in C++20](https://www.fluentcpp.com/2021/03/05/stdindex_sequence-and-its-improvement-in-c20/)
