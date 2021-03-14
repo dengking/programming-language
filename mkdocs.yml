@@ -502,9 +502,7 @@ nav:
         - Type-inference:
           - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/index.md
           - decltype:
-            - decltype: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/index.md
-            - std-declval:
-              - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/std-declval/index.md
+            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/index.md
             - Application: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/Application.md
           - Template-argument-deduction:
             - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Template-argument-deduction/index.md
@@ -662,18 +660,20 @@ nav:
           - Introduction: C++/Language-reference/Functions/Generic-programming/std-result_of/index.md
         - Variadic-function:
           - Variadic-function: C++/Language-reference/Functions/Generic-programming/Variadic-function/index.md
+        - Perfect-forwarding:
+          - Introduction: C++/Language-reference/Functions/Generic-programming/Perfect-forwarding/index.md
+          - std-forward: C++/Language-reference/Functions/Generic-programming/Perfect-forwarding/std-forward.md
       - Function-termination:
         - Introduction: C++/Language-reference/Functions/Function-termination/index.md
       - Functional-programming:
         - Higher-order-function: C++/Language-reference/Functions/Functional-programming/Higher-order-function.md
     - Reference:
       - Introduction: C++/Language-reference/Reference/index.md
-      - Perfect-forwarding:
-        - Introduction: C++/Language-reference/Reference/Perfect-forwarding/index.md
-        - std-forward: C++/Language-reference/Reference/Perfect-forwarding/std-forward.md
-      - std-move-and-std-forward: C++/Language-reference/Reference/std-move-and-std-forward.md
       - Reference: C++/Language-reference/Reference/Reference.md
       - Pointer-VS-reference: C++/Language-reference/Reference/Pointer-VS-reference.md
+      - TODO-std-reference_wrapper:
+        - Introduction: C++/Language-reference/Reference/TODO-std-reference_wrapper/index.md
+      - std-move-and-std-forward: C++/Language-reference/Reference/std-move-and-std-forward.md
     - Exception:
       - Introduction: C++/Language-reference/Exception/index.md
       - Exception-specification:
@@ -1437,6 +1437,8 @@ nav:
       - Pre-C++20-concept:
         - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/index.md
         - ConceptC++: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/ConceptC++.md
+        - std-declval:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/std-declval/index.md
         - Detection:
           - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/index.md
           - More-C++Idioms-Member-Detector:
