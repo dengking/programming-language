@@ -4,9 +4,9 @@ Callable named requirement是一个比function object/function更加宽泛的概
 
 C++对callable named requirement的实现、描述是符合named requirement的原则的: 
 
-1 它是behavior-based(在cppreference [C++ named requirements: *Callable*](https://en.cppreference.com/w/cpp/named_req/Callable)中有所描述)
+1、它是behavior-based(在cppreference [C++ named requirements: *Callable*](https://en.cppreference.com/w/cpp/named_req/Callable)中有所描述)
 
-2 C++ standard library提供了: 
+2、C++ standard library提供了: 
 
 - 操作callable的uniform interface/magic function
 - trait
