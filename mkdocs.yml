@@ -866,6 +866,8 @@ nav:
         - Introduction: C++/Language-reference/Classes/TODO-Implementation/index.md
         - Class-memory-layout:
           - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/index.md
+          - TODO-Memory-Layout-of-C++Object-in-Different-Scenarios:
+            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/TODO-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
           - Dump-class-memory-layout:
             - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/Dump-class-memory-layout/index.md
         - Subtyping-polymorphism:
@@ -878,6 +880,8 @@ nav:
                 \u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3/index.md"
           - wikipedia-Virtual-method-table:
             - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/wikipedia-Virtual-method-table/index.md
+            - Thunk:
+              - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/wikipedia-Virtual-method-table/Thunk/index.md
           - shaharmike-Cpp-vtable:
             - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/shaharmike-Cpp-vtable/index.md
             - Part-1-Basics:
