@@ -144,6 +144,8 @@ nav:
             - Static-and-dynamic-polymorphism:
               - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/index.md
               - TODO-Concept-VS-interface: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/TODO-Concept-VS-interface.md
+            - TODO-Method-resolution-order:
+              - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/TODO-Method-resolution-order/index.md
       - Behavior-based-and-interface:
         - Introduction: Theory/Programming-paradigm/Common/Behavior-based-and-interface/index.md
       - Code-reuse:
@@ -392,6 +394,7 @@ nav:
             - Introduction: C++/Language-reference/Basic-concept/Declaration-and-definition/Declaration/The-Clockwise-Spiral-Rule/index.md
           - Complex-declarations:
             - Introduction: C++/Language-reference/Basic-concept/Declaration-and-definition/Declaration/Complex-declarations/index.md
+            - Pointer-to-function-and-function-type: C++/Language-reference/Basic-concept/Declaration-and-definition/Declaration/Complex-declarations/Pointer-to-function-and-function-type.md
         - Definition:
           - ODR: C++/Language-reference/Basic-concept/Declaration-and-definition/Definition/ODR.md
       - Object:
@@ -482,7 +485,8 @@ nav:
               - Decay: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Implicit-conversion/Decay.md
             - Cast-operator:
               - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/index.md
-              - static_cast: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/static_cast.md
+              - static_cast:
+                - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/static_cast/index.md
               - dynamic_cast:
                 - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/dynamic_cast/index.md
                 - TODO-instanceof:
@@ -508,6 +512,12 @@ nav:
             - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Return-type-deduction/index.md
           - Class-template-argument-deduction(CTAD):
             - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Class-template-argument-deduction(CTAD)/index.md
+        - size_t:
+          - Introduction: C++/Language-reference/Basic-concept/Type-system/size_t/index.md
+          - embedded-Why-size_t-matters: C++/Language-reference/Basic-concept/Type-system/size_t/embedded-Why-size_t-matters.md
+          - size_t-length: C++/Language-reference/Basic-concept/Type-system/size_t/size_t-length.md
+        - TODO-Type-length:
+          - Introduction: C++/Language-reference/Basic-concept/Type-system/TODO-Type-length/index.md
       - Abstract-machine:
         - Introduction: C++/Language-reference/Basic-concept/Abstract-machine/index.md
         - Memory-model:
@@ -527,6 +537,10 @@ nav:
     - Expressions:
       - Introduction: C++/Language-reference/Expressions/index.md
       - Expressions: C++/Language-reference/Expressions/Expressions.md
+      - Discarded-value-expressions:
+        - Introduction: C++/Language-reference/Expressions/Discarded-value-expressions/index.md
+        - Cast-to-type-void:
+          - Introduction: C++/Language-reference/Expressions/Discarded-value-expressions/Cast-to-type-void/index.md
       - Full-expression: C++/Language-reference/Expressions/Full-expression.md
       - Value-categories:
         - Introduction: C++/Language-reference/Expressions/Value-categories/index.md
@@ -560,8 +574,10 @@ nav:
         - Member-access-operators:
           - Introduction: C++/Language-reference/Expressions/Operators/Member-access-operators/index.md
         - Other:
-          - Catch-all-operator: C++/Language-reference/Expressions/Operators/Other/Catch-all-operator.md
-          - Built-in-comma-operator: C++/Language-reference/Expressions/Operators/Other/Built-in-comma-operator.md
+          - Ellipsis-catch-all-operator:
+            - Introduction: C++/Language-reference/Expressions/Operators/Other/Ellipsis-catch-all-operator/index.md
+          - Built-in-comma-operator:
+            - Introduction: C++/Language-reference/Expressions/Operators/Other/Built-in-comma-operator/index.md
         - Operator-overloading:
           - Introduction: C++/Language-reference/Expressions/Operators/Operator-overloading/index.md
         - Operator-precedence:
@@ -636,12 +652,12 @@ nav:
         - Introduction: C++/Language-reference/Functions/Generic-programming/index.md
         - TODO-Function-as-template-parameter:
           - Introduction: C++/Language-reference/Functions/Generic-programming/TODO-Function-as-template-parameter/index.md
-        - Callable:
-          - Introduction: C++/Language-reference/Functions/Generic-programming/Callable/index.md
+        - Callable-concept:
+          - Introduction: C++/Language-reference/Functions/Generic-programming/Callable-concept/index.md
           - Interface:
-            - Introduction: C++/Language-reference/Functions/Generic-programming/Callable/Interface/index.md
+            - Introduction: C++/Language-reference/Functions/Generic-programming/Callable-concept/Interface/index.md
             - std-invoke:
-              - Introduction: C++/Language-reference/Functions/Generic-programming/Callable/Interface/std-invoke/index.md
+              - Introduction: C++/Language-reference/Functions/Generic-programming/Callable-concept/Interface/std-invoke/index.md
         - std-result_of:
           - Introduction: C++/Language-reference/Functions/Generic-programming/std-result_of/index.md
         - Variadic-function:
@@ -831,14 +847,6 @@ nav:
               - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/Return-Covariant-Types/index.md
           - Pure-virtual-function-and-abstract-class:
             - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Pure-virtual-function-and-abstract-class/index.md
-        - TODO-Implementation:
-          - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/TODO-Implementation/index.md
-          - wikipedia-Virtual-method-table:
-            - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/TODO-Implementation/wikipedia-Virtual-method-table/index.md
-          - shaharmike-Cpp-vtable:
-            - Part-1-Basics: C++/Language-reference/Classes/Subtyping-polymorphism/TODO-Implementation/shaharmike-Cpp-vtable/Part-1-Basics.md
-          - RTTI:
-            - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/TODO-Implementation/RTTI/index.md
         - Dispatch:
           - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Dispatch/index.md
         - TODO-Virtual-class:
@@ -854,6 +862,28 @@ nav:
       - Specifier:
         - Introduction: C++/Language-reference/Classes/Specifier/index.md
       - Overload-VS-override-VS-name-hiding: C++/Language-reference/Classes/Overload-VS-override-VS-name-hiding.md
+      - TODO-Implementation:
+        - Introduction: C++/Language-reference/Classes/TODO-Implementation/index.md
+        - Class-memory-layout:
+          - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/index.md
+          - Dump-class-memory-layout:
+            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Class-memory-layout/Dump-class-memory-layout/index.md
+        - Subtyping-polymorphism:
+          - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/index.md
+          - "CSDN-\u8BE6\u89E3virtual-table":
+            - Introduction: "C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/CSDN-\u8BE6\
+                \u89E3virtual-table/index.md"
+          - "CSDN-C++\u865A\u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3":
+            - Introduction: "C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/CSDN-C++\u865A\
+                \u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3/index.md"
+          - wikipedia-Virtual-method-table:
+            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/wikipedia-Virtual-method-table/index.md
+          - shaharmike-Cpp-vtable:
+            - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/shaharmike-Cpp-vtable/index.md
+            - Part-1-Basics:
+              - Introduction: C++/Language-reference/Classes/TODO-Implementation/Subtyping-polymorphism/shaharmike-Cpp-vtable/Part-1-Basics/index.md
+        - RTTI:
+          - Introduction: C++/Language-reference/Classes/TODO-Implementation/RTTI/index.md
     - Struct:
       - Pragma-pack-macro: C++/Language-reference/Struct/Pragma-pack-macro.md
       - struct-compress-scheme: C++/Language-reference/Struct/struct-compress-scheme.md
@@ -914,18 +944,23 @@ nav:
           - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/index.md
           - sizeof-parameter-pack:
             - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/sizeof-parameter-pack/index.md
+          - Recursive-variadic-function:
+            - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/Recursive-variadic-function/index.md
           - C++17-Fold-expression:
             - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/C++17-Fold-expression/index.md
         - Variadic-template-VS-ellipsis:
           - Introduction: C++/Language-reference/Template/Parameter-pack/Variadic-template-VS-ellipsis/index.md
-      - SFINAE:
-        - Introduction: C++/Language-reference/Template/SFINAE/index.md
-        - Class-template-SFINAE: C++/Language-reference/Template/SFINAE/Class-template-SFINAE.md
-        - Function-template-SFINAE: C++/Language-reference/Template/SFINAE/Function-template-SFINAE.md
-        - Expression-SFINAE: C++/Language-reference/Template/SFINAE/Expression-SFINAE.md
-      - Implementation:
-        - Introduction: C++/Language-reference/Template/Implementation/index.md
-        - Compile-error: C++/Language-reference/Template/Implementation/Compile-error.md
+      - Compile-template:
+        - Introduction: C++/Language-reference/Template/Compile-template/index.md
+        - SFINAE:
+          - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/index.md
+          - Class-template-SFINAE:
+            - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/Class-template-SFINAE/index.md
+          - Function-template-SFINAE:
+            - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/Function-template-SFINAE/index.md
+          - Expression-SFINAE:
+            - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/Expression-SFINAE/index.md
+        - Compile-error: C++/Language-reference/Template/Compile-template/Compile-error.md
       - Define-template-in-header-file:
         - Introduction: C++/Language-reference/Template/Define-template-in-header-file/index.md
     - Assertion:
@@ -945,6 +980,8 @@ nav:
         - Deprecation: C++/Language-reference/Attribute/Deprecated/Deprecation.md
       - TODO-Fall-through:
         - Introduction: C++/Language-reference/Attribute/TODO-Fall-through/index.md
+      - Unused:
+        - Introduction: C++/Language-reference/Attribute/Unused/index.md
     - Using:
       - Introduction: C++/Language-reference/Using/index.md
     - Coroutine:
@@ -1003,6 +1040,9 @@ nav:
                 - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Emplace/Custom-emplace/index.md
             - Generic-container-printer:
               - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Generic-container-printer/index.md
+            - Concept:
+              - contiguous_container-concept:
+                - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Concept/contiguous_container-concept/index.md
           - Sequence-container:
             - Introduction: C++/Library/Standard-library/STL/Containers-library/Sequence-container/index.md
             - Vector:
@@ -1041,8 +1081,8 @@ nav:
             - Introduction: C++/Library/Standard-library/STL/Containers-library/View/index.md
             - span:
               - Introduction: C++/Library/Standard-library/STL/Containers-library/View/span/index.md
-              - Span-for-multidimensional-array:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/View/span/Span-for-multidimensional-array/index.md
+              - Span-for-multiple-level-pointer:
+                - Introduction: C++/Library/Standard-library/STL/Containers-library/View/span/Span-for-multiple-level-pointer/index.md
         - Iterator-library:
           - Introduction: C++/Library/Standard-library/STL/Iterator-library/index.md
           - Primer:
@@ -1204,7 +1244,8 @@ nav:
             - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/index.md
             - tuple:
               - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/index.md
-              - Unpacking-Tuple: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/Unpacking-Tuple.md
+              - aherrmann-Unpacking-Tuples-in-C++14:
+                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/aherrmann-Unpacking-Tuples-in-C++14/index.md
               - murrayc-Modern-C++Variadic-template-parameters-and-tuples:
                 - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/murrayc-Modern-C++Variadic-template-parameters-and-tuples/index.md
             - optional: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional.md
@@ -1269,6 +1310,14 @@ nav:
         - Introduction: C++/Library/Boost/Boost-TypeErasure/index.md
       - Boost-Atomic:
         - Introduction: C++/Library/Boost/Boost-Atomic/index.md
+      - boost-Beast:
+        - Introduction: C++/Library/Boost/boost-Beast/index.md
+        - span:
+          - Introduction: C++/Library/Boost/boost-Beast/span/index.md
+        - type_traits:
+          - Introduction: C++/Library/Boost/boost-Beast/type_traits/index.md
+        - make_void:
+          - Introduction: C++/Library/Boost/boost-Beast/make_void/index.md
     - Communication:
       - Introduction: C++/Library/Communication/index.md
       - library-ZeroMQ:
@@ -1379,7 +1428,7 @@ nav:
           - Introduction: C++/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/index.md
           - ConceptC++: C++/Programming-paradigm/Generic-programming/Concepts/Pre-C++20-concept/ConceptC++.md
     - TMP:
-      - Template-metaprogramming: C++/Programming-paradigm/TMP/Template-metaprogramming.md
+      - Introduction: C++/Programming-paradigm/TMP/index.md
       - TMP-and-FP:
         - Introduction: C++/Programming-paradigm/TMP/TMP-and-FP/index.md
     - AOP:
@@ -1483,10 +1532,6 @@ nav:
           - Introduction: C++/Idiom/OOP/Pointer-to-implementation-PImpl/TODO-GotW-101-Compilation-Firewalls-Part-2/index.md
         - cppreference-PImpl:
           - Introduction: C++/Idiom/OOP/Pointer-to-implementation-PImpl/cppreference-PImpl/index.md
-        - Opaque-data-type:
-          - Introduction: C++/Idiom/OOP/Pointer-to-implementation-PImpl/Opaque-data-type/index.md
-          - Opaque-pointer:
-            - Introduction: C++/Idiom/OOP/Pointer-to-implementation-PImpl/Opaque-data-type/Opaque-pointer/index.md
       - TODO-Safe-Bool:
         - Introduction: C++/Idiom/OOP/TODO-Safe-Bool/index.md
       - Static-object:
@@ -1600,6 +1645,7 @@ nav:
         - C-dynamic-memory-allocation:
           - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/index.md
           - Implementations:
+            - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/Implementations/index.md
             - Boundary-tag:
               - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/Implementations/Boundary-tag/index.md
             - jemalloc:
@@ -1608,6 +1654,8 @@ nav:
               - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/Implementations/tcmalloc/index.md
           - malloc:
             - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/malloc/index.md
+            - Thread-safe-and-reentrant:
+              - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/malloc/Thread-safe-and-reentrant/index.md
           - realloc:
             - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C-dynamic-memory-allocation/realloc/index.md
         - C++:
@@ -1618,10 +1666,10 @@ nav:
               - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C++/new-operator/Placement-new/index.md
           - delete-operator:
             - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C++/delete-operator/index.md
+          - Allocator-concept:
+            - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/C++/Allocator-concept/index.md
         - VS-C-VS-C++:
           - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/VS-C-VS-C++/index.md
-          - VS-malloc-VS-new:
-            - Introduction: C++/Resource-management/Memory-management/Allocation-and-deallocation/VS-C-VS-C++/VS-malloc-VS-new/index.md
       - Memory-access:
         - Introduction: C++/Resource-management/Memory-management/Memory-access/index.md
         - Memory-access-and-alignment:
@@ -1659,6 +1707,8 @@ nav:
           - Pointer-and-integer:
             - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-and-integer/index.md
           - Conversion: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Conversion.md
+          - Pointer-length:
+            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-length/index.md
         - Array:
           - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/index.md
           - stackoverflow-How-do-I-use-array-in-C++:
@@ -1894,6 +1944,34 @@ nav:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/Library-rttr/index.md"
         - struct-RTTI:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/struct-RTTI/index.md"
+      - TODO-Interpretation-model:
+        - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/index.md"
+        - Data-type-in-advanced-language-and-machine-instruction: "C++/Guide/Type-\u76F8\
+            \u5173/TODO-Interpretation-model/Data-type-in-advanced-language-and-machine-instruction.md"
+        - What-is-aliasing:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/What-is-aliasing/index.md"
+          - wikipedia-Alias-analysis: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/What-is-aliasing/wikipedia-Alias-analysis.md"
+          - wikipedia-Pointer-aliasing: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/What-is-aliasing/wikipedia-Pointer-aliasing.md"
+        - Strict-aliasing:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Strict-aliasing/index.md"
+          - stackoverflow-C-language-strict-aliasing-rule:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Strict-aliasing/stackoverflow-C-language-strict-aliasing-rule/index.md"
+          - gist-shafik-What-is-the-Strict-Aliasing-Rule-and-Why-do-we-care:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Strict-aliasing/gist-shafik-What-is-the-Strict-Aliasing-Rule-and-Why-do-we-care/index.md"
+        - Type-punning:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/index.md"
+          - What-is-type-punning:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/What-is-type-punning/index.md"
+          - regehr-Type-Punning-Strict-Aliasing-and-Optimization:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/regehr-Type-Punning-Strict-Aliasing-and-Optimization/index.md"
+          - Union-and-type-punning:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/Union-and-type-punning/index.md"
+          - memcpy-and-type-punning:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/memcpy-and-type-punning/index.md"
+        - Type-punning-VS-type conversion-VS-alias: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning-VS-type\
+            \ conversion-VS-alias.md"
+        - TODO-Trap-representation:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/TODO-Trap-representation/index.md"
     - Guard:
       - Introduction: C++/Guide/Guard/index.md
     - Wrapper:
@@ -2029,6 +2107,8 @@ nav:
       - Introduction: C++/C++implementation/Compile/index.md
       - As-if-rule:
         - Introduction: C++/C++implementation/Compile/As-if-rule/index.md
+      - Compile-flow:
+        - Introduction: C++/C++implementation/Compile/Compile-flow/index.md
       - Optimization:
         - Introduction: C++/C++implementation/Compile/Optimization/index.md
         - Copy-elision:
@@ -2048,33 +2128,6 @@ nav:
           - VS-inline-VS-marco: C++/C++implementation/Compile/Optimization/inline/VS-inline-VS-marco.md
         - Prevent-optimization:
           - Introduction: C++/C++implementation/Compile/Optimization/Prevent-optimization/index.md
-      - TODO-Interpretation-model:
-        - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/index.md
-        - Data-type-in-advanced-language-and-machine-instruction: C++/C++implementation/Compile/TODO-Interpretation-model/Data-type-in-advanced-language-and-machine-instruction.md
-        - What-is-aliasing:
-          - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/What-is-aliasing/index.md
-          - wikipedia-Alias-analysis: C++/C++implementation/Compile/TODO-Interpretation-model/What-is-aliasing/wikipedia-Alias-analysis.md
-          - wikipedia-Pointer-aliasing: C++/C++implementation/Compile/TODO-Interpretation-model/What-is-aliasing/wikipedia-Pointer-aliasing.md
-        - Strict-aliasing:
-          - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Strict-aliasing/index.md
-          - stackoverflow-C-language-strict-aliasing-rule:
-            - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Strict-aliasing/stackoverflow-C-language-strict-aliasing-rule/index.md
-          - gist-shafik-What-is-the-Strict-Aliasing-Rule-and-Why-do-we-care:
-            - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Strict-aliasing/gist-shafik-What-is-the-Strict-Aliasing-Rule-and-Why-do-we-care/index.md
-        - Type-punning:
-          - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Type-punning/index.md
-          - What-is-type-punning:
-            - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Type-punning/What-is-type-punning/index.md
-          - regehr-Type-Punning-Strict-Aliasing-and-Optimization:
-            - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Type-punning/regehr-Type-Punning-Strict-Aliasing-and-Optimization/index.md
-          - Union-and-type-punning:
-            - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Type-punning/Union-and-type-punning/index.md
-          - memcpy-and-type-punning:
-            - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/Type-punning/memcpy-and-type-punning/index.md
-        - Type-punning-VS-type conversion-VS-alias: C++/C++implementation/Compile/TODO-Interpretation-model/Type-punning-VS-type
-            conversion-VS-alias.md
-        - TODO-Trap-representation:
-          - Introduction: C++/C++implementation/Compile/TODO-Interpretation-model/TODO-Trap-representation/index.md
     - Link:
       - Linker: C++/C++implementation/Link/Linker.md
       - Linkage:
@@ -2094,18 +2147,17 @@ nav:
           - Object-Files-and-Symbols: C++/C++implementation/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/Object-Files-and-Symbols.md
     - ABI:
       - Introduction: C++/C++implementation/ABI/index.md
-      - Alignment:
-        - Introduction: C++/C++implementation/ABI/Alignment/index.md
-      - Application-binary-interface: C++/C++implementation/ABI/Application-binary-interface.md
+      - Application-binary-interface:
+        - Introduction: C++/C++implementation/ABI/Application-binary-interface/index.md
       - Library:
-        - Library(computing): C++/C++implementation/ABI/Library/Library(computing).md
+        - Introduction: C++/C++implementation/ABI/Library/index.md
         - Position-independent-code:
-          - Position-independent-code: C++/C++implementation/ABI/Library/Position-independent-code/Position-independent-code.md
+          - Introduction: C++/C++implementation/ABI/Library/Position-independent-code/index.md
           - Position-Independent-Code(PIC)-in-shared-libraries: C++/C++implementation/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries.md
         - Relocation:
-          - Relocation(computing): C++/C++implementation/ABI/Library/Relocation/Relocation(computing).md
+          - Introduction: C++/C++implementation/ABI/Library/Relocation/index.md
       - Name-mangling:
-        - Name-mangling: C++/C++implementation/ABI/Name-mangling/Name-mangling.md
+        - Introduction: C++/C++implementation/ABI/Name-mangling/index.md
       - Itanium-Cpp-ABI:
         - Introduction: C++/C++implementation/ABI/Itanium-Cpp-ABI/index.md
     - Code-analysis-tool:
@@ -2348,6 +2400,10 @@ nav:
 - Cross-language:
   - SWIG:
     - Introduction: Cross-language/SWIG/index.md
+  - mapbox-jni.hpp:
+    - Introduction: Cross-language/mapbox-jni.hpp/index.md
+    - Read-code:
+      - Introduction: Cross-language/mapbox-jni.hpp/Read-code/index.md
 - Online-compiler:
   - Introduction: Online-compiler/index.md
 plugins:
