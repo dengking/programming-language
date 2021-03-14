@@ -1,8 +1,18 @@
-# Span-for-multidimensional-array
+# Span for multidimensional array/multiple level pointer
 
 
 
-## stackoverflow [CPPCoreGuidelines span for a T** interface?](https://stackoverflow.com/questions/41880770/cppcoreguidelines-spant-for-a-t-interface)
+## `gsl::multispan`
+
+1、`gsl::multispan`已经被废弃了，关于此，在 microsoft [GSL 3.0.0 Release](https://devblogs.microsoft.com/cppblog/gsl-3-0-0-release/) 中进行了说明:
+
+> ## Deprecation of `multi_span` and `strided_span`
+>
+> To more closely align Microsoft’s GSL to the C++ Core Guidelines, we decided to deprecate our implementation of `gsl::multi_span` and `gsl::strided_span`. For the time being, we will continue to provide these headers, but they will not be actively worked on or maintained unless the C++ Core Guidelines identifies a need for them.
+
+2、`gsl::multispan` 是典型的view
+
+### stackoverflow [CPPCoreGuidelines span for a T** interface?](https://stackoverflow.com/questions/41880770/cppcoreguidelines-spant-for-a-t-interface)
 
 In digital signal processing audio is commonly passed around as a 2D array of channels and samples i.e.
 
@@ -18,13 +28,13 @@ In terms of my own code, for safer manipulation, is there a way I could use `gsl
 
 Thanks in advance.
 
-### Comment
+#### Comment
 
 Use `gsl::multispan` (not well documented) – [Galik](https://stackoverflow.com/users/3807729/galik) Jan 26 '17 at 19:25
 
 
 
-## stackoverflow [What is gsl::multi_span to be used for?](https://stackoverflow.com/questions/45201524/what-is-gslmulti-span-to-be-used-for)
+### stackoverflow [What is gsl::multi_span to be used for?](https://stackoverflow.com/questions/45201524/what-is-gslmulti-span-to-be-used-for)
 
 The C++ core guidelines mention spans, not "multi-spans". But - I see that Microsoft's GSL implementation has a [`multi_span` class](https://github.com/Microsoft/GSL/blob/master/include/gsl/multi_span)
 
@@ -39,7 +49,7 @@ class multi_span { ... };
 
 So, obviously this is some sort of a multi-dimensional version of `gsl::span`. But what is that supposed to mean? Why do we need this multi-dimensional span, or rather - when would we use it? I can't seem to find any documentation on this.
 
-### A
+#### A
 
 In short, it is a span over contiguous piece of memory, which represents multidimensional array.
 
@@ -52,6 +62,8 @@ std::cout << span[1][1] << '\n'; //Outputs 4
 ```
 
 From the linked source, it seems, that it also supports runtime bounds, but I am not sure about proper syntax for those.
+
+
 
 ## library [nitronoid](https://github.com/nitronoid)/**[multi_span](https://github.com/nitronoid/multi_span)**
 
@@ -119,5 +131,118 @@ int main()
 	return 0;
 }
 
+```
+
+
+
+## 我的实现
+
+```C++
+/**
+ * @brief 对二级指针数组的简单封装
+ *
+ * @tparam T
+ */
+template<class T>
+class multi_span
+{
+	std::vector<T*> data_;
+	std::size_t size_ { 0 };
+public:
+	/// The type of value, including cv qualifiers
+	using element_type = T;
+
+	using value_type = typename std::vector<T*>::value_type;
+
+	/// The type of integer used to index the span
+	using index_type = std::ptrdiff_t;
+
+	/// A pointer to a span element
+	using pointer = T*;
+
+	/// A reference to a span element
+	using reference = T&;
+
+	/// The iterator used by the container
+	using iterator = typename std::vector<T*>::iterator;
+
+	/// The const pointer used by the container
+	using const_pointer = T const*;
+
+	/// The const reference used by the container
+	using const_reference = T const&;
+
+	/// The const iterator used by the container
+	using const_iterator = typename std::vector<T*>::const_iterator;
+
+	/// Constructor
+	multi_span() = default;
+
+	/// Constructor
+	multi_span(multi_span const&) = default;
+
+	/// Assignment
+	multi_span& operator=(multi_span const&) = default;
+
+	/** Constructor
+
+	 @param data A pointer to the beginning of the range of elements
+
+	 @param size The number of elements pointed to by `data`
+	 */
+	multi_span(std::size_t size) :
+					size_(size)
+	{
+		data_.reserve(size_);
+	}
+
+	/// Returns `true` if the span is empty
+	bool empty() const
+	{
+		return size_ == 0;
+	}
+
+	/// Returns a pointer to the beginning of the span
+	T**
+	data() const
+	{
+		return data_.data();
+	}
+
+	/// Returns the number of elements in the span
+	std::size_t size() const
+	{
+		return size_;
+	}
+
+	/// Returns an iterator to the beginning of the span
+	const_iterator begin() const
+	{
+		return data_.begin();
+	}
+
+	/// Returns an iterator to the beginning of the span
+	const_iterator cbegin() const
+	{
+		return data_.cbegin();
+	}
+
+	/// Returns an iterator to one past the end of the span
+	const_iterator end() const
+	{
+		return data_.end();
+	}
+
+	/// Returns an iterator to one past the end of the span
+	const_iterator cend() const
+	{
+		return data_.cend();
+	}
+
+	void push_back(value_type p)
+	{
+		data_.push_back(p);
+	}
+};
 ```
 
