@@ -1,4 +1,4 @@
 nav:
-    - decltype: index.md
-    - std-declval: std-declval
+    - Introduction: index.md
+
     - Application: Application.md
