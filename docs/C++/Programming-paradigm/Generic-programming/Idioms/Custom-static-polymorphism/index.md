@@ -1,4 +1,4 @@
-# User-defined static polymorphism 
+# Custom static polymorphism 
 
 C++除了语言内置的static polymorphism，还支持让用户自己建立起static polymorphism，这极大的增加了C++语言的灵活性。
 

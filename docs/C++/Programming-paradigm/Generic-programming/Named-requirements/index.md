@@ -77,11 +77,3 @@ Some of these requirements are being formalized in C++20 using the [concepts](ht
 | [*Callable*](https://en.cppreference.com/w/cpp/named_req/Callable) | [std::invoke](https://en.cppreference.com/w/cpp/utility/functional/invoke) | [std::is_invocable](https://en.cppreference.com/w/cpp/types/is_invocable) |
 
 
-
-### Container
-
-#### Container element
-
-### Iterator
-
-

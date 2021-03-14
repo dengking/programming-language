@@ -1,6 +1,8 @@
 # Object operation and special member function/magic function and concept
 
-object operation、magic function、concept之间有着对应关系，本文对此进行总结。
+1、object operation、magic function、concept之间有着对应关系，本文对此进行总结。
+
+2、其实在cppreference [Named Requirements](https://en.cppreference.com/w/cpp/named_req)中，已经对此进行了总结，参见 `Named-requirements` 章节。
 
 ## Object operation and magic function
 
@@ -93,7 +95,7 @@ object operation、magic function、concept之间有着对应关系，本文对�
 | [CopyAssignable](https://en.cppreference.com/w/cpp/named_req/CopyAssignable) | specifies that an object of the type can be assigned from lvalue (named requirement) |
 | [Destructible](https://en.cppreference.com/w/cpp/named_req/Destructible) | specifies that an object of the type can be destroyed        |
 
-
+关于 named requirement，参见 `Named-requirements` 章节。
 
 ## Rule of zero、three、five
 

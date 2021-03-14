@@ -1,6 +1,4 @@
-# Generic programming
-
-## C++ generic programming
+# C++ generic programming
 
 在`Theory\Programming-paradigm\Generic-programming`中讨论了generic programming，其中所描述的是思想，其中已经涉及了C++中的generic programming。
 

@@ -1,5 +1,7 @@
 # Custom polymorphism
 
+
+
 1、指的是基于if-else的dispatch方式来实现polymorphism，一般这种方式是不推荐的。
 
 2、对于通过custom polymorphism来实现multiple dispatch的方式，有的人是反对的，参见 `C++\Pattern\Visitor-pattern` 章节，其中对此进行了讨论。
@@ -10,3 +12,24 @@
 
 4、本章的目的是除了讨论custom polymorphism的好坏，而是讨论如何实现custom polymorphism。
 
+
+
+## Custom polymorphism idiom
+
+
+
+### Concept-based-polymorphism
+
+参见 `Concept-based-polymorphism` 章节。
+
+
+
+### Signature-Based-polymorphism
+
+参见 `Signature-Based-polymorphism` 章节。
+
+
+
+### Custom static polymorphism
+
+参见 `Custom-static-polymorphism` 章节。

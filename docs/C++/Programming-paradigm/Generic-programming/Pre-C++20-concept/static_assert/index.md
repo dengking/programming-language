@@ -1,10 +1,87 @@
-# Type requirement
+# `static_assert`
 
 
 
-## `static_assert`
+## cppreference [static_assert declaration](https://en.cppreference.com/w/cpp/language/static_assert)
 
-参见`./static_assert`。
+Performs compile-time assertion checking
+
+
+
+```C++
+#include <type_traits>
+
+template<class T>
+void swap(T &a, T &b)
+{
+	static_assert(std::is_copy_constructible<T>::value,
+					"Swap requires copying");
+	static_assert(std::is_nothrow_copy_constructible<T>::value
+					&& std::is_nothrow_copy_assignable<T>::value,
+					"Swap requires nothrow copy/assign");
+	auto c = b;
+	b = a;
+	a = c;
+}
+
+template<class T>
+struct data_structure
+{
+	static_assert(std::is_default_constructible<T>::value,
+					"Data structure requires default-constructible elements");
+};
+
+struct no_copy
+{
+	no_copy(const no_copy&) = delete;
+	no_copy() = default;
+};
+
+struct no_default
+{
+	no_default() = delete;
+};
+
+int main()
+{
+	/**
+	 * 可以校验通过
+	 */
+	int a, b;
+	swap(a, b);
+	/**
+	 * 无法校验通过
+	 */
+	no_copy nc_a, nc_b;
+	swap(nc_a, nc_b); // 1
+
+	data_structure<int> ds_ok;
+	data_structure<no_default> ds_error; // 2
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+> NOTE: 上述程序，编译报错如下:
+>
+> ```C++
+> test.cpp: In instantiation of ‘struct data_structure<no_default>’:
+> test.cpp:43:29:   required from here
+> test.cpp:19:2: 错误：static assertion failed: Data structure requires default-constructible elements
+> static_assert(std::is_default_constructible<T>::value,
+> ^
+> test.cpp: In instantiation of ‘void swap(T&, T&) [with T = no_copy]’:
+> test.cpp:40:17:   required from here
+> test.cpp:6:2: 错误：static assertion failed: Swap requires copying
+> static_assert(std::is_copy_constructible<T>::value,
+> ^
+> test.cpp:8:2: 错误：static assertion failed: Swap requires nothrow copy/assign
+> static_assert(std::is_nothrow_copy_constructible<T>::value
+> ```
+>
+> 
+
+
 
 ## stackoverflow [C++ templates that accept only certain types](https://stackoverflow.com/questions/874298/c-templates-that-accept-only-certain-types)
 
@@ -191,14 +268,14 @@ There are a lot of concepts shown in the example above that showcase C++11's fea
 
 
 
-## [How do I restrict a template class to certain built-in types?](https://stackoverflow.com/questions/16976720/how-do-i-restrict-a-template-class-to-certain-built-in-types)
+## stackoverflow [How do I restrict a template class to certain built-in types?](https://stackoverflow.com/questions/16976720/how-do-i-restrict-a-template-class-to-certain-built-in-types)
 
 
 
-### [回答](https://stackoverflow.com/a/16977241)
+### [A](https://stackoverflow.com/a/16977241)
 
 > NOTE: `static_assert`比本回答中描述的方案是更好的，因为使用`static_assert`是支持打印出提示信息的
 
 
 
-## [restrict a template function, to only allow certain types](https://stackoverflow.com/questions/32267324/restrict-a-template-function-to-only-allow-certain-types)
+## stackoverflow [restrict a template function, to only allow certain types](https://stackoverflow.com/questions/32267324/restrict-a-template-function-to-only-allow-certain-types)

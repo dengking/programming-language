@@ -1,16 +1,12 @@
-# Member Detector
+# More C++ Idioms/[Member Detector](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Member_Detector)
 
-
-
-## More C++ Idioms/[Member Detector](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Member_Detector)
-
-### Motivation
+## Motivation
 
 **Compile-time reflection** capabilities are the cornerstone of C++ template meta-programming. **Type traits** libraries such as `Boost.TypeTraits` and `TR1 <type_traits>` header provide powerful ways of extracting information about types and their relationships. Detecting the presence of a **data member** in a class is also an example of compile-time reflection.
 
-### Solution and Sample Code
+## Solution and Sample Code
 
-#### Before C++11
+### Before C++11
 
 **Member detector idiom** is implemented using the Substitution Failure Is Not An Error (SFINAE)  idiom. The following class `template DetectX<T>` is a meta-function that determines whether type `T` has a data or function member named `X` in it or not. Note that the type of the data member `X` does not matter nor does the return value and arguments of the member function (if it is one).
 
@@ -97,7 +93,7 @@ int main(void)
 // g++ test.cpp
 ```
 
-#### C++11
+### C++11
 
 Using `C++11` features, this example can be rewritten so that the **controlled ambiguity** is created using the `decltype` specifier instead of a `Check` template and a pointer to member. The result can then be wrapped inside a class inheriting from `integral_constant` to provide an interface identical to the type predicates present in the standard header `<type_traits>`.
 
@@ -180,7 +176,7 @@ int main()
 
 
 
-#### Detecting member types
+### Detecting member types
 
 The above example can be adapted to detect existence of a **member type**, be it a nested class or a `typedef`, even if it is incomplete. This time, the **ambiguity** would be created by adding to `Fallback` a nested type with the same name as the macro argument.
 
@@ -248,7 +244,7 @@ int main()
 This is much like the **member detection** macro that declares a data member of the same name as the macro argument. An overload set of two test functions is then created, just like the other examples. The first version can only be instantiated if the type of `U::Type` can be used unambiguously. This type can be used only if there is exactly one instance of Type in `Derived`, i.e. there is no `Type` in `T`. If `T` has a member type `Type`, it is garanteed to be different than `Fallback::Type`, since the latter is a unique type, hence creating the ambiguity. This leads to the second version of test being instantiated in case the substitution
 fails, meaning that `T` has indeed a member type `Type`. Since no objects are ever created (this is entirely resolved by compile-time type checking), `Type` can be an incomplete type or be ambiguous inside `T`; only the name matters. We then wrap the result in a class inheriting from `integral_constant`, just like before to provide the same interface as the standard library.
 
-#### Detecting overloaded member functions
+### Detecting overloaded member functions
 
 A variation of the **member detector idiom** can be used to detect existence of a specific member function in a class even if it is overloaded.
 
@@ -272,141 +268,17 @@ public:
 
 The `HasPolicy` template above checks if `T` has a member function called `policy` that takes two parameters `ARG1`, `ARG2` and returns `RESULT`. Instantiation of Check template succeeds only if `U` has a `U::policy` member function that takes two parameters and returns `RESULT`. Note that the first type parameter of `Check` template is a type whereas the second parameter is a pointer to a member function in the same type. If `Check` template cannot be instantiated, the only remaining `func` that returns an `int` is instantiated. The size of the return value of `func` eventually determines the answer of the type-trait: `true` or `false`.
 
-### Known Issues
+## Known Issues
 
 Will not work if the class checked for member is declared `final` (C++11 keyword).
 
 Will not work to check for a member of a union (unions cannot be base classes).
 
-## Detect member function
-
-- stackoverflow [Templated check for the existence of a class member function?](https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function)
-
-- stackoverflow [Check if a class has a member function of a given signature](https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature)
-
-### [A](https://stackoverflow.com/a/257382): SFINA+`decltype`
-
-```c++
-#include <iostream>
-
-struct Hello
-{
-	int helloworld()
-	{
-		return 0;
-	}
-};
-
-struct Generic
-{
-};
-
-// SFINAE test
-template<typename T>
-class has_helloworld
-{
-	typedef char one;
-	struct two
-	{
-		char x[2];
-	};
-
-	template<typename C> static one test(typeof(&C::helloworld));
-	template<typename C> static two test(...);
-
-public:
-	enum
-	{
-		value = sizeof(test<T>(0)) == sizeof(char)
-	};
-};
-
-int main(int argc, char *argv[])
-{
-	std::cout << has_helloworld<Hello>::value << std::endl;
-	std::cout << has_helloworld<Generic>::value << std::endl;
-	return 0;
-}
-// g++ test.cppm
-
-```
-
-
-
-### [A](https://stackoverflow.com/a/9154394): expression SFINAE 
-
-This question is old, but with `C++11` we got a new way to check for a functions existence (or existence of any non-type member, really), relying on SFINAE again:
-
-```cpp
-template<class T>
-auto serialize_imp(std::ostream& os, T const& obj, int)
-    -> decltype(os << obj, void())
-{
-  os << obj;
-}
-
-template<class T>
-auto serialize_imp(std::ostream& os, T const& obj, long)
-    -> decltype(obj.stream(os), void())
-{
-  obj.stream(os);
-}
-
-template<class T>
-auto serialize(std::ostream& os, T const& obj)
-    -> decltype(serialize_imp(os, obj, 0), void())
-{
-  serialize_imp(os, obj, 0);
-}
-```
-
-Now onto some explanations. First thing, I use [expression SFINAE](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2634.html) to exclude the `serialize(_imp)` functions from **overload resolution**, if the first expression inside `decltype` isn't valid (aka, the function doesn't exist).
-
-The `void()` is used to make the return type of all those functions `void`.
-
-The `0` argument is used to prefer the `os << obj` overload if both are available (literal `0` is of type `int` and as such the first overload is a better match).
 
 
 
 
 
-## cppreference [std::is_member_function_pointer](https://en.cppreference.com/w/cpp/types/is_member_function_pointer)
-
-
-
-## [sfinae_tostring_ex.cpp](https://gist.github.com/fenbf/d2cd670704b82e2ce7fd#file-sfinae_tostring_ex-cpp)
-
-
-
-https://gist.github.com/fenbf/d2cd670704b82e2ce7fd
-
-## [has_member.hpp](https://gist.github.com/maddouri/0da889b331d910f35e05ba3b7b9d869b#file-has_member-hpp)
-
-https://gist.github.com/fenbf/d2cd670704b82e2ce7fd
-
-
-
-## reddit SFINAE Checking for Existence
-
-
-
-## Detection Idiom TO READ
-
-https://www.codeplay.com/portal/09-15-17-detection-idiom-a-stopgap-for-concepts
-
-https://stackoverflow.com/questions/45249985/how-to-require-an-exact-function-signature-in-the-detection-idiom
-
-https://humanreadablemag.com/issues/1/articles/cpp-evolution-via-detection-idiom-lens
-
-https://blog.tartanllama.xyz/detection-idiom/
-
-https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function/9154394#9154394
-
-https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature
-
-https://stackoverflow.com/questions/257288/templated-check-for-the-existence-of-a-class-member-function
-
-https://stackoverflow.com/questions/18570285/using-sfinae-to-detect-a-member-function
 
 
 
