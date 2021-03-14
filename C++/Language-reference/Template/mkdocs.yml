@@ -10,6 +10,6 @@ nav:
     - Function-template: Function-template
     - Variable-template: Variable-template
     - Parameter-pack: Parameter-pack
-    - SFINAE: SFINAE
-    - Implementation: Implementation
+
+    - Compile-template: Compile-template
     - Define-template-in-header-file: Define-template-in-header-file

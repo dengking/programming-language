@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - CSDN-C++14-make_index_sequence原理: CSDN-C++14-make_index_sequence原理    
+    - stackoverflow-Implementation-C++14-make_integer_sequence: stackoverflow-Implementation-C++14-make_integer_sequence

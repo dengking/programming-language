@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - CSDN-详解virtual-table: CSDN-详解virtual-table
+    - CSDN-C++虚函数和虚函数表详解: CSDN-C++虚函数和虚函数表详解
+    - wikipedia-Virtual-method-table: wikipedia-Virtual-method-table
+    - shaharmike-Cpp-vtable: shaharmike-Cpp-vtable

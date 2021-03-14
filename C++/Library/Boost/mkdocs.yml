@@ -22,3 +22,4 @@ nav:
     - Boost-Iterator: Boost-Iterator
     - Boost-TypeErasure: Boost-TypeErasure
     - Boost-Atomic: Boost-Atomic
+    - boost-Beast: boost-Beast

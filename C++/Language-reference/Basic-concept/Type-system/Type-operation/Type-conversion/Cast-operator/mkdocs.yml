@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - static_cast: static_cast.md
+    - static_cast: static_cast
     - dynamic_cast: dynamic_cast
     - const_cast: const_cast.md
     - reinterpret_cast: reinterpret_cast.md

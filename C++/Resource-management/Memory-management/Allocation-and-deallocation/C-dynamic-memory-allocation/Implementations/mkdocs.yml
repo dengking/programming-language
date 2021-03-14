@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - Boundary-tag: Boundary-tag
     - jemalloc: jemalloc
     - tcmalloc: tcmalloc
