@@ -76,9 +76,9 @@ public:
   };
 ```
 
-### Storing a Parameter Pack in a std::tuple
+### Storing a Parameter Pack in a `std::tuple`
 
-However, if you want to keep the parameter values around and use them at some later time, you’ll need to store them in a [std::tuple](http://en.cppreference.com/w/cpp/utility/tuple). I think this is why std::tuple exists. For instance:
+However, if you want to keep the parameter values around and use them at some later time, you’ll need to store them in a [std::tuple](http://en.cppreference.com/w/cpp/utility/tuple). I think this is why `std::tuple` exists. For instance:
 
 ```c++
 template <class... T_values>
