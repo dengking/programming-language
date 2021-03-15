@@ -52,3 +52,37 @@ If you want to simply prevent a template from being instantiated for certain tem
 ## 实现分析
 
 SFINAE作用于argument of type template parameter。
+
+
+
+## 我的实践
+
+```C++
+/**
+ * 根据消息类型获得对应的序列化器、反序列化器 类型
+ */
+template<int ServiceMsgType, typename ReqFieldType, typename Enable = void>
+struct MsgPackerTrait;
+
+/**
+ * 根据消息类型获得对应的序列化器、反序列化器 类型
+ */
+template<int ServiceMsgType, typename RspFieldType, typename Enable = void>
+struct MsgUnpackerTrait;
+
+template<int ServiceMsgType, typename ReqFieldType>
+struct MsgPackerTrait<ServiceMsgType, ReqFieldType, typename std::enable_if<IsTradeMsg(ServiceMsgType)>::type>
+{
+	typedef CNoBizHeadMsgPacker<ReqFieldType> PackerType;
+
+};
+
+template<int ServiceMsgType, typename RspFieldType>
+struct MsgUnpackerTrait<ServiceMsgType, RspFieldType, typename std::enable_if<IsTradeMsg(ServiceMsgType)>::type>
+{
+
+	typedef CNoBizHeadMsgUnpacker<RspFieldType> UnpackerType;
+};
+
+```
+
