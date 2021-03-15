@@ -198,6 +198,8 @@ With this you get the benefits of exception-safe cleanup using RAII, without nee
 
 
 
+## stackoverflow [Why and when do I need to supply my own deleter?](https://stackoverflow.com/questions/51278175/why-and-when-do-i-need-to-supply-my-own-deleter)
+
 ## TODO
 
 1、nextptr [unique_ptr with custom deleter](https://www.nextptr.com/question/qa1366990479/unique_ptr-with-custom-deleter)
