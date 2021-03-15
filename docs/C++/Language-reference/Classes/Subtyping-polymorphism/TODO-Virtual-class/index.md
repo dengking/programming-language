@@ -1,5 +1,6 @@
-
 # Virtual class
+
+
 
 ## wikipedia [Virtual class](https://en.wikipedia.org/wiki/Virtual_class)
 
