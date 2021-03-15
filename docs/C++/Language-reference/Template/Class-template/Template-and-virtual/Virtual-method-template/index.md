@@ -66,12 +66,18 @@ virtual void Test(T t)
 
 1、fluentcpp [Polymorphic clones in modern C++](https://www.fluentcpp.com/2017/09/08/make-polymorphic-copy-modern-cpp/)
 
+
+
+## experts-exchange [virtual template function workaround](https://www.experts-exchange.com/questions/20558666/virtual-template-function-workaround.html)
+
+
+
 ## TODO
 
 https://stackoverflow.com/questions/7968023/c-virtual-template-method
 
 https://stackoverflow.com/questions/2354210/can-a-class-member-function-template-be-virtual?rq=1
 
-https://www.experts-exchange.com/questions/20558666/virtual-template-function-workaround.html
+
 
 
