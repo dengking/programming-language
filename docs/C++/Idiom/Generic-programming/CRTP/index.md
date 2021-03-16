@@ -504,13 +504,11 @@ One issue with static polymorphism is that without using a general base class li
 
 
 
-
-
 ## Application
 
-1、static polymorphism
+### static polymorphism
 
-2、mixin
+### mixin
 
 exmaple:
 
@@ -522,9 +520,41 @@ c、具体类型由derived class来指定(我在AMUST core的代码重构中，�
 
 d、.....
 
-3、polymorphic chaining
+### polymorphic chaining
+
+> NOTE: 
+>
+> 需要添加一些内容
 
 
+
+## Base access member in derived
+
+在使用CRTP中，一个非常常见的内容是: Base access member in derived，这些member包括:
+
+1、typedef
+
+2、member function
+
+3、member data
+
+显然这涉及了:
+
+1、Access specifiers
+
+2、......
+
+### Friend base class in CRTP
+
+在使用CRTP的时候，一个经常要使用的technique是: 在derived class中，声明base class为friend，这样base class能够access derived class的一些protected、private的member。
+
+> NOTE: 
+>
+> 1、需要补充案例
+
+### `Derived-class-template-CRTP`
+
+在 `Derived-class-template-CRTP` 中，也对这个topic进行了讨论。
 
 ## 我的实践
 
