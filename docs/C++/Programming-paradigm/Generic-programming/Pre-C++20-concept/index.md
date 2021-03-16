@@ -7,3 +7,8 @@
 | The Boost Concept Check Library (BCCL) | `C++\Library\Boost\Boost-Concept-Check-Library` |
 | ConceptC++                             | `./ConceptC++`                                  |
 
+
+
+1、`Detection`
+
+2、可以使用trait来实现static reflection，用于判断type

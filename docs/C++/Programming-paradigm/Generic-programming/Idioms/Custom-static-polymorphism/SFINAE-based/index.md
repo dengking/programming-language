@@ -20,17 +20,11 @@ cppreference `SFINAE#Library support`段中关于trait和SFINAE的总结，原�
 
 
 
-SFINAE+trai+`enable_if`是C++ metaprogramming的精髓所在。
-
-
-
 ## `void_t` and SFINAE 
 
 cppreference `SFINAE#Library support`段中的总结如下：
 
 > The standard library component [std::void_t](../types/void_t.html) is another utility metafunction that simplifies SFINAE applications.
-
-## Tag dispatch
 
 
 

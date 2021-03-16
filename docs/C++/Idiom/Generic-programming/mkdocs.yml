@@ -6,8 +6,7 @@ nav:
     # 下面两者密切相关
     - Expression-Template: Expression-Template
     - Recursive-Type-Composition: Recursive-Type-Composition
-    # trait是和template相关的
-    - SFINAE-trait-enable-if: SFINAE-trait-enable-if
+
     # 
     - Metafunction: Metafunction
     # 
