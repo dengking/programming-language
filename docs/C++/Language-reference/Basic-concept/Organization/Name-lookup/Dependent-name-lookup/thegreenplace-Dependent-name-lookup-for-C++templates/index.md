@@ -37,18 +37,20 @@ The intention of `Derived<T>::g` is to call `Base<T>::f`, but what the compiler 
 :18:10: note: (if you use ‘-fpermissive’, G++ will accept your code, but allowing the use of an undeclared name is deprecated)
 ```
 
-> NOTE: 中文如下:
+> NOTE: 
+>
+> 1、中文如下:
 >
 > ```c++
 > test.cpp: 在成员函数‘void Derived<T>::g()’中:
 > test.cpp:16:5: 错误：‘f’的实参不依赖模板参数，所以‘f’的声明必须可用 [-fpermissive]
 > f();
->   ^
+> ^
 > test.cpp:16:5: 附注：(如果您使用‘-fpermissive’，G++ 会接受您的代码，但是允许使用未定义的名称是不建议使用的风格)
 > 
 > ```
 >
-> 
+> 2、由于`f`没有再`struct Derived`中定义，因此，compiler会在 `Base<T>` 中进行查找，而由于 `Base<T>` 是一个class template，因此，`f`就是一个dependent name，而上述程序的写法是不符合dependent name的用法的。
 
 First, let's see how to fix this. It's easy. All you have to do is to make the compiler understand that the call `f` depends on the template parameter `T`. A couple of ways to do this are replacing `f()` with `Base<T>::f()`, or with `this->f()` (since `this` is implicitly dependent on `T`). For example:
 
@@ -94,6 +96,8 @@ Derived<T>::g
   Base<T>::f
 ```
 
+## 为什么需要dependent name lookup？
+
 Problem fixed. Now, let's understand what's going on. Why does the compiler need an explicit specification for which `f` to call? Can't it figure out on its own that we want it to call `Base<T>::f`? It turns out it can't, because this isn't correct in the general case. Suppose that a specialization of the `Base` class is later created for `int`, and it also defines `f`:
 
 ```c++
@@ -113,7 +117,7 @@ template<typename T> struct Derived: Base<T>
 	{
 		std::cerr << "Derived<T>::g\n  ";
 		this->f();
-        // Base<T>::f(); // 这种写法也是允许的
+		// Base<T>::f(); // 这种写法也是允许的
 	}
 };
 
@@ -148,11 +152,19 @@ Derived<T>::g
   Base<int>::f
 ```
 
+> NOTE: 
+>
+> 1、通过上述输出可以看出，`struct Base<int>::f()` 被调用了。
+>
+> 2、上述例子，体现了specialization and inheritance
+>
+> 
+
 This is the correct behavior. The `Base` template has been specialized for `int`, so it should be used for **inheritance** when `Derived<int>` is required. But how does the compiler manage to figure it out? After all, `Base<int>` was defined *after* `Derived`!
 
 
 
-## Two-phase name lookup
+## Two-phase name lookup(如何实现)
 
 To make this work, the C++ standard defines a "two-phase name lookup" rule for names in templates. Names inside templates are divided to two types:
 
@@ -165,9 +177,15 @@ When the compiler tries to resolve some name in the code, it first decides wheth
 
 > NOTE: 关于template instantiation，参见`C++\Language-reference\Template\Implementation\index.md`
 
+### 非常好的解释
+
 Now, back to our original problem. Why doesn't the compiler look `f` up in the base class? First, notice that in the call to `f()` in the first code snippet, `f` is a **non-dependent name**. So it must be resolved at the point of the **template's definition**. At that point, the compiler still doesn't know what `Base<T>::f` is, because it can be **specialized** later. So it doesn't look names up in the base class, but only in the enclosing scope. Since there's no `f` in the enclosing scope, the compiler complains.
 
-> TODO:"At that point, the compiler still doesn't know what `Base<T>::f` is, because it can be **specialized** later. So it doesn't look names up in the base class, but only in the enclosing scope. " 这段话需要进一步分析。
+> NOTE:
+>
+> 1、"At that point, the compiler still doesn't know what `Base<T>::f` is, because it can be **specialized** later. So it doesn't look names up in the base class, but only in the enclosing scope. " 
+>
+> 理解这段话的前提是对C++ compiler编译 template的流程有一个完整的认知，参见 `Compile-template` 章节
 
 On the other hand, when we explicitly make the lookup of `f` dependent by calling it through `this->`, the lookup rule changes. Now `f` is resolved at the point of the **template's instantiation**, where the compiler has full understanding of the base class and can resolve the name correctly.
 
@@ -185,7 +203,7 @@ I've mentioned above that to fix the problem and make the lookup of `f` dependen
 > | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 > | identifier     | 上面例子中的`f`是identifier                                  | compiler的default behavior将dependent name当做identifier     |
 > | type           | 下面例子中的`MyType`是type                                   | 通过keyword `typename`来告诉compiler，这个name表示的是type   |
-> | method         | “Disambiguating dependent template names”中的例子中的`foo_method`是 function template | 通过keyword `template`来告诉compiler，这个name表示的是template |
+> | template       | “Disambiguating dependent template names”中的例子中的`foo_method`是 function template | 通过keyword `template`来告诉compiler，这个name表示的是template |
 >
 > 
 
