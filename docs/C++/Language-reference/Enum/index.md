@@ -278,42 +278,9 @@ github [magic_enum](https://github.com/Neargye/magic_enum)
 
 ## enum in TMP
 
-我记得在TMP中，有多处是使用到了enum的，需要整理一下。
+1、我记得在TMP中，有多处是使用到了enum的，这些都整理到了 `Dispatch-based-on-constant`。
 
-### Enum dispatch: Enum + `enable_if`
-
-为每个trait class添加一个表示其类型的常量，然后添加判断条件来判断它属于哪种类型？
-
-
-比如我定义有三种类型：
-
-```C++
-// 服务类型
-enum EServiceType
-{
-    
-   TradeService=1;//交易类服务 
-   QueryService=2;//查询类服务
-};
-// 某个服务
-struct FooService
-{
-	constexpr static int ServiceType = EServiceType::TradeService;
-};
-// 判断是否是交易类服务
-constexpr bool IsTradeService(EServiceType ServiceType)
-{
-    return ServiceType == TradeService;
-}
-
-template<class ServiceTraitType>
-auto ReqService()->typename std::enable_if<IsTradeService(ServiceTraitType::ServiceType), int>::type
-{
-    
-}
-```
-
-
+2、将此称为 Enum dispatch
 
 
 
