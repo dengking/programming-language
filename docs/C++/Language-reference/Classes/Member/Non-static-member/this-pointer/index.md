@@ -63,4 +63,4 @@ int main()
 
 
 
-> NOTE: 关于`this` is dependent name，参见`C++\Language-reference\Basic-concept\Organization\Name-lookup\Dependent-name-lookup\index.md`，其中有着较好的描述。
+> NOTE: 关于`this` is dependent name，参见`C++\Language-reference\Basic-concept\Organization\Name-lookup\Dependent-name-lookup`，其中有着较好的描述。
