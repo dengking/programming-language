@@ -4,3 +4,4 @@ nav:
     # 
     - Overload-resolution: Overload-resolution
     - Overload-in-OOP: Overload-in-OOP
+    - Overload-and-return-type: Overload-and-return-type
