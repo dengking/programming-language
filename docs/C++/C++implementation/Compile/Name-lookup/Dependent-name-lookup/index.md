@@ -4,7 +4,13 @@
 
 ## thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)
 
-参见 `thegreenplace-Dependent-name-lookup-for-C++templates` 章节。
+1、参见 `thegreenplace-Dependent-name-lookup-for-C++templates` 章节。
+
+2、这篇文章非常好，说明清楚了:
+
+a、为什么需要dependent name lookup
+
+b、如何使用
 
 
 
@@ -97,8 +103,9 @@ Binding of *dependent names* is postponed until lookup takes place.
 
 As discussed in [lookup](https://en.cppreference.com/w/cpp/language/lookup), the lookup of a **dependent name** used in a template is postponed until the **template arguments** are known, at which time
 
-- non-ADL lookup examines function declarations with external linkage that are visible from the *template definition* context
-- [ADL](https://en.cppreference.com/w/cpp/language/adl) examines function declarations with external linkage that are visible from either the *template definition* context or the *template instantiation* context
+1、non-ADL lookup examines function declarations with external linkage that are visible from the *template definition* context
+
+2、[ADL](https://en.cppreference.com/w/cpp/language/adl) examines function declarations with external linkage that are visible from either the *template definition* context or the *template instantiation* context
 
 (in other words, adding a new function declaration after template definition does not make it visible, except via ADL).
 
@@ -489,94 +496,9 @@ int main()
 
 ### The `template` disambiguator for dependent names
 
-Similarly, in a template definition, a dependent name that is not a member of the *current instantiation* is not considered to be a template name unless the disambiguation keyword `template` is used or unless it was already established as a template name:
-
-```c++
-template<typename T>
-struct S
-{
-	template<typename U> void foo()
-	{
-	}
-};
-
-template<typename T>
-void bar()
-{
-	S<T> s;
-	s.foo<T>(); // error: < parsed as less than operator
-	s.template foo<T>(); // OK
-}
-
-```
-
-> NOTE: 下面是一个补充的例子，更加复杂一些
-
-```C++
-#include "stddef.h" // size_t
-#include <vector>
-
-typedef struct SFieldInfo
-{
-	/**
-	 * 字段在结构体中的偏移位置
-	 */
-	size_t m_iOffset;
-};
-
-class CStructRtti
-{
-
-	std::vector<SFieldInfo> m_FieldMetaList;
-public:
-	template<typename ValueType>
-	const ValueType* GetValue(void *Data, int Index) const
-	{
-		const SFieldInfo &FieldMeta = m_FieldMetaList[Index];
-		size_t iOffset = FieldMeta.m_iOffset;
-		char *DataStartAddress = reinterpret_cast<char*>(Data) + iOffset;
-		return reinterpret_cast<const ValueType*>(DataStartAddress);
-	}
-};
-
-class CTableInterface
-{
-protected:
-	/**
-	 * 列信息
-	 */
-	CStructRtti *m_Columns { nullptr };
-public:
-	virtual double GetDouble(size_t RowID, size_t ColID)=0;
-};
-
-template<typename RowType>
-class CTableImpl: public CTableInterface
-{
-	RowType m_Row { };
-public:
-	double GetDouble(size_t RowID, size_t ColID) override
-	{
-		return *m_Columns->template GetValue<double>(&m_Row, ColID); // 必须要使用 The `template` disambiguator for dependent names
-	}
-};
-
-struct SRow
-{
-
-};
-
-int main()
-{
-	CTableImpl<SRow> t;
-	t.GetDouble(1, 1);
-}
-// g++ --std=c++11 test.cpp
-
-
-```
-
-
+> NOTE: 
+>
+> 1、这部分内容移到了 `The-template-disambiguator-for-dependent-names` 章节
 
 ## TO READ
 
@@ -585,170 +507,4 @@ int main()
 - gcc [14.7.2 Name Lookup, Templates, and Accessing Members of Base Classes](https://gcc.gnu.org/onlinedocs/gcc/Name-lookup.html)
 - stackoverflow [Where and why do I have to put the “template” and “typename” keywords?](https://stackoverflow.com/questions/610245/where-and-why-do-i-have-to-put-the-template-and-typename-keywords)
 
-
-
-## Examples
-
-### error: expected primary-expression before ‘>’ token
-
-这是一种非常常见的compile错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "Disambiguating dependent template names"段中介绍了这种错误，下面再补充一些例子: 
-
-1) stackoverflow [C++ template compilation error: expected primary-expression before ‘>’ token](https://stackoverflow.com/questions/3505713/c-template-compilation-error-expected-primary-expression-before-token)
-
-[A](https://stackoverflow.com/a/3505738)
-
-You need to do:
-
-```c++
-std::cout << pt.template get<std::string>("path");
-```
-
-Use `template` in the same situation as `typename`, except for template members instead of types.
-
-(That is, since `pt::get` is a template member *dependent* on a template parameter, you need to tell the compiler it's a template.)
-
-### error: there are no arguments to ‘`***`’ that depend on a template parameter, so a declaration of ‘`***`’ must be available
-
-这是一种常见的compiler错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "A simple problem and a solution"中介绍了这种错误，下面再补充一些例子:
-
-stackoverflow [Inheritance and templates in C++ - why are inherited members invisible?](https://stackoverflow.com/questions/1567730/inheritance-and-templates-in-c-why-are-inherited-members-invisible)
-
-```C++
-template <int a>
-class Test {
-public:
-    Test() {}
-    int MyMethod1() { return a; }
-};
-
-template <int b>
-class Another : public Test<b>
-{
-public:
-    Another() {}
-    void MyMethod2() {
-        MyMethod1();
-    }
-};
-
-int main()
-{
-    Another<5> a;
-    a.MyMethod1();
-    a.MyMethod2();
-}
-// g++ test.cpp
-
-```
-
-编译报错如下: 
-
-```c++
-test.cpp: In member function ‘void Another<b>::MyMethod2()’:
-test.cpp:14:19: error: there are no arguments to ‘MyMethod1’ that depend on a template parameter, so a declaration of ‘MyMethod1’ must be available [-fpermissive]
-         MyMethod1();
-                   ^
-test.cpp:14:19: note: (if you use ‘-fpermissive’, G++ will accept your code, but allowing the use of an undeclared name is deprecated)
-```
-
-[A](https://stackoverflow.com/a/1567781)
-
-```C++
-template <int a>
-class Test {
-public:
-    Test() {}
-    int MyMethod1() { return a; }
-};
-
-template <int b>
-class Another : public Test<b>
-{
-public:
-    Another() {}
-    void MyMethod2() {
-        Test<b>::MyMethod1();
-    }
-};
-
-int main()
-{
-    Another<5> a;
-    a.MyMethod1();
-    a.MyMethod2();
-}
-// g++ test.cpp
-
-```
-
-
-
-### ‘`***`’ does not name a type
-
-这是一种常见的compiler错误，在thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) `#` "Disambiguating dependent type names"中介绍了这种错误，下面再补充一些例子:
-
-stackoverflow [Propagating 'typedef' from based to derived class for 'template'](https://stackoverflow.com/questions/1643035/propagating-typedef-from-based-to-derived-class-for-template)
-
-
-
-```C++
-#include <iostream>
-#include <vector>
-
-template<typename T>
-class A
-{
-public:
-	typedef std::vector<T> Vec_t;
-};
-
-template<typename T>
-class B: public A<T>
-{
-private:
-	Vec_t v;  // fails - Vec_t is not recognized
-};
-int main()
-{
-	B<int> b;
-}
-// g++ test.cpp
-
-```
-
-编译报错如下:
-
-```C++
-test.cpp:15:2: error: ‘Vec_t’ does not name a type
-  Vec_t v;  // fails - Vec_t is not recognized
-  ^
-test.cpp:15:2: note: (perhaps ‘typename A<T>::Vec_t’ was intended)
-```
-
-正确写法:
-
-```C++
-#include <iostream>
-#include <vector>
-
-template<typename T>
-class A
-{
-public:
-	typedef std::vector<T> Vec_t;
-};
-
-template<typename T>
-class B: public A<T>
-{
-private:
-	typename A<T>::Vec_t v;  // fails - Vec_t is not recognized
-};
-int main()
-{
-	B<int> b;
-}
-// g++ test.cpp
-
-```
 

@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
     - thegreenplace-Dependent-name-lookup-for-C++templates: thegreenplace-Dependent-name-lookup-for-C++templates
+    - The-template-disambiguator-for-dependent-names: The-template-disambiguator-for-dependent-names    
+    - Compile-errors: Compile-errors

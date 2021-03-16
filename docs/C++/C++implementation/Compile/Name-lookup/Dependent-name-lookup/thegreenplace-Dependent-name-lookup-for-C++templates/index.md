@@ -245,6 +245,8 @@ int main()
 
 Three attempts are shown to declare a **local variable** `k` of type `MyType`. The first two are commented out because they result in compile errors. (A) should be obvious by now - since `MyType` is non-dependent, it can't be found in the **base class** - same problem as before.
 
+### 为什么需要 `typename`
+
 But why doesn't (B) work? Well, because `Base<T>` can be specialized, so the compiler can't be sure whether `MyType` is a **type** or not. A **specialization** can easily declare a method called `MyType` instead of it being a **type**. And neither can the compiler delay this decision until the **instantiation point**, because whether `MyType` is a type or not affects how the rest of the definition is *parsed*. So we must tell the compiler explicitly, at the point of definition, whether `MyType` is a type or not. It turns out that the default is "not a type", and we must precede the name with `typename` to tell the compiler it *is* a type. This is stated in the `C++` standard, section 14.6:
 
 > A name used in a template declaration or definition and that is dependent on a template-parameter is assumed not to name a type unless the applicable name lookup finds a type name or the name is qualified by the keyword `typename`.
@@ -280,15 +282,19 @@ The first attempt to call `T::foo_method` fails - the compiler can't parse the c
 
 So in declaration (A) above can't be parsed, because the compiler assumes `foo_method` is just a member function and interprets the `<` and `>` symbols as comparison operators. But `foo_method` is a template, so we have to notify the compiler about it. As declaration (B) demonstrates, this can be done by using the keyword `template`.
 
-> NOTE:关于primary-expression，参见`C++\Language-reference\Expressions\Expressions.md`。
+> NOTE:
 >
-> 写法A中，compiler将`T::foo_method<T>()`中的`<`解析为less than operator，将`>`解析为more than operator，而C++规定: 
+> 1、关于primary-expression，参见`C++\Language-reference\Expressions\Expressions.md`。
+>
+> 2、写法A中，compiler将`T::foo_method<T>()`中的`<`解析为less than operator，将`>`解析为more than operator，而C++规定: 
 >
 > > The operands of any operator may be other expressions or primary expressions
 >
 > 按照C++的规定，`T::foo_method<T`不是一个primary expression，所以compiler explain。
 >
 >  实际上`foo_method`是一个function template。
+>
+> 3、`foo_method` 是一个dependent name
 
 ## Resources
 
