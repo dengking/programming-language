@@ -186,96 +186,133 @@ int main() {
 
 ## Examples
 
+### Generic container printer
+
 [Using SFINAE to specialize template methods, depending on the type of container std::map or std::vector, passed as an argument](https://evileg.com/en/post/468/)
 
 ```c++
 #include <iterator>
 #include <type_traits>
- 
+
 // templates for determining whether the std::pair container element is
-template <typename T>
-struct is_pair : std::false_type {};
- 
-template <typename T, typename U>
-struct is_pair<std::pair<T, U>> : std::true_type {};
- 
-template <typename T>
+template<typename T>
+struct is_pair: std::false_type
+{
+};
+
+template<typename T, typename U>
+struct is_pair<std::pair<T, U>> : std::true_type
+{
+};
+
+template<typename T>
 constexpr bool is_pair_v = is_pair<T>::value;
- 
+
 // templates for determining if the container is std::map
 template<typename, typename = void>
-struct is_mapping : std::false_type {};
- 
-template <typename Container>
-struct is_mapping<Container, std::enable_if_t<is_pair_v<typename  std::iterator_traits<typename Container::iterator>::value_type>>> : std::true_type {};
- 
-template <typename T>
+struct is_mapping: std::false_type
+{
+};
+
+template<typename Container>
+struct is_mapping<Container, std::enable_if_t<is_pair_v<typename std::iterator_traits<typename Container::iterator>::value_type>>> : std::true_type
+{
+};
+
+template<typename T>
 constexpr bool is_mapping_v = is_mapping<T>::value;
- 
+
 #include <map>
 #include <vector>
 #include <iostream>
- 
+
 class ClassWithSpecializedMethods
 {
 public:
-    ClassWithSpecializedMethods() {}
- 
-    // A specialized method for handling std::map
-    template <class ContainerType>
-    static typename std::enable_if<is_mapping_v<ContainerType>, void>::type printContainer(ContainerType& container);
- 
-    // A specialized method for handling std::vector
-    template <class ContainerType>
-    static typename std::enable_if<!is_mapping_v<ContainerType>, void>::type printContainer(ContainerType& container);
+	ClassWithSpecializedMethods()
+	{
+	}
+
+	// A specialized method for handling std::map
+	template<class ContainerType>
+	static typename std::enable_if<is_mapping_v<ContainerType>, void>::type printContainer(ContainerType &container);
+
+	// A specialized method for handling std::vector
+	template<class ContainerType>
+	static typename std::enable_if<!is_mapping_v<ContainerType>, void>::type printContainer(ContainerType &container);
 };
- 
+
 // Method implementations
-template <class ContainerType>
-inline
-static typename std::enable_if<is_mapping_v<ContainerType>, void>::type ClassWithSpecializedMethods::printContainer(ContainerType& container)
+template<class ContainerType>
+inline typename std::enable_if<is_mapping_v<ContainerType>, void>::type ClassWithSpecializedMethods::printContainer(ContainerType &container)
 {
-    std::cout << "Map:" << std::endl;
-    for (const auto& [key, value] : container)
-    {
-        std::cout << "Key: " << key << " Value: " << value << std::endl;
-    }
-    std::cout << std::endl;
+	std::cout << "Map:" << std::endl;
+	for (const auto& [key, value] : container)
+	{
+		std::cout << "Key: " << key << " Value: " << value << std::endl;
+	}
+	std::cout << std::endl;
 }
- 
-template <class ContainerType>
-inline
-static typename std::enable_if<!is_mapping_v<ContainerType>, void>::type ClassWithSpecializedMethods::printContainer(ContainerType& container)
+
+template<class ContainerType>
+inline typename std::enable_if<!is_mapping_v<ContainerType>, void>::type ClassWithSpecializedMethods::printContainer(ContainerType &container)
 {
-    std::cout << "Vector:" << std::endl;
-    for (const auto& value : container)
-    {
-        std::cout << "Value: " << value << std::endl;
-    }
-    std::cout << std::endl;
+	std::cout << "Vector:" << std::endl;
+	for (const auto &value : container)
+	{
+		std::cout << "Value: " << value << std::endl;
+	}
+	std::cout << std::endl;
 }
- 
+
 // Testing functions
-int main() {
-    std::cout << "is_pair:" << std::endl;
-    std::cout << "Map:    " << is_pair_v<std::iterator_traits<std::map<int, int>::iterator>::value_type> << std::endl;
-    std::cout << "Vector: " << is_pair_v<std::iterator_traits<std::vector<int>::iterator>::value_type>   << std::endl;
-    std::cout << std::endl;
-    std::cout << "is_mapping:" << std::endl;
-    std::cout << "Map:    " << is_mapping_v<std::map<int, int>> << std::endl;
-    std::cout << "Vector: " << is_mapping_v<std::vector<int>>   << std::endl;
-    std::cout << std::endl;
- 
-    std::map<int, int> map_container = {{1, 1}, {2, 2}, {3, 3}};
-    std::vector<int> vector_container = {1, 2, 3};
- 
-    ClassWithSpecializedMethods::printContainer(map_container);
-    ClassWithSpecializedMethods::printContainer(vector_container);
+int main()
+{
+	std::cout << "is_pair:" << std::endl;
+	std::cout << "Map:    " << is_pair_v<std::iterator_traits<std::map<int, int>::iterator>::value_type> << std::endl;
+	std::cout << "Vector: " << is_pair_v<std::iterator_traits<std::vector<int>::iterator>::value_type> << std::endl;
+	std::cout << std::endl;
+	std::cout << "is_mapping:" << std::endl;
+	std::cout << "Map:    " << is_mapping_v<std::map<int, int>> << std::endl;
+	std::cout << "Vector: " << is_mapping_v<std::vector<int>> << std::endl;
+	std::cout << std::endl;
+
+	std::map<int, int> map_container = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
+	std::vector<int> vector_container = { 1, 2, 3 };
+
+	ClassWithSpecializedMethods::printContainer(map_container);
+	ClassWithSpecializedMethods::printContainer(vector_container);
 }
- 
+
+// g++   --std=c++17 -Wall -pedantic -pthread main.cpp && ./a.out
+
+```
+
+输出如下:
+
+```C++
+is_pair:
+Map:    1
+Vector: 0
+
+is_mapping:
+Map:    1
+Vector: 0
+
+Map:
+Key: 1 Value: 1
+Key: 2 Value: 2
+Key: 3 Value: 3
+
+Vector:
+Value: 1
+Value: 2
+Value: 3
 ```
 
 
+
+## TODO
 
 [Enable_if for template function specialization](https://stackoverflow.com/questions/48097889/enable-if-for-template-function-specialization)
 
