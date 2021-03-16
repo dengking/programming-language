@@ -2,4 +2,5 @@
 
 
 
-## bfilipek [Simplify code with 'if constexpr' in C++17](https://www.bfilipek.com/2018/03/ifconstexpr.html)
+参见 `Custom-static-polymorphism\C++17-Constexpr-if` 章节。
+
