@@ -6,6 +6,8 @@
 
 3、name lookup是由compiler在compile-time完成的，由于C++语言的复杂性，name lookup过程也是非常复杂的，它涉及到了非常多的内容，对C++ name lookup过程有所了解，能够帮助我们理解C++语言中的很多问题；
 
+4、C++是复杂的，这就导致我们很难准确地、完整地描述清楚它的name lookup过程，而是需要结合具体的例子来进行说明。
+
 ## Compile error
 
 很多compile error都可以追溯到name lookup，因此掌握name lookup是解决很多compile error的前提。
