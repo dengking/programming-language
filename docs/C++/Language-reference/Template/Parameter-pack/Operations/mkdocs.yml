@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
     - sizeof-parameter-pack: sizeof-parameter-pack
-    - Recursive-variadic-function: Recursive-variadic-function    
+    - Recursive-variadic-function-template: Recursive-variadic-function-template 
+    - Recursive-variadic-class-template: Recursive-variadic-class-template
     - C++17-Fold-expression: C++17-Fold-expression

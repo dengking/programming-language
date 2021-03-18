@@ -1,8 +1,8 @@
-# FP recursion
+# Recursive variadic function template
 
+## FP recursion
 
-
-## Recursion
+### Example
 
 ```C++
 #include <iostream>
@@ -35,3 +35,11 @@ int main()
 
 
 上述例子是: 递归关系 + 终止条件(base case)
+
+
+
+## TODO
+
+1、需要补充案例
+
+2、eli.thegreenplace [Variadic templates in C++](https://eli.thegreenplace.net/2014/variadic-templates-in-c/)
