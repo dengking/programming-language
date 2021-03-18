@@ -2,7 +2,7 @@ nav:
     - Introduction: index.md
     - Type-system: Type-system
     - Type-constructor: Type-constructor
-    - Type-safety: Type-safety.md
+    - Type-safety: Type-safety
     - Static-VS-dynamic-typing: Static-VS-dynamic-typing.md
     ########## class和type之间的关系是现代OOP的核心##########
     - OOP-and-type-system: OOP-and-type-system
