@@ -4,7 +4,9 @@
 
 1、constructor的调用次序: 沿着class hierarchy，自顶向下、自左至右进行初始化
 
-2、destructor的调用是和constructor的相反的，这样是为了保证stack ordering
+2、destructor的调用是和constructor的相反的
+
+这样是为了保证stack ordering。
 
 ## cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list) # [Initialization order](https://en.cppreference.com/w/cpp/language/constructor#Initialization_order)
 
