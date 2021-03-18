@@ -15,6 +15,8 @@ Prior to C++11, the only way to write functions that take an arbitrary number of
 > 1、interpretation model
 >
 > 2、static type VS dynamic type
+>
+> 3、type safety
 
 But what always bothered me most with this approach is leaving something that is clearly known at **compile-time**, to **run-time**. Yes, when we write a variadic function we don't know all the ways it's going to be used. But when the compiler puts the whole program together, *it does know*. It sees perfectly well all the invocations of the function throughout the program, and all the possible argument types it gets passed (types are, after all, resolved at compile-time in C++).
 
