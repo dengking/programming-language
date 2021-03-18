@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Lightweight-logger: Lightweight-logger
     - Spdlog: Spdlog
