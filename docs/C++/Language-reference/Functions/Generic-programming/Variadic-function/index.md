@@ -1,8 +1,16 @@
 # Variadic functions
 
+
+
 ## C++中实现variadic function的方式
 
+总的来说，有如下三种方式:
 
+1、[parameter pack](https://en.cppreference.com/w/cpp/language/parameter_pack)  C++11
+
+2、[std::initializer_list](https://en.cppreference.com/w/cpp/utility/initializer_list)  C++11
+
+3、C [Variadic arguments](https://en.cppreference.com/w/cpp/language/variadic_arguments)
 
 ### stackoverflow [Variable number of arguments in C++?](https://stackoverflow.com/questions/1657883/variable-number-of-arguments-in-c)
 
@@ -183,7 +191,13 @@ Using *variadic functions* also comes with restrictions in the arguments you can
 
 ## cppreference [Variadic arguments](https://en.cppreference.com/w/cpp/language/variadic_arguments)
 
+> NOTE: 
+>
+> 1、需要注意的是，variadic arguments 和 parameter pack是两个概念
 
+### Default conversions
+
+Because variadic parameters have the lowest rank for the purpose of [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), they are commonly used as the catch-all fallbacks in [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae).
 
 
 
