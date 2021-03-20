@@ -103,7 +103,8 @@ nav:
     - Type-constructor:
       - Introduction: Theory/Type-system/Type-constructor/index.md
       - Covariance-and-contravariance: Theory/Type-system/Type-constructor/Covariance-and-contravariance.md
-    - Type-safety: Theory/Type-system/Type-safety.md
+    - Type-safety:
+      - Introduction: Theory/Type-system/Type-safety/index.md
     - Static-VS-dynamic-typing: Theory/Type-system/Static-VS-dynamic-typing.md
     - OOP-and-type-system:
       - Introduction: Theory/Type-system/OOP-and-type-system/index.md
@@ -401,6 +402,8 @@ nav:
         - Introduction: C++/Language-reference/Basic-concept/Object/index.md
         - cppreference-object:
           - Introduction: C++/Language-reference/Basic-concept/Object/cppreference-object/index.md
+        - Object-type-value:
+          - Introduction: C++/Language-reference/Basic-concept/Object/Object-type-value/index.md
         - Lifetime-and-storage-duration:
           - Lifetime: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Lifetime.md
           - Storage-duration: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Storage-duration.md
@@ -444,16 +447,6 @@ nav:
           - Scope-resolution-operator: C++/Language-reference/Basic-concept/Organization/Scope/Scope-resolution-operator.md
         - Namespace:
           - Introduction: C++/Language-reference/Basic-concept/Organization/Namespace/index.md
-        - Name-lookup:
-          - Introduction: C++/Language-reference/Basic-concept/Organization/Name-lookup/index.md
-          - Name-lookup: C++/Language-reference/Basic-concept/Organization/Name-lookup/Name-lookup.md
-          - using-and-name-lookup: C++/Language-reference/Basic-concept/Organization/Name-lookup/using-and-name-lookup.md
-          - ADL:
-            - ADL: C++/Language-reference/Basic-concept/Organization/Name-lookup/ADL/index.md
-          - Dependent-name-lookup:
-            - Introduction: C++/Language-reference/Basic-concept/Organization/Name-lookup/Dependent-name-lookup/index.md
-            - thegreenplace-Dependent-name-lookup-for-C++templates:
-              - Introduction: C++/Language-reference/Basic-concept/Organization/Name-lookup/Dependent-name-lookup/thegreenplace-Dependent-name-lookup-for-C++templates/index.md
       - Type-system:
         - Introduction: C++/Language-reference/Basic-concept/Type-system/index.md
         - Type-system:
@@ -497,13 +490,12 @@ nav:
               - User-defined-conversion: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/User-defined-conversion/User-defined-conversion.md
             - Type-conversion-and-temporary:
               - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Type-conversion-and-temporary/index.md
-          - Reflection:
-            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Reflection/index.md
         - Type-inference:
           - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/index.md
           - decltype:
             - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/index.md
-            - Application: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/Application.md
+            - Application:
+              - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/Application/index.md
           - Template-argument-deduction:
             - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Template-argument-deduction/index.md
           - Return-type-deduction:
@@ -622,9 +614,11 @@ nav:
           - Introduction: C++/Language-reference/Functions/Function-overload/Overload-resolution/index.md
           - accu-Overload-Resolution: C++/Language-reference/Functions/Function-overload/Overload-resolution/accu-Overload-Resolution.md
           - Overload-resolution: C++/Language-reference/Functions/Function-overload/Overload-resolution/Overload-resolution.md
-          - Ambiguous-overload: C++/Language-reference/Functions/Function-overload/Overload-resolution/Ambiguous-overload.md
+          - Ambiguous-overload-compile-error: C++/Language-reference/Functions/Function-overload/Overload-resolution/Ambiguous-overload-compile-error.md
         - Overload-in-OOP:
           - Introduction: C++/Language-reference/Functions/Function-overload/Overload-in-OOP/index.md
+        - Overload-and-return-type:
+          - Introduction: C++/Language-reference/Functions/Function-overload/Overload-and-return-type/index.md
       - Lambda-expression:
         - Lambda-expressions: C++/Language-reference/Functions/Lambda-expression/index.md
       - First-class-function:
@@ -674,6 +668,8 @@ nav:
       - TODO-std-reference_wrapper:
         - Introduction: C++/Language-reference/Reference/TODO-std-reference_wrapper/index.md
       - std-move-and-std-forward: C++/Language-reference/Reference/std-move-and-std-forward.md
+      - Referenceable:
+        - Introduction: C++/Language-reference/Reference/Referenceable/index.md
     - Exception:
       - Introduction: C++/Language-reference/Exception/index.md
       - Exception-specification:
@@ -837,8 +833,8 @@ nav:
                 - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Derived-classes/Multiple-inheritance/isocpp-Inheritance-Multiple/index.md
               - Virtual-inheritance:
                 - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Derived-classes/Multiple-inheritance/Virtual-inheritance/index.md
-            - TODO-Super:
-              - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Derived-classes/TODO-Super/index.md
+            - Super:
+              - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Derived-classes/Super/index.md
           - Virtual-function:
             - Introduction: C++/Language-reference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/index.md
             - Override-specifier:
@@ -948,8 +944,10 @@ nav:
           - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/index.md
           - sizeof-parameter-pack:
             - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/sizeof-parameter-pack/index.md
-          - Recursive-variadic-function:
-            - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/Recursive-variadic-function/index.md
+          - Recursive-variadic-function-template:
+            - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/Recursive-variadic-function-template/index.md
+          - Recursive-variadic-class-template:
+            - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/Recursive-variadic-class-template/index.md
           - C++17-Fold-expression:
             - Introduction: C++/Language-reference/Template/Parameter-pack/Operations/C++17-Fold-expression/index.md
         - Variadic-template-VS-ellipsis:
@@ -958,12 +956,6 @@ nav:
         - Introduction: C++/Language-reference/Template/Compile-template/index.md
         - SFINAE:
           - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/index.md
-          - Class-template-SFINAE:
-            - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/Class-template-SFINAE/index.md
-          - Function-template-SFINAE:
-            - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/Function-template-SFINAE/index.md
-          - Expression-SFINAE:
-            - Introduction: C++/Language-reference/Template/Compile-template/SFINAE/Expression-SFINAE/index.md
         - Compile-error: C++/Language-reference/Template/Compile-template/Compile-error.md
       - Define-template-in-header-file:
         - Introduction: C++/Language-reference/Template/Define-template-in-header-file/index.md
@@ -1252,6 +1244,8 @@ nav:
                 - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/aherrmann-Unpacking-Tuples-in-C++14/index.md
               - murrayc-Modern-C++Variadic-template-parameters-and-tuples:
                 - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/murrayc-Modern-C++Variadic-template-parameters-and-tuples/index.md
+              - Tuple-to-string:
+                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/Tuple-to-string/index.md
             - optional:
               - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional/index.md
             - any:
@@ -1340,6 +1334,8 @@ nav:
       - Abseil: C++/Library/Abseil/index.md
     - Log:
       - Introduction: C++/Library/Log/index.md
+      - Lightweight-logger:
+        - Introduction: C++/Library/Log/Lightweight-logger/index.md
       - Spdlog:
         - Introduction: C++/Library/Log/Spdlog/index.md
         - Asynchronous-logging:
@@ -1455,6 +1451,38 @@ nav:
         - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/index.md
         - Custom-static-polymorphism:
           - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/index.md
+          - SFINAE-based:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/index.md
+            - SFINAE-based-custom-polymorphism-precondition:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/SFINAE-based-custom-polymorphism-precondition/index.md
+            - Trait:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/index.md
+              - Example: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Example.md
+              - Type-Trait:
+                - Type-Traits: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Type-Trait/Type-Traits.md
+                - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Type-Trait/Type-traits-vs-concepts.md
+              - Function-trait:
+                - Function_trait: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Function-trait/Function_trait.md
+            - enable-if:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/enable-if/index.md
+              - boost-enable_if:
+                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/enable-if/boost-enable_if/index.md
+              - thegreenplace-SFINAE-and-enable_if:
+                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/enable-if/thegreenplace-SFINAE-and-enable_if/index.md
+            - Class-template-SFINAE:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Class-template-SFINAE/index.md
+            - Function-template-SFINAE:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Function-template-SFINAE/index.md
+            - Expression-SFINAE:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Expression-SFINAE/index.md
+          - Tag-Dispatching:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Tag-Dispatching/index.md
+          - C++17-Constexpr-if:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/C++17-Constexpr-if/index.md
+            - TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/C++17-Constexpr-if/TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17/index.md
+          - Dispatch-based-on-constant:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Dispatch-based-on-constant/index.md
     - TMP:
       - Introduction: C++/Programming-paradigm/TMP/index.md
       - TMP-and-FP:
@@ -1579,27 +1607,13 @@ nav:
           - Introduction: C++/Idiom/Generic-programming/CRTP/thegreenplace-CRTP-in-C++/index.md
         - Variadic-CRTP:
           - Introduction: C++/Idiom/Generic-programming/CRTP/Variadic-CRTP/index.md
+        - Derived-class-template-CRTP:
+          - Introduction: C++/Idiom/Generic-programming/CRTP/Derived-class-template-CRTP/index.md
       - Expression-Template:
         - Introduction: C++/Idiom/Generic-programming/Expression-Template/index.md
         - Smart-expression-template: C++/Idiom/Generic-programming/Expression-Template/Smart-expression-template.md
       - Recursive-Type-Composition:
-        - Recursive-Type-Composition: C++/Idiom/Generic-programming/Recursive-Type-Composition/Recursive-Type-Composition.md
-      - SFINAE-trait-enable-if:
-        - Introduction: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/index.md
-        - Trait:
-          - Introduction: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/index.md
-          - Example: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Example.md
-          - Type-Trait:
-            - Type-Traits: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Type-Trait/Type-Traits.md
-            - Type-traits-vs-concepts: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Type-Trait/Type-traits-vs-concepts.md
-          - Function-trait:
-            - Function_trait: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Trait/Function-trait/Function_trait.md
-        - enable-if:
-          - enable_if: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/enable-if/enable_if.md
-          - Analysis-of-enable_if: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/enable-if/Analysis-of-enable_if.md
-          - enable_if-enum: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/enable-if/enable_if-enum.md
-        - Tag-Dispatching:
-          - Introduction: C++/Idiom/Generic-programming/SFINAE-trait-enable-if/Tag-Dispatching/index.md
+        - Introduction: C++/Idiom/Generic-programming/Recursive-Type-Composition/index.md
       - Metafunction:
         - Metafunction: C++/Idiom/Generic-programming/Metafunction/Metafunction.md
       - "Barton\u2013Nackman-trick":
@@ -1644,6 +1658,7 @@ nav:
       - Global-VS-singleton:
         - Introduction: C++/Pattern/Singleton/Global-VS-singleton/index.md
     - Factory:
+      - Introduction: C++/Pattern/Factory/index.md
       - Factory-mixin: C++/Pattern/Factory/Factory-mixin.md
     - Visitor-pattern:
       - Introduction: C++/Pattern/Visitor-pattern/index.md
@@ -2091,6 +2106,8 @@ nav:
           - Introduction: C++/Expert/Anthony-Williams-Justsoftwaresolutions/Multithreading-in-C++0x/Part-6-Lazy-initialization-and-double-checked-locking-with-atomics/index.md
     - Sean-Parent:
       - Introduction: C++/Expert/Sean-Parent/index.md
+      - TODO-Inheritance-is-the-base-class-of-evil:
+        - Introduction: C++/Expert/Sean-Parent/TODO-Inheritance-is-the-base-class-of-evil/index.md
       - Value-Semantics-and-Concept-based-Polymorphism:
         - Introduction: C++/Expert/Sean-Parent/Value-Semantics-and-Concept-based-Polymorphism/index.md
         - Paper:

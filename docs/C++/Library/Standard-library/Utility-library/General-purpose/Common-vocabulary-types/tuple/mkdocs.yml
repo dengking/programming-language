@@ -3,4 +3,4 @@ nav:
     - aherrmann-Unpacking-Tuples-in-C++14: aherrmann-Unpacking-Tuples-in-C++14
     - murrayc-Modern-C++Variadic-template-parameters-and-tuples: murrayc-Modern-C++Variadic-template-parameters-and-tuples
     - Tuple-to-string: Tuple-to-string
-    - Apply-to-tuple: Apply-to-tuple
+    # - Apply-to-tuple: Apply-to-tuple
