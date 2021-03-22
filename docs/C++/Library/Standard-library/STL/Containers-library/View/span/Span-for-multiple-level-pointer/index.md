@@ -204,7 +204,7 @@ public:
 
 	/// Returns a pointer to the beginning of the span
 	T**
-	data() const
+	data() 
 	{
 		return data_.data();
 	}
@@ -244,5 +244,29 @@ public:
 		data_.push_back(p);
 	}
 };
+
+template<class T>
+auto begin(const multi_span<T> &s) -> typename multi_span<T>::const_iterator
+{
+	return s.begin();
+}
+
+template<class T>
+auto begin(const multi_span<T> *s) -> typename multi_span<T>::const_iterator
+{
+	return s->begin();
+}
+
+template<class T>
+auto end(const multi_span<T> &s) -> typename multi_span<T>::const_iterator
+{
+	return s.end();
+}
+
+template<class T>
+auto end(const multi_span<T> *s) -> typename multi_span<T>::const_iterator
+{
+	return s->end();
+}
 ```
 
