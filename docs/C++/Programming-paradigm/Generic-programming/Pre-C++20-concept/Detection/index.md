@@ -6,6 +6,24 @@
 
 2、`SFINAE\Expression-SFINAE`
 
+
+
+## Detection idiom的本质
+
+1、detection 一般以 trait（metafunction）的方式呈现，但是，我们应该从concept的角度来理解、运用它。在使用的使用，一般是使用SFINAE-based custom static polymorphism
+
+## Implementation总结
+
+1、detection idiom的实现是基于SFINAE-based custom static polymorphism，因此，而SFINAE-based custom static polymorphism的实现technique是不断在演进的，因此可以看到，实现detection idiom的方式是非常多、非常灵活的。
+
+> NOTE: 
+>
+> 1、上述内容是我在阅读 `void_t`章节、tartanllama [Detection Idiom - A Stopgap for Concepts](https://blog.tartanllama.xyz/detection-idiom/) 时，联想到的。
+
+2、STL的支持: [`std::experimental::is_detected, std::experimental::detected_t, std::experimental::detected_or`](https://en.cppreference.com/w/cpp/experimental/is_detected)，参见 `Standard-library\Extensions\Version-2\Detection-idiom` 章节。
+
+3、看了诸多实现，我觉得`std::is_detected`是最最像C++ concept的，关于此，参见 `Standard-library\Extensions\Version-2\Detection-idiom` 章节。
+
 ## Example
 
 ### wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error)
@@ -76,14 +94,6 @@ int main()
 // g++ --std=c++11 test.cpp
 
 ```
-
-
-
-
-
-### `std::experimental::is_detected`
-
-参见 `C++\Library\Standard-library\Extensions\Version-2\The-C++detection-idiom` 章节。
 
 
 

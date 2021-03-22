@@ -1,0 +1,127 @@
+# Detecting in c++ whether a type is defined
+
+## stackoverflow [Check if type is defined](https://stackoverflow.com/questions/39816779/check-if-type-is-defined)
+
+Consider this example:
+
+```cpp
+#include <iostream>
+#include <type_traits>
+
+template <class, class = void>
+struct is_defined : std::false_type
+{ };
+
+template <class T>
+struct is_defined<T,
+    std::enable_if_t<std::is_object<T>::value &&
+                    !std::is_pointer<T>::value
+        >
+    > : std::true_type
+{
+private:
+    static const T test; //try to create incomplete type member
+};
+
+struct defined { };
+
+struct forward_declared;
+
+int main()
+{
+    std::cout << std::boolalpha
+              << is_defined<defined>::value << std::endl
+              << is_defined<forward_declared>::value << std::endl;
+}
+// g++ --std=C++14 test.cpp
+```
+
+
+
+> NOTE: 
+>
+> 1、下面是C++11版本
+>
+> ```c++
+> #include <iostream>
+> #include <type_traits>
+> 
+> template<class, class = void>
+> struct is_defined: std::false_type
+> {
+> };
+> 
+> template<class T>
+> struct is_defined<T, typename std::enable_if<std::is_object<T>::value && !std::is_pointer<T>::value>::type> : std::true_type
+> {
+> private:
+> 	static const T test; //try to create incomplete type member
+> };
+> 
+> struct defined
+> {
+> };
+> 
+> struct forward_declared;
+> 
+> int main()
+> {
+> 	std::cout << std::boolalpha << is_defined<defined>::value << std::endl << is_defined<forward_declared>::value << std::endl;
+> }
+> // g++ --std=c++11 test.cpp
+> ```
+>
+> 
+>
+> 
+
+Output is `true` for both. I thought if I try to make `struct` member of incomplete type, then this template specialization would be discarded from overload set. But it isn't. Removal of `static const` causes incomplete-type compile-time error. What is wrong with this approach, and if it's possible, how could this be implemented?
+
+### [A](https://stackoverflow.com/a/39816909)
+
+```C++
+struct is_defined<T,
+    std::enable_if_t<std::is_object<T>::value &&
+                    !std::is_pointer<T>::value &&
+                    (sizeof(T) > 0)
+        >
+    > : std::true_type
+{
+};
+```
+
+
+
+### [A](https://stackoverflow.com/a/39818497)
+
+In general, in this case you can use for your sfinae expression some of those operators that don't accept incomplete types.
+As an example you can use `typeid`:
+
+```cpp
+#include <iostream>
+#include <type_traits>
+#include <utility>
+
+template<typename T, typename = void>
+constexpr bool is_defined = false;
+
+template<typename T>
+constexpr bool is_defined<T, decltype(typeid(T), void())> = true;
+
+struct defined
+{
+};
+struct forward_declared;
+
+int main()
+{
+	std::cout << std::boolalpha << is_defined<defined> << std::endl << is_defined<forward_declared> << std::endl;
+}
+// g++ --std=c++14 test.cpp
+```
+
+> NOTE: 
+>
+> 1、上述使用了C++14 template variable 特性
+
+As mentioned by others, another *valid* operator is `sizeof`.
