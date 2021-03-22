@@ -15,7 +15,7 @@ nav:
     - Philosophy: Philosophy
 
     # C++的命名规范
-    - C++-name-conversion: C++-name-conversion.md
+    - C++-name-convention: C++-name-convention
     
     # 总结c++支持的programming paradigm、idiom、pattern
     - Programming-paradigm: Programming-paradigm

@@ -46,3 +46,22 @@ It seems `_type` is more common in template meta-programming (for template class
 [A](https://stackoverflow.com/a/26400652):
 
 there are a few such names (also pointed out in a comment by @jrok): `common_type`, `underlying_type`, `is_literal_type`, `true_type`, `false_type`. In the first three, `_type` is not really a suffix, it's an actual part of the name (e.g. a *metafunction* to give the common *type* or the underlying *type*). With `true_type` and `false_type`, it is indeed a suffix (since `true` and `false` are reserved words). I would say it's a *type* which represents a true/false value in the type-based metaprogramming sense.
+
+
+
+## `_t` and `_v` suffix in trait
+
+在 "tartanllama [Detection Idiom - A Stopgap for Concepts](https://blog.tartanllama.xyz/detection-idiom/) # Metaprogramming demystified # Type traits and `_v` and `_t` suffixes" 段中，对此有着非常好的总结。
+
+### tartanllama [Detection Idiom - A Stopgap for Concepts](https://blog.tartanllama.xyz/detection-idiom/) # Metaprogramming demystified # Type traits and `_v` and `_t` suffixes
+
+A type trait is some template which can be used to get information about characteristics of a type. For example, you can find out if some type is an arithmetic type using `std::is_arithmetic`:
+
+```c++
+template <class T>
+void foo(T t) {
+     static_assert(std::is_arithmetic<T>::value, "Argument must be of an arithmetic type");
+}
+```
+
+Type traits either “return” types with a `::type` member alias, or values with a `::value` alias. `_t` and `_v` suffixes are shorthand for these respectively. So `std::is_arithmetic_v<T>` is the same as `std::is_arithmetic<T>::value`, `std::add_pointer_t<T>` is the same as `typename std::add_pointer<T>::type`[1](https://blog.tartanllama.xyz/detection-idiom/#fn:1).
