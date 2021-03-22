@@ -39,7 +39,8 @@ protected:
 	template<typename ServiceTrait>
 	struct CServiceMultiSpanRsp: CUstApi<UstTag, SpiType>::template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>, ServiceTrait>
 	{
-		friend typename CUstApi<UstTag, SpiType>:: template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>, ServiceTrait>;
+		using Base = typename CUstApi<UstTag, SpiType>:: template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>, ServiceTrait>;
+		friend Base;
 	protected:
 		int CallBack()
 		{
