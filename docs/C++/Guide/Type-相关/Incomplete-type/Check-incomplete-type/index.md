@@ -1,8 +1,8 @@
 # Check incomplete type
 
-由于delete incomplete type是undefined的behavior，因此我们需要考虑如何判断是否是incomplete type。
+1、由于delete incomplete type是undefined的behavior，因此我们需要考虑如何判断是否是incomplete type。
 
-
+2、与本节内容相关的是`Detect-whether-a-type-is-defined`章节
 
 ## stackoverflow [Delete objects of incomplete type](https://stackoverflow.com/questions/4325154/delete-objects-of-incomplete-type) # [A](https://stackoverflow.com/a/4325900)
 
