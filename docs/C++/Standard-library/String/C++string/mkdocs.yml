@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - basic_string: basic_string
-    - char_traits: char_traits
+
     - basic_string_view: basic_string_view
     - Implementation: Implementation
