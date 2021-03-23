@@ -2,7 +2,7 @@
 
 
 
-## 维基百科[Run-time type information#typeid](https://en.wikipedia.org/wiki/Run-time_type_information#typeid)
+## wikipedia [Run-time type information#typeid](https://en.wikipedia.org/wiki/Run-time_type_information#typeid)
 
 
 
