@@ -5,4 +5,5 @@ nav:
     - Custom-polymorphism: Custom-polymorphism
     # 下面对一些topic进行讨论
     - Specialization-and-overload: Specialization-and-overload
+    - Specialization-and-subclass-inheritance: Specialization-and-subclass-inheritance
     - Polymorphic-object-container: Polymorphic-object-container
