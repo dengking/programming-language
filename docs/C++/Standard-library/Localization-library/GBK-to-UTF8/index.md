@@ -241,6 +241,10 @@ windows下：
 
 
 
+### github [conversion_gbk_utf8](https://github.com/qq1134993111/conversion_gbk_utf8)
+
+
+
 ## 使用boost locale
 
 ### stackoverflow [How to convert the word '' from utf-8 to gbk](https://stackoverflow.com/questions/43871458/how-to-convert-the-word-from-utf-8-to-gbk)
@@ -304,4 +308,20 @@ int main() {
 
 1、需要考虑cross plateform
 
-### [c中实现utf8和gbk的互转](https://www.iteye.com/blog/jimmee-2174693)
+### 素材
+
+1、iteye [c中实现utf8和gbk的互转](https://www.iteye.com/blog/jimmee-2174693)
+
+2、csdn [C++实现utf8和gbk编码字符串互相转换](https://blog.csdn.net/u012234115/article/details/83186386)
+
+> NOTE: 参见 `C++实现utf8和gbk编码字符串互相转换` 章节
+
+3、zhidao [用C/C++写一个字符串GBK转UTF-8编码的函数，并写main函数测试(在线等)](https://zhidao.baidu.com/question/103273521.html)
+
+4、csdn [linux下c++编程 转码 GBKTOUTF8问题](https://bbs.csdn.net/topics/320083099)
+
+
+
+## TODO
+
+microsoft [[C++]Unicode Encoding Conversions with STL Strings and Win32 APIs](https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/c-unicode-encoding-conversions-with-stl-strings-and-win32-apis)
