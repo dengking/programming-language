@@ -34,41 +34,92 @@
 
 
 ```C++
-#include <type_traits>
+#include <experimental/type_traits>
+#include <cstddef>
+#include <utility>
 
-namespace detail
+template<class T>
+using copy_assign_t = decltype(std::declval<T&>() = std::declval<const T&>());
+
+struct Meow
 {
-template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
-struct detector
+};
+struct Purr
 {
-	using value_t = std::false_type;
-	using type = Default;
+	void operator=(const Purr&) = delete;
 };
 
-template<class Default, template<class ...> class Op, class... Args>
-struct detector<Default, std::void_t<Op<Args...>>, Op, Args...>
+static_assert(std::experimental::is_detected<copy_assign_t, Meow>::value,
+				"Meow should be copy assignable!");
+static_assert(!std::experimental::is_detected_v<copy_assign_t, Purr>,
+				"Purr should not be copy assignable!");
+static_assert(std::experimental::is_detected_exact_v<Meow&, copy_assign_t, Meow>,
+				"Copy assignment of Meow should return Meow&!");
+
+template<class T>
+using diff_t = typename T::difference_type;
+
+template<class Ptr>
+using difference_type = std::experimental::detected_or_t<std::ptrdiff_t, diff_t, Ptr>;
+
+struct Woof
 {
-	using value_t = std::true_type;
-	using type = Op<Args...>;
+	using difference_type = int;
+};
+struct Bark
+{
 };
 
+static_assert(std::is_same<difference_type<Woof>, int>::value,
+				"Woof's difference_type should be int!");
+static_assert(std::is_same<difference_type<Bark>, std::ptrdiff_t>::value,
+				"Bark's difference_type should be ptrdiff_t!");
+
+int main()
+{
 }
- // namespace detail
-
-template<template<class ...> class Op, class... Args>
-using is_detected = typename detail::detector<nonesuch, void, Op, Args...>::value_t;
-
-template<template<class ...> class Op, class... Args>
-using detected_t = typename detail::detector<nonesuch, void, Op, Args...>::type;
-
-template<class Default, template<class ...> class Op, class... Args>
-using detected_or = detail::detector<Default, void, Op, Args...>;
 
 ```
 
 > NOTE: 
 >
 > 1、上述code中，没有给出`nonesuch`的定义，在  riptutorial [C++ is_detected](https://riptutorial.com/cplusplus/example/18585/is-detected) 中，给出了完整的定义
+
+### Example
+
+```C++
+#include <experimental/type_traits>
+#include <cstddef>
+ 
+template<class T>
+using copy_assign_t = decltype(std::declval<T&>() = std::declval<const T&>());
+ 
+struct Meow { };
+struct Purr { void operator=(const Purr&) = delete; };
+ 
+static_assert(std::experimental::is_detected<copy_assign_t, Meow>::value,
+              "Meow should be copy assignable!");
+static_assert(!std::experimental::is_detected_v<copy_assign_t, Purr>,
+              "Purr should not be copy assignable!");
+static_assert(std::experimental::is_detected_exact_v<Meow&, copy_assign_t, Meow>,
+              "Copy assignment of Meow should return Meow&!");
+ 
+template<class T>
+using diff_t = typename T::difference_type;
+ 
+template <class Ptr>
+using difference_type = std::experimental::detected_or_t<std::ptrdiff_t, diff_t, Ptr>;
+ 
+struct Woof { using difference_type = int; };
+struct Bark {};
+ 
+static_assert(std::is_same<difference_type<Woof>, int>::value,
+              "Woof's difference_type should be int!");
+static_assert(std::is_same<difference_type<Bark>, std::ptrdiff_t>::value,
+              "Bark's difference_type should be ptrdiff_t!");
+ 
+int main() {}
+```
 
 ## 实现分析
 
