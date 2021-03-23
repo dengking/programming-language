@@ -733,6 +733,8 @@ nav:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/index.md
             - Virtual-clone:
               - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/Virtual-clone/index.md
+              - More-C++Idioms-Virtual-Constructor:
+                - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/Virtual-clone/More-C++Idioms-Virtual-Constructor/index.md
           - Non-copyable:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Copy/Non-copyable/index.md
         - Move:
@@ -915,7 +917,6 @@ nav:
       - Template-specialization:
         - Introduction: C++/Language-reference/Template/Template-specialization/index.md
         - Specialization-of-template-in-different-namespace: C++/Language-reference/Template/Template-specialization/Specialization-of-template-in-different-namespace.md
-        - Specialization-VS-subclass: C++/Language-reference/Template/Template-specialization/Specialization-VS-subclass.md
       - Class-template:
         - Class-template: C++/Language-reference/Template/Class-template/index.md
         - Member-templates: C++/Language-reference/Template/Class-template/Member-templates.md
@@ -1011,272 +1012,278 @@ nav:
       - Introduction: C++/What-is-new-in-C++/C++20/index.md
       - span:
         - Introduction: C++/What-is-new-in-C++/C++20/span/index.md
-  - Library:
-    - Standard-library:
-      - Introduction: C++/Library/Standard-library/index.md
-      - STL:
-        - Introduction: C++/Library/Standard-library/STL/index.md
-        - Containers-library:
-          - Introduction: C++/Library/Standard-library/STL/Containers-library/index.md
-          - Common-issue:
-            - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/index.md
-            - Memory-management:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Memory-management/index.md
-            - Iterator-invalidation:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Iterator-invalidation/index.md
-              - Iterator-invalidation-rules:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Iterator-invalidation/Iterator-invalidation-rules/index.md
-            - Thread-safety:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Thread-safety/index.md
-            - Member-function-table:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Member-function-table/index.md
-            - Emplace:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Emplace/index.md
-              - Custom-emplace:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Emplace/Custom-emplace/index.md
-            - Generic-container-printer:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Generic-container-printer/index.md
-            - Concept:
-              - contiguous_container-concept:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Common-issue/Concept/contiguous_container-concept/index.md
-          - Sequence-container:
-            - Introduction: C++/Library/Standard-library/STL/Containers-library/Sequence-container/index.md
-            - Vector:
-              - std-vector-bool:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool/index.md
-                - TODO-gotw-When-Is-a-Container-Not-a-Container:
-                  - Introduction: C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool/TODO-gotw-When-Is-a-Container-Not-a-Container/index.md
-              - Resize-and-reserve:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Sequence-container/Vector/Resize-and-reserve/index.md
-            - List:
-              - Operation: C++/Library/Standard-library/STL/Containers-library/Sequence-container/List/Operation.md
-          - Associative-container:
-            - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/index.md
-            - Map:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/index.md
-              - Custom-type-as-key:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Custom-type-as-key/index.md
-                - C-str-as-key: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Custom-type-as-key/C-str-as-key.md
-                - Enum-as-key: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Custom-type-as-key/Enum-as-key.md
-              - Operations:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/index.md
-                - std-for_each-map: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/std-for_each-map.md
-                - TODO-Emplace:
-                  - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/TODO-Emplace/index.md
-                - Values-like-python-dict:
-                  - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Values-like-python-dict/index.md
-                - TODO-Erase_if:
-                  - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/TODO-Erase_if/index.md
-                - Iteration:
-                  - Introduction: C++/Library/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Iteration/index.md
-          - Container-adaptors:
-            - Introduction: C++/Library/Standard-library/STL/Containers-library/Container-adaptors/index.md
-            - priority_queue:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/Container-adaptors/priority_queue/index.md
-          - View:
-            - Introduction: C++/Library/Standard-library/STL/Containers-library/View/index.md
-            - span:
-              - Introduction: C++/Library/Standard-library/STL/Containers-library/View/span/index.md
-              - Span-for-multiple-level-pointer:
-                - Introduction: C++/Library/Standard-library/STL/Containers-library/View/span/Span-for-multiple-level-pointer/index.md
-        - Iterator-library:
-          - Introduction: C++/Library/Standard-library/STL/Iterator-library/index.md
-          - Primer:
-            - Introduction: C++/Library/Standard-library/STL/Iterator-library/Primer/index.md
-          - Iterator-adaptors:
-            - Introduction: C++/Library/Standard-library/STL/Iterator-library/Iterator-adaptors/index.md
-            - insert_iterator: C++/Library/Standard-library/STL/Iterator-library/Iterator-adaptors/insert_iterator.md
-            - front_insert_iterator: C++/Library/Standard-library/STL/Iterator-library/Iterator-adaptors/front_insert_iterator.md
-            - back_insert_iterator: C++/Library/Standard-library/STL/Iterator-library/Iterator-adaptors/back_insert_iterator.md
-          - Stream-iterators:
-            - Introduction: C++/Library/Standard-library/STL/Iterator-library/Stream-iterators/index.md
-          - Operations:
-            - Introduction: C++/Library/Standard-library/STL/Iterator-library/Operations/index.md
-            - Iterator-to-pointer:
-              - Introduction: C++/Library/Standard-library/STL/Iterator-library/Operations/Iterator-to-pointer/index.md
-          - const_iterator:
-            - Introduction: C++/Library/Standard-library/STL/Iterator-library/const_iterator/index.md
-          - Custom-iterator:
-            - Introduction: C++/Library/Standard-library/STL/Iterator-library/Custom-iterator/index.md
-        - Algorithm:
-          - Introduction: C++/Library/Standard-library/STL/Algorithm/index.md
-          - std-copy:
-            - std-copy: C++/Library/Standard-library/STL/Algorithm/std-copy/std-copy.md
-          - std-transform:
-            - Introduction: C++/Library/Standard-library/STL/Algorithm/std-transform/index.md
-        - Ranges-library-C++20:
-          - Introduction: C++/Library/Standard-library/STL/Ranges-library-C++20/index.md
-          - Primer:
-            - Introduction: C++/Library/Standard-library/STL/Ranges-library-C++20/Primer/index.md
-        - Idiom:
-          - Introduction: C++/Library/Standard-library/STL/Idiom/index.md
-          - Guidelines:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/Guidelines/index.md
-            - drdobbs-STL-Algorithms-Hand-Written-Loops:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Guidelines/drdobbs-STL-Algorithms-Hand-Written-Loops/index.md
-            - arne-mertz-algorithms-and-the-KISS-principle:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Guidelines/arne-mertz-algorithms-and-the-KISS-principle/index.md
-          - Iteration:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/Iteration/index.md
-            - Zip:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Iteration/Zip/index.md
-            - library-CPPItertools:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Iteration/library-CPPItertools/index.md
-            - std-for_each:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Iteration/std-for_each/index.md
-          - Clear-and-minimize:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/Clear-and-minimize/index.md
-            - Shrink-to-fit: C++/Library/Standard-library/STL/Idiom/Clear-and-minimize/Shrink-to-fit.md
-          - Erase_if:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/Erase_if/index.md
-            - Erase-remove:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Erase_if/Erase-remove/index.md
-            - TODO-Erase-while-iterating:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/Erase_if/TODO-Erase-while-iterating/index.md
-          - Range-access:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/Range-access/index.md
-          - Copy-a-range-of-elements:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/Copy-a-range-of-elements/index.md
-          - TODO-Filter-and-mapper:
-            - Introduction: C++/Library/Standard-library/STL/Idiom/TODO-Filter-and-mapper/index.md
-            - TODO-Custom-filter-iterator: C++/Library/Standard-library/STL/Idiom/TODO-Filter-and-mapper/TODO-Custom-filter-iterator.md
-            - bastian.rieck-Implementing-filter-and-map:
-              - Introduction: C++/Library/Standard-library/STL/Idiom/TODO-Filter-and-mapper/bastian.rieck-Implementing-filter-and-map/index.md
-      - String:
-        - Introduction: C++/Library/Standard-library/String/index.md
-        - C-string:
-          - Introduction: C++/Library/Standard-library/String/C-string/index.md
-          - Memory-manipulation: C++/Library/Standard-library/String/C-string/Memory-manipulation.md
-        - C++string:
-          - Introduction: C++/Library/Standard-library/String/C++string/index.md
-          - basic_string:
-            - basic_string: C++/Library/Standard-library/String/C++string/basic_string/basic_string.md
+  - Standard-library:
+    - Introduction: C++/Standard-library/index.md
+    - STL:
+      - Introduction: C++/Standard-library/STL/index.md
+      - Containers-library:
+        - Introduction: C++/Standard-library/STL/Containers-library/index.md
+        - Common-issue:
+          - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/index.md
+          - Memory-management:
+            - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Memory-management/index.md
+          - Iterator-invalidation:
+            - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Iterator-invalidation/index.md
+            - Iterator-invalidation-rules:
+              - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Iterator-invalidation/Iterator-invalidation-rules/index.md
+          - Thread-safety:
+            - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Thread-safety/index.md
+          - Member-function-table:
+            - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Member-function-table/index.md
+          - Emplace:
+            - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Emplace/index.md
+            - Custom-emplace:
+              - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Emplace/Custom-emplace/index.md
+          - Generic-container-printer:
+            - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Generic-container-printer/index.md
+          - Concept:
+            - contiguous_container-concept:
+              - Introduction: C++/Standard-library/STL/Containers-library/Common-issue/Concept/contiguous_container-concept/index.md
+        - Sequence-container:
+          - Introduction: C++/Standard-library/STL/Containers-library/Sequence-container/index.md
+          - Vector:
+            - std-vector-bool:
+              - Introduction: C++/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool/index.md
+              - TODO-gotw-When-Is-a-Container-Not-a-Container:
+                - Introduction: C++/Standard-library/STL/Containers-library/Sequence-container/Vector/std-vector-bool/TODO-gotw-When-Is-a-Container-Not-a-Container/index.md
+            - Resize-and-reserve:
+              - Introduction: C++/Standard-library/STL/Containers-library/Sequence-container/Vector/Resize-and-reserve/index.md
+          - List:
+            - Operation: C++/Standard-library/STL/Containers-library/Sequence-container/List/Operation.md
+        - Associative-container:
+          - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/index.md
+          - Map:
+            - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/index.md
+            - Custom-type-as-key:
+              - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Custom-type-as-key/index.md
+              - C-str-as-key: C++/Standard-library/STL/Containers-library/Associative-container/Map/Custom-type-as-key/C-str-as-key.md
+              - Enum-as-key: C++/Standard-library/STL/Containers-library/Associative-container/Map/Custom-type-as-key/Enum-as-key.md
+            - Operations:
+              - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/index.md
+              - std-for_each-map: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/std-for_each-map.md
+              - TODO-Emplace:
+                - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/TODO-Emplace/index.md
+              - Values-like-python-dict:
+                - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Values-like-python-dict/index.md
+              - TODO-Erase_if:
+                - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/TODO-Erase_if/index.md
+              - Iteration:
+                - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Iteration/index.md
+        - Container-adaptors:
+          - Introduction: C++/Standard-library/STL/Containers-library/Container-adaptors/index.md
+          - priority_queue:
+            - Introduction: C++/Standard-library/STL/Containers-library/Container-adaptors/priority_queue/index.md
+        - View:
+          - Introduction: C++/Standard-library/STL/Containers-library/View/index.md
+          - span:
+            - Introduction: C++/Standard-library/STL/Containers-library/View/span/index.md
+            - Span-for-multiple-level-pointer:
+              - Introduction: C++/Standard-library/STL/Containers-library/View/span/Span-for-multiple-level-pointer/index.md
+      - Iterator-library:
+        - Introduction: C++/Standard-library/STL/Iterator-library/index.md
+        - Primer:
+          - Introduction: C++/Standard-library/STL/Iterator-library/Primer/index.md
+        - Iterator-adaptors:
+          - Introduction: C++/Standard-library/STL/Iterator-library/Iterator-adaptors/index.md
+          - insert_iterator: C++/Standard-library/STL/Iterator-library/Iterator-adaptors/insert_iterator.md
+          - front_insert_iterator: C++/Standard-library/STL/Iterator-library/Iterator-adaptors/front_insert_iterator.md
+          - back_insert_iterator: C++/Standard-library/STL/Iterator-library/Iterator-adaptors/back_insert_iterator.md
+        - Stream-iterators:
+          - Introduction: C++/Standard-library/STL/Iterator-library/Stream-iterators/index.md
+        - Operations:
+          - Introduction: C++/Standard-library/STL/Iterator-library/Operations/index.md
+          - Iterator-to-pointer:
+            - Introduction: C++/Standard-library/STL/Iterator-library/Operations/Iterator-to-pointer/index.md
+        - const_iterator:
+          - Introduction: C++/Standard-library/STL/Iterator-library/const_iterator/index.md
+        - Custom-iterator:
+          - Introduction: C++/Standard-library/STL/Iterator-library/Custom-iterator/index.md
+      - Algorithm:
+        - Introduction: C++/Standard-library/STL/Algorithm/index.md
+        - std-copy:
+          - std-copy: C++/Standard-library/STL/Algorithm/std-copy/std-copy.md
+        - std-transform:
+          - Introduction: C++/Standard-library/STL/Algorithm/std-transform/index.md
+      - Ranges-library-C++20:
+        - Introduction: C++/Standard-library/STL/Ranges-library-C++20/index.md
+        - Primer:
+          - Introduction: C++/Standard-library/STL/Ranges-library-C++20/Primer/index.md
+      - Idiom:
+        - Introduction: C++/Standard-library/STL/Idiom/index.md
+        - Guidelines:
+          - Introduction: C++/Standard-library/STL/Idiom/Guidelines/index.md
+          - drdobbs-STL-Algorithms-Hand-Written-Loops:
+            - Introduction: C++/Standard-library/STL/Idiom/Guidelines/drdobbs-STL-Algorithms-Hand-Written-Loops/index.md
+          - arne-mertz-algorithms-and-the-KISS-principle:
+            - Introduction: C++/Standard-library/STL/Idiom/Guidelines/arne-mertz-algorithms-and-the-KISS-principle/index.md
+        - Iteration:
+          - Introduction: C++/Standard-library/STL/Idiom/Iteration/index.md
+          - Zip:
+            - Introduction: C++/Standard-library/STL/Idiom/Iteration/Zip/index.md
+          - library-CPPItertools:
+            - Introduction: C++/Standard-library/STL/Idiom/Iteration/library-CPPItertools/index.md
+          - std-for_each:
+            - Introduction: C++/Standard-library/STL/Idiom/Iteration/std-for_each/index.md
+        - Clear-and-minimize:
+          - Introduction: C++/Standard-library/STL/Idiom/Clear-and-minimize/index.md
+          - Shrink-to-fit: C++/Standard-library/STL/Idiom/Clear-and-minimize/Shrink-to-fit.md
+        - Erase_if:
+          - Introduction: C++/Standard-library/STL/Idiom/Erase_if/index.md
+          - Erase-remove:
+            - Introduction: C++/Standard-library/STL/Idiom/Erase_if/Erase-remove/index.md
+          - TODO-Erase-while-iterating:
+            - Introduction: C++/Standard-library/STL/Idiom/Erase_if/TODO-Erase-while-iterating/index.md
+        - Range-access:
+          - Introduction: C++/Standard-library/STL/Idiom/Range-access/index.md
+        - Copy-a-range-of-elements:
+          - Introduction: C++/Standard-library/STL/Idiom/Copy-a-range-of-elements/index.md
+        - TODO-Filter-and-mapper:
+          - Introduction: C++/Standard-library/STL/Idiom/TODO-Filter-and-mapper/index.md
+          - TODO-Custom-filter-iterator: C++/Standard-library/STL/Idiom/TODO-Filter-and-mapper/TODO-Custom-filter-iterator.md
+          - bastian.rieck-Implementing-filter-and-map:
+            - Introduction: C++/Standard-library/STL/Idiom/TODO-Filter-and-mapper/bastian.rieck-Implementing-filter-and-map/index.md
+    - String:
+      - Introduction: C++/Standard-library/String/index.md
+      - Char:
+        - Introduction: C++/Standard-library/String/Char/index.md
+      - C-string:
+        - Introduction: C++/Standard-library/String/C-string/index.md
+        - Memory-manipulation: C++/Standard-library/String/C-string/Memory-manipulation.md
+      - C++string:
+        - Introduction: C++/Standard-library/String/C++string/index.md
+        - basic_string:
+          - Introduction: C++/Standard-library/String/C++string/basic_string/index.md
+        - basic_string_view:
+          - Introduction: C++/Standard-library/String/C++string/basic_string_view/index.md
+        - Implementation:
+          - Introduction: C++/Standard-library/String/C++string/Implementation/index.md
           - char_traits:
-            - Introduction: C++/Library/Standard-library/String/C++string/char_traits/index.md
-          - basic_string_view:
-            - Introduction: C++/Library/Standard-library/String/C++string/basic_string_view/index.md
-          - Implementation:
-            - Introduction: C++/Library/Standard-library/String/C++string/Implementation/index.md
-        - Char:
-          - Introduction: C++/Library/Standard-library/String/Char/index.md
-        - String-operation:
-          - Introduction: C++/Library/Standard-library/String/String-operation/index.md
-          - Comparision:
-            - Introduction: C++/Library/Standard-library/String/String-operation/Comparision/index.md
-          - Toggle-case:
-            - Introduction: C++/Library/Standard-library/String/String-operation/Toggle-case/index.md
-        - IO:
-          - Introduction: C++/Library/Standard-library/String/IO/index.md
-          - fmt:
-            - fmt: C++/Library/Standard-library/String/IO/fmt/fmt.md
-      - IO-library:
-        - Introduction: C++/Library/Standard-library/IO-library/index.md
-        - Buffer: C++/Library/Standard-library/IO-library/Buffer.md
-        - Stream-operation: C++/Library/Standard-library/IO-library/Stream-operation.md
-        - Predefined-standard-stream-objects:
-          - cin: C++/Library/Standard-library/IO-library/Predefined-standard-stream-objects/cin.md
-        - String-IO:
-          - basic_stringstream: C++/Library/Standard-library/IO-library/String-IO/basic_stringstream.md
-      - Thread:
-        - Thread: C++/Library/Standard-library/Thread/index.md
-        - Asynchronous-programming:
-          - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/index.md
-          - std-future:
-            - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/std-future/index.md
-          - std-promise-and-future:
-            - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/std-promise-and-future/index.md
-            - std-promise:
-              - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/std-promise-and-future/std-promise/index.md
-          - std-async-and-future:
-            - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/std-async-and-future/index.md
-            - std-async:
-              - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/std-async-and-future/std-async/index.md
-            - As-member:
-              - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/std-async-and-future/As-member/index.md
-          - TODO-std-packaged_task-and-future:
-            - Introduction: C++/Library/Standard-library/Thread/Asynchronous-programming/TODO-std-packaged_task-and-future/index.md
-        - TODO-joining_thread:
-          - Introduction: C++/Library/Standard-library/Thread/TODO-joining_thread/index.md
-        - TODO-read-write-lock:
-          - Introduction: C++/Library/Standard-library/Thread/TODO-read-write-lock/index.md
-          - C++11-implementation:
-            - Introduction: C++/Library/Standard-library/Thread/TODO-read-write-lock/C++11-implementation/index.md
-        - C++20-Semaphores:
-          - Introduction: C++/Library/Standard-library/Thread/C++20-Semaphores/index.md
-        - Inter-thread-communication:
-          - Introduction: C++/Library/Standard-library/Thread/Inter-thread-communication/index.md
-          - TODO-modernescpp-Synchronization-with-Atomics:
-            - Introduction: C++/Library/Standard-library/Thread/Inter-thread-communication/TODO-modernescpp-Synchronization-with-Atomics/index.md
-          - TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics:
-            - Introduction: C++/Library/Standard-library/Thread/Inter-thread-communication/TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics/index.md
-      - Atomic-operations-library:
-        - Introduction: C++/Library/Standard-library/Atomic-operations-library/index.md
-      - Utility-library:
-        - Utility-library: C++/Library/Standard-library/Utility-library/index.md
-        - Language-support:
-          - Introduction: C++/Library/Standard-library/Utility-library/Language-support/index.md
-          - Type-support:
-            - Introduction: C++/Library/Standard-library/Utility-library/Language-support/Type-support/index.md
-            - Type-traits:
-              - Constants:
-                - Introduction: C++/Library/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Constants/index.md
-              - Relationships:
-                - is_convertible: C++/Library/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Relationships/is_convertible.md
-              - Type-modifications:
-                - Introduction: C++/Library/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-modifications/index.md
-              - Type-transformations:
-                - conditional: C++/Library/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-transformations/conditional.md
-                - void_t:
-                  - void_t: C++/Library/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-transformations/void_t/index.md
-                - decay:
-                  - Introduction: C++/Library/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-transformations/decay/index.md
-          - Initializer-list:
-            - Introduction: C++/Library/Standard-library/Utility-library/Language-support/Initializer-list/index.md
-          - Dynamic-memory-management:
-            - Dynamic-memory-management: C++/Library/Standard-library/Utility-library/Language-support/Dynamic-memory-management/index.md
-        - General-purpose:
-          - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/index.md
-          - Common-vocabulary-types:
-            - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/index.md
-            - tuple:
-              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/index.md
-              - aherrmann-Unpacking-Tuples-in-C++14:
-                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/aherrmann-Unpacking-Tuples-in-C++14/index.md
-              - murrayc-Modern-C++Variadic-template-parameters-and-tuples:
-                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/murrayc-Modern-C++Variadic-template-parameters-and-tuples/index.md
-              - Tuple-to-string:
-                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/Tuple-to-string/index.md
-            - optional:
-              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional/index.md
-            - any:
-              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/any/index.md
-            - variant:
-              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/variant/index.md
-              - std-visit:
-                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/variant/std-visit/index.md
-            - integer_sequence:
-              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/index.md
-              - "CSDN-C++14-make_index_sequence\u539F\u7406":
-                - Introduction: "C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/CSDN-C++14-make_index_sequence\u539F\
-                    \u7406/index.md"
-              - stackoverflow-Implementation-C++14-make_integer_sequence:
-                - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/stackoverflow-Implementation-C++14-make_integer_sequence/index.md
-          - Hash:
-            - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Hash/index.md
-            - General-purpose-hash:
-              - Introduction: C++/Library/Standard-library/Utility-library/General-purpose/Hash/General-purpose-hash/index.md
-      - Implementation:
-        - Introduction: C++/Library/Standard-library/Implementation/index.md
-        - GCC:
-          - GNU-C++Library: C++/Library/Standard-library/Implementation/GCC/GNU-C++Library.md
-        - LLVM:
-          - libc++C++Standard-Library: C++/Library/Standard-library/Implementation/LLVM/libc++C++Standard-Library.md
-      - Extending-std:
-        - Introduction: C++/Library/Standard-library/Extending-std/index.md
-      - Extensions:
-        - Version-2:
-          - The-C++detection-idiom:
-            - Introduction: C++/Library/Standard-library/Extensions/Version-2/The-C++detection-idiom/index.md
+            - Introduction: C++/Standard-library/String/C++string/Implementation/char_traits/index.md
+      - String-operation:
+        - Introduction: C++/Standard-library/String/String-operation/index.md
+        - Comparision:
+          - Introduction: C++/Standard-library/String/String-operation/Comparision/index.md
+        - Toggle-case:
+          - Introduction: C++/Standard-library/String/String-operation/Toggle-case/index.md
+      - IO:
+        - Introduction: C++/Standard-library/String/IO/index.md
+        - fmt:
+          - fmt: C++/Standard-library/String/IO/fmt/fmt.md
+    - IO-library:
+      - Introduction: C++/Standard-library/IO-library/index.md
+      - Buffer: C++/Standard-library/IO-library/Buffer.md
+      - Stream-operation: C++/Standard-library/IO-library/Stream-operation.md
+      - Predefined-standard-stream-objects:
+        - cin: C++/Standard-library/IO-library/Predefined-standard-stream-objects/cin.md
+      - String-IO:
+        - basic_stringstream: C++/Standard-library/IO-library/String-IO/basic_stringstream.md
+    - Thread:
+      - Thread: C++/Standard-library/Thread/index.md
+      - Asynchronous-programming:
+        - Introduction: C++/Standard-library/Thread/Asynchronous-programming/index.md
+        - std-future:
+          - Introduction: C++/Standard-library/Thread/Asynchronous-programming/std-future/index.md
+        - std-promise-and-future:
+          - Introduction: C++/Standard-library/Thread/Asynchronous-programming/std-promise-and-future/index.md
+          - std-promise:
+            - Introduction: C++/Standard-library/Thread/Asynchronous-programming/std-promise-and-future/std-promise/index.md
+        - std-async-and-future:
+          - Introduction: C++/Standard-library/Thread/Asynchronous-programming/std-async-and-future/index.md
+          - std-async:
+            - Introduction: C++/Standard-library/Thread/Asynchronous-programming/std-async-and-future/std-async/index.md
+          - As-member:
+            - Introduction: C++/Standard-library/Thread/Asynchronous-programming/std-async-and-future/As-member/index.md
+        - TODO-std-packaged_task-and-future:
+          - Introduction: C++/Standard-library/Thread/Asynchronous-programming/TODO-std-packaged_task-and-future/index.md
+      - TODO-joining_thread:
+        - Introduction: C++/Standard-library/Thread/TODO-joining_thread/index.md
+      - TODO-read-write-lock:
+        - Introduction: C++/Standard-library/Thread/TODO-read-write-lock/index.md
+        - C++11-implementation:
+          - Introduction: C++/Standard-library/Thread/TODO-read-write-lock/C++11-implementation/index.md
+      - C++20-Semaphores:
+        - Introduction: C++/Standard-library/Thread/C++20-Semaphores/index.md
+      - Inter-thread-communication:
+        - Introduction: C++/Standard-library/Thread/Inter-thread-communication/index.md
+        - TODO-modernescpp-Synchronization-with-Atomics:
+          - Introduction: C++/Standard-library/Thread/Inter-thread-communication/TODO-modernescpp-Synchronization-with-Atomics/index.md
+        - TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics:
+          - Introduction: C++/Standard-library/Thread/Inter-thread-communication/TODO-modernescpp-Performance-Comparison-of-Condition-Variables-and-Atomics/index.md
+    - Atomic-operations-library:
+      - Introduction: C++/Standard-library/Atomic-operations-library/index.md
+    - Utility-library:
+      - Utility-library: C++/Standard-library/Utility-library/index.md
+      - Language-support:
+        - Introduction: C++/Standard-library/Utility-library/Language-support/index.md
+        - Type-support:
+          - Introduction: C++/Standard-library/Utility-library/Language-support/Type-support/index.md
+          - Type-traits:
+            - Constants:
+              - Introduction: C++/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Constants/index.md
+            - Relationships:
+              - is_convertible: C++/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Relationships/is_convertible.md
+            - Type-modifications:
+              - Introduction: C++/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-modifications/index.md
+            - Type-transformations:
+              - conditional: C++/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-transformations/conditional.md
+              - decay:
+                - Introduction: C++/Standard-library/Utility-library/Language-support/Type-support/Type-traits/Type-transformations/decay/index.md
+        - Initializer-list:
+          - Introduction: C++/Standard-library/Utility-library/Language-support/Initializer-list/index.md
+        - Dynamic-memory-management:
+          - Dynamic-memory-management: C++/Standard-library/Utility-library/Language-support/Dynamic-memory-management/index.md
+      - General-purpose:
+        - Introduction: C++/Standard-library/Utility-library/General-purpose/index.md
+        - Common-vocabulary-types:
+          - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/index.md
+          - tuple:
+            - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/index.md
+            - aherrmann-Unpacking-Tuples-in-C++14:
+              - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/aherrmann-Unpacking-Tuples-in-C++14/index.md
+            - murrayc-Modern-C++Variadic-template-parameters-and-tuples:
+              - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/murrayc-Modern-C++Variadic-template-parameters-and-tuples/index.md
+            - Tuple-to-string:
+              - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/tuple/Tuple-to-string/index.md
+          - optional:
+            - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/optional/index.md
+          - any:
+            - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/any/index.md
+          - variant:
+            - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/variant/index.md
+            - std-visit:
+              - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/variant/std-visit/index.md
+          - integer_sequence:
+            - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/index.md
+            - "CSDN-C++14-make_index_sequence\u539F\u7406":
+              - Introduction: "C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/CSDN-C++14-make_index_sequence\u539F\
+                  \u7406/index.md"
+            - stackoverflow-Implementation-C++14-make_integer_sequence:
+              - Introduction: C++/Standard-library/Utility-library/General-purpose/Common-vocabulary-types/integer_sequence/stackoverflow-Implementation-C++14-make_integer_sequence/index.md
+        - Hash:
+          - Introduction: C++/Standard-library/Utility-library/General-purpose/Hash/index.md
+          - General-purpose-hash:
+            - Introduction: C++/Standard-library/Utility-library/General-purpose/Hash/General-purpose-hash/index.md
+    - Implementation:
+      - Introduction: C++/Standard-library/Implementation/index.md
+      - GCC:
+        - GNU-C++Library: C++/Standard-library/Implementation/GCC/GNU-C++Library.md
+      - LLVM:
+        - libc++C++Standard-Library: C++/Standard-library/Implementation/LLVM/libc++C++Standard-Library.md
+    - Extending-std:
+      - Introduction: C++/Standard-library/Extending-std/index.md
+    - Extensions:
+      - Version-2:
+        - Detection-idiom:
+          - Introduction: C++/Standard-library/Extensions/Version-2/Detection-idiom/index.md
+    - Localization-library:
+      - Introduction: C++/Standard-library/Localization-library/index.md
+      - GBK-to-UTF8:
+        - Introduction: C++/Standard-library/Localization-library/GBK-to-UTF8/index.md
+        - "C++\u5B9E\u73B0utf8\u548Cgbk\u7F16\u7801\u5B57\u7B26\u4E32\u4E92\u76F8\u8F6C\u6362":
+          - Introduction: "C++/Standard-library/Localization-library/GBK-to-UTF8/C++\u5B9E\
+              \u73B0utf8\u548Cgbk\u7F16\u7801\u5B57\u7B26\u4E32\u4E92\u76F8\u8F6C\u6362\
+              /index.md"
+  - Library:
     - A-list-of-open-source-Cpp-libraries: C++/Library/A-list-of-open-source-Cpp-libraries.md
     - Boost:
       - Introduction: C++/Library/Boost/index.md
@@ -1390,6 +1397,8 @@ nav:
         - Primer: C++/Library/Unit-testing/Googletest/Primer.md
         - GoogleMock:
           - Introduction: C++/Library/Unit-testing/Googletest/GoogleMock/index.md
+      - catchorg-Catch2:
+        - Introduction: C++/Library/Unit-testing/catchorg-Catch2/index.md
     - idealvin-co:
       - Introduction: C++/Library/idealvin-co/index.md
     - chromium:
@@ -1413,7 +1422,8 @@ nav:
       - Introduction: C++/Library/Folly/index.md
   - Philosophy:
     - Introduction: C++/Philosophy/index.md
-  - C++-name-conversion: C++/C++-name-conversion.md
+  - C++-name-convention:
+    - Introduction: C++/C++-name-convention/index.md
   - Programming-paradigm:
     - Introduction: C++/Programming-paradigm/index.md
     - OOP:
@@ -1439,6 +1449,8 @@ nav:
           - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/index.md
           - More-C++Idioms-Member-Detector:
             - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/More-C++Idioms-Member-Detector/index.md
+          - Detect-whether-a-type-is-defined:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/Detect-whether-a-type-is-defined/index.md
           - tartanllama-Detection-Idiom-A-Stopgap-for-Concepts:
             - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/tartanllama-Detection-Idiom-A-Stopgap-for-Concepts/index.md
           - Ben-C++Detection-Idiom-Through-the-Years:
@@ -1463,12 +1475,16 @@ nav:
                 - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Type-Trait/Type-traits-vs-concepts.md
               - Function-trait:
                 - Function_trait: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Function-trait/Function_trait.md
-            - enable-if:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/enable-if/index.md
-              - boost-enable_if:
-                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/enable-if/boost-enable_if/index.md
-              - thegreenplace-SFINAE-and-enable_if:
-                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/enable-if/thegreenplace-SFINAE-and-enable_if/index.md
+            - Helper-functions:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/index.md
+              - enable-if:
+                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/enable-if/index.md
+                - boost-enable_if:
+                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/enable-if/boost-enable_if/index.md
+                - thegreenplace-SFINAE-and-enable_if:
+                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/enable-if/thegreenplace-SFINAE-and-enable_if/index.md
+              - void_t:
+                - void_t: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/void_t/index.md
             - Class-template-SFINAE:
               - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Class-template-SFINAE/index.md
             - Function-template-SFINAE:
@@ -1518,6 +1534,8 @@ nav:
           - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/Assemble-and-multiple-dispatch/index.md
       - Specialization-and-overload:
         - Introduction: C++/Programming-paradigm/Polymorphism/Specialization-and-overload/index.md
+      - Specialization-and-subclass-inheritance:
+        - Introduction: C++/Programming-paradigm/Polymorphism/Specialization-and-subclass-inheritance/index.md
       - Polymorphic-object-container:
         - Introduction: C++/Programming-paradigm/Polymorphism/Polymorphic-object-container/index.md
     - Type-erasure-OOP-GP:
@@ -1752,6 +1770,8 @@ nav:
             - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Multiple-level-pointer/index.md
           - Pointer-and-integer:
             - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-and-integer/index.md
+            - uintptr_t:
+              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-and-integer/uintptr_t/index.md
           - Conversion: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Conversion.md
           - Pointer-length:
             - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-length/index.md
@@ -1780,8 +1800,7 @@ nav:
         - Out-of-bound:
           - Introduction: C++/Resource-management/Memory-management/Memory-error/Out-of-bound/index.md
         - Dereference-null-pointer:
-          - Null-pointer: C++/Resource-management/Memory-management/Memory-error/Dereference-null-pointer/Null-pointer.md
-          - Dereference-null-pointer: C++/Resource-management/Memory-management/Memory-error/Dereference-null-pointer/Dereference-null-pointer.md
+          - Introduction: C++/Resource-management/Memory-management/Memory-error/Dereference-null-pointer/index.md
         - Dangling-and-wild-pointer:
           - Introduction: C++/Resource-management/Memory-management/Memory-error/Dangling-and-wild-pointer/index.md
         - OOM:
