@@ -119,7 +119,9 @@ int main()
 
 ### Null pointers
 
-
+> NOTE: 
+>
+> 1、参见 `Null-pointer` 章节
 
 ### Constness
 
