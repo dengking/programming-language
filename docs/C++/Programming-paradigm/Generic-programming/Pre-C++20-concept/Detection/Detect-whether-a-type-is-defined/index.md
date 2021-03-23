@@ -1,5 +1,7 @@
 # Detecting in C++ whether a type is defined
 
+1、仅仅declare但是没有definition的type，就是incomplete type，参见 `Incomplete-type` 章节
+
 ## Detecting in C++ whether a type is defined
 
 
