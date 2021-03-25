@@ -93,7 +93,30 @@ int main()
 }
 ```
 
-> NOTE: 上述代码是能够编译通过的，`g++ test.cpp -fpermissive`
+> NOTE: 
+>
+> 一、上述代码是能够编译通过的，`g++ test.cpp -fpermissive`
+>
+> 二、上述code的问题在于: 
+>
+> ```C++
+> class fdostream
+>  : public ostream
+> {
+> protected:
+>  fdoutbuf buf;
+> public:
+>  explicit fdostream( int fd ) 
+>      : buf( fd ), ostream( &buf ) 
+>      // This is not allowed: buf can't be initialized before std::ostream.
+>      // std::ostream needs a std::streambuf object defined inside fdoutbuf.
+>  {}
+> };
+> ```
+>
+> `ostream( &buf )`是典型的使用子类的成员去初始化base class:
+>
+> 1、`fdostream`的initialization依赖于 base class `ostream`，而base class `ostream`的initialization又依赖于`fdostream`的member variable `buf`， 它就形成了circle dependency
 
 
 

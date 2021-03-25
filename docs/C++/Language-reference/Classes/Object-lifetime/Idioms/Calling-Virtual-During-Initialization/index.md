@@ -1,5 +1,33 @@
 # Calling Virtuals During Initialization
 
+## stackoverflow [Calling virtual functions inside constructors](https://stackoverflow.com/questions/962132/calling-virtual-functions-inside-constructors)
+
+### [A](https://stackoverflow.com/a/962148)
+
+Calling virtual functions from a constructor or destructor is dangerous and should be avoided whenever possible. All C++ implementations should call the version of the function defined at the level of the hierarchy in the current constructor and no further.
+
+The [C++ FAQ Lite](https://isocpp.org/wiki/faq/strange-inheritance#calling-virtuals-from-ctors) covers this in section 23.7 in pretty good detail. I suggest reading that (and the rest of the FAQ) for a followup.
+
+Excerpt:
+
+> [...] In a constructor, the virtual call mechanism is disabled because overriding from derived classes hasn’t yet happened. Objects are constructed from the base up, “base before derived”.
+>
+> [...]
+>
+> Destruction is done “derived class before base class”, so virtual functions behave as in constructors: Only the local definitions are used – and no calls are made to overriding functions to avoid touching the (now destroyed) derived class part of the object.
+
+**EDIT** Corrected Most to All (thanks litb)
+
+
+
+## 补充
+
+在cppreference [Lifetime#Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)章节中，对这种行为进行了专门说明: 
+
+> [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction)
+
+C++标准中将其定义为undefined behavior。
+
 
 
 ## More C++ Idioms/[Calling Virtuals During Initialization](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Calling_Virtuals_During_Initialization)
@@ -108,7 +136,7 @@ class Base {
  };
 ```
 
-- using non-member function
+##### using non-member function
 
 ```c++
 template <class Derived, class Parameter>
@@ -253,10 +281,3 @@ Using [Base-from-member idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms
 
 
 
-## 补充
-
-在cppreference [Lifetime#Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)章节中，对这种行为进行了专门说明: 
-
-> [virtual function calls during construction and destruction](https://en.cppreference.com/w/cpp/language/virtual#During_construction_and_destruction)
-
-C++标准中将其定义为undefined behavior。
