@@ -24,7 +24,7 @@ m.emplace(1, 2.3, string("hello")); // invalid
 
 The arguments you pass to `map::emplace` get forwarded to the constructor of `map::value_type`, which is `pair<const Key, Value>`. So you can use the [piecewise construction constructor](http://en.cppreference.com/w/cpp/utility/pair/pair) of `std::pair` to avoid intermediate copies and moves.
 
-```
+```c++
 std::map<int, Foo> m;
 
 m.emplace(std::piecewise_construct,
@@ -38,7 +38,7 @@ m.emplace(std::piecewise_construct,
 
 In C++17 this can more easily be achieved with the [`try_emplace`](http://en.cppreference.com/w/cpp/container/map/try_emplace) method.
 
-```
+```c++
 map<int,Foo> m;
 m.try_emplace(1, 2.3, "hello");
 ```
