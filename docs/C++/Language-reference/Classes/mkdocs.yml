@@ -2,11 +2,12 @@ nav:
     - Introduction: index.md
     - Class: Class.md
     - Member: Member
+    - Object-lifetime: Object-lifetime    
     - Special-member-function: Special-member-function
     - Member-access: Member-access
     - Subtyping-polymorphism: Subtyping-polymorphism
     - Interface: Interface
-    - Lifetime: Lifetime
+
     - Empty-base-optimization: Empty-base-optimization
     - Specifier: Specifier
 ######### 这是c++中非常常见的三种容易混淆的情况##########    
