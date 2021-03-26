@@ -93,15 +93,21 @@ Note that decorators and the original class object share a common set of **featu
 >
 > 2、This paragraph tell us that the decorator class share a common set of features with the original class object, which is decorated by the decorator. In fact this relationship is also shown in the above UML diagram because the decorator inherits the original class. In this way,decorated and undecorated versions share a common set of features;
 
-The **decoration features**<!--装饰特性--> (e.g., methods, properties, or other members) are usually defined by an interface, [mixin](https://en.wikipedia.org/wiki/Mixin) (a.k.a. [trait](https://en.wikipedia.org/wiki/Trait_(computer_programming))) or class inheritance which is shared by the decorators and the decorated object. In the previous example the class `Component` is inherited by both the `ConcreteComponent` and the subclasses that descend from `Decorator`.
+The **decoration features** (e.g., methods, properties, or other members) are usually defined by an interface, [mixin](https://en.wikipedia.org/wiki/Mixin) (a.k.a. [trait](https://en.wikipedia.org/wiki/Trait_(computer_programming))) or class inheritance which is shared by the decorators and the decorated object. In the previous example the class `Component` is inherited by both the `ConcreteComponent` and the subclasses that descend from `Decorator`.
 
 The decorator pattern is an alternative to [subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science)). Subclassing adds behavior at [compile time](https://en.wikipedia.org/wiki/Compile_time), and the change affects all instances of the original class; decorating can provide new behavior at [run-time](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)) for selected objects.
 
-> NOTE：This paragraph compares inheritance and decorator patterns
+> NOTE: 
+>
+> 1、This paragraph compares inheritance and decorator patterns
+>
+> 2、这段总结得是非常好的，在 geeksforgeeks [Decorator Pattern | Set 1 (Background)](https://www.geeksforgeeks.org/decorator-pattern/)、geeksforgeeks [The Decorator Pattern | Set 2 (Introduction and Design)](https://www.geeksforgeeks.org/the-decorator-pattern-set-2-introduction-and-design/) 中的例子就说明了这一点
 
 This difference becomes most important when there are several *independent* ways of extending functionality. In some [object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language), classes cannot be created at runtime, and it is typically not possible to predict, at design time, what combinations of extensions will be needed. This would mean that a new class would have to be made for every possible combination. By contrast, decorators are objects, created at runtime, and can be combined on a per-use basis. The I/O Streams implementations of both [Java](https://en.wikipedia.org/wiki/Java_Platform,_Standard_Edition#java.io) and the [.NET Framework](https://en.wikipedia.org/wiki/.NET_Framework) incorporate（包括） the decorator pattern.
 
-> NOTE:[here](https://en.wikipedia.org/wiki/Forwarding_(object-oriented_programming)#Complex) is good example to demonstrate the use of decorator pattern。
+> NOTE:
+>
+> 1、[here](https://en.wikipedia.org/wiki/Forwarding_(object-oriented_programming)#Complex) is good example to demonstrate the use of decorator pattern。
 
 ## Common Use Cases
 

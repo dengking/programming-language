@@ -8,7 +8,7 @@ nav:
     - Template-specialization: Template-specialization
     - Class-template: Class-template
     - Function-template: Function-template
-    - Variable-template: Variable-template
+    - C++14-Variable-template: C++14-Variable-template
     - Parameter-pack: Parameter-pack
 
     - Compile-template: Compile-template

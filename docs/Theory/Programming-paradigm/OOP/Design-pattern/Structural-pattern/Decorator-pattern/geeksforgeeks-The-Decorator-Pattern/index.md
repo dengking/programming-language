@@ -93,7 +93,9 @@ So what we do now is take a pizza and “decorate” it with toppings(浇头) at
 
 ![piz2](https://media.geeksforgeeks.org/wp-content/uploads/Decorator2.jpg)
 
-3、“Decorate” it with a CheeseBurst object.![piz3](https://media.geeksforgeeks.org/wp-content/uploads/Decorator3.jpg)
+3、“Decorate” it with a CheeseBurst object.
+
+![piz3](https://media.geeksforgeeks.org/wp-content/uploads/Decorator3.jpg)
 
 3、Call `getCost()` and use delegation instead of inheritance to calculate the toppings cost.
 ![decorator pattern](https://media.geeksforgeeks.org/wp-content/uploads/Decorator4.jpg)
@@ -114,7 +116,9 @@ What we get in the end is a pizza with cheeseburst and capsicum toppings. Visual
 
 ### Class Diagram:
 
-![piz5](https://media.geeksforgeeks.org/wp-content/uploads/uml.jpg)Image src: [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Decorator_UML_class_diagram.svg/600px-Decorator_UML_class_diagram.svg.png)
+![piz5](https://media.geeksforgeeks.org/wp-content/uploads/uml.jpg)
+
+Image src: [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Decorator_UML_class_diagram.svg/600px-Decorator_UML_class_diagram.svg.png)
 
 1、Each component can be used on its own or may be wrapped by a decorator.
 

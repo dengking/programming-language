@@ -59,9 +59,11 @@ wikipedia [Design Patterns#Introduction, Chapter 1](https://en.wikipedia.org/wik
 
 ### Strategy pattern
 
-参见 `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Behavioral-pattern\Strategy-pattern` 章节
+参见 `Strategy-pattern` 章节。
 
+### Decorator pattern
 
+参见 `Decorator-pattern` 章节。
 
 ## wikipedia [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)
 

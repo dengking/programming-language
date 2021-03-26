@@ -10,9 +10,17 @@
 
 比较冗杂，论述很多
 
+## Composition over inheritance: decorator is an alternative to subclassing
+
+一、最能够体现"decorator is an alternative to subclassing"的例子是: geeksforgeeks [Decorator Pattern | Set 1 (Background)](https://www.geeksforgeeks.org/decorator-pattern/) 、 geeksforgeeks [The Decorator Pattern | Set 2 (Introduction and Design)](https://www.geeksforgeeks.org/the-decorator-pattern-set-2-introduction-and-design/) 中给出的pizza + topping的例子: 
+
+geeksforgeeks [Decorator Pattern | Set 1 (Background)](https://www.geeksforgeeks.org/decorator-pattern/) 中，使用subclassing ，并分析了它的disadvantage， geeksforgeeks [The Decorator Pattern | Set 2 (Introduction and Design)](https://www.geeksforgeeks.org/the-decorator-pattern-set-2-introduction-and-design/) 使用decorator来进行改进，可以看到，使用decorator非常灵活、扩展性非常好
+
+二、在 wikipedia [Decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) 中，对这个topic进行了总结。
+
 ## Use case
 
-### Combination explode
+### 解决Combination explode、an alternative to subclassing
 
 这是Decorator pattern能够很好的解决的问题，example:
 
@@ -20,7 +28,7 @@
 
 
 
-### Pipeline multiple layer、流程
+### Pipeline multiple layer、流程、chain composition
 
 其实这也是combination，不同的是它还添加了流程、multiple layer，example:
 
