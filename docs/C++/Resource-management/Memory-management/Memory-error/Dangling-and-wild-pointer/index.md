@@ -1,8 +1,14 @@
 # Dangling pointer
 
-Dangling pointer是导致"Access outside of object lifetime"的一个导火索 ，我将很多涉及到dangling pointer的内容都放到了`Access-outside-of-object-lifetime` 章节，便于统一讨论。
+1、Dangling pointer是"Access outside of object lifetime"的一种，我将很多涉及到dangling pointer的内容都放到了`Access-outside-of-object-lifetime` 章节，便于统一讨论。
 
-Dangling pointer是导致wild pointer的一个导火索。
+2、Dangling pointer是导致wild pointer的一个导火索。
+
+3、dangling pointer and segment fault
+
+access 一个 dangling pointer，就会导致segmentation fault
+
+
 
 ## wikipedia [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer)	
 
