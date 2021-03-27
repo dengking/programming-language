@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - decltype: decltype
+    - auto: auto
+    - Type-deduction: Type-deduction.md
+    - Return-type-deduction: Return-type-deduction

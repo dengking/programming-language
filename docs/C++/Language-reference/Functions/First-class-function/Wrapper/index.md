@@ -2,11 +2,11 @@
 
 实现方式：
 
-| 实现方式                  | 章节                                                         |      |
-| ------------------------- | ------------------------------------------------------------ | ---- |
-| function wrapper          | `C++\Language-reference\Functions\std-utility-lib-Function-objects\Function-objects.md` |      |
-| template function wrapper |                                                              |      |
-| function pointer          |                                                              |      |
+| 实现方式                  | 章节               |      |
+| ------------------------- | ------------------ | ---- |
+| function object           | `Function-objects` |      |
+| template function wrapper |                    |      |
+| function pointer          |                    |      |
 
 
 

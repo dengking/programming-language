@@ -1,6 +1,8 @@
-# Type inference
+# Type inference and deduction
 
+1、C++中，deduction特指: template argument deduction；inference特指: auto
 
+2、本章主要讨论type inference，type deduction放到了`C++\Language-reference\Template`章节
 
 ## wikipedia C++11 # [Type inference](https://en.wikipedia.org/wiki/C++11#Type_inference)
 

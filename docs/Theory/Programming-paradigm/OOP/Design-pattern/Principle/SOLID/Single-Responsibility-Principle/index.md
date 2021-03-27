@@ -1,8 +1,18 @@
 # Single-responsibility principle
 
-单一职责原则。
+一、单一职责原则。
 
-## 维基百科 [Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
+二、它看似简单，但是是很多pattern背后的思想，包括:
+
+a、AOP: aspect-oriented programming
+
+b、decorator pattern
+
+三、assemble
+
+Single-responsibility principle促进了assemble(composition)
+
+## wikipedia [Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 
 
 

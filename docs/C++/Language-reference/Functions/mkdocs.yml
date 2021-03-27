@@ -4,6 +4,7 @@ nav:
     - Function-declaration: Function-declaration
     # 函数调用中也包含一些内容
     - Function-call: Function-call
+    - Function-termination: Function-termination
     # 运算符重载    
     - Function-overload: Function-overload
     - Lambda-expression: Lambda-expression
