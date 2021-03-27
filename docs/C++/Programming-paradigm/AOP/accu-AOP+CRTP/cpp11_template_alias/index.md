@@ -2,11 +2,9 @@
 
 source code:
 
-[hugoArregui](https://github.com/hugoArregui)/[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)/[cpp11_template_alias](https://github.com/hugoArregui/CPP_AOP-CRTP/tree/master/cpp11_template_alias)/[aop.h](https://github.com/hugoArregui/CPP_AOP-CRTP/blob/master/cpp11_template_alias/aop.h)
+github [hugoArregui](https://github.com/hugoArregui)/[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)/[cpp11_template_alias](https://github.com/hugoArregui/CPP_AOP-CRTP/tree/master/cpp11_template_alias)/[aop.h](https://github.com/hugoArregui/CPP_AOP-CRTP/blob/master/cpp11_template_alias/aop.h)
 
-[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)/[cpp11_template_alias](https://github.com/hugoArregui/CPP_AOP-CRTP/tree/master/cpp11_template_alias)/[test.cpp](https://github.com/hugoArregui/CPP_AOP-CRTP/blob/master/cpp11_template_alias/test.cpp)
-
-
+github [hugoArregui](https://github.com/hugoArregui)/[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)/[cpp11_template_alias](https://github.com/hugoArregui/CPP_AOP-CRTP/tree/master/cpp11_template_alias)/[test.cpp](https://github.com/hugoArregui/CPP_AOP-CRTP/blob/master/cpp11_template_alias/test.cpp)
 
 
 
@@ -59,6 +57,12 @@ public:
 ```
 
 1、`struct Apply`做的事情是比较简单的，即将所有的aspect串联起来，显然就形成了aspects list，这对应的是source code中的`AspectsCombination`
+
+对于aspect list，即`AspectsCombination`，其实它只需要一个template argument: decoratee，aspect list中的第一个aspect继承自它，aspect list中的其他aspect都继承自它的前一个aspect，如下图所示:
+
+![](../aspect-list-inheritance.jpg)
+
+
 
 2、上述是recursive class template，它是基于specialization的
 

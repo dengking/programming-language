@@ -31,8 +31,7 @@ struct Number
     {
     public:
         typedef _UnderlyingType UnderlyingType;
-        typedef aop::BaseAopData< Number::Type, A> AopData; //Needed by lib
-        typedef typename AopData::Type FullType;
+        typedef A<Number::Type<A>> FullType;
 
         Type(UnderlyingType n)
             : n(n)
@@ -51,8 +50,7 @@ template <class A>
 class ArithmeticAspect: public A
 {
 public:
-    typedef aop::AspectAopData< ::ArithmeticAspect, A> AopData;
-    typedef typename AopData::Type FullType;
+    typedef typename A::FullType FullType;
 
 #ifdef INHERITING_CTORS
     using A::A;
@@ -97,8 +95,7 @@ template <class A>
 class IncrementalAspect: public A
 {
 public:
-    typedef aop::AspectAopData< ::IncrementalAspect, A> AopData;
-    typedef typename AopData::Type FullType;
+    typedef typename A::FullType FullType;
 
 #ifdef INHERITING_CTORS
     using A::A;
@@ -149,8 +146,7 @@ struct RoundAspect
     class Type : public A
     {
     public:
-        typedef aop::AspectAopData< RoundAspect::Type, A> AopData;
-        typedef typename AopData::Type FullType;
+        typedef typename A::FullType FullType;
 
 #ifdef INHERITING_CTORS
         using A::A;
@@ -182,8 +178,7 @@ template <class A>
 class LogicalAspect: public A
 {
 public:
-    typedef aop::AspectAopData< ::LogicalAspect, A> AopData;
-    typedef typename AopData::Type FullType;
+    typedef typename A::FullType FullType;
 
 #ifdef INHERITING_CTORS
     using A::A;
@@ -217,8 +212,7 @@ template <class A>
 class BitwiseAspect: public A
 {
 public:
-    typedef aop::AspectAopData< ::BitwiseAspect, A> AopData;
-    typedef typename AopData::Type FullType;
+    typedef typename A::FullType FullType;
 
 #ifdef INHERITING_CTORS
     using A::A;

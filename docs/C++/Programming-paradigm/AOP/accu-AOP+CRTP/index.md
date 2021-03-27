@@ -2,7 +2,7 @@
 
 > NOTE: 
 >
-> 初读这篇文章是难以理解的，并且阅读它的source code也是不容易理解的，理解本文的前提是:
+> 一、初读这篇文章是难以理解的，并且阅读它的source code也是不容易理解的，理解本文的前提是:
 >
 > 1、对decorator pattern有一定了解
 >
@@ -12,9 +12,9 @@
 >
 > 试了一下，这个链接无法访问，下面是github上收录了这个的 [hugoArregui](https://github.com/hugoArregui)/**[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)**
 >
-> 4、典型的mixin from below
+> 二、典型的mixin from below，可以用于实现strong type
 >
-> 5、实现strong type的典范
+> 
 
 
 
@@ -24,13 +24,19 @@ Aspect Oriented Programming (AOP) is a programming paradigm that makes possible 
 
 > NOTE: 
 >
-> 1、composition: chain
+> 一、它是典型的composition: chain
 >
-> 2、通过后面的描述可以知道，它是通过inheritance来进行weave的、通过inheritance chain来构成**aspect list**，**aspect list**是非常重要的一个概念。
+> 二、通过后面的描述可以知道，它是通过inheritance来进行weave的、通过inheritance chain来构成**aspect list**，**aspect list**是非常重要的一个概念，图示如下:
 >
-> 3、它的这种做法是比较类似于decorator pattern的，添加aspect的过程相当于decorate的过程
+> ![](./aspect-list-inheritance.jpg)
 >
-> 4、通过inheritance chain形成aspect list
+> 1、上述decoratee表示的是被装饰的。
+>
+> 
+>
+> 三、它的这种做法是比较类似于decorator pattern的，添加aspect的过程相当于decorate的过程
+>
+> 四、通过inheritance chain形成aspect list
 
 ## CRTP
 
@@ -120,7 +126,11 @@ The basic principle of this solution does not differ in essence from the traditi
 >
 > 1、"dilemma"困境
 >
-> 2、上面这段话再次描述了问题的症结: number需要将"aspects list"作为它的template argument，从而可以得到它的concrete definition
+> 2、上面这段话再次描述了问题的症结: `Number`需要将"aspects list"作为它的template argument，从而可以得到它的concrete definition，而从下面的picture可以看出，aspect list的第一个aspect需要将`Number`作为它的template argument，因此两者就形成了相互的dependency，这就是前面所说的‘chicken or egg’ 。通过后面的描述可知: CRTP是可以解决这种问题的。
+>
+> 3、对于aspect list，其实它只需要一个template argument: decoratee，aspect list中的第一个aspect继承自它，aspect list中的其他aspect都继承自它的前一个aspect。
+>
+> ![](./aspect-list-inheritance.jpg)
 >
 > 
 
@@ -148,7 +158,7 @@ ArithmeticAspect<Number<ArithmeticAspect>>
 >
 > 后面的两种solution就是为了解决这个问题，显然，它 的实现是依赖于template alias的。
 >
-> 2、`Number`的完整definition依赖于aspects list、每个aspect又需要`Number`的完整definition，这就是前面所说的‘chicken or egg’ 
+> 
 
 This shows the weaving of a single aspect with CRTP, which works perfectly:
 

@@ -27,50 +27,11 @@ template <class A>
 class NullAspect
 {};
 
-template <template <template <class> class> class Base, template <class> class A>
-struct BaseAopData
-{
-    typedef typename A<Base<A>>::Type Type;
-};
-
-template <template <template <class> class> class Base>
-struct BaseAopData<Base, NullAspect>
-{
-    typedef Base<NullAspect> Type;
-};
-
-template <template <class> class Aspect, class A>
-struct AspectAopData
-{
-    typedef typename A::AopData::Type Type;
-    typedef Aspect<A> AspectType;
-};
-
 template <template <template <class> class> class Base>
 struct Decorate
 {
 private:
     struct None {};
-
-    template <template <class> class A, class B = None>
-    struct Binder
-    {
-        template <class T>
-        struct Binding
-        {
-            typedef typename Binder<A>::template Binding<typename B::template Binding<T>::Type>::Type Type;
-        };
-    };
-
-    template<template <class> class T>
-    struct Binder<T, None>
-    {
-        template <class P>
-        struct Binding
-        {
-            typedef T<P> Type;
-        };
-    };
 
     template <template <class> class ... Aspects>
     struct Apply;
@@ -78,21 +39,25 @@ private:
     template <template <class> class T>
     struct Apply<T>
     {
-        typedef Binder<T> Type;
+        template <class E>
+        using Type = T<E>;
     };
 
     template<template <class> class A1, template <class> class ... Aspects>
     struct Apply<A1, Aspects...>
     {
-        typedef Binder<A1, typename Apply<Aspects...>::Type> Type;
+        template <class T>
+        using Type = A1<typename Apply<Aspects...>::template Type<T>>;
     };
 
 public:
     template<template <class> class ... Aspects>
     struct with
     {
-        typedef typename Apply<Aspects...>::Type TypeP;
-        typedef typename TypeP::template Binding<Base<TypeP::template Binding>>::Type Type;
+        template <class T>
+        using AspectsCombination = typename Apply<Aspects...>::template Type<T>;
+
+        typedef AspectsCombination<Base<AspectsCombination>> Type;
     };
 };
 }
