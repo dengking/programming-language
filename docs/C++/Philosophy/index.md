@@ -257,9 +257,23 @@ We can ban, restrain, or detect the individual problem categories separately, as
 >
 > 
 
+### P.8: Don’t leak any resources
 
+> NOTE: 
+>
+> 参见: 
+>
+> 1、CppCoreGuidelines [The resource management section](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-resource)
+>
+> 2、`Resource-management` 章节
 
+#### Note
 
+ Enforcing [the lifetime safety profile](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-lifetime) eliminates leaks. When combined with resource safety provided by [RAII](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii), it eliminates the need for “garbage collection” (by generating no garbage). Combine this with enforcement of [the type and bounds profiles](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-force) and you get complete type- and resource-safety, guaranteed by tools.
+
+> NOTE: 
+>
+> 1、我是因为看到了"  [the lifetime safety profile](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-lifetime) " 这段话而将上面这段话摘抄下来的，关于object lifetime，一种典型的错误就是access outside of object lifetime，这在"Access-outside-of-object-lifetime"章节进行了总结。
 
 ### P.9: Don’t waste time or space
 

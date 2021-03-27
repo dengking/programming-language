@@ -45,7 +45,3 @@ https://isocpp.org/wiki/faq/ctors#using-this-in-ctors
 
 2、dangling reference: 这个object可能已经被析构了，但是在library中，依然尝试去access它，这也是access outside of object lifetime
 
-# calling virtual during construction and destruction
-
-
-
