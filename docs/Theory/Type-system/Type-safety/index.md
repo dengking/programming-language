@@ -14,11 +14,13 @@ In the context of **static (compile-time) type systems**, type safety usually in
 
 > nNOTE: type of expression；
 
-Type safety is closely linked to *memory safety*, a restriction on the ability to copy arbitrary bit patterns from one memory location to another. For instance, in an implementation of a language that has some type {\displaystyle t}![t](https://wikimedia.org/api/rest_v1/media/math/render/svg/65658b7b223af9e1acc877d848888ecdb4466560), such that some sequence of bits (of the appropriate length) does not represent a legitimate member of {\displaystyle t}![t](https://wikimedia.org/api/rest_v1/media/math/render/svg/65658b7b223af9e1acc877d848888ecdb4466560), if that language allows data to be copied into a [variable](https://en.wikipedia.org/wiki/Variable_(programming)) of type {\displaystyle t}![t](https://wikimedia.org/api/rest_v1/media/math/render/svg/65658b7b223af9e1acc877d848888ecdb4466560), then it is not type-safe because such an operation might assign a non-{\displaystyle t}![t](https://wikimedia.org/api/rest_v1/media/math/render/svg/65658b7b223af9e1acc877d848888ecdb4466560) value to that variable. Conversely, if the language is type-unsafe to the extent of allowing an arbitrary integer to be used as a [pointer](https://en.wikipedia.org/wiki/Pointer_(computer_programming)), then it is not memory-safe.
+Type safety is closely linked to *memory safety*, a restriction on the ability to copy arbitrary bit patterns from one memory location to another. 
 
 > NOTE: 
 >
 > 1、type safe是memory safe的一个充分条件；
+>
+> 2、使用interpretation model来理解上面这一段
 
 Most **statically typed languages** provide a degree of **type safety** that is strictly stronger than **memory safety**, because their type systems enforce the proper use of [abstract data types](https://en.wikipedia.org/wiki/Abstract_data_type) defined by programmers even when this is not strictly necessary for memory safety or for the prevention of any kind of catastrophic failure.
 
@@ -38,5 +40,6 @@ Most **statically typed languages** provide a degree of **type safety** that is 
 
 3、cppreference [Variadic arguments](https://en.cppreference.com/w/cpp/language/variadic_arguments)
 
+4、`Comparison-of-programming-language\C++VS-C\Type-system` 章节
 
-
+5、[C++ Core Guidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) # [P.4: Ideally, a program should be statically type safe](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#p4-ideally-a-program-should-be-statically-type-safe)
