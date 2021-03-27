@@ -8,7 +8,13 @@
 >
 > 2、对AOP有一定了解，文章中会使用aspect list这样的概念。
 >
-> 
+> 原文给出的source code链接" The complete code of the library and examples both for C++11 and C++98 can be accessed in [http://cpp-aop.googlecode.com](http://cpp-aop.googlecode.com/)
+>
+> 试了一下，这个链接无法访问，下面是github上收录了这个的 [hugoArregui](https://github.com/hugoArregui)/**[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)**
+>
+> 4、典型的mixin from below
+>
+> 5、实现strong type的典范
 
 
 
@@ -23,6 +29,8 @@ Aspect Oriented Programming (AOP) is a programming paradigm that makes possible 
 > 2、通过后面的描述可以知道，它是通过inheritance来进行weave的、通过inheritance chain来构成**aspect list**，**aspect list**是非常重要的一个概念。
 >
 > 3、它的这种做法是比较类似于decorator pattern的，添加aspect的过程相当于decorate的过程
+>
+> 4、通过inheritance chain形成aspect list
 
 ## CRTP
 
@@ -112,13 +120,57 @@ The basic principle of this solution does not differ in essence from the traditi
 >
 > 1、"dilemma"困境
 >
-> 2、上面这段话所描述的正是问题的症结:
+> 2、上面这段话再次描述了问题的症结: number需要将"aspects list"作为它的template argument，从而可以得到它的concrete definition
 >
 > 
 
+For example, if `Number `knew the complete type, it could use it as a return type for its operators as shown in Listing 2.
 
+```C++
+template <template <class> class Aspects>
+class Number
+{
+  typedef Aspects<Number<Aspects>> FullType;
+...
+};
+ArithmeticAspect<Number<ArithmeticAspect>>
+```
+
+> NOTE: 
+>
+> 1、`Number`是一个class template，它有一个template template parameter `Aspects`，也就是`Aspects`有一个template parameter，它需要一个template argument。在`Number`的class body中可以看出，它将`Number<Aspects>`作为了`Aspects`的template argument。这种写法是和我平时所运用的CRTP不同的，我平时所运用的CRTP是基于inheritance的，而上述写发放显然不是基于inheritance的，这种写法比我平时所运用的CRTP还要复杂，我之前用的CRTP最最复杂的是: `Derived-class-template-CRTP`，上面这种写法和 `Derived-class-template-CRTP`有些类似: 底层是一个class template。
+
+#### Weave multiple aspect
+
+> NOTE: 
+>
+> 1、当需要weave multiple aspect，此时需要将aspect list作为`Number`的template argument，那这如何实现呢？其实这就是问题所在，这对应下面的`  LogicalAspect<ArithmeticAspect<Number<??>>>` 中的 `??`。
+>
+> 后面的两种solution就是为了解决这个问题，显然，它 的实现是依赖于template alias的。
+>
+> 2、`Number`的完整definition依赖于aspects list、每个aspect又需要`Number`的完整definition，这就是前面所说的‘chicken or egg’ 
+
+This shows the weaving of a single aspect with CRTP, which works perfectly:
+
+```C++
+  LogicalAspect<ArithmeticAspect<Number<??>>>
+```
+
+On the other hand, this exposes the problem when trying to weave one additional aspect, since it requires a template template argument, which the aspects lists can’t grammatically fulfill as coded above.
+
+We present two solutions: the first being the simplest using C++11’s template alias [ [Reis ](https://accu.org/journals/overload/20/109/arregui_1916/#[Reis])], and the second using variadic templates (templates that take a variable number of arguments, recently introduced in C++11 [ [Gregor ](https://accu.org/journals/overload/20/109/arregui_1916/#[Gregor])]) as the only C++11’s feature, which in turn, can also be easily implemented in C++98 as well. Both use a common language idiom introduced next, which aims to be used as a library providing a friendly syntax and reduced reusable code.
 
 ### The proposed language idiom
+
+> NOTE: 
+>
+> 总的来说
+>
+> 1、C++ 11 template alias
+>
+> 2、Without template alias: type generator
+
+A possible solution would be to apply some handcrafted per-case base template aliases, as shown below:
 
 ```C++
   //with template alias:
@@ -142,7 +194,13 @@ and with minor changes in the Number
   >
 ```
 
+Although this does the trick it tends to be impractical, and also would increment linearly the number of related lines of code in terms of the amount of combinations to be used, which would cause a copy-paste code bloat.
 
+> NOTE: 
+>
+> 1、combination explode
+
+### Encapsulate the method into a library
 
 Therefore, in order to provide a user-oriented and easy to use library, we'll use C++11’s new variadic-templates so we can cleanly express our intention: to ‘decorate’ the base class with a list of aspects. An example of what we intend to achieve is shown below:
 
@@ -177,21 +235,9 @@ class Decorate
 	
 ```
 
+In both solutions, the `with `nested class and the `Apply `internal helper will have different implementations.
 
 
-
-
-
-
-Let’s see a final example, using two of the aspects mentioned before:
-
-```c++
-  typedef Decorate<Number>::with<ArithmeticAspect,
-            LogicalAspect>::Type
-			ArithmeticLogicalNumber;
-```
-
-Please note that both solutions presented before expose the same interface so this snippet is equally applicable to them.
 
 
 
@@ -227,6 +273,10 @@ struct Apply<A1, Aspects...>
 ```
 
 ## Solution 2: Not using C++11’s template alias
+
+> NOTE: 
+>
+> 1、它显然使用type generator idiom
 
 ### Combining aspects
 
@@ -267,10 +317,7 @@ Let’s see a final example, using two of the aspects mentioned before:
 			ArithmeticLogicalNumber;
 ```
 
+Please note that both solutions presented before expose the same interface so this snippet is equally applicable to them.
 
 
-## 总结
 
-1、所有的aspect都应该返回`FullType`
-
-2、mixin from above

@@ -16,6 +16,24 @@ https://www.fluentcpp.com/2017/08/08/metaclasses-ultimate-answer-strong-typing-c
 
 ## Implementation
 
+### Mixin from above
+
+1、Variadic inheritance
+
+2、CRTP mixin from above
+
+Example: 
+
 1、[joboccara](https://github.com/joboccara)/**[NamedType](https://github.com/joboccara/NamedType)**
 
 参见 `C++\Expert\Fluentcpp\joboccara-NamedType` 章节。
+
+### Mixin from below
+
+1、parameter base class
+
+2、CRTP
+
+Example:
+
+2、[hugoArregui](https://github.com/hugoArregui)/**[CPP_AOP-CRTP](https://github.com/hugoArregui/CPP_AOP-CRTP)**
