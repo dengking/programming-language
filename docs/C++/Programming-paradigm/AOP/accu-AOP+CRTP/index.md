@@ -2,7 +2,11 @@
 
 > NOTE: 
 >
-> 1、初读这篇文章是难以理解的，并且阅读它的source code也是不容易理解的
+> 初读这篇文章是难以理解的，并且阅读它的source code也是不容易理解的，理解本文的前提是:
+>
+> 1、对decorator pattern有一定了解
+>
+> 2、对AOP有一定了解，文章中会使用aspect list这样的概念。
 >
 > 
 
@@ -16,13 +20,19 @@ Aspect Oriented Programming (AOP) is a programming paradigm that makes possible 
 >
 > 1、composition: chain
 >
-> 2、通过后面的描述可以知道，它是通过inheritance来进行weave的、通过inheritance chain来构成aspect list
+> 2、通过后面的描述可以知道，它是通过inheritance来进行weave的、通过inheritance chain来构成**aspect list**，**aspect list**是非常重要的一个概念。
 >
-> 3、它的这种做法是比较类似于decorator pattern的
+> 3、它的这种做法是比较类似于decorator pattern的，添加aspect的过程相当于decorate的过程
 
 ## CRTP
 
 Independently, there are situations in which a base class needs to know its subclass, e.g. for type-safe downcasts. The Curiously Recurring Template Pattern (CRTP) is a C++ idiom in which a class `X` derives from a class template instantiation using `X` itself as template argument [ [Abrahams04 ](https://accu.org/journals/overload/20/109/arregui_1916/#[Abrahams04])]. This way, the base class can know the derived type.
+
+> NOTE: 
+>
+> 1、CRTP中，base class知道derived class，同时derived class也知道base class
+
+---
 
 Both AOP and the CRTP are widely adopted C++ programming techniques. In particular, there exists an AOP easy implementation using templates [ [Spinczyk05 ](https://accu.org/journals/overload/20/109/arregui_1916/#[Spinczyk05])]. However, a C++ grammar incompatibility(不相容) arises when combining AOP and CRTP. While there exists a C++ dialect called AspectC++ [ [Spinczyk05 ](https://accu.org/journals/overload/20/109/arregui_1916/#[Spinczyk05])], we don’t evaluate in this work its ability to combine AOP and CRTP since it requires its own compiler extensions and so its not standard C++. Here we look at a simple solution implemented in standard C++ that addresses the issue without any overhead penalty.
 
@@ -36,7 +46,7 @@ The code in Listing 1 shows an attempt of adding functionality, through aspects,
 
 > NOTE: 
 >
-> 1、这段话让我想到了decorator pattern
+> 1、这段话让我想到了decorator pattern，并且下面的code的comment中使用了"decorating"
 
 
 
@@ -80,7 +90,13 @@ typedef LogicalAspect
 >
 > 1、上述是典型的使用"Parameterized-Base-Class"的写法
 >
-> 2、每个aspect的base class，它从他的base class中取出`FullType` ，`FullType`其实就是concrete type
+> 2、每个aspect从他的base class中取出`FullType` ，`FullType`其实就是concrete type
+>
+> 3、`FullType` 正是问题的症结所在，如何来描述`FullType` 呢？本文后面就是对此进行说明。
+
+### 问题症结所在
+
+We can observe that the return type of `ArithmeticAspect`’s operator `+ `and `- `needs to know the ‘complete type’ ( `FULLTYPE `) when trying to extend the base class functionality through operator overloading. We will address this issue in the following sections.
 
 
 
@@ -90,11 +106,15 @@ The basic principle of this solution does not differ in essence from the traditi
 
 ### Problem
 
-`Number `takes the place of the last aspect in the **aspects list**. However, `Number `itself needs to know (as a template template argument) the aspects list, to which it itself belongs, leading to a ‘chicken or egg’ grammatical dilemma.
+`Number ` takes the place of the last aspect in the **aspects list**. However, `Number `itself needs to know (as a template template argument) the aspects list, to which it itself belongs, leading to a ‘chicken or egg’ grammatical dilemma.
 
 > NOTE: 
 >
 > 1、"dilemma"困境
+>
+> 2、上面这段话所描述的正是问题的症结:
+>
+> 
 
 
 
