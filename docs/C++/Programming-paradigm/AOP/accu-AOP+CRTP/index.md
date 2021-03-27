@@ -16,7 +16,15 @@ Both AOP and the CRTP are widely adopted C++ programming techniques. In particul
 
 ## A minimal solution
 
+The basic principle of this solution does not differ in essence from the traditional solution mentioned before.
 
+### Problem
+
+`Number `takes the place of the last aspect in the **aspects list**. However, `Number `itself needs to know (as a template template argument) the aspects list, to which it itself belongs, leading to a ‘chicken or egg’ grammatical dilemma.
+
+> NOTE: 
+>
+> 1、"dilemma"困境
 
 ## Problems combining AOP + CRTP
 
@@ -69,6 +77,8 @@ typedef LogicalAspect
 > NOTE:
 >
 > 1、上述是典型的使用"Parameterized-Base-Class"的写法
+>
+> 2、每个aspect的base class，它从他的base class中取出`FullType` ，`FullType`其实就是concrete type
 
 ### The proposed language idiom
 
@@ -218,3 +228,11 @@ Let’s see a final example, using two of the aspects mentioned before:
             LogicalAspect>::Type
 			ArithmeticLogicalNumber;
 ```
+
+
+
+## 总结
+
+1、所有的aspect都应该返回`FullType`
+
+2、mixin from above
