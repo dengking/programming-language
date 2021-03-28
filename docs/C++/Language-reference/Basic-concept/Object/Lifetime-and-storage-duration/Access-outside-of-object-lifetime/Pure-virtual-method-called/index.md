@@ -11,8 +11,9 @@
 
 使用一个网络库，这个网络库是基于callback模式的，该库需要developer创建继承自接口类`ICallback`的`Derived`类，并override其中的`OnConnect`、`OnReceive`、`OnClose`等方法；类`IConnection`表示网络连接，它的主要method：
 
-- `Create(ICallback* Callback)` 创建连接对象
-- `Send(const void* Data, int32_t Len)` 发送数据
+1、`Create(ICallback* Callback)` 创建连接对象
+
+2、`Send(const void* Data, int32_t Len)` 发送数据
 
 对于每个network connection，需要调用其`Create`方法向其注册`ICallback`类对象。这样关于这个network connection对象的消息，底层网络库就通过回调`ICallback`对象的成员方法通知到用户；
 
@@ -32,7 +33,7 @@
 
 下面这篇文章中反映的情况大致和我遇到的场景类似；
 
-### [GCC pure virtual method called](https://tombarta.wordpress.com/2008/07/10/gcc-pure-virtual-method-called/)
+### tombarta [GCC pure virtual method called](https://tombarta.wordpress.com/2008/07/10/gcc-pure-virtual-method-called/)
 
 I spent about two hours today trying to debug a **race condition** in a multi-threaded `C++` app today… definitely not a fun thing to do. 
 
@@ -105,6 +106,10 @@ So what’s the moral of the story? If you ever see the error message `pure virt
 
 - 使用virtual method来替换pure virtual method
 - 避免race condition
+
+
+
+
 
 ## constructor、destructor中调用pure virtual method
 
@@ -224,10 +229,7 @@ terminate called without an active exception
 
 
 
-### Analysis
+## TODO
 
-关于此的分析，在[Pure-Virtual-Function-Called](./Pure-Virtual-Function-Called.md)中进行描述。
+wiki.c2.com [Pure Virtual Function Called](https://wiki.c2.com/?PureVirtualFunctionCalled)
 
-
-
-### 如何修复？

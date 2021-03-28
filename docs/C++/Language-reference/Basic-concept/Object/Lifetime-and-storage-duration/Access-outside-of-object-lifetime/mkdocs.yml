@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
     - Pure-virtual-method-called: Pure-virtual-method-called
-    - Use-shared_ptr-to-solve-dangling-pointer: Use-shared_ptr-to-solve-dangling-pointer
+    - Multi-thread-and-observer-pattern: Multi-thread-and-observer-pattern
     - dangling-pointer-and-control-theory-and-reference-counting: dangling-pointer-and-control-theory-and-reference-counting.md

@@ -1,14 +1,6 @@
-# Pure Virtual Function Called
+# artima ["Pure Virtual Function Called": An Explanation](https://www.artima.com/cppsource/pure_virtual.html)
 
-
-
-## wiki.c2.com [Pure Virtual Function Called](https://wiki.c2.com/?PureVirtualFunctionCalled)
-
-
-
-## artima ["Pure Virtual Function Called": An Explanation](https://www.artima.com/cppsource/pure_virtual.html)
-
-### Object-Oriented C++: The Programmer's View
+## Object-Oriented C++: The Programmer's View
 
 ```c++
 class Shape
@@ -64,7 +56,7 @@ A *pure* virtual function is declared, but not necessarily defined, by a base cl
 
 > NOTE: 在某些情况下，pure virtual method是需要给出definition的。
 
-### Object Oriented C++: Under the Covers
+## Object Oriented C++: Under the Covers
 
 (You can skip this section if you already know what a "vtbl" is.)
 
@@ -82,7 +74,7 @@ If an **abstract class** with a **pure virtual function** doesn't define the fun
 
 **Figure 2. An abstract class's vtbl can have a pointer to a special function.**
 
-### Build 'em Up, Tear 'em Down
+## Build 'em Up, Tear 'em Down
 
 When you construct an instance of a derived class, what happens, exactly? If the class has a *vtbl*, the process goes something like the following.
 
@@ -112,7 +104,7 @@ Step 2: Destruct the base part(s) (recursively):
 2. Execute the body of the base class destructor.
 3. Destruct the base class instance member variables.
 
-### Two of the Classic Blunders（重大错误）
+## Two of the Classic Blunders（重大错误）
 
 What if you try to call a virtual function from a base class constructor?
 
@@ -150,7 +142,7 @@ Similarly, calling a virtual function indirectly from a base class destructor (s
 
 These are the most commonly described root causes of the "Pure Virtual Function Called" message. They're straightforward to diagnose from postmortem debugging; the stack trace will point clearly to the problem.
 
-### Pointing Out Blame
+## Pointing Out Blame
 
 There's at least one other problem that can lead to this message, which doesn't seem to be explicitly described anywhere in print or on the net. (There have been some discussions on the ACE mailing list that touch upon the problem but they don't go into detail.)
 
@@ -214,7 +206,7 @@ The last is an interesting case. What was the object "exactly the way it was"? I
 
 (Exercise for the reader: Imagine a function that, unwisely and unfortunately, returned a pointer or reference to a local variable. This is a different kind of dangling pointer. How could this also generate this message?)
 
-### Meanwhile, Back in the Real World
+## Meanwhile, Back in the Real World
 
 Nice theory. What happens in practice?
 
@@ -243,7 +235,7 @@ These were built and tested with several compilers (running on x86 Windows XP un
   - SPARC Solaris 8, gcc 3.2.2
   - PowerPC Mac OS X.4 (Tiger), gcc 3.3 / 4.0
 
-### Direct Invocation
+## Direct Invocation
 
 Some compilers recognized what was happening in the first two examples, with various results.
 
@@ -253,7 +245,7 @@ gcc 3.x and Digital Mars C/C++ compiler 8.42n rejected these programs, complaini
 
 Sun Studio 11 produced a warning, "Warning: Attempt to call a pure virtual function AbstractShape::area() const will always fail", but builds the programs. As promised, both crash, with the message, "Pure virtual function called".
 
-### Indirect Invocation
+## Indirect Invocation
 
 The next two examples built without warning for all compilers. (That's to be expected; this is not the kind of problem normally caught by static analysis.) The resulting programs all crashed, with various error messages:
 
@@ -267,7 +259,7 @@ The next two examples built without warning for all compilers. (That's to be exp
 
 ## [Example code](https://www.artima.com/forums/flat.jsp?forum=226&thread=196881)
 
-### Example program 1
+## Example program 1
 
 ```c++
 // Artima.com: The C++ Source: "Pure virtual function called",
