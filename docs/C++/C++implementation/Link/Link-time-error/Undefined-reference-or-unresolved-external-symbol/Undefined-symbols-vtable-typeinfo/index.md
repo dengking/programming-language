@@ -33,4 +33,22 @@ The `= 0` tells the compiler that this method must be overridden by a derived cl
 
 If the class contains any non-pure virtual functions, then the compiler will assume that they have an implementation somewhere, and its internal structures (vtable and typeinfo) might be generated in the same object file as one of those; if those functions are not implemented, then the internal structures will be missing and you will get these errors.
 
-## stackoverflow [Undefined reference to `typeinfo for class' and undefined reference to `vtable for class' [duplicate]](https://stackoverflow.com/questions/16460522/undefined-reference-to-typeinfo-for-class-and-undefined-reference-to-vtable-f)
+## TODO
+
+stackoverflow [Undefined reference to `typeinfo for class' and undefined reference to `vtable for class' [duplicate]](https://stackoverflow.com/questions/16460522/undefined-reference-to-typeinfo-for-class-and-undefined-reference-to-vtable-f)
+
+
+
+stackoverflow [g++ undefined reference to typeinfo](https://stackoverflow.com/questions/307352/g-undefined-reference-to-typeinfo)
+
+
+
+stackoverflow [C++: what are the causes of “ undefined reference to 'typeinfo for [class name]' ”other than virtual functions](https://stackoverflow.com/questions/11904519/c-what-are-the-causes-of-undefined-reference-to-typeinfo-for-class-name)
+
+
+
+generacodice [g++ undefined reference to typeinfo](https://www.generacodice.com/en/articolo/117232/g%2B%2B-undefined-reference-to-typeinfo)
+
+
+
+wellho [undefined reference to typeinfo - C++ error message](http://www.wellho.net/mouth/802_undefined-reference-to-typeinfo-C-error-message.html)

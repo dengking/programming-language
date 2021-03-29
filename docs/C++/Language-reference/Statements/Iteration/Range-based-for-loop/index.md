@@ -20,7 +20,7 @@ The [range-based `for` loop](http://en.cppreference.com/w/cpp/language/range-for
 
 
 
-## Example 1
+## Example
 
 
 
@@ -116,7 +116,7 @@ int main()
 
 
 
-## Example 2
+## Example 
 
 https://stackoverflow.com/a/7185723
 
@@ -208,7 +208,7 @@ int main()
 
 
 
-## Example 3
+## Example
 
 https://stackoverflow.com/a/8578101
 
@@ -257,6 +257,23 @@ int main()
 	return 0;
 }
 // g++ --std=c++11 test.cpp
+```
+
+## Example: 
+
+stackoverflow [Viewing a raw pointer as a range in range-based for-loop](https://stackoverflow.com/questions/28242073/viewing-a-raw-pointer-as-a-range-in-range-based-for-loop) # [A](https://stackoverflow.com/a/28242402)
+
+A workaround for what you want to do is just make a simple wrapper:
+
+```cpp
+template <typename T> 
+struct PtrWrapper {
+    T* p;
+    T* begin() const { return p; }
+    T* end() const { return p ? p+1 : nullptr; }
+};
+
+for (double& d : PtrWrapper<double>{dptr}) { .. }
 ```
 
 
