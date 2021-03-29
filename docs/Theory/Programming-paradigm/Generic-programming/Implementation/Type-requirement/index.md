@@ -24,7 +24,7 @@
 
 Python [Callable types](https://docs.python.org/3/reference/datamodel.html)
 
-Java [Interface Callable<V>](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html)
+Java [`Interface Callable<V>`](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html)
 
 C++ [named requirements: *Callable*](https://en.cppreference.com/w/cpp/named_req/Callable)
 
@@ -32,7 +32,7 @@ C++ [named requirements: *Callable*](https://en.cppreference.com/w/cpp/named_req
 
 Python [**iterable**](https://docs.python.org/3/glossary.html#term-iterable)
 
-Java [Interface Iterable<T>](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)
+Java [`Interface Iterable<T>`](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)
 
 C++？
 
@@ -82,7 +82,13 @@ callable
 
 通过上面的分析，我们已经知道Python able、C++ named requirement、Java generics本质上是相同的东西: specification of type requirement。
 
+### Ability
 
+1、"ability"的含义是"能力，能耐；才能"
+
+2、满足"`***able`"等价于具备`***ability`
+
+3、在`Assemble-ability`中，就运用了这个说法
 
 ## Type requirement is more about behavior-based
 

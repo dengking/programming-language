@@ -634,7 +634,9 @@ int main()
 
 ```
 
-> NOTE: 上述程序的输出如下:
+> NOTE: 
+>
+> 1、上述程序的输出如下:
 >
 > ```C++
 > virtual void Visible::draw()
@@ -643,6 +645,10 @@ int main()
 > virtual void Movable::update()
 > 
 > ```
+>
+> 2、上述程序，是典型的使用strategy pattern的
+>
+> 3、上述程序，体现了"assemble ability"
 
 
 
