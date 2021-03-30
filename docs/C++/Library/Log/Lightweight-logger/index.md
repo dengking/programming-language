@@ -25,6 +25,8 @@ LOG("Read failed: " << file << " (" << error << ")");
 
 The problem is that this causes the compiler to inline multiple `ostream::operator<<` calls. This increases the generated code and therefore function size, which I suspect may hurt **instruction cache performance** and hinder(阻碍) the compiler's ability to optimize the code.
 
+### SOLUTION #2: variadic template function
+
 Here's a "simple" alternative that replaces the inlined code with a call to a **variadic template function**:
 
 `***********SOLUTION #2: VARIADIC TEMPLATE FUNCTION***********`
@@ -74,8 +76,9 @@ The benefit is there are fewer instructions at each call site. The downside is t
 
 ```cpp
 LOG("Read failed: ", file, " (", error, ")");
-*********` **SOLUTION #3: EXPRESSION TEMPLATES** `*********
 ```
+
+### SOLUTION #3: EXPRESSION TEMPLATES
 
 At @DyP's suggestion I created an alternative solution that uses **expression templates**:
 
@@ -190,6 +193,10 @@ operator<<(std::ostream& os, const TPart& part)
 }
 ```
 
+> NOTE: 
+>
+> 1、关于上述程序的分析，参见下面的"SOLUTION #3: EXPRESSION TEMPLATES 完整程序"章节
+
 The expression templates solution allows the programmer to use the familiar convenient and type-safe streaming operators:
 
 ```cpp
@@ -302,3 +309,57 @@ call  void Log<pair<pair<pair<pair<None, char const*>, string const&>, char cons
 ```
 
 **Please let me know if you can think of any way to improve the performance or usability of this solution.**
+
+
+
+
+
+
+
+## SOLUTION #2完整程序
+
+```C++
+#include <sstream>
+
+#define LOG(...) LogWrapper(__FILE__, __LINE__, __VA_ARGS__)
+
+// Terminator
+void Log_Recursive(const char *file, int line, std::ostringstream &msg)
+{
+	std::cout << file << "(" << line << "): " << msg.str() << std::endl;
+}
+
+// "Recursive" variadic function
+template<typename T, typename ... Args>
+void Log_Recursive(const char *file, int line, std::ostringstream &msg, T value, const Args &... args)
+{
+	msg << value;
+	Log_Recursive(file, line, msg, args...);
+}
+
+// Log_Recursive wrapper that creates the ostringstream
+template<typename ... Args>
+void LogWrapper(const char *file, int line, const Args &... args)
+{
+	std::ostringstream msg;
+	Log_Recursive(file, line, msg, args...);
+}
+```
+
+## SOLUTION #3: EXPRESSION TEMPLATES 完整程序
+
+1、composition chain
+
+```C++
+#define LOG(msg) Log(__FILE__, __LINE__, Part<bool, bool>() << msg)
+```
+
+会被替换为:
+
+```C++
+Log("test.cpp", 129, Part<bool, bool>() << "Read failed: " << file << " " << error)
+```
+
+
+
+形成了一个chain、list
