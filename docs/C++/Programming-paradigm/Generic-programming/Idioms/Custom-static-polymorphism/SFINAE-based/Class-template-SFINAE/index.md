@@ -103,6 +103,44 @@ If you want to simply prevent a template from being instantiated for certain tem
 
 2、它是基于partial template specialization
 
+
+
+## 其他的实现模式
+
+### [jni.hpp](https://github.com/mapbox/jni.hpp)/[include](https://github.com/mapbox/jni.hpp/tree/master/include)/[jni](https://github.com/mapbox/jni.hpp/tree/master/include/jni)/[tagging.hpp](https://github.com/mapbox/jni.hpp/blob/master/include/jni/tagging.hpp)
+
+```C++
+template<class Tag, class = int>
+struct SuperTag
+{
+	using Type = ObjectTag;
+};
+
+template<class Tag>
+struct SuperTag<Tag, decltype(std::declval<typename Tag::SuperTag>(), 0)>
+{
+	using Type = typename Tag::SuperTag;
+};
+
+```
+
+### [ricab](https://github.com/ricab)/**[scope_guard](https://github.com/ricab/scope_guard)**/[scope_guard.hpp](https://github.com/ricab/scope_guard/blob/master/scope_guard.hpp)
+
+```C++
+    // Type trait determining whether a type is callable with no arguments
+    template<typename T, typename = void>
+    struct is_noarg_callable_t
+      : public std::false_type
+    {}; // in general, false
+
+    template<typename T>
+    struct is_noarg_callable_t<T, decltype(std::declval<T&&>()())>
+      : public std::true_type
+    {}; // only true when call expression valid
+```
+
+
+
 ## Application
 
 1、Class template SFINAE是实现trait的基础。

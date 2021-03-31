@@ -363,3 +363,18 @@ Log("test.cpp", 129, Part<bool, bool>() << "Read failed: " << file << " " << err
 
 
 形成了一个chain、list
+
+2、recursion
+
+```C++
+    std::ostream& output(std::ostream& os) const
+    {
+        if (prev)
+            os << *prev;
+        if (value)
+            os << *value;
+        return os;
+    }
+```
+
+通过`prev` pointer，能够从tail逐步找到head。
