@@ -1,20 +1,20 @@
 # Input/output library
 
-C的IO library是基于stream的，可以说它将stream的概念发扬光大了，C++的I/O library继承了C的IO library，以OOP + TMP的方式对其进行了wrap。
+一、C的IO library是基于stream的，可以说它将stream的概念发扬光大了，C++的I/O library继承了C的IO library，以OOP + TMP的方式对其进行了wrap。
 
 > NOTE: 关于wrap，参见`C-and-C++\Wrapper`
 
-在APUE的《5 Standard I/O Library》中对stream-based I/O进行了非常详细的分析，所以首先阅读APUE的《5 Standard I/O Library》能够帮助理解C++的io library。下面是一些关键性地思想：
+二、在APUE的《5 Standard I/O Library》中对stream-based I/O进行了非常详细的分析，所以首先阅读APUE的《5 Standard I/O Library》能够帮助理解C++的io library。下面是一些关键性地思想：
 
-APUE的《5.2  Streams and FILE Objects》: 描述了stream的概念。
+三、APUE的《5.2  Streams and FILE Objects》: 描述了stream的概念。
 
 > When we open or create a file with the standard I/O library, we say that we have associated a stream with the file.
 
-APUE的《5.4  Buffering》
+四、APUE的《5.4  Buffering》
 
 > The goal of the buffering provided by the standard I/O library is to use the minimum number of `read` and `write` calls. (Recall Figure 3.6, which showed the amount of CPU time required to perform I/O using various buffer sizes.) Also, this library tries to do its buffering automatically for each I/O stream, obviating the need for the application to worry about it.
 
-stream-based IO往往是采用buffering策略，c++ IO library也是如此，buffer相关的内容将在`Buffer.md`中进行总结。
+stream-based IO往往是采用buffering策略，c++ IO library也是如此，buffer相关的内容将在`Buffer`中进行总结。
 
 ## cppreference [Input/output library](Input/output library)
 
@@ -24,17 +24,23 @@ stream-based IO往往是采用buffering策略，c++ IO library也是如此，buf
 
 The stream-based input/output library is organized around abstract input/output devices. These abstract devices allow the same code to handle input/output to **files**, **memory streams**, or **custom adaptor devices** that perform arbitrary operations (e.g. compression) on the fly.
 
-> NOTE: abstraction的威力
+> NOTE: 
+>
+> 1、abstraction的威力
+>
+> 2、stream is a good abstraction
 
 Most of the classes are templated, so they can be adapted to any **basic character type**. Separate typedefs are provided for the most common basic character types (`char` and `wchar_t`). 
 
-> NOTE: 上面强调“Most of the classes are templated, so they can be adapted to any **basic character type**”，那这是否说明C++的Stream-based I/O library只能够是character stream呢？这个问题需要结合character stream和byte stream之间的差异、c++ I/O的实现来谈。
+> NOTE: 
+>
+> 一、上面强调“Most of the classes are templated, so they can be adapted to any **basic character type**”，那这是否说明C++的Stream-based I/O library只能够是character stream呢？这个问题需要结合character stream和byte stream之间的差异、c++ I/O的实现来谈。
 >
 > 在工程[Linux-OS](https://dengking.github.io/Linux-OS/)的`Programming\IO\IO-流派\Stream`章节中对“character stream和byte stream之间的差异”进行了总结：
 >
 > > byte stream的unit是byte，character stream的unit是character；一个character由一个或者多个byte组成。
 >
-> 上面所述的**basic character type**其实包含了：
+> 二、上面所述的**basic character type**其实包含了：
 >
 > - `char`
 > - `wchar_t`
@@ -43,7 +49,7 @@ Most of the classes are templated, so they can be adapted to any **basic charact
 >
 > 显然，`char`其实对应的byte，而其它更宽的char类型对应的是character。显然c++的I/O通过抽象`CharT`，实现了同时支持**byte stream**、**character stream**。
 >
-> [`std::basic_ios`](https://en.cppreference.com/w/cpp/io/basic_ios)的声明如下：
+> 三、[`std::basic_ios`](https://en.cppreference.com/w/cpp/io/basic_ios)的声明如下：
 >
 > ```c++
 > template<

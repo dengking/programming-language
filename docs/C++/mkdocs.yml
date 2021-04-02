@@ -11,7 +11,7 @@ nav:
     - Standard-library: Standard-library
     # c++中的库
     - Library: Library
-    - My-library: My-library
+    # - My-library: My-library
     # c++的哲学
     - Philosophy: Philosophy
 

@@ -5,3 +5,4 @@ nav:
     - Stream-operation: Stream-operation.md
     - Predefined-standard-stream-objects: Predefined-standard-stream-objects
     - String-IO: String-IO
+    - Custom-input-output-operator: Custom-input-output-operator

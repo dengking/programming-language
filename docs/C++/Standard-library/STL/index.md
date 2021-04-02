@@ -88,26 +88,28 @@ Stroustrup的这篇文章介绍地也比较好。
 
 ### Design pattern
 
-STL中使用到的一些design pattern。在[design patterns used in STL(standard template library)](https://stackoverflow.com/questions/2698474/design-patterns-used-in-stlstandard-template-library)中给出了较好的分析：
+STL中使用到的一些design pattern。
 
-> The STL stack is a container adapter. An adapter is a design pattern. The iterator is also a design pattern. The STL function objects are related to the command pattern.
->
-> Patterns:
->
-> 1. Adapter (container adapters)
->    - stack
->    - queues
->    - priority queues
-> 2. Iterator
-> 3. Command + Adapter (function adapters)
-> 4. Iterator + Adapter (iterator adapters)
->    - reverse iterators
->    - insert iterators
->    - stream iterators
-> 5. Template Method (STL algorithms using user-specified functions)
-> 6. Which creational pattern? (Allocators)
->
-> The way these patterns are implemented is very different from the way they are implemented in an object oriented design. Josuttis wrote "the STL concept contradicts the original idea of object-oriented programming". This is what is causing the confusion around your question.
+#### stackoverflow [design patterns used in STL(standard template library)](https://stackoverflow.com/questions/2698474/design-patterns-used-in-stlstandard-template-library)
+
+The STL stack is a container adapter. An adapter is a design pattern. The iterator is also a design pattern. The STL function objects are related to the command pattern.
+
+Patterns:
+
+1、Adapter (container adapters)
+    - stack
+        - queues
+        - priority queues
+2、Iterator
+3、Command + Adapter (function adapters)
+4、Iterator + Adapter (iterator adapters)
+        - reverse iterators
+        - insert iterators
+        - stream iterators
+5、Template Method (STL algorithms using user-specified functions)
+6、Which creational pattern? (Allocators)
+
+The way these patterns are implemented is very different from the way they are implemented in an object oriented design. Josuttis wrote "the STL concept contradicts the original idea of object-oriented programming". This is what is causing the confusion around your question.
 
 #### Iterator pattern
 

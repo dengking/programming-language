@@ -7,7 +7,7 @@
 | input stream  | [std::basic_istream](https://en.cppreference.com/w/cpp/io/basic_istream) | get area    |
 | output stream | [std::basic_ostream](https://en.cppreference.com/w/cpp/io/basic_ostream) | put area    |
 
-关于buffer area，参见`./Buffer.md`。
+关于buffer area，参见`./Buffe`。
 
 
 
@@ -70,7 +70,7 @@ stackoverflow [remove char from stringstream and append some data](https://stack
 
 
 
-my example: 从`std::stringstream`中将最后一个元素剔除: 
+### Example: 从`std::stringstream`中将最后一个元素剔除: 
 
 ```C++
 	static std::string Create(const char *TableName, const CStructRtti *StructRtti)

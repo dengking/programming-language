@@ -6,6 +6,7 @@ nav:
     - Plugin-system: Plugin-system.md
     - Abseil: Abseil
     - Log: Log
+    - fmt: fmt
     - Math: Math
     - Partow: Partow
     - Configuration: Configuration

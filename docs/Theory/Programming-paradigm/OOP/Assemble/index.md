@@ -41,42 +41,13 @@
 
 在`Theory\Programming-paradigm\Object-oriented-programming\Assemble\Composition\index.md`中将具体介绍如何来实现这一点。
 
+
+
+
+
 ## TODO 基于“结构化思维”来分析assemble
 
 > 这段标题加一个TODO意在体现，这部分内容没有整理好，需要进一步整理
 
 本章讨论的“assemble”对应了一种relation，这就提示了我们需要使用“结构化思维”来进行分析OOP相关的问题。
 
-### 基于inheritance关系来思考
-
-OOP中的inheritance关系是典型的**nesting关系**，因此它能够呈现出hierarchy structure（如果仅仅允许single-inheritance的话，则是tree），这就是我们常说的**class hierarchy** ，这是典型的以**结构化思维**来进行思考，基于class hierarchy structure来思考OOP中的内容，能够让我们快速的理解OOP中的许多内容，具体分析如下：
-
-> TODO 需要补充一些关于class hierarchy的文章的链接
-
-
-
-#### Hierarchy-based implementation
-
-本节标题的含义是：基于hierarchy的实现，OOP中的很多内容都是基于hierarchy来实现的：
-
-##### Initialization  and deinitialization  order
-
-|                                            | 说明                                                       |
-| ------------------------------------------ | ---------------------------------------------------------- |
-| initialization order（construction order） | object的构造，涉及基类的构造，这就涉及initialization order |
-| deinitialization/destruction order         | object                                                     |
-
-> TODO 需要添加C++中的的链接
-
-
-
-##### Implementation of polymorphism
-
-function find order：沿着hierarchy进行搜索。
-
-需要结合Python、C++的implementation来进行说明：
-
-- C++ vtable
-- Python C3 serialization
-
-> TODO 需要添加链接
