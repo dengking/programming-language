@@ -4,4 +4,4 @@
 
 
 
-## 维基百科[Variadic function](https://en.wikipedia.org/wiki/Variadic_function)
+## wikipedia [Variadic function](https://en.wikipedia.org/wiki/Variadic_function)

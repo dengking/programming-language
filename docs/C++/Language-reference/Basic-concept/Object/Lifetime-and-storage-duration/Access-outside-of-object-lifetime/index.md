@@ -46,10 +46,6 @@ local object也是比较如意导致access outside of object lifetime的。
 
 
 
-
-
-
-
 ## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) # [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
 
 > NOTE: 这是一种常见的error，这种error是和lifetime相关的
