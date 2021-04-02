@@ -18,10 +18,13 @@ accu [CURIOUSLY RECURSIVE TEMPLATE PROBLEMS WITH ASPECT ORIENTED PROGRAMMING](ht
 
 5、`Decorator-pattern`
 
+6、`Protocol-parsing-library`
+
 ## Composition over inheritance
 
 Assemble ability体现了Composition over inheritance。
 
-## Orthogonality
+## Orthogonality、Separation of concern
 
 Assemble ability和orthogonality有一定关联。
+

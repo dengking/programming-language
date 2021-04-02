@@ -40,7 +40,7 @@ transform(v.begin(), v.end(), w.begin(), [](int x) {
 
 1、Sorting: compare function
 
-2、Find, copy_if: predicate function
+2、Find, `copy_if`: predicate function
 
 3、Accumulate: binary function
 
@@ -61,9 +61,21 @@ v.erase(remove_if(v.begin(), v.end(),
 
 ```
 
-> NOTE:上面这段代码是什么意思？
+> NOTE:
+>
+> 1、上面这段代码是什么意思？
+>
+> 删除大于`-10`且小于`10`的元素。
+>
+> 
 
+## Future
 
+Channel for passing data (John Reppy, ML)
+
+1、Promise
+
+2、Future
 
 ## Library Design
 
