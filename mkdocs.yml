@@ -433,13 +433,15 @@ nav:
             - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Thread-local-storage-duration/index.md
           - Access-outside-of-object-lifetime:
             - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/index.md
+            - Case-example:
+              - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Case-example/index.md
+            - Multi-thread-and-observer-pattern:
+              - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/index.md
+              - Example: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/Example.md
             - Pure-virtual-method-called:
               - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/index.md
               - artima-Pure-Virtual-Function-Called-An-Explanation:
                 - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/artima-Pure-Virtual-Function-Called-An-Explanation/index.md
-            - Multi-thread-and-observer-pattern:
-              - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/index.md
-              - Example: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/Example.md
         - Layout:
           - Object-layout: C++/Language-reference/Basic-concept/Object/Layout/Object-layout.md
           - Trivial: C++/Language-reference/Basic-concept/Object/Layout/Trivial.md
@@ -648,8 +650,6 @@ nav:
           - Wrapper: C++/Language-reference/Functions/First-class-function/Wrapper/index.md
         - Member-function-as-first-class-function:
           - Introduction: C++/Language-reference/Functions/First-class-function/Member-function-as-first-class-function/index.md
-          - Pointer-to-member-function:
-            - Introduction: C++/Language-reference/Functions/First-class-function/Member-function-as-first-class-function/Pointer-to-member-function/index.md
       - Generic-programming:
         - Introduction: C++/Language-reference/Functions/Generic-programming/index.md
         - TODO-Function-as-template-parameter:
@@ -1464,18 +1464,20 @@ nav:
       - Pre-C++20-concept:
         - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/index.md
         - ConceptC++: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/ConceptC++.md
+        - Detection-idiom:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection-idiom/index.md
+          - More-C++Idioms-Member-Detector:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection-idiom/More-C++Idioms-Member-Detector/index.md
+          - Detect-whether-a-type-is-defined:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection-idiom/Detect-whether-a-type-is-defined/index.md
+          - tartanllama-Detection-Idiom-A-Stopgap-for-Concepts:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection-idiom/tartanllama-Detection-Idiom-A-Stopgap-for-Concepts/index.md
+          - Ben-C++Detection-Idiom-Through-the-Years:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection-idiom/Ben-C++Detection-Idiom-Through-the-Years/index.md
+          - Control-ambiguity-SFINAE-fallback:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection-idiom/Control-ambiguity-SFINAE-fallback/index.md
         - std-declval:
           - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/std-declval/index.md
-        - Detection:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/index.md
-          - More-C++Idioms-Member-Detector:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/More-C++Idioms-Member-Detector/index.md
-          - Detect-whether-a-type-is-defined:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/Detect-whether-a-type-is-defined/index.md
-          - tartanllama-Detection-Idiom-A-Stopgap-for-Concepts:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/tartanllama-Detection-Idiom-A-Stopgap-for-Concepts/index.md
-          - Ben-C++Detection-Idiom-Through-the-Years:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/Detection/Ben-C++Detection-Idiom-Through-the-Years/index.md
         - static_assert:
           - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/static_assert/index.md
       - C++20-concept:
@@ -1652,7 +1654,6 @@ nav:
           - Introduction: C++/Idiom/Generic-programming/CRTP/Derived-class-template-CRTP/index.md
       - Expression-Template:
         - Introduction: C++/Idiom/Generic-programming/Expression-Template/index.md
-        - Smart-expression-template: C++/Idiom/Generic-programming/Expression-Template/Smart-expression-template.md
       - Recursive-Type-Composition:
         - Introduction: C++/Idiom/Generic-programming/Recursive-Type-Composition/index.md
       - Metafunction:
@@ -1798,6 +1799,12 @@ nav:
           - Conversion: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Conversion.md
           - Pointer-length:
             - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-length/index.md
+          - Pointer-to-member:
+            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-member/index.md
+            - Pointer-to-member-function:
+              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-member/Pointer-to-member-function/index.md
+            - std-is_member_function_pointer:
+              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-member/std-is_member_function_pointer/index.md
         - Array:
           - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/index.md
           - stackoverflow-How-do-I-use-array-in-C++:
@@ -2188,6 +2195,14 @@ nav:
       - One-pass-compiler: C++/C++implementation/Phases-of-translation/One-pass-compiler.md
     - Preprocess:
       - Introduction: C++/C++implementation/Preprocess/index.md
+      - Predefined-macros:
+        - Introduction: C++/C++implementation/Preprocess/Predefined-macros/index.md
+      - Language-feature-testing-macros:
+        - Introduction: C++/C++implementation/Preprocess/Language-feature-testing-macros/index.md
+      - Replacing-text-macros:
+        - Introduction: C++/C++implementation/Preprocess/Replacing-text-macros/index.md
+      - Implementation-defined-behavior-control:
+        - Introduction: C++/C++implementation/Preprocess/Implementation-defined-behavior-control/index.md
       - include-guard-and-pragma-once:
         - Introduction: C++/C++implementation/Preprocess/include-guard-and-pragma-once/index.md
       - Macro:

@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Pointer-to-member-function: Pointer-to-member-function    
+    - std-is_member_function_pointer: std-is_member_function_pointer

@@ -249,7 +249,9 @@ false
 
 ### 封装为macro
 
-#### 参考程序
+#### 参考程序: maddouri gist [has_member.hpp](https://gist.github.com/maddouri/0da889b331d910f35e05ba3b7b9d869b#file-has_member-hpp)
+
+
 
 ```C++
 #include <iostream>

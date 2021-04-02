@@ -494,7 +494,7 @@ Trait是典型的metafunction(参见`C++\Idiom\Templates-and-generic-programming
 
 ### Primary class template and specialization  
 
-在[An introduction to C++ Traits](https://accu.org/index.php/journals/442)有这样的一段话：
+一、在[An introduction to C++ Traits](https://accu.org/index.php/journals/442)有这样的一段话：
 
 > First, **a generic template** is defined that implements the **default behaviour**.
 
@@ -507,6 +507,8 @@ trait class往往会定义一个template class（primary class template ），�
 1、cppreference [explicit (full) template specialization](https://en.cppreference.com/w/cpp/language/template_specialization)
 
 2、cppreference [partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)
+
+二、需要对compiler compile template，尤其是template specialization的机制有一个认识，参见 `Compile-template` 章节。
 
 
 

@@ -1,15 +1,15 @@
 # Specialization
 
-本文主要给出template specializaiton的例子，关于实现，在`C++\Guide\Implementation-of-polymorphism`中进行了解释；
+本文主要给出template specializaiton的例子，关于实现，在`Compile-template`中进行了解释；
 
 ## Primary template and template specialization
 
 primary template和template specialization是两个相对的概念，关于两者之间的关系，在下面章节中进行了介绍:
 
-| 路径                                             | 章节                                                    | 观点                                                         |
-| ------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ |
-| `C++\Language-reference\Template\Implementation` | Partial template specialization是primary template的附庸 | Partial template specialization是primary template的附庸      |
-| `C++\Guide\Polymorphism`                         |                                                         | Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**） |
+| 路径                     | 章节                                                    | 观点                                                         |
+| ------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ |
+| `Compile-template`       | Partial template specialization是primary template的附庸 | Partial template specialization是primary template的附庸      |
+| `C++\Guide\Polymorphism` |                                                         | Overload、specialization、subclass都是对某种“特殊情况的说明”（即**最最特殊的实现**） |
 
 
 
@@ -53,9 +53,11 @@ int main()
 
 ### Examples
 
+理解下面这些example的前提是理解compiler compile template specialization的流程，参见 `Compile-template` 章节。
+
 #### `is_pointer`: specialization of pointer type
 
-accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442)
+accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442) 
 
 ```c++
 #include <iostream>
@@ -83,6 +85,8 @@ int main()
 }
 
 ```
+
+
 
 #### [`remove_reference`](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/std/type_traits): specialization of reference type
 

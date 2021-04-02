@@ -60,7 +60,7 @@ async([this]()
 
 ### 使用pointer to member function
 
-参见`./Pointer-to-member-function`。
+参见`Pointer-to-member-function`。
 
 
 

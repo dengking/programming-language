@@ -12,3 +12,9 @@
 1、`Detection`
 
 2、可以使用trait来实现static reflection，用于判断type
+
+## 如何书写valid expression？
+
+1、如果有object，则使用这个object来写valid expression
+
+2、如果没有object，则使用`std::declval`来模拟object，然后写valid expression

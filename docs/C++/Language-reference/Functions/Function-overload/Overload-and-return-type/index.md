@@ -69,9 +69,9 @@ public:
 
 Extend it to as many types as you need.
 
+## 模拟overload by return type
 
-
-## 模板化 + SFINAE 实现 "constexpr if"，达到 overload by return type的效果
+### 模板化 + SFINAE 实现 "constexpr if"，达到 overload by return type的效果
 
 下面是我第一次写的program: 
 
@@ -137,6 +137,14 @@ struct GenericUnpackerFactory
 ```
 
 
+
+### Detection idiom
+
+Detection idiom的实现，有点类似于overload by return type，参见: 
+
+1、More C++ Idioms/[Member Detector](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Member_Detector)
+
+收录于`More-C++Idioms-Member-Detector`章节。
 
 ## TODO
 

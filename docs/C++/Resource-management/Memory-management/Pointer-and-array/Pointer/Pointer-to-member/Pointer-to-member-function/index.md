@@ -153,3 +153,14 @@ int main()
 >
 > b、OOP interface + template implementation
 
+
+
+
+
+## Template pointer to member function
+
+1、github [macmade](https://github.com/macmade)/**[CPPTraits](https://github.com/macmade/CPPTraits)**
+
+2、cppreference [std::is_member_function_pointer](https://en.cppreference.com/w/cpp/types/is_member_function_pointer)
+
+3、sourcemaking [Adapter in C++: External Polymorphism](https://sourcemaking.com/design_patterns/adapter/cpp/2)

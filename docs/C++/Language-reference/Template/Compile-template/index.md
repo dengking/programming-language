@@ -184,7 +184,9 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 
 1、compiler会逐个substitute Primary Class Template、Specialized Class Template
 
-2、首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用它
+2、首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用它；
+
+如果存在template specialization，则将根据Primary Class Template得到的**template parameter list**代入到template specialization中，如果template specialization能够匹配**template parameter list**，那么它就是一个有效的，在后面的比较中，会考虑这个template specialization。需要注意的是: compiler会根据**template parameter list**来推导出template specialization的template argument，这个过程非常重要( 典型的案例是 stackoverflow [Check if a class has a member function of a given signature](https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature) # [A](https://stackoverflow.com/a/16824239)  )。将template parameter list代入到template specialization中，然后进行匹配的过程，是需要结合具体的案例来进行理解的，后面的"案例学习: template specialization and trait"章节中，就收录非常具有代表性的例子。
 
 3、优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization，即compiler会优先选择 "Specialized Class Template specialization"，这就是一次多态
 
@@ -360,9 +362,165 @@ int main()
 
 > NOTE: 上述过程没有理解
 
-## 3 SFINAE
+### 案例学习: template specialization and trait
 
-SFINAE是C++ template的重要机制，在`SFINAE`中对SFINAE进行了深入分析。
+要想完整地理解compiler编译"Primary template and template specializaiton"的过程，还需要结合具体的案例，最最典型的案例就是基于template specialization来实现trait，下面是一些具体案例: 
+
+#### accu [An introduction to C++ Traits](https://accu.org/index.php/journals/442) # `is_pointer`
+
+```C++
+#include <iostream>
+
+template<typename T>
+struct is_pointer
+{
+	static const bool value = false;
+};
+
+template<typename T>
+struct is_pointer<T*>
+{
+	static const bool value = true;
+};
+
+int main()
+{
+	// for any type T other than void, the
+	// class is derived from false_type
+	std::cout << is_pointer<char>::value << '\n';
+	// but when T is void, the class is derived
+	// from true_type
+	std::cout << is_pointer<void*>::value << '\n';
+}
+
+```
+
+1、`is_pointer<void*>` 根据 primary template 得到的 template parameter list是: `void*`
+
+2、将template parameter list `void*` 代入到template specialization中，能够正常匹配因此，这个specialization是一个有效的specialization。
+
+```C++
+template<typename T>
+struct is_pointer<T*>
+```
+
+3、比较，显然会选择 specialization `is_pointer<T*>`
+
+#### cppreference [std::is_member_function_pointer](https://en.cppreference.com/w/cpp/types/is_member_function_pointer)
+
+```C++
+#include<type_traits>
+template<class T>
+struct is_member_function_pointer_helper: std::false_type
+{
+};
+
+template<class T, class U>
+struct is_member_function_pointer_helper<T U::*> : std::is_function<T>
+{
+};
+
+template<class T>
+struct is_member_function_pointer: is_member_function_pointer_helper<typename std::remove_cv<T>::type>
+{
+};
+class A {
+public:
+    void member() { }
+};
+ 
+int main()
+{
+    // fails at compile time if A::member is a data member and not a function
+    static_assert(std::is_member_function_pointer<decltype(&A::member)>::value,
+                  "A::member is not a member function."); 
+}
+```
+
+
+
+#### stackoverflow [Check if a class has a member function of a given signature](https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature) # [A](https://stackoverflow.com/a/16824239)
+
+
+
+```C++
+#include <type_traits>
+#include <iostream>
+// Primary template with a static assertion
+// for a meaningful error message
+// if it ever gets instantiated.
+// We could leave it undefined if we didn't care.
+
+template<typename, typename T>
+struct has_serialize
+{
+	static_assert(std::integral_constant<T, false>::value, "Second template parameter needs to be of function type.");
+};
+
+// specialization that does the checking
+template<typename C, typename Ret, typename ... Args>
+struct has_serialize<C, Ret(Args...)>
+{
+private:
+	template<typename T>
+	static constexpr auto check(T*) -> typename
+	std::is_same<
+	decltype( std::declval<T>().serialize( std::declval<Args>()... ) ),
+	Ret    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+					>::type;// attempt to call it and see if the return type is correct
+
+	template<typename >
+	static constexpr std::false_type check(...);
+
+	typedef decltype(check<C>(0)) type;
+
+public:
+	static constexpr bool value = type::value;
+};
+
+struct X
+{
+	int serialize(const std::string&)
+	{
+		return 42;
+	}
+};
+
+struct Y: X
+{
+};
+
+struct Z
+{
+};
+int main()
+{
+	std::cout << has_serialize<Y, int(const std::string&)>::value << std::endl; // will print 1
+	std::cout << has_serialize<Z, int(const std::string&)>::value << std::endl; // will print 1
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+1、`has_serialize<Y, int(const std::string&)>`根据 primary template 得到的 template parameter list是 `int(const std::string&)>`
+
+2、将template parameter list `int(const std::string&)>`代入到template specialization中，能够正常匹配因此，这个specialization是一个有效的specialization。
+
+```C++
+template<typename C, typename Ret, typename ... Args>
+struct has_serialize<C, Ret(Args...)>
+{
+};
+```
+
+compiler能够根据 template parameter list 推到出template specialization的parameter `C`、`Ret`、`Args` 的argument。
+
+
+
+
+## SFINAE
+
+SFINAE是C++ template的重要机制，在`SFINAE`章节中对SFINAE进行了深入分析。
 
 
 
@@ -431,6 +589,8 @@ The template argument list `<A>` is compared to the **template parameter list** 
 > 2、compiler会编译source file，source file中，会`include`定义了primary class template、specialized class template 的header file，所以compiler会同时看到primary class template、specialized class template，并且primary class template在specialized class template之前。
 >
 > 3、上面这段话中的**template parameter list**非常重要，后面会使用给它。
+
+
 
 ### 2、Specialized Class Template
 
