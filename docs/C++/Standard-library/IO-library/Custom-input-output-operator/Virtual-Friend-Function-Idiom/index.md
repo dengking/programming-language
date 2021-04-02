@@ -69,3 +69,11 @@ int main()
 ### References
 
 - [Virtual friend function idiom](http://www.parashift.com/c++-faq-lite/friends.html#faq-14.3), Marshall Cline
+
+
+
+## 我的实践
+
+### `My-library/Protocol-parsing-library`
+
+使用virtual friend function idiom，overload `<<` operator，能够避免书写大量的重复code。
