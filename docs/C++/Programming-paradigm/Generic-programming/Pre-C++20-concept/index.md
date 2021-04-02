@@ -18,3 +18,5 @@
 1、如果有object，则使用这个object来写valid expression
 
 2、如果没有object，则使用`std::declval`来模拟object，然后写valid expression
+
+这在 `std-declval` 章节中，也进行了总结。
