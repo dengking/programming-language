@@ -1,6 +1,6 @@
 # Method resolution order
 
-1、class hierarchy是典型的non-linear structure，method resolution order是对它的traverse，显然method resolution order是一个linear structure
+1、需要按照在 `Class-relation-hierarchy-diagram` 章节中总结的"Ordering Structuralization"思路来进行理解。class hierarchy是典型的non-linear structure，method resolution order是对它的traverse，显然method resolution order是一个linear structure
 
 2、在使用method resolution order来实现dynamic polymorphism的时候，往往是自底向上的: 即从most derived class开始，逐级向上进行search，显然这是符合polymorphism的要求的。
 
