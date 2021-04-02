@@ -1,6 +1,8 @@
 # `std::declval`
 
-`std::declval`是经常和`decltype`一起使用的。
+1、`std::declval`是经常和`decltype`一起使用的。
+
+2、当有object的时候，在expression SFINAE中，可以直接书写valid expression；当没有object，只有type的时候，在expression SFINAE中，需要使用`std::declval`
 
 ## boost [Declval](https://www.boost.org/doc/libs/1_54_0/libs/utility/doc/html/declval.html)
 

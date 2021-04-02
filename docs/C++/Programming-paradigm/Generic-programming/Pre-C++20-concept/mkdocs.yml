@@ -2,7 +2,7 @@ nav:
     - Introduction: index.md
     # 这篇文章从generic programming的角度来分析c++concept特性    
     - ConceptC++: ConceptC++.md
+    - Detection-idiom: Detection-idiom    
     - std-declval: std-declval
-    - Detection: Detection
     - static_assert: static_assert
     

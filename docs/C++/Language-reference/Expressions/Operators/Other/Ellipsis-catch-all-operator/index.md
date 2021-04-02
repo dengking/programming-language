@@ -16,9 +16,7 @@
 >
 > 1、其实涉及了`...`
 
-## 用法
-
-### Catch-all exception
+## 用法1: Catch-all exception
 
 stackoverflow [C++ catching all exceptions](https://stackoverflow.com/questions/315948/c-catching-all-exceptions)
 
@@ -80,7 +78,7 @@ int main()
 
 
 
-### Catch-all argument /  **ellipsis parameter**
+## 用法2: Catch-all argument/ellipsis parameter/used as the catch-all fallbacks in [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae)
 
 这主要对应的是这种情况:
 
@@ -90,16 +88,21 @@ a(...)
 
 是通过学习detection idiom发现了这种用法的。
 
-#### 标准
+### 标准
 
 按照C++标准的说法，它叫做Variadic arguments，在cppreference的下列章节中对它进行了描述：
 
-- cppreference Variadic arguments中对它进行了专门描述
-- cppreference Overload resolution`#`Viable functions中将它称为 **ellipsis parameter**
+1、cppreference [Variadic arguments](https://en.cppreference.com/w/cpp/language/variadic_arguments)中对它进行了专门描述
+
+Because variadic parameters have the lowest rank for the purpose of [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), they are commonly used as the catch-all fallbacks in [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae).
+
+2、cppreference Overload resolution`#`Viable functions中将它称为 **ellipsis parameter**
+
+### Application: detection idiom
 
 
 
-#### wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) 
+#### Example: wikipedia [Substitution failure is not an error](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) 
 
 > NOTE: 在这篇文章中对它有着比较好的说明:
 
@@ -203,6 +206,6 @@ int main()
 
 
 
-### Parameter pack
+## 用法3: Parameter pack
 
 参见cppreference [Parameter pack(since C++11)](https://en.cppreference.com/w/cpp/language/parameter_pack)。

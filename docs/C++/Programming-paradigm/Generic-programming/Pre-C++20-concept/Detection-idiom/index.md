@@ -99,7 +99,42 @@ int main()
 
 ### stackoverflow [What is “Expression SFINAE”?](https://stackoverflow.com/questions/12654067/what-is-expression-sfinae)
 
-收录在了`SFINAE\Expression-SFINAE`章节。
+> NOTE: 
+>
+> 收录在了`SFINAE\Expression-SFINAE`章节。
+
+[A](https://stackoverflow.com/a/12654277)
+
+> NOTE: 
+>
+> 1、下面的这种实现方式是比较符合C++11的
+
+```C++
+#include <iostream>
+#include <type_traits>
+#include <vector>
+
+struct has_member_begin_test
+{
+	template<class U>
+	static auto test(U* p) -> decltype(p->begin(), std::true_type());
+	template<class >
+	static auto test(...) -> std::false_type;
+};
+
+template<class T>
+struct has_member_begin
+: decltype(has_member_begin_test::test<T>(0))
+{
+};
+
+int main()
+{
+	std::cout << std::boolalpha;
+	std::cout << has_member_begin<int>::value << std::endl;
+}
+// g++ --std=c++11 test.cpp
+```
 
 
 

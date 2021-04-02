@@ -92,12 +92,6 @@ int main()
 
 
 
-
-
-
-
-
-
 ## 名称由来
 
 Expression SFINAE中的"Expression"对应的是boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) # [concept](https://www.boost.org/community/generic_programming.html#concept) 中的 "**Valid Expressions**"，再加上 C++ SFINAE 机制，就形成了expression SFINAE。
@@ -186,6 +180,8 @@ A common idiom is to use **expression SFINAE** on the **return type**, where the
 > NOTE: 
 >
 > 1、“cast to `void` to ensure the **user-defined operator comma** on the returned type is not selected”是利用[Discarded-value expressions](https://en.cppreference.com/w/cpp/language/expressions#Discarded-value_expressions)的性质。
+>
+> 2、下面这个例子体现了reference、pointer overload control
 
 ```c++
 #include <iostream>
