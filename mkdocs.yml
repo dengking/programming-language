@@ -168,12 +168,17 @@ nav:
           - Introduction: Theory/Programming-paradigm/OOP/Assemble/Inheritance/index.md
         - Composition:
           - Introduction: Theory/Programming-paradigm/OOP/Assemble/Composition/index.md
-          - Has-a: Theory/Programming-paradigm/OOP/Assemble/Composition/Has-a.md
           - Delegation-and-forwarding:
             - Delegation: Theory/Programming-paradigm/OOP/Assemble/Composition/Delegation-and-forwarding/Delegation.md
             - Forwarding: Theory/Programming-paradigm/OOP/Assemble/Composition/Delegation-and-forwarding/Forwarding.md
+        - Composition-over-inheritance-principle:
+          - Introduction: Theory/Programming-paradigm/OOP/Assemble/Composition-over-inheritance-principle/index.md
         - Mixin:
-          - Introduction: Theory/Programming-paradigm/OOP/Assemble/Mixin/TODO-index.md
+          - Introduction: Theory/Programming-paradigm/OOP/Assemble/Mixin/index.md
+        - TODO-assemble-ability:
+          - Introduction: Theory/Programming-paradigm/OOP/Assemble/TODO-assemble-ability/index.md
+        - TODO-assemble-as-chain:
+          - Introduction: Theory/Programming-paradigm/OOP/Assemble/TODO-assemble-as-chain/index.md
         - TODO-Abstraction-and-relation: Theory/Programming-paradigm/OOP/Assemble/TODO-Abstraction-and-relation.md
       - Glossary:
         - Glossarys: Theory/Programming-paradigm/OOP/Glossary/Glossarys.md
@@ -198,11 +203,10 @@ nav:
           - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Goal/index.md
         - Principle:
           - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/index.md
-          - Composition-over-inheritance:
-            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/Composition-over-inheritance/index.md
           - SOLID:
             - SOLID: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/SOLID.md
-            - Single-Responsibility-Principle: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Single-Responsibility-Principle.md
+            - Single-Responsibility-Principle:
+              - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Single-Responsibility-Principle/index.md
             - Open-closed-principle:
               - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Open-closed-principle/index.md
             - Liskov-substitution-principle: Theory/Programming-paradigm/OOP/Design-pattern/Principle/SOLID/Liskov-substitution-principle.md
@@ -279,8 +283,8 @@ nav:
         - Summary-of-design-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Summary-of-design-pattern.md
       - Summary-of-OOP:
         - Introduction: Theory/Programming-paradigm/OOP/Summary-of-OOP/index.md
-      - Class-diagram:
-        - Introduction: Theory/Programming-paradigm/OOP/Class-diagram/index.md
+      - Class-relation-hierarchy-diagram:
+        - Introduction: Theory/Programming-paradigm/OOP/Class-relation-hierarchy-diagram/index.md
       - Glossary: Glossary
     - Aspect-oriented-programming:
       - Introduction: Theory/Programming-paradigm/Aspect-oriented-programming/index.md
@@ -354,11 +358,15 @@ nav:
         - Introduction: Theory/Resource-management/Memory-management/Automatic-memory-management/index.md
         - Garbage-collection:
           - Introduction: Theory/Resource-management/Memory-management/Automatic-memory-management/Garbage-collection/index.md
+          - Tracing-garbage-collection:
+            - Introduction: Theory/Resource-management/Memory-management/Automatic-memory-management/Garbage-collection/Tracing-garbage-collection/index.md
         - Reference-counting:
           - Introduction: Theory/Resource-management/Memory-management/Automatic-memory-management/Reference-counting/index.md
           - Automatic-Reference-Counting: Theory/Resource-management/Memory-management/Automatic-memory-management/Reference-counting/Automatic-Reference-Counting.md
           - Implement-reference-count-use-std-atomic:
             - Introduction: Theory/Resource-management/Memory-management/Automatic-memory-management/Reference-counting/Implement-reference-count-use-std-atomic/index.md
+        - paper-A-Survey-of-Garbage-Collection-Techniques:
+          - Introduction: Theory/Resource-management/Memory-management/Automatic-memory-management/paper-A-Survey-of-Garbage-Collection-Techniques/index.md
   - Serialization-and-deserialization:
     - Introduction: Theory/Serialization-and-deserialization/index.md
     - Binary-parsing: Theory/Serialization-and-deserialization/Binary-parsing.md
@@ -429,9 +437,9 @@ nav:
               - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/index.md
               - artima-Pure-Virtual-Function-Called-An-Explanation:
                 - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/artima-Pure-Virtual-Function-Called-An-Explanation/index.md
-            - Use-shared_ptr-to-solve-dangling-pointer:
-              - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Use-shared_ptr-to-solve-dangling-pointer/index.md
-            - dangling-pointer-and-control-theory-and-reference-counting: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/dangling-pointer-and-control-theory-and-reference-counting.md
+            - Multi-thread-and-observer-pattern:
+              - Introduction: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/index.md
+              - Example: C++/Language-reference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/Example.md
         - Layout:
           - Object-layout: C++/Language-reference/Basic-concept/Object/Layout/Object-layout.md
           - Trivial: C++/Language-reference/Basic-concept/Object/Layout/Trivial.md
@@ -490,18 +498,17 @@ nav:
               - User-defined-conversion: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/User-defined-conversion/User-defined-conversion.md
             - Type-conversion-and-temporary:
               - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Type-conversion/Type-conversion-and-temporary/index.md
-        - Type-inference:
-          - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/index.md
+          - Print-output-type:
+            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-operation/Print-output-type/index.md
+        - Type-inference-and-deduction:
+          - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference-and-deduction/index.md
           - decltype:
-            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/index.md
+            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference-and-deduction/decltype/index.md
             - Application:
-              - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/decltype/Application/index.md
-          - Template-argument-deduction:
-            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Template-argument-deduction/index.md
-          - Return-type-deduction:
-            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Return-type-deduction/index.md
-          - Class-template-argument-deduction(CTAD):
-            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference/Class-template-argument-deduction(CTAD)/index.md
+              - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference-and-deduction/decltype/Application/index.md
+          - auto:
+            - Introduction: C++/Language-reference/Basic-concept/Type-system/Type-inference-and-deduction/auto/index.md
+          - Type-deduction: C++/Language-reference/Basic-concept/Type-system/Type-inference-and-deduction/Type-deduction.md
         - size_t:
           - Introduction: C++/Language-reference/Basic-concept/Type-system/size_t/index.md
           - embedded-Why-size_t-matters: C++/Language-reference/Basic-concept/Type-system/size_t/embedded-Why-size_t-matters.md
@@ -589,6 +596,8 @@ nav:
         - For-statement: C++/Language-reference/Statements/Iteration/For-statement.md
         - Range-based-for-loop:
           - Introduction: C++/Language-reference/Statements/Iteration/Range-based-for-loop/index.md
+          - stackoverflow-make-custom-type-work-with-range-based-for-loops:
+            - Introduction: C++/Language-reference/Statements/Iteration/Range-based-for-loop/stackoverflow-make-custom-type-work-with-range-based-for-loops/index.md
       - Selection:
         - If: C++/Language-reference/Statements/Selection/If.md
         - Constexpr-if: C++/Language-reference/Statements/Selection/Constexpr-if.md
@@ -598,18 +607,19 @@ nav:
       - Function:
         - Introduction: C++/Language-reference/Functions/Function/index.md
       - Function-declaration:
-        - Function-declaration: C++/Language-reference/Functions/Function-declaration/Function-declaration.md
-        - Trailing-return-type:
-          - Introduction: C++/Language-reference/Functions/Function-declaration/Trailing-return-type/index.md
+        - Introduction: C++/Language-reference/Functions/Function-declaration/index.md
       - Function-call:
         - Introduction: C++/Language-reference/Functions/Function-call/index.md
+      - Function-termination:
+        - Introduction: C++/Language-reference/Functions/Function-termination/index.md
+        - Function-return:
+          - Introduction: C++/Language-reference/Functions/Function-termination/Function-return/index.md
       - Function-overload:
         - Introduction: C++/Language-reference/Functions/Function-overload/index.md
         - Operator-overload:
           - Introduction: C++/Language-reference/Functions/Function-overload/Operator-overload/index.md
           - Examples:
             - Introduction: C++/Language-reference/Functions/Function-overload/Operator-overload/Examples/index.md
-            - Overload-input-output-operator: C++/Language-reference/Functions/Function-overload/Operator-overload/Examples/Overload-input-output-operator.md
         - Overload-resolution:
           - Introduction: C++/Language-reference/Functions/Function-overload/Overload-resolution/index.md
           - accu-Overload-Resolution: C++/Language-reference/Functions/Function-overload/Overload-resolution/accu-Overload-Resolution.md
@@ -627,11 +637,11 @@ nav:
           - Introduction: C++/Language-reference/Functions/First-class-function/Function-objects/index.md
           - std-function-object:
             - Introduction: C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/index.md
-            - Partial-function-application: C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/Partial-function-application.md
             - Operator-function-object: C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/Operator-function-object.md
             - std-function:
               - Introduction: C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/std-function/index.md
               - Examples: C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/std-function/Examples.md
+            - TODO-Partial-function-application: C++/Language-reference/Functions/First-class-function/Function-objects/std-function-object/TODO-Partial-function-application.md
           - Functor:
             - Introduction: C++/Language-reference/Functions/First-class-function/Function-objects/Functor/index.md
         - Wrapper:
@@ -654,11 +664,9 @@ nav:
           - Introduction: C++/Language-reference/Functions/Generic-programming/std-result_of/index.md
         - Variadic-function:
           - Variadic-function: C++/Language-reference/Functions/Generic-programming/Variadic-function/index.md
-        - Perfect-forwarding:
-          - Introduction: C++/Language-reference/Functions/Generic-programming/Perfect-forwarding/index.md
-          - std-forward: C++/Language-reference/Functions/Generic-programming/Perfect-forwarding/std-forward.md
-      - Function-termination:
-        - Introduction: C++/Language-reference/Functions/Function-termination/index.md
+        - Perfect-forwarding-function-template:
+          - Introduction: C++/Language-reference/Functions/Generic-programming/Perfect-forwarding-function-template/index.md
+      - Function-termination: Function-termination
       - Functional-programming:
         - Higher-order-function: C++/Language-reference/Functions/Functional-programming/Higher-order-function.md
     - Reference:
@@ -719,6 +727,17 @@ nav:
             - Introduction: C++/Language-reference/Classes/Member/Non-static-member/Function-member/index.md
           - Data-member:
             - Introduction: C++/Language-reference/Classes/Member/Non-static-member/Data-member/index.md
+      - Object-lifetime:
+        - Introduction: C++/Language-reference/Classes/Object-lifetime/index.md
+        - Initialization-and-deinitialization-order:
+          - Introduction: C++/Language-reference/Classes/Object-lifetime/Initialization-and-deinitialization-order/index.md
+        - Idioms:
+          - Base-from-Member:
+            - Introduction: C++/Language-reference/Classes/Object-lifetime/Idioms/Base-from-Member/index.md
+            - boost-Base-From-Member:
+              - Introduction: C++/Language-reference/Classes/Object-lifetime/Idioms/Base-from-Member/boost-Base-From-Member/index.md
+          - Calling-Virtual-During-Initialization:
+            - Introduction: C++/Language-reference/Classes/Object-lifetime/Idioms/Calling-Virtual-During-Initialization/index.md
       - Special-member-function:
         - Introduction: C++/Language-reference/Classes/Special-member-function/index.md
         - Common-issue:
@@ -784,6 +803,8 @@ nav:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Member-initializer-list/index.md
           - Copy-constructor:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/Copy-constructor/index.md
+          - TODO-Use-this-in-constructor:
+            - Introduction: C++/Language-reference/Classes/Special-member-function/Constructor/TODO-Use-this-in-constructor/index.md
         - Destructor:
           - Introduction: C++/Language-reference/Classes/Special-member-function/Destructor/index.md
           - cppreference-Destructors: C++/Language-reference/Classes/Special-member-function/Destructor/cppreference-Destructors.md
@@ -809,16 +830,10 @@ nav:
                 - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/The-rule-of-zero-three-five/Rule-of-Zero/florianwolters-The-Rule-of-Zero/index.md
             - Move-Constructor:
               - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/The-rule-of-zero-three-five/Move-Constructor/index.md
-          - Calling-Virtual-During-Initialization:
-            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Calling-Virtual-During-Initialization/index.md
-          - Base-from-Member:
-            - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Base-from-Member/index.md
           - Copy-and-swap:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Copy-and-swap/index.md
           - Named-Constructor:
             - Introduction: C++/Language-reference/Classes/Special-member-function/Idioms/Named-Constructor/index.md
-        - Initialization-and-deinitialization-order:
-          - Introduction: C++/Language-reference/Classes/Special-member-function/Initialization-and-deinitialization-order/index.md
       - Member-access:
         - Access-specifiers: C++/Language-reference/Classes/Member-access/Access-specifiers.md
       - Subtyping-polymorphism:
@@ -853,8 +868,6 @@ nav:
         - Introduction: C++/Language-reference/Classes/Interface/index.md
         - gotw-What's-In-a-Class-The-Interface-Principle:
           - Introduction: C++/Language-reference/Classes/Interface/gotw-What's-In-a-Class-The-Interface-Principle/index.md
-      - Lifetime:
-        - Introduction: C++/Language-reference/Classes/Lifetime/index.md
       - Empty-base-optimization:
         - Introduction: C++/Language-reference/Classes/Empty-base-optimization/index.md
       - Specifier:
@@ -933,8 +946,8 @@ nav:
         - Introduction: C++/Language-reference/Template/Function-template/index.md
         - cppreference-Function-template:
           - Introduction: C++/Language-reference/Template/Function-template/cppreference-Function-template/index.md
-      - Variable-template:
-        - Introduction: C++/Language-reference/Template/Variable-template/index.md
+      - C++14-Variable-template:
+        - Introduction: C++/Language-reference/Template/C++14-Variable-template/index.md
       - Parameter-pack:
         - Introduction: C++/Language-reference/Template/Parameter-pack/index.md
         - cppreference-Parameter-pack:
@@ -968,6 +981,8 @@ nav:
         - Introduction: C++/Language-reference/Alias/Type-alias/index.md
       - Template-alias:
         - Introduction: C++/Language-reference/Alias/Template-alias/index.md
+        - Type-Generator-Idiom:
+          - Introduction: C++/Language-reference/Alias/Template-alias/Type-Generator-Idiom/index.md
     - Attribute:
       - Introduction: C++/Language-reference/Attribute/index.md
       - Likely-and-unlikely:
@@ -1069,6 +1084,8 @@ nav:
                 - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/TODO-Erase_if/index.md
               - Iteration:
                 - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/Iteration/index.md
+              - In-contain:
+                - Introduction: C++/Standard-library/STL/Containers-library/Associative-container/Map/Operations/In-contain/index.md
         - Container-adaptors:
           - Introduction: C++/Standard-library/STL/Containers-library/Container-adaptors/index.md
           - priority_queue:
@@ -1165,10 +1182,6 @@ nav:
           - Introduction: C++/Standard-library/String/String-operation/Comparision/index.md
         - Toggle-case:
           - Introduction: C++/Standard-library/String/String-operation/Toggle-case/index.md
-      - IO:
-        - Introduction: C++/Standard-library/String/IO/index.md
-        - fmt:
-          - fmt: C++/Standard-library/String/IO/fmt/fmt.md
     - IO-library:
       - Introduction: C++/Standard-library/IO-library/index.md
       - Buffer: C++/Standard-library/IO-library/Buffer.md
@@ -1177,6 +1190,12 @@ nav:
         - cin: C++/Standard-library/IO-library/Predefined-standard-stream-objects/cin.md
       - String-IO:
         - basic_stringstream: C++/Standard-library/IO-library/String-IO/basic_stringstream.md
+        - Formatted-and-unformatted-IO:
+          - Introduction: C++/Standard-library/IO-library/String-IO/Formatted-and-unformatted-IO/index.md
+      - Custom-input-output-operator:
+        - Virtual-Friend-Function-Idiom:
+          - Introduction: C++/Standard-library/IO-library/Custom-input-output-operator/Virtual-Friend-Function-Idiom/index.md
+        - Overload-input-output-operator: C++/Standard-library/IO-library/Custom-input-output-operator/Overload-input-output-operator.md
     - Thread:
       - Thread: C++/Standard-library/Thread/index.md
       - Asynchronous-programming:
@@ -1302,7 +1321,7 @@ nav:
       - Boost-Circular-Buffer:
         - Boost-Circular-Buffer: C++/Library/Boost/Boost-Circular-Buffer/Boost-Circular-Buffer.md
       - Boost-Array:
-        - Boost-Array: C++/Library/Boost/Boost-Array/Boost-Array.md
+        - Introduction: C++/Library/Boost/Boost-Array/index.md
       - Boost-Range:
         - Boost-Range: C++/Library/Boost/Boost-Range/Boost-Range.md
       - Boost-Algorithm-Library:
@@ -1353,6 +1372,10 @@ nav:
               - Introduction: C++/Library/Log/Spdlog/Asynchronous-logging/Read-code/mpmc_blocking_q/index.md
             - thread_pool:
               - Introduction: C++/Library/Log/Spdlog/Asynchronous-logging/Read-code/thread_pool/index.md
+      - SergiusTheBest-plog:
+        - Introduction: C++/Library/Log/SergiusTheBest-plog/index.md
+    - fmt:
+      - Introduction: C++/Library/fmt/index.md
     - Math:
       - Linear-algebra:
         - C++linear-algebra: C++/Library/Math/Linear-algebra/C++linear-algebra.md
@@ -1422,8 +1445,6 @@ nav:
       - Introduction: C++/Library/Folly/index.md
   - Philosophy:
     - Introduction: C++/Philosophy/index.md
-  - C++-name-convention:
-    - Introduction: C++/C++-name-convention/index.md
   - Programming-paradigm:
     - Introduction: C++/Programming-paradigm/index.md
     - OOP:
@@ -1512,6 +1533,10 @@ nav:
       - "TODO-vitiy-C++11-functional-decomposition\u2013easy-way-to-do-AOP":
         - Introduction: "C++/Programming-paradigm/AOP/TODO-vitiy-C++11-functional-decomposition\u2013\
             easy-way-to-do-AOP/index.md"
+      - accu-AOP+CRTP:
+        - Introduction: C++/Programming-paradigm/AOP/accu-AOP+CRTP/index.md
+        - cpp11_template_alias:
+          - Introduction: C++/Programming-paradigm/AOP/accu-AOP+CRTP/cpp11_template_alias/index.md
     - FP:
       - Introduction: C++/Programming-paradigm/FP/index.md
     - Polymorphism:
@@ -1555,8 +1580,6 @@ nav:
         - Introduction: C++/Idiom/OOP/Class-basic/index.md
         - How-to-apply-polymorphism:
           - Introduction: C++/Idiom/OOP/Class-basic/How-to-apply-polymorphism/index.md
-          - Virtual-Friend-Function:
-            - Virtual-Friend-Function: C++/Idiom/OOP/Class-basic/How-to-apply-polymorphism/Virtual-Friend-Function/Virtual-Friend-Function.md
       - RAII-based:
         - Introduction: C++/Idiom/OOP/RAII-based/index.md
         - RAII:
@@ -1637,8 +1660,6 @@ nav:
       - "Barton\u2013Nackman-trick":
         - "Barton\u2013Nackman-trick": "C++/Idiom/Generic-programming/Barton\u2013\
             Nackman-trick/Barton\u2013Nackman-trick.md"
-      - Type-Generator:
-        - Introduction: C++/Idiom/Generic-programming/Type-Generator/index.md
       - Object-Generator:
         - Introduction: C++/Idiom/Generic-programming/Object-Generator/index.md
       - Return-Type-Resolver:
@@ -1700,6 +1721,8 @@ nav:
         - Introduction: C++/Pattern/Mixin/Parameterized-Base-Class/index.md
       - Variadic-mixin:
         - Introduction: C++/Pattern/Mixin/Variadic-mixin/index.md
+    - Assemble-as-chain:
+      - Introduction: C++/Pattern/Assemble-as-chain/index.md
   - Resource-management:
     - Introduction: C++/Resource-management/index.md
     - Memory-management:
@@ -2155,6 +2178,8 @@ nav:
   - C++design:
     - Introduction: C++/C++design/index.md
     - TODO-Program-order-and-memory-order: C++/C++design/TODO-Program-order-and-memory-order.md
+  - C++name-convention:
+    - Introduction: C++/C++name-convention/index.md
   - C++implementation:
     - Introduction: C++/C++implementation/index.md
     - Phases-of-translation:
@@ -2211,7 +2236,8 @@ nav:
           - Multiple-definition: C++/C++implementation/Link/Link-time-error/Violations-of-ODR/Multiple-definition.md
         - Undefined-reference-or-unresolved-external-symbol:
           - Introduction: C++/C++implementation/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/index.md
-          - Object-Files-and-Symbols: C++/C++implementation/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/Object-Files-and-Symbols.md
+          - Undefined-symbols-vtable-typeinfo:
+            - Introduction: C++/C++implementation/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/Undefined-symbols-vtable-typeinfo/index.md
     - ABI:
       - Introduction: C++/C++implementation/ABI/index.md
       - Application-binary-interface:
@@ -2257,6 +2283,8 @@ nav:
         - Introduction: C++/C++implementation/Implementation/GCC/index.md
         - 3-GCC-Command-Options:
           - Introduction: C++/C++implementation/Implementation/GCC/3-GCC-Command-Options/index.md
+        - Warning:
+          - Introduction: C++/C++implementation/Implementation/GCC/Warning/index.md
       - MSVC:
         - Introduction: C++/C++implementation/Implementation/MSVC/index.md
   - C++cross-plateform:
