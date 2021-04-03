@@ -362,7 +362,9 @@ Log("test.cpp", 129, Part<bool, bool>() << "Read failed: " << file << " " << err
 
 
 
-形成了一个chain、list
+形成了一个chain、list。
+
+第一个node的prev 是空的，这就相当于最后一个node的next为空。
 
 2、recursion
 

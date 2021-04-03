@@ -520,7 +520,7 @@ std::cout << has_serialize<Y, int(const std::string&)>::value; // will print 1
 
 3、看了诸多实现，我觉得`std::is_detected`是最最像C++ concept的，关于此，参见 `Standard-library\Extensions\Version-2\Detection-idiom` 章节。
 
-
+4、不同的detect对象，则它们的valid expression就不同
 
 ## TODO
 
