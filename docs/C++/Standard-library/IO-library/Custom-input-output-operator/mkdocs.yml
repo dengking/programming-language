@@ -1,6 +1,6 @@
 nav:
     - Virtual-Friend-Function-Idiom: Virtual-Friend-Function-Idiom
     - Overload-input-output-operator: Overload-input-output-operator.md
-
+    - MSVC-错误C2678-没有找到接受std-ostream类型的左操作数的运算符: MSVC-错误C2678-没有找到接受std-ostream类型的左操作数的运算符
 
     
