@@ -180,6 +180,10 @@ class unique_ptr<_Tp[], _Dp>
 
 
 
+## Specialization on constant
+
+这是一种比较特殊的template specialization ，将它归入到了`Dispatch-based-on-constant`章节。
+
 ## fluentcpp [Template Partial Specialization In C++](https://www.fluentcpp.com/2017/08/11/how-to-do-partial-template-specialization-in-c/)
 
 

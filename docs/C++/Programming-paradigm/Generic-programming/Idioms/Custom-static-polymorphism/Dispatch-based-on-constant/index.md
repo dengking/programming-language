@@ -47,7 +47,7 @@ auto ReqService()->typename std::enable_if<IsTradeService(ServiceTraitType::Serv
 
 
 
-### 我的实践
+#### 我的实践
 
 ```c++
 #include <type_traits>
@@ -86,5 +86,107 @@ MsgProtocol::Pack<MsgType::MSG_TRADE>();
 MsgProtocol::Pack<MsgType::MSG_QUERY>();
 
 }
+```
+
+
+
+### Enum specialization
+
+gist [kimgea](https://gist.github.com/kimgea)/**[cpp-traits.cpp](https://gist.github.com/kimgea/7197a90f2fd81945e5baf123537b2072)**
+
+```C++
+#include <vector>
+#include <list>
+#include <set>
+
+
+enum class insert_method_enum{general, push_back, push_front};
+
+
+// Main template insert helper with its temlate specialications
+template<insert_method_enum i>
+struct insert_selector
+{
+	template<typename t, typename v>
+	static void insert(t& object, v value)
+	{
+		object.insert(object.end(), value);
+	}
+};
+
+template<>
+struct insert_selector<insert_method_enum::push_back>
+{
+	template<typename t, typename v>
+	static void insert(t& object, v value)
+	{
+		object.push_back(value);
+	}
+};
+template<>
+struct insert_selector<insert_method_enum::push_front>
+{
+	template<typename t, typename v>
+	static void insert(t& object, v value)
+	{
+		object.push_front(value);
+	}
+};
+
+
+// type traits
+template<typename t, typename v>
+struct insert_type {
+	static const insert_method_enum value = insert_method_enum::general;
+};
+
+template<typename v>
+struct insert_type<std::vector<v>, v> {
+	static const insert_method_enum value = insert_method_enum::push_back;
+};
+
+template<typename v>
+struct insert_type<std::list<v>, v> {
+	static const insert_method_enum value = insert_method_enum::push_front;
+};
+
+
+
+// Function used by end user
+template<typename t, typename v>
+void insert(t& object, v value)
+{
+	insert_selector<insert_type<t, v>::value>::insert(object, value);
+}
+
+// Extra function to make the end user able to overwrite pre made specialications
+template<insert_method_enum i, typename t, typename v>
+void insert(t& object, v value)
+{
+	insert_selector<i>::insert(object, value);
+}
+
+
+int main()
+{
+	std::vector<int> vector;
+	insert(vector, 1);	// Specialized - vector.push_back(1)
+
+
+	std::list<int> list;
+	insert(list, 1);	// Specialized - list.push_front(1)
+
+	std::set<int> set;
+	insert(set, 1);	// General - set.insert(set.end(), 1);	
+
+
+
+	std::list<int> list2;
+	insert<insert_method_enum::push_back>(list2, 1);	
+
+	return 0;
+}
+// g++ --std=c++11 test.cpp
+
 ```
 

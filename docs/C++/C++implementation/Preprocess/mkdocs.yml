@@ -6,3 +6,4 @@ nav:
     - Implementation-defined-behavior-control: Implementation-defined-behavior-control
     - include-guard-and-pragma-once: include-guard-and-pragma-once
     - Macro: Macro
+    - Pros-and-cons-of-macro: Pros-and-cons-of-macro.md    
