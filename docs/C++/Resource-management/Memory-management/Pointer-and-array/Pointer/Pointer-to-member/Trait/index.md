@@ -1,4 +1,6 @@
-# cppreference [std::is_member_function_pointer](https://en.cppreference.com/w/cpp/types/is_member_function_pointer)
+# Trait
+
+## cppreference [std::is_member_function_pointer](https://en.cppreference.com/w/cpp/types/is_member_function_pointer)
 
 
 
@@ -45,5 +47,23 @@ int main()
     static_assert(std::is_member_function_pointer<decltype(&A::member)>::value,
                   "A::member is not a member function."); 
 }
+```
+
+
+
+## cppreference [std::is_member_pointer](https://en.cppreference.com/w/cpp/types/is_member_pointer)
+
+
+
+```C++
+template< class T >
+struct is_member_pointer_helper         : std::false_type {};
+ 
+template< class T, class U >
+struct is_member_pointer_helper<T U::*> : std::true_type {};
+ 
+template< class T >
+struct is_member_pointer : 
+    is_member_pointer_helper<typename std::remove_cv<T>::type> {};
 ```
 
