@@ -229,9 +229,7 @@ call      _Z3LogI4PartIiS0_IA2_cS0_ISsS0_IA14_cS0_IbbEEEEEENSt9enable_ifIXsr3std
 
 The total is 19 instructions including one function call. It appears each additional argument streamed adds 3 instructions. The compiler creates a different Log() function instantiation depending on the number, kind, and order of message parts, which explains the bizarre function name.
 
-```
-*********` **SOLUTION #4: CATO'S EXPRESSION TEMPLATES** `*********
-```
+### SOLUTION #4: CATO'S EXPRESSION TEMPLATES
 
 Here is Cato's excellent solution with a tweak to support stream manipulators (eg endl):
 
@@ -320,6 +318,7 @@ call  void Log<pair<pair<pair<pair<None, char const*>, string const&>, char cons
 
 ```C++
 #include <sstream>
+#include <iostream>
 
 #define LOG(...) LogWrapper(__FILE__, __LINE__, __VA_ARGS__)
 
@@ -344,9 +343,144 @@ void LogWrapper(const char *file, int line, const Args &... args)
 	std::ostringstream msg;
 	Log_Recursive(file, line, msg, args...);
 }
+
+int main()
+{
+    LOG("hello");
+}
+// g++ --std=c++11 test.cpp
+
 ```
 
 ## SOLUTION #3: EXPRESSION TEMPLATES 完整程序
+
+```C++
+#include<iostream>
+#define LOG(msg) Log(__FILE__, __LINE__, Part<bool, bool>() << msg)
+
+template<typename T>
+struct PartTrait
+{
+	typedef T Type;
+};
+
+// Workaround GCC 4.7.2 not recognizing noinline attribute
+#ifndef NOINLINE_ATTRIBUTE
+#ifdef __ICC
+    #define NOINLINE_ATTRIBUTE __attribute__(( noinline ))
+  #else
+#define NOINLINE_ATTRIBUTE
+#endif // __ICC
+#endif // NOINLINE_ATTRIBUTE
+
+// Mark as noinline since we want to minimize the log-related instructions
+// at the call sites
+template<typename T>
+void Log(const char *file, int line, const T &msg) NOINLINE_ATTRIBUTE
+{
+	std::cout << file << ":" << line << ": " << msg << std::endl;
+}
+
+template<typename TValue, typename TPreviousPart>
+struct Part: public PartTrait<Part<TValue, TPreviousPart>>
+{
+	/**
+	 * @brief 不包含prev，即head node of linked list
+	 *
+	 */
+	Part() :
+					value(nullptr), prev(nullptr)
+	{
+	}
+
+	Part(const Part<TValue, TPreviousPart>&) = default;
+	Part<TValue, TPreviousPart> operator=(const Part<TValue, TPreviousPart>&) = delete;
+	/**
+	 * @brief 包含prev
+	 *
+	 * @param v
+	 * @param p
+	 */
+	Part(const TValue &v, const TPreviousPart &p) :
+					value(&v), prev(&p)
+	{
+	}
+
+	std::ostream& output(std::ostream &os) const
+	{
+		if (prev)
+			os << *prev;
+		if (value)
+			os << *value;
+		return os;
+	}
+
+	const TValue *value;
+	const TPreviousPart *prev;
+};
+
+// Specialization for stream manipulators (eg endl)
+
+typedef std::ostream& (*PfnManipulator)(std::ostream&);
+
+template<typename TPreviousPart>
+struct Part<PfnManipulator, TPreviousPart> : public PartTrait<Part<PfnManipulator, TPreviousPart>>
+{
+	Part() :
+					pfn(nullptr), prev(nullptr)
+	{
+	}
+
+	Part(const Part<PfnManipulator, TPreviousPart> &that) = default;
+	Part<PfnManipulator, TPreviousPart> operator=(const Part<PfnManipulator, TPreviousPart>&) = delete;
+
+	Part(PfnManipulator pfn_, const TPreviousPart &p) :
+					pfn(pfn_), prev(&p)
+	{
+	}
+
+	std::ostream& output(std::ostream &os) const
+	{
+		if (prev)
+			os << *prev;
+		if (pfn)
+			pfn(os);
+		return os;
+	}
+
+	PfnManipulator pfn;
+	const TPreviousPart *prev;
+};
+
+template<typename TPreviousPart, typename T>
+typename std::enable_if<std::is_base_of<PartTrait<TPreviousPart>, TPreviousPart>::value, Part<T, TPreviousPart> >::type operator<<(const TPreviousPart &prev, const T &value)
+{
+	return Part<T, TPreviousPart>(value, prev);
+}
+
+template<typename TPreviousPart>
+typename std::enable_if<std::is_base_of<PartTrait<TPreviousPart>, TPreviousPart>::value, Part<PfnManipulator, TPreviousPart> >::type operator<<(const TPreviousPart &prev, PfnManipulator value)
+{
+	return Part<PfnManipulator, TPreviousPart>(value, prev);
+}
+
+template<typename TPart>
+typename std::enable_if<std::is_base_of<PartTrait<TPart>, TPart>::value, std::ostream&>::type operator<<(std::ostream &os, const TPart &part)
+{
+	return part.output(os);
+}
+
+int main()
+{
+	LOG("hello"<<","<<"world");
+	LOG("hello"<<","<<"world");
+}
+
+// g++ --std=c++11 test.cpp
+
+```
+
+
 
 1、composition chain
 
@@ -359,8 +493,6 @@ void LogWrapper(const char *file, int line, const Args &... args)
 ```C++
 Log("test.cpp", 129, Part<bool, bool>() << "Read failed: " << file << " " << error)
 ```
-
-
 
 形成了一个chain、list。
 
@@ -380,3 +512,6 @@ Log("test.cpp", 129, Part<bool, bool>() << "Read failed: " << file << " " << err
 ```
 
 通过`prev` pointer，能够从tail逐步找到head。
+
+
+
