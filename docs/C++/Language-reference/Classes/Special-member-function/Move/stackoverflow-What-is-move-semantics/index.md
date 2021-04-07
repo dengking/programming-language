@@ -821,7 +821,3 @@ As you can see, `move` accepts any kind of parameter thanks to the forwarding re
 
 Note that returning by rvalue reference is fine in this example, because `t` does not denote an automatic object, but instead an object that was passed in by the caller.
 
-
-
-## [C++11 rvalues and move semantics confusion (return statement)](https://stackoverflow.com/questions/4986673/c11-rvalues-and-move-semantics-confusion-return-statement)
-
