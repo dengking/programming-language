@@ -282,3 +282,5 @@ Such expression `e` is said to be *contextually implicitly converted* to the spe
 
 
 ## Numeric promotions
+
+## The safe bool problem
