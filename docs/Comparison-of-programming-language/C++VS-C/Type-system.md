@@ -69,3 +69,11 @@ C++17引入的`std::any` 是对`void*`的改进，关于此，参见`C++\Library
 ## Variadic template VS ellipsis 
 
 参见 `C++\Language-reference\Functions\Generic-programming\Variadic-function` 章节。
+
+
+
+## Void pointer conversion
+
+参见 :
+
+1、`thegreenplace-void-pointer-and-casts-in-C-and-C++`
