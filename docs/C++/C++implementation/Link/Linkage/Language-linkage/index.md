@@ -60,6 +60,35 @@ extern "C" {
 
 参见`C-and-C++\From-source-code-to-exec\Preprocess`章节。
 
+#### 我的实践: 在C++中，使用[antirez](https://github.com/antirez)/**[sds](https://github.com/antirez/sds)**
+
+这是典型性的在C++中使用C，由于[antirez](https://github.com/antirez)/**[sds](https://github.com/antirez/sds)**的header file中，并没有使用`extern "C" {`，因此，我第一次在进行编译后，生成的executable有如下错误:
+
+```C++
+build/main.o：在函数‘getDotfilePath(char*, char*)’中：
+util.h:41：对‘sdsnew(char const*)’未定义的引用
+util.h:49：对‘sdsempty()’未定义的引用
+util.h:49：对‘sdscatprintf(char*, char const*, ...)’未定义的引用
+build/main.o：在函数‘freeHintsCallback(void*)’中：
+api_shell.h:50：对‘sdsfree(char*)’未定义的引用
+build/main.o：在函数‘Command::Command(char const*)’中：
+api_app/./../command.h:60：对‘sdssplitargs(char const*, int*)’未定义的引用
+build/main.o：在函数‘Command::~Command()’中：
+api_app/./../command.h:66：对‘sdsfreesplitres(char**, int)’未定义的引用
+build/api_shell.o：在函数‘getDotfilePath(char*, char*)’中：
+util.h:41：对‘sdsnew(char const*)’未定义的引用
+util.h:49：对‘sdsempty()’未定义的引用
+util.h:49：对‘sdscatprintf(char*, char const*, ...)’未定义的引用
+build/api_shell.o：在函数‘freeHintsCallback(void*)’中：
+api_shell.h:50：对‘sdsfree(char*)’未定义的引用
+build/common.o：在函数‘getDotfilePath(char*, char*)’中：
+./api_app/../util.h:41：对‘sdsnew(char const*)’未定义的引用
+./api_app/../util.h:49：对‘sdsempty()’未定义的引用
+./api_app/../util.h:49：对‘sdscatprintf(char*, char const*, ...)’未定义的引用
+```
+
+添加上`extern "C" {`后，能够正常编译通过。
+
 ## Use C++ in C
 
 反过来，在C中，可以使用C++吗？这个问题应该是：有些是可以的（比如function），但是有些无法实现的（比如OOP）。由于C++是C的超集，因此当混合使用两者的时候，需要使用`g++`/`gcc --std=c++**`来进行编译；
