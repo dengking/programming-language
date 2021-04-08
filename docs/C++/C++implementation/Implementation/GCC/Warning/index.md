@@ -18,7 +18,11 @@ I've run into this annoyance, too. According to the GCC manpage `-Wall` turns on
 
 There is a GCC feature request to make this work using `#pragma GCC diagnostic`:
 
-- [C++ preprocessor ignores #pragma GCC diagnostic](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=53431)
+1、[C++ preprocessor ignores #pragma GCC diagnostic](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=53431)
+
+
+
+## gcc.gnu [3.8 Options to Request or Suppress Warnings](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html)
 
 
 
