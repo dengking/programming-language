@@ -1,12 +1,13 @@
 nav:
     - Introduction: index.md
     - Common-issue: Common-issue
+    - Constructor: Constructor
+    - Destructor: Destructor    
     - Copy: Copy
     - Move: Move
     - Swap: Swap
     - Assign: Assign    
-    - Constructor: Constructor
-    - Destructor: Destructor
+    - Copyalbe-and-movable: Copyalbe-and-movable
     - User-defined-conversion: User-defined-conversion
     - Idioms: Idioms
     

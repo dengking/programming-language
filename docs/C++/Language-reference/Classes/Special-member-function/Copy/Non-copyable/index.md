@@ -1,5 +1,9 @@
 # Non-copyable 
 
+## Example of non-copyable
+
+参见 `Copyalbe-and-movable` 章节。
+
 ## ariya [C++ Class and Preventing Object Copy](https://ariya.io/2015/01/c-class-and-preventing-object-copy)
 
 In some cases, an instance of a C++ class should not be copied at all. There are three ways to prevent such an [object copy](http://en.wikipedia.org/wiki/Object_copy): 
