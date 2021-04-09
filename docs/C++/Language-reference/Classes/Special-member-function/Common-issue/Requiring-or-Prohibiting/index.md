@@ -4,13 +4,13 @@
 
 OOP、behavior、interface、magic function
 
-## draft: Behavior，magic function，给予或禁止某种behavior，expression
+## draft: Behavior，magic function，给予或禁止某种behavior，valid expression
 
-每种behavior都有对应的operator、magic function，language support function（`std::swap`），都可以使用**expression**来进行描述，这是典型的**behavior-based**，比如thread是movable，但是non-copyable
+每种behavior都有对应的operator、magic function，language support function（`std::swap`），都可以使用**valid expression**来进行描述，这是典型的**behavior-based**，比如thread是movable，但是non-copyable
 
-### Expression
+### Valid expression
 
-可以使用expression来描述某种behavior、运行，进而去:
+可以使用Valid expression来描述某种behavior、运行，进而去:
 
 1、runtime computation: 运行、计算，其实就是我们的program
 
@@ -20,7 +20,7 @@ OOP、behavior、interface、magic function
 
 #### Concept/named requirement
 
-1、concept也是使用expression来表达的，比如expression SFINAE， 另外还有constexpr，
+1、concept也是使用valid expression来表达的，比如expression SFINAE， 另外还有constexpr，
 
 2、`std::declval`就是用于构造expression、declval 方便地表达expression
 

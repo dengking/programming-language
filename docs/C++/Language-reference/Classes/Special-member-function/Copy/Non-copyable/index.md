@@ -1,5 +1,7 @@
 # Non-copyable 
 
+本文着重描述的是: 如何实现non-copyable ，即如何让一个class non-copyable。
+
 ## Example of non-copyable
 
 参见 `Copyalbe-and-movable` 章节。

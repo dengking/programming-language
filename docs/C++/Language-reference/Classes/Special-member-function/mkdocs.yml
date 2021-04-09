@@ -7,7 +7,7 @@ nav:
     - Move: Move
     - Swap: Swap
     - Assign: Assign    
-    - Copyalbe-and-movable: Copyalbe-and-movable
+    - Copyable-and-movable: Copyable-and-movable
     - User-defined-conversion: User-defined-conversion
     - Idioms: Idioms
     
