@@ -1,5 +1,9 @@
 # Address Of
 
+## cppreference [C++ named requirements: *CopyConstructible*](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) # Notes
+
+Until C++11, classes that overloaded `operator&` were not *CopyConstructible* and thus weren't usable in the standard library containers. As of C++11, the standard library uses [std::addressof](https://en.cppreference.com/w/cpp/memory/addressof) whenever the address of an object is needed.
+
 
 
 ## More C++ Idioms/[Address Of](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Address_Of)
