@@ -33,7 +33,7 @@ nav:
     # 如何进行序列化？
     - Serialization-and-deserialization: Serialization-and-deserialization
     # Invariant是进行判别的一个非常重要的概念
-    - Invariant: Invariant
+    - Design-by-contract: Design-by-contract
     # 
     - Compile-time-and-run-time: Compile-time-and-run-time
     # 大多数programming language都会涉及error handling
