@@ -56,7 +56,16 @@ int foo (__attribute__((unused)) int bar) {
 }
 ```
 
+## stackoverflow [How do I best silence a warning about unused variables?](https://stackoverflow.com/questions/1486904/how-do-i-best-silence-a-warning-about-unused-variables) # [A](https://stackoverflow.com/a/1486931)
 
+
+
+```c
+// silence a warning about unused variables，https://stackoverflow.com/a/1486931
+#define UNUSED(expr) do { (void)(expr); } while (0)
+```
+
+Example: 在cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)的`4)`就是说明的discard value expression，Example也对此进行了说明。
 
 ## Variadic template
 
