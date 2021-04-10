@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
-    - Microsoft-GSL: Microsoft-GSL
+    - gsl-suppress: gsl-suppress.md
+    - GSL-Guidelines-support-library: GSL-Guidelines-support-library
+    
