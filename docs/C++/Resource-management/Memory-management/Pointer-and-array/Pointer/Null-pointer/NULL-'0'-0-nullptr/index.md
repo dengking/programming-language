@@ -134,35 +134,35 @@ That said, don't sweat the small stuff.
 
 There are a few arguments (one of which is relatively recent) which I believe contradict Bjarne's position on this.
 
-1. **Documentation of intent**
+1、**Documentation of intent**
 
-    Using `NULL` allows for searches on its use and it also highlights that the developer **wanted** to use a `NULL` pointer, irrespective of whether it is being interpreted by the compiler as `NULL` or not.
+Using `NULL` allows for searches on its use and it also highlights that the developer **wanted** to use a `NULL` pointer, irrespective of whether it is being interpreted by the compiler as `NULL` or not.
 
-2. **Overload of pointer and 'int' is relatively rare**
+2、**Overload of pointer and 'int' is relatively rare**
 
-    The example that everybody quotes is:
+The example that everybody quotes is:
 
-    ```cpp
-     void foo(int*);
-     void foo (int);
-    
-     void bar() {
-       foo (NULL);  // Calls 'foo(int)'
-     }
-    ```
+```cpp
+ void foo(int*);
+ void foo (int);
 
-    However, at least in my opinion, the problem with the above is not that we're using `NULL` for the null pointer constant: it's that we have overloads of `foo()` which take very different kinds of arguments. The parameter must be an `int` too, as any other type will result in an ambiguous call and so generate a helpful compiler warning.
+ void bar() {
+   foo (NULL);  // Calls 'foo(int)'
+ }
+```
 
-3. **Analysis tools can help TODAY!**
+However, at least in my opinion, the problem with the above is not that we're using `NULL` for the null pointer constant: it's that we have overloads of `foo()` which take very different kinds of arguments. The parameter must be an `int` too, as any other type will result in an ambiguous call and so generate a helpful compiler warning.
 
-    Even in the absence of C++0x, there are tools available today that verify that `NULL` is being used for pointers, and that `0` is being used for integral types.
+3、**Analysis tools can help TODAY!**
 
-4. **[C++ 11](http://en.wikipedia.org/wiki/C++11) will have a new `std::nullptr_t` type.**
+Even in the absence of C++0x, there are tools available today that verify that `NULL` is being used for pointers, and that `0` is being used for integral types.
 
-    This is the newest argument to the table. The problem of `0` and `NULL` is being actively addressed for C++0x, and you can guarantee that for every implementation that provides `NULL`, the very first thing that they will do is:
+4、**[C++ 11](http://en.wikipedia.org/wiki/C++11) will have a new `std::nullptr_t` type.**
 
-    ```cpp
-     #define NULL  nullptr
-    ```
+This is the newest argument to the table. The problem of `0` and `NULL` is being actively addressed for C++0x, and you can guarantee that for every implementation that provides `NULL`, the very first thing that they will do is:
 
-    For those who use `NULL` rather than `0`, the change will be an improvement in type-safety with little or no effort - if anything it may also catch a few bugs where they've used `NULL` for `0`. For anybody using `0` today... well, hopefully they have a good knowledge of regular expressions...
+```cpp
+ #define NULL  nullptr
+```
+
+For those who use `NULL` rather than `0`, the change will be an improvement in type-safety with little or no effort - if anything it may also catch a few bugs where they've used `NULL` for `0`. For anybody using `0` today... well, hopefully they have a good knowledge of regular expressions...
