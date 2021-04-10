@@ -17,20 +17,26 @@ It is often useful to extend a relationship between two types to class templates
 For example, suppose that class `D` derives from class `B`. A pointer to an object of type `D` can be assigned to a pointer to `B;` C++ supports that implicitly. However, types composed of these types do not share the relationship of the composed types. That applies to class templates as well, so a `Helper<D>` object normally cannot be assigned to a `Helper<B>` object.
 
 ```c++
-class B {};
-class D : public B {};
-template <class T>
-class Helper {};
+class B
+{
+};
+class D: public B
+{
+};
+template<class T>
+class Helper
+{
+};
 
 int main()
 {
-B *bptr;
-D *dptr;
-bptr = dptr; // OK; permitted by C++
+	B *bptr;
+	D *dptr;
+	bptr = dptr; // OK; permitted by C++
 
-Helper<B> hb;
-Helper<D> hd; 
-hb = hd; // Not allowed but could be very useful 
+	Helper<B> hb;
+	Helper<D> hd;
+	hb = hd; // Not allowed but could be very useful
 }
 
 ```
@@ -53,58 +59,78 @@ Define **member template functions**, in a class template, which rely on the **i
 #include<iostream>
 using namespace std;
 
-class B {};
-class D : public B {};
-
-template <class T>
-class Ptr
+class B
 {
-  public:
-    Ptr () {}
-
-    Ptr (Ptr const & p)
-      : ptr (p.ptr)
-    {
-      std::cout << "Copy constructor\n";
-    }
-
-    // Supporting coercion using member template constructor.
-    // This is not a copy constructor, but behaves similarly.
-    template <class U>
-    Ptr (Ptr <U> const & p)
-      : ptr (p.ptr) // Implicit conversion from U to T required
-    {
-      std::cout << "Coercing member template constructor\n";
-    }
-
-    // Copy assignment operator.
-    Ptr & operator = (Ptr const & p)
-    {
-      ptr = p.ptr;
-      std::cout << "Copy assignment operator\n";
-      return *this;
-    }
-
-    // Supporting coercion using member template assignment operator.
-    // This is not the copy assignment operator, but works similarly.
-    template <class U>
-    Ptr & operator = (Ptr <U> const & p)
-    {
-      ptr = p.ptr; // Implicit conversion from U to T required
-      std::cout << "Coercing member template assignment operator\n";
-      return *this;
-    } 
-
-    T *ptr;
+};
+class D: public B
+{
 };
 
-int main (void)
+template<class T>
+class Ptr
 {
-   Ptr <D> d_ptr;
-   Ptr <B> b_ptr (d_ptr); // Now supported
-   b_ptr = d_ptr;         // Now supported
+public:
+	Ptr() :
+					ptr(NULL)
+	{
+	}
+
+	Ptr(Ptr const &p) :
+					ptr(p.ptr)
+	{
+		std::cout << "Copy constructor\n";
+	}
+
+	// Supporting coercion using member template constructor.
+	// This is not a copy constructor, but behaves similarly.
+	template<class U>
+	Ptr(Ptr<U> const &p) :
+					ptr(p.ptr) // Implicit conversion from U to T required
+	{
+		std::cout << "Coercing member template constructor\n";
+	}
+
+	// Copy assignment operator.
+	Ptr& operator =(Ptr const &p)
+	{
+		ptr = p.ptr;
+		std::cout << "Copy assignment operator\n";
+		return *this;
+	}
+
+	// Supporting coercion using member template assignment operator.
+	// This is not the copy assignment operator, but works similarly.
+	template<class U>
+	Ptr& operator =(Ptr<U> const &p)
+	{
+		ptr = p.ptr; // Implicit conversion from U to T required
+		std::cout << "Coercing member template assignment operator\n";
+		return *this;
+	}
+
+	T *ptr;
+};
+
+int main(void)
+{
+	Ptr<D> d_ptr;
+	Ptr<B> b_ptr(d_ptr); // Now supported
+	b_ptr = d_ptr;         // Now supported
 }
+// g++ test.cpp --std=c++03
+
 ```
+
+> NOTE: 
+>
+> 输出如下:
+>
+> ```C++
+> Coercing member template constructor
+> Coercing member template assignment operator
+> ```
+>
+> 
 
 Another use for this idiom is to permit assigning an array of pointers to a class to an array of pointers to that class' base. Given that `D` derives from `B`, a `D` object **is-a** `B` object. However, an array of `D` objects **is-not-an** array of `B` objects. This is prohibited in C++ because of [slicing](https://en.wikipedia.org/wiki/Object_slicing). Relaxing this rule for an array of pointers can be helpful. For example, an array of pointers to `D` should be assignable to an array of pointers to `B` (assuming `B`'s destructor is virtual). Applying this idiom can achieve that, but extra care is needed to prevent copying arrays of pointers to one type to arrays of pointers to a derived type. Specializations of the member function templates or [SFINAE](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/SFINAE) can be used to achieve that.
 
@@ -113,37 +139,46 @@ The following example uses a templated constructor and assignment operator expec
 ```c++
 #include<iostream>
 #include<algorithm>
-using namespace std;
 
-class B {};
-class D : public B {};
-
-template <class T>
-class Array
+class B
 {
-  public:
-    Array () {}
-    Array (Array const & a)
-    {
-      std::copy (a.array_, a.array_ + SIZE, array_);
-    }
-
-    template <class U>
-    Array (Array <U *> const & a)
-    {
-      std::copy (a.array_, a.array_ + SIZE, array_);
-    }
-
-    template <class U>
-    Array & operator = (Array <U *> const & a)
-    {
-      std::copy (a.array_, a.array_ + SIZE, array_);
-    }
-
-    enum { SIZE = 10 };
-    T array_[SIZE];
+};
+class D: public B
+{
 };
 
+template<class T>
+class Array
+{
+public:
+	Array()
+	{
+	}
+	Array(Array const &a)
+	{
+		std::copy(a.array_, a.array_ + SIZE, array_);
+	}
+
+	template<class U>
+	Array(Array<U*> const &a)
+	{
+		std::copy(a.array_, a.array_ + SIZE, array_);
+	}
+
+	template<class U>
+	Array& operator =(Array<U*> const &a)
+	{
+		std::copy(a.array_, a.array_ + SIZE, array_);
+	}
+
+	enum
+	{
+		SIZE = 10
+	};
+	T array_[SIZE];
+};
+
+// g++ test.cpp --std=c++03
 
 ```
 
