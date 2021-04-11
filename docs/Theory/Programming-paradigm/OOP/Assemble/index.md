@@ -26,7 +26,7 @@
 
 ### inheritance VS composition
 
-虽然两种都能够实现assemble，但是从design的角度来看，它们是有着差异的，在`Theory\Design-pattern\OOP-design-pattern\Principle\Composition-over-inheritance`中对它们进行了对比。
+虽然两种都能够实现assemble，但是从design的角度来看，它们是有着差异的，在`Composition-over-inheritance`中对它们进行了对比。
 
 
 
@@ -43,3 +43,8 @@
 
 
 
+### Combination explode
+
+对于combination explode，composition有着天然的优势，典型例子:
+
+1、decorator pattern中的: pizza + topping
