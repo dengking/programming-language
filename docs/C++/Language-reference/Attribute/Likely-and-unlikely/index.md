@@ -183,3 +183,9 @@ C++20 has standardized those C++ built-ins: [How to use C++20's likely/unlikely 
 
 
 ## cnblogs [C/C++ 分支预测(likely unlikely)](https://www.cnblogs.com/xudong-bupt/p/7337240.html)
+
+
+
+## TODO
+
+stackoverflow [What is the advantage of GCC's __builtin_expect in if else statements?](https://stackoverflow.com/questions/7346929/what-is-the-advantage-of-gccs-builtin-expect-in-if-else-statements)

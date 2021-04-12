@@ -61,3 +61,28 @@ selector.start();
 ```
 
 C++11、C++17中，去除了这种用法，参见`C++\Language-reference\Exception`章节。
+
+
+
+## 原则
+
+一、program应该及时地报告错误，甚至及时终止程序(比如抛出exception)，而不是在错误的基础上继续运行
+
+将这个简称为: report error on time not run on error。
+
+
+
+1、于此相关的一个关于"undefined behavior"的一个说法
+
+2、基于error运行的出现，它的一切行为都是不可预期的、不可控的；从我的经历来看，一些小错误，没有及时处理，而导致的非常诡异的、非常难以排查的问题:
+
+a、之前碰到过由于unsigned integer的overflow而导致程序非常异常的行为
+
+二、turn undefined behavior as error or exception 
+
+对于一些 undefined behavior ，最后将它们转换为exception及时地抛出，下面是一些典型的undefined behavior: 
+
+1、array bound check
+
+2、integer overflow
+
