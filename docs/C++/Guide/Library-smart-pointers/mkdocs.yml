@@ -11,4 +11,5 @@ nav:
     - Guideline-subtyping-polymorphism: Guideline-subtyping-polymorphism
     - Guideline-overhead: Guideline-overhead
     - Guideline-custom-deleter: Guideline-custom-deleter
+    - TODO-swap-reset-release: TODO-swap-reset-release
     - TODO-pointer_cast: TODO-pointer_cast.md

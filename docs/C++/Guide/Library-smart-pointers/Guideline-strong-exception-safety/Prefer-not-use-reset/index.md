@@ -1,6 +1,6 @@
 # Prefer not use reset
 
-其实本质上是 [R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)。
+其实本质上是CppCoreGuidelines [R.13: Perform at most one explicit resource allocation in a single expression statement](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-single-alloc)。
 
 ## stackoverflow [is it better to use shared_ptr.reset or operator =?](https://stackoverflow.com/questions/14836691/is-it-better-to-use-shared-ptr-reset-or-operator)
 
