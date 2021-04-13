@@ -204,7 +204,7 @@ int main()
 
 #### Example
 
-参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Literal-type.md`。
+参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Literal-type`。
 
 ## `constexpr if` statements (C++17)
 
