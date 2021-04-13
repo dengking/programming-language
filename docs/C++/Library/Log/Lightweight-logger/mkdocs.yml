@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    
+    - stackoverflow-A-better-LOG-macro-using-template-metaprogramming: stackoverflow-A-better-LOG-macro-using-template-metaprogramming
+    - Bartek-Improving-Print-Logging-with-Line-Pos-Info-&-Modern-C++: Bartek-Improving-Print-Logging-with-Line-Pos-Info-&-Modern-C++
