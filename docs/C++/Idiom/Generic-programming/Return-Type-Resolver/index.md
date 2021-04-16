@@ -74,3 +74,9 @@ int main()
 ### Known Uses
 
 The [nullptr](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/nullptr) idiom makes use of the return type resolver idiom to automatically deduce a null pointer of the correct type depending upon the pointer variable it is assigning to.
+
+
+
+## 补充样例
+
+1、[microsoft](https://github.com/microsoft)/**[GSL](https://github.com/microsoft/GSL)**/pointers `not_null`

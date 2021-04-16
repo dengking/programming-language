@@ -129,6 +129,24 @@ For all it's worth, it is not a standard C++ terminology. It is just an implemen
 
 
 
+## 当前，virtual table是compile time生成的
+
+
+
+### CppCoreGuidelines [T.83: Do not declare a member function template virtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t83-do-not-declare-a-member-function-template-virtual)
+
+#### Reason
+
+C++ does not support that. If it did, vtbls could not be generated until link time. And in general, implementations must deal with dynamic linking.
+
+> NOTE: 
+>
+> 1、当前，virtual table是compile time生成的；如果支持template virtual function，那么virtual table需要直到link time才能够生成，并且还需要支持dynamic linking。
+>
+> 2、参见 `Template-and-virtual` 章节
+
+
+
 ## 为什么reference semantic才能够实现dynamic polymorphism
 
 1、value semantic时，它的concrete type是已知的，compiler能够直接选择implementation，显然这样是符合optimization principle的

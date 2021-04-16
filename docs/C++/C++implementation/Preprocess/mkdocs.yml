@@ -1,9 +1,6 @@
 nav:
     - Introduction: index.md
-    - Predefined-macros: Predefined-macros
-    - Language-feature-testing-macros: Language-feature-testing-macros
-    - Replacing-text-macros: Replacing-text-macros
+    
     - Implementation-defined-behavior-control: Implementation-defined-behavior-control
     - include-guard-and-pragma-once: include-guard-and-pragma-once
     - Macro: Macro
-    - Pros-and-cons-of-macro: Pros-and-cons-of-macro.md    

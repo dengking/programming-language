@@ -56,7 +56,9 @@ virtual void Test(T t)
 
 2、`Policy-based-design`
 
+4、在 CppCoreGuidelines [T.83: Do not declare a member function template virtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t83-do-not-declare-a-member-function-template-virtual) 中给出了Alternative
 
+> Double dispatch, visitors, calculate which function to call
 
 ### 推荐的解决方案
 

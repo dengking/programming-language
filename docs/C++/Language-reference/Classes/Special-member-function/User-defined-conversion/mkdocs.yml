@@ -1,3 +1,4 @@
 nav:
-    - User-defined-conversion: index.md
+    - Introduction: index.md
+    - Converting-constructor: Converting-constructor
     - Explicit-specifier: Explicit-specifier

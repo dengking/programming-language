@@ -1,12 +1,10 @@
 nav:
-    - CppCoreGuidelines: CppCoreGuidelines
-
     - Command-line: Command-line
     # 如何进行注释，如何根据注释生成文档
     - Comment: Comment
     - Temporary: Temporary
     - Order: Order
-    - Header-only-library: Header-only-library.md
+    - Header-only-library: Header-only-library
     # - Transaction: Transaction
     
     - Performance-optimization: Performance-optimization
@@ -16,6 +14,7 @@ nav:
     - Library-smart-pointers: Library-smart-pointers
     
     - Type-相关: Type-相关
+    
     - Guard: Guard
     - Wrapper: Wrapper
     
@@ -26,3 +25,5 @@ nav:
     - Compile-time-and-run-time: Compile-time-and-run-time
     # C++中的修饰符
     - Specifiers: Specifiers
+    
+    - Configuration-option: Configuration-option

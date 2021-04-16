@@ -16,11 +16,19 @@ why? 在下面文章中解释了原因:
 
 a、stackoverflow [Are pure virtual methods allowed within a template class?](https://stackoverflow.com/questions/8919566/are-pure-virtual-methods-allowed-within-a-template-class) # [A](https://stackoverflow.com/a/8919588)
 
-本文收录了这篇文章
+本文收录了这篇文章，参见下面。
 
 b、rivermatrix [C++ TEMPLATES WITH VIRTUAL FUNCTIONS?](https://rivermatrix.com/c-templates-with-virtual-functions/)
 
+c、CppCoreGuidelines [T.83: Do not declare a member function template virtual](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t83-do-not-declare-a-member-function-template-virtual)
 
+C++ does not support that. If it did, vtbls could not be generated until link time. And in general, implementations must deal with dynamic linking.
+
+> NOTE: 
+>
+> 1、当前，virtual table是compile time生成的；如果支持template virtual function，那么virtual table需要直到link time才能够生成，并且还需要支持dynamic linking。
+>
+> 
 
 ### 验证小程序
 

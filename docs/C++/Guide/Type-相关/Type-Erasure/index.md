@@ -22,6 +22,10 @@ consistent type: type、data
 
 > NOTE: 其实我的上述实现思路，即使用map来进行映射，是属于典型的custom virtual table-generic function pattern，这种实现方式是不推荐的。
 
+#### CppCoreGuidelines [T.84: Use a non-template core implementation to provide an ABI-stable interface](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t84-use-a-non-template-core-implementation-to-provide-an-abi-stable-interface)
+
+
+
 ### Function pointer for behavior and void pointer for data
 
 本节标题是源自: stackoverflow [Type erasure techniques](https://stackoverflow.com/questions/5450159/type-erasure-techniques) # [A](https://stackoverflow.com/a/6044720) 的。
