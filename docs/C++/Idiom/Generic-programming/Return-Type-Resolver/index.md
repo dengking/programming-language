@@ -1,6 +1,6 @@
 # Return Type Resolver
 
-
+1、典型的template user define conversion function
 
 ## [More C++ Idioms/Return Type Resolver](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Return_Type_Resolver)
 
