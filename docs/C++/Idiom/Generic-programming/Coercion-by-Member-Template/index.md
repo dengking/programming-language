@@ -1,6 +1,12 @@
 # Coercion by Member Template
 
-"coercion"的意思是"强迫、强制"。
+一、"coercion"的意思是"强迫、强制"。
+
+二、使用了这个idiom的案例包括
+
+1、`std::unique_ptr`
+
+2、[microsoft](https://github.com/microsoft)/**[GSL](https://github.com/microsoft/GSL)**/[pointers](https://github.com/microsoft/GSL/blob/main/include/gsl/pointers) `class not_null`
 
 ## More C++ Idioms/[Coercion by Member Template](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Coercion_by_Member_Template)
 
@@ -134,6 +140,12 @@ int main(void)
 
 Another use for this idiom is to permit assigning an array of pointers to a class to an array of pointers to that class' base. Given that `D` derives from `B`, a `D` object **is-a** `B` object. However, an array of `D` objects **is-not-an** array of `B` objects. This is prohibited in C++ because of [slicing](https://en.wikipedia.org/wiki/Object_slicing). Relaxing this rule for an array of pointers can be helpful. For example, an array of pointers to `D` should be assignable to an array of pointers to `B` (assuming `B`'s destructor is virtual). Applying this idiom can achieve that, but extra care is needed to prevent copying arrays of pointers to one type to arrays of pointers to a derived type. Specializations of the member function templates or [SFINAE](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/SFINAE) can be used to achieve that.
 
+> NOTE: 
+>
+> 1、"assigning an array of pointers to a class to an array of pointers to that class' base" 让我想起了: 
+>
+> type covariance
+
 The following example uses a templated constructor and assignment operator expecting `Array<U *>` to only allow copying Arrays of pointers when the element types differ.
 
 ```c++
@@ -189,6 +201,10 @@ Many smart pointers such as [`std::unique_ptr`](https://en.cppreference.com/w/cp
 ### Caveats
 
 A typical mistake in implementing the Coercion by Member Template Idiom is failing to provide the non-template copy constructor or copy assignment operator when introducing the templated copy constructor and assignment operator. A compiler will automatically declare a copy constructor and a copy assignment operator if a class does not declare them, which can cause hidden and non-obvious faults when using this idiom.
+
+> NOTE: 
+>
+> 1、这是非常容易出错的，在 [microsoft](https://github.com/microsoft)/**[GSL](https://github.com/microsoft/GSL)**/[pointers](https://github.com/microsoft/GSL/blob/main/include/gsl/pointers) `class not_null` 中，提供了全部
 
 ### Known Uses
 
