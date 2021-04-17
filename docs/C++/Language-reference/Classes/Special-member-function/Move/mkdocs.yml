@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    
     - zhihu-Rvalue-reference: zhihu-Rvalue-reference
     - stackoverflow-What-is-move-semantics: stackoverflow-What-is-move-semantics
 # 以维基百科Rvalue references and move constructors作为引入
@@ -7,5 +8,6 @@ nav:
     - TODO-thegreenplace-Understanding-lvalues-and-rvalues: TODO-thegreenplace-Understanding-lvalues-and-rvalues
     - TODO-Understanding-the-warning-binding-r-value-to-l-value-reference: TODO-Understanding-the-warning-binding-r-value-to-l-value-reference
     - TODO-thbecker-Rvalue-References-Explained: TODO-thbecker-Rvalue-References-Explained
-    - TODO-CppCoreGuidelines-For-Rvalue-References-In-APIs: TODO-CppCoreGuidelines-For-Rvalue-References-In-APIs
+    - TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs: TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs
+    - paper-A-Proposal-to-Add-Move-Semantics-Support-to-the-C++Language: paper-A-Proposal-to-Add-Move-Semantics-Support-to-the-C++Language
     - std-move: std-move

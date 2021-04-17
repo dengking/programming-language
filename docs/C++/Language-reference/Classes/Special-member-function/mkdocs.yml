@@ -2,11 +2,14 @@ nav:
     - Introduction: index.md
     - Common-issue: Common-issue
     - Constructor: Constructor
-    - Destructor: Destructor    
+    - Destructor: Destructor  
+    # 各种operation
     - Copy: Copy
     - Move: Move
     - Swap: Swap
     - Assign: Assign    
+    - Relocate: Relocate
+    
     - Copyable-and-movable: Copyable-and-movable
     - User-defined-conversion: User-defined-conversion
     - Idioms: Idioms
