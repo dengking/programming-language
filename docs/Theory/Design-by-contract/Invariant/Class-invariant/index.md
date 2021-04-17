@@ -1,4 +1,84 @@
-# [What is a class invariant in java?](https://stackoverflow.com/questions/8902331/what-is-a-class-invariant-in-java)
+# Class invariant 
+
+1、Class invariant本质上是 **predefined conditions**，参见 wikipedia [Class invariant](https://en.wikipedia.org/wiki/Class_invariant)
+
+2、在 [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md) 中，有很多关于class invariant的讨论
+
+3、关于Class invariant，最最典型的案例就是C++ `gsl::not_null`，参见相关章节
+
+4、作为class的设计者，我们应该清楚地说明清楚class invariant
+
+5、在testing中，需要对class invariant进行检验， wikipedia [Class invariant](https://en.wikipedia.org/wiki/Class_invariant) :
+
+> Defining class invariants can help programmers and testers to catch more bugs during [software testing](https://en.wikipedia.org/wiki/Software_testing).
+
+## wikipedia [Class invariant](https://en.wikipedia.org/wiki/Class_invariant)
+
+
+
+In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), specifically [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), a **class invariant** (or **type invariant**) is an [invariant](https://en.wikipedia.org/wiki/Invariant_(computer_science)) used to constrain [objects](https://en.wikipedia.org/wiki/Object_(computer_science)) of a [class](https://en.wikipedia.org/wiki/Class_(computer_science)). [Methods](https://en.wikipedia.org/wiki/Method_(computer_science)) of the class should preserve the invariant. The class invariant **constrains** the state stored in the object.
+
+Class invariants are established during construction and constantly maintained between calls to public methods. Code within functions may break invariants as long as the invariants are restored before a public function ends.
+
+An **object invariant**, or representation invariant, is a [computer programming](https://en.wikipedia.org/wiki/Computer_programming) construct consisting of a set of invariant properties that remain uncompromised(不妥协的) regardless of the state of the [object](https://en.wikipedia.org/wiki/Object_(computer_science)). This ensures that the object will always meet **predefined conditions**, and that [methods](https://en.wikipedia.org/wiki/Method_(computer_science)) may, therefore, always reference the object without the risk of making inaccurate presumptions. Defining class invariants can help programmers and testers to catch more bugs during [software testing](https://en.wikipedia.org/wiki/Software_testing).
+
+
+
+### Class invariants and inheritance
+
+The useful effect of class invariants in object-oriented software is enhanced in the presence of inheritance. Class invariants are inherited, that is, "the invariants of all the parents of a class apply to the class itself."[[1\]](https://en.wikipedia.org/wiki/Class_invariant#cite_note-1)
+
+Inheritance can allow descendant classes to alter implementation data of parent classes, so it would be possible for a descendant class to change the state of instances in a way that made them invalid from the viewpoint of the parent class. The concern for this type of misbehaving descendant is one reason object-oriented software designers give for favoring [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) (i.e., inheritance breaks encapsulation).[[2\]](https://en.wikipedia.org/wiki/Class_invariant#cite_note-2)
+
+However, because class invariants are inherited, the class invariant for any particular class consists of any **invariant assertions** coded immediately on that class, logically "and-ed" with all the invariant clauses inherited from the class's parents. This means that even though descendant classes may have access to the implementation data of their parents, the class invariant can prevent them from manipulating those data in any way that produces an invalid instance at runtime.
+
+
+
+### Example
+
+#### Inheritance
+
+An example in [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) follows:
+
+```c++
+class GameObject {
+    public:
+        virtual ~GameObject() {}
+        virtual void update() {}
+        virtual void draw() {}
+        virtual void collide(GameObject objects[]) {}
+};
+
+class Visible : public GameObject {
+    public:
+        void draw() override { /* draw model at position of this object */ };
+    private:
+        Model* model;
+};
+
+class Solid : public GameObject {
+    public:
+        void collide(GameObject objects[]) override { /* check and react to collisions with objects */ };
+};
+
+class Movable : public GameObject {
+    public:
+        void update() override { /* update position */ };
+};
+```
+
+Then, we have concrete classes:
+
+- class `Player` - which is `Solid`, `Movable` and `Visible`
+- class `Cloud` - which is `Movable` and `Visible`, but not `Solid`
+- class `Building` - which is `Solid` and `Visible`, but not `Movable`
+- class `Trap` - which is `Solid`, but neither `Visible` nor `Movable`
+
+Note that multiple inheritance is dangerous if not implemented carefully, as it can lead to the [diamond problem](https://en.wikipedia.org/wiki/Diamond_problem). One solution to avoid this is to create classes such as `VisibleAndSolid`, `VisibleAndMovable`, `VisibleAndSolidAndMovable`, etc. for every needed combination, though this leads to a large amount of repetitive code. Keep in mind that C++ solves the diamond problem of multiple inheritance by allowing [virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance).
+
+
+
+## stackoverflow [What is a class invariant in java?](https://stackoverflow.com/questions/8902331/what-is-a-class-invariant-in-java)
 
 I googled the topic, but besides [Wikipedia](http://en.wikipedia.org/wiki/Class_invariant) I didn't find any further useful documentation or articles.
 
@@ -8,7 +88,7 @@ Can anybody explain to me in simple words what it means or refer me to some nice
 
 A more simple explanation - <[stackoverflow.com/questions/112064/what-is-an-invariant?rq=1](http://stackoverflow.com/questions/112064/what-is-an-invariant?rq=1)>
 
-## [A](https://stackoverflow.com/a/8902410)
+### [A](https://stackoverflow.com/a/8902410)
 
 It doesn't mean anything in particular in reference to java.
 
@@ -89,7 +169,7 @@ The higher-level a system, the larger its TCB typically is, but the more unrelia
 
  [Mike Samuel](https://stackoverflow.com/users/20394/mike-samuel) :  that's a good question. I'm not quite sure. Things like hashCode stability (for each instance i, i.hashCode() does not change) are often called **class invariants** which requires reasoning about values returned previously, so it seems reasonable to say that "for each instance i, i.count() not in (previous results of i.count())" is a class invariant. 
 
-## [A](https://stackoverflow.com/a/19583347)
+### [A](https://stackoverflow.com/a/19583347)
 
 Invariant means something that should stick to its conditions no matter whatever changes or whoever uses/transforms it. That is to say, a property of a class always fulfills or satisfies some condition even after going through transformations by using public methods. So, the client or user of this class is ensured about the class and its property.
 
@@ -103,11 +183,11 @@ For example,
 
 
 
-# [What is an invariant?](https://stackoverflow.com/questions/112064/what-is-an-invariant)
+## stackoverflow [What is an invariant?](https://stackoverflow.com/questions/112064/what-is-an-invariant)
 
 The word seems to get used in a number of contexts. The best I can figure is that they mean a variable that can't change. Isn't that what constants/finals (darn you Java!) are for?
 
-## [A](https://stackoverflow.com/a/112088)
+### [A](https://stackoverflow.com/a/112088)
 
 An invariant is more "conceptual" than a variable. In general, it's a property of the **program state** that is always true. A function or method that ensures that the invariant holds is said to maintain the invariant.
 
@@ -116,70 +196,6 @@ For instance, a binary search tree might have the invariant that for every node,
 As you can tell, that's not the sort of thing you can store in a variable: it's more a statement *about* the program. By figuring out what sort of invariants your program should maintain, then reviewing your code to make sure that it actually maintains those invariants, you can avoid logical errors in your code.
 
 
-
-# [Class invariant](https://en.wikipedia.org/wiki/Class_invariant)
-
-
-
-In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), specifically [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), a **class invariant** (or **type invariant**) is an [invariant](https://en.wikipedia.org/wiki/Invariant_(computer_science)) used to constrain [objects](https://en.wikipedia.org/wiki/Object_(computer_science)) of a [class](https://en.wikipedia.org/wiki/Class_(computer_science)). [Methods](https://en.wikipedia.org/wiki/Method_(computer_science)) of the class should preserve the invariant. The class invariant **constrains** the state stored in the object.
-
-Class invariants are established during construction and constantly maintained between calls to public methods. Code within functions may break invariants as long as the invariants are restored before a public function ends.
-
-An **object invariant**, or representation invariant, is a [computer programming](https://en.wikipedia.org/wiki/Computer_programming) construct consisting of a set of invariant properties that remain uncompromised(不妥协的) regardless of the state of the [object](https://en.wikipedia.org/wiki/Object_(computer_science)). This ensures that the object will always meet predefined conditions, and that [methods](https://en.wikipedia.org/wiki/Method_(computer_science)) may, therefore, always reference the object without the risk of making inaccurate presumptions. Defining class invariants can help programmers and testers to catch more bugs during [software testing](https://en.wikipedia.org/wiki/Software_testing).
-
-
-
-## Class invariants and inheritance
-
-The useful effect of class invariants in object-oriented software is enhanced in the presence of inheritance. Class invariants are inherited, that is, "the invariants of all the parents of a class apply to the class itself."[[1\]](https://en.wikipedia.org/wiki/Class_invariant#cite_note-1)
-
-Inheritance can allow descendant classes to alter implementation data of parent classes, so it would be possible for a descendant class to change the state of instances in a way that made them invalid from the viewpoint of the parent class. The concern for this type of misbehaving descendant is one reason object-oriented software designers give for favoring [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) (i.e., inheritance breaks encapsulation).[[2\]](https://en.wikipedia.org/wiki/Class_invariant#cite_note-2)
-
-However, because class invariants are inherited, the class invariant for any particular class consists of any **invariant assertions** coded immediately on that class, logically "and-ed" with all the invariant clauses inherited from the class's parents. This means that even though descendant classes may have access to the implementation data of their parents, the class invariant can prevent them from manipulating those data in any way that produces an invalid instance at runtime.
-
-
-
-## Example
-
-### Inheritance
-
-An example in [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) follows:
-
-```c++
-class GameObject {
-    public:
-        virtual ~GameObject() {}
-        virtual void update() {}
-        virtual void draw() {}
-        virtual void collide(GameObject objects[]) {}
-};
-
-class Visible : public GameObject {
-    public:
-        void draw() override { /* draw model at position of this object */ };
-    private:
-        Model* model;
-};
-
-class Solid : public GameObject {
-    public:
-        void collide(GameObject objects[]) override { /* check and react to collisions with objects */ };
-};
-
-class Movable : public GameObject {
-    public:
-        void update() override { /* update position */ };
-};
-```
-
-Then, we have concrete classes:
-
-- class `Player` - which is `Solid`, `Movable` and `Visible`
-- class `Cloud` - which is `Movable` and `Visible`, but not `Solid`
-- class `Building` - which is `Solid` and `Visible`, but not `Movable`
-- class `Trap` - which is `Solid`, but neither `Visible` nor `Movable`
-
-Note that multiple inheritance is dangerous if not implemented carefully, as it can lead to the [diamond problem](https://en.wikipedia.org/wiki/Diamond_problem). One solution to avoid this is to create classes such as `VisibleAndSolid`, `VisibleAndMovable`, `VisibleAndSolidAndMovable`, etc. for every needed combination, though this leads to a large amount of repetitive code. Keep in mind that C++ solves the diamond problem of multiple inheritance by allowing [virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance).
 
 
 
