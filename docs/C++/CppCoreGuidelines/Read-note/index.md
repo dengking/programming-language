@@ -72,4 +72,10 @@ List<string> ls;
 
 
 
+### [T.150: Check that a class matches a concept using `static_assert`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t150-check-that-a-class-matches-a-concept-using-static_assert)
+
+> NOTE: 
+>
+> 1、参见 `static_assert` 章节
+
 ### [SF.22: Use an unnamed (anonymous) namespace for all internal/non-exported entities](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#sf22-use-an-unnamed-anonymous-namespace-for-all-internalnon-exported-entities)
