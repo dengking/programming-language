@@ -83,6 +83,29 @@ int main()
 
 
 
+## CppCoreGuidelines [T.150: Check that a class matches a concept using `static_assert`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t150-check-that-a-class-matches-a-concept-using-static_assert)
+
+### Reason
+
+If you intend for a class to match a concept, verifying that early saves users pain.
+
+
+
+## Examples
+
+1、[microsoft](https://github.com/microsoft)/**[GSL](https://github.com/microsoft/GSL)**/[pointers](https://github.com/microsoft/GSL/blob/main/include/gsl/pointers) 
+
+```C++
+template <class T>
+class not_null
+{
+public:
+    static_assert(details::is_comparable_to_nullptr<T>::value, "T cannot be compared to nullptr.");
+};    
+```
+
+
+
 ## stackoverflow [C++ templates that accept only certain types](https://stackoverflow.com/questions/874298/c-templates-that-accept-only-certain-types)
 
 In Java you can define generic class that accept only types that extends class of your choice, eg:
