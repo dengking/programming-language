@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - SFINAE: SFINAE
+    - Deduction: Deduction
     - Compile-error: Compile-error.md

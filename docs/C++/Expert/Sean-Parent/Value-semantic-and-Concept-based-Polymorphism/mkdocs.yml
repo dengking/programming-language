@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - Paper: Paper
+    - Implementation: Implementation
+
+    - TODO-gracicot-Concept-Model-Idiom: TODO-gracicot-Concept-Model-Idiom
+    - TODO-mropert-Polymorphic-ducks: TODO-mropert-Polymorphic-ducks

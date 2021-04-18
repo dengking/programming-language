@@ -2,7 +2,7 @@ nav:
     - Introduction: index.md
     - library-stlab-libraries: library-stlab-libraries
     - TODO-Inheritance-is-the-base-class-of-evil: TODO-Inheritance-is-the-base-class-of-evil    
-    - Value-Semantics-and-Concept-based-Polymorphism: Value-Semantics-and-Concept-based-Polymorphism
+    - PValue-semantic-and-Concept-based-Polymorphism: Value-semantic-and-Concept-based-Polymorphism
     - TODO-Better-Code-Runtime-Polymorphism: TODO-Better-Code-Runtime-Polymorphism
     - Polymorphic-Task-Template-in-Ten: Polymorphic-Task-Template-in-Ten
     - Small-Object-Optimization-for-Polymorphic-Types: Small-Object-Optimization-for-Polymorphic-Types

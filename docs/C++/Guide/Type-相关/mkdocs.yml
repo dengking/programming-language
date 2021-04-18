@@ -1,6 +1,5 @@
 nav:
     - Strong-type: Strong-type
     - Incomplete-type: Incomplete-type
-    - Type-Erasure-and-polymorphism: Type-Erasure-and-polymorphism
     - Reflection: Reflection
     - TODO-Interpretation-model: TODO-Interpretation-model

@@ -1,0 +1,1 @@
+# programmer [C + + value polymorphism: between traditional polymorphism and type erasure](https://programmer.ink/think/c-value-polymorphism-between-traditional-polymorphism-and-type-erasure.html)

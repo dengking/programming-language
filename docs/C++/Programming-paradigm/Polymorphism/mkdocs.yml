@@ -1,9 +1,9 @@
 nav:
     - Introduction: index.md
     - Classification: Classification
-    
+    - Built-in-internal-polymorphism: Built-in-internal-polymorphism
     - Custom-polymorphism: Custom-polymorphism
+    - Polymorphic-value-concept-based-polymorphism: Polymorphic-value-concept-based-polymorphism
     # 下面对一些topic进行讨论
-    - Specialization-and-overload: Specialization-and-overload
-    - Specialization-and-subclass-inheritance: Specialization-and-subclass-inheritance
+
     - Polymorphic-object-container: Polymorphic-object-container

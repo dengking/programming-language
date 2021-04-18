@@ -1,7 +1,8 @@
 nav:
     - Introduction: index.md
 # 首先介绍Bjarne Stroustrup的这篇通俗易懂的文章    
-    - New-Value-Terminology: New-Value-Terminology.md
+    - paper-stroustrup-“New”-Value-Terminology: paper-stroustrup-“New”-Value-Terminology
 # 然后介绍标准中关于value category的描述    
-    - Value-categories: Value-categories.md
+    - cppreference-Value-categories: cppreference-Value-categories
+    - TODO-thegreenplace-Understanding-lvalues-and-rvalues: TODO-thegreenplace-Understanding-lvalues-and-rvalues
     - TODO-prvalues: TODO-prvalues.md

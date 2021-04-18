@@ -1,7 +1,0 @@
-nav:
-    - Introduction: index.md
-    - stackoverflow-Type-erasure-techniques: stackoverflow-Type-erasure-techniques
-    - More-C++Idioms-Type-Erasure: More-C++Idioms-Type-Erasure
-    - TODO-akrzemi1-Type-erasure: TODO-akrzemi1-Type-erasure
-    - sodocumentation-C++type-erasure: sodocumentation-C++type-erasure
-    

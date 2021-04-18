@@ -1,0 +1,1 @@
+# cppreference [std::regular](https://en.cppreference.com/w/cpp/concepts/regular)

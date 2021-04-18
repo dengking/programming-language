@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
+    - library-Quuxplusone-from-scratch: library-Quuxplusone-from-scratch
+    - library-Quuxplusone-ring_view: library-Quuxplusone-ring_view
     - What-is-Type-Erasure: What-is-Type-Erasure

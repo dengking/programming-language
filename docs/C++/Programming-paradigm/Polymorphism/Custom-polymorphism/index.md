@@ -20,7 +20,7 @@
 
 ### Concept-based-polymorphism
 
-参见 `Concept-based-polymorphism` 章节。
+参见 `Polymorphic-value-and-concept-based-polymorphism` 章节。
 
 
 
