@@ -90,3 +90,12 @@ I should actually use:
 not_null<int *> pInt
 ```
 
+## wanghenshui [使用gsl::not_null封装raw pointer](https://wanghenshui.github.io/2019/05/06/not-null-ptr.html)
+
+
+
+### 拓展阅读
+
+> NOTE: 
+>
+> 1、这一段的内容是有误的，`gsl::not_null`是不支持move的
