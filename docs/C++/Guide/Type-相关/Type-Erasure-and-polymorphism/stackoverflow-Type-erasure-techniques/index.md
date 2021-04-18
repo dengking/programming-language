@@ -8,7 +8,9 @@ The first and most obvious, and commonly taken approach, that I know, are **virt
 
 Then there is the option with function pointers to templated functions, while holding the actual object in a `void*` pointer, like [Boost.Function](http://www.boost.org/doc/libs/1_46_1/doc/html/function.html) does to hide the real type of the functor. Example implementations can be found at the end of the question.
 
-> NOTE: function pointer
+> NOTE: 
+>
+> 1、上述描述的是custom virtual table，在 stlab [Small Object Optimization for Polymorphic Types](https://stlab.cc/tip/2017/12/23/small-object-optimizations.html) 中，展示了实现方式
 
 So, for my actual question:
 

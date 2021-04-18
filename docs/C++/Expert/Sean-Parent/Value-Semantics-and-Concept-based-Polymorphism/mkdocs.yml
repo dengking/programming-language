@@ -2,6 +2,6 @@ nav:
     - Introduction: index.md
     - Paper: Paper
     - Implementation: Implementation
-    - Polymorphic-Value-Types: Polymorphic-Value-Types
+    - Polymorphic-Value-Types-idiom: Polymorphic-Value-Types-idiom
     - TODO-gracicot-Concept-Model-Idiom: TODO-gracicot-Concept-Model-Idiom
     - TODO-mropert-Polymorphic-ducks: TODO-mropert-Polymorphic-ducks

@@ -122,7 +122,9 @@ If *`new_type`* is an **rvalue reference type**, `static_cast` converts the valu
 
 ### 10) pointer to `void` to pointer to complete type
 
-
+> NOTE: 
+>
+> 1、在 Sean parent [Small Object Optimization for Polymorphic Types](https://stlab.cc/tip/2017/12/23/small-object-optimizations.html) 中，对此进行了深入的讨论
 
 ### Example
 

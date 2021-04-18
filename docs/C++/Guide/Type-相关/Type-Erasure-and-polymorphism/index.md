@@ -1,10 +1,12 @@
 # Type Erasure
 
+1、本质上是为了实现consistent interface
+
 ## Implementation summary
 
 本节对各种实现type erasure的technique进行总结。
 
-### OOP interface + template implementation
+###  OOP interface + template implementation
 
 1、C++的实现方式是: 
 
@@ -46,17 +48,23 @@ Function pointer的典型的代表就是:
 
 
 
+### Polymorphic-Value-Types-idiom
+
+1、参见 `Value-Semantics-and-Concept-based-Polymorphism` 章节。
+
+2、stackoverflow [Type erasure techniques](https://stackoverflow.com/questions/5450159/type-erasure-techniques) # [A](https://stackoverflow.com/a/6044720)
+
+## Value-Semantics-and-Concept-based-Polymorphism、Polymorphic-Value-Types-idiom
+
+1、type erasure是实现Concept-based-Polymorphism、Polymorphic-Value-Types-idiom的基础，参见 `Value-Semantics-and-Concept-based-Polymorphism` 章节。
+
+
+
 ## C++ standard library support for type erasure
-
-
 
 https://en.cppreference.com/w/cpp/utility/any
 
-
-
 https://en.cppreference.com/w/cpp/utility/variant
-
-
 
 http://en.wikipedia.org/wiki/Type_erasure
 
@@ -65,8 +73,6 @@ http://en.wikipedia.org/wiki/Type_erasure
 `void*`
 
 dynamic_cast `void*`
-
-
 
 ## TODO wizmann [C++类型擦除与`std::function`性能探索](https://wizmann.tk/cpp-type-erasure-and-std-function.html)
 
