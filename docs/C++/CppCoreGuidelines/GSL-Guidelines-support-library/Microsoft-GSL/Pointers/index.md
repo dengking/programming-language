@@ -262,7 +262,7 @@ a、github [remove move constructor for not_null. #842](https://github.com/micro
 >
 > Yes, an intended effect of this change is that a `not_null<unique_ptr<T>>` can only sit there, it can't be moved anywhere. But this is already inherently true, moving one of those is impossible today without breaking the `not_null` invariant. The correct long-term answer for this would be if C++ gets something along the lines of the **relocation / destructive move semantics proposals**, where roughly "relocation/destructive-move leaves an object that is guaranteed to be no longer used" or similar (in those proposals, including even its dtor won't be called), then that would naturally enable cases like returning a local `not_null<unique_ptr<T>>` by value.
 
-关于 "**relocation / destructive move semantics proposals**"，参见 
+关于 "**relocation / destructive move semantics proposals**"，参见: 
 
 open-std [P1144R2 Object relocation in terms of move plus destroy](http://open-std.org/JTC1/SC22/WG21/docs/papers/2019/p1144r2.html)
 

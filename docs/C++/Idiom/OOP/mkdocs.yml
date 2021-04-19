@@ -9,7 +9,7 @@ nav:
     # Control the granularity of access to the implementation details of a class
     - TODO-Attorney-Client: TODO-Attorney-Client
     # 控制object是否能够创建于heap
-    - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects
+    - Requiring-or-Prohibiting-Heap-based-Objects-idiom: Requiring-or-Prohibiting-Heap-based-Objects-idiom
     #
     - Temporary-Proxy: Temporary-Proxy
     #

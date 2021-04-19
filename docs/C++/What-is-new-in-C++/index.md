@@ -52,13 +52,33 @@ C++的一个发展方向就是充分发挥value-semantic，在 `C++\Language-ref
 |                                                              |          |      |
 |                                                              |          |      |
 
-### Generic programming and template meta-programming
+### Static and compile time
 
-#### 提供 uniform、consistent的interface、API、syntax
+C++的一个显著特点就是: 充分发挥compile time、static type safety，这基本上涵盖了C++的很多内容。在下面章节中，也对此进行了总结:
+
+1、`Comparison-of-programming-language\C++VS-C\Type-system`
+
+2、`C++\Guide\Compile-time-and-run-time`
+
+3、CppCoreGuidelines [Philosophy](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#p-philosophy) 
+
+[P.4: Ideally, a program should be statically type safe](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p4-ideally-a-program-should-be-statically-type-safe)
+
+[P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
+
+#### GP and TMP
+
+> NOTE: 
+>
+> GP: generic programming 
+>
+> TMP: template meta-programming
+
+1、提供 uniform、consistent的interface、API、syntax
 
 参见 `Uniform-consistent-interface-API-syntax` 章节。
 
-#### Template
+2、Template
 
 C++的一个发展发现是对template-meta programming的强化。
 
@@ -69,7 +89,17 @@ C++的一个发展发现是对template-meta programming的强化。
 | [class template argument deduction](https://en.cppreference.com/w/cpp/language/class_template_argument_deduction) | C++17    |                                                    |
 | Type transformation `_t` aliases [¶](https://isocpp.org/wiki/faq/cpp14-library#type-transformation-aliases) [Δ](https://isocpp.org/wiki/faq/cpp14-library#) | C++14    | `C++\What-is-new-in-C++\C++14\TransformationTrait` |
 
+#### Static type safety
 
+充分发挥static compile time是C++的一个重要特征，这保证了C++的static type safety，这在如下章节中进行了讨论:
+
+1、`Comparison-of-programming-language\C++VS-C\Type-system`
+
+#### Compile time computation
+
+参见:
+
+1、`C++\Guide\Compile-time-and-run-time`
 
 ### Simplify
 

@@ -1,8 +1,16 @@
 # Compile-time and run-time
 
-## C++
+1、C++是充分发挥compile-time、static的语言，这在 "What-is-new-in-C++" 中也进行了讨论
 
+2、CppCoreGuidelines [Philosophy](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#p-philosophy) 
 
+[P.4: Ideally, a program should be statically type safe](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p4-ideally-a-program-should-be-statically-type-safe)
+
+[P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
+
+因此，我们应该prefer compile time。
+
+## Compile-time and run-time in C++ 总结
 
 ### [`static_assert`](https://en.cppreference.com/w/cpp/language/static_assert) VS [`assert`](https://en.cppreference.com/w/cpp/error/assert) 
 
@@ -84,3 +92,4 @@ run-time
 
 
 
+### static reflection and dynamic reflection

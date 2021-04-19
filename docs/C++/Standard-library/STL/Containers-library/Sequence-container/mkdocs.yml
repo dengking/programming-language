@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Vector: Vector
-    - List: List
+    - std-vector: std-vector
+    - std-list: std-list

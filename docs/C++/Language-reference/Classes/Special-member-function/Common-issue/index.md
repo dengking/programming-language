@@ -28,6 +28,8 @@ virtual化，充分发挥dynamic polymorphism。
 
 1、 `Requiring-or-Prohibiting`
 
+
+
 ## Default
 
 使用compiler的default行为。
@@ -39,3 +41,11 @@ virtual化，充分发挥dynamic polymorphism。
 compiler是会implicit生成这些magic function的，参见如下章节:
 
 1、`Implicitly-defined` 章节。
+
+
+
+
+
+## Trivial
+
+参见 `Trivial` 章节。

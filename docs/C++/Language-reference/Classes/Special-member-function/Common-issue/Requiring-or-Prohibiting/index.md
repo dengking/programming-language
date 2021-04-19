@@ -48,9 +48,9 @@ OOP、behavior、interface、magic function
 
 ## draft
 
-对于某种类型，可以对其给予、禁止某种behavior，这主要通过magic function来实现的。
+1、对于某种类型，可以对其给予、禁止某种behavior，这主要通过magic function来实现的。
 
-
+2、使用`delete` keyword
 
 ## Example
 

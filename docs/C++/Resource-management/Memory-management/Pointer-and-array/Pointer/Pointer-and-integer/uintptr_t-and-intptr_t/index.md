@@ -1,4 +1,10 @@
-# `uintptr_t` 
+# `uintptr_t`  and `intptr_t` 
+
+在下面文章，给出了使用案例:
+
+1、[P1144R2 Object relocation in terms of move plus destroy](http://open-std.org/JTC1/SC22/WG21/docs/papers/2019/p1144r2.html)
+
+2、stackoverflow [How to allocate aligned memory only using the standard library?](https://stackoverflow.com/questions/227897/how-to-allocate-aligned-memory-only-using-the-standard-library)
 
 ## stackoverflow [What is uintptr_t data type](https://stackoverflow.com/questions/1845482/what-is-uintptr-t-data-type)
 
@@ -27,5 +33,9 @@ Take this to mean what it says. It doesn't say anything about size.
 #### comments
 
 To [allocate aligned memory](http://stackoverflow.com/q/227897/183120), among other uses, for instance? – [legends2k](https://stackoverflow.com/users/183120/legends2k) [Jul 21 '15 at 7:36](https://stackoverflow.com/questions/1845482/what-is-uintptr-t-data-type#comment51025968_1846648)
+
+
+
+
 
 ## cppreference [Fixed width integer types (since C++11)](https://en.cppreference.com/w/cpp/types/integer)

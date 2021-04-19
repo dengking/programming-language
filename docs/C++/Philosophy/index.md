@@ -255,7 +255,20 @@ We can ban, restrain, or detect the individual problem categories separately, as
 >
 > 二、关于type safety，参见 `Theory\Type-system\Type-safety` 章节
 >
-> 
+
+
+
+### [P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
+
+#### Reason
+
+Code clarity and performance. You don't need to write error handlers for errors caught at compile time.
+
+> NOTE: 
+>
+> 1、这是compile time的优势，它总结得非常好
+>
+> 2、另外在 paper [P1144R2 Object relocation in terms of move plus destroy](http://open-std.org/JTC1/SC22/WG21/docs/papers/2019/p1144r2.html) 的"1.2. The most important benefit"章节中，讨论了这个topic相关的内容。
 
 ### P.8: Don’t leak any resources
 

@@ -6,6 +6,12 @@ C++在C的基础上对type system做了很多改进，使得相比于C而言，C
 
 > NOTE: 可以作为static type VS dynamic type的素材。
 
+CppCoreGuidelines [Philosophy](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#p-philosophy) 
+
+[P.4: Ideally, a program should be statically type safe](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p4-ideally-a-program-should-be-statically-type-safe)
+
+[P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
+
 2、执行更加严格的类型检查
 
 在wikipedia [Type safety](https://en.wikipedia.org/wiki/Type_safety#C++) 中对此进行了非常好的总结:
