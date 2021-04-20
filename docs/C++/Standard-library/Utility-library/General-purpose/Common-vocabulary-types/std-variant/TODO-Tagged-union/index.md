@@ -1,0 +1,1 @@
+# [Tagged union](https://en.wanweibaike.com/wiki-Tagged_union)
