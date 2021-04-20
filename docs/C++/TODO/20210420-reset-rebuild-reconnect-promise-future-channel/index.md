@@ -107,7 +107,9 @@ int main()
 
 ## cppreference [std::promise<R>::set_value](https://en.cppreference.com/w/cpp/thread/promise/set_value)
 
-
+> NOTE: 
+>
+> 1、这里面已经讨论了thread safety问题
 
 
 
@@ -144,3 +146,7 @@ my_promise = std::promise<int>(); //now you have a new promise
 > NOTE: 
 >
 > 1、非常好的回答
+
+
+
+## github [std::future_error Promise already satisfied #55](https://github.com/alexa/avs-device-sdk/issues/55)
