@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - tuple: tuple
-    - optional: optional
+    - std-optional: std-optional
     - std-any: std-any
-    - variant: variant
-    - integer_sequence: integer_sequence
+    - std-variant: std-variant
+    - std-integer_sequence: std-integer_sequence

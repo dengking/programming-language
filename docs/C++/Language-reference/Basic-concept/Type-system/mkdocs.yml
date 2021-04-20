@@ -3,5 +3,6 @@ nav:
     - Type-system: Type-system
     - Type-operation: Type-operation
     - Type-inference-and-deduction: Type-inference-and-deduction
-    - size_t: size_t
+    - size_t-and-ptrdiff_t: size_t-and-ptrdiff_t
+    
     - TODO-Type-length: TODO-Type-length

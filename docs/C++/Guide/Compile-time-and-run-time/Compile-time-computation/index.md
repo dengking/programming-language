@@ -53,11 +53,21 @@ Compile time function execution给予了C++非常强大的灵活性，下面对�
 
 ## 为什么需要compile time function execution？
 
-Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性、高性能。
+1、Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性、高性能。
 
 > NOTE: 这说明C++的metaprogramming不仅仅是template metaprogramming，还包括`constexpr`。
 
+2、stroustrup [Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf) # Compile-time Computation
 
+3、CppCoreGuidelines [P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
+
+4、TOODO: static-reflection+conditional compile-zero overhead-optimization-relocate paper
+
+a、能够进行optimization
+
+b、zero overhead principle 
+
+5、CppCoreGuidelines [Per.11: Move computation from run time to compile time](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#per11-move-computation-from-run-time-to-compile-time)
 
 ## Application
 

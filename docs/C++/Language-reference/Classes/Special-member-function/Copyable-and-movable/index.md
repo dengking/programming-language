@@ -164,3 +164,30 @@ stackoverflow [Move constructor for std::mutex](https://stackoverflow.com/questi
 cppreference2015 [std::atomic](https://doc.bccnsoft.com/docs/cppreference2015/en/cpp/atomic/atomic.html)
 
 > `std::atomic` is neither copyable nor movable.
+
+
+
+## draft
+
+
+
+
+### Movable but Non-Copyable Types
+
+在阅读redis client [redis-plus-plus](https://github.com/sewenew/redis-plus-plus#connection) 的时候，其中介绍到：
+
+> Redis class is movable but NOT copyable.
+
+这让我想起来之前在阅读cppreference中[thread](https://en.cppreference.com/w/cpp/thread/thread)类的文档的时候，其中也有类似的描述
+
+> No two `std::thread` objects may represent the same thread of execution; `std::thread` is not [*CopyConstructible*](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) or [*CopyAssignable*](https://en.cppreference.com/w/cpp/named_req/CopyAssignable), although it is [*MoveConstructible*](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) and [*MoveAssignable*](https://en.cppreference.com/w/cpp/named_req/MoveAssignable).
+
+
+
+现在想来，其实movable 不填 non-copyable是很多class的一个特性，有必要总结一下：
+
+- [Movable but Non-Copyable Types](http://cs.swan.ac.uk/~csoliver/ok-sat-library/internet_html/doc/doc/Boost/1_53_0/doc/html/move/movable_only_classes.html)
+- google movable but NOT copyable
+
+[std::mutex](https://en.cppreference.com/w/cpp/thread/mutex) is neither copyable nor movable.
+

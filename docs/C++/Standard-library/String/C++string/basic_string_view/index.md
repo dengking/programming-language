@@ -298,6 +298,115 @@ using wstring_view = basic_string_view<wchar_t>;
 
 
 
+
+
+### code-examples [Why is value taking setter member functions not recommended in Herb Sutter's CppCon 2014 talk(Back to Basics: Modern C++ Style)?](https://code-examples.net/en/q/190b60f) 
+
+```C++
+#include<array>
+#include<string>
+
+template<class C>
+struct string_view
+{
+	// could be private:
+	C const *b = nullptr;
+	C const *e = nullptr;
+
+	// key component:
+	C const* begin() const
+	{
+		return b;
+	}
+	C const* end() const
+	{
+		return e;
+	}
+
+	// extra bonus utility:
+	C const& front() const
+	{
+		return *b;
+	}
+	C const& back() const
+	{
+		return *std::prev(e);
+	}
+
+	std::size_t size() const
+	{
+		return e - b;
+	}
+	bool empty() const
+	{
+		return b == e;
+	}
+
+	C const& operator[](std::size_t i)
+	{
+		return b[i];
+	}
+
+	// these just work:
+	string_view() = default;
+	string_view(string_view const&) = default;
+	string_view& operator=(string_view const&) = default;
+
+	// myriad of constructors:
+	string_view(C const *s, C const *f) :
+					b(s), e(f)
+	{
+	}
+
+	// known continuous memory containers:
+	template<std::size_t N>
+	string_view(const C (&arr)[N]) :
+					string_view(arr, arr + N)
+	{
+	}
+	template<std::size_t N>
+	string_view(std::array<C, N> const &arr) :
+					string_view(arr.data(), arr.data() + N)
+	{
+	}
+	template<std::size_t N>
+	string_view(std::array<C const, N> const &arr) :
+					string_view(arr.data(), arr.data() + N)
+	{
+	}
+	template<class ... Ts>
+	string_view(std::basic_string<C, Ts...> const &str) :
+					string_view(str.data(), str.data() + str.size())
+	{
+	}
+	template<class ... Ts>
+	string_view(std::vector<C, Ts...> const &vec) :
+					string_view(vec.data(), vec.data() + vec.size())
+	{
+	}
+	string_view(C const *str) :
+					string_view(str, str + len(str))
+	{
+	}
+private:
+	// helper method:
+	static std::size_t len(C const *str)
+	{
+		std::size_t r = 0;
+		if (!str)
+			return r;
+		while (*str++)
+		{
+			++r;
+		}
+		return r;
+	}
+};
+
+```
+
+一、上述实现是非常全面的
+
 ## TODO
 
 stackoverflow [What is string_view?](https://stackoverflow.com/questions/20803826/what-is-string-view)

@@ -7,5 +7,5 @@ nav:
     - Array-in-template: Array-in-template
     - Variable-length-automatic-stack-array: Variable-length-automatic-stack-array    
     - Multidimensional-array: Multidimensional-array
-
+    - Array-index: Array-index
     - Implementation: Implementation.md

@@ -8,6 +8,20 @@
 
 https://stackoverflow.com/a/4575001
 
+### stackoverflow [What are the useful GCC flags for C?](https://stackoverflow.com/questions/3375697/what-are-the-useful-gcc-flags-for-c) # [A](https://stackoverflow.com/questions/3375697/what-are-the-useful-gcc-flags-for-c/3399846#3399846)
+
+```c
+-save-temps
+```
+
+This leaves behind the results of the preprocessor and the assembly.
+
+The preprocessed source is useful for debugging macros.
+
+The assembly is useful for determining what optimizations went into effect. For instance, you may want to verify that GCC is doing tail call optimization on some recursive functions, as without it you can potentially overflow the stack.
+
+# [What are the useful GCC flags for C?](https://stackoverflow.com/questions/3375697/what-are-the-useful-gcc-flags-for-c) # 
+
 ## Trick
 
 本节讨论在定义macro的时候的一些技巧

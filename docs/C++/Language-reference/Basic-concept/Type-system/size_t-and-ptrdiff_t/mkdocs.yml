@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - pvs-studio-About-size_t-and-ptrdiff_t: pvs-studio-About-size_t-and-ptrdiff_t
+    - ptrdiff_t: ptrdiff_t
+    - size_t: size_t

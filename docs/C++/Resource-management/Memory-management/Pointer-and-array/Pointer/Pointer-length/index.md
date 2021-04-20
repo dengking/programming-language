@@ -8,7 +8,7 @@
 
 Length of pointer <= length of Word 
 
-3、正如在 holbertonschool [Pointers in C](https://www.holbertonschool.com/coding-resource-pointers-in-c) 中所述的，Word是CPU的最大memory access unit，因此将length of pointer设置为Lenght of Word，能够最大地发挥CPU power。
+3、正如在 holbertonschool [Pointers in C](https://www.holbertonschool.com/coding-resource-pointers-in-c) 中所述的，Word是CPU的最大memory access unit，因此将length of pointer设置为Lenght of Word，能够最大地发挥CPU的power。
 
 ### holbertonschool [Pointers in C](https://www.holbertonschool.com/coding-resource-pointers-in-c)
 

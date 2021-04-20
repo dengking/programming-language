@@ -79,3 +79,21 @@ List<string> ls;
 > 1、参见 `static_assert` 章节
 
 ### [SF.22: Use an unnamed (anonymous) namespace for all internal/non-exported entities](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#sf22-use-an-unnamed-anonymous-namespace-for-all-internalnon-exported-entities)
+
+
+
+## Arithmetic
+
+### [ES.100: Don't mix signed and unsigned arithmetic](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es100-dont-mix-signed-and-unsigned-arithmetic)
+
+> NOTE: 
+>
+> 1、在 pvs-studio [About size_t and ptrdiff_t](https://pvs-studio.com/en/a/0050/) 中，有非常好的例子
+
+
+
+### [ES.107: Don't use `unsigned` for subscripts, prefer `gsl::index`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es107-dont-use-unsigned-for-subscripts-prefer-gslindex)
+
+> NOTE: 
+>
+> 1、参见 `Array-index` 章节
