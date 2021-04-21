@@ -20,7 +20,7 @@ C++的initialization不仅种类繁多而且规则冗杂，下面是比较好的
 
 *Initialization* of a variable provides its initial value at the time of **construction**.
 
-> NOTE: initialization发生在object construction阶段，关于object的lifetime，参见`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime.md`。
+> NOTE: initialization发生在object construction阶段，关于object的lifetime，参见`C++\Language-reference\Basic-concept\Data-model\Object\Object-storage-duration-and-lifetime`。
 
 ### Initializer
 

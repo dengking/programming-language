@@ -4,6 +4,25 @@
 
 ## cppreference [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
 
+|                                         |      |      |
+| --------------------------------------- | ---- | ---- |
+| `explicit`                              | 1)   |      |
+| `explicit ( expression )` (since C++20) | 2)   |      |
+
+1) Specifies that 
+
+1、constructor 
+
+2、conversion function (since C++11) 
+
+3、[deduction guide](https://en.cppreference.com/w/cpp/language/ctad) (since C++17)
+
+that is, it cannot be used for [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast) and [copy-initialization](https://en.cppreference.com/w/cpp/language/copy_initialization).
+
+2)
+
+> NOTE: TODO
+
 
 
 ## Purpose of `explicit` 

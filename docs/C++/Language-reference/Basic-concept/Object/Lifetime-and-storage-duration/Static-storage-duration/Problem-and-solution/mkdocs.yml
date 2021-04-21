@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - pabloariasal-C++Initialization-of-Static-Variables: pabloariasal-C++Initialization-of-Static-Variables
+
     - Static-Initialization-Order-Fiasco: Static-Initialization-Order-Fiasco
     - Construct-On-First-Use-Idiom: Construct-On-First-Use-Idiom
