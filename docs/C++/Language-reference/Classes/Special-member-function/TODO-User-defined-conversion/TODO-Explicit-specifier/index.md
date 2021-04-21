@@ -53,13 +53,15 @@ int main()
 // g++ --std=c++11 test.cpp
 ```
 
-> NOTE:  输出如下：
+> NOTE:  
+>
+> 1、输出如下：
 >
 > ```
 > 42
 > ```
 >
-> 
+> 2、上述是典型的 implicit conversion + copy initialization + converting constructor 
 
 The argument is not a `Foo` object, but an `int`. However, there exists a constructor for `Foo` that takes an `int` so this constructor can be used to convert the parameter to the correct type.
 
@@ -69,7 +71,7 @@ Prefixing the `explicit` keyword to the constructor prevents the compiler from u
 
 The reason you might want to do this is to avoid accidental construction that can hide bugs. Contrived example:
 
-- You have a `MyString(int size)` class with a constructor that constructs a string of the given size. You have a function `print(const MyString&)`, and you call `print(3)` (when you *actually* intended to call `print("3")`). You expect it to print "3", but it prints an empty string of length 3 instead.
+1、You have a `MyString(int size)` class with a constructor that constructs a string of the given size. You have a function `print(const MyString&)`, and you call `print(3)` (when you *actually* intended to call `print("3")`). You expect it to print "3", but it prints an empty string of length 3 instead.
 
 
 
@@ -151,17 +153,25 @@ int main()
 
 [A](https://stackoverflow.com/a/121216)
 
+> NOTE: 
+>
+> 1、这个回答的例子非常好
+
+Suppose, you have a class `String`:
+
 ```c++
+#include <iostream>
 class String
 {
 public:
 	String(int n) // allocate n bytes to the String object
 	{
 
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
 	}
 	String(const char *p) // initializes object with char *p
 	{
-
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
 	}
 };
 
@@ -169,34 +179,69 @@ int main()
 {
 	String mystring = 'x';
 }
+// g++ test.cpp -pedantic -Wall -Wextra
 
 ```
+
+> NOTE: 
+>
+> 1、输出如下:
+>
+> ```
+> String::String(int)
+> ```
+>
+> 2、显然，上述输出是出人意外的
 
 The character `'x'` will be implicitly converted to `int` and then the `String(int)` constructor will be called. But, this is not what the user might have intended. So, to prevent such conditions, we shall define the constructor as `explicit`:
 
 ```c++
+#include <iostream>
 class String
 {
 public:
 	explicit String(int n) // allocate n bytes to the String object
 	{
 
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
 	}
 	String(const char *p) // initializes object with char *p
 	{
-
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
 	}
 };
 
 int main()
 {
-	// String mystring = 'x'; // 编译报错
-	String mystring { 2 };
+	String mystring = 'x';
 }
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
 
 ```
 
-
+> NOTE: 
+>
+> 1、编译报错如下:
+>
+> ```C++
+> test.cpp: In constructor 'String::String(int)':
+> test.cpp:5:22: warning: unused parameter 'n' [-Wunused-parameter]
+>   explicit String(int n) // allocate n bytes to the String object
+>                   ~~~~^
+> test.cpp: In constructor 'String::String(const char*)':
+> test.cpp:10:21: warning: unused parameter 'p' [-Wunused-parameter]
+>   String(const char *p) // initializes object with char *p
+>          ~~~~~~~~~~~~^
+> test.cpp: In function 'int main()':
+> test.cpp:18:20: error: invalid conversion from 'char' to 'const char*' [-fpermissive]
+>   String mystring = 'x';
+>                     ^~~
+> test.cpp:10:21: note:   initializing argument 1 of 'String::String(const char*)'
+>   String(const char *p) // initializes object with char *p
+> 
+> ```
+>
+> 2、从上述编译报错中可以看到，此时compiler没有选择`String(int n)`
 
 ## Example
 
@@ -220,9 +265,9 @@ int main()
 下面是错误用法
 
 ```c++
-	static std::unique_ptr<UstStockOpt::CHSAMUSTTraderApi> New(const char *WorkPath)
+	static std::unique_ptr<Api> New(const char *WorkPath)
 	{
-		return { NewStockOptApi(WorkPath)};
+		return { NewApi(WorkPath)};
 	}
 ```
 编译报错如下：
