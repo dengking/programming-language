@@ -1,0 +1,1 @@
+# stackoverflow [function composition in C++ / C++11](https://stackoverflow.com/questions/19071268/function-composition-in-c-c11)

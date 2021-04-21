@@ -47,7 +47,7 @@ static constexpr not(bool x)
 
 
 
-#### Example
+#### Example: `Factorial`
 
 来源: 维基百科[Compile time function execution#Examples](https://en.wikipedia.org/wiki/Compile_time_function_execution)
 
@@ -206,9 +206,13 @@ int main()
 
 参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Literal-type`。
 
+
+
 ## `constexpr if` statements (C++17)
 
 参见 `C++\Language-reference\Statements\Selection-statements\Constexpr-if`章节。
+
+
 
 ## microsoft [constexpr (C++)](https://docs.microsoft.com/en-us/cpp/cpp/constexpr-cpp?view=vs-2019)
 

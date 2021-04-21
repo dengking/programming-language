@@ -125,6 +125,128 @@ int main() {}
 
 在下面文章中给出了对其实现源代码的分析，可以借鉴。
 
+
+
+1、primary template and specialization
+
+primary template: 
+
+```C++
+template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
+struct detector
+{
+	using value_t = std::false_type;
+	using type = Default;
+};
+```
+
+specialization:
+
+```C++
+template<class Default, template<class ...> class Op, class... Args>
+struct detector<Default, my_void_t<Op<Args...>>, Op, Args...>
+{
+	using value_t = std::true_type;
+	using type = Op<Args...>;
+};
+```
+
+显然，如果`Op<Args...>`成功，则会选择specialization
+
+
+
+2、template template instantiation-实例化、valid expression
+
+`template<class ...> class Op`
+
+`class... Args`
+
+`Op<Args...>` 是valid expression
+
+显然，它相当于模板化模板实例，类似于模板化function signature。
+
+### stackoverflow [C++ detection idiom without void_t](https://stackoverflow.com/questions/44399822/c-detection-idiom-without-void-t) # [A](https://stackoverflow.com/a/44400371)
+
+Since the question was modified and C++ 11 is allowed, I post almost a copy-paste from cppreference, no credit taken.
+
+```cpp
+#include <type_traits>
+#include <utility>
+#include <iostream>
+
+namespace detail
+{
+struct nonesuch
+{
+	nonesuch() = delete;
+	~nonesuch() = delete;
+	nonesuch(nonesuch const&) = delete;
+	void operator=(nonesuch const&) = delete;
+};
+
+template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
+struct detector
+{
+	using value_t = std::false_type;
+	using type = Default;
+};
+
+template<typename ... Ts>
+struct my_make_void
+{
+	typedef void type;
+};
+
+template<typename ... Ts>
+using my_void_t = typename my_make_void<Ts...>::type;
+
+template<class Default, template<class ...> class Op, class... Args>
+struct detector<Default, my_void_t<Op<Args...>>, Op, Args...>
+{
+	using value_t = std::true_type;
+	using type = Op<Args...>;
+};
+
+}
+ // namespace detail
+
+template<template<class ...> class Op, class... Args>
+using is_detected = typename detail::detector<detail::nonesuch, void, Op, Args...>::value_t;
+
+template<class T>
+using copy_assign_t = decltype(std::declval<T&>() = std::declval<const T&>());
+
+struct Meow
+{
+};
+struct Purr
+{
+	void operator=(const Purr&) = delete;
+};
+
+int main()
+{
+	std::cerr << is_detected<copy_assign_t, Meow>::value << std::endl;
+	std::cerr << is_detected<copy_assign_t, Purr>::value << std::endl;
+	return 0;
+}
+//  g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
+```
+
+> NOTE: 
+>
+> 1、输出如下:
+>
+> ```
+> 1
+> 0
+> ```
+>
+> 
+
+
+
 ### riptutorial [C++ is_detected](https://riptutorial.com/cplusplus/example/18585/is-detected)
 
 To generalize type_trait creation: based on SFINAE there are experimental traits `detected_or`, `detected_t`, `is_detected`.
@@ -132,6 +254,10 @@ To generalize type_trait creation: based on SFINAE there are experimental traits
 With template parameters `typename Default`, `template <typename...> Op` and `typename ... Args`:
 
 1、`is_detected`: alias of `std::true_type` or `std::false_type` depending of the validity of `Op<Args...>`
+
+> NOTE: 
+>
+> `Op<Args...>` 是 valid expression
 
 2、`detected_t`: alias of `Op<Args...>` or `nonesuch` depending of validity of `Op<Args...>`.
 
@@ -159,10 +285,7 @@ struct detector<Default, std::void_t<Op<Args...>>, Op, Args...>
 	using type = Op<Args...>;
 };
 
-}
- // namespace detail
-
-// special type to indicate detection failure
+    // special type to indicate detection failure
 struct nonesuch
 {
 	nonesuch() = delete;
@@ -170,16 +293,21 @@ struct nonesuch
 	nonesuch(nonesuch const&) = delete;
 	void operator=(nonesuch const&) = delete;
 };
+    
+}
+ // namespace detail
+
+
 
 template<template<class ...> class Op, class... Args>
 using is_detected =
-typename detail::detector<nonesuch, void, Op, Args...>::value_t;
+typename detail::detector<detail::nonesuch, void, Op, Args...>::value_t;
 
 template<template<class ...> class Op, class... Args>
-using detected_t = typename detail::detector<nonesuch, void, Op, Args...>::type;
+using detected_t = typename detail::detector<detail::nonesuch, void, Op, Args...>::type;
 
 template<class Default, template<class ...> class Op, class... Args>
-using detected_or = detail::detector<Default, void, Op, Args...>;
+using detected_or = detail::detector<detail::Default, void, Op, Args...>;
 
 ```
 
@@ -232,175 +360,183 @@ static_assert(std::is_same<int, detected_or<void, foo_type, C2, char>>::value,
 > ```
 >
 > 2、完整测试程序如下:
->
-> C++17版本:
->
-> ```c++
-> #include <type_traits>
-> #include <utility> // std::declval
-> 
-> #pragma once
-> 
-> namespace detail
-> {
-> template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
-> struct detector
-> {
-> 	using value_t = std::false_type;
-> 	using type = Default;
-> };
-> 
-> template<class Default, template<class ...> class Op, class... Args>
-> struct detector<Default, std::void_t<Op<Args...>>, Op, Args...>
-> {
-> 	using value_t = std::true_type;
-> 	using type = Op<Args...>;
-> };
-> 
-> }
->  // namespace detail
-> 
-> // special type to indicate detection failure
-> struct nonesuch
-> {
-> 	nonesuch() = delete;
-> 	~nonesuch() = delete;
-> 	nonesuch(nonesuch const&) = delete;
-> 	void operator=(nonesuch const&) = delete;
-> };
-> 
-> template<template<class ...> class Op, class... Args>
-> using is_detected =
-> typename detail::detector<nonesuch, void, Op, Args...>::value_t;
-> 
-> template<template<class ...> class Op, class... Args>
-> using detected_t = typename detail::detector<nonesuch, void, Op, Args...>::type;
-> 
-> template<class Default, template<class ...> class Op, class... Args>
-> using detected_or = detail::detector<Default, void, Op, Args...>;
-> 
-> template<typename T, typename ...Ts>
-> using foo_type = decltype(std::declval<T>().foo(std::declval<Ts>()...));
-> 
-> struct C1
-> {
-> };
-> 
-> struct C2
-> {
-> 	int foo(char) const;
-> };
-> 
-> template<typename T>
-> using has_foo_char = is_detected<foo_type, T, char>;
-> 
-> int main()
-> {
-> 	static_assert(!has_foo_char<C1>::value, "Unexpected");
-> 	static_assert(has_foo_char<C2>::value, "Unexpected");
-> 
-> 	static_assert(std::is_same<int, detected_t<foo_type, C2, char>>::value,
-> 					"Unexpected");
-> 
-> 	static_assert(std::is_same<void, // Default
-> 					detected_or<void, foo_type, C1, char>>::value,
-> 					"Unexpected");
-> 	static_assert(std::is_same<int, detected_or<void, foo_type, C2, char>>::value,
-> 					"Unexpected");
-> }
-> // g++ --std=c++17 test.cpp
-> ```
->
-> 
->
-> C++11版本:
->
-> ```C++
-> #include <type_traits>
-> #include <utility> // std::declval
-> 
-> #pragma once
-> 
-> namespace std_ext
-> {
-> template <typename ...Ts> struct make_void
-> {
->     using type = void;
-> };
-> template <typename ...Ts> using void_t = typename make_void<Ts...>::type;
-> } // namespace detail
-> 
-> namespace detail
-> {
-> template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
-> struct detector
-> {
-> 	using value_t = std::false_type;
-> 	using type = Default;
-> };
-> 
-> template<class Default, template<class ...> class Op, class... Args>
-> struct detector<Default, std_ext::void_t<Op<Args...>>, Op, Args...>
-> {
-> 	using value_t = std::true_type;
-> 	using type = Op<Args...>;
-> };
-> 
-> }
->  // namespace detail
-> 
-> // special type to indicate detection failure
-> struct nonesuch
-> {
->     nonesuch() = delete;
->     ~nonesuch() = delete;
->     nonesuch(nonesuch const&) = delete;
->     void operator=(nonesuch const&) = delete;
-> };
-> 
-> template<template<class ...> class Op, class... Args>
-> using is_detected =
-> typename detail::detector<nonesuch, void, Op, Args...>::value_t;
-> 
-> template<template<class ...> class Op, class... Args>
-> using detected_t = typename detail::detector<nonesuch, void, Op, Args...>::type;
-> 
-> template<class Default, template<class ...> class Op, class... Args>
-> using detected_or = detail::detector<Default, void, Op, Args...>;
-> 
-> template<typename T, typename ...Ts>
-> using foo_type = decltype(std::declval<T>().foo(std::declval<Ts>()...));
-> 
-> struct C1
-> {
-> };
-> 
-> struct C2
-> {
-> 	int foo(char) const;
-> };
-> 
-> template<typename T>
-> using has_foo_char = is_detected<foo_type, T, char>;
-> 
-> int main()
-> {
-> 	static_assert(!has_foo_char<C1>::value, "Unexpected");
-> 	static_assert(has_foo_char<C2>::value, "Unexpected");
-> 
-> 	static_assert(std::is_same<int, detected_t<foo_type, C2, char>>::value,
-> 					"Unexpected");
-> 
-> 	static_assert(std::is_same<void, // Default
-> 					detected_or<void, foo_type, C1, char>>::value,
-> 					"Unexpected");
-> 	static_assert(std::is_same<int, detected_or<void, foo_type, C2, char>>::value,
-> 					"Unexpected");
-> }
-> // g++ --std=c++11 test.cpp
-> ```
->
-> 
+
+
+
+#### C++17版本:
+
+```C++
+#include <type_traits>
+#include <utility> // std::declval
+
+#pragma once
+
+namespace detail
+{
+template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
+struct detector
+{
+	using value_t = std::false_type;
+	using type = Default;
+};
+
+template<class Default, template<class ...> class Op, class... Args>
+struct detector<Default, std::void_t<Op<Args...>>, Op, Args...>
+{
+	using value_t = std::true_type;
+	using type = Op<Args...>;
+};
+
+    // special type to indicate detection failure
+struct nonesuch
+{
+	nonesuch() = delete;
+	~nonesuch() = delete;
+	nonesuch(nonesuch const&) = delete;
+	void operator=(nonesuch const&) = delete;
+};
+    
+}
+// namespace detail
+
+
+
+template<template<class ...> class Op, class... Args>
+using is_detected =
+typename detail::detector<detail::nonesuch, void, Op, Args...>::value_t;
+
+template<template<class ...> class Op, class... Args>
+using detected_t = typename detail::detector<detail::nonesuch, void, Op, Args...>::type;
+
+template<class Default, template<class ...> class Op, class... Args>
+using detected_or = detail::detector<Default, void, Op, Args...>;
+
+template<typename T, typename ...Ts>
+using foo_type = decltype(std::declval<T>().foo(std::declval<Ts>()...));
+
+struct C1
+{
+};
+
+struct C2
+{
+	int foo(char) const;
+};
+
+template<typename T>
+using has_foo_char = is_detected<foo_type, T, char>;
+
+int main()
+{
+	static_assert(!has_foo_char<C1>::value, "Unexpected");
+	static_assert(has_foo_char<C2>::value, "Unexpected");
+
+	static_assert(std::is_same<int, detected_t<foo_type, C2, char>>::value,
+					"Unexpected");
+
+	static_assert(std::is_same<void, // Default
+					detected_or<void, foo_type, C1, char>>::value,
+					"Unexpected");
+	static_assert(std::is_same<int, detected_or<void, foo_type, C2, char>>::value,
+					"Unexpected");
+}
+// g++ --std=c++17 test.cpp
+```
+
+
+
+
+
+#### C++11版本:
+
+```C++
+#include <type_traits>
+#include <utility> // std::declval
+
+#pragma once
+
+namespace std_ext
+{
+template <typename ...Ts> struct make_void
+{
+ using type = void;
+};
+template <typename ...Ts> using void_t = typename make_void<Ts...>::type;
+} // namespace detail
+
+namespace detail
+{
+template<class Default, class AlwaysVoid, template<class ...> class Op, class... Args>
+struct detector
+{
+	using value_t = std::false_type;
+	using type = Default;
+};
+
+template<class Default, template<class ...> class Op, class... Args>
+struct detector<Default, std_ext::void_t<Op<Args...>>, Op, Args...>
+{
+	using value_t = std::true_type;
+	using type = Op<Args...>;
+};
+// special type to indicate detection failure
+struct nonesuch
+{
+ nonesuch() = delete;
+ ~nonesuch() = delete;
+ nonesuch(nonesuch const&) = delete;
+ void operator=(nonesuch const&) = delete;
+};
+}
+// namespace detail
+
+
+
+template<template<class ...> class Op, class... Args>
+using is_detected =
+typename detail::detector<detail::nonesuch, void, Op, Args...>::value_t;
+
+template<template<class ...> class Op, class... Args>
+using detected_t = typename detail::detector<detail::nonesuch, void, Op, Args...>::type;
+
+template<class Default, template<class ...> class Op, class... Args>
+using detected_or = detail::detector<Default, void, Op, Args...>;
+
+template<typename T, typename ...Ts>
+using foo_type = decltype(std::declval<T>().foo(std::declval<Ts>()...));
+
+struct C1
+{
+};
+
+struct C2
+{
+	int foo(char) const;
+};
+
+template<typename T>
+using has_foo_char = is_detected<foo_type, T, char>;
+
+int main()
+{
+	static_assert(!has_foo_char<C1>::value, "Unexpected");
+	static_assert(has_foo_char<C2>::value, "Unexpected");
+
+	static_assert(std::is_same<int, detected_t<foo_type, C2, char>>::value,
+					"Unexpected");
+
+	static_assert(std::is_same<void, // Default
+					detected_or<void, foo_type, C1, char>>::value,
+					"Unexpected");
+	static_assert(std::is_same<int, detected_or<void, foo_type, C2, char>>::value,
+					"Unexpected");
+}
+// g++ --std=c++11 test.cpp
+```
+
+
+
+
 
 
 

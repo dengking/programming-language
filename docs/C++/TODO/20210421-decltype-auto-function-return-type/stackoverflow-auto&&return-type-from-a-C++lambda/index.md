@@ -1,0 +1,1 @@
+# stackoverflow [auto&& return type from a C++ lambda](https://stackoverflow.com/questions/61742004/auto-return-type-from-a-c-lambda)

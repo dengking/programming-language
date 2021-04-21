@@ -69,8 +69,7 @@ int main(int argc, char *argv[])
 
 [A](https://stackoverflow.com/a/7797872)
 
-Because arrays can not be passed by value as a function parameter.
-When you pass them by value they decay into a pointer.
+Because arrays can not be passed by value as a function parameter. When you pass them by value they decay into a pointer.
 
 In this function:
 
@@ -172,3 +171,50 @@ int main(int argc, char *argv[])
 > ```
 >
 > 
+
+### Pass-by-reference example
+
+code-examples [Why is value taking setter member functions not recommended in Herb Sutter's CppCon 2014 talk(Back to Basics: Modern C++ Style)?](https://code-examples.net/en/q/190b60f) 
+
+```C++
+#include<array>
+#include<string>
+
+template<class C>
+struct string_view
+{
+// known continuous memory containers:
+	template<std::size_t N>
+	string_view(const C (&arr)[N]) :
+					string_view(arr, arr + N)
+	{
+	}
+};	
+```
+
+这篇文章收录于`basic_string_view`章节了
+
+
+
+[C++ Type Erasure](https://sodocumentation.net/cplusplus/topic/2872/type-erasure) # Erasing down to a contiguous buffer of T[#](https://sodocumentation.net/cplusplus/topic/2872/type-erasure#erasing-down-to-a-contiguous-buffer-of-t)
+
+```C++
+template<class T>
+struct array_view
+{
+	// the core of the class:
+	T *b = nullptr;
+	T *e = nullptr;
+	// array constructor:
+	template<std::size_t N>
+	array_view(T (&arr)[N]) :
+					array_view(arr, N)
+	{
+	}
+
+};
+
+```
+
+
+
