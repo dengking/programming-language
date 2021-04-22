@@ -8,19 +8,9 @@
 
 
 
-## Initialize array
-
-https://www.dummies.com/programming/cpp/initializing-an-array-in-c/
-
-https://stackoverflow.com/questions/4057948/initializing-a-member-array-in-constructor-initializer
-
-https://stackoverflow.com/questions/2983819/how-initialize-array-of-classes
-
-
-
-
-
 ## Pointer and array
+
+### Array to pointer decay
 
 一维array会decay to 一级pointer，显然两者能够进行对应；static array vs dynamic array，其实dynamic array就是一个pointer；
 
@@ -48,15 +38,7 @@ https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c?noredirect=
 
 参见 `Multidimensional-array` 章节。
 
-## Get length of array in C and C++
 
-### Length in term of element in the array
-
-关于此，在“5.3 Pitfall: Using the C idiom to get number of elements.”中进行了详细说明；
-
-### Length in term of byte
-
-当我们使用c api来操作array的时候，需要使用length in term of byte，主要使用`sizeof`。
 
 
 
@@ -109,6 +91,14 @@ int main(int argc, char** argv)
 ```
 
 
+
+## Array class
+
+
+
+1) Dynamic array: `std::vector<T>` since C++98 
+
+2) Static array: [`std::array`](http://en.cppreference.com/w/cpp/container/array) since [C++11](https://en.wikipedia.org/wiki/C++11)
 
 
 

@@ -1,4 +1,4 @@
 nav:
-    - Base-from-Member: Base-from-Member
-    - Calling-Virtual-During-Initialization: Calling-Virtual-During-Initialization
+    - Base-from-Member-idiom: Base-from-Member-idiom
+    - Calling-Virtual-During-Initialization-idiom: Calling-Virtual-During-Initialization-idiom
     

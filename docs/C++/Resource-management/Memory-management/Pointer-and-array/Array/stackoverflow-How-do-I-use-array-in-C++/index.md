@@ -1062,7 +1062,7 @@ The same paragraph details the variation that is allowed:
 
 This allowed variation does not include declaring a name as an array in one translation unit, and as a pointer in another **translation unit**.
 
-### 5.2 Pitfall: Doing premature optimization (`memset` & friends).
+### 5.2 Pitfall: Doing premature(不成熟的、过早的) optimization (`memset` & friends).
 
 
 
@@ -1119,7 +1119,13 @@ int main()
 
 5、`sizeof(*array)` is equivalent to `sizeof(int)`, which for a 32-bit executable is also 4.
 
-> NOTE: 关于这一点，在creference [sizeof](https://en.cppreference.com/w/c/language/sizeof)中进行了详细说明。
+> NOTE: 
+>
+> 1、关于这一点，在creference [sizeof](https://en.cppreference.com/w/c/language/sizeof)中进行了详细说明。
+>
+> 2、上述程序典型的说明了:CppCoreGuidelines [Philosophy](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#p-philosophy)  #  P.4: Ideally, a program should be statically type safe 中提及的"array decay"
+>
+> 3、一旦array decay to pointer，那么上述程序就无法使用了，因此，下面的detection就是detect array是否是pointer，`typeid( &*array )`是pointer，如果`typeid( array )`和它不相等，则没有发生decay，否则发生decay了。
 
 In order to detect this error at **run time** you can do …
 
@@ -1154,7 +1160,9 @@ int main()
 
 ```
 
-> NOTE: 关于`typeid` ，参见cppreference [`typeid`](https://en.cppreference.com/w/cpp/language/typeid)
+> NOTE: 
+>
+> 1、关于`typeid` ，参见cppreference [`typeid`](https://en.cppreference.com/w/cpp/language/typeid)
 >
 > 上述实现中，如果`array`的实际类型是pointer，则`typeid( array ) == typeid( &*array )`，显然是不符合assertion的。
 >
@@ -1165,6 +1173,8 @@ int main()
 > a.out: test.cpp:18: void display(const int*): Assertion `( "N_ITEMS requires an actual array as argument", typeid( a ) != typeid( &*a ) )' failed.
 > 已放弃(吐核)
 > ```
+>
+> 2、上述典型的说明了: CppCoreGuidelines [P.6: What cannot be checked at compile time should be checkable at run time](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p6-what-cannot-be-checked-at-compile-time-should-be-checkable-at-run-time)
 
 The **runtime error detection** is better than **no detection**, but it wastes a little processor time, and perhaps much more programmer time. Better with **detection at compile time**! And if you're happy to not support arrays of local types with C++98, then you can do that:
 

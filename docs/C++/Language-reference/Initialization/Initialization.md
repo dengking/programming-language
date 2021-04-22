@@ -82,23 +82,7 @@ Non-static data members can be initialized with [member initializer list](https:
 
 
 
-
-
-## TODO: value initialization VS zero-size initializer list
-
-两者的grammar是相同的，compiler如何来进行区分呢？
-
-在akrzemi1 [Value-initialization with C++](https://akrzemi1.wordpress.com/2013/09/10/value-initialization-with-c/) 中对这个问题进行了讨论。
-
-
-
-
-
-
-
-
-
-## draft
+## Draft
 
 
 
@@ -127,12 +111,6 @@ int width( 5 ); // direct initialization of value 5 into variable width
 ```
 
 For simple data types (like integers), copy and direct initialization are essentially the same. But for some advanced types, direct initialization can perform better than copy initialization. Prior to C++11, direct initialization was recommended over copy initialization in most cases because of the performance boost.
-
-
-
-### Initialization VS assignment
-
-两者之间的相同点是都会改变object的值。
 
 
 

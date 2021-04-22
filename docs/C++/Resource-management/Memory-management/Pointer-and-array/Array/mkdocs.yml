@@ -2,10 +2,11 @@ nav:
     - Introduction: index.md
     - stackoverflow-How-do-I-use-array-in-C++: stackoverflow-How-do-I-use-array-in-C++
     - cppreference-Array-declaration: cppreference-Array-declaration.md
-
-    - Static-array: Static-array
+    - Array-initialization: Array-initialization
+    
     - Array-in-template: Array-in-template
     - Variable-length-automatic-stack-array: Variable-length-automatic-stack-array    
     - Multidimensional-array: Multidimensional-array
+    - Array-length: Array-length
     - Array-index: Array-index
-    - Implementation: Implementation.md
+    

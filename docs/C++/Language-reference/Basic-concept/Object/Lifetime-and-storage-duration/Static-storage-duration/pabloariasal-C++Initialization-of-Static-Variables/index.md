@@ -208,7 +208,13 @@ The future looks bright, however. Even when moving slowly, smart people have bee
 
 > NOTE: 
 >
-> 1、好像那个版本已经支持了，TODO
+> 1、C++20已经支持了 `constexpr` `std::string` or `std::vector`，参见:
+>
+> modernescpp [constexpr std::vector and std::string in C++20](https://www.modernescpp.com/index.php/constexpr-vector-and-string-in-c-20)
+>
+> cppreference [C++20](https://en.cppreference.com/w/cpp/20)
+>
+> 
 
 ## [The Red Zone - Static Initialization Order Fiasco](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-red-zone---static-initialization-order-fiasco)
 

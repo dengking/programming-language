@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    ########## initialization相关##########
-    - Nifty-Counter: Nifty-Counter
-    - Attach-by-Initialization: Attach-by-Initialization
-

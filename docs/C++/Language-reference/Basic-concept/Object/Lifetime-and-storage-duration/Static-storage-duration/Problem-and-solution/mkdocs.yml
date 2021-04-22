@@ -3,3 +3,5 @@ nav:
 
     - Static-Initialization-Order-Fiasco: Static-Initialization-Order-Fiasco
     - Construct-On-First-Use-Idiom: Construct-On-First-Use-Idiom
+    - Nifty-Counter-idiom: Nifty-Counter-idiom
+    - Attach-by-Initialization-idiom: Attach-by-Initialization-idiom

@@ -343,7 +343,52 @@ not possible. Problem areas:
 
 > NOTE: 
 >
-> array decay就导致失去了长度信息
+> 1、array decay就导致失去了长度信息，关于此的非常典型的例子是: "stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c) # 5. Common pitfalls when using arrays # 5.3 Pitfall: Using the C idiom to get number of elements" 中给出的:
+>
+> Main pitfall: the C idiom is not typesafe. For example, the code …
+>
+> ```c++
+> #include <stdio.h>
+> 
+> #define N_ITEMS( array ) (sizeof( array )/sizeof( *array ))
+> 
+> void display(int const a[7])
+> {
+> 	int const n = N_ITEMS(a);          // Oops.
+> 	printf("%d elements.\n", n);
+> }
+> 
+> int main()
+> {
+> 	int const moohaha[] = { 1, 2, 3, 4, 5, 6, 7 };
+> 
+> 	printf("%d elements, calling display...\n", N_ITEMS(moohaha));
+> 	display(moohaha);
+> }
+> // gcc test.c
+> ```
+>
+> > NOTE: 上述程序，传递array的方式为：Pass by pointer
+>
+> > NOTE: 上述程序输出如下：
+> >
+> > ```
+> > 7 elements, calling display...
+> > 2 elements.
+> > 
+> > ```
+>
+> 1、The compiler rewrites `int const a[7]` to just `int const a[]`.
+>
+> 2、The compiler rewrites `int const a[]` to `int const* a`.
+>
+> 3、`N_ITEMS` is therefore invoked with a pointer.
+>
+> 4、For a 32-bit executable `sizeof(array)` (size of a pointer) is then 4.
+>
+> 5、`sizeof(*array)` is equivalent to `sizeof(int)`, which for a 32-bit executable is also 4.
+>
+> 
 
 4、range errors
 
@@ -394,6 +439,51 @@ Code clarity and performance. You don't need to write error handlers for errors 
 > 1、这是compile time的优势，它总结得非常好
 >
 > 2、另外在 paper [P1144R2 Object relocation in terms of move plus destroy](http://open-std.org/JTC1/SC22/WG21/docs/papers/2019/p1144r2.html) 的"1.2. The most important benefit"章节中，讨论了这个topic相关的内容。
+
+
+
+
+
+### [P.6: What cannot be checked at compile time should be checkable at run time](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p6-what-cannot-be-checked-at-compile-time-should-be-checkable-at-run-time)
+
+> NOTE: 
+>
+> 1、关于此的典型案例: "stackoverflow [How do I use arrays in C++?](https://stackoverflow.com/questions/4810664/how-do-i-use-arrays-in-c) # 5. Common pitfalls when using arrays # 5.3 Pitfall: Using the C idiom to get number of elements" 
+>
+> In order to detect this error at **run time** you can do …
+>
+> ```c++
+> #include "assert.h"
+> #include "stdio.h"
+> #include <iostream>
+> #include <typeinfo>
+> 
+> #define N_ITEMS( array )       (                               \
+>     assert((                                                    \
+>         "N_ITEMS requires an actual array as argument",        \
+>         typeid( array ) != typeid( &*array )                    \
+>         )),                                                     \
+>     sizeof( array )/sizeof( *array )                            \
+>     )
+> 
+> void display(int const a[7])
+> {
+> 	int const n = N_ITEMS(a);          // Oops.
+> 	std::cout << typeid( a ).name() << std::endl;
+> 	std::cout << typeid( &*a ).name() << std::endl;
+> 	printf("%d elements.\n", n);
+> }
+> 
+> int main()
+> {
+> 	int const moohaha[] = { 1, 2, 3, 4, 5, 6, 7 };
+> 	printf("%d elements, calling display...\n", N_ITEMS(moohaha));
+> 	display(moohaha);
+> }
+> 
+> ```
+>
+> The **runtime error detection** is better than **no detection**, but it wastes a little processor time, and perhaps much more programmer time. Better with **detection at compile time**! 
 
 ### P.8: Don’t leak any resources
 

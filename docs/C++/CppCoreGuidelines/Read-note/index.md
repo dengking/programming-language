@@ -2,7 +2,7 @@
 
 > NOTE: 
 >
-> 1、这其实就是
+> 1、这其实就是Static-Initialization-Order-Fiasco，参见 `Static-storage-duration` 章节
 
 
 
@@ -82,6 +82,18 @@ List<string> ls;
 
 
 
+### [ES.20: Always initialize an object](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es20-always-initialize-an-object)
+
+> NOTE: 
+>
+> 1、`Default-initialization`:
+>
+> > 对于built-in type，如果不对它进行initialization的话，那么它就是Indeterminate value，显然这是比较危险的；我们最好遵循
+> >
+> > CppCoreGuidelines [ES.20: Always initialize an object](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es20-always-initialize-an-object)
+>
+> 
+
 ## Arithmetic
 
 ### [ES.100: Don't mix signed and unsigned arithmetic](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es100-dont-mix-signed-and-unsigned-arithmetic)
@@ -97,3 +109,21 @@ List<string> ls;
 > NOTE: 
 >
 > 1、参见 `Array-index` 章节
+
+
+
+
+
+### [C.50: Use a factory function if you need "virtual behavior" during initialization](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c50-use-a-factory-function-if-you-need-virtual-behavior-during-initialization)
+
+> NOTE:
+>
+> 1、其实就是`Calling-Virtual-During-Initialization-idiom`
+
+### [C.52: Use inheriting constructors to import constructors into a derived class that does not need further explicit initialization](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c52-use-inheriting-constructors-to-import-constructors-into-a-derived-class-that-does-not-need-further-explicit-initialization)
+
+> NOTE: 
+
+
+
+## C.copy: Copy and move

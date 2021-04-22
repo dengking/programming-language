@@ -1,6 +1,8 @@
 # Compile time function execution
 
-在`Theory\Compile-time-and-run-time`中，我们知道了compile time function execution的概念，本文对C++ compile time function execution进行总结。
+1、在`Theory\Compile-time-and-run-time`中，我们知道了compile time function execution的概念，本文对C++ compile time function execution进行总结。
+
+2、C++的一个发展发现就是充分发挥compile-time computation。
 
 
 
@@ -24,9 +26,9 @@ TMP metaprogram可以以如下方式来实现compile time function execution:
 
 ### 3) Static initialization
 
-参见`C++\Language-reference\Initialization`章节。
+1、参见`C++\Language-reference\Initialization`章节。
 
-
+2、`Static-and-dynamic-initialization` 章节。
 
 ## 发展概述
 
@@ -38,10 +40,11 @@ C++的一个发展发现就是充分发挥compile-time computation。
 | variadic template | C++11    |                                                              |       |
 | `constexpr if`    | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` | 非TMP |
 | fold expression   | C++17    |                                                              | TMP   |
+| `constinit`       | C++20    |                                                              |       |
 
 
 
-Compile time function execution给予了C++非常强大的灵活性，下面对上面描述的几种方式进行总结: 
+Compile time function execution给予了C++非常强大的灵活性、安全性、高性能，下面对上面描述的几种方式进行总结: 
 
 方式 1) `constexp` function 与 C++ program使用的是相同的language，定义、调用就像是普通C++ function，因此非常容易使用；它是更加接近于Python metaprogram的，因为Python metaprogram和Python program也是使用的相同的Python language。
 
@@ -61,13 +64,19 @@ Compile time function execution给予了C++非常强大的灵活性，下面对�
 
 3、CppCoreGuidelines [P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
 
-4、TOODO: static-reflection+conditional compile-zero overhead-optimization-relocate paper
+4、TOODO: static-reflection+conditional compile-zero overhead-optimization-relocate paper、static polymorphism
 
 a、能够进行optimization
 
 b、zero overhead principle 
 
 5、CppCoreGuidelines [Per.11: Move computation from run time to compile time](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#per11-move-computation-from-run-time-to-compile-time)
+
+6、static initialization VS dynamic initialization
+
+a、在 pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/) 中，进行了深入讨论
+
+b、C++11 `constexpr`、C++20 `constinit`
 
 ## Application
 

@@ -2,7 +2,8 @@ nav:
     - Introduction: index.md
     - pabloariasal-C++Initialization-of-Static-Variables: pabloariasal-C++Initialization-of-Static-Variables    
     - Non-local-object: Non-local-object.md
-    - Static-local-object: Static-local-object.md
+    - Static-local-object: Static-local-object
+    - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
 
-    - Magic-static-N2660: Magic-static-N2660
     - Problem-and-solution: Problem-and-solution    
+    - Paper-N2660-Magic-static: Paper-N2660-Magic-static    
