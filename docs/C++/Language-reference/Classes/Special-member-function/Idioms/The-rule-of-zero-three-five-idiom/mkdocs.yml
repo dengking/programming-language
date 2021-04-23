@@ -1,4 +1,9 @@
 nav:
     - Introduction: index.md
+    - feabhas-The-Rule-of-The-Big-Three(and-a-half)–Resource-Management: feabhas-The-Rule-of-The-Big-Three(and-a-half)–Resource-Management
+    - feabhas-The-Rule-of-The-Big-Four(and-a-half)–Move-Semantics-and-Resource-Management: feabhas-The-Rule-of-The-Big-Four(and-a-half)–Move-Semantics-and-Resource-Management    
+    - feabhas-The-Rule-of-Zero: feabhas-The-Rule-of-Zero
+    - cppreference-The-rule-of-three-five-zero: cppreference-The-rule-of-three-five-zero    
     - Rule-of-Zero: Rule-of-Zero
-    - Move-Constructor: Move-Constructor
+    - Examples: Examples
+

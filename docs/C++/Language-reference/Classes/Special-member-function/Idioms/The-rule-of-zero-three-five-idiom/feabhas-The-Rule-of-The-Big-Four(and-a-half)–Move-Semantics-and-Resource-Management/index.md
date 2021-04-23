@@ -1,0 +1,3 @@
+# feabhas [The Rule of The Big Four (and a half) – Move Semantics and Resource Management](https://blog.feabhas.com/2015/01/the-rule-of-the-big-four-and-a-half-move-semantics-and-resource-management/)
+
+In the [previous article](https://blog.feabhas.com/2014/12/the-rule-of-the-big-three-and-a-half-resource-management-in-c/) we looked at the issues of resource management in C++ and introduced “The Rule of The Big Three (and a half)”. In this article we’ll extend this concept by looking at the idea of *move semantics*, a feature introduced in C++11. Move semantics mean we’ll have to extend our rule to “The Rule of The Big Five” or, perhaps more correctly, “The Rule of The Big Four (and a half)”.
