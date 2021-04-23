@@ -1,5 +1,13 @@
 # Segmentation fault
 
+## what cause segmentation fault
+
+### stackoverflow [segmentation fault : 11](https://stackoverflow.com/questions/12762944/segmentation-fault-11)
+
+### kb.iu.edu [Identify what's causing segmentation faults (segfaults)](https://kb.iu.edu/d/aqsj)
+
+https://kb.iu.edu/d/aqsj
+
 
 
 ## wikipedia [Segmentation fault](https://en.wikipedia.org/wiki/Segmentation_fault)

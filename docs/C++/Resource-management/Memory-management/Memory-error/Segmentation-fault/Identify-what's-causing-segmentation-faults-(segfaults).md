@@ -1,14 +1,4 @@
-# [Identify what's causing segmentation faults (segfaults)](https://kb.iu.edu/d/aqsj)
-
-On this page:
-
-- [Overview](https://kb.iu.edu/d/aqsj#over)
-- [Examples of common segfaults](https://kb.iu.edu/d/aqsj#ex)
-- [Find out-of-bounds array references](https://kb.iu.edu/d/aqsj#array)
-- [Check shell limits](https://kb.iu.edu/d/aqsj#shell)
-- [Use debuggers to diagnose segfaults](https://kb.iu.edu/d/aqsj#debug)
-
-------
+# kb.iu.edu [Identify what's causing segmentation faults (segfaults)](https://kb.iu.edu/d/aqsj)
 
 ## Overview
 
