@@ -79,7 +79,7 @@ This rule applies during overload resolution of function templates: When substit
 
 
 
-### draft: [Notes on C++ SFINAE#Overload Resolution](https://www.bfilipek.com/2016/02/notes-on-c-sfinae.html#overload-resolution)
+### draft: bfilipek [Notes on C++ SFINAE#Overload Resolution](https://www.bfilipek.com/2016/02/notes-on-c-sfinae.html#overload-resolution)
 
 When the compiler tries to compile a function call (simplified):
 
@@ -91,7 +91,7 @@ At the end, we have a list of viable functions that can be used for the specific
 
 
 
-### draft: [SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/) 
+### draft: thegreenplace [SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/) 
 
 Function template的resolution算法，在文章thegreenplace  [SFINAE and enable_if](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/) 中就总结地较好：
 

@@ -161,7 +161,9 @@ int main(int argc, char *argv[])
 
 ```
 
-> NOTE: 上述程序的输出如下:
+> NOTE: 
+>
+> 1、上述程序的输出如下:
 >
 > ```C++
 > void f(T) [with T = const char*]
@@ -170,7 +172,9 @@ int main(int argc, char *argv[])
 > f:buff size:4
 > ```
 >
-> 
+> 2、在 `f(T buff)` 中，发生了array to pointer decay，它是pass-by-pointer， 在 `f1(T &buff)` 中，是pass-by-reference，没有decay；
+>
+> 上述例子非常好的体现了: "Array-to-pointer decay 违背 static type safety"
 
 ### Pass-by-reference example
 

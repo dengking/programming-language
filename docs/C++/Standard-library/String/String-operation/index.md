@@ -20,6 +20,19 @@ https://www.geeksforgeeks.org/convert-character-array-to-string-in-c/
 
 
 
+## c string to `std::string`
+
+```C++
+std::string  pchar_to_string(const char * pchar)
+{
+    if (NULL == pchar) return "";
+
+    return std::string(pchar); 
+}
+```
+
+
+
 ## C string operation 参考
 
 对于C string，需要对它的常用算法进行总结，下面是可以参考的内容:

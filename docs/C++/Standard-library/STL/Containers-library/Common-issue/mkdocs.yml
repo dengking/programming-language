@@ -3,7 +3,6 @@ nav:
     - Memory-management: Memory-management
     - Iterator-invalidation: Iterator-invalidation
     - Thread-safety: Thread-safety
-    - Member-function-table: Member-function-table
-    - Emplace: Emplace    
+  
     - Generic-container-printer: Generic-container-printer
     - Concept: Concept

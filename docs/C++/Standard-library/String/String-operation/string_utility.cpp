@@ -9,14 +9,14 @@
 #include <stdlib.h>
 using namespace std;  
 
-std::string FUNCTION_CALL_MODE pchar_to_string(const char * pchar)
+std::string  pchar_to_string(const char * pchar)
 {
     if (NULL == pchar) return "";
 
     return std::string(pchar); 
 }
 
-int FUNCTION_CALL_MODE string_to_char(const string &str,char &ch)
+int  string_to_char(const string &str,char &ch)
 {
   ch = ' ';
   if (str.empty()) return -1;
@@ -26,11 +26,11 @@ int FUNCTION_CALL_MODE string_to_char(const string &str,char &ch)
   return 0;
 }
 
-void FUNCTION_CALL_MODE ToUpperString(string &str)
+void  ToUpperString(string &str)
 {  
     transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
 }  
-void FUNCTION_CALL_MODE ToUpperString(char* pStr)
+void  ToUpperString(char* pStr)
 {
 	unsigned int i;
 	for(i=0;i<strlen(pStr);i++) 
@@ -40,12 +40,12 @@ void FUNCTION_CALL_MODE ToUpperString(char* pStr)
 	}
 }
 
-void FUNCTION_CALL_MODE ToLowerString(string &str)
+void  ToLowerString(string &str)
 {  
    transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);  
 } 
 
-void FUNCTION_CALL_MODE ToLowerString(char* pStr)
+void  ToLowerString(char* pStr)
 {  
   unsigned int i;
   for(i=0;i<strlen(pStr);i++) 
@@ -55,7 +55,7 @@ void FUNCTION_CALL_MODE ToLowerString(char* pStr)
   }
 } 
 
-std::string FUNCTION_CALL_MODE inttostr(int iSource)
+std::string  inttostr(int iSource)
 {
   stringstream ss;
   ss.str("");
@@ -63,7 +63,7 @@ std::string FUNCTION_CALL_MODE inttostr(int iSource)
   return ss.str();
 }
 
-std::string FUNCTION_CALL_MODE doubletostr(double dSource)
+std::string  doubletostr(double dSource)
 {
 	stringstream ss;
 	ss.str("");
@@ -71,7 +71,7 @@ std::string FUNCTION_CALL_MODE doubletostr(double dSource)
 	return ss.str();
 }
 
-std::string FUNCTION_CALL_MODE longtostr(long dSource)
+std::string  longtostr(long dSource)
 {
 	stringstream ss;
 	ss.str("");
@@ -79,7 +79,7 @@ std::string FUNCTION_CALL_MODE longtostr(long dSource)
 	return ss.str();
 }
 
-std::string FUNCTION_CALL_MODE lltostr(long long dSource)
+std::string  lltostr(long long dSource)
 {
 	stringstream ss;
 	ss.str("");
@@ -87,7 +87,7 @@ std::string FUNCTION_CALL_MODE lltostr(long long dSource)
 	return ss.str();
 }
 
-std::string FUNCTION_CALL_MODE chartostr(char cSource)
+std::string  chartostr(char cSource)
 {
   stringstream ss;
   ss.str("");
@@ -96,7 +96,7 @@ std::string FUNCTION_CALL_MODE chartostr(char cSource)
 }
 /*取分割符分隔出来的字符串*/
 /*sSrc=aaa|bbbb|ccc,sPlit='|',iNum=1,则sDest=bbbb*/
-int FUNCTION_CALL_MODE GetSplitStrByParam(const char* sSrc,const char* sSplit,int iNum,char* sDest)
+int  GetSplitStrByParam(const char* sSrc,const char* sSplit,int iNum,char* sDest)
 {
   char sSrcStr[1024]={0};
   strncpy(sSrcStr,sSrc,sizeof(sSrcStr));
@@ -120,7 +120,7 @@ int FUNCTION_CALL_MODE GetSplitStrByParam(const char* sSrc,const char* sSplit,in
   return 0;
 }
 // 替换字符串中特征字符串为指定字符串
-int FUNCTION_CALL_MODE ReplaceStr(char *sSrc, const char *sMatchStr, const char *sReplaceStr)
+int  ReplaceStr(char *sSrc, const char *sMatchStr, const char *sReplaceStr)
 {
   size_t  StringLen;
   char caNewString[102400]={0};
@@ -143,7 +143,7 @@ int FUNCTION_CALL_MODE ReplaceStr(char *sSrc, const char *sMatchStr, const char 
 
   return 0;
 }
-int FUNCTION_CALL_MODE ReplaceXMLSpecialCharacter(char *sSrc)
+int  ReplaceXMLSpecialCharacter(char *sSrc)
 {
   ReplaceStr(sSrc,">","&gt;");
   ReplaceStr(sSrc,"<","&lt;");
@@ -153,20 +153,20 @@ int FUNCTION_CALL_MODE ReplaceXMLSpecialCharacter(char *sSrc)
   return 0;
 }
 
-void FUNCTION_CALL_MODE Ltrim(string &str)
+void  Ltrim(string &str)
 {
   str.erase(str.begin(), find_if(str.begin(), str.end(),not1(ptr_fun(::isspace))));
 }
-void FUNCTION_CALL_MODE Rtrim(string &str)
+void  Rtrim(string &str)
 {
   str.erase(find_if(str.rbegin(), str.rend(),not1(ptr_fun(::isspace))).base(),str.end());
 }
-void FUNCTION_CALL_MODE Trim(string &str)
+void  Trim(string &str)
 {
   Ltrim(str);
   Rtrim(str);
 }
-int FUNCTION_CALL_MODE CountSubstringInString(string &strSrc,string &strSub)
+int  CountSubstringInString(string &strSrc,string &strSub)
 {
   size_t i=0;
   int count = 0;
@@ -177,7 +177,7 @@ int FUNCTION_CALL_MODE CountSubstringInString(string &strSrc,string &strSub)
   }
   return count;
 }
-vector<string> FUNCTION_CALL_MODE splitEx(const string& src, string separate_character)
+vector<string>  splitEx(const string& src, string separate_character)
 {
   vector<string> strs;
   size_t separate_characterLen = separate_character.size();//分割字符串的长度,这样就可以支持如“,,”多字符串的分隔符支
@@ -193,7 +193,7 @@ vector<string> FUNCTION_CALL_MODE splitEx(const string& src, string separate_cha
   return strs;
 }
 
-int FUNCTION_CALL_MODE Strstrex(const string& src, string separate_character) {
+int  Strstrex(const string& src, string separate_character) {
 	string sMainStr = src;
 	if(NULL == strstr(sMainStr.c_str(),separate_character.c_str()))
 	{
@@ -202,7 +202,7 @@ int FUNCTION_CALL_MODE Strstrex(const string& src, string separate_character) {
 	return 0;
 }
 
-void FUNCTION_CALL_MODE split_half( const char * sSrc,const char * sAt,char * sDesStr1,char * sDesStr2 )
+void  split_half( const char * sSrc,const char * sAt,char * sDesStr1,char * sDesStr2 )
 {
     size_t pex = strcspn(sSrc,sAt);
     if(0 >= pex) return;
@@ -217,7 +217,7 @@ void FUNCTION_CALL_MODE split_half( const char * sSrc,const char * sAt,char * sD
   ch : 分隔字符
   num: 取第几部分
 */
-int FUNCTION_CALL_MODE GetColInteger(char * sstr, int *iDes, char ch, int num)
+int  GetColInteger(char * sstr, int *iDes, char ch, int num)
 {
   char buff[100];
   unsigned int i=0;
@@ -254,7 +254,7 @@ int FUNCTION_CALL_MODE GetColInteger(char * sstr, int *iDes, char ch, int num)
   ch : 分隔字符
   num: 取第几部分
 */
-int FUNCTION_CALL_MODE GetColDouble(char * sstr, double *enDes, char ch, int num)
+int  GetColDouble(char * sstr, double *enDes, char ch, int num)
 {
   char buff[100];
   unsigned int i=0;
@@ -297,7 +297,7 @@ int FUNCTION_CALL_MODE GetColDouble(char * sstr, double *enDes, char ch, int num
   ch : 分隔字符
   num: 取第几部分
 */
-int FUNCTION_CALL_MODE GetColString(char* sSrc,char* sDes,char ch ,int num)
+int  GetColString(char* sSrc,char* sDes,char ch ,int num)
 {
   char *pCurr = sSrc;
   char *pNext;
@@ -339,7 +339,7 @@ int FUNCTION_CALL_MODE GetColString(char* sSrc,char* sDes,char ch ,int num)
 }
 
 
-void FUNCTION_CALL_MODE split(std::string const& str, std::string const& delimiter, std::vector< std::string >* dest)
+void  split(std::string const& str, std::string const& delimiter, std::vector< std::string >* dest)
 {
     size_t pos = 0, found = 0;
 
@@ -352,7 +352,7 @@ void FUNCTION_CALL_MODE split(std::string const& str, std::string const& delimit
 
 }
 
-void FUNCTION_CALL_MODE string_replace(string& s1, const string& s2, const string& s3)
+void  string_replace(string& s1, const string& s2, const string& s3)
 {
 	string::size_type pos = 0;
 	string::size_type a = s2.size();
@@ -364,14 +364,14 @@ void FUNCTION_CALL_MODE string_replace(string& s1, const string& s2, const strin
 	}
 }
 
-void FUNCTION_CALL_MODE replaceStr(char* pBuf, int bufLen, const string& s2,const string& s3)
+void  replaceStr(char* pBuf, int bufLen, const string& s2,const string& s3)
 {
 	string s1(pBuf);
 	string_replace(s1, s2, s3);
 	snprintf(pBuf, bufLen, "%s", s1.c_str());
 }
 
-double FUNCTION_CALL_MODE string_to_double(std::string str)
+double  string_to_double(std::string str)
 {
     char* endptr;
     double value = strtod(str.c_str(), &endptr);
@@ -379,12 +379,12 @@ double FUNCTION_CALL_MODE string_to_double(std::string str)
     return value;
 }
 
-int FUNCTION_CALL_MODE string_to_int(std::string str)
+int  string_to_int(std::string str)
 {
 	return atoi( str.c_str());
 }
 
-int FUNCTION_CALL_MODE hs_strcmp(const char *d_str, const char *s_str)
+int  my_strcmp(const char *d_str, const char *s_str)
 {
     if ((d_str != NULL) && (s_str != NULL))
     {
