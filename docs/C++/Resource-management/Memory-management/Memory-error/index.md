@@ -19,3 +19,11 @@
 1、编码规范
 
 2、工具检查
+
+
+
+## TODO
+
+https://stackoverflow.com/questions/33559223/core-dump-when-deleting-pointer-c
+
+https://stackoverflow.com/questions/33111252/segmentation-fault-core-dumped-when-i-delete-pointer/33111432
