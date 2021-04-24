@@ -2,13 +2,11 @@
 
 ## what cause segmentation fault
 
-### stackoverflow [segmentation fault : 11](https://stackoverflow.com/questions/12762944/segmentation-fault-11)
+stackoverflow [segmentation fault : 11](https://stackoverflow.com/questions/12762944/segmentation-fault-11)
 
-### kb.iu.edu [Identify what's causing segmentation faults (segfaults)](https://kb.iu.edu/d/aqsj)
+1、[Identify what's causing segmentation faults (segfaults)](https://kb.iu.edu/d/aqsj)
 
-https://kb.iu.edu/d/aqsj
-
-
+其中整理了一些
 
 ## wikipedia [Segmentation fault](https://en.wikipedia.org/wiki/Segmentation_fault)
 
