@@ -1,12 +1,10 @@
 # Segmentation fault
 
-## what cause segmentation fault
+1、Linux OS中，与memory相关的错误，最终会报Segmentation fault，而导致core dump
 
-stackoverflow [segmentation fault : 11](https://stackoverflow.com/questions/12762944/segmentation-fault-11)
 
-1、[Identify what's causing segmentation faults (segfaults)](https://kb.iu.edu/d/aqsj)
 
-其中整理了一些
+
 
 ## wikipedia [Segmentation fault](https://en.wikipedia.org/wiki/Segmentation_fault)
 
@@ -28,3 +26,6 @@ At the hardware level, the fault is initially raised by the [memory management u
 
 At the operating system level, this fault is caught and a signal is passed on to the offending process, activating the process's handler for that signal. Different operating systems have different signal names to indicate that a segmentation fault has occurred. On [Unix-like](https://en.wikipedia.org/wiki/Unix-like) operating systems, a signal called SIGSEGV (abbreviated from *segmentation violation*) is sent to the offending process. On [Microsoft Windows](https://en.wikipedia.org/wiki/Microsoft_Windows), the offending process receives a STATUS_ACCESS_VIOLATION [exception](https://en.wikipedia.org/wiki/Exception_handling).
 
+## TODO
+
+stackoverflow [segmentation fault : 11](https://stackoverflow.com/questions/12762944/segmentation-fault-11)

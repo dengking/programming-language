@@ -1,4 +1,4 @@
-# [Memory safety](https://en.wikipedia.org/wiki/Memory_safety)
+# wikipedia [Memory safety](https://en.wikipedia.org/wiki/Memory_safety)
 
 **Memory safety** is the state of being protected from various [software bugs](https://en.wikipedia.org/wiki/Software_bugs) and [security vulnerabilities](https://en.wikipedia.org/wiki/Vulnerability_(computing)) when dealing with [memory](https://en.wikipedia.org/wiki/Random-access_memory) access, such as [buffer overflows](https://en.wikipedia.org/wiki/Buffer_overflow) and [dangling pointers](https://en.wikipedia.org/wiki/Dangling_pointer).[[1\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-Adve-1) For example, [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) is said to be memory-safe because its [runtime error detection](https://en.wikipedia.org/wiki/Runtime_error_detection) checks array bounds and pointer dereferences.[[1\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-Adve-1) In contrast, [C](https://en.wikipedia.org/wiki/C_(programming_language)) and [C++](https://en.wikipedia.org/wiki/C%2B%2B) allow arbitrary [pointer arithmetic](https://en.wikipedia.org/wiki/Pointer_arithmetic) with pointers implemented as direct memory addresses with no provision for [bounds checking](https://en.wikipedia.org/wiki/Bounds_checking),[[2\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-2) and thus are termed **memory-unsafe**.[[3\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-3)
 
@@ -26,22 +26,36 @@ Another approach uses [static program analysis](https://en.wikipedia.org/wiki/St
 
 ## Types of memory errors
 
+> NOTE: 
+> 1、总结地非常好
+
 Many different types of memory errors can occur:[[18\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-18)[[19\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-19)
 
-- Access errors: invalid read/write of a pointer
-  - **Buffer overflow** - out-of-bound writes can corrupt the content of adjacent objects, or internal data (like bookkeeping information for the [heap](https://en.wikipedia.org/wiki/Memory_management#Dynamic_memory_allocation)) or [return](https://en.wikipedia.org/wiki/Return_statement)addresses.
-  - **Buffer over-read** - out-of-bound reads can reveal sensitive data or help attackers bypass [address space layout randomization](https://en.wikipedia.org/wiki/Address_space_layout_randomization).
-  - **Race condition** - concurrent reads/writes to shared memory
-  - **Invalid page fault** - accessing a pointer outside the virtual memory space. A null pointer dereference will often cause an exception or program termination in most environments, but can cause corruption in operating system [kernels](https://en.wikipedia.org/wiki/Kernel_(computing)) or systems without [memory protection](https://en.wikipedia.org/wiki/Memory_protection), or when use of the null pointer involves a large or negative offset.
-  - **Use after free** - dereferencing a [dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer) storing the address of an object that has been deleted.
-- [Uninitialized variables](https://en.wikipedia.org/wiki/Uninitialized_variable)  - a variable that has not been assigned a value is used. It may contain an undesired or, in some languages, a corrupt value.
-  - **Null pointer dereference** - dereferencing an invalid pointer or a pointer to memory that has not been allocated
-  - **Wild pointers** arise when a pointer is used prior to initialization to some known state. They show the same erratic behaviour as dangling pointers, though they are less likely to stay undetected.
-- [Memory leak](https://en.wikipedia.org/wiki/Memory_leak) \- when memory usage is not tracked or tracked incorrectly
-  - **Stack exhaustion** - occurs when a program runs out of stack space, typically because of too deep [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)). A [guard page](https://en.wikipedia.org/wiki/Memory_protection) typically halts the program, preventing memory corruption, but functions with large [stack frames](https://en.wikipedia.org/wiki/Stack_frame) may bypass the page.
-  - **Heap exhaustion** - the program tries to [allocate](https://en.wikipedia.org/wiki/Memory_allocation) more memory than the amount available. In some languages, this condition must be checked for manually after each allocation.
-  - **Double free** - repeated calls to [free](https://en.wikipedia.org/wiki/Malloc) may prematurely free a new object at the same address. If the exact address has not been reused, other corruption may occur, especially in allocators that use [free lists](https://en.wikipedia.org/wiki/Free_list).
-  - **Invalid free** - passing an invalid address to [free](https://en.wikipedia.org/wiki/Malloc) can corrupt the [heap](https://en.wikipedia.org/wiki/Memory_management#Dynamic_memory_allocation).
-  - **Mismatched free** - when multiple allocators are in use, attempting to free memory with a deallocation function of a different allocator[[20\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-20)
-  - **Unwanted aliasing** - when the same memory location is allocated and modified twice for unrelated purposes.
+
+
+### Access errors: invalid read/write of a pointer
+
+- **Buffer overflow** - out-of-bound writes can corrupt the content of adjacent objects, or internal data (like bookkeeping information for the [heap](https://en.wikipedia.org/wiki/Memory_management#Dynamic_memory_allocation)) or [return](https://en.wikipedia.org/wiki/Return_statement)addresses.
+- **Buffer over-read** - out-of-bound reads can reveal sensitive data or help attackers bypass [address space layout randomization](https://en.wikipedia.org/wiki/Address_space_layout_randomization).
+- **Race condition** - concurrent reads/writes to shared memory
+- **Invalid page fault** - accessing a pointer outside the virtual memory space. A null pointer dereference will often cause an exception or program termination in most environments, but can cause corruption in operating system [kernels](https://en.wikipedia.org/wiki/Kernel_(computing)) or systems without [memory protection](https://en.wikipedia.org/wiki/Memory_protection), or when use of the null pointer involves a large or negative offset.
+- **Use after free** - dereferencing a [dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer) storing the address of an object that has been deleted.
+
+### [Uninitialized variables](https://en.wikipedia.org/wiki/Uninitialized_variable)  
+
+a variable that has not been assigned a value is used. It may contain an undesired or, in some languages, a corrupt value.
+
+- **Null pointer dereference** - dereferencing an invalid pointer or a pointer to memory that has not been allocated
+- **Wild pointers** arise when a pointer is used prior to initialization to some known state. They show the same erratic behaviour as dangling pointers, though they are less likely to stay undetected.
+
+### [Memory leak](https://en.wikipedia.org/wiki/Memory_leak) 
+
+when memory usage is not tracked or tracked incorrectly
+
+- **Stack exhaustion** - occurs when a program runs out of stack space, typically because of too deep [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)). A [guard page](https://en.wikipedia.org/wiki/Memory_protection) typically halts the program, preventing memory corruption, but functions with large [stack frames](https://en.wikipedia.org/wiki/Stack_frame) may bypass the page.
+- **Heap exhaustion** - the program tries to [allocate](https://en.wikipedia.org/wiki/Memory_allocation) more memory than the amount available. In some languages, this condition must be checked for manually after each allocation.
+- **Double free** - repeated calls to [free](https://en.wikipedia.org/wiki/Malloc) may prematurely free a new object at the same address. If the exact address has not been reused, other corruption may occur, especially in allocators that use [free lists](https://en.wikipedia.org/wiki/Free_list).
+- **Invalid free** - passing an invalid address to [free](https://en.wikipedia.org/wiki/Malloc) can corrupt the [heap](https://en.wikipedia.org/wiki/Memory_management#Dynamic_memory_allocation).
+- **Mismatched free** - when multiple allocators are in use, attempting to free memory with a deallocation function of a different allocator[[20\]](https://en.wikipedia.org/wiki/Memory_safety#cite_note-20)
+- **Unwanted aliasing** - when the same memory location is allocated and modified twice for unrelated purposes.
 
