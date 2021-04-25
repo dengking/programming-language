@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - Copyable-and-movable: Copyable-and-movable
     - The-rule-of-zero-three-five-idiom: The-rule-of-zero-three-five-idiom
     
     - Copy-and-swap-idiom: Copy-and-swap-idiom-idiom

@@ -1,18 +1,48 @@
 # The Rule of Zero
 
-1、运用C++11-default-member-initializer，来避免写constructor
+一、运用C++11-default-member-initializer，来避免写constructor
 
 cpppatterns [The rule of zero](https://cpppatterns.com/patterns/rule-of-zero.html) 中的两个例子是非常典型的。
 
-2、"we can avoid writing any custom copy/move constructors, assignment operators, or destructors by using existing types that support the appropriate copy/move semantics"
+二、"we can avoid writing any custom copy/move constructors, assignment operators, or destructors by using existing types that support the appropriate copy/move semantics"
 
 > NOTE: 
 >
 > 上述摘抄自 cpppatterns [The rule of zero](https://cpppatterns.com/patterns/rule-of-zero.html)。
 
-3、运用Implicitly-defined constructor、destructor、assignment
+三、运用Implicitly-defined constructor、destructor、assignment
 
-4、rule of zero使用的是默认行为，如果这些默认行为不符合预期，则需要custom implementation
+四、rule of zero使用的是默认行为，如果这些默认行为不符合预期，则需要custom implementation
+
+五、Single Responsibility Principle and RAII and composition
+
+> NOTE: 
+>
+> 1、这是我在阅读  stackoverflow [Rule of Zero confusion?](https://stackoverflow.com/questions/44997955/rule-of-zero-confusion)  comment
+>
+> > Ownership == responsibility for the lifecycle of a managed resource. For example, the various smart pointer classes model different kinds of ownership (shared vs. unique, etc.)
+>
+> 时，联想到的。
+>
+> 
+
+single responsibility principle: 每个member都管理一个resource
+
+RAII: 每个member，都遵循rule of five/three/zero，RAII
+
+composition: 将它们作为member data
+
+C++11-default-member-initializer: 每个member，都需要合适的initialization
+
+## stackoverflow [Rule of Zero confusion?](https://stackoverflow.com/questions/44997955/rule-of-zero-confusion) 
+
+### comments
+
+Ownership == responsibility for the lifecycle of a managed resource. For example, the various smart pointer classes model different kinds of ownership (shared vs. unique, etc.) – [Oliver Charlesworth](https://stackoverflow.com/users/129570/oliver-charlesworth) [Jul 9 '17 at 15:22](https://stackoverflow.com/questions/44997955/rule-of-zero-confusion#comment76969848_44997955)
+
+### [A](https://stackoverflow.com/a/45016295)
+
+
 
 ## cpppatterns [The rule of zero](https://cpppatterns.com/patterns/rule-of-zero.html)
 
@@ -130,7 +160,7 @@ https://www.fluentcpp.com/2019/04/23/the-rule-of-zero-zero-constructor-zero-calo
 
 
 
-### std::unique_ptr and rule of zero
+### `std::unique_ptr` and rule of zero
 
 https://stackoverflow.com/questions/59146954/how-to-implement-the-rule-of-zero-with-unique-ptr
 

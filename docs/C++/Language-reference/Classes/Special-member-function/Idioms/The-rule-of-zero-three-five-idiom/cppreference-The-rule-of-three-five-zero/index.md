@@ -1,5 +1,3 @@
-
-
 # cppreference [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
 ## Rule of three
@@ -8,7 +6,15 @@ If a class requires a user-defined [destructor](https://en.cppreference.com/w/cp
 
 > NOTE: 三者只要有其一，就需要有其三
 
+Because C++ copies and copy-assigns objects of user-defined types in various situations (passing/returning by value, manipulating a container, etc), these special member functions will be called, if accessible, and if they are not user-defined, they are implicitly-defined by the compiler.
 
+> NOTE: 
+
+The implicitly-defined special member functions are typically incorrect if the class manages a resource whose handle is an object of non-class type (raw pointer, POSIX file descriptor, etc), whose destructor does nothing and copy constructor/assignment operator performs a "shallow copy" (copy the value of the handle, without duplicating the underlying resource).
+
+> NOTE: 
+>
+> 1、这就是问题的根源所在，一般，我们需要使用"single responsibility principle + rule of three five zero + RAII "来实现resource wrapper，这样能够有效地解决上述问题
 
 ```c++
 #include <cstddef>
@@ -129,6 +135,10 @@ Unlike Rule of Three, failing to provide move constructor and move assignment is
 ## Rule of zero
 
 Classes that have custom destructors, copy/move constructors or copy/move assignment operators should deal exclusively with ownership (which follows from the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)). Other classes should not have custom destructors, copy/move constructors or copy/move assignment operators.[[1\]](https://en.cppreference.com/w/cpp/language/rule_of_three#cite_note-1)
+
+> NOTE: 
+>
+> 1、上面这段话的意思是: 
 
 This rule also appears in the C++ Core Guidelines as [C.20: If you can avoid defining default operations, do](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-zero).
 

@@ -1,5 +1,6 @@
 # Copyable and movable
 
+
 ## Google C++ Style Guide [Copyable and Movable Types](https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types)
 
 

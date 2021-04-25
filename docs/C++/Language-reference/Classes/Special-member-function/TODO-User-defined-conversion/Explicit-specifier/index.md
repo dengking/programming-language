@@ -1,6 +1,12 @@
 # explicit specifier
 
-`explicit`供programmer对conversion进行控制，它体现了C++的灵活性。
+1、`explicit`供programmer对conversion进行控制，它体现了C++的灵活性。
+
+2、使用场景: 
+
+a、explicit constructor
+
+b、user-defined conversion function
 
 ## cppreference [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
 
