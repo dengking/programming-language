@@ -1,8 +1,9 @@
 nav:
     - Introduction: index.md
-    - TODO-Function-as-template-parameter: TODO-Function-as-template-parameter
+
+    - Function-as-template-parameter: Function-as-template-parameter
     - Callable-concept: Callable-concept
-    - std-result_of: std-result_of
+    - Perfect-forwarding: Perfect-forwarding    
+    - Perfect-forwarding-parameter: Perfect-forwarding-parameter
     # 变参函数
     - Variadic-arguments-function: Variadic-arguments-function
-    - Perfect-forwarding-function-template: Perfect-forwarding-function-template

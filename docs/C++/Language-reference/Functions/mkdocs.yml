@@ -1,7 +1,8 @@
 nav:
     - Introduction: index.md
     - Function: Function
-    - Function-declaration: Function-declaration
+    - Function-objects: Function-objects    
+    - cppreference-Function-declaration: cppreference-Function-declaration
     # 函数调用中也包含一些内容
     - Function-call: Function-call
     - Function-termination: Function-termination

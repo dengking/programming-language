@@ -14,6 +14,7 @@ Function as first class citizen是一个非常有用的特性，但是C++并不�
 | ------------------------------ | ----------------------- | ------ |
 | `std::function`                | 1、can be passed around | 性能？ |
 | function as template parameter |                         |        |
+| function object                |                         |        |
 
 
 
@@ -34,6 +35,16 @@ Function as first class citizen是一个非常有用的特性，但是C++并不�
 
 
 参见 `std-function` 章节。
+
+### Function object
+
+参见 `Function-objects` 章节。
+
+## Application
+
+1、AOP
+
+一个非常重要的application就是AOP。
 
 ## TO RAED
 

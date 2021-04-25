@@ -1,18 +1,6 @@
-# Wrapper
+# Function as template parameter example
 
-实现方式：
-
-| 实现方式                  | 章节               |      |
-| ------------------------- | ------------------ | ---- |
-| function object           | `Function-objects` |      |
-| template function wrapper |                    |      |
-| function pointer          |                    |      |
-
-
-
-## Template function wrapper
-
-### stackoverflow [c++11: Templated wrapper function](https://stackoverflow.com/questions/25495448/c11-templated-wrapper-function)
+## stackoverflow [c++11: Templated wrapper function](https://stackoverflow.com/questions/25495448/c11-templated-wrapper-function)
 
 I try to create a general wrapper function which takes any function as argument and also their parameters. Just something like the `std::thread` constructor.
 
@@ -56,9 +44,9 @@ int main(void)
 
 The wrapper function itself works. It calls the given function object (`std::function`, functor or just a "normal" function) with the given arguments. But i also like to return its return value.
 
-#### [A](https://stackoverflow.com/a/25495463) 
+### [A](https://stackoverflow.com/a/25495463) 
 
-C++11: `std::result_of` + `std::forward`
+#### C++11: `std::result_of` + `std::forward`
 
 Use [`std::result_of`](http://en.cppreference.com/w/cpp/types/result_of) :
 
@@ -98,7 +86,7 @@ int main(void)
 >
 > 
 
-C++14:
+#### C++14: `std::result_of_t` + `std::forward`
 
 In C++14 you can use the `result_of_t` alias:
 
@@ -139,6 +127,8 @@ std::result_of_t<F &&(Args &&...)> wrapper(F && f, Args &&... args)
 > ```
 >
 > 
+
+#### C++14: `decltype(auto)` + `std::forward`
 
 Or you can use return type deduction:
 
@@ -188,7 +178,9 @@ decltype(auto) wrapper(F && f, Args &&... args)
 >
 > 
 
-#### [A](https://stackoverflow.com/a/25495501)
+### [A](https://stackoverflow.com/a/25495501)
+
+#### C++11: auto + decltype + trailing return type 
 
 You can use `decltype` with the C++11 auto trailing return type :
 
