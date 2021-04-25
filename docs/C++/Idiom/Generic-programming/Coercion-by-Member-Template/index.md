@@ -8,6 +8,8 @@
 
 2、[microsoft](https://github.com/microsoft)/**[GSL](https://github.com/microsoft/GSL)**/[pointers](https://github.com/microsoft/GSL/blob/main/include/gsl/pointers) `class not_null`
 
+三、提供了一个非模板版本 和 模板版本
+
 ## More C++ Idioms/[Coercion by Member Template](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Coercion_by_Member_Template)
 
 ### Intent

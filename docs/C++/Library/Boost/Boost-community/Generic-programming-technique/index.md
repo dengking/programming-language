@@ -127,6 +127,8 @@ A **concept** is a set of requirements consisting of valid expressions, associat
 > NOTE: 
 >
 > 1、invariant是dynamic的
+>
+> 2、上述invariant、pre-condition、post-condition是design-by-contract领域的内容
 
 4) **Complexity Guarantees** are maximum limits on how long the execution of one of the valid expressions will take, or how much of various resources its computation will use.
 

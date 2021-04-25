@@ -14,7 +14,7 @@
 
 
 
-## Custom polymorphism idiom
+## Custom polymorphism的方式总结
 
 
 
@@ -33,3 +33,10 @@
 ### Custom static polymorphism
 
 参见 `Custom-static-polymorphism` 章节。
+
+
+
+### Custom virtual table
+
+参见 `TODO-custom-virtual-table` 章节。
+

@@ -8,9 +8,11 @@
 
 简而言之，C++中的generic programming是通过template来实现的。
 
-在 boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) 介绍了一些GP technique，我觉得它是关于C++ GP介绍的非常好的的文章，它向我们展示了GP的核心technique，在`C++\Library\Boost\Boost-community\Generic-programming-technique`中收录了这篇文章。
+## boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) 
 
+1、在 boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) 介绍了一些GP technique，我觉得它是关于C++ GP介绍的非常好的的文章，我是通过这篇文章开始了C++ GP的学习的，它向我们展示了GP的核心technique，在`C++\Library\Boost\Boost-community\Generic-programming-technique`中收录了这篇文章。
 
+2、后面的很多内容都是基于boost [Generic Programming Techniques](https://www.boost.org/community/generic_programming.html) 中的概念的，尤其是其中的valid expression章节
 
 ## Type requirement/concept
 
@@ -18,9 +20,9 @@
 >
 > 因此本节标题中为了避免混淆，两者都用上了。
 
-在generic programming中，非常重要的一点是描述type requirement/concept；具体到C++，则是指在使用template的过程中，我们需要对template parameter添加type requirement/restriction/constrain，比如希望它**具备某种特性**/**满足某种条件**，各个版本的C++都提供了解决方法，本文对各种可用的方法进行总结。
+1、在generic programming中，非常重要的一点是描述type requirement/concept；具体到C++，则是指在使用template的过程中，我们需要对template parameter添加type requirement/restriction/constrain，比如希望它**具备某种特性**/**满足某种条件**，各个版本的C++都提供了解决方法，本文对各种可用的方法进行总结。
 
-Type requirement/concept也是C++中用于控制static polymorphism的，因此它在C++中尤为重要，本节对此进行梳理。
+2、Type requirement/concept也是C++中用于控制static polymorphism的，因此它在C++中尤为重要，本节对此进行梳理。
 
 > NOTE: 关于Type requirement/concept用于控制static polymorphism，参见如下章节:
 >
@@ -28,13 +30,15 @@ Type requirement/concept也是C++中用于控制static polymorphism的，因此�
 >
 > 2) `C++\Language-reference\Template\Programming-paradigm\Idioms\Polymorphism`
 
+3、Type requirement的对应的是static reflection
+
 ### Classification
 
 Type requirement/concept基本上涉及了所有与type相关的内容，C++对此提供了丰富的支持，下面是对它的分类: 
 
 #### Behavior-based
 
-对于behavior-based的type requirement的，behavior常常是以expression的方式来进行表达，所以可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中使用**expression**来表达这些concept。参见:
+对于behavior-based的type requirement的，behavior常常是以**valid expression**的方式来进行表达，所以可以看到cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)中使用**valid expression**来表达这些concept。参见:
 
 1) `./Named-requirements`，在`./Named-requirements`中对此进行了详细的说明
 
@@ -65,7 +69,7 @@ Type是否有指定member，比如typedef。
 
 #### C++11
 
-`decltype`、`std::declval`: 让programmer能够方便地表达expression、member，再借助SFINE，从而便利:
+`decltype`、`std::declval`: 让programmer能够方便地表达valid expression，再借助SFINE，从而便利地:
 
 1) 实现**compile-time detection**/**compile-time introspection**/**compile-time reflection**
 

@@ -89,6 +89,8 @@ When a base class is intended for polymorphic use, its destructor may have to be
 
 
 
+## draft: move disable copy
+
 ## TODO
 
 
@@ -102,3 +104,5 @@ When a base class is intended for polymorphic use, its destructor may have to be
 
 
 ### stackoverflow [Why user-defined move-constructor disables the implicit copy-constructor?](https://stackoverflow.com/questions/11255027/why-user-defined-move-constructor-disables-the-implicit-copy-constructor)
+
+> NOTE: 

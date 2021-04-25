@@ -61,7 +61,9 @@ The main uses of concepts are:
 
 4) Constraining automatic type deduction
 
-> NOTE: 这个用法还不太了解，需要进行扩展
+> NOTE: 
+>
+> 1、automatic type deduction是C++17引入的
 
 ### Example: EqualityComparable
 
