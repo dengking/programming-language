@@ -71,3 +71,12 @@ async([this]()
 ### 使用callable `std::invoke`
 
 就像 stackoverflow [Class and std::async on class member in C++](https://stackoverflow.com/questions/11758414/class-and-stdasync-on-class-member-in-c) # [A](https://stackoverflow.com/a/11758662) 中所描述的方式；
+
+
+
+## TODO
+
+stackexchange [C++ member function wrapper for interfacing with C APIs](https://codereview.stackexchange.com/questions/180221/c-member-function-wrapper-for-interfacing-with-c-apis)
+
+stackexchange [Simple wrapper for member function pointers with known signature](https://codereview.stackexchange.com/questions/148824/simple-wrapper-for-member-function-pointers-with-known-signature)
+

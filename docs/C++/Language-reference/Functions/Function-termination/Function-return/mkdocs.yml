@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
-    
+    - C++11-Trailing-return-type: C++11-Trailing-return-type
+    - C++11-std-result_of: C++11-std-result_of
+    - C++14-Return-type-deduction: C++14-Return-type-deduction

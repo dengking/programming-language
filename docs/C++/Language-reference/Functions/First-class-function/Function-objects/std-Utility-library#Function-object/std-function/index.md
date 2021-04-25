@@ -53,11 +53,27 @@ int main()
 // g++ --std=c++11 test.cpp
 ```
 
+## `std::function` 是 polymorphic value type
 
+> NOTE: 
+>
+> 1、"tag-std-function-polymorphic value type-融合OOP-和-GP"
 
+`std::function` 是典型的polymorphic value type，它如何了OOP + GP 的优点:
 
+一、OOP: 
 
-## `std::function` is generic and a good abstraction
+1、提供了consistent interface，因此它可以被pass around
+
+正如在 stackoverflow [What is ScopeGuard in C++?](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c) # [A](https://stackoverflow.com/a/31365171) 中所总结的: 
+
+> The rôle of the `function` here is to avoid templating so that `Scope_guard` instances can be declared as such, and passed around. An alternative, slightly more complex and with slightly constrained usage, but possibly marginally more efficient, is to have a class templated on a functor type, and use C++11 `auto` for declarations, with the scope guard instance created by a factory function. 
+
+2、polymorphic
+
+二、GP: 抽象出了类型，能够表达callable concept
+
+### `std::function` is generic and a good abstraction
 
 `std::function` is generic and a good abstraction，所有callable都可以包装为`std::function`:
 

@@ -15,6 +15,8 @@ Function as first class citizen是一个非常有用的特性，但是C++并不�
 | `std::function`                | 1、can be passed around | 性能？ |
 | function as template parameter |                         |        |
 
+
+
 ### Function as template parameter
 
 参见 `../Generic-programming/Function-as-template-parameter` 章节。
@@ -22,6 +24,14 @@ Function as first class citizen是一个非常有用的特性，但是C++并不�
 
 
 ### `std::function`
+
+`std::function` 是非常好的选择，因为它是polymorphic value type，它融合了OOP和GP的优势。
+
+> NOTE: 
+>
+> 1、tag-std-function-polymorphic value type-融合OOP-和-GP
+
+
 
 参见 `std-function` 章节。
 

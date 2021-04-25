@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - std-function-object: std-function-object
+    - std-Utility-library#Function-object: std-Utility-library#Function-object
     - Functor: Functor
 

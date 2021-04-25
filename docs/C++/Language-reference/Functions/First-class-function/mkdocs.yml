@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
     - Function-objects: Function-objects
-    - Wrapper: Wrapper
+    - Function-as-template-parameter: Function-as-template-parameter
     - Member-function-as-first-class-function: Member-function-as-first-class-function
+    - library-Timeit: library-Timeit

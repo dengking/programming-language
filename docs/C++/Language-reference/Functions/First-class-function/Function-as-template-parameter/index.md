@@ -44,9 +44,15 @@ int main(void)
 // g++ --std=c++11 test.cpp
 ```
 
-> NOTE: 上述代码是无法实现perfect forwarding的，正如评论所言：
+> NOTE: 
+>
+> 1、上述代码是无法实现perfect forwarding的，正如评论所言：
 >
 > You should be passing like this: `func(std::forward<Args>(args)...)` – [CoffeeandCode](https://stackoverflow.com/users/2297448/coffeeandcode)
+>
+> 2、[A](https://stackoverflow.com/a/25495463)  中提供了完善版本
+>
+> 
 
 The wrapper function itself works. It calls the given function object (`std::function`, functor or just a "normal" function) with the given arguments. But i also like to return its return value.
 
@@ -58,9 +64,8 @@ Use [`std::result_of`](http://en.cppreference.com/w/cpp/types/result_of) :
 
 ```c++
 #include <iostream>
-#include <type_traits> // std::result_of
-using namespace std;
 
+using namespace std;
 template<typename F, typename ...Args>
 typename std::result_of<F&& (Args&&...)>::type wrapper(F &&f, Args &&... args)
 {
@@ -72,14 +77,26 @@ int dummy(int a, int b)
 	cout << a << '+' << b << '=' << (a + b) << endl;
 	return a + b;
 }
-
 int main(void)
 {
 	dummy(3, 4);
-	wrapper(dummy, 3, 4);
+	std::cout << wrapper(dummy, 3, 4) << std::endl;
 }
-// g++ --std=c++11 test.cpp
+// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
+
 ```
+
+> NOTE: 
+>
+> 1、输出如下:
+>
+> ```C++
+> 3+4=7
+> 3+4=7
+> 7
+> ```
+>
+> 
 
 C++14:
 
@@ -92,6 +109,36 @@ std::result_of_t<F &&(Args &&...)> wrapper(F && f, Args &&... args)
     return std::forward<F>(f)(std::forward<Args>(args)...);
 }
 ```
+
+> NOTE: 
+>
+> 1、完整测试程序如下:
+>
+> ```C++
+> #include <iostream>
+> 
+> using namespace std;
+> template <typename F, typename ...Args>
+> std::result_of_t<F &&(Args &&...)> wrapper(F && f, Args &&... args)
+> {
+>     return std::forward<F>(f)(std::forward<Args>(args)...);
+> }
+> 
+> int dummy(int a, int b)
+> {
+> 	cout << a << '+' << b << '=' << (a + b) << endl;
+> 	return a + b;
+> }
+> int main(void)
+> {
+> 	dummy(3, 4);
+> 	std::cout << wrapper(dummy, 3, 4) << std::endl;
+> }
+> // g++ test.cpp -pedantic -Wall -Wextra --std=c++14
+> 
+> ```
+>
+> 
 
 Or you can use return type deduction:
 
@@ -108,6 +155,39 @@ decltype(auto) wrapper(F && f, Args &&... args)
 
 > In C++14 you can also forget about `result_of` and friends completely and use return type deduction :) 
 
+> NOTE: 
+>
+> 1、完成测试程序如下:
+>
+> ```C++
+> #include <iostream>
+> 
+> using namespace std;
+> 
+> template <typename F, typename ...Args>
+> decltype(auto) wrapper(F && f, Args &&... args)
+> {
+>     std::cout << "before\n";
+>     auto && res = std::forward<F>(f)(std::forward<Args>(args)...);
+>     std::cout << "after\n";
+>     return res;
+> }
+> int dummy(int a, int b)
+> {
+> 	cout << a << '+' << b << '=' << (a + b) << endl;
+> 	return a + b;
+> }
+> int main(void)
+> {
+> 	dummy(3, 4);
+> 	std::cout << wrapper(dummy, 3, 4) << std::endl;
+> }
+> // g++ test.cpp -pedantic -Wall -Wextra --std=c++14
+> 
+> ```
+>
+> 
+
 #### [A](https://stackoverflow.com/a/25495501)
 
 You can use `decltype` with the C++11 auto trailing return type :
@@ -117,26 +197,28 @@ You can use `decltype` with the C++11 auto trailing return type :
 
 using namespace std;
 
-template<typename FUNCTION, typename... ARGS>
-auto wrapper(FUNCTION&& func, ARGS&&... args) -> decltype(func(std::forward<ARGS>(args)...))
+template<typename FUNCTION, typename ... ARGS>
+auto wrapper(FUNCTION &&func, ARGS &&... args) -> decltype(func(std::forward<ARGS>(args)...))
 {
-    cout << "WRAPPER: BEFORE" << endl;
-    auto res = func(args...);
-    cout << "WRAPPER: AFTER" << endl;
-    return res;
+	cout << "WRAPPER: BEFORE" << endl;
+	auto res = func(args...);
+	cout << "WRAPPER: AFTER" << endl;
+	return res;
 }
 
 int dummy(int a, int b)
 {
-    cout << a << '+' << b << '=' << (a + b) << endl;
-    return a + b;
+	cout << a << '+' << b << '=' << (a + b) << endl;
+	return a + b;
 }
 
 int main(void)
 {
-    dummy(3, 4);
-    cout << "WRAPPERS RES IS: " << wrapper(dummy, 3, 4) << endl;
+	dummy(3, 4);
+	cout << "WRAPPERS RES IS: " << wrapper(dummy, 3, 4) << endl;
 }
+// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
+
 ```
 
 [**Live demo**](http://coliru.stacked-crooked.com/a/de9cc92d8d305070)
@@ -150,22 +232,111 @@ template<typename FUNCTION, typename... ARGS>
 decltype(auto) wrapper(FUNCTION&& func, ARGS&&... args)
 ```
 
+> NOTE: 
+>
+> 1、完整测试程序如下:
+>
+> ```C++
+> #include <iostream>
+> 
+> using namespace std;
+> 
+> template<typename FUNCTION, typename ... ARGS>
+> decltype(auto) wrapper(FUNCTION &&func, ARGS &&... args)
+> {
+> 	cout << "WRAPPER: BEFORE" << endl;
+> 	auto res = func(args...);
+> 	cout << "WRAPPER: AFTER" << endl;
+> 	return res;
+> }
+> 
+> int dummy(int a, int b)
+> {
+> 	cout << a << '+' << b << '=' << (a + b) << endl;
+> 	return a + b;
+> }
+> 
+> int main(void)
+> {
+> 	dummy(3, 4);
+> 	cout << "WRAPPERS RES IS: " << wrapper(dummy, 3, 4) << endl;
+> }
+> // g++ test.cpp -pedantic -Wall -Wextra --std=c++14
+> 
+> 
+> ```
+>
+> 
+
 [**Live demo**](http://coliru.stacked-crooked.com/a/158fd792b0972671)
 
 
 
 ## stackoverflow [how to write a C++ class member function wrapper?](https://stackoverflow.com/questions/48355723/how-to-write-a-c-class-member-function-wrapper)
 
-按照[回答](https://stackoverflow.com/a/48355758)中给出的思路：
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+class A
+{
+public:
+	void connect()
+	{
+	}
+	void close()
+	{
+	}
+	template<typename F, typename ... Args>
+	auto wrapper(F &&f, Args &&... args) -> typename std::result_of<F(Args...)>::type
+	{
+		using return_type = typename std::result_of<F(Args...)>::type;
+		connect();
+		return_type ret = f(args...);
+		close();
+		return ret;
+	}
+	bool c(int a, string b)
+	{
+	}
+	string c(string b)
+	{
+		return b;
+	}
+	bool r(int a, string b)
+	{
+	}
+};
+int main()
+{
+	A a;
+	a.connect();
+	a.c(1, "abc");
+	a.close(); // equal to a.wrapper(a.c, 1, "abc"); but compling error, how to write it correctly?
+	cout << "result of a is: " << a.wrapper(a.c, 1, "abc") ? "successful" : "fail" << endl;
+	cout << "result of another a is: " << a.wrapper(a.c, "abc") << endl;
+	cout << "result of r is:" << a.wrapper(a.r, 1, "abc") << endl;
+}
+// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
+
+
+```
+
+
+
+### [A](https://stackoverflow.com/a/48355758)
+
+
 
 There are two ways to solve this:
 
-1. Use [`std::bind`](http://en.cppreference.com/w/cpp/utility/functional/bind). As in `std::bind(&A::c, a)`
-2. Use a [lambda](http://en.cppreference.com/w/cpp/language/lambda). As in `[&a](int i, std::string const& s) { return a.c(i, s); }`
+1、Use [`std::bind`](http://en.cppreference.com/w/cpp/utility/functional/bind). As in `std::bind(&A::c, a)`
 
-原文中的实现，没有perfect forwarding，下面是结合stackoverflow [c++11: Templated wrapper function](https://stackoverflow.com/questions/25495448/c11-templated-wrapper-function) 中的写法
+2、Use a [lambda](http://en.cppreference.com/w/cpp/language/lambda). As in `[&a](int i, std::string const& s) { return a.c(i, s); }`
 
-### `std::result_of` + `std::forward` + lambda
+> 原文中的实现，没有perfect forwarding，下面是结合stackoverflow [c++11: Templated wrapper function](https://stackoverflow.com/questions/25495448/c11-templated-wrapper-function) 中的写法
+
+#### `std::result_of` + `std::forward` + lambda
 
 ```C++
 #include <iostream>
@@ -229,7 +400,7 @@ int main()
 
 
 
-### `std::result_of` + `std::forward` + `std::bind`
+#### `std::result_of` + `std::forward` + `std::bind`
 
 ```c++
 #include <iostream>
@@ -383,49 +554,3 @@ int main()
 ```
 
 
-
-## Timeit
-
-度量函数的耗时，是各种programming language中的一个任务，本文描述C++中如何来实现这个需求。
-
-参考如下:
-
-- stackoverflow [Measuring execution time of a function in C++](https://stackoverflow.com/questions/22387586/measuring-execution-time-of-a-function-in-c)
-- stackoverflow [How to Calculate Execution Time of a Code Snippet in C++](https://stackoverflow.com/questions/1861294/how-to-calculate-execution-time-of-a-code-snippet-in-c) 
-- https://stackoverflow.com/questions/48355723/how-to-write-a-c-class-member-function-wrapper
-
-file:///E:/github/dengking/programming-language-theory/programming-language/docs/C-family-language/C-and-C++/cppreference/reference/en/cpp/types/result_of.html
-
-https://en.cppreference.com/w/cpp/utility/functional/bind
-
-https://en.cppreference.com/w/cpp/utility/functional/mem_fn
-
-
-
-https://codereview.stackexchange.com/questions/180221/c-member-function-wrapper-for-interfacing-with-c-apis
-
-https://codereview.stackexchange.com/questions/148824/simple-wrapper-for-member-function-pointers-with-known-signature
-
-
-
-
-
-## Generic forwarding function template
-
-在`C++\Language-reference\Basic-concept\Type-system\Type-inference`章节也对这个问题进行了探讨。
-
-需要总结C++在此之上的发展:
-
-C++11: 
-
-1) perfect forwarding
-
-2) `decltype`
-
-3)  *[trailing-return-type](https://en.wikipedia.org/wiki/Trailing-return-type)* 
-
-
-
-C++14:
-
-1) `decltype(auto)`
