@@ -76,4 +76,6 @@ int main()
 
 ### `My-library/Protocol-parsing-library`
 
-使用virtual friend function idiom，overload `<<` operator，能够避免书写大量的重复code。
+1、使用virtual friend function idiom，overload `<<` operator，能够避免书写大量的重复code。
+
+2、使用 "OOP interface +  template implementation" 能够非常灵活。

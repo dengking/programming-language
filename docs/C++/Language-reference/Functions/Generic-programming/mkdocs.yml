@@ -7,3 +7,4 @@ nav:
     - Perfect-forwarding-parameter: Perfect-forwarding-parameter
     # 变参函数
     - Variadic-arguments-function: Variadic-arguments-function
+    - Template-function-signature: Template-function-signature

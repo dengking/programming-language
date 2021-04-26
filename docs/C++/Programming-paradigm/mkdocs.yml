@@ -7,6 +7,6 @@ nav:
     - FP: FP
     # 总结c++中polymorphism的实现
     - Polymorphism: Polymorphism    
-    
+    - Polymorphic-value-concept-based-polymorphism: Polymorphic-value-concept-based-polymorphism
     - Type-erasure-OOP-GP: Type-erasure-OOP-GP
 

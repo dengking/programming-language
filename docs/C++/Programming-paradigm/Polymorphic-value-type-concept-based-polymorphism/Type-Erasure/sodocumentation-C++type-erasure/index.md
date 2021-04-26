@@ -1,5 +1,9 @@
 # sodocumentation [C++Type Erasure](https://sodocumentation.net/cplusplus/topic/2872/type-erasure)
 
+> NOTE: 
+>
+> 1、非常好的一篇文章，对C++ type erasure进行了非常好的总结
+
 ## Introduction
 
 Type erasure is a set of techniques for creating a type that can provide a **uniform interface** to various underlying types, while hiding the underlying type information from the client. `std::function<R(A...)>`, which has the ability to hold callable objects of various types, is perhaps the best known example of type erasure in C++.
@@ -14,7 +18,7 @@ Type erasure is a set of techniques for creating a type that can provide a **uni
 
 > NOTE:
 >
-> 1、glue between GP static polymorphism and OOP dynamic polymorphism
+> 1、polymorphic value type-融合OOP-和-GP的优势
 
 ### Basic mechanism of type erasure
 
@@ -756,6 +760,10 @@ An improvement would be to use a non-member `data` and a non-member `size` in an
 
 ## Type erasing type erasure with `std::any`
 
+> NOTE: 
+>
+> 1、未阅读完成
+
 This example uses C++14 and `boost::any`. In C++17 you can swap in `std::any` instead.
 
 The syntax we end up with is:
@@ -770,3 +778,16 @@ super_any<decltype(print)> a = 7;
 ```
 
 which is almost optimal.
+
+
+
+First we use a tag to pass around types:
+
+```C++
+template<class T>struct tag_t{constexpr tag_t(){};};
+template<class T>constexpr tag_t<T> tag{};
+```
+
+> NOTE: 
+>
+> 1、"constexpr constructor literal type tag for dispatch idiom"

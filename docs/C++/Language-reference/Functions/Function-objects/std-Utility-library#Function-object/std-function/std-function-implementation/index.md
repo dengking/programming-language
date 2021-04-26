@@ -24,7 +24,7 @@ struct task<R(Args...)> {
 
 
 
-## `std::function` is based on type erasure
+## `std::function` is polymorphic value type
 
 `std::function` 是基于 type erasure 实现的，这在 artima [On the Tension Between Object-Oriented and Generic Programming in C++](https://www.artima.com/cppsource/type_erasure.html) 中进行了说明:
 

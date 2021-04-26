@@ -10,15 +10,7 @@ a、sean-parent [Polymorphic Task Template in Ten](https://sean-parent.stlab.cc/
 
 b、sodocumentation [C++Type Erasure](https://sodocumentation.net/cplusplus/topic/2872/type-erasure)
 
-
-
-## groups.google [Safe 'type erasure' without runtime memory allocation](https://groups.google.com/a/isocpp.org/g/std-proposals/c/eWl57Y96_iI)
-
-Generally, the 'type erasure' pattern involves the use of:
-
-\1. boost/std any - which is inefficient because of the need to query the object or it forces use of the visitor pattern which scatters the logic all over the place.
-
-\2. A custom abstract interface - which leads to runtime memory allocation.
+3、Small buffer optimization是一种场景的optimization technique，由于type erasure中，通常涉及dynamic allocation，因此可以使用small buffer optimization来进行优化。
 
 
 
