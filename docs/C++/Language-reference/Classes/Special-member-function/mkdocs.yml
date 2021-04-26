@@ -5,10 +5,10 @@ nav:
     - Destructor: Destructor  
     # 各种operation
     - Copy: Copy
-    - Move: Move
+    - C++11-Move: C++11-Move
     - Swap: Swap
     - Assign: Assign    
-    - Relocate: Relocate
+    - TODO-Relocate: TODO-Relocate
     
     - Copyable-and-movable: Copyable-and-movable
     - User-defined-conversion: User-defined-conversion

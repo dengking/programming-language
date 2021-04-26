@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
+    - User-defined-conversion-function: User-defined-conversion-function
     - Converting-constructor: Converting-constructor
-    - Explicit-specifier: Explicit-specifier
+    - operator-bool-and-safe-bool-problem: operator-bool-and-safe-bool-problem    
+    - C++11-Explicit-specifier: C++11-Explicit-specifier

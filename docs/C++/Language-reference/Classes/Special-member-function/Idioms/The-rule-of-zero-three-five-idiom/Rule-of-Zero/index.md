@@ -155,7 +155,9 @@ In file included from /usr/include/c++/8/memory:80,
 https://stackoverflow.com/questions/44997955/rule-of-zero-confusion
 
 
-https://www.fluentcpp.com/2019/04/23/the-rule-of-zero-zero-constructor-zero-calorie/
+
+
+### fluentcpp [The Rule of Zero in C++](https://www.fluentcpp.com/2019/04/23/the-rule-of-zero-zero-constructor-zero-calorie/)
 
 
 

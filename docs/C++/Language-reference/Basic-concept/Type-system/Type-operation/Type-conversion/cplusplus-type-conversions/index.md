@@ -17,36 +17,36 @@ Here, the value of `a` is promoted(提升) from `short` to `int` without the nee
 
 Converting to `int` from some smaller integer type, or to `double` from float is `known` as **promotion**, and is guaranteed to produce the exact same value in the destination type. Other conversions between **arithmetic types** may not always be able to represent the same value exactly:
 
-- If a **negative integer** value is converted to an **unsigned type**, the resulting value corresponds to its 2's complement bitwise representation (i.e., -1 becomes the largest value representable by the type, -2 the second largest, ...).
+1、If a **negative integer** value is converted to an **unsigned type**, the resulting value corresponds to its 2's complement bitwise representation (i.e., -1 becomes the largest value representable by the type, -2 the second largest, ...).
 
-  > NOTE: 测试程序如下：
-  >
-  > ```c++
-  > #include<iostream>
-  > int main()
-  > {
-  > 	int i = -1;
-  > 	unsigned int j = i;
-  > 	std::cout << j << std::endl;
-  > }
-  > 
-  > ```
-  >
-  > 输出如下：
-  >
-  > ```
-  > 4294967295
-  > ```
+> NOTE: 测试程序如下：
+>
+> ```c++
+> #include<iostream>
+> int main()
+> {
+> 	int i = -1;
+> 	unsigned int j = i;
+> 	std::cout << j << std::endl;
+> }
+> 
+> ```
+>
+> 输出如下：
+>
+> ```
+> 4294967295
+> ```
 
-  
 
-  
 
-- The conversions from/to `bool` consider `false` equivalent to **zero** (for numeric types) and to **null pointer** (for pointer types); `true` is equivalent to all other values and is converted to the equivalent of 1.
 
-- If the conversion is from a **floating-point type** to an **integer type**, the value is truncated (the decimal part is removed). If the result lies outside the range of representable values by the type, the conversion causes **undefined behavior**.
 
-- Otherwise, if the conversion is between numeric types of the same kind (integer-to-integer or floating-to-floating), the conversion is valid, but the value is implementation-specific (and may not be portable).
+2、The conversions from/to `bool` consider `false` equivalent to **zero** (for numeric types) and to **null pointer** (for pointer types); `true` is equivalent to all other values and is converted to the equivalent of 1.
+
+3、If the conversion is from a **floating-point type** to an **integer type**, the value is truncated (the decimal part is removed). If the result lies outside the range of representable values by the type, the conversion causes **undefined behavior**.
+
+4、Otherwise, if the conversion is between numeric types of the same kind (integer-to-integer or floating-to-floating), the conversion is valid, but the value is implementation-specific (and may not be portable).
 
 > NOTE：上面主要描述的是**conversions between arithmetic types**
 

@@ -24,7 +24,18 @@
 
 > As we all know, the First Amendment to the C++ Standard states: "The committee shall make no rule that prevents C++ programmers from shooting themselves in the foot." Speaking less facetiously, when it comes to choosing between giving programmers more control and saving them from their own carelessness, C++ tends to err on the side of giving more control. Being true to that spirit, C++11 allows you to use move semantics not just on rvalues, but, at your discretion, on lvalues as well. A good example is the `std` library function `swap`. As before, let `X` be a class for which we have overloaded the copy constructor and copy assignment operator to achieve move semantics on rvalues.
 
-验证上面这段话所表达的思想的另外一个例子是：[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 
+验证上面这段话所表达的思想的另外的例子是
+
+1、[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 
+
+2、stackoverflow [Conversion function for error checking considered good?](https://stackoverflow.com/questions/6242296/conversion-function-for-error-checking-considered-good) # [A](https://stackoverflow.com/a/6242355)
+
+```c++
+int x = my_object; // does not compile because there's no explicit conversion
+bool y = bool(my_object); // an explicit conversion does the trick
+```
+
+
 
 C++的安全性体现在compiler进行了严格的类型检查，对于不符合规范的program，compiler会给出报错提示。同时C++基于了programmer执行危险操作的权利，不过C++采用的“explicit”的策略，即需要由programmer“explicit”地来执行，而不是由compiler“implicit”地执行。
 

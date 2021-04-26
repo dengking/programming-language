@@ -1,1 +1,0 @@
-## stackoverflow [What is the meaning of “operator bool() const”](https://stackoverflow.com/questions/4600295/what-is-the-meaning-of-operator-bool-const)

@@ -6,6 +6,7 @@ nav:
     - 3.9-Options-for-Debugging-Your-Program-or-GCC: 3.9-Options-for-Debugging-Your-Program-or-GCC
     - 3.8-Options-to-Request-or-Suppress-Warnings: 3.8-Options-to-Request-or-Suppress-Warnings
     - 3.11-Options-That-Control-Optimization: 3.11-Options-That-Control-Optimization
+    - 3.13-Options-Controlling-the-Preprocessor: 3.13-Options-Controlling-the-Preprocessor
     - 3.17-Options-for-Code-Generation-Conventions: 3.17-Options-for-Code-Generation-Conventions
     - Sanitizer: Sanitizer
     - Built-in-Functions: Built-in-Functions

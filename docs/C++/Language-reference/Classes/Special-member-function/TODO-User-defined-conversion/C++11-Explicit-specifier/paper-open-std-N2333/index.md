@@ -1,0 +1,1 @@
+# open-std N2333 [Explicit Conversion Operator](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2333.html)

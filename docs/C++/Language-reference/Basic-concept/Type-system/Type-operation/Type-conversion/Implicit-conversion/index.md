@@ -1,7 +1,8 @@
 # cppreference [Implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_conversion)
 
-> 在阅读本文前，建议先阅读accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/)，在`C++\Language-reference\Functions\Overload-resolution\accu-Overload-Resolution.md`中收录了这篇文章，并对其进行了详细注解。
+> NOTE: 
 >
+> 1、在阅读本文前，建议先阅读accu [Overload Resolution - Selecting the Function](https://accu.org/journals/overload/13/66/kilpelainen_268/)，在`C++\Language-reference\Functions\Overload-resolution\accu-Overload-Resolution`中收录了这篇文章，并对其进行了详细注解。
 
 Implicit conversions are performed whenever an expression of some type `T1` is used in context that does not accept that type, but accepts some other type `T2`; in particular:
 
@@ -101,9 +102,44 @@ An expression `e` is said to be *implicitly convertible to `T2`* if and only if 
 
 In the following contexts, the type `bool` is expected and the **implicit conversion** is performed if the declaration `bool t(e);` is well-formed (that is, an **explicit conversion function** such as `explicit T::operator bool() const;` is considered). Such expression `e` is said to be *contextually converted to bool*.
 
-> NOTE: 关于`bool t(e);`，参见上一段。
+> NOTE: 
+>
+> 一、关于`bool t(e);`，参见上一段。
 >
 > 可以看到，下面描述的这些context，可以看到这些context都是期望`bool`的，我们可以将它们简称为bool context 。
+>
+> 二、这是比较特殊的，在下面文章中，涉及了这个内容
+>
+> stackoverflow [Conversion function for error checking considered good?](https://stackoverflow.com/questions/6242296/conversion-function-for-error-checking-considered-good) # [A](https://stackoverflow.com/a/6242355)
+>
+> In C++11 you can use an explicit conversion:
+>
+> ```cpp
+> explicit operator bool() const
+> {
+>     // verify if valid
+>     return is_valid;
+> }
+> ```
+>
+> This way you need to be explicit about the conversion to bool, so you can no longer do crazy things by accident (in C++ you can always do crazy things on purpose):
+>
+> ```cpp
+> int x = my_object; // does not compile because there's no explicit conversion
+> bool y = bool(my_object); // an explicit conversion does the trick
+> ```
+>
+> This still works as normal in places like `if` and `while` that require a boolean expression, because the condition of those statements is *contextually converted* to bool:
+>
+> ```cpp
+> // this uses the explicit conversion "implicitly"
+> if (my_object)
+> {
+>     ...
+> }
+> ```
+>
+> 三、显然C++这样做，是为了简便、向后兼容
 
 | context                                                      | 注解 |
 | ------------------------------------------------------------ | ---- |
@@ -273,7 +309,7 @@ Such expression `e` is said to be *contextually implicitly converted* to the spe
 
 > NOTE: 参见 `Resource-management\Memory-management\Memory-access\Array` 章节
 
-### Temporary materialization
+### C++17 Temporary materialization
 
 
 
@@ -283,4 +319,14 @@ Such expression `e` is said to be *contextually implicitly converted* to the spe
 
 ## Numeric promotions
 
+### Integral conversions
+
+
+
+### Floating-point conversions
+
+
+
 ## The safe bool problem
+
+> NOTE: 这部分内容放到了 `operator-bool` 章节

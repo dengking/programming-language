@@ -1,8 +1,10 @@
-# How to design C++ programming language?
+# Design  of C++ programming language
+
+
 
 Design of C++涉及的内容非常多，本文将涉及的内容进行梳理，以期作为了解C++ design的guide。
 
-
+## Contract
 
 Programming language norm/standard是一种contract，在进行design的时候：
 
@@ -24,3 +26,6 @@ b、side effect
 
 2、......
 
+## Design philosophy
+
+参见 `C++design-principle-feature-philosophy` 章节

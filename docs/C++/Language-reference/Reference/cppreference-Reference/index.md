@@ -1,22 +1,22 @@
-# Reference 
+# cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
 
-C++的reference是alias。
+> NOTE: 
+>
+> C++的reference是alias。
+>
+> 1) `&`是左值的alias
+>
+> 2) `&&`是右值的alias
+>
+> 它可以：
+>
+> 1) alias to **already-existing** object
+>
+> 2) alias to **already-existing** function
+>
+> 关于alias，参见`C++\Language-reference\Alias`。
 
-1) `&`是左值的alias
-
-2) `&&`是右值的alias
-
-它可以：
-
-1) alias to **already-existing** object
-
-2) alias to **already-existing** function
-
-关于alias，参见`C++\Language-reference\Alias`。
-
-## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
-
-### Syntax
+## Syntax
 
 **Reference types** cannot be [cv-qualified](https://en.cppreference.com/w/cpp/language/cv) at the top level; there is no syntax for that in declaration, and if a qualification is added to a typedef-name or [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) specifier, or type template parameter, it is ignored.
 
@@ -45,17 +45,17 @@ int& &r;   // error: **references** to references
 
 
 
-### Reference collapsing
+## Reference collapsing
 
 > NOTE: 支持reference collapsing的目的是什么？支持perfect forward，后面章节中会进行介绍
 
 
 
-### Lvalue references
+## Lvalue references
 
 
 
-#### Reference to `const`
+### Reference to `const`
 
 ```C++
 #include <iostream>
@@ -74,7 +74,7 @@ int main() {
 
 
 
-#### Pass-by-reference semantics
+### Pass-by-reference semantics
 
 
 
@@ -95,11 +95,11 @@ int main() {
 
 
 
-### Rvalue references (since C++11)
+## Rvalue references (since C++11)
 
 
 
-#### Rvalue references  VS lvalue references to `const` 
+### Rvalue references  VS lvalue references to `const` 
 
 Rvalue references can be used to [extend the lifetimes](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) of temporary objects (note, lvalue references to `const` can extend the lifetimes of temporary objects too, but they are not modifiable through them):
 
@@ -132,7 +132,7 @@ int main() {
 
 
 
-#### Rvalue reference variables
+### Rvalue reference variables
 
 
 
@@ -180,7 +180,7 @@ void f(int&& x)
 
 我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
 
-#### Rvalue references bind to xvalues
+### Rvalue references bind to xvalues
 
 Because rvalue references can bind to **xvalues**, they can refer to **non-temporary objects**:
 
@@ -236,7 +236,7 @@ A& operator=(A&& other) {
 
 
 
-#### Rvalue reference and lvalue reference overloads
+### Rvalue reference and lvalue reference overloads
 
 More importantly, when a function has both **rvalue reference** and **lvalue reference** [overloads](https://en.cppreference.com/w/cpp/language/overload_resolution), the rvalue reference overload binds to **rvalues** (including both **prvalues** and **xvalues**), while the lvalue reference overload binds to **lvalues**.
 
@@ -296,11 +296,11 @@ This allows [move constructors](https://en.cppreference.com/w/cpp/language/move_
 
 
 
-### Forwarding references (since C++11)
+## Forwarding references (since C++11)
 
 **Forwarding references** are a special kind of references that preserve the value category of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). Forwarding references are either:
 
-#### 1)
+### 1)
 
 1) function parameter of a function template declared as **rvalue reference** to **cv-unqualified** [type template parameter](https://en.cppreference.com/w/cpp/language/template_parameters) of that same function template:
 
@@ -356,7 +356,7 @@ template<class T> struct A {
 };
 ```
 
-#### 2)
+### 2)
 
 2) `auto&&` except when deduced from a brace-enclosed initializer list:
 
@@ -405,7 +405,7 @@ See also [template argument deduction](https://en.cppreference.com/w/cpp/languag
 
 
 
-### Rvalue reference VS forwarding reference
+## Rvalue reference VS forwarding reference
 
 [cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes):
 
@@ -420,7 +420,7 @@ See also [template argument deduction](https://en.cppreference.com/w/cpp/languag
 
 
 
-### Dangling references
+## Dangling references
 
 > NOTE: 关于 [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) ，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration`章节。
 
@@ -445,7 +445,7 @@ const X&&                           yes      yes
 
 上述表格总结得非常好，基本上涵盖了reference、value category and const的所有可能的组合，下面结合具体的例子来对它进行仔细的说明:
 
-### 1) `const X&`  to lvalue
+## 1) `const X&`  to lvalue
 
 来源: csdn [【C++数据类型】const 引用的几点用法](https://blog.csdn.net/hyman_c/article/details/52700094)
 
@@ -503,11 +503,11 @@ int main()
 
 ```
 
-### 2) `const X&` to const lvalue
+## 2) `const X&` to const lvalue
 
 关于此的一个典型的例子就是在const-qualified member function中，所有的member data都是const-qualified的，如果想要reference，必须要使用`const X&` ，在`C++\Language-reference\Classes\Members\Non-static-member\Function-member`中给出了典型的例子。
 
-### 3) `const X&`  to rvalue
+## 3) `const X&`  to rvalue
 
 下面是一个小例子: 
 

@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - Safe-Bool-idiom: Safe-Bool-idiom

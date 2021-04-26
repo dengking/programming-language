@@ -1,104 +1,12 @@
-# explicit specifier
+# C++11 explicit specifier
 
-1、`explicit`供programmer对conversion进行控制，它体现了C++的灵活性。
+## What's new in C++
 
-2、使用场景: 
+1、C++11 explicit specifier的引入主要是为了解决"safe bool problem"的，这在 `operator-bool-and-safe-bool-problem` 章节中进行了讨论
 
-a、explicit constructor
-
-b、user-defined conversion function
-
-## cppreference [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
-
-|                                         |      |      |
-| --------------------------------------- | ---- | ---- |
-| `explicit`                              | 1)   |      |
-| `explicit ( expression )` (since C++20) | 2)   |      |
-
-1) Specifies that 
-
-1、constructor 
-
-2、conversion function (since C++11) 
-
-3、[deduction guide](https://en.cppreference.com/w/cpp/language/ctad) (since C++17)
-
-that is, it cannot be used for [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast) and [copy-initialization](https://en.cppreference.com/w/cpp/language/copy_initialization).
-
-2)
-
-> NOTE: TODO
-
-### Example
-
-```C++
-#include <iostream>
-
-struct A
-{
-	A(int)
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}      // converting constructor
-	A(int, int)
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	} // converting constructor (C++11)
-	operator bool() const
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return true;
-	}
-};
-
-struct B
-{
-	explicit B(int)
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
-	explicit B(int, int)
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
-	explicit operator bool() const
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return true;
-	}
-};
-
-int main()
-{
-	A a1 = 1;      // OK: copy-initialization selects A::A(int)
-	A a2(2);       // OK: direct-initialization selects A::A(int)
-	A a3 { 4, 5 };   // OK: direct-list-initialization selects A::A(int, int)
-	A a4 = { 4, 5 }; // OK: copy-list-initialization selects A::A(int, int)
-	A a5 = (A) 1;   // OK: explicit cast performs static_cast
-	if (a1)
-		;      // OK: A::operator bool()
-	bool na1 = a1; // OK: copy-initialization selects A::operator bool()
-	bool na2 = static_cast<bool>(a1); // OK: static_cast performs direct-initialization
-
-//  B b1 = 1;      // error: copy-initialization does not consider B::B(int)
-	B b2(2);       // OK: direct-initialization selects B::B(int)
-	B b3 { 4, 5 };   // OK: direct-list-initialization selects B::B(int, int)
-//  B b4 = {4, 5}; // error: copy-list-initialization does not consider B::B(int,int)
-	B b5 = (B) 1;   // OK: explicit cast performs static_cast
-	if (b2)
-		;      // OK: B::operator bool()
-//  bool nb1 = b2; // error: copy-initialization does not consider B::operator bool()
-	bool nb2 = static_cast<bool>(b2); // OK: static_cast performs direct-initialization
-}
-// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
-
-```
+2、C++11 explicit specifier的引入给予了programmer对implicit、explicit type conversion的控制，它体现了C++的灵活性。
 
 
-
-## Purpose of `explicit` 
-
-参考：
 
 ### stackoverflow [What does the explicit keyword mean?](https://stackoverflow.com/questions/121162/what-does-the-explicit-keyword-mean)
 
@@ -203,7 +111,7 @@ int main()
 > ```c++
 > test.cpp: 在函数‘int main()’中:
 > test.cpp:28:15: 错误：从初始化列表转换为‘Foo’将使用显式构造函数‘Foo::Foo(int)’
->   DoBar( { 42 });
+> DoBar( { 42 });
 > ```
 
 ```c++
@@ -316,22 +224,122 @@ int main()
 > ```C++
 > test.cpp: In constructor 'String::String(int)':
 > test.cpp:5:22: warning: unused parameter 'n' [-Wunused-parameter]
->   explicit String(int n) // allocate n bytes to the String object
->                   ~~~~^
+> explicit String(int n) // allocate n bytes to the String object
+>                ~~~~^
 > test.cpp: In constructor 'String::String(const char*)':
 > test.cpp:10:21: warning: unused parameter 'p' [-Wunused-parameter]
->   String(const char *p) // initializes object with char *p
->          ~~~~~~~~~~~~^
+> String(const char *p) // initializes object with char *p
+>       ~~~~~~~~~~~~^
 > test.cpp: In function 'int main()':
 > test.cpp:18:20: error: invalid conversion from 'char' to 'const char*' [-fpermissive]
->   String mystring = 'x';
->                     ^~~
+> String mystring = 'x';
+>                  ^~~
 > test.cpp:10:21: note:   initializing argument 1 of 'String::String(const char*)'
->   String(const char *p) // initializes object with char *p
+> String(const char *p) // initializes object with char *p
 > 
 > ```
 >
 > 2、从上述编译报错中可以看到，此时compiler没有选择`String(int n)`
+
+
+
+## 使用场景
+
+1、 `explicit`主要由于对user-defined conversion的implicit、explicit 进行控制，它主要用于: 
+
+a、explicit constructor
+
+b、user-defined conversion function
+
+2、C++17 deduction guide
+
+## cppreference [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
+
+|                                         |      |      |
+| --------------------------------------- | ---- | ---- |
+| `explicit`                              | 1)   |      |
+| `explicit ( expression )` (since C++20) | 2)   |      |
+
+1) Specifies that 
+
+1、constructor 
+
+2、conversion function (since C++11) 
+
+3、[deduction guide](https://en.cppreference.com/w/cpp/language/ctad) (since C++17)
+
+that is, it cannot be used for [implicit conversions](https://en.cppreference.com/w/cpp/language/implicit_cast) and [copy-initialization](https://en.cppreference.com/w/cpp/language/copy_initialization).
+
+2)
+
+> NOTE: TODO
+
+### Example
+
+```C++
+#include <iostream>
+
+struct A
+{
+	A(int)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}      // converting constructor
+	A(int, int)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	} // converting constructor (C++11)
+	operator bool() const
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		return true;
+	}
+};
+
+struct B
+{
+	explicit B(int)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	explicit B(int, int)
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	explicit operator bool() const
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		return true;
+	}
+};
+
+int main()
+{
+	A a1 = 1;      // OK: copy-initialization selects A::A(int)
+	A a2(2);       // OK: direct-initialization selects A::A(int)
+	A a3 { 4, 5 };   // OK: direct-list-initialization selects A::A(int, int)
+	A a4 = { 4, 5 }; // OK: copy-list-initialization selects A::A(int, int)
+	A a5 = (A) 1;   // OK: explicit cast performs static_cast
+	if (a1)
+		;      // OK: A::operator bool()
+	bool na1 = a1; // OK: copy-initialization selects A::operator bool()
+	bool na2 = static_cast<bool>(a1); // OK: static_cast performs direct-initialization
+
+//  B b1 = 1;      // error: copy-initialization does not consider B::B(int)
+	B b2(2);       // OK: direct-initialization selects B::B(int)
+	B b3 { 4, 5 };   // OK: direct-list-initialization selects B::B(int, int)
+//  B b4 = {4, 5}; // error: copy-list-initialization does not consider B::B(int,int)
+	B b5 = (B) 1;   // OK: explicit cast performs static_cast
+	if (b2)
+		;      // OK: B::operator bool()
+//  bool nb1 = b2; // error: copy-initialization does not consider B::operator bool()
+	bool nb2 = static_cast<bool>(b2); // OK: static_cast performs direct-initialization
+}
+// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
+
+```
+
+
 
 ## Example
 
