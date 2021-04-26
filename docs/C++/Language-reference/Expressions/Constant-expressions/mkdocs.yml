@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - Constant: Constant.md
     - Constant-expressions: Constant-expressions.md
-    - constexpr: constexpr
+    - C++11-constexpr: C++11-constexpr
