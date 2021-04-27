@@ -1,0 +1,1 @@
+# stackoverflow [Should I use an exception specifier in C++?](https://stackoverflow.com/questions/88573/should-i-use-an-exception-specifier-in-c)

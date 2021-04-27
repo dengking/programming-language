@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+
     - Syntax-ambiguity: Syntax-ambiguity
     - Data-dependency: Data-dependency
     - TODO-Program-order-and-memory-order: TODO-Program-order-and-memory-order

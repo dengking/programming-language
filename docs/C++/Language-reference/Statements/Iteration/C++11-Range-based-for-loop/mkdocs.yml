@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - stackoverflow-make-custom-type-work-with-range-based-for-loops: stackoverflow-make-custom-type-work-with-range-based-for-loops
+    - TODO-nextptr-How-C++range-based-for-loop-works: TODO-nextptr-How-C++range-based-for-loop-works

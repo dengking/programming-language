@@ -138,3 +138,7 @@ public:
 如果实在要使用virtual assignment operator，那如何实现呢？本节讨论这个。
 
 在 stackoverflow [What is object slicing?](https://stackoverflow.com/questions/274626/what-is-object-slicing) # [A](https://stackoverflow.com/a/14461532) 中，给出了virtual assignment operator的实现，这篇文章收录在了`Object-slicing` 章节。
+
+
+
+## TODO root.cer [When to use virtual assignment](https://root.cern.ch/TaligentDocs/TaligentOnline/DocumentRoot/1.0/Docs/books/WM/WM_136.html)

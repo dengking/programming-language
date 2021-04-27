@@ -1,0 +1,1 @@
+# nextptr [How C++ range-based for loop works](https://www.nextptr.com/tutorial/ta1208652092/how-cplusplus-rangebased-for-loop-works)

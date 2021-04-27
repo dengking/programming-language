@@ -129,3 +129,9 @@ The destructor for class `T` is trivial if all of the following is true:
 4、All non-static data members of class type (or array of class type) have trivial destructors
 
 A trivial destructor is a destructor that performs no action. Objects with trivial destructors don't require a delete-expression and may be disposed of by simply deallocating their storage. All data types compatible with the C language (POD types) are trivially destructible.
+
+
+
+## TODO
+
+### howtobuildsoftware [What is a trivial function?](https://www.howtobuildsoftware.com/index.php/how-do/2pm/c-language-lawyer-c-14-what-is-a-trivial-function)

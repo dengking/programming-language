@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Primer: Primer.md
     - GoogleMock: GoogleMock
+    - google-test-code-coverage: google-test-code-coverage

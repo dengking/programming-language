@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Allocation-and-deallocation: Allocation-and-deallocation
+    - Dynamic-allocation: Dynamic-allocation
     - Memory-access: Memory-access
     - Pointer-and-array: Pointer-and-array
     - GC: GC

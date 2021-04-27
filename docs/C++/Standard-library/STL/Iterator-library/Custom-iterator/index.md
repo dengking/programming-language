@@ -22,4 +22,9 @@
 
 2、https://www.boost.org/doc/libs/master/boost/beast/core/span.hpp
 
-3、[How is end() implemented in STL containers?](https://stackoverflow.com/questions/3810312/how-is-end-implemented-in-stl-containers)
+3、stackoverflow [How is end() implemented in STL containers?](https://stackoverflow.com/questions/3810312/how-is-end-implemented-in-stl-containers)
+
+4、stackoverflow [How can an implementation guarantee that copy constructor of an iterator is no throw?](https://stackoverflow.com/questions/13428851/how-can-an-implementation-guarantee-that-copy-constructor-of-an-iterator-is-no-t)
+
+stackoverflow [Implementing an iterator copy constructor](https://stackoverflow.com/questions/28460759/implementing-an-iterator-copy-constructor)
+
