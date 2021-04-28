@@ -50,7 +50,11 @@ string c(some_function_returning_a_string());   // Line 3
 
 Now comes the key insight into **move semantics**. Note that only in the **first line** where we copy `x` is this **deep copy** really necessary, because we might want to **inspect** `x` later and would be very surprised if `x` had changed somehow. Did you notice how I just said `x` three times (four times if you include this sentence) and meant the *exact same object* every time? We call expressions such as `x` "**lvalues**".
 
-> NOTE: 您是否注意到我刚刚说了三次x（如果包含这个句子则是四次）并且每次都表示完全相同的对象，lvalues的特性就是has identity
+> NOTE: 
+>
+> 1、您是否注意到我刚刚说了三次x（如果包含这个句子则是四次）并且每次都表示完全相同的对象，lvalues的特性就是has identity
+>
+> 2、对于lvalue，需要deep copy
 
 The arguments in lines 2 and 3 are not **lvalues**, but **rvalues**, because the underlying `string` objects have no names, so the client has no way to **inspect** them again at a later point in time. **rvalues** denote **temporary objects** which are destroyed at the next semicolon (to be more precise: at the end of the full-expression that lexically contains the rvalue). This is important because during the initialization of `b` and `c`, we could do whatever we wanted with the source string, and *the client couldn't tell a difference*!
 
@@ -60,7 +64,7 @@ The arguments in lines 2 and 3 are not **lvalues**, but **rvalues**, because the
 >
 > 答：at the end of the full-expression that lexically contains the rvalue
 
-
+### "**rvalue reference**"
 
 
 C++0x introduces a new mechanism called "**rvalue reference**" which, among other things, allows us to detect **rvalue** arguments via function overloading. All we have to do is write a constructor with an **rvalue reference** parameter. Inside that constructor we can do *anything we want* with the source, as long as we leave it in *some* valid state:
@@ -77,7 +81,13 @@ C++0x introduces a new mechanism called "**rvalue reference**" which, among othe
 
 What have we done here? Instead of **deeply copying** the heap data, we have just copied the pointer and then set the original pointer to null. In effect, we have "stolen" the data that originally belonged to the source string. Again, **the key insight is that under no circumstance could the client detect that the source had been modified**. Since we don't really do a copy here, we call this constructor a "move constructor". Its job is to move resources from one object to another instead of copying them.
 
-> NOTE: 这里将set original pointer to nullptr是非常重要的， 因为最终that是会被析构掉的，如果不将`thar.data`设置为null，那么在destruct that的时候，就会release已经由当前接管的`data`，We avoid this by setting it to null, as deleting null is a no-operation.
+> NOTE: 
+>
+> 1、这里将set original pointer to nullptr是非常重要的， 因为最终that是会被析构掉的，如果不将`thar.data`设置为null，那么在destruct that的时候，就会release已经由当前接管的`data`，We avoid this by setting it to null, as deleting null is a no-operation.
+>
+> 这就是 CppCoreGuidelines [C.64: A move operation should move and leave its source in a valid state](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c64-a-move-operation-should-move-and-leave-its-source-in-a-valid-state) 
+
+### Copy and swap idiom **assignment operator**
 
 Congratulations, you now understand the basics of move semantics! Let's continue by implementing the **assignment operator**. If you're unfamiliar with the [copy and swap idiom](https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom), learn it and come back, because it's an awesome C++ idiom related to exception safety.
 
@@ -97,6 +107,8 @@ Note that we pass the parameter `that` *by value*, so `that` has to be **initial
 So if you say `a = b`, the *copy constructor* will initialize `that` (because the expression `b` is an lvalue), and the **assignment operator** swaps the contents with a freshly created, deep copy. That is the very definition of the **copy and swap idiom** -- make a copy, swap the contents with the copy, and then get rid of the copy by leaving the scope. Nothing new here.
 
 But if you say `a = x + y`, the *move constructor* will initialize `that` (because the expression `x + y`is an **rvalue**), so there is no deep copy involved, only an efficient move. `that` is still an independent object from the argument, but its construction was trivial, since the **heap data** didn't have to be copied, just moved. It wasn't necessary to copy it because `x + y` is an **rvalue**, and again, it is okay to move from string objects denoted by rvalues.
+
+### **copy constructor** VS  **move constructor**
 
 To summarize, the **copy constructor** makes a deep copy, because the source must remain untouched(程序不能touch lvalue params). The **move constructor**, on the other hand, can just copy the pointer and then set the pointer in the source to null. It is okay to "**nullify**" the source object in this manner, because the client has no way of inspecting the object again.
 
@@ -207,6 +219,10 @@ Stephan T. Lavavej took the time provide valuable feedback. Thank you very much,
 ### Introduction
 
 **Move semantics** allows an object, under certain conditions, to take ownership of some other object's **external resources**. This is important in two ways:
+
+> NOTE: 
+>
+> 1、move transfer ownership
 
 #### Turning expensive copies into cheap moves
 
@@ -347,7 +363,9 @@ Note that the letters `l` and `r` have a historic origin in the left-hand side a
 
 We now understand that moving from **lvalues** is potentially dangerous, but moving from **rvalues** is harmless. If `C++` had language support to distinguish **lvalue** arguments from **rvalue** arguments, we could either completely forbid moving from **lvalues**, or at least make moving from lvalues *explicit* at call site, so that we no longer move by accident.
 
-> NOTE: 对于dangerous的事情，要么 完全 禁止，要求 explicit；
+> NOTE: 
+>
+> 1、对于dangerous的事情，要么 完全 禁止，要求 explicit；显然C++选择了后者，这体现了C++的灵活、自由，但是"prevents C++ programmers from shooting themselves in the foot"
 
 `C++11`'s answer to this problem is ***rvalue references***. An **rvalue reference** is a new kind of **reference** that only binds to **rvalues**, and the syntax is `X&&`. The good old reference `X&` is now known as an ***lvalue reference***. (Note that `X&&` is *not* a reference to a reference; there is no such thing in C++.)
 
@@ -620,9 +638,17 @@ Note that after the third line, `a` no longer owns a triangle. That's okay, beca
 
 Note that even though `std::move(a)` is an rvalue, its evaluation does *not* create a temporary object. This conundrum(难题) forced the committee to introduce a third **value category**. Something that can be bound to an **rvalue reference**, even though it is not an rvalue in the traditional sense, is called an *xvalue* (eXpiring value). The traditional rvalues were renamed to *prvalues* (Pure rvalues).
 
-> NOTE: eXpiring 的 含义是 “到期”，“eXpiring value”即“将亡值”。
-
-> NOTE: 也就是在这一段前面所讲的内容中的rvalue其实是**prvalues**
+> NOTE: 
+>
+> 1、eXpiring 的 含义是 “到期”，“eXpiring value”即“将亡值”。
+>
+> 2、这一段前面所讲的内容中的rvalue其实是**prvalues**
+>
+> 3、
+>
+> rvalue reference可以bind to rvalues(xvalue-prvalue)
+>
+> lvalue reference可以bind to glvalues(lvalue-xvalue)
 
 Both **prvalues** and **xvalues** are **rvalues**. Xvalues and lvalues are both *glvalues* (Generalized lvalues). The relationships are easier to grasp with a diagram:
 
@@ -769,7 +795,11 @@ X& X::operator=(X source)    // unified assignment operator
 
 This way, the number of special member functions to implement drops from five to four. There is a tradeoff between exception-safety and efficiency here, but I am not an expert on this issue.
 
-> NOTE: 上述是copy-and-swap idiom
+> NOTE: 
+>
+> 1、上述是copy-and-swap idiom
+>
+> 2、unified assignment operator是有利也有弊的，参见 `TODO-Unified-assignment-operator` 章节
 
 ### Forwarding references ([previously](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4164.pdf) known as *Universal references*)
 

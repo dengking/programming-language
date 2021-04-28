@@ -103,7 +103,17 @@ This means that due to the virtual table, you're able to have polymorphism at ru
 
 virtual table其实就是一个dispatch table
 
+### wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
 
+> 如下总结，我觉得描述地非常好: 
+
+[Object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language) offer subtype polymorphism using *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* (also known as *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)*). In typical implementations, each class contains what is called a *[virtual table](https://en.wikipedia.org/wiki/Virtual_table)*—a table of functions that implement the polymorphic part of the class interface—and each object contains a pointer to the "vtable" of its class, which is then consulted whenever a polymorphic method is called. This mechanism is an example of:
+
+1、*[late binding](https://en.wikipedia.org/wiki/Late_binding)*, because virtual function calls are not bound until the time of invocation;
+
+2、*[single dispatch](https://en.wikipedia.org/wiki/Single_dispatch)* (i.e. single-argument polymorphism), because virtual function calls are bound simply by looking through the vtable provided by the first argument (the `this` object), so the runtime types of the other arguments are completely irrelevant.
+
+> NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
 
 ### stackoverflow [What is vtable in C++ [duplicate]](https://stackoverflow.com/questions/3554909/what-is-vtable-in-c)
 
@@ -127,7 +137,20 @@ For all it's worth, it is not a standard C++ terminology. It is just an implemen
 
 
 
+### stackoverflow [Type erasure techniques](https://stackoverflow.com/questions/5450159/type-erasure-techniques) # [A](https://stackoverflow.com/a/6044720) 
 
+The "different" methods simply differ in the way they add semantic sugar. Virtual functions, e.g., are just semantic sugar for
+
+```cpp
+struct Class {
+    struct vtable {
+        void (*dtor)(Class*);
+        void (*func)(Class*,double);
+    } * vtbl
+};
+```
+
+iow: function pointers.
 
 ## 当前，virtual table是compile time生成的
 
@@ -186,26 +209,6 @@ most derived class
 
 
 在文章artima ["Pure Virtual Function Called": An Explanation](https://www.artima.com/cppsource/pure_virtual.html)中对此进行了解释。
-
-
-
-
-
-### draft3
-
-在wikipedia [Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))中有如下总结，我觉得描述地非常好: 
-
-[Object-oriented programming languages](https://en.wikipedia.org/wiki/Object-oriented_programming_language) offer subtype polymorphism using *[subclassing](https://en.wikipedia.org/wiki/Subclass_(computer_science))* (also known as *[inheritance](https://en.wikipedia.org/wiki/Inheritance_in_object-oriented_programming)*). In typical implementations, each class contains what is called a *[virtual table](https://en.wikipedia.org/wiki/Virtual_table)*—a table of functions that implement the polymorphic part of the class interface—and each object contains a pointer to the "vtable" of its class, which is then consulted whenever a polymorphic method is called. This mechanism is an example of:
-
-1、*[late binding](https://en.wikipedia.org/wiki/Late_binding)*, because virtual function calls are not bound until the time of invocation;
-
-2、*[single dispatch](https://en.wikipedia.org/wiki/Single_dispatch)* (i.e. single-argument polymorphism), because virtual function calls are bound simply by looking through the vtable provided by the first argument (the `this` object), so the runtime types of the other arguments are completely irrelevant.
-
-> NOTE: 这一段从实现层面详细描述了C++仅仅支持single dispatch的原因。
-
-
-
-
 
 
 

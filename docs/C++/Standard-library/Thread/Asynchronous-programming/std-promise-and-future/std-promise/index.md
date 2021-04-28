@@ -6,6 +6,14 @@
 
 The class template `std::promise` provides a facility to store a **value** or an **exception** that is later acquired asynchronously via a [std::future](https://en.cppreference.com/w/cpp/thread/future) object created by the `std::promise` object. Note that the `std::promise` object is meant to be used only once.
 
+> NOTE: 
+>
+> 一、"the `std::promise` object is meant to be used only once"是它的一个特点，或者是弱点，如果重复`set_value`，它就会throw exception的，因此这在需要重复`set_value`的时候:
+>
+> 1、不能使用`std::promise`
+>
+> 2、每次重新建立future-promise channel
+
 Each promise is associated with a *shared state*, which contains some state information and a *result* which may be not yet evaluated, evaluated to a value (possibly void) or evaluated to an exception. A promise may do three things with the **shared state**:
 
 1 *make ready*: the promise stores the result or the exception in the **shared state**. Marks the state ready and unblocks any thread waiting on a future associated with the shared state.

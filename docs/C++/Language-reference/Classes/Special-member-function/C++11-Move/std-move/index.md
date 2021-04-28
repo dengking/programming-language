@@ -73,15 +73,29 @@ cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language
 
 rvalue reference的syntax是`&&`。
 
-## C++ `std::move` does not **move** 
+## C++ `std::move` does not **move** but enable move
 
-bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)：
+1、bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)：
 
 > C++ `std::move` does not **move** and `std::forward` does not **forward**. 
 
+stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) # [part two](https://stackoverflow.com/a/11540204) # Moving from lvalues
+
+> Sometimes, we want to move from **lvalues**. That is, sometimes we want the compiler to treat an **lvalue** as if it were an **rvalue**, so it can invoke the **move constructor**, even though it could be potentially unsafe. For this purpose, `C++11` offers a standard library function template called `std::move` inside the header `<utility>`. This name is a bit unfortunate, because `std::move` simply casts an **lvalue** to an **rvalue**; it does *not* move anything by itself. It merely *enables* moving. Maybe it should have been named `std::cast_to_rvalue` or `std::enable_move`, but we are stuck with the name by now.
+
+## Value category of `std::move`
+
+stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) # [part two](https://stackoverflow.com/a/11540204) # Xvalues
+
+> Note that even though `std::move(a)` is an rvalue, its evaluation does *not* create a temporary object. This conundrum(难题) forced the committee to introduce a third **value category**. Something that can be bound to an **rvalue reference**, even though it is not an rvalue in the traditional sense, is called an *xvalue* (eXpiring value). The traditional rvalues were renamed to *prvalues* (Pure rvalues).
+>
+> > NOTE: eXpiring 的 含义是 “到期”，“eXpiring value”即“将亡值”。
+
+## TODO
 
 
-## [What is std::move(), and when should it be used?](https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used)
+
+stackoverflow [What is std::move(), and when should it be used?](https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used)
 
 
 

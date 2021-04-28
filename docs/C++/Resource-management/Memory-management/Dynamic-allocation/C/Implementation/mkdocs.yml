@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-
-    - jemalloc: jemalloc
-    - tcmalloc: tcmalloc
-    - Boundary-tag: Boundary-tag    

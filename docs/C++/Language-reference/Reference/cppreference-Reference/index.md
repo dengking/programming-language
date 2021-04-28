@@ -1,20 +1,70 @@
 # cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
 
+## C++的reference是alias
+
+关于alias，参见`C++\Language-reference\Alias`。
+
+### Reference and value category
+
+C++的reference是alias。
+
+1) `&`是左值(glvalues)的alias
+
+2) `&&`是右值(rvalues)的alias
+
+
+
+#### 参考一
+
+**stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) # [part two](https://stackoverflow.com/a/11540204) # Xvalues**
+
+
+
+Note that even though `std::move(a)` is an rvalue, its evaluation does *not* create a temporary object. This conundrum(难题) forced the committee to introduce a third **value category**. Something that can be bound to an **rvalue reference**, even though it is not an rvalue in the traditional sense, is called an *xvalue* (eXpiring value). The traditional rvalues were renamed to *prvalues* (Pure rvalues).
+
 > NOTE: 
 >
-> C++的reference是alias。
+> 1、eXpiring 的 含义是 “到期”，“eXpiring value”即“将亡值”。
 >
-> 1) `&`是左值的alias
+> 2、这一段前面所讲的内容中的rvalue其实是**prvalues**
 >
-> 2) `&&`是右值的alias
+> 3、
 >
-> 它可以：
+> rvalue reference可以bind to rvalues(xvalue-prvalue)
 >
-> 1) alias to **already-existing** object
->
-> 2) alias to **already-existing** function
->
-> 关于alias，参见`C++\Language-reference\Alias`。
+> lvalue reference可以bind to glvalues(lvalue-xvalue)
+
+Both **prvalues** and **xvalues** are **rvalues**. Xvalues and lvalues are both *glvalues* (Generalized lvalues). The relationships are easier to grasp with a diagram:
+
+```cpp
+        expressions
+          /     \
+         /       \
+        /         \
+    glvalues   rvalues
+      /  \       /  \
+     /    \     /    \
+    /      \   /      \
+lvalues   xvalues   prvalues
+```
+
+Note that only xvalues are really new; the rest is just due to renaming and grouping.
+
+> C++98 rvalues are known as prvalues in C++11. Mentally replace all occurrences of "rvalue" in the preceding paragraphs with "prvalue".
+
+
+
+#### 参考二
+
+`paper-stroustrup-“New”-Value-Terminology` 
+
+### Function and object
+
+1) alias to **already-existing** object
+
+2) alias to **already-existing** function
+
+
 
 ## Syntax
 
@@ -165,20 +215,28 @@ int main()
 // g++ --std=c++11 test.cpp
 ```
 
-上述例子告诉我们：
+> NOTE:
+>
+> 1、上述例子告诉我们：
+>
+> "rvalue reference variables are **lvalues** when used in expressions"
+>
+> 也就是说：rvalue reference variables is lvalue；所以，对于入参类型为rvalue reference的function的argument，它的argument就是典型的rvalue reference variables，也就是说function body中，argument为lvalue。比如在下面例子中，`x`是lvalue：
+>
+> ```C++
+> void f(int&& x)
+> {
+> 	std::cout << "rvalue reference overload f(" << x << ")\n";
+> }
+> ```
+>
+> 
+>
+> 我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
 
-"rvalue reference variables are **lvalues** when used in expressions"
 
-也就是说：rvalue reference variables is lvalue；所以，对于入参类型为rvalue reference的function的argument，它的argument就是典型的rvalue reference variables，也就是说function body中，argument为lvalue。比如在下面例子中，`x`是lvalue：
 
-```c++
-void f(int&& x)
-{
-	std::cout << "rvalue reference overload f(" << x << ")\n";
-}
-```
 
-我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
 
 ### Rvalue references bind to xvalues
 
