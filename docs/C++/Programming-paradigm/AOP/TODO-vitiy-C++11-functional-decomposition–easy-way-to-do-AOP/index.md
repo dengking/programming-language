@@ -1,5 +1,3 @@
-
-
 # vitiy [C++11 functional decomposition – easy way to do AOP](http://vitiy.info/c11-functional-decomposition-easy-way-to-do-aop/)
 
 This post is about making **functional decomposition** from perspective of [Aspect Oriented Programming](http://en.wikipedia.org/wiki/Aspect-oriented_programming) using C++11.

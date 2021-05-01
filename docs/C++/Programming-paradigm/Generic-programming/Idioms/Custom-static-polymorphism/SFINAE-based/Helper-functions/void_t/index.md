@@ -19,6 +19,8 @@ Utility metafunction that maps a sequence of any types to the type `void`.
 
 ### Example
 
+#### Example1
+
 ```C++
 #include <iostream>
 #include <type_traits>
@@ -72,7 +74,9 @@ int main()
 
 ```
 
-> NOTE: 输出如下:
+> NOTE: 
+>
+> 1、输出如下:
 >
 > ```C++
 > true
@@ -84,6 +88,33 @@ int main()
 > ```
 >
 > 关于上述程序中`decltype`、`std::declval`的分析，参见`C++\Language-reference\Basic-concept\Type-system\Type-inference\decltype`章节。
+>
+> 2、上述code是为了detect type `T`是否有method `begin`、method `end`，由于没有object，只有type，所以需要使用`std::declva(T)()`。
+
+
+
+#### Example2
+
+
+
+```C++
+// primary template handles types that do not support pre-increment:
+template< class, class = void >
+struct has_pre_increment_member : std::false_type { };
+// specialization recognizes types that do support pre-increment:
+template< class T >
+struct has_pre_increment_member<T,
+           std::void_t<decltype( ++std::declval<T&>() )>
+       > : std::true_type { };
+```
+
+
+
+
+
+
+
+
 
 ## Application
 

@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - std-invoke: std-invoke
+    - C++17-std-invoke: C++17-std-invoke
+    - C++17-std-apply: C++17-std-apply

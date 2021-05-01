@@ -16,7 +16,7 @@
 
 ### C++14
 
-新增 generic lambda特性，参见: 
+新增 generic lambda 特性，参见: 
 
 1) cppreference [C++14](https://en.cppreference.com/w/cpp/14) # [generic lambdas](https://en.cppreference.com/w/cpp/language/lambda)
 

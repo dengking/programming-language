@@ -1,6 +1,8 @@
 nav:
     - Introduction: index.md
     
-    - Operator-function-object: Operator-function-object.md
+
     - std-function: std-function
-    - TODO-Partial-function-application: TODO-Partial-function-application.md    
+    - std-bind: std-bind
+
+    - Operator-function-object: Operator-function-object.md    

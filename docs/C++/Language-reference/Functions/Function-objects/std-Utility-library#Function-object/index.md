@@ -13,15 +13,18 @@
 
 ## Partial function application
 
-> NOTE: 参见`./Partial-function-application`
+[std::bind_front](https://en.cppreference.com/w/cpp/utility/functional/bind_front) and [std::bind](https://en.cppreference.com/w/cpp/utility/functional/bind) provide support for [partial function application](https://en.wikipedia.org/wiki/Partial_application), i.e. binding arguments to functions to produce new functions.
 
 
 
-### Operator function objects
+## Operator function objects
 
 > NOTE: 参见`./Operator-function-object`
 
 
 
+## TODO
 
 
+
+oopscenities [C++11: std::function and std::bind](https://oopscenities.net/2012/02/24/c11-stdfunction-and-stdbind/)

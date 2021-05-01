@@ -1,4 +1,3 @@
 nav:
     - Introduction: index.md
-
-    - Application: Application
+    - microsoft-decltype(C++): microsoft-decltype(C++)

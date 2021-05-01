@@ -1,4 +1,4 @@
-# Trailing return type
+# C++11 Trailing return type
 
 这是c++11引入的新特性，首先搞清楚它解决的是什么问题，然后再来学习它的具体的用法。
 
@@ -8,22 +8,41 @@
 
 
 
-## Usage
+## What is new in C++ and usage of trailing return type
+
+本节回答为什么C++会引入"trailing return type"
 
 参考：
 
-- stackoverflow [Should the trailing return type syntax style become the default for new C++11 programs? ](https://stackoverflow.com/questions/11215227/should-the-trailing-return-type-syntax-style-become-the-default-for-new-c11-pr)
-- ibm [Introduction to the C++11 feature: trailing return types](https://community.ibm.com/community/user/ibmz-and-linuxone/blogs/fang-lu2/2020/03/24/introduction-to-the-c11-feature-trailing-return-types?lang=en)
+1、stackoverflow [Should the trailing return type syntax style become the default for new C++11 programs? ](https://stackoverflow.com/questions/11215227/should-the-trailing-return-type-syntax-style-become-the-default-for-new-c11-pr)
 
-### Return type depends on argument names
+2、ibm [Introduction to the C++11 feature: trailing return types](https://community.ibm.com/community/user/ibmz-and-linuxone/blogs/fang-lu2/2020/03/24/introduction-to-the-c11-feature-trailing-return-types?lang=en)
 
-典型的template metaprogramming。
+3、microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019)
+
+### Generic forwarding function template: later specified return type
+
+一、在实现generic forwarding function template，经常需要使用later specified return type，即return type depends on argument names。
+
+二、在 microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019) 中，对此进行了非常好的说明
+
+三、它的syntax，参见: 
+
+1、microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019) 
+
+```c++
+auto function_name ( parameters _opt ) const _opt volatile _opt -> decltype( expression ) noexceptopt { function_body };
+```
+
+四、更加复杂的"later specified return type"形式
 
 在stackoverflow [Should the trailing return type syntax style become the default for new C++11 programs? [closed]](https://stackoverflow.com/questions/11215227/should-the-trailing-return-type-syntax-style-become-the-default-for-new-c11-pr)的 [回答](https://stackoverflow.com/a/11215414) 中，介绍了这种用法:
 
 > Also, if your return type utilizes a `decltype` that requires that the argument names are in scope, a trailing return type must be used (however, one can usually use `declval<T>` to work around this latter issue).
 
-在 ibm [Introduction to the C++11 feature: trailing return types](https://community.ibm.com/community/user/ibmz-and-linuxone/blogs/fang-lu2/2020/03/24/introduction-to-the-c11-feature-trailing-return-types?lang=en) 中进行了详细介绍。
+
+
+五、在 ibm [Introduction to the C++11 feature: trailing return types](https://community.ibm.com/community/user/ibmz-and-linuxone/blogs/fang-lu2/2020/03/24/introduction-to-the-c11-feature-trailing-return-types?lang=en) 中进行了详细介绍。
 
 ```c++
 #include <iostream>
@@ -45,14 +64,6 @@ int main()
 
 
 
-#### Idiom: Trailing return type + expression SFINAE
-
-典型的template metaprogramming。
-
-trailing return type：trailing return type + expression SFINAE是一个非常典型的例子。
-
-
-
 #### Examples
 
 在stackoverflow [How can I output the value of an enum class in C++11](https://stackoverflow.com/questions/11421432/how-can-i-output-the-value-of-an-enum-class-in-c11)的[回答](https://stackoverflow.com/a/11421471)中给出的一个例子：
@@ -68,6 +79,14 @@ auto as_integer(Enumeration const value)
 
 std::cout << as_integer(a) << std::endl;
 ```
+
+
+
+### Idiom: Trailing return type + expression SFINAE
+
+一、典型的template metaprogramming。
+
+二、在 `Expression-SFINAE` 章节给出了很多例子
 
 
 

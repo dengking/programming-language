@@ -297,8 +297,28 @@ int main()
 
 
 
-## C++ std::move and std::forward
+## draft
 
-http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html
+下面是非常好的例子:
 
+### stackoverflow [How to bind function to an object by reference?](https://stackoverflow.com/questions/26187192/how-to-bind-function-to-an-object-by-reference) # A
 
+**Note on using `std::forward`**
+
+First of all, `std::forward` is meant to be used for [perfect forwarding](https://stackoverflow.com/q/3582001/873025), i.e. to forward the reference type (l-value or r-value).
+
+If you pass an *l-value* reference to `std::forward` that is what is returned, and likewise if an *r-value* reference is passed then an r-value is returned. This works as opposed to `std::move` that will always return an r-value reference. Also remember that *named* r-value references are l-value references.
+
+```c++
+/* Function that takes r-value reference. */
+void func(my_type&& t) {
+    // 't' is named and thus is an l-value reference here.
+
+    // Pass 't' as lvalue reference.
+    some_other_func(t);
+    // Pass 't' as rvalue reference (forwards rvalueness).
+    some_other_func(std::forward<my_type>(t));
+    // 'std::move' should be used instead as we know 't' is always an rvalue.
+    // e.g. some_other_func(std::move(t));
+}
+```
