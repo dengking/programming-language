@@ -94,7 +94,6 @@ decltype(some_int) other_integer_variable = 5;
 This is more useful in conjunction with `auto`, since the type of auto variable is known only to the compiler. However, `decltype` can also be very useful for expressions in code that makes heavy use of [operator overloading](https://en.wikipedia.org/wiki/Operator_overloading) and specialized types.
 
 > NOTE:  最后一句话没有搞懂
-> 
 
 The type denoted by `decltype` can be different from the type deduced by `auto`.
 
@@ -175,3 +174,7 @@ C++17 新增 "Use of auto as the type for a non-type template parameter"，参�
 减轻programmer的工作量，让programmer写更少的code。
 
 
+
+## TODO
+
+https://www.geeksforgeeks.org/type-inference-in-c-auto-and-decltype/
