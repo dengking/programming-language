@@ -7,7 +7,7 @@ nav:
     - C++03-Value-initialization: C++03-Value-initialization
     - Direct-initialization: Direct-initialization
     - Copy-initialization: Copy-initialization
-    - Syntax-ambiguity-in-initialization-with-round-parenthese: Syntax-ambiguity-in-initialization-with-round-parenthese
+    - Syntax-ambiguity-in-initialization-with-parenthese: Syntax-ambiguity-in-initialization-with-parenthese
     - akrzemi1-Value-initialization-with-C++: akrzemi1-Value-initialization-with-C++
     - C++11-List-initialization: C++11-List-initialization
     - Aggregate-initialization: Aggregate-initialization    
