@@ -1,1 +1,0 @@
-关于ASDL，读完论文[The Zephyr Abstract Syntax Description Language](https://www.cs.princeton.edu/research/techreps/TR-554-97)就完全可以掌握了，无需补充另外的内容。

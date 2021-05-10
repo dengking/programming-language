@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Primer: Primer.md
+    - Primer: Primer
     - GoogleMock: GoogleMock
     - google-test-code-coverage: google-test-code-coverage
