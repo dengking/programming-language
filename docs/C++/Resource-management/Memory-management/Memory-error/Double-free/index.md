@@ -100,6 +100,134 @@ int main()
 
 > The difference here is that we created two std::shared_ptr independently from each other. As a consequence, even though they’re both pointing to the same Resource, they aren’t aware of each other. When ptr2 goes out of scope, it thinks it’s the only owner of the Resource, and deallocates it. When ptr1 later goes out of the scope, it thinks the same thing, and tries to delete the Resource again. Then bad things happen.
 
+### 错误地释放automatic variable导致double free
+
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+
+//Definition for singly-linked list.
+struct ListNode
+{
+	int val;
+	ListNode *next;
+	ListNode() :
+					val(0), next(nullptr)
+	{
+	}
+	ListNode(int x) :
+					val(x), next(nullptr)
+	{
+	}
+	ListNode(int x, ListNode *next) :
+					val(x), next(next)
+	{
+	}
+};
+
+class Solution
+{
+public:
+	ListNode* removeDuplicates(ListNode *head, bool delete_flag = false)
+	{
+		if (head == nullptr)
+		{
+			return head;
+		}
+		ListNode *fast = head->next, *slow = head;
+		while (fast)
+		{
+			if (fast->val != slow->val)
+			{
+				ListNode *delete_head = slow->next; // 待删除子链表的头
+				slow->next = fast;
+				slow = slow->next;
+				/**
+				 * 需要将两者之间的node全部都删除，因为它们都是重复的值
+				 */
+				if (delete_flag)
+				{
+					while (delete_head != nullptr && delete_head != fast)
+					{
+						ListNode *n = delete_head;
+						delete_head = delete_head->next; // 迭代
+						cout << "删除:" << n->val << endl;
+						delete n; // 删除掉对应的节点
+					}
+				}
+			}
+			fast = fast->next;
+		}
+		slow->next = nullptr;
+		return head;
+	}
+};
+
+ostream& operator <<(ostream &stream, ListNode *head)
+{
+	while (head)
+	{
+		stream << head->val << " ";
+		head = head->next;
+	}
+	return stream;
+}
+
+void test1()
+{
+	ListNode *N1 = new ListNode { 1 };
+	ListNode *N2 = new ListNode { 1 };
+	ListNode *N3 = new ListNode { 2 };
+	ListNode *N4 = new ListNode { 2 };
+	ListNode *N5 = new ListNode { 5 };
+	ListNode *N6 = new ListNode { 6 };
+	N1->next = N2;
+	N2->next = N3;
+	N3->next = N4;
+	N4->next = N5;
+	N5->next = N6;
+	cout << N1 << endl;
+	Solution s;
+	cout << s.removeDuplicates(N1, true) << endl;
+}
+
+void test2()
+{
+	ListNode N1 { 1 };
+	ListNode N2 { 1 };
+	ListNode N3 { 2 };
+	ListNode N4 { 2 };
+	ListNode N5 { 5 };
+	ListNode N6 { 6 };
+	N1.next = &N2;
+	N2.next = &N3;
+	N3.next = &N4;
+	N4.next = &N5;
+	N5.next = &N6;
+	cout << &N1 << endl;
+	Solution s;
+	cout << s.removeDuplicates(&N1, true) << endl;
+}
+int main()
+{
+	test1();
+	test2();
+}
+// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
+
+```
+
+
+
+上述程序运行时，会出现如下错误:
+
+```
+double free or corruption (out)
+Aborted
+```
+
+问题的根源在于在 `ListNode* removeDuplicates(ListNode *head)` 中，释放了链表的节点，而这些节点是分配于stack上的。
+
 ## Why does free crash when called twice?
 
 ### 分析一
