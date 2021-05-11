@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Fold: Fold.md
+    - Map-apply: Map-apply.md

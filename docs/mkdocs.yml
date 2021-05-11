@@ -11,6 +11,7 @@ nav:
     - Java: Java
     - Eiffel: Eiffel
     - Go: Go
+    - Lisp: Lisp
     ########## 对比各种programming language##########    
     - Comparison-of-programming-language: Comparison-of-programming-language
     ##### 如何跨语言 #####
