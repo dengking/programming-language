@@ -10,7 +10,7 @@ nav:
     - Language-reference: Language-reference
 
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
-    - Standard-library: Standard-library
+    - STL: STL
     # c++中的库
     - Library: Library
     # - My-library: My-library
