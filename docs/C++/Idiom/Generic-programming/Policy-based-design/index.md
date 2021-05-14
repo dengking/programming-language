@@ -34,11 +34,27 @@ Policy classes have some similarity to [callbacks](https://en.wikipedia.org/wiki
 
 A key feature of the *policy* idiom is that, usually (though it is not strictly necessary), the host class will [derive](https://en.wikipedia.org/wiki/Inheritance_(computer_science)) from (make itself a [child class](https://en.wikipedia.org/wiki/Subclass_(computer_science)) of) each of its **policy classes** using (public) [multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance). (Alternatives are for the host class to merely contain a member variable of each policy class type(composition), or else to inherit the policy classes privately; however inheriting the policy classes publicly has the major advantage that a policy class can add new methods, inherited by the instantiated host class and accessible to its users, which the host class itself need not even know about.) 
 
-> NOTE: 之前在实现AMUST API的时候，使用的是multiple inheritance。
+> NOTE: 
 >
-> 上面这段话中涉及了composition和inheritance，它让我想到了"composition over inheritance"。
+> 一、
 >
-> policy-based design中，inheritance、composition的目的是: code reuse
+> 1、之前在实现AMUST API的时候，使用的是multiple inheritance。
+>
+> 2、libstdc++ hash table的实现，就是典型的使用policy based design + multiple inheritance，参见:
+>
+> https://gcc.gnu.org/onlinedocs/gcc-6.4.0/libstdc++/api/a01320_source.html
+>
+> https://code.woboq.org/gcc/libstdc++-v3/include/bits/hashtable_policy.h.html
+>
+> 
+>
+> 二、上面这段话中涉及了composition和inheritance，它让我想到了"composition over inheritance"。
+>
+> 三、policy-based design中，inheritance、composition的目的是: code reuse
+>
+> 四、"policy based design-multiple inheritance-composition-assemble ability"
+>
+> 
 
 A notable feature of this aspect of the policy idiom is that, relative to [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), policies invert(颠倒) the relationship between [base class](https://en.wikipedia.org/wiki/Superclass_(computer_science)) and derived class - whereas in OOP interfaces are traditionally represented by ([abstract](https://en.wikipedia.org/wiki/Virtual_function#Abstract_classes_and_pure_virtual_functions)) base classes and implementations of interfaces by derived classes, in policy-based design the derived (host) class represents the interfaces and the base (policy) classes implement them. In the case of policies, the public inheritance does not represent an **is-a** relationship between the host and the policy classes. While this would traditionally be considered evidence of a design defect(缺点) in OOP contexts, this doesn't apply in the context of the **policy idiom**.
 
