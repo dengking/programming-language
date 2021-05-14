@@ -1,8 +1,8 @@
 # Policy-based design
 
-在阅读[boost Generic Programming Techniques#Policy Classes](https://www.boost.org/community/generic_programming.html#policy)时，发现的这个policy-based design。
+1、在阅读[boost Generic Programming Techniques#Policy Classes](https://www.boost.org/community/generic_programming.html#policy)时，发现的这个policy-based design。
 
-
+2、policy-based design遵循"program to an abstraction and polymorphism"
 
 ## wikipedia [*Modern C++ Design*#Policy-based design](https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design#Policy-based_design)
 

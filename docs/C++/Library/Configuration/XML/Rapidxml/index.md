@@ -14,7 +14,15 @@ You may also like to check [Boost.PropertyTree](http://boost.org/) library, whic
 
 RapidXml uses a special memory pool object to allocate nodes and attributes, because direct allocation using `new` operator would be far too slow. Underlying memory allocations performed by the pool can be customized by use of [memory_pool::set_allocator()](http://rapidxml.sourceforge.net/manual.html#classrapidxml_1_1memory__pool_c0a55a6ef0837dca67572e357100d78a_1c0a55a6ef0837dca67572e357100d78a) function. See class [memory_pool](http://rapidxml.sourceforge.net/manual.html#classrapidxml_1_1memory__pool) for more information.
 
-> NOTE: 值得借鉴
+> NOTE: 
+>
+> 1、值得借鉴，函数原型:
+>
+> ```C++
+> void set_allocator(alloc_func *af, free_func *ff);
+> ```
+>
+> 约定接口
 
 
 
