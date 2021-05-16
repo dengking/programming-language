@@ -17,7 +17,13 @@ I hope you enjoy it. Finally, here are links to previous Effective Concurrency c
 
 1 [The Pillars of Concurrency](http://www.ddj.com/hpc-high-performance-computing/200001985) (Aug 2007)
 
+给出了framework、model，非常好的guide。
+
 2 [How Much Scalability Do You Have or Need?](http://www.ddj.com/hpc-high-performance-computing/201202924) (Sep 2007)
+
+如何设计thread model以充分发挥scalability，这是对 "Pillar 2: Throughput and Scalability Via Concurrent Collections"的展开。
+
+
 
 3 [Use Critical Sections (Preferably Locks) to Eliminate Races](http://ddj.com/cpp/201804238) (Oct 2007)
 
@@ -26,6 +32,12 @@ I hope you enjoy it. Finally, here are links to previous Effective Concurrency c
 5 [Avoid Calling Unknown Code While Inside a Critical Section](http://ddj.com/architect/202802983) (Dec 2007)
 
 6 [Use Lock Hierarchies to Avoid Deadlock](http://www.ddj.com/hpc-high-performance-computing/204801163) (Jan 2008)
+
+前面都是描述如何lock的。
+
+---
+
+
 
 7 [Break Amdahl’s Law!](http://www.ddj.com/cpp/205900309) (Feb 2008)
 
