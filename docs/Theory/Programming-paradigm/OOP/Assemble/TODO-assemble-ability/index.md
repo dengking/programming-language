@@ -18,6 +18,8 @@ accu [CURIOUSLY RECURSIVE TEMPLATE PROBLEMS WITH ASPECT ORIENTED PROGRAMMING](ht
 
 5、`Decorator-pattern`
 
+最最典型的就是protocol interceptor拦截器，参见对应章节。
+
 6、`Protocol-parsing-library`
 
 ## Composition over inheritance

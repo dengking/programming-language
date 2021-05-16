@@ -49,7 +49,7 @@ In all `O(1)` cases, if we want better throughput for CPU-bound operations, esse
 
 `O(K)` means that the system typically has some constant number of things it can do to keep a constant number of cores busy at any given time. That number is hardwired into the structure of the program and will be the same regardless of the amount of hardware concurrency available at execution time.
 
-### Example
+### Example: first-person action game
 
 > NOTE: 
 >
@@ -60,6 +60,18 @@ For example, consider a first-person action game. To take some advantage of addi
 Thread 1 does game physics, thread 2 does rendering, and thread 3 does nonplayer character AI. 
 
 For simplicity, assume that all three threads are equally busy and interdependent. The game runs fine on a single-core machine; the operating system just interleaves the threads on the one core. When the user upgrades to a two-core machine, the game runs faster—but not twice as fast, because if we schedule thread 1 on core 1, and thread 2 on core 2, we have to put thread 3 somewhere. If we put thread 3 on the same core as thread 1, then thread 2 (which depends on 1 and/or 3) will be idle half the time. But if we schedule thread 3 on both core 1 and core 2, we incur cache sloshing and other overhead every time we move it from one core to the other. So the game runs faster on a two-core system, just not twice as fast. When the user upgrades to a four-core machine, the game runs faster still—but only three times as fast as on a single core, or maybe slightly better if spyware and other applications can be moved to the fourth core. When the user upgrades to an eight-core machine, nothing happens. When he upgrades to a 16-core machine, more nothing happens. The `O(3)` application is hardwired to prefer three cores regardless of the input or execution environment.
+
+### Example: pipelining
+
+> NOTE: 
+>
+> 1、这是一种并行化的技巧
+
+A closely related technique is pipelining, which is useful when we have a collection of things to operate on, but we can't apply `O(N)` techniques to fully parallelize them because of ordering dependencies. For example, consider a communications subsystem that packets data to be sent over the network. The input to the subsystem is a stream of raw packets; before sending a given packet, it must first be decorated with header information, then compressed, and then encrypted. Those three operations can't easily be run in parallel for a given packet, in part because they must be applied in that order. A solution is to have three agents that communicate using message queues: The `Decorator` agent (typically a thread) decorates each raw packet and sends it to the `Compressor` agent; the `Compressor` accepts the decorated packet, compresses it, and sends it to the `Encryptor`; and the `Encryptor` encrypts it and sends it to the network. Like the game example, this subsystem also has `O(3)` parallelism if the pipeline stages are equally busy. We are using Pillar 1 techniques (isolated agents, messaging; see [2] for details) because it's a natural fit for expressing pipelines: The pipeline stages are relatively isolated, and using messaging lets us tolerate any difference in execution rates between the stages.
+
+> NOTE: 
+>
+> 1、典型的"protocol interceptor拦截器decorator-pattern-assemble ability"
 
 ### 结论
 
