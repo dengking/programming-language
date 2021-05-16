@@ -1,6 +1,6 @@
 # drdobbs [How Much Scalability Do You Have or Need?](https://www.drdobbs.com/parallel/how-much-scalability-do-you-have-or-need/201202924)
 
-Linked Lists and Balanced Search Trees are familiar data structures, but can they make the leap to parallelized environments?
+**Linked Lists and Balanced Search Trees are familiar data structures, but can they make the leap to parallelized environments?**
 
 
 

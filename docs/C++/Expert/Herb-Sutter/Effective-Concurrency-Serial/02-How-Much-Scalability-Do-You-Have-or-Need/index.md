@@ -66,6 +66,8 @@ For simplicity, assume that all three threads are equally busy and interdependen
 > NOTE: 
 >
 > 1、这是一种并行化的技巧
+>
+> 2、"4"
 
 A closely related technique is pipelining, which is useful when we have a collection of things to operate on, but we can't apply `O(N)` techniques to fully parallelize them because of ordering dependencies. For example, consider a communications subsystem that packets data to be sent over the network. The input to the subsystem is a stream of raw packets; before sending a given packet, it must first be decorated with header information, then compressed, and then encrypted. Those three operations can't easily be run in parallel for a given packet, in part because they must be applied in that order. A solution is to have three agents that communicate using message queues: The `Decorator` agent (typically a thread) decorates each raw packet and sends it to the `Compressor` agent; the `Compressor` accepts the decorated packet, compresses it, and sends it to the `Encryptor`; and the `Encryptor` encrypts it and sends it to the network. Like the game example, this subsystem also has `O(3)` parallelism if the pipeline stages are equally busy. We are using Pillar 1 techniques (isolated agents, messaging; see [2] for details) because it's a natural fit for expressing pipelines: The pipeline stages are relatively isolated, and using messaging lets us tolerate any difference in execution rates between the stages.
 
@@ -93,17 +95,23 @@ Alert readers may already have noticed that in other computer science contexts w
 
 3、Applications that aren't CPU-bound, where their current feature set won't drive more than one core's worth of computation no matter how you slice them (a simple text processor, for instance).
 
+> NOTE: 
+>
+> 1、"simple text processor" "aren't CPU-bound" 是非常容易理解的，因为它需要等待用户输入，这让我想起了Redis is not CPU-bound的论断，Redis和"simple text processor" 一样，是"IO-bound"的
 
 
-If you have no reason or capability to escape one of those constraints, it probably doesn't make sense to invest heavily in making your code `O(K)` or better because the extra concurrency will never be exercised on such systems. But don't forget that, even in the `O(1)` world, concurrency is a primary path to better responsiveness, and some basic techniques like using an event-driven program structure will work even in the most constrained case of running on an OS that has no support for actual threads. `O(K)` is appropriate especially for code that targets domains with fixed concurrency:
+
+If you have no reason or capability to escape one of those constraints, it probably doesn't make sense to invest(投资) heavily in making your code `O(K)` or better because the extra concurrency will never be exercised on such systems. But don't forget that, even in the `O(1)` world, concurrency is a primary path to better responsiveness, and some basic techniques like using an event-driven program structure will work even in the most constrained case of running on an OS that has no support for actual threads. `O(K)` is appropriate especially for code that targets domains with fixed concurrency:
 
 1、Fixed hardware targets: A notable situation is when you're targeting one multicore game console generation. For example, when developing a game for XBox 360, it makes sense to write an `O(6)` application, because that generation of the console is fixed at six hardware threads (three cores with two hardware threads each); similarly, PlayStation 3 naturally lends itself to `O(8)` or `O(9)` applications because it is fixed at 1+8 cores (one general-purpose core, and eight special-purpose cores). These configurations will not change until each console's next major hardware generation.
 
-2、Applications whose key operations cannot be fully parallelized: The earlier packet-sending example illustrates a case where a CPU-intensive operation has internal ordering dependencies; its parts are not sufficiently independent to let them be run fully in parallel. As we saw, pipelining is a classic approach to extract some parallelism out of an otherwise inherently serial operation; but basic pipelining is at best `O(K)`, for a pipeline with `K` stages of relatively equal cost. Although `O(K)` is not scalable, it can be deployed tactically to temporarily extend the free lunch.
+2、Applications whose key operations cannot be fully parallelized: The earlier packet-sending example illustrates a case where a CPU-intensive operation has internal ordering dependencies; its parts are not sufficiently independent to let them be run fully in parallel. As we saw, pipelining is a classic approach to extract(提取) some parallelism out of an otherwise inherently(内在地) serial(串行) operation; but basic pipelining is at best `O(K)`, for a pipeline with `K` stages of relatively equal cost. Although `O(K)` is not scalable, it can be deployed tactically(策略高明地) to temporarily extend the free lunch.
 
+> NOTE: 
+>
+> "async method invocat-message queue-mailbox-pipeline parallel 串联并行流程"
 
-
-In `O(K)` in particular, there are some fixed costs of making the code concurrent that we will incur at runtime on even a single-core machine, including work to manage messages, perform context switches, and lock shared data. However, by applying concurrency, we can get some limited scalability, and often also better responsiveness.
+In `O(K)` in particular, there are some fixed costs of making the code concurrent that we will incur at runtime on even a single-core machine, including work to manage messages, **perform context switches**, and **lock shared data**. However, by applying concurrency, we can get some limited scalability, and often also better responsiveness.
 
 
 
@@ -115,21 +123,21 @@ Note that `O(1)` and `O(K)` situations are mostly described by what you can't do
 
 The key to scalable throughput is to express lots of latent concurrency that isn't explicitly coded in the program and that scales to match its inputs (number of messages, size of data, and so on) and that can be efficiently mapped down at execution time to the variable number `N` cores available on a given machine.
 
-We find the scalable concurrency opportunities principally by exploiting natural parallelism:
+We find the scalable concurrency opportunities principally by exploiting **natural parallelism**:
 
 1、Exploit parallelism in algorithm structures: For example, recursive sorting can exploit the natural parallelism in its divide-and-conquer structure.
 
-2、Exploit parallelism in data structures: For example, tree traversal can often exploit the independence in each node's subtrees. Compilation can exploit independence at several levels in the structure of source code, from coarse-grained independence among source files to finer-grained independence among classes or methods within a file.
+2、Exploit parallelism in data structures: For example, tree traversal can often exploit the independence in each node's subtrees. Compilation can exploit independence at several levels in the structure of source code, from **coarse-grained** independence among source files to **finer-grained** independence among classes or methods within a file.
 
 
 
 This lets us decompose the application into a "sea of chores"—expressing independent chunks of work that are big or small, blocking or nonblocking, structured subdivisions or independent; but we often want to look first for the CPU-bound work—and rely on the runtime system to "rightsize" the application by assigning those chores efficiently to whatever hardware parallelism is available on a given user's system.
 
+### Implementation
 
+**OpenMP** supports some constrained `O(N)` styles, but it is primarily intended for use with integer-indexed loops over arrays and doesn't work well with iteration-based containers in STL, .NET, or Java. Instead, as mentioned in last month's column [2], today, one common idiom for expressing such a sea of work items is to explicitly schedule chores for execution on a thread pool (for example, using Java `ThreadPoolExecutor` or .NET `BackgroundWorker`). Unfortunately, this incurs significant context-switch overhead and so you have to ensure that a work item will be worth shipping over to a worker thread. In the future, this constraint will be relaxed as languages and runtimes improve.
 
-OpenMP supports some constrained `O(N)` styles, but it is primarily intended for use with integer-indexed loops over arrays and doesn't work well with iteration-based containers in STL, .NET, or Java. Instead, as mentioned in last month's column [2], today, one common idiom for expressing such a sea of work items is to explicitly schedule chores for execution on a thread pool (for example, using Java `ThreadPoolExecutor` or .NET `BackgroundWorker`). Unfortunately, this incurs significant context-switch overhead and so you have to ensure that a work item will be worth shipping over to a worker thread. In the future, this constraint will be relaxed as languages and runtimes improve.
-
-
+### Re-enabling the free lunch 
 
 `O(N)` is the key to re-enabling the free lunch and keeping lots of cores busy, because it lets us express applications that can run on yesterday's single-core machine, run better on today's four-core machine, run better still on tomorrow's 64-core machine, and so on until we exhaust the inherent limit of CPU-boundedness in the application. For a thread pool-driven program, on a single-core machine the system can spin up a single worker thread that runs the program by serially pulling chore after chore from the sea and executing it; on an eight-core machine, it can spin up eight threads; and so on [4].
 
@@ -139,9 +147,9 @@ As with `O(K)`, `O(N)` can have costs at runtime on even a single-core machine. 
 
 
 
-Using `O(N)` is highly desirable for software that expects to run on a variety of current and future hardware having variable amounts of hardware parallelism—which happens to now be the target for all mainstream desktop and server software. If your application doesn't currently have key CPU-bound operations that are amenable to full `O(N)` parallelization, don't give up: Consider finding new desirable features that are amenable to `O(N)`, or at least more `O(K`), and you will still be able to deliver software that runs well on today's hardware, better on tomorrow's hardware, and better still on future systems.
+Using `O(N)` is highly desirable for software that expects to run on a variety of current and future hardware having variable amounts of **hardware parallelism**—which happens to now be the target for all mainstream desktop and server software. If your application doesn't currently have key CPU-bound operations that are amenable to full `O(N)` parallelization, don't give up: Consider finding new desirable features that are amenable to `O(N)`, or at least more `O(K`), and you will still be able to deliver software that runs well on today's hardware, better on tomorrow's hardware, and better still on future systems.
 
-### 
+
 
 ## Notes
 
