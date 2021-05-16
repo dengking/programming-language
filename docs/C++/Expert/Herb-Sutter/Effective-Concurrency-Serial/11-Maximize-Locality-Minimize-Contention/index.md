@@ -2,7 +2,7 @@
 
 > NOTE: 
 >
-> 1、更大的locality，意味着更少的contention
+> 一本文中的"locality"对应的是local to core cache；更大的locality，意味着更少的contention
 
 **Want to kill your parallel application's scalability? Easy: Just add a dash of contention.**
 

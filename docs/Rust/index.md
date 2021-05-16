@@ -23,3 +23,9 @@
 https://www.viva64.com/en/b/0733/
 
 https://www.bitdegree.org/tutorials/rust-vs-cpp/
+
+
+
+## 一些读过的文章
+
+新智元 [Rust也出2077？ 最受欢迎的编程语言再度更新！](https://mp.weixin.qq.com/s/zgDh0Q7MwolvWGdvXh2VmQ)

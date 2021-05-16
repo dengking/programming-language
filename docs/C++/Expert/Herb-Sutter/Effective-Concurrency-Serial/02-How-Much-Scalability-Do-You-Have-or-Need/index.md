@@ -29,15 +29,37 @@ This month's topic delves into throughput-oriented techniques using techniques i
 
 
 
-## O(1): Sequential Code
+## O(1): Sequential Code(串行)
 
 `O(1)` means that the program typically has one CPU-intensive piece of work available to be actively executed at any given time. It may occasionally perform multiple concurrent operations, such as occasional background work in addition to the main foreground work, but the extra work is not ongoing and/or doesn't keep more than a single core busy.
 
+This category includes not only all **sequential code**, but also every concurrent application with throughput that is as good as sequential because its threads execute serially, such as by being convoyed on a global lock or message queue. The free throughput lunch is over for both these kinds of `O(1)` code, but the fully serial option tends to have the additional liability of poorer responsiveness, while a concurrent application tends to be better structured to do background work asynchronously[1, 2].
 
+> NOTE: 
+>
+> 1、并发串行是经常会出现的: "concurrent application with throughput that is as good as sequential because its threads execute serially, such as by being convoyed on a global lock or message queue"
+
+In all `O(1)` cases, if we want better throughput for CPU-bound operations, essentially, our only option is to try to optimize our code in traditional ways because adding more cores won't help.
+
+> NOTE: 
+>
+> 1、这是非常重要的一个事实
 
 ## O(K): Explicitly Threaded Code
 
 `O(K)` means that the system typically has some constant number of things it can do to keep a constant number of cores busy at any given time. That number is hardwired into the structure of the program and will be the same regardless of the amount of hardware concurrency available at execution time.
+
+### Example
+
+> NOTE: 
+>
+> 1、我们会经常采用这种设计
+
+For example, consider a first-person action game. To take some advantage of additional cores, let's say we divide the game's compute-bound work into three threads: 
+
+Thread 1 does game physics, thread 2 does rendering, and thread 3 does nonplayer character AI. 
+
+For simplicity, assume that all three threads are equally busy and interdependent. The game runs fine on a single-core machine; the operating system just interleaves the threads on the one core. When the user upgrades to a two-core machine, the game runs faster—but not twice as fast, because if we schedule thread 1 on core 1, and thread 2 on core 2, we have to put thread 3 somewhere. If we put thread 3 on the same core as thread 1, then thread 2 (which depends on 1 and/or 3) will be idle half the time. But if we schedule thread 3 on both core 1 and core 2, we incur cache sloshing and other overhead every time we move it from one core to the other. So the game runs faster on a two-core system, just not twice as fast. When the user upgrades to a four-core machine, the game runs faster still—but only three times as fast as on a single core, or maybe slightly better if spyware and other applications can be moved to the fourth core. When the user upgrades to an eight-core machine, nothing happens. When he upgrades to a 16-core machine, more nothing happens. The `O(3)` application is hardwired to prefer three cores regardless of the input or execution environment.
 
 ### 结论
 

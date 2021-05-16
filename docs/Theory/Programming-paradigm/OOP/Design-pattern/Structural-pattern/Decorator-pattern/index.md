@@ -32,9 +32,15 @@ geeksforgeeks [Decorator Pattern | Set 1 (Background)](https://www.geeksforgeeks
 
 其实这也是combination，不同的是它还添加了流程、multiple layer，example:
 
+#### Protocol interceptor
+
+
+
 1、apache [HttpClient Tutorial](http://hc.apache.org/httpcomponents-client-ga/tutorial/html/index.html) # 1.4. HTTP protocol interceptors
 
-> The HTTP protocol interceptor(拦截器) is a routine that implements a specific aspect of the HTTP protocol. Usually **protocol interceptors** are expected to act upon one specific header or a group of related headers of the incoming message, or populate the outgoing message with one specific header or a group of related headers. Protocol interceptors can also manipulate content entities enclosed with messages - transparent content compression / decompression being a good example. Usually this is accomplished by using the **'Decorator' pattern** where a **wrapper entity class** is used to decorate the original entity. Several protocol interceptors can be combined to form one logical unit.
+The HTTP protocol interceptor(拦截器) is a routine that implements a specific aspect of the **HTTP protocol**. Usually **protocol interceptors** are expected to act upon one specific header or a group of related headers of the incoming message, or populate the outgoing message with one specific header or a group of related headers. Protocol interceptors can also manipulate content entities enclosed with messages - transparent content compression / decompression being a good example. Usually this is accomplished by using the **'Decorator' pattern** where a **wrapper entity class** is used to decorate the original entity. Several protocol interceptors can be combined to form one logical unit.
+
+
 
 2、wikipedia [Decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) 中的 `class WebPage` 例子
 
