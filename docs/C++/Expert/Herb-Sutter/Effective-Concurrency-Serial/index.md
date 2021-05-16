@@ -45,6 +45,8 @@ I hope you enjoy it. Finally, here are links to previous Effective Concurrency c
 
 9 [Super Linearity and the Bigger Machine](http://www.ddj.com/hpc-high-performance-computing/206903306) (Apr 2008)
 
+
+
 10 [Interrupt Politely](http://ddj.com/architect/207100682) (May 2008)
 
 
