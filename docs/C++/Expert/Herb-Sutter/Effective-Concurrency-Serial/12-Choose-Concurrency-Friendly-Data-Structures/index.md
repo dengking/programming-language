@@ -1,8 +1,10 @@
-# drdobbs [How Much Scalability Do You Have or Need?](https://www.drdobbs.com/parallel/how-much-scalability-do-you-have-or-need/201202924)
+# drdobbs [Choose Concurrency-Friendly Data Structures](https://www.drdobbs.com/parallel/choose-concurrency-friendly-data-structu/208801371)
 
 > NOTE: 
 >
-> 1、如何选项？
+> 1、如何选型？选择Concurrency-Friendly Data Structures，它们运行fine-grained lock；本文一linked list 和 balanced search tree 来说明这个问题。这位我们选型提供了很好的思路。
+>
+> 
 
 **Linked Lists and Balanced Search Trees are familiar data structures, but can they make the leap to parallelized environments?**
 
@@ -16,7 +18,7 @@ But in concurrent code, we need to consider two additional things to help us pic
 
 1、In parallel code, your performance needs likely include the ability to allow multiple threads to use the data at the same time. If this is (or may become) a high-contention data structure, does it allow for concurrent readers and/or writers in different parts of the data structure at the same time? If the answer is, "No," then you may be designing an inherent bottleneck into your system and be just asking for lock convoys as threads wait, only one being able to use the data structure at a time.
 
-2、On parallel hardware, you may also care about minimizing the cost of memory synchronization. When one thread updates one part of the data structure, how much memory needs to be moved to make the change visible to another thread? If the answer is, "More than just the part that has ostensibly changed," then again you're asking for a potential performance penalty, this time due to cache sloshing as more data has to move from the core that performed the update to the core that is reading the result.
+2、On parallel hardware, you may also care about minimizing the cost of **memory synchronization**. When one thread updates one part of the data structure, how much memory needs to be moved to make the change visible to another thread? If the answer is, "More than just the part that has ostensibly(表面上) changed," then again you're asking for a potential performance penalty, this time due to cache sloshing(晃荡) as more data has to move from the core that performed the update to the core that is reading the result.
 
 ### Locality
 

@@ -33,7 +33,7 @@ I hope you enjoy it. Finally, here are links to previous Effective Concurrency c
 
 6 [Use Lock Hierarchies to Avoid Deadlock](http://www.ddj.com/hpc-high-performance-computing/204801163) (Jan 2008)
 
-前面都是描述如何lock的。
+前面都是描述如何lock的，其实是对"Pillar 3: Consistency Via Safely Shared Resources"的详细说明。
 
 ---
 
