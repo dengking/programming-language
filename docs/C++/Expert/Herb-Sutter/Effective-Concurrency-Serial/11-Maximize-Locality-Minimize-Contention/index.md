@@ -1,4 +1,8 @@
-# drdobbs [Maximize Locality, Minimize Contention](https://www.drdobbs.com/parallel/maximize-locality-minimize-contention/208200273)
+# drdobbs [Maximize Locality, Minimize Contention](https://www.drdobbs.com/parallel/maximize-locality-minimize-contention/208200273) 
+
+> NOTE: 
+>
+> 1、更大的locality，意味着更少的contention
 
 **Want to kill your parallel application's scalability? Easy: Just add a dash of contention.**
 
@@ -9,13 +13,23 @@ In the concurrent world, locality is a first-order issue that trumps(王牌、�
 > 翻译如下:
 >
 > "在并发世界中，局部性是一个一阶问题，比大多数其他性能考虑因素都重要。
-> 现在，局部性不再仅仅是为了很好地适应缓存和RAM，而是为了避免可伸缩性问题，将物理上紧密耦合的数据保持在一起，而将单独使用的数据保持在很远很远的地方。"
+> 现在，局部性不再仅仅是为了很好地适应缓存和RAM，而是为了避免可伸缩性问题，将紧密耦合的数据保持物理上在一起，而将单独使用的数据保持在很远很远的地方。"
 >
-> 
+> 最后一句话的含义是: 
+>
+> locality 不再仅仅是"fitting well into cache and RAM"，还包括了: 为了避免"scalability busters(遏制)"，需要:
+>
+> 1、keeping tightly coupled data physically close together 
+>
+> 2、separately used data far, far apart
+>
+> 这是为了避免false sharing
 
 
 
 ## Of Course, You'd Never Convoy(护航) On a Global Lock
+
+### Example
 
 Nobody would ever willingly write code like this in a tight loop.
 
@@ -32,7 +46,7 @@ This is clearly foolish, because all the work is being done while holding a glob
 
 Convoys are a classic way to kill parallel scalability. In this example, we'll get no parallel speedup at all because this is just a fancy way to write sequential code. In fact, we'll probably get a minor performance hit because of taking and releasing the lock many times and incurring context switches, and so we would be better off just putting the lock around the whole loop and making the convoy more obvious.
 
-
+#### 降低锁的粒度
 
 True, we sometimes still gain some parallel benefit when only part of each thread's work is done while holding the lock:
 
@@ -52,11 +66,23 @@ while( ... ) {
 
 
 
-Now at least some of the threads' work can be done in parallel. Of course, we still hit Amdahl's Law [1]: Even on infinitely parallel hardware with an infinite number of workers, the maximum speedup is merely` (s+p)/s,` minus whatever overhead we incur to perform the locking and context switches. But if we fail to measure (ahem) and the time spent in `p` is much less than in `s`, we're really gaining little and we've again written a convoy.
+Now at least some of the threads' work can be done in parallel. 
 
+> NOTE: 
+>
+> 一、Global Lock锁的粒度太大了，通过降低锁的粒度，能够提升一些并发性，但是从下面的"Amdahl's Law"可知，这种提升是有上限的。
 
+### Amdahl's Law 
 
-We'd never willingly do this. But the ugly truth is that we do it all the time: Sometimes it happens unintentionally; for example, when some function we call might be taking a lock on a popular mutex unbeknownst(不为所知的) to us. But often it happens invisibly, when hardware will helpfully take exactly such an exclusive lock automatically, and silently, on our behalf. Let's see how, why, and what we can do about it.
+Of course, we still hit Amdahl's Law [1]: Even on infinitely parallel hardware with an infinite number of workers, the maximum speedup is merely` (s+p)/s,` minus whatever overhead we incur to perform the locking and context switches. But if we fail to measure (ahem) and the time spent in `p` is much less than in `s`, we're really gaining little and we've again written a convoy.
+
+### The ugly truth: 无处不在的exclusive lock
+
+> NOTE: 
+>
+> 1、无处不在的lock，最终都会导致 "hit Amdahl's Law"
+
+We'd never willingly do this. But the ugly truth is that we do it all the time: Sometimes it happens unintentionally; for example, when some function we call might be taking a lock on a popular mutex unbeknownst(不为所知的) to us. But often it happens invisibly(看不见的), when hardware will helpfully take exactly such an exclusive lock automatically, and silently, on our behalf. Let's see how, why, and what we can do about it.
 
 
 
@@ -134,6 +160,8 @@ On a machine with one core, the program would probably take twice as long to run
 
 On a machine with two or more cores, we'd probably expect to get a 2x throughput improvement as the two threads each run at full speed on their own cores. And that is what in fact will happen...but only if `x` and `y` are on different cache lines.
 
+### `x` and `y` are on the same cache line
+
 If `x` and `y` are on the same cache line, however, only one core can be updating the cache line at a time, because only one core can have exclusive access at a time—it's as if the cache line is a token being passed between the threads/cores to say who is currently allowed to run. So the situation is exactly as if we had explicitly written:
 
 ```C++
@@ -154,13 +182,13 @@ for( i = 0; i < MAX; ++i ) {
 
 
 
-Which of course is exactly what we said we would never willingly do: Only one thread can make progress at a time. This effect is called "false sharing" because, even though the cores are trying to update different parts of the cache line, that doesn't matter; the unit of sharing is the whole line, and so the performance effect is the same as if the two threads were trying to share the same variable. It's also called ping-ponging because that's an apt description of how the cache line ownership keeps hopping back and forth madly between the two cores.
+Which of course is exactly what we said we would never willingly do: Only one thread can make progress at a time. This effect is called "false sharing" because, even though the cores are trying to update different parts of the **cache line**, that doesn't matter; the unit of sharing is the whole line, and so the performance effect is the same as if the two threads were trying to share the same variable. It's also called ping-ponging because that's an apt description of how the cache line ownership keeps hopping back and forth madly between the two cores.
 
-
+### How to ensure `x` and `y` are on different cache lines? 
 
 Even in this simple example, what could we do to ensure `x` and `y` are on different cache lines? First, we can rearrange the data: For example, if `x` and `y` are data values inside the same object, perhaps we can rearrange the object's members so that `x` and `y` are sufficiently further apart. Second, we can add padding: If we have no other data that's easy to put adjacent to `x,` we can ensure `x` is alone on its cache line by allocating extra space, such as by allocating a larger object with `x` as a member (preceded/followed by appropriate padding to fill the cache line) instead of allocating `x` by itself as a naked integer. This is a great example of how to deliberately waste space to improve performance.
 
-
+### False sharing example
 
 False sharing arises in lots of hard-to-see places. For example:
 
@@ -170,21 +198,25 @@ False sharing arises in lots of hard-to-see places. For example:
 
 ## Cache-Conscious Design
 
+> NOTE: 
+>
+> 1、我们要意识到CPU cache的重要性，因此在进行设计的时候，需要合理的安排数据
+
 Locality is a first-order issue that trumps much of our existing understanding of performance optimization. Most traditional optimization techniques come after "locality" on parallel hardware (although a few are still equally or more important than locality, such as big-Oh algorithmic complexity for example).
 
 
 
 Arrange your data carefully by following these three guidelines, starting with the most important:
 
+### First
 
+First: Keep data that are not used together apart in memory. If variables `A` and `B` are not protected by the same mutex and are liable(应该) to be used by two different threads, keep them on separate cache lines. (Add padding, if necessary; it's a great way to "waste" memory to make your code run faster.) This avoids the invisible convoying of false sharing (ping-pong) where in the worst case only one contending thread can make progress at all, and so typically trumps other important cache considerations.
 
-First: Keep data that are not used together apart in memory. If variables `A` and `B` are not protected by the same mutex and are liable to be used by two different threads, keep them on separate cache lines. (Add padding, if necessary; it's a great way to "waste" memory to make your code run faster.) This avoids the invisible convoying of false sharing (ping-pong) where in the worst case only one contending thread can make progress at all, and so typically trumps other important cache considerations.
-
-
+### Second
 
 Second: Keep data that is frequently used together close together in memory. If a thread that uses variable `A` frequently also needs variable `B,` try to put `A` and `B` in the same cache line if possible. For example, `A` and `B` might be two fields in the same object that are frequently used together. This is a traditional technique to improve memory performance in both sequential and concurrent code, which now comes second to keeping separate data apart.
 
-
+### Third
 
 Third: Keep "hot" (frequently accessed) and "cold" (infrequently accessed) data apart. This is true even if the data is conceptually in the same logical object. This helps both to fit "hot" data into the fewest possible cache lines and memory pages and to avoid needlessly loading the "colder" parts. Together these effects reduce (a) the cache footprint and cache misses, and (b) the memory footprint and virtual memory paging.
 
@@ -194,8 +226,9 @@ Achieving parallel scalability involves two things:
 
 
 
-1. Express it: Find the work that can be parallelized effectively.
-2. Then don't lose it: Avoid visible and invisible scalability busters like the ones noted in this article.
+1、Express it: Find the work that can be parallelized effectively.
+
+2、Then don't lose it: Avoid visible and invisible scalability busters like the ones noted in this article.
 
 
 
