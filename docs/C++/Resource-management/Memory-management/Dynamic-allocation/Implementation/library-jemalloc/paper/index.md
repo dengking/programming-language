@@ -2,7 +2,7 @@
 
 > NOTE: 
 >
-> 1、从下面的内容来看，tcmalloc的设计其实非常注重的是scalability，这也是它的优势，显然这是"意图决定最终的结果"	
+> 1、从下面的内容来看，jemalloc的设计其实非常注重的是scalability，这也是它的优势，显然这是"意图决定最终的结果"	
 
 ## Introduction
 
@@ -26,7 +26,15 @@ If two threads are simultaneously running on separate processors and manipulatin
 
 > TODO: 需要截图过来，原图非常好
 
-Figure 1: Two allocations that are used by separate threads share the same line in the physical memory cache (false cache sharing). If the threads concurrently modify the two allocations, then the processors must fight over ownership of the cache line.
+Modern multi-processor systems preserve a coherent view of memory on a per-cache-line basis. If two threads are simultaneously running on separate processors and manipulating separate objects that are in the same cache line, then the processors must arbitrate ownership of the cache line (Figure 1). This false cache line sharing can cause serious performance degradation. One way of fixing this issue is to pad allocations, but padding is in direct opposition to the goal of packing objects as tightly as possible; it can cause severe internal fragmentation. jemalloc instead relies on multiple allocation arenas to reduce the problem, and leaves it up to the application writer to pad allocations in order to avoid false cache line sharing in performance-critical code, or in code where one thread allocates objects and hands them off to multiple other threads.
+
+> NOTE: 
+>
+> 1、"tag-padding-to-cache line-optimization-avoid false sharing"
+>
+> 实现方式有多种，通过上述tag，可以找到实现方式
+
+![](./figure-1.false-sharing.png)
 
 #### jemalloc的策略
 
@@ -45,6 +53,8 @@ jemalloc instead relies on multiple allocation arenas to reduce the problem, and
 > 2、从下面的描述来看，Larson and Krishnan (1998) 的思想是: "divide to reduce lock granularity"，即"They tried pushing locks down in their allocator, so that rather than using a single allocator lock, each free list had its own lock"，显然，这降低了lock granularity。
 >
 > 3、jemalloc 借鉴了Larson and Krishnan (1998) 的"multiple arenas"策略，但是"uses a more reliable mechanism than hashing for assignment of threads to arenas"，通过后文可知，是"round-robin"
+>
+> 这是cache optimization，为了避免"cache sloshing-晃动"
 >
 > 在下面的图中，解释了"hashing of the thread identifiers"的劣势，简单而言: 伪随机过程，并不能够保证均等，因此无法保证load balance（此处使用load balance是不准确的）
 
