@@ -21,6 +21,8 @@ Atomically compares the [object representation](https://en.cppreference.com/w/cp
 >
 > a、[CAS](https://en.wikipedia.org/wiki/Compare-and-swap)
 >
+> 比较 `obj` 和 `expected`，如果相等，则说明状态没有变化、没有其它的transaction发生，则commit；否则rollback。
+>
 > b、"loads"(其实是"Copying"): "loads the actual value pointed to by `obj` into `*expected` (performs load operation)"
 >
 > 这样的设计在一定程度上简化了使用；
