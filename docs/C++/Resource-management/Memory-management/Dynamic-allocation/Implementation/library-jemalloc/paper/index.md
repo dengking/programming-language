@@ -54,7 +54,7 @@ jemalloc instead relies on multiple allocation arenas to reduce the problem, and
 >
 > 3、jemalloc 借鉴了Larson and Krishnan (1998) 的"multiple arenas"策略，但是"uses a more reliable mechanism than hashing for assignment of threads to arenas"，通过后文可知，是"round-robin"
 >
-> 这是cache optimization，为了避免"cache sloshing-晃动"
+> 这是cache optimization，为了避免"cache sloshing-晃动"，所谓的"cache sloshing-晃动"，其实就是 "cache coherence flood-broadcast-bus traffic-interconnect contention-memory synchronization多核同步内存"。
 >
 > 在下面的图中，解释了"hashing of the thread identifiers"的劣势，简单而言: 伪随机过程，并不能够保证均等，因此无法保证load balance（此处使用load balance是不准确的）
 
