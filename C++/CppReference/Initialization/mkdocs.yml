@@ -1,0 +1,17 @@
+nav:
+    - Introduction: index.md
+    # 首先描述cppreference中initialization的概念    
+    - Initialization-and-constructor-and-conversion: Initialization-and-constructor-and-conversion
+    - Initialization: Initialization.md
+    - Default-initialization: Default-initialization    
+    - C++03-Value-initialization: C++03-Value-initialization
+    - Direct-initialization: Direct-initialization
+    - Copy-initialization: Copy-initialization
+    - Syntax-ambiguity-in-initialization-with-parenthese: Syntax-ambiguity-in-initialization-with-parenthese
+    - akrzemi1-Value-initialization-with-C++: akrzemi1-Value-initialization-with-C++
+    - C++11-List-initialization: C++11-List-initialization
+    - Aggregate-initialization: Aggregate-initialization    
+
+    - Zero-initialization: Zero-initialization
+    - Constant-initialization: Constant-initialization
+

@@ -1,3 +1,2 @@
 nav:
-    - Buffer-overflow: Buffer-overflow.md
-    - Memeset: Memeset
+    - Introduction: index.md

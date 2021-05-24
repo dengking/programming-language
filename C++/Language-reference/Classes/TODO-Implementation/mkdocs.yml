@@ -1,5 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Class-memory-layout: Class-memory-layout
-    - Subtyping-polymorphism: Subtyping-polymorphism
-    - RTTI: RTTI

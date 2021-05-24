@@ -1,0 +1,1 @@
+# Variadic static array

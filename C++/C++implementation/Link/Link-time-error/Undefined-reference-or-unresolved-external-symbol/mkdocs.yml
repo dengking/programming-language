@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - Object-Files-and-Symbols: Object-Files-and-Symbols.md
+
+    - Undefined-symbols-vtable-typeinfo: Undefined-symbols-vtable-typeinfo

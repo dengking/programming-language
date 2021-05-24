@@ -2,5 +2,8 @@ nav:
     - Introduction: index.md
     - Inheritance: Inheritance
     - Composition: Composition
+    - Composition-over-inheritance-principle: Composition-over-inheritance-principle
     - Mixin: Mixin
+    - TODO-assemble-ability: TODO-assemble-ability
+    - TODO-assemble-as-chain: TODO-assemble-as-chain
     - TODO-Abstraction-and-relation: TODO-Abstraction-and-relation.md

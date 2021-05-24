@@ -2,3 +2,4 @@ nav:
     - Introduction: index.md
     - Garbage-collection: Garbage-collection
     - Reference-counting: Reference-counting
+    - paper-A-Survey-of-Garbage-Collection-Techniques: paper-A-Survey-of-Garbage-Collection-Techniques

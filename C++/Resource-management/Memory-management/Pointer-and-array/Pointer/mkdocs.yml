@@ -6,6 +6,6 @@ nav:
     - Pointer-and-integer: Pointer-and-integer
     - Conversion: Conversion.md
     - Pointer-length: Pointer-length
-
+    - Pointer-to-member: Pointer-to-member
 
     

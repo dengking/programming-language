@@ -1,5 +1,3 @@
 nav:
     - Introduction: index.md
-    - Type-requirement: Type-requirement
-    - Polymorphism: Polymorphism
-    - Detection: Detection
+    - Custom-static-polymorphism: Custom-static-polymorphism

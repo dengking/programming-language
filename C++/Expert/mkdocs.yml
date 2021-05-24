@@ -1,5 +1,5 @@
 nav:
-    - Bjarne-Stroustrup: Bjarne-Stroustrup.md
+    - Bjarne-Stroustrup: Bjarne-Stroustrup
     - Herb-Sutter: Herb-Sutter
     - Scott-Meyers: Scott-Meyers
     - Andrei-Alexandrescu: Andrei-Alexandrescu
@@ -11,3 +11,4 @@ nav:
     - Anthony-Williams-Justsoftwaresolutions: Anthony-Williams-Justsoftwaresolutions
     - Sean-Parent: Sean-Parent
     - Erik-Rigtorp: Erik-Rigtorp
+    - Arthur-O’Dwyer: Arthur-O’Dwyer

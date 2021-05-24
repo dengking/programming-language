@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    - drdobbs-Andrew-Koenig-Object-Swapping: drdobbs-Andrew-Koenig-Object-Swapping
-    - std-swap: std-swap
-    - Non-throwing-swap: Non-throwing-swap
-    - Swappable-concept: Swappable-concept

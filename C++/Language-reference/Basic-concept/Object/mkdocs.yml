@@ -1,9 +1,0 @@
-nav:
-    # 首先描述c++中object的概念
-    - Introduction: index.md
-    - cppreference-object: cppreference-object
-    # object的storage duration和lifetime是两个非常重要的概念    
-    - Lifetime-and-storage-duration: Lifetime-and-storage-duration
-    # 描述object的layout    
-    - Layout: Layout 
-    - Object-operation: Object-operation    

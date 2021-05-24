@@ -1,0 +1,5 @@
+nav:
+    - offsetof: offsetof
+    - Struct-initialization: Struct-initialization
+    - The-Lost-Art-of-Structure-Packing: The-Lost-Art-of-Structure-Packing
+    - Pragma-pack-macro: Pragma-pack-macro.md

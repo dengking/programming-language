@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Class-hierarchy: Class-hierarchy
+    - Multiple-inheritance: Multiple-inheritance
+    - Super: Super

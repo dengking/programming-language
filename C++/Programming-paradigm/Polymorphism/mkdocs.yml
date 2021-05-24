@@ -1,6 +1,9 @@
 nav:
     - Introduction: index.md
-    - Specialization-and-overload: Specialization-and-overload
-    - Assemble-polymorphism-and-multiple-dispatch: Assemble-polymorphism-and-multiple-dispatch
-    - TODO-Static-and-dynamic-polymorphism: TODO-Static-and-dynamic-polymorphism
+    - Classification: Classification
+    - Built-in-internal-polymorphism: Built-in-internal-polymorphism
+    - Custom-polymorphism: Custom-polymorphism
+
+    # 下面对一些topic进行讨论
+
     - Polymorphic-object-container: Polymorphic-object-container

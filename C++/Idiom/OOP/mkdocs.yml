@@ -1,23 +1,19 @@
 nav:
-    - Introduction: index.md     
-    ########## resource相关########## 
-    - Class-basic: Class-basic
-    - RAII-based: RAII-based
-    - Resource-Return: Resource-Return
+    - Introduction: index.md
+    - Named-Constructor-idiom: Named-Constructor-idiom
     # 命名参数
     - Named-Parameter: Named-Parameter
-    # Control the granularity of access to the implementation details of a class
-    - TODO-Attorney-Client: TODO-Attorney-Client
+
     # 控制object是否能够创建于heap
-    - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects
+    - Requiring-or-Prohibiting-Heap-based-Objects-idiom: Requiring-or-Prohibiting-Heap-based-Objects-idiom
     #
     - Temporary-Proxy: Temporary-Proxy
     #
-    - Address-Of: Address-Of
-    #
-    - TODO-Temporary-Base-Class: TODO-Temporary-Base-Class
-
+    - Address-of-idiom: Address-of-idiom
+    
     - Pointer-to-implementation-PImpl: Pointer-to-implementation-PImpl
-    - TODO-Safe-Bool: TODO-Safe-Bool
-    - Static-object: Static-object
+    - Custom-input-output-operator: Custom-input-output-operator
 
+    # Control the granularity of access to the implementation details of a class
+    - TODO-Attorney-Client: TODO-Attorney-Client
+    - TODO-Temporary-Base-Class: TODO-Temporary-Base-Class

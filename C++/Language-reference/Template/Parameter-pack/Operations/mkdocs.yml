@@ -1,5 +1,0 @@
-nav:
-    - Introduction: index.md
-    - sizeof-parameter-pack: sizeof-parameter-pack
-    - Recursive-variadic-function: Recursive-variadic-function    
-    - C++17-Fold-expression: C++17-Fold-expression

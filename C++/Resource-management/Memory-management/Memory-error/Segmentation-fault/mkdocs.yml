@@ -1,4 +1,3 @@
 nav:
-    - Segmentation-fault: Segmentation-fault.md
+    - Introduction: index.md
     - Identify-what's-causing-segmentation-faults-(segfaults): Identify-what's-causing-segmentation-faults-(segfaults).md
-    - Misalignment: Misalignment

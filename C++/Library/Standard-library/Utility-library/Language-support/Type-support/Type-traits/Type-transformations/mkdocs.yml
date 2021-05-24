@@ -1,4 +1,0 @@
-nav:
-    - conditional: conditional.md
-    - void_t: void_t
-    - decay: decay

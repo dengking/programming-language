@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Perfect-forwarding: Perfect-forwarding
-    - std-move-and-std-forward: std-move-and-std-forward.md
-    - Reference: Reference.md
-    - Pointer-VS-reference: Pointer-VS-reference.md

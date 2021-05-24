@@ -1,0 +1,11 @@
+nav:
+    - Introduction: index.md
+    ########## 首先描述c++中的type conversion的概念#########    
+    - cplusplus-type-conversions: cplusplus-type-conversions
+    - Implicit-conversion: Implicit-conversion
+    - Explicit-conversion: Explicit-conversion
+    - Cast-operator: Cast-operator
+    ########## 用户自定义cast    
+    - User-defined-conversion: User-defined-conversion
+    - Type-conversion-and-temporary: Type-conversion-and-temporary
+    

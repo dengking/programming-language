@@ -3,8 +3,8 @@ nav:
     - Design: Design
     - Why-need-memory-model: Why-need-memory-model
     - Guide: Guide
-    - Atomic-operations-library: Atomic-operations-library
+    - Atomic-operations-library: Library
     - C++VS-Java-memory-model: C++VS-Java-memory-model
-    - cam-Cppmem: cam-Cppmem
+    - cl.cam.uk-Cppmem: cl.cam.uk-Cppmem
 
     

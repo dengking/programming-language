@@ -1,7 +1,0 @@
-nav:
-    - Introduction: index.md
-    # trait是和template相关的
-    - Trait: Trait
-    # enable-if的实现是依赖于trait
-    - enable-if: enable-if
-    - Tag-Dispatching: Tag-Dispatching

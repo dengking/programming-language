@@ -6,3 +6,5 @@ nav:
     - Decorator: Decorator
     - Adaptor-pattern: Adaptor-pattern
     - Mixin: Mixin
+    - Assemble-as-chain: Assemble-as-chain
+    - Design-by-contract: Design-by-contract

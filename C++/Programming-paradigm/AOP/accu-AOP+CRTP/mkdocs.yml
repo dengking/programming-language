@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - cpp11_template_alias: cpp11_template_alias

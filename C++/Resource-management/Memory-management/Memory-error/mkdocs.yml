@@ -1,12 +1,15 @@
 nav:
     - Introduction: index.md
-    - Memory-safety: Memory-safety.md
-    - Memory-debugger: Memory-debugger.md
+    - Memory-safety: Memory-safety
+
+    - Segmentation-fault: Segmentation-fault    
+    
     - Double-free: Double-free
-    - Segmentation-fault: Segmentation-fault
+
     - Out-of-bound: Out-of-bound
     - Dereference-null-pointer: Dereference-null-pointer
     - Dangling-and-wild-pointer: Dangling-and-wild-pointer
     - OOM: OOM
     - Buffer-overflow: Buffer-overflow
     - Memory-leak: Memory-leak
+    - Memory-debugger: Memory-debugger    

@@ -1,2 +1,6 @@
 nav:
-    - Functional-programming: index.md
+    - Introduction: index.md
+    - Pure-function: Pure-function.md
+    - Higher-order-function: Higher-order-function
+    - First-class-function: First-class-function.md
+    - Function-composition: Function-composition

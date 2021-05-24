@@ -1,5 +1,0 @@
-nav:
-    - Introduction: index.md
-
-    # 控制object是否能够创建于heap
-    - Requiring-or-Prohibiting-Heap-based-Objects: Requiring-or-Prohibiting-Heap-based-Objects    

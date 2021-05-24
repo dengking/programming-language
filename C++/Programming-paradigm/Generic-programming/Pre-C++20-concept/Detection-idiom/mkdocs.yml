@@ -1,0 +1,9 @@
+nav:
+    - Introduction: index.md
+    - More-C++Idioms-Member-Detector: More-C++Idioms-Member-Detector
+    - Detect-member-function: Detect-member-function
+    - Detect-whether-a-type-is-defined: Detect-whether-a-type-is-defined
+    - tartanllama-Detection-Idiom-A-Stopgap-for-Concepts: tartanllama-Detection-Idiom-A-Stopgap-for-Concepts
+    - Ben-C++Detection-Idiom-Through-the-Years: Ben-C++Detection-Idiom-Through-the-Years
+    - Control-ambiguity-SFINAE-fallback: Control-ambiguity-SFINAE-fallback
+    

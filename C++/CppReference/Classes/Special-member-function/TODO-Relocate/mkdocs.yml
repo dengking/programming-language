@@ -1,0 +1,3 @@
+nav:
+    - Introduction: index.md
+    - paper-P1144R2-Object-relocation-in-terms-of-move-plus-destroy: paper-P1144R2-Object-relocation-in-terms-of-move-plus-destroy

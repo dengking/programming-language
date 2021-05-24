@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - Googletest: Googletest
+    - catchorg-Catch2: catchorg-Catch2
