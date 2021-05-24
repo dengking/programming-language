@@ -4,37 +4,49 @@ In the [previous article](https://blog.feabhas.com/2014/12/the-rule-of-the-big-t
 
 ## The cost of copying
 
-Earlier, we had defined a `SocketManager` class that manages the lifetime of a Socket object. Here’s the type definition for the SocketManager:
+Earlier, we had defined a `SocketManager` class that manages the lifetime of a `Socket` object. Here’s the type definition for the `SocketManager`:
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb25.png?resize=466%2C474)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image37.png)
+![](./image_thumb25.png)
 
-The Socket is allocated in the SocketManager constructor; and de-allocated in the destructor.
 
-The SocketManager class implements both the copy constructor and assignment operator, providing a ‘deep copy’ policy. You should read the previous article if you’re not already familiar with the *Copy-Swap Idiom* I’ve used here.
+
+The `Socket` is allocated in the `SocketManager` constructor; and de-allocated in the destructor.
+
+The `SocketManager` class implements both the copy constructor and assignment operator, providing a ‘deep copy’ policy. You should read the previous article if you’re not already familiar with the *Copy-Swap Idiom* I’ve used here.
 
 Copying objects may not be the best solution in many situations. It can be very expensive in terms of creating, copying and then destroying temporary objects. For example:
 
-- Returning objects from functions
-- Some algorithms (for example, swap())
-- Dynamically-allocating containers.
+1、Returning objects from functions
 
-Let’s take a vector of SocketManagers as an example:
+2、Some algorithms (for example, `swap()`)
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb26.png?resize=525%2C363)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image38.png)
+3、Dynamically-allocating containers.
 
-As expected we get the constructor for the (temporary) SocketManager object, then the copy constructor as it is inserted into the vector. The second copy constructor is caused by the vector memory allocator creating space for two new objects then copying the objects across. This is an expensive operation since every copy requires de-allocation / re-allocation of memory and copying of contents.
+Let’s take a vector of `SocketManagers` as an example:
 
-Here we’re using the default constructor for the SocketManager class. We will discuss the consequences of this later.
+![](./image_thumb26.png)
+
+As expected we get the **constructor** for the (temporary) `SocketManager` object, then the **copy constructor** as it is inserted into the vector. The second copy constructor is caused by the vector memory allocator creating space for two new objects then copying the objects across. This is an expensive operation since every copy requires de-allocation / re-allocation of memory and copying of contents.
+
+Here we’re using the default constructor for the `SocketManager` class. We will discuss the consequences of this later.
 
 For this example I’m deliberately ignoring emplacement of the objects; although the copying will still occur as memory is allocated.
 
-#### Resource pilfering and r-value references
+## Resource pilfering(盗窃) and r-value references
 
 C++98 favours copying. When temporary objects are created, as in the above example, they are copied (using the copy constructor). In a lot of cases copying is an unnecessary overhead since the temporary is going out of scope and can’t use its resources anymore.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb27.png?resize=559%2C277)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image40.png)
+![](./image_thumb27.png)
+
+
 
 It would be nicer if we could just ‘take ownership’ of the temporary’s resources, freeing it of the burden of de-allocating the resource, and freeing us of the burden of re-allocating. This is concept is known as ‘resource pilfering’.
+
+> NOTE: 
+>
+> 一、C++11 mover semantic transfer resource ownership
+
+### C++11 *r-value reference*
 
 C++11 introduced the concept of the *r-value reference* for such circumstances.
 
@@ -42,55 +54,77 @@ C++ programmers are (hopefully!) familiar with references. A reference allows yo
 
 An r-value reference can be explicitly bound to an r-value. An r-value is an *unnamed object;* a temporary object, in other words. (click [here](https://blog.feabhas.com/2013/02/l-values-r-values-expressions-and-types/) for a much more detailed discussion of l-value and r-value expressions)
 
-Rather confusingly an r-value reference, since it is a named object, is actually an l-value expression! Hence why the call to byRef(rval) actually calls byRef(int&)
+Rather confusingly an r-value reference, since it is a named object, is actually an l-value expression! Hence why the call to `byRef(rval)` actually calls `byRef(int&)`
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image_thumb.png?resize=541%2C300)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image.png)
+> NOTE: 
+>
+> 一、"a named rvalue reference is an lvalue-just like any other variable"，下面的这个例子是一个非常经典的例子
+
+![](./image_thumb28.png)
+
+
 
 The r-value reference, while not in and of itself particularly useful (much like the l-value reference, actually), can be used to overload functions to respond differently depending on whether a parameter is an l-value or an r-value type, giving different behaviour in each case.
 
-There are (as always) some complications. The compiler only favours r-value reference overloads for modifiable r-values; for constant r-values it always prefers constant l-value references (for backward compatibility). This means overloading functions for const T&& has no real application.
+#### There is no const r-value reference 
+
+There are (as always) some complications. The compiler only favours r-value reference overloads for modifiable r-values; for constant r-values it always prefers constant l-value references (for **backward compatibility**). This means overloading functions for `const T&&` has no real application.
 
 As we can now distinguish between l-value and r-value objects we can overload the constructor (and, later, assignment operator) to support resource pilfering.
 
-#### 4 – Move constructor
+### 4 – Move constructor
 
 The move constructor is an overload of a class’ constructor that takes an r-value reference as a parameter. That is, the compiler can determine that the object used as the source is going out of scope in the near future and so we can pilfer its resources to construct the new object. The basic process is to take ownership of all the source object’s attributes then leave it in an ‘empty’ state.
 
-What constitutes ‘empty’ will obviously vary from class to class; but basically it means leaving the object in such a state that its destructor will not fail or throw an exception.
+> NOTE: 
+>
+> CppCoreGuidelines [C.64: A move operation should move and leave its source in a valid state](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c64-a-move-operation-should-move-and-leave-its-source-in-a-valid-state)
+
+What constitutes(构成) ‘empty’ will obviously vary from class to class; but basically it means leaving the object in such a state that its destructor will not fail or throw an exception.
 
 Let’s look at the naïve solution first to understand the principle.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb29.png?resize=431%2C429)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image43.png)
+![](./image_thumb29.png)
 
-Note the parameter for the move constructor is not const – we need to modify the parameter. Our move constructor needs to pilfer the resources of the source object, and leave it in a default state.
+Note the parameter for the **move constructor** is not `const` – we need to modify the parameter. Our **move constructor** needs to pilfer(偷窃) the resources of the source object, and leave it in a **default state**.
 
-The move constructor ‘claims’ the resource of the supplied r-value. By setting the r-value pSocket to nullptr, when the r-value object goes out of scope its destructor will do nothing.
+The move constructor ‘claims’(请求) the resource of the supplied r-value. By setting the r-value `pSocket` to `nullptr`, when the r-value object goes out of scope its destructor will do nothing.
 
 As in previous articles, a look at the memory map can clarify what’s going on. First we take ownership of the right-hand-side’s resources.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb30.png?resize=263%2C423)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image44.png)
+![](./image_thumb30.png)
+
+
 
 Then we put the right-hand side into an ‘empty’ state.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb31.png?resize=263%2C416)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image45.png)
+![](./image_thumb31.png)
 
-When the right-hand-side (temporary) object goes out of scope its destructor is called but does nothing (deleting nullptr has no effect). We have successfully pilfered the resources from the temporary object.
+When the right-hand-side (temporary) object goes out of scope its destructor is called but does nothing (deleting `nullptr` has no effect). We have successfully pilfered(窃取) the resources from the temporary object.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb32.png?resize=260%2C393)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image46.png)
+![](./image_thumb32.png)
 
-A brief review of the code reveals that all the move constructor is doing is simply swapping the elements of the source object with an object in the default state. We have code that can already perform those two functions – the default constructor and the swap() function.
+A brief review of the code reveals that all the **move constructor** is doing is simply swapping the elements of the source object with an object in the default state. We have code that can already perform those two functions – the **default constructor** and the `swap()` function.
 
 Re-writing the move constructor as below is clearly a more elegant solution.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb33.png?resize=441%2C356)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image47.png)
+![](./image_thumb33.png)
+
+
 
 Here we are making use of a C++11 feature – cascading constructors. The first thing we do in the move constructor is call the default constructor for the class, before swapping this ‘empty’ object’s state with the temporary’s.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb34.png?resize=449%2C264)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image49.png)
+> NOTE: 
+>
+> 一、关于"C++11 feature – cascading constructors"，参见 cppreference [Constructors and member initializer lists # Delegating constructor](https://en.cppreference.com/w/cpp/language/constructor#Delegating_constructor)。
+
+![](./image_thumb34.png)
+
+
 
 Notice, in order to perform a move construction it must be possible to define an ‘empty’ state for the object. A good rule of thumb is: *if you cannot define a default constructor for the class it cannot support move semantics*.
 
-A side-note: The move constructor is qualified as noexcept. This is a C++11 keyword denoting the exception specification of the function. In this case it guarantees that the move constructor will not throw an exception. This is a requirement for container classes (like the vector in our earlier example). If the move constructor may throw an exception the container will normally copy the object rather than move it.
+A side-note: The move constructor is qualified as `noexcept`. This is a C++11 keyword denoting the exception specification of the function. In this case it guarantees that the move constructor will not throw an exception. This is a requirement for container classes (like the vector in our earlier example). If the move constructor may throw an exception the container will normally copy the object rather than move it.
 
 Now we can return to our original example, the vector of SocketManagers. With the move constructor in place the SocketManager objects are moved rather than copied. (Note: we haven’t changed the vector code. It was attempting to move our SocketManager class all along, but without a move constructor to bind to, the compiler preferred the next best thing – binding the r-value object to a const SocketManager&; that is, the copy constructor)
 
@@ -104,7 +138,7 @@ There are some things to be aware of if you want to include move semantics with 
 
 std::move here doesn’t actually do any moving; it just converts an l-value into an r-value. This forces the compiler to use the object’s move constructor (if defined) rather than the copy constructor.
 
-#### 5 – Move assignment
+### 5 – Move assignment
 
 Occasionally we want to explicitly transfer ownership of resources from one object to another. This can be done using std::move.
 
@@ -122,7 +156,7 @@ The assignment operator must always check for self-assignment. Although this is 
 
 Once again, a quick review of the above code reveals that, like the move constructor, the move assignment simply swaps the right-hand-side’s values for those of an ‘empty’ object.
 
-#### Eliminating the move assignment operator
+## Eliminating the move assignment operator
 
 In reality is the move assignment operator is unnecessary!
 
@@ -154,7 +188,7 @@ When the temporary object (rhs) goes out of scope it deletes its resource (the r
 
 [![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb44.png?resize=503%2C419)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image60.png)
 
-#### Your resource management policy
+## Your resource management policy
 
 What should have been “The Rule of The Big Five” is now reduced to “The Rule of The Big Four (and a half):
 
@@ -179,7 +213,7 @@ Suppressing move and copy is straightforward; and there are two ways to do it:
 
 [![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image_thumb2.png?resize=521%2C354)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image2.png)
 
-#### The conclusion (so far)
+## The conclusion (so far)
 
 Resource management – making use of C++’s RAII/RDID mechanism – is a key practice for building efficient, maintainable, bug-free code. Defining your copy and move policy for each type in your system is a key part of the software design. The Rule of The Big Five exists as an aide memoir for your copy/move policy. Feel free to ignore it; but do so at your peril.
 
