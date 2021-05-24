@@ -61,7 +61,7 @@ RAII does not apply to the management of the resources that are not acquired bef
 
 
 
-## 维基百科[Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) 
+## wikipedia [Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) 
 
 > NOTE: 本文主要讨论了RAII idiom的写法以及这样写的好处。
 
