@@ -230,23 +230,33 @@ Here’s the memory situation just before the call to the assignment.
 
 A copy of the right-hand-side object is made: temp.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb20.png?resize=254%2C407)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image29.png)
+![image](./image_thumb20.png)
 
-Next, the left-hand-side of the assignment (this) and the temporary object are exchanged using swap().
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb21.png?resize=279%2C441)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image31.png)
 
-When the temporary object goes out of scope at the end of the function it will deallocate its resource – which was the resource owned by the left-hand-side (mgr2). Thus there are no memory leaks.
+Next, the left-hand-side of the assignment (this) and the temporary object are exchanged using `swap()`.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb22.png?resize=319%2C437)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image32.png)
+![image](./image_thumb21.png)
 
-There is a (small) chance that if the copy constructor (for temp) fails it could throw an exception, possibly leaving the receiving object in an invalid state.
 
-To stop this, we re-write the assignment operator and move the copy construction outside the call. Notice the assignment operator has been re-written to take a SocketManager object *by value*.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb23.png?resize=540%2C466)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image34.png)
+When the temporary object goes out of scope at the end of the function it will deallocate its resource – which was the resource owned by the left-hand-side (`mgr2`). Thus there are no memory leaks.
 
-When the assignment operator is called, the first thing that happens is a copy of the right-hand-side is made. Should the copy constructor throw an exception this will happen before the call to operator= (which will never get called); thus leaving the left-hand-side object unaffected.
+![image](./image_thumb22.png)
+
+
+
+### Assignment operator-pass by value-copy and swap idiom-strong exception safety
+
+There is a (small) chance that if the copy constructor (for `temp`) fails it could throw an exception, possibly leaving the receiving object in an invalid state.
+
+To stop this, we re-write the assignment operator and move the copy construction outside the call. Notice the assignment operator has been re-written to take a `SocketManager` object *by value*.
+
+![image](./image_thumb23.png)
+
+
+
+When the assignment operator is called, the first thing that happens is a copy of the right-hand-side is made. Should the copy constructor throw an exception this will happen before the call to `operator=` (which will never get called); thus leaving the left-hand-side object unaffected.
 
 ## The Rule of the Big Three (and a half)
 
@@ -266,15 +276,17 @@ The *Rule of the Big Three* states that if you have implemented either
 
 You should also implement the other two.
 
-To implement the Copy-Swap idiom your resource management class must also implement a swap() function to perform a member-by-member swap (there’s your “…(and a half)”)
+To implement the Copy-Swap idiom your resource management class must also implement a `swap()` function to perform a member-by-member swap (there’s your “…(and a half)”)
 
 ## Suppressing copying
 
 In some cases you may want to explicitly restrict / suppress copying. For example, copying an OS mutex is semantically incorrect.
 
-To suppress copying mark the copy constructor and assignment operator as a del*eted function* (using =delete). The compiler will prevent you from calling these functions. You only have to declare the copy constructor and assignment operator; not define them (since no-once can call them).
+To suppress copying mark the copy constructor and assignment operator as a del*eted function* (using `=delete`). The compiler will prevent you from calling these functions. You only have to declare the copy constructor and assignment operator; not define them (since no-once can call them).
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb24.png?resize=535%2C301)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image35.png)
+![image](./image_thumb24.png)
+
+
 
 The choice you make for the class is known as its *copy policy.* Depending on the needs of the class the policy may be:
 
