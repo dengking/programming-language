@@ -2,7 +2,7 @@
 
 
 
-## 对于resource wrapper需要阐明copyable、movable
+## 对于resource wrapper需要明确copyable、movable
 
 ### 我的经历
 
@@ -12,19 +12,9 @@
 
 2、我推测compiler会执行copy-elision，即不会发生copy，然而在复杂的C++规则面前，programmer可能无法准确的预测compiler的行为，结果发生了copy，而implicit defined copy是shallow copy，并且在定义了destructor的情况下，compiler是不会生成movable的 ，这就导致了"implicit-define-copy-constructor-shallow-copy-double-free"错误。
 
-### 从resource ownership的角度来分析copy、move
 
-move对应的是transfer ownership，它需要将resource的ownership transfer走，因此在source object中，需要表明它已经不再own resource了，source object就不再release resource。
 
-> CppCoreGuidelines-C.64 A move operation should move and leave its source in a valid state
-
-copy:
-
-deep copy: 显然是重新acquire resource了
-
-shallow copy: 显然表达的是shared ownership的，需要注意的是，raw pointer是无法表达shared ownership，`std::shared_ptr`是可以的。
-
-### 阐明copyable、movable
+### 明确copyable、movable
 
 对于resource wrapper，需要明确指定它的copyable、movable，下面是一些example: 
 
@@ -42,11 +32,13 @@ Neither copyable nor movable: `std::mutex`
 
 #### 本质是对resource ownership的阐明
 
+> NOTE: 
+>
+> 1、在resource ownership章节，对这问题已经进行了探讨。
+
 其实对copyable、movable的思考，本质上是对ownership的思考，"implicit defined copy constructor shallow copy double free"问题，其实就是典型对ownership描述不清而导致的问题，它到底是unique ownership还是shared ownership？显然raw pointer无法描述清楚，shallow copy对应的更多是shared ownership，而raw pointer无法表达shared ownership，它会导致double free、dangling。
 
 因此在使用resource handle的时候，一定要同时阐明清楚它的ownership，最好是使用`unique_ptr`、`shared_ptr`，它们已经明确的阐明清楚了ownership。
-
-
 
 
 
@@ -222,7 +214,6 @@ stackoverflow [Move constructor for std::mutex](https://stackoverflow.com/questi
 cppreference2015 [std::atomic](https://doc.bccnsoft.com/docs/cppreference2015/en/cpp/atomic/atomic.html)
 
 > `std::atomic` is neither copyable nor movable.
-
 
 
 

@@ -4,11 +4,11 @@
 
 C++ resource management中非常重要的一点是: 明确Resource ownership，这一点无论是在C++ language level、CppCoreGuidelines [R: Resource management](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#S-resource) 都有体现: 
 
-C++ language level:
+**C++ language level**
 
 1、move semantic
 
-C++ STL:
+**C++ STL**
 
 1、smart pointer
 
@@ -20,6 +20,8 @@ CppCoreGuidelines [R: Resource management](https://github.com/isocpp/CppCoreGuid
 
 3、[R.3: A raw pointer (a `T*`) is non-owning](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#r3-a-raw-pointer-a-t-is-non-owning)
 
+
+
 ### Owning and non-owning  
 
 这是在 CppCoreGuidelines [R.2: In interfaces, use raw pointers to denote individual objects (only)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-use-ptr) 的下面这段话: 
@@ -28,7 +30,7 @@ CppCoreGuidelines [R: Resource management](https://github.com/isocpp/CppCoreGuid
 
 中提出的，它提示我们: 需要区分Owning and non-owning  。
 
-### shared 和 unique
+### Shared 和 unique
 
 shared 和 unique，其实表达了对resource的ownership 语义；
 
@@ -46,16 +48,39 @@ reader lock是shared，write lock是unique的；
 
 1、akrzemi1 [Unique and shared ownership](https://akrzemi1.wordpress.com/2011/06/27/unique-ownership-shared-ownership/)
 
+
+
 ## 对resource ownership的操作
 
-1、share ownership
+总的来说，对object的operation主要两种:
 
-2、transfer/take over ownership
+1、copy
+
+2、move
+
+我们可以从resource ownership的角度来分析copy、move。
+
+### move
+
+一、move对应的是transfer ownership，它需要将resource的ownership transfer走，因此在source object中，需要表明它已经不再own resource了，source object就不再release resource。
+
+> CppCoreGuidelines-C.64 A move operation should move and leave its source in a valid state
+
+
+
+二、transfer/take over ownership
 
 > NOTE: 
 >
 > 1、"take over ownership"是我在阅读 CppCoreGuidelines [R.1: Manage resources automatically using resource handles and RAII (Resource Acquisition Is Initialization)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-raii) 时，其中提出的。
 
-### Move semantic and ownership
 
-transfer ownership后，原来的object就不再拥有了，则就不应该再使用它们了。
+
+### copy
+
+deep copy: 显然是重新acquire resource了
+
+shallow copy: 
+
+显然表达的是shared ownership的，需要注意的是，raw pointer是无法表达shared ownership，`std::shared_ptr`是可以的。
+

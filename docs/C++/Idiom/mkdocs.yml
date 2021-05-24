@@ -4,7 +4,8 @@ nav:
     - OOP: OOP
     #################### template metaprogramming和Generic-programming密切相关####################    
     - Generic-programming: Generic-programming
-
+    # 这是C++中非常重要的内容
+    - Object-based-resource-management: Object-based-resource-management
     ########## Exception#############
     - Error-handling: Error-handling
 
