@@ -1,12 +1,9 @@
 nav:
     - Introduction: index.md
-    ########## resource相关########## 
-    - Resource-wrapper: Resource-wrapper
 
     # 命名参数
     - Named-Parameter: Named-Parameter
-    # Control the granularity of access to the implementation details of a class
-    - TODO-Attorney-Client: TODO-Attorney-Client
+
     # 控制object是否能够创建于heap
     - Requiring-or-Prohibiting-Heap-based-Objects-idiom: Requiring-or-Prohibiting-Heap-based-Objects-idiom
     #
@@ -19,4 +16,5 @@ nav:
     - Pointer-to-implementation-PImpl: Pointer-to-implementation-PImpl
     - TODO-Safe-Bool: TODO-Safe-Bool
 
-
+    # Control the granularity of access to the implementation details of a class
+    - TODO-Attorney-Client: TODO-Attorney-Client
