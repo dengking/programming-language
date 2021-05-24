@@ -1,5 +1,8 @@
+# Member initializer lists
 
-# [When do we use Initializer List in C++?](https://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/)
+## cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/constructor)
+
+## geeksforgeeks [When do we use Initializer List in C++?](https://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/)
 
 **Initializer List** is used to initialize data members of a class. The list of members to be initialized is indicated with constructor as a comma separated list followed by a colon(冒号). Following is an example that uses initializer list to initialize x and y of Point class.
 
@@ -35,7 +38,7 @@ int main() {
 
 The above code is just an example for **syntax** of Initializer list. In the above code, x and y can also be easily initialed inside the constructor. But there are situations where initialization of data members inside constructor doesn’t work and **Initializer List** must be used. Following are such cases:
 
-## **1) For initialization of non-static const data members:**
+### 1) For initialization of non-static const data members:
 
 **const data members** must be initialized using Initializer List. In the following example, “t” is a const data member of Test class and is initialized using Initializer List.
 
@@ -61,7 +64,7 @@ int main() {
 */
 ```
 
-## **2) For initialization of reference members:**
+### 2) For initialization of reference members:
 
 **Reference members** must be initialized using **Initializer List**. In the following example, “t” is a reference member of Test class and is initialized using **Initializer List**.
 
@@ -91,7 +94,7 @@ int main() {
  */
 ```
 
-## **3) For initialization of member objects which do not have default constructor:**
+### 3) For initialization of member objects which do not have default constructor:
 
 In the following example, an object “a” of class “A” is data member of class “B”, and “A” doesn’t have **default constructor**. Initializer List must be used to initialize “a”.
 
@@ -133,7 +136,7 @@ int main() {
 
 If class A had both default and parameterized constructors, then Initializer List is not must if we want to initialize “a” using default constructor, but it is must to initialize “a” using parameterized constructor.
 
-## **4) For initialization of base class members :** 
+### 4) For initialization of base class members : 
 
  Like point 3, **parameterized constructor** of base class can only be called using **Initializer List**.
 
@@ -168,7 +171,7 @@ int main() {
 } 
 ```
 
-## **5) When constructor’s parameter name is same as data member**
+### 5) When constructor’s parameter name is same as data member
 
 If constructor’s parameter name is same as data member name then the data member must be initialized either using [this pointer ](http://msdn.microsoft.com/en-us/library/y0dddwwd.aspx)or Initializer List. In the following example, both member name and parameter name for A() is “i”.
 
@@ -200,7 +203,7 @@ int main() {
 */
 ```
 
-## **6) For Performance reasons:**
+### 6) For Performance reasons:
 
 It is better to initialize all class variables in **Initializer List** instead of assigning values inside body. Consider the following example:
 

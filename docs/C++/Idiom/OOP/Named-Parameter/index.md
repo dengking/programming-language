@@ -88,7 +88,7 @@ int main()
 
 编译`g++ tests.cpp`
 
-## 维基百科[Named parameter#With chained method calls](https://en.wikipedia.org/wiki/Named_parameter#With_chained_method_calls)
+## wikipedia [Named parameter#With chained method calls](https://en.wikipedia.org/wiki/Named_parameter#With_chained_method_calls)
 
 
 
