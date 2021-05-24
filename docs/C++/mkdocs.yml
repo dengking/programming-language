@@ -7,7 +7,7 @@ nav:
     - What-is-new-in-C++: What-is-new-in-C++        
     #理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识
     # Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
-    - Language-reference: Language-reference
+    - CppReference: CppReference
 
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
     - STL: STL
