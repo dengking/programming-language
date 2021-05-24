@@ -72,7 +72,7 @@ There are (as always) some complications. The compiler only favours r-value refe
 
 As we can now distinguish between l-value and r-value objects we can overload the constructor (and, later, assignment operator) to support resource pilfering.
 
-### 4 – Move constructor
+## 4 – Move constructor
 
 The move constructor is an overload of a class’ constructor that takes an r-value reference as a parameter. That is, the compiler can determine that the object used as the source is going out of scope in the near future and so we can pilfer its resources to construct the new object. The basic process is to take ownership of all the source object’s attributes then leave it in an ‘empty’ state.
 
@@ -104,6 +104,8 @@ When the right-hand-side (temporary) object goes out of scope its destructor is 
 
 ![](./image_thumb32.png)
 
+### Move constructor = default constructor + swap
+
 A brief review of the code reveals that all the **move constructor** is doing is simply swapping the elements of the source object with an object in the default state. We have code that can already perform those two functions – the **default constructor** and the `swap()` function.
 
 Re-writing the move constructor as below is clearly a more elegant solution.
@@ -127,6 +129,8 @@ Notice, in order to perform a move construction it must be possible to define an
 > NOTE: 
 >
 > 1、上述总结非常好
+>
+> 2、CppCoreGuidelines [C.44: Prefer default constructors to be simple and non-throwing](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c44-prefer-default-constructors-to-be-simple-and-non-throwing)
 
 A side-note: The move constructor is qualified as `noexcept`. This is a C++11 keyword denoting the exception specification of the function. In this case it guarantees that the move constructor will not throw an exception. This is a requirement for container classes (like the vector in our earlier example). If the move constructor may throw an exception the container will normally copy the object rather than move it.
 
@@ -136,67 +140,101 @@ A side-note: The move constructor is qualified as `noexcept`. This is a C++11 ke
 >
 > 二、tag-std-vector implementation--move if std-move_if_noexcept else copy
 
-Now we can return to our original example, the vector of `SocketManagers`. With the move constructor in place the `SocketManager` objects are moved rather than copied. (Note: we haven’t changed the vector code. It was attempting to move our SocketManager class all along, but without a move constructor to bind to, the compiler preferred the next best thing – binding the r-value object to a const SocketManager&; that is, the copy constructor)
+Now we can return to our original example, the vector of `SocketManagers`. With the move constructor in place the `SocketManager` objects are moved rather than copied. (Note: we haven’t changed the vector code. It was attempting to move our `SocketManager` class all along, but without a move constructor to bind to, the compiler preferred the next best thing – binding the r-value object to a `const SocketManager&;` that is, the copy constructor)
 
 This code could be significantly more efficient, if there is a lot of insertion in the vector.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb35.png?resize=501%2C325)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image50.png)
+![](./image_thumb35.png)
+
+
+
+### Use the base class move semantics from the derived class 
+
+> NOTE: 
+>
+> "a named rvalue reference is an lvalue-just like any other variable"，下面的这个例子是一个非常经典的例子
 
 There are some things to be aware of if you want to include move semantics with derived classes. If you want to use the base class move semantics from the derived class you must explicitly invoke it; otherwise the copy constructor will be called.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb36.png?resize=527%2C305)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image52.png)
+![](./image_thumb36.png)
 
-std::move here doesn’t actually do any moving; it just converts an l-value into an r-value. This forces the compiler to use the object’s move constructor (if defined) rather than the copy constructor.
+`std::move` here doesn’t actually do any moving; it just converts an l-value into an r-value. This forces the compiler to use the object’s move constructor (if defined) rather than the copy constructor.
 
-### 5 – Move assignment
+> NOTE: 
+>
+> tag-C++11 std move dose not move but enable move-std-cast_to_rvalue-std-enable_move
+>
+> tag-C++11 std-move-does not move and std-forward-does not forward
 
-Occasionally we want to explicitly transfer ownership of resources from one object to another. This can be done using std::move.
+## 5 – Move assignment
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb37.png?resize=535%2C392)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image53.png)
+Occasionally we want to explicitly transfer ownership of resources from one object to another. This can be done using `std::move`.
 
-std::move in this case forces the compiler to choose an r-value overload for the assignment operator.
+![](./image_thumb37.png)
 
-After the move assignment the right-hand-side object will be left in an ‘empty’ state, so be careful: use std::move only if the l-value object is going to be discarded immediately – either it won’t be used again, or it is going out of scope (what the standard refers to as an ‘x-value’).
+`std::move` in this case forces the compiler to choose an r-value overload for the assignment operator.
+
+After the move assignment the right-hand-side object will be left in an ‘empty’ state, so be careful: use `std::move` only if the l-value object is going to be discarded immediately – either it won’t be used again, or it is going out of scope (what the standard refers to as an ‘x-value’).
 
 The assignment operator can now be overloaded for r-value references. First, let’s look at a naïve solution.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb38.png?resize=536%2C416)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image54.png)
+![](./image_thumb38.png)
 
-The assignment operator must always check for self-assignment. Although this is extremely rare in hand-written code certain algorithms (for example std::sort) may make such assignments.
+
+
+The assignment operator must always check for self-assignment. Although this is extremely rare in hand-written code certain algorithms (for example `std::sort`) may make such assignments.
+
+> NOTE: 
+>
+> CppCoreGuidelines [C.65: Make move assignment safe for self-assignment](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c65-make-move-assignment-safe-for-self-assignment)
+>
+> CppCoreGuidelines [C.62: Make copy assignment safe for self-assignment](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-copy-self)
 
 Once again, a quick review of the above code reveals that, like the move constructor, the move assignment simply swaps the right-hand-side’s values for those of an ‘empty’ object.
 
 ## Eliminating the move assignment operator
 
-In reality is the move assignment operator is unnecessary!
+In reality is the **move assignment** operator is unnecessary!
 
-The previously-defined version of the assignment operator made a copy of the right-hand-side object before the call. This would normally invoke the usual copy constructor. However, std::move will cause the compiler to invoke the move constructor on the right-hand-side object instead.
+The previously-defined version of the assignment operator made a copy of the right-hand-side object before the call. This would normally invoke the usual **copy constructor**. However, `std::move` will cause the compiler to invoke the **move constructor** on the right-hand-side object instead.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb39.png?resize=525%2C379)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image55.png)
+![](./image_thumb39.png)
 
-By move-constructing the parameter its source (mgr2) will be left in an empty state (as required).
+
+
+By move-constructing the parameter its source (`mgr2`) will be left in an empty state (as required).
 
 Once inside the assignment operator the left-hand-side and right-hand-side objects are simply swapped.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb40.png?resize=468%2C428)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image56.png)
+![](./image_thumb40.png)
+
+
 
 When the assignment operator function exits the temporary object (the parameter) will be deleted, conveniently cleaning up the resource that was owned by the left-hand-side.
 
 Once again, a view of the memory map can help explain how this code appears to ‘magically’ work. Here’s our initial state:
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb41.png?resize=264%2C417)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image57.png)
+![](./image_thumb41.png)
 
-First, the move constructor is called which pilfers the resources of the right-hand-side object (mgr1) and leaves it in an empty state.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb42.png?resize=262%2C417)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image58.png)
 
-The behaviour of the assignment operator is to swap the left- and right-hand side objects – in this case mgr2 and rhs.
+First, the **move constructor** is called which pilfers the resources of the right-hand-side object (`mgr1`) and leaves it in an empty state.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb43.png?resize=398%2C422)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image59.png)
+![](./image_thumb42.png)
+
+
+
+The behaviour of the assignment operator is to swap the left- and right-hand side objects – in this case `mgr2` and `rhs`.
+
+![](./image_thumb43.png)
+
+
 
 When the temporary object (rhs) goes out of scope it deletes its resource (the resource originally owned by mgr2).
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb44.png?resize=503%2C419)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image60.png)
+![](./image_thumb44.png)
+
+
 
 ## Your resource management policy
 
@@ -207,21 +245,31 @@ What should have been “The Rule of The Big Five” is now reduced to “The Ru
 - The move constructor
 - The swap function
 
+> NOTE: 
+
+
+
 With some careful programming we’ve managed to limit the amount of resource allocation / de-allocation to the bare minimum
 
 “The Rule of The Big Four (and a half)” says if you’ve written one of the above functions then you must have a policy about the others. It doesn’t say you *have to write them.* In fact, you have to have a resource management policy for every class you create. Your policy can be one of the following:
 
-- Use the compiler-provided versions of these functions. In other words, you’re not doing any resource management in the class.
-- Write your own copy functions to perform deep copy, but don’t provide move semantics.
-- Write your own move functions, but don’t support copying.
-- Disable copying and move semantics for the class, because it doesn’t make sense to allow it.
+1、Use the compiler-provided versions of these functions. In other words, you’re not doing any resource management in the class.
+
+2、Write your own copy functions to perform deep copy, but don’t provide move semantics.
+
+3、Write your own move functions, but don’t support copying.
+
+4、Disable copying and move semantics for the class, because it doesn’t make sense to allow it.
 
 Suppressing move and copy is straightforward; and there are two ways to do it:
 
-- Make the appropriate function declarations private. (C++98-style)
-- Use the =delete notation
+1、Make the appropriate function declarations private. (C++98-style)
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image_thumb2.png?resize=521%2C354)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image2.png)
+2、Use the =delete notation
+
+![](./image_thumb45.png)
+
+
 
 ## The conclusion (so far)
 
@@ -229,7 +277,12 @@ Resource management – making use of C++’s RAII/RDID mechanism – is a key p
 
 Finally, examining move and copy policies also leads to two supplemental good practices:
 
-- A class should only manage at most one resource.
-- Simplify your types by making use of extant types that perform resource management for you, such as ‘smart pointers’.
+1、A class should only manage at most one resource.
+
+> NOTE: 
+>
+> tag-single responsibility principle-RAII-A class should only manage at most one resource
+
+2、Simplify your types by making use of extant types that perform resource management for you, such as ‘smart pointers’.
 
 This last point is critical; and leads on to the last article in this series – “The Rule of Zero”. We’ll look at that next time.

@@ -290,25 +290,15 @@ To suppress copying mark the copy constructor and assignment operator as a del*e
 
 The choice you make for the class is known as its *copy policy.* Depending on the needs of the class the policy may be:
 
-- Do nothing – accept the default (compiler-supplied) operations.
-- Implement deep-copy semantics
-- Suppress copying
+1、Do nothing – accept the default (compiler-supplied) operations.
 
-## More to come…
+> NOTE: 
+>
+> shallow copy
 
-We’re only part-way through our resource management journey. Next time we’ll look at the effect of C++11’s move semantics on resource management.
+2、Implement deep-copy semantics
 
-Until then, if you’d like to know more about C++ programming – particularly for embedded and real-time applications – visit the Feabhas website. You may find the following of interest:
-
-[C++-501 – C++ for Embedded Developers](http://www.feabhas.com/content/c-embedded-developers-7)
-
-[C++-502 – C++ for Real-Time Developers](http://www.feabhas.com/content/real-time-c)
-
-[AC++-501 – Advanced C++](http://www.feabhas.com/content/advanced-c-embedded-systems)
-
-[AC++11-401 – Transitioning to C++11](http://www.feabhas.com/content/transitioning-c11).
-
-[DP-403 – Design patterns for C++](https://www.feabhas.com/content/design-patterns-c-embedded-systems)
+3、Suppress copying
 
 
 
