@@ -78,6 +78,21 @@
 
 1、在`Destructor`章节
 
+## cppreference [Special member functions](https://en.cppreference.com/w/cpp/language/classes)
+
+> NOTE: 
+>
+> 下面是 cppreference 中总结的special member function
+
+| Special member functions                                     |
+| ------------------------------------------------------------ |
+| [Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor) |
+| [Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor) |
+| [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) (C++11) |
+| [Copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment) |
+| [Move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment) (C++11) |
+| [Destructor](https://en.cppreference.com/w/cpp/language/destructor) |
+
 
 
 ## Concepts
@@ -97,6 +112,3 @@
 
 关于 named requirement，参见 `Named-requirements` 章节。
 
-## Rule of zero、three、five
-
-参见 `The-rule-of-zero-three-five` 章节。
