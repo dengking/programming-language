@@ -6,9 +6,9 @@ OOP、behavior、interface、magic function
 
 ## draft: Behavior，magic function，给予或禁止某种behavior，valid expression
 
-每种behavior都有对应的operator、magic function，language support function（`std::swap`），都可以使用**valid expression**来进行描述，这是典型的**behavior-based**，比如thread是movable，但是non-copyable
+每种behavior都有对应的operator、magic function，language support function（`std::swap`），都可以使用**valid expression**来进行描述，这是典型的**behavior-based**，比m如thread是movable，但是non-copyable
 
-### Valid expression
+### Valid expression and concept
 
 可以使用Valid expression来描述某种behavior、运行，进而去:
 

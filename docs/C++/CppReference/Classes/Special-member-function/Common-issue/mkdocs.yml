@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Requiring-or-Prohibiting: Requiring-or-Prohibiting
+    - Require-prohibit: Require-prohibit
     - Virtual: Virtual
     
     - Implicitly-defined: Implicitly-defined
