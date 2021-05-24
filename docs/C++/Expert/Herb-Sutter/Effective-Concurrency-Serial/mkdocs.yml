@@ -1,11 +1,2 @@
 nav:
     - Introduction: index.md
-    - 01-The-Pillars-of-Concurrency: 01-The-Pillars-of-Concurrency
-    - 02-How-Much-Scalability-Do-You-Have-or-Need: 02-How-Much-Scalability-Do-You-Have-or-Need
-    - 06-Use-Lock-Hierarchies-to-Avoid-Deadlock: 06-Use-Lock-Hierarchies-to-Avoid-Deadlock
-    - 07-TODO-Break-Amdahl's-Law: 07-TODO-Break-Amdahl's-Law
-    - 11-Maximize-Locality-Minimize-Contention: 11-Maximize-Locality-Minimize-Contention
-    - 12-Choose-Concurrency-Friendly-Data-Structures: 12-Choose-Concurrency-Friendly-Data-Structures
-    - 15-TODO-Writing-Lock-Free-Code-A-Corrected-Queue: 15-TODO-Writing-Lock-Free-Code-A-Corrected-Queue
-    - 20-TODO-Sharing-Is-the-Root-of-All-Contention: 20-TODO-Sharing-Is-the-Root-of-All-Contention
-    - 31-Prefer-Using-Active-Objects-Instead-of-Naked-Thread: 31-Prefer-Using-Active-Objects-Instead-of-Naked-Thread

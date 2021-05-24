@@ -4,6 +4,7 @@ nav:
     - Polymorphic-Value-Types-idiom: Polymorphic-Value-Types-idiom  
     - open-std-paper-A-polymorphic-value-type-for-C++: open-std-paper-A-polymorphic-value-type-for-C++    
     - library-jbcoe-polymorphic_value: library-jbcoe-polymorphic_value
-    - TODO-C++value-polymorphism-between-traditional-polymorphism-and-type-erasure: TODO-C++value-polymorphism-between-traditional-polymorphism-and-type-erasure
+    - TODO-artima-On-the-Tension-Between-OOP-and-GP-in-C++: TODO-artima-On-the-Tension-Between-OOP-and-GP-in-C++
+    - TODO-programmer-C++value-polymorphism-between-traditional-polymorphism-and-type-erasure: TODO-programmer-C++value-polymorphism-between-traditional-polymorphism-and-type-erasure
     - TODO-stackexchange-Polymorphic(owned)-reference-wrapper-for-class-hierarchies: TODO-stackexchange-Polymorphic(owned)-reference-wrapper-for-class-hierarchies
     

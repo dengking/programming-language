@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - pabloariasal-C++Initialization-of-Static-Variables: pabloariasal-C++Initialization-of-Static-Variables    
-    - Non-local-object: Non-local-object.md
+    - Non-local-object: Non-local-object
     - Static-local-object: Static-local-object
     - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
 

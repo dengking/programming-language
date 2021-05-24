@@ -3,4 +3,4 @@ nav:
     - Linkage: Linkage
     - Optimization: Optimization
     - Link-time-error: Link-time-error
-    - Type-unsafe-link: Type-unsafe-link.md
+    - Type-unsafe-link: Type-unsafe-link

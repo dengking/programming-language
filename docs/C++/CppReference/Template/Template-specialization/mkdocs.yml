@@ -1,4 +1,3 @@
 nav:
     - Introduction: index.md
     - Specialization-of-template-in-different-namespace: Specialization-of-template-in-different-namespace.md
-    - Specialization-on-constant: Specialization-on-constant

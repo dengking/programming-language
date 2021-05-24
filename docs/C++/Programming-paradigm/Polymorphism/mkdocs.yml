@@ -3,7 +3,7 @@ nav:
     - Classification: Classification
     - Built-in-internal-polymorphism: Built-in-internal-polymorphism
     - Custom-polymorphism: Custom-polymorphism
-    - Polymorphic-value-concept-based-polymorphism: Polymorphic-value-concept-based-polymorphism
+
     # 下面对一些topic进行讨论
 
     - Polymorphic-object-container: Polymorphic-object-container

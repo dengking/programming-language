@@ -38,7 +38,7 @@ nav:
     
 ########## 下面是相关的  ##########     
     # 讨论C++的设计与实现
-    - C++design: C++design
+    
     # C++的命名规范
     - C++name-convention: C++name-convention    
     # 对C++ implementation 进行讨论
