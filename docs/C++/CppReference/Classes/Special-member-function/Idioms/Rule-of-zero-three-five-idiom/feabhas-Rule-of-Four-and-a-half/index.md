@@ -124,9 +124,19 @@ Here we are making use of a C++11 feature – cascading constructors. The first 
 
 Notice, in order to perform a move construction it must be possible to define an ‘empty’ state for the object. A good rule of thumb is: *if you cannot define a default constructor for the class it cannot support move semantics*.
 
+> NOTE: 
+>
+> 1、上述总结非常好
+
 A side-note: The move constructor is qualified as `noexcept`. This is a C++11 keyword denoting the exception specification of the function. In this case it guarantees that the move constructor will not throw an exception. This is a requirement for container classes (like the vector in our earlier example). If the move constructor may throw an exception the container will normally copy the object rather than move it.
 
-Now we can return to our original example, the vector of SocketManagers. With the move constructor in place the SocketManager objects are moved rather than copied. (Note: we haven’t changed the vector code. It was attempting to move our SocketManager class all along, but without a move constructor to bind to, the compiler preferred the next best thing – binding the r-value object to a const SocketManager&; that is, the copy constructor)
+> NOTE: 
+>
+> 一、CppCoreGuidelines [C.66: Make move operations `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c66-make-move-operations-noexcept)
+>
+> 二、tag-std-vector implementation--move if std-move_if_noexcept else copy
+
+Now we can return to our original example, the vector of `SocketManagers`. With the move constructor in place the `SocketManager` objects are moved rather than copied. (Note: we haven’t changed the vector code. It was attempting to move our SocketManager class all along, but without a move constructor to bind to, the compiler preferred the next best thing – binding the r-value object to a const SocketManager&; that is, the copy constructor)
 
 This code could be significantly more efficient, if there is a lot of insertion in the vector.
 
