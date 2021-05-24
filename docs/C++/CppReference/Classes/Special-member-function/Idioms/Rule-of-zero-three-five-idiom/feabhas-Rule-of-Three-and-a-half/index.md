@@ -26,6 +26,10 @@ Experience with resource management objects lead to the introduction of a new id
 
 ## 1 – The destructor
 
+> NOTE: 
+>
+> 一、原文这一章节主要讲述的是RAII
+
 For our example we will use a `SocketManager` class that owns (manages) the lifetime of a Socket class.
 
 > NOTE: 
@@ -36,149 +40,193 @@ For our example we will use a `SocketManager` class that owns (manages) the life
 
 The `SocketManager` is responsible for the lifetime of its `Socket` object. The `Socket` is allocated in the `SocketManager` constructor; and de-allocated in the destructor.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb2.png?resize=532%2C388)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image2.png)
+![image](./image_thumb2.png)
 
 A small warning here: make sure the new and delete operators ‘match’: that is, if the resource is allocated with `new`, then use `delete`; if the resource is allocated as an array (`new[]`) make sure array delete is used (`delete[]`) Failure to do so will lead to ‘Bad Things’ happening.
 
+> NOTE: 
+>
+> CppCoreGuidelines [ES.61: Delete arrays using `delete[]` and non-arrays using `delete`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#es61-delete-arrays-using-delete-and-non-arrays-using-delete)
+
 Also, if your resource manager class is going to be used polymorphically (that is, in an inheritance hierarchy) it is good practice to make the destructor virtual. This will ensure that any derived class destructors, if defined, will be called even if the client has a pointer to a base class.
 
-Here’s the memory layout for a SocketManager object:
+> NOTE: 
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb3.png?resize=527%2C274)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image4.png)
+Here’s the memory layout for a `SocketManager` object:
 
-When mgr goes out of scope (in this case at the end of main; but in general at the end of the enclosing block) its destructor will be automatically called. The destructor calls delete on the pSocket pointer, which automatically calls the Socket’s destructor *before* releasing the memory for the Socket.
+![image](./image_thumb3.png)
 
-#### 2 – The copy constructor
+When `mgr` goes out of scope (in this case at the end of main; but in general at the end of the enclosing block) its destructor will be automatically called. The destructor calls `delete` on the `pSocket` pointer, which automatically calls the Socket’s destructor *before* releasing the memory for the Socket.
+
+## 2 – The copy constructor
 
 The copy constructor on a class is a special overload that initialises the object using another object of the same type as a source. At the end of the copy constructor the new object has the same state as the source object.
 
-So when in your code will the copy constructor be called? Often, it is called ‘invisibly’ by the compiler. Here are the four scenarios the copy constructor is invoked:
+So when in your code will the copy constructor be called? Often, it is called ‘invisibly(看不见的)’ by the compiler. Here are the four scenarios the copy constructor is invoked:
 
-##### 1 – Explicit copy construction
+### 1 – Explicit copy construction
 
 The most explicit way to invoke the copy constructor on an object is to create said object, passing in another object (of the same type) as a parameter.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb4.png?resize=360%2C177)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image5.png)
+![image](./image_thumb4.png)
 
 This is not a particularly common way to construct objects; compared with below.
 
-##### 2 – Object initialisation
 
-C++ makes the distinction between *initialisation* and *assignment* (even though it uses the same symbol for both; unhelpfully). If an object is being initialised the compiler will call a constructor, rather than the assignment operator. In the code below the copy constructor for mgr2 is called:
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb5.png?resize=353%2C169)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image7.png)
+### 2 – Object initialisation
 
-##### 3 – Pass-by-value parameters
+> NOTE: 
+>
+> 这是典型的copy initialization
+
+C++ makes the distinction between *initialisation* and *assignment* (even though it uses the same symbol for both; unhelpfully). If an object is being initialised the compiler will call a constructor, rather than the assignment operator. In the code below the copy constructor for `mgr2` is called:
+
+![image](./image_thumb5.png)
+
+
+
+### 3 – Pass-by-value parameters
 
 When objects are passed to functions by value a copy of the caller’s object is made. This new object has a constructor called, in this case the copy constructor.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb6.png?resize=363%2C268)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image8.png)
+![image](./image_thumb6.png)
+
+
 
 This extra overhead (memory + constructor call time) is why it’s always better to pass objects to functions by reference.
 
-##### 4 – Function return value
+### 4 – Function return value
 
 If a function returns an object from a function (by value) then a copy of the object is made. The copy constructor is invoked on return.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb7.png?resize=542%2C269)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image10.png)
+![image](./image_thumb7.png)
+
+
 
 There are two exceptions to this:
 
-- If the return object is constructed directly as part of the return statement (as in NRV_make_SocketManager(), above) the compiler can optimise this and construct the return object *directly* into the caller’s object. In this case a ‘normal’ constructor is called rather than a copy constructor. This mechanism is referred to as the *Named Return Value* (NRV) optimisation.
-- If the object has a move constructor defined then that will be called in preference. We’ll explore move constructors in another article.
+1、If the return object is constructed directly as part of the return statement (as in `NRV_make_SocketManager()`, above) the compiler can optimise this and construct the return object *directly* into the caller’s object. In this case a ‘normal’ constructor is called rather than a copy constructor. This mechanism is referred to as the *Named Return Value* (NRV) optimisation.
 
-In the example below the programmer is passing the SocketManager object (either deliberately, or accidently) to the function preamble by value.
+2、If the object has a move constructor defined then that will be called in preference. We’ll explore move constructors in another article.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb8.png?resize=454%2C293)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image11.png)
+In the example below the programmer is passing the `SocketManager` object (either deliberately, or accidently) to the function preamble by value.
+
+![image](./image_thumb8.png)
+
+
 
 Let’s explore the consequences of this.
 
 Copying an object requires that the new object has the same attributes values as its source. To do this the compiler supplies a default implementation of the copy constructor.
 
+#### Implicit defined copy constructor shallow copy、double free、dangling、wrong ownership
+
+> NOTE: 
+>
+> 原文后面所谈论的是非常常见的: implicit-defined-copy-constructor-shallow-copy-double-free-dangling-wrong ownership
+
 The compiler-supplied copy constructor performs a *member-wise* initialisation; each data member in the new object is initialised with its equivalent in the source.
 
-Here we see the memory map, just before the call to preamble().
+Here we see the memory map, just before the call to `preamble()`.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb9.png?resize=278%2C348)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image13.png)
+![image](./image_thumb9.png)
 
-On call, the parameter object, mgr, is created and copy-constructed. Because the default behaviour of the compiler-supplied copy constructor is to perform a member-wise initialisation mgr has the same pSocket value as socketMgr.
+On call, the parameter object, mgr, is created and copy-constructed. Because the default behaviour of the compiler-supplied copy constructor is to perform a member-wise initialisation mgr has the same `pSocket` value as `socketMgr`.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb10.png?resize=282%2C356)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image14.png)
+![image](./image_thumb10.png)
 
-At the moment this should cause no problems with the behaviour of the code. But what happens when preamble() returns?
+At the moment this should cause no problems with the behaviour of the code. But what happens when `preamble()` returns?
 
-When the function finishes its automatic objects (including its parameters) are destroyed. In this case, mgr goes out of scope and its destructor is called. The SocketManager destructor does exactly what it should do – deallocate its resource.
+When the function finishes its automatic objects (including its parameters) are destroyed. In this case, mgr goes out of scope and its destructor is called. The `SocketManager` destructor does exactly what it should do – deallocate its resource.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb11.png?resize=303%2C419)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image16.png)
+![image](./image_thumb11.png)
 
-However, at the end of main() socketMgr goes out of scope; and once again the SocketManager destructor is called. This is where our problem occurs – the resource has already been deallocated so we cannot free it again. This will (typically) cause an exception to be thrown.
+However, at the end of `main()` `socketMgr` goes out of scope; and once again the `SocketManager` destructor is called. This is where our problem occurs – the resource has already been deallocated so we cannot free it again. This will (typically) cause an exception to be thrown.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb12.png?resize=300%2C428)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image17.png)
+![image](./image_thumb12.png)
 
-A more subtle problem is that, even though the resource has been deallocated, the data may still exist on the free store (depending on the implementation of your memory manager). This means socketMgr may still be able to access / use its Socket object, even though technically the memory is invalid.
+A more subtle problem is that, even though the resource has been deallocated, the data may still exist on the free store (depending on the implementation of your memory manager). This means `socketMgr` may still be able to access / use its Socket object, even though technically the memory is invalid.
 
 You can (and of course, should) provide your own copy constructor, which overrides the compiler-supplied one.
 
+#### Custom copy constructor deep copy
+
 The copy constructor must be written to perform a ‘deep copy’ – that is, don’t simply copy pointers, copy what the pointers *reference*.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image_thumb1.png?resize=483%2C382)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2015/01/image1.png)
+![image](./image_thumb13.png)
 
-Note the signature of the copy constructor – it takes a reference to a const SocketManager object. (make sure you always pass by reference, or you’ll blow your stack. I’ll leave it to you to figure out why!)
+Note the signature of the copy constructor – it takes a reference to a `const` `SocketManager` object. (make sure you always pass by reference, or you’ll blow your stack. I’ll leave it to you to figure out why!)
 
 Notice also that we check if the source object actually *has* a resource allocated, otherwise we’ll get a run-time fault when we try and copy from a null pointer.
 
 The copy construction proceeds as follows:
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb14.png?resize=371%2C354)](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image20.png)
+![image](./image_thumb14.png)
 
-1. Memory is allocated for the new SocketManager object
-2. The non-pointer elements are initialised with the MIL
-3. A new resource (Socket) is allocated.
-4. The source Socket is assigned to the target’s Socket.
+1、Memory is allocated for the new `SocketManager` object
+
+2、The non-pointer elements are initialised with the MIL
+
+3、A new resource (Socket) is allocated.
+
+4、The source Socket is assigned to the target’s Socket.
 
 This new implementation will save us from problems if we happen to copy our resource manager objects about.
 
-#### 3 – The assignment operator
+## 3 – The assignment operator
 
 One of the design goals of C++ is that user-defined types (classes) should behave in the same way as the built-in types. It should be possible to assign two objects of like type.  Since all behaviours on classes are defined as functions there must be an assignment operator function. If you haven’t provided one the compiler creates a default assignment operator which performs a member-wise assignment; each data member is assigned in turn.
 
 At first glance the code below appears sound:
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb15.png?resize=409%2C239)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image22.png)
+![image](./image_thumb15.png)
 
-SocketManager mgr2 is being initialised with mgr1. The compiler will copy-construct mgr2 from mgr1. That is, the code above is equivalent to:
+`SocketManager mgr2` is being initialised with `mgr1`. The compiler will copy-construct `mgr2` from `mgr1`. That is, the code above is equivalent to:
 
+```C++
 SocketManager mgr2(mgr1);
+```
 
-The problem is with mgr3.
+The problem is with `mgr3`.
 
-Although the construction of mgr3 appears to be semantically the same the compiler is producing different code. In this case mgr3 is being default-constructed then (in the next statement) having mgr1 *assigned* to it.
+Although the construction of `mgr3` appears to be semantically the same the compiler is producing different code. In this case `mgr3` is being default-constructed then (in the next statement) having `mgr1` *assigned* to it.
 
 With a resource-managing class this causes the problem we had previously: the default implementation performs *shallow copy;* and we require a *deep copy*.
 
+### Custom assignment operator 
+
 The solution to our problem is to provide an assignment operator function that implements the correct class copy semantics.
 
-[![image](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb16.png?resize=499%2C383)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image23.png)
+![image](./image_thumb16.png)
 
 Notice the assignment operator returns a reference to itself. This is so expressions like this work:
 
+```c++
 mgr1 = mgr2 = mgr3;
+```
+
+
 
 The behaviour of the assignment operator is very similar to the behaviour of the copy constructor. In general, it is bad practice to replicate code so ideally we’d like to have a common function for performing both copying and assignment.
 
+### *Copy-Swap Idiom*
+
 Enter the *Copy-Swap Idiom*, which provides an efficient, safe way to implement the assignment operator by (re)using the copy constructor code.
 
-We provide a swap() function that uses the standard library function std::swap to exchange the attributes of the class. std::swap has been specialised for objects and arrays (as well as most of the Standard Library types) so it usually far more efficient than attempting to manipulate memory yourself.
+We provide a `swap()` function that uses the standard library function `std::swap` to exchange the attributes of the class. `std::swap` has been specialised for objects and arrays (as well as most of the Standard Library types) so it usually far more efficient than attempting to manipulate memory yourself.
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb17.png?resize=545%2C418)](https://i0.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image25.png)
+![image](./image_thumb17.png)
 
 It’s not immediately obvious how this works so it’s worth examining the memory map for the assignment:
 
-[![image](https://i1.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb18.png?resize=347%2C194)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image26.png)
+![image](./image_thumb18.png)
 
 Here’s the memory situation just before the call to the assignment.
 
-[![image](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image_thumb19.png?resize=273%2C432)](https://i2.wp.com/blog.feabhas.com/wp-content/uploads/2014/12/image28.png)
+![image](./image_thumb19.png)
+
+
 
 A copy of the right-hand-side object is made: temp.
 
@@ -200,7 +248,7 @@ To stop this, we re-write the assignment operator and move the copy construction
 
 When the assignment operator is called, the first thing that happens is a copy of the right-hand-side is made. Should the copy constructor throw an exception this will happen before the call to operator= (which will never get called); thus leaving the left-hand-side object unaffected.
 
-#### The Rule of the Big Three (and a half)
+## The Rule of the Big Three (and a half)
 
 If your class manages a resource then it is likely:
 
@@ -220,7 +268,7 @@ You should also implement the other two.
 
 To implement the Copy-Swap idiom your resource management class must also implement a swap() function to perform a member-by-member swap (there’s your “…(and a half)”)
 
-#### Suppressing copying
+## Suppressing copying
 
 In some cases you may want to explicitly restrict / suppress copying. For example, copying an OS mutex is semantically incorrect.
 
@@ -234,7 +282,7 @@ The choice you make for the class is known as its *copy policy.* Depending on th
 - Implement deep-copy semantics
 - Suppress copying
 
-#### More to come…
+## More to come…
 
 We’re only part-way through our resource management journey. Next time we’ll look at the effect of C++11’s move semantics on resource management.
 
