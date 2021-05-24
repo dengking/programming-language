@@ -1,6 +1,6 @@
 # 关于本章
 
-本章描述了c++中关于OOP的idiom。RAII、swap、temporary，很多OOP idiom都是建立在这三者之上。
+本章描述了C++中关于OOP的idiom。RAII、swap、temporary，很多OOP idiom都是建立在这三者之上。
 
 ## Initialization相关
 
@@ -66,6 +66,8 @@ copy-and-swap idiom依赖于：
 
 [Handle Body](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Handle_Body)<-[Non-throwing swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap)<- [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) 
 
+
+
 ### 基于reference counting的resource management
 
 | idiom                                             |      | summary                                                      |
@@ -100,8 +102,6 @@ c++ idiom中有多个关于resource的idiom，可以看到这些idiom都充分�
 
 
 
-
-
 ## Idiom concerning temporary/proxy
 
 本节总结涉及到temporary的idiom，而不仅仅局限于oop idiom。
@@ -113,18 +113,15 @@ Idiom concerning temporary/proxy可以分为：
 - 使用temporary的idiom
 - 消除temporary的idiom
 
+
+
 ### 使用temporary的idiom
 
 | idiom                                                        | example | summary                                                      |
 | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
 | [Copy-and-swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Copy-and-swap) |         | 这个idiom又称为：Create-Temporary-and-Swap，它的名字已经告诉了我们它应用了temporary。 |
 | [Clear-and-minimize](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Clear-and-minimize) |         | 这个idiom又称为： ***swap with temporary idiom***. <br> 显然它是依赖于：temporary、swap，其实它可以看做是将swap idiom用于container上。 |
-|                                                              |         |                                                              |
-|                                                              |         |                                                              |
-|                                                              |         |                                                              |
-|                                                              |         |                                                              |
-|                                                              |         |                                                              |
-
+|                                                              |
 
 
 proxy/temporary class

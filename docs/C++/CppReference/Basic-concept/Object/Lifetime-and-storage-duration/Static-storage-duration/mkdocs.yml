@@ -5,5 +5,5 @@ nav:
     - Static-local-object: Static-local-object
     - Static-and-dynamic-initialization: Static-and-dynamic-initialization.md
 
-    - Problem-and-solution: Problem-and-solution    
+    - Idioms: Idioms
     - Paper-N2660-Magic-static: Paper-N2660-Magic-static    
