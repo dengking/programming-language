@@ -1,10 +1,8 @@
-- [Redis内存管理的基石zmallc.c源码解读（一）](https://blog.csdn.net/guodongxiaren/article/details/44747719)
-- [gcc Type Attributes aligned](https://gcc.gnu.org/onlinedocs/gcc/Common-Type-Attributes.html#Common-Type-Attributes)
-- [Alignment in C](https://hps.vi4io.org/_media/teaching/wintersemester_2013_2014/epc-14-haase-svenhendrik-alignmentinc-paper.pdf)
 
-通过Google以下内容来带出资源：
-- aligned vs unaligned memory access example
-- c alignment example
+
+- [gcc Type Attributes aligned](https://gcc.gnu.org/onlinedocs/gcc/Common-Type-Attributes.html#Common-Type-Attributes)
+
+    
 
 
 分为两类主题：
@@ -41,9 +39,4 @@ https://software.intel.com/en-us/articles/coding-for-performance-data-alignment-
 
 # unaligned pointer to large area
 https://groups.google.com/forum/#!topic/comp.lang.c/YEfswjndH1s
-
-https://www.kernel.org/doc/Documentation/unaligned-memory-access.txt
-
-
-# size of pointer in c
 

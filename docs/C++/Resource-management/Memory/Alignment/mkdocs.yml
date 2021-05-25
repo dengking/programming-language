@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    
+    - Object-alignment-requirement: Object-alignment-requirement
     - Allocate-aligned-memory: Allocate-aligned-memory 
 
     - Aliasing-pointer-cast: Aliasing-pointer-cast    
