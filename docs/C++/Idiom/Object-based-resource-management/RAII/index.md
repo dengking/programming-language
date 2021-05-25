@@ -10,16 +10,16 @@ RAII guarantees that the resource is available to any function that may access t
 
 RAII can be summarized as follows:
 
-- encapsulate each resource into a class, where
+1、encapsulate each resource into a class, where
 
-  - the constructor acquires the resource and establishes all class invariants or throws an exception if that cannot be done,
+- the constructor acquires the resource and establishes all class invariants or throws an exception if that cannot be done,
 
-  - the destructor releases the resource and never throws exceptions;
+- the destructor releases the resource and never throws exceptions;
 
-- always use the resource via an instance of a RAII-class that either
+2、always use the resource via an instance of a RAII-class that either
 
-  - has **[automatic storage duration](https://en.cppreference.com/w/cpp/language/storage_duration)** or **temporary lifetime** itself, or
-  - has lifetime that is bounded by the lifetime of an automatic or temporary object
+- has **[automatic storage duration](https://en.cppreference.com/w/cpp/language/storage_duration)** or **temporary lifetime** itself, or
+- has lifetime that is bounded by the lifetime of an automatic or temporary object
 
 **Move semantics** make it possible to safely transfer resource ownership between objects, across scopes, and in and out of threads, while maintaining resource safety.
 
@@ -50,8 +50,9 @@ The C++ library classes that manage their own resources follow RAII: [std::strin
 
 In addition, the standard library offers several RAII wrappers to manage user-provided resources:
 
-- [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr) and [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr) to manage dynamically-allocated memory or, with a user-provided deleter, any resource represented by a plain pointer;
-- [std::lock_guard](https://en.cppreference.com/w/cpp/thread/lock_guard), [std::unique_lock](https://en.cppreference.com/w/cpp/thread/unique_lock), [std::shared_lock](https://en.cppreference.com/w/cpp/thread/shared_lock) to manage mutexes.
+1、[std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr) and [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr) to manage dynamically-allocated memory or, with a user-provided deleter, any resource represented by a plain pointer;
+
+2、[std::lock_guard](https://en.cppreference.com/w/cpp/thread/lock_guard), [std::unique_lock](https://en.cppreference.com/w/cpp/thread/unique_lock), [std::shared_lock](https://en.cppreference.com/w/cpp/thread/shared_lock) to manage mutexes.
 
 ### Notes
 
@@ -109,7 +110,9 @@ void write_to_file (const std::string & message) {
 
 This code is **exception-safe** because `C++` guarantees that all **stack objects** are destroyed at the end of the **enclosing scope**, known as [stack unwinding](https://en.wikipedia.org/wiki/Stack_unwinding). The destructors of both the *lock* and *file* objects are therefore guaranteed to be called when returning from the function, whether an **exception** has been thrown or not.[[9\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-dtors-shouldnt-throw-9)
 
-总结：最后一句话是非常重要的：无论是否抛出异常，当从该函数返回的时候，*lock*和*file*的析构函数都能够保证被调用。那这就引起了我对c++11的异常管理的好奇了，c++11的异常管理机制是怎样的呢？
+> NOTE: 
+>
+> 总结：最后一句话是非常重要的：无论是否抛出异常，当从该函数返回的时候，*lock*和*file*的析构函数都能够保证被调用。那这就引起了我对c++11的异常管理的好奇了，c++11的异常管理机制是怎样的呢？
 
 **Local variables** allow easy management of multiple resources within a single function: they are destroyed in the reverse order of their construction, and an object is destroyed only if fully constructed—that is, if no exception propagates from its constructor.[[10\]](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization#cite_note-C++17_International_Standard_(%C2%A76.6.4)-10)
 
@@ -127,7 +130,9 @@ The advantages of **RAII** as a resource management technique are that it provid
 
 **Exception safety** is provided for stack resources (resources that are released in the same scope as they are acquired) by tying(绑定) the resource to the lifetime of a **stack variable** (a **local variable** declared in a given scope): if an [exception](https://en.wikipedia.org/wiki/Exception_handling) is thrown, and proper exception handling is in place, the only code that will be executed when exiting the current [scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) are the **destructors** of objects declared in that scope.
 
-总结：其实从这段话中也是可以推测出c++的异常处理机制的：在一个函数执行的过程中如果出现了异常，则会退出当前scope的执行，但是在退出当前scope之前是会调用所有声明在当前域中的object的destructor的。
+> NOTE: 
+>
+> 总结：其实从这段话中也是可以推测出c++的异常处理机制的：在一个函数执行的过程中如果出现了异常，则会退出当前scope的执行，但是在退出当前scope之前是会调用所有声明在当前域中的object的destructor的。
 
 Finally, **locality of definition** is provided by writing the constructor and destructor definitions next to each other in the class definition.
 
@@ -183,22 +188,25 @@ However, **object lifetimes** are not necessarily bound to any scope, and object
 
 
 
-
-
-## THINKING
+## 一些思考
 
 ### RAII and GC
 
 `C++`的RAII让我想到了python中的`with`、 [context managers](https://en.wikipedia.org/w/index.php?title=Context_manager&action=edit&redlink=1) 。上面这篇文章中的Reference counting 章节就谈到了这一点。
 
-### [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 
+### zhihu [如何评价 C++11 的右值引用（Rvalue reference）特性？ - zihuatanejo的回答 - 知乎](https://www.zhihu.com/question/22111546/answer/31929118) 
 
 这是阅读这篇文章的感想：RAII虽然简单，但是能够处理非常多的问题：将一个resource的lifetime与一个object的lifetime bind到一起。c++又允许programmer来控制object的lifetime，同时C++有支持value and  reference semantic， 因此对于resource的处理将变得非常灵活且安全。GC的language无法实现RAII，因为它们无法控制object的lifetime。
 
 
 
+## See also
 
-## TODO
+1、florianwolters [The Rule of Zero](http://blog.florianwolters.de/educational/2015/01/31/The_Rule_of_Zero/)
 
-https://www.tomdalling.com/blog/software-design/resource-acquisition-is-initialisation-raii-explained/
+在其中也对RAII进行了描述。
+
+2、tomdalling [Resource Acquisition is Initialisation (RAII) Explained](https://www.tomdalling.com/blog/software-design/resource-acquisition-is-initialisation-raii-explained/)
+
+
 

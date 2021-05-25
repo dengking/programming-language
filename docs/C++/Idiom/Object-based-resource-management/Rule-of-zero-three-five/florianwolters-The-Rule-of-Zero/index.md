@@ -1,4 +1,14 @@
-# florianwolters [The Rule of Zero](http://blog.florianwolters.de/educational/2015/01/31/The_Rule_of_Zero/)
+# florianwolters [The Rule of Zero](http://blog.florianwolters.de/educational/2015/01/31/The_Rule_of_Zero/) 
+
+> NOTE: 
+>
+> 一、是通过 feabhas [The Rule of Zero](https://blog.feabhas.com/2015/01/the-rule-of-zero/) 发现的这篇文章: 
+>
+> The term The Rule of Zero was coined by R. Martinho Fernandes in his 2012 paper (http://flamingdangerzone.com/cxx11/2012/08/15/rule-of-zero.html). 
+>
+> 显然，是本文首次提出了rule of zero
+>
+> 二、本文是从automatic resource management 和 manual resource management 的角度来说明rule of three/five/zero，在"Resource Management Types"章节中进行了非常好的总结。
 
 ## Introduction
 
@@ -18,10 +28,13 @@ RAII is also described in detail as *Item 13: Use objects to manage resources* i
 
 In modern C++, the following four types of objects from a resource management perspective can be categorized:
 
-- Copyable, but not moveable.
-- Both copyable and moveable.
-- Moveable, but not copyable.
-- Neither copyable nor moveable.
+1、Copyable, but not moveable.
+
+2、Both copyable and moveable.
+
+3、Moveable, but not copyable.
+
+4、Neither copyable nor moveable.
 
 > NOTE: copyable和moveable的组合
 
@@ -34,16 +47,19 @@ The following matrix illustrates the four cases in a more compact form.
 
 To define the behavior of a class regarding **copy** and **move** semantics, modern C++ offers the following constructs:
 
-- [Copy constructor](http://en.cppreference.com/w/cpp/language/copy_constructor)
-- [Copy assignment operator](http://en.cppreference.com/w/cpp/language/as_operator)
-- [Move constructor](http://en.cppreference.com/w/cpp/language/move_constructor)
-- [Move assignment operator](http://en.cppreference.com/w/cpp/language/move_operator)
+1、[Copy constructor](http://en.cppreference.com/w/cpp/language/copy_constructor)
+
+2、[Copy assignment operator](http://en.cppreference.com/w/cpp/language/as_operator)
+
+3、[Move constructor](http://en.cppreference.com/w/cpp/language/move_constructor)
+
+4、[Move assignment operator](http://en.cppreference.com/w/cpp/language/move_operator)
 
 The following rules can be applied for the resource management types:
 
 ### Uncopyable (**UC**)
 
-- Declare the **copy constructor** as deleted.
+1、Declare the **copy constructor** as deleted.
 
 *Example:*
 
@@ -51,7 +67,7 @@ The following rules can be applied for the resource management types:
 MyObject(MyObject const& kSource) = delete;
 ```
 
-- Declare the **assignment operator** as deleted.
+2、Declare the **assignment operator** as deleted.
 
 *Example:*
 
@@ -61,7 +77,7 @@ MyObject& operator=(MyObject const& kRhs) = delete;
 
 ### Unmoveable (**UM**)
 
-- Declare the move constructor as deleted.
+1、Declare the move constructor as deleted.
 
 *Example:*
 
@@ -69,7 +85,7 @@ MyObject& operator=(MyObject const& kRhs) = delete;
 MyObject(MyObject&& source) = delete;
 ```
 
-- Declare the move operator as deleted.
+2、Declare the move operator as deleted.
 
 ```c++
 MyObject& operator=(MyObject&& rhs) = delete;
@@ -77,15 +93,15 @@ MyObject& operator=(MyObject&& rhs) = delete;
 
 ### Copyable (**C**)
 
-- If using automatic resource management: Apply *The Rule of Zero*.
-- If using manual resource management: Apply *The Rule of Three*.
+1、If using **automatic resource management**: Apply *The Rule of Zero*.
+
+2、If using **manual resource management**: Apply *The Rule of Three*.
 
 ### Moveable (**M**)
 
-- If using automatic resource management: Apply *The Rule of Zero*.
-- If using manual resource management: Apply *The Rule of Five*.
+1、If using automatic resource management: Apply *The Rule of Zero*.
 
-
+2、If using manual resource management: Apply *The Rule of Five*.
 
 Instead of using `delete`, the mentioned functions can be declared with`private ` visibility. This allows to implement uncopyable objects if using an older standard, such as C++98. 
 
@@ -118,68 +134,75 @@ I will summarize each rule in this article. Please refer to the linked informati
 #include <cstring>
 #include <utility>
 
-namespace fw {
-namespace idiom {
+namespace fw
+{
+namespace idiom
+{
 
 /**
  * The TheRuleOfThree class demonstrates *The Rule of Three* idiom.
  *
  * @author Florian Wolters <wolters.fl@gmail.com>
  */
-class TheRuleOfThree final {
- public:
-  /**
-   * Initializes a new instance of the TheRuleOfThree class with the specified
-   * C-style string.
-   *
-   * @param kValue The C-style string.
-   */
-  explicit TheRuleOfThree(char const* kValue)
-      : resource_{new char[std::strlen(kValue) + 1]} {
-    std::strcpy(resource_, kValue);
-  }
+class TheRuleOfThree final
+{
+public:
+	/**
+	 * Initializes a new instance of the TheRuleOfThree class with the specified
+	 * C-style string.
+	 *
+	 * @param kValue The C-style string.
+	 */
+	explicit TheRuleOfThree(char const *kValue) :
+					resource_ { new char[std::strlen(kValue) + 1] }
+	{
+		std::strcpy(resource_, kValue);
+	}
 
-  /**
-   * Finalizes an instance of the TheRuleOfThree class.
-   *
-   * This is the destructor.
-   */
-  ~TheRuleOfThree() {
-    delete[] resource_;
-  }
+	/**
+	 * Finalizes an instance of the TheRuleOfThree class.
+	 *
+	 * This is the destructor.
+	 */
+	~TheRuleOfThree()
+	{
+		delete[] resource_;
+	}
 
-  /**
-   * Initializes a new instance of the TheRuleOfThree class from the specified
-   * TheRuleOfThree.
-   *
-   * This is the copy constructor.
-   *
-   * @param kValue The TheRuleOfThree to copy.
-   */
-  TheRuleOfThree(TheRuleOfThree const& kOther)
-      : resource_{new char[std::strlen(kOther.resource_) + 1]} {
-    std::strcpy(resource_, kOther.resource_);
-  }
+	/**
+	 * Initializes a new instance of the TheRuleOfThree class from the specified
+	 * TheRuleOfThree.
+	 *
+	 * This is the copy constructor.
+	 *
+	 * @param kValue The TheRuleOfThree to copy.
+	 */
+	TheRuleOfThree(TheRuleOfThree const &kOther) :
+					resource_ { new char[std::strlen(kOther.resource_) + 1] }
+	{
+		std::strcpy(resource_, kOther.resource_);
+	}
 
-  /**
-   * Assigns the specified TheRuleOfThree to this TheRuleOfThree.
-   *
-   * This is the copy assignment operator.
-   *
-   * @param kValue The TheRuleOfThree to assign to this
-   *    TheRuleOfThree.
-   */
-  TheRuleOfThree& operator=(TheRuleOfThree& kOther) {
-    std::swap(resource_, kOther.resource_);
+	/**
+	 * Assigns the specified TheRuleOfThree to this TheRuleOfThree.
+	 *
+	 * This is the copy assignment operator.
+	 *
+	 * @param kValue The TheRuleOfThree to assign to this
+	 *    TheRuleOfThree.
+	 */
+	TheRuleOfThree& operator=(TheRuleOfThree &kOther)
+	{
+		std::swap(resource_, kOther.resource_);
 
-    return *this;
-  }
+		return *this;
+	}
 
- private:
-  /**
-   * The resource (a raw pointer to a character) to handle by this class.
-   */
-  char* resource_;
+private:
+	/**
+	 * The resource (a raw pointer to a character) to handle by this class.
+	 */
+	char *resource_;
 };
 
 }  // namespace idiom
@@ -187,21 +210,32 @@ class TheRuleOfThree final {
 
 #endif  // FW_IDIOM_THE_RULE_OF_THREE_H_
 
-int main() {
-  using fw::idiom::TheRuleOfThree;
+int main()
+{
+	using fw::idiom::TheRuleOfThree;
 
-  // Complete constructor.
-  TheRuleOfThree the_rule_of_three{"hello, world"};
+	// Complete constructor.
+	TheRuleOfThree the_rule_of_three { "hello, world" };
 
-  // Copy constructor.
-  TheRuleOfThree copy{the_rule_of_three};
+	// Copy constructor.
+	TheRuleOfThree copy { the_rule_of_three };
 
-  // Copy assignment operator.
-  copy = the_rule_of_three;
+	// Copy assignment operator.
+	copy = the_rule_of_three;
 
-  // Destructor(s).
+	// Destructor(s).
 }
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
 ```
+
+> NOTE: 
+>
+> 一、上述code中的copy assignment的实现是比较奇怪的，我觉得是有问题的: 它仅仅执行了swap，这是违反了assignment operator的语义的；正确的写法是"Assignment operator-pass by value-copy and swap idiom-strong exception safety"，参见:
+>
+> 1、feabhas [The Rule of The Big Three (and a half) – Resource Management in C++](https://blog.feabhas.com/2014/12/the-rule-of-the-big-three-and-a-half-resource-management-in-c/)
+>
+> 
 
 [the_rule_of_three.h](https://gist.github.com/FlorianWolters/26f0ea1117f34866f2a2#file-the_rule_of_three-h) hosted with ❤ by [GitHub](https://github.com/)
 
@@ -238,92 +272,102 @@ I recommend reading the article [The Rule of The Big Four (and a half) – Move 
 #include <cstring>
 #include <utility>
 
-namespace fw {
-namespace idiom {
+namespace fw
+{
+namespace idiom
+{
 
 /**
  * The TheRuleOfFive class demonstrates *The Rule of Five* idiom.
  *
  * @author Florian Wolters <wolters.fl@gmail.com>
  */
-class TheRuleOfFive final {
- public:
-  /**
-   * Initializes a new instance of the TheRuleOfFive class with the specified
-   * C-style string.
-   *
-   * @param kValue The C-style string.
-   */
-  explicit TheRuleOfFive(char const* kValue)
-      : resource_{new char[std::strlen(kValue) + 1]} {
-    std::strcpy(resource_, kValue);
-  }
+class TheRuleOfFive final
+{
+public:
+	/**
+	 * Initializes a new instance of the TheRuleOfFive class with the specified
+	 * C-style string.
+	 *
+	 * @param kValue The C-style string.
+	 */
+	explicit TheRuleOfFive(char const *kValue) :
+					resource_ { new char[std::strlen(kValue) + 1] }
+	{
+		std::strcpy(resource_, kValue);
+	}
 
-  /**
-   * Finalizes an instance of the TheRuleOfFive class.
-   *
-   * This is the destructor.
-   */
-  ~TheRuleOfFive() {
-    delete[] resource_;
-  }
+	/**
+	 * Finalizes an instance of the TheRuleOfFive class.
+	 *
+	 * This is the destructor.
+	 */
+	~TheRuleOfFive()
+	{
+		delete[] resource_;
+	}
 
-  /**
-   * Initializes a new instance of the TheRuleOfFive class from the specified
-   * TheRuleOfFive.
-   *
-   * This is the copy constructor.
-   *
-   * @param kValue The TheRuleOfFive to copy.
-   */
-  TheRuleOfFive(TheRuleOfFive const& kOther)
-      : resource_{new char[std::strlen(kOther.resource_) + 1]} {
-    std::strcpy(resource_, kOther.resource_);
-  }
+	/**
+	 * Initializes a new instance of the TheRuleOfFive class from the specified
+	 * TheRuleOfFive.
+	 *
+	 * This is the copy constructor.
+	 *
+	 * @param kValue The TheRuleOfFive to copy.
+	 */
+	TheRuleOfFive(TheRuleOfFive const &kOther) :
+					resource_ { new char[std::strlen(kOther.resource_) + 1] }
+	{
+		std::strcpy(resource_, kOther.resource_);
+	}
 
-  /**
-   * Assigns the specified TheRuleOfFive to this TheRuleOfFive.
-   *
-   * This is the copy assignment operator.
-   *
-   * @param kValue The TheRuleOfFive to assign to this TheRuleOfFive.
-   */
-  TheRuleOfFive& operator=(TheRuleOfFive& kOther) {
-    std::swap(resource_, kOther.resource_);
+	/**
+	 * Assigns the specified TheRuleOfFive to this TheRuleOfFive.
+	 *
+	 * This is the copy assignment operator.
+	 *
+	 * @param kValue The TheRuleOfFive to assign to this TheRuleOfFive.
+	 */
+	TheRuleOfFive& operator=(TheRuleOfFive &kOther)
+	{
+		std::swap(resource_, kOther.resource_);
 
-    return *this;
-  }
+		return *this;
+	}
 
-  /**
-   * Initializes a new instance of the TheRuleOfFive class from the specified
-   * TheRuleOfFive.
-   *
-   * This is the move constructor.
-   *
-   * @param kValue The TheRuleOfFive to copy.
-   */
-  TheRuleOfFive(TheRuleOfFive&& other) : resource_{other.resource_}  {
-    other.resource_ = nullptr;
-  }
+	/**
+	 * Initializes a new instance of the TheRuleOfFive class from the specified
+	 * TheRuleOfFive.
+	 *
+	 * This is the move constructor.
+	 *
+	 * @param kValue The TheRuleOfFive to copy.
+	 */
+	TheRuleOfFive(TheRuleOfFive &&other) :
+					resource_ { other.resource_ }
+	{
+		other.resource_ = nullptr;
+	}
 
-  /**
-   * Assigns the specified TheRuleOfFive to this TheRuleOfFive.
-   *
-   * This is the move assignment operator.
-   *
-   * @param kValue The TheRuleOfFive to assign to this TheRuleOfFive.
-   */
-  TheRuleOfFive& operator=(TheRuleOfFive&& other) {
-    std::swap(resource_, other.resource_);
+	/**
+	 * Assigns the specified TheRuleOfFive to this TheRuleOfFive.
+	 *
+	 * This is the move assignment operator.
+	 *
+	 * @param kValue The TheRuleOfFive to assign to this TheRuleOfFive.
+	 */
+	TheRuleOfFive& operator=(TheRuleOfFive &&other)
+	{
+		std::swap(resource_, other.resource_);
 
-    return *this;
-  }
+		return *this;
+	}
 
- private:
-  /**
-   * The resource (a raw pointer to a character) to handle by this class.
-   */
-  char* resource_;
+private:
+	/**
+	 * The resource (a raw pointer to a character) to handle by this class.
+	 */
+	char *resource_;
 };
 
 }  // namespace idiom
@@ -336,30 +380,37 @@ class TheRuleOfFive final {
  *
  * @return Always `0`.
  */
-int main() {
-  using fw::idiom::TheRuleOfFive;
+int main()
+{
+	using fw::idiom::TheRuleOfFive;
 
-  // Complete constructor.
-  TheRuleOfFive the_rule_of_five_defaults{"hello, world"};
+	// Complete constructor.
+	TheRuleOfFive the_rule_of_five_defaults { "hello, world" };
 
-  // Copy constructor.
-  TheRuleOfFive copy{the_rule_of_five_defaults};
+	// Copy constructor.
+	TheRuleOfFive copy { the_rule_of_five_defaults };
 
-  // Move constructor.
-  TheRuleOfFive move{std::move(copy)};
+	// Move constructor.
+	TheRuleOfFive move { std::move(copy) };
 
-  // Copy assignment operator.
-  copy = the_rule_of_five_defaults;
+	// Copy assignment operator.
+	copy = the_rule_of_five_defaults;
 
-  // Move assignment operator (from rvalue).
-  move = TheRuleOfFive{"foo"};
+	// Move assignment operator (from rvalue).
+	move = TheRuleOfFive { "foo" };
 
-  // Move assignment operator (from lvalue).
-  move = std::move(copy);
+	// Move assignment operator (from lvalue).
+	move = std::move(copy);
 
-  // Destructor(s).
+	// Destructor(s).
 }
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
 ```
+
+> NOTE: 
+>
+> 一、上述code，同样存在一些问题，参见 feabhas [The Rule of The Big Four (and a half) – Move Semantics and Resource Management](https://blog.feabhas.com/2015/01/the-rule-of-the-big-four-and-a-half-move-semantics-and-resource-management/) ，其中给出了更好的实现方式
 
 [the_rule_of_five.h](https://gist.github.com/FlorianWolters/26f0ea1117f34866f2a2#file-the_rule_of_five-h) hosted with ❤ by [GitHub](https://github.com/)
 
@@ -379,6 +430,18 @@ This basically means that one should never use a **raw pointer** to manage a res
 
 *The Rule of Zero* allows to implement **{C, M}**, **{UC, M}**, **{C, UM}** and **{UC, UM}**, **without declaring them explicitly**. The emphasized part of the last sentence is the important difference to *The Rule of Five*.
 
+> NOTE: 
+>
+> 上面的总结是不够直观明了的，在 feabhas [The Rule of Zero](https://blog.feabhas.com/2015/01/the-rule-of-zero/) 中的总结更加明了:
+>
+> > “The Rule of Zero” basically states:
+> >
+> > > *You should NEVER implement a destructor, copy constructor, move constructor or assignment operators in your code.*
+> >
+> > With the (very important) corollary to this:
+> >
+> > > *You should NEVER use a raw pointer to manage a resource.*
+
 The aim of *The Rule of Zero* is to eliminate resource management for the user and let the Standard Library do all the work related to resource management.
 
 The latest approved [ISO C++ Standard *C++14*](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4296.pdf) describes *The Rule of Zero* in the section 12.8 (“Copying and moving class objects”):
@@ -387,20 +450,21 @@ The latest approved [ISO C++ Standard *C++14*](http://www.open-std.org/jtc1/sc22
 
 #### Suggestions
 
-##### Use *Smart Pointers* instead of raw pointers:
+**Use *Smart Pointers* instead of raw pointers:**
 
-[`std::unique_ptr `](http://en.cppreference.com/w/cpp/memory/unique_ptr) 
+1、[`std::unique_ptr `](http://en.cppreference.com/w/cpp/memory/unique_ptr) 
 
 if an instance of a class can be moved, but not copied and does not have to be shared.
 
-[`std::shared_ptr `](http://en.cppreference.com/w/cpp/memory/shared_ptr) 
+2、[`std::shared_ptr `](http://en.cppreference.com/w/cpp/memory/shared_ptr) 
 
 if an instance of a class can be copied and has to be shared.
 
-##### Avoid C-style language constructs (especially as class member attributes):
+**Avoid C-style language constructs (especially as class member attributes):**
 
-- The string class[`std::basic_string `](http://en.cppreference.com/w/cpp/string/basic_string)instead of a C-string (`char* `).
-- The container class[`std::array `](http://en.cppreference.com/w/cpp/container/array)instead of C-arrays (e. g.`std::uint16_t my_var[10]; `).
+1、The string class[`std::basic_string `](http://en.cppreference.com/w/cpp/string/basic_string)instead of a C-string (`char* `).
+
+2、The container class[`std::array `](http://en.cppreference.com/w/cpp/container/array)instead of C-arrays (e. g.`std::uint16_t my_var[10]; `).
 
 
 
@@ -425,31 +489,36 @@ if an instance of a class can be copied and has to be shared.
 #include <string>
 #include <utility>
 
-namespace fw {
-namespace idiom {
+namespace fw
+{
+namespace idiom
+{
 
 /**
  * The TheRuleOfZero class demonstrates *The Rule of Zero* idiom.
  *
  * @author Florian Wolters <wolters.fl@gmail.com>
  */
-class TheRuleOfZero final {
- public:
-  /**
-   * Initializes a new instance of the TheRuleOfZero class with the specified
-   * string.
-   *
-   * @param kValue Thestring.
-   */
-  explicit TheRuleOfZero(std::string const& kValue) : value_{kValue} {
-    // NOOP
-  }
+class TheRuleOfZero final
+{
+public:
+	/**
+	 * Initializes a new instance of the TheRuleOfZero class with the specified
+	 * string.
+	 *
+	 * @param kValue Thestring.
+	 */
+	explicit TheRuleOfZero(std::string const &kValue) :
+					value_ { kValue }
+	{
+		// NOOP
+	}
 
- private:
-  /**
-   * The value of this TheRuleOfZero instance.
-   */
-  std::string value_;
+private:
+	/**
+	 * The value of this TheRuleOfZero instance.
+	 */
+	std::string value_;
 };
 
 }  // namespace idiom
@@ -462,29 +531,32 @@ class TheRuleOfZero final {
  *
  * @return Always `0`.
  */
-int main() {
-  using fw::idiom::TheRuleOfZero;
+int main()
+{
+	using fw::idiom::TheRuleOfZero;
 
-  // Complete constructor.
-  TheRuleOfZero the_rule_of_five_defaults{"hello, world"};
+	// Complete constructor.
+	TheRuleOfZero the_rule_of_five_defaults { "hello, world" };
 
-  // Copy constructor.
-  TheRuleOfZero copy{the_rule_of_five_defaults};
+	// Copy constructor.
+	TheRuleOfZero copy { the_rule_of_five_defaults };
 
-  // Move constructor.
-  TheRuleOfZero move{std::move(copy)};
+	// Move constructor.
+	TheRuleOfZero move { std::move(copy) };
 
-  // Copy assignment operator.
-  copy = the_rule_of_five_defaults;
+	// Copy assignment operator.
+	copy = the_rule_of_five_defaults;
 
-  // Move assignment operator (from rvalue).
-  move = TheRuleOfZero{"foo"};
+	// Move assignment operator (from rvalue).
+	move = TheRuleOfZero { "foo" };
 
-  // Move assignment operator (from lvalue).
-  move = std::move(copy);
+	// Move assignment operator (from lvalue).
+	move = std::move(copy);
 
-  // Destructor(s).
+	// Destructor(s).
 }
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
 ```
 
 

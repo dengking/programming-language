@@ -246,6 +246,22 @@ What should have been “The Rule of The Big Five” is now reduced to “The Ru
 - The swap function
 
 > NOTE: 
+>
+> 上述总结和我的认知不同，我觉得"Big Four"指的是:
+>
+> 1、The copy constructor
+>
+> 2、The assignment operator
+>
+> 3、The move constructor
+>
+> 4、Destructor
+>
+> "a half"指的是
+>
+> 1、The swap function
+>
+> 关于此，参见 stackoverflow [What is the Rule of Four (and a half)?](https://stackoverflow.com/questions/45754226/what-is-the-rule-of-four-and-a-half) 
 
 
 
@@ -286,3 +302,147 @@ Finally, examining move and copy policies also leads to two supplemental good pr
 2、Simplify your types by making use of extant types that perform resource management for you, such as ‘smart pointers’.
 
 This last point is critical; and leads on to the last article in this series – “The Rule of Zero”. We’ll look at that next time.
+
+
+
+## 补充
+
+原文的内容比较分散，下面是补充内容。
+
+### stackoverflow [What is the Rule of Four (and a half)?](https://stackoverflow.com/questions/45754226/what-is-the-rule-of-four-and-a-half)
+
+For properly handling object copying, the rule of thumb is the [Rule of Three](https://stackoverflow.com/q/4172722). With C++11, move semantics are a thing, so instead it's the [Rule of Five](http://en.cppreference.com/w/cpp/language/rule_of_three). However, in discussions around [here](https://stackoverflow.com/a/3279550) and on the internet, I've also seen references to the [Rule of Four (and a half)](https://blog.feabhas.com/2015/01/the-rule-of-the-big-four-and-a-half-move-semantics-and-resource-management/), which is a combination of the Rule of Five and the copy-and-swap idiom.
+
+So what exactly is the Rule of Four (and a half)? Which functions need to be implemented, and what should each function's body look like? Which function is the half? Are there any disadvantages or warnings for this approach, compared to the Rule of Five?
+
+Here's a reference implementation that resembles my current code. If this is incorrect, what would a correct implementation look like?
+
+```C++
+//I understand that in this example, I could just use `std::unique_ptr`.
+//Just assume it's a more complex resource.
+#include <utility>
+
+class Foo
+{
+public:
+	//We must have a default constructor so we can swap during copy construction.
+	//It need not be useful, but it should be swappable and deconstructable.
+	//It can be private, if it's not truly a valid state for the object.
+	Foo() :
+					resource(nullptr)
+	{
+	}
+
+	//Normal constructor, acquire resource
+	Foo(int value) :
+					resource(new int(value))
+	{
+	}
+
+	//Copy constructor
+	Foo(Foo const &other)
+	{
+		//Copy the resource here.
+		resource = new int(*other.resource);
+	}
+
+	//Move constructor
+	//Delegates to default constructor to put us in safe state.
+	Foo(Foo &&other) :
+					Foo()
+	{
+		swap(other);
+	}
+
+	//Assignment
+	Foo& operator=(Foo other)
+	{
+		swap(other);
+		return *this;
+	}
+
+	//Destructor
+	~Foo()
+	{
+		//Free the resource here.
+		//We must handle the default state that can appear from the copy ctor.
+		//(The if is not technically needed here. `delete nullptr` is safe.)
+		if (resource != nullptr)
+			delete resource;
+	}
+
+	//Swap
+	void swap(Foo &other)
+	{
+		using std::swap;
+
+		//Swap the resource between instances here.
+		swap(resource, other.resource);
+	}
+
+	//Swap for ADL
+	friend void swap(Foo &left, Foo &right)
+	{
+		left.swap(right);
+	}
+
+private:
+	int *resource;
+};
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
+```
+
+
+
+A
+
+> So what exactly is the Rule of Four (and a half)?
+
+“The Rule of The Big Four (and a half)" states that if you implement one of
+
+1、The copy constructor
+
+2、The assignment operator
+
+3、The move constructor
+
+4、The destructor
+
+5、The swap function
+
+then you must have a policy about the others.
+
+> Which functions need to implemented, and what should each function's body look like?
+
+- default constructor (which could be private)
+
+- copy constructor (Here you have real code to handle your resource)
+
+- move constructor (using default constructor and swap) :
+
+    ```C++
+    S(S&& s) : S{} { swap(*this, s); }
+    ```
+
+- assignment operator (using constructor and swap)
+
+    ```
+    S& operator=(S s) { swap(*this, s); }
+    ```
+
+- destructor (deep copy of your resource)
+
+- friend swap (doesn't have default implementation :/ you should probably want to swap each member). This one is important contrary to the swap member method: `std::swap` uses move (or copy) constructor, which would lead to infinite recursion.
+
+> Which function is the half?
+
+From previous article:
+
+> "To implement the Copy-Swap idiom your resource management class must also implement a swap() function to perform a member-by-member swap (there’s your “…(and a half)”)"
+
+so the `swap` method.
+
+> Are there any disadvantages or warnings for this approach, compared to the Rule of Five?
+
+The warning I already wrote is about to write the correct swap to avoid the infinite recursion.

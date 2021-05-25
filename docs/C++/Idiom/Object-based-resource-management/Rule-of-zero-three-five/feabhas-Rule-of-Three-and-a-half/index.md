@@ -248,6 +248,10 @@ When the temporary object goes out of scope at the end of the function it will d
 
 ### Assignment operator-pass by value-copy and swap idiom-strong exception safety
 
+> NOTE: 
+>
+> 这种写法是最最简洁、最最完善的
+
 There is a (small) chance that if the copy constructor (for `temp`) fails it could throw an exception, possibly leaving the receiving object in an invalid state.
 
 To stop this, we re-write the assignment operator and move the copy construction outside the call. Notice the assignment operator has been re-written to take a `SocketManager` object *by value*.

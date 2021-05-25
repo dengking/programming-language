@@ -3,7 +3,9 @@ nav:
     - feabhas-Rule-of-Three-and-a-half: feabhas-Rule-of-Three-and-a-half
     - feabhas-Rule-of-Four-and-a-half: feabhas-Rule-of-Four-and-a-half
     - feabhas-Rule-of-Zero: feabhas-Rule-of-Zero
-    - cppreference-The-rule-of-three-five-zero: cppreference-The-rule-of-three-five-zero    
+    - florianwolters-The-Rule-of-Zero: florianwolters-The-Rule-of-Zero
+    - drdobbs-C++Made-Easier-The-Rule-of-Three: drdobbs-C++Made-Easier-The-Rule-of-Three
+    - cppreference-Rule-of-three-five-zero: cppreference-Rule-of-three-five-zero
     - Rule-of-Zero: Rule-of-Zero
     - Examples: Examples
 
