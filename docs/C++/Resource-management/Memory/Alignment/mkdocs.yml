@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-
+    - Allocate-aligned-memory: Allocate-aligned-memory 
     - quarkslab-Unaligned-accesses-what-why-and-solution: quarkslab-Unaligned-accesses-what-why-and-solution
     - cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type: cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type
     - Aliasing-pointer-cast: Aliasing-pointer-cast    
