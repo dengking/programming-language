@@ -20,11 +20,11 @@ The alternate wording *b-bit aligned* designates a *b/8 byte aligned* address (e
 
 A memory access is said to be *aligned* when the data being accessed is *n* bytes long and the datum address is *n*-byte aligned. When a memory access is not aligned, it is said to be *misaligned*. Note that by definition byte memory accesses are always aligned.
 
-***SUMMARY*** : 注意memory address alignment和memory access alignment
+> NOTE: 注意memory address alignment和memory access alignment
 
 A memory pointer that refers to primitive data that is *n* bytes long is said to be *aligned* if it is only allowed to contain addresses that are *n*-byte aligned, otherwise it is said to be *unaligned*. A memory pointer that refers to a data aggregate (a data structure or array) is *aligned* if (and only if) each primitive datum in the aggregate is aligned.
 
-***SUMMARY*** : 在`c`中，通过类似`int * p`来声明指针所指向的类型，其实这也是在向compiler声明alignment requirement；
+> NOTE:  : 在`c`中，通过类似`int * p`来声明指针所指向的类型，其实这也是在向compiler声明alignment requirement；
 
 Note that the definitions above assume that each primitive datum is a power of two bytes long. When this is not the case (as with 80-bit floating-point on [x86](https://en.wikipedia.org/wiki/X86)) the context influences the conditions where the datum is considered aligned or not.
 
@@ -34,25 +34,25 @@ Data structures can be stored in memory on the stack with a **static size** know
 
 A computer accesses memory by a single **memory word** at a time. As long as the **memory word size** is at least as large as the largest [primitive data type](https://en.wikipedia.org/wiki/Primitive_data_type) supported by the computer, **aligned accesses** will always access a single memory word. This may not be true for misaligned data accesses.
 
-***SUMMARY*** : largest primitive data type，在C中就是`long`。
+> NOTE:  : largest primitive data type，在C中就是`long`。
 
 If the highest and lowest bytes in a datum are not within **the same memory word** the computer must split the datum access into multiple **memory accesses**. This requires a lot of complex circuitry to generate the memory accesses and coordinate them. To handle the case where the memory words are in different memory pages the processor must either verify that both pages are present before executing the instruction or be able to handle a [TLB](https://en.wikipedia.org/wiki/Translation_lookaside_buffer) miss or a [page fault](https://en.wikipedia.org/wiki/Page_fault) on any memory access during the instruction execution.
 
 When a single memory word is accessed the operation is **atomic**, i.e. the whole memory word is read or written at once and other devices must wait until the read or write operation completes before they can access it. This may not be true for unaligned accesses to multiple memory words, e.g. the first word might be read by one device, both words written by another device and then the second word read by the first device so that the value read is neither the original value nor the updated value. Although such failures are rare, they can be very difficult to identify.
 
-***SUMMARY*** : 这一节所总结的是misaligned memory所带来的问题；
+> NOTE:  : 这一节所总结的是misaligned memory所带来的问题；
 
 ## Data structure padding
 
 Although the [compiler](https://en.wikipedia.org/wiki/Compiler) (or [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing))) normally allocates individual data items on aligned boundaries, data structures often have members with different **alignment requirements**. To maintain proper alignment the translator normally inserts additional unnamed data members so that each member is properly aligned. In addition, the data structure as a whole may be padded with a final unnamed member. This allows each member of an array of structures to be properly aligned.
 
-***SUMMARY*** : 因为在`c`中，`struct`往往是占据着连续的内存空间，`struct`中的每个成员变量都有alignment requirement，所以就存在这样的可能性：为了满足后一个成员变量的alignment requirement，在它和前一个成员变量之间存在着类似于空洞的空间， 其实这个空间就是下面所谓的padding；显然添加padding的目的是为了满足成员变量的alignment requirement；从下面的介绍来看，padding不仅会发生在两个成员变量之间，也会发生在`struct`之后；
+> NOTE:  : 因为在`c`中，`struct`往往是占据着连续的内存空间，`struct`中的每个成员变量都有alignment requirement，所以就存在这样的可能性：为了满足后一个成员变量的alignment requirement，在它和前一个成员变量之间存在着类似于空洞的空间， 其实这个空间就是下面所谓的padding；显然添加padding的目的是为了满足成员变量的alignment requirement；从下面的介绍来看，padding不仅会发生在两个成员变量之间，也会发生在`struct`之后；
 
 Padding is only inserted when a [structure](https://en.wikipedia.org/wiki/Structure) member is followed by a member with a larger **alignment requirement** or at the end of the structure. By changing the ordering of members in a structure, it is possible to change the amount of padding required to maintain alignment. For example, if members are sorted by descending alignment requirements a minimal amount of padding is required. The minimal amount of padding required is always less than the largest alignment in the structure. Computing the maximum amount of padding required is more complicated, but is always less than the sum of the alignment requirements for all members minus twice the sum of the alignment requirements for the least aligned half of the structure members.
 
 Although C and `C++` do not allow the compiler to reorder structure members to save space, other languages might. It is also possible to tell most C and `C++` compilers to "**pack**" the members of a structure to a certain level of **alignment**, e.g. "`pack(2)`" means align data members larger than a byte to a **two-byte boundary** so that any padding members are at most one byte long.
 
-***SUMMARY*** : 关于packing和padding之间的关联，参考这篇文章：[Structure padding and packing](https://stackoverflow.com/questions/4306186/structure-padding-and-packing)
+> NOTE:  : 关于packing和padding之间的关联，参考这篇文章：[Structure padding and packing](https://stackoverflow.com/questions/4306186/structure-padding-and-packing)
 
 One use for such "packed" structures is to **conserve memory**. For example, a structure containing a single byte and a four-byte integer would require three additional bytes of padding. A large array of such structures would use 37.5% less memory if they are packed, although accessing each structure might take longer. This compromise may be considered a form of [space–time tradeoff](https://en.wikipedia.org/wiki/Space–time_tradeoff).
 
@@ -68,7 +68,7 @@ aligned = offset + padding
         = offset + ((align - (offset mod align)) mod align)
 ```
 
-***SUMMARY*** : 上述计算是非常简单的
+> NOTE:  : 上述计算是非常简单的
 
 For example, the **padding** to add to offset `0x59d` for a 4-byte aligned structure is 3. The structure will then start at `0x5a0`, which is a multiple of 4. However, when the alignment of *offset* is already equal to that of *align*, the second modulo in *(align - (offset mod align)) mod align* will return zero, therefore the original value is left unchanged.
 
@@ -98,7 +98,7 @@ struct MyData
 
 If the type "short" is stored in two bytes of memory then each member of the data structure depicted above would be 2-byte aligned. `Data1` would be at offset 0, `Data2` at offset 2, and `Data3` at offset 4. The size of this structure would be 6 bytes.
 
-***SUMMARY*** : `struct MyData`的**alignment requirement**是什么？
+> NOTE:  : `struct MyData`的**alignment requirement**是什么？
 
 The type of each member of the structure usually has a default **alignment**, meaning that it will, unless otherwise requested by the programmer, be aligned on a pre-determined boundary. The following typical alignments are valid for compilers from [Microsoft](https://en.wikipedia.org/wiki/Microsoft) ([Visual C++](https://en.wikipedia.org/wiki/Visual_C%2B%2B)), [Borland](https://en.wikipedia.org/wiki/Borland)/[CodeGear](https://en.wikipedia.org/wiki/CodeGear) ([C++Builder](https://en.wikipedia.org/wiki/C%2B%2BBuilder)), [Digital Mars](https://en.wikipedia.org/wiki/Digital_Mars) (DMC), and [GNU](https://en.wikipedia.org/wiki/GNU) ([GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)) when compiling for 32-bit x86:
 
