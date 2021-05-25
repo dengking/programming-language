@@ -75,11 +75,11 @@ singleton
 
 通过阅读[INSTALL](https://github.com/gabime/spdlog/blob/v1.x/INSTALL)可知，它有两种使用模式：
 
-- Header only version
+1、Header only version
 
-- Compiled library version
+2、Compiled library version
 
-  编译的时候，需要`-DSPDLOG_COMPILED_LIB`
+编译的时候，需要`-DSPDLOG_COMPILED_LIB`
 
 ## [Asynchronous logging](https://github.com/gabime/spdlog/wiki/6.-Asynchronous-logging)
 

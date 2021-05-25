@@ -94,11 +94,13 @@ SPDLOG_INLINE void spdlog::async_logger::sink_it_(const details::log_msg &msg)
 
 3、async_logger-(`weak_ptr`)->thread_pool
 
+显然，`thread_pool`的析构是不受`async_logger`控制的
+
 4、thread_pool的message queue-(`shared_ptr`)->async_logger
 
 显然环在3、4，因此在3中只能够使用`weak_ptr`。
 
-当thread_pool的message queue的所有的message被处理完成了，则
+当thread_pool的message queue的所有的message被处理完成了，则能够析构`async_logger`
 
 
 它使用smart pointer的目的是: 
