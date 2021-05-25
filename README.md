@@ -1,3 +1,3 @@
-# python-in-action
+# programming-language
 
-My knowledge base of python.
+My knowledge base of programming language.
