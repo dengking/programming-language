@@ -10,7 +10,7 @@
 
 3、Memory access and alignment
 
-这是非常重要的一个内容，在`Memory-access-and-alignment`章节中进行讨论 。
+这是非常重要的一个内容，在`Alignment`章节中进行讨论 。
 
 
 

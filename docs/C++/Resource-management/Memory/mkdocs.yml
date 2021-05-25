@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - Dynamic-allocation: Dynamic-allocation
     - Memory-access: Memory-access
+    - Alignment: Alignment
     - Pointer-and-array: Pointer-and-array
     - GC: GC
     - Memory-error: Memory-error
