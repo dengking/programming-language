@@ -4,8 +4,6 @@
 
 
 
-
-
 ## wikipedia [Segmentation fault](https://en.wikipedia.org/wiki/Segmentation_fault)
 
 In [computing](https://en.wikipedia.org/wiki/Computing), a **segmentation fault** (often shortened to **segfault**) or **access violation** is a [fault](https://en.wikipedia.org/wiki/Fault_(computing)), or failure condition, raised by hardware with [memory protection](https://en.wikipedia.org/wiki/Memory_protection), notifying an [operating system](https://en.wikipedia.org/wiki/Operating_system) (OS) the software has attempted to access a restricted area of memory (a memory access violation). On standard [x86](https://en.wikipedia.org/wiki/X86) computers, this is a form of [general protection fault](https://en.wikipedia.org/wiki/General_protection_fault). The OS [kernel](https://en.wikipedia.org/wiki/Kernel_(computing)) will, in response, usually perform some corrective action, generally passing the fault on to the offending [process](https://en.wikipedia.org/wiki/Process_(computing)) by sending the process a [signal](https://en.wikipedia.org/wiki/Signal_(computing)). Processes can in some cases install a custom signal handler, allowing them to recover on their own,[[1\]](https://en.wikipedia.org/wiki/Segmentation_fault#cite_note-Peter_Van_der_Linden-1) but otherwise the OS default signal handler is used, generally causing [abnormal termination](https://en.wikipedia.org/wiki/Abnormal_termination) of the process (a program [crash](https://en.wikipedia.org/wiki/Crash_(computing))), and sometimes a [core dump](https://en.wikipedia.org/wiki/Core_dump).
@@ -29,3 +27,4 @@ At the operating system level, this fault is caught and a signal is passed on to
 ## TODO
 
 stackoverflow [segmentation fault : 11](https://stackoverflow.com/questions/12762944/segmentation-fault-11)
+

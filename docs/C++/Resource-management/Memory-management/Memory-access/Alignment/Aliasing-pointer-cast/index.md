@@ -1,4 +1,8 @@
-# stackoverflow [Should I worry about the alignment during pointer casting?](https://stackoverflow.com/questions/13881487/should-i-worry-about-the-alignment-during-pointer-casting)
+# Aliasing、pointer cast
+
+
+
+## stackoverflow [Should I worry about the alignment during pointer casting?](https://stackoverflow.com/questions/13881487/should-i-worry-about-the-alignment-during-pointer-casting)
 
 
 
@@ -14,23 +18,33 @@ i3 = *((int*)(data + 8));
 i4 = *((int*)(data + 12));
 ```
 
-***SUMMARY*** : `char`类型的alignment是1，所以`data`的alignment也是1；
-
-***SUMMARY*** : 上述代码中，`i1, i2, i3, i4`其实是在执行后面的赋值语句之前就已经被分配了，后面的`*((int*)data)`是dereference一个指针；`(int*)data`不一定满足`int`的alignment；
+> NOTE: 
+>
+> 1、`char`类型的alignment是1，所以`data`的alignment也是1
+>
+> 2、上述是典型的违背strict aliasing的
+>
+> 3、上述代码中，`i1, i2, i3, i4`其实是在执行后面的赋值语句之前就已经被分配了，后面的`*((int*)data)`是dereference一个指针；`(int*)data`不一定满足`int`的alignment；
 
 
 
 I talked to my tech lead that this code may not be portable since it's trying to cast a `unsigned char*`to a `int*` which usually has a more strict alignment requirement. But tech lead says that's all right, most compilers remains the same pointer value after casting, and I can just write the code like this.
 
-***SUMMARY*** : 上面这段话中的cast a `unsigned char*`to a `int*` which usually has a more strict alignment requirement的意思是，`unsigned char*`和`int*` 都是指针类型，它们的alignment和它们所指向的数据的alignment是不同的，比如在64位系统中，`unsigned char*`的alignment是8，它所指向的是`char`，`char`的alignment是1；
+> NOTE: 
+>
+> 1、上面这段话中的"cast a `unsigned char*`to a `int*` which usually has a more strict alignment requirement"的意思是，`unsigned char*`和`int*` 都是指针类型，它们的alignment和它们所指向的数据的alignment是不同的，比如在64位系统中，`unsigned char*`的alignment是8，它所指向的是`char`，`char`的alignment是1，`int`的alignment是比`char`的大，即更加strict的。
+>
+> 需要使用"interpretation model"来进行理解
 
 To be frank, I'm not really convinced. After researching, I find some people against use of pointer castings like above, e.g., [here](https://www.securecoding.cert.org/confluence/display/cplusplus/EXP36-CPP.+Do+not+convert+pointers+into+more+strictly+aligned+pointer+types) and [here](http://www.informit.com/guides/content.aspx?g=cplusplus&seqNum=548).
 
 So here are my questions:
 
-1. Is it REALLY safe to dereference the pointer after casting in a real project?
-2. Is there any difference between C-style casting and `reinterpret_cast`?
-3. Is there any difference between C and `C++`?
+1、Is it REALLY safe to dereference the pointer after casting in a real project?
+
+2、Is there any difference between C-style casting and `reinterpret_cast`?
+
+3、Is there any difference between C and `C++`?
 
 
 
@@ -38,13 +52,17 @@ Many CPUs will **trap** on **unaligned accesses**. Is that enough of a reason fo
 
 
 
-## [A](https://stackoverflow.com/a/13881606)
+### [A](https://stackoverflow.com/a/13881606)
 
 
 
 > \1. Is it REALLY safe to dereference the pointer after casting in a real project?
 
 If the pointer happens to not be aligned properly it really can cause problems. I've personally seen and fixed bus errors in real, production code caused by casting a `char*` to a **more strictly aligned type**. Even if you don't get an obvious error you can have less obvious issues like slower performance. Strictly following the standard to avoid UB is a good idea even if you don't immediately see any problems. (And one rule the code is breaking is the strict aliasing rule, § 3.10/10*)
+
+> NOTE: 
+>
+> 关于bus error，参见 `Bus-error` 章节。
 
 A better alternative is to use `std::memcpy()` or `std::memmove` if the buffers overlap (or better yet [`bit_cast<>()`](https://gist.github.com/3472964))
 
@@ -64,46 +82,53 @@ Some compilers work harder than others to make sure char arrays are aligned more
 #include <typeinfo>
 #include <iostream>
 
-template<typename T> void check_aligned(void *p) {
-    std::cout << p << " is " <<
-      (0==(reinterpret_cast<std::intptr_t>(p) % alignof(T))?"":"NOT ") <<
-      "aligned for the type " << typeid(T).name() << '\n';
+template<typename T> void check_aligned(void *p)
+{
+	std::cout << p << " is " << (0 == (reinterpret_cast<std::intptr_t>(p) % alignof(T)) ? "" : "NOT ") << "aligned for the type " << typeid(T).name() << '\n';
 }
 
-void foo1() {
-    char a;
-    char b[sizeof (int)];
-    check_aligned<int>(b); // unaligned in clang
+void foo1()
+{
+	char a;
+	char b[sizeof(int)];
+	check_aligned<int>(b); // unaligned in clang
 }
 
-struct S {
-    char a;
-    char b[sizeof(int)];
+struct S
+{
+	char a;
+	char b[sizeof(int)];
 };
 
-void foo2() {
-    S s;
-    check_aligned<int>(s.b); // unaligned in clang and msvc
+void foo2()
+{
+	S s;
+	check_aligned<int>(s.b); // unaligned in clang and msvc
 }
 
 S s;
 
-void foo3() {
-    check_aligned<int>(s.b); // unaligned in clang, msvc, and gcc
+void foo3()
+{
+	check_aligned<int>(s.b); // unaligned in clang, msvc, and gcc
 }
 
-int main() {
-    foo1();
-    foo2();
-    foo3();
+int main()
+{
+	foo1();
+	foo2();
+	foo3();
 }
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
+
 ```
 
 http://ideone.com/FFWCjf
 
 > \2. Is there any difference between C-style casting and reinterpret_cast?
 
-It depends. C-style casts do different things depending on the types involved. C-style casting between pointer types will result in the same thing as a reinterpret_cast; See § 5.4 *Explicit type conversion (cast notation)* and § 5.2.9-11.
+It depends. C-style casts do different things depending on the types involved. C-style casting between pointer types will result in the same thing as a `reinterpret_cast`; See § 5.4 *Explicit type conversion (cast notation)* and § 5.2.9-11.
 
 > \3. Is there any difference between C and C++?
 
@@ -111,13 +136,11 @@ There shouldn't be as long as you're dealing with types that are legal in C.
 
 ------
 
-\* Another issue is that C++ does not specify the result of casting from one pointer type to a type with stricter alignment requirements. This is to support platforms where unaligned pointers cannot even be represented. However typical platforms today can represent unaligned pointers and compilers specify the results of such a cast to be what you would expect. As such, this issue is secondary to the aliasing violation. See [expr.reinterpret.cast]/7.
+`*` Another issue is that C++ does not specify the result of casting from one pointer type to a type with stricter alignment requirements. This is to support platforms where unaligned pointers cannot even be represented. However typical platforms today can represent unaligned pointers and compilers specify the results of such a cast to be what you would expect. As such, this issue is secondary to the aliasing violation. See [expr.reinterpret.cast]/7.
 
 
 
-## [A](https://stackoverflow.com/a/13881632)
-
-
+### [A](https://stackoverflow.com/a/13881632)
 
 
 
@@ -131,11 +154,11 @@ etc. This is definitely well-defined behaviour, and as a bonus, it's also endian
 
 
 
-## [A](https://stackoverflow.com/a/13881680)
+### [A](https://stackoverflow.com/a/13881680)
 
 The correct way to unpack `char` buffered data is to use `memcpy`:
 
-```
+```C++
 unsigned char data[4 * sizeof(int)];
 int i1, i2, i3, i4;
 memcpy(&i1, data, sizeof(int));
@@ -148,9 +171,11 @@ Casting violates aliasing, which means that the compiler and optimiser are free 
 
 Regarding your 3 questions:
 
-1. No, dereferencing a cast pointer is in general unsafe, because of aliasing and alignment.
-2. No, in C++, C-style casting is defined in terms of `reinterpret_cast`.
-3. No, C and C++ agree on cast-based aliasing. There is a difference in the treatment of union-based aliasing (C allows it in some cases; C++ does not).
+1、No, dereferencing a cast pointer is in general unsafe, because of aliasing and alignment.
+
+2、No, in C++, C-style casting is defined in terms of `reinterpret_cast`.
+
+3、No, C and C++ agree on cast-based aliasing. There is a difference in the treatment of union-based aliasing (C allows it in some cases; C++ does not).
 
 
 
@@ -158,7 +183,7 @@ Regarding your 3 questions:
 
 
 
-# stackoverflow [Output from arbitrary dereferenced pointer](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer)
+## stackoverflow [Output from arbitrary dereferenced pointer](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer)
 
 I fill the memory as follows:
 
@@ -191,10 +216,68 @@ When I execute this code on my x64 plaform I get what I expected:
 88776655
 ```
 
-***SUMMARY*** : 这个输出其实传达了非常多的信息：
+> NOTE: 
+>
+> 一、完整测试程序如下:
+>
+> ```C++
+> #include <stdio.h>
+> 
+> char buf[8] = { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88 };
+> int main()
+> {
+> 	for (int i = 0; i < sizeof(buf) / sizeof(buf[0]); ++i)
+> 	{
+> 		printf("%X\n", buf[i]);
+> 	}
+> 	char *c_ptr;
+> 	unsigned long *u_ptr;
+> 
+> 	c_ptr = buf;
+> 	for (int i = 0; i < 5; i++)
+> 	{
+> 		u_ptr = (unsigned long*) c_ptr;
+> 		printf("%X\n", *u_ptr);
+> 		c_ptr++;
+> 	}
+> }
+> // gcc test.c
+> 
+> ```
+>
+> 输出如下:
+>
+> ```
+> 11
+> 22
+> 33
+> 44
+> 55
+> 66
+> 77
+> FFFFFF88
+> 44332211
+> 55443322
+> 66554433
+> 77665544
+> 88776655
+> ```
+>
+> 上述程序用`g++`编译是无法通过的，会报如下错误:
+>
+> 
+>
+> 二、这个输出其实传达了非常多的信息：
+>
+> 1、[Endianness](https://en.wikipedia.org/wiki/Endianness) 我们所看到的数据在内存中是如何存放的
+>
+> 我们的书写是大端模式，从上述输出来看，CPU是小端，两者是相反的。
+>
+> 2、cast的底层含义：将一个`char *c_ptr`转换为`unsigned long *u_ptr`，然后访问`*u_ptr`，其实会read 4 个byte
+>
+> 使用interpretation model、aliasing来进行理解
 
-- [Endianness](https://en.wikipedia.org/wiki/Endianness) 我们所看到的数据在内存中是如何存放的
-- cast的底层含义：将一个`char *c_ptr`转换为`unsigned long *u_ptr`，然后访问`*u_ptr`，其实会read 4 个byte
+
 
 But when I execute the same code on ARM platform I get following:
 
@@ -226,29 +309,7 @@ I.e when I have pointer for example `0x10000001` It makes unsigned long from byt
 
 
 
-***COMMENTS*** : 
-
-- [en.wikipedia.org/wiki/Endianness](http://en.wikipedia.org/wiki/Endianness) – [Nikolai Fetissov](https://stackoverflow.com/users/106671/nikolai-fetissov) [Sep 16 '12 at 22:24](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer#comment16744142_12451230)
-
-- 
-
-  So far, every comment and answer has missed the point. The bytes aren't reversed, they're rotated. – [Marcelo Cantos](https://stackoverflow.com/users/9990/marcelo-cantos) [Sep 16 '12 at 22:29](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer#comment16744192_12451230)
-
-- 
-
-  A memory alignment thing? – [paddy](https://stackoverflow.com/users/1553090/paddy) [Sep 16 '12 at 22:30](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer#comment16744199_12451230)
-
-- 
-
-  The accepted answer explains what's happening. At the language level I think the problem is that your program is not a valid program according to the standard and you are in the *undefined behavior* arena: I think converting a `char*` to a `long*` is valid only if the pointer was originaly a pointer to `long*`, problem is that I cannot find the actual standard chapter(s) that make it so. – [Analog File](https://stackoverflow.com/users/574590/analog-file) [Sep 16 '12 at 22:48](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer#comment16744347_12451230)
-
-- 
-
-  The above casting is only way to create a non-aligment pointer. I had problem in a program, where another non-aligment pointer was used, so want to know, is this problem because of this. – [Nosturion](https://stackoverflow.com/users/1676270/nosturion) [Sep 16 '12 at 22:50](https://stackoverflow.com/questions/12451230/output-from-arbitrary-dereferenced-pointer#comment16744369_12451230)
-
-
-
-## [A](https://stackoverflow.com/a/12451301)
+### [A](https://stackoverflow.com/a/12451301)
 
 After suspecting memory alignment I did a quick google =)
 
@@ -289,7 +350,7 @@ inline unsigned long ulong_at( const char *p ) {
 
 
 
-## [A](https://stackoverflow.com/a/12451306)
+### [A](https://stackoverflow.com/a/12451306)
 
 If you want to fetch a four-byte word from memory, the address should be a multiple of four.
 
@@ -297,12 +358,7 @@ Misaligned access is generally a bad idea on any architecture. Some will throw a
 
 
 
-
-
-# alfonsobeato [How to Access Safely Unaligned Data](https://www.alfonsobeato.net/arm/how-to-access-safely-unaligned-data/)
-
+## TODO alfonsobeato [How to Access Safely Unaligned Data](https://www.alfonsobeato.net/arm/how-to-access-safely-unaligned-data/)
 
 
 
-
-# cmu.edu [EXP36-C. Do not cast pointers into more strictly aligned pointer types](https://wiki.sei.cmu.edu/confluence/display/c/EXP36-C.+Do+not+cast+pointers+into+more+strictly+aligned+pointer+types)

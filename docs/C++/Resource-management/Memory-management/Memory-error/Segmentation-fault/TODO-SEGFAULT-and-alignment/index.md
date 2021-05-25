@@ -56,8 +56,9 @@ It works.
 
 Now I wonder about few things:
 
-1. Why does it happen? There shouldn't be any "memory alignment" issue that could result in accessing a memory that is not allocated. If I am wrong with my understanding - please let me know what I missed.
-2. what conversion is happening with the `(__m128*)(a+1)`.
+1、Why does it happen? There shouldn't be any "memory alignment" issue that could result in accessing a memory that is not allocated. If I am wrong with my understanding - please let me know what I missed.
+
+2、what conversion is happening with the `(__m128*)(a+1)`.
 
 I am trying to understand how the SIMD works, so any information you can link - might help me understand why it reacts that way.
 
@@ -130,7 +131,4 @@ Assuming `a` is 16 byte aligned, and has type `float*`, then `a+1` adds `sizeof(
 
 Ensuring proper alignment is one of the challenges of using SIMD instruction sets. You will often see SIMD algorithms process the first few elements using "normal" (scalar) code, so that it can reach the alignment required by the SIMD instructions.
 
-
-
-## geeksforgeeks [Segmentation Fault (SIGSEGV) vs Bus Error (SIGBUS)](https://www.geeksforgeeks.org/segmentation-fault-sigsegv-vs-bus-error-sigbus/)
 

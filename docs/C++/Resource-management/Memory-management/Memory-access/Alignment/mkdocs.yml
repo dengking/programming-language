@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - Aliasing-pointer-cast: Aliasing-pointer-cast
     - quarkslab-Unaligned-accesses-what-why-and-solution: quarkslab-Unaligned-accesses-what-why-and-solution
     - cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type: cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type
     - Alignment: Alignment

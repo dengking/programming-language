@@ -3,7 +3,7 @@ nav:
     - Memory-safety: Memory-safety
 
     - Segmentation-fault: Segmentation-fault    
-    
+    - Bus-error: Bus-error
     - Double-free: Double-free
 
     - Out-of-bound: Out-of-bound
