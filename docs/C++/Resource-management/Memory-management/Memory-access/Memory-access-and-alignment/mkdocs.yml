@@ -3,6 +3,6 @@ nav:
     - Alignment: Alignment
     - argv-alignment: argv-alignment
     - TODO-pointer-and-alignment: TODO-pointer-and-alignment
-    - quarkslab-Unaligned-accesses-in-C-C++what-why-and-solutions-to-do-it-properly: quarkslab-Unaligned-accesses-in-C-C++what-why-and-solutions-to-do-it-properly
+    - quarkslab-Unaligned-accesses-what-why-and-solution: quarkslab-Unaligned-accesses-what-why-and-solution
     - pzemtsov -A-bug-story-data-alignment-on-x86: pzemtsov -A-bug-story-data-alignment-on-x86
     - SEGFAULT-and-alignment: SEGFAULT-and-alignment

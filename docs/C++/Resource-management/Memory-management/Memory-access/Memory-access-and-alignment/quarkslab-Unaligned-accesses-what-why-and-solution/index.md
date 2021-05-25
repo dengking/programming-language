@@ -6,6 +6,10 @@ For people that just want to see them and the final code, you can go directly to
 
 Spoiler: the provided solutions have nothing really disruptive, and are fairly standard ones! Other resources on the Internet [[1\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id11) [[2\]](https://blog.quarkslab.com/unaligned-accesses-in-cc-what-why-and-solutions-to-do-it-properly.html#id12) also cover this issue.
 
+> NOTE: 
+>
+> "spoiler"的意思是"剧透"
+
 ## The problem
 
 Let's consider this hash function, that computes a 64-bit integer from a buffer:
@@ -14,30 +18,33 @@ Let's consider this hash function, that computes a 64-bit integer from a buffer:
 #include <stdint.h>
 #include <stdlib.h>
 
-static uint64_t load64_le(uint8_t const* V)
+static uint64_t load64_le(uint8_t const *V)
 {
 #if !defined(__LITTLE_ENDIAN__)
 #error This code only works with little endian systems
 #endif
-  uint64_t Ret = *((uint64_t const*)V);
-  return Ret;
+	uint64_t Ret = *((uint64_t const*) V); // 不符合strict aliasing
+	return Ret;
 }
 
-uint64_t hash(const uint8_t* Data, const size_t Len)
+uint64_t hash(const uint8_t *Data, const size_t Len)
 {
-   uint64_t Ret = 0;
-   const size_t NBlocks = Len/8;
-   for (size_t I = 0; I < NBlocks; ++I) {
-     const uint64_t V = load64_le(&Data[I*sizeof(uint64_t)]);
-     Ret = (Ret ^ V)*CST;
-   }
-   uint64_t LastV = 0;
-   for (size_t I = 0; I < (Len-NBlocks*8); ++I) {
-     LastV |= ((uint64_t)Data[NBlocks*8+I]) << (I*8);
-   }
-   Ret = (Ret^LastV)*CST;
-   return Ret;
+	uint64_t Ret = 0;
+	const size_t NBlocks = Len / 8; // 8字节
+	for (size_t I = 0; I < NBlocks; ++I)
+	{
+		const uint64_t V = load64_le(&Data[I * sizeof(uint64_t)]);
+		Ret = (Ret ^ V) * CST;
+	}
+	uint64_t LastV = 0;
+	for (size_t I = 0; I < (Len - NBlocks * 8); ++I)
+	{
+		LastV |= ((uint64_t) Data[NBlocks * 8 + I]) << (I * 8);
+	}
+	Ret = (Ret ^ LastV) * CST;
+	return Ret;
 }
+
 ```
 
 The full source code with a convenient `main` function can be downloaded here: https://gist.github.com/aguinet/4b631959a2cb4ebb7e1ea20e679a81af.
@@ -51,43 +58,47 @@ The full source code with a convenient `main` function can be downloaded here: h
 
 #define CST 11246805480246805480ULL
 // 函数名中的le表示是是little endian
-static uint64_t load64_le(uint8_t const* V)
+static uint64_t load64_le(uint8_t const *V)
 {
 #if !defined(__LITTLE_ENDIAN__)
 #error This code only works with little endian systems
 #endif
-  uint64_t Ret = *((uint64_t const*)V); // 转换为uint64_t类型，它会从V开始，读取8个字节的数据
-  return Ret;
+	uint64_t Ret = *((uint64_t const*) V); // 转换为uint64_t类型，它会从V开始，读取8个字节的数据
+	return Ret;
 }
 
-static uint64_t hash(const uint8_t* Data, const size_t Len)
+static uint64_t hash(const uint8_t *Data, const size_t Len)
 {
-   uint64_t Ret = 0;
-   // 每次取8字节
-   const size_t NBlocks = Len/8;
-   for (size_t I = 0; I < NBlocks; ++I) {
-     const uint64_t V = load64_le(&Data[I*sizeof(uint64_t)]);
-     Ret = (Ret ^ V)*CST;
-   }
-   uint64_t LastV = 0;
-   for (size_t I = 0; I < (Len-NBlocks*8); ++I) { // I的单位是byte
-     LastV |= ((uint64_t)Data[NBlocks*8+I]) << (I*8); // uint64_t占8字节，<<的单位是bit
-   }
-   Ret = (Ret^LastV)*CST;
-   return Ret;
+	uint64_t Ret = 0;
+	// 每次取8字节
+	const size_t NBlocks = Len / 8;
+	for (size_t I = 0; I < NBlocks; ++I)
+	{
+		const uint64_t V = load64_le(&Data[I * sizeof(uint64_t)]);
+		Ret = (Ret ^ V) * CST;
+	}
+	uint64_t LastV = 0;
+	for (size_t I = 0; I < (Len - NBlocks * 8); ++I)
+	{ // I的单位是byte
+		LastV |= ((uint64_t) Data[NBlocks * 8 + I]) << (I * 8); // uint64_t占8字节，<<的单位是bit
+	}
+	Ret = (Ret ^ LastV) * CST;
+	return Ret;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-  if (argc < 2) {
-    fprintf(stderr, "Usage: %s string\n", argv[0]);
-    return 1;
-  }
-  const char* Str = argv[1];
-  const uint64_t H = hash((const uint8_t*) Str, strlen(Str));
-  printf("%016" PRIX64 "\n", H);
-  return 0;
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s string\n", argv[0]);
+		return 1;
+	}
+	const char *Str = argv[1];
+	const uint64_t H = hash((const uint8_t*) Str, strlen(Str));
+	printf("%016" PRIX64 "\n", H);
+	return 0;
 }
+
 ```
 
 > NOTE: `uint8_t`是byte type，参见：`C-family-language\C++\Language-reference\Basic-concept\Type-system`

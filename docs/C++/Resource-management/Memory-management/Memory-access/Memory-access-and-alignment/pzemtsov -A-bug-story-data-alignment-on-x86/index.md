@@ -8,9 +8,11 @@ This sounds unusual. Who ever wants to do this in real life? Normally, we only s
 
 Well, the actual task was to verify the [IP header checksum](https://en.wikipedia.org/wiki/IPv4_header_checksum), which is a ones’ complement sum of two-byte words. Simply speaking, it means adding together all the words and all the carry bits produced in the process. This procedure has several nice features:
 
-- it can be done very efficiently using the `ADC` processor instruction (unfortunately, this feature is not accessible from **C**)
-- it can be done on any size words (you can add eight-byte values if you wish, as long as you reduce the result to two bytes and add all the overflow bits together)
-- it is insensitive to the endianness of the processor (very surprising, but true).
+1、it can be done very efficiently using the `ADC` processor instruction (unfortunately, this feature is not accessible from **C**)
+
+2、it can be done on any size words (you can add eight-byte values if you wish, as long as you reduce the result to two bytes and add all the overflow bits together)
+
+3、it is insensitive to the endianness of the processor (very surprising, but true).
 
 There was one important requirement: the input data was not aligned (the IP frames as received by hardware or read from a file).
 
