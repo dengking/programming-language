@@ -154,3 +154,11 @@ Constructing a new `shared_ptr` using the raw underlying pointer owned by anothe
 #### cppreference [shared_ptr::reset](https://en.cppreference.com/w/cpp/memory/shared_ptr/reset)
 
 如何release shared ownership？在 "cppreference [std::shared_ptr # Notes](https://en.cppreference.com/w/cpp/memory/shared_ptr) # Example "中展示的例子，演示了用法；
+
+
+
+## `std::shared_ptr` circular reference(循环引用)
+
+一、`nextptr-Using-weak_ptr-for-circular-references`
+
+二、
