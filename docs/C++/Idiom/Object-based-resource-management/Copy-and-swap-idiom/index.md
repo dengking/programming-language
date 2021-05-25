@@ -1,9 +1,22 @@
 # Copy-and-swap
 
-The **copy-and-swap idiom** allows an **assignment operator** to be implemented elegantly with **strong exception safety**.
+一、The **copy-and-swap idiom** allows an **assignment operator** to be implemented elegantly with **strong exception safety**.
+
+即它在告诉我们如何来实现**assignment operator**。
+
+二、基于 "assignment operator-pass by value-copy and swap idiom-strong exception safety" 的实现方式没有做好self-assignment
 
 
 ## stackoverflow [What is the copy-and-swap idiom?](https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
+
+Here is a partial list of places where it was previously mentioned:
+
+- [What are your favorite C++ Coding Style idioms: Copy-swap](https://stackoverflow.com/questions/276173/what-are-your-favorite-c-coding-style-idioms/2034447#2034447)
+- [Copy constructor and = operator overload in C++: is a common function possible?](https://stackoverflow.com/questions/1734628/copy-constructor-and-operator-overload-in-c-is-a-common-function-possible/1734640#1734640)
+- [What is copy elision and how it optimizes copy-and-swap idiom](https://stackoverflow.com/questions/2143787/what-is-copy-elision-and-how-it-optimizes-copy-and-swap-idiom)
+- [C++: dynamically allocating an array of objects?](https://stackoverflow.com/questions/255612/c-dynamically-allocating-an-array-of-objects/255744#255744)
+
+### A
 
 ### Overview
 
@@ -15,9 +28,9 @@ Any class that manages a resource (a *wrapper*, like a smart pointer) needs to i
 
 The ***copy-and-swap idiom*** is the solution, and elegantly assists the **assignment operator** in achieving two things: 
 
-- avoiding [code duplication](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself) 
+1、avoiding [code duplication](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself) 
 
-- providing a [strong exception guarantee](http://en.wikipedia.org/wiki/Exception_guarantees).
+2、providing a [strong exception guarantee](http://en.wikipedia.org/wiki/Exception_guarantees).
 
 #### How does it work?
 
@@ -28,6 +41,8 @@ In order to use the **copy-and-swap idiom**, we need three things:
 - a working **copy-constructor**
 - a working **destructor** (both are the basis of any wrapper, so should be complete anyway)
 - a `swap`function.
+
+> tag-CppCoreGuidelines-C.85-Make-swap-noexcept
 
 A swap function is a *non-throwing* function that swaps two objects of a class, member for member. We might be tempted to use `std::swap` instead of providing our own(我们可能想要使用[`std :: swap`](https://en.cppreference.com/w/cpp/algorithm/swap) 而不是提供我们自己的), but this would be impossible; `std::swap` uses the **copy-constructor** and **copy-assignment operator** within its implementation, and we'd ultimately(最终) be trying to define the **assignment operator** in terms of itself!
 
@@ -289,7 +304,6 @@ And so concludes the **copy-and-swap idiom**.
 
 
 ## TODO [c++patterns](https://cpppatterns.com/) # [Copy-and-swap](https://cpppatterns.com/patterns/copy-and-swap.html)
-
 
 
 
