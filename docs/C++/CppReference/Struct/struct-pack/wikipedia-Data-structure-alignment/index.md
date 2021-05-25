@@ -100,25 +100,7 @@ If the type "short" is stored in two bytes of memory then each member of the dat
 
 > NOTE:  : `struct MyData`的**alignment requirement**是什么？
 
-The type of each member of the structure usually has a default **alignment**, meaning that it will, unless otherwise requested by the programmer, be aligned on a pre-determined boundary. The following typical alignments are valid for compilers from [Microsoft](https://en.wikipedia.org/wiki/Microsoft) ([Visual C++](https://en.wikipedia.org/wiki/Visual_C%2B%2B)), [Borland](https://en.wikipedia.org/wiki/Borland)/[CodeGear](https://en.wikipedia.org/wiki/CodeGear) ([C++Builder](https://en.wikipedia.org/wiki/C%2B%2BBuilder)), [Digital Mars](https://en.wikipedia.org/wiki/Digital_Mars) (DMC), and [GNU](https://en.wikipedia.org/wiki/GNU) ([GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)) when compiling for 32-bit x86:
-
-- A **char** (one byte) will be 1-byte aligned.
-- A **short** (two bytes) will be 2-byte aligned.
-- An **int** (four bytes) will be 4-byte aligned.
-- A **long** (four bytes) will be 4-byte aligned.
-- A **float** (four bytes) will be 4-byte aligned.
-- A **double** (eight bytes) will be 8-byte aligned on Windows and 4-byte aligned on Linux (8-byte with *-malign-double* compile time option).
-- A **long long** (eight bytes) will be 4-byte aligned.
-- A **long double** (ten bytes with C++Builder and DMC, eight bytes with Visual C++, twelve bytes with GCC) will be 8-byte aligned with C++Builder, 2-byte aligned with DMC, 8-byte aligned with Visual C++, and 4-byte aligned with GCC.
-- Any **pointer** (four bytes) will be 4-byte aligned. (e.g.: `char*`, `int*`)
-
-The only notable differences in alignment for an [LP64](https://en.wikipedia.org/wiki/LP64) 64-bit system when compared to a 32-bit system are:
-
-- A **long** (eight bytes) will be 8-byte aligned.
-- A **double** (eight bytes) will be 8-byte aligned.
-- A **long long** (eight bytes) will be 8-byte aligned.
-- A **long double** (eight bytes with Visual C++, sixteen bytes with GCC) will be 8-byte aligned with Visual C++ and 16-byte aligned with GCC.
-- Any **pointer** (eight bytes) will be 8-byte aligned.
+The type of each member of the structure usually has a default **alignment**, meaning that it will, unless otherwise requested by the programmer, be aligned on a pre-determined boundary. 
 
 Some data types are dependent on the implementation.
 

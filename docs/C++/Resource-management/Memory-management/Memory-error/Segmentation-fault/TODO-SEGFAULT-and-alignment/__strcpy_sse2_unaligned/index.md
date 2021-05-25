@@ -70,7 +70,7 @@ Missing separate debuginfos, use: debuginfo-install glibc-2.17-260.el7.x86_64
 
 ## 分析
 
-### [strcpy misalignment __strcpy_sse2_unaligned()](https://stackoverflow.com/questions/43685987/strcpy-misalignment-strcpy-sse2-unaligned)
+### stackoverflow [strcpy misalignment __strcpy_sse2_unaligned()](https://stackoverflow.com/questions/43685987/strcpy-misalignment-strcpy-sse2-unaligned)
 
 > The compiler is unable to determine whether your source and destination `char*` are aligned (usually word or even quad-word aligned) and therefore is backing up to the unaligned yet possibly optimized `strcpy` routine. You'd need to explicitly hint about the missed guess it is doing; otherwise, it'll just give up: unaligned access is often disallowed for SSE or still very slow.
 >

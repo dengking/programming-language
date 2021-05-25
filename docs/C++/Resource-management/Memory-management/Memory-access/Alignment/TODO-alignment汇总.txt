@@ -1,0 +1,15 @@
+alignment：
+
+D:\github\linux-master\Documentation\unaligned-memory-access.txt
+
+与alignment密切相关的一个问题就是：strict aliasing
+Google c++ new alignment
+https://stackoverflow.com/questions/506518/is-there-any-guarantee-of-alignment-of-address-return-by-cs-new-operation
+https://en.cppreference.com/w/cpp/language/new
+
+object and alignment
+https://en.cppreference.com/w/cpp/language/object#Alignment
+https://en.cppreference.com/w/cpp/memory/align
+https://en.cppreference.com/w/cpp/types/aligned_storage
+
+C:\Users\dengkai17334\AppData\Local\YNote\Data\m18710752213@163.com\00035BB5BE694DF89E6B320C85204A92\c-memcpy-and-type-punning.md

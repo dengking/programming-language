@@ -1,12 +1,13 @@
 nav:
     - Introduction: index.md
-    - Aliasing-pointer-cast: Aliasing-pointer-cast
+
     - quarkslab-Unaligned-accesses-what-why-and-solution: quarkslab-Unaligned-accesses-what-why-and-solution
     - cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type: cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type
-    - Alignment: Alignment
-    - argv-alignment: argv-alignment
-    - TODO-pointer-and-alignment: TODO-pointer-and-alignment
+    - Aliasing-pointer-cast: Aliasing-pointer-cast    
 
-    - pzemtsov -A-bug-story-data-alignment-on-x86: pzemtsov -A-bug-story-data-alignment-on-x86
-    - SEGFAULT-and-alignment: SEGFAULT-and-alignment
+    - argv-alignment: argv-alignment
+
+
+    - pzemtsov-A-bug-story-data-alignment-on-x86: pzemtsov-A-bug-story-data-alignment-on-x86
+
     - library-aguinet-intmem: library-aguinet-intmem
