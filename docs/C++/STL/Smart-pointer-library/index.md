@@ -109,12 +109,8 @@ learncpp [15.6 — std::shared_ptr#Shared pointers can be created from unique po
 
 ## Reading list
 
-### internalpointers [A beginner's look at smart pointers in modern C++](https://www.internalpointers.com/post/beginner-s-look-smart-pointers-modern-c)
+1、internalpointers [A beginner's look at smart pointers in modern C++](https://www.internalpointers.com/post/beginner-s-look-smart-pointers-modern-c)
 
+2、cppreference [intro/smart pointers](https://en.cppreference.com/book/intro/smart_pointers)
 
-
-### [intro/smart pointers](https://en.cppreference.com/book/intro/smart_pointers)
-
-
-
-### [What is a smart pointer and when should I use one?](https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one)
+3、stackoverflow [What is a smart pointer and when should I use one?](https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one)

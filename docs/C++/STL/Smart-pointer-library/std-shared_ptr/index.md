@@ -30,7 +30,7 @@ destroy of `shard_ptr`对象、destroy of resource。
 
 ### Share ownership of an object while storing a pointer to another object
 
-A `shared_ptr` can share ownership of an object while storing a pointer to another object. This feature can be used to point to member objects while owning the object they belong to. The **stored pointer** is the one accessed by [get()](https://en.cppreference.com/w/cpp/memory/shared_ptr/get), the dereference and the comparison operators. The **managed pointer** is the one passed to the deleter when use count reaches zero.
+A `shared_ptr` can share ownership of an object while storing a pointer to another object. This feature can be used to point to member objects while owning the object they belong to. The **stored pointer** is the one accessed by [get()](https://en.cppreference.com/w/cpp/memory/shared_ptr/get), the dereference and the comparison operators. The **managed pointer** is the one passed to the deleter when **use count** reaches zero.
 
 > NOTE: 
 >
@@ -46,23 +46,9 @@ A `shared_ptr` may also own no objects, in which case it is called *empty* (an e
 
 ### Data race
 
-All member functions (including copy constructor and copy assignment) can be called by multiple threads on different instances of `shared_ptr` without additional synchronization even if these instances are copies and share ownership of the same object. 
-
-> NOTE: 对于具备shared ownership的所有`shared_ptr`，它们是共享同一个control block；通过上面这段话可知: `shared_ptr`的实现能够保证: **不同**的thread同时使用**不同**的`shared_ptr` object，control block是thread safe的；
-
-
-
-If multiple threads of execution access the same `shared_ptr` without synchronization and any of those accesses uses a non-const member function of `shared_ptr` then a data race will occur; the [`shared_ptr` overloads of atomic functions](https://en.cppreference.com/w/cpp/memory/shared_ptr/atomic) can be used to prevent the data race.
-
-> NOTE: 上面这段话所描述的是: 多个thread同时使用同一个`shared_ptr` object;
+> NOTE: 
 >
-> 我觉得 需要考虑两层thread safe:
->
-> 1、`shared_ptr` object的thread safe
->
-> 2、target object的thread safe
->
-> 没有理解上面这段话的含义；
+> 这部分内容放到了`shared_ptr-and-multithread`章节。
 
 ### Example
 

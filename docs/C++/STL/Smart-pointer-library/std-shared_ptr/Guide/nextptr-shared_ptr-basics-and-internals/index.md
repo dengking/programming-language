@@ -462,7 +462,7 @@ int main()
 
 ### **2.3. Weak Counter**
 
-A control block also keeps the count of *weak_ptr* associated with it in a weak counter. An *std::weak_ptr* is a smart pointer that serves as a weak reference to an *std::shared_ptr* managed object. When a *weak_ptr* is created from a *shared_ptr*, it refers to the same **control block** but does not share the ownership of the managed object. It is not possible to directly access the managed object through a *weak_ptr*. A *weak_ptr* must be copied to a *shared_ptr* to acquire access to the managed object.
+A **control block** also keeps the count of *weak_ptr* associated with it in a weak counter. An *std::weak_ptr* is a smart pointer that serves as a weak reference to an *std::shared_ptr* managed object. When a *weak_ptr* is created from a *shared_ptr*, it refers to the same **control block** but does not share the ownership of the managed object. It is not possible to directly access the managed object through a *weak_ptr*. A *weak_ptr* must be copied to a *shared_ptr* to acquire access to the managed object.
 
 The following multithreaded example shows how a *shared_ptr* can be created from a *weak_ptr* as long as the managed object is alive. A reader thread periodically tries to acquire a *shared_ptr<`std::atomic_int`>* from a *weak_ptr<`std::atomic_int`>* and logs the value. If the reader thread cannot acquire a *shared_ptr* in an iteration, it exits. A writer thread periodically changes the *shared_ptr* managed `std::atomic_int` value a few times and exits. When the writer thread exits, the *shared_ptr* held by it is destroyed, and the reader thread can no longer get a *shared_ptr* from its *weak_ptr*, which makes the reader thread to also exit. The program terminates when both the threads exit:
 
@@ -534,7 +534,7 @@ int main()
 
 > NOTE: smart pointer是一种更加高级的控制方式，无需由programmer进行显式的停止，而是依赖于reference counting机制
 
-The weak count is the number of existing *weak_ptr*. The weak count does not play any role in deciding the lifetime of the managed object, which is deleted when the reference count reaches zero. However, the control block itself is not deleted until the weak count also reaches zero
+The weak count is the number of existing *weak_ptr*. The weak count does not play any role in deciding the lifetime of the **managed object**, which is deleted when the reference count reaches zero. However, the **control block** itself is not deleted until the weak count also reaches zero
 
 > NOTE: 上面这段话说明了: weak count的作用
 
@@ -609,5 +609,4 @@ auto sp = std::allocate_shared<SomeData>(Allocator<SomeData>());
 > NOTE: 重要是对比`shared_ptr`和raw pointer
 
 The *std::shared_ptr<`T`>* is a handy yet straightforward utility. But under its simplicity lie extensive details that make it work. Dereferencing a *shared_ptr* is nearly as fast as a **raw pointer**, but constructing or copying a *shared_ptr* is certainly more expensive. Nonetheless, for most applications, this cost is reasonable for **automatic memory management**.
-
 

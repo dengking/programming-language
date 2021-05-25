@@ -6,6 +6,7 @@ nav:
     - Thread: Thread
     - Atomic-operations-library: Atomic-operations-library
     - Utility-library: Utility-library
+    - Smart-pointer-library: Smart-pointer-library
     # 标准库的实现
     - Implementation: Implementation
     - Extending-std: Extending-std

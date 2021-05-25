@@ -1,8 +1,16 @@
 # nextptr [Using weak_ptr for circular references](https://www.nextptr.com/tutorial/ta1382183122/using-weak_ptr-for-circular-references)
 
+> NOTE: 
+>
+> 使用`std::weak_pt` 来破除circular reference(循环引用)
+
 ## **What is weak_ptr?**
 
 An *std::weak_ptr* is a non-owning smart pointer that maintains a **weak reference** to an *std::shared_ptr* managed object. Multiple *shared_ptr* instances can share the ownership of a managed object. The managed object is deleted when the last owning *shared_ptr* is destroyed. Therefore, a *shared_ptr* is a **strong reference** to a managed object. On the other hand, a *weak_ptr* is a weak reference that does not control the lifetime of a managed object but merely acts as a limited handle, from which a strong reference (*shared_ptr*) can be acquired when needed.
+
+> NOTE: 
+>
+> 一、通过调用`std::weak_ptr::lock()`
 
 Let's look at an example of *weak_ptr*:
 
@@ -73,6 +81,8 @@ As shown above, it is not possible to directly access the managed object through
 
 There are a few situations where *weak_ptr* can be quite useful. One of them is to avoid the **circular references** of *shared_ptr*. We will look at that in the next section.
 
+> NOTE: 循环引用
+
 ## **Circular References**
 
 One of the biggest concerns dealing with the raw pointers is that sometimes it is hard to ensure that a raw pointer is not dangling or valid. **Automatic memory management** by *shared_ptr* leads to a safer and easier to maintain code. As long as a component or function holds a *shared_ptr*, the object managed by the *shared_ptr* stays in memory.
@@ -116,39 +126,48 @@ Following illustration shows the memory-leak when all other strong references to
 
 There are several ways to avoid the memory-leak mentioned above, and depending on an application, the workarounds could be very involved(复杂的) and ugly. For instance, in some cases, we might be able to change one of the references (e.g., the reference to *Back* in *Forth*) to a raw pointer. By doing that, we are letting only one class control the lifetime of the other and avoid a memory leak. However, that solution is too specific and is not applicable in those situations where the lives of *Back* and *Forth* should be entirely independent of each other. It is ideal to use weak references (*weak_ptr*) in these circumstances where classes need to have **cyclic links** without controlling the lifetime of each other.
 
-> NOTE: cyclic line
+> NOTE: cyclic link
 
 Let's take a more realistic(现实的) example where we use weak references to avoid circular references. In an event-driven application (e.g., a UI application), there are sources of events and listeners that consume events. A *Listener* is registered with a *Source* for consuming events. An ostensibly(表面上) simple approach is that a *Source* keeps a strong reference to a *Listener* to dispatch events:
 
 ```c++
-struct Event {
- //..
+#include <memory>
+
+struct Event
+{
+	//..
 };
 
-class Listener {
+class Listener
+{
 public:
- void onEvent(Event e) {
-  //Handle event from Source
- }
- //...
+	void onEvent(Event e)
+	{
+		//Handle event from Source
+	}
+	//...
 };
 
-class Source {
-public: 
- void dispatchEvent(Event e) {
-  if(listener)
-   listener->onEvent(e);
- }
+class Source
+{
+public:
+	void dispatchEvent(Event e)
+	{
+		if (listener)
+			listener->onEvent(e);
+	}
 
- void 
- registerListener(const std::shared_ptr<Listener>& lp) {
-  listener = lp;
- }
- //...
+	void registerListener(const std::shared_ptr<Listener> &lp)
+	{
+		listener = lp;
+	}
+	//...
 private:
- //Strong reference to Listener
- std::shared_ptr<Listener> listener;
+	//Strong reference to Listener
+	std::shared_ptr<Listener> listener;
 };
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
 ```
 
 But the above design causes the lifetime of a *Listener* to be influenced by the lifetime of a *Source*. The situation could be further exacerbated(恶化) if a *Listener* is a big object and stays in memory for longer than it should. The existence of a *Source* and a *Listener* should be mutually independent, and only their respective holders should control their lifetimes.
@@ -156,26 +175,35 @@ But the above design causes the lifetime of a *Listener* to be influenced by the
 It is tempting to use cyclic references here between *Source* and *Listener* so that they both can explicitly detach from one another when the time comes. But that would require both *Source* and *Listener* to be expressly disposed of by their holders, which might not be feasible or be very tricky at best. A better way is to use a weak reference from *Source* to *Listener*, as shown below:
 
 ```c++
-class Source {
-public: 
- void dispatchEvent(Event e) {
-  //Acquire strong ref to listener
-  if(auto listener = weakListener.lock()) {
-    listener->onEvent(e);
-  } else {
-    //Handle if required
-  }
- }
+#include <memory>
 
- void 
- registerListener(const std::shared_ptr<Listener>& lp) {
-  weakListener = lp;
- }
- //...
-private: 
- //Weak reference to Listener
- std::weak_ptr<Listener> weakListener;
+class Source
+{
+public:
+	void dispatchEvent(Event e)
+	{
+		//Acquire strong ref to listener
+		if (auto listener = weakListener.lock())
+		{
+			listener->onEvent(e);
+		}
+		else
+		{
+			//Handle if required
+		}
+	}
+
+	void registerListener(const std::shared_ptr<Listener> &lp)
+	{
+		weakListener = lp;
+	}
+	//...
+private:
+	//Weak reference to Listener
+	std::weak_ptr<Listener> weakListener;
 };
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
 ```
 
 Following illustration shows the relationships between *Source*, *Listener*, and their respective holders:

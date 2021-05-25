@@ -4,6 +4,16 @@
 
 ## `std::shared_ptr` thread_safety
 
+一、对于`std::shared_ptr`，它的对于它的data race的考虑
+
+1、control block(包括reference counting)的data race
+
+2、同一个`std::shared_ptr` object的data race
+
+同一个`std::shared_ptr` object可能被多个thread同时access
+
+3、target object的thread safe
+
 综合stackoverflow [std::shared_ptr thread safety explained](https://stackoverflow.com/questions/9127816/stdshared-ptr-thread-safety-explained)、cppreference [`std::shared_ptr`](https://en.cppreference.com/w/cpp/memory/shared_ptr) 、[Boost.SmartPtr: The Smart Pointer Library](https://www.boost.org/doc/libs/1_72_0/libs/smart_ptr/doc/html/smart_ptr.html)中的描述可知：
 
 1、Standard guarantees that reference counting is handled thread safe and it's platform independent
@@ -16,13 +26,31 @@
 
 ### cppreference [`std::shared_ptr`](https://en.cppreference.com/w/cpp/memory/shared_ptr) 
 
-> All member functions (including copy constructor and copy assignment) can be called by multiple threads on different instances of `shared_ptr` without additional synchronization even if these instances are copies and share ownership of the same object. If multiple threads of execution access the same `shared_ptr` without synchronization and any of those accesses uses a non-const member function of `shared_ptr` then a **data race** will occur; the [`shared_ptr` overloads of atomic functions](https://en.cppreference.com/w/cpp/memory/shared_ptr/atomic) can be used to prevent the data race.
 
-上面这段话其实描述了两种情况：
 
-1、多个thread同时使用同一个`shared_ptr` instance，此时是需要synchronization 
+All member functions (including copy constructor and copy assignment) can be called by multiple threads on different instances of `shared_ptr` without additional synchronization even if these instances are copies and share ownership of the same object. 
 
-2、多个thread，每个thread有一个自己的`shared_ptr` instance，这些instance执行同一个object
+> NOTE: 
+>
+> 1、对于具备shared ownership的所有`shared_ptr`，它们是共享同一个control block；通过上面这段话可知: `shared_ptr`的实现能够保证: **不同**的thread同时使用**不同**的`shared_ptr` object，control block是thread safe的；
+
+
+
+If multiple threads of execution access the same `shared_ptr` without synchronization and any of those accesses uses a non-const member function of `shared_ptr` then a data race will occur; the [`shared_ptr` overloads of atomic functions](https://en.cppreference.com/w/cpp/memory/shared_ptr/atomic) can be used to prevent the data race.
+
+> NOTE: 上面这段话所描述的是: 多个thread同时使用同一个`shared_ptr` object;
+>
+> 通过上面这段话的描述可以看出，同一个`std::shared_ptr`如果同时被multiple thread使用， 是存在data race的，此时是需要synchronization 
+
+
+
+> NOTE: 
+>
+> 上面两段话其实描述了两种情况：
+>
+> 1、多个thread同时使用同一个`shared_ptr` instance
+>
+> 2、多个thread，每个thread有一个自己的`shared_ptr` instance，这些instance执行同一个object
 
 ### stackoverflow [std::shared_ptr thread safety explained](https://stackoverflow.com/questions/9127816/stdshared-ptr-thread-safety-explained)
 

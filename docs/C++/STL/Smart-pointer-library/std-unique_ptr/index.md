@@ -36,19 +36,28 @@
 
 ## `std::unique_ptr<void>`
 
-[Should std::unique_ptr be permitted](https://stackoverflow.com/questions/19840937/should-stdunique-ptrvoid-be-permitted)
+stackoverflow [Should std::unique_ptr be permitted](https://stackoverflow.com/questions/19840937/should-stdunique-ptrvoid-be-permitted)
 
-https://stackoverflow.com/questions/39288891/why-is-shared-ptrvoid-legal-while-unique-ptrvoid-is-ill-formed
+### stackoverflow [Why is shared_ptr legal, while unique_ptr is ill-formed?](https://stackoverflow.com/questions/39288891/why-is-shared-ptrvoid-legal-while-unique-ptrvoid-is-ill-formed)
+
+The question really fits in the title: I am curious to know what is the technical reason for this difference, but also the rationale ?
+
+```c++
+std::shared_ptr<void> sharedToVoid; // legal;
+std::unique_ptr<void> uniqueToVoid; // ill-formed;
+```
 
 
 
+**A**
 
+It is because `std::shared_ptr` implements type-erasure, while `std::unique_ptr` does not.
 
 ## std::unique_ptr return from function and test for null
 
-[C++ std::unique_ptr return from function and test for null](https://stackoverflow.com/questions/30293338/c-stdunique-ptr-return-from-function-and-test-for-null)
+stackoverflow [C++ std::unique_ptr return from function and test for null](https://stackoverflow.com/questions/30293338/c-stdunique-ptr-return-from-function-and-test-for-null)
 
-[`std::unique_ptr<T,Deleter>::operator bool`](https://en.cppreference.com/w/cpp/memory/unique_ptr/operator_bool) 
+cppreference [`std::unique_ptr<T,Deleter>::operator bool`](https://en.cppreference.com/w/cpp/memory/unique_ptr/operator_bool) 
 
 
 
