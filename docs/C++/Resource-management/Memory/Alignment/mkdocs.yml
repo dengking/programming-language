@@ -1,13 +1,10 @@
 nav:
     - Introduction: index.md
+    
     - Allocate-aligned-memory: Allocate-aligned-memory 
-    - quarkslab-Unaligned-accesses-what-why-and-solution: quarkslab-Unaligned-accesses-what-why-and-solution
-    - cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type: cmu.edu-Do-not-cast-pointer-into-more-strictly-aligned-pointer-type
+
     - Aliasing-pointer-cast: Aliasing-pointer-cast    
 
     - argv-alignment: argv-alignment
-
-
-    - pzemtsov-A-bug-story-data-alignment-on-x86: pzemtsov-A-bug-story-data-alignment-on-x86
 
     - library-aguinet-intmem: library-aguinet-intmem
