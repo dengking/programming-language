@@ -432,7 +432,7 @@ nav:
       - span:
         - Introduction: C++/What-is-new-in-C++/C++20/span/index.md
   - CppReference:
-    - index: C++/CppReference/index.md
+    - Introduction: C++/CppReference/index.md
     - Basic-concept:
       - Introduction: C++/CppReference/Basic-concept/index.md
       - Basic-concepts: C++/CppReference/Basic-concept/Basic-concepts.md
@@ -451,6 +451,8 @@ nav:
         - Introduction: C++/CppReference/Basic-concept/Object/index.md
         - cppreference-object:
           - Introduction: C++/CppReference/Basic-concept/Object/cppreference-object/index.md
+          - Object-alignment-requirement:
+            - Introduction: C++/CppReference/Basic-concept/Object/cppreference-object/Object-alignment-requirement/index.md
         - Object-type-value:
           - Introduction: C++/CppReference/Basic-concept/Object/Object-type-value/index.md
         - Lifetime-and-storage-duration:
@@ -496,10 +498,10 @@ nav:
           - Passive-data-structure: C++/CppReference/Basic-concept/Object/Layout/Passive-data-structure.md
         - Object-operation:
           - Introduction: C++/CppReference/Basic-concept/Object/Object-operation/index.md
-          - Serialization-and-deserialization:
-            - Introduction: C++/CppReference/Basic-concept/Object/Object-operation/Serialization-and-deserialization/index.md
+          - Serialization-deserialization:
+            - Introduction: C++/CppReference/Basic-concept/Object/Object-operation/Serialization-deserialization/index.md
             - Binary-representation:
-              - Introduction: C++/CppReference/Basic-concept/Object/Object-operation/Serialization-and-deserialization/Binary-representation/index.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Object-operation/Serialization-deserialization/Binary-representation/index.md
       - Organization:
         - Introduction: C++/CppReference/Basic-concept/Organization/index.md
         - Scope:
@@ -1012,9 +1014,13 @@ nav:
         - Introduction: C++/CppReference/Struct/offsetof/index.md
       - Struct-initialization:
         - Introduction: C++/CppReference/Struct/Struct-initialization/index.md
-      - The-Lost-Art-of-Structure-Packing:
-        - Introduction: C++/CppReference/Struct/The-Lost-Art-of-Structure-Packing/index.md
-      - Pragma-pack-macro: C++/CppReference/Struct/Pragma-pack-macro.md
+      - struct-pack:
+        - Introduction: C++/CppReference/Struct/struct-pack/index.md
+        - The-Lost-Art-of-Structure-Packing:
+          - Introduction: C++/CppReference/Struct/struct-pack/The-Lost-Art-of-Structure-Packing/index.md
+        - wikipedia-Data-structure-alignment:
+          - Introduction: C++/CppReference/Struct/struct-pack/wikipedia-Data-structure-alignment/index.md
+        - Pragma-pack-macro: C++/CppReference/Struct/struct-pack/Pragma-pack-macro.md
     - Initialization:
       - Introduction: C++/CppReference/Initialization/index.md
       - Initialization-and-constructor-and-conversion:
@@ -1422,6 +1428,78 @@ nav:
           - Introduction: C++/STL/Utility-library/General-purpose/Hash/index.md
           - General-purpose-hash:
             - Introduction: C++/STL/Utility-library/General-purpose/Hash/General-purpose-hash/index.md
+    - Smart-pointer-library:
+      - Introduction: C++/STL/Smart-pointer-library/index.md
+      - std-unique_ptr:
+        - Introduction: C++/STL/Smart-pointer-library/std-unique_ptr/index.md
+        - unique_ptr-as-member:
+          - Introduction: C++/STL/Smart-pointer-library/std-unique_ptr/unique_ptr-as-member/index.md
+          - Copy-constructor-for-a-class-with-unique_ptr:
+            - Introduction: C++/STL/Smart-pointer-library/std-unique_ptr/unique_ptr-as-member/Copy-constructor-for-a-class-with-unique_ptr/index.md
+      - std-shared_ptr:
+        - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/index.md
+        - Implementation:
+          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Implementation/index.md
+        - Guide:
+          - nextptr-shared_ptr-basics-and-internals:
+            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Guide/nextptr-shared_ptr-basics-and-internals/index.md
+          - nextptr-Using-weak_ptr-for-circular-references:
+            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Guide/nextptr-Using-weak_ptr-for-circular-references/index.md
+          - learncpp-std-shared_ptr:
+            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Guide/learncpp-std-shared_ptr/index.md
+        - shared_ptr-and-this:
+          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-this/index.md
+          - std-enable_shared_from_this:
+            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-this/std-enable_shared_from_this/index.md
+        - shared_ptr-and-multithread:
+          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-multithread/index.md
+          - atomic_shared_ptr:
+            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-multithread/atomic_shared_ptr/index.md
+        - Assignment-operator:
+          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Assignment-operator/index.md
+        - std-weak_ptr:
+          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/std-weak_ptr/index.md
+        - TODO-aliasing-constructor:
+          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/TODO-aliasing-constructor/index.md
+      - auto_ptr: C++/STL/Smart-pointer-library/auto_ptr.md
+      - CppCoreGuidelines-Passing-Smart-Pointers:
+        - Introduction: C++/STL/Smart-pointer-library/CppCoreGuidelines-Passing-Smart-Pointers/index.md
+      - Guideline-strong-exception-safety:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/index.md
+        - Prefer-use-object-generator:
+          - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/index.md
+          - std-make_unique:
+            - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/index.md
+            - Deep-copy:
+              - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/Deep-copy/index.md
+          - std-make_shared:
+            - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_shared/index.md
+        - Prefer-not-use-reset:
+          - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-not-use-reset/index.md
+      - Guideline-Incomplete-type:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-Incomplete-type/index.md
+        - howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr:
+          - Introduction: C++/STL/Smart-pointer-library/Guideline-Incomplete-type/howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr/index.md
+      - Guideline-deep-copy:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-deep-copy/index.md
+        - stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper:
+          - Introduction: C++/STL/Smart-pointer-library/Guideline-deep-copy/stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper/index.md
+      - Guideline-covariance:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-covariance/index.md
+        - fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance:
+          - Introduction: C++/STL/Smart-pointer-library/Guideline-covariance/fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance/index.md
+        - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
+          - Introduction: C++/STL/Smart-pointer-library/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
+        - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C++/STL/Smart-pointer-library/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
+      - Guideline-subtyping-polymorphism:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-subtyping-polymorphism/index.md
+      - Guideline-overhead:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-overhead/index.md
+      - Guideline-custom-deleter:
+        - Introduction: C++/STL/Smart-pointer-library/Guideline-custom-deleter/index.md
+      - TODO-swap-reset-release:
+        - Introduction: C++/STL/Smart-pointer-library/TODO-swap-reset-release/index.md
+      - TODO-pointer_cast: C++/STL/Smart-pointer-library/TODO-pointer_cast.md
     - Implementation:
       - Introduction: C++/STL/Implementation/index.md
       - GCC:
@@ -1850,8 +1928,12 @@ nav:
           - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/feabhas-Rule-of-Four-and-a-half/index.md
         - feabhas-Rule-of-Zero:
           - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/feabhas-Rule-of-Zero/index.md
-        - cppreference-The-rule-of-three-five-zero:
-          - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/cppreference-The-rule-of-three-five-zero/index.md
+        - florianwolters-The-Rule-of-Zero:
+          - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/florianwolters-The-Rule-of-Zero/index.md
+        - drdobbs-C++Made-Easier-The-Rule-of-Three:
+          - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/drdobbs-C++Made-Easier-The-Rule-of-Three/index.md
+        - cppreference-Rule-of-three-five-zero:
+          - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/cppreference-Rule-of-three-five-zero/index.md
         - Rule-of-Zero:
           - Introduction: C++/Idiom/Object-based-resource-management/Rule-of-zero-three-five/Rule-of-Zero/index.md
         - Examples:
@@ -1951,143 +2033,160 @@ nav:
       - CppCoreGuidelines-Resource-Management:
         - Introduction: C++/Resource-management/Guide/CppCoreGuidelines-Resource-Management/index.md
     - Memory-management:
-      - Introduction: C++/Resource-management/Memory-management/index.md
+      - Introduction: C++/Resource-management/Memory/index.md
       - Dynamic-allocation:
-        - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/index.md
-        - C:
-          - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C/index.md
-          - malloc:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C/malloc/index.md
-            - Thread-safe-and-reentrant:
-              - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C/malloc/Thread-safe-and-reentrant/index.md
-          - realloc:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C/realloc/index.md
-        - C++:
-          - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C++/index.md
-          - new-operator:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C++/new-operator/index.md
-            - Placement-new:
-              - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C++/new-operator/Placement-new/index.md
-            - Thread-safety-of-new:
-              - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C++/new-operator/Thread-safety-of-new/index.md
-          - delete-operator:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C++/delete-operator/index.md
+        - Introduction: C++/Resource-management/Memory/Dynamic-allocation/index.md
+        - malloc:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/malloc/index.md
+          - Thread-safe-and-reentrant:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/malloc/Thread-safe-and-reentrant/index.md
+        - realloc:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/realloc/index.md
+        - new-operator:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/index.md
+          - Placement-new:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/Placement-new/index.md
+          - operator-new-operator-new[]:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/operator-new-operator-new[]/index.md
+          - Thread-safe-and-reentrant:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/Thread-safe-and-reentrant/index.md
+        - delete-operator:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/delete-operator/index.md
+        - std-allocator-library:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/std-allocator-library/index.md
           - Allocator-concept:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/C++/Allocator-concept/index.md
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/std-allocator-library/Allocator-concept/index.md
         - Implementation:
-          - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/Implementation/index.md
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/index.md
           - library-jemalloc:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/Implementation/library-jemalloc/index.md
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-jemalloc/index.md
             - paper:
-              - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/Implementation/library-jemalloc/paper/index.md
+              - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-jemalloc/paper/index.md
           - library-tcmalloc:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/Implementation/library-tcmalloc/index.md
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-tcmalloc/index.md
             - Design:
-              - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/Implementation/library-tcmalloc/Design/index.md
+              - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-tcmalloc/Design/index.md
           - Boundary-tag:
-            - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/Implementation/Boundary-tag/index.md
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/Boundary-tag/index.md
+          - Arena:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/Arena/index.md
         - VS-C-VS-C++:
-          - Introduction: C++/Resource-management/Memory-management/Dynamic-allocation/VS-C-VS-C++/index.md
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/VS-C-VS-C++/index.md
+        - Allocate-aligned-memory:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/index.md
+          - Align-to-cacheline-word:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/Align-to-cacheline-word/index.md
       - Memory-access:
-        - Introduction: C++/Resource-management/Memory-management/Memory-access/index.md
-        - Memory-access-and-alignment:
-          - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/index.md
-          - Alignment:
-            - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/Alignment/index.md
-            - TODO-Alignment.md: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/Alignment/TODO-Alignment.md
-            - Data-structure-alignment:
-              - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/Alignment/Data-structure-alignment/index.md
-              - wikipedia-Data-structure-alignment:
-                - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/Alignment/Data-structure-alignment/wikipedia-Data-structure-alignment/index.md
-            - TODO-alignment-in-struct-flexible-array-member:
-              - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/Alignment/TODO-alignment-in-struct-flexible-array-member/index.md
-          - argv-alignment:
-            - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/argv-alignment/index.md
-          - TODO-pointer-and-alignment:
-            - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/TODO-pointer-and-alignment/index.md
-          - quarkslab-Unaligned-accesses-in-C-C++what-why-and-solutions-to-do-it-properly:
-            - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/quarkslab-Unaligned-accesses-in-C-C++what-why-and-solutions-to-do-it-properly/index.md
-          - pzemtsov -A-bug-story-data-alignment-on-x86:
-            - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/pzemtsov
-                -A-bug-story-data-alignment-on-x86/index.md
-          - SEGFAULT-and-alignment:
-            - Introduction: C++/Resource-management/Memory-management/Memory-access/Memory-access-and-alignment/SEGFAULT-and-alignment/index.md
+        - Introduction: C++/Resource-management/Memory/Memory-access/index.md
       - Pointer-and-array:
-        - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/index.md
+        - Introduction: C++/Resource-management/Memory/Pointer-and-array/index.md
         - Pointer:
-          - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/index.md
+          - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/index.md
           - Pointer:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer/index.md
           - Pointer-to-void:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-void/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-void/index.md
             - thegreenplace-void-pointer-and-casts-in-C-and-C++:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-void/thegreenplace-void-pointer-and-casts-in-C-and-C++/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-void/thegreenplace-void-pointer-and-casts-in-C-and-C++/index.md
           - Multiple-level-pointer:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Multiple-level-pointer/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Multiple-level-pointer/index.md
           - Pointer-and-integer:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-and-integer/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-and-integer/index.md
             - uintptr_t-and-intptr_t:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-and-integer/uintptr_t-and-intptr_t/index.md
-          - Conversion: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Conversion.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-and-integer/uintptr_t-and-intptr_t/index.md
+          - Conversion: C++/Resource-management/Memory/Pointer-and-array/Pointer/Conversion.md
           - Pointer-length:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-length/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-length/index.md
           - Pointer-to-member:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-member/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-member/index.md
             - Pointer-to-member-function:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-member/Pointer-to-member-function/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-member/Pointer-to-member-function/index.md
             - Trait:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Pointer/Pointer-to-member/Trait/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-member/Trait/index.md
         - Array:
-          - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/index.md
+          - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/index.md
           - stackoverflow-How-do-I-use-array-in-C++:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/stackoverflow-How-do-I-use-array-in-C++/index.md
-          - cppreference-Array-declaration: C++/Resource-management/Memory-management/Pointer-and-array/Array/cppreference-Array-declaration.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/stackoverflow-How-do-I-use-array-in-C++/index.md
+          - cppreference-Array-declaration: C++/Resource-management/Memory/Pointer-and-array/Array/cppreference-Array-declaration.md
           - Array-initialization:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Array-initialization/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-initialization/index.md
           - Array-in-template:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Array-in-template/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-in-template/index.md
             - Create-array:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Array-in-template/Create-array/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-in-template/Create-array/index.md
           - Variable-length-automatic-stack-array:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Variable-length-automatic-stack-array/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Variable-length-automatic-stack-array/index.md
           - Multidimensional-array:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Multidimensional-array/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Multidimensional-array/index.md
             - TODO-Dynamic-multiple-dimension-array:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Multidimensional-array/TODO-Dynamic-multiple-dimension-array/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Multidimensional-array/TODO-Dynamic-multiple-dimension-array/index.md
           - Array-length:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Array-length/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-length/index.md
           - Array-index:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/Array-index/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-index/index.md
           - std-array:
-            - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/std-array/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/std-array/index.md
             - std-make_array:
-              - Introduction: C++/Resource-management/Memory-management/Pointer-and-array/Array/std-array/std-make_array/index.md
-      - GC:
-        - Introduction: C++/Resource-management/Memory-management/GC/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/std-array/std-make_array/index.md
+      - Alignment:
+        - Introduction: C++/Resource-management/Memory/Alignment/index.md
+        - Aliasing-pointer-cast:
+          - Introduction: C++/Resource-management/Memory/Alignment/Aliasing-pointer-cast/index.md
+          - argv-alignment:
+            - Introduction: C++/Resource-management/Memory/Alignment/Aliasing-pointer-cast/argv-alignment/index.md
+          - quarkslab-Unaligned-accesse-what-why-solution:
+            - Introduction: C++/Resource-management/Memory/Alignment/Aliasing-pointer-cast/quarkslab-Unaligned-accesse-what-why-solution/index.md
+          - cmu.edu-EXP36-C:
+            - Introduction: C++/Resource-management/Memory/Alignment/Aliasing-pointer-cast/cmu.edu-EXP36-C/index.md
+          - pzemtsov -A-bug-story-data-alignment-on-x86:
+            - Introduction: C++/Resource-management/Memory/Alignment/Aliasing-pointer-cast/pzemtsov
+                -A-bug-story-data-alignment-on-x86/index.md
+        - C++11-alignof-operator:
+          - Introduction: C++/Resource-management/Memory/Alignment/C++11-alignof-operator/index.md
+        - C++11-std-alignment_of:
+          - Introduction: C++/Resource-management/Memory/Alignment/C++11-std-alignment_of/index.md
+        - C++11-std-max_align_t:
+          - Introduction: C++/Resource-management/Memory/Alignment/C++11-std-max_align_t/index.md
+        - C++11-alignas-specifier:
+          - Introduction: C++/Resource-management/Memory/Alignment/C++11-alignas-specifier/index.md
+        - C++11-std-align:
+          - Introduction: C++/Resource-management/Memory/Alignment/C++11-std-align/index.md
+        - C++11-std-aligned_storage:
+          - Introduction: C++/Resource-management/Memory/Alignment/C++11-std-aligned_storage/index.md
+        - library-aguinet-intmem:
+          - Introduction: C++/Resource-management/Memory/Alignment/library-aguinet-intmem/index.md
       - Memory-error:
-        - Introduction: C++/Resource-management/Memory-management/Memory-error/index.md
+        - Introduction: C++/Resource-management/Memory/Memory-error/index.md
         - Memory-safety:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Memory-safety/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Memory-safety/index.md
         - Segmentation-fault:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Segmentation-fault/index.md
-          - Identify-what's-causing-segmentation-faults-(segfaults): C++/Resource-management/Memory-management/Memory-error/Segmentation-fault/Identify-what's-causing-segmentation-faults-(segfaults).md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Segmentation-fault/index.md
+          - Identify-what's-causing-segmentation-faults-(segfaults): C++/Resource-management/Memory/Memory-error/Segmentation-fault/Identify-what's-causing-segmentation-faults-(segfaults).md
+          - TODO-SEGFAULT-and-alignment:
+            - Introduction: C++/Resource-management/Memory/Memory-error/Segmentation-fault/TODO-SEGFAULT-and-alignment/index.md
+            - __strcpy_sse2_unaligned:
+              - Introduction: C++/Resource-management/Memory/Memory-error/Segmentation-fault/TODO-SEGFAULT-and-alignment/__strcpy_sse2_unaligned/index.md
+        - Bus-error:
+          - Introduction: C++/Resource-management/Memory/Memory-error/Bus-error/index.md
         - Double-free:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Double-free/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Double-free/index.md
         - Out-of-bound:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Out-of-bound/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Out-of-bound/index.md
         - Dereference-null-pointer:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Dereference-null-pointer/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Dereference-null-pointer/index.md
         - Dangling-and-wild-pointer:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Dangling-and-wild-pointer/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Dangling-and-wild-pointer/index.md
         - OOM:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/OOM/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/OOM/index.md
         - Buffer-overflow:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Buffer-overflow/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Buffer-overflow/index.md
         - Memory-leak:
-          - Memory-leak: C++/Resource-management/Memory-management/Memory-error/Memory-leak/index.md
-          - Tools: C++/Resource-management/Memory-management/Memory-error/Memory-leak/Tools.md
+          - Memory-leak: C++/Resource-management/Memory/Memory-error/Memory-leak/index.md
+          - Tools: C++/Resource-management/Memory/Memory-error/Memory-leak/Tools.md
         - Memory-debugger:
-          - Introduction: C++/Resource-management/Memory-management/Memory-error/Memory-debugger/index.md
+          - Introduction: C++/Resource-management/Memory/Memory-error/Memory-debugger/index.md
+      - GC:
+        - Introduction: C++/Resource-management/Memory/GC/index.md
   - CppCoreGuidelines:
     - Introduction: C++/CppCoreGuidelines/index.md
     - Read-note:
@@ -2199,78 +2298,6 @@ nav:
         - Introduction: C++/Guide/Memory-model-and-atomic-library/C++VS-Java-memory-model/index.md
       - cl.cam.uk-Cppmem:
         - Introduction: C++/Guide/Memory-model-and-atomic-library/cl.cam.uk-Cppmem/index.md
-    - Library-smart-pointers:
-      - Introduction: C++/Guide/Library-smart-pointers/index.md
-      - unique_ptr:
-        - Introduction: C++/Guide/Library-smart-pointers/unique_ptr/index.md
-        - unique_ptr-as-member:
-          - Introduction: C++/Guide/Library-smart-pointers/unique_ptr/unique_ptr-as-member/index.md
-          - Copy-constructor-for-a-class-with-unique_ptr:
-            - Introduction: C++/Guide/Library-smart-pointers/unique_ptr/unique_ptr-as-member/Copy-constructor-for-a-class-with-unique_ptr/index.md
-      - shared_ptr:
-        - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/index.md
-        - Guide:
-          - nextptr-shared_ptr-basics-and-internals:
-            - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/Guide/nextptr-shared_ptr-basics-and-internals/index.md
-          - nextptr-Using-weak_ptr-for-circular-references:
-            - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/Guide/nextptr-Using-weak_ptr-for-circular-references/index.md
-          - learncpp-std-shared_ptr:
-            - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/Guide/learncpp-std-shared_ptr/index.md
-        - Implementation:
-          - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/Implementation/index.md
-        - shared_ptr-and-this:
-          - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/shared_ptr-and-this/index.md
-          - std-enable_shared_from_this:
-            - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/shared_ptr-and-this/std-enable_shared_from_this/index.md
-        - shared_ptr-and-multithread:
-          - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/shared_ptr-and-multithread/index.md
-          - atomic_shared_ptr:
-            - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/shared_ptr-and-multithread/atomic_shared_ptr/index.md
-        - Assignment-operator:
-          - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/Assignment-operator/index.md
-        - weak_ptr:
-          - weak_ptr: C++/Guide/Library-smart-pointers/shared_ptr/weak_ptr/weak_ptr.md
-        - TODO-aliasing-constructor:
-          - Introduction: C++/Guide/Library-smart-pointers/shared_ptr/TODO-aliasing-constructor/index.md
-      - auto_ptr: C++/Guide/Library-smart-pointers/auto_ptr.md
-      - CppCoreGuidelines-Passing-Smart-Pointers:
-        - Introduction: C++/Guide/Library-smart-pointers/CppCoreGuidelines-Passing-Smart-Pointers/index.md
-      - Guideline-strong-exception-safety:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-strong-exception-safety/index.md
-        - Prefer-use-object-generator:
-          - Introduction: C++/Guide/Library-smart-pointers/Guideline-strong-exception-safety/Prefer-use-object-generator/index.md
-          - std-make_unique:
-            - Introduction: C++/Guide/Library-smart-pointers/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/index.md
-            - Deep-copy:
-              - Introduction: C++/Guide/Library-smart-pointers/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/Deep-copy/index.md
-          - std-make_shared:
-            - Introduction: C++/Guide/Library-smart-pointers/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_shared/index.md
-        - Prefer-not-use-reset:
-          - Introduction: C++/Guide/Library-smart-pointers/Guideline-strong-exception-safety/Prefer-not-use-reset/index.md
-      - Guideline-Incomplete-type:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-Incomplete-type/index.md
-        - howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr:
-          - Introduction: C++/Guide/Library-smart-pointers/Guideline-Incomplete-type/howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr/index.md
-      - Guideline-deep-copy:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-deep-copy/index.md
-        - stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper:
-          - Introduction: C++/Guide/Library-smart-pointers/Guideline-deep-copy/stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper/index.md
-      - Guideline-covariance:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-covariance/index.md
-        - fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance:
-          - Introduction: C++/Guide/Library-smart-pointers/Guideline-covariance/fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance/index.md
-        - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
-          - Introduction: C++/Guide/Library-smart-pointers/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
-        - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C++/Guide/Library-smart-pointers/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
-      - Guideline-subtyping-polymorphism:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-subtyping-polymorphism/index.md
-      - Guideline-overhead:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-overhead/index.md
-      - Guideline-custom-deleter:
-        - Introduction: C++/Guide/Library-smart-pointers/Guideline-custom-deleter/index.md
-      - TODO-swap-reset-release:
-        - Introduction: C++/Guide/Library-smart-pointers/TODO-swap-reset-release/index.md
-      - TODO-pointer_cast: C++/Guide/Library-smart-pointers/TODO-pointer_cast.md
     - "Type-\u76F8\u5173":
       - Strong-type:
         - Introduction: "C++/Guide/Type-\u76F8\u5173/Strong-type/index.md"
@@ -2308,6 +2335,8 @@ nav:
             - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/regehr-Type-Punning-Strict-Aliasing-and-Optimization/index.md"
           - Union-and-type-punning:
             - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/Union-and-type-punning/index.md"
+            - C++11-std-aligned_union:
+              - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/Union-and-type-punning/C++11-std-aligned_union/index.md"
           - memcpy-and-type-punning:
             - Introduction: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning/memcpy-and-type-punning/index.md"
         - Type-punning-VS-type conversion-VS-alias: "C++/Guide/Type-\u76F8\u5173/TODO-Interpretation-model/Type-punning-VS-type\

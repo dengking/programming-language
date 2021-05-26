@@ -2,5 +2,3 @@ nav:
     - offsetof: offsetof
     - Struct-initialization: Struct-initialization
     - struct-pack: struct-pack
-    - The-Lost-Art-of-Structure-Packing: The-Lost-Art-of-Structure-Packing
-    - Pragma-pack-macro: Pragma-pack-macro.md

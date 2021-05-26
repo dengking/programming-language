@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
+    - The-Lost-Art-of-Structure-Packing: The-Lost-Art-of-Structure-Packing    
     - wikipedia-Data-structure-alignment: wikipedia-Data-structure-alignment
-
+    - Pragma-pack-macro: Pragma-pack-macro.md    
+    

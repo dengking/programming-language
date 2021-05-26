@@ -2,4 +2,4 @@ nav:
     # 首先概述c++中的resource management
     - Introduction: index.md
     - Guide: Guide    
-    - Memory-management: Memory-management
+    - Memory-management: Memory
