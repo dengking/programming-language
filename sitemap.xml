@@ -784,11 +784,15 @@
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/Theory/Serialization-and-deserialization/</loc>
+     <loc>https://dengking.github.io/programming-language/Theory/Resource-management/Memory-management/PEEK-and-POKE/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/Theory/Serialization-and-deserialization/Binary-parsing/</loc>
+     <loc>https://dengking.github.io/programming-language/Theory/Serialization-deserialization/</loc>
+     <lastmod>2021-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/programming-language/Theory/Serialization-deserialization/Binary-parsing/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2161,6 +2165,18 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/programming-language/C%2B%2B/CppReference/Struct/struct-pack/Pragma-pack-macro/</loc>
+     <lastmod>2021-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/CppReference/Union/</loc>
+     <lastmod>2021-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/CppReference/Union/Union-and-type-punning/</loc>
+     <lastmod>2021-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/CppReference/Union/C%2B%2B11-std-aligned_union/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -4340,26 +4356,6 @@
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Resource-management/Memory/Alignment/Aliasing-pointer-cast/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Resource-management/Memory/Alignment/Aliasing-pointer-cast/argv-alignment/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Resource-management/Memory/Alignment/Aliasing-pointer-cast/quarkslab-Unaligned-accesse-what-why-solution/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Resource-management/Memory/Alignment/Aliasing-pointer-cast/cmu.edu-EXP36-C/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Resource-management/Memory/Alignment/Aliasing-pointer-cast/pzemtsov%20-A-bug-story-data-alignment-on-x86/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://dengking.github.io/programming-language/C%2B%2B/Resource-management/Memory/Alignment/C%2B%2B11-alignof-operator/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
@@ -4708,67 +4704,51 @@
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Data-type-in-advanced-language-and-machine-instruction/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/What-is-aliasing/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing/Strict-aliasing/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/What-is-aliasing/wikipedia-Alias-analysis/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing/Strict-aliasing/stackoverflow-C-language-strict-aliasing-rule/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/What-is-aliasing/wikipedia-Pointer-aliasing/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Type-punning/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Strict-aliasing/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing-by-pointer-conversion/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Strict-aliasing/stackoverflow-C-language-strict-aliasing-rule/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing-by-pointer-conversion/quarkslab-Unaligned-accesse-what-why-solution/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Strict-aliasing/gist-shafik-What-is-the-Strict-Aliasing-Rule-and-Why-do-we-care/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing-by-pointer-conversion/cmu.edu-EXP36-C/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing-by-pointer-conversion/pzemtsov%20-A-bug-story-data-alignment-on-x86/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning/What-is-type-punning/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing-by-pointer-conversion/TODO-memcpy-and-type-punning/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning/regehr-Type-Punning-Strict-Aliasing-and-Optimization/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/Aliasing-by-pointer-conversion/argv-alignment/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning/Union-and-type-punning/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning/Union-and-type-punning/C%2B%2B11-std-aligned_union/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning/memcpy-and-type-punning/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/Type-punning-VS-type%20conversion-VS-alias/</loc>
-     <lastmod>2021-05-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/TODO-Interpretation-model/TODO-Trap-representation/</loc>
+     <loc>https://dengking.github.io/programming-language/C%2B%2B/Guide/Type-%E7%9B%B8%E5%85%B3/Interpretation-model/TODO-Trap-representation/</loc>
      <lastmod>2021-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>

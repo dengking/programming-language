@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
 
-    - Aliasing-pointer-cast: Aliasing-pointer-cast  
+
     
     - C++11-alignof-operator: C++11-alignof-operator
     - C++11-std-alignment_of: C++11-std-alignment_of
