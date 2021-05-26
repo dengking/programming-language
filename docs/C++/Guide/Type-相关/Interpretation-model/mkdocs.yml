@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
-
     - What-is-aliasing: What-is-aliasing
     - Strict-aliasing: Strict-aliasing
     - Type-punning: Type-punning

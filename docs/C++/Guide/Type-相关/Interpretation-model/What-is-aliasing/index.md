@@ -8,11 +8,15 @@
 
 ## Alias in c++
 
-[Namespace aliases](https://en.cppreference.com/w/cpp/language/namespace_alias)
+cppreference [Namespace aliases](https://en.cppreference.com/w/cpp/language/namespace_alias)
 
-[Reference](https://en.cppreference.com/w/cpp/language/reference)
+和本文讨论的aliasing是不同的
 
-[Strict aliasing](https://en.cppreference.com/w/c/language/object)
+cppreference [Reference](https://en.cppreference.com/w/cpp/language/reference)
+
+creference [Strict aliasing](https://en.cppreference.com/w/c/language/object)
+
+
 
 ## wikipedia [Aliasing (computing)](https://en.wikipedia.org/wiki/Aliasing_(computing))
 
@@ -127,28 +131,11 @@ In this case, with A2 always being zero, the first four memory locations are dup
 
 If this change occurred to a different address bit, the decoding results would be different, but in general the effect would be the same: the loss of a single address bit cuts the available memory space in half, with resulting duplication (aliasing) of the remaining space.
 
-### See also
-
-- [Aliasing](https://en.wikipedia.org/wiki/Aliasing) for uses of the word when applied to signal processing, including computer graphics
-- [Pointer alias](https://en.wikipedia.org/wiki/Pointer_alias)
-
-### References
-
-1.  Mike Acton (2006-06-01). ["Understanding Strict Aliasing"](http://cellperformance.beyond3d.com/articles/2006/06/understanding-strict-aliasing.html).
-2. **^** Neil Schemenauer (2003-07-17). ["ANSI strict aliasing and Python"](http://mail.python.org/pipermail/python-dev/2003-July/036898.html).
-3. **^** Linus Torvalds (2003-02-26). ["Re: Invalid compilation without -fno-strict-aliasing"](https://lkml.org/lkml/2003/2/26/158).
-4. **^** Michael Barr (2012-07-27). ["Software Based Memory Testing"](http://www.esacademy.com/en/library/technical-articles-and-documents/miscellaneous/software-based-memory-testing.html).
 
 
+## wikipedia [Pointer aliasing](https://en.wikipedia.org/wiki/Pointer_aliasing)
 
-### External links
-
-- [Understanding Strict Aliasing](http://cellperformance.beyond3d.com/articles/2006/06/understanding-strict-aliasing.html) – article by Mike Acton
-- [Aliasing, pointer casts and gcc 3.3](http://mail-index.netbsd.org/tech-kern/2003/08/11/0001.html) – informational article on NetBSD mailing list
-- [Type-based alias analysis in C++](http://www.ddj.com/cpp/184404273;jsessionid=NV5BWY3EOHMFSQSNDLPCKH0CJUNN2JVN?_requestid=510121) – Informational article on type-based alias analysis in C++
-- [Understand C/C++ Strict Aliasing](http://dbp-consulting.com/tutorials/StrictAliasing.html) – article on strict aliasing originally from the boost developer's wiki
-
-
+In [computer programming](https://en.wanweibaike.com/wiki-Computer_programming), **aliasing** refers to the situation where the same memory location can be accessed using different **names**.
 
 ## alias可能造成的问题
 

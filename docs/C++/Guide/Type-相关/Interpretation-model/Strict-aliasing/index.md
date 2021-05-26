@@ -1,11 +1,6 @@
 # Strict aliasing
 
-关于alias，在下面章节中进行了介绍：
 
-- `C++\Language-reference\Basic-concept\Data-model\Object\Object.md#Aliase to an existing object`
-- `C++\Language-reference\Alias`
-
-在C++、C中，都描述了strict aliasing内容。
 
 ## cppreference `Object#Strict aliasing`
 
@@ -32,7 +27,6 @@ Given an object with *effective type* `T1`, using an lvalue expression (typicall
 > }
 > 
 > ```
->
 
 
 
