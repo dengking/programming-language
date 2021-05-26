@@ -8,6 +8,45 @@
 
 
 
+## cppreference [new expression # Allocation # Placement new](https://en.cppreference.com/w/cpp/language/new#Allocation)
+
+> NOTE: 
+>
+> 一、对于这种情况:
+>
+> 1、alignment是需要由programmer来保证的，这在custom memory pool的实现中，是非常重要的。
+>
+> 2、不执行allocation，只执行construction
+
+If `placement_params` are provided, they are passed to the allocation function as additional arguments. Such allocation functions are known as "placement new", after the standard allocation function `void*` [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new)([std::size_t](http://en.cppreference.com/w/cpp/types/size_t)`, void*)`, which simply returns its second argument unchanged. This is used to construct objects in allocated storage:
+
+```C++
+// within any block scope...
+{
+    alignas(T) unsigned char buf[sizeof(T)];
+    // Statically allocate the storage with automatic storage duration
+    // which is large enough for any object of type `T`.
+    T* tptr = new(buf) T; // Construct a `T` object, placing it directly into your 
+                          // pre-allocated storage at memory address `buf`.
+    tptr->~T();           // You must **manually** call the object's destructor
+                          // if its side effects is depended by the program.
+}                         // Leaving this block scope automatically deallocates `buf`.
+```
+
+Note: this functionality is encapsulated by the member functions of the [*Allocator*](https://en.cppreference.com/w/cpp/named_req/Allocator) classes.
+
+> NOTE: 
+>
+> 上面这个demo给出了使用placement new 的正确做法，其实强调了alignment。
+
+
+
+> NOTE: 
+>
+> 函数原型，参见 cppreference [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new) 
+
+
+
 ## stackoverflow [What uses are there for “placement new”?](https://stackoverflow.com/questions/222557/what-uses-are-there-for-placement-new)
 
 **comments**
@@ -129,41 +168,3 @@ It's certainly not for the faint of heart, but that's why they make the syntax f
 ## geeksforgeeks [Placement new operator in C++](https://www.geeksforgeeks.org/placement-new-operator-cpp/)
 
 
-
-## cppreference [new expression # Allocation # Placement new](https://en.cppreference.com/w/cpp/language/new#Allocation)
-
-If `placement_params` are provided, they are passed to the allocation function as additional arguments. Such allocation functions are known as "placement new", after the standard allocation function `void*` [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new)([std::size_t](http://en.cppreference.com/w/cpp/types/size_t)`, void*)`, which simply returns its second argument unchanged. This is used to construct objects in allocated storage:
-
-```C++
-// within any block scope...
-{
-    alignas(T) unsigned char buf[sizeof(T)];
-    // Statically allocate the storage with automatic storage duration
-    // which is large enough for any object of type `T`.
-    T* tptr = new(buf) T; // Construct a `T` object, placing it directly into your 
-                          // pre-allocated storage at memory address `buf`.
-    tptr->~T();           // You must **manually** call the object's destructor
-                          // if its side effects is depended by the program.
-}                         // Leaving this block scope automatically deallocates `buf`.
-```
-
-Note: this functionality is encapsulated by the member functions of the [*Allocator*](https://en.cppreference.com/w/cpp/named_req/Allocator) classes.
-
----
-
-### since C++17
-
-When allocating an object whose alignment requirement exceeds `__STDCPP_DEFAULT_NEW_ALIGNMENT__` or an array of such objects, the new-expression passes the alignment requirement (wrapped in [std::align_val_t](https://en.cppreference.com/w/cpp/memory/new/align_val_t)) as the second argument for the allocation function (for placement forms, `placement_params` appear after the alignment, as the third, fourth, etc arguments). If overload resolution fails (which happens when a class-specific allocation function is defined with a different signature, since it hides the globals), overload resolution is attempted a second time, without alignment in the argument list. This allows alignment-unaware class-specific allocation functions to take precedence over the global alignment-aware allocation functions.
-
-```C++
-new T;      // calls operator new(sizeof(T))
-            // (C++17) or operator new(sizeof(T), std::align_val_t(alignof(T))))
-new T[5];   // calls operator new[](sizeof(T)*5 + overhead)
-            // (C++17) or operator new(sizeof(T)*5+overhead, std::align_val_t(alignof(T))))
-new(2,f) T; // calls operator new(sizeof(T), 2, f)
-            // (C++17) or operator new(sizeof(T), std::align_val_t(alignof(T)), 2, f)
-```
-
----
-
-If a non-throwing allocation function (e.g. the one selected by new([std::nothrow](http://en.cppreference.com/w/cpp/memory/new/nothrow)) T) returns a null pointer because of an allocation failure, then the new-expression returns immediately, it does not attempt to initialize an object or to call a deallocation function. If a null pointer is passed as the argument to a non-allocating placement new-expression, which makes the selected standard non-allocating placement allocation function return a null pointer, the behavior is undefined.

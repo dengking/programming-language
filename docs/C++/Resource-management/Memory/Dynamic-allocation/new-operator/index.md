@@ -10,21 +10,65 @@
 
 
 
-## cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new)
+## 内容概述
 
-> NOTE: 
->
-> 一、在 cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中，给出了 new operator的function signature，显然这是符合uniform function model的。
->
-> 二、在 cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) 中，将它们称为"allocation function"，因为它们主要用于allocate memory，因此其中会讨论alignment的问题
->
-> 三、关于new expression 和 allocation function之间的对应关系，参见:
->
-> "How to call allocation function" 章节
+cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) 整体描述了new expression的内容，它主要两个功能:
+
+1、allocation
+
+2、construction
+
+其中"allocation"是通过调用allocation function来实现的，这些allocation function在 cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中进行了描述
+
+### cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new)
+
+一、在 cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中，给出了 new operator 的allocation function的function signature，显然这是符合uniform function model的。
+
+二、在 cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) 中，将它们称为"allocation function"，因为它们主要用于allocate memory，因此其中会讨论alignment的问题
+
+三、关于new expression 和 allocation function之间的对应关系，参见:
+
+1、"How to call allocation function" 章节
 
 
 
-## cppreference [new expression](https://en.cppreference.com/w/cpp/language/new)
+## Alignment说明
+
+主要是在 cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中，对alignment进行了说明。
+
+分为三种情况:
+
+1、
+
+```C++
+void* operator new  ( std::size_t count ); // (1)
+```
+
+This function is required to return a pointer suitably aligned to point to an object of the requested size.
+
+2、placement new
+
+```C++
+void* operator new  ( std::size_t count, void* ptr ); // (9)
+```
+
+不对alignment做任何处理，由programmer自己来处理alignment
+
+3、alignment requirement exceeds `__STDCPP_DEFAULT_NEW_ALIGNMENT__`  (since C++17)
+
+```c++
+void* operator new  ( std::size_t count, std::align_val_t al ); // (3)
+```
+
+能够保证alignment。
+
+### `__STDCPP_DEFAULT_NEW_ALIGNMENT__`
+
+一、`__STDCPP_DEFAULT_NEW_ALIGNMENT__` 是`new expression`的default alignment，显然这个default alignment是能够大多数类型的alignment requirement的，就好比 [malloc](https://en.cppreference.com/w/c/memory/malloc) 的default alignment。
+
+二、对于alignment requirement超过`__STDCPP_DEFAULT_NEW_ALIGNMENT__`的，可以使用"C++17 [allocation functions](https://en.cppreference.com/w/cpp/memory/new/operator_new) with explicit alignment"特性
+
+## cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) 
 
 Creates and initializes objects with dynamic [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration), that is, objects whose lifetime is not necessarily limited by the **scope** in which they were created.
 
@@ -172,40 +216,13 @@ In addition, if the new-expression is used to allocate an array of `char`, `unsi
 
 > NOTE: 
 >
-> 一、对于这种情况:
->
-> 1、alignment是需要由programmer来保证的
->
-> 2、不执行allocation，只执行construction
-
-If `placement_params` are provided, they are passed to the **allocation function** as additional arguments. Such allocation functions are known as "placement new", after the standard allocation function `void* operator new(std::size_t, void*)`, which simply returns its second argument unchanged. This is used to construct objects in allocated storage:
-
-```C++
-// within any block scope...
-{
-    alignas(T) unsigned char buf[sizeof(T)];
-    // Statically allocate the storage with automatic storage duration
-    // which is large enough for any object of type `T`.
-    T* tptr = new(buf) T; // Construct a `T` object, placing it directly into your 
-                          // pre-allocated storage at memory address `buf`.
-    tptr->~T();           // You must **manually** call the object's destructor
-                          // if its side effects is depended by the program.
-}                         // Leaving this block scope automatically deallocates `buf`.
-```
-
-> NOTE: 
->
-> 上面这个demo给出了使用placement new 的正确做法，其实强调了alignment。
-
-[operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new)
+> 参见 `Placement-new` 章节
 
 ### Custom alignment requirement(since C++17)
 
 > NOTE: 
 >
-> 一、`__STDCPP_DEFAULT_NEW_ALIGNMENT__` 是`new expression`的default alignment，显然这个default alignment是能够大多数类型的alignment requirement的，就好比 [malloc](https://en.cppreference.com/w/c/memory/malloc) 的default alignment。
->
-> 二、关于这种用法，参见: 
+> 关于这种用法，参见: 
 >
 > bfilipek [New new() - The C++17's Alignment Parameter for Operator new()](https://www.bfilipek.com/2019/08/newnew-align.html)
 
@@ -220,29 +237,51 @@ new(2,f) T; // calls operator new(sizeof(T), 2, f)
             // (C++17) or operator new(sizeof(T), std::align_val_t(alignof(T)), 2, f)
 ```
 
+### Null pointer
 
+> NOTE: 
+>
+> [std::nothrow](http://en.cppreference.com/w/cpp/memory/new/nothrow)
+
+If a non-throwing allocation function (e.g. the one selected by `new(std::nothrow) T`) returns a null pointer because of an allocation failure, then the new-expression returns immediately, it does not attempt to initialize an object or to call a deallocation function. If a null pointer is passed as the argument to a non-allocating placement new-expression, which makes the selected standard non-allocating placement allocation function return a null pointer, the behavior is undefined.
 
 ### Construction
 
-
+> NOTE: 
+>
+> 原文这一段将如何进行initialization。
+>
+> 
 
 ### Memory leaks
 
-
-
-
-
-
-
-## cnblogs [C++ 内存分配操作符new和delete详解](https://www.cnblogs.com/Philip-Tell-Truth/p/6567808.html)
-
-
+The objects created by new-expressions (objects with dynamic storage duration) persist until the pointer returned by the new-expression is used in a matching [delete-expression](https://en.cppreference.com/w/cpp/language/delete). If the original value of pointer is lost, the object becomes unreachable and cannot be deallocated: a *memory leak* occurs.
 
 
 
 ## TODO
 
-https://stackoverflow.com/questions/9603696/use-new-operator-to-initialise-an-array
+### cnblogs [C++ 内存分配操作符new和delete详解](https://www.cnblogs.com/Philip-Tell-Truth/p/6567808.html)
+
+### stackoverflow [Use new operator to initialise an array](https://stackoverflow.com/questions/9603696/use-new-operator-to-initialise-an-array)
+
+**A**
+
+You can use `memcpy` after the allocation.
+
+```c++
+int originalArray[] ={1,2,3,4,5,6,7,8,9,10};
+int *array = new int[10];
+memcpy(array, originalArray, 10*sizeof(int) );
+```
+
+I'm not aware of any syntax that lets you do this automagically.
+
+Much later edit:
+
+```C++
+const int *array = new int[10]{1,2,3,4,5,6,7,8,9,10};
+```
 
 
 
