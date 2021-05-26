@@ -1,10 +1,15 @@
 nav:
     - Introduction: index.md
-    - Object-alignment-requirement: Object-alignment-requirement
-    - Allocate-aligned-memory: Allocate-aligned-memory 
 
-    - Aliasing-pointer-cast: Aliasing-pointer-cast    
-
-    - argv-alignment: argv-alignment
-
+    - Aliasing-pointer-cast: Aliasing-pointer-cast  
+    
+    - C++11-alignof-operator: C++11-alignof-operator
+    - C++11-std-alignment_of: C++11-std-alignment_of
+    
+    - C++11-std-max_align_t: C++11-std-max_align_t
+    
+    - C++11-alignas-specifier: C++11-alignas-specifier
+    - C++11-std-align: C++11-std-align
+    - C++11-std-aligned_storage: C++11-std-aligned_storage
+    
     - library-aguinet-intmem: library-aguinet-intmem

@@ -24,8 +24,6 @@ Some targets, e.g. i386 and PowerPC, support the `ms_struct` `#pragma` which lay
 
 `aligned (alignment)`
 
-
-
 ```C++
 struct __attribute__ ((aligned (8))) S { short f[3]; };
 typedef int more_aligned_int __attribute__ ((aligned (8)));
@@ -33,9 +31,10 @@ typedef int more_aligned_int __attribute__ ((aligned (8)));
 
 
 
-
-
 ## TODO
 
 songho [Data Alignment](http://www.songho.ca/misc/alignment/dataalign.html)
 
+http://www.catb.org/esr/structure-packing/
+
+https://software.intel.com/en-us/articles/coding-for-performance-data-alignment-and-structures

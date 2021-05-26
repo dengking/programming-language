@@ -66,12 +66,15 @@ void* operator new  ( std::size_t count, std::align_val_t al ); // (3)
 
 能够保证alignment。
 
-### `__STDCPP_DEFAULT_NEW_ALIGNMENT__`
+### C++17 `__STDCPP_DEFAULT_NEW_ALIGNMENT__`
 
 一、`__STDCPP_DEFAULT_NEW_ALIGNMENT__` 是`new expression`的default alignment，显然这个default alignment是能够大多数类型的alignment requirement的，就好比 [malloc](https://en.cppreference.com/w/c/memory/malloc) 的default alignment。
 
 二、对于alignment requirement超过`__STDCPP_DEFAULT_NEW_ALIGNMENT__`的，可以使用"C++17 [allocation functions](https://en.cppreference.com/w/cpp/memory/new/operator_new) with explicit alignment"特性
 
+三、cppreference [`__STDCPP_DEFAULT_NEW_ALIGNMENT__`](https://en.cppreference.com/w/cpp/preprocessor/replace#Predefined_macros)
+
+expands to an [std::size_t](https://en.cppreference.com/w/cpp/types/size_t) literal whose value is the alignment guaranteed by a call to alignment-unaware [operator new](https://en.cppreference.com/w/cpp/memory/new/operator_new) (larger alignments will be passed to alignment-aware overload, such as [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new)([std::size_t](http://en.cppreference.com/w/cpp/types/size_t), [std::align_val_t](http://en.cppreference.com/w/cpp/memory/new/align_val_t))
 
 
 ### stackoverflow [Is there any guarantee of alignment of address return by C++'s new operation?](https://stackoverflow.com/questions/506518/is-there-any-guarantee-of-alignment-of-address-return-by-cs-new-operation)
@@ -94,7 +97,7 @@ The `new` operator calls `malloc` internally (see `./gcc/libstdc++-v3/libsupc++/
 
 The implementation of `malloc` which is part of the `glibc` basically defines `MALLOC_ALIGNMENT` to be `2*sizeof(size_t)` and `size_t` is 32bit=4byte and 64bit=8byte on a x86-32 and x86-64 system, respectively.
 
-```c
+```shell
 $ cat ./glibc-2.14/malloc/malloc.c:
 ...
 #ifndef INTERNAL_SIZE_T
@@ -121,6 +124,30 @@ C++17 changes the requirements on the `new` allocator, such that it is required 
 This is important because this size can be *larger* than `alignof(std::max_align_t)`. In Visual C++ for example, the maximum regular alignment is 8-byte, but the default `new` always returns 16-byte aligned memory.
 
 Also, note that if you override the default `new` with your own allocator, you are *required* to abide by the `__STDCPP_DEFAULT_NEW_ALIGNMENT__` as well.
+
+
+
+### stackoverflow [Order between __STDCPP_DEFAULT_NEW_ALIGNMENT__ and alignof(std::max_align_t)](https://stackoverflow.com/questions/59172291/order-between-stdcpp-default-new-alignment-and-alignofstdmax-align-t)
+
+With GCC and Clang on x86-64/Linux `alignof(std::max_align_t)` and `__STDCPP_DEFAULT_NEW_ALIGNMENT__` are both equal to `16`.
+
+With MSVC on x86-64/Windows `alignof(std::max_align_t)` is `8` and `__STDCPP_DEFAULT_NEW_ALIGNMENT__` is `16`.
+
+The standard defines the two terms corresponding to these quantities in [[basic.align\]/3](https://timsong-cpp.github.io/cppwp/n4659/basic.align#3):
+
+> An *extended alignment* is represented by an alignment greater than `alignof(std::max_­align_­t)`. [...] A type having an extended alignment requirement is an *over-aligned type*. [...] A *new-extended alignment* is represented by an alignment greater than `_­_­STDCPP_­DEFAULT_­NEW_­ALIGNMENT_­_­`.
+
+
+
+**A**
+
+1、[`std::max_align_t`](https://en.cppreference.com/w/cpp/types/max_align_t): The alignment of the biggest scalar type
+
+2、[`__STDCPP_DEFAULT_NEW_ALIGNMENT__`](https://en.cppreference.com/w/cpp/preprocessor/replace#Predefined_macros): The alignment of allocated memory
+
+> NOTE: 
+>
+> C++17引入
 
 
 

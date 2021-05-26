@@ -32,6 +32,10 @@ If allocation succeeds, returns a pointer that is suitably aligned for any objec
 
 
 
+## alignment的说明
+
+在 cppreference [std::max_align_t](https://en.cppreference.com/w/cpp/types/max_align_t) 中，对此有说明。
+
 ## Implementation
 
 ### stackoverflow [How malloc() and sbrk() works in unix?](https://stackoverflow.com/questions/19676688/how-malloc-and-sbrk-works-in-unix)

@@ -165,7 +165,6 @@ A *variable* is an object or a reference that is not a non-static data member, t
 > C++中variable的概念和object的概念密切相关，在下面文章中描述了此：
 >
 > learncpp [1.3 — Introduction to variables](https://www.learncpp.com/cpp-tutorial/introduction-to-variables/)
->
 
 
 
@@ -282,7 +281,7 @@ For an object of type `T`, *object representation* is the sequence of `sizeof(T)
 >
 > ### 如何查看object representation？
 >
-> 在工程`computer-arithmetic`的`Bitwise-operation\Binary-representation\Binary-representation`中对这个问题进行了说明；
+> 在`Object-operation/Serialization-deserialization`中对这个问题进行了说明；
 >
 > 按照“Serialization and deserialization”节的说法，这个过程叫做Serialization。
 
@@ -294,7 +293,7 @@ For an object of type `T`, *object representation* is the sequence of `sizeof(T)
 >
 > 关于trivial type，参见：
 >
-> - `C++\Language-reference\Basic-concept\Data-model\Object-layout\Trivial.md`
+> 1、`C++\Language-reference\Basic-concept\Data-model\Object-layout\Trivial`
 >
 > 
 
@@ -359,8 +358,9 @@ An object can have *subobjects*. These include
 
 > NOTE: 根据polymorphism，可以将`C++` object分为两类：
 >
-> - non-polymorphic objects
-> - polymorphic objects
+> 1、non-polymorphic objects
+>
+> 2、polymorphic objects
 
 Objects of a class type that declares or inherits at least one **virtual function** are **polymorphic objects**. Within each polymorphic object, the implementation stores additional information (in every existing implementation, it is one pointer unless optimized out), which is used by [virtual function](https://en.cppreference.com/w/cpp/language/virtual) calls and by the RTTI features ([dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) and [typeid](https://en.cppreference.com/w/cpp/language/typeid)) to determine, at run time, the type with which the object was created, regardless of the expression it is used in.
 
@@ -374,11 +374,11 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 
 ### [Strict aliasing](https://en.cppreference.com/w/cpp/language/object#Strict_aliasing)
 
-> NOTE: 将strict aliasing放到了`C-family-language\C-and-C++\Pointer-array-alias\Alias`章节中。
+> NOTE: 将strict aliasing放到了`Strict-aliasing`章节中。
 
 ### [Alignment](https://en.cppreference.com/w/cpp/language/object#Alignment)
 
-> NOTE: 将alignment放到了`C-and-C++\From-source-code-to-exec\ABI\Alignment`章节中。
+> NOTE: 将alignment放到了`Object-alignment-requirement`章节中。
 
 
 
@@ -393,5 +393,4 @@ For non-polymorphic objects, the **interpretation** of the value is determined f
 2、[reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) conversion
 
 > Converts between types by reinterpreting the underlying bit pattern.
-
 

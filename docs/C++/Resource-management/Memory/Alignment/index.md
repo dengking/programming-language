@@ -26,19 +26,31 @@ stricter alignment  意味着 alignment  更大，比如`char`的alignment是1�
 
 ### Object alignment requirement
 
+参见 `Object-alignment-requirement` 章节。
 
+### 概述
 
-### wikipedia [C++11#Control and query object alignment](https://en.wikipedia.org/wiki/C++11#Control_and_query_object_alignment)
+参见: 
 
+1、wikipedia [C++11#Control and query object alignment](https://en.wikipedia.org/wiki/C++11#Control_and_query_object_alignment)
 
+2、`Object-alignment-requirement` 章节
 
 
 
 ## TODO
 
-
-
 ### Linux unaligned memory access
 
 https://www.kernel.org/doc/Documentation/unaligned-memory-access.txt
+
+
+
+### alexonlinux [Aligned vs. unaligned memory access](http://www.alexonlinux.com/aligned-vs-unaligned-memory-access)
+
+
+
+### unaligned pointer to large area
+
+https://groups.google.com/forum/#!topic/comp.lang.c/YEfswjndH1s
 
