@@ -1,9 +1,5 @@
 # Union and type-punning
 
-## cppreference  [Union declaration](https://en.cppreference.com/w/c/language/union)
-
-其中对type punning进行了介绍。
-
 
 
 ## stackoverflow [Is type-punning through a union unspecified in C99, and has it become specified in C11?](https://stackoverflow.com/questions/11639947/is-type-punning-through-a-union-unspecified-in-c99-and-has-it-become-specified)

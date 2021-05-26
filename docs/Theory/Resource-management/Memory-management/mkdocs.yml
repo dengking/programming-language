@@ -6,3 +6,4 @@ nav:
 #################### variable的概念跟memory management密切相关####################   
     - Variable: Variable
     - Automatic-memory-management: Automatic-memory-management
+    - PEEK-and-POKE: PEEK-and-POKE.md
