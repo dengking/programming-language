@@ -30,7 +30,11 @@ cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) �
 
 1、"How to call allocation function" 章节
 
+## C++ implementation
 
+通过 stackoverflow [Is there any guarantee of alignment of address return by C++'s new operation?](https://stackoverflow.com/questions/506518/is-there-any-guarantee-of-alignment-of-address-return-by-cs-new-operation) 中的内容可知:
+
+> The `new` operator calls `malloc` internally (see `./gcc/libstdc++-v3/libsupc++/new_op.cc`) so this applies to `new` as well.
 
 ## Alignment说明
 
@@ -67,6 +71,58 @@ void* operator new  ( std::size_t count, std::align_val_t al ); // (3)
 一、`__STDCPP_DEFAULT_NEW_ALIGNMENT__` 是`new expression`的default alignment，显然这个default alignment是能够大多数类型的alignment requirement的，就好比 [malloc](https://en.cppreference.com/w/c/memory/malloc) 的default alignment。
 
 二、对于alignment requirement超过`__STDCPP_DEFAULT_NEW_ALIGNMENT__`的，可以使用"C++17 [allocation functions](https://en.cppreference.com/w/cpp/memory/new/operator_new) with explicit alignment"特性
+
+
+
+### stackoverflow [Is there any guarantee of alignment of address return by C++'s new operation?](https://stackoverflow.com/questions/506518/is-there-any-guarantee-of-alignment-of-address-return-by-cs-new-operation)
+
+**A**
+
+The alignment has the following guarantee from the standard (3.7.3.1/2):
+
+> The pointer returned shall be suitably aligned so that it can be converted to a pointer of any complete object type and then used to access the object or array in the storage allocated (until the storage is explicitly deallocated by a call to a corresponding deallocation function).
+
+**A**
+
+This is a late answer but just to clarify the situation on Linux - on 64-bit systems memory is always 16-byte aligned:
+
+http://www.gnu.org/software/libc/manual/html_node/Aligned-Memory-Blocks.html
+
+> The address of a block returned by malloc or realloc in the GNU system is always a multiple of eight (or sixteen on 64-bit systems).
+
+The `new` operator calls `malloc` internally (see `./gcc/libstdc++-v3/libsupc++/new_op.cc`) so this applies to `new` as well.
+
+The implementation of `malloc` which is part of the `glibc` basically defines `MALLOC_ALIGNMENT` to be `2*sizeof(size_t)` and `size_t` is 32bit=4byte and 64bit=8byte on a x86-32 and x86-64 system, respectively.
+
+```c
+$ cat ./glibc-2.14/malloc/malloc.c:
+...
+#ifndef INTERNAL_SIZE_T
+#define INTERNAL_SIZE_T size_t
+#endif
+...
+#define SIZE_SZ                (sizeof(INTERNAL_SIZE_T))
+...
+#ifndef MALLOC_ALIGNMENT
+#define MALLOC_ALIGNMENT       (2 * SIZE_SZ)
+#endif
+```
+
+
+
+**A**
+
+> NOTE: 
+>
+> custom allocator时，是需要遵循alignment的
+
+C++17 changes the requirements on the `new` allocator, such that it is required to return a pointer whose alignment is equal to the macro `__STDCPP_DEFAULT_NEW_ALIGNMENT__` (which is defined by the implementation, not by including a header).
+
+This is important because this size can be *larger* than `alignof(std::max_align_t)`. In Visual C++ for example, the maximum regular alignment is 8-byte, but the default `new` always returns 16-byte aligned memory.
+
+Also, note that if you override the default `new` with your own allocator, you are *required* to abide by the `__STDCPP_DEFAULT_NEW_ALIGNMENT__` as well.
+
+
 
 ## cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) 
 
