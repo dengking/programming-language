@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - argv-alignment: argv-alignment
+    - quarkslab-Unaligned-accesse-what-why-solution: quarkslab-Unaligned-accesse-what-why-solution
+    - cmu.edu-EXP36-C: cmu.edu-EXP36-C
+    - pzemtsov -A-bug-story-data-alignment-on-x86: pzemtsov -A-bug-story-data-alignment-on-x86

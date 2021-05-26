@@ -1,5 +1,0 @@
-nav:
-    - Introduction: index.md
-    - TODO-Alignment.md: TODO-Alignment.md
-    - Data-structure-alignment: Data-structure-alignment
-    - TODO-alignment-in-struct-flexible-array-member: TODO-alignment-in-struct-flexible-array-member

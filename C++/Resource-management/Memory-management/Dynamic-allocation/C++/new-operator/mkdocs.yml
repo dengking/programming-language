@@ -1,4 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Placement-new: Placement-new
-    - Thread-safety-of-new: Thread-safety-of-new

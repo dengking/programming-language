@@ -1,0 +1,14 @@
+nav:
+    - Introduction: index.md
+    
+    - Dynamic-allocation: Dynamic-allocation
+    
+    - Memory-access: Memory-access
+
+    - Pointer-and-array: Pointer-and-array
+    
+    - Alignment: Alignment    
+    
+    - Memory-error: Memory-error
+    
+    - GC: GC    
