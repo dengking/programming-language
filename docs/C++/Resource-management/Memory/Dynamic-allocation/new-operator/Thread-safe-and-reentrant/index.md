@@ -1,6 +1,10 @@
-# Thread safety of new
+# Thread-safety and reentrancy of new operator
 
+## 分析
 
+一、new operator最终还是会使用类似于`malloc`的allocator，因此它的reentrancy是由allocator决定的，一般allocator是non-reentrant的
+
+二、thread safety，C++标准没有明确说明；并且由于C++支持overload new operator，在这种情况下就需要由programmer来决定了。
 
 ## stackoverflow [Thread safety of ::new in C++11](https://stackoverflow.com/questions/26375732/thread-safety-of-new-in-c11)
 

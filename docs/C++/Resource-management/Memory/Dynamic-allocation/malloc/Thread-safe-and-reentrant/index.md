@@ -1,4 +1,4 @@
-# Thread-safety and reentrance of `malloc`
+# Thread-safety and reentrancy of `malloc`
 
 ## 结论
 
