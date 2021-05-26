@@ -1,4 +1,4 @@
-# [realloc](https://en.cppreference.com/w/c/memory/realloc)
+# creference [realloc](https://en.cppreference.com/w/c/memory/realloc)
 
 Defined in header `<stdlib.h>`
 
