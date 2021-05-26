@@ -36,10 +36,14 @@ If allocation succeeds, returns a pointer that is suitably aligned for any objec
 
 在 cppreference [std::max_align_t](https://en.cppreference.com/w/cpp/types/max_align_t) 中，对此有说明。
 
+### stackoverflow [how does malloc understand alignment?](https://stackoverflow.com/questions/8752546/how-does-malloc-understand-alignment)
+
+
+
 ## Implementation
 
-### stackoverflow [How malloc() and sbrk() works in unix?](https://stackoverflow.com/questions/19676688/how-malloc-and-sbrk-works-in-unix)
+stackoverflow [How malloc() and sbrk() works in unix?](https://stackoverflow.com/questions/19676688/how-malloc-and-sbrk-works-in-unix)
 
 
 
-### holbertonschool Chapter 3: [Hack the Virtual Memory: malloc, the heap & the program break](https://blog.holbertonschool.com/hack-the-virtual-memory-malloc-the-heap-the-program-break/)
+holbertonschool Chapter 3: [Hack the Virtual Memory: malloc, the heap & the program break](https://blog.holbertonschool.com/hack-the-virtual-memory-malloc-the-heap-the-program-break/)
