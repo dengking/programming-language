@@ -87,9 +87,9 @@ The compiler may or may not be able to or smart enough to try to inline SendMess
 
 **Beginner beware**
 
-This is only one potential minefield when overlaying two types onto each other. You should also learn about [endianness](http://en.wikipedia.org/wiki/Endianness), [word alignment](http://web.archive.org/web/20170708093042/http://www.cs.umd.edu:80/class/sum2003/cmsc311/Notes/Data/aligned.html), and how to deal with alignment issues through [packing structs](http://grok2.com/structure_packing.html)correctly.
+This is only one potential minefield when overlaying two types onto each other. You should also learn about [endianness](http://en.wikipedia.org/wiki/Endianness), [word alignment](http://web.archive.org/web/20170708093042/http://www.cs.umd.edu:80/class/sum2003/cmsc311/Notes/Data/aligned.html), and how to deal with alignment issues through [packing structs](http://grok2.com/structure_packing.html) correctly.
 
-## Footnote
+### Footnote
 
 1 The types that C 2011 6.5 7 allows an lvalue to access are:
 

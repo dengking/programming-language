@@ -11,11 +11,13 @@ In [C](https://en.wikipedia.org/wiki/C_programming_language) and [C++](https://e
 
 In the [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)) programming language, the use of [records](https://en.wikipedia.org/wiki/Record_(computer_science)) with [variants](https://en.wikipedia.org/wiki/Variant_type) may be used to treat a particular data type in more than one manner, or in a manner not normally permitted.
 
-> NOTE: [type punning](https://en.wikipedia.org/wiki/Type_punning)则是希望使用一种新的type来解释重解释一个已经声明为另外一种类型的object，它不是[type conversion](https://en.cppreference.com/w/c/language/cast)（type conversion会读取原object，然后构造一个新的类型的object），type punning是就地进行重解释，或者说它是告诉compiler它：按照这种类型来进行解释，在c中，实现type punning可以使用不同的指针类型来进行alias，但是c标准中认可的方法是使用`union`，在[Objects and alignment](https://en.cppreference.com/w/c/language/object)中专门说明了这种用法：
+> NOTE: [type punning](https://en.wikipedia.org/wiki/Type_punning)则是希望使用一种新的type来解释重解释一个已经声明为另外一种类型的object，它不是[type conversion](https://en.cppreference.com/w/c/language/cast)（type conversion会读取原object，然后构造一个新的类型的object），type punning是就地进行重解释，或者说它是告诉compiler它：按照这种类型来进行解释，在c中，实现type punning可以使用不同的指针类型来进行aliasing，在creference [Objects and alignment](https://en.cppreference.com/w/c/language/object)中专门说明了这种用法：
+>
+> > Note that type-punning may also be performed through the inactive member of a [union](https://en.cppreference.com/w/c/language/union).
+>
+> 当然，在标准中，也对这此进行了说明；
 
-> Note that type-punning may also be performed through the inactive member of a [union](https://en.cppreference.com/w/c/language/union).
 
-当然，在标准中，也对这此进行了说明；
 
 ### Sockets example
 
@@ -39,11 +41,13 @@ The Berkeley sockets library fundamentally relies on the fact that in [C](https:
 
 Often seen in the programming world is the use of "padded" data structures to allow for the storage of different kinds of values in what is effectively the same storage space. This is often seen when two structures are used in mutual exclusivity for optimization.
 
-> NOTE: 显然， the two structure types share **the same memory layout**.是它们可以互换的前提；
-
-> NOTE: 在[beej **struct sockaddr** and pals](https://beej.us/guide/bgnet/html/multi/sockaddr_inman.html)中对这个问题也进行了阐述：
+> NOTE: 
 >
-> In memory, the `struct sockaddr_in` and `struct sockaddr_in6` share the same beginning structure as `struct sockaddr`, and you can freely cast the pointer of one type to the other without any harm, except the possible end of the universe.
+> 一、显然， "the two structure types share **the same memory layout**"是它们可以互换的前提；
+>
+> 二、 在[beej **struct sockaddr** and pals](https://beej.us/guide/bgnet/html/multi/sockaddr_inman.html)中对这个问题也进行了阐述：
+>
+> > In memory, the `struct sockaddr_in` and `struct sockaddr_in6` share the same beginning structure as `struct sockaddr`, and you can freely cast the pointer of one type to the other without any harm, except the possible end of the universe.
 
 ### Floating-point example
 
@@ -66,21 +70,50 @@ bool is_negative(float x) {
 
 Note that the behaviour will not be exactly the same: in the special case of `x` being [negative zero](https://en.wikipedia.org/wiki/Signed_zero), the first implementation yields `false` while the second yields `true`.
 
-This kind of **type punning** is more dangerous than most. Whereas the former example relied only on guarantees made by the C programming language about structure layout and pointer convertibility, the latter example relies on assumptions about a particular system's hardware. Some situations, such as [time-critical](https://en.wikipedia.org/wiki/Real-time_computing) code that the compiler otherwise fails to [optimize](https://en.wikipedia.org/wiki/Compiler_optimization), may require dangerous code. In these cases, documenting all such assumptions in [comments](https://en.wikipedia.org/wiki/Comment_(computer_programming)), and introducing [static assertions](https://en.wikipedia.org/wiki/Assertion_(computing)#Static_assertions) to verify portability expectations, helps to keep the code [maintainable](https://en.wikipedia.org/wiki/Maintainability).
+This kind of **type punning** is more dangerous than most. Whereas the former example relied only on guarantees made by the C programming language about structure layout and **pointer convertibility**, the latter example relies on assumptions about a particular system's hardware. Some situations, such as [time-critical](https://en.wikipedia.org/wiki/Real-time_computing) code that the compiler otherwise fails to [optimize](https://en.wikipedia.org/wiki/Compiler_optimization), may require dangerous code. In these cases, documenting all such assumptions in [comments](https://en.wikipedia.org/wiki/Comment_(computer_programming)), and introducing [static assertions](https://en.wikipedia.org/wiki/Assertion_(computing)#Static_assertions) to verify portability expectations, helps to keep the code [maintainable](https://en.wikipedia.org/wiki/Maintainability).
 
 For a practical example popularized by [Quake III](https://en.wikipedia.org/wiki/Quake_III), see [fast inverse square root](https://en.wikipedia.org/wiki/Fast_inverse_square_root).
 
-In addition to the assumption about bit-representation of floating-point numbers, the previous floating-point type-punning example also violates the C language's constraints on **how objects are accessed**:[[1\]](https://en.wikipedia.org/wiki/Type_punning#cite_note-ISOs6.5/7-1) the declared type of `x` is `float` but it is read through an expression of type `unsigned int`. On many common platforms, this use of **pointer punning** can create problems if different pointers are [aligned in machine-specific ways](https://en.wikipedia.org/wiki/Data_structure_alignment). Furthermore, pointers of **different sizes** can [alias accesses to the same memory](https://en.wikipedia.org/wiki/Aliasing_(computing)), causing problems that are unchecked by the compiler.
+### C and C++
 
-> NOTE: 这一段关于**pointer punning**的分析非常细致；
+> NOTE: 
 >
-> 其中关于 pointer cast和alignment的问题，在[cppreference cast operator](https://en.cppreference.com/w/c/language/cast)中有描述；
+> 在 C 和 C++中，有两种实现方式:
 >
-> 其中提及的pointer of different size所指的是pointer to different type，different type may have different size；
+> 1、pointer conversion
+>
+> 2、union
 
+In addition to the assumption about **bit-representation** of floating-point numbers, the previous floating-point type-punning example also violates the C language's constraints on **how objects are accessed**:[[1\]](https://en.wikipedia.org/wiki/Type_punning#cite_note-ISOs6.5/7-1) the declared type of `x` is `float` but it is read through an expression of type `unsigned int`. On many common platforms, this use of **pointer punning** can create problems if different pointers are [aligned in machine-specific ways](https://en.wikipedia.org/wiki/Data_structure_alignment). Furthermore, pointers of **different sizes** can [alias accesses to the same memory](https://en.wikipedia.org/wiki/Aliasing_(computing)), causing problems that are unchecked by the compiler.
 
+> NOTE: 
+>
+> 一、"bit-representation of floating-point numbers" 即 "serialization序列化-object memory binary representation"
+>
+> 二、这一段关于**pointer punning**的分析非常细致；
+>
+> 其中关于pointer cast和alignment的问题，在[cppreference cast operator](https://en.cppreference.com/w/c/language/cast)中有描述；我们需要遵循"strict aliasing"原则，否则就是undefined behavior。
+>
+> 其中提及的"pointer of different size"的含义是: pointer to different type，different type may have different size；
 
-### Use of `union`
+#### Use of pointers
+
+A naive attempt at type-punning can be achieved by using pointers:
+
+```C++
+float pi = 3.14159;
+uint32_t piAsRawData = *(uint32_t*)&pi;
+```
+
+According to the C standard, this code should not (or rather, does not have to) compile, however, if it does, then `piAsRawData` typically contains the raw bits of `pi`.
+
+> NOTE: 
+>
+> 上述code是违反strict aliasing的
+
+#### Use of `union`
+
+It is a common mistake to attempt to fix **type-punning** by the use of a `union`. (The following example additionally makes the assumption of IEEE-754 bit-representation for floating-point types).
 
 This **aliasing problem** can be fixed by the use of a `union` (though, this example still makes the assumption about IEEE-754 bit-representation of floating-point types):
 
