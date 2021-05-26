@@ -1,6 +1,9 @@
 nav:
     - Introduction: index.md
-    - C: C
-    - C++: C++
+    - malloc: malloc
+    - realloc: realloc
+    - new-operator: new-operator
+    - delete-operator: delete-operator
+    - std-allocator-library: std-allocator-library
     - Implementation: Implementation
     - VS-C-VS-C++: VS-C-VS-C++

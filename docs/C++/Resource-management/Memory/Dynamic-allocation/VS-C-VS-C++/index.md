@@ -12,7 +12,7 @@ C中的dynamic memory management是通过标准库所提供[dynamic memory manag
 
 ### [Out of memory](https://en.wikipedia.org/wiki/Out_of_memory) 的处理
 
- the [C standard function](https://en.wikipedia.org/wiki/C_standard_function) for allocating memory, `malloc()`, will return [NULL](https://en.wikipedia.org/wiki/Null_pointer) and a well-behaved application should handle this situation. `malloc`通过返回值是否为NULL来判断是否分配成功
+the [C standard function](https://en.wikipedia.org/wiki/C_standard_function) for allocating memory, `malloc()`, will return [NULL](https://en.wikipedia.org/wiki/Null_pointer) and a well-behaved application should handle this situation. `malloc`通过返回值是否为NULL来判断是否分配成功
 
 c++中的`new`呢？通过Google `c++ new return null`可以得到如下有文章：
 

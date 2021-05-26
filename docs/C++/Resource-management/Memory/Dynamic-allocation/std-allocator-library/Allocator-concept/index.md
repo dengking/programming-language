@@ -4,9 +4,24 @@
 
 ## cppreference [C++ named requirements: *Allocator*](https://en.cppreference.com/w/cpp/named_req/Allocator)
 
+Encapsulates strategies for access/addressing, allocation/deallocation and construction/destruction of objects.
 
-
-
+> NOTE: 
+>
+> 一、典型的policy-based design，[`std::allocator`](https://en.cppreference.com/w/cpp/memory/allocator) 是它的default implementation:
+>
+> > The `std::allocator` class template is the default [*Allocator*](https://en.cppreference.com/w/cpp/named_req/Allocator) used by all standard library containers if no user-specified allocator is provided.
+>
+> [std::vector](https://en.cppreference.com/w/cpp/container/vector)
+>
+> ```C++
+> template<
+>     class T,
+>     class Allocator = std::allocator<T>
+> > class vector;
+> ```
+>
+> 
 
 ### Fancy pointers
 

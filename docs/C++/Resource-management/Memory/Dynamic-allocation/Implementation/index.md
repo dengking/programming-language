@@ -1,5 +1,9 @@
 # Implementation of dynamic memory allocator
 
+## Chunky memory management
+
+很多memory allocator使用的是chunky memory management策略。
+
 
 
 ## 选型 and tradeoff

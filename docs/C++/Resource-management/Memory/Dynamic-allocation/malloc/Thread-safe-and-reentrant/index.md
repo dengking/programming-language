@@ -8,6 +8,18 @@
 
 2、stackoverflow [Why are malloc() and printf() said as non-reentrant?](https://stackoverflow.com/questions/3941271/why-are-malloc-and-printf-said-as-non-reentrant) # [A](https://stackoverflow.com/a/3941563)
 
+
+
+## creference [malloc](https://en.cppreference.com/w/c/memory/malloc)
+
+`malloc` is thread-safe: it behaves as though only accessing the memory locations visible through its argument, and not any static storage.
+
+> NOTE: 
+>
+> 对thread safety进行了明确的规定
+
+
+
 ## stackoverflow [Why are malloc() and printf() said as non-reentrant?](https://stackoverflow.com/questions/3941271/why-are-malloc-and-printf-said-as-non-reentrant)
 
 In UNIX systems we know `malloc()` is a non-reentrant function (system call). Why is that?
@@ -18,11 +30,23 @@ I know the definition of re-entrancy, but I wanted to know why it applies to the
 
 ### [A](https://stackoverflow.com/a/3941563)
 
-`malloc` and `printf` usually use global structures, and employ lock-based synchronization internally. That's why they're not reentrant.
+> NOTE: 
+>
+> 这回答是非常好的
+
+`malloc` and `printf` usually use **global structures**, and employ lock-based synchronization internally. That's why they're not reentrant.
 
 The `malloc` function could either be thread-safe or thread-unsafe. Both are not reentrant:
 
-1、Malloc operates on a global heap, and it's possible that two different invocations of `malloc` that happen at the same time, return the same memory block. (The 2nd malloc call should happen before an address of the chunk is fetched, but the chunk is not marked as unavailable). This violates the postcondition of `malloc`, so this implementation would not be re-entrant.
+> NOTE: 
+>
+> C11明确要求`malloc`需要保证thread safe
+
+1、Malloc operates on a **global heap**, and it's possible that two different invocations of `malloc` that happen at the same time, return the same memory block. (The 2nd malloc call should happen before an address of the chunk is fetched, but the chunk is not marked as unavailable). This violates the postcondition of `malloc`, so this implementation would not be re-entrant.
+
+> NOTE: 
+>
+> 这是典型的race
 
 2、To prevent this effect, a thread-safe implementation of `malloc` would use lock-based synchronization. However, if malloc is called from signal handler, the following situation may happen:
 
@@ -36,9 +60,17 @@ malloc();            //call malloc() inside signal handler
   // it won't be released because the original malloc call is interrupted
 ```
 
+> NOTE: 
+>
+> 上述例子非常好
+
 This situation won't happen when `malloc` is simply called from different threads. Indeed, the reentrancy concept goes beyond thread-safety and also requires functions to work properly **even if one of its invocation never terminates**. That's basically the reasoning why any function with locks would be not re-entrant.
 
 The `printf` function also operated on global data. Any output stream usually employs a global buffer attached to the resource data are sent to (a buffer for terminal, or for a file). The print process is usually a sequence of copying data to buffer and flushing the buffer afterwards. This buffer should be protected by locks in the same way `malloc` does. Therefore, `printf` is also non-reentrant.
+
+> NOTE: 
+>
+> 可能也是lock based
 
 ### [A](https://stackoverflow.com/a/26873638)
 
@@ -48,7 +80,9 @@ There are at least three concepts here, all of which are conflated in colloquial
 - *critical section*
 - *re-entrant*
 
-To take the easiest one first: **Both `malloc` and `printf` are [\*thread-safe\*](http://en.wikipedia.org/wiki/Thread_safety)**. They have been guaranteed to be thread-safe in Standard C since 2011, in POSIX since 2001, and in practice since long before that. What this means is that the following program is guaranteed not to crash or exhibit bad behavior:
+#### [*thread-safe*](http://en.wikipedia.org/wiki/Thread_safety)
+
+To take the easiest one first: **Both `malloc` and `printf` are [*thread-safe*](http://en.wikipedia.org/wiki/Thread_safety)**. They have been guaranteed to be thread-safe in Standard C since 2011, in POSIX since 2001, and in practice since long before that. What this means is that the following program is guaranteed not to crash or exhibit bad behavior:
 
 ```c
 #include <pthread.h>
@@ -69,7 +103,7 @@ int main() {
 
 An example of a function which is *not thread-safe* is `strtok`. If you call `strtok` from two different threads simultaneously, the result is undefined behavior — because `strtok` internally uses a static buffer to keep track of its state. glibc adds `strtok_r` to fix this problem, and C11 added the same thing (but optionally and under a different name, because Not Invented Here) as `strtok_s`.
 
-Okay, but doesn't `printf` use global resources to build its output, too? In fact, what would it even *mean* to print to stdout from two threads *simultaneously?* That brings us to the next topic. Obviously **`printf` is going to be a [\*critical section\*](http://en.wikipedia.org/wiki/Critical_section) in any program that uses it.** Only one thread of execution is allowed to be inside the critical section at once.
+Okay, but doesn't `printf` use global resources to build its output, too? In fact, what would it even *mean* to print to stdout from two threads *simultaneously?* That brings us to the next topic. Obviously **`printf` is going to be a [*critical section*](http://en.wikipedia.org/wiki/Critical_section) in any program that uses it.** Only one thread of execution is allowed to be inside the critical section at once.
 
 At least in POSIX-compliant systems, this is achieved by having `printf` begin with a call to `flockfile(stdout)` and end with a call to `funlockfile(stdout)`, which is basically like taking a global mutex associated with stdout.
 
@@ -77,7 +111,9 @@ However, each distinct `FILE` in the program is allowed to have its own mutex. T
 
 Similarly, `malloc` is unlikely to be a critical section in any modern system, because modern systems are [smart enough to keep one pool of memory for each thread in the system](http://goog-perftools.sourceforge.net/doc/tcmalloc.html), rather than having all N threads fight over a single pool. (The `sbrk` system call will still probably be a critical section, but `malloc` spends very little of its time in `sbrk`. Or `mmap`, or whatever the cool kids are using these days.)
 
-Okay, so **what does [\*re-entrancy\*](http://en.wikipedia.org/wiki/Reentrancy_(computing)) actually mean?** Basically, it means that the function can safely be called recursively — the current invocation is "put on hold" while a second invocation runs, and then the first invocation is still able to "pick up where it left off." (Technically this *might* not be due to a recursive call: the first invocation might be in Thread A, which gets interrupted in the middle by Thread B, which makes the second invocation. But that scenario is just a special case of *thread-safety*, so we can forget about it in this paragraph.)
+#### [*re-entrancy*](http://en.wikipedia.org/wiki/Reentrancy_(computing)) 
+
+Okay, so **what does [*re-entrancy*](http://en.wikipedia.org/wiki/Reentrancy_(computing)) actually mean?** Basically, it means that the function can safely be called recursively — the current invocation is "put on hold" while a second invocation runs, and then the first invocation is still able to "pick up where it left off." (Technically this *might* not be due to a recursive call: the first invocation might be in Thread A, which gets interrupted in the middle by Thread B, which makes the second invocation. But that scenario is just a special case of *thread-safety*, so we can forget about it in this paragraph.)
 
 Neither `printf` nor `malloc` can possibly *be* called recursively by a single thread, because they are leaf functions (they don't call themselves nor call out to any user-controlled code that could possibly make a recursive call). And, as we saw above, they've been thread-safe against *multi-*threaded re-entrant calls since 2001 (by using locks).
 
@@ -106,6 +142,8 @@ int main() {
   printf("|%W|\n", 42);
 }
 ```
+
+
 
 ## stackoverflow [Is malloc thread-safe?](https://stackoverflow.com/questions/855763/is-malloc-thread-safe)
 
