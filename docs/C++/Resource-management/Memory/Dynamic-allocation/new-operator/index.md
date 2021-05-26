@@ -34,7 +34,7 @@ cppreference [new expression](https://en.cppreference.com/w/cpp/language/new) �
 
 ## Alignment说明
 
-主要是在 cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中，对alignment进行了说明。
+C++对dynamic allocation的alignment进行了要求，它们(大多数情况)都要求保证alignment，显然这简化了programmer的操作、保证了performance。主要是在 cppreference [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new) 中，对alignment进行了说明。
 
 分为三种情况:
 
