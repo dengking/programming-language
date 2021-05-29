@@ -274,7 +274,8 @@ nav:
           - Method-chaining: Theory/Programming-paradigm/OOP/Design-pattern/Fluent-API/Method-chaining.md
         - Computation-on-structure:
           - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Computation-on-structure/index.md
-          - Separation-of-algorithm-and-structure: Theory/Programming-paradigm/OOP/Design-pattern/Computation-on-structure/Separation-of-algorithm-and-structure.md
+          - Separation-of-algorithm-and-structure:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Computation-on-structure/Separation-of-algorithm-and-structure/index.md
         - Summary-of-design-pattern: Theory/Programming-paradigm/OOP/Design-pattern/Summary-of-design-pattern.md
       - Summary-of-OOP:
         - Introduction: Theory/Programming-paradigm/OOP/Summary-of-OOP/index.md
@@ -2047,8 +2048,8 @@ nav:
         - Introduction: C++/Resource-management/Memory/Dynamic-allocation/index.md
         - malloc:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/malloc/index.md
-          - Thread-safe-and-reentrant:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/malloc/Thread-safe-and-reentrant/index.md
+          - Thread-safety-Reentrancy:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/malloc/Thread-safety-Reentrancy/index.md
         - realloc:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/realloc/index.md
         - new-operator:
@@ -2057,8 +2058,8 @@ nav:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/Placement-new/index.md
           - operator-new-operator-new[]:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/operator-new-operator-new[]/index.md
-          - Thread-safe-and-reentrant:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/Thread-safe-and-reentrant/index.md
+          - Thread-safety-Reentrancy:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/Thread-safety-Reentrancy/index.md
         - delete-operator:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/delete-operator/index.md
         - std-allocator-library:
