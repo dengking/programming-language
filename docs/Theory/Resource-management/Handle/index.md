@@ -56,11 +56,19 @@ A [handle leak](https://en.wikipedia.org/wiki/Handle_leak) is a type of [softwar
 
 > NOTE: 
 >
-> 1、"Security"是一个非常重要的问题，这一段从"Security"的角度对handle进行分析
+> 1、"Security"是一个非常重要的问题，这一段从"Security"的角度对handle进行分析，关于"Security"，参见工程`Linux-OS`的`Security`章节
 >
-> 2、a handle functions as a *[capability](https://en.wikipedia.org/wiki/Capability-based_security)*: it not only identifies an object, but also associates [access rights](https://en.wikipedia.org/wiki/Access_control)".
+> 2、"a handle functions as a *[capability](https://en.wikipedia.org/wiki/Capability-based_security)*: it not only identifies an object, but also associates [access rights](https://en.wikipedia.org/wiki/Access_control)".
 
 In [secure computing](https://en.wikipedia.org/wiki/Computer_security) terms, because access to a resource via a handle is mediated(中转) by another system, a handle functions as(充当) a *[capability](https://en.wikipedia.org/wiki/Capability-based_security)*: it not only identifies an object, but also associates [access rights](https://en.wikipedia.org/wiki/Access_control). For example, while a filename is forgeable(可以伪造的) (it is just a guessable(可以推测的) identifier), a handle is *given* to a user by an external system, and thus represents not just identity, but also *granted* access.
+
+> NOTE: 
+>
+> 一、"because access to a resource via a handle is mediated(中转) by another system" 中的"another system"并不是指另外一个OS，它所指代的是具体implementation的一种机制。
+>
+> 下面的内容结合了"read the system password file"的例子来说明 "a handle functions as(充当) a *[capability](https://en.wikipedia.org/wiki/Capability-based_security)*"
+>
+> 如果OS允许"open the specified file with the specified access rights"，那么这就说明是具备capability的，那么它将得到file handler；否则是不具备capability的，那么它就无法open file、无法得到file handle；因此一个file handle就代表了capability。
 
 For example, if a program wishes to read the system password file (`/etc/passwd`) in read/write mode (`O_RDWR`), it could try to open the file via the following call:
 
@@ -72,7 +80,7 @@ This call asks the operating system to open the specified file with the specifie
 
 #### In a capability-based system
 
-In a capability-based system, handles can be passed between processes, with associated access rights. Note that in these cases the handle must be something other than a system-wide-unique small integer, otherwise it is forgeable. Such an integer may nevertheless be used to identify a capability inside a process; e.g., file descriptor in Linux is unforgeable because its numerical value alone is meaningless, and only in the process context may refer to anything. Transferring such a handle requires special care though, as its value often has to be different in the sending and receiving processes.
+In a capability-based system, handles can be passed between processes, with associated access rights. Note that in these cases the handle must be something other than a system-wide-unique small integer, otherwise it is forgeable(可以伪造的). Such an integer may nevertheless be used to identify a capability inside a process; e.g., **file descriptor** in Linux is unforgeable because its numerical value alone is meaningless, and only in the process context may refer to anything. Transferring such a handle requires special care though, as its value often has to be different in the sending and receiving processes.
 
 > NOTE: 
 >
