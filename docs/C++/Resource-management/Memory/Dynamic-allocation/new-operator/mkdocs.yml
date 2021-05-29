@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - Placement-new: Placement-new
     - operator-new-operator-new[]: operator-new-operator-new[]
-    - Thread-safe-and-reentrant: Thread-safe-and-reentrant
+    - Thread-safety-Reentrancy: Thread-safety-Reentrancy
