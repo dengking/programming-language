@@ -1,10 +1,12 @@
 # cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
 
-## C++的reference是alias
+## 导读
+
+### C++的reference是alias
 
 关于alias，参见`C++\Language-reference\Alias`。
 
-### Reference and value category
+#### Reference and value category
 
 C++的reference是alias。
 
@@ -14,7 +16,7 @@ C++的reference是alias。
 
 
 
-#### 参考一
+**参考一**
 
 **stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) # [part two](https://stackoverflow.com/a/11540204) # Xvalues**
 
@@ -54,17 +56,19 @@ Note that only xvalues are really new; the rest is just due to renaming and grou
 
 
 
-#### 参考二
+**参考二**
 
 `paper-stroustrup-“New”-Value-Terminology` 
 
-### Function and object
+#### Function and object
 
 1) alias to **already-existing** object
 
 2) alias to **already-existing** function
 
+---
 
+Declares a named variable as a reference, that is, an alias to an already-existing object or function.
 
 ## Syntax
 
@@ -95,11 +99,29 @@ int& &r;   // error: **references** to references
 
 
 
-## Reference collapsing
+## Reference collapsing(since C++11)
 
 > NOTE: 支持reference collapsing的目的是什么？支持perfect forward，后面章节中会进行介绍
 
+```C++
+typedef int&  lref;
+typedef int&& rref;
+int n;
+lref&  r1 = n; // type of r1 is int&
+lref&& r2 = n; // type of r2 is int&
+rref&  r3 = n; // type of r3 is int&
+rref&& r4 = 1; // type of r4 is int&&
+```
 
+> NOTE: 
+>
+> 可以看到，`&&`是保持value category的，这是 [std::forward](https://en.cppreference.com/w/cpp/utility/forward) 的要求。
+
+(This, along with special rules for [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction) when `T&&` is used in a function template, forms the rules that make [std::forward](https://en.cppreference.com/w/cpp/utility/forward) possible.)
+
+> NOTE: 
+>
+> 其实这段话揭示了 [std::forward](https://en.cppreference.com/w/cpp/utility/forward) 的实现原理
 
 ## Lvalue references
 
@@ -147,9 +169,15 @@ int main() {
 
 ## Rvalue references (since C++11)
 
-
-
 ### Rvalue references  VS lvalue references to `const` 
+
+> NOTE: 
+>
+> 这个标题是我添加的，原文并没有，其实原文的内容主要是从"rvalue references  VS lvalue references to `const` "的角度来展开的，下面的两个也是我添加的，对原文的内容进行了一下概括
+>
+> 
+
+### [Extend the lifetimes](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) of temporary objects 
 
 Rvalue references can be used to [extend the lifetimes](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) of temporary objects (note, lvalue references to `const` can extend the lifetimes of temporary objects too, but they are not modifiable through them):
 
@@ -180,11 +208,17 @@ int main() {
 
 
 
+### Move semantic/ Rvalue reference and lvalue reference overloads
 
+> NOTE: 
+>
+> 这一点，主要是为了实现move semantic
 
-### Rvalue reference variables
+More importantly, when a function has both **rvalue reference** and **lvalue reference** [overloads](https://en.cppreference.com/w/cpp/language/overload_resolution), the rvalue reference overload binds to **rvalues** (including both **prvalues** and **xvalues**), while the lvalue reference overload binds to **lvalues**.
 
+[cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes):
 
+> The functions that accept rvalue reference parameters (including [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment operators](https://en.cppreference.com/w/cpp/language/move_operator), and regular member functions such as `std::vector::push_back`) are selected, by [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), when called with [rvalue](https://en.cppreference.com/w/cpp/language/value_category) arguments (either [prvalues](https://en.cppreference.com/w/cpp/language/value_category) such as a temporary object or [xvalues](https://en.cppreference.com/w/cpp/language/value_category) such as the one produced by `std::move`).
 
 ```c++
 #include <iostream>
@@ -207,6 +241,14 @@ void f(int&& x)
 
 int main()
 {
+	int i = 1;
+	const int ci = 2;
+	f(i);  // calls f(int&)
+	f(ci); // calls f(const int&)
+	f(3);  // calls f(int&&)
+		   // would call f(const int&) if f(int&&) overload wasn't provided
+	f(std::move(i)); // calls f(int&&)
+
 	// rvalue reference variables are lvalues when used in expressions
 	int&& x = 1;
 	f(x);            // calls f(int& x)
@@ -215,26 +257,28 @@ int main()
 // g++ --std=c++11 test.cpp
 ```
 
-> NOTE:
+> NOTE: 上述程序输入如下：
 >
-> 1、上述例子告诉我们：
->
-> "rvalue reference variables are **lvalues** when used in expressions"
->
-> 也就是说：rvalue reference variables is lvalue；所以，对于入参类型为rvalue reference的function的argument，它的argument就是典型的rvalue reference variables，也就是说function body中，argument为lvalue。比如在下面例子中，`x`是lvalue：
->
-> ```C++
-> void f(int&& x)
-> {
-> 	std::cout << "rvalue reference overload f(" << x << ")\n";
-> }
 > ```
->
-> 
->
-> 我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
+> lvalue reference overload f(1)
+> lvalue reference to const overload f(2)
+> rvalue reference overload f(3)
+> rvalue reference overload f(1)
+> lvalue reference overload f(1)
+> rvalue reference overload f(1)
+> ```
 
+This allows [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment](https://en.cppreference.com/w/cpp/language/move_assignment) operators, and other move-aware functions (e.g. [std::vector::push_back()](https://en.cppreference.com/w/cpp/container/vector/push_back)) to be automatically selected when suitable.
 
+#### Move semantic transfer ownership
+
+This makes it possible to move out of an object in scope that is no longer needed:
+
+```C++
+std::vector<int> v{1,2,3,4,5};
+std::vector<int> v2(std::move(v)); // binds an rvalue reference to v
+assert(v.empty());
+```
 
 
 
@@ -292,15 +336,13 @@ A& operator=(A&& other) {
 }
 ```
 
+---
 
+### A named rvalue reference is an lvalue-just like any other variable
 
-### Rvalue reference and lvalue reference overloads
-
-More importantly, when a function has both **rvalue reference** and **lvalue reference** [overloads](https://en.cppreference.com/w/cpp/language/overload_resolution), the rvalue reference overload binds to **rvalues** (including both **prvalues** and **xvalues**), while the lvalue reference overload binds to **lvalues**.
-
-[cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes):
-
-> The functions that accept rvalue reference parameters (including [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment operators](https://en.cppreference.com/w/cpp/language/move_operator), and regular member functions such as `std::vector::push_back`) are selected, by [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), when called with [rvalue](https://en.cppreference.com/w/cpp/language/value_category) arguments (either [prvalues](https://en.cppreference.com/w/cpp/language/value_category) such as a temporary object or [xvalues](https://en.cppreference.com/w/cpp/language/value_category) such as the one produced by `std::move`).
+> NOTE: 
+>
+> 这是我补充的
 
 ```c++
 #include <iostream>
@@ -323,14 +365,6 @@ void f(int&& x)
 
 int main()
 {
-	int i = 1;
-	const int ci = 2;
-	f(i);  // calls f(int&)
-	f(ci); // calls f(const int&)
-	f(3);  // calls f(int&&)
-		   // would call f(const int&) if f(int&&) overload wasn't provided
-	f(std::move(i)); // calls f(int&&)
-
 	// rvalue reference variables are lvalues when used in expressions
 	int&& x = 1;
 	f(x);            // calls f(int& x)
@@ -339,18 +373,24 @@ int main()
 // g++ --std=c++11 test.cpp
 ```
 
-> NOTE: 上述程序输入如下：
+> NOTE:
 >
+> 1、上述例子告诉我们：
+>
+> "rvalue reference variables are **lvalues** when used in expressions"
+>
+> 也就是说：rvalue reference variables is lvalue；所以，对于入参类型为rvalue reference的function的argument，它的argument就是典型的rvalue reference variables，也就是说function body中，argument为lvalue。比如在下面例子中，`x`是lvalue：
+>
+> ```C++
+> void f(int&& x)
+> {
+> 	std::cout << "rvalue reference overload f(" << x << ")\n";
+> }
 > ```
-> lvalue reference overload f(1)
-> lvalue reference to const overload f(2)
-> rvalue reference overload f(3)
-> rvalue reference overload f(1)
-> lvalue reference overload f(1)
-> rvalue reference overload f(1)
-> ```
-
-This allows [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment](https://en.cppreference.com/w/cpp/language/move_assignment) operators, and other move-aware functions (e.g. [std::vector::push_back()](https://en.cppreference.com/w/cpp/container/vector/push_back)) to be automatically selected when suitable.
+>
+> 
+>
+> 我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
 
 
 
@@ -463,149 +503,8 @@ See also [template argument deduction](https://en.cppreference.com/w/cpp/languag
 
 
 
-## Rvalue reference VS forwarding reference
-
-[cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes):
-
-> One exception is when the type of the function parameter is rvalue reference to type template parameter ("forwarding reference" or "universal reference"), in which case **std::forward** is used instead.
-
-上面这段话给我的感觉是：forwarding reference是一种特殊的rvalue reference。
-
-| reference类型        |                                                              |
-| -------------------- | ------------------------------------------------------------ |
-| rvalue reference     | [std::move](https://en.cppreference.com/w/cpp/utility/move)  |
-| forwarding reference | [std::forward](https://en.cppreference.com/w/cpp/utility/forward) |
-
-
-
 ## Dangling references
 
 > NOTE: 关于 [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) ，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration`章节。
 
 
-
-
-
-## Reference and value category and const
-
-在stackoverflow [What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics)的[回答](https://stackoverflow.com/a/11540204)中的总结：
-
-```c++
-            lvalue   const lvalue   rvalue   const rvalue
----------------------------------------------------------              
-X&          yes
-const X&    yes      yes            yes      yes
-X&&                                 yes
-const X&&                           yes      yes
-```
-
-> In practice, you can forget about `const X&&`. Being restricted to read from **rvalues** is not very useful.
-
-上述表格总结得非常好，基本上涵盖了reference、value category and const的所有可能的组合，下面结合具体的例子来对它进行仔细的说明:
-
-## 1) `const X&`  to lvalue
-
-来源: csdn [【C++数据类型】const 引用的几点用法](https://blog.csdn.net/hyman_c/article/details/52700094)
-
-这个例子中的`ra`就是典型的`const X&`  to lvalue，后续对`ra`的使用需要保持相同的CV，否则会编译报错，下面是一个典型的例子: 
-
-```C++
-#include<iostream>
-using std::cout;
-using std::endl;
-void print(int &a)
-{
-	cout << a << endl;
-}
-int main()
-{
-	int a = 10;
-	const int &ra = a;
-	print(ra); //传入常左值引用
-	return 0;
-}
-// g++ test.cpp
-
-```
-
-上述代码编译报错如下:
-
-```C++
-test.cpp: 在函数‘int main()’中:
-test.cpp:12:10: 错误：将类型为‘int&’的引用初始化为类型为‘const int’的表达式无效
-  print(ra); //传入常左值引用
-          ^
-test.cpp:4:6: 错误：在传递‘void print(int&)’的第 1 个实参时
- void print(int &a)
-
-```
-
-上述报错提示中的`const int`所指为`ra`，显然上述程序就违背了CV原则，修改版本如下:
-
-```C++
-#include<iostream>
-using std::cout;
-using std::endl;
-void print(const int &a)
-{
-	cout << a << endl;
-}
-int main()
-{
-	int a = 10;
-	const int &ra = a;
-	print(ra); //传入常左值引用
-	return 0;
-}
-// g++ test.cpp
-
-```
-
-## 2) `const X&` to const lvalue
-
-关于此的一个典型的例子就是在const-qualified member function中，所有的member data都是const-qualified的，如果想要reference，必须要使用`const X&` ，在`C++\Language-reference\Classes\Members\Non-static-member\Function-member`中给出了典型的例子。
-
-## 3) `const X&`  to rvalue
-
-下面是一个小例子: 
-
-
-如果一个函数的说明如下:
-```c++
-Sub(int ReSubTimes, std::chrono::seconds& ReSubInterval)
-```
-
-它的第二个入参的类型是左值引用
-
-下面两种调用方式
-
-```c++
-#include<chrono>
-void Sub(int ReSubTimes, std::chrono::seconds& ReSubInterval)
-{
-
-
-}
-
-int main(){
-std::chrono::seconds t(3);
-Sub(3,t);
-Sub(3,std::chrono::seconds(3));
-
-}
-```
-上述`Sub(3,std::chrono::seconds(3));`会导致如下编译报错
-```c++
-test.cpp: 在函数‘int main()’中:
-test.cpp:10:30: 错误：用类型为‘std::chrono::seconds {aka std::chrono::duration<long int>}’的右值初始化类型为‘std::chrono::seconds& {aka std::chrono::duration<long int>&}’的非常量引用无效
- Sub(3,std::chrono::seconds(3)); 
-                              ^
-test.cpp:2:6: 错误：在传递‘void Sub(int, std::chrono::seconds&)’的第 2 个实参时
- void Sub(int ReSubTimes, std::chrono::seconds& ReSubInterval){
-
-```
-这是因为`Sub(3,std::chrono::seconds(3));`的第二个入参是右值，无法通过左值引用进行传参。
-
-
-
-## TODO: isocpp faq [References](https://isocpp.org/wiki/faq/references) 
