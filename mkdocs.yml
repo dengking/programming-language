@@ -1280,6 +1280,10 @@ nav:
           - std-copy: C++/STL/STL/Algorithm/std-copy/std-copy.md
         - std-transform:
           - Introduction: C++/STL/STL/Algorithm/std-transform/index.md
+        - std-max_element-min_element-minmax_element:
+          - Introduction: C++/STL/STL/Algorithm/std-max_element-min_element-minmax_element/index.md
+        - Sum:
+          - Introduction: C++/STL/STL/Algorithm/Sum/index.md
       - C++20-Range-library:
         - Introduction: C++/STL/STL/C++20-Range-library/index.md
         - Primer:
