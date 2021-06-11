@@ -1946,6 +1946,11 @@ nav:
         - Introduction: C++/Idiom/OOP/TODO-Temporary-Base-Class/index.md
     - Generic-programming:
       - Introduction: C++/Idiom/Generic-programming/index.md
+      - Policy-based-design:
+        - Introduction: C++/Idiom/Generic-programming/Policy-based-design/index.md
+        - TODO-Policy based design-in-STL:
+          - Introduction: C++/Idiom/Generic-programming/Policy-based-design/TODO-Policy
+              based design-in-STL/index.md
       - CRTP:
         - Introduction: C++/Idiom/Generic-programming/CRTP/index.md
         - thegreenplace-CRTP-in-C++:
@@ -1959,21 +1964,15 @@ nav:
       - Recursive-Type-Composition:
         - Introduction: C++/Idiom/Generic-programming/Recursive-Type-Composition/index.md
       - Metafunction:
-        - Metafunction: C++/Idiom/Generic-programming/Metafunction/Metafunction.md
-      - "Barton\u2013Nackman-trick":
-        - "Barton\u2013Nackman-trick": "C++/Idiom/Generic-programming/Barton\u2013\
-            Nackman-trick/Barton\u2013Nackman-trick.md"
+        - Introduction: C++/Idiom/Generic-programming/Metafunction/index.md
       - Object-Generator:
         - Introduction: C++/Idiom/Generic-programming/Object-Generator/index.md
       - Return-Type-Resolver:
         - Introduction: C++/Idiom/Generic-programming/Return-Type-Resolver/index.md
       - Coercion-by-Member-Template:
         - Introduction: C++/Idiom/Generic-programming/Coercion-by-Member-Template/index.md
-      - Policy-based-design:
-        - Introduction: C++/Idiom/Generic-programming/Policy-based-design/index.md
-        - TODO-Policy based design-in-STL:
-          - Introduction: C++/Idiom/Generic-programming/Policy-based-design/TODO-Policy
-              based design-in-STL/index.md
+      - "TODO-Barton\u2013Nackman-trick":
+        - Introduction: "C++/Idiom/Generic-programming/TODO-Barton\u2013Nackman-trick/index.md"
     - Object-based-resource-management:
       - Introduction: C++/Idiom/Object-based-resource-management/index.md
       - Copyable-and-movable:
