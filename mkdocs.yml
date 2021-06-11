@@ -429,6 +429,8 @@ nav:
         - Introduction: C++/What-is-new-in-C++/C++17/C++17-Parallel-algorithm/index.md
         - cppreference-ExecutionPolicy:
           - Introduction: C++/What-is-new-in-C++/C++17/C++17-Parallel-algorithm/cppreference-ExecutionPolicy/index.md
+      - C++17-inline-varaible:
+        - Introduction: C++/What-is-new-in-C++/C++17/C++17-inline-varaible/index.md
     - C++20:
       - Introduction: C++/What-is-new-in-C++/C++20/index.md
       - span:
@@ -1737,6 +1739,8 @@ nav:
         - Introduction: C++/Library/Folly/io-async/index.md
     - Serialization-and-deserialization:
       - Introduction: C++/Library/Serialization-and-deserialization/index.md
+    - Command-line:
+      - Introduction: C++/Library/Command-line/index.md
   - Programming-paradigm:
     - Introduction: C++/Programming-paradigm/index.md
     - OOP:
@@ -1790,28 +1794,28 @@ nav:
         - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/index.md
         - Custom-static-polymorphism:
           - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/index.md
+          - Trait:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/index.md
+            - Example: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Example.md
+            - Type-Trait:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Type-Trait/index.md
+              - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Type-Trait/Type-traits-vs-concepts.md
+            - Function-trait:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Function-trait/index.md
           - SFINAE-based:
             - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/index.md
             - SFINAE-based-custom-polymorphism-precondition:
               - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/SFINAE-based-custom-polymorphism-precondition/index.md
-            - Trait:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/index.md
-              - Example: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Example.md
-              - Type-Trait:
-                - Type-Traits: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Type-Trait/Type-Traits.md
-                - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Type-Trait/Type-traits-vs-concepts.md
-              - Function-trait:
-                - Function_trait: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Trait/Function-trait/Function_trait.md
             - Helper-functions:
               - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/index.md
-              - enable-if:
-                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/enable-if/index.md
+              - std-enable_if:
+                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/std-enable_if/index.md
                 - boost-enable_if:
-                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/enable-if/boost-enable_if/index.md
+                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/std-enable_if/boost-enable_if/index.md
                 - thegreenplace-SFINAE-and-enable_if:
-                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/enable-if/thegreenplace-SFINAE-and-enable_if/index.md
-              - void_t:
-                - void_t: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/void_t/index.md
+                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/std-enable_if/thegreenplace-SFINAE-and-enable_if/index.md
+              - C++17-std-void_t:
+                - void_t: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/C++17-std-void_t/index.md
             - Class-template-SFINAE:
               - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Class-template-SFINAE/index.md
             - Function-template-SFINAE:
@@ -1836,15 +1840,15 @@ nav:
         - Introduction: C++/Programming-paradigm/AOP/Execute-Around-Pointer-idiom/index.md
       - AspectC++:
         - Introduction: C++/Programming-paradigm/AOP/AspectC++/index.md
-      - "TODO-vitiy-C++11-functional-decomposition\u2013easy-way-to-do-AOP":
-        - Introduction: "C++/Programming-paradigm/AOP/TODO-vitiy-C++11-functional-decomposition\u2013\
-            easy-way-to-do-AOP/index.md"
       - accu-AOP+CRTP:
         - Introduction: C++/Programming-paradigm/AOP/accu-AOP+CRTP/index.md
         - cpp11_template_alias:
           - Introduction: C++/Programming-paradigm/AOP/accu-AOP+CRTP/cpp11_template_alias/index.md
       - my-library-Timeit:
         - Introduction: C++/Programming-paradigm/AOP/my-library-Timeit/index.md
+      - "TODO-vitiy-C++11-functional-decomposition\u2013easy-way-to-do-AOP":
+        - Introduction: "C++/Programming-paradigm/AOP/TODO-vitiy-C++11-functional-decomposition\u2013\
+            easy-way-to-do-AOP/index.md"
     - FP:
       - Introduction: C++/Programming-paradigm/FP/index.md
     - Polymorphism:
@@ -2255,12 +2259,12 @@ nav:
         - Pointers:
           - Introduction: C++/CppCoreGuidelines/GSL-Guidelines-support-library/Microsoft-GSL/Pointers/index.md
   - Guide:
-    - Command-line:
-      - Introduction: C++/Guide/Command-line/index.md
     - Comment:
       - Comment: C++/Guide/Comment/Comment.md
       - Doxygen:
         - Introduction: C++/Guide/Comment/Doxygen/index.md
+    - Style-guide:
+      - Introduction: C++/Guide/Style-guide/index.md
     - Temporary:
       - Introduction: C++/Guide/Temporary/index.md
     - Order:
@@ -2397,19 +2401,17 @@ nav:
     - Wrapper:
       - Introduction: C++/Guide/Wrapper/index.md
       - Wrapper-function: C++/Guide/Wrapper/Wrapper-function.md
-    - Style-guide:
-      - Introduction: C++/Guide/Style-guide/index.md
-    - Compile-time-and-run-time:
-      - Introduction: C++/Guide/Compile-time-and-run-time/index.md
+    - Compile-time&&run-time:
+      - Introduction: C++/Guide/Compile-time&&run-time/index.md
       - Compile-time-computation:
-        - Introduction: C++/Guide/Compile-time-and-run-time/Compile-time-computation/index.md
+        - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/index.md
         - Draft-and-TODO:
-          - "Compile-time-computation-\u53D1\u5C55\u6982\u8FF0": "C++/Guide/Compile-time-and-run-time/Compile-time-computation/Draft-and-TODO/Compile-time-computation-\u53D1\
+          - "Compile-time-computation-\u53D1\u5C55\u6982\u8FF0": "C++/Guide/Compile-time&&run-time/Compile-time-computation/Draft-and-TODO/Compile-time-computation-\u53D1\
               \u5C55\u6982\u8FF0.md"
           - C++20-constexpr-vector-string:
-            - Introduction: C++/Guide/Compile-time-and-run-time/Compile-time-computation/Draft-and-TODO/C++20-constexpr-vector-string/index.md
+            - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/Draft-and-TODO/C++20-constexpr-vector-string/index.md
             - modernescpp-constexpr-std-vector-and-std-string-in-C++20:
-              - Introduction: C++/Guide/Compile-time-and-run-time/Compile-time-computation/Draft-and-TODO/C++20-constexpr-vector-string/modernescpp-constexpr-std-vector-and-std-string-in-C++20/index.md
+              - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/Draft-and-TODO/C++20-constexpr-vector-string/modernescpp-constexpr-std-vector-and-std-string-in-C++20/index.md
     - Specifiers:
       - Introduction: C++/Guide/Specifiers/index.md
       - Specifiers: C++/Guide/Specifiers/Specifiers.md

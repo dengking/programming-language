@@ -2,6 +2,9 @@ nav:
 
     # 如何进行注释，如何根据注释生成文档
     - Comment: Comment
+    # 代码风格
+    - Style-guide: Style-guide    
+        
     - Temporary: Temporary
     - Order: Order
     - Header-only-library: Header-only-library
@@ -10,7 +13,6 @@ nav:
     - Performance-optimization: Performance-optimization
     
     - Memory-model&&atomic-library: Memory-model&&atomic-library
-    
 
     
     - Type-相关: Type-相关
@@ -18,9 +20,7 @@ nav:
     - Guard: Guard
     - Wrapper: Wrapper
     
-    # 代码风格
-    - Style-guide: Style-guide    
-    
+
     # 
     - Compile-time&&run-time: Compile-time&&run-time
     # C++中的修饰符
