@@ -394,3 +394,4 @@ Thank you to Rani Sharoni, Terje Slettebø, Stefan de Bruijn and Paul Grenyer fo
 
 
 [Vandevoorde-] David Vandevoorde and Nicolai M. Josuttis, *C++ templates: The Complete Guide* , Addison Wesley 2002
+

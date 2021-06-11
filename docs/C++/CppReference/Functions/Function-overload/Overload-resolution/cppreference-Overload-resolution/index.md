@@ -1,8 +1,5 @@
-# Overload resolution
 
-
-
-## cppreference [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
+# cppreference [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
 
 In order to compile a function call, the compiler must first perform [name lookup](https://en.cppreference.com/w/cpp/language/lookup), which, for functions, may involve [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl), and for function templates may be followed by [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction). If these steps produce more than one *candidate function*, then *overload resolution* is performed to select the function that will actually be called.
 
@@ -19,13 +16,13 @@ If a function cannot be selected by overload resolution (e.g. it is a [templated
 > - SFINA
 > - constrain
 
-### Details
+## Details
 
 > NOTE: 
 >
 > *implicit object parameter*，参见 cppreference [this pointer](https://en.cppreference.com/w/cpp/language/this)
 
-#### Member function
+### Member function
 
 > NOTE: 本节的小标题是我添加上去的，原文并没有，我添加的目的是对内容进行梳理总结，原文原文的中的下面这些段落都是对member function的描述，其中重点描述的是implicit object parameter和implied object argument。
 
@@ -90,7 +87,7 @@ int main()
 > void B::f(int)
 > ```
 
-#### Function template
+### Function template
 
 If any candidate is a **function template**, its specializations are generated using [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction), and such specializations are treated just like **non-template functions** except where specified otherwise in the **tie-breaker rules**. If a name refers to one or more function templates and also to a set of overloaded non-template functions, those functions and the specializations generated from the templates are all candidates.
 
@@ -106,33 +103,33 @@ If any candidate is a **function template**, its specializations are generated u
 
 
 
-### Candidate functions
+## Candidate functions
 
 The set of candidate functions and the list of arguments is prepared in a unique way for each of the **contexts** where overload resolution is used:
 
-#### Call to a named function
+### Call to a named function
 
-#### Call to a class object
+### Call to a class object
 
-#### Call to an overloaded operator
+### Call to an overloaded operator
 
-#### Initialization by constructor
+### Initialization by constructor
 
-#### Copy-initialization by conversion
+### Copy-initialization by conversion
 
-#### Non-class initialization by conversion
+### Non-class initialization by conversion
 
-#### Reference initialization by conversion
+### Reference initialization by conversion
 
-#### List-initialization
+### List-initialization
 
-### Viable functions
+## Viable functions
 
-### Best viable function
+## Best viable function
 
-### Ranking of implicit conversion sequences
+## Ranking of implicit conversion sequences
 
-#### Rank rule of standard conversion sequence
+### Rank rule of standard conversion sequence
 
 Each [type of standard conversion sequence](https://en.cppreference.com/w/cpp/language/implicit_conversion) is assigned one of three ranks:
 
@@ -148,7 +145,7 @@ The rank of the standard conversion sequence is the worst of the ranks of the st
 
 > NOTE: 前面介绍了standard conversion sequence的rank rule，下面开始介绍implicit conversion sequence的rank rule
 
-#### Rank rule of implicit conversion sequences
+### Rank rule of implicit conversion sequences
 
 | rule                                                         | 注解                     |
 | ------------------------------------------------------------ | ------------------------ |
@@ -276,11 +273,11 @@ int main()
 >
 > 
 
-### Implicit conversion sequence in list-initialization
+## Implicit conversion sequence in list-initialization
 
 
 
-## Overload resolution and template function
+# Overload resolution and template function
 
 1、需要梳理清楚overload resolution、template function之间的关系；substitution和overload resolution的发生顺序。
 
@@ -290,25 +287,25 @@ int main()
 
 
 
-## 控制overload resolution
+# 控制overload resolution
 
 [More C++ Idioms/Tag Dispatching](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Tag_Dispatching)中的preference ordering就是一个典型的例子。
 
 
 
-## Name mangling
+# Name mangling
 
 Name mangling发生于哪个阶段？
 
 
 
-### wikipedia [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
+## wikipedia [Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
 
 
 
 
 
-## TO DO
+# TO DO
 
 
 

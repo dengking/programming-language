@@ -2,7 +2,7 @@
 
 Function as first class citizen是一个非常有用的特性，但是C++并不直接支持这个特性，本章介绍C++中如何实现类似于function as first class citizen效果。
 
-## 两种实现方式
+## 实现方式
 
 在 stackoverflow [What is ScopeGuard in C++?](https://stackoverflow.com/questions/31365013/what-is-scopeguard-in-c) # [A](https://stackoverflow.com/a/31365171) 中，提出了两种实现思路:
 

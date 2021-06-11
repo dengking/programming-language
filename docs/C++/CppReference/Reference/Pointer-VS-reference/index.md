@@ -32,7 +32,9 @@ null pointer表示的是point to nothing，在C family language中，这是存�
 
 
 
-## [What are the differences between a pointer variable and a reference variable in C++?](https://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in)`#`[A](https://stackoverflow.com/a/57492)
+## stackoverflow [What are the differences between a pointer variable and a reference variable in C++?](https://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in)
+
+### [A](https://stackoverflow.com/a/57492)
 
 1) A pointer can be re-assigned:
 
@@ -110,7 +112,7 @@ This makes `const&` safer for use in argument lists and so forth.
 
 
 
-## [What are the differences between a pointer variable and a reference variable in C++?](https://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in)`#`[A](https://stackoverflow.com/a/596750)
+### [A](https://stackoverflow.com/a/596750)
 
 > NOTE: 这篇文章的总结是非常棒的，优先阅读[这个回答](https://stackoverflow.com/a/596750)，因为它是概括性的，然后阅读[这个回答](https://stackoverflow.com/a/57492)，因为它枚举了非常多的具体情况。
 
