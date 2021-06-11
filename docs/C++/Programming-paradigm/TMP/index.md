@@ -25,7 +25,6 @@ Templates are different from *macros*. A macro, which is also a compile-time lan
 **Template metaprograms** have no [mutable variables](https://en.wikipedia.org/wiki/Immutable_object)— that is, no variable can change value once it has been initialized, therefore **template metaprogramming** can be seen as a form of [functional programming](https://en.wikipedia.org/wiki/Functional_programming). In fact many template implementations implement **flow control** only through [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)), as seen in the example below.
 
 > NOTE: 在`./TMP-and-FP`中，会对template metaprogram和functional programming之间的关联进行分析。
->
 
 
 

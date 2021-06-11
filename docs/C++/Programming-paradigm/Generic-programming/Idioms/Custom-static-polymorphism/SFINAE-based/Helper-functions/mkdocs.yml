@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - enable-if: enable-if
-    - void_t: void_t
+    - std-enable_if: std-enable_if
+    - C++17-std-void_t: C++17-std-void_t

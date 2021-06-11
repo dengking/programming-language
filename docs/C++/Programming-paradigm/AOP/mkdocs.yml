@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - Execute-Around-Pointer-idiom: Execute-Around-Pointer-idiom
     - AspectC++: AspectC++
-    - TODO-vitiy-C++11-functional-decomposition–easy-way-to-do-AOP: TODO-vitiy-C++11-functional-decomposition–easy-way-to-do-AOP
+
     - accu-AOP+CRTP: accu-AOP+CRTP
     - my-library-Timeit: my-library-Timeit
+    - TODO-vitiy-C++11-functional-decomposition–easy-way-to-do-AOP: TODO-vitiy-C++11-functional-decomposition–easy-way-to-do-AOP    

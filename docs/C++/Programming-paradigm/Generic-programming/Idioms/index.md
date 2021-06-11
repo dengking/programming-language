@@ -4,12 +4,16 @@
 
 随着C++的发展，解决这些问题的idiom/technique也在不断发展，所以本章会以发展的视角总结解决这些问题的idiom/technique。
 
+1、trait
 
+2、sfinae
 
-- trait
-- sfinae
-- `enable_if`
-- tag dispatch
-- `void_t` C++17
-- concept C++20
-- constexp if C++17
+3、`enable_if`
+
+4、tag dispatch
+
+5、`void_t` C++17
+
+6、concept C++20
+
+7、constexp if C++17

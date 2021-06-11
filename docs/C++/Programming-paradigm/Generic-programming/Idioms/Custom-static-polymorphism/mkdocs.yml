@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-
+    - Trait: Trait
     - SFINAE-based: SFINAE-based
     - Tag-Dispatching: Tag-Dispatching    
     - C++17-Constexpr-if: C++17-Constexpr-if

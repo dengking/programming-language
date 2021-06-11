@@ -38,5 +38,5 @@
 
 ### Custom virtual table
 
-参见 `TODO-custom-virtual-table` 章节。
+参见 `Custom-virtual-table` 章节。
 
