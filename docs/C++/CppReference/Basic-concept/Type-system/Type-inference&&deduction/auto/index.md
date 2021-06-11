@@ -9,6 +9,10 @@
 |             | [function declaration](https://en.cppreference.com/w/cpp/language/function) with trailing return type |      |
 | since C++17 | [structured binding declaration](https://en.cppreference.com/w/cpp/language/structured_binding) |      |
 
+## microsoft [`auto` (C++)](https://docs.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-160)
+
+
+
 
 
 ## `auto` 的 application
@@ -18,12 +22,6 @@
 2、auto + trailing return type
 
 3、type inference
-
-## cppreference [Placeholder type specifiers (since C++11)](https://en.cppreference.com/w/cpp/language/auto)
-
-
-
-
 
 
 

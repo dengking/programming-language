@@ -562,15 +562,17 @@ nav:
               - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Type-conversion-and-temporary/index.md
           - Print-output-type-info:
             - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Print-output-type-info/index.md
-        - Type-inference-and-deduction:
-          - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference-and-deduction/index.md
+        - Type-inference&&deduction:
+          - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/index.md
           - decltype:
-            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference-and-deduction/decltype/index.md
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/decltype/index.md
             - microsoft-decltype(C++):
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference-and-deduction/decltype/microsoft-decltype(C++)/index.md
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/decltype/microsoft-decltype(C++)/index.md
           - auto:
-            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference-and-deduction/auto/index.md
-          - Type-deduction: C++/CppReference/Basic-concept/Type-system/Type-inference-and-deduction/Type-deduction.md
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/auto/index.md
+            - cppreference-Placeholder-type-specifiers(since-C++11):
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/auto/cppreference-Placeholder-type-specifiers(since-C++11)/index.md
+          - Type-deduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/Type-deduction.md
         - size_t-and-ptrdiff_t:
           - Introduction: C++/CppReference/Basic-concept/Type-system/size_t-and-ptrdiff_t/index.md
           - pvs-studio-About-size_t-and-ptrdiff_t:
