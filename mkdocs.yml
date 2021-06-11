@@ -1790,46 +1790,44 @@ nav:
           - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/Concepts-library-(C++20)/index.md
           - Regular-type:
             - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/Concepts-library-(C++20)/Regular-type/index.md
-      - Idioms:
-        - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/index.md
-        - Custom-static-polymorphism:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/index.md
-          - Trait:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/index.md
-            - Example: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Example.md
-            - Type-Trait:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Type-Trait/index.md
-              - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Type-Trait/Type-traits-vs-concepts.md
-            - Function-trait:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Trait/Function-trait/index.md
-          - SFINAE-based:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/index.md
-            - SFINAE-based-custom-polymorphism-precondition:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/SFINAE-based-custom-polymorphism-precondition/index.md
-            - Helper-functions:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/index.md
-              - std-enable_if:
-                - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/std-enable_if/index.md
-                - boost-enable_if:
-                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/std-enable_if/boost-enable_if/index.md
-                - thegreenplace-SFINAE-and-enable_if:
-                  - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/std-enable_if/thegreenplace-SFINAE-and-enable_if/index.md
-              - C++17-std-void_t:
-                - void_t: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Helper-functions/C++17-std-void_t/index.md
-            - Class-template-SFINAE:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Class-template-SFINAE/index.md
-            - Function-template-SFINAE:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Function-template-SFINAE/index.md
-            - Expression-SFINAE:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/SFINAE-based/Expression-SFINAE/index.md
-          - Tag-Dispatching:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Tag-Dispatching/index.md
-          - C++17-Constexpr-if:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/C++17-Constexpr-if/index.md
-            - TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/C++17-Constexpr-if/TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17/index.md
-          - Dispatch-based-on-constant:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Idioms/Custom-static-polymorphism/Dispatch-based-on-constant/index.md
+      - Custom-static-polymorphism-idiom:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/index.md
+        - Trait:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/index.md
+          - Example: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Example.md
+          - Type-Trait:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Type-Trait/index.md
+            - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Type-Trait/Type-traits-vs-concepts.md
+          - Function-trait:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Function-trait/index.md
+        - SFINAE-based:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/index.md
+          - SFINAE-based-custom-polymorphism-precondition:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/SFINAE-based-custom-polymorphism-precondition/index.md
+          - Helper-functions:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/index.md
+            - std-enable_if:
+              - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/std-enable_if/index.md
+              - boost-enable_if:
+                - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/std-enable_if/boost-enable_if/index.md
+              - thegreenplace-SFINAE-and-enable_if:
+                - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/std-enable_if/thegreenplace-SFINAE-and-enable_if/index.md
+            - C++17-std-void_t:
+              - void_t: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/C++17-std-void_t/index.md
+          - Class-template-SFINAE:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Class-template-SFINAE/index.md
+          - Function-template-SFINAE:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Function-template-SFINAE/index.md
+          - Expression-SFINAE:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Expression-SFINAE/index.md
+        - Tag-Dispatching:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Tag-Dispatching/index.md
+        - C++17-Constexpr-if:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/C++17-Constexpr-if/index.md
+          - TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17:
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/C++17-Constexpr-if/TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17/index.md
+        - Dispatch-based-on-constant:
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Dispatch-based-on-constant/index.md
     - TMP:
       - Introduction: C++/Programming-paradigm/TMP/index.md
       - TMP-and-FP:

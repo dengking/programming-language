@@ -1,22 +1,20 @@
 nav:
     - Introduction: index.md
-
+    
+    - Policy-based-design: Policy-based-design
 #################### generic programming都是和template相关的 ####################    
     - CRTP: CRTP
     # 下面两者密切相关
     - Expression-Template: Expression-Template
+    
     - Recursive-Type-Composition: Recursive-Type-Composition
-
     # 
     - Metafunction: Metafunction
     # 
-    - Barton–Nackman-trick: Barton–Nackman-trick
-    
-    # 
     - Object-Generator: Object-Generator
-
     # Deduce
     - Return-Type-Resolver: Return-Type-Resolver
 
     - Coercion-by-Member-Template: Coercion-by-Member-Template
-    - Policy-based-design: Policy-based-design
+    # 
+    - TODO-Barton–Nackman-trick: TODO-Barton–Nackman-trick    
