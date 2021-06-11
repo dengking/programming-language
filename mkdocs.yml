@@ -177,7 +177,7 @@ nav:
           - Introduction: Theory/Programming-paradigm/OOP/Assemble/TODO-assemble-as-chain/index.md
         - TODO-Abstraction-and-relation: Theory/Programming-paradigm/OOP/Assemble/TODO-Abstraction-and-relation.md
       - Glossary:
-        - Glossarys: Theory/Programming-paradigm/OOP/Glossary/Glossarys.md
+        - Introduction: Theory/Programming-paradigm/OOP/Glossary/index.md
         - Method: Theory/Programming-paradigm/OOP/Glossary/Method.md
         - TODO-Trait: Theory/Programming-paradigm/OOP/Glossary/TODO-Trait.md
         - Inheritance: Theory/Programming-paradigm/OOP/Glossary/Inheritance.md
@@ -702,14 +702,14 @@ nav:
         - Introduction: C++/CppReference/Functions/Function-call/index.md
       - Function-termination:
         - Introduction: C++/CppReference/Functions/Function-termination/index.md
-        - Function-return:
-          - Introduction: C++/CppReference/Functions/Function-termination/Function-return/index.md
+        - Function-return-type:
+          - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/index.md
           - C++11-Trailing-return-type:
-            - Introduction: C++/CppReference/Functions/Function-termination/Function-return/C++11-Trailing-return-type/index.md
+            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-Trailing-return-type/index.md
           - C++11-std-result_of:
-            - Introduction: C++/CppReference/Functions/Function-termination/Function-return/C++11-std-result_of/index.md
+            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-std-result_of/index.md
           - C++14-Return-type-deduction:
-            - Introduction: C++/CppReference/Functions/Function-termination/Function-return/C++14-Return-type-deduction/index.md
+            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/index.md
       - Function-overload:
         - Introduction: C++/CppReference/Functions/Function-overload/index.md
         - Operator-overload:
@@ -718,9 +718,12 @@ nav:
             - Introduction: C++/CppReference/Functions/Function-overload/Operator-overload/Examples/index.md
         - Overload-resolution:
           - Introduction: C++/CppReference/Functions/Function-overload/Overload-resolution/index.md
-          - accu-Overload-Resolution: C++/CppReference/Functions/Function-overload/Overload-resolution/accu-Overload-Resolution.md
-          - Overload-resolution: C++/CppReference/Functions/Function-overload/Overload-resolution/Overload-resolution.md
-          - Ambiguous-overload-compile-error: C++/CppReference/Functions/Function-overload/Overload-resolution/Ambiguous-overload-compile-error.md
+          - accu-Overload-Resolution:
+            - Introduction: C++/CppReference/Functions/Function-overload/Overload-resolution/accu-Overload-Resolution/index.md
+          - cppreference-Overload-resolution:
+            - Introduction: C++/CppReference/Functions/Function-overload/Overload-resolution/cppreference-Overload-resolution/index.md
+          - Compile-error-Ambiguous-overload:
+            - Introduction: C++/CppReference/Functions/Function-overload/Overload-resolution/Compile-error-Ambiguous-overload/index.md
         - Overload-in-OOP:
           - Introduction: C++/CppReference/Functions/Function-overload/Overload-in-OOP/index.md
         - Overload-and-return-type:
@@ -732,32 +735,39 @@ nav:
         - Member-function-as-first-class-function:
           - Introduction: C++/CppReference/Functions/First-class-function/Member-function-as-first-class-function/index.md
       - Generic-programming:
-        - Introduction: C++/CppReference/Functions/Generic-programming/index.md
+        - Introduction: C++/CppReference/Functions/GP/index.md
         - Callable-concept:
-          - Introduction: C++/CppReference/Functions/Generic-programming/Callable-concept/index.md
+          - Introduction: C++/CppReference/Functions/GP/Callable-concept/index.md
           - Interface:
-            - Introduction: C++/CppReference/Functions/Generic-programming/Callable-concept/Interface/index.md
+            - Introduction: C++/CppReference/Functions/GP/Callable-concept/Interface/index.md
             - C++17-std-invoke:
-              - Introduction: C++/CppReference/Functions/Generic-programming/Callable-concept/Interface/C++17-std-invoke/index.md
+              - Introduction: C++/CppReference/Functions/GP/Callable-concept/Interface/C++17-std-invoke/index.md
             - C++17-std-apply:
-              - Introduction: C++/CppReference/Functions/Generic-programming/Callable-concept/Interface/C++17-std-apply/index.md
+              - Introduction: C++/CppReference/Functions/GP/Callable-concept/Interface/C++17-std-apply/index.md
         - Function-as-template-parameter:
-          - Introduction: C++/CppReference/Functions/Generic-programming/Function-as-template-parameter/index.md
-        - Perfect-forwarding-parameter:
-          - Introduction: C++/CppReference/Functions/Generic-programming/Perfect-forwarding-parameter/index.md
+          - Introduction: C++/CppReference/Functions/GP/Function-as-template-parameter/index.md
+        - Forwarding-reference&&perfect-forwarding:
+          - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/index.md
+          - C++11-forwarding-reference:
+            - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/C++11-forwarding-reference/index.md
           - thegreenplace-Perfect-forwarding-and-universal-references:
-            - Introduction: C++/CppReference/Functions/Generic-programming/Perfect-forwarding-parameter/thegreenplace-Perfect-forwarding-and-universal-references/index.md
-          - TODO-paper-The-Forwarding-Problem-Arguments:
-            - Introduction: C++/CppReference/Functions/Generic-programming/Perfect-forwarding-parameter/TODO-paper-The-Forwarding-Problem-Arguments/index.md
-          - std-forward: C++/CppReference/Functions/Generic-programming/Perfect-forwarding-parameter/std-forward.md
+            - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/thegreenplace-Perfect-forwarding-and-universal-references/index.md
+          - Perfect-forwarding-parameter:
+            - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/Perfect-forwarding-parameter/index.md
+            - C++11-std-forward:
+              - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/Perfect-forwarding-parameter/C++11-std-forward/index.md
+            - TODO-paper-The-Forwarding-Problem-Arguments:
+              - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/Perfect-forwarding-parameter/TODO-paper-The-Forwarding-Problem-Arguments/index.md
+          - auto&&:
+            - Introduction: C++/CppReference/Functions/GP/Forwarding-reference&&perfect-forwarding/auto&&/index.md
         - Generic-forwarding-function:
-          - Introduction: C++/CppReference/Functions/Generic-programming/Generic-forwarding-function/index.md
+          - Introduction: C++/CppReference/Functions/GP/Generic-forwarding-function/index.md
           - Examples:
-            - Wrapper: C++/CppReference/Functions/Generic-programming/Generic-forwarding-function/Examples/index.md
+            - Wrapper: C++/CppReference/Functions/GP/Generic-forwarding-function/Examples/index.md
         - Variadic-arguments-function:
-          - Variadic-function: C++/CppReference/Functions/Generic-programming/Variadic-arguments-function/index.md
+          - Variadic-function: C++/CppReference/Functions/GP/Variadic-arguments-function/index.md
         - Template-function-signature:
-          - Introduction: C++/CppReference/Functions/Generic-programming/Template-function-signature/index.md
+          - Introduction: C++/CppReference/Functions/GP/Template-function-signature/index.md
       - Function-termination: Function-termination
       - Functional-programming:
         - Higher-order-function: C++/CppReference/Functions/Functional-programming/Higher-order-function.md
@@ -765,7 +775,8 @@ nav:
       - Introduction: C++/CppReference/Reference/index.md
       - cppreference-Reference:
         - Introduction: C++/CppReference/Reference/cppreference-Reference/index.md
-      - Pointer-VS-reference: C++/CppReference/Reference/Pointer-VS-reference.md
+      - Pointer-VS-reference:
+        - Introduction: C++/CppReference/Reference/Pointer-VS-reference/index.md
       - TODO-C++11-std-reference_wrapper:
         - Introduction: C++/CppReference/Reference/TODO-C++11-std-reference_wrapper/index.md
       - std-move-and-std-forward:
@@ -1338,8 +1349,10 @@ nav:
           - Introduction: C++/STL/String/String-operation/TODO-Comma-join/index.md
     - IO-library:
       - Introduction: C++/STL/IO-library/index.md
-      - Buffer: C++/STL/IO-library/Buffer.md
-      - Stream-operation: C++/STL/IO-library/Stream-operation.md
+      - Buffer:
+        - Introduction: C++/STL/IO-library/Buffer/index.md
+      - Stream-operation:
+        - Introduction: C++/STL/IO-library/Stream-operation/index.md
       - Predefined-standard-stream-objects:
         - cin: C++/STL/IO-library/Predefined-standard-stream-objects/cin.md
       - String-IO:
@@ -1547,7 +1560,23 @@ nav:
       - Boost-Concept-Check-Library:
         - Introduction: C++/Library/Boost/Boost-Concept-Check-Library/index.md
       - Boost-Graph-Library:
-        - Boost-Graph-Library: C++/Library/Boost/Boost-Graph-Library/Boost-Graph-Library.md
+        - Introduction: C++/Library/Boost/Boost-Graph-Library/index.md
+        - A-Quick-Tour-of-the-Boost-Graph-Library: C++/Library/Boost/Boost-Graph-Library/A-Quick-Tour-of-the-Boost-Graph-Library.md
+        - Boost-Graph-Library-Tutorial:
+          - Using-adjacency_list: C++/Library/Boost/Boost-Graph-Library/Boost-Graph-Library-Tutorial/Using-adjacency_list.md
+        - The-Boost-Graph-Interface:
+          - The-Boost-Graph-Interface: C++/Library/Boost/Boost-Graph-Library/The-Boost-Graph-Interface/The-Boost-Graph-Interface.md
+        - Visitor-Concepts:
+          - Visitor-Concepts: C++/Library/Boost/Boost-Graph-Library/Visitor-Concepts/Visitor-Concepts.md
+        - Algorithms:
+          - Named-parameters: C++/Library/Boost/Boost-Graph-Library/Algorithms/Named-parameters.md
+          - Core-Searches:
+            - breadth_first_search: C++/Library/Boost/Boost-Graph-Library/Algorithms/Core-Searches/breadth_first_search.md
+            - depth_first_search: C++/Library/Boost/Boost-Graph-Library/Algorithms/Core-Searches/depth_first_search.md
+        - Example:
+          - bfs-example: C++/Library/Boost/Boost-Graph-Library/Example/bfs-example.md
+        - Implementation:
+          - Graph-representation: C++/Library/Boost/Boost-Graph-Library/Implementation/Graph-representation.md
       - Boost-Property-Tree:
         - Property-Tree: C++/Library/Boost/Boost-Property-Tree/Property-Tree.md
       - Boost-Circular-Buffer:
@@ -1686,6 +1715,8 @@ nav:
         - Introduction: C++/Library/macmade/Library-PIMPL/index.md
     - Folly:
       - Introduction: C++/Library/Folly/index.md
+      - io-async:
+        - Introduction: C++/Library/Folly/io-async/index.md
     - Serialization-and-deserialization:
       - Introduction: C++/Library/Serialization-and-deserialization/index.md
   - Programming-paradigm:

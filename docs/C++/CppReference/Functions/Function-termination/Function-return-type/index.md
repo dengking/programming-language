@@ -1,6 +1,4 @@
-# Function return
-
-## Function return type
+# Function return type
 
 对于function return type:
 
@@ -22,7 +20,7 @@
 
 
 
-### Late-specified return type 
+## Late-specified return type 
 
 > NOTE:
 >

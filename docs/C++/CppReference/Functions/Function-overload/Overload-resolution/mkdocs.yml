@@ -2,5 +2,5 @@ nav:
     - Introduction: index.md
     - accu-Overload-Resolution: accu-Overload-Resolution
     - cppreference-Overload-resolution: cppreference-Overload-resolution
-    - Ambiguous-overload-compile-error: Ambiguous-overload-compile-error
+    - Compile-error-Ambiguous-overload: Compile-error-Ambiguous-overload
 
