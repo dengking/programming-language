@@ -1,5 +1,3 @@
-
-
 # thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)
 
 ## The perfect forwarding problem
@@ -29,7 +27,7 @@ This will obviously not work if `func` accepts its parameters by **reference**, 
 
 OK, then, we can make `wrapper` accept its parameters by reference. This should not interfere with `func`'s taking parameters by value, because the call to `func` within `wrapper` will create the required copy.
 
-```
+```c++
 template <typename T1, typename T2>
 void wrapper(T1& e1, T2& e2) {
     func(e1, e2);

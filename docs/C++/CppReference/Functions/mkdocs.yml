@@ -10,7 +10,7 @@ nav:
     - Function-overload: Function-overload
     - Lambda-expression: Lambda-expression
     - First-class-function: First-class-function
-    - Generic-programming: Generic-programming
+    - Generic-programming: GP
     - Function-termination: Function-termination
     - Functional-programming: Functional-programming
     

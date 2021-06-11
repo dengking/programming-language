@@ -1,6 +1,26 @@
 # 关于本章
 
-本章讨论generic programming中的function相关的内容，重要包括如下topic:
+本章讨论generic programming中的function相关的内容，
+
+## 大的思路
+
+对于function generic programming，涉及的内容非常多，因此我们需要建立起一个完整的、清晰的思路，下面是我们的梳理: 
+
+维度一: input、output
+
+对于一个function，我们需要关注的是:
+
+input: 入参
+
+output: 出参、返回值
+
+维度二: type、value category(涉及perfect forwarding、pass-by、return-by)
+
+在generic programming中，type、value category是和template parameter息息相关的重要的两个topic。
+
+将上述两个维度进行组合就构成了function generic programming的大部分内容。
+
+
 
 ## Function template
 

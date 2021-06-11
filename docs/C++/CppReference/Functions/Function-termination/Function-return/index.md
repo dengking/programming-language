@@ -12,7 +12,9 @@
 
 2、依赖于compiler type inference
 
-
+> NOTE: 
+>
+> 关于此，参见 microsoft [decltype (C++)](https://docs.microsoft.com/en-us/cpp/cpp/decltype-cpp?view=vs-2019)
 
 ## 发展概述
 
