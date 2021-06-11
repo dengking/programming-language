@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - Callable-concept: Callable-concept
     - Function-as-template-parameter: Function-as-template-parameter
+    - Forwarding-reference&&perfect-forwarding: Forwarding-reference&&perfect-forwarding
     - Perfect-forwarding-parameter: Perfect-forwarding-parameter
     - Generic-forwarding-function: Generic-forwarding-function
     # 变参函数

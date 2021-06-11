@@ -6,6 +6,8 @@ forwarding reference是function generic programming的基础:
 
 2、`template &&`解决的函数的参数
 
+后面会对它们进行专门的介绍。
+
 ## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) # Forwarding references (since C++11)
 
 
