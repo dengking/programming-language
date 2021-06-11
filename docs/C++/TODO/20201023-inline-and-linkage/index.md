@@ -1,8 +1,6 @@
-
-
 # inline and linkage
 
-
+结论是 inline 并不能够使function具有static linkage，对于在头文件中定义的function，需要使用static来进行修饰，使它具有static linkage，从而防止multiple definition。
 
 ## ibm [Linkage of inline functions](https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzarg/inline_linkage.htm)
 
@@ -69,7 +67,7 @@ Since inline functions are treated as having **internal linkage**, an inline fun
 
 
 
-## Example
+### 测试程序
 
 下面程序是根据ibm [Linkage of inline functions](https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzarg/inline_linkage.htm)#Beginning of C only改编而来的: 
 

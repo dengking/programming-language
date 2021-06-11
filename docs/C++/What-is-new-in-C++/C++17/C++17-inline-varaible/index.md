@@ -1,5 +1,7 @@
 # inline variable
 
+## stackoverflow [How do inline variables work?](https://stackoverflow.com/questions/38043442/how-do-inline-variables-work)
+
 ## pabloariasal [C++ - Inline Variables and Functions](https://pabloariasal.github.io/2019/02/28/cpp-inlining/)
 
 
