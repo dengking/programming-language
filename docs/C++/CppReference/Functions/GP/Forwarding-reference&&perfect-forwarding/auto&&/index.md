@@ -1,6 +1,10 @@
 # `auto&&`
 
+`auto&&`解决的是函数的返回值。
 
+## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) # Forwarding references (since C++11)
+
+参见 `C++11-forwarding-reference` 章节。
 
 ## stackoverflow [What does auto&& tell us?](https://stackoverflow.com/questions/13230480/what-does-auto-tell-us)
 
