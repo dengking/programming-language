@@ -712,6 +712,9 @@ nav:
             - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-std-result_of/index.md
           - C++14-Return-type-deduction:
             - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/index.md
+            - "\u6211\u7684\u5B9E\u8DF5-auto-return":
+              - Introduction: "C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/\u6211\
+                  \u7684\u5B9E\u8DF5-auto-return/index.md"
       - Function-overload:
         - Introduction: C++/CppReference/Functions/Function-overload/index.md
         - Operator-overload:
@@ -1366,7 +1369,14 @@ nav:
         - Formatted-and-unformatted-IO:
           - Introduction: C++/STL/IO-library/String-IO/Formatted-and-unformatted-IO/index.md
     - Thread:
-      - Thread: C++/STL/Thread/index.md
+      - Introduction: C++/STL/Thread/index.md
+      - Mutex&&lock:
+        - C++11-std-lock:
+          - Introduction: C++/STL/Thread/Mutex&&lock/C++11-std-lock/index.md
+        - C++17-std-scoped_lock:
+          - Introduction: C++/STL/Thread/Mutex&&lock/C++17-std-scoped_lock/index.md
+        - Locking-strategy:
+          - Introduction: C++/STL/Thread/Mutex&&lock/Locking-strategy/index.md
       - Asynchronous-programming:
         - Introduction: C++/STL/Thread/Asynchronous-programming/index.md
         - std-future:
@@ -1375,6 +1385,8 @@ nav:
           - Introduction: C++/STL/Thread/Asynchronous-programming/std-promise-and-future/index.md
           - std-promise:
             - Introduction: C++/STL/Thread/Asynchronous-programming/std-promise-and-future/std-promise/index.md
+          - Reset-rebuild-reconnect-promise-future-channel:
+            - Introduction: C++/STL/Thread/Asynchronous-programming/std-promise-and-future/Reset-rebuild-reconnect-promise-future-channel/index.md
         - std-async-and-future:
           - Introduction: C++/STL/Thread/Asynchronous-programming/std-async-and-future/index.md
           - std-async:
@@ -2259,81 +2271,87 @@ nav:
       - Introduction: C++/Guide/Performance-optimization/index.md
       - Optimizing-software-in-C++:
         - Introduction: C++/Guide/Performance-optimization/Optimizing-software-in-C++/index.md
-    - Memory-model-and-atomic-library:
-      - Introduction: C++/Guide/Memory-model-and-atomic-library/index.md
+    - Memory-model&&atomic-library:
+      - Introduction: C++/Guide/Memory-model&&atomic-library/index.md
       - Design:
-        - Introduction: C++/Guide/Memory-model-and-atomic-library/Design/index.md
+        - Introduction: C++/Guide/Memory-model&&atomic-library/Design/index.md
         - Multiple-level-memory-model:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Design/Multiple-level-memory-model/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Design/Multiple-level-memory-model/index.md
           - sciencedirect-Shared-Memory-Application-Programming:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Design/Multiple-level-memory-model/sciencedirect-Shared-Memory-Application-Programming/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Design/Multiple-level-memory-model/sciencedirect-Shared-Memory-Application-Programming/index.md
         - TODO-zhihu-C++11-memory-order:
-          - 1: C++/Guide/Memory-model-and-atomic-library/Design/TODO-zhihu-C++11-memory-order/1.md
-          - TODO-2: C++/Guide/Memory-model-and-atomic-library/Design/TODO-zhihu-C++11-memory-order/TODO-2.md
+          - 1: C++/Guide/Memory-model&&atomic-library/Design/TODO-zhihu-C++11-memory-order/1.md
+          - TODO-2: C++/Guide/Memory-model&&atomic-library/Design/TODO-zhihu-C++11-memory-order/TODO-2.md
       - Why-need-memory-model:
-        - Introduction: C++/Guide/Memory-model-and-atomic-library/Why-need-memory-model/index.md
+        - Introduction: C++/Guide/Memory-model&&atomic-library/Why-need-memory-model/index.md
         - Bjarne-Stroustrup:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Why-need-memory-model/Bjarne-Stroustrup/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Why-need-memory-model/Bjarne-Stroustrup/index.md
         - stackoverflow-C++Memory-model:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Why-need-memory-model/stackoverflow-C++Memory-model/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Why-need-memory-model/stackoverflow-C++Memory-model/index.md
         - Herb-Sutter:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Why-need-memory-model/Herb-Sutter/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Why-need-memory-model/Herb-Sutter/index.md
       - Guide:
         - TODO-CSDN-wxj1992-C++memory-order:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Guide/TODO-CSDN-wxj1992-C++memory-order/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Guide/TODO-CSDN-wxj1992-C++memory-order/index.md
         - modernescpp-C++Memory-Model:
-          - 1-C++Memory-Model.md: C++/Guide/Memory-model-and-atomic-library/Guide/modernescpp-C++Memory-Model/1-C++Memory-Model.md
-          - 2-Sequential-Consistency: C++/Guide/Memory-model-and-atomic-library/Guide/modernescpp-C++Memory-Model/2-Sequential-Consistency.md
+          - 1-C++Memory-Model.md: C++/Guide/Memory-model&&atomic-library/Guide/modernescpp-C++Memory-Model/1-C++Memory-Model.md
+          - 2-Sequential-Consistency: C++/Guide/Memory-model&&atomic-library/Guide/modernescpp-C++Memory-Model/2-Sequential-Consistency.md
           - Acquire-Release-Fences:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Guide/modernescpp-C++Memory-Model/Acquire-Release-Fences/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Guide/modernescpp-C++Memory-Model/Acquire-Release-Fences/index.md
           - Acquire-Release-Semantic:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Guide/modernescpp-C++Memory-Model/Acquire-Release-Semantic/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Guide/modernescpp-C++Memory-Model/Acquire-Release-Semantic/index.md
       - Atomic-operations-library:
-        - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/index.md
+        - Introduction: C++/Guide/Memory-model&&atomic-library/Library/index.md
         - std-memory_order:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/index.md
           - Formal-description:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Formal-description/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Formal-description/index.md
           - Explanation:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/index.md
             - Relaxed-ordering:
-              - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/Relaxed-ordering/index.md
+              - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/Relaxed-ordering/index.md
             - Release-Acquire-ordering:
-              - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/Release-Acquire-ordering/index.md
+              - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/Release-Acquire-ordering/index.md
             - Release-Consume-ordering:
-              - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/Release-Consume-ordering/index.md
+              - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/Release-Consume-ordering/index.md
             - Sequentially-consistent-ordering:
-              - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/Sequentially-consistent-ordering/index.md
+              - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/Sequentially-consistent-ordering/index.md
               - Full-memory-barrier:
-                - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/Sequentially-consistent-ordering/Full-memory-barrier/index.md
+                - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/Sequentially-consistent-ordering/Full-memory-barrier/index.md
             - Summary:
-              - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Explanation/Summary/index.md
+              - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Explanation/Summary/index.md
           - Happens-before:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-memory_order/Happens-before/index.md
-        - std-atomic_flag:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-atomic_flag/index.md
-          - std-atomic_flag-and-spinlock:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-atomic_flag/std-atomic_flag-and-spinlock/index.md
-            - modernescpp-The-Atomic-Flag:
-              - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/std-atomic_flag/std-atomic_flag-and-spinlock/modernescpp-The-Atomic-Flag/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/std-memory_order/Happens-before/index.md
+        - Atomic-Boolean:
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Atomic-Boolean/index.md
+          - std-atomic_flag:
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Atomic-Boolean/std-atomic_flag/index.md
+            - std-atomic_flag-and-spinlock:
+              - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Atomic-Boolean/std-atomic_flag/std-atomic_flag-and-spinlock/index.md
+              - modernescpp-The-Atomic-Flag:
+                - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Atomic-Boolean/std-atomic_flag/std-atomic_flag-and-spinlock/modernescpp-The-Atomic-Flag/index.md
+          - modernescpp-Atomic-Boolean:
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Atomic-Boolean/modernescpp-Atomic-Boolean/index.md
+          - std-atomic_bool-VS-bool:
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Atomic-Boolean/std-atomic_bool-VS-bool/index.md
         - Fence:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/Fence/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Fence/index.md
           - std-atomic_signal_fence:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/Fence/std-atomic_signal_fence/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Fence/std-atomic_signal_fence/index.md
         - compare_exchange:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/compare_exchange/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Library/compare_exchange/index.md
           - TODO-herbsutter-write-a-CAS-loop:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/compare_exchange/TODO-herbsutter-write-a-CAS-loop/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/compare_exchange/TODO-herbsutter-write-a-CAS-loop/index.md
         - Implementation:
-          - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/Implementation/index.md
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Implementation/index.md
           - cl.cam.ac.uk-C-C++11-mappings-to-processors:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/Implementation/cl.cam.ac.uk-C-C++11-mappings-to-processors/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Implementation/cl.cam.ac.uk-C-C++11-mappings-to-processors/index.md
           - TODO-Implementation-on-x86:
-            - Introduction: C++/Guide/Memory-model-and-atomic-library/Library/Implementation/TODO-Implementation-on-x86/index.md
+            - Introduction: C++/Guide/Memory-model&&atomic-library/Library/Implementation/TODO-Implementation-on-x86/index.md
       - C++VS-Java-memory-model:
-        - Introduction: C++/Guide/Memory-model-and-atomic-library/C++VS-Java-memory-model/index.md
+        - Introduction: C++/Guide/Memory-model&&atomic-library/C++VS-Java-memory-model/index.md
       - cl.cam.uk-Cppmem:
-        - Introduction: C++/Guide/Memory-model-and-atomic-library/cl.cam.uk-Cppmem/index.md
+        - Introduction: C++/Guide/Memory-model&&atomic-library/cl.cam.uk-Cppmem/index.md
     - "Type-\u76F8\u5173":
       - Strong-type:
         - Introduction: "C++/Guide/Type-\u76F8\u5173/Strong-type/index.md"
