@@ -1,5 +1,6 @@
 nav:
-    - Thread: index.md
+    - Introduction: index.md
+    - Mutex&&lock: Mutex&&lock
     - Asynchronous-programming: Asynchronous-programming
     - TODO-joining_thread: TODO-joining_thread
     - TODO-read-write-lock: TODO-read-write-lock

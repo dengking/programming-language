@@ -1,7 +1,8 @@
 nav:
     - Introduction: index.md
     - std-memory_order: std-memory_order
-    - std-atomic_flag: std-atomic_flag
+    - Atomic-Boolean: Atomic-Boolean
+
     - Fence: Fence
     - compare_exchange: compare_exchange
     - Implementation: Implementation

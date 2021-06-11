@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - std-promise: std-promise
-    
+    - Reset-rebuild-reconnect-promise-future-channel: Reset-rebuild-reconnect-promise-future-channel

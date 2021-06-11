@@ -1,4 +1,4 @@
-# [How can completed futures be automatically erased from std::vector](https://stackoverflow.com/questions/45117450/how-can-completed-futures-be-automatically-erased-from-stdvector)
+## stackoverflow [How can completed futures be automatically erased from std::vector](https://stackoverflow.com/questions/45117450/how-can-completed-futures-be-automatically-erased-from-stdvector)
 
 ```C++
 void RaiseEvent(EventID messageID)
@@ -19,7 +19,7 @@ void RaiseEvent(EventID messageID)
 
 
 
-[A](https://stackoverflow.com/a/45117709)
+### [A](https://stackoverflow.com/a/45117709)
 
 You need to be careful though, your code currently has a lot of data races. Consider using another mutex or some other technique to prevent them.
 
