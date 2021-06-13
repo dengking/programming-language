@@ -1,10 +1,21 @@
-## Functor
 
-## wikipedia [Functor](https://en.wikipedia.org/wiki/Functor)
+# Functor
+
+根据uniform function model，operator可以看做是function，所以存在operator function object其实是非常自然而然的事情。
+
+## cppreference [Function objects#Operator function object](https://en.cppreference.com/w/cpp/utility/functional#Operator_function_objects)
 
 
 
-## stackoverflow [In Functional Programming, what is a functor?](https://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor)
+### Arithmetic operations
+
+`std::plus`
+
+> NOTE:
+>
+> 在[`std::transform`](https://en.cppreference.com/w/cpp/algorithm/transform) 的 example中，使用了`std::plus`
+
+
 
 
 

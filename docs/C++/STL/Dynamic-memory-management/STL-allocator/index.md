@@ -14,3 +14,27 @@ In [C++](https://en.wanweibaike.com/wiki-C%2B%2B) [computer programming](https:/
 
 One of the main reasons for writing a custom allocator is performance. Utilizing a specialized custom allocator may substantially improve the performance or memory usage, or both, of the program.[[4\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-effectivestl-4)[[15\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-aue-15) The default allocator uses `operator new` to allocate memory.[[16\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-C++03_20.4.1.1/3-16) This is often implemented as a thin layer around the [C](https://en.wanweibaike.com/wiki-C_(programming_language)) heap [allocation functions](https://en.wanweibaike.com/wiki-Malloc),[[17\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-moderncpp-17) which are usually optimized for infrequent allocation of large memory blocks. This approach may work well with containers that mostly allocate large chunks of memory, like [vector](https://en.wanweibaike.com/wiki-Vector_(C%2B%2B)) and [deque](https://en.wanweibaike.com/wiki-Deque).[[15\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-aue-15) However, for containers that require frequent allocations of small objects, such as [map](https://en.wanweibaike.com/wiki-Map_(C%2B%2B)) and [list](https://en.wanweibaike.com/wiki-List_(computing)), using the default allocator is generally slow.[[4\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-effectivestl-4)[[17\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-moderncpp-17) Other common problems with a [malloc](https://en.wanweibaike.com/wiki-Malloc)-based allocator include poor [locality of reference](https://en.wanweibaike.com/wiki-Locality_of_reference),[[4\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-effectivestl-4) and excessive [memory fragmentation](https://en.wanweibaike.com/wiki-Fragmentation_(computer)).[[4\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-effectivestl-4)[[17\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-moderncpp-17)
 
+### Usage
+
+When instantiating one of the standard containers, the allocator is specified through a [template](https://en.wanweibaike.com/wiki-Template_(programming)) argument, which [defaults](https://en.wanweibaike.com/wiki-Default_argument) to `std::allocator<T>`:[[20\]](https://en.wanweibaike.com/wiki-STL allocator#cite_note-C++03_23.2/1-20)
+
+```C++
+namespace std {
+  template <class T, class Allocator = allocator<T> > class vector;
+// ...
+```
+
+> NOTE: 
+>
+> policy-based design
+
+## cppreference [Dynamic memory management](https://en.cppreference.com/w/cpp/memory) # [Allocators](https://en.cppreference.com/w/cpp/memory#Allocators)
+
+Allocators are class templates encapsulating memory allocation strategy. This allows generic containers to decouple memory management from the data itself.
+
+> NOTE: 
+>
+> 一、decouple解耦
+>
+> 二、这些allocator的实现，最终都是依赖于new operator
+

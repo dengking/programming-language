@@ -19,7 +19,7 @@
 
 ## Operator function objects
 
-> NOTE: 参见`./Operator-function-object`
+> NOTE: 参见`STL-Functor`
 
 
 
