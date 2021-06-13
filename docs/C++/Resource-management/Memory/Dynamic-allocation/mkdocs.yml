@@ -1,10 +1,16 @@
 nav:
     - Introduction: index.md
+    
     - malloc: malloc
+    
     - realloc: realloc
+    
     - new-operator: new-operator
+    
     - delete-operator: delete-operator
-    - std-allocator-library: std-allocator-library
+    
     - Implementation: Implementation
+    
     - C-VS-C++: C-VS-C++
+    
     - Allocate-aligned-memory: Allocate-aligned-memory
