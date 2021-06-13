@@ -1,1 +1,0 @@
-# [std::istream_iterator and std::ostream_iterator in C++ STL](https://www.geeksforgeeks.org/stdistream_iterator-stdostream_iterator-c-stl/)

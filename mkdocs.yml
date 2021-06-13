@@ -1179,154 +1179,164 @@ nav:
       - TODO-Program-order-and-memory-order: C++/CppReference/TODO-Design-C++/TODO-Program-order-and-memory-order.md
   - STL:
     - Introduction: C++/STL/index.md
-    - STL:
-      - Introduction: C++/STL/STL/index.md
-      - Containers:
-        - Introduction: C++/STL/STL/Containers/index.md
-        - Common-issue:
-          - Introduction: C++/STL/STL/Containers/Common-issue/index.md
-          - Memory-management:
-            - Introduction: C++/STL/STL/Containers/Common-issue/Memory-management/index.md
-          - Iterator-invalidation:
-            - Introduction: C++/STL/STL/Containers/Common-issue/Iterator-invalidation/index.md
-            - Iterator-invalidation-rules:
-              - Introduction: C++/STL/STL/Containers/Common-issue/Iterator-invalidation/Iterator-invalidation-rules/index.md
-          - Thread-safety:
-            - Introduction: C++/STL/STL/Containers/Common-issue/Thread-safety/index.md
-          - Generic-container-printer:
-            - Introduction: C++/STL/STL/Containers/Common-issue/Generic-container-printer/index.md
-          - Concept:
-            - contiguous_container-concept:
-              - Introduction: C++/STL/STL/Containers/Common-issue/Concept/contiguous_container-concept/index.md
-        - Sequence-container:
-          - Introduction: C++/STL/STL/Containers/Sequence-container/index.md
-          - std-vector:
-            - std-vector-bool:
-              - Introduction: C++/STL/STL/Containers/Sequence-container/std-vector/std-vector-bool/index.md
-              - TODO-gotw-When-Is-a-Container-Not-a-Container:
-                - Introduction: C++/STL/STL/Containers/Sequence-container/std-vector/std-vector-bool/TODO-gotw-When-Is-a-Container-Not-a-Container/index.md
-            - Resize-and-reserve:
-              - Introduction: C++/STL/STL/Containers/Sequence-container/std-vector/Resize-and-reserve/index.md
-          - std-list:
-            - Implementation:
-              - Introduction: C++/STL/STL/Containers/Sequence-container/std-list/Implementation/index.md
-            - splice-and-merge:
-              - Introduction: C++/STL/STL/Containers/Sequence-container/std-list/splice-and-merge/index.md
-            - Operation: C++/STL/STL/Containers/Sequence-container/std-list/Operation.md
-        - Associative-container:
-          - Introduction: C++/STL/STL/Containers/Associative-container/index.md
-          - Map:
-            - Introduction: C++/STL/STL/Containers/Associative-container/Map/index.md
-            - Custom-type-as-key:
-              - Introduction: C++/STL/STL/Containers/Associative-container/Map/Custom-type-as-key/index.md
-              - C-str-as-key: C++/STL/STL/Containers/Associative-container/Map/Custom-type-as-key/C-str-as-key.md
-              - Enum-as-key: C++/STL/STL/Containers/Associative-container/Map/Custom-type-as-key/Enum-as-key.md
-            - Operations:
-              - Introduction: C++/STL/STL/Containers/Associative-container/Map/Operations/index.md
-              - std-for_each-map: C++/STL/STL/Containers/Associative-container/Map/Operations/std-for_each-map.md
-              - TODO-Emplace:
-                - Introduction: C++/STL/STL/Containers/Associative-container/Map/Operations/TODO-Emplace/index.md
-              - Values-like-python-dict:
-                - Introduction: C++/STL/STL/Containers/Associative-container/Map/Operations/Values-like-python-dict/index.md
-              - TODO-Erase_if:
-                - Introduction: C++/STL/STL/Containers/Associative-container/Map/Operations/TODO-Erase_if/index.md
-              - Iteration:
-                - Introduction: C++/STL/STL/Containers/Associative-container/Map/Operations/Iteration/index.md
-              - In-contain:
-                - Introduction: C++/STL/STL/Containers/Associative-container/Map/Operations/In-contain/index.md
-        - Container-adaptors:
-          - Introduction: C++/STL/STL/Containers/Container-adaptors/index.md
-          - priority_queue:
-            - Introduction: C++/STL/STL/Containers/Container-adaptors/priority_queue/index.md
-        - View:
-          - Introduction: C++/STL/STL/Containers/View/index.md
-          - span:
-            - Introduction: C++/STL/STL/Containers/View/span/index.md
-            - Span-for-multiple-level-pointer:
-              - Introduction: C++/STL/STL/Containers/View/span/Span-for-multiple-level-pointer/index.md
-        - Member-function-table:
-          - Introduction: C++/STL/STL/Containers/Member-function-table/index.md
-          - Element-access:
-            - Introduction: C++/STL/STL/Containers/Member-function-table/Element-access/index.md
-          - Uniform-consistent-API:
-            - Introduction: C++/STL/STL/Containers/Member-function-table/Uniform-consistent-API/index.md
-            - C++17-std-data:
-              - Introduction: C++/STL/STL/Containers/Member-function-table/Uniform-consistent-API/C++17-std-data/index.md
-            - C++17-std-size-std-ssize:
-              - Introduction: C++/STL/STL/Containers/Member-function-table/Uniform-consistent-API/C++17-std-size-std-ssize/index.md
-          - std-emplace:
-            - Introduction: C++/STL/STL/Containers/Member-function-table/std-emplace/index.md
-            - Custom-emplace:
-              - Introduction: C++/STL/STL/Containers/Member-function-table/std-emplace/Custom-emplace/index.md
-          - std-swap:
-            - Introduction: C++/STL/STL/Containers/Member-function-table/std-swap/index.md
-      - Iterator-library:
-        - Introduction: C++/STL/STL/Iterator-library/index.md
-        - Primer:
-          - Introduction: C++/STL/STL/Iterator-library/Primer/index.md
-        - Iterator-adaptors:
-          - Introduction: C++/STL/STL/Iterator-library/Iterator-adaptors/index.md
-          - insert_iterator: C++/STL/STL/Iterator-library/Iterator-adaptors/insert_iterator.md
-          - front_insert_iterator: C++/STL/STL/Iterator-library/Iterator-adaptors/front_insert_iterator.md
-          - back_insert_iterator: C++/STL/STL/Iterator-library/Iterator-adaptors/back_insert_iterator.md
-        - Stream-iterators:
-          - Introduction: C++/STL/STL/Iterator-library/Stream-iterators/index.md
-        - Operations:
-          - Introduction: C++/STL/STL/Iterator-library/Operations/index.md
-          - Iterator-to-pointer:
-            - Introduction: C++/STL/STL/Iterator-library/Operations/Iterator-to-pointer/index.md
-        - const_iterator:
-          - Introduction: C++/STL/STL/Iterator-library/const_iterator/index.md
-        - Custom-iterator:
-          - Introduction: C++/STL/STL/Iterator-library/Custom-iterator/index.md
-      - Algorithm:
-        - Introduction: C++/STL/STL/Algorithm/index.md
-        - std-copy:
-          - std-copy: C++/STL/STL/Algorithm/std-copy/std-copy.md
-        - std-transform:
-          - Introduction: C++/STL/STL/Algorithm/std-transform/index.md
-        - std-max_element-min_element-minmax_element:
-          - Introduction: C++/STL/STL/Algorithm/std-max_element-min_element-minmax_element/index.md
-        - Sum:
-          - Introduction: C++/STL/STL/Algorithm/Sum/index.md
-      - C++20-Range-library:
-        - Introduction: C++/STL/STL/C++20-Range-library/index.md
-        - Primer:
-          - Introduction: C++/STL/STL/C++20-Range-library/Primer/index.md
-      - Idiom:
-        - Introduction: C++/STL/STL/Idiom/index.md
-        - Guidelines:
-          - Introduction: C++/STL/STL/Idiom/Guidelines/index.md
-          - drdobbs-STL-Algorithms-Hand-Written-Loops:
-            - Introduction: C++/STL/STL/Idiom/Guidelines/drdobbs-STL-Algorithms-Hand-Written-Loops/index.md
-          - arne-mertz-algorithms-and-the-KISS-principle:
-            - Introduction: C++/STL/STL/Idiom/Guidelines/arne-mertz-algorithms-and-the-KISS-principle/index.md
-        - Iteration:
-          - Introduction: C++/STL/STL/Idiom/Iteration/index.md
-          - Zip:
-            - Introduction: C++/STL/STL/Idiom/Iteration/Zip/index.md
-          - library-CPPItertools:
-            - Introduction: C++/STL/STL/Idiom/Iteration/library-CPPItertools/index.md
-          - std-for_each:
-            - Introduction: C++/STL/STL/Idiom/Iteration/std-for_each/index.md
-        - Clear-and-minimize:
-          - Introduction: C++/STL/STL/Idiom/Clear-and-minimize/index.md
-          - Shrink-to-fit: C++/STL/STL/Idiom/Clear-and-minimize/Shrink-to-fit.md
-        - Erase_if:
-          - Introduction: C++/STL/STL/Idiom/Erase_if/index.md
-          - Erase-remove:
-            - Introduction: C++/STL/STL/Idiom/Erase_if/Erase-remove/index.md
-          - TODO-Erase-while-iterating:
-            - Introduction: C++/STL/STL/Idiom/Erase_if/TODO-Erase-while-iterating/index.md
-        - Range-access:
-          - Introduction: C++/STL/STL/Idiom/Range-access/index.md
-        - Copy-a-range-of-elements:
-          - Introduction: C++/STL/STL/Idiom/Copy-a-range-of-elements/index.md
-        - TODO-Filter-and-mapper:
-          - Introduction: C++/STL/STL/Idiom/TODO-Filter-and-mapper/index.md
-          - TODO-Custom-filter-iterator: C++/STL/STL/Idiom/TODO-Filter-and-mapper/TODO-Custom-filter-iterator.md
-          - bastian.rieck-Implementing-filter-and-map:
-            - Introduction: C++/STL/STL/Idiom/TODO-Filter-and-mapper/bastian.rieck-Implementing-filter-and-map/index.md
+    - Design&&implementation:
+      - Introduction: C++/STL/Design&&implementation/index.md
+      - GCC:
+        - GNU-C++Library: C++/STL/Design&&implementation/GCC/GNU-C++Library.md
+        - 28-Demangling:
+          - Introduction: C++/STL/Design&&implementation/GCC/28-Demangling/index.md
+      - LLVM:
+        - libc++C++Standard-Library: C++/STL/Design&&implementation/LLVM/libc++C++Standard-Library.md
+      - Microsoft:
+        - Introduction: C++/STL/Design&&implementation/Microsoft/index.md
+    - Guidelines:
+      - Introduction: C++/STL/Guidelines/index.md
+      - Range-based-algorithms:
+        - Introduction: C++/STL/Guidelines/Range-based-algorithms/index.md
+      - drdobbs-STL-Algorithms-Hand-Written-Loops:
+        - Introduction: C++/STL/Guidelines/drdobbs-STL-Algorithms-Hand-Written-Loops/index.md
+      - arne-mertz-algorithms-and-the-KISS-principle:
+        - Introduction: C++/STL/Guidelines/arne-mertz-algorithms-and-the-KISS-principle/index.md
+    - Idiom:
+      - Introduction: C++/STL/Idiom/index.md
+      - Iteration:
+        - Introduction: C++/STL/Idiom/Iteration/index.md
+        - Zip:
+          - Introduction: C++/STL/Idiom/Iteration/Zip/index.md
+        - library-CPPItertools:
+          - Introduction: C++/STL/Idiom/Iteration/library-CPPItertools/index.md
+        - std-for_each:
+          - Introduction: C++/STL/Idiom/Iteration/std-for_each/index.md
+      - Clear-and-minimize:
+        - Introduction: C++/STL/Idiom/Clear-and-minimize/index.md
+        - Shrink-to-fit: C++/STL/Idiom/Clear-and-minimize/Shrink-to-fit.md
+      - Erase_if:
+        - Introduction: C++/STL/Idiom/Erase_if/index.md
+        - Erase-remove:
+          - Introduction: C++/STL/Idiom/Erase_if/Erase-remove/index.md
+        - TODO-Erase-while-iterating:
+          - Introduction: C++/STL/Idiom/Erase_if/TODO-Erase-while-iterating/index.md
+      - Range-access:
+        - Introduction: C++/STL/Idiom/Range-access/index.md
+      - Copy-a-range-of-elements:
+        - Introduction: C++/STL/Idiom/Copy-a-range-of-elements/index.md
+      - TODO-Filter-and-mapper:
+        - Introduction: C++/STL/Idiom/TODO-Filter-and-mapper/index.md
+        - TODO-Custom-filter-iterator: C++/STL/Idiom/TODO-Filter-and-mapper/TODO-Custom-filter-iterator.md
+        - bastian.rieck-Implementing-filter-and-map:
+          - Introduction: C++/STL/Idiom/TODO-Filter-and-mapper/bastian.rieck-Implementing-filter-and-map/index.md
+    - Containers:
+      - Introduction: C++/STL/Containers/index.md
+      - Common-issue:
+        - Introduction: C++/STL/Containers/Common-issue/index.md
+        - Memory-management:
+          - Introduction: C++/STL/Containers/Common-issue/Memory-management/index.md
+        - Iterator-invalidation:
+          - Introduction: C++/STL/Containers/Common-issue/Iterator-invalidation/index.md
+          - Iterator-invalidation-rules:
+            - Introduction: C++/STL/Containers/Common-issue/Iterator-invalidation/Iterator-invalidation-rules/index.md
+        - Thread-safety:
+          - Introduction: C++/STL/Containers/Common-issue/Thread-safety/index.md
+        - Generic-container-printer:
+          - Introduction: C++/STL/Containers/Common-issue/Generic-container-printer/index.md
+        - Concept:
+          - contiguous_container-concept:
+            - Introduction: C++/STL/Containers/Common-issue/Concept/contiguous_container-concept/index.md
+      - Member-function-table:
+        - Introduction: C++/STL/Containers/Member-function-table/index.md
+        - Element-access:
+          - Introduction: C++/STL/Containers/Member-function-table/Element-access/index.md
+        - Uniform-consistent-API:
+          - Introduction: C++/STL/Containers/Member-function-table/Uniform-consistent-API/index.md
+          - C++17-std-data:
+            - Introduction: C++/STL/Containers/Member-function-table/Uniform-consistent-API/C++17-std-data/index.md
+          - C++17-std-size-std-ssize:
+            - Introduction: C++/STL/Containers/Member-function-table/Uniform-consistent-API/C++17-std-size-std-ssize/index.md
+        - std-emplace:
+          - Introduction: C++/STL/Containers/Member-function-table/std-emplace/index.md
+          - Custom-emplace:
+            - Introduction: C++/STL/Containers/Member-function-table/std-emplace/Custom-emplace/index.md
+        - std-swap:
+          - Introduction: C++/STL/Containers/Member-function-table/std-swap/index.md
+      - Sequence-container:
+        - Introduction: C++/STL/Containers/Sequence-container/index.md
+        - std-vector:
+          - std-vector-bool:
+            - Introduction: C++/STL/Containers/Sequence-container/std-vector/std-vector-bool/index.md
+            - TODO-gotw-When-Is-a-Container-Not-a-Container:
+              - Introduction: C++/STL/Containers/Sequence-container/std-vector/std-vector-bool/TODO-gotw-When-Is-a-Container-Not-a-Container/index.md
+          - Resize-and-reserve:
+            - Introduction: C++/STL/Containers/Sequence-container/std-vector/Resize-and-reserve/index.md
+        - std-list:
+          - Implementation:
+            - Introduction: C++/STL/Containers/Sequence-container/std-list/Implementation/index.md
+          - splice-and-merge:
+            - Introduction: C++/STL/Containers/Sequence-container/std-list/splice-and-merge/index.md
+          - Operation: C++/STL/Containers/Sequence-container/std-list/Operation.md
+      - Associative-container:
+        - Introduction: C++/STL/Containers/Associative-container/index.md
+        - Map:
+          - Introduction: C++/STL/Containers/Associative-container/Map/index.md
+          - Custom-type-as-key:
+            - Introduction: C++/STL/Containers/Associative-container/Map/Custom-type-as-key/index.md
+            - C-str-as-key: C++/STL/Containers/Associative-container/Map/Custom-type-as-key/C-str-as-key.md
+            - Enum-as-key: C++/STL/Containers/Associative-container/Map/Custom-type-as-key/Enum-as-key.md
+          - Operations:
+            - Introduction: C++/STL/Containers/Associative-container/Map/Operations/index.md
+            - std-for_each-map: C++/STL/Containers/Associative-container/Map/Operations/std-for_each-map.md
+            - TODO-Emplace:
+              - Introduction: C++/STL/Containers/Associative-container/Map/Operations/TODO-Emplace/index.md
+            - Values-like-python-dict:
+              - Introduction: C++/STL/Containers/Associative-container/Map/Operations/Values-like-python-dict/index.md
+            - TODO-Erase_if:
+              - Introduction: C++/STL/Containers/Associative-container/Map/Operations/TODO-Erase_if/index.md
+            - Iteration:
+              - Introduction: C++/STL/Containers/Associative-container/Map/Operations/Iteration/index.md
+            - In-contain:
+              - Introduction: C++/STL/Containers/Associative-container/Map/Operations/In-contain/index.md
+      - Container-adaptors:
+        - Introduction: C++/STL/Containers/Container-adaptors/index.md
+        - priority_queue:
+          - Introduction: C++/STL/Containers/Container-adaptors/priority_queue/index.md
+      - View:
+        - Introduction: C++/STL/Containers/View/index.md
+        - span:
+          - Introduction: C++/STL/Containers/View/span/index.md
+          - Span-for-multiple-level-pointer:
+            - Introduction: C++/STL/Containers/View/span/Span-for-multiple-level-pointer/index.md
+    - Iterator-library:
+      - Introduction: C++/STL/Iterator-library/index.md
+      - northwestern-course-C++Iterators:
+        - Introduction: C++/STL/Iterator-library/northwestern-course-C++Iterators/index.md
+      - Operations:
+        - Introduction: C++/STL/Iterator-library/Operations/index.md
+        - Iterator-to-pointer:
+          - Introduction: C++/STL/Iterator-library/Operations/Iterator-to-pointer/index.md
+      - Stream-iterators:
+        - Introduction: C++/STL/Iterator-library/Stream-iterators/index.md
+      - Iterator-adaptors:
+        - Introduction: C++/STL/Iterator-library/Iterator-adaptors/index.md
+        - insert_iterator: C++/STL/Iterator-library/Iterator-adaptors/insert_iterator.md
+        - front_insert_iterator: C++/STL/Iterator-library/Iterator-adaptors/front_insert_iterator.md
+        - back_insert_iterator: C++/STL/Iterator-library/Iterator-adaptors/back_insert_iterator.md
+      - const_iterator:
+        - Introduction: C++/STL/Iterator-library/const_iterator/index.md
+      - Custom-iterator:
+        - Introduction: C++/STL/Iterator-library/Custom-iterator/index.md
+    - Algorithm:
+      - Introduction: C++/STL/Algorithm/index.md
+      - std-copy:
+        - std-copy: C++/STL/Algorithm/std-copy/std-copy.md
+      - std-transform:
+        - Introduction: C++/STL/Algorithm/std-transform/index.md
+      - std-max_element-min_element-minmax_element:
+        - Introduction: C++/STL/Algorithm/std-max_element-min_element-minmax_element/index.md
+      - Sum:
+        - Introduction: C++/STL/Algorithm/Sum/index.md
+    - C++20-Range-library:
+      - Introduction: C++/STL/C++20-Range-library/index.md
+      - Primer:
+        - Introduction: C++/STL/C++20-Range-library/Primer/index.md
     - String:
       - Introduction: C++/STL/String/index.md
       - Char:
@@ -1543,16 +1553,6 @@ nav:
       - TODO-swap-reset-release:
         - Introduction: C++/STL/Smart-pointer-library/TODO-swap-reset-release/index.md
       - TODO-pointer_cast: C++/STL/Smart-pointer-library/TODO-pointer_cast.md
-    - Implementation:
-      - Introduction: C++/STL/Implementation/index.md
-      - GCC:
-        - GNU-C++Library: C++/STL/Implementation/GCC/GNU-C++Library.md
-        - 28-Demangling:
-          - Introduction: C++/STL/Implementation/GCC/28-Demangling/index.md
-      - LLVM:
-        - libc++C++Standard-Library: C++/STL/Implementation/LLVM/libc++C++Standard-Library.md
-      - Microsoft:
-        - Introduction: C++/STL/Implementation/Microsoft/index.md
     - Extending-std:
       - Introduction: C++/STL/Extending-std/index.md
     - Extensions:
