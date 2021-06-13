@@ -1,5 +1,3 @@
 nav:
     - Introduction: index.md
     - STL-Function-object: STL-Function-object
-    - Functor: Functor
-

@@ -688,18 +688,19 @@ nav:
         - Introduction: C++/CppReference/Functions/Function/index.md
       - Function-objects:
         - Introduction: C++/CppReference/Functions/Function-objects/index.md
-        - std-Utility-library#Function-object:
-          - Introduction: C++/CppReference/Functions/Function-objects/std-Utility-library#Function-object/index.md
+        - STL-Function-object:
+          - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/index.md
           - std-function:
-            - Introduction: C++/CppReference/Functions/Function-objects/std-Utility-library#Function-object/std-function/index.md
-            - Examples: C++/CppReference/Functions/Function-objects/std-Utility-library#Function-object/std-function/Examples.md
+            - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/std-function/index.md
+            - Examples: C++/CppReference/Functions/Function-objects/STL-Function-object/std-function/Examples.md
             - std-function-implementation:
-              - Introduction: C++/CppReference/Functions/Function-objects/std-Utility-library#Function-object/std-function/std-function-implementation/index.md
+              - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/std-function/std-function-implementation/index.md
           - std-bind:
-            - Introduction: C++/CppReference/Functions/Function-objects/std-Utility-library#Function-object/std-bind/index.md
-          - Operator-function-object: C++/CppReference/Functions/Function-objects/std-Utility-library#Function-object/Operator-function-object.md
-        - Functor:
-          - Introduction: C++/CppReference/Functions/Function-objects/Functor/index.md
+            - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/std-bind/index.md
+          - STL-Functor:
+            - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/STL-Functor/index.md
+            - What-is-functor:
+              - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/STL-Functor/What-is-functor/index.md
       - cppreference-Function-declaration:
         - Introduction: C++/CppReference/Functions/cppreference-Function-declaration/index.md
       - Function-call:
@@ -1181,6 +1182,10 @@ nav:
     - Introduction: C++/STL/index.md
     - Design&&implementation:
       - Introduction: C++/STL/Design&&implementation/index.md
+      - STL-Design:
+        - Introduction: C++/STL/Design&&implementation/STL-Design/index.md
+        - Policy-based-design-in-STL:
+          - Introduction: C++/STL/Design&&implementation/STL-Design/Policy-based-design-in-STL/index.md
       - GCC:
         - GNU-C++Library: C++/STL/Design&&implementation/GCC/GNU-C++Library.md
         - 28-Demangling:
@@ -1444,8 +1449,6 @@ nav:
             - Introduction: C++/STL/Utility-library/Language-support/Type-support/std-numeric_limits/index.md
         - Initializer-list:
           - Introduction: C++/STL/Utility-library/Language-support/Initializer-list/index.md
-        - Dynamic-memory-management:
-          - Dynamic-memory-management: C++/STL/Utility-library/Language-support/Dynamic-memory-management/index.md
       - General-purpose:
         - Introduction: C++/STL/Utility-library/General-purpose/index.md
         - Common-vocabulary-types:
@@ -1481,78 +1484,88 @@ nav:
           - Introduction: C++/STL/Utility-library/General-purpose/Hash/index.md
           - General-purpose-hash:
             - Introduction: C++/STL/Utility-library/General-purpose/Hash/General-purpose-hash/index.md
-    - Smart-pointer-library:
-      - Introduction: C++/STL/Smart-pointer-library/index.md
-      - std-unique_ptr:
-        - Introduction: C++/STL/Smart-pointer-library/std-unique_ptr/index.md
-        - unique_ptr-as-member:
-          - Introduction: C++/STL/Smart-pointer-library/std-unique_ptr/unique_ptr-as-member/index.md
-          - Copy-constructor-for-a-class-with-unique_ptr:
-            - Introduction: C++/STL/Smart-pointer-library/std-unique_ptr/unique_ptr-as-member/Copy-constructor-for-a-class-with-unique_ptr/index.md
-      - std-shared_ptr:
-        - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/index.md
-        - Implementation:
-          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Implementation/index.md
-        - Guide:
-          - nextptr-shared_ptr-basics-and-internals:
-            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Guide/nextptr-shared_ptr-basics-and-internals/index.md
-          - nextptr-Using-weak_ptr-for-circular-references:
-            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Guide/nextptr-Using-weak_ptr-for-circular-references/index.md
-          - learncpp-std-shared_ptr:
-            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Guide/learncpp-std-shared_ptr/index.md
-        - shared_ptr-and-this:
-          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-this/index.md
-          - std-enable_shared_from_this:
-            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-this/std-enable_shared_from_this/index.md
-        - shared_ptr-and-multithread:
-          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-multithread/index.md
-          - atomic_shared_ptr:
-            - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/shared_ptr-and-multithread/atomic_shared_ptr/index.md
-        - Assignment-operator:
-          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/Assignment-operator/index.md
-        - std-weak_ptr:
-          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/std-weak_ptr/index.md
-        - TODO-aliasing-constructor:
-          - Introduction: C++/STL/Smart-pointer-library/std-shared_ptr/TODO-aliasing-constructor/index.md
-      - auto_ptr: C++/STL/Smart-pointer-library/auto_ptr.md
-      - CppCoreGuidelines-Passing-Smart-Pointers:
-        - Introduction: C++/STL/Smart-pointer-library/CppCoreGuidelines-Passing-Smart-Pointers/index.md
-      - Guideline-strong-exception-safety:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/index.md
-        - Prefer-use-object-generator:
-          - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/index.md
-          - std-make_unique:
-            - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/index.md
-            - Deep-copy:
-              - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/Deep-copy/index.md
-          - std-make_shared:
-            - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_shared/index.md
-        - Prefer-not-use-reset:
-          - Introduction: C++/STL/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-not-use-reset/index.md
-      - Guideline-Incomplete-type:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-Incomplete-type/index.md
-        - howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr:
-          - Introduction: C++/STL/Smart-pointer-library/Guideline-Incomplete-type/howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr/index.md
-      - Guideline-deep-copy:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-deep-copy/index.md
-        - stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper:
-          - Introduction: C++/STL/Smart-pointer-library/Guideline-deep-copy/stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper/index.md
-      - Guideline-covariance:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-covariance/index.md
-        - fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance:
-          - Introduction: C++/STL/Smart-pointer-library/Guideline-covariance/fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance/index.md
-        - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
-          - Introduction: C++/STL/Smart-pointer-library/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
-        - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C++/STL/Smart-pointer-library/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
-      - Guideline-subtyping-polymorphism:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-subtyping-polymorphism/index.md
-      - Guideline-overhead:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-overhead/index.md
-      - Guideline-custom-deleter:
-        - Introduction: C++/STL/Smart-pointer-library/Guideline-custom-deleter/index.md
-      - TODO-swap-reset-release:
-        - Introduction: C++/STL/Smart-pointer-library/TODO-swap-reset-release/index.md
-      - TODO-pointer_cast: C++/STL/Smart-pointer-library/TODO-pointer_cast.md
+    - Dynamic-memory-management:
+      - Introduction: C++/STL/Dynamic-memory-management/index.md
+      - Smart-pointer-library:
+        - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/index.md
+        - std-unique_ptr:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-unique_ptr/index.md
+          - unique_ptr-as-member:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-unique_ptr/unique_ptr-as-member/index.md
+            - Copy-constructor-for-a-class-with-unique_ptr:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-unique_ptr/unique_ptr-as-member/Copy-constructor-for-a-class-with-unique_ptr/index.md
+        - std-shared_ptr:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/index.md
+          - Implementation:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/Implementation/index.md
+          - Guide:
+            - nextptr-shared_ptr-basics-and-internals:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/Guide/nextptr-shared_ptr-basics-and-internals/index.md
+            - nextptr-Using-weak_ptr-for-circular-references:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/Guide/nextptr-Using-weak_ptr-for-circular-references/index.md
+            - learncpp-std-shared_ptr:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/Guide/learncpp-std-shared_ptr/index.md
+          - shared_ptr-and-this:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/shared_ptr-and-this/index.md
+            - std-enable_shared_from_this:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/shared_ptr-and-this/std-enable_shared_from_this/index.md
+          - shared_ptr-and-multithread:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/shared_ptr-and-multithread/index.md
+            - atomic_shared_ptr:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/shared_ptr-and-multithread/atomic_shared_ptr/index.md
+          - Assignment-operator:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/Assignment-operator/index.md
+          - std-weak_ptr:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/std-weak_ptr/index.md
+          - TODO-aliasing-constructor:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/std-shared_ptr/TODO-aliasing-constructor/index.md
+        - auto_ptr: C++/STL/Dynamic-memory-management/Smart-pointer-library/auto_ptr.md
+        - CppCoreGuidelines-Passing-Smart-Pointers:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/CppCoreGuidelines-Passing-Smart-Pointers/index.md
+        - Guideline-strong-exception-safety:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-strong-exception-safety/index.md
+          - Prefer-use-object-generator:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/index.md
+            - std-make_unique:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/index.md
+              - Deep-copy:
+                - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_unique/Deep-copy/index.md
+            - std-make_shared:
+              - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-use-object-generator/std-make_shared/index.md
+          - Prefer-not-use-reset:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-strong-exception-safety/Prefer-not-use-reset/index.md
+        - Guideline-Incomplete-type:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-Incomplete-type/index.md
+          - howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-Incomplete-type/howardhinnant-Incomplete-types-and-shared_ptr-unique_ptr/index.md
+        - Guideline-deep-copy:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-deep-copy/index.md
+          - stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-deep-copy/stackexchange-DeepPtr-a-deep-copying-unique_ptr-wrapper/index.md
+        - Guideline-covariance:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-covariance/index.md
+          - fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-covariance/fluentcpp-How-to-Return-a-Smart-Pointer-AND-Use-Covariance/index.md
+          - CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers:
+            - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-covariance/CppCodeReviewers-Covariant-Return-Types-and-Smart-Pointers/index.md
+          - TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup): C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-covariance/TODO-riptutorial-Covariant-smart-pointer-result(automated-cleanup).md
+        - Guideline-subtyping-polymorphism:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-subtyping-polymorphism/index.md
+        - Guideline-overhead:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-overhead/index.md
+        - Guideline-custom-deleter:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/Guideline-custom-deleter/index.md
+        - TODO-swap-reset-release:
+          - Introduction: C++/STL/Dynamic-memory-management/Smart-pointer-library/TODO-swap-reset-release/index.md
+        - TODO-pointer_cast: C++/STL/Dynamic-memory-management/Smart-pointer-library/TODO-pointer_cast.md
+      - STL-allocator:
+        - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/index.md
+        - Allocator-concept:
+          - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/Allocator-concept/index.md
+        - std-allocator:
+          - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/std-allocator/index.md
+        - codeproject-C++Standard-Allocator:
+          - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/codeproject-C++Standard-Allocator/index.md
     - Extending-std:
       - Introduction: C++/STL/Extending-std/index.md
     - Extensions:
@@ -1948,9 +1961,6 @@ nav:
       - Introduction: C++/Idiom/Generic-programming/index.md
       - Policy-based-design:
         - Introduction: C++/Idiom/Generic-programming/Policy-based-design/index.md
-        - TODO-Policy based design-in-STL:
-          - Introduction: C++/Idiom/Generic-programming/Policy-based-design/TODO-Policy
-              based design-in-STL/index.md
       - CRTP:
         - Introduction: C++/Idiom/Generic-programming/CRTP/index.md
         - thegreenplace-CRTP-in-C++:
@@ -2112,10 +2122,6 @@ nav:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/new-operator/Thread-safety-Reentrancy/index.md
         - delete-operator:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/delete-operator/index.md
-        - std-allocator-library:
-          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/std-allocator-library/index.md
-          - Allocator-concept:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/std-allocator-library/Allocator-concept/index.md
         - Implementation:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/index.md
           - library-jemalloc:
@@ -2130,8 +2136,8 @@ nav:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/Boundary-tag/index.md
           - Arena:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/Arena/index.md
-        - VS-C-VS-C++:
-          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/VS-C-VS-C++/index.md
+        - C-VS-C++:
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/C-VS-C++/index.md
         - Allocate-aligned-memory:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/index.md
           - Align-to-cacheline-word:
