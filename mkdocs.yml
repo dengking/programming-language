@@ -2138,56 +2138,56 @@ nav:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/Align-to-cacheline-word/index.md
       - Memory-access:
         - Introduction: C++/Resource-management/Memory/Memory-access/index.md
-      - Pointer-and-array:
-        - Introduction: C++/Resource-management/Memory/Pointer-and-array/index.md
+      - Pointer&&array:
+        - Introduction: C++/Resource-management/Memory/Pointer&&array/index.md
         - Pointer:
-          - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/index.md
+          - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/index.md
           - Pointer:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer/index.md
           - Pointer-to-void:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-void/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-void/index.md
             - thegreenplace-void-pointer-and-casts-in-C-and-C++:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-void/thegreenplace-void-pointer-and-casts-in-C-and-C++/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-void/thegreenplace-void-pointer-and-casts-in-C-and-C++/index.md
           - Multiple-level-pointer:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Multiple-level-pointer/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Multiple-level-pointer/index.md
           - Pointer-and-integer:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-and-integer/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-and-integer/index.md
             - uintptr_t-and-intptr_t:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-and-integer/uintptr_t-and-intptr_t/index.md
-          - Conversion: C++/Resource-management/Memory/Pointer-and-array/Pointer/Conversion.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-and-integer/uintptr_t-and-intptr_t/index.md
+          - Conversion: C++/Resource-management/Memory/Pointer&&array/Pointer/Conversion.md
           - Pointer-length:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-length/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-length/index.md
           - Pointer-to-member:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-member/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-member/index.md
             - Pointer-to-member-function:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-member/Pointer-to-member-function/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-member/Pointer-to-member-function/index.md
             - Trait:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Pointer/Pointer-to-member/Trait/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-member/Trait/index.md
         - Array:
-          - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/index.md
+          - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/index.md
           - stackoverflow-How-do-I-use-array-in-C++:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/stackoverflow-How-do-I-use-array-in-C++/index.md
-          - cppreference-Array-declaration: C++/Resource-management/Memory/Pointer-and-array/Array/cppreference-Array-declaration.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/stackoverflow-How-do-I-use-array-in-C++/index.md
+          - cppreference-Array-declaration: C++/Resource-management/Memory/Pointer&&array/Array/cppreference-Array-declaration.md
           - Array-initialization:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-initialization/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Array-initialization/index.md
           - Array-in-template:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-in-template/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Array-in-template/index.md
             - Create-array:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-in-template/Create-array/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Array-in-template/Create-array/index.md
           - Variable-length-automatic-stack-array:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Variable-length-automatic-stack-array/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Variable-length-automatic-stack-array/index.md
           - Multidimensional-array:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Multidimensional-array/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Multidimensional-array/index.md
             - TODO-Dynamic-multiple-dimension-array:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Multidimensional-array/TODO-Dynamic-multiple-dimension-array/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Multidimensional-array/TODO-Dynamic-multiple-dimension-array/index.md
           - Array-length:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-length/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Array-length/index.md
           - Array-index:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/Array-index/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/Array-index/index.md
           - std-array:
-            - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/std-array/index.md
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/std-array/index.md
             - std-make_array:
-              - Introduction: C++/Resource-management/Memory/Pointer-and-array/Array/std-array/std-make_array/index.md
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/std-array/std-make_array/index.md
       - Alignment:
         - Introduction: C++/Resource-management/Memory/Alignment/index.md
         - C++11-alignof-operator:

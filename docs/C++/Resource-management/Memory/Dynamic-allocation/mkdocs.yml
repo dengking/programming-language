@@ -6,5 +6,5 @@ nav:
     - delete-operator: delete-operator
     - std-allocator-library: std-allocator-library
     - Implementation: Implementation
-    - VS-C-VS-C++: VS-C-VS-C++
+    - C-VS-C++: C-VS-C++
     - Allocate-aligned-memory: Allocate-aligned-memory
