@@ -1186,14 +1186,20 @@ nav:
         - Introduction: C++/STL/Design&&implementation/STL-Design/index.md
         - Policy-based-design-in-STL:
           - Introduction: C++/STL/Design&&implementation/STL-Design/Policy-based-design-in-STL/index.md
-      - GCC:
-        - GNU-C++Library: C++/STL/Design&&implementation/GCC/GNU-C++Library.md
+      - STL-components:
+        - Introduction: C++/STL/Design&&implementation/STL-components/index.md
+      - GCC-libstdc++:
+        - Introduction: C++/STL/Design&&implementation/GCC-libstdc++/index.md
+        - Dynamic-memory-management:
+          - Introduction: C++/STL/Design&&implementation/GCC-libstdc++/Dynamic-memory-management/index.md
+          - 20-The-bitmap_allocator:
+            - Introduction: C++/STL/Design&&implementation/GCC-libstdc++/Dynamic-memory-management/20-The-bitmap_allocator/index.md
         - 28-Demangling:
-          - Introduction: C++/STL/Design&&implementation/GCC/28-Demangling/index.md
-      - LLVM:
-        - libc++C++Standard-Library: C++/STL/Design&&implementation/LLVM/libc++C++Standard-Library.md
-      - Microsoft:
-        - Introduction: C++/STL/Design&&implementation/Microsoft/index.md
+          - Introduction: C++/STL/Design&&implementation/GCC-libstdc++/28-Demangling/index.md
+      - LLVM-libc++:
+        - Introduction: C++/STL/Design&&implementation/LLVM-libc++/index.md
+      - Microsoft-STL:
+        - Introduction: C++/STL/Design&&implementation/Microsoft-STL/index.md
     - Guidelines:
       - Introduction: C++/STL/Guidelines/index.md
       - Range-based-algorithms:
@@ -1564,6 +1570,8 @@ nav:
           - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/Allocator-concept/index.md
         - std-allocator:
           - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/std-allocator/index.md
+          - Implementation:
+            - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/std-allocator/Implementation/index.md
         - codeproject-C++Standard-Allocator:
           - Introduction: C++/STL/Dynamic-memory-management/STL-allocator/codeproject-C++Standard-Allocator/index.md
     - Extending-std:
@@ -2140,6 +2148,10 @@ nav:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/C-VS-C++/index.md
         - Allocate-aligned-memory:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/index.md
+          - Allocate-aligned-memory-manually:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/Allocate-aligned-memory-manually/index.md
+          - POSIX-allocate-aligned-memory:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/POSIX-allocate-aligned-memory/index.md
           - Align-to-cacheline-word:
             - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Allocate-aligned-memory/Align-to-cacheline-word/index.md
       - Memory-access:
