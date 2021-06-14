@@ -40,3 +40,10 @@ Generic programming
 
 
 
+## 意图决定最终的结果、think as a designer、tradeoff
+
+1、不同的programming language有着不同的特性，这就决定了它们会被用于不同的领域
+
+2、没有全能的语言，需要根据实际的需求，来选择合适的语言
+
+3、不同的programming language之间彼此借鉴特性
