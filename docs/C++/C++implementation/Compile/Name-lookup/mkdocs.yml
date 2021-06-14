@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - cppreference-Name-lookup: cppreference-Name-lookup
-    - using-and-name-lookup: using-and-name-lookup.md
+    - cppreference-Qualified-name-lookup: cppreference-Qualified-name-lookup    
     - ADL: ADL
-    - Dependent-name-lookup: Dependent-name-lookup
-    
+    - Dependent-name-lookup: Dependent-name-lookup    
+    - using-and-name-lookup: using-and-name-lookup.md

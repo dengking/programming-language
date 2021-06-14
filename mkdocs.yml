@@ -2553,14 +2553,15 @@ nav:
     - Introduction: C++/C++implementation/index.md
     - Phases-of-translation:
       - Introduction: C++/C++implementation/Phases-of-translation/index.md
-      - Separate-compilation-model.md: C++/C++implementation/Phases-of-translation/Separate-compilation-model.md
+      - Separate-compilation-model.md:
+        - Introduction: C++/C++implementation/Phases-of-translation/Separate-compilation-model/index.md
       - One-pass-compiler: C++/C++implementation/Phases-of-translation/One-pass-compiler.md
     - Preprocess:
       - Introduction: C++/C++implementation/Preprocess/index.md
       - Implementation-defined-behavior-control:
         - Introduction: C++/C++implementation/Preprocess/Implementation-defined-behavior-control/index.md
-      - include-guard-and-pragma-once:
-        - Introduction: C++/C++implementation/Preprocess/include-guard-and-pragma-once/index.md
+      - include-guard&&pragma-once:
+        - Introduction: C++/C++implementation/Preprocess/include-guard&&pragma-once/index.md
       - Macro:
         - Introduction: C++/C++implementation/Preprocess/Macro/index.md
         - Plateform-macro:
@@ -2578,6 +2579,23 @@ nav:
         - Introduction: C++/C++implementation/Compile/As-if-rule/index.md
       - Compile-flow:
         - Introduction: C++/C++implementation/Compile/Compile-flow/index.md
+      - Name-lookup:
+        - Introduction: C++/C++implementation/Compile/Name-lookup/index.md
+        - cppreference-Name-lookup:
+          - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Name-lookup/index.md
+          - cppreference-Qualified-name-lookup:
+            - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Name-lookup/cppreference-Qualified-name-lookup/index.md
+        - using-and-name-lookup: C++/C++implementation/Compile/Name-lookup/using-and-name-lookup.md
+        - ADL:
+          - ADL: C++/C++implementation/Compile/Name-lookup/ADL/index.md
+        - Dependent-name-lookup:
+          - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/index.md
+          - thegreenplace-Dependent-name-lookup-for-C++templates:
+            - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/thegreenplace-Dependent-name-lookup-for-C++templates/index.md
+          - The-template-disambiguator-for-dependent-names:
+            - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/The-template-disambiguator-for-dependent-names/index.md
+          - Compile-errors:
+            - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/Compile-errors/index.md
       - Optimization:
         - Introduction: C++/C++implementation/Compile/Optimization/index.md
         - Copy-elision:
@@ -2604,7 +2622,6 @@ nav:
         - Language-linkage:
           - Introduction: C++/C++implementation/Link/Linkage/Language-linkage/index.md
         - const-static-and-linkage: C++/C++implementation/Link/Linkage/const-static-and-linkage.md
-        - TODO-Linkage-and-libraries: C++/C++implementation/Link/Linkage/TODO-Linkage-and-libraries.md
       - Optimization:
         - Introduction: C++/C++implementation/Link/Optimization/index.md
       - Link-time-error:
@@ -2635,7 +2652,7 @@ nav:
     - Code-analysis-tool:
       - Introduction: C++/C++implementation/Code-analysis-tool/index.md
       - PC-Lint:
-        - PC-Lint: C++/C++implementation/Code-analysis-tool/PC-Lint/PC-Lint.md
+        - Introduction: C++/C++implementation/Code-analysis-tool/PC-Lint/index.md
     - Implementation:
       - LLVM:
         - Introduction: C++/C++implementation/Implementation/LLVM/index.md
