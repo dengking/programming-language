@@ -2583,9 +2583,8 @@ nav:
         - Introduction: C++/C++implementation/Compile/Name-lookup/index.md
         - cppreference-Name-lookup:
           - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Name-lookup/index.md
-          - cppreference-Qualified-name-lookup:
-            - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Name-lookup/cppreference-Qualified-name-lookup/index.md
-        - using-and-name-lookup: C++/C++implementation/Compile/Name-lookup/using-and-name-lookup.md
+        - cppreference-Qualified-name-lookup:
+          - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Qualified-name-lookup/index.md
         - ADL:
           - ADL: C++/C++implementation/Compile/Name-lookup/ADL/index.md
         - Dependent-name-lookup:
@@ -2596,6 +2595,7 @@ nav:
             - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/The-template-disambiguator-for-dependent-names/index.md
           - Compile-errors:
             - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/Compile-errors/index.md
+        - using-and-name-lookup: C++/C++implementation/Compile/Name-lookup/using-and-name-lookup.md
       - Optimization:
         - Introduction: C++/C++implementation/Compile/Optimization/index.md
         - Copy-elision:
