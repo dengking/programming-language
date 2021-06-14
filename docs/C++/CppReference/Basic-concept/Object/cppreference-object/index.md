@@ -42,9 +42,13 @@ cppreference中，习惯使用"storage"这个词语，它其实是对memory的�
 >
 > cppreference [Object#Implicit creation](https://en.cppreference.com/w/cpp/language/object)
 
-3) cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime): Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
+3) cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime): 
 
-4) cppreference [Object](https://en.cppreference.com/w/cpp/language/object): [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary);
+Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
+
+4) cppreference [Object](https://en.cppreference.com/w/cpp/language/object): 
+
+[lifetime](https://en.cppreference.com/w/cpp/language/lifetime) (bounded by storage duration or temporary);
 
 > NOTE: 在`./Lifetime-and-storage-duration`中，对3)、4)进行说明。
 

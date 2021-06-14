@@ -4,11 +4,11 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 ## Guide
 
-原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，对linkage的讨论，在`C-family-language\C-and-C++\From-source-code-to-exec\Link\Linkage`章节；
+原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，对linkage的讨论，在`C++implementation\Link\Linkage`章节；
 
-原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在[Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
+原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
 
-我们按照在`Theory\Programming-language\How-to-master-programming-language.md#`中总结的：首先学习property，然后学习描述这些property的specifier的方式来进行学习。
+我们按照在`Theory\Programming-language\How-to-master-programming-language`中总结的：首先学习property，然后学习描述这些property的specifier的方式来进行学习。
 
 本文仅仅关注原文中object storage duration相关的内容，我们以如下的思路来组织内容：
 
@@ -64,7 +64,7 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 | static           | allocated when the **program** begins<br>(Before main function) | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括:<br>**static local object**、<br>**extern local object**） | process;            |
 | dynamic          | allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              | heap;               |
 
-> NOTE: 上述storage duration是C++ language对OS中process execution model、memory model的刻画，参见工程Linux-OS的`Kernel\Guide\Multitasking\Process-model\Process-run-model`章节。
+> NOTE: 上述storage duration是C++ language对OS中process execution model、memory model的刻画，参见工程Linux-OS的`Multitasking\Process-model\Process-run-model`章节。
 
 
 
@@ -88,13 +88,13 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 我们平时所说的"自动变量"就具备这种storage duration；
 
-##### Automatic storage and RAII
+**Automatic storage and RAII**
 
-object with automatic storage的lifetime is bound by "`{}`"，对这个特性的一个非常重要的应用就是: RAII，参见`C++\Idiom\OOP\RAII`。
+object with automatic storage的lifetime is bound by "`{}`"，对这个特性的一个非常重要的应用就是: RAII，参见`RAII`。
 
 #### Dynamic storage duration
 
-对于object with dynamic storage duration，在`C-and-C++\Resource-management\Memory-management`章节进行了描述。
+对于object with dynamic storage duration，在`Resource-management\Memory-management`章节进行了描述。
 
 
 
@@ -211,7 +211,9 @@ It specifies **external linkage**, and does not technically affect **storage dur
 
 使用`static` specifier修饰的object具有static storage duration，但是具有static storage duration的object，不一定要使用`static` specifier来修饰。
 
-
+> NOTE: 
+>
+> 这是C++的晦涩之处
 
 ### Static local variables
 
