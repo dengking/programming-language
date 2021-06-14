@@ -1,12 +1,8 @@
 # Separate compilation model
 
-
-
 我是在查找compiler如何compile template的时候，在isocpp的"Why can’t I separate the definition of my templates class from its declaration and put it inside a .cpp file? [¶](https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl) [Δ](https://isocpp.org/wiki/faq/templates#)"中提及了“Separate compilation model”，遂特地Google了一下，结合之前的思考，发现，c和c++中的很多问题都与此有关：
 
-- 在`Theory/Organization`章节中，其实已经探讨了与此相关的问题了，显然，compiler的编译是基于programming language的organization的。
-
-
+1、在`Theory/Organization`章节中，其实已经探讨了与此相关的问题了，显然，compiler的编译是基于programming language的organization的。
 
 C和`C++`都是采用的Separate compilation model，其实所谓的“Separate compilation model”，简而言之是：
 
@@ -30,7 +26,7 @@ C和`C++`都是采用的Separate compilation model，其实所谓的“Separate 
 
 translation unit说明编译的单位，一般是source file。
 
-### TODO: wikipedia [Translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))
+### wikipedia [Translation unit](https://en.wikipedia.org/wiki/Translation_unit_(programming))
 
 
 
@@ -50,9 +46,7 @@ translation unit说明编译的单位，一般是source file。
 
 ### Linkage
 
-Linkage显然是建立在translation unit之间的一个概念。
-
-linkage是建立在translation unit之间的一个概念，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
+Linkage显然是建立在translation unit之间的一个概念，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
 
 Linkage: 允许不同的translation unit
 

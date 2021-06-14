@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
-    - As-if-rule: As-if-rule     
+    - As-if-rule: As-if-rule
     - Compile-flow: Compile-flow
+    - Name-lookup: Name-lookup
     - Optimization: Optimization

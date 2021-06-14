@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Name-lookup: Name-lookup.md
+    - cppreference-Name-lookup: cppreference-Name-lookup
     - using-and-name-lookup: using-and-name-lookup.md
     - ADL: ADL
     - Dependent-name-lookup: Dependent-name-lookup

@@ -6,18 +6,18 @@
 
 构建起一个完整的编译流程，对于理解C++非常重要。
 
-| 步骤                      | 子步骤                                                       |      |
-| ------------------------- | ------------------------------------------------------------ | ---- |
-| Name lookup               |                                                              |      |
-|                           | [ADL](https://en.cppreference.com/w/cpp/language/adl)        |      |
-| Compile template          |                                                              |      |
-|                           | Template argument deduction                                  |      |
-|                           | Substitution(涉及 [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae)  ) |      |
-| Overload resolution       |                                                              |      |
-|                           |                                                              |      |
-| Specializaiton resolution |                                                              |      |
-|                           |                                                              |      |
-| Access checking           |                                                              |      |
+| 步骤                                | 子步骤                                                       |      |
+| ----------------------------------- | ------------------------------------------------------------ | ---- |
+| Name lookup                         |                                                              |      |
+|                                     | [ADL](https://en.cppreference.com/w/cpp/language/adl)        |      |
+| Compile template                    |                                                              |      |
+|                                     | Template argument deduction                                  |      |
+|                                     | Substitution(涉及 [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae)  ) |      |
+| Overload resolution                 |                                                              |      |
+|                                     |                                                              |      |
+| Template  specialization resolution |                                                              |      |
+|                                     |                                                              |      |
+| Access checking                     |                                                              |      |
 
 说明:
 

@@ -1,12 +1,12 @@
 # Linkage 
 
-需要从完整的编译过程（是指从source file到最终的object file）来分析linkage。和storage duration不同的是，linkage描述的是“name”，所以它既可以指代function，也可以指代object。	
+一、需要从完整的编译过程（是指从source file到最终的object file）来分析linkage。和storage duration不同的是，linkage描述的是“name”，所以它既可以指代function，也可以指代object。	
 
-linkage是建立translation unit之间的概念，参见`C-and-C++\From-source-code-to-exec\Phases-of-translation\Separate-compilation-model`。
+二、linkage是建立translation unit之间的概念，参见`Phases-of-translation\Separate-compilation-model`。
 
 ## 编译模型
 
-完整的编译过程在`C-and-C++\From-source-code-to-exec\Phases-of-translation`中描述的；
+完整的编译过程在`Phases-of-translation`中描述的；
 
 
 
@@ -113,9 +113,7 @@ https://aticleworld.com/linkage-in-c/
 
 ### const and linkage
 
-参考[const-static-and-linkage](./const-static-and-linkage.md)。
-
-
+参考 `const-static-and-linkage`。
 
 
 

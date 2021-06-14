@@ -1,61 +1,12 @@
-# Name lookup
-
-
-
-## cppreference [Name lookup](https://en.cppreference.com/w/cpp/language/lookup)
-
-**Name lookup** is the procedure by which a [name](https://en.cppreference.com/w/cpp/language/name), when encountered in a program, is associated with the [declaration](https://en.cppreference.com/w/cpp/language/declarations) that introduced it.
-
-For example, to compile [std::cout](http://en.cppreference.com/w/cpp/io/cout) << [std::endl](http://en.cppreference.com/w/cpp/io/manip/endl);, the compiler performs:
-
-1、**unqualified name lookup** for the name `std`, which finds the declaration of namespace `std` in the header `<iostream>`
-
->  NOTE: 因为`#include <iostream>`，则包含了namespace `std`的声明
-
-2、**qualified name lookup** for the name `cout`, which finds a variable declaration in the namespace `std`
-
-3、**qualified name lookup** for the name `endl`, which finds a function template declaration in the namespace `std`
-
-4、both [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl) for the name `operator <<` which finds multiple function template declarations in the namespace `std` and **qualified name lookup** for the name `std::ostream::operator<<` which finds multiple member function declarations in class `std::ostream`
-
-> NOTE: 
->
-> 1、在 cppreference [Argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl) 中，对`std::cout << "Test\n";`有着更多的解释
-
-For function and function template names, **name lookup** can associate *multiple* declarations with the same name, and may obtain additional declarations from [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl). [Template argument deduction](https://en.cppreference.com/w/cpp/language/function_template) may also apply, and the set of declarations is passed to [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), which selects the declaration that will be used. [Member access](https://en.cppreference.com/w/cpp/language/access) rules, if applicable, are considered only after **name lookup** and **overload resolution**.
-
-> NOTE: 完整的编译过程涉及到了非常多的内容
-
-For all other names (variables, namespaces, classes, etc), **name lookup** must produce a *single* declaration in order for the program to compile. Lookup for a name in a scope finds all declarations of that name, with one exception, known as the "struct hack" or "type/non-type hiding": Within the same scope, some occurrences of a name may refer to a declaration of a `class`/`struct`/`union`/`enum` that is not a typedef, while all other occurrences of the same name either all refer to the same variable, non-static data member (since C++14), or enumerator, or they all refer to possibly overloaded function or function template names. In this case, there is no error, but the type name is hidden from lookup (the code must use [elaborated type specifier](https://en.cppreference.com/w/cpp/language/elaborated_type_specifier) to access it).
-
-> NOTE: 上面两段话分别概述了function的name lookup和others的name lookup。需要注意它们的异同。
-
-### Types of lookup
-
-If the **name** appears immediately to the right of the scope resolution operator `::` or possibly after `::` followed by the disambiguating keyword `template`, see
-
-- [Qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup)
-
-Otherwise, see
-
-- [Unqualified name lookup](https://en.cppreference.com/w/cpp/language/unqualified_lookup)
-
-### See also
-
-- [Scope](https://en.cppreference.com/w/cpp/language/scope)
-- [Argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)
-- [Template argument deduction](https://en.cppreference.com/w/cpp/language/function_template)
-- [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
-
-
-
-## cppreference [Qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup)
+# cppreference [Qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup)
 
 A *qualified* name is a name that appears on the right hand side of the **scope resolution operator** `::` (see also [qualified identifiers](https://en.cppreference.com/w/cpp/language/identifiers#Qualified_identifiers)). A qualified name may refer to a
 
-- class member (including static and non-static functions, types, templates, etc)
-- namespace member (including another namespace)
-- enumerator
+1、class member (including static and non-static functions, types, templates, etc)
+
+2、namespace member (including another namespace)
+
+3、enumerator
 
 If there is nothing on the left hand side of the `::`, the lookup considers only declarations made in the **global namespace scope** (or introduced into the global namespace by a [using declaration](https://en.cppreference.com/w/cpp/language/namespace)). This makes it possible to refer to such names even if they were hidden by a local declaration:
 
@@ -128,18 +79,21 @@ int main() {
 }
 ```
 
-### Enumerators
+## Enumerators
 
 If the lookup of the left-hand side name comes up with an [enumeration](https://en.cppreference.com/w/cpp/language/enum) (either scoped or unscoped), the lookup of the right-hand side must result in an enumerator that belongs that enumeration, otherwise the program is ill-formed.
 
-### Class members
+## Class members
 
 If the lookup of the **left** hand side name comes up with a `class`/`struct` or `union` name, the name on the **right** hand side of `::` is looked up in the scope of that class (and so may find a declaration of a member of that class or of its base), with the following exceptions
 
-- A destructor is looked up as described above (in the scope of the name to the left of ::)
-- A conversion-type-id in a [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) function name is first looked up in the scope of the class. If not found, the name is then looked up in the **current scope**. The conversion-type-id must denote the same type in both scopes.
-- names used in **template arguments** are looked up in the **current scope** (not in the scope of the template name)
-- names in [using-declarations](https://en.cppreference.com/w/cpp/language/namespace) also consider `class`/`enum` names that are hidden by the name of a variable, data member, function, or enumerator declared in the same scope
+1、A destructor is looked up as described above (in the scope of the name to the left of ::)
+
+2、A conversion-type-id in a [user-defined conversion](https://en.cppreference.com/w/cpp/language/cast_operator) function name is first looked up in the scope of the class. If not found, the name is then looked up in the **current scope**. The conversion-type-id must denote the same type in both scopes.
+
+3、names used in **template arguments** are looked up in the **current scope** (not in the scope of the template name)
+
+4、names in [using-declarations](https://en.cppreference.com/w/cpp/language/namespace) also consider `class`/`enum` names that are hidden by the name of a variable, data member, function, or enumerator declared in the same scope
 
 If the **right** hand side of `::` names the same class as the **left** hand side, the name designates the [constructor](https://en.cppreference.com/w/cpp/language/constructor) of that class. Such **qualified name** can only be used in a declaration of a **constructor** and in the [using-declaration](https://en.cppreference.com/w/cpp/language/using_declaration) for an [inheriting constructor](https://en.cppreference.com/w/cpp/language/using_declaration#Inheriting_constructors). In those lookups where function names are ignored (that is, when looking up a name on the left of `::`, when looking up a name in [elaborated type specifier](https://en.cppreference.com/w/cpp/language/elaborated_type_specifier), or [base specifier](https://en.cppreference.com/w/cpp/language/derived_class)), the same syntax resolves to the injected-class-name:
 
@@ -170,7 +124,7 @@ int main()
 }
 ```
 
-### Namespace members
+## Namespace members
 
 If the name on the **left** of `::` refers to a namespace or if there is nothing on the left of `::` (in which case it refers to the **global namespace**), the name that appears on the **right** hand side of `::` is looked up in the scope of that namespace, except that
 
@@ -246,3 +200,4 @@ void g()
   BD::a++; // OK: finds the same A::a through B and through D
 }
 ```
+

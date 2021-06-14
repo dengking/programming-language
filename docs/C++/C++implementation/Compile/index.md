@@ -46,4 +46,3 @@ C++11引入了memory model，给予了programmer解决上述问题的手段。
 
 参见 `C++\Guide\Polymorphism` 章节。
 
-
