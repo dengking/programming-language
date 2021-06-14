@@ -10,9 +10,7 @@ Programming paradigm所表达的是编程的理念、思想，它指导着progra
 
 上面这段话中的“high-level [programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) of *generic programming*”就是generic programming这种paradigm的核心思想，而“lower-level programming language *genericity mechanisms* used to implement them ”即为programming language对它的实现。
 
-
-
-
+不同programming language对programming paradigm的实现是不同的。
 
 ## wikipedia [Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) 
 

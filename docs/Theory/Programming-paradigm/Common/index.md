@@ -12,11 +12,7 @@ Programming language的设计者在设计实现某种paradigm的时候，需要�
 
 ## 各种programming paradigm都有着自己的优势和劣势
 
-各种programming paradigm都有着自己的优势与劣势:
-
-OOP: 无法像generic programming 那样抽象出type，因此可能导致写非常多的重复的code；比如: AMUST API的各种interface的差异仅仅在于它们的request struct type不同，它们的流程都是类似的；在OOP中，无法抽象出type/参数化type，则导致可能写非常多的重复的code；
-
-FP: 非常适合于computation on structure
+参见 `Theory\Programming-paradigm\Comparison` 章节
 
 ## 博采众长，充分发挥各种programming paradigm的优势
 

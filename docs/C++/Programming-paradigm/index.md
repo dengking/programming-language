@@ -54,6 +54,8 @@ C++并不直接支持AOP，但是C++可以使用AOP的思想来编写更加抽�
 
 
 
-
-
 ## CppCoreGuidelines [T.5: Combine generic and OO techniques to amplify their strengths, not their costs](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#t5-combine-generic-and-oo-techniques-to-amplify-their-strengths-not-their-costs)
+
+> NOTE: 
+>
+> 结合C++的各种programming paradigm来发挥C++的威力

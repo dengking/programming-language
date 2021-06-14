@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - About-this-chapter: index.md
     - Introduction: Introduction.md
     - Introduction-to-Objects: Introduction-to-Objects.md

@@ -7,11 +7,8 @@ nav:
     - Member-access: Member-access
     - Subtyping-polymorphism: Subtyping-polymorphism
     - Interface: Interface
-
     - Empty-base-optimization: Empty-base-optimization
     - Specifier: Specifier
-######### 这是c++中非常常见的三种容易混淆的情况##########    
-    - Overload-VS-override-VS-name-hiding: Overload-VS-override-VS-name-hiding.md
+    - Overload-VS-override-VS-name-hiding: Overload-VS-override-VS-name-hiding # 这是c++中非常常见的三种容易混淆的情况##########    
     - CppCoreGuidelines-Classes-and-class-hierarchies: CppCoreGuidelines-Classes-and-class-hierarchies
-    
     - TODO-Implementation: TODO-Implementation

@@ -1,17 +1,18 @@
 nav:
-    #################### 首先介绍面向对象编程的概念####################
-    - Object-oriented-programming: index.md
-    #################### thinking in java这本书对OOP的介绍是非常好的####################    
-    - Thinking-in-java: Thinking-in-java
+    - Introduction: index.md # 首先介绍面向对象编程的概念
     #################### class-based OOP是我们最常用的####################    
     - Class-based-OOP: Class-based-OOP
+    
     - Prototype-based-OOP: Prototype-based-OOP
     # 
     - Assemble: Assemble
     
-    - Glossary: Glossary
     - Subtyping-polymorphism: Subtyping-polymorphism
+    
     - Design-pattern: Design-pattern
+    
     - Summary-of-OOP: Summary-of-OOP
+    
     - Class-relation-hierarchy-diagram: Class-relation-hierarchy-diagram
+    
     - Glossary: Glossary

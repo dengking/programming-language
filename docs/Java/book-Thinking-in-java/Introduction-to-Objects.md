@@ -1,5 +1,11 @@
 # Introduction to Objects
 
+> NOTE: 
+>
+> 一、发展概述:
+>
+> 从描述 machine 到 描述 concept
+
 “We cut nature up, organize it into **concepts**, and ascribe significances as we do, largely because we are parties to an agreement that holds throughout our speech community and is codified in the patterns of
 our language … we cannot talk at all except by subscribing to the organization and classification of data which the agreement decrees.” Benjamin Lee Whorf (1897-1941)
 
@@ -11,9 +17,13 @@ The genesis（起源） of the computer revolution was in a **machine**. The gen
 
 But computers are not so much machines as they are mind amplification（放大） tools (“bicycles for the mind,” as Steve Jobs is fond of saying) and a different kind of **expressive medium**. As a result, the tools are beginning to look less like machines and more like parts of our **minds**, and also like other forms of **expression** such as writing, painting, sculpture, animation, and filmmaking. **[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)** (OOP) is part of this movement toward using the computer as an **expressive medium**.
 
-> NOTE: 上面这段表达的意思是programming language的发展趋势是“描述” mind。显然OOP就是在这种浪潮下诞生的。
+> NOTE: 
 >
-> 关于programming language，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)的[Abstraction in programming language](https://dengking.github.io/Post/Abstraction/Abstraction/#abstraction-in-programming-language)章节。
+> 1、上面这段表达的意思是programming language的发展趋势是“描述” mind。显然OOP就是在这种浪潮下诞生的。
+>
+> 2、关于programming language，参见文章[Abstraction](https://dengking.github.io/Post/Abstraction/Abstraction/)的[Abstraction in programming language](https://dengking.github.io/Post/Abstraction/Abstraction/#abstraction-in-programming-language)章节。
+>
+> 3、"expressive medium"的意思是: 用于表达的媒介
 
 This chapter will introduce you to the basic concepts of OOP, including an overview of development methods. 
 
@@ -43,21 +53,21 @@ The object-oriented approach goes a step further by providing tools for the prog
 
 Alan Kay summarized five basic characteristics of [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk), the first successful object-oriented language and one of the languages upon which [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) is based. These characteristics represent a pure approach to **object-oriented programming**:
 
-1. **Everything is an [object](https://en.wikipedia.org/wiki/Object_(computer_science))**. Think of an object as a fancy **variable**; it stores data, but you can “make requests” to that object, asking it to perform operations on itself. In theory, you can take any **conceptual component** in the problem you’re trying to solve (dogs, buildings, services, etc.) and represent it as an object in your program.
+1、**Everything is an [object](https://en.wikipedia.org/wiki/Object_(computer_science))**. Think of an object as a fancy **variable**; it stores data, but you can “make requests” to that object, asking it to perform operations on itself. In theory, you can take any **conceptual component** in the problem you’re trying to solve (dogs, buildings, services, etc.) and represent it as an object in your program.
 
-2. **A program is a bunch of objects telling each other what to do by sending messages. To make a request of an object, you “send a message” to that object**. More concretely, you can think of a message as a request to call a method that belongs to a particular object.
+2、**A program is a bunch of objects telling each other what to do by sending messages. To make a request of an object, you “send a message” to that object**. More concretely, you can think of a message as a request to call a method that belongs to a particular object.
 
   > NOTE: 上面这段话总结从OOP的角度来描述程序的运行。
   >
   > 牢记“send a message”和"make a request“，后面会频繁出现，在下一节会描述如何来实现“send a message”。
 
-3. **Each object has its own memory made up of other objects**. Put another way, you create a new kind of object by making a package containing existing objects. Thus, you can build complexity into a program while hiding it behind the simplicity of objects.
+3、**Each object has its own memory made up of other objects**. Put another way, you create a new kind of object by making a package containing existing objects. Thus, you can build complexity into a program while hiding it behind the simplicity of objects.
 
-   > NOTE: 这就是我们常常所说的[Object composition](https://en.wikipedia.org/wiki/Object_composition)
+> NOTE: 这就是我们常常所说的[Object composition](https://en.wikipedia.org/wiki/Object_composition)
 
-4. **Every object has a type**. Using the parlance, each object is an ***[instance](https://en.wikipedia.org/wiki/Instance_(computer_science))*** of a ***[class](https://en.wikipedia.org/wiki/Class_(computer_programming))***, in which “class” is synonymous with “type.” The most important distinguishing characteristic of a class is “What messages can you send to it?”
+4、**Every object has a type**. Using the parlance, each object is an ***[instance](https://en.wikipedia.org/wiki/Instance_(computer_science))*** of a ***[class](https://en.wikipedia.org/wiki/Class_(computer_programming))***, in which “class” is synonymous with “type.” The most important distinguishing characteristic of a class is “What messages can you send to it?”
 
-5. **All objects of a particular type can receive the same messages**. This is actually a loaded statement, as you will see later. Because an object of type “circle” is also an object of type “shape,” a circle is guaranteed to accept shape messages. This means you can write code that talks to shapes and automatically handle anything that fits the description of a shape. This **[substitutability](https://en.wikipedia.org/wiki/Liskov_substitution_principle)** is one of the powerful concepts in OOP.
+5、**All objects of a particular type can receive the same messages**. This is actually a loaded statement, as you will see later. Because an object of type “circle” is also an object of type “shape,” a circle is guaranteed to accept shape messages. This means you can write code that talks to shapes and automatically handle anything that fits the description of a shape. This **[substitutability](https://en.wikipedia.org/wiki/Liskov_substitution_principle)** is one of the powerful concepts in OOP.
 
 > NOTE: 上面5条对OOP的总结非常好。
 

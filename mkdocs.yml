@@ -125,35 +125,30 @@ nav:
     - Programming-paradigm: Theory/Programming-paradigm/Programming-paradigm.md
     - Common:
       - Introduction: Theory/Programming-paradigm/Common/index.md
-      - Abstraction-and-polymorphism:
-        - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/index.md
+      - Abstraction&&polymorphism:
+        - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/index.md
         - Program-to-an-abstraction:
-          - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Program-to-an-abstraction/index.md
+          - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Program-to-an-abstraction/index.md
         - Polymorphism:
-          - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/index.md
-          - Polymorphism: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Polymorphism.md
+          - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/index.md
+          - Polymorphism: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Polymorphism.md
           - Ad-hoc-polymorphism:
-            - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Ad-hoc-polymorphism/index.md
+            - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Ad-hoc-polymorphism/index.md
           - Parametric-polymorphism:
-            - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Parametric-polymorphism/index.md
+            - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Parametric-polymorphism/index.md
           - Implementation:
-            - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/index.md
+            - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Implementation/index.md
             - Static-and-dynamic-polymorphism:
-              - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/index.md
-              - TODO-Concept-VS-interface: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/TODO-Concept-VS-interface.md
+              - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/index.md
+              - TODO-Concept-VS-interface: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Implementation/Static-and-dynamic-polymorphism/TODO-Concept-VS-interface.md
             - TODO-Method-resolution-order:
-              - Introduction: Theory/Programming-paradigm/Common/Abstraction-and-polymorphism/Polymorphism/Implementation/TODO-Method-resolution-order/index.md
-      - Behavior-based-and-interface:
-        - Introduction: Theory/Programming-paradigm/Common/Behavior-based-and-interface/index.md
+              - Introduction: Theory/Programming-paradigm/Common/Abstraction&&polymorphism/Polymorphism/Implementation/TODO-Method-resolution-order/index.md
+      - Behavior-based&&interface:
+        - Introduction: Theory/Programming-paradigm/Common/Behavior-based&&interface/index.md
       - Code-reuse:
         - Introduction: Theory/Programming-paradigm/Common/Code-reuse/index.md
     - OOP:
-      - Object-oriented-programming: Theory/Programming-paradigm/OOP/index.md
-      - Thinking-in-java:
-        - About-this-chapter: Theory/Programming-paradigm/OOP/Thinking-in-java/index.md
-        - Introduction: Theory/Programming-paradigm/OOP/Thinking-in-java/Introduction.md
-        - Introduction-to-Objects: Theory/Programming-paradigm/OOP/Thinking-in-java/Introduction-to-Objects.md
-        - Everything-is-an-object: Theory/Programming-paradigm/OOP/Thinking-in-java/Everything-is-an-object.md
+      - Introduction: Theory/Programming-paradigm/OOP/index.md
       - Class-based-OOP:
         - Introduction: Theory/Programming-paradigm/OOP/Class-based-OOP/index.md
       - Prototype-based-OOP:
@@ -176,12 +171,6 @@ nav:
         - TODO-assemble-as-chain:
           - Introduction: Theory/Programming-paradigm/OOP/Assemble/TODO-assemble-as-chain/index.md
         - TODO-Abstraction-and-relation: Theory/Programming-paradigm/OOP/Assemble/TODO-Abstraction-and-relation.md
-      - Glossary:
-        - Introduction: Theory/Programming-paradigm/OOP/Glossary/index.md
-        - Method: Theory/Programming-paradigm/OOP/Glossary/Method.md
-        - TODO-Trait: Theory/Programming-paradigm/OOP/Glossary/TODO-Trait.md
-        - Inheritance: Theory/Programming-paradigm/OOP/Glossary/Inheritance.md
-        - Method-override: Theory/Programming-paradigm/OOP/Glossary/Method-override.md
       - Subtyping-polymorphism:
         - Introduction: Theory/Programming-paradigm/OOP/Subtyping-polymorphism/index.md
         - Is-a:
@@ -281,7 +270,12 @@ nav:
         - Introduction: Theory/Programming-paradigm/OOP/Summary-of-OOP/index.md
       - Class-relation-hierarchy-diagram:
         - Introduction: Theory/Programming-paradigm/OOP/Class-relation-hierarchy-diagram/index.md
-      - Glossary: Glossary
+      - Glossary:
+        - Introduction: Theory/Programming-paradigm/OOP/Glossary/index.md
+        - Method: Theory/Programming-paradigm/OOP/Glossary/Method.md
+        - TODO-Trait: Theory/Programming-paradigm/OOP/Glossary/TODO-Trait.md
+        - Inheritance: Theory/Programming-paradigm/OOP/Glossary/Inheritance.md
+        - Method-override: Theory/Programming-paradigm/OOP/Glossary/Method-override.md
     - Aspect-oriented-programming:
       - Introduction: Theory/Programming-paradigm/Aspect-oriented-programming/index.md
     - Functional-programming:
@@ -2906,6 +2900,12 @@ nav:
   - Guide:
     - Generic-programming:
       - Introduction: Java/Guide/Generic-programming/index.md
+  - book-Thinking-in-java:
+    - Introduction: Java/book-Thinking-in-java/index.md
+    - About-this-chapter: Java/book-Thinking-in-java/index.md
+    - Introduction: Java/book-Thinking-in-java/Introduction.md
+    - Introduction-to-Objects: Java/book-Thinking-in-java/Introduction-to-Objects.md
+    - Everything-is-an-object: Java/book-Thinking-in-java/Everything-is-an-object.md
 - Eiffel:
   - Introduction: Eiffel/index.md
 - Go:

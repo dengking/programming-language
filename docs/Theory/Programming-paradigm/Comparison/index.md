@@ -1,8 +1,12 @@
 # Comparison of programming paradigms
 
-本章对各种programming paradigm进行比较。
+一、本章对各种programming paradigm进行比较。
 
+二、各种programming paradigm都有着自己的优势与劣势:
 
+OOP: 无法像generic programming 那样抽象出type，因此可能导致写非常多的重复的code；比如: AMUST API的各种interface的差异仅仅在于它们的request struct type不同，它们的流程都是类似的；在OOP中，无法抽象出type/参数化type，则导致可能写非常多的重复的code；
+
+FP: 非常适合于computation on structure
 
 ## wikipedia [Comparison of programming paradigms](https://en.wikipedia.org/wiki/Comparison_of_programming_paradigms)
 
