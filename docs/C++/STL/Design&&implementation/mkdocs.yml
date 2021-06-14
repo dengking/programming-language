@@ -1,6 +1,12 @@
 nav:
     - Introduction: index.md
+    
     - STL-Design: STL-Design
-    - GCC: GCC
-    - LLVM: LLVM
-    - Microsoft: Microsoft
+    
+    - STL-components: STL-components
+    
+    - GCC-libstdc++: GCC-libstdc++
+    
+    - LLVM-libc++: LLVM-libc++
+    
+    - Microsoft-STL: Microsoft-STL
