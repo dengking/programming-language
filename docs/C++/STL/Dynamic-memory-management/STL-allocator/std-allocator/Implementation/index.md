@@ -1,6 +1,6 @@
 # `std::allocator` implementation
 
-总的来说，各种具体的实现(`libstdc++`......)对 `std::allocator` 的实现是不同的。
+总的来说，各种具体的实现(gcc、LLVM、MSVC) 的实现是不同的，具体实现，需要参考对应的doc。
 
 
 
