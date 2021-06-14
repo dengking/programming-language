@@ -686,6 +686,8 @@ nav:
       - Introduction: C++/CppReference/Functions/index.md
       - Function:
         - Introduction: C++/CppReference/Functions/Function/index.md
+        - cppreference-Function-declaration:
+          - Introduction: C++/CppReference/Functions/Function/cppreference-Function-declaration/index.md
       - Function-objects:
         - Introduction: C++/CppReference/Functions/Function-objects/index.md
         - STL-Function-object:
@@ -701,23 +703,8 @@ nav:
             - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/STL-Functor/index.md
             - What-is-functor:
               - Introduction: C++/CppReference/Functions/Function-objects/STL-Function-object/STL-Functor/What-is-functor/index.md
-      - cppreference-Function-declaration:
-        - Introduction: C++/CppReference/Functions/cppreference-Function-declaration/index.md
       - Function-call:
         - Introduction: C++/CppReference/Functions/Function-call/index.md
-      - Function-termination:
-        - Introduction: C++/CppReference/Functions/Function-termination/index.md
-        - Function-return-type:
-          - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/index.md
-          - C++11-Trailing-return-type:
-            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-Trailing-return-type/index.md
-          - C++11-std-result_of:
-            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-std-result_of/index.md
-          - C++14-Return-type-deduction:
-            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/index.md
-            - "\u6211\u7684\u5B9E\u8DF5-auto-return":
-              - Introduction: "C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/\u6211\
-                  \u7684\u5B9E\u8DF5-auto-return/index.md"
       - Function-overload:
         - Introduction: C++/CppReference/Functions/Function-overload/index.md
         - Operator-overload:
@@ -738,6 +725,8 @@ nav:
           - Introduction: C++/CppReference/Functions/Function-overload/Overload-and-return-type/index.md
       - Lambda-expression:
         - Introduction: C++/CppReference/Functions/Lambda-expression/index.md
+        - C++14-generalized-lambda-capture:
+          - Introduction: C++/CppReference/Functions/Lambda-expression/C++14-generalized-lambda-capture/index.md
       - First-class-function:
         - Introduction: C++/CppReference/Functions/First-class-function/index.md
         - Member-function-as-first-class-function:
@@ -776,9 +765,19 @@ nav:
           - Variadic-function: C++/CppReference/Functions/GP/Variadic-arguments-function/index.md
         - Template-function-signature:
           - Introduction: C++/CppReference/Functions/GP/Template-function-signature/index.md
-      - Function-termination: Function-termination
-      - Functional-programming:
-        - Higher-order-function: C++/CppReference/Functions/Functional-programming/Higher-order-function.md
+      - Function-termination:
+        - Introduction: C++/CppReference/Functions/Function-termination/index.md
+        - Function-return-type:
+          - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/index.md
+          - C++11-Trailing-return-type:
+            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-Trailing-return-type/index.md
+          - C++11-std-result_of:
+            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++11-std-result_of/index.md
+          - C++14-Return-type-deduction:
+            - Introduction: C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/index.md
+            - "\u6211\u7684\u5B9E\u8DF5-auto-return":
+              - Introduction: "C++/CppReference/Functions/Function-termination/Function-return-type/C++14-Return-type-deduction/\u6211\
+                  \u7684\u5B9E\u8DF5-auto-return/index.md"
     - Reference:
       - Introduction: C++/CppReference/Reference/index.md
       - cppreference-Reference:
