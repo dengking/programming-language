@@ -439,7 +439,8 @@ nav:
     - Introduction: C++/CppReference/index.md
     - Basic-concept:
       - Introduction: C++/CppReference/Basic-concept/index.md
-      - Basic-concepts: C++/CppReference/Basic-concept/Basic-concepts.md
+      - Basic-concepts:
+        - Introduction: C++/CppReference/Basic-concept/Basic-concepts/index.md
       - Declaration-and-definition:
         - Introduction: C++/CppReference/Basic-concept/Declaration-and-definition/index.md
         - Declaration:
@@ -459,43 +460,45 @@ nav:
             - Introduction: C++/CppReference/Basic-concept/Object/cppreference-object/Object-alignment-requirement/index.md
         - Object-type-value:
           - Introduction: C++/CppReference/Basic-concept/Object/Object-type-value/index.md
-        - Lifetime-and-storage-duration:
-          - Lifetime: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Lifetime.md
-          - Storage-duration: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Storage-duration.md
+        - Lifetime&&storage-duration:
+          - Object-lifetime:
+            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Object-lifetime/index.md
+          - Storage-duration:
+            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Storage-duration/index.md
           - Static-storage-duration:
-            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/index.md
+            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/index.md
             - pabloariasal-C++Initialization-of-Static-Variables:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/pabloariasal-C++Initialization-of-Static-Variables/index.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/pabloariasal-C++Initialization-of-Static-Variables/index.md
             - Non-local-object:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Non-local-object/index.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Non-local-object/index.md
             - Static-local-object:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Static-local-object/index.md
-            - Static-and-dynamic-initialization: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Static-and-dynamic-initialization.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Static-local-object/index.md
+            - Static-and-dynamic-initialization: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Static-and-dynamic-initialization.md
             - Idioms:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Idioms/index.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Idioms/index.md
               - Static-Initialization-Order-Fiasco:
-                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Idioms/Static-Initialization-Order-Fiasco/index.md
+                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Idioms/Static-Initialization-Order-Fiasco/index.md
               - Construct-On-First-Use-Idiom:
-                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Idioms/Construct-On-First-Use-Idiom/index.md
+                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Idioms/Construct-On-First-Use-Idiom/index.md
               - Nifty-Counter-idiom:
-                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Idioms/Nifty-Counter-idiom/index.md
+                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Idioms/Nifty-Counter-idiom/index.md
               - Attach-by-Initialization-idiom:
-                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Idioms/Attach-by-Initialization-idiom/index.md
+                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Idioms/Attach-by-Initialization-idiom/index.md
             - Paper-N2660-Magic-static:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Static-storage-duration/Paper-N2660-Magic-static/index.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Static-storage-duration/Paper-N2660-Magic-static/index.md
           - Thread-local-storage-duration:
-            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Thread-local-storage-duration/index.md
+            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Thread-local-storage-duration/index.md
           - Access-outside-of-object-lifetime:
-            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/index.md
+            - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Access-outside-of-object-lifetime/index.md
             - Case-example:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Case-example/index.md
-            - Multi-thread-and-observer-pattern:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/index.md
-              - Example: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Multi-thread-and-observer-pattern/Example.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Access-outside-of-object-lifetime/Case-example/index.md
+            - Multi-thread&&observer-pattern:
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Access-outside-of-object-lifetime/Multi-thread&&observer-pattern/index.md
+              - Example: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Access-outside-of-object-lifetime/Multi-thread&&observer-pattern/Example.md
             - Pure-virtual-method-called:
-              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/index.md
+              - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/index.md
               - TODO-artima-Pure-Virtual-Function-Called-An-Explanation:
-                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime-and-storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/TODO-artima-Pure-Virtual-Function-Called-An-Explanation/index.md
+                - Introduction: C++/CppReference/Basic-concept/Object/Lifetime&&storage-duration/Access-outside-of-object-lifetime/Pure-virtual-method-called/TODO-artima-Pure-Virtual-Function-Called-An-Explanation/index.md
         - Layout:
           - Object-layout: C++/CppReference/Basic-concept/Object/Layout/Object-layout.md
           - Trivial: C++/CppReference/Basic-concept/Object/Layout/Trivial.md
@@ -2244,6 +2247,8 @@ nav:
           - Introduction: C++/Resource-management/Memory/Memory-error/Dangling-and-wild-pointer/index.md
         - OOM:
           - Introduction: C++/Resource-management/Memory/Memory-error/OOM/index.md
+        - Stack-overflow:
+          - Introduction: C++/Resource-management/Memory/Memory-error/Stack-overflow/index.md
         - Buffer-overflow:
           - Introduction: C++/Resource-management/Memory/Memory-error/Buffer-overflow/index.md
         - Memory-leak:
@@ -2543,10 +2548,18 @@ nav:
         - Introduction: "C++/Expert/Arthur-O\u2019Dwyer/library-Quuxplusone-ring_view/index.md"
       - What-is-Type-Erasure:
         - Introduction: "C++/Expert/Arthur-O\u2019Dwyer/What-is-Type-Erasure/index.md"
-  - IDE:
-    - Introduction: C++/IDE/index.md
-    - eclipse:
-      - Introduction: C++/IDE/eclipse/index.md
+  - Tools:
+    - Introduction: C++/Tools/index.md
+    - Valgrind:
+      - Introduction: C++/Tools/Valgrind/index.md
+    - gperftools:
+      - Introduction: C++/Tools/gperftools/index.md
+      - Heap-checker:
+        - Introduction: C++/Tools/gperftools/Heap-checker/index.md
+    - IDE:
+      - Introduction: C++/Tools/IDE/index.md
+      - eclipse:
+        - Introduction: C++/Tools/IDE/eclipse/index.md
   - C++name-convention:
     - Introduction: C++/C++name-convention/index.md
   - C++implementation:

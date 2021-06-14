@@ -1,12 +1,20 @@
 # 关于本章
 
-## draft
+一、通过C++ magic function/special function，来对C++ object的行为进行控制:
+
+require: 要求
+
+prohibit: 禁止
+
+二、是在学习 `Requiring-or-Prohibiting-Heap-based-Objects-idiom` 时，及一反三而想到的。
+
+## OOP
 
 OOP、behavior、interface、magic function
 
-## draft: Behavior，magic function，给予或禁止某种behavior，valid expression
+## GP: Behavior、magic function，给予或禁止某种behavior，valid expression
 
-每种behavior都有对应的operator、magic function，language support function（`std::swap`），都可以使用**valid expression**来进行描述，这是典型的**behavior-based**，比m如thread是movable，但是non-copyable
+每种behavior都有对应的operator、magic function，language support function（`std::swap`），都可以使用**valid expression**来进行描述，这是典型的**behavior-based**，比如thread是movable，但是non-copyable；
 
 ### Valid expression and concept
 
@@ -26,7 +34,7 @@ OOP、behavior、interface、magic function
 
 3、Concept/named requirement其实就是compile-time expression，其实是compile-time computation
 
-## Summary
+### Summary
 
 > NOTE: 总结这样的table非常重要， 能够对C++ OOP有完整的认知
 
@@ -34,11 +42,10 @@ OOP、behavior、interface、magic function
 | ------------------------- | ---------- | -------------- |
 |                           |            |                |
 |                           |            |                |
-|                           |            |                |
 
+## 如何实现？
 
-
-## draft: Mixin 给予或删除
+### Mixin 给予或删除
 
 1、CRTP behavior mixin 给予或删除
 
@@ -46,7 +53,7 @@ OOP、behavior、interface、magic function
 
 3、behavior、interface/magic function、able(在fluentcpp strong type的实现中，就非常多地使用"able"这个词语)
 
-## draft
+### `delete` keyword
 
 1、对于某种类型，可以对其给予、禁止某种behavior，这主要通过magic function来实现的。
 

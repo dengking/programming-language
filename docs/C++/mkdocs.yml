@@ -1,50 +1,38 @@
 nav:
     - Introduction: index.md
-    
     # c++的哲学
     - C++design-principle-feature-philosophy: C++design-principle-feature-philosophy   
     # c++的发展，演进，不断引入的新特性
     - What-is-new-in-C++: What-is-new-in-C++        
-    #理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识
-    # Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
+    # 理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识，Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
     - CppReference: CppReference
-
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
     - STL: STL
     # c++中的库
     - Library: Library
-    # - My-library: My-library
-   
-
-
-    
     # 总结c++支持的programming paradigm、idiom、pattern
     - Programming-paradigm: Programming-paradigm
     # 
     - Idiom: Idiom
     # c++的设计模式
     - Pattern: Pattern
-    
     # Resource-management是C++中的核心内容
     - Resource-management: Resource-management
+    
     - CppCoreGuidelines: CppCoreGuidelines
     # 对c++中的一些专题进行介绍
     - Guide: Guide
     # C++领域专家
     - Expert: Expert
-    
     # 
-    - IDE: IDE
-    
-########## 下面是相关的  ##########     
-    # 讨论C++的设计与实现
-    
-    # C++的命名规范
-    - C++name-convention: C++name-convention    
+    - Tools: Tools
+########## 讨论C++的设计与实现##########     
+    - C++name-convention: C++name-convention    # C++的命名规范
     # 对C++ implementation 进行讨论
     - C++implementation: C++implementation
     # cross-plateform是C++中非常重要的一个内容
     - C++cross-plateform: C++cross-plateform
+    
     - TODO-Undefined-behavior: TODO-Undefined-behavior
     
-
+# - My-library: My-library
