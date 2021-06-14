@@ -997,7 +997,8 @@ nav:
         - Introduction: C++/CppReference/Classes/Empty-base-optimization/index.md
       - Specifier:
         - Introduction: C++/CppReference/Classes/Specifier/index.md
-      - Overload-VS-override-VS-name-hiding: C++/CppReference/Classes/Overload-VS-override-VS-name-hiding.md
+      - Overload-VS-override-VS-name-hiding:
+        - Introduction: C++/CppReference/Classes/Overload-VS-override-VS-name-hiding/index.md
       - CppCoreGuidelines-Classes-and-class-hierarchies:
         - Introduction: C++/CppReference/Classes/CppCoreGuidelines-Classes-and-class-hierarchies/index.md
         - TODO-assign-and-operator=:
