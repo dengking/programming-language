@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Initialization-and-deinitialization-order: Initialization-and-deinitialization-order
+    - Initialization&&deinitialization-order: Initialization&&deinitialization-order
     - Idioms: Idioms

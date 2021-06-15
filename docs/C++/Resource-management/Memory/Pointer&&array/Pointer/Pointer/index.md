@@ -200,8 +200,9 @@ int main()
 >
 > `bar` is a constant or fixed pointer to a value that can be changed. This is like a **reference** without the extra syntactic sugar. Because of this fact, usually you would use a reference where you would use a `T* const` pointer unless you need to allow `NULL` pointers.
 
-## cppreference [Pointer comparison operators](https://en.cppreference.com/w/cpp/language/operator_comparison#Pointer_comparison_operators)
 
+
+## cppreference [Pointer comparison operators](https://en.cppreference.com/w/cpp/language/operator_comparison#Pointer_comparison_operators)
 
 
 

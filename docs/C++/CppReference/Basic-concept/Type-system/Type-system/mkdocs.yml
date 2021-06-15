@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
 # c++的type system是支持type qualifier的    
-    - TODO-Type-qualifier: TODO-Type-qualifier
     - OOP-class-type: OOP-class-type
     - Byte-type: Byte-type

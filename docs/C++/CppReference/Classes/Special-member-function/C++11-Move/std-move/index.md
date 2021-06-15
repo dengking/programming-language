@@ -42,9 +42,13 @@ move(_Tp&& __t) noexcept
 
 #### Forwarding reference
 
-入参：`_Tp&& __t`，说明它使用了forwarding / universal reference，所以它的入参既可以是rvalue reference也可以是lvalue reference，关于这一点，在文章bajamircea [std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中有描述：
+一、入参：`_Tp&& __t`，说明它使用了forwarding / universal reference，所以它的入参既可以是rvalue reference也可以是lvalue reference，关于这一点，在文章bajamircea [std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中有描述：
 
 > First of all `std::move` is a template with a `forwarding reference` argument which means that it can be called with either a `lvalue` or an `rvalue`, and the reference collapsing rules apply.
+
+二、关于 forwarding reference，参见 `C++\CppReference\Functions\GP\Forwarding-reference&&perfect-forwarding` 章节
+
+三、"Forwarding reference"的实现，依赖于 "C++11-Reference collapsing折叠"，参见 `C++\CppReference\Reference\cppreference-Reference` 章节
 
 #### `static_cast`
 
@@ -68,10 +72,19 @@ cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language
 
 `C++11`给予programmer可以引用prvalue的权利，这就是rvalue reference，对于prvalue，programmer是可以安全地将其move走的，这是在C++语言级别支持的（compiler能够识别）。同时C++还给予了programmer将一些**可以安全地移走的glvalue**也move走的权利，这些**可以安全地移走的glvalue**就是**xvalue**，显然，这些**可以安全地移走的glvalue**即具备 **im** 属性，所以它，为了支持这个，C++语言做了如下变动：
 
-- 引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic
-- rvalue reference 安全地move prvalue
+1、引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥move semantic
+
+2、rvalue reference 安全地move prvalue
 
 rvalue reference的syntax是`&&`。
+
+
+
+
+
+
+
+
 
 ## C++ `std::move` does not **move** but enable move
 
@@ -83,6 +96,8 @@ stackoverflow [What are move semantics?](https://stackoverflow.com/questions/310
 
 > Sometimes, we want to move from **lvalues**. That is, sometimes we want the compiler to treat an **lvalue** as if it were an **rvalue**, so it can invoke the **move constructor**, even though it could be potentially unsafe. For this purpose, `C++11` offers a standard library function template called `std::move` inside the header `<utility>`. This name is a bit unfortunate, because `std::move` simply casts an **lvalue** to an **rvalue**; it does *not* move anything by itself. It merely *enables* moving. Maybe it should have been named `std::cast_to_rvalue` or `std::enable_move`, but we are stuck with the name by now.
 
+
+
 ## Value category of `std::move`
 
 stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) # [part two](https://stackoverflow.com/a/11540204) # Xvalues
@@ -90,6 +105,8 @@ stackoverflow [What are move semantics?](https://stackoverflow.com/questions/310
 > Note that even though `std::move(a)` is an rvalue, its evaluation does *not* create a temporary object. This conundrum(难题) forced the committee to introduce a third **value category**. Something that can be bound to an **rvalue reference**, even though it is not an rvalue in the traditional sense, is called an *xvalue* (eXpiring value). The traditional rvalues were renamed to *prvalues* (Pure rvalues).
 >
 > > NOTE: eXpiring 的 含义是 “到期”，“eXpiring value”即“将亡值”。
+
+
 
 ## TODO
 

@@ -5,9 +5,6 @@ nav:
     - paper-A-Proposal-to-Add-Move-Semantics-Support-to-the-C++Language: paper-A-Proposal-to-Add-Move-Semantics-Support-to-the-C++Language
     - Move-Constructor: Move-Constructor
     - More-C++Idioms-Move-Constructor: More-C++Idioms-Move-Constructor
-    - std-move: std-move    
-    # 以维基百科Rvalue references and move constructors作为引入
-    - TODO-wikipedia-rvalue-reference-and-move-semantic: TODO-wikipedia-rvalue-reference-and-move-semantic
-    - TODO-Understanding-the-warning-binding-r-value-to-l-value-reference: TODO-Understanding-the-warning-binding-r-value-to-l-value-reference
-    - TODO-thbecker-Rvalue-References-Explained: TODO-thbecker-Rvalue-References-Explained
+    - std-move: std-move   
+    - warning-binding-rvalue-to-lvalue-reference: warning-binding-rvalue-to-lvalue-reference
     - TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs: TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs

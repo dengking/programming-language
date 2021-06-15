@@ -6,7 +6,11 @@
 
 一、Parameter pack是linear structure
 
+
+
 二、对Parameter pack使用FP的方式来进行操作，最最常见的是recursion(参见`Recursive-variadic-function`)。
+
+
 
 三、parameter pack大大提高了C++ generic programming，使得如下成为可能: 
 
@@ -16,13 +20,31 @@
 
 2、variadic class template
 
-参见 `Variadic-multiple-inheritance`章节
+参见 `Variadic-inheritance`章节
 
 3、variadic function template
+
+4、idiom
+
+"parameter pack + forwarding reference" 使得programmer能够写出非常generic的程序。
+
+
 
 四、parameter pack大大提高了C++ compile time computation
 
 典型的就是`Recursive-variadic-function`。
+
+
+
+五、下面是使用了Parameter pack的一些案例:
+
+1、`Variadic-CRTP`
+
+2、`Variadic-inheritance`
+
+3、`Variadic-mixin`
+
+4、`Variadic-template-VS-ellipsis`
 
 ## 发展概述
 
@@ -49,5 +71,4 @@
 参见:
 
 1) Wikipedia [C++17#Folding expressions](https://infogalactic.com/info/C%2B%2B17)
-
 

@@ -1,4 +1,6 @@
-# [Position-independent code](https://en.wikipedia.org/wiki/Position-independent_code)
+# Position-independent code
+
+## wikipedia [Position-independent code](https://en.wikipedia.org/wiki/Position-independent_code)
 
 In [computing](https://en.wikipedia.org/wiki/Computing), **position-independent code**[[1\]](https://en.wikipedia.org/wiki/Position-independent_code#cite_note-Intel_iRMX-1) (**PIC**[[1\]](https://en.wikipedia.org/wiki/Position-independent_code#cite_note-Intel_iRMX-1)) or **position-independent executable** (**PIE**) is a body of [machine code](https://en.wikipedia.org/wiki/Machine_code) that, being placed somewhere in the [primary memory](https://en.wikipedia.org/wiki/Primary_memory), executes properly regardless of its [absolute address](https://en.wikipedia.org/wiki/Absolute_address) (无论其绝对地址如何，它都被放置在主存储器中的某个位置). PIC is commonly used for [shared libraries](https://en.wikipedia.org/wiki/Shared_library), so that the same library code can be loaded in a location in each program address space where it will not overlap any other uses of memory (for example, other shared libraries). PIC was also used on older computer systems lacking an [MMU](https://en.wikipedia.org/wiki/Memory_management_unit),[[2\]](https://en.wikipedia.org/wiki/Position-independent_code#cite_note-Levine_1999_CH8-2) so that the [operating system](https://en.wikipedia.org/wiki/Operating_system) could keep applications away from each other even within the single [address space](https://en.wikipedia.org/wiki/Address_space) of an MMU-less system.
 

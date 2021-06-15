@@ -2,6 +2,73 @@
 
 对于[Constructor](./Constructor.md)、[Destructor](./Destructor/Destructor.md)、[Assignment](./Assignment/Assignment.md)，compiler在user没有指定的情况下，会提供默认实现，当然，这种默认实现是不一定保证正确的。
 
+
+
+## C++ 编译器会给一个空类自动生成哪些函数？
+
+### cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions) # [Special member functions](https://en.cppreference.com/w/cpp/language/member_functions#Special_member_functions)
+
+Some member functions are *special*: under certain circumstances they are defined by the compiler even if not defined by the user. They are:
+
+1、[Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor)
+
+2、[Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor)
+
+3、[Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) (since C++11)
+
+4、[Copy assignment operator](https://en.cppreference.com/w/cpp/language/as_operator)
+
+5、[Move assignment operator](https://en.cppreference.com/w/cpp/language/move_operator) (since C++11)
+
+6、[Destructor](https://en.cppreference.com/w/cpp/language/destructor)
+
+
+
+### [LeetBook C++ 面试突击](https://leetcode-cn.com/leetbook/detail/cpp-interview-highlights/) # [C++ 编译器会给一个空类自动生成哪些函数？](https://leetcode-cn.com/leetbook/read/cpp-interview-highlights/eflvg3/)
+
+> NOTE: 
+>
+> 一、原文的答案，应该主要针对C++03，在C++11中，新增了move semantic。
+>
+> 二、原文中补充了: "**两个取址运算符**"
+>
+> 
+
+**空类定义时编译器会生成 6 个成员函数：**
+
+当空类 `A` 定义对象时，`sizeof(A)` 仍是为 1，但编译器会生成 6 个成员函数：缺省的构造函数、拷贝构造函数、析构函数、赋值运算符、**两个取址运算符**。
+
+```C++
+#include <iostream>
+using namespace std;
+/*
+class A
+{}; 该空类的等价写法如下：
+*/
+class A
+{
+public:
+    A(){};                                       // 缺省构造函数
+    A(const A &tmp){};                           // 拷贝构造函数
+    ~A(){};                                      // 析构函数
+    A &operator=(const A &tmp){};                // 赋值运算符
+    A *operator&() { return this; };             // 取址运算符
+    const A *operator&() const { return this; }; // 取址运算符（const 版本）
+};
+
+int main()
+{
+    A *p = new A(); 
+    cout << "sizeof(A):" << sizeof(A) << endl; // sizeof(A):1
+    delete p;       
+    return 0;
+}
+
+
+```
+
+
+
 ## draft: implicit defined copy是shallow copy
 
 可能导致double free，例子: 
@@ -95,14 +162,14 @@ When a base class is intended for polymorphic use, its destructor may have to be
 
 
 
-### stackoverflow [Conditions under which compiler will not define implicits (constructor, destructor, copy constructor, copy assignment) [duplicate]](https://stackoverflow.com/questions/15590832/conditions-under-which-compiler-will-not-define-implicits-constructor-destruct)
+stackoverflow [Conditions under which compiler will not define implicits (constructor, destructor, copy constructor, copy assignment) [duplicate]](https://stackoverflow.com/questions/15590832/conditions-under-which-compiler-will-not-define-implicits-constructor-destruct)
 
 
 
-### stackoverflow [Conditions for automatic generation of default/copy/move ctor and copy/move assignment operator?](https://stackoverflow.com/questions/4943958/conditions-for-automatic-generation-of-default-copy-move-ctor-and-copy-move-assi)
+stackoverflow [Conditions for automatic generation of default/copy/move ctor and copy/move assignment operator?](https://stackoverflow.com/questions/4943958/conditions-for-automatic-generation-of-default-copy-move-ctor-and-copy-move-assi)
 
 
 
-### stackoverflow [Why user-defined move-constructor disables the implicit copy-constructor?](https://stackoverflow.com/questions/11255027/why-user-defined-move-constructor-disables-the-implicit-copy-constructor)
+stackoverflow [Why user-defined move-constructor disables the implicit copy-constructor?](https://stackoverflow.com/questions/11255027/why-user-defined-move-constructor-disables-the-implicit-copy-constructor)
 
 > NOTE: 
