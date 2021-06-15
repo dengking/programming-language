@@ -46,8 +46,8 @@ nav:
           - Introduction: Theory/Programming-language/Design-and-implementation/Design/Syntax/index.md
       - Implementation:
         - Introduction: Theory/Programming-language/Design-and-implementation/Implementation/index.md
-    - Expressive-of-programming-language:
-      - Introduction: Theory/Programming-language/Expressive-of-programming-language/index.md
+    - Expressive-power-of-programming-language:
+      - Introduction: Theory/Programming-language/Expressive-power-of-programming-language/index.md
     - Scripting-language:
       - Scripting-language: Theory/Programming-language/Scripting-language/index.md
       - Read-eval-print-loop: Theory/Programming-language/Scripting-language/Read-eval-print-loop.md
@@ -514,12 +514,6 @@ nav:
         - Introduction: C++/CppReference/Basic-concept/Type-system/index.md
         - Type-system:
           - Introduction: C++/CppReference/Basic-concept/Type-system/Type-system/index.md
-          - TODO-Type-qualifier:
-            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/TODO-index.md
-            - Type-qualifier: C++/CppReference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Type-qualifier.md
-            - CV-type-qualifiers: C++/CppReference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/CV-type-qualifiers.md
-            - Const: C++/CppReference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Const.md
-            - Volatile: C++/CppReference/Basic-concept/Type-system/Type-system/TODO-Type-qualifier/Volatile.md
           - OOP-class-type:
             - Introduction: C++/CppReference/Basic-concept/Type-system/Type-system/OOP-class-type/index.md
             - Polymorphic-type: C++/CppReference/Basic-concept/Type-system/Type-system/OOP-class-type/Polymorphic-type.md
@@ -532,35 +526,35 @@ nav:
             - decltype: C++/CppReference/Basic-concept/Type-system/Type-operation/Query-type/decltype.md
             - typeid:
               - typeid: C++/CppReference/Basic-concept/Type-system/Type-operation/Query-type/typeid/index.md
-          - Type-conversion:
-            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/index.md
-            - cplusplus-type-conversions:
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/cplusplus-type-conversions/index.md
-            - Implicit-conversion:
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Implicit-conversion/index.md
-              - Lvalue-to-rvalue-conversion:
-                - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Implicit-conversion/Lvalue-to-rvalue-conversion/index.md
-              - Decay: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Implicit-conversion/Decay.md
-            - Explicit-conversion:
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Explicit-conversion/index.md
-            - Cast-operator:
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/index.md
-              - static_cast:
-                - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/static_cast/index.md
-              - dynamic_cast:
-                - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/dynamic_cast/index.md
-                - TODO-instanceof:
-                  - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/dynamic_cast/TODO-instanceof/index.md
-              - const_cast:
-                - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/const_cast/index.md
-              - reinterpret_cast:
-                - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Cast-operator/reinterpret_cast/index.md
-            - User-defined-conversion:
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/User-defined-conversion/index.md
-            - Type-conversion-and-temporary:
-              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Type-conversion/Type-conversion-and-temporary/index.md
           - Print-output-type-info:
             - Introduction: C++/CppReference/Basic-concept/Type-system/Type-operation/Print-output-type-info/index.md
+        - Type-conversion:
+          - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/index.md
+          - cplusplus-type-conversions:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/cplusplus-type-conversions/index.md
+          - Implicit-conversion:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Implicit-conversion/index.md
+            - Lvalue-to-rvalue-conversion:
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Implicit-conversion/Lvalue-to-rvalue-conversion/index.md
+            - Decay: C++/CppReference/Basic-concept/Type-system/Type-conversion/Implicit-conversion/Decay.md
+          - Explicit-conversion:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Explicit-conversion/index.md
+          - Cast-operator:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Cast-operator/index.md
+            - static_cast:
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Cast-operator/static_cast/index.md
+            - dynamic_cast:
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Cast-operator/dynamic_cast/index.md
+              - TODO-instanceof:
+                - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Cast-operator/dynamic_cast/TODO-instanceof/index.md
+            - const_cast:
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Cast-operator/const_cast/index.md
+            - reinterpret_cast:
+              - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Cast-operator/reinterpret_cast/index.md
+          - User-defined-conversion:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/User-defined-conversion/index.md
+          - Type-conversion-and-temporary:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/Type-conversion/Type-conversion-and-temporary/index.md
         - Type-inference&&deduction:
           - Introduction: C++/CppReference/Basic-concept/Type-system/Type-inference&&deduction/index.md
           - decltype:
@@ -582,6 +576,20 @@ nav:
             - Introduction: C++/CppReference/Basic-concept/Type-system/size_t-and-ptrdiff_t/size_t/index.md
             - embedded-Why-size_t-matters: C++/CppReference/Basic-concept/Type-system/size_t-and-ptrdiff_t/size_t/embedded-Why-size_t-matters.md
             - size_t-length: C++/CppReference/Basic-concept/Type-system/size_t-and-ptrdiff_t/size_t/size_t-length.md
+        - TODO-Type-qualifier:
+          - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/index.md
+          - wikipedia-Type-qualifier:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/wikipedia-Type-qualifier/index.md
+          - CV-type-qualifiers:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/CV-type-qualifiers/index.md
+          - const:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/const/index.md
+            - isocpp-Const-Correctness:
+              - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/const/isocpp-Const-Correctness/index.md
+            - const-member: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/const/const-member.md
+            - const-compiler-error: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/const/const-compiler-error.md
+          - volatile:
+            - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-qualifier/volatile/index.md
         - TODO-Type-length:
           - Introduction: C++/CppReference/Basic-concept/Type-system/TODO-Type-length/index.md
       - Abstract-machine:
@@ -602,7 +610,8 @@ nav:
           - Introduction: C++/CppReference/Basic-concept/Reference-and-Value-Semantics/By-value-and-by-reference/index.md
     - Expressions:
       - Introduction: C++/CppReference/Expressions/index.md
-      - Expressions: C++/CppReference/Expressions/Expressions.md
+      - cppreference-Expressions:
+        - Introduction: C++/CppReference/Expressions/cppreference-Expressions/index.md
       - Discarded-value-expressions:
         - Introduction: C++/CppReference/Expressions/Discarded-value-expressions/index.md
         - Cast-to-type-void:
@@ -840,8 +849,8 @@ nav:
               - Introduction: C++/CppReference/Classes/Member/Non-static-member/Data-member/C++11-default-member-initializer/index.md
       - Object-lifetime:
         - Introduction: C++/CppReference/Classes/Object-lifetime/index.md
-        - Initialization-and-deinitialization-order:
-          - Introduction: C++/CppReference/Classes/Object-lifetime/Initialization-and-deinitialization-order/index.md
+        - Initialization&&deinitialization-order:
+          - Introduction: C++/CppReference/Classes/Object-lifetime/Initialization&&deinitialization-order/index.md
         - Idioms:
           - Base-from-Member-idiom:
             - Introduction: C++/CppReference/Classes/Object-lifetime/Idioms/Base-from-Member-idiom/index.md
@@ -865,11 +874,11 @@ nav:
           - Introduction: C++/CppReference/Classes/Special-member-function/Constructor/index.md
           - cppreference-Constructor:
             - Introduction: C++/CppReference/Classes/Special-member-function/Constructor/cppreference-Constructor/index.md
+            - Member-initializer-list:
+              - Introduction: C++/CppReference/Classes/Special-member-function/Constructor/cppreference-Constructor/Member-initializer-list/index.md
             - Virtual-constructor: C++/CppReference/Classes/Special-member-function/Constructor/cppreference-Constructor/Virtual-constructor.md
           - Default-constructors:
             - Introduction: C++/CppReference/Classes/Special-member-function/Constructor/Default-constructors/index.md
-          - Member-initializer-list:
-            - Introduction: C++/CppReference/Classes/Special-member-function/Constructor/Member-initializer-list/index.md
           - Copy-constructor:
             - Introduction: C++/CppReference/Classes/Special-member-function/Constructor/Copy-constructor/index.md
           - TODO-Use-this-in-constructor:
@@ -887,12 +896,12 @@ nav:
             - Introduction: C++/CppReference/Classes/Special-member-function/Destructor/Destructor-and-exception/index.md
         - Copy:
           - Introduction: C++/CppReference/Classes/Special-member-function/Copy/index.md
-          - Polymorphic-type-and-copy-and-Object-slicing:
-            - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/index.md
+          - Polymorphic-type&&copy&&Object-slicing:
+            - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Polymorphic-type&&copy&&Object-slicing/index.md
             - Virtual-clone:
-              - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/Virtual-clone/index.md
+              - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Polymorphic-type&&copy&&Object-slicing/Virtual-clone/index.md
               - More-C++Idioms-Virtual-Constructor:
-                - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Polymorphic-type-and-copy-and-Object-slicing/Virtual-clone/More-C++Idioms-Virtual-Constructor/index.md
+                - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Polymorphic-type&&copy&&Object-slicing/Virtual-clone/More-C++Idioms-Virtual-Constructor/index.md
           - Non-copyable:
             - Introduction: C++/CppReference/Classes/Special-member-function/Copy/Non-copyable/index.md
         - C++11-Move:
@@ -909,12 +918,8 @@ nav:
             - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/More-C++Idioms-Move-Constructor/index.md
           - std-move:
             - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/std-move/index.md
-          - TODO-wikipedia-rvalue-reference-and-move-semantic:
-            - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/TODO-wikipedia-rvalue-reference-and-move-semantic/index.md
-          - TODO-Understanding-the-warning-binding-r-value-to-l-value-reference:
-            - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/TODO-Understanding-the-warning-binding-r-value-to-l-value-reference/index.md
-          - TODO-thbecker-Rvalue-References-Explained:
-            - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/TODO-thbecker-Rvalue-References-Explained/index.md
+          - warning-binding-rvalue-to-lvalue-reference:
+            - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/warning-binding-rvalue-to-lvalue-reference/index.md
           - TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs:
             - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs/index.md
         - Swap:
@@ -983,8 +988,10 @@ nav:
               - Introduction: C++/CppReference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/Override-specifier/index.md
             - Return-Covariant-Types:
               - Introduction: C++/CppReference/Classes/Subtyping-polymorphism/Inheritance/Virtual-function/Return-Covariant-Types/index.md
-          - Pure-virtual-function-and-abstract-class:
-            - Introduction: C++/CppReference/Classes/Subtyping-polymorphism/Inheritance/Pure-virtual-function-and-abstract-class/index.md
+          - Pure-virtual-function&&abstract-class:
+            - Introduction: C++/CppReference/Classes/Subtyping-polymorphism/Inheritance/Pure-virtual-function&&abstract-class/index.md
+          - C++11-final-specifier:
+            - Introduction: C++/CppReference/Classes/Subtyping-polymorphism/Inheritance/C++11-final-specifier/index.md
         - Dispatch:
           - Introduction: C++/CppReference/Classes/Subtyping-polymorphism/Dispatch/index.md
         - TODO-Virtual-class:
@@ -1003,32 +1010,6 @@ nav:
         - Introduction: C++/CppReference/Classes/CppCoreGuidelines-Classes-and-class-hierarchies/index.md
         - TODO-assign-and-operator=:
           - Introduction: C++/CppReference/Classes/CppCoreGuidelines-Classes-and-class-hierarchies/TODO-assign-and-operator=/index.md
-      - TODO-Implementation:
-        - Introduction: C++/CppReference/Classes/TODO-Implementation/index.md
-        - Object-memory-layout:
-          - Introduction: C++/CppReference/Classes/TODO-Implementation/Object-memory-layout/index.md
-          - TODO-Memory-Layout-of-C++Object-in-Different-Scenarios:
-            - Introduction: C++/CppReference/Classes/TODO-Implementation/Object-memory-layout/TODO-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
-          - Dump-object-memory-layout:
-            - Introduction: C++/CppReference/Classes/TODO-Implementation/Object-memory-layout/Dump-object-memory-layout/index.md
-        - Subtyping-polymorphism:
-          - Introduction: C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/index.md
-          - "CSDN-\u8BE6\u89E3virtual-table":
-            - Introduction: "C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/CSDN-\u8BE6\
-                \u89E3virtual-table/index.md"
-          - "CSDN-C++\u865A\u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3":
-            - Introduction: "C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/CSDN-C++\u865A\
-                \u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3/index.md"
-          - wikipedia-Virtual-method-table:
-            - Introduction: C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/wikipedia-Virtual-method-table/index.md
-            - Thunk:
-              - Introduction: C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/wikipedia-Virtual-method-table/Thunk/index.md
-          - shaharmike-Cpp-vtable:
-            - Introduction: C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/shaharmike-Cpp-vtable/index.md
-            - Part-1-Basics:
-              - Introduction: C++/CppReference/Classes/TODO-Implementation/Subtyping-polymorphism/shaharmike-Cpp-vtable/Part-1-Basics/index.md
-        - RTTI:
-          - Introduction: C++/CppReference/Classes/TODO-Implementation/RTTI/index.md
     - Struct:
       - offsetof:
         - Introduction: C++/CppReference/Struct/offsetof/index.md
@@ -1076,7 +1057,6 @@ nav:
         - Introduction: C++/CppReference/Initialization/Constant-initialization/index.md
     - Template:
       - Introduction: C++/CppReference/Template/index.md
-      - Templates: C++/CppReference/Template/Templates.md
       - Template-parameters-and-arguments:
         - Introduction: C++/CppReference/Template/Template-parameters-and-arguments/index.md
         - Template-parameters-and-template-arguments: C++/CppReference/Template/Template-parameters-and-arguments/Template-parameters-and-template-arguments.md
@@ -2646,17 +2626,54 @@ nav:
       - Introduction: C++/C++implementation/ABI/index.md
       - Application-binary-interface:
         - Introduction: C++/C++implementation/ABI/Application-binary-interface/index.md
+      - Call-convention:
+        - Introduction: C++/C++implementation/ABI/Call-convention/index.md
+        - Call-stack:
+          - Introduction: C++/C++implementation/ABI/Call-convention/Call-stack/index.md
+        - aaronbloomfield-The-32bit-x86-C-Call-Convention:
+          - Introduction: C++/C++implementation/ABI/Call-convention/aaronbloomfield-The-32bit-x86-C-Call-Convention/index.md
       - Library:
         - Introduction: C++/C++implementation/ABI/Library/index.md
         - Position-independent-code:
           - Introduction: C++/C++implementation/ABI/Library/Position-independent-code/index.md
-          - Position-Independent-Code(PIC)-in-shared-libraries: C++/C++implementation/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries.md
+          - thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries:
+            - Introduction: C++/C++implementation/ABI/Library/Position-independent-code/thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries/index.md
         - Relocation:
           - Introduction: C++/C++implementation/ABI/Library/Relocation/index.md
       - Name-mangling:
         - Introduction: C++/C++implementation/ABI/Name-mangling/index.md
-      - Itanium-Cpp-ABI:
-        - Introduction: C++/C++implementation/ABI/Itanium-Cpp-ABI/index.md
+      - C++ABI:
+        - Introduction: C++/C++implementation/ABI/C++ABI/index.md
+        - Itanium-Cpp-ABI:
+          - Introduction: C++/C++implementation/ABI/C++ABI/Itanium-Cpp-ABI/index.md
+          - Chapter-2-Data-Layout:
+            - Introduction: C++/C++implementation/ABI/C++ABI/Itanium-Cpp-ABI/Chapter-2-Data-Layout/index.md
+        - Object-memory-layout:
+          - Introduction: C++/C++implementation/ABI/C++ABI/Object-memory-layout/index.md
+          - vishalchovatiya-Memory-Layout-of-C++Object-in-Different-Scenarios:
+            - Introduction: C++/C++implementation/ABI/C++ABI/Object-memory-layout/vishalchovatiya-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
+          - Dump-object-memory-layout:
+            - Introduction: C++/C++implementation/ABI/C++ABI/Object-memory-layout/Dump-object-memory-layout/index.md
+        - Polymorphic-type-impl:
+          - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/index.md
+          - Virtual-function-table:
+            - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/index.md
+            - "CSDN-\u8BE6\u89E3virtual-table":
+              - Introduction: "C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/CSDN-\u8BE6\
+                  \u89E3virtual-table/index.md"
+            - "CSDN-C++\u865A\u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3":
+              - Introduction: "C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/CSDN-C++\u865A\
+                  \u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3/index.md"
+            - wikipedia-Virtual-method-table:
+              - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/wikipedia-Virtual-method-table/index.md
+              - Thunk:
+                - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/wikipedia-Virtual-method-table/Thunk/index.md
+            - shaharmike-Cpp-vtable:
+              - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/shaharmike-Cpp-vtable/index.md
+              - Part-1-Basics:
+                - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/shaharmike-Cpp-vtable/Part-1-Basics/index.md
+          - RTTI:
+            - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/RTTI/index.md
     - Code-analysis-tool:
       - Introduction: C++/C++implementation/Code-analysis-tool/index.md
       - PC-Lint:
@@ -2905,7 +2922,8 @@ nav:
     - Introduction: Java/book-Thinking-in-java/index.md
     - About-this-chapter: Java/book-Thinking-in-java/index.md
     - Introduction: Java/book-Thinking-in-java/Introduction.md
-    - Introduction-to-Objects: Java/book-Thinking-in-java/Introduction-to-Objects.md
+    - Introduction-to-Objects:
+      - Introduction: Java/book-Thinking-in-java/Introduction-to-Objects/index.md
     - Everything-is-an-object: Java/book-Thinking-in-java/Everything-is-an-object.md
 - Eiffel:
   - Introduction: Eiffel/index.md
