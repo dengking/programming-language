@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     # 首先阅读这篇入门文章
-    - northwestern-course-C++Iterators: northwestern-course-C++Iterators
+    - Course-northwestern-C++Iterators: Course-northwestern-C++Iterators
     - Operations: Operations    
     - Stream-iterators: Stream-iterators    
     - Iterator-adaptors: Iterator-adaptors
