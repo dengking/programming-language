@@ -1,6 +1,6 @@
 # 关于本章
 
-本章讨论c++的design pattern。
+本章讨论C++的design pattern。
 
 ## 参考
 
@@ -27,6 +27,8 @@ source code：[design-patterns-in-modern-cpp](https://github.com/Apress/design-p
 
 
 ### caiorss.github [CPP / C++ Notes - Design Patterns](https://caiorss.github.io/C-Cpp-Notes/cpp-design-patterns.html)
+
+
 
 ## GitHub
 

@@ -15,7 +15,7 @@ nav:
     # 
     - Idiom: Idiom
     # c++的设计模式
-    - Pattern: Pattern
+    - Design-pattern: Design-pattern
     # Resource-management是C++中的核心内容
     - Resource-management: Resource-management
     

@@ -1,6 +1,8 @@
 # C++ paradigm
 
-C++是一种multi-paradigm programming language，下面罗列了C++支持的programming paradigm以及每种paradigm的实现。在`Idiom`章节总结了各种paradigm的idiom。
+C++是一种multi-paradigm programming language，下面罗列了C++支持的programming paradigm以及每种paradigm的实现。在`C++\Idiom`中总结了各种paradigm的idiom。
+
+
 
 ## OOP: Object-oriented programming
 
@@ -38,19 +40,13 @@ C++通过template来实现:
 
 参见如下章节:
 
-1、`C++\Programming-paradigm\GP-and-TMP\TMP`
+1、`C++\Programming-paradigm\TMP`
 
 
 
 ## AOP
 
 C++并不直接支持AOP，但是C++可以使用AOP的思想来编写更加抽象的code，参见 `AOP` 章节。
-
-
-
-## Idiom
-
-在`C++\Idiom`中总结了各种paradigm的idiom。
 
 
 

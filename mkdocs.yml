@@ -1294,8 +1294,8 @@ nav:
             - Introduction: C++/STL/Containers/View/span/Span-for-multiple-level-pointer/index.md
     - Iterator-library:
       - Introduction: C++/STL/Iterator-library/index.md
-      - northwestern-course-C++Iterators:
-        - Introduction: C++/STL/Iterator-library/northwestern-course-C++Iterators/index.md
+      - Course-northwestern-C++Iterators:
+        - Introduction: C++/STL/Iterator-library/Course-northwestern-C++Iterators/index.md
       - Operations:
         - Introduction: C++/STL/Iterator-library/Operations/index.md
         - Iterator-to-pointer:
@@ -2034,49 +2034,50 @@ nav:
           - Introduction: C++/Idiom/gertrudandcope-C++Idioms/Handle-body-based/Handle-Body/index.md
         - TODO-Counted-Body:
           - Introduction: C++/Idiom/gertrudandcope-C++Idioms/Handle-body-based/TODO-Counted-Body/index.md
-  - Pattern:
-    - Introduction: C++/Pattern/index.md
+  - Design-pattern:
+    - Introduction: C++/Design-pattern/index.md
     - Singleton:
-      - Introduction: C++/Pattern/Singleton/index.md
+      - Introduction: C++/Design-pattern/Singleton/index.md
       - Singleton-mixin:
-        - Introduction: C++/Pattern/Singleton/Singleton-mixin/index.md
+        - Introduction: C++/Design-pattern/Singleton/Singleton-mixin/index.md
       - Avoid-singletons:
-        - Introduction: C++/Pattern/Singleton/Avoid-singletons/index.md
+        - Introduction: C++/Design-pattern/Singleton/Avoid-singletons/index.md
       - aristeia-C++and-the-Perils-of-Double-Checked-Locking:
-        - Introduction: C++/Pattern/Singleton/aristeia-C++and-the-Perils-of-Double-Checked-Locking/index.md
+        - Introduction: C++/Design-pattern/Singleton/aristeia-C++and-the-Perils-of-Double-Checked-Locking/index.md
       - Global-VS-singleton:
-        - Introduction: C++/Pattern/Singleton/Global-VS-singleton/index.md
+        - Introduction: C++/Design-pattern/Singleton/Global-VS-singleton/index.md
     - Factory:
-      - Introduction: C++/Pattern/Factory/index.md
-      - Factory-mixin: C++/Pattern/Factory/Factory-mixin.md
+      - Introduction: C++/Design-pattern/Factory/index.md
+      - Factory-mixin: C++/Design-pattern/Factory/Factory-mixin.md
     - Visitor-pattern:
-      - Introduction: C++/Pattern/Visitor-pattern/index.md
+      - Introduction: C++/Design-pattern/Visitor-pattern/index.md
       - thegreenplace-A-polyglot's-guide-to-multiple-dispatch:
-        - Introduction: C++/Pattern/Visitor-pattern/thegreenplace-A-polyglot's-guide-to-multiple-dispatch/index.md
+        - Introduction: C++/Design-pattern/Visitor-pattern/thegreenplace-A-polyglot's-guide-to-multiple-dispatch/index.md
       - TODO-gieseanw-Stop-reimplementing-the-virtual-table-and-start-using-double-dispatch:
-        - Introduction: C++/Pattern/Visitor-pattern/TODO-gieseanw-Stop-reimplementing-the-virtual-table-and-start-using-double-dispatch/index.md
+        - Introduction: C++/Design-pattern/Visitor-pattern/TODO-gieseanw-Stop-reimplementing-the-virtual-table-and-start-using-double-dispatch/index.md
     - Decorator:
-      - Introduction: C++/Pattern/Decorator/index.md
+      - Introduction: C++/Design-pattern/Decorator/index.md
     - Adaptor-pattern:
-      - Introduction: C++/Pattern/Adaptor-pattern/index.md
+      - Introduction: C++/Design-pattern/Adaptor-pattern/index.md
       - Adaptor-external-polymorphism-pattern:
-        - Introduction: C++/Pattern/Adaptor-pattern/Adaptor-external-polymorphism-pattern/index.md
+        - Introduction: C++/Design-pattern/Adaptor-pattern/Adaptor-external-polymorphism-pattern/index.md
         - TODO-paper-vanderbilt.edu-External-Polymorphism:
-          - Introduction: C++/Pattern/Adaptor-pattern/Adaptor-external-polymorphism-pattern/TODO-paper-vanderbilt.edu-External-Polymorphism/index.md
+          - Introduction: C++/Design-pattern/Adaptor-pattern/Adaptor-external-polymorphism-pattern/TODO-paper-vanderbilt.edu-External-Polymorphism/index.md
     - Mixin:
-      - Introduction: C++/Pattern/Mixin/index.md
+      - Introduction: C++/Design-pattern/Mixin/index.md
       - fluentcpp-Mixin-Classes-The-Yang-of-the-CRTP:
-        - Introduction: C++/Pattern/Mixin/fluentcpp-Mixin-Classes-The-Yang-of-the-CRTP/index.md
+        - Introduction: C++/Design-pattern/Mixin/fluentcpp-Mixin-Classes-The-Yang-of-the-CRTP/index.md
       - Parameterized-Base-Class:
-        - Introduction: C++/Pattern/Mixin/Parameterized-Base-Class/index.md
+        - Introduction: C++/Design-pattern/Mixin/Parameterized-Base-Class/index.md
       - Variadic-mixin:
-        - Introduction: C++/Pattern/Mixin/Variadic-mixin/index.md
+        - Introduction: C++/Design-pattern/Mixin/Variadic-mixin/index.md
     - Assemble-as-chain:
-      - Introduction: C++/Pattern/Assemble-as-chain/index.md
+      - Introduction: C++/Design-pattern/Assemble-as-chain/index.md
     - Design-by-contract:
-      - Introduction: C++/Pattern/Design-by-contract/index.md
+      - Introduction: C++/Design-pattern/Design-by-contract/index.md
       - TODO-p0380r1-the contract proposal:
-        - Introduction: C++/Pattern/Design-by-contract/TODO-p0380r1-the contract proposal/index.md
+        - Introduction: C++/Design-pattern/Design-by-contract/TODO-p0380r1-the contract
+            proposal/index.md
   - Resource-management:
     - Introduction: C++/Resource-management/index.md
     - Guide:
@@ -2788,6 +2789,7 @@ nav:
     - Introduction: C/Guide/index.md
   - Book: C/Book.md
 - Python:
+  - Introduction: Python/index.md
   - Language:
     - Language-reference:
       - Introduction: Python/Language/Language-reference/index.md
