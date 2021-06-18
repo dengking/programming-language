@@ -40,15 +40,15 @@ In some object-oriented programming languages, such as [C#](https://en.wikipedia
 
 A language supporting reflection provides a number of features available at runtime that would otherwise be difficult to accomplish in a lower-level language. Some of these features are the abilities to:
 
-- Discover and modify source-code constructions (such as **code blocks**, [classes](https://en.wikipedia.org/wiki/Class_(computer_science)), **methods**, protocols, etc.) as [first-class objects](https://en.wikipedia.org/wiki/First-class_object) at runtime.
+1、Discover and modify source-code constructions (such as **code blocks**, [classes](https://en.wikipedia.org/wiki/Class_(computer_science)), **methods**, protocols, etc.) as [first-class objects](https://en.wikipedia.org/wiki/First-class_object) at runtime.
 
-- Convert a [string](https://en.wikipedia.org/wiki/String_(computer_science)) matching the symbolic name of a class or function into a reference to or invocation of that class or function.
+2、Convert a [string](https://en.wikipedia.org/wiki/String_(computer_science)) matching the symbolic name of a class or function into a reference to or invocation of that class or function.
 
-- Evaluate a string as if it were a source-code statement at runtime.
+3、Evaluate a string as if it were a source-code statement at runtime.
 
-  > NOTE: 看到此处，想到了python的`eval()`[¶](https://docs.python.org/3/library/functions.html#eval)
+> NOTE: 看到此处，想到了python的`eval()`[¶](https://docs.python.org/3/library/functions.html#eval)
 
-- Create a new interpreter for the language's bytecode to give a new meaning or purpose for a programming construct.
+4、Create a new interpreter for the language's bytecode to give a new meaning or purpose for a programming construct.
 
 These features can be implemented in different ways. In [MOO](https://en.wikipedia.org/wiki/MOO_(programming_language)), reflection forms a natural part of everyday programming idiom. When verbs (methods) are called, various variables such as *verb* (the name of the verb being called) and *this* (the object on which the verb is called) are populated to give the context of the call. Security is typically managed by accessing the caller stack programmatically: Since *callers*() is a list of the methods by which the current verb was eventually called, performing tests on *callers*()[1] (the command invoked by the original user) allows the verb to protect itself against unauthorised use.
 

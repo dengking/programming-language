@@ -1,19 +1,32 @@
 nav:
     - Home: index.md
+    
     - Theory: Theory
     # 各种具体的programming  language
     - C-family: C-family
+    
     - C++: C++
+    
     - C: C        
+    
     - Python: Python
+    
     - Rust: Rust
+    
     - JavaScript: JavaScript
+    
     - Java: Java
+    
     - Eiffel: Eiffel
+    
     - Go: Go
+    
     - Lisp: Lisp
     ########## 对比各种programming language##########    
     - Comparison-of-programming-language: Comparison-of-programming-language
     ##### 如何跨语言 #####
     - Cross-language: Cross-language
+    
     - Online-compiler: Online-compiler
+    
+    - Auxiliary-compiler: Auxiliary-compiler

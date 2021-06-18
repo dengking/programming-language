@@ -110,10 +110,12 @@ nav:
     - Type-relation:
       - Introduction: Theory/Type-system/Type-relation/index.md
     - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
-  - Reflection:
-    - Introduction: Theory/Reflection/index.md
-    - Type-introspection: Theory/Reflection/Type-introspection.md
-    - Summary: Theory/Reflection/Summary.md
+  - Reflection&&introspection:
+    - Introduction: Theory/Reflection&&introspection/index.md
+    - wikipedia-Reflection:
+      - Introduction: Theory/Reflection&&introspection/wikipedia-Reflection/index.md
+    - Type-introspection:
+      - Introduction: Theory/Reflection&&introspection/Type-introspection/index.md
   - First-class-citizen:
     - Introduction: Theory/First-class-citizen/index.md
   - Pyramid-of-doom:
@@ -1670,7 +1672,7 @@ nav:
     - Partow:
       - Introduction: C++/Library/Partow/index.md
       - Strtk:
-        - Strtk: C++/Library/Partow/Strtk/Strtk.md
+        - Introduction: C++/Library/Partow/Strtk/index.md
         - Strtk-implementation: C++/Library/Partow/Strtk/Strtk-implementation.md
       - exprtk:
         - Introduction: C++/Library/Partow/exprtk/index.md
@@ -1735,10 +1737,16 @@ nav:
       - Introduction: C++/Library/Folly/index.md
       - io-async:
         - Introduction: C++/Library/Folly/io-async/index.md
-    - Serialization-and-deserialization:
-      - Introduction: C++/Library/Serialization-and-deserialization/index.md
+    - Serialization&&deserialization:
+      - Introduction: C++/Library/Serialization&&deserialization/index.md
     - Command-line:
       - Introduction: C++/Library/Command-line/index.md
+    - GUI:
+      - Introduction: C++/Library/GUI/index.md
+      - QT:
+        - Introduction: C++/Library/GUI/QT/index.md
+        - QT-code-generator:
+          - Introduction: C++/Library/GUI/QT/QT-code-generator/index.md
   - Programming-paradigm:
     - Introduction: C++/Programming-paradigm/index.md
     - OOP:
@@ -2362,6 +2370,10 @@ nav:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Incomplete-type/Check-incomplete-type/index.md"
       - Reflection:
         - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/index.md"
+        - paper-N3996-Static-reflection:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/paper-N3996-Static-reflection/index.md"
+        - vollmann-Metaclasses-and-Reflection-in-C++:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/vollmann-Metaclasses-and-Reflection-in-C++/index.md"
         - Library-rttr:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/Library-rttr/index.md"
         - struct-RTTI:
@@ -2750,10 +2762,7 @@ nav:
   - TODO-Undefined-behavior:
     - Introduction: C++/TODO-Undefined-behavior/index.md
     - llvm-What-Every-C-Programmer-Should-Know-About-Undefined-Behavior:
-      - 1#3: C++/TODO-Undefined-behavior/llvm-What-Every-C-Programmer-Should-Know-About-Undefined-Behavior/1#3.md
-    - regehr-A-Guide-to-Undefined-Behavior-in-C-and-C++:
-      - Part-1: C++/TODO-Undefined-behavior/regehr-A-Guide-to-Undefined-Behavior-in-C-and-C++/Part-1.md
-      - Part-2: C++/TODO-Undefined-behavior/regehr-A-Guide-to-Undefined-Behavior-in-C-and-C++/Part-2.md
+      - Introduction: C++/TODO-Undefined-behavior/llvm-What-Every-C-Programmer-Should-Know-About-Undefined-Behavior/index.md
     - Example-of-undefined-behavior:
       - Introduction: C++/TODO-Undefined-behavior/Example-of-undefined-behavior/index.md
 - C:
@@ -2960,6 +2969,8 @@ nav:
       - Introduction: Cross-language/mapbox-jni.hpp/Read-code/index.md
 - Online-compiler:
   - Introduction: Online-compiler/index.md
+- Auxiliary-compiler:
+  - Introduction: Auxiliary-compiler/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/programming-language

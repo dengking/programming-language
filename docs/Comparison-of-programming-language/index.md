@@ -44,6 +44,6 @@ Generic programming
 
 1、不同的programming language有着不同的特性，这就决定了它们会被用于不同的领域
 
-2、没有全能的语言，需要根据实际的需求，来选择合适的语言
+2、没有全能的语言，需要根据实际的需求，来选择合适的语言，更多的时候，我们需要跨语言、综合运用多种语言的优势，这在`Cross-language` 章节进行了讨论。
 
 3、不同的programming language之间彼此借鉴特性

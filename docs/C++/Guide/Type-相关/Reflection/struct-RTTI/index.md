@@ -12,25 +12,23 @@ Google:
 
 2、C/C++ header file parser
 
-
-
-
+下面是检索的有价值的结果: 
 
 ### senexcanis [CppHeaderParser](http://senexcanis.com/open-source/cppheaderparser/)
 
-这是Google parse c++ header file的第一个返回结果。
+1、这是Google parse c++ header file的第一个返回结果。
 
-https://pypi.org/project/CppHeaderParser/
+2、https://pypi.org/project/CppHeaderParser/
+
+3、我最终选择了这个library
+
+4、借助它，实现了一个auxiliary compiler，生成struct RTTI
 
 ### thegreenplace [Parsing C++ in Python with Clang](https://eli.thegreenplace.net/2011/07/03/parsing-c-in-python-with-clang)
 
 ### stackoverflow [Is there a good Python library that can parse C++? [closed]](https://stackoverflow.com/questions/1444961/is-there-a-good-python-library-that-can-parse-c)
 
-
-
-### [gccxml](http://gccxml.github.io/HTML/Index.html)
-
-
+### github [gccxml](http://gccxml.github.io/HTML/Index.html)
 
 
 
