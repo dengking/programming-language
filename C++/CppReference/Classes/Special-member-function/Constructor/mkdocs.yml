@@ -2,7 +2,6 @@ nav:
     - Introduction: index.md
     - cppreference-Constructor: cppreference-Constructor
     - Default-constructors: Default-constructors
-    - Member-initializer-list: Member-initializer-list
     - Copy-constructor: Copy-constructor
     - TODO-Use-this-in-constructor: TODO-Use-this-in-constructor
  

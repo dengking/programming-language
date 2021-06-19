@@ -1,0 +1,6 @@
+nav:
+    - Object-lifetime: Object-lifetime
+    - Storage-duration: Storage-duration
+    - Static-storage-duration: Static-storage-duration
+    - Thread-local-storage-duration: Thread-local-storage-duration
+    - Access-outside-of-object-lifetime: Access-outside-of-object-lifetime

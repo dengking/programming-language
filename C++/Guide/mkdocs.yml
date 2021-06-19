@@ -1,29 +1,27 @@
 nav:
-    - Command-line: Command-line
-    # 如何进行注释，如何根据注释生成文档
-    - Comment: Comment
+    - Comment: Comment # 如何进行注释，如何根据注释生成文档
+    # 代码风格
+    - Style-guide: Style-guide    
+        
     - Temporary: Temporary
+    
     - Order: Order
+    
     - Header-only-library: Header-only-library
-    # - Transaction: Transaction
     
     - Performance-optimization: Performance-optimization
     
-    - Memory-model-and-atomic-library: Memory-model-and-atomic-library
-    
-
+    - Memory-model&&atomic-library: Memory-model&&atomic-library
     
     - Type-相关: Type-相关
     
     - Guard: Guard
+    
     - Wrapper: Wrapper
-    
-    # 代码风格
-    - Style-guide: Style-guide    
-    
     # 
-    - Compile-time-and-run-time: Compile-time-and-run-time
+    - Compile-time&&run-time: Compile-time&&run-time
     # C++中的修饰符
     - Specifiers: Specifiers
     
     - Configuration-option: Configuration-option
+    

@@ -1,15 +1,34 @@
 nav:
     - Introduction: index.md
-    - STL: STL
-    - String: String
-    - IO-library: IO-library
-    - Thread: Thread
-    - Atomic-operations-library: Atomic-operations-library
-    - Utility-library: Utility-library
-    - Smart-pointer-library: Smart-pointer-library
     # 标准库的实现
-    - Implementation: Implementation
-    - Extending-std: Extending-std
-    - Extensions: Extensions
-    - Localization-library: Localization-library
+    - Design&&implementation: Design&&implementation
     
+    - Guidelines: Guidelines
+    
+    - Idiom: Idiom
+    # STL三大核心
+    - Containers: Containers
+    
+    - Iterator-library: Iterator-library
+    
+    - Algorithm: Algorithm
+    # range是c++引入的新特性    
+    - C++20-Range-library: C++20-Range-library
+    
+    - String: String
+    
+    - IO-library: IO-library
+    
+    - Thread: Thread
+    
+    - Atomic-operations-library: Atomic-operations-library
+    
+    - Utility-library: Utility-library
+
+    - Dynamic-memory-management: Dynamic-memory-management
+    
+    - Extending-std: Extending-std
+    
+    - Extensions: Extensions
+    
+    - Localization-library: Localization-library

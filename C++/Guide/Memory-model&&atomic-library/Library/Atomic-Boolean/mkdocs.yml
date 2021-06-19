@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - std-atomic_flag: std-atomic_flag
+    - modernescpp-Atomic-Boolean: modernescpp-Atomic-Boolean
+    - std-atomic_bool-VS-bool: std-atomic_bool-VS-bool

@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
+    - Allocate-aligned-memory-manually: Allocate-aligned-memory-manually
+    - POSIX-allocate-aligned-memory: POSIX-allocate-aligned-memory
     - Align-to-cacheline-word: Align-to-cacheline-word

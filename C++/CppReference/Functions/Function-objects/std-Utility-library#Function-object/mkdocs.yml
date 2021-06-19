@@ -1,8 +1,0 @@
-nav:
-    - Introduction: index.md
-    
-
-    - std-function: std-function
-    - std-bind: std-bind
-
-    - Operator-function-object: Operator-function-object.md    

@@ -1,8 +1,17 @@
 nav:
     - Introduction: index.md
+    
     - Type-system: Type-system
+    
     - Type-operation: Type-operation
-    - Type-inference-and-deduction: Type-inference-and-deduction
+    # 类型转换是type system的一个非常重要的内容        
+    - Type-conversion: Type-conversion
+    
+    - Type-inference&&deduction: Type-inference&&deduction
+    
     - size_t-and-ptrdiff_t: size_t-and-ptrdiff_t
     
+    - TODO-Type-qualifier: TODO-Type-qualifier
+    
     - TODO-Type-length: TODO-Type-length
+    

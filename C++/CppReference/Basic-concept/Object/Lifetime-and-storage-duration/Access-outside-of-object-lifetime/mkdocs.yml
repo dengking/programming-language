@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Case-example: Case-example
-    - Multi-thread-and-observer-pattern: Multi-thread-and-observer-pattern
-    - Pure-virtual-method-called: Pure-virtual-method-called    
-    # - dangling-pointer-and-control-theory-and-reference-counting: dangling-pointer-and-control-theory-and-reference-counting.md

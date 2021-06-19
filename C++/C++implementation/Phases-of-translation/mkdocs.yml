@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Separate-compilation-model.md: Separate-compilation-model.md
+    - Separate-compilation-model.md: Separate-compilation-model
     - One-pass-compiler: One-pass-compiler.md
     

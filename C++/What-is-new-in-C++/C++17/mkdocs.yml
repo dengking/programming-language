@@ -3,3 +3,4 @@ nav:
     - C++17-Temporary-materialization: C++17-Temporary-materialization
     - C++17-Structured-binding: C++17-Structured-binding
     - C++17-Parallel-algorithm: C++17-Parallel-algorithm
+    - C++17-inline-varaible: C++17-inline-varaible

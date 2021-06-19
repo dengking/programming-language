@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md # 首先介绍面向对象编程的概念
     # 描述语言的一些原理
     - Language: Language
     - What-is-new: What-is-new    

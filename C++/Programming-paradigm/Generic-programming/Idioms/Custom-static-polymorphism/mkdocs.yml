@@ -1,9 +1,0 @@
-nav:
-    - Introduction: index.md
-
-    - SFINAE-based: SFINAE-based
-    - Tag-Dispatching: Tag-Dispatching    
-    - C++17-Constexpr-if: C++17-Constexpr-if
-    - Dispatch-based-on-constant: Dispatch-based-on-constant
-    # - Select-function-overload: Select-function-overload
-    # - Select-template-specialization: Select-template-specialization

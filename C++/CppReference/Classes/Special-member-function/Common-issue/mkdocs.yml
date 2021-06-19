@@ -2,6 +2,5 @@ nav:
     - Introduction: index.md
     - Require-prohibit: Require-prohibit
     - Virtual: Virtual
-    
     - Implicitly-defined: Implicitly-defined
     - Trivial: Trivial

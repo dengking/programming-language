@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     # 讨论buffer的实现
-    - Buffer: Buffer.md
-    - Stream-operation: Stream-operation.md
+    - Buffer: Buffer
+    - Stream-operation: Stream-operation
     - Predefined-standard-stream-objects: Predefined-standard-stream-objects
     - String-IO: String-IO

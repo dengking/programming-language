@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
+    - paper-N3996-Static-reflection: paper-N3996-Static-reflection
+    - vollmann-Metaclasses-and-Reflection-in-C++: vollmann-Metaclasses-and-Reflection-in-C++
     - Library-rttr: Library-rttr
     - struct-RTTI: struct-RTTI
