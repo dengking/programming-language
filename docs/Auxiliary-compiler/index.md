@@ -45,3 +45,7 @@ mode 2、source transformer，使用 auxiliary compiler直接编译source code�
 五、`struct-RTTI`
 
 六、AspectC++
+
+七、Google protobuf
+
+使用Auxiliary compiler来编译DSL生成stub code

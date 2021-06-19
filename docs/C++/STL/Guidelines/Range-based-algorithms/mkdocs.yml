@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - cpppatterns-Range-based-algorithms: cpppatterns-Range-based-algorithms
     

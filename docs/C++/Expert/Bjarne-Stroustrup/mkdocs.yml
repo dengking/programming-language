@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - paper-Foundations-of-C++: paper-Foundations-of-C++
     - paper-A-rationale-for-semantically-enhanced-library-languages: paper-A-rationale-for-semantically-enhanced-library-languages
     - TODO-paper-Supporting-SELL-for-High-Performance-Computing: TODO-paper-Supporting-SELL-for-High-Performance-Computing

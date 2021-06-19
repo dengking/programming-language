@@ -6,6 +6,6 @@ nav:
     - Pre-C++20-concept: Pre-C++20-concept
     # concept是c++20引入的一个非常重要的特性    
     - C++20-concept: C++20-concept
-    - Custom-static-polymorphism-idiom: Custom-static-polymorphism-idiom
+    - Custom-static-polymorphism-idioms: Custom-static-polymorphism-idioms
 
     

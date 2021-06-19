@@ -101,7 +101,8 @@ nav:
       - Covariance-and-contravariance: Theory/Type-system/Type-constructor/Covariance-and-contravariance.md
     - Type-safety:
       - Introduction: Theory/Type-system/Type-safety/index.md
-    - Static-VS-dynamic-typing: Theory/Type-system/Static-VS-dynamic-typing.md
+    - Static-vs-dynamic-typing:
+      - Introduction: Theory/Type-system/Static-vs-dynamic-typing/index.md
     - OOP-and-type-system:
       - Introduction: Theory/Type-system/OOP-and-type-system/index.md
     - Type-conversion:
@@ -109,7 +110,6 @@ nav:
       - Downcast-and-upcast: Theory/Type-system/Type-conversion/Downcast-and-upcast.md
     - Type-relation:
       - Introduction: Theory/Type-system/Type-relation/index.md
-    - Static-vs-dynamic-typing: Theory/Type-system/Static-vs-dynamic-typing.md
   - Reflection&&introspection:
     - Introduction: Theory/Reflection&&introspection/index.md
     - wikipedia-Reflection:
@@ -216,6 +216,8 @@ nav:
             - Dependency-injection: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Dependency-injection/Dependency-injection.md
           - Prototype:
             - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Prototype/index.md
+          - Object-pool-pattern:
+            - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Creational-pattern/Object-pool-pattern/index.md
         - Behavioral-pattern:
           - Introduction: Theory/Programming-paradigm/OOP/Design-pattern/Behavioral-pattern/index.md
           - Visitor-pattern:
@@ -821,8 +823,18 @@ nav:
           - Introduction: C++/CppReference/Exception/Exception-Safety/No-throw-guarantee/index.md
         - Strong-exception-safety:
           - Introduction: C++/CppReference/Exception/Exception-Safety/Strong-exception-safety/index.md
+        - Exception-Safe-Function-Call:
+          - Introduction: C++/CppReference/Exception/Exception-Safety/Exception-Safe-Function-Call/index.md
+          - gotw-56-Exception-Safe-Function-Calls:
+            - Introduction: C++/CppReference/Exception/Exception-Safety/Exception-Safe-Function-Call/gotw-56-Exception-Safe-Function-Calls/index.md
+          - gotw-102-Exception-Safe-Function-Calls:
+            - Introduction: C++/CppReference/Exception/Exception-Safety/Exception-Safe-Function-Call/gotw-102-Exception-Safe-Function-Calls/index.md
         - TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know:
           - Introduction: C++/CppReference/Exception/Exception-Safety/TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know/index.md
+      - Stack-unwinding:
+        - Introduction: C++/CppReference/Exception/Stack-unwinding/index.md
+        - Exception-and-stack-unwinding:
+          - Introduction: C++/CppReference/Exception/Stack-unwinding/Exception-and-stack-unwinding/index.md
       - library-Error-handling:
         - Introduction: C++/CppReference/Exception/library-Error-handling/index.md
         - std-uncaught_exception:
@@ -924,6 +936,8 @@ nav:
             - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/warning-binding-rvalue-to-lvalue-reference/index.md
           - TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs:
             - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs/index.md
+          - Examples:
+            - Introduction: C++/CppReference/Classes/Special-member-function/C++11-Move/Examples/index.md
         - Swap:
           - Introduction: C++/CppReference/Classes/Special-member-function/Swap/index.md
           - drdobbs-Andrew-Koenig-Object-Swapping:
@@ -1183,6 +1197,8 @@ nav:
       - Introduction: C++/STL/Guidelines/index.md
       - Range-based-algorithms:
         - Introduction: C++/STL/Guidelines/Range-based-algorithms/index.md
+        - cpppatterns-Range-based-algorithms:
+          - Introduction: C++/STL/Guidelines/Range-based-algorithms/cpppatterns-Range-based-algorithms/index.md
       - drdobbs-STL-Algorithms-Hand-Written-Loops:
         - Introduction: C++/STL/Guidelines/drdobbs-STL-Algorithms-Hand-Written-Loops/index.md
       - arne-mertz-algorithms-and-the-KISS-principle:
@@ -1257,6 +1273,8 @@ nav:
               - Introduction: C++/STL/Containers/Sequence-container/std-vector/std-vector-bool/TODO-gotw-When-Is-a-Container-Not-a-Container/index.md
           - Resize-and-reserve:
             - Introduction: C++/STL/Containers/Sequence-container/std-vector/Resize-and-reserve/index.md
+          - std-vector-end:
+            - Introduction: C++/STL/Containers/Sequence-container/std-vector/std-vector-end/index.md
         - std-list:
           - Implementation:
             - Introduction: C++/STL/Containers/Sequence-container/std-list/Implementation/index.md
@@ -1622,14 +1640,14 @@ nav:
         - Introduction: C++/Library/Boost/Boost-TypeErasure/index.md
       - Boost-Atomic:
         - Introduction: C++/Library/Boost/Boost-Atomic/index.md
-      - boost-Beast:
-        - Introduction: C++/Library/Boost/boost-Beast/index.md
+      - Boost-Beast-lib:
+        - Introduction: C++/Library/Boost/Boost-Beast-lib/index.md
         - span:
-          - Introduction: C++/Library/Boost/boost-Beast/span/index.md
+          - Introduction: C++/Library/Boost/Boost-Beast-lib/span/index.md
         - type_traits:
-          - Introduction: C++/Library/Boost/boost-Beast/type_traits/index.md
+          - Introduction: C++/Library/Boost/Boost-Beast-lib/type_traits/index.md
         - make_void:
-          - Introduction: C++/Library/Boost/boost-Beast/make_void/index.md
+          - Introduction: C++/Library/Boost/Boost-Beast-lib/make_void/index.md
       - Boost.Intrusive:
         - Introduction: C++/Library/Boost/Boost.Intrusive/index.md
     - Communication:
@@ -1657,6 +1675,8 @@ nav:
               - Introduction: C++/Library/Log/Spdlog/Asynchronous-logging/Read-code/mpmc_blocking_q/index.md
             - thread_pool:
               - Introduction: C++/Library/Log/Spdlog/Asynchronous-logging/Read-code/thread_pool/index.md
+        - "\u6211\u7684\u5B9E\u8DF5":
+          - Introduction: "C++/Library/Log/Spdlog/\u6211\u7684\u5B9E\u8DF5/index.md"
       - SergiusTheBest-plog:
         - Introduction: C++/Library/Log/SergiusTheBest-plog/index.md
     - fmt:
@@ -1739,6 +1759,10 @@ nav:
         - Introduction: C++/Library/Folly/io-async/index.md
     - Serialization&&deserialization:
       - Introduction: C++/Library/Serialization&&deserialization/index.md
+      - library-USCiLab-cereal:
+        - Introduction: C++/Library/Serialization&&deserialization/library-USCiLab-cereal/index.md
+      - Google-Protobuf:
+        - Introduction: C++/Library/Serialization&&deserialization/Google-Protobuf/index.md
     - Command-line:
       - Introduction: C++/Library/Command-line/index.md
     - GUI:
@@ -1792,48 +1816,50 @@ nav:
           - Introduction: C++/Programming-paradigm/Generic-programming/Pre-C++20-concept/static_assert/index.md
       - C++20-concept:
         - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/index.md
-        - Concepts-library-(C++20):
-          - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/Concepts-library-(C++20)/index.md
+        - C++20-Concepts-library:
+          - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/C++20-Concepts-library/index.md
           - Regular-type:
-            - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/Concepts-library-(C++20)/Regular-type/index.md
-      - Custom-static-polymorphism-idiom:
-        - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/C++20-Concepts-library/Regular-type/index.md
+            - std-regular:
+              - Introduction: C++/Programming-paradigm/Generic-programming/C++20-concept/C++20-Concepts-library/Regular-type/std-regular/index.md
+      - Custom-static-polymorphism-idioms:
+        - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/index.md
         - Trait:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/index.md
-          - Example: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Example.md
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Trait/index.md
+          - Example: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Trait/Example.md
           - Type-Trait:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Type-Trait/index.md
-            - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Type-Trait/Type-traits-vs-concepts.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Trait/Type-Trait/index.md
+            - Type-traits-vs-concepts: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Trait/Type-Trait/Type-traits-vs-concepts.md
           - Function-trait:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Trait/Function-trait/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Trait/Function-trait/index.md
         - SFINAE-based:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/index.md
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/index.md
           - SFINAE-based-custom-polymorphism-precondition:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/SFINAE-based-custom-polymorphism-precondition/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/SFINAE-based-custom-polymorphism-precondition/index.md
           - Helper-functions:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Helper-functions/index.md
             - std-enable_if:
-              - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/std-enable_if/index.md
+              - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Helper-functions/std-enable_if/index.md
               - boost-enable_if:
-                - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/std-enable_if/boost-enable_if/index.md
+                - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Helper-functions/std-enable_if/boost-enable_if/index.md
               - thegreenplace-SFINAE-and-enable_if:
-                - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/std-enable_if/thegreenplace-SFINAE-and-enable_if/index.md
+                - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Helper-functions/std-enable_if/thegreenplace-SFINAE-and-enable_if/index.md
             - C++17-std-void_t:
-              - void_t: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Helper-functions/C++17-std-void_t/index.md
+              - void_t: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Helper-functions/C++17-std-void_t/index.md
           - Class-template-SFINAE:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Class-template-SFINAE/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Class-template-SFINAE/index.md
           - Function-template-SFINAE:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Function-template-SFINAE/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Function-template-SFINAE/index.md
           - Expression-SFINAE:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/SFINAE-based/Expression-SFINAE/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/SFINAE-based/Expression-SFINAE/index.md
         - Tag-Dispatching:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Tag-Dispatching/index.md
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Tag-Dispatching/index.md
         - C++17-Constexpr-if:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/C++17-Constexpr-if/index.md
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/C++17-Constexpr-if/index.md
           - TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17:
-            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/C++17-Constexpr-if/TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17/index.md
+            - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/C++17-Constexpr-if/TODO-bfilipek-Simplify-code-with-if-constexpr-in-C++17/index.md
         - Dispatch-based-on-constant:
-          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idiom/Dispatch-based-on-constant/index.md
+          - Introduction: C++/Programming-paradigm/Generic-programming/Custom-static-polymorphism-idioms/Dispatch-based-on-constant/index.md
     - TMP:
       - Introduction: C++/Programming-paradigm/TMP/index.md
       - TMP-and-FP:
@@ -1881,6 +1907,8 @@ nav:
           - Introduction: C++/Programming-paradigm/Polymorphism/Custom-polymorphism/Assemble-and-multiple-dispatch/index.md
       - Polymorphic-object-container:
         - Introduction: C++/Programming-paradigm/Polymorphism/Polymorphic-object-container/index.md
+        - Polymorphic-containers-with-value-semantic:
+          - Introduction: C++/Programming-paradigm/Polymorphism/Polymorphic-object-container/Polymorphic-containers-with-value-semantic/index.md
     - Polymorphic-value-type:
       - Introduction: C++/Programming-paradigm/Polymorphic-value-type/index.md
       - Type-Erasure:
@@ -2167,6 +2195,12 @@ nav:
               - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-member/Pointer-to-member-function/index.md
             - Trait:
               - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Pointer-to-member/Trait/index.md
+          - Null-pointer:
+            - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Null-pointer/index.md
+            - NULL-'0'-0-nullptr:
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Null-pointer/NULL-'0'-0-nullptr/index.md
+            - nullptr-idiom:
+              - Introduction: C++/Resource-management/Memory/Pointer&&array/Pointer/Null-pointer/nullptr-idiom/index.md
         - Array:
           - Introduction: C++/Resource-management/Memory/Pointer&&array/Array/index.md
           - stackoverflow-How-do-I-use-array-in-C++:
@@ -2364,6 +2398,10 @@ nav:
         - Introduction: "C++/Guide/Type-\u76F8\u5173/Strong-type/index.md"
       - Incomplete-type:
         - Introduction: "C++/Guide/Type-\u76F8\u5173/Incomplete-type/index.md"
+        - Opaque-data-type:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/Incomplete-type/Opaque-data-type/index.md"
+          - Opaque-pointer:
+            - Introduction: "C++/Guide/Type-\u76F8\u5173/Incomplete-type/Opaque-data-type/Opaque-pointer/index.md"
         - Delete-incomplete-type:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Incomplete-type/Delete-incomplete-type/index.md"
         - Check-incomplete-type:
@@ -2374,6 +2412,8 @@ nav:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/paper-N3996-Static-reflection/index.md"
         - vollmann-Metaclasses-and-Reflection-in-C++:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/vollmann-Metaclasses-and-Reflection-in-C++/index.md"
+        - thegreenplace-Parsing-C++in-Python-with-Clang:
+          - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/thegreenplace-Parsing-C++in-Python-with-Clang/index.md"
         - Library-rttr:
           - Introduction: "C++/Guide/Type-\u76F8\u5173/Reflection/Library-rttr/index.md"
         - struct-RTTI:
@@ -2439,6 +2479,8 @@ nav:
   - Expert:
     - Bjarne-Stroustrup:
       - Introduction: C++/Expert/Bjarne-Stroustrup/index.md
+      - paper-Foundations-of-C++:
+        - Introduction: C++/Expert/Bjarne-Stroustrup/paper-Foundations-of-C++/index.md
       - paper-A-rationale-for-semantically-enhanced-library-languages:
         - Introduction: C++/Expert/Bjarne-Stroustrup/paper-A-rationale-for-semantically-enhanced-library-languages/index.md
       - TODO-paper-Supporting-SELL-for-High-Performance-Computing:
@@ -2527,7 +2569,7 @@ nav:
       - Library-SPSCQueue:
         - Introduction: C++/Expert/Erik-Rigtorp/Library-SPSCQueue/index.md
       - Library-MPMCQueue:
-        - Introduction: C++/Expert/Erik-Rigtorp/Library-MPMCQueue/index.md
+        - Introduction: C++/Expert/Erik-Rigtorp/library-MPMCQueue/index.md
     - "Arthur-O\u2019Dwyer":
       - Introduction: "C++/Expert/Arthur-O\u2019Dwyer/index.md"
       - library-Quuxplusone-from-scratch:
@@ -2536,6 +2578,8 @@ nav:
         - Introduction: "C++/Expert/Arthur-O\u2019Dwyer/library-Quuxplusone-ring_view/index.md"
       - What-is-Type-Erasure:
         - Introduction: "C++/Expert/Arthur-O\u2019Dwyer/What-is-Type-Erasure/index.md"
+    - Evan-Klitzke:
+      - Introduction: C++/Expert/Evan-Klitzke/index.md
   - Tools:
     - Introduction: C++/Tools/index.md
     - Valgrind:
@@ -2566,7 +2610,7 @@ nav:
       - Macro:
         - Introduction: C++/C++implementation/Preprocess/Macro/index.md
         - Plateform-macro:
-          - Introduction: C++/C++implementation/Preprocess/Macro/Plateform-macro/index.md
+          - Introduction: C++/C++implementation/Preprocess/Macro/plateform-macro/index.md
         - Predefined-macros:
           - Introduction: C++/C++implementation/Preprocess/Macro/Predefined-macros/index.md
         - Language-feature-testing-macros:
@@ -2956,11 +3000,13 @@ nav:
   - Introduction: Comparison-of-programming-language/index.md
   - C++VS-C:
     - Introduction: Comparison-of-programming-language/C++VS-C/index.md
+    - Type-system: Comparison-of-programming-language/C++VS-C/Type-system.md
   - C++VS-Python:
     - Introduction: Comparison-of-programming-language/C++VS-Python/index.md
   - C++VS-Java:
     - Introduction: Comparison-of-programming-language/C++VS-Java/index.md
 - Cross-language:
+  - Introduction: Cross-language/index.md
   - SWIG:
     - Introduction: Cross-language/SWIG/index.md
   - mapbox-jni.hpp:

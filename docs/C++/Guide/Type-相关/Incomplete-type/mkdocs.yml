@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - Opaque-data-type: Opaque-data-type
     - Delete-incomplete-type: Delete-incomplete-type
     - Check-incomplete-type: Check-incomplete-type

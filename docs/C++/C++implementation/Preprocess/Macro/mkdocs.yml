@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Plateform-macro: Plateform-macro
+    - Plateform-macro: plateform-macro
     - Predefined-macros: Predefined-macros
     - Language-feature-testing-macros: Language-feature-testing-macros
     - Stringify-and-concatenate-macros: Stringify-and-concatenate-macros
