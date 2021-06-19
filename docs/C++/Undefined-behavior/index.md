@@ -1,5 +1,7 @@
 # Undefined behavior
 
+
+
 ## cppreference [Undefined behavior](https://en.cppreference.com/w/c/language/behavior)
 
 The C language standard precisely specifies the [observable behavior](https://en.cppreference.com/mwiki/index.php?title=c/language/as_if&action=edit&redlink=1) of C language programs, except for the ones in the following categories:
@@ -80,20 +82,6 @@ exists_in_table:
 
 
 
-
-
-### External links
-
-- [What Every C Programmer Should Know About Undefined Behavior #1/3](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know.html)
-- [What Every C Programmer Should Know About Undefined Behavior #2/3](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_14.html)
-- [What Every C Programmer Should Know About Undefined Behavior #3/3](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_21.html)
-- [Undefined behavior can result in time travel (among other things, but time travel is the funkiest)](http://blogs.msdn.com/b/oldnewthing/archive/2014/06/27/10537746.aspx)
-- [Understanding Integer Overflow in C/C++](http://www.cs.utah.edu/~regehr/papers/overflow12.pdf)
-- [Undefined Behavior and Fermat’s Last Theorem](http://kukuruku.co/hub/cpp/undefined-behavior-and-fermats-last-theorem)
-- [Fun with NULL pointers, part 1](http://lwn.net/Articles/342330/) (local exploit in Linux 2.6.30 caused by UB due to null pointer dereference)
-
-
-
 ## wikipedia [Undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior)
 
 In [computer programming](https://en.wikipedia.org/wiki/Computer_programming), **undefined behavior** (**UB**) is the result of executing computer code whose [behavior](https://en.wikipedia.org/wiki/Behavior) is not prescribed(规定的) by the [language specification](https://en.wikipedia.org/wiki/Language_specification) to which the code adheres(遵循), for the current state of the program. This happens when the [translator](https://en.wikipedia.org/wiki/Translator_(computing)) of the source code makes certain assumptions, but these assumptions are not satisfied during execution.
@@ -144,32 +132,14 @@ Another benefit from allowing signed integer overflow to be undefined is that it
 
 A further important benefit of undefined signed integer overflow is that it enables, though does not require, erroneous overflows to be detected at compile-time or by [static program analysis](https://en.wikipedia.org/wiki/Static_program_analysis), or by run-time checks such as the [Clang](https://en.wikipedia.org/wiki/Clang) and [GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) sanitizers and [valgrind](https://en.wikipedia.org/wiki/Valgrind); if such overflow were defined with semantics such as **wrap-around** then compile-time checks would not be possible.
 
-### Risks
 
 
+## How to deal with UB
 
+1、加强programmer的水平，避免写出UB code
 
+2、static check
 
+3、dynamic check: UndefinedBehaviorSanitizer
 
-
-## summary of undefined behavior
-
-http://www.eskimo.com/~scs/readings/undef.950311.html
-
-### [1](https://blog.regehr.org/archives/959)
-
-if you cast a pointer to a different kind of pointer and then dereference it, then your program has executed an [undefined behavior](http://blog.regehr.org/archives/213). 
-
-这种情况的一个典型例子就是：[Sockets example](https://en.wikipedia.org/wiki/Type_punning)
-
-其实上面这段话的意思和[What is the Strict Aliasing Rule and Why do we care?](https://gist.github.com/shafik/848ae25ee209f698763cffee272a58f8)中所描述的是一致的：
-
-In C and `C++` **aliasing** has to do with what **expression types** we are allowed to access stored values through. In both C and `C++` the standard specifies which **expression types** are allowed to alias which types. The compiler and optimizer are allowed to assume we follow the **aliasing rules** strictly, hence the term *strict aliasing rule*. If we attempt to access a **value** using a **type** not allowed it is classified as [undefined behavior](http://en.cppreference.com/w/cpp/language/ub)(**UB**). Once we have **undefined behavior** all bets are off, the results of our program are no longer reliable.
-
-### 6.2.4 Storage durations of objects
-
-The lifetime of an object is the portion of program execution during which storage is guaranteed to be reserved for it. An object exists, has a constant address, 33) and retains its last-stored value throughout its lifetime. 34) If an object is referred to outside of its lifetime, the behavior is undefined. The value of a pointer becomes indeterminate when the object it points to (or just past) reaches the end of its lifetime.
-
-
-
-### J.2 Undefined behavior
+参见对应章节。

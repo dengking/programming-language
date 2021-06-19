@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - Clang-Static-Analyzer: Clang-Static-Analyzer
-    - UndefinedBehaviorSanitizer: UndefinedBehaviorSanitizer
+    - Sanitizer: Sanitizer
     - Assembling-a-Complete-Toolchain: Assembling-a-Complete-Toolchain.md
     

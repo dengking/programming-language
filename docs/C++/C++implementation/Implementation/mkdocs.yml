@@ -2,4 +2,5 @@ nav:
     - LLVM: LLVM
     - GCC: GCC
     - MSVC: MSVC
+    - GCC-VS-LLVM: GCC-VS-LLVM
     

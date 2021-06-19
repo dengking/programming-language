@@ -46,3 +46,18 @@ Oh, and **use [`std::minmax_element(...)`](http://en.cppreference.com/w/cpp/algo
 
 
 ## cppreference [std::minmax_element](https://en.cppreference.com/w/cpp/algorithm/minmax_element)
+
+
+
+
+
+## `std::initializer_list<T>`参数
+
+这种入参，兼职就是语法糖。
+
+leetcode [【中规中矩】Bellman Ford 动态规划两种写法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/zhong-gui-zhong-ju-bellman-ford-dong-tai-gui-hua-l/)
+
+```C++
+dp[v][k] = min({dp[v][k - 1], dp[v][k], dp[u][k - 1] + w});
+```
+

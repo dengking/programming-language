@@ -6,7 +6,11 @@
 
 3、以"Access outside of object lifetime"这个角度出发，可以组织很多内容。
 
+## 如何应对 "access outside of lifetime" memory error
 
+1、"access outside of lifetime"本质上是一种memory error，其实我们可以采用应付memory error的方式来应付它，比如AddressSanitizer就能够发现很多的这类问题
+
+2、"access outside of lifetime" 也有这它的特殊性，所以下面对它进行详细分析，找到一些更好的解决方法。
 
 ## 原因和修改方法
 
@@ -76,9 +80,9 @@ During construction and destruction, other restrictions apply, see [virtual func
 
 参见`Case-example`章节。
 
+
+
 ## TODO
-
-
 
 geeksforgeeks [Dangling, Void , Null and Wild Pointers](https://www.geeksforgeeks.org/dangling-void-null-wild-pointers/)
 

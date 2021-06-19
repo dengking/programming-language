@@ -1,0 +1,3 @@
+nav:
+    - UndefinedBehaviorSanitizer: UndefinedBehaviorSanitizer
+    - AddressSanitizer: AddressSanitizer

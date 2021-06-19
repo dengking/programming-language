@@ -3,9 +3,5 @@
 - [Clang vs Other Open Source Compilers](https://clang.llvm.org/comparison.html)
 - [Clang vs GCC - which produces better binaries?](https://stackoverflow.com/questions/3187414/clang-vs-gcc-which-produces-better-binaries)
 
-
-
-
-
 个人感觉LLVM是更加简单易用，对于理解compiler principle，它是一个非常好的工具。
 

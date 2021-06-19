@@ -33,7 +33,9 @@ alloc time=1280862302.170749 pc=0x7f3a57550cb1
 number of nearby objects: 1
 ```
 
-
+> NOTE: 
+>
+> 典型的越界访问了
 
 ## gcc-10.3.0 [3.12 Program Instrumentation Options](https://gcc.gnu.org/onlinedocs/gcc-10.3.0/gcc/Instrumentation-Options.html#Instrumentation-Options)
 
