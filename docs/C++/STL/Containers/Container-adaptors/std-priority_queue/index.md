@@ -18,9 +18,77 @@ A priority queue is a container adaptor that provides constant time lookup of th
 
 A user-provided `Compare` can be supplied to change the ordering, e.g. using `std::greater<T>` would cause the **smallest element** to appear as the [top()](https://en.cppreference.com/w/cpp/container/priority_queue/top).
 
+> NOTE: 
+>
+> 需要注意的是，默认是最大堆
+
 Working with a `priority_queue` is similar to managing a [heap](https://en.cppreference.com/w/cpp/algorithm/make_heap) in some **random access container**, with the benefit of not being able to accidentally invalidate the heap.
 
 > NOTE: 这一段话其实透露出了`priority_queue`的实现，它结合了`heap`和一个random access container（比如`std::vector`）。
+
+## 最小堆
+
+leetcode [787. c++简单易懂的Dijkstra算法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/cjian-dan-yi-dong-de-dijkstrasuan-fa-by-w05aa/) 
+
+```C++
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
+        // 构建图
+        vector<vector<int>> graph(n, vector<int>(n, 0));
+        for (auto& flight : flights)
+        {
+            graph[flight[0]][flight[1]] = flight[2];
+        }
+
+        // 优先级队列，按照价格的最小堆
+        auto cmp = [](const vector<int>& a, const vector<int>& b) -> bool
+        {
+            return a[1] > b[1];
+        };
+        priority_queue<vector<int>, deque<vector<int>>, decltype(cmp)> q(cmp);
+        // 插入到数组里： 当前点，价格，最大飞行次数（K=0的时候也能至少飞一次，所以是中转次数+1）
+        q.push({src, 0, K+1});
+        while (!q.empty())
+        {
+            const vector<int>& curr = q.top();
+            int node = curr[0];
+            int price = curr[1];
+            int k = curr[2];
+            q.pop();
+
+            if (node == dst)
+            {
+                return price;
+            }
+
+            // 判断是否还可以再飞一次
+            if (k > 0)
+            {
+                // 遍历目前可以达到的边
+                for (int i = 0; i < n; ++i)
+                {
+                    if (graph[node][i] > 0)
+                    {
+                        q.push({i, price + graph[node][i], k-1});
+                    }
+                }
+            }
+
+        }
+
+        // 都找不到结果，则返回-1
+        return -1;
+    }
+};
+
+```
+
+
+
+
+
+
 
 ## Move out element from `std::priority_queue`
 
