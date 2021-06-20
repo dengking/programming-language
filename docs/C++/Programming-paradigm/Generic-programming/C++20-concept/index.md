@@ -2,6 +2,8 @@
 
 是在阅读cppreference [Named requirements](https://en.cppreference.com/w/cpp/named_req)的时候，发现了[concepts](https://en.cppreference.com/w/cpp/language/constraints)特性的。
 
+## zhihu [Concept 对 C++ 有什么影响，它和 Rust 的泛型 Bound 和 Trait 有点类似？](https://www.zhihu.com/question/33222324)
+
 ## cppreference [Constraints and concepts](https://en.cppreference.com/w/cpp/language/constraints) 
 
 > NOTE: 查看右侧的目录可以知道，原文的行文思路是：
@@ -65,5 +67,4 @@ The intent of concepts is to model semantic categories (Number, Range, RegularFu
 
 
 ### [Partial ordering of constraints](https://en.cppreference.com/w/cpp/language/constraints#Partial_ordering_of_constraints)
-
 
