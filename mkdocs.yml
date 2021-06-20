@@ -672,12 +672,22 @@ nav:
         - User-defined-literals: C++/CppReference/Expressions/Literals/User-defined-literals.md
       - Constant-expressions:
         - Introduction: C++/CppReference/Expressions/Constant-expressions/index.md
-        - Constant: C++/CppReference/Expressions/Constant-expressions/Constant.md
-        - Constant-expressions: C++/CppReference/Expressions/Constant-expressions/Constant-expressions.md
+        - Constant-in-C++:
+          - Introduction: C++/CppReference/Expressions/Constant-expressions/Constant-in-C++/index.md
+        - Constant-expressions:
+          - Introduction: C++/CppReference/Expressions/Constant-expressions/Constant-expressions/index.md
         - C++11-constexpr:
           - Introduction: C++/CppReference/Expressions/Constant-expressions/C++11-constexpr/index.md
           - TODO-Literal-type:
             - Introduction: C++/CppReference/Expressions/Constant-expressions/C++11-constexpr/TODO-Literal-type/index.md
+          - constexpr-and-const:
+            - Introduction: C++/CppReference/Expressions/Constant-expressions/C++11-constexpr/constexpr-and-const/index.md
+          - C++20-constexpr-vector-string:
+            - Introduction: C++/CppReference/Expressions/Constant-expressions/C++11-constexpr/C++20-constexpr-vector-string/index.md
+            - modernescpp-constexpr-std-vector-and-std-string-in-C++20:
+              - Introduction: C++/CppReference/Expressions/Constant-expressions/C++11-constexpr/C++20-constexpr-vector-string/modernescpp-constexpr-std-vector-and-std-string-in-C++20/index.md
+        - C++20-consteval:
+          - Introduction: C++/CppReference/Expressions/Constant-expressions/C++20-consteval/index.md
     - Statements:
       - Iteration:
         - Introduction: C++/CppReference/Statements/Iteration/index.md
@@ -2452,13 +2462,8 @@ nav:
       - Introduction: C++/Guide/Compile-time&&run-time/index.md
       - Compile-time-computation:
         - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/index.md
-        - Draft-and-TODO:
-          - "Compile-time-computation-\u53D1\u5C55\u6982\u8FF0": "C++/Guide/Compile-time&&run-time/Compile-time-computation/Draft-and-TODO/Compile-time-computation-\u53D1\
-              \u5C55\u6982\u8FF0.md"
-          - C++20-constexpr-vector-string:
-            - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/Draft-and-TODO/C++20-constexpr-vector-string/index.md
-            - modernescpp-constexpr-std-vector-and-std-string-in-C++20:
-              - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/Draft-and-TODO/C++20-constexpr-vector-string/modernescpp-constexpr-std-vector-and-std-string-in-C++20/index.md
+        - Use-static-info-to-optimize:
+          - Introduction: C++/Guide/Compile-time&&run-time/Compile-time-computation/Use-static-info-to-optimize/index.md
     - Specifiers:
       - Introduction: C++/Guide/Specifiers/index.md
       - Specifiers: C++/Guide/Specifiers/Specifiers.md

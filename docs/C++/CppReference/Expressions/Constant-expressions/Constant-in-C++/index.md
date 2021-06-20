@@ -59,8 +59,6 @@ enum、constexpr都可以用于in-class static constant
 
 
 
-
-
 ## TODO
 
 c++ 11 initialize a dict constexpr

@@ -2,6 +2,53 @@
 
 `constexpr`应该是constant expression的缩写，显然它是为了支持c++的constant expression特性而添加的，显然，它需要杜绝所有的run-time概念。
 
+
+
+## What's in C++ # `constexpr`
+
+wikipedia [C++11#`constexpr` – Generalized constant expressions](https://en.wikipedia.org/wiki/C++11#constexpr_%E2%80%93_Generalized_constant_expressions)，这一段所总结地非常好。
+
+wikipedia [Compile time function execution#Examples](https://en.wikipedia.org/wiki/Compile_time_function_execution)
+
+wikipedia [Template metaprogramming#Compile-time class generation](https://en.wikipedia.org/wiki/Template_metaprogramming#Compile-time_class_generation)：
+
+> In [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) and [C++20](https://en.wikipedia.org/wiki/C%2B%2B20), [constexpr](https://en.wikipedia.org/wiki/Constexpr) and [`consteval`](https://en.cppreference.com/w/cpp/language/consteval) were introduced to let the compiler execute code. Using `constexpr` and `consteval`, one can use the usual recursive factorial definition with the non-templated syntax.
+
+上述两篇中，给出的example是非常好的，非常具有启发性。
+
+
+
+## `constexpr`发展史
+
+### C++11
+
+引入了`constexpr`
+
+### C++14
+
+1、stackoverflow [Difference between `constexpr` and `const`](https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const) # [A](https://stackoverflow.com/a/14117121)
+
+> As of C++14, the rules are more relaxed, what is allowed since then inside a constexpr function: `asm` declaration, a `goto` statement, a statement with a label other than `case` and `default`, try-block, the definition of a variable of non-literal type, definition of a variable of static or thread storage duration, the definition of a variable for which no initialization is performed.
+> 2、wikipedia [C++14](https://en.wikipedia.org/wiki/C%2B%2B14) # [Relaxed constexpr restrictions](https://en.wikipedia.org/wiki/C%2B%2B14#Relaxed_constexpr_restrictions)
+
+### C++17
+
+`constexpr if` statements 
+
+参见 `C++\Language-reference\Statements\Selection-statements\Constexpr-if`章节。
+
+
+
+### C++20
+
+cppreference [C++20](https://en.cppreference.com/w/cpp/20)
+
+> further relaxed constexpr
+
+具体参见原文。
+
+
+
 ## cppreference [constexpr specifier](https://en.cppreference.com/w/cpp/language/constexpr)
 
 ### Explanation
@@ -208,18 +255,11 @@ int main()
 
 
 
-## `constexpr if` statements (C++17)
-
-参见 `C++\Language-reference\Statements\Selection-statements\Constexpr-if`章节。
-
-
-
 ## microsoft [constexpr (C++)](https://docs.microsoft.com/en-us/cpp/cpp/constexpr-cpp?view=vs-2019)
 
 
 
-## Difference between `constexpr` and `const`
+## TODO
 
-stackoverflow [Difference between `constexpr` and `const`](https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const)
-
+### stackoverflow [When should you use constexpr capability in C++11?](https://stackoverflow.com/questions/4748083/when-should-you-use-constexpr-capability-in-c11)
 

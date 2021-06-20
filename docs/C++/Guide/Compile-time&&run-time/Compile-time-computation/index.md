@@ -1,14 +1,20 @@
-# Compile time function execution
+# Compile time execution
 
 1、在`Theory\Compile-time-and-run-time`中，我们知道了compile time function execution的概念，本文对C++ compile time function execution进行总结。
 
-2、C++的一个发展发现就是充分发挥compile-time computation。
+2、C++的一个发展方向就是充分发挥compile-time computation。
 
+## wanweibaike [Compile time function execution](https://en.wanweibaike.com/wiki-Compile-time%20function%20execution)
 
+> NOTE: 
+>
+> 这篇文章在 `Theory\Compile-time-and-run-time` 中也收录了
+
+**Compile-time function execution** (or **compile time function evaluation**, or **general constant expressions**) is the ability of a [compiler](https://en.wanweibaike.com/wiki-Compiler), that would normally compile a function to machine code and execute it at [run time](https://en.wanweibaike.com/wiki-Run_time_(program_lifecycle_phase)), to execute the function at [compile time](https://en.wanweibaike.com/wiki-Compile_time). This is possible if the arguments to the function are known at compile time, and the function does not make any reference to or attempt to modify any global state (is a [pure function](https://en.wanweibaike.com/wiki-Pure_function)).
 
 ## 方式
 
-本文标题的含义是: 编译时时函数执行，它是C++的一个非常强大的特性，C++支持如下方式的compile time function execution: 
+本文标题的含义是: 编译时时执行，它是C++的一个非常强大的特性，C++支持如下方式的compile time execution: 
 
 ### 1) Constant expression
 
@@ -34,15 +40,13 @@ TMP metaprogram可以以如下方式来实现compile time function execution:
 
 C++的一个发展发现就是充分发挥compile-time computation。
 
-| feature           | 引入版本 | 章节                                                         | 说明  |
-| ----------------- | -------- | ------------------------------------------------------------ | ----- |
-| `constexpr`       | C++11    | 参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier` | 非TMP |
-| variadic template | C++11    |                                                              |       |
-| `constexpr if`    | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` | 非TMP |
-| fold expression   | C++17    |                                                              | TMP   |
-| `constinit`       | C++20    |                                                              |       |
-
-
+| feature                                                      | 引入版本 | 章节                                                         | 说明  |
+| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | ----- |
+| `constexpr`                                                  | C++11    | 参见`C++\Language-reference\Expressions\Constant-expressions\constexpr\Constexpr-specifier` | 非TMP |
+| variadic template                                            | C++11    |                                                              |       |
+| `constexpr if`                                               | C++17    | 参见`C++\Language-reference\Statements\Selection-statements\Constexpr-if.md` | 非TMP |
+| fold expression                                              | C++17    |                                                              | TMP   |
+| [`consteval`](https://en.cppreference.com/w/cpp/language/consteval), [`constinit`](https://en.cppreference.com/w/cpp/language/constinit) | C++20    |                                                              |       |
 
 Compile time function execution给予了C++非常强大的灵活性、安全性、高性能，下面对上面描述的几种方式进行总结: 
 
@@ -54,9 +58,9 @@ Compile time function execution给予了C++非常强大的灵活性、安全性�
 
 
 
-## 为什么需要compile time function execution？
+## 为什么需要compile time execution？
 
-1、Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time function execution给予了C++非常强大的灵活性、高性能。
+1、Compile time function是C++ programmer编写来给compiler来执行的，它们可以看做是metaprogram，显然compile time function属于metaprogramming。Compile time execution给予了C++非常强大的灵活性、高性能。
 
 > NOTE: 这说明C++的metaprogramming不仅仅是template metaprogramming，还包括`constexpr`。
 
@@ -64,11 +68,7 @@ Compile time function execution给予了C++非常强大的灵活性、安全性�
 
 3、CppCoreGuidelines [P.5: Prefer compile-time checking to run-time checking](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#p5-prefer-compile-time-checking-to-run-time-checking)
 
-4、TOODO: static-reflection+conditional compile-zero overhead-optimization-relocate paper、static polymorphism
-
-a、能够进行optimization
-
-b、zero overhead principle 
+4、参见 `Use-static-info-to-optimize`
 
 5、CppCoreGuidelines [Per.11: Move computation from run time to compile time](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#per11-move-computation-from-run-time-to-compile-time)
 
@@ -77,11 +77,4 @@ b、zero overhead principle
 a、在 pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/) 中，进行了深入讨论
 
 b、C++11 `constexpr`、C++20 `constinit`
-
-## Application
-
-1) 对dispatch进行控制:
-
-- SFINAE
-- constexpr if
 

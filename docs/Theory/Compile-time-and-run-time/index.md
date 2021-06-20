@@ -77,7 +77,7 @@ Static binding参见：
 
 提到function execution，我们自然而然地想到它是在run time被执行的，但是其实在现代programming language中也是支持compile time function execution，典型的就是C++。
 
-#### 维基百科 [Compile time function execution](https://en.wikipedia.org/wiki/Compile_time_function_execution)
+#### wikipedia [Compile time function execution](https://en.wikipedia.org/wiki/Compile_time_function_execution)
 
 > NOTE: 是在学习C++11的[constexpr](https://en.wikipedia.org/wiki/C++11#constexpr_%E2%80%93_Generalized_constant_expressions)特性时发现达到这个内容，知道有这样的一个过程是非常重要的，对于理解C++的很多新特性都非常重要。现在想想C++语言的很多新特性都是在compile time完成的。
 >

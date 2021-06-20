@@ -2,8 +2,6 @@
 
 
 
-
-
 ## cppreference [Constant expressions](https://en.cppreference.com/w/cpp/language/constant_expression)
 
 Defines an [expression](https://en.cppreference.com/w/cpp/language/expressions) that can be evaluated at **compile time**.
@@ -99,12 +97,6 @@ constexpr bool b = a[2]; // UB, but unspecified if detected
 > - [sizeof operator](https://en.cppreference.com/w/cpp/language/sizeof)
 > - [Enumeration](https://en.cppreference.com/w/cpp/language/enum)
 > - 类似于`const int i = 0;`
-
-
-
-
-
-
 
 
 

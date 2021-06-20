@@ -1,5 +1,13 @@
 # Use static info to optimization
 
+> 在 relocate paper 中，对此进行了非常好的说明，我是在阅读它的时候，想到的；其中谈及了:
+>
+> static-reflection+conditional compile+static polymorphism
+>
+> zero overhead-optimization
+>
+> 
+
 一、
 
 C++支持非常强大的static reflection、static polymorphism，这就给予了C++非常强大的:
@@ -10,13 +18,13 @@ C++支持非常强大的static reflection、static polymorphism，这就给予�
 
 polymorphism 的本质目的是选择 "best"，C++的static polymorphism让programmer能够在compile time完成select best。
 
-
-
 二、遵循 zero overload principle
 
 static reflection + optimization
 
 三、这是遵循的cppcoreguideline中的move runtime to compile time
+
+
 
 ## Example
 
@@ -113,4 +121,6 @@ private:
 };
 
 ```
+
+
 
