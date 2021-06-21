@@ -16,7 +16,7 @@ OutputIterator algorithm(IntputIterator begin, IntputIterator end, OutputIterato
 }
 ```
 
-
+需要注意的是: C++ range-based algorithm是左闭右开的。
 
 ### 1、fluentcpp [Smart Output Iterators: A Symmetrical Approach to Range Adaptors](https://www.fluentcpp.com/2017/11/28/output-iterator-adaptors-symmetry-range-adaptors/)
 
@@ -37,6 +37,8 @@ C++ algorithms library中的大部分algorithm是典型的“range-based algorit
 a、`InputIt first`
 
 b、`InputIt last`
+
+
 
 ## Since C++20
 

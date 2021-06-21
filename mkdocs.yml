@@ -1351,6 +1351,8 @@ nav:
         - Introduction: C++/STL/Algorithm/std-max_element-min_element-minmax_element/index.md
       - Sum:
         - Introduction: C++/STL/Algorithm/Sum/index.md
+      - binary-search:
+        - Introduction: C++/STL/Algorithm/binary-search/index.md
     - C++20-Range-library:
       - Introduction: C++/STL/C++20-Range-library/index.md
       - Primer:
@@ -2946,6 +2948,8 @@ nav:
   - Books: Python/Books.md
 - Rust:
   - Introduction: Rust/index.md
+  - Rust-trait:
+    - Introduction: Rust/Rust-trait/index.md
 - JavaScript:
   - Introduction: JavaScript/index.md
   - DOM:
