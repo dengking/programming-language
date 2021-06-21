@@ -1,4 +1,6 @@
-# Rust trait
+# [Traits: Defining Shared Behavior](https://doc.rust-lang.org/book/ch10-02-traits.html#traits-defining-shared-behavior)
+
+
 
 ## cnblogs [Rust：一个不再有 C/C++ 的，实现安全实时软件的未来](https://www.cnblogs.com/dhcn/p/12344538.html)
 

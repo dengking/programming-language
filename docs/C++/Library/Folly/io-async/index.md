@@ -2,6 +2,32 @@
 
 [libevent](https://github.com/libevent/libevent) is an excellent cross-platform eventing library. Folly's async provides C++ object wrappers for fd callbacks and event_base, as well as providing implementations for many common types of fd uses.
 
+## EventBase
+
+The main libevent / epoll loop. 
+
+> NOTE: 
+>
+> `EventBase` 表示的是 "main libevent / epoll loop"，即main event loop
+
+Generally there is a single `EventBase` per thread, and once started, nothing else happens on the thread except fd callbacks. For example:
+
+```C++
+EventBase base;
+auto thread = std::thread([&](){
+  base.loopForever();
+});
+
+```
+
+> NOTE: 
+>
+> 每个thread执行一个event loop，这是否是类似于 "Memcache-concurrent server-event driven-IO multiplexing-multiple reactor-multiple thread"
+
+## EventHandler
+
+`EventHandler` is the object wrapper for fd's. Any class you wish to receive callbacks on will inherit from EventHandler. `registerHandler(EventType)` will register to receive events of a specific type.
+
 
 
 ## Generic Multithreading Advice
