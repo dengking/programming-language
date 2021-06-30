@@ -2,7 +2,7 @@
 
 As an asynchronous event driven **JavaScript runtime**, Node is designed to build scalable network applications. In the following "hello world" example, many connections can be handled concurrently. Upon each connection the callback is fired, but if there is no work to be done, **Node** will sleep.
 
-总结：显然在Node.js中Node有着特殊的含义，现在想来它的含义应该就是“节点”。既然Node.js是一个**JavaScript runtime**，则它就可以运行JavaScript代码，显然它就相当于一个JavaScript的解释器，能够解释执行JavaScript代码，就好比python解释器一般。目前的这篇文章主要从concurrency model的角度来描述node.js，我的一个好奇是，像Vue.js这样的框架为何能够基于node.js而构建呢？
+> 总结：显然在Node.js中Node有着特殊的含义，现在想来它的含义应该就是“节点”。既然Node.js是一个**JavaScript runtime**，则它就可以运行JavaScript代码，显然它就相当于一个JavaScript的解释器，能够解释执行JavaScript代码，就好比python解释器一般。目前的这篇文章主要从concurrency model的角度来描述node.js，我的一个好奇是，像Vue.js这样的框架为何能够基于node.js而构建呢？
 
 ```javascript
 const http = require('http');
@@ -33,9 +33,13 @@ In other systems there is always a **blocking call** to start the **event-loop**
 
 In Node there is no such **start-the-event-loop call**. Node simply enters the event loop after executing the input script. Node exits the event loop when there are no more callbacks to perform. This behavior is like browser JavaScript — the event loop is hidden from the user.
 
-思考：It presents an [event loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) as a runtime construct instead of as a library.这句好要如何来进行理解？其中的runtime construct是运行时构建的意思。
+> NOTE: 
+>
+> It presents an [event loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) as a runtime construct instead of as a library.这句好要如何来进行理解？其中的runtime construct是运行时构建的意思。
+>
+> 总结：这段话概括的描述了node.js的event model。
 
-总结：这段话概括的描述了node.js的event model。
+
 
 HTTP is a **first class citizen** in Node, designed with **streaming** and **low latency** in mind. This makes Node well suited for the foundation of a web library or framework.
 

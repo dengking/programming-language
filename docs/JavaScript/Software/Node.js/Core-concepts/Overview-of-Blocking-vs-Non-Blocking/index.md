@@ -1,5 +1,3 @@
-
-
 # [Overview of Blocking vs Non-Blocking](https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/)
 
 This overview covers the difference between **blocking** and **non-blocking** calls in Node.js. This overview will refer to the **event loop** and **libuv** but no prior knowledge of those topics is required. Readers are assumed to have a basic understanding of the JavaScript language and **Node.js callback pattern**.
@@ -70,7 +68,7 @@ The event loop is different than models in many other languages where additional
 
 There are some patterns that should be avoided when dealing with I/O. Let's look at an example:
 
-```
+```javascript
 const fs = require('fs');
 fs.readFile('/file.md', (err, data) => {
   if (err) throw err;
@@ -82,7 +80,7 @@ fs.unlinkSync('/file.md');
 
 In the above example, `fs.unlinkSync()` is likely to be run before `fs.readFile()`, which would delete `file.md` before it is actually read. A better way to write this that is completely **non-blocking** and guaranteed to execute in the correct order is:
 
-```
+```javascript
 const fs = require('fs');
 fs.readFile('/file.md', (readFileErr, data) => {
   if (readFileErr) throw readFileErr;

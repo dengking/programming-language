@@ -46,13 +46,11 @@ nav:
           - Introduction: Theory/Programming-language/Design-and-implementation/Design/Syntax/index.md
       - Implementation:
         - Introduction: Theory/Programming-language/Design-and-implementation/Implementation/index.md
-    - Expressive-power-of-programming-language:
-      - Introduction: Theory/Programming-language/Expressive-power-of-programming-language/index.md
+    - Expressive-power:
+      - Introduction: Theory/Programming-language/Expressive-power/index.md
     - Scripting-language:
       - Scripting-language: Theory/Programming-language/Scripting-language/index.md
       - Read-eval-print-loop: Theory/Programming-language/Scripting-language/Read-eval-print-loop.md
-    - Development:
-      - Introduction: Theory/Programming-language/Development/index.md
   - Programming-language-construct:
     - Introduction: Theory/Programming-language-construct/index.md
     - Basic-Language-construct:
@@ -379,6 +377,8 @@ nav:
       - Introduction: Theory/Design-by-contract/Invariant/index.md
       - Class-invariant:
         - Introduction: Theory/Design-by-contract/Invariant/Class-invariant/index.md
+    - Assertion:
+      - Introduction: Theory/Design-by-contract/Assertion/index.md
   - Compile-time-and-run-time:
     - Compile-time-and-run-time: Theory/Compile-time-and-run-time/index.md
     - Runtime: Theory/Compile-time-and-run-time/Runtime.md
@@ -1746,6 +1746,9 @@ nav:
           - Introduction: C++/Library/Unit-testing/Googletest/google-test-code-coverage/index.md
       - catchorg-Catch2:
         - Introduction: C++/Library/Unit-testing/catchorg-Catch2/index.md
+        - "CSDN-catch2\u4E00\u4E2A\u597D\u7528\u7684C++\u5355\u5143\u6D4B\u8BD5\u6846\u67B6":
+          - Introduction: "C++/Library/Unit-testing/catchorg-Catch2/CSDN-catch2\u4E00\
+              \u4E2A\u597D\u7528\u7684C++\u5355\u5143\u6D4B\u8BD5\u6846\u67B6/index.md"
     - idealvin-co:
       - Introduction: C++/Library/idealvin-co/index.md
     - chromium:
@@ -2090,8 +2093,8 @@ nav:
         - Introduction: C++/Design-pattern/Singleton/Singleton-mixin/index.md
       - Avoid-singletons:
         - Introduction: C++/Design-pattern/Singleton/Avoid-singletons/index.md
-      - aristeia-C++and-the-Perils-of-Double-Checked-Locking:
-        - Introduction: C++/Design-pattern/Singleton/aristeia-C++and-the-Perils-of-Double-Checked-Locking/index.md
+      - aristeia-paper-Perils-of-Double-Checked-Lock:
+        - Introduction: C++/Design-pattern/Singleton/aristeia-paper-Perils-of-Double-Checked-Lock/index.md
       - Global-VS-singleton:
         - Introduction: C++/Design-pattern/Singleton/Global-VS-singleton/index.md
     - Factory:
@@ -2322,6 +2325,18 @@ nav:
       - Introduction: C++/Guide/Header-only-library/index.md
     - Performance-optimization:
       - Introduction: C++/Guide/Performance-optimization/index.md
+      - Benchmark:
+        - Introduction: C++/Guide/Performance-optimization/Benchmark/index.md
+      - Memory:
+        - Introduction: C++/Guide/Performance-optimization/Memory/index.md
+        - Small-Buffer-Optimization:
+          - Introduction: C++/Guide/Performance-optimization/Memory/Small-Buffer-Optimization/index.md
+          - riptutorial-C++Small-Object-Optimization:
+            - Introduction: C++/Guide/Performance-optimization/Memory/Small-Buffer-Optimization/riptutorial-C++Small-Object-Optimization/index.md
+        - We-Know-Where-You-Live-optimization:
+          - Introduction: C++/Guide/Performance-optimization/Memory/We-Know-Where-You-Live-optimization/index.md
+      - Bound:
+        - Introduction: C++/Guide/Performance-optimization/Bound/index.md
       - Optimizing-software-in-C++:
         - Introduction: C++/Guide/Performance-optimization/Optimizing-software-in-C++/index.md
     - Memory-model&&atomic-library:
@@ -2538,16 +2553,16 @@ nav:
         - Introduction: C++/Expert/Bartosz-Milewski/C++17-I-See-a-Monad-in-Your-Future/index.md
         - PPT:
           - Introduction: C++/Expert/Bartosz-Milewski/C++17-I-See-a-Monad-in-Your-Future/PPT/index.md
-    - Anthony-Williams-Justsoftwaresolutions:
-      - Introduction: C++/Expert/Anthony-Williams-Justsoftwaresolutions/index.md
+    - Anthony-Williams:
+      - Introduction: C++/Expert/Anthony-Williams/index.md
       - CCiA:
-        - Introduction: C++/Expert/Anthony-Williams-Justsoftwaresolutions/CCiA/index.md
+        - Introduction: C++/Expert/Anthony-Williams/CCiA/index.md
         - 6-Designing-lock-based-concurrent-data-structures:
-          - Introduction: C++/Expert/Anthony-Williams-Justsoftwaresolutions/CCiA/6-Designing-lock-based-concurrent-data-structures/index.md
+          - Introduction: C++/Expert/Anthony-Williams/CCiA/6-Designing-lock-based-concurrent-data-structures/index.md
       - Multithreading-in-C++0x:
-        - Introduction: C++/Expert/Anthony-Williams-Justsoftwaresolutions/Multithreading-in-C++0x/index.md
+        - Introduction: C++/Expert/Anthony-Williams/Multithreading-in-C++0x/index.md
         - Part-6-Lazy-initialization-and-double-checked-locking-with-atomics:
-          - Introduction: C++/Expert/Anthony-Williams-Justsoftwaresolutions/Multithreading-in-C++0x/Part-6-Lazy-initialization-and-double-checked-locking-with-atomics/index.md
+          - Introduction: C++/Expert/Anthony-Williams/Multithreading-in-C++0x/Part-6-Lazy-initialization-and-double-checked-locking-with-atomics/index.md
     - Sean-Parent:
       - Introduction: C++/Expert/Sean-Parent/index.md
       - library-stlab-libraries:
@@ -2602,214 +2617,213 @@ nav:
   - C++name-convention:
     - Introduction: C++/C++name-convention/index.md
   - C++implementation:
-    - Introduction: C++/C++implementation/index.md
+    - Introduction: C++/C++impl/index.md
     - Phases-of-translation:
-      - Introduction: C++/C++implementation/Phases-of-translation/index.md
+      - Introduction: C++/C++impl/Phases-of-translation/index.md
       - Separate-compilation-model.md:
-        - Introduction: C++/C++implementation/Phases-of-translation/Separate-compilation-model/index.md
-      - One-pass-compiler: C++/C++implementation/Phases-of-translation/One-pass-compiler.md
+        - Introduction: C++/C++impl/Phases-of-translation/Separate-compilation-model/index.md
+      - One-pass-compiler: C++/C++impl/Phases-of-translation/One-pass-compiler.md
     - Preprocess:
-      - Introduction: C++/C++implementation/Preprocess/index.md
+      - Introduction: C++/C++impl/Preprocess/index.md
       - Implementation-defined-behavior-control:
-        - Introduction: C++/C++implementation/Preprocess/Implementation-defined-behavior-control/index.md
+        - Introduction: C++/C++impl/Preprocess/Implementation-defined-behavior-control/index.md
       - include-guard&&pragma-once:
-        - Introduction: C++/C++implementation/Preprocess/include-guard&&pragma-once/index.md
+        - Introduction: C++/C++impl/Preprocess/include-guard&&pragma-once/index.md
       - Macro:
-        - Introduction: C++/C++implementation/Preprocess/Macro/index.md
+        - Introduction: C++/C++impl/Preprocess/Macro/index.md
         - Plateform-macro:
-          - Introduction: C++/C++implementation/Preprocess/Macro/plateform-macro/index.md
+          - Introduction: C++/C++impl/Preprocess/Macro/plateform-macro/index.md
         - Predefined-macros:
-          - Introduction: C++/C++implementation/Preprocess/Macro/Predefined-macros/index.md
+          - Introduction: C++/C++impl/Preprocess/Macro/Predefined-macros/index.md
         - Language-feature-testing-macros:
-          - Introduction: C++/C++implementation/Preprocess/Macro/Language-feature-testing-macros/index.md
+          - Introduction: C++/C++impl/Preprocess/Macro/Language-feature-testing-macros/index.md
         - Stringify-and-concatenate-macros:
-          - Introduction: C++/C++implementation/Preprocess/Macro/Stringify-and-concatenate-macros/index.md
-        - Pros-and-cons-of-macro: C++/C++implementation/Preprocess/Macro/Pros-and-cons-of-macro.md
+          - Introduction: C++/C++impl/Preprocess/Macro/Stringify-and-concatenate-macros/index.md
+        - Pros-and-cons-of-macro: C++/C++impl/Preprocess/Macro/Pros-and-cons-of-macro.md
     - Compile:
-      - Introduction: C++/C++implementation/Compile/index.md
+      - Introduction: C++/C++impl/Compile/index.md
       - As-if-rule:
-        - Introduction: C++/C++implementation/Compile/As-if-rule/index.md
+        - Introduction: C++/C++impl/Compile/As-if-rule/index.md
       - Compile-flow:
-        - Introduction: C++/C++implementation/Compile/Compile-flow/index.md
+        - Introduction: C++/C++impl/Compile/Compile-flow/index.md
       - Name-lookup:
-        - Introduction: C++/C++implementation/Compile/Name-lookup/index.md
+        - Introduction: C++/C++impl/Compile/Name-lookup/index.md
         - cppreference-Name-lookup:
-          - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Name-lookup/index.md
+          - Introduction: C++/C++impl/Compile/Name-lookup/cppreference-Name-lookup/index.md
         - cppreference-Qualified-name-lookup:
-          - Introduction: C++/C++implementation/Compile/Name-lookup/cppreference-Qualified-name-lookup/index.md
+          - Introduction: C++/C++impl/Compile/Name-lookup/cppreference-Qualified-name-lookup/index.md
         - ADL:
-          - ADL: C++/C++implementation/Compile/Name-lookup/ADL/index.md
+          - ADL: C++/C++impl/Compile/Name-lookup/ADL/index.md
         - Dependent-name-lookup:
-          - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/index.md
+          - Introduction: C++/C++impl/Compile/Name-lookup/Dependent-name-lookup/index.md
           - thegreenplace-Dependent-name-lookup-for-C++templates:
-            - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/thegreenplace-Dependent-name-lookup-for-C++templates/index.md
+            - Introduction: C++/C++impl/Compile/Name-lookup/Dependent-name-lookup/thegreenplace-Dependent-name-lookup-for-C++templates/index.md
           - The-template-disambiguator-for-dependent-names:
-            - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/The-template-disambiguator-for-dependent-names/index.md
+            - Introduction: C++/C++impl/Compile/Name-lookup/Dependent-name-lookup/The-template-disambiguator-for-dependent-names/index.md
           - Compile-errors:
-            - Introduction: C++/C++implementation/Compile/Name-lookup/Dependent-name-lookup/Compile-errors/index.md
-        - using-and-name-lookup: C++/C++implementation/Compile/Name-lookup/using-and-name-lookup.md
+            - Introduction: C++/C++impl/Compile/Name-lookup/Dependent-name-lookup/Compile-errors/index.md
+        - using-and-name-lookup: C++/C++impl/Compile/Name-lookup/using-and-name-lookup.md
       - Optimization:
-        - Introduction: C++/C++implementation/Compile/Optimization/index.md
+        - Introduction: C++/C++impl/Compile/Optimization/index.md
         - Copy-elision:
-          - Introduction: C++/C++implementation/Compile/Optimization/Copy-elision/index.md
+          - Introduction: C++/C++impl/Compile/Optimization/Copy-elision/index.md
           - stackoverflow-What-are-copy-elision-and-RVO:
-            - Introduction: C++/C++implementation/Compile/Optimization/Copy-elision/stackoverflow-What-are-copy-elision-and-RVO/index.md
+            - Introduction: C++/C++impl/Compile/Optimization/Copy-elision/stackoverflow-What-are-copy-elision-and-RVO/index.md
           - cppreference-Copy-elision:
-            - Introduction: C++/C++implementation/Compile/Optimization/Copy-elision/cppreference-Copy-elision/index.md
+            - Introduction: C++/C++impl/Compile/Optimization/Copy-elision/cppreference-Copy-elision/index.md
         - Optimization-in-function-return:
-          - Introduction: C++/C++implementation/Compile/Optimization/Optimization-in-function-return/index.md
+          - Introduction: C++/C++impl/Compile/Optimization/Optimization-in-function-return/index.md
           - Move-and-return:
-            - Introduction: C++/C++implementation/Compile/Optimization/Optimization-in-function-return/Move-and-return/index.md
+            - Introduction: C++/C++impl/Compile/Optimization/Optimization-in-function-return/Move-and-return/index.md
           - TODO-return-large-object:
-            - Introduction: C++/C++implementation/Compile/Optimization/Optimization-in-function-return/TODO-return-large-object/index.md
+            - Introduction: C++/C++impl/Compile/Optimization/Optimization-in-function-return/TODO-return-large-object/index.md
         - inline:
-          - inline: C++/C++implementation/Compile/Optimization/inline/index.md
-          - VS-inline-VS-marco: C++/C++implementation/Compile/Optimization/inline/VS-inline-VS-marco.md
+          - inline: C++/C++impl/Compile/Optimization/inline/index.md
+          - VS-inline-VS-marco: C++/C++impl/Compile/Optimization/inline/VS-inline-VS-marco.md
         - Prevent-optimization:
-          - Introduction: C++/C++implementation/Compile/Optimization/Prevent-optimization/index.md
+          - Introduction: C++/C++impl/Compile/Optimization/Prevent-optimization/index.md
     - Link:
-      - Linker: C++/C++implementation/Link/Linker.md
+      - Linker: C++/C++impl/Link/Linker.md
       - Linkage:
-        - Linkage: C++/C++implementation/Link/Linkage/index.md
+        - Linkage: C++/C++impl/Link/Linkage/index.md
         - Language-linkage:
-          - Introduction: C++/C++implementation/Link/Linkage/Language-linkage/index.md
-        - const-static-and-linkage: C++/C++implementation/Link/Linkage/const-static-and-linkage.md
+          - Introduction: C++/C++impl/Link/Linkage/Language-linkage/index.md
+        - const-static-and-linkage: C++/C++impl/Link/Linkage/const-static-and-linkage.md
       - Optimization:
-        - Introduction: C++/C++implementation/Link/Optimization/index.md
+        - Introduction: C++/C++impl/Link/Optimization/index.md
       - Link-time-error:
-        - Introduction: C++/C++implementation/Link/Link-time-error/index.md
+        - Introduction: C++/C++impl/Link/Link-time-error/index.md
         - Violations-of-ODR:
-          - Multiple-definition: C++/C++implementation/Link/Link-time-error/Violations-of-ODR/Multiple-definition.md
+          - Multiple-definition: C++/C++impl/Link/Link-time-error/Violations-of-ODR/Multiple-definition.md
         - Undefined-reference-or-unresolved-external-symbol:
-          - Introduction: C++/C++implementation/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/index.md
+          - Introduction: C++/C++impl/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/index.md
           - Undefined-symbols-vtable-typeinfo:
-            - Introduction: C++/C++implementation/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/Undefined-symbols-vtable-typeinfo/index.md
+            - Introduction: C++/C++impl/Link/Link-time-error/Undefined-reference-or-unresolved-external-symbol/Undefined-symbols-vtable-typeinfo/index.md
       - Type-unsafe-link:
-        - Introduction: C++/C++implementation/Link/Type-unsafe-link/index.md
+        - Introduction: C++/C++impl/Link/Type-unsafe-link/index.md
     - ABI:
-      - Introduction: C++/C++implementation/ABI/index.md
+      - Introduction: C++/C++impl/ABI/index.md
       - Application-binary-interface:
-        - Introduction: C++/C++implementation/ABI/Application-binary-interface/index.md
+        - Introduction: C++/C++impl/ABI/Application-binary-interface/index.md
       - Call-convention:
-        - Introduction: C++/C++implementation/ABI/Call-convention/index.md
+        - Introduction: C++/C++impl/ABI/Call-convention/index.md
         - Call-stack:
-          - Introduction: C++/C++implementation/ABI/Call-convention/Call-stack/index.md
+          - Introduction: C++/C++impl/ABI/Call-convention/Call-stack/index.md
         - aaronbloomfield-The-32bit-x86-C-Call-Convention:
-          - Introduction: C++/C++implementation/ABI/Call-convention/aaronbloomfield-The-32bit-x86-C-Call-Convention/index.md
+          - Introduction: C++/C++impl/ABI/Call-convention/aaronbloomfield-The-32bit-x86-C-Call-Convention/index.md
       - Library:
-        - Introduction: C++/C++implementation/ABI/Library/index.md
+        - Introduction: C++/C++impl/ABI/Library/index.md
         - Position-independent-code:
-          - Introduction: C++/C++implementation/ABI/Library/Position-independent-code/index.md
+          - Introduction: C++/C++impl/ABI/Library/Position-independent-code/index.md
           - thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries:
-            - Introduction: C++/C++implementation/ABI/Library/Position-independent-code/thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries/index.md
+            - Introduction: C++/C++impl/ABI/Library/Position-independent-code/thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries/index.md
         - Relocation:
-          - Introduction: C++/C++implementation/ABI/Library/Relocation/index.md
+          - Introduction: C++/C++impl/ABI/Library/Relocation/index.md
       - Name-mangling:
-        - Introduction: C++/C++implementation/ABI/Name-mangling/index.md
+        - Introduction: C++/C++impl/ABI/Name-mangling/index.md
       - C++ABI:
-        - Introduction: C++/C++implementation/ABI/C++ABI/index.md
+        - Introduction: C++/C++impl/ABI/C++ABI/index.md
         - Itanium-Cpp-ABI:
-          - Introduction: C++/C++implementation/ABI/C++ABI/Itanium-Cpp-ABI/index.md
+          - Introduction: C++/C++impl/ABI/C++ABI/Itanium-Cpp-ABI/index.md
           - Chapter-2-Data-Layout:
-            - Introduction: C++/C++implementation/ABI/C++ABI/Itanium-Cpp-ABI/Chapter-2-Data-Layout/index.md
+            - Introduction: C++/C++impl/ABI/C++ABI/Itanium-Cpp-ABI/Chapter-2-Data-Layout/index.md
         - Object-memory-layout:
-          - Introduction: C++/C++implementation/ABI/C++ABI/Object-memory-layout/index.md
+          - Introduction: C++/C++impl/ABI/C++ABI/Object-memory-layout/index.md
           - vishalchovatiya-Memory-Layout-of-C++Object-in-Different-Scenarios:
-            - Introduction: C++/C++implementation/ABI/C++ABI/Object-memory-layout/vishalchovatiya-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
+            - Introduction: C++/C++impl/ABI/C++ABI/Object-memory-layout/vishalchovatiya-Memory-Layout-of-C++Object-in-Different-Scenarios/index.md
           - Dump-object-memory-layout:
-            - Introduction: C++/C++implementation/ABI/C++ABI/Object-memory-layout/Dump-object-memory-layout/index.md
+            - Introduction: C++/C++impl/ABI/C++ABI/Object-memory-layout/Dump-object-memory-layout/index.md
         - Polymorphic-type-impl:
-          - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/index.md
+          - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/index.md
           - Virtual-function-table:
-            - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/index.md
+            - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/index.md
             - "CSDN-\u8BE6\u89E3virtual-table":
-              - Introduction: "C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/CSDN-\u8BE6\
+              - Introduction: "C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/CSDN-\u8BE6\
                   \u89E3virtual-table/index.md"
             - "CSDN-C++\u865A\u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3":
-              - Introduction: "C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/CSDN-C++\u865A\
+              - Introduction: "C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/CSDN-C++\u865A\
                   \u51FD\u6570\u548C\u865A\u51FD\u6570\u8868\u8BE6\u89E3/index.md"
             - wikipedia-Virtual-method-table:
-              - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/wikipedia-Virtual-method-table/index.md
+              - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/wikipedia-Virtual-method-table/index.md
               - Thunk:
-                - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/wikipedia-Virtual-method-table/Thunk/index.md
+                - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/wikipedia-Virtual-method-table/Thunk/index.md
             - shaharmike-Cpp-vtable:
-              - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/shaharmike-Cpp-vtable/index.md
+              - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/shaharmike-Cpp-vtable/index.md
               - Part-1-Basics:
-                - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/shaharmike-Cpp-vtable/Part-1-Basics/index.md
+                - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/Virtual-function-table/shaharmike-Cpp-vtable/Part-1-Basics/index.md
           - RTTI:
-            - Introduction: C++/C++implementation/ABI/C++ABI/Polymorphic-type-impl/RTTI/index.md
+            - Introduction: C++/C++impl/ABI/C++ABI/Polymorphic-type-impl/RTTI/index.md
     - Code-analysis-tool:
-      - Introduction: C++/C++implementation/Code-analysis-tool/index.md
+      - Introduction: C++/C++impl/Code-analysis-tool/index.md
       - PC-Lint:
-        - Introduction: C++/C++implementation/Code-analysis-tool/PC-Lint/index.md
+        - Introduction: C++/C++impl/Code-analysis-tool/PC-Lint/index.md
     - Implementation:
       - LLVM:
-        - Introduction: C++/C++implementation/Implementation/LLVM/index.md
+        - Introduction: C++/C++impl/Implementation/LLVM/index.md
         - LLVM-Design-and-overview:
-          - Introduction: C++/C++implementation/Implementation/LLVM/LLVM-Design-and-overview/index.md
-          - aosabook-LLVM: C++/C++implementation/Implementation/LLVM/LLVM-Design-and-overview/aosabook-LLVM.md
+          - Introduction: C++/C++impl/Implementation/LLVM/LLVM-Design-and-overview/index.md
+          - aosabook-LLVM: C++/C++impl/Implementation/LLVM/LLVM-Design-and-overview/aosabook-LLVM.md
         - LLVM-Core:
-          - Introduction: C++/C++implementation/Implementation/LLVM/LLVM-Core/index.md
+          - Introduction: C++/C++impl/Implementation/LLVM/LLVM-Core/index.md
           - LLVM-Language:
-            - Introduction: C++/C++implementation/Implementation/LLVM/LLVM-Core/LLVM-Language/index.md
+            - Introduction: C++/C++impl/Implementation/LLVM/LLVM-Core/LLVM-Language/index.md
         - Clang:
           - Clang-Features-and-Goals:
-            - Introduction: C++/C++implementation/Implementation/LLVM/Clang/Clang-Features-and-Goals/index.md
+            - Introduction: C++/C++impl/Implementation/LLVM/Clang/Clang-Features-and-Goals/index.md
           - doc:
-            - Introduction: C++/C++implementation/Implementation/LLVM/Clang/doc/index.md
+            - Introduction: C++/C++impl/Implementation/LLVM/Clang/doc/index.md
             - Clang-Static-Analyzer:
-              - Introduction: C++/C++implementation/Implementation/LLVM/Clang/doc/Clang-Static-Analyzer/index.md
+              - Introduction: C++/C++impl/Implementation/LLVM/Clang/doc/Clang-Static-Analyzer/index.md
             - Sanitizer:
               - UndefinedBehaviorSanitizer:
-                - Introduction: C++/C++implementation/Implementation/LLVM/Clang/doc/Sanitizer/UndefinedBehaviorSanitizer/index.md
+                - Introduction: C++/C++impl/Implementation/LLVM/Clang/doc/Sanitizer/UndefinedBehaviorSanitizer/index.md
               - AddressSanitizer:
-                - Introduction: C++/C++implementation/Implementation/LLVM/Clang/doc/Sanitizer/AddressSanitizer/index.md
-            - Assembling-a-Complete-Toolchain: C++/C++implementation/Implementation/LLVM/Clang/doc/Assembling-a-Complete-Toolchain.md
+                - Introduction: C++/C++impl/Implementation/LLVM/Clang/doc/Sanitizer/AddressSanitizer/index.md
+            - Assembling-a-Complete-Toolchain: C++/C++impl/Implementation/LLVM/Clang/doc/Assembling-a-Complete-Toolchain.md
           - Clang-Tidy:
-            - Introduction: C++/C++implementation/Implementation/LLVM/Clang/Clang-Tidy/index.md
+            - Introduction: C++/C++impl/Implementation/LLVM/Clang/Clang-Tidy/index.md
           - compiler-rt:
-            - Introduction: C++/C++implementation/Implementation/LLVM/Clang/compiler-rt/index.md
+            - Introduction: C++/C++impl/Implementation/LLVM/Clang/compiler-rt/index.md
           - TODO-Clang-application:
-            - Introduction: C++/C++implementation/Implementation/LLVM/Clang/TODO-Clang-application/index.md
+            - Introduction: C++/C++impl/Implementation/LLVM/Clang/TODO-Clang-application/index.md
       - GCC:
-        - Introduction: C++/C++implementation/Implementation/GCC/index.md
+        - Introduction: C++/C++impl/Implementation/GCC/index.md
         - 3-GCC-Command-Options:
-          - Introduction: C++/C++implementation/Implementation/GCC/3-GCC-Command-Options/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3-GCC-Command-Options/index.md
         - 3.1-Option-Summary:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.1-Option-Summary/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.1-Option-Summary/index.md
         - 3.5-Options-Controlling-C++Dialect:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.5-Options-Controlling-C++Dialect/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.5-Options-Controlling-C++Dialect/index.md
           - fpermissive:
-            - Introduction: C++/C++implementation/Implementation/GCC/3.5-Options-Controlling-C++Dialect/fpermissive/index.md
+            - Introduction: C++/C++impl/Implementation/GCC/3.5-Options-Controlling-C++Dialect/fpermissive/index.md
         - 3.9-Options-for-Debugging-Your-Program-or-GCC:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.9-Options-for-Debugging-Your-Program-or-GCC/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.9-Options-for-Debugging-Your-Program-or-GCC/index.md
         - 3.8-Options-to-Request-or-Suppress-Warnings:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.8-Options-to-Request-or-Suppress-Warnings/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.8-Options-to-Request-or-Suppress-Warnings/index.md
         - 3.11-Options-That-Control-Optimization:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.11-Options-That-Control-Optimization/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.11-Options-That-Control-Optimization/index.md
         - 3.13-Options-Controlling-the-Preprocessor:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.13-Options-Controlling-the-Preprocessor/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.13-Options-Controlling-the-Preprocessor/index.md
         - 3.17-Options-for-Code-Generation-Conventions:
-          - Introduction: C++/C++implementation/Implementation/GCC/3.17-Options-for-Code-Generation-Conventions/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/3.17-Options-for-Code-Generation-Conventions/index.md
         - Sanitizer:
-          - Introduction: C++/C++implementation/Implementation/GCC/Sanitizer/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/Sanitizer/index.md
           - UndefinedBehaviorSanitizer:
-            - Introduction: C++/C++implementation/Implementation/GCC/Sanitizer/UndefinedBehaviorSanitizer/index.md
+            - Introduction: C++/C++impl/Implementation/GCC/Sanitizer/UndefinedBehaviorSanitizer/index.md
           - AddressSanitizer:
-            - Introduction: C++/C++implementation/Implementation/GCC/Sanitizer/AddressSanitizer/index.md
+            - Introduction: C++/C++impl/Implementation/GCC/Sanitizer/AddressSanitizer/index.md
           - LeakSanitizer:
-            - Introduction: C++/C++implementation/Implementation/GCC/Sanitizer/LeakSanitizer/index.md
+            - Introduction: C++/C++impl/Implementation/GCC/Sanitizer/LeakSanitizer/index.md
           - ThreadSanitizer:
-            - Introduction: C++/C++implementation/Implementation/GCC/Sanitizer/ThreadSanitizer/index.md
+            - Introduction: C++/C++impl/Implementation/GCC/Sanitizer/ThreadSanitizer/index.md
         - Built-in-Functions:
-          - Introduction: C++/C++implementation/Implementation/GCC/Built-in-Functions/index.md
+          - Introduction: C++/C++impl/Implementation/GCC/Built-in-Functions/index.md
         - "10-gcov\u2014a-Test-Coverage-Program":
-          - Introduction: "C++/C++implementation/Implementation/GCC/10-gcov\u2014\
-              a-Test-Coverage-Program/index.md"
+          - Introduction: "C++/C++impl/Implementation/GCC/10-gcov\u2014a-Test-Coverage-Program/index.md"
       - MSVC:
-        - Introduction: C++/C++implementation/Implementation/MSVC/index.md
+        - Introduction: C++/C++impl/Implementation/MSVC/index.md
       - GCC-VS-LLVM:
-        - Introduction: C++/C++implementation/Implementation/GCC-VS-LLVM/index.md
+        - Introduction: C++/C++impl/Implementation/GCC-VS-LLVM/index.md
   - C++cross-plateform:
     - Introduction: C++/C++cross-plateform/index.md
     - lib-hedley:
@@ -2899,26 +2913,26 @@ nav:
     - Python-Runtime-Services:
       - Introduction: Python/Standard-library/Python-Runtime-Services/index.md
       - inspect-Inspect-live-objects: Python/Standard-library/Python-Runtime-Services/inspect-Inspect-live-objects.md
-  - Third-party-library:
-    - Introduction: Python/Third-party-library/index.md
+  - Library:
+    - Introduction: Python/Library/index.md
     - Event-driven-programming:
-      - Introduciton: Python/Third-party-library/Event-driven-programming/index.md
+      - Introduciton: Python/Library/Event-driven-programming/index.md
       - Eventlet:
-        - Introduction: Python/Third-party-library/Event-driven-programming/Eventlet/index.md
+        - Introduction: Python/Library/Event-driven-programming/Eventlet/index.md
       - Eevent:
-        - Introduction: Python/Third-party-library/Event-driven-programming/Eevent/index.md
-    - TODO-Concurrent-server:
-      - Introduction: Python/Third-party-library/TODO-Concurrent-server/index.md
+        - Introduction: Python/Library/Event-driven-programming/Eevent/index.md
+    - Concurrent-server:
+      - Introduction: Python/Library/Concurrent-server/index.md
       - medium-How-Does-Python-Handle-Multiple-Web-Requests:
-        - Introduction: Python/Third-party-library/TODO-Concurrent-server/medium-How-Does-Python-Handle-Multiple-Web-Requests/index.md
+        - Introduction: Python/Library/Concurrent-server/medium-How-Does-Python-Handle-Multiple-Web-Requests/index.md
       - Greenlet:
-        - Greenlet: Python/Third-party-library/TODO-Concurrent-server/Greenlet/Greenlet.md
+        - Introduction: Python/Library/Concurrent-server/Greenlet/index.md
     - Pallets:
       - Flask:
         - Deployment-Options:
-          - flask-Deployment-Options: Python/Third-party-library/Pallets/flask/Deployment-Options/flask-Deployment-Options.md
+          - flask-Deployment-Options: Python/Library/Pallets/flask/Deployment-Options/flask-Deployment-Options.md
     - Static-web-generator:
-      - Static-web-generator: Python/Third-party-library/Static-web-generator/static-web-generator.md
+      - Introduction: Python/Library/Static-web-generator/index.md
   - Philosophy:
     - The-Zen-of-Python: Python/Philosophy/The-Zen-of-Python.md
   - Guide:
@@ -2948,8 +2962,14 @@ nav:
   - Books: Python/Books.md
 - Rust:
   - Introduction: Rust/index.md
-  - Rust-trait:
-    - Introduction: Rust/Rust-trait/index.md
+  - doc:
+    - Introduction: Rust/doc/index.md
+    - 4-Understanding-Ownership:
+      - Introduction: Rust/doc/4-Understanding-Ownership/index.md
+    - 10-Generic-Types-Traits-and-Lifetimes:
+      - Introduction: Rust/doc/10-Generic-Types-Traits-and-Lifetimes/index.md
+      - 10.4-Traits-Defining-Shared-Behavior:
+        - Introduction: Rust/doc/10-Generic-Types-Traits-and-Lifetimes/10.4-Traits-Defining-Shared-Behavior/index.md
 - JavaScript:
   - Introduction: JavaScript/index.md
   - DOM:
@@ -2960,14 +2980,13 @@ nav:
     - Introduction: JavaScript/Event-driven-model/index.md
     - JavaScript-event-loop: JavaScript/Event-driven-model/JavaScript-event-loop.md
   - Software:
-    - Event-driven-programming:
-      - Node.js:
-        - Node.js-About Node.js: JavaScript/Software/Event-driven-programming/Node.js/Node.js-About
-            Node.js.md
-        - Node.js-core-concepts:
-          - Node.js-How-does-Node.js-manage-timers-internally: JavaScript/Software/Event-driven-programming/Node.js/Node.js-core-concepts/Node.js-How-does-Node.js-manage-timers-internally.md
-          - Node.js-Overview-of-Blocking-vs-Non-Blocking: JavaScript/Software/Event-driven-programming/Node.js/Node.js-core-concepts/Node.js-Overview-of-Blocking-vs-Non-Blocking.md
-          - Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick(): JavaScript/Software/Event-driven-programming/Node.js/Node.js-core-concepts/Node.js-The-Node.js-Event-Loop-Timers-and-process.nextTick().md
+    - Node.js:
+      - Introduction: JavaScript/Software/Node.js/index.md
+      - Core-concepts:
+        - Overview-of-Blocking-vs-Non-Blocking:
+          - Introduction: JavaScript/Software/Node.js/Core-concepts/Overview-of-Blocking-vs-Non-Blocking/index.md
+        - How-does-Node.js-manage-timers-internally:
+          - Introduction: JavaScript/Software/Node.js/Core-concepts/How-does-Node.js-manage-timers-internally/index.md
     - jQuery:
       - Introduction: JavaScript/Software/jQuery/index.md
   - Asynchronous-programming:

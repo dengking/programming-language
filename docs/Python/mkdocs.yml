@@ -1,23 +1,14 @@
 nav:
     - Introduction: index.md # 首先介绍面向对象编程的概念
-    # 描述语言的一些原理
-    - Language: Language
+    - Language: Language # 描述语言的一些原理
     - What-is-new: What-is-new    
-    # 描述编程相关的内容
-    - Standard-library: Standard-library
-    - Third-party-library: Third-party-library
-
-    # python的哲学
-    - Philosophy: Philosophy
+    - Standard-library: Standard-library # 描述编程相关的内容
+    - Library: Library
+    - Philosophy: Philosophy # python的哲学
     - Guide: Guide
-    # python的编程范式
-    - Paradigm: Paradigm
-    # python设计模式
-    - Pattern: Pattern
-    # 编程工具
-    - Programming-tool: Programming-tool
-    # 对应的是python doc中的how to
-    - How-to: How-to
-    
+    - Paradigm: Paradigm # python的编程范式
+    - Pattern: Pattern # python设计模式
+    - Programming-tool: Programming-tool # 编程工具
+    - How-to: How-to # 对应的是python doc中的how to
     - Glossary: Glossary
     - Books: Books.md
