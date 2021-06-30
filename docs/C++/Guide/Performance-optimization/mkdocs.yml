@@ -1,3 +1,6 @@
 nav:
     - Introduction: index.md
+    - Benchmark: Benchmark
+    - Memory: Memory
+    - Bound: Bound    
     - Optimizing-software-in-C++: Optimizing-software-in-C++

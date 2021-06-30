@@ -1,13 +1,6 @@
 nav:
-#################### 首先介绍programming language的概念####################
-    - Introduction: index.md
-#################### 如何来掌握programming language，这是本章的核心思想##################    
-    - How-to-master-programming-language: How-to-master-programming-language
-    # programming language的设计和实现
-    - Design-and-implementation: Design-and-implementation
-
-#################### expressive是我们使用programming language来描述世界的最终目的####################    
-    - Expressive-power-of-programming-language: Expressive-power-of-programming-language
-#################### 脚本型语言是一类非常重要的语言####################    
-    - Scripting-language: Scripting-language    
-    - Development: Development
+    - Introduction: index.md # 首先介绍programming language的概念
+    - How-to-master-programming-language: How-to-master-programming-language # 如何来掌握programming language，这是本章的核心思想
+    - Design-and-implementation: Design-and-implementation # programming language的设计和实现
+    - Expressive-power: Expressive-power # expressive是我们使用programming language来描述世界的最终目的
+    - Scripting-language: Scripting-language # 脚本型语言是一类非常重要的语言   

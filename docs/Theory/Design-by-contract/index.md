@@ -58,3 +58,16 @@ Contract 更多是理念层、而aspect则是如何实现，在 "wikipedia [Desi
 - [OVal](https://sebthom.github.io/oval/) with [AspectJ](https://en.wikipedia.org/wiki/AspectJ)
 
 - JavaDbC using AspectJ
+
+
+
+## 编写可以发现问题的代码
+
+Design by contract能够帮助我们"编写可以发现问题的代码"，对于一些错误情况，程序员需要能够提前断言，然后将这些断言编码到程序中，当此断言成真，即程序进入到了这个分支，需要使用适当的方式通知，不同的编程语言提供了不同的通知方式：
+
+1、python可以raise Exception
+
+关于断言，参见：`Assertion` 章节。
+
+
+
