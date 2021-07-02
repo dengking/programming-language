@@ -10,6 +10,12 @@ High performance涉及到发出多的内容，可以说是贯彻了整个compute
 
 2) Performance optimization in programming language
 
+## wikipedia [Program optimization](https://en.wikipedia.org/wiki/Program_optimization)
+
+> NOTE: 
+>
+> 比较权威的介绍
+
 ## Optimization principle
 
 参见文章 《Optimization-principle》。

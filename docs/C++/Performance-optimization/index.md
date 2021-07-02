@@ -1,6 +1,7 @@
 # Performance  optimization
 
 一、无论是compiler还是programmer，都需要遵循optimization principle。因此，我们后续谈论optimization的时候，会从两个方面来进行描述:
+
 1、compiler(实现层)执行的optimization
 
 2、programmer执行的optimization
