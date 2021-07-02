@@ -22,6 +22,8 @@ nav:
     - CppCoreGuidelines: CppCoreGuidelines
     # 对c++中的一些专题进行介绍
     - Guide: Guide
+    
+    - Performance-optimization: Performance-optimization # 性能优化    
     # C++领域专家
     - Expert: Expert
     # 

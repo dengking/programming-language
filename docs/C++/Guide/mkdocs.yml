@@ -9,8 +9,6 @@ nav:
     
     - Header-only-library: Header-only-library
     
-    - Performance-optimization: Performance-optimization
-    
     - Memory-model&&atomic-library: Memory-model&&atomic-library
     
     - Type-相关: Type-相关
