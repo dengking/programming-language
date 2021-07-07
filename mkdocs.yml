@@ -2323,22 +2323,6 @@ nav:
       - Introduction: C++/Guide/Order/index.md
     - Header-only-library:
       - Introduction: C++/Guide/Header-only-library/index.md
-    - Performance-optimization:
-      - Introduction: C++/Guide/Performance-optimization/index.md
-      - Benchmark:
-        - Introduction: C++/Guide/Performance-optimization/Benchmark/index.md
-      - Memory:
-        - Introduction: C++/Guide/Performance-optimization/Memory/index.md
-        - Small-Buffer-Optimization:
-          - Introduction: C++/Guide/Performance-optimization/Memory/Small-Buffer-Optimization/index.md
-          - riptutorial-C++Small-Object-Optimization:
-            - Introduction: C++/Guide/Performance-optimization/Memory/Small-Buffer-Optimization/riptutorial-C++Small-Object-Optimization/index.md
-        - We-Know-Where-You-Live-optimization:
-          - Introduction: C++/Guide/Performance-optimization/Memory/We-Know-Where-You-Live-optimization/index.md
-      - Bound:
-        - Introduction: C++/Guide/Performance-optimization/Bound/index.md
-      - Optimizing-software-in-C++:
-        - Introduction: C++/Guide/Performance-optimization/Optimizing-software-in-C++/index.md
     - Memory-model&&atomic-library:
       - Introduction: C++/Guide/Memory-model&&atomic-library/index.md
       - Design:
@@ -2498,6 +2482,22 @@ nav:
         - Introduction: C++/Guide/Specifiers/cv/index.md
     - Configuration-option:
       - Introduction: C++/Guide/Configuration-option/index.md
+  - Performance-optimization:
+    - Introduction: C++/Performance-optimization/index.md
+    - Benchmark:
+      - Introduction: C++/Performance-optimization/Benchmark/index.md
+    - Memory:
+      - Introduction: C++/Performance-optimization/Memory/index.md
+      - Small-Buffer-Optimization:
+        - Introduction: C++/Performance-optimization/Memory/Small-Buffer-Optimization/index.md
+        - riptutorial-C++Small-Object-Optimization:
+          - Introduction: C++/Performance-optimization/Memory/Small-Buffer-Optimization/riptutorial-C++Small-Object-Optimization/index.md
+      - We-Know-Where-You-Live-optimization:
+        - Introduction: C++/Performance-optimization/Memory/We-Know-Where-You-Live-optimization/index.md
+    - Bound:
+      - Introduction: C++/Performance-optimization/Bound/index.md
+    - Optimizing-software-in-C++:
+      - Introduction: C++/Performance-optimization/Optimizing-software-in-C++/index.md
   - Expert:
     - Bjarne-Stroustrup:
       - Introduction: C++/Expert/Bjarne-Stroustrup/index.md
