@@ -2498,6 +2498,9 @@ nav:
       - Introduction: C++/Performance-optimization/Bound/index.md
     - Optimizing-software-in-C++:
       - Introduction: C++/Performance-optimization/Optimizing-software-in-C++/index.md
+    - "developer.51cto-\u9AD8\u6027\u80FD\u5F00\u53D1\u7684\u5341\u5927\u6B66\u5668":
+      - Introduction: "C++/Performance-optimization/developer.51cto-\u9AD8\u6027\u80FD\
+          \u5F00\u53D1\u7684\u5341\u5927\u6B66\u5668/index.md"
   - Expert:
     - Bjarne-Stroustrup:
       - Introduction: C++/Expert/Bjarne-Stroustrup/index.md
