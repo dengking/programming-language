@@ -185,10 +185,6 @@ Non-member functions and static member functions cannot be virtual.
 
 Functions templates cannot be declared `virtual`. This applies only to functions that are themselves templates - a regular member function of a class template can be declared virtual.
 
-| Virtual functions (whether declared virtual or overriding one) cannot have any associated constraints.`struct A {     virtual void f() requires true; // Error: constrained virtual function };`If an overriding function specifies [contract conditions](https://en.cppreference.com/w/cpp/language/attributes/contract), it must specify the same list contract conditions as the functions it overrides; no diagnostic is required if corresponding conditions will always evaluate to the same value. Otherwise, it is considered to have the list of contract conditions from one of its overriden functions; the names in the contract conditions are bound and the semantic constraints are checked at the point where the contract conditions appear.`struct A {     virtual void f(int i) [[expects: i > x]];     virtual void g(int i) [[expects: i < x]];     virtual void h(int i) [[expects: i < 0]];     int x; };   struct B : A {     virtual void f(int i); // OK, 'x' in precondition means A::x     virtual void g(int i) [[expects: i < x]]; // error     virtual void h(int i) [[expects: i < 1]]; // error     std::string x; };   struct C : A {     virtual void f(int i) [[expects: i > x]]; // OK     virtual void g(int i) [[expects: i < A::x]]; // ill-formed, no diagnostic required };`If a contract condition of a virtual function `f` odr-uses *this, the class of which `f` is a direct member must be an unambiguous and accessible base class of any class in which `f` is overridden.`struct A {     virtual void g() [[expects: x == 0]]; // odr-uses *this     int x = 42; }; struct B : A { };   struct C : A, B {     virtual void g(); //error, A is an ambiguous base };`If a function overrides more than one function, all of the overridden functions must have the same list of contract conditions; no diagnostic is required if corresponding conditions will always evaluate to the same value.`struct A {     virtual void g() [[expects: x == 0]]; // x means A::x     int x = 42; };   int x = 42; struct B {   virtual void g() [[expects: x == 0]]; // x means ::x }   struct C : A, B {     virtual void g(); //error };` | (since C++20) |
-| ------------------------------------------------------------ | ------------- |
-|                                                              |               |
-
 [Default arguments](https://en.cppreference.com/w/cpp/language/default_arguments) for virtual functions are substituted at the compile time.
 
 #### Covariant return types
@@ -203,7 +199,7 @@ The class in the return type of `Derived::f` must be either `Derived` itself, or
 
 When a virtual function call is made, the type returned by the final overrider is [implicitly converted](https://en.cppreference.com/w/cpp/language/implicit_cast) to the return type of the overridden function that was called:
 
-```
+```c++
 class B {};
  
 struct Base {
@@ -329,4 +325,73 @@ B::B(V* v, A* a)
 - [override specifier](https://en.cppreference.com/w/cpp/language/override) (since C++11)
 - [final specifier](https://en.cppreference.com/w/cpp/language/final) (since C++11)
 
+## jb51 [C++中判断成员函数是否重写](https://www.jb51.net/article/110578.htm)
 
+**C++中判断成员函数是否重写**
+
+判断一个成员函数是不是虚函数（重写），有两个三个条件：
+
+1、两个成员函数各自在基类和派生类中定义；
+
+2、基类中定义的成员函数必须带有关键字virtual，派生类的成员函数可带可不带。
+
+3、这两个成员函数原型（函数名，函数参数，函数返回类型）必须相同。
+
+```C++
+#include<iostream>
+using namespace std;
+
+class Grandam
+{
+public:
+  virtual void introduce_self()
+  {
+    cout << "I am grandam." << endl;
+  }
+};
+
+class Mother:public Grandam
+{
+public:
+  void introdude_self()
+  {
+    cout << "I am mother." << endl;
+  }
+};
+
+class Daughter :public Mother
+{
+public:
+  void introduce_self()
+  {
+    cout << "I am daughter." << endl;
+  }
+};
+
+int main()
+{
+  Grandam* ptr;
+  Grandam g;
+  Mother m;
+  Daughter d;
+  ptr = &g;
+  ptr->introduce_self();
+
+  ptr = &m;
+  ptr->introduce_self();
+
+  ptr = &d;
+  ptr->introduce_self();
+  return 0;
+}
+
+
+```
+
+> NOTE: 
+>
+> 上述 `introduce_self()` 都是virtual function
+
+结果如图所示：
+
+![img](https://img.jbzj.com/file_images/article/201704/201747102335280.png?201737102353)

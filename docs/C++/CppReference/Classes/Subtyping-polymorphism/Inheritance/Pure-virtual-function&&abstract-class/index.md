@@ -152,3 +152,63 @@ int main()
 
 
 ## cppreference [std::is_abstract](https://en.cppreference.com/w/cpp/types/is_abstract)
+
+
+
+
+
+## 注意
+
+### 题目
+
+链接：https://www.nowcoder.com/questionTerminal/6027723bb7f945339125f20d183138fe
+来源：牛客网
+
+
+
+下述有关c++的虚类和java接口的描述，说法错误的是？
+
+- ```
+    c++虚类相当与java里面的抽象类
+    ```
+
+- ```
+    c++中没有接口的概念，与之对应的是纯虚类，对应的是java的接口
+    ```
+
+- ```
+    纯虚函数和虚函数的区别在于前者只包含定义，而后者还可以包含函数体。
+    ```
+
+- ```
+    一个抽象类和接口中的方法必须是抽象方法
+    ```
+
+
+[查看正确选项](javascript:void(0))
+
+正确答案：C D
+
+纯虚函数可以有函数体 C++ primer 5th p541。但是函数体只能定义在类外，例如：
+
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+
+class A
+{
+public:
+	virtual void func() = 0;
+};
+void A::func()
+{
+	cout << "func" << endl;
+}
+int main()
+{
+
+}
+// g++ test.cpp
+
+```
+
