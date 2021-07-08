@@ -1368,8 +1368,10 @@ nav:
           - Introduction: C++/STL/String/C-string/C-string-wrapper/index.md
         - Memory-manipulation:
           - Introduction: C++/STL/String/C-string/Memory-manipulation/index.md
-          - memset:
-            - Introduction: C++/STL/String/C-string/Memory-manipulation/memset/index.md
+          - std-memset:
+            - Introduction: C++/STL/String/C-string/Memory-manipulation/std-memset/index.md
+          - std-memmove:
+            - Introduction: C++/STL/String/C-string/Memory-manipulation/std-memmove/index.md
       - C++string:
         - Introduction: C++/STL/String/C++string/index.md
         - basic_string:
@@ -2047,30 +2049,30 @@ nav:
       - Copy-and-swap-idiom:
         - Introduction: C++/Idiom/Object-based-resource-management/Copy-and-swap-idiom/index.md
       - Scope-guard:
-        - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/index.md
+        - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/index.md
         - drdobbs-Generic-Change-the-Way-You-Write-Exception-Safe-Code:
-          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/drdobbs-Generic-Change-the-Way-You-Write-Exception-Safe-Code/index.md
+          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/drdobbs-Generic-Change-the-Way-You-Write-Exception-Safe-Code/index.md
         - C++and-Beyond2012-Systematic-Error-Handling-in-C++:
-          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/C++and-Beyond2012-Systematic-Error-Handling-in-C++/index.md
+          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/C++and-Beyond2012-Systematic-Error-Handling-in-C++/index.md
         - CppCon2015-Declarative-Control-Flow:
-          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/CppCon2015-Declarative-Control-Flow/index.md
+          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/CppCon2015-Declarative-Control-Flow/index.md
         - Implementation:
           - SergiusTheBest-ScopeExit:
-            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/Implementation/SergiusTheBest-ScopeExit/index.md
+            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/Implementation/SergiusTheBest-ScopeExit/index.md
           - Neargye-ScopExit:
-            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/Implementation/Neargye-ScopExit/index.md
+            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/Implementation/Neargye-ScopExit/index.md
           - ricab-scope_guard:
-            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/Implementation/ricab-scope_guard/index.md
+            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/Implementation/ricab-scope_guard/index.md
           - boost-ScopeExit:
-            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/Implementation/boost-ScopeExit/index.md
+            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/Implementation/boost-ScopeExit/index.md
           - evgeny-panasyuk-stack_unwinding:
-            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/Implementation/evgeny-panasyuk-stack_unwinding/index.md
+            - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/Implementation/evgeny-panasyuk-stack_unwinding/index.md
         - Transaction:
-          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard/Transaction/index.md
+          - Introduction: C++/Idiom/Object-based-resource-management/Scope-guard-/Transaction/index.md
       - Resource-return:
-        - Introduction: C++/Idiom/Object-based-resource-management/Resource-return/index.md
+        - Introduction: C++/Idiom/Object-based-resource-management/Resource-ret/index.md
         - Returning-unique_ptr-from-functions:
-          - Introduction: C++/Idiom/Object-based-resource-management/Resource-return/Returning-unique_ptr-from-functions/index.md
+          - Introduction: C++/Idiom/Object-based-resource-management/Resource-ret/Returning-unique_ptr-from-functions/index.md
     - Error-handling:
       - Introduction: C++/Idiom/Error-handling/index.md
       - Polymorphic-Exception:
