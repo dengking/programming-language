@@ -1,3 +1,4 @@
 nav:
+    - Introduction: index.md
     - SWIG: SWIG
     - mapbox-jni.hpp: mapbox-jni.hpp

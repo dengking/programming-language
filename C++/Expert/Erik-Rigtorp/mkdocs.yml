@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - Library-SPSCQueue: Library-SPSCQueue
-    - Library-MPMCQueue: Library-MPMCQueue
+    - Library-MPMCQueue: library-MPMCQueue

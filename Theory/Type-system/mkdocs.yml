@@ -1,13 +1,17 @@
 nav:
     - Introduction: index.md
+    
     - Type-system: Type-system
+    
     - Type-constructor: Type-constructor
+    
     - Type-safety: Type-safety
-    - Static-VS-dynamic-typing: Static-VS-dynamic-typing.md
+    
+    - Static-vs-dynamic-typing: Static-vs-dynamic-typing
     ########## class和type之间的关系是现代OOP的核心##########
     - OOP-and-type-system: OOP-and-type-system
-    
     ########## 类型转换是一种非常重要的类型操作##########    
     - Type-conversion: Type-conversion
+    
     - Type-relation: Type-relation
-    - Static-vs-dynamic-typing: Static-vs-dynamic-typing.md
+    

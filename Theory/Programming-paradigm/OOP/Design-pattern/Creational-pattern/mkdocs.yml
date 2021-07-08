@@ -5,3 +5,5 @@ nav:
     - Builder-pattern: Builder-pattern
     - Dependency-injection: Dependency-injection
     - Prototype: Prototype
+    - Object-pool-pattern: Object-pool-pattern
+    

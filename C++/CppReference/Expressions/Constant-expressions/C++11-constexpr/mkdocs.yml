@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
     - TODO-Literal-type: TODO-Literal-type
+    - constexpr-and-const: constexpr-and-const
+    - C++20-constexpr-vector-string: C++20-constexpr-vector-string

@@ -2,25 +2,33 @@ nav:
     - Introduction: index.md
     # boost社区，其中说明了boost库编写的一些内容
     - Boost-community: Boost-community
+    
     - Boost-Book: Boost-Book
     # 编程技巧相关
     - Boost-Concept-Check-Library: Boost-Concept-Check-Library
     # data structure    
     - Boost-Graph-Library: Boost-Graph-Library
+    
     - Boost-Property-Tree: Boost-Property-Tree
+    
     - Boost-Circular-Buffer: Boost-Circular-Buffer
+    
     - Boost-Array: Boost-Array
     # 算法相关
     - Boost-Range: Boost-Range
-    - Boost-Algorithm-Library: Boost-Algorithm-Library
     
+    - Boost-Algorithm-Library: Boost-Algorithm-Library
     # 多态相关    
     - Boost-Poly-Collection: Boost-Poly-Collection
     # meta programming    
     - Boost-Meta-programming: Boost-Meta-programming
     # generic programming
     - Boost-Iterator: Boost-Iterator
+    
     - Boost-TypeErasure: Boost-TypeErasure
+    
     - Boost-Atomic: Boost-Atomic
-    - boost-Beast: boost-Beast
+    
+    - Boost-Beast-lib: Boost-Beast-lib
+    
     - Boost.Intrusive: Boost.Intrusive

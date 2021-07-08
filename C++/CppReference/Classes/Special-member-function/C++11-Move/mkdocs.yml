@@ -8,3 +8,4 @@ nav:
     - std-move: std-move   
     - warning-binding-rvalue-to-lvalue-reference: warning-binding-rvalue-to-lvalue-reference
     - TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs: TODO-foonathan-Guidelines-For-Rvalue-References-In-APIs
+    - Examples: Examples

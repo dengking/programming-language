@@ -6,4 +6,5 @@ nav:
     - Level-of-exception-safety: Level-of-exception-safety
     - No-throw-guarantee: No-throw-guarantee
     - Strong-exception-safety: Strong-exception-safety
+    - Exception-Safe-Function-Call: Exception-Safe-Function-Call
     - TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know: TODO-vishalchovatiya-C++Exception-Handling-Best-Practices-7-Things-To-Know

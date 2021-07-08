@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - Plateform-macro: plateform-macro
+    - Predefined-macros: Predefined-macros
+    - Language-feature-testing-macros: Language-feature-testing-macros
+    - Stringify-and-concatenate-macros: Stringify-and-concatenate-macros
+    - Pros-and-cons-of-macro: Pros-and-cons-of-macro.md        
