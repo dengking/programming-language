@@ -2162,19 +2162,27 @@ nav:
         - delete-operator:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/delete-operator/index.md
         - Implementation:
-          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/index.md
-          - library-jemalloc:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-jemalloc/index.md
-            - paper:
-              - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-jemalloc/paper/index.md
-          - library-tcmalloc:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-tcmalloc/index.md
-            - Design:
-              - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/library-tcmalloc/Design/index.md
+          - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/index.md
           - Boundary-tag:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/Boundary-tag/index.md
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/Boundary-tag/index.md
           - Arena:
-            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Implementation/Arena/index.md
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/Arena/index.md
+          - Free-store:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/Free-store/index.md
+          - Free-list:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/Free-list/index.md
+          - Buddy-allocation:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/Buddy-allocation/index.md
+          - Slab-allocation:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/Slab-allocation/index.md
+          - library-jemalloc:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/library-jemalloc/index.md
+            - paper:
+              - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/library-jemalloc/paper/index.md
+          - library-tcmalloc:
+            - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/library-tcmalloc/index.md
+            - Design:
+              - Introduction: C++/Resource-management/Memory/Dynamic-allocation/Impl/library-tcmalloc/Design/index.md
         - C-VS-C++:
           - Introduction: C++/Resource-management/Memory/Dynamic-allocation/C-VS-C++/index.md
         - Allocate-aligned-memory:
