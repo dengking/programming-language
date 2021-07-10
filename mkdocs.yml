@@ -400,8 +400,8 @@ nav:
   - Introduction: C++/index.md
   - C++design-principle-feature-philosophy:
     - Introduction: C++/C++design-principle-feature-philosophy/index.md
-    - TODO-Zero-overhead-principle:
-      - Introduction: C++/C++design-principle-feature-philosophy/TODO-Zero-overhead-principle/index.md
+    - Zero-overhead-principle:
+      - Introduction: C++/C++design-principle-feature-philosophy/Zero-overhead-principle/index.md
   - What-is-new-in-C++:
     - Introduction: C++/What-is-new-in-C++/index.md
     - Simplify:
@@ -2500,8 +2500,6 @@ nav:
       - Introduction: C++/Performance-optimization/Memory/index.md
       - Small-Buffer-Optimization:
         - Introduction: C++/Performance-optimization/Memory/Small-Buffer-Optimization/index.md
-        - riptutorial-C++Small-Object-Optimization:
-          - Introduction: C++/Performance-optimization/Memory/Small-Buffer-Optimization/riptutorial-C++Small-Object-Optimization/index.md
       - We-Know-Where-You-Live-optimization:
         - Introduction: C++/Performance-optimization/Memory/We-Know-Where-You-Live-optimization/index.md
     - Bound:
