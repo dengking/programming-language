@@ -58,7 +58,9 @@ C++中的很多Optimization technique和`Software-analysis\Performance-optimizat
 
 ### Cache optimization
 
-后面提及的"绑核"能够一定程度上提高cache hit。
+1、后面提及的"绑核"能够一定程度上提高cache hit。
+
+2、参见工程`Hardware`的`CPU-memory-access\CPU-cache-memory\Cache-performance-optimization`章节。
 
 ### 避免频繁的system call
 
@@ -146,7 +148,7 @@ distributed computing、concurrent programming，因此concurrency的优化非�
 
 一、工程`parallel-computing`的如下章节中，对这个问题进行了探讨:
 
-1、`Concurrent-computing\Concurrency-control\How-to-optimize`章节
+1、`Concurrent-computing\Design-and-optimize`章节
 
 
 
