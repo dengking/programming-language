@@ -48,8 +48,6 @@ CppCoreGuidelines [R.1: Manage resources automatically using resource handles an
 
 
 
-
-
 ## Resource wrapper
 
 使用"Single responsibility+rule of three/five/zero+RAII"来实现Resource wrapper。
@@ -78,9 +76,13 @@ CppCoreGuidelines [R.1: Manage resources automatically using resource handles an
 
 参见 `Copy-and-swap-idiom` 章节。
 
+
+
 ### Scope-guard
 
 参见 `Scope-guard` 章节。
+
+
 
 ### Resource-return
 

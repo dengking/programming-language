@@ -1,5 +1,13 @@
 # `std::tring` implementation
 
+1、stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) 
+
+参见 `C++\CppReference\Classes\Special-member-function\C++11-Move\stackoverflow-What-is-move-semantics` 章节
+
+2、`C++\Performance-optimization\Memory\Small-Buffer-Optimization`
+
+
+
 ## Small String Optimization
 
 这是一种memory相关的performance optimization，参见工程software-engineering的`Software-analysis\Performance\Memory`章节。

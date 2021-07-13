@@ -4,7 +4,7 @@
 
 即它在告诉我们如何来实现**assignment operator**。
 
-二、基于 "assignment operator-pass by value-copy and swap idiom-strong exception safety" 的实现方式没有做好self-assignment
+二、基于 "assignment operator-pass by value-copy and swap idiom-strong exception safety" 的实现方式并没有处理self-assignment问题，它认为这个问题不需要处理。
 
 
 ## stackoverflow [What is the copy-and-swap idiom?](https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)

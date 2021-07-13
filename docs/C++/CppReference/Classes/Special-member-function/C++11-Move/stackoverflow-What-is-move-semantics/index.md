@@ -123,7 +123,7 @@ I hope this example got the main point across. There is a lot more to **rvalue r
 #include <utility> // std::swap
 class string
 {
-	char* data;
+	char* data { nullptr };
 
 public:
 
@@ -150,8 +150,9 @@ public:
 	string(string&& that)   // string&& is an rvalue reference to a string
 	{
 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		data = that.data;
-		that.data = nullptr;
+		// data = that.data;
+		// that.data = nullptr;
+        std::swap(data, that.data);
 	}
 	string& operator=(string that)
 	{

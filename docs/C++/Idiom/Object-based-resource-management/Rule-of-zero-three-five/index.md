@@ -46,7 +46,7 @@ feabhas [The Rule of Zero](https://blog.feabhas.com/2015/01/the-rule-of-zero/)
 
 2、assignment operator=[copy move] constructor+swap
 
-### 3、Rule of Four (and a half)
+3、Rule of Four (and a half)
 
 stackoverflow [Rule of Four (and a half)?](https://stackoverflow.com/questions/45754226/what-is-the-rule-of-four-and-a-half)
 
