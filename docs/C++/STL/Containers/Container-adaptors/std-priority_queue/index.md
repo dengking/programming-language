@@ -26,6 +26,52 @@ Working with a `priority_queue` is similar to managing a [heap](https://en.cppre
 
 > NOTE: 这一段话其实透露出了`priority_queue`的实现，它结合了`heap`和一个random access container（比如`std::vector`）。
 
+```C++
+#include <functional>
+#include <queue>
+#include <vector>
+#include <iostream>
+ 
+template<typename T>
+void print_queue(T q) { // NB: pass by value so the print uses a copy
+    while(!q.empty()) {
+        std::cout << q.top() << ' ';
+        q.pop();
+    }
+    std::cout << '\n';
+}
+ 
+int main() {
+    std::priority_queue<int> q;
+ 
+    const auto data = {1,8,5,6,3,4,0,9,7,2};
+ 
+    for(int n : data)
+        q.push(n);
+ 
+    print_queue(q);
+ 
+    std::priority_queue<int, std::vector<int>, std::greater<int>>
+        q2(data.begin(), data.end());
+ 
+    print_queue(q2);
+ 
+    // Using lambda to compare elements.
+    auto cmp = [](int left, int right) { return (left ^ 1) < (right ^ 1); };
+    std::priority_queue<int, std::vector<int>, decltype(cmp)> q3(cmp);
+ 
+    for(int n : data)
+        q3.push(n);
+ 
+    print_queue(q3);
+}
+// g++ test.cpp --std=c++11
+```
+
+
+
+
+
 ## 最小堆
 
 leetcode [787. c++简单易懂的Dijkstra算法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/cjian-dan-yi-dong-de-dijkstrasuan-fa-by-w05aa/) 
@@ -83,8 +129,6 @@ public:
 };
 
 ```
-
-
 
 
 
