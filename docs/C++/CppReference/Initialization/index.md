@@ -28,8 +28,6 @@
 
 
 
-
-
 ## 区分
 
 C++的initialization章节中，出现了非常多的initialization术语，如何对它们进行区分、记忆呢？

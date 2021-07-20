@@ -250,8 +250,6 @@ A constructor is *user-provided* if it is user-declared and not explicitly defau
 
 
 
-
-
 ## Example 
 
 ```c++

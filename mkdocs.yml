@@ -1056,8 +1056,8 @@ nav:
         - Introduction: C++/CppReference/Union/C++11-std-aligned_union/index.md
     - Initialization:
       - Introduction: C++/CppReference/Initialization/index.md
-      - Initialization-and-constructor-and-conversion:
-        - Introduction: C++/CppReference/Initialization/Initialization-and-constructor-and-conversion/index.md
+      - Initialization&constructor&conversion:
+        - Introduction: C++/CppReference/Initialization/Initialization&constructor&conversion/index.md
       - Initialization: C++/CppReference/Initialization/Initialization.md
       - Default-initialization:
         - Introduction: C++/CppReference/Initialization/Default-initialization/index.md
