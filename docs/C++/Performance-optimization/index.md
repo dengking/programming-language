@@ -243,3 +243,6 @@ void redisSetCpuAffinity(const char *cpulist) {
 
 这在工程discrete中进行讨论；
 
+## Network performance optimization
+
+参见工程`Linux-OS`的`Network\Performance-optimization`章节。
