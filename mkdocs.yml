@@ -1599,6 +1599,9 @@ nav:
           - Introduction: "C++/STL/Localization-library/GBK-to-UTF8/C++\u5B9E\u73B0\
               utf8\u548Cgbk\u7F16\u7801\u5B57\u7B26\u4E32\u4E92\u76F8\u8F6C\u6362\
               /index.md"
+    - Numerics-library:
+      - std-random:
+        - Introduction: C++/STL/Numerics-library/std-random/index.md
   - Library:
     - A-list-of-open-source-Cpp-libraries: C++/Library/A-list-of-open-source-Cpp-libraries.md
     - Boost:

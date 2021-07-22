@@ -1,12 +1,9 @@
 nav:
     - Introduction: index.md
-    - Phases-of-translation: Phases-of-translation
-#################### 预处理####################    
-    - Preprocess: Preprocess
-#################### 编译阶段####################        
-    - Compile: Compile
-#################### 链接阶段####################        
-    - Link: Link
+    - Phases-of-translation: Phases-of-translation 
+    - Preprocess: Preprocess #预处理
+    - Compile: Compile #编译阶段
+    - Link: Link #链接阶段
     - ABI: ABI
     - Code-analysis-tool: Code-analysis-tool
     - Implementation: Implementation
