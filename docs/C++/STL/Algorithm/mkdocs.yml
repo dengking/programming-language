@@ -5,3 +5,5 @@ nav:
     - std-max_element-min_element-minmax_element: std-max_element-min_element-minmax_element
     - Sum: Sum
     - binary-search: binary-search
+    - std-sample: std-sample
+    

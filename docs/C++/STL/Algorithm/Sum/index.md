@@ -14,22 +14,22 @@ int sum_of_elems = 0;
 
 #### C++03
 
-1. Classic for loop:
+1、Classic for loop:
 
-    ```c++
-    for(std::vector<int>::iterator it = vector.begin(); it != vector.end(); ++it)
-        sum_of_elems += *it;
-    ```
+```c++
+for(std::vector<int>::iterator it = vector.begin(); it != vector.end(); ++it)
+    sum_of_elems += *it;
+```
 
-2. Using a standard algorithm:
+2、Using a standard algorithm:
 
-    ```c++
-    #include <numeric>
-    
-    sum_of_elems = std::accumulate(vector.begin(), vector.end(), 0);
-    ```
+```c++
+#include <numeric>
 
-    **Important Note:** The last argument's type is used not just for the initial value, but for *the type of the result* as well. If you put an int there, it will accumulate ints even if the vector has float. If you are summing floating-point numbers, change `0` to `0.0` or `0.0f` (thanks to nneonneo). See also the C++11 solution below.
+sum_of_elems = std::accumulate(vector.begin(), vector.end(), 0);
+```
+
+**Important Note:** The last argument's type is used not just for the initial value, but for *the type of the result* as well. If you put an int there, it will accumulate ints even if the vector has float. If you are summing floating-point numbers, change `0` to `0.0` or `0.0f` (thanks to nneonneo). See also the C++11 solution below.
 
 #### C++11 and higher
 
