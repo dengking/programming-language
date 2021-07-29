@@ -38,6 +38,8 @@
 
 They are defined in the following terms:
 
+
+
 ## Sequenced-before
 
 > NOTE: 
@@ -47,6 +49,8 @@ They are defined in the following terms:
 > 2、在 `C++Order-of-evaluation` 中，对它进行了深入分析
 
 Within the same thread, evaluation A may be *sequenced-before* evaluation B, as described in [evaluation order](https://en.cppreference.com/w/cpp/language/eval_order).
+
+
 
 ## Carries dependency
 
@@ -66,7 +70,7 @@ Within the same thread, evaluation A that is *sequenced-before* evaluation B may
 
 > NOTE: "A carry a dependency int B"的含义是: B 依赖于 A
 
-1) The value of A is used as an operand of B, **except**
+1、The value of A is used as an operand of B, **except**
 
 a) if B is a call to [std::kill_dependency](https://en.cppreference.com/w/cpp/atomic/kill_dependency)
 
@@ -76,9 +80,11 @@ b) if A is the left operand of the built-in `&&`, `||`, `?:`, or `,` operators.
 
 > NOTE: 为什么这些operator不形成dependency关系？
 
-2) A writes to a scalar object M, B reads from M
+2、A writes to a scalar object M, B reads from M
 
-3) A carries dependency into another evaluation X, and X carries dependency into B
+3、A carries dependency into another evaluation X, and X carries dependency into B
+
+
 
 ## Modification order
 
@@ -138,13 +144,15 @@ All modifications to any particular atomic variable occur in a total order that 
 
 The following four requirements are guaranteed for all atomic operations:
 
-1) **Write-write coherence**: If evaluation A that modifies some atomic `M` (a write) *happens-before* evaluation B that modifies `M`, then A appears earlier than B in the *modification order* of `M`
+1、**Write-write coherence**: If evaluation A that modifies some atomic `M` (a write) *happens-before* evaluation B that modifies `M`, then A appears earlier than B in the *modification order* of `M`
 
-2) **Read-read coherence**: if a value computation A of some atomic `M` (a read) *happens-before* a value computation B on `M`, and if the value of A comes from a write `X` on `M`, then the value of B is either the value stored by `X`, or the value stored by a side effect `Y` on `M` that appears later than X in the *modification order* of M.
+2、**Read-read coherence**: if a value computation A of some atomic `M` (a read) *happens-before* a value computation B on `M`, and if the value of A comes from a write `X` on `M`, then the value of B is either the value stored by `X`, or the value stored by a side effect `Y` on `M` that appears later than X in the *modification order* of `M`.
 
-3) **Read-write coherence**: if a value computation A of some atomic M (a read) *happens-before* an operation B on M (a write), then the value of A comes from a side-effect (a write) X that appears earlier than B in the *modification order* of M
+3、**Read-write coherence**: if a value computation A of some atomic M (a read) *happens-before* an operation B on M (a write), then the value of A comes from a side-effect (a write) X that appears earlier than B in the *modification order* of `M`
 
-4) **Write-read coherence**: if a side effect (a write) X on an atomic object M *happens-before* a value computation (a read) B of M, then the evaluation B shall take its value from X or from a side effect Y that follows X in the modification order of M
+4、**Write-read coherence**: if a side effect (a write) X on an atomic object M *happens-before* a value computation (a read) B of M, then the evaluation B shall take its value from X or from a side effect Y that follows X in the modification order of `M`
+
+
 
 ## Release sequence
 
@@ -164,11 +172,13 @@ The following four requirements are guaranteed for all atomic operations:
 
 After a *release operation* A is performed on an atomic object M, the longest continuous **subsequence** of the **modification order** of M that consists of
 
-1) Writes performed by the same thread that performed A(until C++20)
+1、Writes performed by the same thread that performed A(until C++20)
 
-2) Atomic read-modify-write operations made to M by any thread
+2、Atomic read-modify-write operations made to M by any thread
 
 is known as *release sequence headed by A*
+
+
 
 ## Dependency-ordered before
 
@@ -202,11 +212,11 @@ Between threads, evaluation A is *dependency-ordered before* evaluation B if any
 
 > NOTE: 
 >
-> 1、原文并没有对Synchronizes-with进行说明，这是我添加的，有误后面的"Inter-thread happens-before"章节中，会使用到这个概念
+> 1、原文并没有对Synchronizes-with进行说明，这是我添加的，在后面的"Inter-thread happens-before"章节中，会使用到这个概念
 >
 > 2、在 csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486)  中，也有相同的做法
 
-1、"csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486)   2.5 Synchronizes-with"
+1、"csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.5 Synchronizes-with"
 
 Synchronizes-with，也就是同步关系，用来描述对内存的修改操作（包括原子和非原子操作）对其他线程可见，有一点需要注意，这是一个**运行时的关系**，也就是说不是代码层面的，代码只是让程序在运行的时候有可能建立这种关系，并且一旦建立了就有可见性的保证。简单来说，如果A和B建立了Synchronizes-with关系，那么A之前的内存修改对B之后都可见，preshing大神给的例子很好，如下分别是建立了Synchronizes-with关系和没建立的情况：
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/201912222053442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d4ajE5OTI=,size_16,color_FFFFFF,t_70)

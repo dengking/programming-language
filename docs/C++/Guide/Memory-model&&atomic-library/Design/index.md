@@ -84,6 +84,8 @@ C++还提供了对memory order的控制。
 
 2、zhihu [如何理解 C++11 的六种 memory order？](https://www.zhihu.com/question/24301047) # [A](https://www.zhihu.com/question/24301047/answer/1193956492) : "限制编译器以及CPU对单线程当中的指令执行顺序进行重排的程度"
 
+
+
 ### 可以使用memory order进行控制的对象
 
 1、`std::atomic`
@@ -104,7 +106,7 @@ C++还提供了对memory order的控制。
 
 ## Lock-free VS lock-based
 
-1、C++ memory model 和 atomic library 基于了programmer实现让所有的thread 按照设计的order去access shared atomic variable，而不是去contention，从而可以实现lockfree programming
+1、C++ memory model 和 atomic library 给予了programmer实现让所有的thread 按照设计的order去access shared atomic variable，而不是去contention，从而可以实现lockfree programming
 
 2、对一个shared data的read、write order进行控制，从而避免data race，达到目的cooperative的目的，从而实现lockless programming。
 

@@ -155,8 +155,6 @@ int main()
 
 
 
-
-
 ### Comments
 
 > NOTE: 评论也非常精彩
@@ -194,7 +192,7 @@ int main()
 
 #### *sequenced-before* and  inter-thread *happens-before* 
 
-@Nawaz, @Nemo - A minor detail: the new memory model is relevant in single-threaded code insofar as it specifies the undefinedness(不确定性) of certain expressions, such as `i = i++`. The old concept of *sequence points* has been discarded; the new standard specifies the same thing using a *sequenced-before* relation which is just a special case of the more general inter-thread *happens-before* concept. – [JohannesD](https://stackoverflow.com/users/279597/johannesd) [Jun 13 '11 at 13:14](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g#comment7404214_6319356) 
+@Nawaz, @Nemo - A minor detail: the new memory model is relevant in single-threaded code insofar( 在这个范围，到这个程度) as it specifies the undefinedness(不确定性) of certain expressions, such as `i = i++`. The old concept of *sequence points* has been discarded; the new standard specifies the same thing using a *sequenced-before* relation which is just a special case of the more general inter-thread *happens-before* concept. – [JohannesD](https://stackoverflow.com/users/279597/johannesd) [Jun 13 '11 at 13:14](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g#comment7404214_6319356) 
 
 > NOTE: 这段评论非常好，它提出了一个非常容易忽视的内容；
 >
