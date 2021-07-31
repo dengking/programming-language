@@ -1353,6 +1353,10 @@ nav:
         - Introduction: C++/STL/Algorithm/Sum/index.md
       - binary-search:
         - Introduction: C++/STL/Algorithm/binary-search/index.md
+      - C++17-std-sample:
+        - Introduction: C++/STL/Algorithm/C++17-std-sample/index.md
+      - std-sort:
+        - Introduction: C++/STL/Algorithm/std-sort/index.md
     - C++20-Range-library:
       - Introduction: C++/STL/C++20-Range-library/index.md
       - Primer:
@@ -2356,8 +2360,8 @@ nav:
         - Herb-Sutter:
           - Introduction: C++/Guide/Memory-model&&atomic-library/Why-need-memory-model/Herb-Sutter/index.md
       - Guide:
-        - TODO-CSDN-wxj1992-C++memory-order:
-          - Introduction: C++/Guide/Memory-model&&atomic-library/Guide/TODO-CSDN-wxj1992-C++memory-order/index.md
+        - CSDN-wxj1992-C++memory-order:
+          - Introduction: C++/Guide/Memory-model&&atomic-library/Guide/CSDN-wxj1992-C++memory-order/index.md
         - modernescpp-C++Memory-Model:
           - 1-C++Memory-Model.md: C++/Guide/Memory-model&&atomic-library/Guide/modernescpp-C++Memory-Model/1-C++Memory-Model.md
           - 2-Sequential-Consistency: C++/Guide/Memory-model&&atomic-library/Guide/modernescpp-C++Memory-Model/2-Sequential-Consistency.md

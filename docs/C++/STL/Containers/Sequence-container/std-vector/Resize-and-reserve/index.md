@@ -109,3 +109,235 @@ You can refer to the documentation regarding the difference of [resize](http://w
 
 ## stackoverflow [Choice between vector::resize() and vector::reserve()](https://stackoverflow.com/questions/7397768/choice-between-vectorresize-and-vectorreserve)
 
+
+
+
+
+## 误用`reserve`、`resize`的一个例子
+
+### 第一个版本: 只有 `reserve`
+
+在编写leetcode [698. 划分为k个相等的子集](https://leetcode-cn.com/problems/partition-to-k-equal-sum-subsets/) 时，我误用了`reserve`，导致了一个错误，错误程序如下:
+
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+	int m_k { 0 }; // 桶的个数
+	vector<int> m_buckets; // 所有的桶
+	int m_target { 0 }; // 每个桶的目标装载量
+public:
+	bool canPartitionKSubsets(vector<int> &nums, int k)
+	{
+		int len = nums.size();
+		m_k = k;
+		if (m_k > len)
+		{
+			return false;
+		}
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+
+		if (sum % m_k != 0) // 无法均匀分配
+			return false;
+		m_target = sum / m_k;
+		m_buckets.reserve(k); // 桶
+		return DFS(0, nums);
+	}
+	bool DFS(int index, vector<int> &nums)
+	{
+		if (index == nums.size()) // 所有的数都放完了
+		{
+			for (auto &&i : m_buckets)
+			{
+				if (i != m_target)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		for (int j = 0; j < m_k; ++j)
+		{
+			if (nums[index] + m_buckets[j] > m_target) // 第i个数，不应当放入 m_buckets[j] 中
+				continue;
+			m_buckets[j] += nums[index];
+			if (DFS(index + 1, nums))
+			{
+				return true;
+			}
+			m_buckets[j] -= nums[index];
+		}
+		return false;
+	}
+};
+
+int main()
+{
+	Solution s;
+	vector<int> nums { 2, 2, 2, 2, 3, 4, 5 };
+	int k = 4;
+	cout << s.canPartitionKSubsets(nums, k) << endl;
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -g
+```
+
+
+
+需要注意:
+
+```C++
+m_buckets.reserve(k); // 桶
+```
+
+此时 `m_buckets` 的size依然是0；
+
+
+
+
+
+### 第二个版本: 只有 `reserve` + `push_back`
+
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+	int m_k { 0 }; // 桶的个数
+	vector<int> m_buckets; // 所有的桶
+	int m_target { 0 }; // 每个桶的目标装载量
+public:
+	bool canPartitionKSubsets(vector<int> &nums, int k)
+	{
+		int len = nums.size();
+		m_k = k;
+		if (m_k > len)
+		{
+			return false;
+		}
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+
+		if (sum % m_k != 0) // 无法均匀分配
+			return false;
+		m_target = sum / m_k;
+		m_buckets.reserve(k); // 桶
+		for (int i = 0; i < m_k; ++i)
+		{
+			m_buckets.push_back(0);
+		}
+		return DFS(0, nums);
+	}
+	bool DFS(int index, vector<int> &nums)
+	{
+		if (index == nums.size()) // 所有的数都放完了
+		{
+			for (auto &&i : m_buckets)
+			{
+				if (i != m_target)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		for (int j = 0; j < m_k; ++j)
+		{
+			if (nums[index] + m_buckets[j] > m_target) // 第i个数，不应当放入 m_buckets[j] 中
+				continue;
+			m_buckets[j] += nums[index];
+			if (DFS(index + 1, nums))
+			{
+				return true;
+			}
+			m_buckets[j] -= nums[index];
+		}
+		return false;
+	}
+};
+
+int main()
+{
+	Solution s;
+	vector<int> nums { 2, 2, 2, 2, 3, 4, 5 };
+	int k = 4;
+	cout << s.canPartitionKSubsets(nums, k) << endl;
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -g
+
+
+```
+
+这种写法是正确的，此时size是准确的，但是这种写法肯定是不够简洁的，下面的写法是更加简洁的。
+
+
+
+### 第三个版本: `resize(k, 0)`
+
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+	int m_k { 0 }; // 桶的个数
+	vector<int> m_buckets; // 所有的桶
+	int m_target { 0 }; // 每个桶的目标装载量
+public:
+	bool canPartitionKSubsets(vector<int> &nums, int k)
+	{
+		int len = nums.size();
+		m_k = k;
+		if (m_k > len)
+		{
+			return false;
+		}
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+
+		if (sum % m_k != 0) // 无法均匀分配
+			return false;
+		m_target = sum / m_k;
+		m_buckets.resize(k, 0); // 桶
+		return DFS(0, nums);
+	}
+	bool DFS(int index, vector<int> &nums)
+	{
+		if (index == nums.size()) // 所有的数都放完了
+		{
+			for (auto &&i : m_buckets)
+			{
+				if (i != m_target)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		for (int j = 0; j < m_k; ++j)
+		{
+			if (nums[index] + m_buckets[j] > m_target) // 第i个数，不应当放入 m_buckets[j] 中
+				continue;
+			m_buckets[j] += nums[index];
+			if (DFS(index + 1, nums))
+			{
+				return true;
+			}
+			m_buckets[j] -= nums[index];
+		}
+		return false;
+	}
+};
+
+int main()
+{
+	Solution s;
+	vector<int> nums { 2, 2, 2, 2, 3, 4, 5 };
+	int k = 4;
+	cout << s.canPartitionKSubsets(nums, k) << endl;
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -g
+
+
+```
+
