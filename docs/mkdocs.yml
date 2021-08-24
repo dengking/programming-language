@@ -22,8 +22,10 @@ nav:
     - Go: Go
     
     - Lisp: Lisp
+    
+    - Dart: Dart
     ########## 对比各种programming language##########    
-    - Comparison-of-programming-language: Comparison-of-programming-language
+    - Comparison: Comparison
     ##### 如何跨语言 #####
     - Cross-language: Cross-language
     
