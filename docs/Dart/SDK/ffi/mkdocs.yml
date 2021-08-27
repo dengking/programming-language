@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - struct: struct
+    - Dynamic-memory-manage: Dynamic-memory-manage
+    - package-ffigen: package-ffigen
+    

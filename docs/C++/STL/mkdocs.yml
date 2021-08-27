@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     # 标准库的实现
-    - Design&&implementation: Design&&implementation
+    - Design&&impl: Design&&impl
     
     - Guidelines: Guidelines
     
