@@ -83,9 +83,3 @@ isocpp [N3996- Static reflection](https://isocpp.org/files/papers/n3996.pdf)
 
 open-std [Call for Compile-Time Reflection Proposals](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3814.html)
 
-
-
-
-
-
-
