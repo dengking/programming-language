@@ -507,7 +507,13 @@ stackoverflow [Get typedef type and name with libclang?](https://stackoverflow.c
 
 ### canonical types in Clang
 
+它和`typedef`有关。
+
 stackoverflow [What are canonical types in Clang?](https://stackoverflow.com/questions/25231080/what-are-canonical-types-in-clang)
+
+
+
+### qualified name、namespace
 
 
 
