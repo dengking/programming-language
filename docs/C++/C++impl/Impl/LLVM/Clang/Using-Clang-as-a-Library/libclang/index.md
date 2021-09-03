@@ -6,11 +6,15 @@ https://llvm.org/devmtg/2010-11/Gregor-libclang.pdf
 
 https://sudonull.com/post/907-An-example-of-parsing-C-code-using-libclang-in-Python
 
+## libclang指定parse argument
 
+stackoverflow [Why does libclang mis-parse C++ headers with a .h prefix?](https://stackoverflow.com/questions/59206093/why-does-libclang-mis-parse-c-headers-with-a-h-prefix)
 
 ## Example
 
-### stackoverflow [python-clang: Getting Template Arguments](https://stackoverflow.com/questions/41333185/python-clang-getting-template-arguments)
+### template
+
+#### stackoverflow [python-clang: Getting Template Arguments](https://stackoverflow.com/questions/41333185/python-clang-getting-template-arguments)
 
 
 
@@ -101,7 +105,7 @@ visit(tu.cursor, template_finder)
 
 
 
-#### [A](https://stackoverflow.com/a/41337188)
+##### [A](https://stackoverflow.com/a/41337188)
 
 I think all you're really missing is `.type` in a couple of places in template finder, but for reference, this works for me, even on clang as old as 3.7
 
@@ -196,7 +200,7 @@ bool
 
 
 
-### stackoverflow [can libclang parse the CRTP pattern?](https://stackoverflow.com/questions/42795408/can-libclang-parse-the-crtp-pattern)
+#### stackoverflow [can libclang parse the CRTP pattern?](https://stackoverflow.com/questions/42795408/can-libclang-parse-the-crtp-pattern)
 
 I am trying to use libclang for parsing C++, but it seems to have problem with the CRTP pattern, i.e when a class inherits from a template that is instantiated with the derived class:
 
@@ -222,7 +226,7 @@ What I want to accomplish is to find classes that inherits from Base, but it is 
 
 Does anyone know how to solve this?
 
-#### [A](https://stackoverflow.com/a/42871503)
+##### [A](https://stackoverflow.com/a/42871503)
 
 Cursors that have a kind of `CXX_BASE_SPECIFIER` will have child cursors which allow you to determine this information. In cases where the base specifier refers to a template class, it will have two child nodes (of kind) TEMPLATE_REF and TYPE_REF. You can use that information in the TEMPLATE_REF node to compare against a class template cursor.
 
@@ -296,6 +300,8 @@ for c in tu.cursor.walk_preorder():
 ```
 
 
+
+#### stackoverflow [How do you obtain the instantiated CXXRecordDecl of a templated class in Clang?](https://stackoverflow.com/questions/56813060/how-do-you-obtain-the-instantiated-cxxrecorddecl-of-a-templated-class-in-clang)
 
 
 
@@ -515,6 +521,16 @@ stackoverflow [What are canonical types in Clang?](https://stackoverflow.com/que
 
 ### qualified name、namespace
 
+stackoverflow [How to retrieve class names and its method names from C++ header using python](https://stackoverflow.com/questions/57072048/how-to-retrieve-class-names-and-its-method-names-from-c-header-using-python)
 
+
+
+### class
+
+stackoverflow [Get list of methods in class using clang](https://stackoverflow.com/questions/21878260/get-list-of-methods-in-class-using-clang)
+
+
+
+stackoverflow [Find all references of specific function declaration in libclang (Python)](https://stackoverflow.com/questions/37194718/find-all-references-of-specific-function-declaration-in-libclang-python)
 
 ## github [**cindex-dump.py**](https://github.com/llvm-mirror/clang/blob/master/bindings/python/examples/cindex/cindex-dump.py)

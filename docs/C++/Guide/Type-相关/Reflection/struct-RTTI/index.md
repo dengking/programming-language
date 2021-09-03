@@ -66,3 +66,6 @@ stackoverflow [C++ JSON Serialization](https://stackoverflow.com/questions/17549
 
 https://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented
 
+
+
+cwoodall [Reflection in C++ to Generate Serializable Structs Using libclang and Python](https://cwoodall.com/posts/2018-02-24-using-clang-and-python-to-generate-cpp-struct-serde-fns/)
