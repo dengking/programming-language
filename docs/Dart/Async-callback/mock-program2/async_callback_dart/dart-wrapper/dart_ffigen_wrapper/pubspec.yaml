@@ -1,0 +1,25 @@
+name: dart_ffigen_wrapper
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+# dependencies:
+#   path: ^1.8.0
+
+dev_dependencies:
+  pedantic: ^1.10.0
+  test: ^1.16.0
+  ffigen: ^3.0.0
+
+ffigen:
+  output: 'generated_bindings.dart'
+  headers:
+    entry-points:
+      - 'D:\GitHub\programming-language\docs\Dart\Async-callback\mock-program2\async_callback-C\async_callback-C.h'
+  llvm-path:
+      - 'D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64'
+  name: 'DartAsyncCallback'
+  description: 'Bindings to IM1'

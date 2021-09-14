@@ -149,3 +149,11 @@ int main(void)
 ```
 
 从输出来看，两者的地址相等，也就是是同一个object，因此是capture by reference。
+
+
+
+## TODO
+
+### C++ lambda capture variadic template
+
+stackoverflow [c++ lambdas how to capture variadic parameter pack from the upper scope](https://stackoverflow.com/questions/47496358/c-lambdas-how-to-capture-variadic-parameter-pack-from-the-upper-scope)

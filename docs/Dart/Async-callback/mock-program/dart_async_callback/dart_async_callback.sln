@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dart_async_callback", "dart_async_callback.vcxproj", "{F22934B1-FC5F-44BF-B74F-04AD9FD58873}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Debug|x64.ActiveCfg = Debug|x64
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Debug|x64.Build.0 = Debug|x64
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Debug|x86.ActiveCfg = Debug|Win32
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Debug|x86.Build.0 = Debug|Win32
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Release|x64.ActiveCfg = Release|x64
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Release|x64.Build.0 = Release|x64
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Release|x86.ActiveCfg = Release|Win32
+		{F22934B1-FC5F-44BF-B74F-04AD9FD58873}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61017FCE-5D4D-4C0C-93E1-7AC8BF44964D}
+	EndGlobalSection
+EndGlobal
