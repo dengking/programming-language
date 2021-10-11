@@ -1,8 +1,7 @@
 nav:
     - Introduction: index.md
-    - Implementation: Implementation    
+    - Impl: Impl    
     - Guide: Guide
-
     - shared_ptr-and-this: shared_ptr-and-this
     - shared_ptr-and-multithread: shared_ptr-and-multithread
     - Assignment-operator: Assignment-operator

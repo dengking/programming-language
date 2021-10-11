@@ -2,6 +2,8 @@
 
 本章描述rust programming language，初识这个语言是因为经常有人拿它和C++比较。
 
+
+
 ## Official website: [Rust](https://www.rust-lang.org/)
 
 

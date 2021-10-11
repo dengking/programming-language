@@ -149,11 +149,3 @@ void nim_session_cancel_stick_top(nim_session_cancel_stick_top_cb_func cb, const
 }
 
 
-NIM_SDK_DLL_API void nim_session_cancel_stick_top(const char* session_id, enum NIMSessionType to_type, nim_session_cancel_stick_top_cb_func cb, const void* user_data) {
-	QLOG_APP("[api]session.call cancel stick top");
-	RemoveStickTopSessionParam param;
-	param.session_id = session_id;
-	param.to_type = to_type;
-	nim::SessionManager::GetInstance()->InvokeRemoveStickTopSession(param, [cb, user_data](int rescode, std::shared_ptr<std::string> session_id, int to_type) {
-		internal_callback_non_blocking(cb, rescode, session_id, user_data);
-}

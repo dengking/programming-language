@@ -17,3 +17,4 @@ nav:
     - Serialization&&deserialization: Serialization&&deserialization
     - Command-line: Command-line    
     - GUI: GUI
+    - Template-engine: Template-engine

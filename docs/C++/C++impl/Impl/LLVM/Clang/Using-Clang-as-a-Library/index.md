@@ -240,3 +240,26 @@ bool VisitCXXRecordDecl(CXXRecordDecl *Declaration) {
 
 ## Tutorial for building tools using LibTooling and LibASTMatchers[¶](https://clang.llvm.org/docs/LibASTMatchersTutorial.html#tutorial-for-building-tools-using-libtooling-and-libastmatchers)
 
+
+
+
+
+## libclang comment
+
+stackoverflow [How to extract comments and match to declaration with RecursiveASTVisitor in libclang c++?](https://stackoverflow.com/questions/25275212/how-to-extract-comments-and-match-to-declaration-with-recursiveastvisitor-in-lib)
+
+[A](https://stackoverflow.com/a/41736499)
+
+**"-fparse-all-comments"**
+
+
+
+itbaoku [如何使用libclang c ++中的RecursiveASTVisitor提取注释并与声明匹配?](https://www.itbaoku.cn/post/1816672/How-to-extract-comments-and-match-to-declaration-with-RecursiveASTVisitor-in-libclang-c)
+
+stackoverflow [Retrieving comments using python libclang](https://stackoverflow.com/questions/19079070/retrieving-comments-using-python-libclang)
+
+
+
+## libclang  pre-processor
+
+stackoverflow [Retrieve information about pre-processor directives](https://stackoverflow.com/questions/13881506/retrieve-information-about-pre-processor-directives)

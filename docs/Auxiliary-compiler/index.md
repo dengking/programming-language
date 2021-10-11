@@ -4,11 +4,11 @@
 
 ## 两种模式
 
-mode 1、DSL，编写专门compiler DSL的auxiliary compiler来实现code generator 
+一、DSL，编写专门compiler DSL的auxiliary compiler来实现code generator 
 
 "tag-auxiliary compiler DSL code generator"
 
-mode 2、source transformer，使用 auxiliary compiler直接编译source code，一般需要在source code中进行特殊的标记，来实现code generator
+二、source transformer，使用 auxiliary compiler直接编译source code，一般需要在source code中进行特殊的标记，来实现code generator
 
 "tag-auxiliary compiler source transformer code generator"
 

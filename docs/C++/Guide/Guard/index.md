@@ -1,5 +1,7 @@
 # Guard
 
+
+
 ## 将Scope Guard的思想推广
 
 1、Scope Guard是C++中的established idiom，它描述的是当scope exit的时候，执行某个callback

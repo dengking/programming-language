@@ -18,6 +18,34 @@ Performance concerns permeate much of Folly, sometimes leading to designs that a
 
 At the top level Folly uses the classic "stuttering" scheme `folly/folly` used by Boost and others. The first directory serves as an installation root of the library (with possible versioning a la `folly-1.0/`), and the second is to distinguish the library when including files, e.g. `#include <folly/FBString.h>`.
 
+
+
+## 官方文档
+
+### github [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/master/folly)/**[docs](https://github.com/facebook/folly/tree/master/folly/docs)**/
+
+### facebook [ELI5: Folly - Battle-Tested C++ Library](https://developers.facebook.com/blog/post/2021/05/24/eli5-folly-battle-tested-c-plus-plus-library/)
+
+
+
+## Component
+
+### [`Expected.h`](https://github.com/facebook/folly/blob/master/folly/Expected.h)
+
+Like `folly::Optional`, but can store a value *or* an error.
+
+
+
+github [TartanLlama](https://github.com/TartanLlama)/**[expected](https://github.com/TartanLlama/expected)**
+
+reddit [Why std::expected is not in the standard yet? Is it bad practice?](https://www.reddit.com/r/cpp/comments/c75ipk/why_stdexpected_is_not_in_the_standard_yet_is_it/)
+
+open-std [P0323R10 std::expected](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p0323r10.html)
+
+
+
+
+
 ## TODO
 
 cnblogs [folly学习心得](https://www.cnblogs.com/Leo_wl/archive/2012/06/27/2566346.html)
