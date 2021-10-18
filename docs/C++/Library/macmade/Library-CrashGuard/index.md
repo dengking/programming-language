@@ -1,1 +1,0 @@
-当process crash的时候，执行callback；

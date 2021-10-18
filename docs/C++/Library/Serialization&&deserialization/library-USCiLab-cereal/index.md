@@ -1,1 +1,0 @@
-# [USCiLab](https://github.com/USCiLab)/**[cereal](https://github.com/USCiLab/cereal)**

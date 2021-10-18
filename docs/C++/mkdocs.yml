@@ -9,7 +9,7 @@ nav:
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
     - STL: STL
     # c++中的库
-    - Library: Library
+    - Library: Lib
     # 总结c++支持的programming paradigm、idiom、pattern
     - Programming-paradigm: Programming-paradigm
     # 

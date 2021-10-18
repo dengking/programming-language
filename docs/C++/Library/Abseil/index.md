@@ -1,2 +1,0 @@
-# [Abseil](https://abseil.io/)
-

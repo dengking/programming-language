@@ -1,1 +1,0 @@
-# [Boost.Circular Buffer](https://www.boost.org/doc/libs/1_73_0/doc/html/circular_buffer.html)
