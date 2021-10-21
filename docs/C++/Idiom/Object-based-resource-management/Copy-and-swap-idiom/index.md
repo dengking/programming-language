@@ -125,9 +125,9 @@ dumb_array& operator=(const dumb_array& other)
 
 And we say we're finished; this now manages an array, without leaks. However, it suffers from three problems, marked sequentially in the code as `(n)`.
 
-1) The first is the **self-assignment test**. This check serves two purposes: it's an easy way to prevent us from running needless code **on self-assignment**, and it protects us from subtle bugs (such as deleting the array only to try and copy it). But in all other cases it merely serves to slow the program down, and act as noise in the code; **self-assignment** rarely occurs(**self-assignment**几乎不会发生), so most of the time this check is a waste. It would be better if the operator could work properly without it.
+1、The first is the **self-assignment test**. This check serves two purposes: it's an easy way to prevent us from running needless code **on self-assignment**, and it protects us from subtle bugs (such as deleting the array only to try and copy it). But in all other cases it merely serves to slow the program down, and act as noise in the code; **self-assignment** rarely occurs(**self-assignment**几乎不会发生), so most of the time this check is a waste. It would be better if the operator could work properly without it.
 
-2) The second is that it only provides a **basic exception guarantee**. If `new int[mSize]` fails, `*this`will have been modified. (Namely, the size is wrong and the data is gone!) For a **strong exception guarantee**, it would need to be something akin to(类似于):
+2、The second is that it only provides a **basic exception guarantee**. If `new int[mSize]` fails, `*this`will have been modified. (Namely, the size is wrong and the data is gone!) For a **strong exception guarantee**, it would need to be something akin to(类似于):
 
 ```cpp
 dumb_array& operator=(const dumb_array& other)
@@ -149,7 +149,7 @@ dumb_array& operator=(const dumb_array& other)
 }
 ```
 
-3) The code has expanded! Which leads us to the third problem: **code duplication**. Our **assignment operator** effectively duplicates all the code we've already written elsewhere, and that's a terrible thing.
+3、The code has expanded! Which leads us to the third problem: **code duplication**. Our **assignment operator** effectively duplicates all the code we've already written elsewhere, and that's a terrible thing.
 
 In our case, the core of it is only two lines (the allocation and the copy), but with more complex resources this **code bloat**(膨胀) can be quite a hassle(严重). We should strive to never repeat ourselves(我们应该坚持永不重复).
 

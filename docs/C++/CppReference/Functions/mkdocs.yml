@@ -9,7 +9,7 @@ nav:
     # 运算符重载    
     - Function-overload: Function-overload
     
-    - Lambda-expression: Lambda-expression
+    - Lambda: Lambda
     
     - First-class-function: First-class-function
     

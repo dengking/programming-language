@@ -32,8 +32,6 @@ C++支持template function、template class，它们都可以通过SFINA来进�
 
 2 Controlling class template specializations
 
-> 
-
 
 
 ## SFINAE-based custom polymorphism的前提是有substitution
