@@ -64,6 +64,11 @@ class Coordinate extends Pointer<Void> {
 
 ## TODO
 
-1、将callback转化为dart future，如果callback会被多次调用，那么future能够被多次设置value吗？
+一、将callback转化为dart future，如果callback会被多次调用，那么future能够被多次设置value吗？
 
 答案: future只能够被设置一次value。
+
+下面是相关内容:
+
+flutterigniter [Why Is My Future/Async Called Multiple Times?](https://flutterigniter.com/future-async-called-multiple-times/)
+
