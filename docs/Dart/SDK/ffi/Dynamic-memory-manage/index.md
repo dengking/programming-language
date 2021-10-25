@@ -8,11 +8,11 @@
 
 doc: [Allocator class](https://api.dart.cn/stable/2.13.4/dart-ffi/Allocator-class.html)
 
-code: [sdk](https://github.com/dart-lang/sdk)/[sdk](https://github.com/dart-lang/sdk/tree/main/sdk)/[lib](https://github.com/dart-lang/sdk/tree/main/sdk/lib)/[ffi](https://github.com/dart-lang/sdk/tree/main/sdk/lib/ffi)/**[allocation.dart](https://github.com/dart-lang/sdk/blob/main/sdk/lib/ffi/allocation.dart)**
+code: github [sdk](https://github.com/dart-lang/sdk)/[sdk](https://github.com/dart-lang/sdk/tree/main/sdk)/[lib](https://github.com/dart-lang/sdk/tree/main/sdk/lib)/[ffi](https://github.com/dart-lang/sdk/tree/main/sdk/lib/ffi)/**[allocation.dart](https://github.com/dart-lang/sdk/blob/main/sdk/lib/ffi/allocation.dart)**
 
 ## implementation
 
-在 GitHub [dart-lang](https://github.com/dart-lang)/**[ffi](https://github.com/dart-lang/ffi)** 中，给出了implementation，具体参见如下code:
+在 github [dart-lang](https://github.com/dart-lang)/**[ffi](https://github.com/dart-lang/ffi)** 中，给出了implementation，具体参见如下code:
 
 https://github.com/dart-lang/ffi/tree/master/lib
 
