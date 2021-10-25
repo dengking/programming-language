@@ -66,3 +66,20 @@ w3adda [Dart Getters and Setters](https://www.w3adda.com/dart-tutorial/dart-gett
 >
 > 
 
+
+
+## OOP static method
+
+正如[这里](https://stackoverflow.com/a/20741850/10173843)所总结的: 
+
+> Dart doesn't inherit static methods to derived classes
+
+github [Access of static class method by static generic method #34131](https://github.com/dart-lang/sdk/issues/34131)
+
+通过其中的内容可以发现: 暂时并没有比较好的方式来实现调用基类的static method。
+
+
+
+## null lambda function
+
+在 dart codelabs [Asynchronous programming: futures, async, await](https://dart.dev/codelabs/async-await) 中展示了用法。
