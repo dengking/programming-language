@@ -49,3 +49,8 @@ public:
 };
 ```
 
+
+
+## Example
+
+Google chromium delegate virtual class
