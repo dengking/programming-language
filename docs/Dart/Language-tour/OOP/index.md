@@ -43,3 +43,15 @@ github [Access of static class method by static generic method #34131](https://g
 
 通过其中的内容可以发现: 暂时并没有比较好的方式来实现调用基类的static method。
 
+
+
+## Dart singlton
+
+
+
+stackoverflow [How do you build a Singleton in Dart?](https://stackoverflow.com/questions/12649573/how-do-you-build-a-singleton-in-dart)
+
+
+
+## scottt2.github [design-patterns-in-dart](https://scottt2.github.io/design-patterns-in-dart/)
+
