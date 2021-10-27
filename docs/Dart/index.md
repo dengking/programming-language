@@ -56,9 +56,75 @@ class Coordinate extends Pointer<Void> {
 
 
 
-## null lambda function
+
+
+## null in dart
+
+dart是sound null safety language。
+
+### stackoverflow [What is the Dart null checking idiom or best practice?](https://stackoverflow.com/questions/17006664/what-is-the-dart-null-checking-idiom-or-best-practice)
+
+> NOTE: 
+>
+> 总结的非常好
+
+### Dart null-aware operators
+
+
+
+## Dart function
+
+
+
+### null lambda function
 
 在 dart codelabs [Asynchronous programming: futures, async, await](https://dart.dev/codelabs/async-await) 中展示了用法。
+
+
+
+### stackoverflow [What is the dart function type syntax for variable declaration?](https://stackoverflow.com/questions/17617224/what-is-the-dart-function-type-syntax-for-variable-declaration)
+
+
+
+## Dart detect plateform
+
+stackoverflow [How do you detect the host platform from Dart code?](https://stackoverflow.com/questions/45924474/how-do-you-detect-the-host-platform-from-dart-code)
+
+
+
+## Dart dynamic
+
+stackoverflow [How to convert Class object to data structure `Map` or a `List of Maps` in Dart?](https://stackoverflow.com/questions/54949087/how-to-convert-class-object-to-data-structure-map-or-a-list-of-maps-in-dart)
+
+```dart
+class Human {
+  String name;
+  int age;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'age': age,
+    };
+  }
+}
+```
+
+
+
+## Dart object hash code
+
+stackoverflow [What's a good recipe for overriding hashcode in Dart?](https://stackoverflow.com/questions/20577606/whats-a-good-recipe-for-overriding-hashcode-in-dart)
+
+
+
+## Dart string
+
+### C string to dart string
+
+github [String parameter support #72](https://github.com/dart-lang/ffigen/issues/72)
+
+stackoverflow [How to pass a list of strings to C In dart ffi](https://stackoverflow.com/questions/68377638/how-to-pass-a-list-of-strings-to-c-in-dart-ffi)
 
 
 
