@@ -10,6 +10,7 @@ nav:
     - STL: STL
     # c++中的库
     - Library: Lib
+    - chromium: chromium
     # 总结c++支持的programming paradigm、idiom、pattern
     - Programming-paradigm: Programming-paradigm
     # 

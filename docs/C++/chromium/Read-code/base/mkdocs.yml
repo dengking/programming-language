@@ -1,5 +1,5 @@
 nav:
-    - design-pattern: design-pattern
+    - Introduction: index.md
     - token: token
     - memory: memory
     - threading: threading

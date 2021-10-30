@@ -2,6 +2,12 @@
 
 本章总结在chromium中广泛采用的design pattern。
 
+## doc
+
+[chromium](https://chromium.googlesource.com/?format=HTML) / [chromium](https://chromium.googlesource.com/chromium/) / [src](https://chromium.googlesource.com/chromium/src/) / [HEAD](https://chromium.googlesource.com/chromium/src/+/HEAD) / [.](https://chromium.googlesource.com/chromium/src/+/HEAD/) / [docs](https://chromium.googlesource.com/chromium/src/+/HEAD/docs) / **[patterns](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/patterns/)**
+
+
+
 
 
 ## Resource handle
