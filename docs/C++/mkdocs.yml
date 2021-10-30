@@ -7,10 +7,6 @@ nav:
     # 理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识，Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容
     - CppReference: CppReference
     #实践知识：这部分重要描述使用c++语言进行开发的时候的一些技巧等
-    - STL: STL
-    # c++中的库
-    - Library: Lib
-    - chromium: chromium
     # 总结c++支持的programming paradigm、idiom、pattern
     - Programming-paradigm: Programming-paradigm
     # 
@@ -22,8 +18,7 @@ nav:
     
     - CppCoreGuidelines: CppCoreGuidelines
     # 对c++中的一些专题进行介绍
-    - Guide: Guide
-    
+    - Guide: Guide    
     - Performance-optimization: Performance-optimization # 性能优化    
     # C++领域专家
     - Expert: Expert
@@ -38,6 +33,10 @@ nav:
     
     - Undefined-behavior: Undefined-behavior
     
+    - STL: STL
+    # c++中的库
+    - Library: Lib
+    - chromium: chromium # 这个软件非常重要
 # - My-library: My-library
 
 
