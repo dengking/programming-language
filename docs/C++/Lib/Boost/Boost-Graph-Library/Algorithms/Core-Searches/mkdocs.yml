@@ -1,0 +1,3 @@
+nav:
+    - breadth_first_search: breadth_first_search.md
+    - depth_first_search: depth_first_search.md

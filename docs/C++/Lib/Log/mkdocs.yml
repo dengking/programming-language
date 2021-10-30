@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Lightweight-logger: Lightweight-logger
+    - Spdlog: Spdlog
+    - SergiusTheBest-plog: SergiusTheBest-plog
