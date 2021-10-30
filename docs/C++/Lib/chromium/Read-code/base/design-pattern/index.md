@@ -39,3 +39,16 @@ handle to system resource
 ## Cross plateform
 
 如何根据不同的plateform从source code中选择对应plateform的source code进行编译。很显然，是不能够将所有的plateform的implementation source code全部都compile到target file中的。
+
+
+
+## Delegate pattern + virtual class
+
+这是在chromium base中，广泛采用的模式。
+
+要搞清楚所delegate的是什么、将什么的implementation(实现)给delegate出去了；本质上来说delegate所定义的是interface，它需要由其他class来进行实现，然后在host class中，使用delegate的implementation。
+
+### Example
+
+比如`Thread`的`Delegate`所delegate的是它的task queue的implementation。
+
