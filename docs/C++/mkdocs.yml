@@ -29,7 +29,7 @@ nav:
     # 对C++ implementation 进行讨论
     - C++implementation: C++impl
     # cross-plateform是C++中非常重要的一个内容
-    - C++cross-plateform: C++cross-plateform
+    - Cross-plateform: Cross-plateform
     
     - Undefined-behavior: Undefined-behavior
     
