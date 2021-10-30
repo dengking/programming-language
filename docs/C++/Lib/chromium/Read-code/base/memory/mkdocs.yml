@@ -1,4 +1,5 @@
 nav:
     - refcount: refcount
     - scoped_refptr: scoped_refptr
-    
+    - shared_memory_mapping: shared_memory_mapping
+    - memory-tagging: memory-tagging

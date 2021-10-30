@@ -1,5 +1,6 @@
 nav:
     - design-pattern: design-pattern
+    - token: token
     - memory: memory
     - threading: threading
     - compiler_specific: compiler_specific

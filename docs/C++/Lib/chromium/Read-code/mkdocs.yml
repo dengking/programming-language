@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Chromium-C++style-guide: Chromium-C++style-guide
     - base: base
