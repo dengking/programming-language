@@ -126,6 +126,34 @@ github [String parameter support #72](https://github.com/dart-lang/ffigen/issues
 
 stackoverflow [How to pass a list of strings to C In dart ffi](https://stackoverflow.com/questions/68377638/how-to-pass-a-list-of-strings-to-c-in-dart-ffi)
 
+## Dart getters and setters
+
+dev [Dart getters and setters](https://dev.to/newtonmunene_yg/dart-getters-and-setters-1c8f)
+
+
+
+我的实践: 
+
+```dart
+
+class NimInuseValue<T> {
+  bool inuse = false;
+  T? value_;
+  NimInuseValue(this.value_) {
+    inuse = true;
+  }
+
+  /// 没有在使用
+  NimInuseValue.NotInuse();
+  set value(T v) {
+    value_ = v;
+    inuse = true;
+  }
+
+  T get value => value_!;
+}
+```
+
 
 
 ## TODO
