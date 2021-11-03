@@ -1,5 +1,5 @@
 nav:
-    - SOLID: SOLID.md
+    - Introduction: index.md
     - Single-Responsibility-Principle: Single-Responsibility-Principle
     - Open-closed-principle: Open-closed-principle
     - Liskov-substitution-principle: Liskov-substitution-principle.md
