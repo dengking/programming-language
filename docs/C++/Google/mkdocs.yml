@@ -2,4 +2,5 @@ nav:
     - Introduction: index.md
     - Chromium: Chromium # 这个软件非常重要
     - Googletest: Googletest
+    - glog: glog
     

@@ -5,3 +5,6 @@ nav:
     - threading: threading
     - compiler_specific: compiler_specific
     - plateform: plateform
+    - logging: logging
+    - sequence: sequence
+    
