@@ -34,7 +34,7 @@ const Allocator malloc = _MallocAllocator();
 
 ## example
 
-
+### 1
 
 ```dart
 class Tag_CApiNIM_AuthInfo extends ffi.Struct {
@@ -58,4 +58,28 @@ account2.ref.token = 'a38355b1941984c6e97de6e228717986'.toNativeUtf8().cast();
 malloc.free(account1);
 malloc.free(account2); // 释放分配的内存
 ```
+
+### 2
+
+```dart
+    /// 将字符串传入到C中
+    if (linkAddrs.isNotEmpty) {
+      cStruct.ref.linkAddrs.data = malloc
+          .allocate<Pointer<Int8>>(sizeOf<Pointer<Int8>>() * linkAddrs.length);
+      cStruct.ref.linkAddrs.len = linkAddrs.length;
+      for (var i = 0; i < linkAddrs.length; ++i) {
+        cStruct.ref.linkAddrs.data[i] = linkAddrs[i].toNativeUtf8().cast();
+      }
+    }
+```
+
+
+
+## dart.ffi `sizeof`
+
+### api.dart.dev [`sizeOf<T extends NativeType>` function](https://api.dart.dev/stable/2.14.4/dart-ffi/sizeOf.html)
+
+
+
+
 

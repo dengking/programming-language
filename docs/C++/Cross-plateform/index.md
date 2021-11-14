@@ -27,3 +27,13 @@
 
 一个[demo](https://stackoverflow.com/questions/11983875/what-does-the-thread-local-mean-in-c11)
 
+
+
+## 如何开发cross-plateform 
+
+### create abstraction
+
+example:
+
+1、folly event loop
+

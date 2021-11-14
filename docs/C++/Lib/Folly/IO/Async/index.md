@@ -1,8 +1,12 @@
 # [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/master/folly)/[io](https://github.com/facebook/folly/tree/master/folly/io)/[async](https://github.com/facebook/folly/tree/master/folly/io/async)/**[README.md](https://github.com/facebook/folly/blob/master/folly/io/async/README.md)**
 
-[libevent](https://github.com/libevent/libevent) is an excellent cross-platform eventing library. Folly's async provides C++ object wrappers for fd callbacks and event_base, as well as providing implementations for many common types of fd uses.
+[libevent](https://github.com/libevent/libevent) is an excellent cross-platform eventing library. Folly's async provides C++ object wrappers for fd callbacks and `event_base`, as well as providing implementations for many common types of fd uses.
 
-## `EventBase`
+> NOTE: 
+>
+> **fd callback**的含义是什么？监控一个fd，一旦有event发生，则触发相应的callback。
+
+## [`EventBase`](https://github.com/facebook/folly/blob/main/folly/io/async/EventBase.h)
 
 The main libevent / epoll loop. 
 
@@ -12,7 +16,11 @@ The main libevent / epoll loop.
 >
 > 二、一个 `EventBase` 管理多个 `AsyncSocket`
 
-Generally there is a single `EventBase` per thread, and once started, nothing else happens on the thread except fd callbacks. For example:
+Generally there is a single `EventBase` per thread, and once started, nothing else happens on the thread except `fd` callbacks. 
+
+> NOTE: "nothing else happens on the thread except `fd` callbacks"的意思是: "在thread中，仅仅执行 "`fd` callback""，下面的例子就展示了对应的写法
+
+For example:
 
 ```C++
 EventBase base;
@@ -30,21 +38,41 @@ auto thread = std::thread([&](){
 
 
 
+### Message passing
 
+`EventBase` has built-in support for message passing between threads. To send a function to be run in the `EventBase` thread, use [`runInEventBaseThread()`](https://github.com/facebook/folly/blob/main/folly/io/async/EventBase.h#L540).
 
-## EventHandler
+> NOTE: 它的实现是基于 `NotificationQueue` 的
 
-`EventHandler` is the object wrapper for fd's. Any class you wish to receive callbacks on will inherit from EventHandler. `registerHandler(EventType)` will register to receive events of a specific type.
+`EventBase` always calls all callbacks inline - that is, there is no explicit or implicit queuing.
+
+> NOTE: 这段话的意思是: `EventBase` 总是立即调用所有的callback。
+
+## [EventHandler](https://github.com/facebook/folly/blob/main/folly/io/async/EventHandler.h)
+
+> NOTE: 在 [EventHandler](https://github.com/facebook/folly/blob/main/folly/io/async/EventHandler.h) 中的注释是: 
+>
+> >  The EventHandler class is used to asynchronously wait for events on a **file descriptor**.
+>
+> 
+
+`EventHandler` is the object wrapper for fd's. Any class you wish to receive callbacks on will inherit from `EventHandler`. `registerHandler(EventType)` will register to receive events of a specific type.
 
 ## Implementations of EventHandler
 
-### AsyncSocket
+### [AsyncSocket](https://github.com/facebook/folly/blob/main/folly/io/async/AsyncSocket.h)
 
-A listen()ing socket that accept()s fds, and passes them to other event bases.
+A nonblocking socket implementation. 
 
+#### Write
 
+Writes are queued and written asynchronously, even before connect() is successful.
 
-### AsyncServerSocket
+#### Read 
+
+The `read` api consists of two methods: `getReadBuffer()` and `readDataAvailable()`. When the **READ event** is signaled, `libevent` has no way of knowing how much data is available to read. In some systems (linux), we *could* make another syscall to get the data size in the kernel read buffer, but syscalls are slow. Instead, most users will just want to provide a fixed size buffer in `getReadBuffer()`, probably using the IOBufQueue in folly/io. readDataAvailable() will then describe exactly how much data was read.
+
+### [AsyncServerSocket](https://github.com/facebook/folly/blob/main/folly/io/async/AsyncServerSocket.h)
 
 A listen()ing socket that accept()s fds, and passes them to other event bases.
 
@@ -87,7 +115,29 @@ Multiple ServerSockets can be made, but currently the linux kernel has a lock on
 
 `NotificationQueue` is used to send messages between threads in the *same process*. It is what backs `EventBase::runInEventBaseThread()`, so it is unlikely you'd want to use it directly instead of using `runInEventBaseThread()`.
 
+
+
+
+
 ### AsyncTimeout
+
+
+
+## Helper Classes
+
+### RequestContext (in Request.h)
+
+Since messages are frequently passed between threads with `runInEventBaseThread()`, ThreadLocals don't work for messages. Instead, `RequestContext` can be used, which is saved/restored between threads. 
+
+### DelayedDestruction
+
+Since `EventBase` callbacks already have the `EventHandler` and `EventBase` on the stack, calling `delete` on either of these objects would most likely result in a segfault. Instead, these objects inherit from `DelayedDestruction`, which provides reference counting in the callbacks. Instead of delete, `destroy()` is called, which notifies that is ready to be destroyed. In each of the callbacks there is a `DestructorGuard`, which prevents destruction until all the Guards are gone from the stack, when the actual delete method is called.
+
+`DelayedDestruction` can be a painful to use, since `shared_ptrs` and `unique_ptrs` need to have a special `DelayedDestruction` destructor type. It's also pretty easy to forget to add a `DestructorGuard` in code that calls callbacks. But it is well worth it to avoid queuing callbacks, and the improved P99 times as a result.
+
+### DestructorCheck
+
+
 
 ## Generic Multithreading Advice
 
