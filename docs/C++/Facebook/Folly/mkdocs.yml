@@ -5,5 +5,5 @@ nav:
     - IO: IO
     - Future: Future
     - Executor: Executor
-    
+    - Indestructible: Indestructible
     

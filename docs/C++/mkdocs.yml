@@ -36,7 +36,8 @@ nav:
     - STL: STL
     # c++中的库
     - Library: Lib
-    - chromium: chromium # 这个软件非常重要
+    - Facebook: Facebook
+
 # - My-library: My-library
 
 
