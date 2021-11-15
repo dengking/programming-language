@@ -2,7 +2,7 @@
 
 1、要在object lifetime内使用它，如果不遵循这个原则，在object lifetime外使用它，就会导致memory error，因为C++ object对应的是memory，关于 memory error，参见`Resource-management\Memory-management\Memory-error`章节。
 
-2、我将这类错误统一称为"Access outside of lifetime"，这是一种常见的memory error，它和 object lifetime相关的。它的另外一个说法是: "dangling"，比如dangling pointer、dangling reference。
+2、我将这类错误统一称为"Access outside of lifetime"，这是一种常见的memory error，它和 object lifetime 相关的。它的另外一个说法是: "dangling"，比如dangling pointer、dangling reference。
 
 3、以"Access outside of object lifetime"这个角度出发，可以组织很多内容。
 

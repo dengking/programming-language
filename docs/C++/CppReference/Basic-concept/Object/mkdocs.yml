@@ -5,7 +5,7 @@ nav:
     
     - Object-type-value: Object-type-value
     # object的storage duration和lifetime是两个非常重要的概念    
-    - Lifetime&&storage-duration: Lifetime&&storage-duration
+    - Lifetime&storage-duration: Lifetime&storage-duration
     # 描述object的layout    
     - Layout: Layout 
     

@@ -24,9 +24,7 @@
 
 Event-driven/network library中，一般采用observer pattern，传入一个object来作为callback。将一个object作为callback传入到另外一个event driven library中的做法是非常不好的，这种情况下，一般涉及multithread，这个object同时被多个thread access，这样的做法有如下劣势就是非常容易access outside of object lifetime。
 
-
-
-> draft: 这种情况的最最典型的例子是: amust api。
+> NOTE: 这种情况的最最典型的例子是: amust api。
 
 
 
@@ -87,7 +85,7 @@ public:
 
 由于在zookeeper HA library(event driven library)中，会有一个单独的thread调用`IARBEventCallBack` object的member method，而我是在constructor中，进行的register，这就可能导致，object还没有完成initialization，另外一个thread就开始access它了，这就是典型的access outside of object lifetime。
 
-> draft:
+> NOTE:
 >
 > 如果在这个object的constructor中，使用`this`传入到另外一个library中，则这就导致了access outside of object lifetime；
 >
@@ -128,8 +126,6 @@ public:
 
 
 
-
-
 ## Example: 在开发行情插件时遇到的一个错误
 
 这个例子， 体现的是dangling pointer错误。
@@ -138,7 +134,7 @@ public:
 
 在开发行情插件时遇到的一个错误，其中涉及到了multiple thread中，分析如下: 
 
-原来的程序将对行情插件的重订阅线程、行情消息处理线程的停止放到了行情 类的析构函数中，由于对析构函数的调用不受programmer的控制，这就可能出现: 重订阅线程、行情消息处理线程没有被及时地停止并且使用已经被析构的对象而导致segment fault；修改方法是：显示地调用线程停止函数将重订阅线程、行情消息处理线程停止，从而确保不会出现前面描述的情况
+原来的程序将对行情插件的重订阅线程、行情消息处理线程的停止放到了行情类的析构函数中，由于对析构函数的调用不受programmer的控制，这就可能出现: 重订阅线程、行情消息处理线程没有被及时地停止并且使用已经被析构的对象而导致segment fault；修改方法是：显示地调用线程停止函数将重订阅线程、行情消息处理线程停止，从而确保不会出现前面描述的情况
 
 ### 修正方法 Synchronization
 
@@ -172,7 +168,7 @@ process exit的 时候，对destructor的调用顺序是比较复杂的，并且
 
 #### nextptr [Using weak_ptr for circular references](https://www.nextptr.com/tutorial/ta1382183122/using-weak_ptr-for-circular-references) 
 
-One of the biggest concerns dealing with the raw pointers is that sometimes it is hard to ensure that a raw pointer is not dangling or valid. **Automatic memory management** by *shared_ptr* leads to a safer and easier to maintain code. As long as a component or function holds a *shared_ptr*, the object managed by the *shared_ptr* stays in memory.
+One of the biggest concerns dealing with the raw pointers is that sometimes it is hard to ensure that a raw pointer is not dangling or valid. **Automatic memory management** by *shared_ptr* leads to a safer and easier to maintain code. As long as a component or function holds a *`shared_ptr`*, the object managed by the *`shared_ptr`* stays in memory.
 
 > NOTE: 
 >

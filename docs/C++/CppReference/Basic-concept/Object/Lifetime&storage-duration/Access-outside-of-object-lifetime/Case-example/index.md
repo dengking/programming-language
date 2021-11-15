@@ -14,8 +14,6 @@
 
 参见`Static-Initialization-Order-Fiasco`章节。
 
-4
-
 ## Example: iterator invalidation
 
 1、iterator invalidate和object lifetime，Access outside  of lifetime of object 有关。
