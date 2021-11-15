@@ -1,9 +1,10 @@
 nav:
     - Introduction: index.md
-    - Async: Async
-    - Fbstring: Fbstring
+    - Fbstring: Fbstring    
     - IO: IO
     - Future: Future
     - Executor: Executor
     - Indestructible: Indestructible
+    - Guide: Guide
+    
     

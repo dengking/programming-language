@@ -1,6 +1,10 @@
 # Executor
 
-运行task。
+一、运行task，典型的 "closure-task-first-class-function-based-concurrent"。
+
+二、无论是future、eventbase，都需要描述它们如何运行，而executor就是对如何运行的抽象。
+
+每个eventbase都是要和thread进行bind的。
 
 ## [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[docs](https://github.com/facebook/folly/tree/main/folly/docs)/**[Executors.md](https://github.com/facebook/folly/blob/main/folly/docs/Executors.md)**
 
@@ -16,7 +20,7 @@
 >
 > 
 >
-> |                         | notification |                                                              |
+> |                         | notification | queue                                                        |
 > | ----------------------- | ------------ | ------------------------------------------------------------ |
 > | `IOThreadPoolExecutor`  | `event_fd`   | one queue (`NotificationQueue` specifically) per thread/epoll. |
 > | `CPUThreadPoolExecutor` | semaphore    | single queue                                                 |
