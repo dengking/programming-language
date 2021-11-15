@@ -27,7 +27,7 @@ nav:
 ########## 讨论C++的设计与实现##########     
     - C++name-convention: C++name-convention    # C++的命名规范
     # 对C++ implementation 进行讨论
-    - C++implementation: C++impl
+    - C++implementation: Impl
     # cross-plateform是C++中非常重要的一个内容
     - Cross-plateform: Cross-plateform
     
