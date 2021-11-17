@@ -82,3 +82,31 @@ auto thread = std::thread([&](){
 });
 ```
 
+
+
+## Callback-based notification
+
+是基于callback的，在 [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[io](https://github.com/facebook/folly/tree/main/folly/io)/[async](https://github.com/facebook/folly/tree/main/folly/io/async)/**[AsyncTransport.h](https://github.com/facebook/folly/blob/main/folly/io/async/AsyncTransport.h)** 中，有如下的定义:
+
+```C++
+class AsyncReader {
+ public:
+  class ReadCallback {
+  }
+};
+
+
+class AsyncWriter {
+ public:
+  class ReleaseIOBufCallback {
+   public:
+    virtual ~ReleaseIOBufCallback() = default;
+
+    virtual void releaseIOBuf(std::unique_ptr<folly::IOBuf>) noexcept = 0;
+  };
+
+  class WriteCallback {
+  }
+};
+```
+
