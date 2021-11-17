@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - CMake: CMake
     - lib-hedley: lib-hedley
