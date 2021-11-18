@@ -4,7 +4,7 @@ nav:
     - IO: IO
     - Future: Future
     - Executor: Executor
-    - Indestructible: Indestructible
+    - Destruction: Destruction
     - Guide: Guide
     
     

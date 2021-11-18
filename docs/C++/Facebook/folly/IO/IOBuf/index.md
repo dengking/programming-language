@@ -1,15 +1,22 @@
 # `folly::IOBuf`
 
-`IOBuf object` 相当于`shared_ptr`，它指向`data buffer`
+1、`IOBuf object` 相当于`shared_ptr`，它指向`data buffer`
 
-显然，它是非常类似于`std::string`的。
 
-## `FBIOBuf`
-https://research.fb.com/blog/2014/02/under-the-hood-building-and-open-sourcing-fbthrift/
 
-To improve **asynchronous workload performance**, we updated the base **Thrift transport** to be [folly’s IOBuf](https://github.com/facebook/folly/blob/main/folly/io/IOBuf.h) class, a chained memory buffer with views similar to BSD’s `mbuf` or Linux’s `sk_buff`. In earlier versions of Thrift, the same memory buffer was reused for all requests, but memory management quickly became tricky to use when we tried to update the buffer to send responses out of order. Instead, we now request new buffers from the memory allocator on every request. To reduce the performance impact of allocating new buffers, we allocate constant-sized buffers from JEMalloc to hit the **thread-local buffer cache** as often as possible. Hitting the **thread-local cache** was an impressive performance improvement — for the average Thrift server, it’s just as fast as **reusing** or **pooling** buffers, without any of the complicated code. These buffers are then chained together to become as large as needed, and freed when not needed, preventing some memory issues seen in previous Thrift servers where memory was pooled indefinitely(不确定的). In order to support these chained buffers, all of the existing Thrift protocols had to be rewritten.
+## research.fb [Under the Hood: Building and open-sourcing fbthrift](https://research.fb.com/blog/2014/02/under-the-hood-building-and-open-sourcing-fbthrift/)
 
-> NOTE: 之前是"the same memory buffer was reused for all requests"，现在是: "now request new buffers from the memory allocator on every request"
+
+
+To improve **asynchronous workload performance**, we updated the base **Thrift transport** to be [folly’s IOBuf](https://github.com/facebook/folly/blob/main/folly/io/IOBuf.h) class, a chained memory buffer with views similar to BSD’s `mbuf` or Linux’s `sk_buff`. In earlier versions of Thrift, the same memory buffer was reused for all requests, but memory management quickly became tricky to use when we tried to update the buffer to send responses out of order. Instead, we now request new buffers from the memory allocator on every request. To reduce the performance impact of allocating new buffers, we allocate constant-sized buffers from `JEMalloc` to hit the **thread-local buffer cache** as often as possible. Hitting the **thread-local cache** was an impressive performance improvement — for the average Thrift server, it’s just as fast as **reusing** or **pooling** buffers, without any of the complicated code. These buffers are then chained together to become as large as needed, and freed when not needed, preventing some memory issues seen in previous Thrift servers where memory was pooled indefinitely(不确定的). In order to support these chained buffers, all of the existing Thrift protocols had to be rewritten.
+
+> NOTE: 
+>
+> 一、之前是"the same memory buffer was reused for all requests"，现在是: "now request new buffers from the memory allocator on every request"
+>
+> 二、上面解释了memory management的一些技巧: "To reduce the performance impact of allocating new buffers, we allocate constant-sized buffers from `JEMalloc` to hit the **thread-local buffer cache** as often as possible. Hitting the **thread-local cache** was an impressive performance improvement — for the average Thrift server, it’s just as fast as **reusing** or **pooling** buffers, without any of the complicated code. "
+>
+> 
 
 
 
@@ -86,18 +93,35 @@ class IOBuf
 
 ## 使用场景、如何使用
 
+### Socket
+
+folly的IO的buffer都是建立于`IOBuf`上的。
+
+1、application protocol: socket接受到的二进制data，在应用层需要进行decode为应用层的协议。
+
 ```
 .h C:\Users\Kai\Desktop\share\folly-main\folly-main\ content:IOBuf 
 ```
-### `AsyncSocket.h`
 
-```
+2、每个socket都有一个receive queue，一个send queue，显然它们是可以使用`IOBuf`来实现的
+
+3、思考: 需要由谁来创建`IOBuf`并将它传入到`Socket`？
+
+#### [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[io](https://github.com/facebook/folly/tree/main/folly/io)/[async](https://github.com/facebook/folly/tree/main/folly/io/async)/**[AsyncTransport.h](https://github.com/facebook/folly/blob/main/folly/io/async/AsyncTransport.h)**
+
+
+
+
+
+#### [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[io](https://github.com/facebook/folly/tree/main/folly/io)/[async](https://github.com/facebook/folly/tree/main/folly/io/async)/[`AsyncSocket.h`](https://github.com/facebook/folly/blob/main/folly/io/async/AsyncSocket.h)
+
+```C++
   // Pre-received data, to be returned to read callback before any data from the
   // socket.
   std::unique_ptr<IOBuf> preReceivedData_;
 ```
 
-```
+```C++
   // a folly::IOBuf can be used in multiple partial requests
   // there is a that maps a buffer id to a raw folly::IOBuf ptr
   // and another one that adds a ref count for a folly::IOBuf that is either
@@ -115,13 +139,15 @@ class IOBuf
   
 ```
 
-### `AsyncUDPSocket.h`
+#### [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[io](https://github.com/facebook/folly/tree/main/folly/io)/[async](https://github.com/facebook/folly/tree/main/folly/io/async)/**[AsyncUDPSocket.h](https://github.com/facebook/folly/blob/main/folly/io/async/AsyncUDPSocket.h)**
 
-```
+```C++
 uint32_t zeroCopyBufId_{0};
 std::unordered_map<uint32_t, std::unique_ptr<folly::IOBuf>> idZeroCopyBufMap_;
 
 ```
+
+
 
 ### `File.h`
 
@@ -149,3 +175,20 @@ https://gitee.com/mirrors/folly/blob/main/folly/io/IOBufQueue.h
 
 ## `TypedIOBuf`
 
+
+
+## Example code
+
+vimsky [C++ folly::IOBuf方法代码示例](https://vimsky.com/examples/detail/cpp-ex---folly-IOBuf-method.html)
+
+hotexamples [C++ (Cpp) IOBuf Examples](https://cpp.hotexamples.com/examples/folly/IOBuf/-/cpp-iobuf-class-examples.html)
+
+GitHub [facebook](https://github.com/facebook)/**[mcrouter](https://github.com/facebook/mcrouter)**
+
+GitHub  [facebook](https://github.com/facebook)/**[fbthrift](https://github.com/facebook/fbthrift)**
+
+
+
+## 如何实现zero copy
+
+在 `AsyncSocket.h` 中，搜索`zero`，可以查到很多的关于zero-copy的内容。
