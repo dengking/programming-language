@@ -5,6 +5,8 @@ nav:
     - Future: Future
     - Executor: Executor
     - Destruction: Destruction
+    - TurnSequencer: TurnSequencer
+    - Queue: Queue
     - Guide: Guide
     
     
