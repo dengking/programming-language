@@ -8,8 +8,6 @@
 
 
 
-
-
 ## Resource handle
 
 cross plateform
@@ -26,15 +24,15 @@ handle to system resource
 
 ### RAII、scoped resource handle
 
+#### Example
 
-
-#### scoped move-only resource handle
+一、scoped move-only resource handle
 
 参见: 
 
 1、[chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[writable_shared_memory_region.h](https://github.com/chromium/chromium/blob/master/base/memory/writable_shared_memory_region.h)**
 
-
+二、doc [Smart Pointer Guidelines](https://www.chromium.org/developers/smart-pointer-guidelines)
 
 
 

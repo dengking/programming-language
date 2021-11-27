@@ -138,7 +138,9 @@ In Flutter, change notifications flow “up” the widget hierarchy by way of ca
 
 ## docs [Widget catalog](https://docs.flutter.dev/development/ui/widgets)
 
-
+> NOTE:
+>
+> 关于 [Layout widgets](https://docs.flutter.dev/development/ui/widgets/layout)，参见 `Layout` 章节。
 
 ## Flutter [Material Components library](https://material.io/develop/flutter) 
 

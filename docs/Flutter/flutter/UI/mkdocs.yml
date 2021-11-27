@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
     - Layout: Layout    
+    - Sliver: Sliver
     - API: API
+    

@@ -1,10 +1,10 @@
-# reference counting
+# chromium reference counting
 
 一些使用C++ atomic library的code。
 
 
 
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[atomic_ref_count.h](https://github.com/chromium/chromium/blob/master/base/atomic_ref_count.h)**
+## github [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[atomic_ref_count.h](https://github.com/chromium/chromium/blob/master/base/atomic_ref_count.h)**
 
 
 
@@ -94,6 +94,12 @@ private:
 
 ```
 
+一、`fetch_sub` 的返回值是之前的值，因此当 `fetch_sub` 的返回值是 `1` 的时候，说明现在它的值是 `0`。
+
+二、`IsZero`、`IsZero` 显然都是read acquire
+
+
+
 ### `Decrement`
 
 
@@ -124,9 +130,48 @@ Insert barriers的目的是保证在reference count成为0之前，被写入的s
 
 ## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)**
 
+**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)** 中的内容是需要结合 [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 来进行阅读的，因为其中引用了很多在  [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 中定义的constant。
+
+### Adopt ref
+
+`StartRefCountFromOneTag`
+
+```C++
+  explicit constexpr RefCountedThreadSafeBase(StartRefCountFromOneTag)
+      : ref_count_(1) {
+#if DCHECK_IS_ON()
+    needs_adopt_ref_ = true;
+#endif
+  }
+```
+
+在成员方法 `Adopted()` 中会将 `needs_adopt_ref_` 的值设置为`false`。
+
+#### friend `base::AdoptRef`
+
+因为成员方法 `void Adopted() const` 是private的。
+
+
+
 ### `class BASE_EXPORT base::subtle::RefCountedBase`
 
-**Thread-unsafe**，基于sequence
+```C++
+  explicit RefCountedBase(StartRefCountFromZeroTag) {
+  }
+
+  explicit RefCountedBase(StartRefCountFromOneTag) : ref_count_(1) {
+  }
+```
+
+典型的:
+
+1、tag-dispatch
+
+2、explicit single parameter constructor
+
+
+
+一、**Thread-unsafe**，基于sequence
 
 
 
