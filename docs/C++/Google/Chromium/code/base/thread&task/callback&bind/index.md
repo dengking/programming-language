@@ -103,7 +103,7 @@ Callbacks can be run with their `Run` method, which has the same signature as th
 
 
 
-# code
+## code
 
 1、callback_forward.h
 
@@ -115,15 +115,11 @@ https://github.com/chromium/chromium/blob/master/base/callback.h
 
 
 
- 
+### [chromium](https://github.com/chromium/chromium) / [base](https://github.com/chromium/chromium/tree/master/base) / **[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)**
 
 
 
-## [chromium](https://github.com/chromium/chromium) / [base](https://github.com/chromium/chromium/tree/master/base) / **[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)**
-
-
-
-### `class BASE_EXPORT BindStateBase`
+#### `class BASE_EXPORT BindStateBase`
 
 
 
@@ -141,8 +137,6 @@ https://github.com/chromium/chromium/blob/master/base/callback.h
 
 
 
-## [chromium](https://gitee.com/mirrors/chromium/tree/master) / **[base](https://gitee.com/mirrors/chromium/tree/master/base)** / **[bind_internal.h](https://gitee.com/mirrors/chromium/blob/master/base/bind_internal.h)**
+## TODO
 
-
-
-
+CSDN Luoshengyang [Chromium多线程通信的Closure机制分析](https://blog.csdn.net/Luoshengyang/article/details/46747797)
