@@ -1,5 +1,8 @@
 nav:
     - Introduction: index.md
     - doc-Threading-and-Tasks-in-Chrome: doc-Threading-and-Tasks-in-Chrome
+    - callback&bind: callback&bind    
+    - sequence-executor: sequence-executor
+    - threading: threading
     - code: code
     

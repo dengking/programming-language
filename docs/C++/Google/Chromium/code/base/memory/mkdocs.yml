@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - smart-pointer: smart-pointer
-    - shared_memory_mapping: shared_memory_mapping
+    - shared-memory-mapping: shared-memory-mapping
     - memory-tagging: memory-tagging
     
     
