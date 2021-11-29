@@ -149,7 +149,7 @@ Insert barriers的目的是保证在reference count成为0之前，被写入的s
 
 #### friend `base::AdoptRef`
 
-因为成员方法 `void Adopted() const` 是private的。
+因为成员方法 `void Adopted() const` 是private的，因此需要添加上述声明
 
 
 
@@ -171,13 +171,9 @@ Insert barriers的目的是保证在reference count成为0之前，被写入的s
 
 
 
-一、**Thread-unsafe**，基于sequence
-
-
-
 #### How to trap unsafe cross thread usage?
 
-
+它使用的是 `DFAKE_MUTEX(add_release_);`
 
 ### `class BASE_EXPORT base::subtle::RefCountedThreadSafeBase`
 

@@ -24,7 +24,7 @@ Together with the `base::Bind{Once, Repeating}()` functions in [`base/bind.h`](h
 >
 > 二、我踩过的坑
 >
-> 使用dart ffigen依据C header file生成dart binding，它的内部实现是采用的function pointer，因此就存在 "problems in ensuring the type-correctness of callback arguments"；
+> 使用dart ffigen依据C header file生成dart binding，它的内部实现是采用的function pointer，因此就存在 "problems in ensuring the type-correctness of callback arguments": 
 >
 > dll 是使用的旧版本
 >
@@ -32,13 +32,11 @@ Together with the `base::Bind{Once, Repeating}()` functions in [`base/bind.h`](h
 >
 > 两个版本恰好有一个函数新加了一个非常重要的参数
 >
-> 导致这个非常重要的参数没有传入到dll中，从而导致了非常奇怪的问题。
->
 > dll中使用的是旧版本的，因此没有这个非常重要的参数；但是dart binding使用的是新的版本的，因此有这个非常重要的函数入参；
 >
-> 但是就是这样mismatch的dart binding 和 dll，竟然能够正常启动、运行，但是程序的输出是错误的，并且会偶然地core dump。
+> 但是就是这样mismatch的dart binding 和 dll，竟然能够正常启动、运行，但是程序的输出是错误的，并且会偶然地core dump。导致这个非常重要的参数没有传入到dll中，从而导致了非常奇怪的问题。排查起来的难道是比较大的。
 >
-> 
+> 三、如何保证static type safety
 
 Partial application is the process of binding a subset of a function's arguments to produce another function that takes fewer arguments. This can be used to pass around a unit of delayed execution, much like **lexical closures** are used in other languages. For example, it is used in Chromium code to schedule tasks on different MessageLoops.
 
