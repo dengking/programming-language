@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
     - doc-Threading-and-Tasks-in-Chrome: doc-Threading-and-Tasks-in-Chrome
-    - callback&bind: callback&bind   
     - task-runner: task-runner    
     - threading: threading
     - code: code
