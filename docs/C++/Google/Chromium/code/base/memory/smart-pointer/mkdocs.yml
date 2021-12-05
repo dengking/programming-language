@@ -3,3 +3,5 @@ nav:
     - refcount: refcount
     - scoped_refptr: scoped_refptr    
     - weak_ptr: weak_ptr
+    - raw_ptr: raw_ptr
+    
