@@ -1,6 +1,10 @@
 # Undefined reference or unresolved external symbol
 
+主要原因有:
 
+1、linker找不到需要链接的库
+
+2、source file没有编译到target中
 
 ## stackoverflow [What is an undefined reference/unresolved external symbol error and how do I fix it?](https://stackoverflow.com/questions/12573816/what-is-an-undefined-reference-unresolved-external-symbol-error-and-how-do-i-fix)
 

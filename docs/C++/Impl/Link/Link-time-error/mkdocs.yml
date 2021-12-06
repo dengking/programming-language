@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - Violations-of-ODR: Violations-of-ODR
-    - Undefined-reference-or-unresolved-external-symbol: Undefined-reference-or-unresolved-external-symbol
+    - Undefined-reference-unresolved-external-symbol: Undefined-reference-unresolved-external-symbol

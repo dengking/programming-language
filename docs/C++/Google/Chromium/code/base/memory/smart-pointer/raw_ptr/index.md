@@ -19,3 +19,7 @@
 > 上面这段话的大致意思是: `MiraclePtr` 是一种 "Improved coding patterns"，虽然 "Improved coding patterns" 并不是一个 "robust solution"，因为它们 "still subject to human error"，但是它们能够消除 "some fraction of the bugs"。
 
 ### zdnet [Chrome willing to take performance hit to prevent use-after-free bugs](https://www.zdnet.com/article/chrome-willing-to-take-performance-hit-to-prevent-use-after-free-bugs/)
+
+
+
+### google docs [**MiraclePtr One Pager**](https://docs.google.com/document/d/1pnnOAIz_DMWDI4oIOFoMAqLnf_MZ2GsrJNb_dbQ3ZBg/edit#heading=h.p1fqfm5alk4a)
