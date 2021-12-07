@@ -1,8 +1,11 @@
 nav:
     - Introduction: index.md
     - Clang-AST: Clang-AST
+    - Clang-Tools: Clang-Tools
+    - Clang-Plugins: Clang-Plugins
+    - LibClang: LibClang        
     - LibASTMatchers: LibASTMatchers 
-    - Libclang: Libclang    
+    
 
     
     
