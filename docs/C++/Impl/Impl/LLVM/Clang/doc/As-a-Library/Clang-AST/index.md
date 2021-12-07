@@ -1,4 +1,6 @@
-# clang AST
+# clang AST	
+
+AST表示的是结构信息，`Type`则表示类型信息。
 
 ## docs [Introduction to the Clang AST](https://clang.llvm.org/docs/IntroductionToTheClangAST.html)
 
