@@ -2,9 +2,11 @@
 
 在编写基于clang的tool的时候，非常重要的一个部分就是match clang AST节点。
 
+matcher所匹配的是node。
+
 ## docs [Tutorial for building tools using LibTooling and LibASTMatchers](https://clang.llvm.org/docs/LibASTMatchersTutorial.html) # [Intermezzo: Learn AST matcher basics](https://clang.llvm.org/docs/LibASTMatchersTutorial.html#intermezzo-learn-ast-matcher-basics)
 
-matchers offer the feel of algebraic data types common to functional programming languages.
+Clang recently introduced the [ASTMatcher library](https://clang.llvm.org/docs/LibASTMatchers.html) to provide a simple, powerful, and concise way to describe specific patterns in the AST. Implemented as a DSL powered by macros and templates (see [ASTMatchers.h](https://clang.llvm.org/doxygen/ASTMatchers_8h_source.html) if you’re curious), matchers offer the feel of algebraic data types common to functional programming languages.
 
 > NOTE: 
 >
@@ -63,6 +65,8 @@ There are three different basic categories of matchers:
 ## code
 
 https://clang.llvm.org/doxygen/ASTMatchers_8h_source.html
+
+
 
 ## Python binding
 
