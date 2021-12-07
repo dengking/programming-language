@@ -18,56 +18,6 @@
 
 
 
-## AST node
-
-
-
-下面是各种各样的node: 
-
-一、[TranslationUnitDecl](https://clang.llvm.org/doxygen/classclang_1_1TranslationUnitDecl.html)
-
-二、declarations ([Decl](https://clang.llvm.org/doxygen/classclang_1_1Decl.html))
-
-This represents one declaration (or definition)
-
-
-
-> NOTE: 
->
-> 一、其中给出了非常详细的class hierarchy
->
-> 二、definition也是属于declaration
-
-三、statements ([Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html))
-
-expressions ([Expr](https://clang.llvm.org/doxygen/classclang_1_1Expr.html)) 
-
- [Expr](https://clang.llvm.org/doxygen/classclang_1_1Expr.html)'s are subclasses of [Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html). This allows an expression to be transparently used any place a [Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html) is required
-
-
-
-[DeclContext](https://clang.llvm.org/doxygen/classclang_1_1DeclContext.html) 
-
-> NOTE: 
->
-> 它表示的是一类declaration，这类declaration可以包含其他的declaration，比如namespace、class，通过它的class hierarchy是可以看出的
->
-> 
-
-
-
-## [Type](https://clang.llvm.org/doxygen/classclang_1_1Type.html)
-
-
-
-## [Introduction to the Clang AST](https://clang.llvm.org/docs/IntroductionToTheClangAST.html)
-
-> NOTE: 
->
-> 既然是AST，显然它的组成就是node
-
-Documentation for all Clang AST nodes is available via the generated [Doxygen](https://clang.llvm.org/doxygen).
-
 
 
 

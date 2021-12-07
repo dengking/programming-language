@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md    
-    - LLVM-Design-and-overview: LLVM-Design-and-overview
+    - Design: Design
     - LLVM-Core: LLVM-Core
     - Clang: Clang

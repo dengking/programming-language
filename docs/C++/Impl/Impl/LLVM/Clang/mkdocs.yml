@@ -1,9 +1,8 @@
 nav:
-    - Clang-Features-and-Goals: Clang-Features-and-Goals
+    - Features&Goals: Features&Goals
     - doc: doc
     - Clang-Tidy: Clang-Tidy
     - compiler-rt: compiler-rt    
-    - Using-Clang-as-a-Library: Using-Clang-as-a-Library
-    - Clang-application: Clang-application
+    - Application: Application
 
     
