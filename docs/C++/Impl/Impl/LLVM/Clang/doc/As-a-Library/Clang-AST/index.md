@@ -20,7 +20,7 @@ Documentation for all Clang AST nodes is available via the generated [Doxygen](h
 
 一、[TranslationUnitDecl](https://clang.llvm.org/doxygen/classclang_1_1TranslationUnitDecl.html) (translation unit)
 
-二、[Decl](https://clang.llvm.org/doxygen/classclang_1_1Decl.html) (declarations )
+二、[Decl](https://clang.llvm.org/doxygen/classclang_1_1Decl.html) (declarations)
 
 This represents one declaration (or definition)
 
@@ -32,9 +32,9 @@ This represents one declaration (or definition)
 >
 > 二、definition也是属于declaration
 
-三、[Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html) (statements )
+三、[Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html) (statements)
 
-[Expr](https://clang.llvm.org/doxygen/classclang_1_1Expr.html) (expressions ) 
+[Expr](https://clang.llvm.org/doxygen/classclang_1_1Expr.html) (expressions) 
 
 [Expr](https://clang.llvm.org/doxygen/classclang_1_1Expr.html)'s are subclasses of [Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html). This allows an expression to be transparently used any place a [Stmt](https://clang.llvm.org/doxygen/classclang_1_1Stmt.html) is required
 
