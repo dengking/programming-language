@@ -1,3 +1,6 @@
 nav:
     - Introduction: index.md
     - Deployment-Options: Deployment-Options
+    - Blueprints: Blueprints
+    - code: code
+    

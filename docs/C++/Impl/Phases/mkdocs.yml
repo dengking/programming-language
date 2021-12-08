@@ -2,4 +2,6 @@ nav:
     - Introduction: index.md
     - Separate-compilation-model.md: Separate-compilation-model
     - One-pass-compiler: One-pass-compiler.md
-    
+    - Preprocess: Preprocess #预处理
+    - Compile: Compile #编译阶段
+    - Link: Link #链接阶段    

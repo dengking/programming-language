@@ -18,9 +18,11 @@
 
 
 
-​	
+## Plugin VS tool
 
+Clang Plugin: clang based tool like a Clang Plugin
 
+Clang Tool: standalone tool based on LibTooling
 
 ## libclang comment
 

@@ -12,11 +12,11 @@
 >
 > 显然是采用的visitor pattern
 >
-> |                |                                                              |                                                              |
-> | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-> | Action class   | [**ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) | Action class的`CreateASTConsumer`是一个创造Consumer class object的factory method |
-> | Consumer class | [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) | Consumer has-a Visitor                                       |
-> | Visitor class  | [**RecursiveASTVisitor**](https://clang.llvm.org/doxygen/classclang_1_1RecursiveASTVisitor.html) |                                                              |
+> |                | doxygen                                                      | 简介                                                         | scope、级别                                                  |
+> | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+> | Action class   | [**ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) | Action class的`CreateASTConsumer`是一个创造Consumer class object的factory method | 工具、application级别，即一个tool，只需要有一个**`ASTFrontendAction`** 对象 |
+> | Consumer class | [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) | Consumer has-a Visitor                                       | translation unit级别，它给予了programmer对不同的translation unit创建不同的consumer的能力 |
+> | Visitor class  | [**RecursiveASTVisitor**](https://clang.llvm.org/doxygen/classclang_1_1RecursiveASTVisitor.html) | "provides hooks of the form `bool VisitNodeType(NodeType *)` for most AST nodes" |                                                              |
 >
 > [ASTFrontendAction](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) - Abstract base class to use for AST consumer-based frontend actions.
 >
@@ -29,14 +29,16 @@
 > This abstraction layer allows the client to be independent of the AST producer (e.g. parser vs AST dump file reader, etc).
 >
 > 
->
-> 
 
 In this tutorial you will learn how to create a `FrontendAction` that uses a `RecursiveASTVisitor` to find `CXXRecordDecl` AST nodes with a specified name.
 
 ### Creating a FrontendAction[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#creating-a-frontendaction)
 
+The only part left is to implement the `CreateASTConsumer` method that returns an `ASTConsumer` per translation unit.
 
+> NOTE: 
+>
+> 一、每个translation unit有一个 `ASTConsumer` object，其实这对应了clang的"separate-compilation-model"，另外从他的
 
 ```C++
 class FindNamedClassAction : public clang::ASTFrontendAction {
@@ -53,6 +55,10 @@ public:
 > `FindNamedClassAction::CreateASTConsumer` 就相当于 factory method
 
 ### Creating an ASTConsumer[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#creating-an-astconsumer)
+
+> NOTE: 
+>
+> 在上面有对它的介绍
 
 ```C++
 class FindNamedClassConsumer : public clang::ASTConsumer {
