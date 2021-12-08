@@ -1,11 +1,11 @@
-# `FrontendAction`
+# `ASTFrontendAction`、`ASTConsumer`、`RecursiveASTVisitor`
 
-设计思想介绍: IoC，显然是采用的visitor pattern，下面是具体的分析: 
+设计思想介绍: 典型的IoC，显然是采用的visitor pattern，下面是具体的分析: 
 
 |                | doxygen                                                      | 简介                                                         | scope、级别                                                  |
 | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Action class   | [**ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) | Action class的`CreateASTConsumer`是一个创造Consumer class object的factory method | 工具、application级别，即一个tool，会有一个对应的**`ASTFrontendAction`** 对象 |
-| Consumer class | [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) | Consumer has-a Visitor                                       | translation unit级别，每个TU都会有一个对应的对象；它给予了programmer对不同的translation unit创建不同的consumer的能力 |
+| Action class   | [**ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) | Action class的`CreateASTConsumer`是一个创造Consumer class object的factory method | 工具、application级别，即一个tool，会有一个对应的**`ASTFrontendAction`** 对象；它给予了programmer对不同的translation unit创建不同的consumer的能力 |
+| Consumer class | [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) | Consumer has-a Visitor                                       | translation unit级别，每个TU都会有一个对应的对象；           |
 | Visitor class  | [**RecursiveASTVisitor**](https://clang.llvm.org/doxygen/classclang_1_1RecursiveASTVisitor.html) | "provides hooks of the form `bool VisitNodeType(NodeType *)` for most AST nodes" |                                                              |
 
 
@@ -14,7 +14,7 @@
 
 In this tutorial you will learn how to create a `FrontendAction` that uses a `RecursiveASTVisitor` to find `CXXRecordDecl` AST nodes with a specified name.
 
-### Creating a FrontendAction[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#creating-a-frontendaction)
+### Creating a `FrontendAction`[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#creating-a-frontendaction)
 
 The only part left is to implement the `CreateASTConsumer` method that returns an `ASTConsumer` per translation unit.
 
@@ -36,7 +36,7 @@ public:
 >
 > `FindNamedClassAction::CreateASTConsumer` 就相当于 factory method
 
-### Creating an ASTConsumer[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#creating-an-astconsumer)
+### Creating an `ASTConsumer`[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#creating-an-astconsumer)
 
 > NOTE: 
 >
@@ -60,7 +60,7 @@ private:
 >
 > consumer has-a visitor
 
-### Using the RecursiveASTVisitor[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#using-the-recursiveastvisitor)
+### Using the `RecursiveASTVisitor`[¶](https://clang.llvm.org/docs/RAVFrontendAction.html#using-the-recursiveastvisitor)
 
 > NOTE: 
 >
