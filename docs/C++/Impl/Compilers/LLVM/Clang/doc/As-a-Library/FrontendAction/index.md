@@ -1,34 +1,16 @@
 # `FrontendAction`
 
+设计思想介绍: IoC，显然是采用的visitor pattern，下面是具体的分析: 
 
-
-关于`FrontendAction`，参加: doxygen [clang::FrontendAction (**abstract**)](https://clang.llvm.org/doxygen/classclang_1_1FrontendAction.html)
+|                | doxygen                                                      | 简介                                                         | scope、级别                                                  |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Action class   | [**ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) | Action class的`CreateASTConsumer`是一个创造Consumer class object的factory method | 工具、application级别，即一个tool，会有一个对应的**`ASTFrontendAction`** 对象 |
+| Consumer class | [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) | Consumer has-a Visitor                                       | translation unit级别，每个TU都会有一个对应的对象；它给予了programmer对不同的translation unit创建不同的consumer的能力 |
+| Visitor class  | [**RecursiveASTVisitor**](https://clang.llvm.org/doxygen/classclang_1_1RecursiveASTVisitor.html) | "provides hooks of the form `bool VisitNodeType(NodeType *)` for most AST nodes" |                                                              |
 
 
 
 ## docs [How to write RecursiveASTVisitor based ASTFrontendActions](https://clang.llvm.org/docs/RAVFrontendAction.html#how-to-write-recursiveastvisitor-based-astfrontendactions)
-
-> NOTE: 
->
-> 显然是采用的visitor pattern
->
-> |                | doxygen                                                      | 简介                                                         | scope、级别                                                  |
-> | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-> | Action class   | [**ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) | Action class的`CreateASTConsumer`是一个创造Consumer class object的factory method | 工具、application级别，即一个tool，只需要有一个**`ASTFrontendAction`** 对象 |
-> | Consumer class | [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) | Consumer has-a Visitor                                       | translation unit级别，它给予了programmer对不同的translation unit创建不同的consumer的能力 |
-> | Visitor class  | [**RecursiveASTVisitor**](https://clang.llvm.org/doxygen/classclang_1_1RecursiveASTVisitor.html) | "provides hooks of the form `bool VisitNodeType(NodeType *)` for most AST nodes" |                                                              |
->
-> [ASTFrontendAction](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) - Abstract base class to use for AST consumer-based frontend actions.
->
-> > NOTE: 
-> >
-> > 上面这段话中的 "consumer-based" 是什么含义？
->
-> [ASTConsumer](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) - This is an abstract interface that should be implemented by clients that read ASTs.
->
-> This abstraction layer allows the client to be independent of the AST producer (e.g. parser vs AST dump file reader, etc).
->
-> 
 
 In this tutorial you will learn how to create a `FrontendAction` that uses a `RecursiveASTVisitor` to find `CXXRecordDecl` AST nodes with a specified name.
 
@@ -138,3 +120,22 @@ bool VisitCXXRecordDecl(CXXRecordDecl *Declaration) {
 }
 ```
 
+
+
+## doxygen [**clang::ASTFrontendAction**](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html)
+
+[ASTFrontendAction](https://clang.llvm.org/doxygen/classclang_1_1ASTFrontendAction.html) - Abstract base class to use for AST consumer-based frontend actions.
+
+> NOTE: 
+>
+> 上面这段话中的 "consumer-based" 是什么含义？对应的是 [**ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) 。
+
+
+
+## doxygen  [**clang::ASTConsumer**](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html)
+
+
+
+[ASTConsumer](https://clang.llvm.org/doxygen/classclang_1_1ASTConsumer.html) - This is an abstract interface that should be implemented by clients that read ASTs.
+
+This abstraction layer allows the client to be independent of the AST producer (e.g. parser vs AST dump file reader, etc).
