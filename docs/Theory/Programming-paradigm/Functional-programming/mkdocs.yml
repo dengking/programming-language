@@ -4,3 +4,5 @@ nav:
     - Higher-order-function: Higher-order-function
     - First-class-function: First-class-function.md
     - Function-composition: Function-composition
+    - Algebraic-data-type: Algebraic-data-type
+    

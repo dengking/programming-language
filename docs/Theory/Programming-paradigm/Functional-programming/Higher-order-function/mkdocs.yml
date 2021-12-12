@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Fold: Fold.md
-    - Map-apply: Map-apply.md
+    - FP-fold: FP-fold.md
+    - FP-map-apply: FP-map-apply.md
