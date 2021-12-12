@@ -114,3 +114,14 @@ print(t.render(users=users))
 1, 2, 3, 4, 5
 ```
 
+
+
+### jinja in
+
+stackoverflow [How to See if a String Contains Another String in Django Template](https://stackoverflow.com/questions/19627911/how-to-see-if-a-string-contains-another-string-in-django-template)
+
+
+
+### pass argument
+
+stackoverflow [How to pass selected, named arguments to Jinja2's include context?](https://stackoverflow.com/questions/9404990/how-to-pass-selected-named-arguments-to-jinja2s-include-context)

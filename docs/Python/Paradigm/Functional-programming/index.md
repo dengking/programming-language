@@ -31,3 +31,18 @@ stackoverflow [Apply function to each element of a list](https://stackoverflow.c
 ['THIS IS TEST', 'ANOTHER TEST']
 ```
 
+> NOTE: 
+>
+> 在Python3中，`map`函数所返回的是iterator，`map`函数并不会立即对列表的每个元素都执行`upper`函数
+
+
+
+### 简单的封装
+
+```Python
+def apply(func, sequence):
+    for i in sequence:
+        func(i)
+```
+
+Python是duck typing的，因此封装是非常简单的。
