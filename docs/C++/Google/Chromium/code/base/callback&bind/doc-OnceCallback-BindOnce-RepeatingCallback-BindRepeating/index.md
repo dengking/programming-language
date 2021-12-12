@@ -1,5 +1,3 @@
-
-
 # docs [OnceCallback<> and BindOnce(), RepeatingCallback<> and BindRepeating()](https://github.com/chromium/chromium/blob/master/docs/callback.md)
 
 
@@ -35,6 +33,12 @@ Together with the `base::Bind{Once, Repeating}()` functions in [`base/bind.h`](h
 > 三、如何保证static type safety
 
 Partial application is the process of binding a subset of a function's arguments to produce another function that takes fewer arguments. This can be used to pass around a unit of delayed execution, much like **lexical closures** are used in other languages. For example, it is used in Chromium code to schedule tasks on different `MessageLoop`s.
+
+## `OnceCallback<>` And `RepeatingCallback<>`
+
+> NOTE: 
+>
+> unique VS shared
 
 
 ## partial application of function VS closure

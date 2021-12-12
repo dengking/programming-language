@@ -1,10 +1,42 @@
 # Implementation
 
-## code
+## 参见: 
+
+1、docs [OnceCallback<> and BindOnce(), RepeatingCallback<> and BindRepeating()](https://github.com/chromium/chromium/blob/master/docs/callback.md) # [Implementation notes](https://gitee.com/mirrors/chromium/blob/master/docs/callback.md#implementation-notes)
 
 
 
-https://github.com/chromium/chromium/blob/master/base/callback.h
+## 我的总结
+
+1、遵循design to abstraction
+
+2、回答这些问题:
+
+### 一、如何存储bind state？
+
+abstract class: `BindStateBase` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)** )
+
+implementation class: `BindState` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/main/base/bind_internal.h)** )，这是class template 
+
+显然，它采用的是: OOP interface + template implementation idiom
+
+### 二、如何表示callback？
+
+abstract class: `CallbackBase` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)** )
+
+implementation class: ，
+
+1、`OnceCallback` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** )，这是class template 
+
+2、`RepeatingCallback` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** )，这是class template 
+
+### 三、如何关联 callback 和 bind state？
+
+1、成员变量: 
+
+abstract class: `CallbackBase` 有成员变量 `bind_state_`，它的类型是 `scoped_refptr<BindStateBase> bind_state_`，显然它使用的是 abstract class: `BindStateBase` 。
+
+2、factory method
 
 ## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback_forward.h](https://github.com/chromium/chromium/blob/main/base/callback_forward.h)**
 
@@ -14,7 +46,9 @@ https://github.com/chromium/chromium/blob/master/base/callback.h
 
 2、`RepeatingCallback`、`RepeatingClosure` 
 
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)**
+
+
+## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** 
 
 Callbacks also support cancellation. A common use is binding the receiver object as a `WeakPtr<T>`. If that weak pointer is invalidated, calling `Run()`
 will be a no-op. Note that |`IsCancelled()`| and |`is_null()`| are distinct: simply cancelling a callback will not also make it null.
@@ -29,8 +63,8 @@ will be a no-op. Note that |`IsCancelled()`| and |`is_null()`| are distinct: sim
 > ```
 >
 > 
->
-> 
+
+
 
 ## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)**
 
@@ -88,45 +122,7 @@ scoped_refptr<BindStateBase> bind_state_;
 
 可以看到，它的成员变量的类型是 `BindStateBase` ，这是典型的design-to-an-abstraction。
 
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/main/base/bind_internal.h)**
 
-主要描述`BindStateBase`的implementation `BindState` 。
-
-### `struct BindState final : BindStateBase` 
-
-```C++
-template <typename Functor, typename... BoundArgs>
-struct BindState final : BindStateBase 
-```
-
-#### 成员变量
-
-```C++
-  Functor functor_;
-  std::tuple<BoundArgs...> bound_args_;
-```
-
-可以看到，它使用 `std::tuple` 来存储bound args。
-
-
-
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[bind.h](https://github.com/chromium/chromium/blob/main/base/bind.h)**
-
-
-
-## `Unretained`, `RetainedRef`, `Owned`, `Passed`, `IgnoreResult`
-
-"retain" 的意思是 "保留"；显然 "Unretained" 的意思是 "不保留"
-
-参考内容:
-
-1、docs [Important Abstractions and Data Structures](https://www.chromium.org/developers/coding-style/important-abstractions-and-data-structures)
-
-这篇文章做了非常详细的介绍
-
-2、docs [OnceCallback<> and BindOnce(), RepeatingCallback<> and BindRepeating()](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/callback.md)	
-
-3、geek-share [Chromium中base::Unretained的用法](https://www.geek-share.com/detail/2577300816.html)
 
 ## TODO
 
