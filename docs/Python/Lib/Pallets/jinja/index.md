@@ -70,7 +70,7 @@ from jinja2 import Environment, BaseLoader
 t_str = '''
 {% for host in groups['tag_Function_logdb']  %}
 {{ host }}:9300
-{%- if loop.first %},{% endif %}
+{%- if not loop.last %},{% endif %}
 {% endfor %}
 '''
 t = Environment(loader=BaseLoader).from_string(t_str)
@@ -83,11 +83,11 @@ print(t.render(groups=groups))
 ```C++
 1:9300,
 
-2:9300
+2:9300,
 
-3:9300
+3:9300,
 
-4:9300
+4:9300,
 
 5:9300
 ```

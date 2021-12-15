@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - doc: doc
+    - Rust-pattern-match: Rust-pattern-match

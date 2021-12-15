@@ -128,3 +128,7 @@ decorator是一种语法糖；
 descriptor是一种python attribute access  protocol；
 
 现在想来，要理解decorator和descriptor之间的关系，最好的例子是通过decorator的方式来使用`property`。因为python的`property`是一种descriptor，而它是可以通过decorator的方式来进行使用的。
+
+
+
+adding function attributes

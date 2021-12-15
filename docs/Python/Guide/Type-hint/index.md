@@ -8,7 +8,25 @@
 x: Dict[str, float] = {'field': 2.0}
 ```
 
+> NOTE: type hint for dictionary
 
+
+
+```Python
+# You don't need to initialize a variable to annotate it
+a: int  # Ok (no value at runtime until assigned)
+
+# The latter is useful in conditional branches
+child: bool
+if age < 18:
+    child = True
+else:
+    child = False
+```
+
+> NOTE: 
+>
+> 可以不进行初始化了，后面在进行赋值也是可以的
 
 ## Type hint for variable
 
