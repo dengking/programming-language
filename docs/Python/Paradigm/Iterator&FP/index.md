@@ -1,6 +1,6 @@
-# Functional programming
+# Iterator and Functional programming
 
-
+python iterate、iterator。
 
 ## docs Functional Programming HOWTO[¶](https://docs.python.org/3/howto/functional.html#functional-programming-howto)
 
@@ -80,14 +80,47 @@ stackoverflow [Apply function to each element of a list](https://stackoverflow.c
 >
 > 在Python3中，`map`函数所返回的是iterator，`map`函数并不会立即对列表的每个元素都执行`upper`函数
 
-
-
-#### 简单的封装
+简单的封装
 
 ```Python
 def apply(func, sequence):
+    """
+    对sequence中的每个元素，都执行func
+    :param func:
+    :param sequence:
+    :return:
+    """
     for i in sequence:
         func(i)
+
 ```
 
+
+
 Python是duck typing的，因此封装是非常简单的。
+
+
+
+### last
+
+https://stackoverflow.com/questions/2138873/cleanest-way-to-get-last-item-from-python-iterator
+
+### count
+
+https://stackoverflow.com/questions/3345785/getting-number-of-elements-in-an-iterator-in-python
+
+
+
+## `itertools`
+
+https://docs.python.org/3/library/itertools.html
+
+
+
+## `__iter__ ` and `iter` and `Iterable`
+
+https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
+
+
+https://docs.python.org/3/library/typing.html
+

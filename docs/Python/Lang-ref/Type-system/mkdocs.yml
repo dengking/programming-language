@@ -1,2 +1,6 @@
 nav:
     - Type-system: Type-system.md
+    - Lang-Ref-Standard-type-hierarchy: Lang-Ref-Standard-type-hierarchy
+    - Lib-Ref-Data-Types: Lib-Ref-Data-Types
+    - Type-hint: Type-hint
+    

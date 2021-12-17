@@ -1,4 +1,4 @@
 nav:
     - AOP: AOP
-    - Functional-programming: Functional-programming.md
+    - Iterator&FP: Iterator&FP
     - Meta-programming: Meta-programming
