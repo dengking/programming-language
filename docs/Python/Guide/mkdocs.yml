@@ -1,5 +1,4 @@
 nav:
-    - Iterate: Iterate  
     - Style-guide: Style-guide    
     - How-to: How-to # 对应的是python doc中的how to
     - Books: Books.md    
