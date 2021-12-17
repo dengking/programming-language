@@ -1,3 +1,7 @@
-# [abstract base class](https://docs.python.org/3.7/glossary.html#term-abstract-base-class)
+# Glossary[¶](https://docs.python.org/3/glossary.html#glossary)
+
+
+
+## [abstract base class](https://docs.python.org/3/glossary.html#term-abstract-base-class)
 
 Abstract base classes complement [duck-typing](https://docs.python.org/3.7/glossary.html#term-duck-typing) by providing a way to define interfaces when other techniques like [`hasattr()`](https://docs.python.org/3.7/library/functions.html#hasattr) would be clumsy or subtly wrong (for example with [magic methods](https://docs.python.org/3.7/reference/datamodel.html#special-lookup)). ABCs introduce **virtual subclasses**, which are classes that don’t inherit from a class but are still recognized by [`isinstance()`](https://docs.python.org/3.7/library/functions.html#isinstance) and [`issubclass()`](https://docs.python.org/3.7/library/functions.html#issubclass); see the [`abc`](https://docs.python.org/3.7/library/abc.html#module-abc) module documentation. Python comes with many built-in ABCs for data structures (in the [`collections.abc`](https://docs.python.org/3.7/library/collections.abc.html#module-collections.abc) module), numbers (in the [`numbers`](https://docs.python.org/3.7/library/numbers.html#module-numbers) module), streams (in the [`io`](https://docs.python.org/3.7/library/io.html#module-io)module), import finders and loaders (in the [`importlib.abc`](https://docs.python.org/3.7/library/importlib.html#module-importlib.abc) module). You can create your own ABCs with the [`abc`](https://docs.python.org/3.7/library/abc.html#module-abc) module.

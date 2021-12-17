@@ -2,5 +2,6 @@ nav:
     - Introduction: index.md
     - Deployment-Options: Deployment-Options
     - Blueprints: Blueprints
+    - Signals: Signals
     - code: code
     

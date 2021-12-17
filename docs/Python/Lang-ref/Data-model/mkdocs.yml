@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - Standard-type-hierarchy: Standard-type-hierarchy
+    - Special-method-names: Special-method-names
+    - Special-attribute-names: Special-attribute-names
+    - Coroutines: Coroutines.md

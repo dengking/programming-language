@@ -131,4 +131,6 @@ descriptor是一种python attribute access  protocol；
 
 
 
-adding function attributes
+## Python decorator adding function attributes
+
+stackoverflow [How can I pass a variable in a decorator to function's argument in a decorated function?](https://stackoverflow.com/questions/1965607/how-can-i-pass-a-variable-in-a-decorator-to-functions-argument-in-a-decorated-f)
