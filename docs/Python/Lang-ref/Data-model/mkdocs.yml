@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - Special-method-names: Special-method-names
+    - Attribute: Attribute    
     - Coroutines: Coroutines.md

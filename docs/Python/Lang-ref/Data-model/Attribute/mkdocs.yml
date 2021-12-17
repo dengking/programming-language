@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - Special-attribute-names: Special-attribute-names    
     - Immutable: Immutable
-    
+    - Descriptor: Descriptor
