@@ -34,9 +34,7 @@ nav:
     - Undefined-behavior: Undefined-behavior
     
     - STL: STL
-    # c++中的库
-    - Library: Lib
-    - Facebook: Facebook
+
 
 # - My-library: My-library
 
