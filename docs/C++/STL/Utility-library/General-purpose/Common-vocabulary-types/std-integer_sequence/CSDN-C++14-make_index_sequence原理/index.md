@@ -35,17 +35,31 @@ int main()
 > ```C++
 > test.cpp: In function ‘int main()’:
 > test.cpp:14:39: error: no matching function for call to ‘fun(std::make_index_sequence<3>)’
->   auto t = fun(make_index_sequence<3>());
->                                        ^
+> auto t = fun(make_index_sequence<3>());
+>                                     ^
 > test.cpp:7:16: note: candidate: ‘template<int ...N> decltype(auto) fun(std::index_sequence<N ...>)’
->  decltype(auto) fun(index_sequence<N...> is)
->                 ^~~
+> decltype(auto) fun(index_sequence<N...> is)
+>              ^~~
 > test.cpp:7:16: note:   template argument deduction/substitution failed:
 > test.cpp:14:39: note:   mismatched types ‘int’ and ‘long unsigned int’
->   auto t = fun(make_index_sequence<3>());
+> auto t = fun(make_index_sequence<3>());
 > ```
 >
-> 上述‘long unsigned int’其实对应的是`std:size_t`
+> 上述‘long unsigned int’其实对应的是`std:size_t`，因此修改方法也比较简单，即将:
+>
+> ```c++
+> template<int ... N>
+> decltype(auto) fun(index_sequence<N...> is)
+> ```
+>
+> 替换为:
+>
+> ```C++
+> template<size_t ... N>
+> decltype(auto) fun(index_sequence<N...> is)
+> ```
+>
+> 
 >
 > 2、`std::index_sequence`的type如下:
 >
@@ -160,25 +174,29 @@ struct make_index_seq<0, M...> : public index_seq<M...>
 ```
 
 > NOTE: 
-> 1、上述实现方式是典型的recursive variadic class template
->
-> 2、递归函数如下:
+> 1、上述实现方式是典型的recursive variadic class template，上述过程其实描述的是一个递归过程，递归函数如下:
 >
 > seq(0) = 0
 >
 > seq(N) =  N-1 + seq(N-1) (N > 1)
+>
+> 每次往sequence中，添加一个元素
 
 实现的原理是，当给定一个整数`N`，如3，定义`make_index_seq<3>()` 对象时，模板可变参数`M`，由空逐渐推导为序列`0，1，2`。
 
-即`make_index_seq<3>` 时，M 为空。
+0、`make_index_seq<3>`，N=3，M 为 `{}` （空），它继承自如下类: 
 
-1、`make_index_seq<3-1,3-1, M...>`时，M 为3-1 = 2
+1、`make_index_seq<3-1,3-1>`时，M 为 `{3-1 = 2}`，它继承自如下类: 
 
-2、`make_index_seq<2-1,2-1,M...>`时，M为2-1=1，2 即序列（1，2）
+2、`make_index_seq<2-1,2-1,2>`时，M为`{2-1=1，2}` 即序列`{1，2}`，它继承自如下类: 
 
-3、`make_index_seq<1-1,1-1,M...>`时，M为1-1 = 0， 1，2即序列（0，1，2）
+3、`make_index_seq<1-1,1-1,1,2>`时，M为`{1-1 = 0, 1, 2}`即序列`{0，1，2}`，它继承自如下类: 
 
 4、`make_index_seq<0,M...>`时，M为（0，1，2）此时，`make_index_seq<3>`实际继承自`index_seq<0,1,2>`
+
+> NOTE: 
+>
+> 上述过程其实是一个generator，它从子类传递到父类
 
 这样就生成了编译期的整数序列。
 

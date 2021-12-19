@@ -26,7 +26,9 @@ This works whether the arguments `x` and `y` are integers, strings, or any other
 
 Languages like Python, Java and Objective-C are examples of duck typing because it is possible in them to construct new types in runtime via [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) and inspect whether these objects implement certain methods. On the other hand, there are languages that rely on **compile-time metaprogramming** techniques (like C++ and its template system) and thus do not fit into the category of duck typing; instead, at some point in the compilation pipeline, all placeholder types become substituted with some concrete types specified in a particular instantiation. Even though certain type erasure is possible in them, runtime inspection is limited.
 
-
+> NOTE: 
+>
+> 上面这段话其实否认了C++ template meta-programming是duck typing
 
 ## cppreference Named requirement
 

@@ -71,7 +71,7 @@ template < class ValueType > struct container_gen< mapS, ValueType >
 
 注释中，对default value的说明。
 
-## Trait variable
+## Trait constant
 
 这种是最最简单的，即定义有成员变量来说明含义。
 

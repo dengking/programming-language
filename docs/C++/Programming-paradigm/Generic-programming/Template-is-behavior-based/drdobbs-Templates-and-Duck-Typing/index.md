@@ -1,5 +1,3 @@
-
-
 # drdobbs [Templates and Duck Typing](https://www.drdobbs.com/templates-and-duck-typing/184401971)
 
 ## 前言

@@ -25,7 +25,7 @@ template<class S1, class S2>
 struct concat;
 
 template<unsigned ... I1, unsigned ... I2>
-struct concat<seq<I1...>, seq<I2...>> : seq<I1..., (sizeof...(I1)+I2)...>
+struct concat<seq<I1...>, seq<I2...>> : seq<I1..., (sizeof...(I1)+I2)...> // template specialization
 {
 };
 
@@ -76,7 +76,7 @@ template<> struct gen_seq<1> : seq<0>
 > =Seq<0, 1, 2, 3, 4>;
 > ```
 >
-> 
+> 4、下面的实现的可读性更强
 
 ### Comments
 
@@ -103,6 +103,10 @@ template<unsigned N> struct gen_seq: Concat<GenSeq<N / 2>, Inc<GenSeq<N - N / 2>
 , where `Concat` doesn't add anything to second list, would decouple that operation from concatenation. 
 
 ## [A](https://stackoverflow.com/a/32223343)
+
+> NOTE: 
+>
+> 这个实现的可读性是更强的
 
 This is basically me hacking around Xeo's solution: Making community wiki - if appreciative, ***please upvote Xeo***.
 

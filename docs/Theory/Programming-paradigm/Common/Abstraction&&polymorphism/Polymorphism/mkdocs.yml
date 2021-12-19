@@ -5,6 +5,6 @@ nav:
 ########## 接着具体描述三种类型的多态##########    
     - Ad-hoc-polymorphism: Ad-hoc-polymorphism
     - Parametric-polymorphism: Parametric-polymorphism
-    - Implementation: Implementation
+    - Implementation: Impl
     
     

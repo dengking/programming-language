@@ -60,8 +60,6 @@ The term "[ad hoc](https://en.wikipedia.org/wiki/Ad_hoc)" in this context is not
 
 > NOTE: 在[Generic programming](https://en.wikipedia.org/wiki/Generic_programming)、Functional programming中，都涉及parametric polymorphism。
 
-
-
 The concept of **parametric polymorphism** applies to both [data types](https://en.wikipedia.org/wiki/Data_type) and [functions](https://en.wikipedia.org/wiki/Function_(programming)). 
 
 1) A function that can evaluate to or be applied to values of different types is known as a *polymorphic function.* 

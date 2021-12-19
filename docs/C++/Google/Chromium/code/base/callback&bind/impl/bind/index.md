@@ -34,31 +34,22 @@
 
 3、geek-share [Chromium中base::Unretained的用法](https://www.geek-share.com/detail/2577300816.html)
 
+## 调用关系
 
 
 
+`BindOnce`、`BindRepeating`
 
+`internal::BindImpl`
 
+`Invoker`: Unwraps the curried parameters and executes the Functor
 
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/main/base/bind_internal.h)**
+`InvokeHelper`
 
-主要描述`BindStateBase`的implementation `BindState` 。
+`MakeItSo`
 
-### `struct BindState final : BindStateBase` 
+`FunctorTrait`
 
-```C++
-template <typename Functor, typename... BoundArgs>
-struct BindState final : BindStateBase 
-```
+`CallbackParamTraits`
 
-#### 成员变量
-
-```C++
-  Functor functor_;
-  std::tuple<BoundArgs...> bound_args_;
-```
-
-可以看到，它使用 `std::tuple` 来存储bound args。
-
-### `BindImpl`
 

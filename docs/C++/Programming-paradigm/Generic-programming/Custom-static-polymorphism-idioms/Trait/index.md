@@ -275,10 +275,6 @@ enum { value = false };
 
 
 
-
-
-
-
 ## bogotobogo [Traits - A Template Specialization](https://www.bogotobogo.com/cplusplus/template_specialization_traits.php)
 
 ### `numeric_limits`
@@ -516,7 +512,7 @@ trait class往往会定义一个template class（primary class template ），�
 
 下面分情况对它进行讨论：
 
-1、trait是一个变量，trait variable
+1、trait是一个常量，trait constant
 
 2、trait是一个method，trait function
 
@@ -548,3 +544,16 @@ https://www.modernescpp.com/index.php/type-traits-performance-matters
 https://www.modernescpp.com/index.php/compare-and-modify-types
 
 https://www.modernescpp.com/index.php/check-types
+
+
+
+https://www.internalpointers.com/post/quick-primer-type-traits-modern-cpp
+
+https://blog.galowicz.de/2016/02/18/what_is_a_type_trait/
+
+https://accu.org/index.php/journals/442
+
+https://www.bogotobogo.com/cplusplus/template_specialization_traits.php
+
+https://www.geeksforgeeks.org/stdis_trivially_copy_constructible-in-c-c/?ref=rp
+

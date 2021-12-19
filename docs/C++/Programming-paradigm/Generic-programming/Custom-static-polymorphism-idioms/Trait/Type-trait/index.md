@@ -110,4 +110,15 @@ At this point it's just a matter of reading the `value` member inside those stru
 
 
 
-## [How do you use type traits to do conditional compilation?](https://stackoverflow.com/questions/13787490/how-do-you-use-type-traits-to-do-conditional-compilation)
+## TODO
+
+stackoverflow [How do you use type traits to do conditional compilation?](https://stackoverflow.com/questions/13787490/how-do-you-use-type-traits-to-do-conditional-compilation)
+
+
+
+### Type traits vs concepts
+
+
+
+jakubkonka [C++ short stories: type traits, concepts, and type constraints](https://www.jakubkonka.com/2017/09/02/type-traits-cpp.html)
+

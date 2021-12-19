@@ -4,7 +4,7 @@
 
 ## 为什么添加concept特性？
 
-在`Theory\Programming-languageDesign-of-programming-language.md#What's new in the programming language`中，提出了“首先搞清楚设计者引入这些新特性的意图、这些新特性所能够解决的问题，然后再去了解它们的grammar”，所以在学习concept特性的grammar之前，我们实现要搞清楚c++的designer引入这个feature的原因。关于这个问题，我首先从generic programming的角度来进行分析，我觉得这个角度是最高的、最本质的，后面会结合具体的问题来进行分析。
+在`Theory\Programming-language\Design-of-programming-language.md#What's new in the programming language`中，提出了“首先搞清楚设计者引入这些新特性的意图、这些新特性所能够解决的问题，然后再去了解它们的grammar”，所以在学习concept特性的grammar之前，我们实现要搞清楚c++的designer引入这个feature的原因。关于这个问题，我首先从generic programming的角度来进行分析，我觉得这个角度是最高的、最本质的，后面会结合具体的问题来进行分析。
 
 在 [generic programming](https://en.wikipedia.org/wiki/Generic_programming) 中，就已经提出了“[concept](https://en.wikipedia.org/wiki/Concept_(generic_programming))”的概念，但是C++直到C++20版本才显式地支持它了，在之前的版本，programmer能够通过类似于`SFINAE + enable_if + type_trait`的方式来间接地表达它，那我们就需要考虑:
 
@@ -34,7 +34,7 @@ concept是explicit的，它是对named requirement的formal definition，它能�
 
 ## wikipedia [Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))
 
-> 维基百科的[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))对concept的介绍是比较简洁清晰的，可以作为prime来进行阅读。
+> NOTE: 维基百科的[Concepts (C++)](https://en.wikipedia.org/wiki/Concepts_(C%2B%2B))对concept的介绍是比较简洁清晰的，可以作为prime来进行阅读。
 >
 > C++ concept是对GP concept的一种实现，同时结合C++的实现进行了很多的扩展。
 
