@@ -56,7 +56,7 @@ In addition to being efficient when pitted head-to-head against GCC in batch mod
 
 Here is one simple example that illustrates the difference between a typical GCC and Clang diagnostic:
 
-```
+```C++
   $ gcc-4.9 -fsyntax-only t.c
   t.c: In function 'int f(int, int)':
   t.c:7:39: error: invalid operands to binary + (have 'int' and 'struct A')
@@ -134,17 +134,55 @@ For more information about the low-level implementation details of the various c
 
 ### Support Diverse Clients
 
-Clang is designed and built with many grand plans for how we can use it. The driving force is the fact that we use C and `C++` daily, and have to suffer due to a lack of good tools available for it. We believe that the C and `C++` tools ecosystem has been significantly limited by how difficult it is to parse and represent the source code for these languages, and we aim to rectify this problem in clang.
+> NOTE: 
+>
+> 结合本段内容，"Support Diverse Clients"可以理解为: clang支持不同client的丰富多样的需求。
+
+Clang is designed and built with many grand plans for how we can use it. The driving force is the fact that we use C and `C++` daily, and have to suffer due to a lack of good tools available for it. We believe that the C and `C++` tools ecosystem has been significantly limited by how difficult it is to parse and represent the source code for these languages, and we aim to rectify(纠正) this problem in clang.
 
 > NOTE: 
 >
-> 1、动机
+> 一、 "grand plans"指的是"宏达的计划"
+>
+> 二、上面这段话阐明了clang的开发者们开发、设计clang的动机: 
+>
+> "The driving force is the fact that we use C and `C++` daily, and have to suffer due to a lack of good tools available for it." 我们每天都在使用clang，但是我们必须忍受缺乏可用的"good tool"的问题
+>
+> "We believe that the C and `C++` tools ecosystem has been significantly limited by how difficult it is to parse and represent the source code for these languages, and we aim to rectify(纠正) this problem in clang" C and `C++` tools ecosystem 受限的原因是: "how difficult it is to parse and represent the source code for these languages"
 
-The problem with this goal is that different clients have very different requirements. Consider code generation, for example: a simple front-end that parses for code generation must analyze the code for validity and emit code in some intermediate form to pass off to a optimizer or backend. Because validity analysis and code generation can largely be done on the fly, there is not hard requirement that the front-end actually build up a full AST for all the expressions and statements in the code. TCC and GCC are examples of compilers that either build no real AST (in the former case) or build a stripped down and simplified AST (in the later case) because they focus primarily on codegen.
+The problem with this goal is that different clients have very different requirements. Consider code generation, for example: a simple front-end that parses for code generation must analyze the code for validity and emit code in some intermediate form to pass off(可以理解为传递) to a optimizer or backend. Because validity analysis and code generation can largely be done on the fly, there is not hard requirement that the front-end actually build up a full AST for all the expressions and statements in the code. TCC and GCC are examples of compilers that either build no real AST (in the former case) or build a stripped down(剥离的) and simplified(简化的) AST (in the later case) because they focus primarily on codegen.
 
-On the opposite side of the spectrum, some clients (like refactoring) want highly detailed information about the original source code and want a complete AST to describe it with. Refactoring wants to have information about macro expansions, the location of every paren expression '(((x)))' vs 'x', full position information, and much more. Further, refactoring wants to look *across the whole program* to ensure that it is making transformations that are safe. Making this efficient and getting this right requires a significant amount of engineering and algorithmic work that simply are unnecessary for a simple static compiler.
+> NOTE: 
+>
+> 一、上面这一段是以"code generation"为例来说明
+>
+> 二、"Because validity analysis and code generation can largely be done on the fly, there is not hard requirement that the front-end actually build up a full AST for all the expressions and statements in the code"
+>
+> 这段话的意思是: 因为在进行语法分析的过程中就可以进行"analyze the code for validity and emit code in some intermediate form"，因此front-end并没有完全必要去为源代码中的每个语句和表达式都生成完整的AST。
+>
+> "TCC and GCC are examples of compilers that either build no real AST (in the former case) or build a stripped down(剥离的) and simplified(简化的) AST (in the later case) because they focus primarily on codegen."
+>
+> TCC 和 GCC 就是典型的没有生成完整的AST的的:
+>
+> GCC的主要关注点在于codegen，它生成的是一个简化的AST，这个AST并不能够完整地反映source code。
+>
+> 三、clang VS GCC
+>
+> a、相较于GCC，clang的架构是更加符合我们平常关于compiler架构的理解的。
+>
+> b、两者的侧重点不同:
+>
+> 1、GCC的侧重点在于机器代码生成，并没有考虑可重用
+>
+> 2、clang的侧重点包括: 便于工具开发、可重用
+>
+> 
 
-The beauty of the clang approach is that it does not restrict how you use it. In particular, it is possible to use the clang preprocessor and parser to build an extremely quick and light-weight on-the-fly code generator (similar to TCC) that does not build an AST at all. As an intermediate step, clang supports using the current AST generation and semantic analysis code and having a code generation client free the AST for each function after code generation. Finally, clang provides support for building and retaining fully-fledged ASTs, and even supports writing them out to disk.
+On the opposite side of the spectrum, some clients (like refactoring) want highly detailed information about the original source code and want a complete AST to describe it with. Refactoring wants to have information about **macro expansions**, the location of every paren expression '(((x)))' vs 'x', full position information, and much more. Further, refactoring wants to look *across the whole program* to ensure that it is making transformations that are safe. Making this efficient and getting this right requires a significant amount of engineering and algorithmic work that simply are unnecessary for a simple static compiler.
+
+The beauty of the clang approach is that it does not restrict how you use it. In particular, it is possible to use the clang **preprocessor** and **parser** to build an extremely quick and light-weight on-the-fly **code generator** (similar to TCC) that does not build an AST at all. As an intermediate step, clang supports using the current AST generation and semantic analysis code and having a code generation client free the AST for each function after code generation. Finally, clang provides support for building and retaining fully-fledged ASTs, and even supports writing them out to disk.
+
+> NOTE: clang的灵活和强大之处
 
 Designing the libraries with clean and simple APIs allows these high-level policy decisions to be determined in the client, instead of forcing "one true way" in the implementation of any of these libraries. Getting this right is hard, and we don't always get it right the first time, but we fix any problems when we realize we made a mistake.
 
@@ -179,6 +217,10 @@ In addition to a simple design, we work to make the source base approachable by 
 ### A single unified parser for C, Objective C, C++, and Objective C++
 
 Clang is the "C Language Family Front-end", which means we intend to support the most popular members of the C family. We are convinced that the right parsing technology for this class of languages is a hand-built recursive-descent parser. Because it is plain `C++` code, recursive descent makes it very easy for new developers to understand the code, it easily supports ad-hoc rules and other strange hacks required by C/C++, and makes it straight-forward to implement excellent diagnostics and error recovery.
+
+> NOTE: 
+>
+> 上面这段话阐述了clang采用"hand-built recursive-descent parser"的原因
 
 We believe that implementing C/`C++`/ObjC in a single unified parser makes the end result easier to maintain and evolve than maintaining a separate C and `C++` parser which must be bugfixed and maintained independently of each other.
 
