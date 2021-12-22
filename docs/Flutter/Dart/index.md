@@ -156,6 +156,29 @@ class NimInuseValue<T> {
 
 
 
+## dart tear-off
+
+effective dart [DON’T create a lambda when a tear-off will do.](https://dart.dev/guides/language/effective-dart/usage#dont-create-a-lambda-when-a-tear-off-will-do)
+
+```dart
+var charCodes = [68, 97, 114, 116];
+var buffer = StringBuffer();
+
+// Function:
+charCodes.forEach(print);
+
+// Method:
+charCodes.forEach(buffer.write);
+
+// Named constructor:
+var strings = charCodes.map(String.fromCharCode);
+
+// Unnamed constructor:
+var buffers = charCodes.map(StringBuffer.new);
+```
+
+上述就是使用的tear-off 语法。
+
 ## TODO
 
 一、将callback转化为dart future，如果callback会被多次调用，那么future能够被多次设置value吗？

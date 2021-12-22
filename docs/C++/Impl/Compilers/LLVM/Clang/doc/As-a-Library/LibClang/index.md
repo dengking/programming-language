@@ -36,3 +36,27 @@ stackoverflow [Retrieving comments using python libclang](https://stackoverflow.
 
 stackoverflow [Retrieve information about pre-processor directives](https://stackoverflow.com/questions/13881506/retrieve-information-about-pre-processor-directives)
 
+
+
+
+
+## Compile string
+
+stackoverflow [Using libclang to parse in C++ in Python](https://stackoverflow.com/questions/36808565/using-libclang-to-parse-in-c-in-python) # [A](https://stackoverflow.com/a/36821958/10173843)
+
+```python
+import clang.cindex
+
+s = '''
+int fac(int n) {
+    return (n>1) ? n*fac(n-1) : 1;
+}
+'''
+
+idx = clang.cindex.Index.create()
+tu = idx.parse('tmp.cpp', args=['-std=c++11'],  
+                unsaved_files=[('tmp.cpp', s)],  options=0)
+for t in tu.get_tokens(extent=tu.cursor.extent):
+    print t.kind
+```
+

@@ -28,3 +28,6 @@ constexpr decltype(auto) apply(F &&f, Tuple &&t)
 
 ```
 
+> NOTE: 
+>
+> 上述实现是依赖于`std::invoke`的
