@@ -1,4 +1,4 @@
-# argument wrapper
+# Argument wrapper unwrap
 
 ## 为什么需要argument wrapper
 
@@ -9,6 +9,72 @@
 1、ownership 
 
 2、constness
+
+### wrap and unwrap
+
+一、`bind`的时候需要对argument进行wrap
+
+二、在进行`Run`的时候，需要对argument进行unwrap。
+
+在 `Invoker::RunImpl` 中，有如下实现:
+
+```C++
+  template <typename Functor, typename BoundArgsTuple, size_t... indices>
+  static inline R RunImpl(Functor&& functor,
+                          BoundArgsTuple&& bound,
+                          std::index_sequence<indices...>,
+                          UnboundArgs&&... unbound_args) {
+    static constexpr bool is_method = MakeFunctorTraits<Functor>::is_method;
+
+    using DecayedArgsTuple = std::decay_t<BoundArgsTuple>;
+    static constexpr bool is_weak_call =
+        IsWeakMethod<is_method,
+                     std::tuple_element_t<indices, DecayedArgsTuple>...>();
+
+    return InvokeHelper<is_weak_call, R>::MakeItSo(
+        std::forward<Functor>(functor),
+        Unwrap(std::get<indices>(std::forward<BoundArgsTuple>(bound)))...,
+        std::forward<UnboundArgs>(unbound_args)...);
+  }
+};
+```
+
+其中 `Unwrap(std::get<indices>(std::forward<BoundArgsTuple>(bound)))...` 就是对argument进行unwrap，这是调用的地方，关于具体的实现，参见后面的章节。
+
+
+## wrapper
+有着多种wrapper
+### `UnretainedWrapper`
+
+```C++
+class UnretainedWrapper 
+```
+### `UnretainedRefWrapper`
+
+```C++
+class UnretainedRefWrapper 
+```
+### `OwnedWrapper` 
+
+```C++
+template <typename T, typename Deleter = std::default_delete<T>>
+class OwnedWrapper {
+ public:
+  explicit OwnedWrapper(T* o) : ptr_(o) {}
+  explicit OwnedWrapper(std::unique_ptr<T, Deleter>&& ptr)
+      : ptr_(std::move(ptr)) {}
+  T* get() const { return ptr_.get(); }
+
+ private:
+  std::unique_ptr<T, Deleter> ptr_;
+};
+```
+
+### `PassedWrapper`
+
+
+
+
 
 ### `Unretained`
 
@@ -72,45 +138,10 @@ inline internal::RetainedRefWrapper<T> RetainedRef(scoped_refptr<T> o) {
 }
 ```
 
-### wrap and unwrap
-
-`bind`的时候需要对argument进行wrap
-
-在进行`Run`的时候，需要对argument进行unwrap。
 
 
-#### wrapper
-有着多种wrapper
-##### `UnretainedWrapper`
 
-```C++
-class UnretainedWrapper 
-```
-##### `UnretainedRefWrapper`
-
-```C++
-class UnretainedRefWrapper 
-```
-##### `OwnedWrapper` 
-
-```C++
-template <typename T, typename Deleter = std::default_delete<T>>
-class OwnedWrapper {
- public:
-  explicit OwnedWrapper(T* o) : ptr_(o) {}
-  explicit OwnedWrapper(std::unique_ptr<T, Deleter>&& ptr)
-      : ptr_(std::move(ptr)) {}
-  T* get() const { return ptr_.get(); }
-
- private:
-  std::unique_ptr<T, Deleter> ptr_;
-};
-```
-
-##### `PassedWrapper`
-
-
-#### unwrapper
+## Unwrap
 基本上是和wrapper相对应。
 
 

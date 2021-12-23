@@ -5,5 +5,8 @@ nav:
     - SDK: SDK
     - Dart-WASM: Dart-WASM
     - Expert-Daco-Harkes: Expert-Daco-Harkes
+    # 一些编程相关topic
+    - Programming-paradigm: Programming-paradigm
+    - Asynchronous-programming: Asynchronous-programming
     - Reflection: Reflection
     

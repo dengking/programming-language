@@ -1,4 +1,5 @@
 nav:
     - Style-guide: Style-guide    
-    - How-to: How-to # 对应的是python doc中的how to
+    - Decorator: Decorator        
+    - Lazy-import: Lazy-import
     - Books: Books.md    
