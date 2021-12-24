@@ -49,11 +49,15 @@
 ```C++
 class UnretainedWrapper 
 ```
+
+
 ### `UnretainedRefWrapper`
 
 ```C++
 class UnretainedRefWrapper 
 ```
+
+
 ### `OwnedWrapper` 
 
 ```C++
@@ -69,6 +73,8 @@ class OwnedWrapper {
   std::unique_ptr<T, Deleter> ptr_;
 };
 ```
+
+
 
 ### `PassedWrapper`
 
@@ -109,6 +115,8 @@ inline internal::UnretainedWrapper<T> Unretained(const raw_ptr<T>& o) {
 
 
 ```
+
+
 
 ### `RetainedRefWrapper`
 
@@ -156,5 +164,58 @@ template <typename T>
 decltype(auto) Unwrap(T&& o) {
   return Unwrapper<T>::Unwrap(std::forward<T>(o));
 }
+```
+
+
+
+
+
+```C++
+
+// An injection point to control how bound objects passed to the target
+// function. BindUnwrapTraits<>::Unwrap() is called for each bound objects right
+// before the target function is invoked.
+template <typename>
+struct BindUnwrapTraits {
+  template <typename T>
+  static T&& Unwrap(T&& o) {
+    return std::forward<T>(o);
+  }
+};
+
+template <typename T>
+struct BindUnwrapTraits<internal::UnretainedWrapper<T>> {
+  static T* Unwrap(const internal::UnretainedWrapper<T>& o) { return o.get(); }
+};
+
+template <typename T>
+struct BindUnwrapTraits<internal::RetainedRefWrapper<T>> {
+  static T* Unwrap(const internal::RetainedRefWrapper<T>& o) { return o.get(); }
+};
+
+template <typename T, typename Deleter>
+struct BindUnwrapTraits<internal::OwnedWrapper<T, Deleter>> {
+  static T* Unwrap(const internal::OwnedWrapper<T, Deleter>& o) {
+    return o.get();
+  }
+};
+
+template <typename T>
+struct BindUnwrapTraits<internal::OwnedRefWrapper<T>> {
+  static T& Unwrap(const internal::OwnedRefWrapper<T>& o) { return o.get(); }
+};
+
+template <typename T>
+struct BindUnwrapTraits<internal::PassedWrapper<T>> {
+  static T Unwrap(const internal::PassedWrapper<T>& o) { return o.Take(); }
+};
+
+#if defined(OS_WIN)
+template <typename T>
+struct BindUnwrapTraits<Microsoft::WRL::ComPtr<T>> {
+  static T* Unwrap(const Microsoft::WRL::ComPtr<T>& ptr) { return ptr.Get(); }
+};
+#endif
+
 ```
 

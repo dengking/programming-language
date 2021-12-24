@@ -2,9 +2,41 @@
 
 自顶向下进行分析
 
-## polymorphic invoke
+## polymorphic invoke实现概述
 
-使用 function pointer 实现的:
+显然，function pointer是需要保存在 `BindStateBase` 中，在 `CallbackBase`  中有成员 `bind_state_`，它提供了 `polymorphic_invoke()` 来实现从 `bind_state_` 中取function pointer。在 `BindStateBase` 中，function的type是 void pointer:
+
+```C++
+// In C++, it is safe to cast function pointers to function pointers of
+// another type. It is not okay to use void*. We create a InvokeFuncStorage
+// that that can store our function pointer, and then cast it back to
+// the original type on usage.
+using InvokeFuncStorage = void(*)();
+```
+
+它采用的type erasure策略: 在base中，使用void pointer给出统一的表示，在implementation中给出concrete type:
+
+1、`OnceCallback`
+
+```C++
+  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
+                                  internal::PassingType<Args>...);
+```
+
+2、`RepeatingCallback`
+
+```C++
+  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
+                                  internal::PassingType<Args>...);
+```
+
+
+
+## base class
+
+使用 void function pointer 实现的:
+
+
 
 一、在 `class BASE_EXPORT BindStateBase` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)** ) 中，有成员变量:
 
@@ -12,6 +44,8 @@
   using InvokeFuncStorage = void(*)();
   InvokeFuncStorage polymorphic_invoke_;
 ```
+
+
 
 二、在 `class BASE_EXPORT CallbackBase` ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)** ) 中，有成员函数:
 
@@ -21,6 +55,85 @@ InvokeFuncStorage polymorphic_invoke() const {
     return bind_state_->polymorphic_invoke_;
 }
 ```
+
+
+
+## `CallbackBase` implementation
+
+```C++
+  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
+                                  internal::PassingType<Args>...);
+```
+
+总的来说，两个`CallBack`中给出的concrete type是一致的: 
+
+1、参数 `internal::BindStateBase*` 代表的是bound args
+
+2、参数 `internal::PassingType<Args>...` 代表的是unbound args
+
+
+
+一、在 [class OnceCallback<R(Args...)> : public internal::CallbackBase](https://github.com/chromium/chromium/blob/main/base/callback.h) ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** ) 中，
+
+```C++
+template <typename R, typename... Args>
+class OnceCallback<R(Args...)> : public internal::CallbackBase {
+  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
+                                  internal::PassingType<Args>...);
+  R Run(Args... args) && {
+    // Move the callback instance into a local variable before the invocation,
+    // that ensures the internal state is cleared after the invocation.
+    // It's not safe to touch |this| after the invocation, since running the
+    // bound function may destroy |this|.
+    OnceCallback cb = std::move(*this);
+    PolymorphicInvoke f =
+        reinterpret_cast<PolymorphicInvoke>(cb.polymorphic_invoke());
+    return f(cb.bind_state_.get(), std::forward<Args>(args)...);
+  }
+};
+```
+
+
+
+二、在 [`class RepeatingCallback<R(Args...)> : public internal::CallbackBaseCopyable`](https://github.com/chromium/chromium/blob/main/base/callback.h#L180) ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** ) 中，
+
+```C++
+template <typename R, typename... Args>
+class RepeatingCallback<R(Args...)> : public internal::CallbackBaseCopyable {
+  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
+                                  internal::PassingType<Args>...);
+  R Run(Args... args) const & {
+    PolymorphicInvoke f =
+        reinterpret_cast<PolymorphicInvoke>(this->polymorphic_invoke());
+    return f(this->bind_state_.get(), std::forward<Args>(args)...);
+  }
+
+  R Run(Args... args) && {
+    // Move the callback instance into a local variable before the invocation,
+    // that ensures the internal state is cleared after the invocation.
+    // It's not safe to touch |this| after the invocation, since running the
+    // bound function may destroy |this|.
+    RepeatingCallback cb = std::move(*this);
+    PolymorphicInvoke f =
+        reinterpret_cast<PolymorphicInvoke>(cb.polymorphic_invoke());
+    return f(std::move(cb).bind_state_.get(), std::forward<Args>(args)...);
+  }
+};
+```
+
+
+
+## bind implementation
+
+通过 `BindImpl` 来创建`{Once|Repeating}Callback`，显然，此时 `CallbackT` 是已经具备 `PolymorphicInvoke` 的完整类型了。从下面实现可以看出，在 `BindImpl` 中是需要 `CallbackType::PolymorphicInvoke` type的，它需要使用此来构造具体的 `invoke_func` 的implementation。显然，在创建 `{Once|Repeating}Callback` object的时候，就已经知道了它的具体的 `invoke_func`，由于chromium采用的是design to an abstraction
+
+存的时候，用opaque handle、type erasure，用的时候在转化为concrete type。`std::any` 貌似也采用了这种玩法
+
+对于chromium `{Once|Repeating}Callback` 而已，它需要关联 `{Once|Repeating}Callback` 对象 和 它绑定的function、绑定的argument，并且需要绑定的参数是未知的，因此它使用了type erasure技术:
+
+1、对于 `{Once|Repeating}Callback`，在编译时是能够确定它的 `invoke_func` 的具体类型的，compiler在进行编译的时候，是会通过替换的方式生成一个函数的，只是保存在 `{Once|Repeating}Callback` 中，使用的是一个opaque handle。
+
+2、在 `{Once|Repeating}Callback` 中，在编译时是可以知道它的 `PolymorphicInvoke` 类型的
 
 三、在 [`decltype(auto) BindImpl(Functor&& functor, Args&&... args)`](https://chromium.googlesource.com/chromium/src/base/+/refs/heads/main/bind_internal.h#1251) ( [chromium](https://github.com/chromium/chromium/tree/master)/[base](https://github.com/chromium/chromium/tree/master/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/master/base/bind_internal.h)** ) 中，有如下实现:
 
@@ -51,9 +164,11 @@ decltype(auto) BindImpl(Functor&& functor, Args&&... args) {
 
 
 
-3、它到底执行是什么函数？
 
-`GetInvokeFunc`
+
+### `GetInvokeFunc`
+
+它到底执行是什么函数？通过查看 `GetInvokeFunc` 我们可以得出这个答案。
 
 ```C++
 // Used below in BindImpl to determine whether to use Invoker::Run or
@@ -78,61 +193,9 @@ constexpr auto GetInvokeFunc(std::false_type) {
 
 
 
-四、在 [class OnceCallback<R(Args...)> : public internal::CallbackBase](https://github.com/chromium/chromium/blob/main/base/callback.h) ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** ) 中，
-
-```C++
-  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
-                                  internal::PassingType<Args>...);
-```
 
 
-
-```c++
-  R Run(Args... args) && {
-    // Move the callback instance into a local variable before the invocation,
-    // that ensures the internal state is cleared after the invocation.
-    // It's not safe to touch |this| after the invocation, since running the
-    // bound function may destroy |this|.
-    OnceCallback cb = std::move(*this);
-    PolymorphicInvoke f =
-        reinterpret_cast<PolymorphicInvoke>(cb.polymorphic_invoke());
-    return f(cb.bind_state_.get(), std::forward<Args>(args)...);
-  }
-```
-
-五、在 [`class RepeatingCallback<R(Args...)> : public internal::CallbackBaseCopyable`](https://github.com/chromium/chromium/blob/main/base/callback.h#L180) ( [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[callback.h](https://github.com/chromium/chromium/blob/main/base/callback.h)** ) 中，
-
-```C++
-  using PolymorphicInvoke = R (*)(internal::BindStateBase*,
-                                  internal::PassingType<Args>...);
-```
-
-
-
-```c++
-  R Run(Args... args) const & {
-    PolymorphicInvoke f =
-        reinterpret_cast<PolymorphicInvoke>(this->polymorphic_invoke());
-    return f(this->bind_state_.get(), std::forward<Args>(args)...);
-  }
-
-  R Run(Args... args) && {
-    // Move the callback instance into a local variable before the invocation,
-    // that ensures the internal state is cleared after the invocation.
-    // It's not safe to touch |this| after the invocation, since running the
-    // bound function may destroy |this|.
-    RepeatingCallback cb = std::move(*this);
-    PolymorphicInvoke f =
-        reinterpret_cast<PolymorphicInvoke>(cb.polymorphic_invoke());
-    return f(std::move(cb).bind_state_.get(), std::forward<Args>(args)...);
-  }
-```
-
-
-
-
-
-## `bind_internal`: `Invoker`
+### `bind_internal`: `Invoker`
 
 [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/main/base/bind_internal.h)**
 
@@ -202,7 +265,7 @@ struct Invoker<StorageType, R(UnboundArgs...)> {
 
 ![](./chromium-base-Invoke-RunOnce-VS-Run.png)
 
-### 注释的含义
+#### 注释的含义
 
 > Local references to make debugger stepping easier. If in a debugger, you really want to warp ahead and step through the `InvokeHelper<>::MakeItSo()` call below.
 
@@ -210,7 +273,7 @@ struct Invoker<StorageType, R(UnboundArgs...)> {
 
 "step through"的意思是"单步调试"
 
-### `RunImpl`
+#### `RunImpl`
 
 它的入参可以分为:
 
@@ -230,13 +293,13 @@ struct Invoker<StorageType, R(UnboundArgs...)> {
 
 上述是unwrap args的地方。
 
-### `std::tuple` as function args
+#### `std::tuple` as function args
 
 上述code展示了"`std::tuple` as function args"的典型用法。
 
 
 
-## `bind_internal`: `InvokeHelper`
+### `bind_internal`: `InvokeHelper`
 
 [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/main/base/bind_internal.h)**
 
