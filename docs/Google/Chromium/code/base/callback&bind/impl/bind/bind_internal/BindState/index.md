@@ -4,11 +4,13 @@
 
 上面这段话对 `BindStateBase` 的总结是最好的。
 
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)**
-
-### `class BASE_EXPORT BindStateBase`
 
 
+## `class BASE_EXPORT BindStateBase`
+
+### doc
+
+[chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[callback_internal.h](https://github.com/chromium/chromium/blob/master/base/callback_internal.h)**
 
 `BindStateBase` is used to provide an **opaque handle** that the `Callback` class can use to represent a function object with bound arguments.  It behaves as an existential type that is used by a corresponding `DoInvoke` function to perform the function execution.  This allows us to shield(屏蔽、保护) the `Callback` class from the types of the bound argument via "type erasure."
 
@@ -41,7 +43,7 @@ At the base level, the only task is to add reference counting data. Avoid using 
 >
 > 总的来说，这是一种avoid code bloat的奇技淫巧。
 
-#### member variable
+### member variable
 
 ```C++
   using InvokeFuncStorage = void(*)();
@@ -65,11 +67,11 @@ At the base level, the only task is to add reference counting data. Avoid using 
 
 
 
-#### implementation
+### implementation
 
 `BindStateBase`的implementation是在 [chromium](https://gitee.com/mirrors/chromium/tree/master) / **[base](https://gitee.com/mirrors/chromium/tree/master/base)** / **[bind_internal.h](https://gitee.com/mirrors/chromium/blob/master/base/bind_internal.h)** 中定义的。
 
-#### constructor
+### constructor
 
 ```C++
   BindStateBase(InvokeFuncStorage polymorphic_invoke,
@@ -86,16 +88,68 @@ At the base level, the only task is to add reference counting data. Avoid using 
 
 
 
+## Factory meta-function: `MakeBindStateType` 
 
+```C++
+// Used to implement MakeBindStateType.
+template <bool is_method, typename Functor, typename... BoundArgs>
+struct MakeBindStateTypeImpl;
+
+template <typename Functor, typename... BoundArgs>
+struct MakeBindStateTypeImpl<false, Functor, BoundArgs...> {
+  static_assert(!HasRefCountedTypeAsRawPtr<std::decay_t<BoundArgs>...>::value,
+                "A parameter is a refcounted type and needs scoped_refptr.");
+  using Type = BindState<std::decay_t<Functor>, MakeStorageType<BoundArgs>...>;
+};
+
+template <typename Functor>
+struct MakeBindStateTypeImpl<true, Functor> {
+  using Type = BindState<std::decay_t<Functor>>;
+};
+
+template <typename Functor, typename Receiver, typename... BoundArgs>
+struct MakeBindStateTypeImpl<true, Functor, Receiver, BoundArgs...> {
+ private:
+  using DecayedReceiver = std::decay_t<Receiver>;
+
+  static_assert(!std::is_array<std::remove_reference_t<Receiver>>::value,
+                "First bound argument to a method cannot be an array.");
+  static_assert(
+      !std::is_pointer<DecayedReceiver>::value ||
+          IsRefCountedType<std::remove_pointer_t<DecayedReceiver>>::value,
+      "Receivers may not be raw pointers. If using a raw pointer here is safe"
+      " and has no lifetime concerns, use base::Unretained() and document why"
+      " it's safe.");
+  static_assert(!HasRefCountedTypeAsRawPtr<std::decay_t<BoundArgs>...>::value,
+                "A parameter is a refcounted type and needs scoped_refptr.");
+
+ public:
+  using Type = BindState<
+      std::decay_t<Functor>,
+      std::conditional_t<std::is_pointer<DecayedReceiver>::value,
+                         scoped_refptr<std::remove_pointer_t<DecayedReceiver>>,
+                         DecayedReceiver>,
+      MakeStorageType<BoundArgs>...>;
+};
+
+template <typename Functor, typename... BoundArgs>
+using MakeBindStateType =
+    typename MakeBindStateTypeImpl<MakeFunctorTraits<Functor>::is_method,
+                                   Functor,
+                                   BoundArgs...>::Type;
+```
 
 
 
 ## `StorageTraits`
 
-```
-//  StorageTraits<> -- Type traits that determine how a bound argument is
-//                     stored in BindState.
-```
+### doc
+
+> `StorageTraits<>` -- Type traits that determine how a bound argument is stored in `BindState`.
+
+
+
+### impl
 
 ```C++
 // StorageTraits<>
