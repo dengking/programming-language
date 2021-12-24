@@ -133,7 +133,17 @@ class RepeatingCallback<R(Args...)> : public internal::CallbackBaseCopyable {
 
 1、对于 `{Once|Repeating}Callback`，在编译时是能够确定它的 `invoke_func` 的具体类型的，compiler在进行编译的时候，是会通过替换的方式生成一个函数的，只是保存在 `{Once|Repeating}Callback` 中，使用的是一个opaque handle。
 
-2、在 `{Once|Repeating}Callback` 中，在编译时是可以知道它的 `PolymorphicInvoke` 类型的
+compiler在进行编译的时候，是能够生成具体的`BindState` 类型的 ( `using BindState = MakeBindStateType<Functor, Args...>;` )
+
+
+
+2、在 `{Once|Repeating}Callback` 中，在编译时是可以知道它的 `PolymorphicInvoke` 类型的，即它的`RunType`
+
+
+
+3、通过上述分析可知，它是能够实现static type safety的
+
+### `BindImpl`
 
 三、在 [`decltype(auto) BindImpl(Functor&& functor, Args&&... args)`](https://chromium.googlesource.com/chromium/src/base/+/refs/heads/main/bind_internal.h#1251) ( [chromium](https://github.com/chromium/chromium/tree/master)/[base](https://github.com/chromium/chromium/tree/master/base)/**[bind_internal.h](https://github.com/chromium/chromium/blob/master/base/bind_internal.h)** ) 中，有如下实现:
 
@@ -142,6 +152,9 @@ template <template <typename> class CallbackT,
           typename Functor,
           typename... Args>
 decltype(auto) BindImpl(Functor&& functor, Args&&... args) {
+  // This block checks if each |args| matches to the corresponding params of the
+  // target function. This check does not affect the behavior of Bind, but its
+  // error message should be more readable.              
   ......
   using Invoker = Invoker<BindState, UnboundRunType>;
   using CallbackType = CallbackT<UnboundRunType>;    
