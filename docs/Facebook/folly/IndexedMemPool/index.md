@@ -23,29 +23,13 @@ The object lifecycle strategy is controlled by the `Traits` parameter. One strat
 > NOTE: 一、典型的strategy pattern；二、eager 和 lazy: eager 指的是 eager to "destroy when they are recycled"，lazy 指的是 lazy to "delete when the pool itself is deleted"
 > NOTE: 
 
-IMPORTANT: Space for extra elements is allocated to account for those
-that are inaccessible because they are in other local lists, so the
-actual number of items that can be allocated ranges from `capacity` to
-`capacity + (NumLocalLists_-1)*LocalListLimit_`.  This is important if
-you are trying to maximize the capacity of the pool while constraining
-the bit size of the resulting pointers, because the pointers will
-actually range up to the boosted capacity.  See `maxIndexForCapacity`
-and `capacityForMaxIndex`.
+IMPORTANT: Space for extra elements is allocated to account for those that are inaccessible because they are in other local lists, so the actual number of items that can be allocated ranges from `capacity` to `capacity + (NumLocalLists_-1)*LocalListLimit_`.  This is important if you are trying to maximize the capacity of the pool while constraining the bit size of the resulting pointers, because the pointers will actually range up to the boosted capacity.  See `maxIndexForCapacity` and `capacityForMaxIndex`.
 
-To avoid contention, `NumLocalLists_` free lists of limited (less than
-or equal to `LocalListLimit_`) size are maintained, and each thread
-retrieves and returns entries from its associated local list.  If the
-local list becomes too large then elements are placed in bulk in a
-global free list.  This allows items to be efficiently recirculated
-from consumers to producers.  `AccessSpreader` is used to access the
-local lists, so there is no performance advantage to having more
-local lists than L1 caches.
+To avoid contention, `NumLocalLists_` free lists of limited (less than or equal to `LocalListLimit_`) size are maintained, and each thread
+retrieves and returns entries from its associated **local list**.  If the **local list** becomes too large then elements are placed in bulk in a **global free list**.  This allows items to be efficiently recirculated from consumers to producers.  `AccessSpreader` is used to access the **local lists**, so there is no performance advantage to having more **local lists** than **L1 caches**.
 
-The pool mmap-s the entire necessary address space when the pool is
-constructed, but delays element construction.  This means that only
-elements that are actually returned to the caller get paged into the
-process's resident set (RSS).
-"""
+The pool mmap-s the entire necessary address space when the pool is constructed, but delays element construction.  This means that only elements that are actually returned to the caller get paged into the process's resident set (RSS).
+
 
 
 ## 成员变量 `slots_`
@@ -53,7 +37,7 @@ process's resident set (RSS).
 
 ## `struct Slot` 
 
-```
+```c++
   struct Slot {
     T elem;
     Atom<uint32_t> localNext;

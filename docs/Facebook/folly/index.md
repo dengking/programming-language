@@ -8,7 +8,7 @@
 
 
 
-Performance concerns permeate much of Folly, sometimes leading to designs that are more idiosyncratic than they would otherwise be (see e.g. `PackedSyncPtr.h`, `SmallLocks.h`). Good performance at large scale is a unifying theme in all of Folly.
+Performance concerns permeate(渗透、弥漫) much of Folly, sometimes leading to designs that are more idiosyncratic(特殊的、独特的) than they would otherwise be (see e.g. `PackedSyncPtr.h`, `SmallLocks.h`). Good performance at large scale is a unifying theme in all of Folly.
 
 > NOTE: 
 >
@@ -43,6 +43,10 @@ reddit [Why std::expected is not in the standard yet? Is it bad practice?](https
 open-std [P0323R10 std::expected](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p0323r10.html)
 
 
+
+## Expert
+
+1、[Lu Pan](https://blog.the-pans.com/about/)
 
 
 
