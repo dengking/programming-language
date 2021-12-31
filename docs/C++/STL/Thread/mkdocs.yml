@@ -1,8 +1,12 @@
 nav:
     - Introduction: index.md
-    - Mutex&&lock: Mutex&&lock
-    - Asynchronous-programming: Asynchronous-programming
+    - Mutex&lock: Mutex&lock
+    - Async-programming: Async-programming
     - TODO-joining_thread: TODO-joining_thread
     - TODO-read-write-lock: TODO-read-write-lock
     - C++20-Semaphores: C++20-Semaphores
     - Inter-thread-communication: Inter-thread-communication
+    - C++17-hardware_constructive-destructive_interference_size: C++17-hardware_constructive-destructive_interference_size
+    
+    
+    

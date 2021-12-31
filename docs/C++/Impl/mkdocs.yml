@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - Translation-phases: Phases
     - ABI: ABI
+    - C++ABI: C++ABI    
     - Code-analysis-tool: Code-analysis-tool
     - Compilers: Compilers
 

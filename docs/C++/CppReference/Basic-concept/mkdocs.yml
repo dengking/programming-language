@@ -3,7 +3,7 @@ nav:
     # 这篇文章，照应全局
     - Basic-concepts: Basic-concepts
     # 声明的概念在c++中非常重要    
-    - Declaration-and-definition: Declaration-and-definition
+    - Declaration&definition: Declaration&definition
     # data-model是核心概念    动态概念：数据模型
     - Object: Object
     # include file、 source file、module单个文件中的组织
@@ -13,4 +13,5 @@ nav:
     # c++的执行模型
     - Abstract-machine: Abstract-machine
     
-    - Reference-and-Value-Semantics: Reference-and-Value-Semantics
+    - Reference&Value-Semantics: Reference&Value-Semantics
+    

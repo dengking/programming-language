@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
+    - Futex: Futex    
     - LifoSem: LifoSem
-    
+    - SharedMutex: SharedMutex
+    - Synchronized: Synchronized
