@@ -1,7 +1,5 @@
 # Default initialization
 
-
-
 1、对于default initialization，直观感受是，它和default constructor对应；它不对built-in type进行 [zero initialization](https://en.cppreference.com/w/cpp/language/zero_initialization)，这是它和value initialization的主要差别。
 
 2、对于built-in type，它的default initialization是do nothing，因此如果不对它进行其他的initialization的话，那么它就是Indeterminate value，显然这是比较危险的；我们最好遵循
@@ -72,15 +70,17 @@ nothing is done: the objects with automatic storage duration (and their subobjec
 
 Default initialization of **non-class variable**s with **automatic** and **dynamic** storage duration produces objects with indeterminate values (static and thread-local objects get [zero initialized](https://en.cppreference.com/w/cpp/language/zero_initialization))
 
-> NOTE: 也就是上面说的 nothing is done，为什么这样做呢？在akrzemi1 [Value-initialization with C++](https://akrzemi1.wordpress.com/2013/09/10/value-initialization-with-c/)中给出的解释是:
+> NOTE: 
+>
+> 一、也就是上面说的 nothing is done，为什么这样做呢？在akrzemi1 [Value-initialization with C++](https://akrzemi1.wordpress.com/2013/09/10/value-initialization-with-c/)中给出的解释是:
 >
 > > Its value is **indeterminate** (no initialization is performed). This is so for **performance** reasons, because sometimes we do not need an initial value.
+>
+> 二、 关于static、thread-local object，下面的例子中有着更加详细的说明。
+>
+> 三、 "**non-class variable**s"包括诸如int、double等built-in type，它们的default-initialized是do-nothing。
 
-> NOTE: 关于static、thread-local object，下面的例子中有着更加详细的说明。
 
-
-
-> NOTE: 也就是built-in type，是不允许default-initialized的。
 
 Reference cannot be default-initialized.
 

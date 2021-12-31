@@ -7,10 +7,10 @@ nav:
     - IO: IO
     - Future: Future
     - Executor: Executor
-    - Destruction: Destruction
-    - TurnSequencer: TurnSequencer
+    - OOP: OOP
     - portability: portability
     - concurrency: concurrency
     - lang: lang
     - Idiom: Idiom
+    - Design-pattern: Design-pattern
     

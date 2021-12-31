@@ -101,11 +101,56 @@ using IndexedMemPoolTraitsEagerRecycle = IndexedMemPoolTraits<T, true, true>;
 
 
 
+## construction
+
+
+
+```C++
+mmapLength_ = ((needed - 1) & ~(pagesize - 1)) + pagesize;
+```
+
+这种写法是非常值得借鉴的: 简洁又高效
+
+
+
+### `capacity`、`actualCapacity_`
+
+实际是会分配更多的内存的
+
+
+
+## `isAllocated`、`markAllocated`
+
+在 `maxIndexForCapacity` 中，有这样的描述:
+
+> index of `std::numeric_limits<uint32_t>::max()` is reserved for `isAllocated` tracking
+
+### `isAllocated`
+
+```C++
+  /// Returns true iff idx has been alloc()ed and not recycleIndex()ed
+  bool isAllocated(uint32_t idx) const {
+    return slot(idx).localNext.load(std::memory_order_acquire) == uint32_t(-1);
+  }
+```
+
+
+
+### `markAllocated`
+
+```C++
+  void markAllocated(Slot& slot) {
+    slot.localNext.store(uint32_t(-1), std::memory_order_release);
+  }
+```
+
+
+
 ## 数据结构
 
 总的来说，它的数据由两部分组成:
 
-1、array of slot
+1、raw storage: 它是dynamic array of `Slot`
 
 成员变量 `slots_`
 
@@ -113,8 +158,33 @@ using IndexedMemPoolTraitsEagerRecycle = IndexedMemPoolTraits<T, true, true>;
 
 成员变量 `local_`
 
+### index as pointer
 
-### `struct Slot` 
+使用的是dynamic array作为backing storage，因此它可以使用index作为pointer，并且在实现中，也是这样用的:
+
+1、`struct Slot` 的 `next` 成员:
+
+```C++
+Atom<uint32_t> localNext;
+Atom<uint32_t> globalNext;
+```
+
+2、`struct TaggedPtr` 的 `idx` 成员:
+
+```C++
+uint32_t idx;
+```
+
+`idx` 作为指向 slot 的pointer。
+
+### raw storage
+
+raw storage只有一个:  `slots_`
+
+
+
+
+#### `struct Slot` 
 
 ```C++
   struct Slot {
@@ -126,9 +196,17 @@ using IndexedMemPoolTraitsEagerRecycle = IndexedMemPoolTraits<T, true, true>;
   };
 ```
 
-这是单位
+它在`T` object的基础上增加了 `localNext`、`globalNext`。
 
-### 成员变量 `slots_`
+##### `localNext`
+
+记录的是它是local list中的next元素的index。
+
+##### `globalNext`
+
+记录的是它是global list中的next元素的index。
+
+#### 成员变量 `slots_`
 
 ```C++
   /// raw storage, only 1..min(size_,actualCapacity_) (inclusive) are
@@ -136,9 +214,172 @@ using IndexedMemPoolTraitsEagerRecycle = IndexedMemPoolTraits<T, true, true>;
   alignas(hardware_destructive_interference_size) Slot* slots_;
 ```
 
+一、`slots_[0]` 没有被使用的是原因是: index的类型是 `uint32_t`，因此它没有负数，因此需要使用 0 来表示失败的分配。
+
+二、它仅仅让成员变量 `slots_` `alignas(hardware_destructive_interference_size)`，这是因为它会被多个thread同时access，需要避免它会被false sharing而带来性能损耗。
+
+三、为什么`struct Slot` 没有像 `LocalList` 一样加上 `alignas(hardware_destructive_interference_size)` 呢？一个`struct Slot` 是否会同时被多个thread access呢？`LocalList` object是会的。
+
+#### 概述: 对raw storage的使用
+
+正如文档中所介绍的，它是通过 `LocalList` 的方式来使用raw storage的，具体来说: 通过 `localHead()`、`globalHead_` 等，这样做的目的是: "To avoid contention"。
+
+下面是  `LocalList`  的声明和使用方式:
+
+```C++
+  /// use AccessSpreader to find your list.  We use stripes instead of
+  /// thread-local to avoid the need to grow or shrink on thread start
+  /// or join.   These are heads of lists chained with localNext
+  LocalList local_[NumLocalLists];
+```
 
 
-`LocalList` 
+
+```C++
+  AtomicStruct<TaggedPtr, Atom>& localHead() {
+    auto stripe = AccessSpreader<Atom>::current(NumLocalLists);
+    return local_[stripe].head;
+  }
+```
+
+一个令我感到好奇的问题是: 为什么在 `maxIndexForCapacity` 只使用 `(NumLocalLists - 1)`?
+
+```C++
+  static constexpr uint32_t maxIndexForCapacity(uint32_t capacity) {
+    // index of std::numeric_limits<uint32_t>::max() is reserved for isAllocated
+    // tracking
+    return uint32_t(std::min(
+        uint64_t(capacity) + (NumLocalLists - 1) * LocalListLimit,
+        uint64_t(std::numeric_limits<uint32_t>::max() - 1)));
+  }
+```
+
+这是否和 global 和 local 有关？即: 1个global + (`NumLocalLists` - 1)个local。貌似不是这样的，因为 `LocalList local_[NumLocalLists]` 即 它有 `NumLocalLists` 个 `LocalList` 、`AtomicStruct<TaggedPtr, Atom> globalHead_`。
 
 
 
+### local list
+
+每个thread，会获得自己的local list，通过`localHead()`获得local list的head，然后按照linked list的方式，可以找到当前local list的末尾，然后往其中插入元素。这说明是由`AccessSpreader`来决定它到底使用哪个local list。
+
+因为local list是limited size的，因此allocate就相当于是pop，release就相当于是push。
+
+#### size limit: `LocalListLimit_` 
+
+```C++
+static_assert(LocalListLimit_ <= 255, "LocalListLimit must fit in 8 bits");
+```
+
+
+
+
+
+#### `struct TaggedPtr` 
+
+```C++
+  struct TaggedPtr {
+    uint32_t idx;
+
+    // size is bottom 8 bits, tag in top 24.  g++'s code generation for
+    // bitfields seems to depend on the phase of the moon, plus we can
+    // do better because we can rely on other checks to avoid masking
+    uint32_t tagAndSize;
+  };      
+```
+
+一、它的size是 8 byte，因此它是可以使用 `AtomicStruct` 的
+
+二、`size()` 
+
+```C++
+enum : uint32_t {
+    SizeBits = 8,
+    SizeMask = (1U << SizeBits) - 1, // OX00FF，通过 & 可以获得 size
+    TagIncr = 1U << SizeBits,
+};
+uint32_t size() const { return tagAndSize & SizeMask; }
+```
+
+三、它构成的是一个单向链表
+
+
+
+#### 成员变量 `local_`
+
+```C++
+LocalList local_[NumLocalLists];
+```
+
+它仅仅在函数 `localHead()` 中被使用，并且它没有被初始化就直接使用了，这引起了我的好奇。查了一下，下面是回答:
+
+1、cppreference [Default initialization](https://en.cppreference.com/w/cpp/language/default_initialization)
+
+显然，作者是依赖于C++ 的default initialization behavior。
+
+更多关于array member initialization，参见:
+
+1、stackoverflow [populating int array that is a member variable](https://stackoverflow.com/questions/1811447/populating-int-array-that-is-a-member-variable)
+
+2、stackoverflow [C++ Initializing Non-Static Member Array](https://stackoverflow.com/questions/5643923/c-initializing-non-static-member-array)
+
+
+
+#### 成员变量 `globalHead_`
+
+```C++
+  /// this is the head of a list of node chained by globalNext, that are
+  /// themselves each the head of a list chained by localNext
+  alignas(hardware_destructive_interference_size)
+      AtomicStruct<TaggedPtr, Atom> globalHead_;
+```
+
+在构造函数中，会对它进行初始化:
+
+```C++
+globalHead_(TaggedPtr{}) 
+```
+
+
+
+## `allocIndex`、`recycleIndex`
+
+### `allocIndex`
+
+
+
+```C++
+auto idx = localPop(localHead());
+```
+
+find a slot、allocate a slot
+
+### `recycleIndex`
+
+
+
+```C++
+localPush(localHead(), idx);
+```
+
+release a slot
+
+
+
+## `localHead()`、`localPush()`、`localPop()`
+
+
+
+
+
+```C++
+  AtomicStruct<TaggedPtr, Atom>& localHead() {
+    auto stripe = AccessSpreader<Atom>::current(NumLocalLists);
+    return local_[stripe].head;
+  }
+```
+
+它返回的是 `LocalList` 的 `head` 属性。
+
+
+
+## `globalHead_`、`globalPush()`、`globalPop()`

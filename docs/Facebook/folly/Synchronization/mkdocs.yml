@@ -4,3 +4,7 @@ nav:
     - LifoSem: LifoSem
     - SharedMutex: SharedMutex
     - Synchronized: Synchronized
+    - AtomicStruct: AtomicStruct
+    - TurnSequencer: TurnSequencer    
+    
+    
