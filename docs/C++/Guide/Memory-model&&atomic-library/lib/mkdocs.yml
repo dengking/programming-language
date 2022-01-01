@@ -4,5 +4,5 @@ nav:
     - Atomic-Boolean: Atomic-Boolean
     - Fence: Fence
     - compare_exchange: compare_exchange
-    - Implementation: Implementation
+    - Impl: Impl
     
