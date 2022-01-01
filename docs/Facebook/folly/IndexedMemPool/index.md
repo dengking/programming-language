@@ -1,12 +1,4 @@
-# `IndexedMemPool`
-
-## stackoverflow [How does Facebook folly::AccessSpreader work?](https://stackoverflow.com/questions/47006451/how-does-facebook-follyaccessspreader-work)
-
-
-
-## [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/**[IndexedMemPool.h](https://github.com/facebook/folly/blob/main/folly/IndexedMemPool.h)**
-
-
+# [folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/**[IndexedMemPool.h](https://github.com/facebook/folly/blob/main/folly/IndexedMemPool.h)**
 
 > NOTE: 
 >
@@ -30,7 +22,7 @@ The memory backing items returned from the pool will always be readable, even if
 >
 > 简而言之，因为是memory pool，它的已经分配过的memory是不会被unmap到OS的
 
-The indexing behavior makes it easy to build **tagged pointer-like-things**, since a large number of elements can be managed using fewer bits than a full pointer.  The **access-after-free** behavior makes it safe to read from T-s even after they have been recycled, since it is guaranteed that the memory won't have been returned to the OS and unmapped (the algorithm must still use a mechanism to validate that the read was correct, but it doesn't have to worry about page faults), and if the elements use **internal sequence numbers** it can be guaranteed that there won't be an **ABA match** due to the element being overwritten with a different type that has the same bit pattern.
+The indexing behavior makes it easy to build **tagged pointer-like-things**, since a large number of elements can be managed using fewer bits than a full pointer.  The **access-after-free** behavior makes it safe to read from T-s even after they have been recycled, since it is guaranteed that the memory won't have been returned to the OS and unmapped (the algorithm must still use a mechanism to validate that the read was correct, but it doesn't have to worry about **page faults**), and if the elements use **internal sequence numbers** it can be guaranteed that there won't be an **ABA match** due to the element being overwritten with a different type that has the same bit pattern.
 
 > NOTE: 
 >
@@ -63,6 +55,8 @@ The object lifecycle strategy is controlled by the `Traits` parameter. One strat
 >
 > `IndexedMemPoolTraitsLazyRecycle`
 
+### global list 和 local list
+
 IMPORTANT: Space for extra(额外的) elements is allocated to account for those that are inaccessible because they are in other local lists, so the actual number of items that can be allocated ranges from `capacity` to `capacity + (NumLocalLists_-1)*LocalListLimit_`.  This is important if you are trying to maximize the capacity of the pool while constraining the bit size of the resulting pointers, because the pointers will actually range up to the boosted capacity.  See `maxIndexForCapacity` and `capacityForMaxIndex`.
 
 > NOTE: 
@@ -73,7 +67,31 @@ IMPORTANT: Space for extra(额外的) elements is allocated to account for those
 >
 > 一、实际会分配的内存是比用户指定的 `capacity` 要多的，因为需要一些"space for extra elements"
 
+### avoid contention
+
 To avoid contention, `NumLocalLists_` free lists of limited (less than or equal to `LocalListLimit_`) size are maintained, and each thread retrieves and returns entries from its associated **local list**.  If the **local list** becomes too large then elements are placed in bulk in a **global free list**.  This allows items to be efficiently recirculated from consumers to producers.  `AccessSpreader` is used to access the **local lists**, so there is no performance advantage to having more **local lists** than **L1 caches**.
+
+> NOTE: 
+>
+> 一、local list 和 global list其实都是logical的，因为raw storage是dynamical array，它们都是建立在这个dynamic array之上的，为了支持这个特性，raw storage dynamical array的成员类型为:
+>
+> ```C++
+>   struct Slot {
+>     T elem;
+>     Atom<uint32_t> localNext;
+>     Atom<uint32_t> globalNext;
+> 
+>     Slot() : localNext{}, globalNext{} {}
+>   };
+> ```
+>
+> 可以看到，它有两个属性:
+>
+> 1、`localNext`
+>
+> 
+>
+> 2、`globalNext`
 
 The pool mmap-s the entire necessary **address space** when the pool is constructed, but delays element construction.  This means that only elements that are actually returned to the caller get paged into the **process's resident set** (RSS).
 
@@ -367,7 +385,7 @@ release a slot
 
 ## `localHead()`、`localPush()`、`localPop()`
 
-
+### `localHead()`
 
 
 
@@ -380,6 +398,106 @@ release a slot
 
 它返回的是 `LocalList` 的 `head` 属性。
 
+### `localPush()`
+
+```C++
+  // returns 0 if allocation failed
+  uint32_t localPop(AtomicStruct<TaggedPtr, Atom>& head) {
+    while (true) {
+      TaggedPtr h = head.load(std::memory_order_acquire);
+      if (h.idx != 0) {
+        // local list is non-empty, try to pop
+        Slot& s = slot(h.idx);
+        auto next = s.localNext.load(std::memory_order_relaxed);
+        if (head.compare_exchange_strong(h, h.withIdx(next).withSizeDecr())) {
+          // success
+          return h.idx;
+        }
+        continue;
+      }
+      // local list is empty  
+      uint32_t idx = globalPop();
+      if (idx == 0) {
+        // global list is empty, allocate and construct new slot
+        if (size_.load(std::memory_order_relaxed) >= actualCapacity_ ||
+            (idx = ++size_) > actualCapacity_) {
+          // allocation failed
+          return 0;
+        }
+        Slot& s = slot(idx);
+        // Atom is enforced above to be nothrow-default-constructible
+        // As an optimization, use default-initialization (no parens) rather
+        // than direct-initialization (with parens): these locations are
+        // stored-to before they are loaded-from
+        new (&s.localNext) Atom<uint32_t>;
+        new (&s.globalNext) Atom<uint32_t>;
+        Traits::initialize(&s.elem);
+        return idx;
+      }
+
+      Slot& s = slot(idx);
+      auto next = s.localNext.load(std::memory_order_relaxed);
+      if (head.compare_exchange_strong(
+              h, h.withIdx(next).withSize(LocalListLimit))) {
+        // global list moved to local list, keep head for us
+        return idx;
+      }
+      // local bulk push failed, return idx to the global list and try again
+      globalPush(s, idx);
+    }
+  }
+```
+
 
 
 ## `globalHead_`、`globalPush()`、`globalPop()`
+
+
+
+### `globalPop()`
+
+```C++
+  // returns 0 if empty
+  uint32_t globalPop() {
+    while (true) {
+      TaggedPtr gh = globalHead_.load(std::memory_order_acquire);
+      if (gh.idx == 0 // global list 是空的
+          ||
+          globalHead_.compare_exchange_strong(
+              gh,
+              gh.withIdx(
+                  slot(gh.idx).globalNext.load(std::memory_order_relaxed)))) {
+        // global list is empty, or pop was successful
+        return gh.idx;
+      }
+    }
+  }
+```
+
+
+
+## member accessory
+
+
+
+```C++
+  /// Provides access to the pooled element referenced by idx
+  T& operator[](uint32_t idx) { return slot(idx).elem; }  
+
+  uint32_t slotIndex(uint32_t idx) const {
+    assert(
+        0 < idx && idx <= actualCapacity_ &&
+        idx <= size_.load(std::memory_order_acquire));
+    return idx;
+  }
+
+  Slot& slot(uint32_t idx) { return slots_[slotIndex(idx)]; }
+```
+
+
+
+## stackoverflow [How does Facebook folly::AccessSpreader work?](https://stackoverflow.com/questions/47006451/how-does-facebook-follyaccessspreader-work)
+
+> NOTE: 
+>
+> 其中也描述了 `IndexedMemPool` 是如何使用 `folly::AccessSpreader` 的
