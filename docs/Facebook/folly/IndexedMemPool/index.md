@@ -154,7 +154,7 @@ release: `recycleIndex`
 
 
 
-### local list 和 global list的生成过程
+### local list 和 global list的生成、使用
 
 对local list 和 global list的生成过程的理解是通过阅读代码总结出来的，原文的注释中，并没有给出具体的说明。
 
@@ -192,7 +192,7 @@ release: `recycleIndex`
   }
 ```
 
-
+##### list list的使用
 
 每个thread，会获得自己的local list，通过`localHead()`获得local list的head，然后按照linked list的方式，往其中插入元素，是由`AccessSpreader`来决定它到底使用哪个local list。当从list list中allocate就相当于是pop，release就相当于是push:
 
@@ -201,7 +201,7 @@ release: `recycleIndex`
 | **local list**  | `localPop`  | `localPush`  |
 | **global list** | `globalPop` | `globalPush` |
 
-
+local list需要保证线程安全，在实现上，采用的是CAS，具体参见后面的章节。
 
 ##### 成员变量 `local_`
 
@@ -247,6 +247,8 @@ static_assert(LocalListLimit_ <= 255, "LocalListLimit must fit in 8 bits");
 ```
 
 最多8-bit。
+
+
 
 ### local list 和 global list的关系
 
@@ -499,7 +501,13 @@ localPush(localHead(), idx);
 
 release a slot
 
+## CAS 操作local list
 
+典型的CAS操作，参见:
+
+1、wikipedia [Compare-and-swap](https://en.wikipedia.org/wiki/Compare-and-swap)
+
+2、cppreference [`std::atomic<T>::compare_exchange_***`](https://en.cppreference.com/w/cpp/atomic/atomic/compare_exchange) 
 
 ## `localHead()`、`localPush()`、`localPop()`
 
@@ -570,7 +578,24 @@ release a slot
 
 1、local list
 
-如果非空，则从中pop，否则执行下一步；
+如果非空，则从中pop，否则执行2；
+
+下面是local list非空情况，此时可以从中pop: 
+
+```C++
+      if (h.idx != 0) {
+        // local list is non-empty, try to pop
+        Slot& s = slot(h.idx);
+        auto next = s.localNext.load(std::memory_order_relaxed);
+        if (head.compare_exchange_strong(h, h.withIdx(next).withSizeDecr())) {
+          // success
+          return h.idx;
+        }
+        continue;
+      }
+```
+
+它会将next作为新的top。
 
 2、global list
 
@@ -581,7 +606,8 @@ release a slot
 ```C++
         // global list is empty, allocate and construct new slot
         if (size_.load(std::memory_order_relaxed) >= actualCapacity_ ||
-            (idx = ++size_) > actualCapacity_) {
+            (idx = ++size_) > actualCapacity_
+           ) {
           // allocation failed
           return 0;
         }
@@ -596,7 +622,9 @@ release a slot
         return idx;
 ```
 
-二、CAS
+`(idx = ++size_)` 这句话是容易忽视的: 
+
+1、`++size_` 
 
 
 

@@ -3,6 +3,6 @@ nav:
     - std-memory_order: std-memory_order
     - Atomic-Boolean: Atomic-Boolean
     - Fence: Fence
-    - compare_exchange: compare_exchange
+    - std-compare_exchange: std-compare_exchange
     - Impl: Impl
     
