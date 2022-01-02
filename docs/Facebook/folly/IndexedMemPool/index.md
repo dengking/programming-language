@@ -444,6 +444,8 @@ raw storage只有一个:  `slots_`
   };      
 ```
 
+它是local list 和 global list元素类型，`idx`是典型的使用 "index as pointer"，指向raw storage。它是典型的使用 "tagged pointer" 无法，它将 list size 和 tag 放到了 `tagAndSize` 字段。
+
 一、它的`sizeof(TaggedPtr)`是 8 byte，因此它是可以使用 `AtomicStruct` 的
 
 二、`size()` 
@@ -459,7 +461,7 @@ uint32_t size() const { return tagAndSize & SizeMask; }
 
 因为"local list size limit: `LocalListLimit_` "，因此 `SizeBits = 8`。
 
-三、它是典型的使用 "index as pointer"
+
 
 #### `withIdx`
 
@@ -564,7 +566,37 @@ release a slot
   }
 ```
 
-`TaggedPtr` 的size的倒着来的。
+分配的顺序是:
+
+1、local list
+
+如果非空，则从中pop，否则执行下一步；
+
+2、global list
+
+如果非空，则从中pop，否则执行下一步；
+
+3、raw storage
+
+```C++
+        // global list is empty, allocate and construct new slot
+        if (size_.load(std::memory_order_relaxed) >= actualCapacity_ ||
+            (idx = ++size_) > actualCapacity_) {
+          // allocation failed
+          return 0;
+        }
+        Slot& s = slot(idx);
+        // Atom is enforced above to be nothrow-default-constructible
+        // As an optimization, use default-initialization (no parens) rather
+        // than direct-initialization (with parens): these locations are
+        // stored-to before they are loaded-from
+        new (&s.localNext) Atom<uint32_t>;
+        new (&s.globalNext) Atom<uint32_t>;
+        Traits::initialize(&s.elem);
+        return idx;
+```
+
+
 
 ### `localPush()`
 
