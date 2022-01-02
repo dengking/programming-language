@@ -566,7 +566,7 @@ release a slot
   }
 ```
 
-分配的顺序是:
+一、分配的顺序是:
 
 1、local list
 
@@ -595,6 +595,8 @@ release a slot
         Traits::initialize(&s.elem);
         return idx;
 ```
+
+二、CAS
 
 
 
