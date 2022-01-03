@@ -1,0 +1,10 @@
+nav:
+    - Introduction: index.md
+    - ProducerConsumerQueue: ProducerConsumerQueue
+    - MPMCQueue: MPMCQueue
+    - UnboundedQueue: UnboundedQueue
+    - LifoSemMPMCQueue: LifoSemMPMCQueue
+    - PriorityLifoSemMPMCQueue: PriorityLifoSemMPMCQueue
+    - UnboundedBlockingQueue: UnboundedBlockingQueue
+    - PriorityUnboundedBlockingQueue: PriorityUnboundedBlockingQueue
+    

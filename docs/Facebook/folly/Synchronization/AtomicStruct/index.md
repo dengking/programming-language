@@ -44,3 +44,14 @@ using _t = typename T::type;
 
 
 
+## Application
+
+1、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[synchronization](https://github.com/facebook/folly/tree/main/folly/synchronization)/[**LifoSem.h**](https://github.com/facebook/folly/blob/main/folly/synchronization/LifoSem.h)
+
+2、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[**IndexedMemPool.h**](https://github.com/facebook/folly/blob/main/folly/IndexedMemPool.h)
+
+3、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[detail](https://github.com/facebook/folly/tree/main/folly/detail)/[**MemoryIdler.h**](https://github.com/facebook/folly/blob/main/folly/detail/MemoryIdler.h)
+
+4、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[**AtomicUnorderedMap.h**](https://github.com/facebook/folly/blob/main/folly/AtomicUnorderedMap.h)
+
+5、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[executors](https://github.com/facebook/folly/tree/main/folly/executors)/[**ThreadPoolExecutor.h**](https://github.com/facebook/folly/blob/main/folly/executors/ThreadPoolExecutor.h)

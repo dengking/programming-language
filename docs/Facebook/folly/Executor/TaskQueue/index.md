@@ -1,3 +1,29 @@
+# Task queue
+
+[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[**MPMCQueue.h**](https://github.com/facebook/folly/blob/main/folly/MPMCQueue.h) 是各种task queue的底层结构。
+
+
+
+## interface
+
+[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[executors](https://github.com/facebook/folly/tree/main/folly/executors)/[task_queue](https://github.com/facebook/folly/tree/main/folly/executors/task_queue)/[**BlockingQueue.h**](https://github.com/facebook/folly/blob/main/folly/executors/task_queue/BlockingQueue.h)
+
+
+
+## Implementation
+
+1、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[executors](https://github.com/facebook/folly/tree/main/folly/executors)/[task_queue](https://github.com/facebook/folly/tree/main/folly/executors/task_queue)/[**LifoSemMPMCQueue.h**](https://github.com/facebook/folly/blob/main/folly/executors/task_queue/LifoSemMPMCQueue.h)
+
+2、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[executors](https://github.com/facebook/folly/tree/main/folly/executors)/[task_queue](https://github.com/facebook/folly/tree/main/folly/executors/task_queue)/[**PriorityLifoSemMPMCQueue.h**](https://github.com/facebook/folly/blob/main/folly/executors/task_queue/PriorityLifoSemMPMCQueue.h)
+
+3、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[executors](https://github.com/facebook/folly/tree/main/folly/executors)/[task_queue](https://github.com/facebook/folly/tree/main/folly/executors/task_queue)/[**UnboundedBlockingQueue.h**](https://github.com/facebook/folly/blob/main/folly/executors/task_queue/UnboundedBlockingQueue.h)
+
+4、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[executors](https://github.com/facebook/folly/tree/main/folly/executors)/[task_queue](https://github.com/facebook/folly/tree/main/folly/executors/task_queue)/[**PriorityUnboundedBlockingQueue.h**](https://github.com/facebook/folly/blob/main/folly/executors/task_queue/PriorityUnboundedBlockingQueue.h)
+
+
+
+## draft
+
 ```
 queue D:\GitHub-src\folly
 ```
