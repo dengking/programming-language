@@ -48,3 +48,5 @@ developer.51cto [揭秘Facebook官方底层C++函数Folly](https://developer.51c
 >
 > 其中对folly的component进行了说明
 
+the-pans [Global Data Locality – Why and How](https://blog.the-pans.com/cache-locality/)
+

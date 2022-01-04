@@ -38,8 +38,6 @@ stackoverflow [Retrieve information about pre-processor directives](https://stac
 
 
 
-
-
 ## Compile string
 
 stackoverflow [Using libclang to parse in C++ in Python](https://stackoverflow.com/questions/36808565/using-libclang-to-parse-in-c-in-python) # [A](https://stackoverflow.com/a/36821958/10173843)
@@ -60,3 +58,14 @@ for t in tu.get_tokens(extent=tu.cursor.extent):
     print t.kind
 ```
 
+## install
+
+在pypi上有两个:
+
+1、clang 不带libclang的动态库
+
+https://github.com/llvm/llvm-project/tree/main/clang/bindings/python
+
+2、libclang 带libclang的动态库，由中国工程师开发
+
+https://pypi.org/project/libclang/

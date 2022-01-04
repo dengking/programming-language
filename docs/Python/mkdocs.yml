@@ -10,3 +10,5 @@ nav:
     - Pattern: Pattern # python设计模式
     - Programming-tool: Programming-tool # 编程工具
     - Glossary: Glossary
+    - Distribute-module: Distribute-module
+    

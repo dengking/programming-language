@@ -6,6 +6,8 @@
 
 ## Application
 
+`Futex` 在folly中有着非常广泛的应用:
+
 1、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[detail](https://github.com/facebook/folly/tree/main/folly/detail)/[**TurnSequencer.h**](https://github.com/facebook/folly/blob/main/folly/detail/TurnSequencer.h)
 
 2、[folly](https://github.com/facebook/folly)/[folly](https://github.com/facebook/folly/tree/main/folly)/[**SharedMutex.h**](https://github.com/facebook/folly/blob/main/folly/SharedMutex.h)
