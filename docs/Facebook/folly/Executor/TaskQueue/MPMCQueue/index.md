@@ -41,7 +41,9 @@ If you have a pool of N queue consumers that you want to shut down after the que
 to the queue.  If the producer doesn't know how many consumers there are you can enqueue one sentinel and then have each consumer requeue
 two sentinels after it receives it (by requeuing 2 the shutdown can complete in O(log P) time instead of O(P)).
 
+## paper: cs.au.dk [Mechanized Verification of a Fine-Grained Concurrent Queue from Meta’s Folly Library](https://cs.au.dk/~birke/papers/mpmc-queue.pdf)
 
+这篇论文不错，对`MPMCQueue`的原理进行了深入的剖析。
 
 ## `class MPMCQueueBase`
 
