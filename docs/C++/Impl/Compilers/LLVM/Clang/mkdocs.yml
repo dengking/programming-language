@@ -1,7 +1,7 @@
 nav:
     - Features&Goals: Features&Goals
     - doc: doc
-    - Clang-Tidy: Clang-Tidy
+    - static-analyzer: static-analyzer
     - compiler-rt: compiler-rt    
     - Application: Application
 

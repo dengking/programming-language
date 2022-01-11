@@ -1,2 +1,4 @@
 nav:
     - Lint: Lint
+    - pip: pip
+    

@@ -103,7 +103,15 @@ Python是duck typing的，因此封装是非常简单的。
 
 ### last
 
-https://stackoverflow.com/questions/2138873/cleanest-way-to-get-last-item-from-python-iterator
+https://stackoverflow.com/questions/2138873/cleanest-way-to-get-last-item-from-python-iterator、
+
+```Python
+itor = tu.cursor.get_children()
+#: 下面是获得iterator中最后一个元素的写法，参见: https://stackoverflow.com/a/48232574/10173843
+*_, last = itor
+```
+
+
 
 ### count
 

@@ -125,3 +125,28 @@ stackoverflow [How to See if a String Contains Another String in Django Template
 ### pass argument
 
 stackoverflow [How to pass selected, named arguments to Jinja2's include context?](https://stackoverflow.com/questions/9404990/how-to-pass-selected-named-arguments-to-jinja2s-include-context)
+
+
+
+### jinja string template include
+
+stackoverflow [How to include/extend Jinja2 template string variable in another variable](https://stackoverflow.com/questions/40196059/how-to-include-extend-jinja2-template-string-variable-in-another-variable)
+
+```python
+from jinja2 import Environment, BaseLoader, Template
+base = Template('''
+  - alert:
+     cluster: {{cluster}}
+     role: {{role}}
+     slack: {{slack}}
+''')
+
+alert = Template('''
+    {% include base %}
+     description: Critical {{role}} system load
+     threshold: xxx-yyy-zzz
+''')
+print(alert.render(cluster='cluster1', slack='alerts', role='database', base=base))
+
+```
+

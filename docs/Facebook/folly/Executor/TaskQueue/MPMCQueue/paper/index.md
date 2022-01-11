@@ -32,3 +32,98 @@ More concretely, in this paper we present an implementation of the MPMC queue an
 the original C++ implementation. We prove that the MPMC queue contextually refines a coarse-grained concurrent queue. The coarse-grained queue uses a lock to ensure that only one thread at a time access the queue. We take this simple queue to be the specification of a queue and the MPMC
 queue to be an implementation of the specification. Informally, the contextual refinement property then means that in any program we may replace uses of the “obviously correct” coarse-grained concurrent queue with the more efficient, but also more complicated, MPMC queue, without changing
 the observable behavior of the program. More precisely, an expression 𝑒 contextually refines another expression 𝑒′, if for all contexts 𝐶 of a ground type, if 𝐶[𝑒] terminates with a value, then there exists an execution of𝐶[𝑒′] that terminates with the same value.
+
+## 2 The Folly MPMC Queue
+
+We now describe the three data structures, starting with the turn sequencer and proceeding bottom-up.
+
+### 2.1 Turn Sequencer
+
+A **turn sequencer** is a data structure that implements mutual exclusion by ***sequentializing*** access to a critical section among threads ordered by a monotonically increasing turn. The **turn sequencer** implementation is shown in Figure 1a.
+
+The **turn sequencer** provides two operations: **wait** and **complete**. These are similar to the acquire and release operations on a lock, but they take an additional natural number as an argument. The natural number specifies which ***turn*** to wait for or to complete.
+
+> NOTE: 
+>
+> wait for turn
+>
+> complete turn
+
+The **turn sequencer** guarantees that if a thread waits for the **𝑛th turn**, then it will only proceed once all the preceding turns have been completed. For this to hold, the **turn sequencer** assumes that its clients never wait for the same turn several times. As such, it is the responsibility of clients to manage the turns, i.e., which natural numbers they wait for. Compared to a lock, this places a greater demand on the client, but in return the client is given precise control over the order in which threads run their critical sections.
+
+> NOTE: 
+>
+> 是否需要保证turn是连续的？
+
+We implement the turn sequencer as a pointer `ts` to a number, which represents the **current turn**. The function wait `ts 𝑛` simply spins on that pointer until its value is equal to `𝑛`. The implementation of complete ends the current turn by incrementing `ts`.
+
+### 2.2 Single-Element Queue
+
+A single-element queue (SEQ) is a queue with a capacity of one. Our implementation is shown in Figure 1a. It is a blocking queue: if it is **empty** (**full**) then any subsequent **dequeue** (**enqueue**) is blocked until the queue becomes **nonempty** (**non-full**).
+
+Similarly to the **turn sequencer**, the SEQ’s operations take a **turn** as an argument, however the turns are separate for **enqueue** and **dequeue**. The turn argument specifies the order of the operations: an enqueue or dequeue operation is carried out only after all operations with a lower number have been
+carried out. For an enqueue and a dequeue operation with the same turns, the enqueue is carried out first. This ordering ensures that when an enqueue operation is carried out, the queue is always empty, and when dequeue is run the queue is non-empty.
+
+### 2.3 MPMC Queue
+
+> NOTE: 
+>
+> ticket 和 turn 之间的对应关系
+
+In addition to the array, the queue contains two **ticket dispensers** (references to natural numbers): `pushTicket` and `popTicket`. The first keep track of tickets for the **enqueue** operation, and the second does the same for the **dequeue** operation.
+
+The enqueue operation first takes a ticket by incrementing the value of `pushTicket` with FAA, which atomically increments the ticket and leaves enqueue with a ticket `𝑡` . From this ticket, we calculate an index (`𝑡 mod 𝑞`) in the array for a SEQ. Then, enqueue writes an element into the SEQ by using the turn `⌊𝑡/𝑞⌋`. The dequeue operation proceeds in a similar way. It atomically increments `popTicket` and calculates an index and a turn in the same way. It dequeues a value from the SEQ and returns this value.
+
+### (a) Turn sequencer and single-element queue.
+
+```javascript
+newTS () = ref(0) // 这是在定义一个新类型；ref 表示reference、pointer； "="后面的是它的函数体
+
+complete ts turn = ts ← turn + 1; () // complete 是一个函数，它有两个入参: ts、turn； "="后面的是它的函数体
+
+wait ts turn =
+    let turn′ = ! ts in // 这是一个赋值语句， `!ts`  表示读取 ts 所指向的memory的值，并将该值赋值给 turn′
+    if (𝑡𝑢𝑟𝑛′ = 𝑡𝑢𝑟𝑛) then () // 函数返回
+    else wait ts turn // 这里使用递归来实现spin
+    
+queueSEQ () = (newTS (), ref(None)) // 这是在定义一个新类型queueSEQ；它使用的是functional language中的product type
+
+enqueueSEQ (ts, 𝑟 ) enqTurn 𝑣 = // 定义一个函数enqueueSEQ，(ts, 𝑟 )是这个函数的第一个入参，它其实就是 queueSEQ 类型的: ts 对应 queueSEQ 类型的第一个成员，r对应的是第二个成员；enqTurn 是第二个入参；v是第三个入参
+	let turn = enqTurn ∗ 2 in // 定义一个变量
+    wait ts turn; // 等待 turn
+    𝑟 ← Some(𝑣); // 赋值
+    complete ts turn // 完成 turn
+    
+dequeueSEQ (ts, 𝑟 ) deqTurn =
+    let turn = deqTurn ∗ 2 + 1 in
+    wait ts turn;
+    let 𝑣 = match ! 𝑟 with // 这是使用FP的pattern match特性，它本质上做的是将 r 赋值给 v；v是函数的返回值
+    | Some(𝑥) ⇒𝑥
+    | None ⇒ assert(false)
+    in complete ts turn; 𝑣 // v是函数的返回值
+```
+
+
+
+```JavaScript
+queueMPMC 𝑞 = Λ.
+    let slots = arrayInit 𝑞 queueSEQ in // 定义成员变量 slots；queueSEQ引用的是在(a)中定义的类型
+    let pushTicket = ref(0) in // 定义成员变量 pushTicket
+    let popTicket = ref(0) in // 定义成员变量 popTicket
+    (𝜆𝑣. enqueue slots 𝑞 pushTicket 𝑣, // 定义成员函数 enqueue，它的入参有四个
+     𝜆𝑥. dequeue slots 𝑞 popTicket) // 定义成员函数 dequeue
+enqueue slots 𝑞 pushTicket 𝑣 = // 定义函数，入参有四个
+    let 𝑡 = FAA(pushTicket, 1) in
+    let idx = 𝑡 mod 𝑞 in
+    let ticket = 𝑡/𝑞 in
+    enqueueSEQ (slots[idx]) ticket 𝑣
+dequeue slots 𝑞 popTicket =
+    let 𝑡 = FAA(popTicket, 1) in
+    let idx = 𝑡 mod 𝑞 in
+    let ticket = 𝑡/𝑞 in
+    dequeueSEQ (slots[idx]) ticket 𝑣
+```
+
+
+
+Figure 1. Implementation of the various data structures.

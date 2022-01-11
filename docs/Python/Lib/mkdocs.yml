@@ -4,3 +4,5 @@ nav:
     - Concurrent-server: Concurrent-server
     - Pallets: Pallets
     - Static-web-generator: Static-web-generator
+    - DB: DB
+    
