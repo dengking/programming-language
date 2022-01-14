@@ -378,6 +378,10 @@ del f # Destroy f
 
 ### 6.29 Callbacks to the target language
 
+> NOTE: 
+>
+> "Callbacks to the target language" 指的是在source language的程序中，执行target language程序中的函数
+
 C/C++ function pointers are often used for callbacks and this is discussed in the Pointers to functions and callbacks section. The callback techniques described therein provide a way to control callbacks to a C/C++ function but not callbacks into the target language. The techniques described below show how the director feature can be used to support callbacks from C/C++ to the target language.
 
 > NOTE: 
@@ -388,13 +392,19 @@ C/C++ function pointers are often used for callbacks and this is discussed in th
 
 #### 6.29.1 Introduction to director classes
 
-The **director feature** enables the ability for a target language class to derive from a **wrapped C++ class**. The target language can override virtual methods of a wrapped C++ class, thereby supporting **cross-language polymorphism**. Code can 'call up' from C++ into the target language by simply calling a virtual method overridden in a derived class in the target language. The wrapped C++ classes that have this ability are termed 'director' classes. The director feature is documented individually in each target language and the reader should locate and read this to obtain a full understanding of directors.
+The **director feature** enables the ability for a target language class to derive from a **wrapped C++ class**. The target language can override virtual methods of a wrapped C++ class, thereby supporting **cross-language polymorphism**. Code can 'call up' from C++ into the target language by simply calling a virtual method overridden in a derived class in the target language. The **wrapped C++ classes** that have this ability are termed 'director' classes. The director feature is documented individually in each target language and the reader should locate and read this to obtain a full understanding of directors.
+
+> NOTE: 
+>
+> 目标语言中的类来实现源语言C++中的virtual class，实现**cross-language polymorphism**。
 
 #### 6.29.2 Using directors and target language callbacks
 
-SWIG's primary goal is to make it possible to call C/C++ code from a target language, however, the director feature enables the reverse. While there isn't simple direct support for calling target language code from C, the director feature makes this possible. It does require some work and additional wrapper code to be provided by the user. The additional code required must be C++ and not C code and hence may introduce a small dependency on C++ if using a pure C project. In a nutshell, the user must create a C++ base class and turn it into a director class. A virtual method in the director base class is required. SWIG generates the code to call up into the target language when wrapping the director virtual method.
+SWIG's primary goal is to make it possible to call C/C++ code from a target language, however, the director feature enables the reverse. While there isn't simple direct support for calling target language code from C, the director feature makes this possible. It does require some work and additional wrapper code to be provided by the user. The additional code required must be C++ and not C code and hence may introduce a small dependency on C++ if using a pure C project. In a nutshell, the user must create a C++ base class and turn it into a **director class**. A **virtual method** in the director base class is required. SWIG generates the code to call up into the target language when wrapping the **director virtual method**.
 
-
+> NOTE: 
+>
+> 所谓 "director class"，其实就是接口类
 
 ## 11 SWIG library
 
@@ -410,6 +420,12 @@ swig -swiglib
 
 This section describes library modules for manipulating low-level C arrays and pointers. The primary use of these modules is in supporting C declarations that manipulate bare pointers such as `int *`, `double *`, or `void *`. The modules can be used to allocate memory, manufacture pointers, dereference memory, and wrap pointers as class-like objects. Since these functions provide direct access to memory, their use is potentially unsafe and you should exercise caution.
 
+
+
+## 14 Customization Features
+
+
+
 ## 19 Working with Modules
 
 ### 19.1 Modules Introduction
@@ -419,3 +435,5 @@ Each invocation of SWIG requires a **module name** to be specified. The **module
 > NOTE: 
 >
 > 目标语言的module
+
+## 32 SWIG and Python

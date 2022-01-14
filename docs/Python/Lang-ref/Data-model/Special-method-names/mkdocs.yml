@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - Python-able: Python-able
-    
+    - __name__: __name__

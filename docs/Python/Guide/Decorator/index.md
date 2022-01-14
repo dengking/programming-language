@@ -134,3 +134,22 @@ descriptor是一种python attribute access  protocol；
 ## Python decorator adding function attributes
 
 stackoverflow [How can I pass a variable in a decorator to function's argument in a decorated function?](https://stackoverflow.com/questions/1965607/how-can-i-pass-a-variable-in-a-decorator-to-functions-argument-in-a-decorated-f)
+
+## Python decorator add attribute to object
+
+1、stackoverflow [How can I add properties to a class using a decorator that takes a list of names as argument?](https://stackoverflow.com/questions/9125832/how-can-i-add-properties-to-a-class-using-a-decorator-that-takes-a-list-of-names)
+
+
+
+## decorate class 
+
+1、stackoverflow [How to decorate a class?](https://stackoverflow.com/questions/681953/how-to-decorate-a-class)
+
+2、kite [How to decorate a class in Python](https://www.kite.com/python/answers/how-to-decorate-a-class-in-python)
+
+3、pencilprogrammer [How to Decorate a class in Python?](https://pencilprogrammer.com/decorate-python-class/)
+
+## class decorator
+
+1、towardsdatascience [Using Class Decorators in Python](https://towardsdatascience.com/using-class-decorators-in-python-2807ef52d273)
+
