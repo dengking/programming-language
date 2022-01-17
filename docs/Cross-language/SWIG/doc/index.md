@@ -416,10 +416,6 @@ Library files are included using the `%include` directive.
 swig -swiglib
 ```
 
-### 11.2 C arrays and pointers
-
-This section describes library modules for manipulating low-level C arrays and pointers. The primary use of these modules is in supporting C declarations that manipulate bare pointers such as `int *`, `double *`, or `void *`. The modules can be used to allocate memory, manufacture pointers, dereference memory, and wrap pointers as class-like objects. Since these functions provide direct access to memory, their use is potentially unsafe and you should exercise caution.
-
 
 
 ## 14 Customization Features

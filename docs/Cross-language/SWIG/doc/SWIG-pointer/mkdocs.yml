@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - SWIG-object-of-pointer-type: SWIG-object-of-pointer-type    
+    - SWIG-const-char-pointer: SWIG-const-char-pointer
+    

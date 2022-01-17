@@ -1,5 +1,7 @@
 nav:
     - Introduction: index.md
+    - 11.2-C-arrays-and-pointers: 11.2-C-arrays-and-pointers
     - SWIG-director: SWIG-director
     - Reference-Counting-with-SWIG: Reference-Counting-with-SWIG
+    - SWIG-pointer: SWIG-pointer
     

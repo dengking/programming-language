@@ -1,4 +1,5 @@
 nav:
     - Lint: Lint
     - pip: pip
+    - Debug: Debug
     

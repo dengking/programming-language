@@ -183,3 +183,6 @@ class Test(BinaryOp):
 
 ```
 
+## swig director exception
+
+stackoverflow [Swig exception in Python director class](https://stackoverflow.com/questions/55489154/swig-exception-in-python-director-class)
