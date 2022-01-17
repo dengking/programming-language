@@ -30,9 +30,9 @@
 
 ## swig typemap void pointer
 
+
+
 ## stackoverflow [How to handle void pointers in SWIG director methods in Python](https://stackoverflow.com/questions/48132910/how-to-handle-void-pointers-in-swig-director-methods-in-python)
-
-
 
 
 
@@ -69,3 +69,25 @@
 
 
 ## stackoverflow [How to handle void pointers in SWIG director methods in Python](https://stackoverflow.com/questions/48132910/how-to-handle-void-pointers-in-swig-director-methods-in-python)
+
+
+
+## stackoverflow [Wrap C struct with array member for access in python: SWIG? cython? ctypes?](https://stackoverflow.com/questions/6165293/wrap-c-struct-with-array-member-for-access-in-python-swig-cython-ctypes)
+
+
+
+## stackoverflow [SWIG Python fixed size array passed by reference](https://stackoverflow.com/questions/22498128/swig-python-fixed-size-array-passed-by-reference)
+
+
+
+## typemap pointer to Python list
+
+stackoverflow [SWIG C-to-Python Int Array](https://stackoverflow.com/questions/5778500/swig-c-to-python-int-array)
+
+stackify [SWIG C-to-Python Int Array](https://stackify.dev/218768-swig-c-to-python-int-array)
+
+
+
+## `char *`
+
+swig默认会将`char *` 转化为 string。

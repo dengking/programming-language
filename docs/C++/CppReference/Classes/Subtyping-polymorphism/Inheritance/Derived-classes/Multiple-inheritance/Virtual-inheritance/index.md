@@ -10,7 +10,7 @@ virtual base class是virtual inheritance的base class。
 
 
 
-## TODO wikipedia [Virtual inheritance](https://en..org/wiki/Virtual_inheritance)
+## wikipedia [Virtual inheritance](https://en..org/wiki/Virtual_inheritance)
 
 **Virtual inheritance** is a [C++](https://en.wikipedia.org/wiki/C%2B%2B) technique that ensures only one copy of a [base class](https://en.wikipedia.org/wiki/Base_class)'s **member variables** are [inherited](https://en.wikipedia.org/wiki/Inheritance_(computer_science)) by grandchild derived classes.
 
@@ -66,8 +66,103 @@ int main()
 	Bat bat;
 }
 // g++ test.cpp
-
 ```
+
+> NOTE: 
+>
+> 需要注意的是: 上述程序是能够编译通过的，并且也能够运行，下面的程序是无法编译通过的:
+>
+> ```C++
+> struct Animal
+> 
+> {
+> 
+> 	virtual ~Animal()
+> 
+> 	{
+> 
+> 	}
+> 
+> 	virtual void eat()
+> 
+> 	{
+> 
+> 	}
+> 
+> };
+> 
+> 
+> 
+> struct Mammal: Animal
+> 
+> {
+> 
+> 	virtual void breathe()
+> 
+> 	{
+> 
+> 	}
+> 
+> };
+> 
+> 
+> 
+> struct WingedAnimal: Animal
+> 
+> {
+> 
+> 	virtual void flap()
+> 
+> 	{
+> 
+> 	}
+> 
+> };
+> 
+> 
+> 
+> // A bat is a winged mammal
+> 
+> struct Bat: Mammal, WingedAnimal
+> 
+> {
+> 
+> };
+> 
+> int main()
+> 
+> {
+> 
+> 	Bat bat;
+> 
+>     bat.eat();
+> 
+> }
+> 
+> // g++ test.cpp
+> ```
+>
+> 编译报错如下:
+>
+> ```C++
+> test.cpp: In function ‘int main()’:
+> 
+> test.cpp:32:13: error: request for member ‘eat’ is ambiguous
+> 
+>    32 |         bat.eat();
+> 
+>       |             ^~~
+> 
+> test.cpp:6:22: note: candidates are: ‘virtual void Animal::eat()’
+> 
+>     6 |         virtual void eat()
+> 
+>       |                      ^~~
+> 
+> test.cpp:6:22: note:                 ‘virtual void Animal::eat()’
+> ```
+>
+> 
 
 As declared above, a call to `bat.eat()` is ambiguous because there are two `Animal` (indirect) base classes in `Bat`, so any `Bat` object has two different `Animal` base class subobjects(子对象). So an attempt to directly bind a reference to the `Animal` subobject of a `Bat` object would fail, since the binding is inherently(本质上来说) ambiguous:
 
@@ -86,6 +181,10 @@ Animal &winged = static_cast<WingedAnimal&> (b);
 ```
 
 In order to call `eat()`, the same disambiguation, or **explicit qualification** is needed: `static_cast<Mammal&>(bat).eat()` or `static_cast<WingedAnimal&>(bat).eat()` or alternatively `bat.Mammal::eat()` and `bat.WingedAnimal::eat()`. **Explicit qualification** not only uses an easier, uniform syntax for both pointers and objects but also allows for static dispatch, so it would arguably be the preferable method.
+
+> NOTE: 
+>
+> 一、可以看到，上述grammar是非常冗杂的；但是需要明白的是: C++是支持非virtual inheritance的multiple inheritance
 
 In this case, the double inheritance of `Animal` is probably unwanted, as we want to model that the relation (`Bat` is an `Animal`) exists only once; that a `Bat` is a `Mammal` and is a `WingedAnimal` does not imply that it is an `Animal` twice: an `Animal` base class corresponds to a contract(合同) that `Bat` implements (the "is a" relationship above really means "*implements the requirements of*"), and a `Bat` only implements the `Animal` contract once. The real world meaning of "*is a* only once" is that `Bat` should have only one way of implementing `eat()`, not two different ways, depending on whether the `Mammal` view of the `Bat` is eating, or the `WingedAnimal` view of the `Bat`. (In the first code example we see that `eat()` is not overridden in either `Mammal` or `WingedAnimal`, so the two `Animal` subobjects will actually behave the same, but this is just a degenerate(退化) case, and that does not make a difference from the C++ point of view.)
 
@@ -115,11 +214,25 @@ struct Bat : Mammal, WingedAnimal {
 };
 ```
 
+> NOTE: 
+>
+> 如果要支持multiple inheritance，那么在base class就需要为其加上virtual inheritance使其成为virtual base class
+
 The `Animal` portion of `Bat::WingedAnimal` is now the *same* `Animal` instance as the one used by `Bat::Mammal`, which is to say that a `Bat` has only one, shared, `Animal` instance in its representation and so a call to `Bat::eat()` is unambiguous. Additionally, a direct cast from `Bat` to `Animal` is also unambiguous, now that there exists only one `Animal` instance which `Bat` could be converted to.
 
 The ability to share a single instance of the `Animal` parent between `Mammal` and `WingedAnimal` is enabled by recording the **memory offset** between the `Mammal` or `WingedAnimal` members and those of the base `Animal` within the **derived class**. However this offset can in the general case only be known at runtime, thus `Bat` must become (`vpointer`, `Mammal`, `vpointer`, `WingedAnimal`, `Bat`, `Animal`). There are two [vtable](https://en.wikipedia.org/wiki/Vtable) pointers, one per **inheritance hierarchy** that virtually inherits `Animal`. In this example, one for `Mammal` and one for `WingedAnimal`. The object size has therefore increased by two pointers, but now there is only one `Animal` and no ambiguity. All objects of type `Bat` will use the same `vpointers`, but each `Bat` object will contain its own unique `Animal` object. If another class inherits from `Mammal`, such as `Squirrel`, then the `vpointer` in the `Mammal` part of `Squirrel` will generally be different to the `vpointer` in the `Mammal` part of `Bat` though they may happen to be the same should the `Squirrel` class be the same size as `Bat`.
 
+### Additional Example
 
+```C++
+  A  
+ / \  
+B   C  
+ \ /  
+  D 
+  |
+  E
+```
 
 
 

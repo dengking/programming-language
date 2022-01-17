@@ -1,7 +1,10 @@
 nav:
     - Introduction: index.md
+    - 6-SWIG-and-C++: 6-SWIG-and-C++
     - 11.2-C-arrays-and-pointers: 11.2-C-arrays-and-pointers
+    - 13-Typemaps: 13-Typemaps
     - SWIG-director: SWIG-director
-    - Reference-Counting-with-SWIG: Reference-Counting-with-SWIG
+    - SWIG-reference-counting: SWIG-reference-counting
     - SWIG-pointer: SWIG-pointer
-    
+    - SWIG-callback&multithread: SWIG-callback&multithread
+    - SWIG-this: SWIG-this
