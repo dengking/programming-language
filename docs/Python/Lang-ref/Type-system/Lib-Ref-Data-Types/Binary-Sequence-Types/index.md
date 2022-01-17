@@ -1,0 +1,1 @@
+## [Built-in Types](https://docs.python.org/3/library/stdtypes.html) # Binary Sequence Types — [`bytes`](https://docs.python.org/3/library/stdtypes.html#bytes), [`bytearray`](https://docs.python.org/3/library/stdtypes.html#bytearray), [`memoryview`](https://docs.python.org/3/library/stdtypes.html#memoryview)
