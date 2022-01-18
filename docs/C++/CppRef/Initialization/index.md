@@ -4,8 +4,6 @@
 
 ## 发展概述
 
-
-
 ### C++98 
 
 1、[Default initialization](https://en.cppreference.com/w/cpp/language/default_initialization)
@@ -26,7 +24,21 @@
 
 统一了syntax、消除了syntax ambiguity，进行了simplify。
 
+## 思路
 
+C++的initialization不仅种类繁多而且规则冗杂，下面是比较好的整理思路:
+
+首先需要区分每种initialization的syntax，因为compiler根据syntax来决定采用何种initialization；
+
+其次是需要搞清楚每种initialization的**effect**，对effect的讨论主要集中在对下面三种type的effect: 
+
+| type           | 注解        |
+| -------------- | ----------- |
+| built-in type  | int、char等 |
+| OOP class type | class       |
+| aggregate type | array       |
+
+各种initialization的差异重要体现在它们的**effect**上。
 
 ## 区分
 
@@ -34,17 +46,7 @@ C++的initialization章节中，出现了非常多的initialization术语，如�
 
 ### 带参 与 不带参的initialization
 
-不带参的initialization:
-
-1、default initialization
-
-2、value initialization
-
-带参的initialization:
-
-1、copy initialization
-
-2、directed initialization
+这在cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization)章节有着非常好的总结。
 
 ### Default initialization VS value initialization
 
@@ -92,16 +94,20 @@ In a C++03 conformant compiler, things should work like so:
 
 - `new A` - indeterminate value
 - `new A()` - value-initialize A, which is zero-initialization since it's a POD.
-- `new B` - default-initializes (leaves B::m uninitialized)
+- `new B` - default-initializes (leaves `B::m` uninitialized)
 - `new B()` - value-initializes B which zero-initializes all fields since its default ctor is compiler generated as opposed to user-defined.
 - `new C` - default-initializes C, which calls the default ctor.
 - `new C()` - value-initializes C, which calls the default ctor.
 
-So in all versions of C++ there's a difference between `new A` and `new A()` because A is a POD.
+> NOTE: 
+>
+> initialization 和 default ctor之间的对应关系
+
+So in all versions of C++ there's a difference between `new A` and `new A()` because `A` is a POD.
 
 And there's a difference in behavior between C++98 and C++03 for the case `new B()`.
 
-This is one of the dusty corners of C++ that can drive you crazy. When constructing an object, sometimes you want/need the parens, sometimes you absolutely cannot have them, and sometimes it doesn't matter.
+This is one of the dusty corners(灰暗的角落) of C++ that can drive you crazy. When constructing an object, sometimes you want/need the parens, sometimes you absolutely cannot have them, and sometimes it doesn't matter.
 
 ### Directed initialization 和 value initialization
 

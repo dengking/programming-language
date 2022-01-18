@@ -3,6 +3,7 @@ nav:
     # 首先描述cppreference中initialization的概念    
     - Initialization&constructor&conversion: Initialization&constructor&conversion
     - Initialization: Initialization.md
+    - Non-local-variables-initialization: Non-local-variables-initialization
     - Default-initialization: Default-initialization    
     - C++03-Value-initialization: C++03-Value-initialization
     - Direct-initialization: Direct-initialization
