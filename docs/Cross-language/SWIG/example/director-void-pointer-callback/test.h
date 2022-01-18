@@ -1,7 +1,8 @@
 
 struct Interface
 {
-    virtual int callback(void *p) = 0;
+    Interface(){}
+    virtual void callback(void *p) {}
     virtual ~Interface() {}
 };
 void run(Interface *i)

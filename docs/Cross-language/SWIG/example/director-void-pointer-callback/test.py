@@ -2,7 +2,9 @@ from example import *
 
 class Test(Interface):
     def __init__(self):
-        super(Interface, self).__init__()
+        """
+        """
+        # super(Interface, self).__init__()
 
     def handle(self, a):
         """

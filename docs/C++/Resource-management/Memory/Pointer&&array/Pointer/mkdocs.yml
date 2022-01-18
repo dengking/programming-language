@@ -3,7 +3,7 @@ nav:
     - Pointer: Pointer
     - Pointer-to-void: Pointer-to-void
     - Multiple-level-pointer: Multiple-level-pointer
-    - Pointer-and-integer: Pointer-and-integer
+    - Pointer&integer: Pointer&integer
     - Conversion: Conversion.md
     - Pointer-length: Pointer-length
     - Pointer-to-member: Pointer-to-member

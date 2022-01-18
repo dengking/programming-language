@@ -4,12 +4,6 @@ C++引入的Virtual inheritance特性就是为了解决前面提到的 [the diam
 
 virtual base class是virtual inheritance的base class。
 
-## TODO cppreference [Virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
-
-
-
-
-
 ## wikipedia [Virtual inheritance](https://en..org/wiki/Virtual_inheritance)
 
 **Virtual inheritance** is a [C++](https://en.wikipedia.org/wiki/C%2B%2B) technique that ensures only one copy of a [base class](https://en.wikipedia.org/wiki/Base_class)'s **member variables** are [inherited](https://en.wikipedia.org/wiki/Inheritance_(computer_science)) by grandchild derived classes.
@@ -216,9 +210,21 @@ struct Bat : Mammal, WingedAnimal {
 
 > NOTE: 
 >
-> 如果要支持multiple inheritance，那么在base class就需要为其加上virtual inheritance使其成为virtual base class
+> 一、如果要支持multiple inheritance，那么在base class就需要为其加上virtual inheritance使其成为virtual base class，如上例子中的 `struct Mammal`、`struct WingedAnimal`
 
 The `Animal` portion of `Bat::WingedAnimal` is now the *same* `Animal` instance as the one used by `Bat::Mammal`, which is to say that a `Bat` has only one, shared, `Animal` instance in its representation and so a call to `Bat::eat()` is unambiguous. Additionally, a direct cast from `Bat` to `Animal` is also unambiguous, now that there exists only one `Animal` instance which `Bat` could be converted to.
+
+> NOTE: 
+>
+> 一、上面这一段讲述的是"unambiguous"，下面则是对具体的实现细节的阐述:
+>
+> 为了让"`Mammal` and `WingedAnimal` " 能够 "share a single instance of the `Animal` parent "，需要在 **derived class** `Bat` 中记录`Mammal` 、`WingedAnimal` 、`Animal` 的成员的memory offset。这些offset只能够在运行时获知，因此: "`Bat` must become (`vpointer`, `Mammal`, `vpointer`, `WingedAnimal`, `Bat`, `Animal`)"
+>
+> 在 `Bat` 中，需要 "two [vtable](https://en.wikipedia.org/wiki/Vtable) pointers":
+>
+> 1、one for `Mammal` 
+>
+> 2、one for `WingedAnimal`
 
 The ability to share a single instance of the `Animal` parent between `Mammal` and `WingedAnimal` is enabled by recording the **memory offset** between the `Mammal` or `WingedAnimal` members and those of the base `Animal` within the **derived class**. However this offset can in the general case only be known at runtime, thus `Bat` must become (`vpointer`, `Mammal`, `vpointer`, `WingedAnimal`, `Bat`, `Animal`). There are two [vtable](https://en.wikipedia.org/wiki/Vtable) pointers, one per **inheritance hierarchy** that virtually inherits `Animal`. In this example, one for `Mammal` and one for `WingedAnimal`. The object size has therefore increased by two pointers, but now there is only one `Animal` and no ambiguity. All objects of type `Bat` will use the same `vpointers`, but each `Bat` object will contain its own unique `Animal` object. If another class inherits from `Mammal`, such as `Squirrel`, then the `vpointer` in the `Mammal` part of `Squirrel` will generally be different to the `vpointer` in the `Mammal` part of `Bat` though they may happen to be the same should the `Squirrel` class be the same size as `Bat`.
 
@@ -234,17 +240,189 @@ B   C
   E
 ```
 
+Here, `A` must be constructed in both `D` and `E`. Further, inspection of the variable `msg` illustrates how class `A` becomes a direct base class of its deriving class, as opposed to a base class of any intermediate deriving classed between `A` and the final deriving class. The code below may be explored interactively [here](https://godbolt.org/z/WGfa9bYG7).
+
+> NOTE: 
+>
+> 一、上面这段话的含义是: 从上面的class hierarchy中，我们会觉得 `A` 不是 `D` 的**direct base class**，但是在C++的具体implementation中，会将 `A` 看做是 `D` 的direct base class，这个结论初看是比较违反直觉的，但是仔细想想应该是这样的:
+>
+> 使用virtual inheritance能够保证`D`中只有一个`A` object，那这就相当于 `A` 就是 `D` 的direct base class。
+>
+> 这个总结是非常好的，它能够帮助我们理解C++ virtual inheritance的syntax，下面的这个例子非常好的展示了这种情况下的initialization的写法:
 
 
 
+```C++
+#include <string>
+#include <iostream>
+
+class A
+{
+private:
+    std::string _msg;
+
+public:
+    A(std::string x) : _msg(x) {}
+    void test() { std::cout << "hello from A: " << _msg << "\n"; }
+};
+
+// B,C inherit A virtually
+class B : virtual public A
+{
+public:
+    B(std::string x) : A("b") {}
+};
+class C : virtual public A
+{
+public:
+    C(std::string x) : A("c") {}
+};
+
+// since B,C inherit A virtually, A must be constructed in each child
+class D : public B, C
+{
+public:
+    D(std::string x) : A("d_a"), B("d_b"), C("d_c") {}
+};
+class E : public D
+{
+public:
+    E(std::string x) : A("e_a"), D("e_d") {}
+};
+
+// breaks without constructing A
+// class D: public         B,C { public: D(std::string x):B(x),C(x){}  };
+
+// breaks without constructing A
+// class E: public         D   { public: E(std::string x):D(x){}  };
+
+int main(int argc, char **argv)
+{
+    D d("d");
+    d.test(); // hello from A: d_a
+
+    E e("e");
+    e.test(); // hello from A: e_a
+}
+// g++ test.cpp -pedantic -Wall -Wextra
+
+```
+
+> NOTE: 
+>
+> 输出如下:
+>
+> ```C++
+> hello from A: d_a
+> 
+> hello from A: e_a
+> ```
+>
+> 
+
+#### 错误版本
+
+```C++
+#include <string>
+#include <iostream>
+
+class A
+{
+private:
+    std::string _msg;
+
+public:
+    A(std::string x) : _msg(x) {}
+    void test() { std::cout << "hello from A: " << _msg << "\n"; }
+};
+
+// B,C inherit A virtually
+class B : virtual public A
+{
+public:
+    B(std::string x) : A("b") {}
+};
+class C : virtual public A
+{
+public:
+    C(std::string x) : A("c") {}
+};
+
+// since B,C inherit A virtually, A must be constructed in each child
+// class D : public B, C
+// {
+// public:
+//     D(std::string x) : A("d_a"), B("d_b"), C("d_c") {}
+// };
+// class E : public D
+// {
+// public:
+//     E(std::string x) : A("e_a"), D("e_d") {}
+// };
+
+// breaks without constructing A
+class D : public B, C
+{
+public:
+    D(std::string x) : B(x), C(x) {}
+};
+
+// breaks without constructing A
+class E : public D
+{
+public:
+    E(std::string x) : D(x) {}
+};
+
+int main(int argc, char **argv)
+{
+    D d("d");
+    d.test(); // hello from A: d_a
+
+    E e("e");
+    e.test(); // hello from A: e_a
+}
+// g++ test.cpp -pedantic -Wall -Wextra
+
+```
+
+> NOTE: 
+>
+> 编译报错如下:
+>
+> ```C++
+> test.cpp: In constructor ‘D::D(std::string)’:
+> test.cpp:42:33: error: no matching function for call to ‘A::A()’
+>    42 |     D(std::string x) : B(x), C(x) {}
+>       |                                 ^
+> 
+> test.cpp:10:5: note: candidate: ‘A::A(std::string)’
+>    10 |     A(std::string x) : _msg(x) {}
+>       |     ^
+> 
+> test.cpp:10:5: note:   candidate expects 1 argument, 0 provided
+> test.cpp:4:7: note: candidate: ‘A::A(const A&)’
+>     4 | class A
+>       |       ^
+> 
+> test.cpp:4:7: note:   candidate expects 1 argument, 0 provided
+> test.cpp:4:7: note: candidate: ‘A::A(A&&)’
+> test.cpp:4:7: note:   candidate expects 1 argument, 0 provided
+> ```
+>
+> 上述错误的原因是: 在 `D(std::string x) : B(x), C(x) {}` 中，没有调用它的direct base class `A` 的唯一constructor `A(std::string x)` ，因为 `A` 没有default constructor，因此上述就会报错。
 
 ## stackoverflow [virtual inheritance](https://stackoverflow.com/questions/419943/virtual-inheritance)
 
 
 
-
-
 ## stackoverflow [In C++, what is a virtual base class?](https://stackoverflow.com/questions/21558/in-c-what-is-a-virtual-base-class)
+
+
+
+## cppreference [Virtual base classes](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)
+
+
 
 
 
