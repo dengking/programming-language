@@ -1,5 +1,49 @@
 # ctypes
 
+## [`ctypes`](https://docs.python.org/3/library/ctypes.html#module-ctypes) — A foreign function library for Python
+
+> NOTE: 
+>
+> 原文主要分为两部分:
+>
+> 1、ctypes tutorial[¶](https://docs.python.org/3/library/ctypes.html#ctypes-tutorial)
+>
+> 2、ctypes reference[¶](https://docs.python.org/3/library/ctypes.html#ctypes-reference)
+
+
+
+### ctypes tutorial[¶](https://docs.python.org/3/library/ctypes.html#ctypes-tutorial)
+
+
+
+`None`, integers, bytes objects and (unicode) strings are the only native Python objects that can directly be used as parameters in these function calls. `None` is passed as a C `NULL` pointer, bytes objects and strings are passed as pointer to the memory block that contains their data (`char*` or `wchar_t*`). Python integers are passed as the platforms default C `int` type, their value is masked to fit into the C type.
+
+> NOTE: 
+>
+> 一、Python C type map
+>
+> 这段话非常重要
+
+#### Fundamental data types[¶](https://docs.python.org/3/library/ctypes.html#fundamental-data-types)
+
+> NOTE: 
+>
+> 一、Python C type map
+
+Assigning a new value to instances of the pointer types [`c_char_p`](https://docs.python.org/3/library/ctypes.html#ctypes.c_char_p), [`c_wchar_p`](https://docs.python.org/3/library/ctypes.html#ctypes.c_wchar_p), and [`c_void_p`](https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p) changes the *memory location* they point to, *not the contents* of the memory block (of course not, because **Python bytes objects** are **immutable**):
+
+
+
+### ctypes reference[¶](https://docs.python.org/3/library/ctypes.html#ctypes-reference)
+
+
+
+
+
+
+
+
+
 
 
 ## pass byte array to C++ function that accept a void pointer

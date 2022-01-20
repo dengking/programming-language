@@ -1,4 +1,7 @@
 nav:
     - Built-in: Built-in
     - Python-Runtime-Services: Python-Runtime-Services
+    - ctypes: ctypes
+    - Concurrent-Execution: Concurrent-Execution
+    - Network&IPC: Network&IPC
     

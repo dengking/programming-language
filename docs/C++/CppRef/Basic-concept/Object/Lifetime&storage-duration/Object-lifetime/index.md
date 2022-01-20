@@ -34,9 +34,9 @@ C++语言对这些问题，都进行了详细的规定，后面我们将以此�
 
 | 章节                                                         | 说明                                                    |
 | ------------------------------------------------------------ | ------------------------------------------------------- |
-| `C++\Language-reference\Classes\Lifetime`                    | 描述OOP object的lifetime                                |
-| `C++\Language-reference\Basic-concept\Data-model\Object-with-static-storage-duration` | 描述object with static storage duration的lifetime       |
-| `C++\Language-reference\Basic-concept\Data-model\Object-with-thread-local-storage-duration` | 描述object with thread local storage duration的lifetime |
+| `CppRef\Classes\Lifetime`                                    | 描述OOP object的lifetime                                |
+| `CppRef\Basic-concept\Object\Lifetime&storage-duration\Static-storage-duration` | 描述object with static storage duration的lifetime       |
+| `CppRef\Basic-concept\Object\Lifetime&storage-duration\Thread-local-storage-duration` | 描述object with thread local storage duration的lifetime |
 
 
 

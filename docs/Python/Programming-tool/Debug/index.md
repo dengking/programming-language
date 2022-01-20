@@ -54,6 +54,3 @@ redhat [Debugging Python C extensions with GDB](https://developers.redhat.com/ar
 >
 > 
 
-## pdb
-
-### realpython [Python Debugging With Pdb](https://realpython.com/python-debugging-pdb/)
