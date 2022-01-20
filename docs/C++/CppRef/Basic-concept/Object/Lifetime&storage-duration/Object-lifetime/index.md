@@ -62,20 +62,67 @@ cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 的
 
 ## cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
 
+> NOTE: 
+>
+> 本文对原文的内容基于我的理解进行了重新的整理
 
+### Object lifetime and storage
 
-### Lifetime of an explicitly created object
+Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
+
+> NOTE: 
+>
+> 一、把它放到最前面是为了强调两者之间的关系
+>
+> 二、"nested"是因为: [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse): 同一个storage，可以用于多个object，即存在object已经end了，但是storage还存在。
+
+### 通用的Lifetime规则
 
 > NOTE: 仅仅描述了大体的流程，并不涉及具体细节
 
 #### Begin
 
-| activity       | explanation                                                  | 注解                     |
-| -------------- | ------------------------------------------------------------ | ------------------------ |
-| allocation     | storage with the proper alignment and size for its type is obtained |                          |
-| initialization | its initialization (if any) is complete                      | 原文对此有更加详细的讨论 |
+The lifetime of an object begins when:
 
+> NOTE: 
+>
+> 一、首先执行allocation，然后执行initialization
 
+一、allocation
+
+storage with the proper alignment and size for its type is obtained
+
+二、initialization
+
+its initialization (if any) is complete (including [default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) via no constructor or [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)), except that
+
+> NOTE: 
+>
+> 一、上述括号中的内容是对"initialization"进行解释，它特意强调的是 "[default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) via no constructor or [trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)" 都属于"initialization (if any) is complete"，因为:
+>
+> 1、[default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) via no constructor
+>
+> 2、[trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)，关于此，可以参见 cppreference [Default constructors # Trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor) 
+>
+> > A **trivial default constructor** is a constructor that performs no action. All data types compatible with the C language (POD types) are trivially default-constructible.
+>
+> 简而言之: trivial default constructor其实是do-noting
+
+1、if the object is a [union member](https://en.cppreference.com/w/cpp/language/union#Member_lifetime) or subobject thereof, its lifetime only begins if that union member is the initialized member in the union, or it is made active,
+
+> NOTE: 上面这段话描述了union member的lifetime规则， union member的lifetime begin的条件是:
+>
+> 1、它是"initialized member in the union"
+>
+> 2、它被"made active"
+
+2、if the object is nested in a union object, its lifetime may begin if the containing union object is assigned or constructed by a trivial special member function,
+
+3、an array object's lifetime may also begin if it is allocated by [std::allocator::allocate](https://en.cppreference.com/w/cpp/memory/allocator/allocate).
+
+> NOTE: 
+>
+> 一、上面描述的其实是一些特殊的object的lifetime规则
 
 #### End
 
@@ -95,15 +142,27 @@ The lifetime of an object ends when:
 
 3) the storage which the object occupies is released, or is reused by an object that is not nested within it.
 
-> NOTE: 参见下面的"Storage reuse"段
+> NOTE: 
 >
-> 关于non-class type、class type，参见`C++\Language-reference\Basic-concept\Type-system\Type-system`
+> 一、关于"storage reuse"，参见 `Storage-reuse` 章节
+>
+> 二、关于non-class type、class type，参见`C++\Language-reference\Basic-concept\Type-system\Type-system`
 
 ### Lifetime of an implicitly created object
 
 Some operations [implicitly create objects](https://en.cppreference.com/w/cpp/language/object#Object_creation) of implicit-lifetime types (see below) in given region of storage and start their lifetime.
 
+> NOTE: 
+>
 > 中文意思: 一些操作隐式地在给定的存储区域中创建隐含生命期类型的对象(见下面)，并启动它们的生命期。
+
+
+
+#### Implicit-lifetime types
+
+> NOTE: 是否是trivially-copyable type？
+
+
 
 ### Lifetime of reference
 
@@ -123,17 +182,11 @@ Lifetimes of non-static data members and base subobjects **begin** and **end** f
 
 
 
-### Implicit-lifetime types
-
-> NOTE: 是否是trivially-copyable type？
-
-
-
 ### Temporary object lifetime
 
 > NOTE: 
 >
-> 理解原文的内容的一个非常关键的点是: 理解C++17 [Temporary materialization](https://en.cppreference.com/w/cpp/language/implicit_conversion#Temporary_materialization) 特性，这个特性改变了Temporary object lifetime的规则。因此，原文中关于"Temporary object lifetime"的讨论分为了两部分:
+> 理解原文的内容的一个非常关键的点是: 理解C++17 [Temporary materialization](https://en.cppreference.com/w/cpp/language/implicit_conversion#Temporary_materialization) (物化) 特性，这个特性改变了Temporary object lifetime的规则。因此，原文中关于"Temporary object lifetime"的讨论分为了两部分:
 >
 > 1) C++17前
 >
@@ -215,6 +268,10 @@ Temporary objects are created in the following situations:
 
 All **temporary objects** are destroyed as the last step in evaluating the **full-expression** that (lexically) contains the point where they were created, and if multiple **temporary objects** were created, they are **destroyed in the order opposite to the order of creation**. This is true even if that evaluation ends in throwing an exception.
 
+> NOTE: 
+>
+> stack order
+
 There are two exceptions from that:
 
 1) The lifetime of a **temporary object** may be extended by binding to a **const lvalue reference** or to an **rvalue reference** (since C++11), see [reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) for details.
@@ -223,17 +280,13 @@ There are two exceptions from that:
 
 > NOTE: 没有读懂
 
-### Object and storage
+### Storage reuse
 
-本节的标题继承自`C++\Language-reference\Basic-concept\Object\Object.md`中的同名章节，本节结合cppreference [Lifetime](https://en.cppreference.com/w/cpp/language/lifetime) 中的内容，从lifetime的角度对Object and storage之间的关系进行论述: 
+> NOTE: 
+>
+> 参见`Storage-reuse`章节
 
-> Lifetime of an object is equal to or is nested within the lifetime of its storage, see [storage duration](https://en.cppreference.com/w/cpp/language/storage_duration).
 
-"nested"是因为: [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse): 同一个storage，可以用于多个object，即存在object已经end了，但是storage还存在。
-
-#### TODO [Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)
-
-> NOTE: 这段内容是值得一读的
 
 ### [Access outside of lifetime](https://en.cppreference.com/w/cpp/language/lifetime#Access_outside_of_lifetime)
 

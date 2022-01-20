@@ -17,6 +17,8 @@
 > 1、alignment是需要由programmer来保证的，这在custom memory pool的实现中，是非常重要的。
 >
 > 2、不执行allocation，只执行construction
+>
+> 二、当使用placement new的时候，必须要 `#include <new>`
 
 If `placement_params` are provided, they are passed to the allocation function as additional arguments. Such allocation functions are known as "placement new", after the standard allocation function `void*` [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new)([std::size_t](http://en.cppreference.com/w/cpp/types/size_t)`, void*)`, which simply returns its second argument unchanged. This is used to construct objects in allocated storage:
 
@@ -45,7 +47,9 @@ Note: this functionality is encapsulated by the member functions of the [*Alloca
 >
 > 函数原型，参见 cppreference [operator new](http://en.cppreference.com/w/cpp/memory/new/operator_new) 
 
+## Placement new and storage reuse
 
+一般，"placement new" 会涉及"storage reuse"，关于此，在 `Storage-reuse` 章节进行了非常好的描述。
 
 ## stackoverflow [What uses are there for “placement new”?](https://stackoverflow.com/questions/222557/what-uses-are-there-for-placement-new)
 

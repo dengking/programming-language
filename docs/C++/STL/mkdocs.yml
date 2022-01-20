@@ -23,14 +23,14 @@ nav:
     
     - Atomic-operations-library: Atomic-operations-library
     
-    - Utility-library: Utility-library
+    - Utility: Utility
 
     - Dynamic-memory-management: Dynamic-memory-management
     
     - Extending-std: Extending-std
     
-    - Extensions: Extensions
-    
     - Localization-library: Localization-library
     
     - Numerics-library: Numerics-library
+    
+    - Extensions: Extensions
