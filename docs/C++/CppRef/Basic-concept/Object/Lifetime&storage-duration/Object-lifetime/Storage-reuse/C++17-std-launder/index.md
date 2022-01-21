@@ -6,6 +6,8 @@
 
 ## stackoverflow [What is the purpose of std::launder?](https://stackoverflow.com/questions/39382501/what-is-the-purpose-of-stdlaunder)
 
+## stackoverflow [Does this really break strict-aliasing rules?](https://stackoverflow.com/questions/27003727/does-this-really-break-strict-aliasing-rules)
+
 
 
 ## cppreference [Lifetime # Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse)

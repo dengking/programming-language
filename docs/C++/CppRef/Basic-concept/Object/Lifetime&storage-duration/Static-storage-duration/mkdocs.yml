@@ -3,5 +3,6 @@ nav:
     - pabloariasal-C++Initialization-of-Static-Variables: pabloariasal-C++Initialization-of-Static-Variables    
     - Non-local-object: Non-local-object
     - Static-local-object: Static-local-object
+    - Extern-local-object: Extern-local-object
     - Idioms: Idioms
     - Paper-N2660-Magic-static: Paper-N2660-Magic-static    

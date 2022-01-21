@@ -77,3 +77,82 @@ int main()
 #### C++11
 
 In C++11 the template [std::addressof](http://en.cppreference.com/w/cpp/memory/addressof), in the `<memory>` header, was added to solve this problem. In C++17, the template is also `constexpr`.
+
+
+
+## cppreference [std::addressof](https://en.cppreference.com/w/cpp/memory/addressof)
+
+
+
+```C++
+
+template<class T>
+typename std::enable_if<std::is_object<T>::value, T*>::type  addressof(T& arg) noexcept
+{
+    return reinterpret_cast<T*>(
+               &const_cast<char&>(
+                   reinterpret_cast<const volatile char&>(arg)));
+}
+ 
+template<class T>
+typename std::enable_if<!std::is_object<T>::value, T*>::type addressof(T& arg) noexcept
+{
+    return &arg;
+}
+```
+
+
+
+### Example
+
+```C++
+#include <iostream>
+#include <memory>
+
+template<class T>
+struct Ptr {
+	T* pad; // add pad to show difference between 'this' and 'data'
+	T* data;
+	Ptr(T* arg) : pad(nullptr), data(arg)
+	{
+		std::cout << "Ctor this = " << this << std::endl;
+	}
+
+	~Ptr() { delete data; }
+	T** operator&() { return &data; }
+};
+
+template<class T>
+void f(Ptr<T>* p)
+{
+	std::cout << "Ptr   overload called with p = " << p << '\n';
+}
+
+void f(int** p)
+{
+	std::cout << "int** overload called with p = " << p << '\n';
+}
+
+int main()
+{
+	Ptr<int> p(new int(42));
+	f(&p);                 // calls int** overload
+	f(std::addressof(p));  // calls Ptr<int>* overload, (= this)
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -Werror
+
+```
+
+> NOTE: 
+>
+> 输出如下:
+>
+> ```C++
+> Ctor this = 0x7ffe5e31c290
+> 
+> int** overload called with p = 0x7ffe5e31c298
+> 
+> Ptr   overload called with p = 0x7ffe5e31c290
+> ```
+>
+> 

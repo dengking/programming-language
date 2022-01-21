@@ -32,6 +32,12 @@
 
 如果这个类都是trivial ctor/dtor/copy/assignment函数，我们对这个类进行构造、析构、拷贝和赋值时可以采用最有效率的方法，不调用无所事事正真的那些ctor/dtor等，而直接采用内存操作如malloc()、memcpy()等提高性能，这也是SGI STL内部干的事情。
 
+## stackoverflow [What is a non-trivial constructor in C++?](https://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c)
+
+> NOTE: 
+>
+> 这篇文章总结地也是非常不错的
+
 ## Constructor and destructor
 
 trivial表示**无意义**的，对于trivial default constructor 、trivial destructor，是可以不调用的:
@@ -156,15 +162,7 @@ The move assignment operator for class `T` is trivial if all of the following is
 
 A trivial move assignment operator performs the same action as the trivial copy assignment operator, that is, makes a copy of the object representation as if by [std::memmove](https://en.cppreference.com/w/cpp/string/byte/memmove). All data types compatible with the C language (POD types) are trivially move-assignable.
 
-
-
-### 陷阱: 导致dangling
-
-#### stackoverflow [c++ type trait to say “trivially movable” - examples of](https://stackoverflow.com/questions/45747932/c-type-trait-to-say-trivially-movable-examples-of)
-
-
-
-#### 修正方法
+### Relocate
 
 参见 `Relocate` 章节。
 
@@ -181,8 +179,6 @@ A trivial move assignment operator performs the same action as the trivial copy 
 - [Trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator)
 - [Trivial move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment#Trivial_move_assignment_operator)
 - [Trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor)
-
-
 
 
 

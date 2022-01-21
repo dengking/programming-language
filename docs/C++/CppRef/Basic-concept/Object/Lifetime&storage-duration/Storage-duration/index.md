@@ -1,12 +1,10 @@
 # Object storage duration 
 
-storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/language/object)的重要属性，这两个属性是密切相关的，在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中对此进行了介绍，本文讨论object的storage duration。
+本文讨论object的storage duration。
 
 ## Guide
 
-原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，对linkage的讨论，在`C++implementation\Link\Linkage`章节；
-
-原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
+原文的内容是比较杂乱的，既包含了**storage duration**又包含了**linkage**，实际上它们两者是independent property of object，所以应该分开来进行讨论，对linkage的讨论，在`Linkage`章节；原文之所以将它们放到一起是因为：C++和C并没有提供专门分别描述这两种property的specifier，而是提供的合并的specifier，关于这一点，在cppreference [Storage class specifiers](https://en.cppreference.com/w/cpp/language/storage_duration)中进行了详细的讨论。
 
 我们按照在`Theory\Programming-language\How-to-master-programming-language`中总结的：首先学习property，然后学习描述这些property的specifier的方式来进行学习。
 
@@ -16,8 +14,6 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 | ------------------------ | ------------------------------------------------------------ |
 | storage duration         | C++ object有哪几种storage duration                           |
 | Storage class specifiers | C++ language提供了哪些specifier来供programmer对storage duration进行控制/描述，即C++ language中，有哪些Storage class specifiers |
-
-
 
 所以，本文与原文的组织有所差异。
 
@@ -29,15 +25,13 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 > NOTE: 
 >
-> 
->
 > #### 统一描述方式: object with `***`storage duration
 >
 > 本节标题的含义是: 后面为了描述的统一性，我们统一使用"object with `***`storage (duration)"格式，括号括起来的部分，表示是optional；下面是例子: 
 >
 > 描述具备automatic storage duration的object: **object with automatic storage** ;
 >
-> 描述具备static storage duration的object: object with static storage ;
+> 描述具备static storage duration的object: **object with static storage** ;
 >
 > #### 本节内容组织
 >
@@ -64,7 +58,9 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 | static           | allocated when the **program** begins<br>(Before main function) | deallocated when the **program** ends                        | 1. objects declared at namespace scope (including **global namespace**) <br>2. those declared with `static` or `extern` （包括:<br>**static local object**、<br>**extern local object**） | process;            |
 | dynamic          | allocated by using [dynamic memory allocation](https://en.cppreference.com/w/cpp/memory) function | deallocated by using [dynamic memory deallocation](https://en.cppreference.com/w/cpp/memory) function |                                                              | heap;               |
 
-> NOTE: 上述storage duration是C++ language对OS中process execution model、memory model的刻画，参见工程Linux-OS的`Multitasking\Process-model\Process-run-model`章节。
+> NOTE: 
+>
+> 上述storage duration是C++ language对OS中process execution model、memory model的刻画，参见工程Linux-OS的`Multitasking\Process-model\Process-run-model`章节。
 
 
 
@@ -72,15 +68,15 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 >
 > ### Lifetime of object with static and thread-local storage duration
 >
-> C++语言中，对object的lifetime是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述主要是如下两篇文章:
+> C++语言中，object的lifetime是受到了object的storage duration属性的影响的，对于上述四种storage duration，由于它们的allocation time point不同，就造成了它们的initialization time point的不同；其中比较特殊的是static storage duration和thread storage duration，cppreference中，对它们的描述主要是如下两篇文章:
 >
 > [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) 
 >
 > 它们是比较分散的，我将它们进行了整理: 
 >
-> `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Thread-local-storage-duration`
+> `Thread-local-storage-duration`
 >
-> `C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration`
+> `Static-storage-duration`
 
 #### Automatic storage duration
 
@@ -92,6 +88,8 @@ storage duration和lifetime是[object](https://en.cppreference.com/w/cpp/languag
 
 object with automatic storage的lifetime is bound by "`{}`"，对这个特性的一个非常重要的应用就是: RAII，参见`RAII`。
 
+
+
 #### Dynamic storage duration
 
 对于object with dynamic storage duration，在`Resource-management\Memory-management`章节进行了描述。
@@ -100,24 +98,13 @@ object with automatic storage的lifetime is bound by "`{}`"，对这个特性的
 
 #### Static storage duration
 
-对于object with static storage duration，相比于其它类型的object，它的initialization、deinitialization是比较复杂的，原文中有专门说明: 
-
-> See [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) for details on initialization of objects with this storage duration.
-
-在前面的注解中，已经描述了我的整理思路。
+参见 `Static-storage-duration` 章节。
 
 
 
-#### Thread local duration
+#### Thread local storage duration
 
-
-这是C++11引入的，源于"C++11 introduced a standardized memory model"，关于此，参见`C++\Language-reference\Basic-concept\Abstract-machine\Memory-model`。
-
-对于对于object with thread storage duration相比于其它类型的object，它的initialization、deinitialization是比较复杂的，原文中有专门说明: 
-
-> See [Non-local variables](https://en.cppreference.com/w/cpp/language/initialization#Non-local_variables) and [Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) for details on initialization of objects with this storage duration.
-
-在前面的注解中，已经描述了我的整理思路。
+参见 `Thread-local-storage-duration` 章节
 
 
 
@@ -218,8 +205,6 @@ It specifies **external linkage**, and does not technically affect **storage dur
 ### Static local variables
 
 对于static local variable，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration\Static-storage-duration\Static-local-variables`章节
-
-
 
 
 

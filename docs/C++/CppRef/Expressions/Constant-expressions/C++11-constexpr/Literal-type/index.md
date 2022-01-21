@@ -8,6 +8,20 @@ cppreference [LiteralType](https://en.cppreference.com/w/cpp/named_req/LiteralTy
 
 > Specifies that a type is a *literal type*. Literal types are the types of [constexpr variables](https://en.cppreference.com/w/cpp/language/constexpr) and they can be constructed, manipulated, and returned from [constexpr functions](https://en.cppreference.com/w/cpp/language/constexpr).
 
+microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170&viewFallbackFrom=vs-2019) 中，对literal type的总结如下:
+
+> A literal type is one whose layout can be determined at compile time. The following are the literal types:
+>
+> 1、void
+>
+> 2、scalar types
+>
+> 3、references
+>
+> 4、Arrays of void, scalar types or references
+>
+> 5、A class that has a trivial destructor, and one or more constexpr constructors that are not move or copy constructors. Additionally, all its non-static data members and base classes must be literal types and not volatile.
+
 显然**literal type**和`constexpr`密切相关，所以，理解literal type的第一步是理解`constexpr`。
 
 `constexpr`的核心思想是：“evaluate the value of the **function** or **variable** at **compile time**”，所以literal type的value也是需要compile-time获得的，它是在compile-time allocation、initialization，它的value就像是literal一样，在compile-time就已知了，这应该是literal type的命名缘由。
@@ -30,17 +44,9 @@ cppreference [LiteralType](https://en.cppreference.com/w/cpp/named_req/LiteralTy
 
 > has a trivial (until C++20)constexpr (since C++20) destructor
 
-上面这段话如何理解呢？
+上面这段话如何理解呢？在microsoft [Trivial, standard-layout, POD, and literal types#literal_types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#literal_types) 对literal type的解释:
 
-在microsoft [Trivial, standard-layout, POD, and literal types#literal_types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019#literal_types) 中对literal type进行了解释:
-
-A **literal type** is one whose layout can be determined at **compile time**. The following are the literal types:
-
-- void
-- scalar types
-- references
-- Arrays of void, scalar types or references
-- A class that has a **trivial destructor**, and one or more `constexpr` constructors that are not move or copy constructors. Additionally, all its non-static data members and base classes must be literal types and not volatile.
+> A class that has a **trivial destructor**, and one or more `constexpr` constructors that are not move or copy constructors. Additionally, all its non-static data members and base classes must be literal types and not volatile.
 
 ## Examples
 
@@ -57,11 +63,11 @@ A **literal type** is one whose layout can be determined at **compile time**. Th
 class conststr
 {
 	const char* p;
-	std::size_t sz;
+	std::size_t sz; // 字符串的长度
 	public:
 	template<std::size_t N>
 	constexpr conststr(const char (&a)[N])
-			: p(a), sz(N - 1)
+			: p(a), sz(N - 1) // N - 1 的目的是去除最后的 0
 	{
 	}
 
@@ -218,12 +224,6 @@ int main()
 
 
 
-
-
 ## cppreference [std::is_literal_type](https://en.cppreference.com/w/cpp/types/is_literal_type)
 
 
-
-## microsoft [Trivial, standard-layout, POD, and literal types](https://docs.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=vs-2019)
-
-> NOTE:  这篇文章中也对literal type进行了描述。
