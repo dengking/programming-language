@@ -8,13 +8,9 @@ static function and static object in header file cause duplicate definition
 
 如何查看function是否multiple definition？
 
-
-
 compiler对internal linkage的实现方式。
 
 ## static function in header
-
-
 
 https://stackoverflow.com/questions/780730/c-c-static-function-in-header-file-what-does-it-mean
 

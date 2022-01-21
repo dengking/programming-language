@@ -38,6 +38,8 @@ If the initial value of a static variable can’t be evaluated at compile time, 
 >
 > 2、zero initialization
 
+
+
 ### Dynamic initialization
 
 After **static initialization**, **dynamic initialization** takes place. **Dynamic initialization** happens at runtime for variables that can’t be evaluated at compile time[2](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#fn:1). Here, **static variables** are initialized every time the executable is run and not just once during compilation.
@@ -225,10 +227,12 @@ Within a single compilation unit, static variables are initialized in the same o
 This turns into a very serious issue if the initialization of a variable in `a.cpp` depends on another one defined `b.cpp` . This is called the [Static Initialization Order Fiasco](https://isocpp.org/wiki/faq/ctors#static-init-order). Consider this example:
 
 ```c++
+#include <iostream>
 // a.cpp
 int duplicate(int n)
 {
-    return n * 2;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	return n * 2;
 }
 auto A = duplicate(7); // A is dynamic-initialized
 ```
@@ -247,11 +251,29 @@ int main()
   std::cout << B << std::endl;
   return EXIT_SUCCESS;
 }
+// g++ --std=c++11 a.cpp b.cpp -o test
+
 ```
 
-> 编译 `g++ --std=c++11 a.cpp b.cpp -o test`
+> NOTE: 
+>
+> 一、输出如下:
+>
+> ```
+> int duplicate(int)
+> 
+> 14
+> ```
+>
+> 从输出可以看到: `duplicate` 会在`main`执行前执行
+>
+> 下面的解释是非常好的: 
 
 This program is ill-formed. It may print `14` or `0` (all static variables are at least **zero-initialized** during **static initialization**), depending if the **dynamic initialization** of `A` happens before `B` or not.
+
+> NOTE: 
+>
+> 对static initialization order fiasco的解释非常好
 
 Note that this problem can only happen during the **dynamic initialization phase** and not during **static initialization**, as during **compile time** it is impossible to access a value defined in another **compilation unit**. This makes **compile time initialization** so much safer than **dynamic initialization**, as it doesn’t suffer from the **static initialization order fiasco**.
 
@@ -271,14 +293,16 @@ int& A();
 ```c++
 // a.cpp
 #include "a.h"
-
+#include <iostream>
 int duplicate(int n)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     return n * 2;
 }
 
-auto& A()
+int& A()
 {
+   std::cout << __PRETTY_FUNCTION__ << std::endl;
   static auto a = duplicate(7); // Initiliazed first time A() is called
   return a;
 }
@@ -298,8 +322,21 @@ int main()
   std::cout << B << std::endl;
   return EXIT_SUCCESS;
 }
+// g++ --std=c++11 a.cpp b.cpp -o test
+
 ```
 
+> NOTE: 
+>
+> 一、输出如下:
+>
+> ```C++
+> int& A()
+> 
+> int duplicate(int)
+> 
+> 14
+> ```
+>
+> 
 
-
-编译:`g++ --std=c++11 a.cpp b.cpp -o test`

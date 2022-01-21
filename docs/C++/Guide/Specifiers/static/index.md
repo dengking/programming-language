@@ -75,7 +75,7 @@
 | ----- | ------------------------------------------------------------ | ------------------------ |
 | **1** | [declarations of namespace members with static storage duration and internal linkage](https://en.cppreference.com/w/cpp/language/storage_duration) | Non-OOP，namespace scope |
 | **2** | [definitions of block scope variables with static storage duration and initialized once](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables) | Non-OOP，block scope     |
-| 3     | [declarations of class members not bound to specific instances](https://en.cppreference.com/w/cpp/language/static) | 对应的就是1)中的OOP      |
+| **3** | [declarations of class members not bound to specific instances](https://en.cppreference.com/w/cpp/language/static) | 对应的就是1)中的OOP      |
 
 和1)对比可以发现，其实2)中的1和2是对1)中的Non-OOP的细分；
 

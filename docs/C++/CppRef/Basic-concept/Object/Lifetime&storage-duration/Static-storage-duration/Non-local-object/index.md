@@ -49,11 +49,15 @@ For both of these classes of variables, initialization occurs in two distinct st
 
 There are two forms of static initialization:
 
-1) If relevant, [constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) is applied.
-
 > NOTE: 
 >
-> 此处的"relevant"是什么含义？
+> 一、原文对static initialization的说明是难以理解的，在 pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/)  # [The Two Stages of Static Variable Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-two-stages-of-static-variable-initialization) 中，给出了更加详细的解释:
+>
+> > Static initialization happens first and usually at compile time. If possible, initial values for static variables are evaluated during compilation and burned into the data section of the executable. Zero runtime overhead, early problem diagnosis, and, as we will see later, safe. This is called [constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization). In an ideal world all static variables are const-initialized.
+> >
+> > If the initial value of a static variable can’t be evaluated at compile time, the compiler will perform zero-initialization. Hence, during static initialization all static variables are either const-initialized or zero-initialized.
+
+1) If relevant, [constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) is applied.
 
 2) Otherwise, non-local static and thread-local variables are [zero-initialized](https://en.cppreference.com/w/cpp/language/zero_initialization).
 
