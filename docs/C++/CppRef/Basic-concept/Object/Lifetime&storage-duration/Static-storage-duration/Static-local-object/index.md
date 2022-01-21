@@ -4,22 +4,33 @@
 
 ## cppreference [Storage class specifiers#Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables)
 
-
+> NOTE: 
+>
+> 一、通过下面的内容可知: static local object的lifetime 和 non-local object的lifetime是一致的。
 
 ### Dnitialization
 
 Variables declared at **block scope** with the specifier `static` or `thread_local` (since C++11) have static or thread (since C++11) storage duration but are initialized the first time control passes through their declaration (unless their initialization is [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization), which can be performed before the block is first entered). On all further calls, the declaration is skipped.
 
-> NOTE: 上面这段话关于initialization的描述是不易理解的？它的意思是：对于static local variable，它的initialization的发生时间如下：
+> NOTE: 
 >
-> - [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) can be performed before the block is first entered
-> - others are initialized the first time control passes through their declaration
+> 一、static local variable 的 initialization 也是"two stage initialization"：
+>
+> 1、static initialization: [zero-](https://en.cppreference.com/w/cpp/language/zero_initialization) or [constant-initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) can be performed before the block is first entered
+>
+> 2、dynamic initialization: others are initialized the first time control passes through their declaration
+>
+> 这一点和 " [Initialization](https://en.cppreference.com/w/cpp/language/initialization) # Non-local variables" 相同，不同的是: 它的dynamic initialization是发生于"on first use"
+>
+> 上述机制是construct-on-first-use的基础。
 
 
 
 #### Initialization of static local variable concurrently (since C++11)
 
-> NOTE: 因为C++11支持multiple thread，所以标准需要对此进行特别的规定。
+> NOTE: 
+>
+> 一、因为C++11支持multiple thread，所以标准需要对此进行特别的规定。
 >
 > 这种情况的典型就是：线程执行函数中声明了一个static local variable。
 
@@ -59,7 +70,9 @@ The destructor for a block-scope static variable [is called at program exit](htt
 
 Function-local static objects in all definitions of the same [inline function](https://en.cppreference.com/w/cpp/language/inline) (which may be implicitly inline) all refer to the same object defined in one translation unit.
 
-> NOTE: 能够保证唯一性
+> NOTE: 
+>
+> 能够保证唯一性
 
 
 
@@ -77,6 +90,8 @@ Initializer is not allowed in a block-scope declaration of a variable with [exte
 
 ## Application
 
-### Singleton
+1、Singleton
 
 参见`C++\Pattern\Singleton`。
+
+2、construct-on-first-use，可以解决 "Static-Initialization-Order-Fiasco" 问题，参见 pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/)

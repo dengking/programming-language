@@ -13,7 +13,9 @@
 > Initialization of static variables happens in two consecutive stages: *static* and *dynamic* initialization.
 >
 
+三、cppreference [Storage class specifiers#Static local variables](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables)
 
+其中对 static local variables 的 two stage initialization进行了介绍，它虽然是local object，但是它也是two-stage-initialization的。
 
 ## cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization) # Non-local variables
 
@@ -58,6 +60,12 @@ There are two forms of static initialization:
 > > If the initial value of a static variable can’t be evaluated at compile time, the compiler will perform zero-initialization. Hence, during static initialization all static variables are either const-initialized or zero-initialized.
 
 1) If relevant, [constant initialization](https://en.cppreference.com/w/cpp/language/constant_initialization) is applied.
+
+> NOTE: 
+>
+> 一、关于"relevant"的解释，可以参见:
+>
+> 1、pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/)  # [The Two Stages of Static Variable Initialization](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/#the-two-stages-of-static-variable-initialization) 
 
 2) Otherwise, non-local static and thread-local variables are [zero-initialized](https://en.cppreference.com/w/cpp/language/zero_initialization).
 

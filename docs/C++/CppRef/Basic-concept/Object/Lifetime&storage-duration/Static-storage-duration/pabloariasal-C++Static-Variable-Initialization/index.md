@@ -340,3 +340,8 @@ int main()
 >
 > 
 
+This program will always consistently print `14`, as it is guaranteed that `A` will always be initialized before `B`.
+
+> NOTE: 
+>
+> 显然它保证了initialization order和dependency order一致
