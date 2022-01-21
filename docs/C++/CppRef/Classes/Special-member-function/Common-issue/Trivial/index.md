@@ -1,8 +1,48 @@
 # Trivial
 
+一、按照 CSDN [C++ trivial和non-trivial构造函数及POD类型](https://blog.csdn.net/a627088424/article/details/48595525) 中的说法: "trivial"的含义是: "无意义"。
 
+二、按wikipedia [Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C++11#Modification_to_the_definition_of_plain_old_data)中的说法，`trivial`是c++11引入的。
 
-## [Default constructors](https://en.cppreference.com/w/cpp/language/default_constructor) # Trivial default constructor
+## CSDN [C++ trivial和non-trivial构造函数及POD类型](https://blog.csdn.net/a627088424/article/details/48595525)
+
+**trivial**意思是**无意义**，这个trivial和non-trivial是对类的四种函数来说的：
+
+1、构造函数(ctor)
+
+2、复制构造函数(copy)
+
+3、赋值函数(assignment)
+
+4、析构函数(dtor)
+
+如果至少满足下面3条里的一条：
+
+1、显式(explict)定义了这四种函数。
+
+2、类里有非静态非POD的数据成员。
+
+3、有基类。
+
+那么上面的四种函数是**non-trivial**函数，比如叫non-trivial ctor、non-trivial copy…，也就是说**有意义**的函数，里面有一下必要的操作，比如类成员的初始化，释放内存等。
+
+那个POD意思是Plain Old Data，也就是C++的内建类型或传统的C结构体类型。POD类型必然有trivial ctor/dtor/copy/assignment四种函数。
+
+那这有什么用处呢？
+
+如果这个类都是trivial ctor/dtor/copy/assignment函数，我们对这个类进行构造、析构、拷贝和赋值时可以采用最有效率的方法，不调用无所事事正真的那些ctor/dtor等，而直接采用内存操作如malloc()、memcpy()等提高性能，这也是SGI STL内部干的事情。
+
+## Constructor and destructor
+
+trivial表示**无意义**的，对于trivial default constructor 、trivial destructor，是可以不调用的:
+
+1、cppreference [Lifetime # Storage reuse](https://en.cppreference.com/w/cpp/language/lifetime#Storage_reuse) 
+
+> A program is not required to call the destructor of an object to end its lifetime if the object is [trivially-destructible](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor) or if the program does not rely on the side effects of the destructor.
+
+2、CSDN [C++ trivial和non-trivial构造函数及POD类型](https://blog.csdn.net/a627088424/article/details/48595525)
+
+### cppreference [Default constructors](https://en.cppreference.com/w/cpp/language/default_constructor) # Trivial default constructor
 
 The default constructor for class `T` is trivial (i.e. performs no action) if all of the following is true:
 
@@ -19,6 +59,24 @@ The default constructor for class `T` is trivial (i.e. performs no action) if al
 6、Every non-static member of class type (or array thereof) has a trivial default constructor
 
 A trivial default constructor is a constructor that performs no action. All data types compatible with the C language (POD types) are trivially default-constructible.
+
+
+
+### cppreference [Destructors](https://en.cppreference.com/w/cpp/language/destructor) # Trivial destructor
+
+The destructor for class `T` is trivial if all of the following is true:
+
+1、The destructor is not user-provided (meaning, it is either implicitly declared, or explicitly defined as defaulted on its first declaration)
+
+2、The destructor is not virtual (that is, the base class destructor is not virtual)
+
+3、All direct base classes have trivial destructors
+
+4、All non-static data members of class type (or array of class type) have trivial destructors
+
+A trivial destructor is a destructor that performs no action. Objects with trivial destructors don't require a delete-expression and may be disposed of by simply deallocating their storage. All data types compatible with the C language (POD types) are trivially destructible.
+
+
 
 ## Copy
 
@@ -110,28 +168,35 @@ A trivial move assignment operator performs the same action as the trivial copy 
 
 参见 `Relocate` 章节。
 
+## 术语总结
+
+在阅读cppreference的时候，多次碰到这个词语，有：
+
+- [TrivialType](https://en.cppreference.com/w/cpp/named_req/TrivialType)
+
+- [TriviallyCopyable](https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable)
+- [Trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor)
+- [Trivial copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor#Trivial_copy_constructor)
+- [Trivial move constructor](https://en.cppreference.com/w/cpp/language/move_constructor#Trivial_move_constructor)
+- [Trivial copy assignment operator](https://en.cppreference.com/w/cpp/language/copy_assignment#Trivial_copy_assignment_operator)
+- [Trivial move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment#Trivial_move_assignment_operator)
+- [Trivial destructor](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor)
 
 
 
 
-## Destructors
 
-### cppreference [Destructors](https://en.cppreference.com/w/cpp/language/destructor) # Trivial destructor
+## 素材
 
-The destructor for class `T` is trivial if all of the following is true:
+1、howtobuildsoftware [What is a trivial function?](https://www.howtobuildsoftware.com/index.php/how-do/2pm/c-language-lawyer-c-14-what-is-a-trivial-function)
 
-1、The destructor is not user-provided (meaning, it is either implicitly declared, or explicitly defined as defaulted on its first declaration)
+https://stackoverflow.com/questions/3899223/what-is-a-non-trivial-constructor-in-c
 
-2、The destructor is not virtual (that is, the base class destructor is not virtual)
+https://www.geeksforgeeks.org/trivial-classes-c/
 
-3、All direct base classes have trivial destructors
+http://olafurw.com/2019-02-14-trivial-code/
 
-4、All non-static data members of class type (or array of class type) have trivial destructors
+https://isocpp.org/blog/2018/03/quick-q-what-is-a-non-trivial-constructor-in-cpp
 
-A trivial destructor is a destructor that performs no action. Objects with trivial destructors don't require a delete-expression and may be disposed of by simply deallocating their storage. All data types compatible with the C language (POD types) are trivially destructible.
+https://www.geeksforgeeks.org/trivial-classes-c/
 
-
-
-## TODO
-
-### howtobuildsoftware [What is a trivial function?](https://www.howtobuildsoftware.com/index.php/how-do/2pm/c-language-lawyer-c-14-what-is-a-trivial-function)
