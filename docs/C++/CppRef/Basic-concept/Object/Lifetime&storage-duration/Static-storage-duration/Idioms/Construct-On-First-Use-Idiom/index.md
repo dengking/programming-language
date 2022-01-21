@@ -17,11 +17,11 @@ struct Bar
 {
 	Bar()
 	{
-		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "Bar::Bar()\n";
+		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << __PRETTY_FUNCTION__ << std::endl;
 	}
 	void f()
 	{
-		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "Bar::f()\n";
+		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << __PRETTY_FUNCTION__ << std::endl;
 	}
 };
 struct Foo
@@ -39,7 +39,7 @@ Bar Foo::bar_; // definition of static member bar_，此时会调用`Bar()`
 
 int main()
 {
-	cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "main\n";
+	cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 }
 // g++ -Wall -pedantic test.cpp
 ```
@@ -49,9 +49,11 @@ int main()
 > 1、输出如下：
 >
 > ```
-> [test.cpp][11]Bar::f()
+> [test.cpp][11]void Bar::f()
+> 
 > [test.cpp][7]Bar::Bar()
-> [test.cpp][27]main
+> 
+> [test.cpp][29]int main()
 > ```
 >
 > 2、这是典型的`static` initialization order ‘fiasco’ (problem)
@@ -75,11 +77,11 @@ struct Bar
 {
 	Bar()
 	{
-		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "Bar::Bar()\n";
+		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 	}
 	void f()
 	{
-		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "Bar::f()\n";
+		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 	}
 };
 struct Foo
@@ -90,6 +92,7 @@ struct Foo
 	}
 	Bar& bar()
 	{
+        cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 		static Bar *b = new Bar();
 		return *b;
 	}
@@ -99,17 +102,23 @@ Foo f; // 会调用`Foo()`，进而调用 `Bar()`
 
 int main()
 {
-	cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "main\n";
+	cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 }
 // g++ -Wall -pedantic test.cpp
 ```
 
-> NOTE: 输出如下:
+> NOTE: 
+>
+> 输出如下:
 >
 > ```C++
+> [test.cpp][22]Bar& Foo::bar()
+> 
 > [test.cpp][7]Bar::Bar()
-> [test.cpp][11]Bar::f()
-> [test.cpp][31]main
+> 
+> [test.cpp][11]void Bar::f()
+> 
+> [test.cpp][32]int main()
 > ```
 >
 > 
@@ -123,11 +132,11 @@ struct Bar
 {
 	Bar()
 	{
-		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "Bar::Bar()\n";
+		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 	}
 	void f()
 	{
-		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "Bar::f()\n";
+		cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 	}
 };
 struct Foo
@@ -147,7 +156,7 @@ Foo f; // 会调用`Foo()`，进而调用 `Bar()`
 
 int main()
 {
-	cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" << "main\n";
+	cout << "[" << __FILE__ << "]" << "[" << __LINE__ << "]" <<  __PRETTY_FUNCTION__ << std::endl;
 }
 // g++ -Wall -pedantic test.cpp
 
@@ -157,8 +166,18 @@ int main()
 >
 > ```C++
 > [test.cpp][7]Bar::Bar()
-> [test.cpp][11]Bar::f()
-> [test.cpp][31]main
+> 
+> [test.cpp][11]void Bar::f()
+> 
+> [test.cpp][31]int main()
 > ```
 >
 > 
+
+
+
+## 素材
+
+stackoverflow [Construct on first use + forced initialization to solve static initialization order fiasco?](https://stackoverflow.com/questions/25122575/construct-on-first-use-forced-initialization-to-solve-static-initialization-or) 
+
+parashift [Construct on first use](http://www.parashift.com/c++-faq/construct-on-first-use-v2.html)

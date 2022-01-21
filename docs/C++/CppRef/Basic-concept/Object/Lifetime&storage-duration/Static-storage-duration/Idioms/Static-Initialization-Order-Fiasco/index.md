@@ -16,6 +16,8 @@
 
 4、pabloariasal [C++ - Initialization of Static Variables](https://pabloariasal.github.io/2020/01/02/static-variable-initialization/)
 
+
+
 ### stackoverflow [Prevent static initialization order “fiasco”, C++](https://stackoverflow.com/questions/29822181/prevent-static-initialization-order-fiasco-c)
 
 
@@ -31,6 +33,12 @@ It wouldn't be much of a "fiasco", otherwise!
 > NOTE: 关于global 和 singleton，参见 `Global-VS-singleton` 章节
 
 
+
+## Example
+
+1、`Construct-On-First-Use-Idiom`
+
+2、zhihu [用std::once_flag来std::call_once，运行时却执行了2次？](https://zhuanlan.zhihu.com/p/408838350)
 
 
 
