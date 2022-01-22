@@ -18,7 +18,7 @@ public:
 		std::cout << __PRETTY_FUNCTION__ << std::endl;
 	}
 };
-static A& GetExtraCreator();
+A& GetExtraCreator();
 
 ```
 
@@ -33,7 +33,7 @@ static A& GetExtraCreator();
 
 static std::once_flag gInitFlag;
 
-static A& GetExtraCreator()
+A& GetExtraCreator()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	static A* gExtraCreator;
@@ -49,6 +49,7 @@ static A& GetExtraCreator()
 // File2.cpp
 #include "File1.h"
 static bool gResistor = []() {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
 	A& obj_A = GetExtraCreator();
 	return false;
 }( );
