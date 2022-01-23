@@ -167,9 +167,17 @@ int main()
 
 C++ thrives on what is known as a Regular type (or at least Pseudo-Regular).
 
+> NOTE: 
+>
+> 一、上面这段话的意思是: C++是在regular type的基础上成长起来的
+
 ### Regular type
 
 A Regular type is a type that can be constructed and assigned-to and assigned-from via copy or move, can be destroyed, and can be compared equal-to. It can also be constructed from no arguments. Finally, it also has support for a few other operations that are highly useful in various `std` algorithms and containers.
+
+> NOTE: 
+>
+> 其实regular type也是一个concept
 
 ### Implementation
 
@@ -178,181 +186,6 @@ A Regular type is a type that can be constructed and assigned-to and assigned-fr
 I will use the manual vtable approach to type erasure here.
 
 
-
-```C++
-#include <iostream>
-#include <memory>
-#include <utility>
-
-/**
- * type erasure
- */
-using dtor_unique_ptr = std::unique_ptr<void, void(*)(void*)>;
-
-/**
- * @brief 能够正常调用destructor
- *
- * @tparam T
- * @tparam Args
- * @param args
- * @return
- */
-template<class T, class...Args>
-dtor_unique_ptr make_dtor_unique_ptr( Args&&... args ) {
-  return {new T(std::forward<Args>(args)...), [](void* self){ delete static_cast<T*>(self); }};
-}
-
-struct regular_vtable {
-  void(*copy_assign)(void* dest, void const* src); // T&=(T const&)
-  void(*move_assign)(void* dest, void* src); // T&=(T&&)
-  bool(*equals)(void const* lhs, void const* rhs); // T const&==T const&
-  bool(*order)(void const* lhs, void const* rhs); // std::less<T>{}(T const&, T const&)
-  std::size_t(*hash)(void const* self); // std::hash<T>{}(T const&)
-  std::type_info const&(*type)(); // typeid(T)
-  dtor_unique_ptr(*clone)(void const* self); // T(T const&)
-};
-
-template<class T>
-regular_vtable make_regular_vtable() noexcept {
-  return {
-    [](void* dest, void const* src){ *static_cast<T*>(dest) = *static_cast<T const*>(src); },
-    [](void* dest, void* src){ *static_cast<T*>(dest) = std::move(*static_cast<T*>(src)); },
-    [](void const* lhs, void const* rhs){ return *static_cast<T const*>(lhs) == *static_cast<T const*>(rhs); },
-    [](void const* lhs, void const* rhs) { return std::less<T>{}(*static_cast<T const*>(lhs),*static_cast<T const*>(rhs)); },
-    [](void const* self){ return std::hash<T>{}(*static_cast<T const*>(self)); },
-    []()->decltype(auto){ return typeid(T); },
-    [](void const* self){ return make_dtor_unique_ptr<T>(*static_cast<T const*>(self)); }
-  };
-}
-template<class T>
-regular_vtable const* get_regular_vtable() noexcept {
-  static const regular_vtable vtable=make_regular_vtable<T>();
-  return &vtable;
-}
-
-struct regular_type {
-  using self=regular_type;
-  regular_vtable const* vtable = 0;
-  dtor_unique_ptr ptr{nullptr, [](void*){}};
-
-  bool empty() const { return !vtable; }
-
-  template<class T, class...Args>
-  void emplace( Args&&... args ) {
-    ptr = make_dtor_unique_ptr<T>(std::forward<Args>(args)...);
-    if (ptr)
-      vtable = get_regular_vtable<T>();
-    else
-      vtable = nullptr;
-  }
-  friend bool operator==(regular_type const& lhs, regular_type const& rhs) {
-    if (lhs.vtable != rhs.vtable) return false;
-    return lhs.vtable->equals( lhs.ptr.get(), rhs.ptr.get() );
-  }
-  bool before(regular_type const& rhs) const {
-    auto const& lhs = *this;
-    if (!lhs.vtable || !rhs.vtable)
-      return std::less<regular_vtable const*>{}(lhs.vtable,rhs.vtable);
-    if (lhs.vtable != rhs.vtable)
-      return lhs.vtable->type().before(rhs.vtable->type());
-    return lhs.vtable->order( lhs.ptr.get(), rhs.ptr.get() );
-  }
-  // technically friend bool operator< that calls before is also required
-
-  std::type_info const* type() const {
-    if (!vtable) return nullptr;
-    return &vtable->type();
-  }
-  regular_type(regular_type&& o):
-    vtable(o.vtable),
-    ptr(std::move(o.ptr))
-  {
-    o.vtable = nullptr;
-  }
-  friend void swap(regular_type& lhs, regular_type& rhs){
-    std::swap(lhs.ptr, rhs.ptr);
-    std::swap(lhs.vtable, rhs.vtable);
-  }
-  regular_type& operator=(regular_type&& o) {
-    if (o.vtable == vtable) {
-      vtable->move_assign(ptr.get(), o.ptr.get());
-      return *this;
-    }
-    auto tmp = std::move(o);
-    swap(*this, tmp);
-    return *this;
-  }
-  regular_type(regular_type const& o):
-    vtable(o.vtable),
-    ptr(o.vtable?o.vtable->clone(o.ptr.get()):dtor_unique_ptr{nullptr, [](void*){}})
-  {
-    if (!ptr && vtable) vtable = nullptr;
-  }
-  regular_type& operator=(regular_type const& o) {
-    if (o.vtable == vtable) {
-      vtable->copy_assign(ptr.get(), o.ptr.get());
-      return *this;
-    }
-    auto tmp = o;
-    swap(*this, tmp);
-    return *this;
-  }
-  std::size_t hash() const {
-    if (!vtable) return 0;
-    return vtable->hash(ptr.get());
-  }
-  /**
-   * @brief constructor 
-   * 
-   * @tparam T
-   * @tparam 
-   * @param t
-   */
-  template<class T,
-    std::enable_if_t< !std::is_same<std::decay_t<T>, regular_type>{}, int>* =nullptr
-  >
-  regular_type(T&& t) {
-    emplace<std::decay_t<T>>(std::forward<T>(t));
-  }
-};
-namespace std {
-  template<>
-  struct hash<regular_type> {
-    std::size_t operator()( regular_type const& r )const {
-      return r.hash();
-    }
-  };
-  template<>
-  struct less<regular_type> {
-    bool operator()( regular_type const& lhs, regular_type const& rhs ) const {
-      return lhs.before(rhs);
-    }
-  };
-}
-
-```
-
-[live example](http://coliru.stacked-crooked.com/a/28ef6be761012a81).
-
-Such a regular type can be used as a key for a `std::map` or a `std::unordered_map` that accepts *anything regular* for a key, like:
-
-```
-std::map<regular_type, std::any>
-```
-
-would be basically a map from anothing regular, to anything copyable.
-
-Unlike `any`, my `regular_type` does no small object optimization nor does it support getting the original data back. Getting the original type back isn't hard.
-
-Small object optimization requires that we store an aligned storage buffer within the `regular_type`, and carefully tweak the deleter of the `ptr` to only destroy the object and not delete it.
-
-I would start at `make_dtor_unique_ptr` and teach it how to sometimes store the data in a buffer, and then in the heap if no room in the buffer. That may be sufficient.
-
-#### 实现总结
-
-1、"使用 `unique_ptr<void, deleter>` 来实现type erasure "+ "custom virtual table 来实现polymorphism"
-
-#### 完整测试程序
 
 ```C++
 #include <utility>
@@ -367,153 +200,181 @@ I would start at `make_dtor_unique_ptr` and teach it how to sometimes store the 
 
 using namespace std::literals;
 
-    using dtor_unique_ptr = std::unique_ptr<void, void(*)(void*)>;
-    template<class T, class...Args>
-    dtor_unique_ptr make_dtor_unique_ptr( Args&&... args ) {
-      return {new T(std::forward<Args>(args)...), [](void* self){ delete static_cast<T*>(self); }};
-    }
-    struct regular_vtable {
-      void(*copy_assign)(void* dest, void const* src); // T&=(T const&)
-      void(*move_assign)(void* dest, void* src); // T&=(T&&)
-      bool(*equals)(void const* lhs, void const* rhs); // T const&==T const&
-      bool(*order)(void const* lhs, void const* rhs); // std::less<T>{}(T const&, T const&)
-      std::size_t(*hash)(void const* self); // std::hash<T>{}(T const&)
-      std::type_info const&(*type)(); // typeid(T)
-      dtor_unique_ptr(*clone)(void const* self); // T(T const&)
-    };
+using dtor_unique_ptr = std::unique_ptr<void, void( * )( void* )>;
 
-    template<class T>
-    regular_vtable make_regular_vtable() noexcept {
-      return {
-        [](void* dest, void const* src){ *static_cast<T*>(dest) = *static_cast<T const*>(src); },
-        [](void* dest, void* src){ *static_cast<T*>(dest) = std::move(*static_cast<T*>(src)); },
-        [](void const* lhs, void const* rhs){ return *static_cast<T const*>(lhs) == *static_cast<T const*>(rhs); },
-        [](void const* lhs, void const* rhs) { return std::less<T>{}(*static_cast<T const*>(lhs),*static_cast<T const*>(rhs)); },
-        [](void const* self){ return std::hash<T>{}(*static_cast<T const*>(self)); },
-        []()->decltype(auto){ return typeid(T); },
-        [](void const* self){ return make_dtor_unique_ptr<T>(*static_cast<T const*>(self)); }
-      };
-    }
-    template<class T>
-    regular_vtable const* get_regular_vtable() noexcept {
-      static const regular_vtable vtable=make_regular_vtable<T>();
-      return &vtable;
-    }
+template<class T, class...Args>
+dtor_unique_ptr make_dtor_unique_ptr(Args&&... args) {
+	return { new T(std::forward<Args>(args)...), [](void* self) { delete static_cast<T*>( self ); } };
+}
+struct regular_vtable {
+	void( *copy_assign )( void* dest, void const* src ); // T&=(T const&)
+	void( *move_assign )( void* dest, void* src ); // T&=(T&&)
+	bool( *equals )( void const* lhs, void const* rhs ); // T const&==T const&
+	bool( *order )( void const* lhs, void const* rhs ); // std::less<T>{}(T const&, T const&)
+	std::size_t(*hash)( void const* self ); // std::hash<T>{}(T const&)
+	std::type_info const& ( *type )( ); // typeid(T)
+	dtor_unique_ptr(*clone)( void const* self ); // T(T const&)
+};
 
-    struct regular_type {
-      using self=regular_type;
-      regular_vtable const* vtable = 0;
-      dtor_unique_ptr ptr{nullptr, [](void*){}};
-      
-      bool empty() const { return !vtable; }
+template<class T>
+regular_vtable make_regular_vtable() noexcept {
+	return {
+	  [](void* dest, void const* src) { *static_cast<T*>( dest ) = *static_cast<T const*>( src ); },
+	  [](void* dest, void* src) { *static_cast<T*>( dest ) = std::move(*static_cast<T*>( src )); },
+	  [](void const* lhs, void const* rhs) { return *static_cast<T const*>( lhs ) == *static_cast<T const*>( rhs ); },
+	  [](void const* lhs, void const* rhs) { return std::less<T>{}( *static_cast<T const*>( lhs ),*static_cast<T const*>( rhs ) ); },
+	  [](void const* self) { return std::hash<T>{}( *static_cast<T const*>( self ) ); },
+	  []()->decltype( auto ) { return typeid( T ); },
+	  [](void const* self) { return make_dtor_unique_ptr<T>(*static_cast<T const*>( self )); }
+	};
+}
+template<class T>
+regular_vtable const* get_regular_vtable() noexcept {
+	static const regular_vtable vtable = make_regular_vtable<T>();
+	return &vtable;
+}
 
-      template<class T, class...Args>
-      void emplace( Args&&... args ) {
-        ptr = make_dtor_unique_ptr<T>(std::forward<Args>(args)...);
-        if (ptr)
-          vtable = get_regular_vtable<T>();
-        else
-          vtable = nullptr;
-      }
-      friend bool operator==(regular_type const& lhs, regular_type const& rhs) {
-        if (lhs.vtable != rhs.vtable) return false;
-        return lhs.vtable->equals( lhs.ptr.get(), rhs.ptr.get() );
-      }
-      bool before(regular_type const& rhs) const {
-        auto const& lhs = *this;
-        if (!lhs.vtable || !rhs.vtable)
-          return std::less<regular_vtable const*>{}(lhs.vtable,rhs.vtable);
-        if (lhs.vtable != rhs.vtable)
-          return lhs.vtable->type().before(rhs.vtable->type());
-        return lhs.vtable->order( lhs.ptr.get(), rhs.ptr.get() );
-      }
-      // technically friend bool operator< that calls before is also required
+struct regular_type {
+	using self = regular_type;
+	regular_vtable const* vtable = 0;
+	dtor_unique_ptr ptr{ nullptr, [](void*) {} };
 
-      std::type_info const* type() const {
-        if (!vtable) return nullptr;
-        return &vtable->type();
-      }
-      regular_type(regular_type&& o):
-        vtable(o.vtable),
-        ptr(std::move(o.ptr))
-      {
-        o.vtable = nullptr;
-      }
-      friend void swap(regular_type& lhs, regular_type& rhs){
-        std::swap(lhs.ptr, rhs.ptr);
-        std::swap(lhs.vtable, rhs.vtable);
-      }
-      regular_type& operator=(regular_type&& o) {
-        if (o.vtable == vtable) {
-          vtable->move_assign(ptr.get(), o.ptr.get());
-          return *this;
-        }
-        auto tmp = std::move(o);
-        swap(*this, tmp);
-        return *this;
-      }
-      regular_type(regular_type const& o):
-        vtable(o.vtable),
-        ptr(o.vtable?o.vtable->clone(o.ptr.get()):dtor_unique_ptr{nullptr, [](void*){}})
-      {
-        if (!ptr && vtable) vtable = nullptr;
-      }
-      regular_type& operator=(regular_type const& o) {
-        if (o.vtable == vtable) {
-          vtable->copy_assign(ptr.get(), o.ptr.get());
-          return *this;
-        }
-        auto tmp = o;
-        swap(*this, tmp);
-        return *this;
-      }
-      std::size_t hash() const {
-        if (!vtable) return 0;
-        return vtable->hash(ptr.get());
-      }
-      template<class T,
-        std::enable_if_t< !std::is_same<std::decay_t<T>, regular_type>{}, int>* =nullptr
-      >
-      regular_type(T&& t) {
-        emplace<std::decay_t<T>>(std::forward<T>(t));
-      }
-    };
-    namespace std {
-      template<>
-      struct hash<regular_type> {
-        std::size_t operator()( regular_type const& r )const {
-          return r.hash();
-        }
-      };
-      template<>
-      struct less<regular_type> {
-        bool operator()( regular_type const& lhs, regular_type const& rhs ) const {
-          return lhs.before(rhs);
-        }
-      };
-    }
+	bool empty() const { return !vtable; }
+
+	template<class T, class...Args>
+	void emplace(Args&&... args) {
+		ptr = make_dtor_unique_ptr<T>(std::forward<Args>(args)...);
+		if (ptr)
+			vtable = get_regular_vtable<T>();
+		else
+			vtable = nullptr;
+	}
+	friend bool operator==(regular_type const& lhs, regular_type const& rhs) {
+		if (lhs.vtable != rhs.vtable) return false;
+		return lhs.vtable->equals(lhs.ptr.get(), rhs.ptr.get());
+	}
+	bool before(regular_type const& rhs) const {
+		auto const& lhs = *this;
+		if (!lhs.vtable || !rhs.vtable)
+			return std::less<regular_vtable const*>{}( lhs.vtable, rhs.vtable );
+		if (lhs.vtable != rhs.vtable)
+			return lhs.vtable->type().before(rhs.vtable->type());
+		return lhs.vtable->order(lhs.ptr.get(), rhs.ptr.get());
+	}
+	// technically friend bool operator< that calls before is also required
+
+	std::type_info const* type() const {
+		if (!vtable) return nullptr;
+		return &vtable->type();
+	}
+	regular_type(regular_type&& o) :
+		vtable(o.vtable),
+		ptr(std::move(o.ptr))
+	{
+		o.vtable = nullptr;
+	}
+	friend void swap(regular_type& lhs, regular_type& rhs) {
+		std::swap(lhs.ptr, rhs.ptr);
+		std::swap(lhs.vtable, rhs.vtable);
+	}
+	regular_type& operator=(regular_type&& o) {
+		if (o.vtable == vtable) {
+			vtable->move_assign(ptr.get(), o.ptr.get());
+			return *this;
+		}
+		auto tmp = std::move(o);
+		swap(*this, tmp);
+		return *this;
+	}
+	regular_type(regular_type const& o) :
+		vtable(o.vtable),
+		ptr(o.vtable ? o.vtable->clone(o.ptr.get()) : dtor_unique_ptr{ nullptr, [](void*) {} })
+	{
+		if (!ptr && vtable) vtable = nullptr;
+	}
+	regular_type& operator=(regular_type const& o) {
+		if (o.vtable == vtable) {
+			vtable->copy_assign(ptr.get(), o.ptr.get());
+			return *this;
+		}
+		auto tmp = o;
+		swap(*this, tmp);
+		return *this;
+	}
+	std::size_t hash() const {
+		if (!vtable) return 0;
+		return vtable->hash(ptr.get());
+	}
+	template<class T,
+		std::enable_if_t < !std::is_same<std::decay_t<T>, regular_type>{}, int > * = nullptr
+	>
+		regular_type(T && t) {
+		emplace<std::decay_t<T>>(std::forward<T>(t));
+	}
+};
+namespace std {
+	template<>
+	struct hash<regular_type> {
+		std::size_t operator()(regular_type const& r)const {
+			return r.hash();
+		}
+	};
+	template<>
+	struct less<regular_type> {
+		bool operator()(regular_type const& lhs, regular_type const& rhs) const {
+			return lhs.before(rhs);
+		}
+	};
+}
 
 int main() {
-    std::unordered_map< regular_type, int > uom {
-      std::make_pair(1,1),
-      std::make_pair("hello"s, 2),
-      std::make_pair(2,3),
-    };
-    std::map< regular_type, int > om {
-      {1,1},
-      {"hello"s, 2},
-      {2,3},
-    };
-    uom[1] = -10;
-    for (auto&& e:uom)
-        std::cout << e.second << '\n';
-    om["hello"s] = -10;
-    for (auto&& e:om)
-        std::cout << e.second << '\n';
+	std::unordered_map< regular_type, int > uom{
+	  std::make_pair(1,1),
+	  std::make_pair("hello"s, 2),
+	  std::make_pair(2,3),
+	};
+	std::map< regular_type, int > om{
+	  {1,1},
+	  {"hello"s, 2},
+	  {2,3},
+	};
+	uom[1] = -10;
+	for (auto&& e : uom)
+		std::cout << e.second << '\n';
+	om["hello"s] = -10;
+	for (auto&& e : om)
+		std::cout << e.second << '\n';
 }
 // clang++ -std=c++14 -O2 -Wall -pedantic -pthread main.cpp && ./a.out
-
 ```
+
+> NOTE: 
+>
+> 一、实现总结
+>
+> 1、abstract  type + template object generator 
+>
+> `dtor_unique_ptr` + `make_dtor_unique_ptr`
+>
+> `regular_vtable` + `make_regular_vtable`
+
+[live example](http://coliru.stacked-crooked.com/a/28ef6be761012a81).
+
+Such a regular type can be used as a key for a `std::map` or a `std::unordered_map` that accepts *anything regular* for a key, like:
+
+```C++
+std::map<regular_type, std::any>
+```
+
+would be basically a map from anothing regular, to anything copyable.
+
+Unlike `any`, my `regular_type` does no small object optimization nor does it support getting the original data back. Getting the original type back isn't hard.
+
+Small object optimization requires that we store an aligned storage buffer within the `regular_type`, and carefully tweak the deleter of the `ptr` to only destroy the object and not delete it.
+
+I would start at `make_dtor_unique_ptr` and teach it how to sometimes store the data in a buffer, and then in the heap if no room in the buffer. That may be sufficient.
+
+
 
 
 
