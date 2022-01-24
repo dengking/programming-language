@@ -4,6 +4,10 @@
 
 1、how to remember type info
 
+2、construct in place
+
+3、small object optimization
+
 ### stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work)
 
 ```cpp

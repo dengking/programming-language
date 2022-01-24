@@ -5,3 +5,5 @@ nav:
     - std-any: std-any
     - std-variant: std-variant
     - std-integer_sequence: std-integer_sequence
+    - std-in_place: std-in_place
+    
