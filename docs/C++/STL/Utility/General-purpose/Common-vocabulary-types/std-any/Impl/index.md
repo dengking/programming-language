@@ -11,12 +11,17 @@
 ### stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work)
 
 ```cpp
+#include <iostream>
+#include <any>
+
 int main()
-{   
-    std::any x;
-    x=9.9;
-    std::cout << std::any_cast<double>(x) << std::endl;
+{
+	std::any x;
+	x = 9.9;
+	std::cout << std::any_cast<double>( x ) << std::endl;
 }
+// g++ -std=c++17 -O2 -Wall -pedantic  test.cpp && ./a.out
+
 ```
 
 But how `std::any` stores the type information? As I see, if I call `std::any_cast` with the "wrong" type I got `std::bad_any_cast` exception as expected.
