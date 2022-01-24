@@ -1,3 +1,6 @@
 nav:
     - Introduction: index.md
     - library-thelink2012-any: library-thelink2012-any
+    - std-any_cast: std-any_cast
+    - Impl: Impl
+    

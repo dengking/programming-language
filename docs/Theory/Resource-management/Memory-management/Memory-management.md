@@ -5,7 +5,7 @@
 - [Automatic memory management](./Automatic-memory-management/Automatic-memory-management.md)
 - [Manual memory management](./Manual-memory-management/Manual-memory-management.md)
 
-## 维基百科[Memory management](https://en.wikipedia.org/wiki/Memory_management)
+## wikipedia [Memory management](https://en.wikipedia.org/wiki/Memory_management)
 
 
 

@@ -27,6 +27,8 @@ People often use the term **vocabulary type**, yet I've never seen a definition 
 
 ### foonathan [What should be part of the C++ standard library?](https://foonathan.net/2017/11/standard-library/) # 2. Vocabulary types and concepts
 
+
+
 ## How To Use Vocabulary Types from C++17?
 
 bfilipek [How To Use Vocabulary Types from C++17, Presentation](https://www.bfilipek.com/2019/09/vocabulary-types-talk.html)

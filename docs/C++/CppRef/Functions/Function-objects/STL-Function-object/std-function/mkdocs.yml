@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
     - Examples: Examples.md
-    - std-function-impl: std-function-impl
+    - impl: impl
     

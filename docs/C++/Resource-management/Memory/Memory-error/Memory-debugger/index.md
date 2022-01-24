@@ -12,7 +12,7 @@
 
 ### [AddressSanitizer](https://en.wikipedia.org/wiki/AddressSanitizer)
 
- Compile-time instrumentation (available in [Clang](https://en.wikipedia.org/wiki/Clang) and [GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)) and specialized library
+Compile-time instrumentation (available in [Clang](https://en.wikipedia.org/wiki/Clang) and [GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)) and specialized library
 
 
 

@@ -3,6 +3,8 @@ nav:
 
     - std-function: std-function
     
+    - C++23-std-move_only_function: C++23-std-move_only_function
+    
     - std-bind: std-bind
     
     - STL-Functor: STL-Functor
