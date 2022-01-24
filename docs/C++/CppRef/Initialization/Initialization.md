@@ -12,14 +12,21 @@
 
 > NOTE: 
 >
-> 一、提供了"initializer"其实就是带参的initialization
->
-> 二、Terminology: initializer
+> 一、Terminology: initializer
 >
 > "initializer"是cppreference中用来表示**初始值**的术语，在下面文章中使用了这个术语: 
 >
-> - cppreference [new expression](https://en.cppreference.com/w/cpp/language/new)
-> - cppreference [Declarators](https://en.cppreference.com/w/cpp/language/declarations#Declarators) 
+> 1、cppreference [new expression](https://en.cppreference.com/w/cpp/language/new)
+>
+> 2、cppreference [Declarators](https://en.cppreference.com/w/cpp/language/declarations#Declarators) 
+>
+> 二、从下面的内容可知Initializer & initialization & constructor 之间的映射关系:
+>
+> C++中只有三种形式的 **initializer** ， **initializer** 其实仅仅是一种语法形式而已，需要注意的是 **initializer** 和 initialization之间的对应关系:
+>
+> > Depending on context, the **initializer** may invoke: (initialization)
+>
+> 即在不同的场合会执行不同的initialization，然后由initialization决定调用哪个constructor。C++定义了多种initialization，各种initialization可能考虑多种constructor，即一对多。
 
 The initial value may be provided in the **initializer** section of a [declarator](https://en.cppreference.com/w/cpp/language/declarations) or a [new expression](https://en.cppreference.com/w/cpp/language/new).
 
@@ -33,14 +40,14 @@ For each declarator, the **initializer** may be one of the following:
 
 Depending on context, the **initializer** may invoke:
 
-| initialization                                               | example                         | 注解 |
-| ------------------------------------------------------------ | ------------------------------- | ---- |
-| [Value initialization](https://en.cppreference.com/w/cpp/language/value_initialization) | `std::string s{};`              |      |
-| [Direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) | `std::string s("hello");`       |      |
-| [Copy initialization](https://en.cppreference.com/w/cpp/language/copy_initialization) | `std::string s = "hello";`      |      |
-| [List initialization](https://en.cppreference.com/w/cpp/language/list_initialization) | `std::string s{'a', 'b', 'c'};` |      |
-| [Aggregate initialization](https://en.cppreference.com/w/cpp/language/aggregate_initialization) | `char a[3] = {'a', 'b'};`       |      |
-| [Reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization) | `char& c = a[0];`               |      |
+| initialization                                               | example                         |
+| ------------------------------------------------------------ | ------------------------------- |
+| [Value initialization](https://en.cppreference.com/w/cpp/language/value_initialization) | `std::string s{};`              |
+| [Direct initialization](https://en.cppreference.com/w/cpp/language/direct_initialization) | `std::string s("hello");`       |
+| [Copy initialization](https://en.cppreference.com/w/cpp/language/copy_initialization) | `std::string s = "hello";`      |
+| [List initialization](https://en.cppreference.com/w/cpp/language/list_initialization) | `std::string s{'a', 'b', 'c'};` |
+| [Aggregate initialization](https://en.cppreference.com/w/cpp/language/aggregate_initialization) | `char a[3] = {'a', 'b'};`       |
+| [Reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization) | `char& c = a[0];`               |
 
 If no initializer is provided, the rules of [default initialization](https://en.cppreference.com/w/cpp/language/default_initialization) apply.
 
@@ -60,7 +67,7 @@ If no initializer is provided, the rules of [default initialization](https://en.
 
 ### Non-local variables
 
-> NOTE: 原文的这部分内容放到了 `Non-local-variables-initialization` 章节中
+> NOTE: 原文的这部分内容放到了 `Non-local-object` 章节中
 
 ### Static local variables
 

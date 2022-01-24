@@ -1,16 +1,16 @@
-# Initialization and constructor and conversion
+# Initializer & initialization & constructor & conversion
 
 搞清楚initialization 和 constructor 之间的对应关系非常重要，下面是比较好的素材。
 
-## 以initialization为切入点
+## Initializer & initialization & constructor
+
+在 cppreference [Initialization](https://en.cppreference.com/w/cpp/language/initialization) 中总结了initializer和initialization之间的对应关系，此处不再赘述。
+
+## Conversion & initialization
 
 "Conversion is defined in terms of initialization" 并且 "各种initialization可能考虑多种constructor，即一对多"，因此以initialization为切入点是比较好的。
 
-### Conversion and initialization
-
-Conversion is defined in terms of initialization
-
-#### implicit conversion
+### implicit conversion
 
 cppreference [Copy initialization](https://en.cppreference.com/w/cpp/language/copy_initialization)
 
@@ -26,9 +26,7 @@ It is said that a converting constructor specifies an implicit conversion from t
 
 
 
-
-
-#### explicit conversion
+### explicit conversion
 
 cppreference [Explicit type conversion](https://en.cppreference.com/w/cpp/language/explicit_cast)
 
@@ -39,12 +37,6 @@ cppreference [Explicit type conversion](https://en.cppreference.com/w/cpp/langua
 > A single-word type name followed by a *braced-init-list* is a prvalue of the specified type designating a temporary (until C++17)whose result object is (since C++17) [direct-list-initialized](https://en.cppreference.com/w/cpp/language/list_initialization) with the specified *braced-init-list*. If *new_type* is (possibly [cv-qualified](https://en.cppreference.com/w/cpp/language/cv)) `void`, the expression is a void prvalue without a result object (since C++17).
 
 explicit conversion是否会考虑 [Copy initialization](https://en.cppreference.com/w/cpp/language/copy_initialization) ？我觉得它应该不会的。
-
-### Initialization and constructor
-
-1、C++定义了多种initialization，各种initialization可能考虑多种constructor，即一对多
-
-
 
 
 

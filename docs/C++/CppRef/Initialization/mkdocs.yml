@@ -1,8 +1,8 @@
 nav:
     - Introduction: index.md
     # 首先描述cppreference中initialization的概念    
-    - Initialization&constructor&conversion: Initialization&constructor&conversion
     - Initialization: Initialization.md
+    - Initializer&initialization&constructor&conversion: Initializer&initialization&constructor&conversion    
     - Non-local-object-initialization: Non-local-object-initialization
     - Default-initialization: Default-initialization    
     - C++03-Value-initialization: C++03-Value-initialization

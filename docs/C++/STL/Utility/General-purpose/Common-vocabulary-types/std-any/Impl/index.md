@@ -60,11 +60,7 @@ small object optimisation
 
 
 
-### [gcc](https://github.com/gcc-mirror/gcc)/[libstdc++-v3](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3)/[include](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include)/[std](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include/std)/[any](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/std/any)
-
-
-
-### github [thelink2012](https://github.com/thelink2012)/**[any](https://github.com/thelink2012/any)**
+## github [thelink2012](https://github.com/thelink2012)/**[any](https://github.com/thelink2012/any)**
 
 参见 `library-thelink2012-any` 章节。
 
