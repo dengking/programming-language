@@ -48,12 +48,26 @@ int main()
 
 上述使用 `std::conditional` 构建了一个类型抽象层。
 
+
+
 ## cppreference [std::conditional](https://en.cppreference.com/w/cpp/types/conditional)
 
 #### Possible implementation
 
 ```C++
-template<bool B, class T, class F> struct conditional { typedef T type; }; 
+template<bool B, class T, class F>
+struct conditional {
+	typedef T type;
+};
 
-template<class T, class F> struct conditional<false, T, F> { typedef F type; };
+template<class T, class F>
+struct conditional<false, T, F> {
+	typedef F type;
+};
 ```
+
+
+
+## 素材
+
+stackoverflow [How std::conditional works](https://stackoverflow.com/questions/44550976/how-stdconditional-works)

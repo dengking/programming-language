@@ -284,8 +284,6 @@ github [magic_enum](https://github.com/Neargye/magic_enum)
 
 
 
-
-
 ## TODO enum and callback function
 
 这其实是要实现polymorphism。

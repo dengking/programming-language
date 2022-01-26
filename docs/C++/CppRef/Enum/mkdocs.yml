@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - enum-as-key-of-hash-map: enum-as-key-of-hash-map
+    

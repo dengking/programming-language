@@ -2,10 +2,6 @@
 
 
 
-stackoverflow [Can std::byte replace std::aligned_storage?](https://stackoverflow.com/questions/58288225/can-stdbyte-replace-stdaligned-storage)
-
-
-
 ## cppreference [std::aligned_storage](https://en.cppreference.com/w/cpp/types/aligned_storage)
 
 
@@ -26,7 +22,9 @@ struct aligned_storage
 
 ```
 
-
+> NOTE: 
+>
+> 可以看到，本质上是一个static array
 
 ### Example
 
@@ -94,4 +92,8 @@ int main()
 ## aligned storage placement new
 
 stackoverflow [Placement new in std::aligned_storage?](https://stackoverflow.com/questions/28187732/placement-new-in-stdaligned-storage)
+
+## 素材
+
+stackoverflow [Can std::byte replace std::aligned_storage?](https://stackoverflow.com/questions/58288225/can-stdbyte-replace-stdaligned-storage)
 

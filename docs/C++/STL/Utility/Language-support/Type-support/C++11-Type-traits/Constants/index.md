@@ -6,9 +6,48 @@
 
 **std::integral_constant** wraps a static constant of specified type. It is the base class for the C++ type traits.
 
-> NOTE: 帮助首先type trait
+> NOTE: 
+>
+> 一、帮助实现type trait
+>
+> 二、example:
+>
+> 1、[gcc](https://github.com/gcc-mirror/gcc)/[libstdc++-v3](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3)/[include](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include)/[std](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include/std)/[**any**](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/std/any)
+>
+> ```C++
+> template<
+> typename _Tp, 
+> typename _Safe = is_nothrow_move_constructible<_Tp>,
+> bool _Fits = (sizeof(_Tp) <= sizeof(_Storage)) && (alignof(_Tp) <= alignof(_Storage))
+> >
+> using _Internal = std::integral_constant<bool, _Safe::value && _Fits>;
+> ```
+>
+> 
 
+### Possible implementation
 
+```C++
+
+template<class T, T v>
+struct integral_constant {
+	static constexpr T value = v;
+	typedef T value_type;
+	typedef integral_constant type;
+	constexpr operator value_type() const noexcept
+	{
+		return value;
+	}
+	constexpr value_type operator()() const noexcept //since c++14
+	{
+		return value;
+	}
+};
+```
+
+> NOTE: 
+>
+> 典型的使用 template user defined conversion member function
 
 ## `std::true_type` and `std::false_type`
 

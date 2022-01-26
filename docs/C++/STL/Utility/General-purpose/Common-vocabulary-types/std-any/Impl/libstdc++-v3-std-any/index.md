@@ -30,6 +30,36 @@ union _Storage
 };
 ```
 
+上述写法其实是可以作为一个通用的small object optimization。
+
+```C++
+#include <type_traits>
+// Holds either pointer to a heap object or the contained object itself.
+union Storage
+{
+	constexpr Storage() : ptr_{ nullptr } {}
+
+	// Prevent trivial copies of this type, buffer might hold a non-POD.
+	Storage(const Storage&) = delete;
+	Storage& operator=(const Storage&) = delete;
+
+	void* ptr_; // pointer to the heap object
+	std::aligned_storage<sizeof(ptr_), alignof( void* )>::type buffer_; // 这是small buffer optimization
+};
+template<
+	typename _Tp, // contained object的类型
+	// 为了执行small object optimization，_Tp 必须是nothrow move constructible的
+	typename _Safe = std::is_nothrow_move_constructible<_Tp>,
+	// 为了执行small object optimization，_Tp 的size、align等都必须要满足要求
+	bool _Fits = ( sizeof(_Tp) <= sizeof(_Storage) ) && ( alignof( _Tp ) <= alignof( _Storage ) )
+>
+using Internal = std::integral_constant<bool, _Safe::value&& _Fits>; // metafunction: 判断能否使用small object optimization
+int main()
+{
+
+}
+```
+
 
 
 ## `Manager`
@@ -44,7 +74,7 @@ template<
 	// 为了执行small object optimization，_Tp 的size、align等都必须要满足要求
 	bool _Fits = ( sizeof(_Tp) <= sizeof(_Storage) ) && ( alignof( _Tp ) <= alignof( _Storage ) )
 >
-using _Internal = std::integral_constant<bool, _Safe::value&& _Fits>;
+using _Internal = std::integral_constant<bool, _Safe::value&& _Fits>; // metafunction: 判断能否使用small object optimization
 
 template<typename _Tp>
 struct _Manager_internal; // uses small-object optimization
@@ -137,8 +167,6 @@ struct _Manager_external
 	}
 };
 ```
-
-
 
 
 
