@@ -3,4 +3,5 @@ nav:
     - GCC: GCC
     - MSVC: MSVC
     - GCC-VS-LLVM: GCC-VS-LLVM
+    - Sanitizers: Sanitizers
     
