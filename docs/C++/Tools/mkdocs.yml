@@ -3,3 +3,5 @@ nav:
     - Valgrind: Valgrind
     - gperftools: gperftools
     - IDE: IDE
+    - Conan: Conan
+    
