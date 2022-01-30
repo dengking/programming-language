@@ -10,3 +10,10 @@
 
 ## github [rigtorp](https://github.com/rigtorp)
 
+
+
+## [C++ Best Practices](https://rigtorp.se/cpp-best-practices/)
+
+> NOTE: 
+>
+> 这篇描述C++最佳实践的文章还是不错的

@@ -21,7 +21,7 @@ nav:
     - Guide: Guide    
     - Performance-optimization: Performance-optimization # 性能优化    
     # C++领域专家
-    - Expert: Expert
+    - Experts: Experts
     # 
     - Tools: Tools
 ########## 讨论C++的设计与实现##########     
