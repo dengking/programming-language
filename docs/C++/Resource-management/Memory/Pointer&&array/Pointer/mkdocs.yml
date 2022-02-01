@@ -1,10 +1,10 @@
 nav:
     - Introduction: index.md
-    - Pointer: Pointer
+    - cppreference-pointer: cppreference-pointer
     - Pointer-to-void: Pointer-to-void
     - Multiple-level-pointer: Multiple-level-pointer
     - Pointer&integer: Pointer&integer
-    - Conversion: Conversion.md
+    - Pointer-conversion: Pointer-conversion
     - Pointer-length: Pointer-length
     - Pointer-to-member: Pointer-to-member
     - Null-pointer: Null-pointer

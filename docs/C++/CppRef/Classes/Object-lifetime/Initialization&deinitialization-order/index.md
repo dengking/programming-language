@@ -1,12 +1,18 @@
 # Initialization and deinitialization order 
 
-本章探讨constructor、destructor的调用次序问题(order)，原则如下:
+对于initialization order 和 deinitialization order，可以从如下方面进行思考: 
 
-1、constructor的调用次序: 沿着class hierarchy，自顶向下、自左至右进行初始化
+一、class hierarchy
 
-2、destructor的调用是和constructor的相反的
+1、constructor的调用次序: 沿着class hierarchy(按照declaration)，自顶向下、自左至右进行初始化；关于此，在 cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list) # [Initialization order](https://en.cppreference.com/w/cpp/language/constructor#Initialization_order) 中进行了非常好的介绍
 
-这样是为了保证stack ordering。
+2、destructor的调用是和constructor的相反的，这样是为了保证stack ordering。
+
+二、member initialization order
+
+简而言之: 是按照member declaration的顺序，而不是按照它们在member initialization list中的顺序
+
+
 
 ## cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list) # [Initialization order](https://en.cppreference.com/w/cpp/language/constructor#Initialization_order)
 
@@ -17,8 +23,6 @@
 > 1、class hierarchy
 >
 > 2、"non-static data member are initialized in order of declaration in the class definition"
->
-> 
 >
 > 在下面解释了这样做的原因:
 >
@@ -58,13 +62,25 @@ For both user-defined or implicitly-defined destructors, after the body of the d
 
 Even when the destructor is called directly (e.g. `obj.~Foo();`), the return statement in `~Foo()` does not return control to the caller immediately: it calls all those member and base destructors first.
 
+## 素材
+
+1、stackoverflow [Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )
 
 
-## stackoverflow [Constructor initialization-list evaluation order](https://stackoverflow.com/questions/1242830/constructor-initialization-list-evaluation-order)
+
+## Member initialization order
+
+### Example
+
+下面是例子:
 
 
 
-## 我踩过的坑
+### stackoverflow [Constructor initialization-list evaluation order](https://stackoverflow.com/questions/1242830/constructor-initialization-list-evaluation-order)
+
+
+
+### 我踩过的坑
 
 今天在碰到了一个与initialization-list evaluation order相关的问题，并且它还导致了进程core掉了，现在想来，`c++`的这种设计太容易出现错误了，并且这种错误是非常严重但是隐晦的。
 
@@ -73,11 +89,14 @@ class Turn {
 public:
 	virtual ~Turn() {
 	}
-	Turn(const unsigned int interval, StockReader* stock_reader_p,
-			const std::string& redis_address) :
-			interval_(interval), stock_reader_p_(stock_reader_p), redis_address_(
-					redis_address), redis_con_(redis_address_), AI_service_(
-					redis_address_) {
+	Turn(const unsigned int interval, 
+         StockReader* stock_reader_p,
+		 const std::string& redis_address) :
+		 interval_(interval), 
+         stock_reader_p_(stock_reader_p), 
+         redis_address_(redis_address), 
+         redis_con_(redis_address_), 
+         AI_service_(redis_address_) {
 		this_turn_left_time_ = 0;
 		init_flag_ = false;
 		time_number_ = 0;
@@ -149,10 +168,4 @@ private:
 - 为什么什么的代码会core掉？
 
 这些问题既涉及到`c++`也设计到core dump，为此需要专门去了解相关内容。
-
-## TODO
-
-
-
-1、stackoverflow [Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )
 

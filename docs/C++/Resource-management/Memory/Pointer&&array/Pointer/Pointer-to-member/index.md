@@ -1,8 +1,18 @@
 # Pointer to member
 
+## 素材
+
+### cppreference  [Pointer declaration](https://pd.codechef.com/docs/cpp/cpp/language/pointer.html)
+
+> NOTE: 
+>
+> 其中的对pointer to member进行了非常好的解释
+
+### cppreference [Non-static data members # Usage](https://pd.codechef.com/docs/cpp/cpp/language/data_members.html)
 
 
-## stackoverflow [Pointer to class data member “::*”](https://stackoverflow.com/questions/670734/pointer-to-class-data-member)
+
+### stackoverflow [Pointer to class data member “::*”](https://stackoverflow.com/questions/670734/pointer-to-class-data-member)
 
 I came across this strange code snippet which compiles fine:
 
@@ -24,7 +34,7 @@ int main()
 
 
 
-### [A](https://stackoverflow.com/a/670744)
+#### [A](https://stackoverflow.com/a/670744)
 
 It's a "pointer to member" - the following code illustrates its use:
 

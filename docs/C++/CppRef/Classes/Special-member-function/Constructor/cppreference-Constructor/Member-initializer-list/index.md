@@ -264,7 +264,7 @@ Please write comments if you find anything incorrect, or you want to share more 
 
 
 
-## Prefer to use member initialization list
+## Prefer to use member initializer list
 
 ### [LeetBook C++ 面试突击](https://leetcode-cn.com/leetbook/detail/cpp-interview-highlights/) # [为什么用成员初始化列表会快一些？](https://leetcode-cn.com/leetbook/read/cpp-interview-highlights/eft937/)
 
@@ -276,7 +276,9 @@ Please write comments if you find anything incorrect, or you want to share more 
 
 #### [A](https://stackoverflow.com/a/926795/10173843)
 
-```
+For [POD](https://stackoverflow.com/a/146454/626796) class members, it makes no difference, it's just a matter of style. For class members which are classes, then it avoids an unnecessary call to a **default constructor**. Consider:
+
+```C++
 #include<iostream>
 class A
 {
@@ -322,3 +324,78 @@ int main()
 > ```
 >
 > 从上面可以看到，它是会首先调用 `A` 的default constructor `A::A()` 的
+
+In this case, the constructor for `B` will call the default constructor for `A`, and then initialize `a.x` to 3. A better way would be for `B`'s constructor to directly call `A`'s constructor in the initializer list:
+
+```C++
+#include<iostream>
+class A
+{
+public:
+    A() { 
+        x = 0; 
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    A(int x_) { 
+        x = x_; 
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    int x;
+};
+
+class B
+{
+public:
+    B() : a(3)
+    {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+private:
+    A a;
+};
+int main()
+{
+    B b;
+}
+// g++ test.cpp -pedantic -Wall -Wextra -Werror
+
+```
+
+> NOTE: 
+>
+> 一、输出如下:
+>
+> ```C++
+> A::A(int)
+> 
+> B::B()
+> ```
+>
+> 
+
+This would only call `A`'s `A(int)` constructor and not its default constructor. In this example, the difference is negligible(微不足道的), but imagine if you will that `A`'s default constructor did more, such as allocating memory or opening files. You wouldn't want to do that unnecessarily.
+
+```C++
+class A
+{
+public:
+    A(int x_) { x = x_; }
+    int x;
+};
+
+class B
+{
+public:
+    B() : a(3), y(2)  // 'a' and 'y' MUST be initialized in an initializer list;
+    {                 // it is an error not to do so
+    }
+private:
+    A a;
+    const int y;
+};
+```
+
+## Member initialization order
+
+这在 `Initialization&deinitialization-order` 章节进行了讨论。
+
