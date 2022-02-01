@@ -62,6 +62,165 @@ For both user-defined or implicitly-defined destructors, after the body of the d
 
 Even when the destructor is called directly (e.g. `obj.~Foo();`), the return statement in `~Foo()` does not return control to the caller immediately: it calls all those member and base destructors first.
 
+
+
+## Example
+
+下面的例子是根据stackoverflow [Order of member constructor and destructor calls](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls) 中的例子改编而来。
+
+### member声明顺序和member initializer list的顺序相同
+
+```C++
+#include <iostream>
+using namespace std;
+
+struct A
+{
+    A(int a) :a_{ a }
+    {
+        cout << "A::A" << endl;
+	}
+    ~A() { cout << "A::~" << endl; }
+    int a_;
+};
+
+struct B
+{
+	B(int b) :b_{ b }
+    { 
+        cout << "B::B" << endl; 
+	}
+    ~B() { cout << "B::~" << endl; }
+    int b_;
+};
+
+struct C
+{
+    C(int c) :c_{c}
+    { 
+        cout << "C::C" << endl; 
+	}
+    ~C() { cout << "C::~" << endl; }
+    int c_;
+};
+
+struct Aggregate
+{
+	Aggregate(int a, int b, int c) :a_{ a }, b_{ b }, c_{ c }
+    {
+	}
+    A a_;
+    B b_;
+    C c_;
+};
+
+int main()
+{
+	Aggregate a{ 1,2,3 };
+    return 0;
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra 
+
+```
+
+输出如下:
+
+```c++
+A::A
+B::B
+C::C
+C::~
+B::~
+A::~
+```
+
+可以看到initialization order 和 deinitialization order是相反的。
+
+### member声明顺序和member initializer list的顺序不相同
+
+```C++
+#include <iostream>
+using namespace std;
+
+struct A
+{
+    A(int a) :a_{ a }
+    {
+        cout << "A::A" << endl;
+	}
+    ~A() { cout << "A::~" << endl; }
+    int a_;
+};
+
+struct B
+{
+	B(int b) :b_{ b }
+    { 
+        cout << "B::B" << endl; 
+	}
+    ~B() { cout << "B::~" << endl; }
+    int b_;
+};
+
+struct C
+{
+    C(int c) :c_{c}
+    { 
+        cout << "C::C" << endl; 
+	}
+    ~C() { cout << "C::~" << endl; }
+    int c_;
+};
+
+struct Aggregate
+{
+    Aggregate(int a, int b, int c) :b_{ b }, a_{ a }, c_{ c }
+    {
+	}
+    A a_;
+    B b_;
+    C c_;
+};
+
+int main()
+{
+	Aggregate a{ 1,2,3 };
+    return 0;
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra 
+
+```
+
+编译警告如下:
+
+```C++
+test.cpp: In constructor ‘Aggregate::Aggregate(int, int, int)’:
+test.cpp:40:7: warning: ‘Aggregate::b_’ will be initialized after [-Wreorder]
+   40 |     B b_;
+      |       ^~
+test.cpp:39:7: warning:   ‘A Aggregate::a_’ [-Wreorder]
+   39 |     A a_;
+      |       ^~
+test.cpp:36:5: warning:   when initialized here [-Wreorder]
+   36 |     Aggregate(int a, int b, int c) :b_{ b }, a_{ a }, c_{ c }
+      |     ^~~~~~~~~
+```
+
+上述警告的原因是: member的声明顺序和
+
+输出如下:
+
+```C++
+A::A
+B::B
+C::C
+C::~
+B::~
+A::~
+```
+
+可以看见，实际执行的顺序并不受影响，这也证明了 cppreference [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/initializer_list) # [Initialization order](https://en.cppreference.com/w/cpp/language/constructor#Initialization_order) 中总结的。
+
 ## 素材
 
 1、stackoverflow [Order of member constructor and destructor calls  ](https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls  )
@@ -70,15 +229,13 @@ Even when the destructor is called directly (e.g. `obj.~Foo();`), the return sta
 
 ## Member initialization order
 
-### Example
-
-下面是例子:
-
 
 
 ### stackoverflow [Constructor initialization-list evaluation order](https://stackoverflow.com/questions/1242830/constructor-initialization-list-evaluation-order)
 
+[A](https://stackoverflow.com/a/1242835/10173843)
 
+It depends on the order of member variable declaration in the class. So `a_` will be the first one, then `b_` will be the second one in your example.
 
 ### 我踩过的坑
 
@@ -89,14 +246,11 @@ class Turn {
 public:
 	virtual ~Turn() {
 	}
-	Turn(const unsigned int interval, 
-         StockReader* stock_reader_p,
-		 const std::string& redis_address) :
-		 interval_(interval), 
-         stock_reader_p_(stock_reader_p), 
-         redis_address_(redis_address), 
-         redis_con_(redis_address_), 
-         AI_service_(redis_address_) {
+	Turn(const unsigned int interval, StockReader* stock_reader_p,
+			const std::string& redis_address) :
+			interval_(interval), stock_reader_p_(stock_reader_p), redis_address_(
+					redis_address), redis_con_(redis_address_), AI_service_(
+					redis_address_) {
 		this_turn_left_time_ = 0;
 		init_flag_ = false;
 		time_number_ = 0;
@@ -116,28 +270,6 @@ private:
 	RedisIO::AIServerQueue<> AI_server_queue_; //
 };
 ```
-
-```c++
-template<typename TransportT>
-class Producer {
-public:
-	/// @param broker_address
-	Producer(const std::string& broker_address) :
-			transport_(broker_address) {
-
-	}
-	/// 发布信息
-	void publish(const std::string &message) {
-		celery_queue_.write(transport_, message);
-	}
-private:
-	std::string broker_address_;
-	TransportT transport_;
-	RedisIO::CeleryQueue<TransportT> celery_queue_;
-};
-```
-
-
 
 上述代码能够编译通过，但是一旦运行起来，就会core掉，core的信息如下：
 
@@ -160,12 +292,6 @@ private:
 
 ```
 
-在排查这个问题的时候，我感觉`redis_con_(redis_address_), AI_service_(redis_address_) `这种写法，类似于使用了未初始化的类成员变量，所以我尝试将上述`redis_address_`修改为由用户传入的`redis_address`，然后再次进行编译，运行，发现这种情况下，进程是不会core掉的；说明我的猜测是正确的，所以我就Google了相关的内容， 发现在类`Turn`中，`redis_address_`的确是声明在依赖它的两个成员变量之后的。在深入思考这个问题的时候，我想到了如下问题：
+在排查这个问题的时候，我感觉`redis_con_(redis_address_), AI_service_(redis_address_) `这种写法，类似于使用了未初始化的类成员变量，所以我尝试将上述`redis_address_`修改为由用户传入的`redis_address`，然后再次进行编译，运行，发现这种情况下，进程是不会core掉的；说明我的猜测是正确的，所以我就Google了相关的内容， 原因如下: 
 
-- 是先执行initializer list还是先执行 constructor body？
-- 在执行initializer list的时候，`redis_address_`的值是什么？
-
-- 为什么什么的代码会core掉？
-
-这些问题既涉及到`c++`也设计到core dump，为此需要专门去了解相关内容。
-
+成员变量 `AI_service_` 的 initialization 是依赖于成员变量 `redis_address_`，但是在类定义中，成员变量 `AI_service_` 的声明是在成员变量 `redis_address_`前面的，这就导致了"access-outside-of-object-lifetime-use-before-initialization"错误。
