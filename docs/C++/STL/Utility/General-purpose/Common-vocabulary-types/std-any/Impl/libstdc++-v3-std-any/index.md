@@ -1,6 +1,7 @@
 # [gcc](https://github.com/gcc-mirror/gcc)/[libstdc++-v3](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3)/[include](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include)/[std](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include/std)/[any](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/std/any)
 
 
+
 ## stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work)
 
 ```cpp
@@ -281,7 +282,19 @@ struct _Manager_external
 };
 ```
 
-## constructors
+## `_Decay_if_not_any`
+
+为什么要使用 `_Decay_if_not_any`？
+
+`std::any` 是要能够存储任何类型的object的，它通过template constructor、template assignment 来实现；在这些它支持的类型中还包括它自己`std::any`，但是这两种情况的处理逻辑是不同的，因此需要通过overload进行区分。简而言之: 便于区分overload、template method:
+
+1、template constructor、template assignment 
+
+2、constructor with argument `std::any`、assignment with argument `std::any`
+
+
+
+## Constructors
 
 ### Default constructor
 
@@ -308,6 +321,116 @@ any(const any& __other)
 ```
 
 在 `_M_manager(_Op_clone, &__other, &__arg)` 中，会调用copy constructor。
+
+
+
+### Move constructor
+
+```C++
+/**
+     * @brief Move constructor, transfer the state from @p __other
+     *
+     * @post @c !__other.has_value() (this postcondition is a GNU extension)
+     */
+any(any&& __other) noexcept
+{
+    if (!__other.has_value())
+        _M_manager = nullptr;
+    else
+    {
+        _Arg __arg;
+        __arg._M_any = this;
+        __other._M_manager(_Op_xfer, &__other, &__arg);
+    }
+}
+```
+
+
+
+### Constructor: copy contained object
+
+```C++
+template<typename _Tp, typename _VTp = decay_t<_Tp>>
+using _Decay_if_not_any = enable_if_t<!is_same_v<_VTp, any>, _VTp>;
+
+/// Construct with a copy of @p __value as the contained object.
+template <
+    typename _Tp, 
+    typename _VTp = _Decay_if_not_any<_Tp>,
+    typename _Mgr = _Manager<_VTp>,
+    typename = _Require<
+                    __not_<__is_in_place_type<_VTp>>,
+                    is_copy_constructible<_VTp>
+                >
+    >
+    any(_Tp&& __value)
+    : _M_manager(&_Mgr::_S_manage)
+{
+    _Mgr::_S_create(_M_storage, std::forward<_Tp>(__value));
+}
+```
+
+一、典型的SFIANE
+
+二、`_Require` 是 concept
+
+### Constructor: construct contained object in-place
+
+```C++
+template <typename _Res, typename _Tp, typename... _Args>
+using __any_constructible
+= enable_if<
+	__and_<
+	    is_copy_constructible<_Tp>,
+	    is_constructible<_Tp, _Args...>
+	>::value,
+	_Res
+>;
+
+template <typename _Tp, typename... _Args>
+using __any_constructible_t = typename __any_constructible<bool, _Tp, _Args...>::type;
+
+/// Construct with an object created from @p __args as the contained object.
+template <
+	typename _Tp, 
+	typename... _Args, 
+	typename _VTp = decay_t<_Tp>,
+	typename _Mgr = _Manager<_VTp>,
+	__any_constructible_t<_VTp, _Args&&...> = false
+>
+explicit any(in_place_type_t<_Tp>, _Args&&... __args)
+	: _M_manager(&_Mgr::_S_manage)
+{
+	_Mgr::_S_create(_M_storage, std::forward<_Args>(__args)...);
+}
+
+```
+
+### Constructor: construct contained object in-place、`std::initializer_list`
+
+```C++
+/// Construct with an object created from @p __il and @p __args as
+/// the contained object.
+template <
+    typename _Tp, 
+    typename _Up, 
+    typename... _Args,
+    typename _VTp = decay_t<_Tp>, 
+    typename _Mgr = _Manager<_VTp>,
+    __any_constructible_t<
+        _VTp, 
+        initializer_list<_Up>&,
+        _Args&&...
+    > = false>
+explicit any(in_place_type_t<_Tp>, initializer_list<_Up> __il, _Args&&... __args)
+    : _M_manager(&_Mgr::_S_manage)
+{
+    _Mgr::_S_create(_M_storage, __il, std::forward<_Args>(__args)...);
+}
+
+```
+
+## Assignments
 
 
 
