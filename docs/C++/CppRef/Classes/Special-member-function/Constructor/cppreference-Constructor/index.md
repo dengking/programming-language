@@ -45,7 +45,7 @@ int main()
 
 ## Initialization order
 
-> NOTE: 这部分内容移到了`Initialization-and-deinitialization-order`章节
+> NOTE: 这部分内容移到了`Initialization&deinitialization-order`章节
 
 ## Summary
 

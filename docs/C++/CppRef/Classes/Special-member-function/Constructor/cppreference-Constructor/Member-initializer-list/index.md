@@ -40,7 +40,7 @@ int main() {
 } 
 ```
 
-The above code is just an example for **syntax** of Initializer list. In the above code, x and y can also be easily initialed inside the constructor. But there are situations where initialization of data members inside constructor doesn’t work and **Initializer List** must be used. Following are such cases:
+The above code is just an example for **syntax** of Initializer list. In the above code, `x` and `y` can also be easily initialed inside the constructor. But there are situations where initialization of data members inside constructor doesn’t work and **Initializer List** must be used. Following are such cases:
 
 ### 1) For initialization of non-static const data members:
 
@@ -264,9 +264,61 @@ Please write comments if you find anything incorrect, or you want to share more 
 
 
 
-## [LeetBook C++ 面试突击](https://leetcode-cn.com/leetbook/detail/cpp-interview-highlights/) # [为什么用成员初始化列表会快一些？](https://leetcode-cn.com/leetbook/read/cpp-interview-highlights/eft937/)
+## Prefer to use member initialization list
+
+### [LeetBook C++ 面试突击](https://leetcode-cn.com/leetbook/detail/cpp-interview-highlights/) # [为什么用成员初始化列表会快一些？](https://leetcode-cn.com/leetbook/read/cpp-interview-highlights/eft937/)
 
 说明：数据类型可分为内置类型和用户自定义类型（类类型），对于用户自定义类型，利用成员初始化列表效率高。
 
 原因：用户自定义类型如果使用类初始化列表，直接调用该成员变量对应的构造函数即完成初始化；如果在构造函数中初始化，因为 C++ 规定，对象的成员变量的初始化动作发生在进入构造函数本体之前，那么在执行构造函数的函数体之前首先调用默认的构造函数为成员变量设初值，在进入函数体之后，调用该成员变量对应的构造函数。因此，使用列表初始化会减少调用默认的构造函数的过程，效率高。
 
+### stackoverflow [Why should I prefer to use member initialization lists?](https://stackoverflow.com/questions/926752/why-should-i-prefer-to-use-member-initialization-lists)
+
+#### [A](https://stackoverflow.com/a/926795/10173843)
+
+```
+#include<iostream>
+class A
+{
+public:
+    A() { 
+        x = 0; 
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    A(int x_) { 
+        x = x_; 
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    int x;
+};
+
+class B
+{
+public:
+    B()
+    {
+        a.x = 3;
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+private:
+    A a;
+};
+int main()
+{
+    B b;
+}
+// g++ test.cpp -pedantic -Wall -Wextra -Werror
+
+```
+
+> NOTE: 
+>
+> 一、输出如下
+>
+> ```C++
+> A::A()
+> 
+> B::B()
+> ```
+>
+> 从上面可以看到，它是会首先调用 `A` 的default constructor `A::A()` 的
