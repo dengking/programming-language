@@ -1,0 +1,4 @@
+# Cross plateform
+
+如何根据不同的plateform从source code中选择对应plateform的source code进行编译。很显然，是不能够将所有的plateform的implementation source code全部都compile到target file中的。
+

@@ -2,4 +2,5 @@ nav:
     - Introduction: index.md
     - doc: doc
     - code: code
+    - Security&safety: Security&safety
     

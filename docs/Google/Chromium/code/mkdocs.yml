@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
-    - design-pattern: design-pattern    
-    - Chromium-C++style-guide: Chromium-C++style-guide
     - base: base
     - Mojo: Mojo
     - Chromium-libevent: Chromium-libevent
+    

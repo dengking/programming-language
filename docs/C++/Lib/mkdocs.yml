@@ -12,7 +12,7 @@ nav:
     - Unit-testing: Unit-testing
     - idealvin-co: idealvin-co
     - macmade: macmade
-    - Serialization&&deserialization: Serialization&&deserialization
+    - Serialization: Serialization
     - Command-line: Command-line    
     - GUI: GUI
     - Template-engine: Template-engine

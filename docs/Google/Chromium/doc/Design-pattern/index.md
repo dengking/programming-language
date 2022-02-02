@@ -6,7 +6,13 @@
 
 [chromium](https://chromium.googlesource.com/?format=HTML) / [chromium](https://chromium.googlesource.com/chromium/) / [src](https://chromium.googlesource.com/chromium/src/) / [HEAD](https://chromium.googlesource.com/chromium/src/+/HEAD) / [.](https://chromium.googlesource.com/chromium/src/+/HEAD/) / [docs](https://chromium.googlesource.com/chromium/src/+/HEAD/docs) / **[patterns](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/patterns/)**
 
+### test
 
+1、[The TestApi Pattern](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/patterns/testapi.md)
+
+2、[The Friend-the-tests Pattern](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/patterns/friend-the-tests.md)
+
+3、[The ForTesting Methods Pattern](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/patterns/fortesting-methods.md)
 
 ## Resource handle
 
@@ -33,16 +39,6 @@ handle to system resource
 1、[chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[writable_shared_memory_region.h](https://github.com/chromium/chromium/blob/master/base/memory/writable_shared_memory_region.h)**
 
 二、doc [Smart Pointer Guidelines](https://www.chromium.org/developers/smart-pointer-guidelines)
-
-
-
-## observer pattern
-
-
-
-## Cross plateform
-
-如何根据不同的plateform从source code中选择对应plateform的source code进行编译。很显然，是不能够将所有的plateform的implementation source code全部都compile到target file中的。
 
 
 

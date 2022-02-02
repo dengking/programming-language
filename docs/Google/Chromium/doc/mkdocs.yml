@@ -1,5 +1,7 @@
 nav:
     - Introduction: index.md
+    - Design-pattern: Design-pattern        
+    - Chromium-C++style-guide: Chromium-C++style-guide    
     - AddressSanitizer(ASan): AddressSanitizer(ASan)
     - Static-Initializers: Static-Initializers
     
