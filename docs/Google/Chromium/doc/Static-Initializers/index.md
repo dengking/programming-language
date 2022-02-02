@@ -1,4 +1,4 @@
-# chromium.googlesource [Static Initializers](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/static_initializers.md)
+# doc [Static Initializers](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/static_initializers.md)
 
 > NOTE: 
 >

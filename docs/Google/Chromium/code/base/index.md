@@ -106,6 +106,32 @@ The reason to prefer `base::LazyInstance` over `base::Singleton` is `base::LazyI
 
 **NOTE:** Both `Singleton` and `base::LazyInstance` provide "leaky" traits to leak the global on shutdown. This is often advisable (except potentially in library code where the code may be dynamically loaded into another process's address space or when data needs to be flushed on process shutdown) in order to not to slow down shutdown. There are valgrind suppressions for these "leaky" traits.
 
+> NOTE: 
+>
+> 一、"leaky" traits 显然是对object lifetime进行control的policy
+
+### [ObserverList](https://code.google.com/p/chromium/codesearch#chromium/src/base/observer_list.h&q=ObserverList&sq=package:chromium&l=54) & [ObserverListThreadSafe](https://code.google.com/p/chromium/codesearch#chromium/src/base/observer_list_threadsafe.h&q=ObserverListThreadSafe&sq=package:chromium&type=cs&l=94)
+
+`ObserverList` is a thread-unsafe object that is intended to be used as a member variable of a class. It provides a simple interface for iterating on a bunch of `Observer` objects and invoking a notification method.
+
+> NOTE: 
+>
+> 一、observer pattern本质上还是callback-based-notify
+
+`ObserverListThreadSafe` similar. It contains multiple `ObserverLists`, and observer notifications are invoked on the same `PlatformThreadId` that the observer was registered on, thereby allowing proxying notifications across threads and allowing the individual observers to receive notifications in a single threaded manner.
+
+### serialization and deserialization
+
+#### [Pickle](https://code.google.com/p/chromium/codesearch#chromium/src/base/pickle.h&q=Pickle&sq=package:chromium&type=cs)
+
+Pickle provides a basic facility for object serialization and deserialization in binary form.
+
+#### [Value](https://code.google.com/p/chromium/codesearch#chromium/src/base/values.h&sq=package:chromium&rcl=1367374264&l=55)
+
+Values allow for specifying recursive data classes (lists and dictionaries) containing simple values (bool/int/string/etc). These values can also be serialized to JSON and back.
+
+
+
 ## github [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[README.md](https://github.com/chromium/chromium/blob/main/base/README.md)**
 
 
