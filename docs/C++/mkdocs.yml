@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     # c++的哲学
-    - C++design-principle-feature-philosophy: C++design-principle-feature-philosophy   
+    - Design-principle&feature&philosophy: Design-principle&feature&philosophy
     # c++的发展，演进，不断引入的新特性
     - What-is-new-in-C++: What-is-new-in-C++        
     # 理论知识：这部分重要描述c++语言的语法、语义、设计等理论知识，Language-reference重要是阅读https://en.cppreference.com/w/cpp的记录，是c++语言的语法等内容

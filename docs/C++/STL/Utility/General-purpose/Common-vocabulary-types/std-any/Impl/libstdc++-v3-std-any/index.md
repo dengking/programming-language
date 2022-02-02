@@ -2,7 +2,7 @@
 
 
 
-## stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work)
+## stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work) 
 
 ```cpp
 #include <iostream>
@@ -22,7 +22,7 @@ But how `std::any` stores the type information? As I see, if I call `std::any_ca
 
 > NOTE: 
 >
-> 非常神奇，相当于将类型存储起来了，然后运行时在使用。但是它的implementation可以不使用RTTI
+> 非常神奇，相当于将类型存储起来了，然后运行时再使用。但是它的implementation可以不使用RTTI
 
 ### comment
 
@@ -38,7 +38,7 @@ Boost has its own typeinfo that replaces RTTI, that's why `boost::any` does not 
 
 > NOTE: 
 >
-> compile-time constant
+> 一、compile-time constant
 
 Basically, `std::any` holds two things:
 
@@ -167,6 +167,10 @@ int main()
 
 三、它采用的是典型的pointer to instantiation of function template，"instantiation of function template"记住了具体的类型信息，这种做法是非常常见的
 
+
+
+### static polymorphism: `_Manager`
+
 ```C++
 template<
 	typename _Tp, // contained object的类型
@@ -195,7 +199,7 @@ using _Manager = __conditional_t<_Internal<_Tp>::value,
 
 ```C++
 enum _Op {
-	_Op_access, 
+	_Op_access, // 在std::any_cast的实现中会使用到它
     _Op_get_type_info,
     _Op_clone, 
     _Op_destroy, 
@@ -204,9 +208,9 @@ enum _Op {
 
 union _Arg
 {
-	void* _M_obj;
-	const std::type_info* _M_typeinfo;
-	any* _M_any;
+	void* _M_obj; // 将 _M_obj 作为出参带出
+	const std::type_info* _M_typeinfo; // 将 _M_typeinfo 作为出参带出
+	any* _M_any; // 将_M_any作为入参传入到函数中
 };
 ```
 
@@ -250,6 +254,44 @@ struct _Manager_internal
 
 ```
 
+#### `_S_manage`
+
+```C++
+/// 表示对 `__any` 执行 `__which` 操作
+/// __arg 的类型是 _Arg，它用于保存输出参数
+template<typename _Tp>
+void any::_Manager_internal<_Tp>::_S_manage(_Op __which, const any* __any, _Arg* __arg)
+{
+	// The contained object is in _M_storage._M_buffer
+	auto __ptr = reinterpret_cast<const _Tp*>( &__any->_M_storage._M_buffer );
+	switch (__which)
+	{
+	case _Op_access:
+		__arg->_M_obj = const_cast<_Tp*>( __ptr );
+		break;
+	case _Op_get_type_info:
+#if __cpp_rtti
+		__arg->_M_typeinfo = &typeid( _Tp );
+#endif
+		break;
+	case _Op_clone:
+		::new( &__arg->_M_any->_M_storage._M_buffer ) _Tp(*__ptr);
+		__arg->_M_any->_M_manager = __any->_M_manager;
+		break;
+	case _Op_destroy:
+		__ptr->~_Tp();
+		break;
+	case _Op_xfer: 
+		// 执行的其实是简单deep copy，需要注意的是，此处调用的是copy constructor，因此要求copy_constructable
+		::new( &__arg->_M_any->_M_storage._M_buffer ) _Tp(std::move(*const_cast<_Tp*>( __ptr ))); // 
+		__ptr->~_Tp(); // 必须要手动地调用一下destructor
+		__arg->_M_any->_M_manager = __any->_M_manager; // transfer
+		const_cast<any*>( __any )->_M_manager = nullptr; // 这是move的常规操作
+		break;
+	}
+}
+```
+
 
 
 ### `struct _Manager_external`
@@ -282,6 +324,44 @@ struct _Manager_external
 };
 ```
 
+#### `_S_manage`
+
+```C++
+template<typename _Tp>
+void any::_Manager_external<_Tp>::_S_manage(_Op __which, const any* __any, _Arg* __arg)
+{
+	// The contained object is *_M_storage._M_ptr
+	auto __ptr = static_cast<const _Tp*>( __any->_M_storage._M_ptr );
+	switch (__which)
+	{
+	case _Op_access:
+		__arg->_M_obj = const_cast<_Tp*>( __ptr );
+		break;
+	case _Op_get_type_info:
+#if __cpp_rtti
+		__arg->_M_typeinfo = &typeid( _Tp );
+#endif
+		break;
+	case _Op_clone:
+		__arg->_M_any->_M_storage._M_ptr = new _Tp(*__ptr); // 调用_Tp的copy constructor
+		__arg->_M_any->_M_manager = __any->_M_manager;
+		break;
+	case _Op_destroy:
+		delete __ptr;
+		break;
+	case _Op_xfer:
+		__arg->_M_any->_M_storage._M_ptr = __any->_M_storage._M_ptr;
+		__arg->_M_any->_M_manager = __any->_M_manager;
+		const_cast<any*>( __any )->_M_manager = nullptr;
+		break;
+	}
+}
+```
+
+
+
+
+
 ## `_Decay_if_not_any`
 
 为什么要使用 `_Decay_if_not_any`？
@@ -292,7 +372,7 @@ struct _Manager_external
 
 2、constructor with argument `std::any`、assignment with argument `std::any`
 
-
+总的来说，它是比较类似于tag dispatching的。
 
 ## Constructors
 
@@ -432,6 +512,85 @@ explicit any(in_place_type_t<_Tp>, initializer_list<_Up> __il, _Args&&... __args
 
 ## Assignments
 
+### 用法
+
+下面是使用assignment的一个例子，源自 stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work) 
+
+```C++
+#include <iostream>
+#include <any>
+
+int main()
+{
+	std::any x;
+	x = 9.9;
+	std::cout << std::any_cast<double>( x ) << std::endl;
+}
+// g++ -std=c++17 -O2 -Wall -pedantic  test.cpp && ./a.out
+
+```
+
+即可以先构造出 `std::any` 对象，然后给他赋值。
+
+### implementation: copy and swap
+
+一、函数原型
+
+1、copy assignment: `any& operator=(const any& __rhs)` ；
+
+2、template copy assignment:
+
+```C++
+template<typename _Tp>
+enable_if_t<is_copy_constructible<_Decay_if_not_any<_Tp>>::value, any&>
+operator=(_Tp&& __rhs)
+```
+
+3、move assignment: `any& operator=(any&& __rhs) noexcept` ；
+
+二、实现细节
+
+copy assignment 和 template copy assignment的implementation都依赖于move assignment，move assignment主要是通过swap实现的。copy assignment 和 template copy assignment的implementation中，会首先构造出temporary，然后调用move assignment，综合来说copy assignment 和 template copy assignment的implementation是典型的使用copy-and-swap-idiom的。
+
+```C++
+/// Copy the state of another object.
+any& operator=(const any& __rhs)
+{
+    // 首先调用std::any的copy constructor构造出一个temporary，然后调用move assignment
+	*this = any(__rhs); 
+	return *this;
+}
+
+/// Store a copy of @p __rhs as the contained object.
+template<typename _Tp>
+enable_if_t<is_copy_constructible<_Decay_if_not_any<_Tp>>::value, any&>
+operator=(_Tp&& __rhs)
+{
+	*this = any(std::forward<_Tp>(__rhs));
+	return *this;
+}
+
+/**
+ * @brief Move assignment operator
+ *
+ * @post @c !__rhs.has_value() (not guaranteed for other implementations)
+ */
+any& operator=(any&& __rhs) noexcept
+{
+	if (!__rhs.has_value()) // 如果 __rhs 是empty，则直接将this reset
+		reset();
+	else if (this != &__rhs) // 防止self assignment
+	{
+		reset();
+		_Arg __arg;
+		__arg._M_any = this;
+		__rhs._M_manager(_Op_xfer, &__rhs, &__arg);
+	}
+	return *this;
+}
+
+```
+
 
 
 ## `std::any_cast`
@@ -452,7 +611,7 @@ void* __any_caster(const any* __any) {
 }
 ```
 
-
+首先比较类型是否一致，这是通过 `__any->_M_manager == &any::_Manager<decay_t<_Tp>>::_S_manage` 来实现的，这在 stackoverflow [std::any without RTTI, how does it work?](https://stackoverflow.com/questions/51361606/stdany-without-rtti-how-does-it-work) #  [A](https://stackoverflow.com/a/51362647/10173843) 中进行了非常好的说明。
 
 
 

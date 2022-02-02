@@ -1,11 +1,10 @@
 nav:
     - Introduction: index.md
-    - Impl: Impl    
     - Guide: Guide
-    - shared_ptr-and-this: shared_ptr-and-this
-    - shared_ptr-and-multithread: shared_ptr-and-multithread
-    - shared_ptr-and-array: shared_ptr-and-array
+    - shared_ptr&this: shared_ptr&this
+    - shared_ptr&multithread: shared_ptr&multithread
+    - shared_ptr&array: shared_ptr&array
     - Assignment-operator: Assignment-operator
     - std-weak_ptr: std-weak_ptr
-
+    - Impl: Impl    
     - TODO-aliasing-constructor: TODO-aliasing-constructor

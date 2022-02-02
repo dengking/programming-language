@@ -6,6 +6,8 @@
 
 二、通过`std::any_cast`来将它转换为真实的type，它能够实现dynamic type safety，是对`void *`的增强
 
+三、`std::any` 会对它的contained object的lifetime进行管理，这一点是和smart pointer比较类似的，它是一个非常典型的有contained object的wrapper
+
 ## microsoft [std::any: How, when, and why](https://devblogs.microsoft.com/cppblog/stdany-how-when-and-why/)
 
 > NOTE:
@@ -233,7 +235,7 @@ int main() {
 > end
 > ```
 >
-> 可以看到在执行 `some_day = some_other_day;` 后，就`user_data`就被release了
+> 可以看到在执行 `some_day = some_other_day;` 后，`user_data`就被release了
 
 since `shared_ptr` squirrels away enough type info to know how to properly destroy the object it points at. A client could create a `shared_ptr<Foo>`, and the deleter would continue to work just fine after converting to `shared_ptr<void>` for storage in the calendar.
 
