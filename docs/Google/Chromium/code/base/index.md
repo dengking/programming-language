@@ -80,6 +80,32 @@ PS: There's some debate about when to use `SequencedTaskRunner` vs `MessageLoopP
 
 Mostly thread-unsafe weak pointer that returns NULL if the referent has been destroyed. It's safe to pass across threads (and to destroy on other threads), but it should only be used on the original thread it was created on. `base::WeakPtrFactory` is useful for automatically canceling `base::Callbacks` when the referent of the `base::WeakPtr` gets destroyed.
 
+### [Singleton](https://code.google.com/p/chromium/codesearch#chromium/src/base/memory/singleton.h&q=singleton&sq=package:chromium&type=cs) & [base::LazyInstance](https://code.google.com/p/chromium/codesearch#chromium/src/base/lazy_instance.h&q=base::LazyInstance&sq=package:chromium&type=cs)
+
+> NOTE: 
+>
+> 一、这一段非常有启发意义
+
+They're globals, so you generally should [avoid using them](http://www.object-oriented-security.org/lets-argue/singletons), as per the [style guide](http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml?showone=Static_and_Global_Variables#Static_and_Global_Variables). That said, when you use globals in Chromium code, it's often good to use one of these, and in general, prefer `base::LazyInstance` over `Singleton`. The reason to use these classes is construction is lazy (thereby preventing startup slowdown due to static initializers) and destruction order is well-defined. They are all destroyed in opposite order as construction when the `AtExitManager` is destroyed.
+
+> NOTE: 
+>
+> 一、关于 "startup slowdown due to static initializers" ，在下面的文章中进行了非常好的说明:
+>
+> 1、neugierig [Static initializers](http://neugierig.org/software/chromium/notes/2011/08/static-initializers.html)
+>
+> 2、doc [Static Initializers](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/static_initializers.md)
+
+In the Chromium browser process, the `AtExitManager` is instantiated early on in the main thread (the UI thread), so all of these objects will be destroyed on the main thread, even if constructed on a different thread. 
+
+The reason to prefer `base::LazyInstance` over `base::Singleton` is `base::LazyInstance` reduces heap fragmentation by reserving space in the data segment and using placement new to construct the object in that memory location. 
+
+> NOTE: 
+>
+> 一、需要注意的是它是通过"reserving space in the data segment"来实现"reduces heap fragmentation"的
+
+**NOTE:** Both `Singleton` and `base::LazyInstance` provide "leaky" traits to leak the global on shutdown. This is often advisable (except potentially in library code where the code may be dynamically loaded into another process's address space or when data needs to be flushed on process shutdown) in order to not to slow down shutdown. There are valgrind suppressions for these "leaky" traits.
+
 ## github [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/main/base)/**[README.md](https://github.com/chromium/chromium/blob/main/base/README.md)**
 
 
