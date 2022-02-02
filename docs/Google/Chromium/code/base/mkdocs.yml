@@ -1,11 +1,10 @@
 nav:
     - Introduction: index.md
-    - token: token
     - memory: memory
     - thread&task: thread&task
     - callback&bind: callback&bind       
     - compiler_specific: compiler_specific
     - plateform: plateform
     - logging: logging
-    - sequence: sequence
+    - token: token    
     
