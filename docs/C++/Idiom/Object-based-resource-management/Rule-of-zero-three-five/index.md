@@ -6,15 +6,15 @@
 
 ## What is rule of three/five/zero？
 
-一、Rule of three
+一、Rule of three (C++03)
 
 cppreference [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three) # Rule of three
 
 > If a class requires a user-defined [destructor](https://en.cppreference.com/w/cpp/language/destructor), a user-defined [copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor), or a user-defined [copy assignment operator](https://en.cppreference.com/w/cpp/language/as_operator), it almost certainly requires all three.
 
-支持copyable
+支持copyable(03中并没有move semantic)
 
-二、Rule of five
+二、Rule of five (C++11)
 
 cppreference [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three) # Rule of five
 
@@ -34,7 +34,7 @@ feabhas [The Rule of Zero](https://blog.feabhas.com/2015/01/the-rule-of-zero/)
 >
 > > *You should NEVER use a raw pointer to manage a resource.*
 
-需要注意的是，是"NEVER implement a destructor, copy constructor, move constructor or assignment operators"，constructor还是要实现的。
+需要注意的是，是"NEVER implement a **destructor**, **copy constructor**, **move constructor** or **assignment operators**"，constructor还是要实现的。
 
 ### 从 "automatic/manual  resource management" 的角度来分析rule of three/five/zero
 
@@ -52,7 +52,7 @@ stackoverflow [Rule of Four (and a half)?](https://stackoverflow.com/questions/4
 
 > I've also seen references to the [Rule of Four (and a half)](https://blog.feabhas.com/2015/01/the-rule-of-the-big-four-and-a-half-move-semantics-and-resource-management/), which is a combination of the Rule of Five and the copy-and-swap idiom.
 
-#### Copy and swap idiom
+### Copy and swap idiom
 
 参见 `Copy-and-swap-idiom` 章节。
 

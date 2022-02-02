@@ -2,11 +2,7 @@
 
 
 
-## User-defined conversion function
-
-
-
-### cppreference [user-defined conversion function](https://en.cppreference.com/w/cpp/language/cast_operator)
+## cppreference [user-defined conversion function](https://en.cppreference.com/w/cpp/language/cast_operator)
 
 Enables [implicit conversion](https://en.cppreference.com/w/cpp/language/implicit_cast) or [explicit conversion](https://en.cppreference.com/w/cpp/language/explicit_cast) from a [class type](https://en.cppreference.com/w/cpp/language/class) to another type.
 
@@ -95,11 +91,11 @@ int main()
 
 
 
-### Microsoft [User-Defined Type Conversions (C++)](https://docs.microsoft.com/en-us/cpp/cpp/user-defined-type-conversions-cpp?view=vs-2019)
+## Microsoft [User-Defined Type Conversions (C++)](https://docs.microsoft.com/en-us/cpp/cpp/user-defined-type-conversions-cpp?view=vs-2019)
 
 
 
-### Conversion isn't considered for member access
+## Conversion isn't considered for member access
 
 stackoverflow [Why user-defined conversion is not implicitly taking place on the calling object](https://stackoverflow.com/questions/44699176/why-user-defined-conversion-is-not-implicitly-taking-place-on-the-calling-object) :
 
@@ -146,7 +142,7 @@ So the compiler considers that `func` must be a member of `B` or a class that `B
 
 
 
-### Example
+## Example
 
 Example1: overload conversion operator for custom type to `std::string`: 
 

@@ -10,9 +10,9 @@ cpppatterns [The rule of zero](https://cpppatterns.com/patterns/rule-of-zero.htm
 
 > we can avoid writing any custom copy/move constructors, assignment operators, or destructors by using existing types that support the appropriate copy/move semantics
 
-class的moveable、copyable是受其member的movable、copyable影响的
+1、class的moveable、copyable是受其member的movable、copyable影响的，比如有一个non-movable data member，则这个class就是non-movable的
 
-三、运用Implicitly-defined constructor、destructor、assignment
+三、运用implicitly-defined constructor、destructor、assignment，后者default
 
 四、rule of zero使用的是默认行为，如果这些默认行为不符合预期，则需要custom implementation
 
@@ -44,15 +44,11 @@ C++11-default-member-initializer: 每个member，都需要合适的initializatio
 
 那对于自己的一些个性化的resource management呢？其实也应该遵循rule of zero进行设计。
 
-
-
 七、florianwolters [The Rule of Zero](http://blog.florianwolters.de/educational/2015/01/31/The_Rule_of_Zero/) # Summary
 
 > By using automatic resource management, all required constructors and assignment operators can be implicitly declared and defined by the compiler.
 
 Rule of zero 有一些 automatic resource management 的意思。
-
-
 
 八、feabhas [The Rule of Zero](https://blog.feabhas.com/2015/01/the-rule-of-zero/) 
 

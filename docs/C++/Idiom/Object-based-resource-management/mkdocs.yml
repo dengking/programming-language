@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Copyable-and-movable: Copyable-and-movable
+    - Copyable-movable: Copyable-movable
     - RAII: RAII
     - Rule-of-zero-three-five: Rule-of-zero-three-five
     - Copy-and-swap-idiom: Copy-and-swap-idiom

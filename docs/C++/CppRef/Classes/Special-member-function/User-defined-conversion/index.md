@@ -20,8 +20,6 @@
 
 参见 `C++11-Explicit-specifier` 章节
 
-
-
 1、[explicit constructors](https://en.cppreference.com/w/cpp/language/explicit) 不是 [Converting constructor](https://en.cppreference.com/w/cpp/language/converting_constructor)
 
 2、一个class，应该不能够同时既定义 [explicit constructors](https://en.cppreference.com/w/cpp/language/explicit)  又定义 [Converting constructor](https://en.cppreference.com/w/cpp/language/converting_constructor) ，从下面的描述来看，两者之间存在着一定的对立。

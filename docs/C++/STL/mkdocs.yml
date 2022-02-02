@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     # 标准库的实现
-    - Design&&impl: Design&&impl
+    - Design&impl: Design&impl
     
     - Guidelines: Guidelines
     
@@ -34,3 +34,4 @@ nav:
     - Numerics-library: Numerics-library
     
     - Extensions: Extensions
+    
