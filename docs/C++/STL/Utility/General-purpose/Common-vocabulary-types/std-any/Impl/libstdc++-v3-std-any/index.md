@@ -155,7 +155,17 @@ int main()
 
 ## `Manager`
 
+一、由`_Manager`对`_Storage`进行管理
 
+二、可以看到，下面的两种manager有如下共性:
+
+1、模板参数都是 `_Tp`
+
+2、成员函数都是 static
+
+3、它典型的C-style OOP: 第一个参数的类型都是`_Storage`
+
+三、它采用的是典型的pointer to instantiation of function template，"instantiation of function template"记住了具体的类型信息，这种做法是非常常见的
 
 ```C++
 template<
@@ -181,17 +191,7 @@ using _Manager = __conditional_t<_Internal<_Tp>::value,
 >;
 ```
 
-一、由`_Manager`对`_Storage`进行管理
-
-二、可以看到，下面的两种manager有如下共性:
-
-1、模板参数都是 `_Tp`
-
-2、成员函数都是 static
-
-3、它典型的C-style OOP: 第一个参数的类型都是`_Storage`
-
-
+`__conditional_t` 可以实现static polymorphism: 根据 `_Tp` 来选择具体的implementation。
 
 ```C++
 enum _Op {
@@ -210,7 +210,7 @@ union _Arg
 };
 ```
 
-主要是对"contained object"进行管理
+主要是对"contained object"进行管理。
 
 ### `struct _Manager_internal`
 
