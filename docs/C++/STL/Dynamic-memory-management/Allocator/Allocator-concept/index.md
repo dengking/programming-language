@@ -1,4 +1,4 @@
-# Allocator concept
+# Allocator 
 
 
 
@@ -48,3 +48,4 @@ When the member type `pointer` is not a **raw pointer type**, it is commonly ref
 > NOTE:
 >
 > 1、这个例子演示了如下custom allocator
+

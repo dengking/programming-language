@@ -1,9 +1,6 @@
 nav:
     - Introduction: index.md
-    
     - Smart-pointer-lib: Smart-pointer-lib
-    
     - Allocator: Allocator
-    
     - Uninitialized-storage: Uninitialized-storage
     
