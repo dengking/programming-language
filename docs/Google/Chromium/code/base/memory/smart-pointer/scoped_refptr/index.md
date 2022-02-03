@@ -91,14 +91,6 @@ void some_other_function() {
 
 ## code
 
-需要处理如下类型的转换:
-
-1、raw pointer
-
-2、`scoped_ptr` of other type
-
-3、`scoped_ptr` of same type
-
 
 
 ```C++
@@ -111,24 +103,153 @@ protected:
 };  
 ```
 
-
-
-```C++
-  // Constructs from a raw pointer. Note that this constructor allows implicit
-  // conversion from T* to scoped_refptr<T> which is strongly discouraged. If
-  // you are creating a new ref-counted object please use
-  // base::MakeRefCounted<T>() or base::WrapRefCounted<T>(). Otherwise you
-  // should move or copy construct from an existing scoped_refptr<T> to the
-  // ref-counted object.
-  scoped_refptr(T* p) : ptr_(p) {
-    if (ptr_)
-      AddRef(ptr_);
-  }
-```
-
-通过comment可知，上述函数是不建议使用的；
+`T` 的类型是 "ref counted type"。
 
 ### object generator 
+
+#### `AdoptRef`
+
+```C++
+// Creates a scoped_refptr from a raw pointer without incrementing the reference
+// count. Use this only for a newly created object whose reference count starts
+// from 1 instead of 0.
+template <typename T>
+scoped_refptr<T> AdoptRef(T* obj) {
+	using Tag = std::decay_t<decltype( T::kRefCountPreference )>;
+	static_assert( std::is_same<subtle::StartRefCountFromOneTag, Tag>::value,
+		"Use AdoptRef only if the reference count starts from one." );
+
+	DCHECK(obj);
+	DCHECK(obj->HasOneRef());
+	obj->Adopted();
+	return scoped_refptr<T>(obj, subtle::kAdoptRefTag);
+}
+```
+
+可以看到: `AdoptRef`仅仅用于 `StartRefCountFromOneTag`。
+
+#### `MakeRefCounted`
+
+```c++
+namespace subtle {
+	template <typename T>
+	scoped_refptr<T> AdoptRefIfNeeded(T* obj, StartRefCountFromZeroTag) {
+		return scoped_refptr<T>(obj);
+	}
+
+	template <typename T>
+	scoped_refptr<T> AdoptRefIfNeeded(T* obj, StartRefCountFromOneTag) {
+		return AdoptRef(obj);
+	}
+}  // namespace subtle
+
+// Constructs an instance of T, which is a ref counted type, and wraps the
+// object into a scoped_refptr<T>.
+template <typename T, typename... Args>
+scoped_refptr<T> MakeRefCounted(Args&&... args) {
+	T* obj = new T(std::forward<Args>(args)...);
+	return subtle::AdoptRefIfNeeded(obj, T::kRefCountPreference);
+}
+```
+
+
+
+#### `WrapRefCounted`
+
+```C++
+// Takes an instance of T, which is a ref counted type, and wraps the object
+// into a scoped_refptr<T>.
+template <typename T>
+scoped_refptr<T> WrapRefCounted(T* t) {
+  return scoped_refptr<T>(t);
+}
+```
+
+### constructor
+
+需要处理如下类型的转换:
+
+1、raw pointer
+
+2、`scoped_ptr` of other type
+
+3、`scoped_ptr` of same type
+
+4、`std::nullptr_t`
+
+#### from raw pointer
+
+```C++
+// Constructs from a raw pointer. Note that this constructor allows implicit
+// conversion from T* to scoped_refptr<T> which is strongly discouraged. If
+// you are creating a new ref-counted object please use
+// base::MakeRefCounted<T>() or base::WrapRefCounted<T>(). Otherwise you
+// should move or copy construct from an existing scoped_refptr<T> to the
+// ref-counted object.
+scoped_refptr(T* p) : ptr_(p) {
+    if (ptr_)
+        AddRef(ptr_); // 注意，需要AddRef一下
+}
+```
+
+通过comment可知，上述函数是不建议使用的，而是应该直接使用object generator function。
+
+#### from `std::nullptr_t`
+
+```C++
+// Allow implicit construction from nullptr.
+constexpr scoped_refptr(std::nullptr_t) {}
+```
+
+#### Copy constructor
+
+```C++
+// Copy constructor. This is required in addition to the copy conversion
+// constructor below.
+scoped_refptr(const scoped_refptr& r) : scoped_refptr(r.ptr_) {}
+```
+
+上述copy constructor会调用前面的"from raw pointer constructor"，这是使用的C++11 delegating constructor特性。
+
+#### Copy conversion constructor
+
+```C++
+// Copy conversion constructor.
+template <
+	typename U,
+	typename = typename std::enable_if<std::is_convertible<U*, T*>::value>::type
+>
+scoped_refptr(const scoped_refptr<U>& r) : scoped_refptr(r.ptr_) {}
+```
+
+一、上述copy constructor会调用前面的"from raw pointer constructor"，这是使用的C++11 delegating constructor特性。
+
+二、上述代码虽然简单，但是我比较疑惑的是它会进行哪些conversion？
+
+指针的declaration type和它实际所指向的object的真实type不同，这在C++中是允许的。
+
+#### Move constructor
+
+```C++
+// Move constructor. This is required in addition to the move conversion
+// constructor below.
+scoped_refptr(scoped_refptr&& r) noexcept : ptr_(r.ptr_) { r.ptr_ = nullptr; }
+```
+
+#### Move conversion constructor
+
+```C++
+// Move conversion constructor.
+template <
+    typename U,
+    typename = typename std::enable_if<std::is_convertible<U*, T*>::value>::type
+>
+scoped_refptr(scoped_refptr<U>&& r) noexcept : ptr_(r.ptr_) {
+    r.ptr_ = nullptr;
+}
+```
+
+### assignment operator
 
 
 
