@@ -98,7 +98,7 @@ private:
 
 二、`IsZero`、`IsZero` 显然都是read acquire
 
-
+三、它的constructor都是 `constexpr` 的
 
 ### `Decrement`
 
