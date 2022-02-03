@@ -62,6 +62,50 @@ For both user-defined or implicitly-defined destructors, after the body of the d
 
 Even when the destructor is called directly (e.g. `obj.~Foo();`), the return statement in `~Foo()` does not return control to the caller immediately: it calls all those member and base destructors first.
 
+## 自动调用base class的default constructor
+
+对于base class的default constructor，compiler会自动进行调用，不需要programmer显示地进行调用，下面就是例子: 
+
+```C++
+#include <iostream>
+class Base
+{
+public:
+	Base() {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	~Base()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+class Derived :public Base {
+public:
+	Derived() {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	~Derived()
+	{
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+};
+int main()
+{
+	Derived d;
+}
+// g++ test.cpp --std = c++11 - pedantic - Wall
+
+```
+
+输出如下:
+
+```C++
+Base::Base()
+Derived::Derived()
+Derived::~Derived()
+Base::~Base()
+```
+
 
 
 ## Example
@@ -295,3 +339,6 @@ private:
 在排查这个问题的时候，我感觉`redis_con_(redis_address_), AI_service_(redis_address_) `这种写法，类似于使用了未初始化的类成员变量，所以我尝试将上述`redis_address_`修改为由用户传入的`redis_address`，然后再次进行编译，运行，发现这种情况下，进程是不会core掉的；说明我的猜测是正确的，所以我就Google了相关的内容， 原因如下: 
 
 成员变量 `AI_service_` 的 initialization 是依赖于成员变量 `redis_address_`，但是在类定义中，成员变量 `AI_service_` 的声明是在成员变量 `redis_address_`前面的，这就导致了"access-outside-of-object-lifetime-use-before-initialization"错误。
+
+
+
