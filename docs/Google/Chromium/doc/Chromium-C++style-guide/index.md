@@ -50,6 +50,6 @@ Items local to a `.cc` file should be wrapped in an **unnamed namespace**. While
 >
 > 一、为什么 "**unnamed namespaces** (which restrict these symbols to the **compilation unit**) improve **function call cost** "？
 >
-> 二、这一点是符合CppCoreGuidelines [SF.22: Use an unnamed (anonymous) namespace for all internal/non-exported entities](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#sf22-use-an-unnamed-anonymous-namespace-for-all-internalnon-exported-entities)
+> 二、这一点是符合CppCoreGuidelines [SF.22: Use an unnamed (anonymous) namespace for all internal/non-exported entities](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#sf22-use-an-unnamed-anonymous-namespace-for-all-internalnon-exported-entities) 
 
 ## doc [C++ Dos and Don'ts](https://chromium.googlesource.com/chromium/src/+/lkgr/styleguide/c++/c++-dos-and-donts.md)

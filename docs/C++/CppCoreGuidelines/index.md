@@ -4,11 +4,13 @@
 
 > NOTE: 
 >
-> 1、将它的很多内容，分散到了不同的章节中
+> 一、由于内容非常多，因此将它的很多内容，分散到了不同的章节中
 >
-> 2、isocpp.github [C++ Core Guidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+> 二、链接: 
 >
-> 3、modernescpp [C++ Core Guidelines](https://www.modernescpp.com/index.php/category/modern-c?start=0)
+> isocpp.github [C++ Core Guidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+>
+> modernescpp [C++ Core Guidelines](https://www.modernescpp.com/index.php/category/modern-c?start=0)
 >
 > 
 >
@@ -23,32 +25,25 @@
 
 We do not suffer the delusion(迷惑) that every one of these rules can be effectively applied to every code base. Upgrading(升级) old systems is hard. However, we do believe that a program that uses a rule is less error-prone and more maintainable than one that does not. Often, rules also lead to faster/easier **initial development**. As far as we can tell, these rules lead to code that performs as well or better than older, more conventional(传统的；常见的；惯例的) techniques; they are meant to follow the **zero-overhead principle** ("what you don't use, you don't pay for" or "when you use an abstraction mechanism appropriately, you get at least as good performance as if you had handcoded using lower-level language constructs"). Consider these rules ideals for new code, opportunities to exploit when working on older code, and try to approximate these ideals as closely as feasible. Remember:
 
-> NOTE: 翻译如下:
+> NOTE: 
 >
-> "我们不会妄想这些规则中的每一条都可以有效地应用到每一个代码库中。
-> 升级旧系统非常困难。
-> 然而，我们相信使用规则的程序比不使用规则的程序更不易出错，更容易维护。
-> 通常情况下，规则也会导致更快/更容易的初始开发。
-> 就我们所知，这些规则会导致代码的性能和旧的、更传统的技术一样好，甚至更好;
-> 它们意味着遵循零开销原则(“不使用的，不付费”或“当您适当地使用抽象机制时，您至少可以获得与使用低级语言结构手工编码一样好的性能”)。
-> 考虑这些规则对于新代码的理想，在处理旧代码时利用的机会，并尽可能接近这些理想。
-> 记住:"
+> 一、翻译如下:
+> 
+> "我们不会妄想这些规则中的每一条都可以有效地应用到每一个代码库中。升级旧系统非常困难。
+> 然而，我们相信使用规则的程序比不使用规则的程序更不易出错，更容易维护。通常情况下，规则也会导致更快/更容易的初始开发。就我们所知，这些规则会导致代码的性能和旧的、更传统的技术一样好，甚至更好;
+> 它们意味着遵循零开销原则(“不使用的，不付费”或“当您适当地使用抽象机制时，您至少可以获得与使用低级语言结构手工编码一样好的性能”)。考虑这些规则对于新代码的理想，在处理旧代码时利用的机会，并尽可能接近这些理想"
+> 
+> 二、关于" **zero-overhead principle** "，参见对应章节
 
 
 
 #### In.0: Don't panic!
-
-> NOTE: 
->
-> 1、意思是: 必要害怕
 
 These guidelines are designed according to the "subset of superset" principle ([Stroustrup05](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Stroustrup05)). They do not simply define a subset of C++ to be used (for reliability, safety, performance, or whatever). Instead, they strongly recommend the use of a few simple "extensions" ([library components](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#S-gsl)) that make the use of the most error-prone features of C++ redundant, so that they can be banned(禁止) (in our set of rules).
 
 > NOTE:
 >
 > 一、"[Stroustrup05](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Stroustrup05)"所链接的是: [A rationale for semantically enhanced library languages](http://www.stroustrup.com/SELLrationale.pdf)，一定要阅读这篇文章，感觉" [CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md) + gsl + CppCorechecker"就是按照这篇文章的思想设计的
->
-> 
 >
 > 二、"[library components](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#S-gsl)"所指的是gsl。
 >
