@@ -249,7 +249,27 @@ scoped_refptr(scoped_refptr<U>&& r) noexcept : ptr_(r.ptr_) {
 }
 ```
 
-### assignment operator
+### Assignment operator
+
+"assignment"其实也就意味着要将current object进行替换(swap)，因此它的implementation中往往涉及swap。
+
+#### Unified assignment operator
+
+```c++
+// Unified assignment operator.
+scoped_refptr& operator=(scoped_refptr r) noexcept {
+    swap(r);
+    return *this;
+}
+```
+
+它是典型的使用copy-and-swap-idiom的。
+
+#### from raw pointer
+
+```C++
+scoped_refptr& operator=(T* p) { return *this = scoped_refptr(p); }
+```
 
 
 
