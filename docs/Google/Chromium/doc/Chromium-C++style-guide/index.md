@@ -52,4 +52,58 @@ Items local to a `.cc` file should be wrapped in an **unnamed namespace**. While
 >
 > 二、这一点是符合CppCoreGuidelines [SF.22: Use an unnamed (anonymous) namespace for all internal/non-exported entities](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#sf22-use-an-unnamed-anonymous-namespace-for-all-internalnon-exported-entities) 
 
+### Exporting symbols
+
+> NOTE: 
+>
+> 一、这是常见用法
+
+Symbols can be exported (made visible outside of a shared library/DLL) by annotating with a `<COMPONENT>_EXPORT` macro name (where `<COMPONENT>` is the name of the component being built, e.g. `BASE`, `NET`, `CONTENT`, etc.). Class annotations should precede the class name:
+
+```C++
+class FOO_EXPORT Foo {
+  void Bar();
+  void Baz();
+  // ...
+};
+```
+
+### Platform-specific code
+
+> NOTE: 
+>
+> 一、这也是常见的用法，原文描述了一堆，其实直接看下面的例子即可
+
+```C++
+#include "foo/foo.h"
+
+#include <stdint.h>
+#include <algorithm>
+
+#include "base/strings/utf_string_conversions.h"
+#include "build/build_config.h"
+#include "chrome/common/render_messages.h"
+
+#if BUILDFLAG(IS_WIN)
+#include <windows.h>
+#include "base/win/com_init_util.h"
+#elif BUILDFLAG(IS_POSIX)
+#include "base/posix/global_descriptors.h"
+#endif
+```
+
+### CHECK(), DCHECK(), and NOTREACHED()
+
+> NOTE: 
+>
+> 一、其实就是assertion
+
+The `CHECK()` macro will cause an immediate crash if its condition is not met. 
+
+`DCHECK()` is like `CHECK()` but is only compiled in when `DCHECK_IS_ON` is true (debug builds and some bot configurations, but not end-user builds). `NOTREACHED()` is equivalent to `DCHECK(false)`. 
+
 ## doc [C++ Dos and Don'ts](https://chromium.googlesource.com/chromium/src/+/lkgr/styleguide/c++/c++-dos-and-donts.md)
+
+> NOTE: 
+>
+> 总结得非常好
