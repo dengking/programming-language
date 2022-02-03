@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
-    - gsl-not_null: gsl-not_null
     - Microsoft-GSL: Microsoft-GSL
+    - GSL-not_null: GSL-not_null    
+    - GSL-suppress: GSL-suppress

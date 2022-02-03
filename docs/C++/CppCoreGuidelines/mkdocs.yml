@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - Read-note: Read-note
-    - gsl-suppress: gsl-suppress.md
-    - GSL-Guidelines-support-library: GSL-Guidelines-support-library
+
+    - GSL: GSL
     

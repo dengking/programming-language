@@ -120,7 +120,7 @@ private:
 
 一、注释的表明意思是:
 
-Insert barriers的目的是保证在reference count成为0之前，被写入的state(state written before the reference count became zero)对另外一个刚刚使得reference count成为0的thread是可见的(visible)
+"Insert barriers"的目的是保证在reference count成为0之前，被写入的state("state written before the reference count became zero")对另外一个刚刚使得reference count成为0的thread是可见的(visible)，本质上是 "ordering constrain"
 
 二、[`fetch_sub`](https://en.cppreference.com/w/cpp/atomic/atomic/fetch_sub) 的返回值是之前的值，因此当 `fetch_sub` 的返回值是 `1` 的时候，说明现在它的值是 `0`。
 
@@ -130,46 +130,54 @@ Insert barriers的目的是保证在reference count成为0之前，被写入的s
 
 ## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)**
 
-**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)** 中的内容是需要结合 [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 来进行阅读的，因为其中引用了很多在  [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 中定义的constant。
+一、**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)** 中的内容是需要结合 [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 来进行阅读的，因为其中引用了很多在  [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 中定义的constant。
 
-### Adopt ref
+二、
 
-`StartRefCountFromOneTag`
+1、`RefCountedBase` 
 
-```C++
-  explicit constexpr RefCountedThreadSafeBase(StartRefCountFromOneTag)
-      : ref_count_(1) {
-#if DCHECK_IS_ON()
-    needs_adopt_ref_ = true;
-#endif
-  }
-```
-
-在成员方法 `Adopted()` 中会将 `needs_adopt_ref_` 的值设置为`false`。
-
-#### friend `base::AdoptRef`
-
-因为成员方法 `void Adopted() const` 是private的，因此需要添加上述声明
+2、`RefCountedThreadSafe` 
 
 
 
 ### `class BASE_EXPORT base::subtle::RefCountedBase`
 
-```C++
-  explicit RefCountedBase(StartRefCountFromZeroTag) {
-  }
 
-  explicit RefCountedBase(StartRefCountFromOneTag) : ref_count_(1) {
-  }
+
+```C++
+class BASE_EXPORT RefCountedBase {
+  // non-copyable
+  RefCountedBase(const RefCountedBase&) = delete;
+    
+  RefCountedBase& operator=(const RefCountedBase&) = delete;
+  // 
+  explicit RefCountedBase(StartRefCountFromZeroTag) { }
+
+  explicit RefCountedBase(StartRefCountFromOneTag) : ref_count_(1) { }
+  // 下面是主要的API
+  bool HasOneRef() const;
+    
+  bool HasAtLeastOneRef() const;
+  
+  void AddRef() const;
+  // Returns true if the object should self-delete.
+  bool Release() const;
+private:    
+  mutable uint32_t ref_count_ = 0;
+  static_assert(std::is_unsigned<decltype(ref_count_)>::value,
+                "ref_count_ must be an unsigned type.");
+};
 ```
 
-典型的:
+一、典型的:
 
 1、tag-dispatch
 
 2、explicit single parameter constructor
 
+二、它是非线程安全的
 
+三、显然是non-copyable
 
 #### How to trap unsafe cross thread usage?
 
@@ -281,6 +289,27 @@ class RefCountedData
 一、因为它是需要reference count来进行管理的，因此对象本身是不能够copy、assign的，但是pointer to object是能够被copy、assign的，并且pointer to object是能够调用它的函数的；
 
 二、对于需要reference count的object，显然它是需要提供new来进行创建的，一般是不能够在heap上创建的。
+
+### Adopt ref
+
+`StartRefCountFromOneTag`
+
+```C++
+  explicit constexpr RefCountedThreadSafeBase(StartRefCountFromOneTag)
+      : ref_count_(1) {
+#if DCHECK_IS_ON()
+    needs_adopt_ref_ = true;
+#endif
+  }
+```
+
+在成员方法 `Adopted()` 中会将 `needs_adopt_ref_` 的值设置为`false`。
+
+#### friend `base::AdoptRef`
+
+因为成员方法 `void Adopted() const` 是private的，因此需要添加上述声明
+
+
 
 ## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted_memory.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted_memory.h)**
 
