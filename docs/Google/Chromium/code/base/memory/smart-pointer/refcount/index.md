@@ -2,31 +2,22 @@
 
 一些使用C++ atomic library的code。
 
-
-
 ## github [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[atomic_ref_count.h](https://github.com/chromium/chromium/blob/master/base/atomic_ref_count.h)**
 
-
+### `class AtomicRefCount`
 
 ```C++
 // This is a low level implementation of atomic semantics for reference
 // counting.  Please use base/memory/ref_counted.h directly instead.
-
 #ifndef BASE_ATOMIC_REF_COUNT_H_
 #define BASE_ATOMIC_REF_COUNT_H_
-
 #include <atomic>
-
 namespace base
 {
-
 class AtomicRefCount
 {
 public:
-	constexpr AtomicRefCount() :
-					ref_count_(0)
-	{
-	}
+	constexpr AtomicRefCount() : ref_count_(0)	{	}
 	explicit constexpr AtomicRefCount(int initial_value) :
 					ref_count_(initial_value)
 	{
@@ -83,11 +74,9 @@ public:
 	{
 		return ref_count_.load(std::memory_order_relaxed);
 	}
-
 private:
 	std::atomic_int ref_count_;
 };
-
 }  // namespace base
 
 #endif  // BASE_ATOMIC_REF_COUNT_H_
@@ -100,9 +89,9 @@ private:
 
 三、它的constructor都是 `constexpr` 的
 
+四、它的功能是reference counting
+
 ### `Decrement`
-
-
 
 ```C++
 	// Decrement a reference count, and return whether the result is non-zero.
@@ -128,7 +117,7 @@ private:
 
 四、这个函数的返回值表示: 当前的reference count的值是否是非0的，如果当前reference count的值是非0，则返回为TRUE；否则返回为false，即当前的值为0了。
 
-## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)**
+## github [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)**
 
 一、**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)** 中的内容是需要结合 [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 来进行阅读的，因为其中引用了很多在  [**scoped_refptr.h**](https://github.com/chromium/chromium/blob/master/base/memory/scoped_refptr.h) 中定义的constant。
 
@@ -138,27 +127,32 @@ private:
 
 2、`RefCountedThreadSafe` 
 
+### Tag dispatching: constructor
 
+`RefCountedBase`、`RefCountedThreadSafeBase` 两个函数都提供了如下模式的constructor:
 
-### `class BASE_EXPORT base::subtle::RefCountedBase`
+```C++
+  explicit RefCountedBase(StartRefCountFromZeroTag) { }
+  explicit RefCountedBase(StartRefCountFromOneTag) : ref_count_(1) { }
+```
+
+这是典型的tag dispatch用法，在它们的子类 `RefCounted`、`RefCountedThreadSafe` 的constructor中，会调用上述constructor中的一个。
+
+### `class base::subtle::RefCountedBase`
 
 
 
 ```C++
 class BASE_EXPORT RefCountedBase {
-  // non-copyable
-  RefCountedBase(const RefCountedBase&) = delete;
-    
-  RefCountedBase& operator=(const RefCountedBase&) = delete;
   // 
   explicit RefCountedBase(StartRefCountFromZeroTag) { }
-
   explicit RefCountedBase(StartRefCountFromOneTag) : ref_count_(1) { }
+  // non-copyable
+  RefCountedBase(const RefCountedBase&) = delete;
+  RefCountedBase& operator=(const RefCountedBase&) = delete;
   // 下面是主要的API
   bool HasOneRef() const;
-    
   bool HasAtLeastOneRef() const;
-  
   void AddRef() const;
   // Returns true if the object should self-delete.
   bool Release() const;
@@ -183,13 +177,27 @@ private:
 
 它使用的是 `DFAKE_MUTEX(add_release_);`
 
-### `class BASE_EXPORT base::subtle::RefCountedThreadSafeBase`
+### `class base::subtle::RefCountedThreadSafeBase`
+
+```C++
+class BASE_EXPORT RefCountedThreadSafeBase {
+  // constructor
+  explicit constexpr RefCountedThreadSafeBase(StartRefCountFromZeroTag) {}
+  explicit constexpr RefCountedThreadSafeBase(StartRefCountFromOneTag) {}    
+  //
+  bool HasOneRef() const;
+  bool HasAtLeastOneRef() const;
+  // Returns true if the object should self-delete.
+  bool Release() const;
+  void AddRef() const;
+private:
+  mutable AtomicRefCount ref_count_{0};
+};
+```
 
 一、**Thread-safe**，基于`class AtomicRefCount`的。
 
 二、需要注意，它是 `DISALLOW_COPY_AND_ASSIGN` 的，为什么要这样设计？
-
-
 
 三、为什么 `Release()` 的返回值类型是`bool`？
 
@@ -197,7 +205,7 @@ private:
 
 > Returns true if the object should self-delete.
 
-
+#### `ReleaseImpl`
 
 ```C++
   ALWAYS_INLINE bool ReleaseImpl() const {
@@ -215,53 +223,67 @@ private:
   }
 ```
 
-`if (!ref_count_.Decrement())` 
+1、当 `ref_count_.Decrement()` 返回为 false时，表示 `ref_count_` 为 0 了，此时 `!ref_count_.Decrement()` 为 TRUE，说应该release resource了，所以 `ReleaseImpl()` 应该返回TRUE。
 
-当 `ref_count_.Decrement()` 返回为 false时，表示 `ref_count_` 为 0 了，此时 `!ref_count_.Decrement()` 为 TRUE，说应该release resource了，所以 `ReleaseImpl()` 应该返回TRUE。
 
-四、
 
-在 [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.h)** 中，有如下定义: 
+### Usage
 
-```C++
-#if defined(ARCH_CPU_X86_FAMILY)
-  // Returns true if the object should self-delete.
-  bool Release() const { return ReleaseImpl(); }
-  void AddRef() const { AddRefImpl(); }
-  void AddRefWithCheck() const { AddRefWithCheckImpl(); }
-#else
-  // Returns true if the object should self-delete.
-  bool Release() const;
-  void AddRef() const;
-  void AddRefWithCheck() const;
-#endif
-```
+`class base::RefCounted`、`class base::RefCountedThreadSafe` 的usage模式是类似的，下面是总结:
 
-那 `#if !defined(ARCH_CPU_X86_FAMILY)` 时，`Release()` 等的implementation在哪里呢？在 [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted.cc](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted.cc)**  中有如下implementation:
+#### CRTP mixin from above + friend base class
+
+在 `base::RefCounted` 的document中给出了它们的usage pattern
 
 ```C++
-#if !defined(ARCH_CPU_X86_FAMILY)
-bool RefCountedThreadSafeBase::Release() const {
-  return ReleaseImpl();
-}
-void RefCountedThreadSafeBase::AddRef() const {
-  AddRefImpl();
-}
-void RefCountedThreadSafeBase::AddRefWithCheck() const {
-  AddRefWithCheckImpl();
-}
-#endif
+class MyFoo : public base::RefCounted<MyFoo> {
+	//...
+private:
+	friend class base::RefCounted<MyFoo>;
+	~MyFoo(); // "make destructor private"，后面会有说明
+};
 ```
 
 
 
-五、`friend scoped_refptr<U> base::AdoptRef(U*);`
+#### Make destructor private
 
-它和`refptr`的关联是什么？
+在 `base::RefCounted` 的document中有如下描述:
 
+> 1、You should always make your destructor non-public, to avoid any code deleting the object accidentally while there are references to it.
+>
+> 2、You should always make the ref-counted base class a friend of your class, so that it can access the destructor.
 
+典型的采用 "CRTP mixin from above + friend base class"，通过 "make the ref-counted base class a friend of your class, so that it can access the destructor"，从而保证当reference count为0的时候，private destructor能够被调用，并且避免被外部意外调用，前面的例子就是对此的展示
 
-### CRTP mixin from above + friend base class
+### Reference count 初始值
+
+```C++
+// The reference count starts from zero by default, and we intended to migrate
+// to start-from-one ref count. Put REQUIRE_ADOPTION_FOR_REFCOUNTED_TYPE() to
+// the ref counted class to opt-in.
+//
+// If an object has start-from-one ref count, the first scoped_refptr need to be
+// created by base::AdoptRef() or base::MakeRefCounted(). We can use
+// base::MakeRefCounted() to create create both type of ref counted object.
+//
+// The motivations to use start-from-one ref count are:
+//  - Start-from-one ref count doesn't need the ref count increment for the
+//    first reference.
+//  - It can detect an invalid object acquisition for a being-deleted object
+//    that has zero ref count. That tends to happen on custom deleter that
+//    delays the deletion.
+//    TODO(tzik): Implement invalid acquisition detection.
+//  - Behavior parity to Blink's WTF::RefCounted, whose count starts from one.
+//    And start-from-one ref count is a step to merge WTF::RefCounted into
+//    base::RefCounted.
+```
+
+关于第一段话，在后面的"Static polymorphism: `T::kRefCountPreference`"中会进行解释。后面两段话解释了使用"start-from-one ref count"的原因。
+
+### Policy-based design: Traits
+
+模板参数 `Traits` 是典型的使用policy-based design，用于对object lifetime进行控制。
 
 ```c++
 template <class T, typename Traits = DefaultRefCountedTraits<T>>
@@ -272,23 +294,152 @@ template<typename T>
 class RefCountedData
 ```
 
+### Static polymorphism: `T::kRefCountPreference`
+
+`class base::RefCounted`、`class base::RefCountedThreadSafe` 在调用base class的constructor的时候，采用的写法如下:
+
+```C++
+RefCounted() : subtle::RefCountedBase(T::kRefCountPreference) {}
+```
+
+ 这样做的原因是: 
+
+1、在前面我们已经知道`RefCountedBase` 提供了两个constructor，提供tag dispatching来进行区分
+
+2、"preference"的含义是偏好，`T::kRefCountPreference`的值是`RefCountedBase` 的两个tag之一，sub class `T`可以通过定义`kRefCountPreference`来进行选择，显然这是static polymorphism，在原文的document中，对此的说法是"opt-in"
+
+```C++
+// The reference count starts from zero by default, and we intended to migrate
+// to start-from-one ref count. Put REQUIRE_ADOPTION_FOR_REFCOUNTED_TYPE() to
+// the ref counted class to opt-in.
+```
 
 
-### Make destructor private
 
-> 1、You should always make your destructor non-public, to avoid any code deleting the object accidentally while there are references to it.
->
-> 2、You should always make the ref-counted base class a friend of your class, so that it can access the destructor.
+`class base::RefCounted`、`class base::RefCountedThreadSafe`中都有定义static inline member `kRefCountPreference`，这样做的目的是:
 
-典型的采用 "CRTP mixin from above + friend base class"，通过 "make the ref-counted base class a friend of your class, so that it can access the destructor"，从而保证当reference count为0的时候，private destructor能够被调用。
+1、可以由subclass `T`来指定 kRefCountPreference 的具体值进行override，它们的definition是兜底的，因为它会被子类继承，因此如果base class没有进行override，那么可以使用base class的
+
+### 主要接口
+
+1、`AddRef()`
+
+2、`Release()`
+
+### `class base::RefCounted`
+
+```C++
+template <typename T>
+struct DefaultRefCountedTraits {
+	static void Destruct(const T* x) {
+		RefCounted<T, DefaultRefCountedTraits>::DeleteInternal(x);
+	}
+};
+
+template <class T, typename Traits = DefaultRefCountedTraits<T>>
+class RefCounted : public subtle::RefCountedBase {
+public:
+    /// 这是一个static inline member，它是用于tag dispatch的: 
+	static constexpr subtle::StartRefCountFromZeroTag kRefCountPreference = subtle::kStartRefCountFromZeroTag; 
+    /// 需要注意第一个入参，它是用于override
+	RefCounted() : subtle::RefCountedBase(T::kRefCountPreference) {}
+
+	RefCounted(const RefCounted&) = delete;
+	RefCounted& operator=(const RefCounted&) = delete;
+
+	void AddRef() const {
+		subtle::RefCountedBase::AddRef();
+	}
+    /// 
+	void Release() const {
+		if (subtle::RefCountedBase::Release()) {
+			// Prune the code paths which the static analyzer may take to simulate
+			// object destruction. Use-after-free errors aren't possible given the
+			// lifetime guarantees of the refcounting system.
+			ANALYZER_SKIP_THIS_PATH();
+			Traits::Destruct(static_cast<const T*>( this )); // 这是CRTP的常规做法
+		}
+	}
+protected:
+	~RefCounted() = default;
+private:
+	friend struct DefaultRefCountedTraits<T>;
+	template <typename U>
+	static void DeleteInternal(const U* x) {
+		delete x;
+	}
+};
+```
 
 
 
-### `DISALLOW_COPY_AND_ASSIGN(RefCountedThreadSafeBase);`
+### `class base::RefCountedThreadSafe`
 
-一、因为它是需要reference count来进行管理的，因此对象本身是不能够copy、assign的，但是pointer to object是能够被copy、assign的，并且pointer to object是能够调用它的函数的；
+```C++
+template <class T, typename Traits = DefaultRefCountedThreadSafeTraits<T> >
+class RefCountedThreadSafe : public subtle::RefCountedThreadSafeBase {
+public:
+	static constexpr subtle::StartRefCountFromZeroTag kRefCountPreference = subtle::kStartRefCountFromZeroTag;
 
-二、对于需要reference count的object，显然它是需要提供new来进行创建的，一般是不能够在heap上创建的。
+	explicit RefCountedThreadSafe()
+		: subtle::RefCountedThreadSafeBase(T::kRefCountPreference) {}
+
+	RefCountedThreadSafe(const RefCountedThreadSafe&) = delete;
+	RefCountedThreadSafe& operator=(const RefCountedThreadSafe&) = delete;
+
+	void AddRef() const { AddRefImpl(T::kRefCountPreference); }
+
+	void Release() const {
+		if (subtle::RefCountedThreadSafeBase::Release()) {
+			ANALYZER_SKIP_THIS_PATH();
+			Traits::Destruct(static_cast<const T*>( this ));
+		}
+	}
+
+protected:
+	~RefCountedThreadSafe() = default;
+
+private:
+	friend struct DefaultRefCountedThreadSafeTraits<T>;
+	template <typename U>
+	static void DeleteInternal(const U* x) {
+		delete x;
+	}
+
+	void AddRefImpl(subtle::StartRefCountFromZeroTag) const {
+		subtle::RefCountedThreadSafeBase::AddRef();
+	}
+
+	void AddRefImpl(subtle::StartRefCountFromOneTag) const {
+		subtle::RefCountedThreadSafeBase::AddRefWithCheck();
+	}
+};
+```
+
+### `class base::RefCountedData`
+
+```C++
+// A thread-safe wrapper for some piece of data so we can place other
+// things in scoped_refptrs<>.
+template<typename T>
+class RefCountedData : public base::RefCountedThreadSafe< base::RefCountedData<T> > {
+public:
+	RefCountedData() : data() {}
+	RefCountedData(const T& in_value) : data(in_value) {}
+	RefCountedData(T&& in_value) : data(std::move(in_value)) {}
+	template <typename... Args>
+	explicit RefCountedData(in_place_t, Args&&... args)
+		: data(std::forward<Args>(args)...) {}
+
+	T data;
+
+private:
+	friend class base::RefCountedThreadSafe<base::RefCountedData<T> >;
+	~RefCountedData() = default;
+};
+```
+
+它是典型的contained object，这一点和`std::any`是非常类似的。
 
 ### Adopt ref
 
@@ -311,6 +462,12 @@ class RefCountedData
 
 
 
+五、`friend scoped_refptr<U> base::AdoptRef(U*);`
+
+它和`refptr`的关联是什么？
+
+
+
 ## [chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/**[ref_counted_memory.h](https://github.com/chromium/chromium/blob/master/base/memory/ref_counted_memory.h)**
 
 ```c++
@@ -322,3 +479,11 @@ class BASE_EXPORT RefCountedString : public RefCountedMemory
 class BASE_EXPORT RefCountedString16 : public base::RefCountedMemory 
 class BASE_EXPORT RefCountedSharedMemoryMapping : public RefCountedMemory
 ```
+
+
+
+### `DISALLOW_COPY_AND_ASSIGN(RefCountedThreadSafeBase);`
+
+一、因为它是需要reference count来进行管理的，因此对象本身是不能够copy、assign的，但是pointer to object是能够被copy、assign的，并且pointer to object是能够调用它的函数的；
+
+二、对于需要reference count的object，显然它是需要提供new来进行创建的，一般是不能够在heap上创建的。
