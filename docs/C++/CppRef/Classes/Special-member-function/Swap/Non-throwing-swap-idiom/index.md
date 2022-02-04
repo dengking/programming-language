@@ -1,14 +1,12 @@
 # Non-throwing swap
 
-
+在实现swap的时候，要让它"non-throwing"，那如何做呢？本章对此进行探讨。 
 
 ## More C++ Idioms [Non-throwing swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap)
 
 参见 `./More-C++Idioms-Non-throwing swap` 章节。
 
 ## CppCoreGuidelines [C.85: Make `swap` `noexcept`](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rc-swap-noexcept)
-
-
 
 
 

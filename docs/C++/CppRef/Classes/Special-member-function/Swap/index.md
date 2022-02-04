@@ -8,6 +8,14 @@ swap是非常重要的operation，它可以看做是language-support-function，
 
 > 上述两点其实是在 More C++ Idioms [Non-throwing swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap) 中强调的
 
+## swap usage
+
+一、default constructor + swap
+
+1、reset
+
+2、clear and minimize
+
 ## 素材
 
 在下面文章中，对`swap`有着非常好的描述

@@ -8,13 +8,13 @@
 
 4、C++是复杂的，这就导致我们很难准确地、完整地描述清楚它的name lookup过程，而是需要结合具体的例子来进行说明。
 
-## Compile error
+## Compile error and name lookup
 
 很多compile error都可以追溯到name lookup，因此掌握name lookup是解决很多compile error的前提。
 
 ## Implementation of static polymorphism is based on the result of name lookup
 
-本节标题的含义是：static polymorphism是基于name lookup的结果，关于static polymorphism，参见`C++\Guide\Implementation-of-polymorphism`。
+本节标题的含义是：static polymorphism是基于name lookup的结果，关于static polymorphism，参见`Polymorphism` 章节。
 
 下面对这个观点进行详细解释：
 

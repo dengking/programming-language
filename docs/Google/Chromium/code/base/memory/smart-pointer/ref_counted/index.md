@@ -292,7 +292,7 @@ template<typename T>
 class RefCountedData
 ```
 
-### Static polymorphism: `T::kRefCountPreference`
+### tag dispatching static polymorphism: `T::kRefCountPreference`
 
 `class base::RefCounted`、`class base::RefCountedThreadSafe` 在调用base class的constructor的时候，采用的写法如下:
 
@@ -302,7 +302,7 @@ RefCounted() : subtle::RefCountedBase(T::kRefCountPreference) {}
 
  这样做的原因是: 
 
-1、在前面我们已经知道`RefCountedBase` 提供了两个constructor，提供tag dispatching来进行区分
+1、在前面我们已经知道`RefCountedBase` 提供了两个constructor，提供tag来进行区分，这是场景的tag dispatching玩法
 
 2、"preference"的含义是偏好，`T::kRefCountPreference`的值是`RefCountedBase` 的两个tag之一，sub class `T`可以通过定义`kRefCountPreference`来进行选择，显然这是static polymorphism，在原文的document中，对此的说法是"opt-in"
 
@@ -312,7 +312,7 @@ RefCounted() : subtle::RefCountedBase(T::kRefCountPreference) {}
 // the ref counted class to opt-in.
 ```
 
-
+我之前在恒生公司开发UST API的时候，就用过这个technique。
 
 `class base::RefCounted`、`class base::RefCountedThreadSafe`中都有定义static inline member `kRefCountPreference`，这样做的目的是:
 
