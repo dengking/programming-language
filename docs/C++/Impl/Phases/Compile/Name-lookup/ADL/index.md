@@ -20,6 +20,8 @@ ADL是compiler的一种行为，可以将compiler的name lookup分为两种：
 
 这让我想到了之前在阅读代码的时候，有很多类似的写法：
 
+### swap
+
 spdlog:`logger-inc.h`
 
 ```c++
@@ -36,7 +38,7 @@ using std::swap;
 swap(a, b);
 ```
 
-
+### range-based for
 
 `std::begin` 和 类成员函数`begin`：
 
@@ -96,8 +98,6 @@ wikipedia [Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/w
 1、[Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for) 
 
 2、[Swap values](https://cpppatterns.com/patterns/swap-values.html)
-
-
 
 
 
