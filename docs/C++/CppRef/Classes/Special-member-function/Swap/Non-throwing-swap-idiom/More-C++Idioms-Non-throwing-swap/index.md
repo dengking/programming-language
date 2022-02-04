@@ -261,7 +261,7 @@ Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a 
 
 
 
-### 使用cpppatterns [Swappable idiom](https://cpppatterns.com/patterns/swap-values.html)
+### 使用 [swap value idiom](https://cpppatterns.com/patterns/swap-values.html)
 
 ```c++
 #include <utility>
