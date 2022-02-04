@@ -2,6 +2,12 @@
 
 在实现swap的时候，要让它"non-throwing"，那如何做呢？本章对此进行探讨。 
 
+为什么move可以是non-throw？
+
+简单来说，它无需system call、dynamic allocation，对于resource wrapper，应该实行non-throw swap
+
+
+
 ## More C++ Idioms [Non-throwing swap](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap)
 
 参见 `./More-C++Idioms-Non-throwing swap` 章节。
@@ -97,6 +103,9 @@ There's generally no reason for a **move-constructor** to throw: it doesn't allo
 >
 > 可以看到，它充分发挥了move semantic，正如上面的描述所言。
 
+## 素材
 
+cpptruths [tale of noexcept swap for user defined](http://cpptruths.blogspot.com/2011/09/tale-of-noexcept-swap-for-user-defined.html)
 
-## cpptruths [tale of noexcept swap for user defined](http://cpptruths.blogspot.com/2011/09/tale-of-noexcept-swap-for-user-defined.html)
+blog.ycshao.com [Effective C++ item 25: Consider Support For a Non-throwing swap](https://blog.ycshao.com/2017/10/22/effective-c-item-25-consider-support-for-a-non-throwing-swap/)
+

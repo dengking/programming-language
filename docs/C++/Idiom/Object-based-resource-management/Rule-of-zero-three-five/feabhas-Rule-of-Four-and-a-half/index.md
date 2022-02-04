@@ -74,7 +74,7 @@ As we can now distinguish between l-value and r-value objects we can overload th
 
 ## 4 – Move constructor
 
-The move constructor is an overload of a class’ constructor that takes an r-value reference as a parameter. That is, the compiler can determine that the object used as the source is going out of scope in the near future and so we can pilfer its resources to construct the new object. The basic process is to take ownership of all the source object’s attributes then leave it in an ‘empty’ state.
+The move constructor is an overload of a class’ constructor that takes an r-value reference as a parameter. That is, the compiler can determine that the object used as the source is going out of scope in the near future and so we can pilfer(偷取) its resources to construct the new object. The basic process is to take ownership of all the source object’s attributes then leave it in an ‘empty’ state.
 
 > NOTE: 
 >
@@ -253,6 +253,8 @@ What should have been “The Rule of The Big Five” is now reduced to “The Ru
 >
 > 2、The assignment operator
 >
+> unified assignment operator
+>
 > 3、The move constructor
 >
 > 4、Destructor
@@ -405,6 +407,10 @@ A
 
 2、The assignment operator
 
+> NOTE: 
+>
+> 一、指的是unified assignment operator
+
 3、The move constructor
 
 4、The destructor
@@ -415,25 +421,25 @@ then you must have a policy about the others.
 
 > Which functions need to implemented, and what should each function's body look like?
 
-- default constructor (which could be private)
+1、default constructor (which could be private)
 
-- copy constructor (Here you have real code to handle your resource)
+2、copy constructor (Here you have real code to handle your resource)
 
-- move constructor (using default constructor and swap) :
+3、move constructor (using default constructor and swap) :
 
-    ```C++
-    S(S&& s) : S{} { swap(*this, s); }
-    ```
+```C++
+S(S&& s) : S{} { swap(*this, s); }
+```
 
-- assignment operator (using constructor and swap)
+4、assignment operator (using constructor and swap)
 
-    ```
-    S& operator=(S s) { swap(*this, s); }
-    ```
+```
+S& operator=(S s) { swap(*this, s); }
+```
 
-- destructor (deep copy of your resource)
+5、destructor (deep copy of your resource)
 
-- friend swap (doesn't have default implementation :/ you should probably want to swap each member). This one is important contrary to the swap member method: `std::swap` uses move (or copy) constructor, which would lead to infinite recursion.
+6、friend swap (doesn't have default implementation :/ you should probably want to swap each member). This one is important contrary to the swap member method: `std::swap` uses move (or copy) constructor, which would lead to infinite recursion.
 
 > Which function is the half?
 
