@@ -106,17 +106,27 @@ namespace std {
 
 ### Common usage styles of `swap`
 
+> NOTE: 
+>
+> 一、下面总结的其实是扩展STL的两种典型的方式
+
 Adding it in two places takes care of two different common usage styles of swap :
 
 (1) unqualified swap 
 
-(2) fully qualified swap (e.g., `std::swap`). 
-
 When **unqualified `swap`** is used, right swap is looked up using **Koenig lookup** (provided one is already defined). 
 
-> NOTE: `swap(Orange::String, Orange::String)`
+> NOTE: 
+>
+> 这种方式是借助ADL的，后面将它称为swap value idiom
+>
+> `swap(Orange::String, Orange::String)`
 >
 > **Koenig lookup** 就是 [Argument-dependent name lookup](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup)
+
+
+
+(2) fully qualified swap (e.g., `std::swap`). 
 
 If **fully qualified `swap`** is used, Koenig lookup is suppressed and one in the `std` namespace is used instead. It is a very common practice. 
 
@@ -240,8 +250,6 @@ Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a 
 > ```
 >
 > 
->
-> 
 
 1、Standard-compliant solution. Leveraging on **Koenig lookup**(**ADL**), define an overloaded swap function template in the same namespace as that of the class being swapped. Not all compilers may support this correctly, but this solution is compliant to the standard.[[2\]](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Non-throwing_swap#cite_note-2)
 
@@ -250,10 +258,6 @@ Using non-throwing swap idiom for template classes (e.g., `Matrix<T>`) can be a 
 2、Fingers-crossed solution. Partially specialize `std::swap` and ignore the fact that this is technically undefined behavior, hoping that nothing will happen and wait for a fix in the next language standard.
 
 > NOTE: 这种做法相当于什么都没有做
-
-
-
-
 
 
 
@@ -327,7 +331,7 @@ world hello
 
 
 
-### 使用`std::swap`
+### full specialization `std::swap`
 
 ```c++
 #include <utility>

@@ -83,13 +83,13 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 在`C++\Language-reference\Classes\The-interface-principle`中对ADL and the Interface Principle进行了分析。
 
-### ADL make C++ generic and extensible
+总的来说: ADL make C++ generic and extensible: 
 
-> 从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP、generic programming。
+一、从Interface Principle的角度来看，C++ ADL是为了更好、更灵活地支持OOP、generic programming。
 
-扩展性
+二、扩展性 和 static polymorphism
 
-wikipedia [Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
+借助ADL可以扩展STL，实现static polymorphism，正如wikipedia [Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces) 所总结的: 
 
 > Functions found by ADL are considered part of a class's interface. In the C++ Standard Library, several algorithms use unqualified calls to `swap` from within the `std` namespace. As a result, the generic `std::swap` function is used if nothing else is found, but if these algorithms are used with a third-party class, `Foo`, found in another namespace that also contains `swap(Foo&, Foo&)`, that overload of `swap` will be used.
 
@@ -149,7 +149,7 @@ int main()
  
     (endl)(std::cout); // Error: 'endl' is not declared in this namespace.
                        // The sub-expression (endl) is not a function call expression
-
+}
 ```
 
 > NOTE: 上述例子能够极好的帮助我们理解ADL：
@@ -279,60 +279,59 @@ ADL和OOP multiple dispatch是有着相似之处的:
 
 ### `get_rtti`
 
-我已经使用了c++ ADL了，`get_rtti`就是一个例子。下面是简化的代码：
+我已经使用了C++ ADL了，`get_rtti`就是一个例子。下面是简化的代码：
 
 ```c++
 #include <string>
 #include <iostream>
 
 /**
- *  * 结构体1
- *   */
+ * 结构体1
+ */
 struct MyStruct1
 {
 };
 
 /**
- *  * 结构体
- *   */
+ * 结构体
+ */
 struct MyStruct2
 {
 };
 
 /**
- *  * 结构体类型信息
- *   */
+ * 结构体类型信息
+ */
 typedef std::string CStructRtti;
 
 /**
- *  * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
- *   * @param f
- *    * @return
- *     */
+ * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+ * @param f
+ * @return
+ */
 CStructRtti GetRtti(MyStruct1* f)
 {
 	return "MyStruct1";
 }
 
 /**
- *  * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
- *   * @param f
- *    * @return
- *     */
+ * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+ * @param f
+ * @return
+ */
 CStructRtti GetRtti(MyStruct2* f)
 {
 	return "MyStruct2";
 }
 
 /**
- *  * 模板函数，根据结构体类型来获取结构体类型信息，它的实现是派发到上述的根据结构体对象来获取结构体类型休息
- *   * @return
- *    */
+ * 模板函数，根据结构体类型来获取结构体类型信息，它的实现是派发到上述的根据结构体对象来获取结构体类型休息
+ * @return
+ */
 template<typename StructT>
 CStructRtti GetRttiByType()
 {
-	StructT Tmp = StructT();
-	return GetRtti(&Tmp);
+	return GetRtti(static_cast<StructT*>(nullptr));
 }
 
 class Utility
@@ -346,64 +345,73 @@ public:
 
 };
 /**
- *  * 该namespace内部和外部的结构基本一致
- *   * @param f
- *    * @return
- *     */
+ * 该namespace内部和外部的结构基本一致
+ * @param f
+ * @return
+ */
 namespace NS
 {
-/**
- *  * 结构体1
- *   */
-struct MyStruct1
-{
-};
-
-/**
- *  * 结构体
- *   */
-struct MyStruct2
-{
-};
-
-/**
- *  * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
- *   * @param f
- *    * @return
- *     */
-CStructRtti GetRtti(MyStruct1* f)
-{
-	return "NS::MyStruct1";
-}
-
-/**
- *  * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
- *   * @param f
- *    * @return
- *     */
-CStructRtti GetRtti(MyStruct2* f)
-{
-	return "NS::MyStruct2";
-}
-
-
-class Utility
-{
-public:
-	template<typename StrucT>
-	static CStructRtti GetRtti()
+	/**
+	 * 结构体1
+	 */
+	struct MyStruct1
 	{
-		return GetRttiByType<StrucT>();
+	};
+
+	/**
+	 * 结构体
+	 */
+	struct MyStruct2
+	{
+	};
+
+	/**
+	 * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+	 * @param f
+	 * @return
+	 */
+	CStructRtti GetRtti(MyStruct1* f)
+	{
+		return "NS::MyStruct1";
 	}
 
-};
+	/**
+	 * 获得结构体MyStruct的类型信息，这是按照对象来获取结构体类型信息
+	 * @param f
+	 * @return
+	 */
+	CStructRtti GetRtti(MyStruct2* f)
+	{
+		return "NS::MyStruct2";
+	}
+
+
+	class Utility
+	{
+	public:
+		template<typename StrucT>
+		static CStructRtti GetRtti()
+		{
+			return GetRttiByType<StrucT>();
+		}
+
+	};
 }
 
 int main()
 {
-	std::cout<<Utility::GetRtti<MyStruct1>()<<std::endl;
-	std::cout<<NS::Utility::GetRtti<NS::MyStruct1>()<<std::endl;
+	std::cout << Utility::GetRtti<MyStruct1>() << std::endl;
+	std::cout << NS::Utility::GetRtti<NS::MyStruct1>() << std::endl;
 }
+// g++ test.cpp --std=c++11 -pedantic -Wall 
+
+```
+
+输出如下:
+
+```
+MyStruct1
+NS::MyStruct1
 ```
 
 
@@ -412,7 +420,7 @@ int main()
 
 在`C++\Idiom\OOP\Non-throwing-swap`中给出的例子，就展示了ADL：
 
-#### 使用Swappable idiom
+#### 使用swap value idiom
 
 ```c++
 #include <utility>
@@ -448,18 +456,8 @@ void swap(String & s1, String & s2) // noexcept
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	s1.swap(s2);
 }
-
 }
 
-namespace std
-{
-template<>
-void swap(Orange::String & s1, Orange::String & s2) // noexcept
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	s1.swap(s2);
-}
-}
 
 int main()
 {
@@ -486,9 +484,9 @@ After swap:
 world hello
 ```
 
+上述例子使用swap value idiom，它是最最简单的，推荐使用上述写法。
 
-
-#### 使用`std::swap`
+#### full specialization `std::swap`
 
 ```c++
 #include <utility>
@@ -561,6 +559,8 @@ void Orange::String::swap(Orange::String&)
 After swap:
 world hello
 ```
+
+上述例子通过full specialization `std::swap`来达到调用user-defined swap的目的。
 
 ## TODO
 

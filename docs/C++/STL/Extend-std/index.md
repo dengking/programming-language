@@ -27,6 +27,10 @@ It is **allowed** to add **template specializations** for any standard library c
 | It is allowed to add template specializations for any standard library function template to the namespace `std` only if the declaration depends on at least one program-defined type and the specialization satisfies all requirements for the original template, except where such specializations are prohibited. | (until C++20) |
 | It is undefined behavior to declare a full specialization of any standard library function template. | (since C++20) |
 
+> NOTE:
+>
+> 一、注意: 从C++20开始，是不在允许通过full specialization function template的方式来extend std了
+
 #### Variable templates
 
 > NOTE: C++14引入的
