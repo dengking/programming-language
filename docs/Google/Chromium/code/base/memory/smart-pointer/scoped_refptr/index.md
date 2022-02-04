@@ -226,7 +226,61 @@ scoped_refptr(const scoped_refptr<U>& r) : scoped_refptr(r.ptr_) {}
 
 二、上述代码虽然简单，但是我比较疑惑的是它会进行哪些conversion？
 
-指针的declaration type和它实际所指向的object的真实type不同，这在C++中是允许的。
+C++允许指针的declaration type和它实际所指向的object的真实type不同，上述函数首先使用 `std::is_convertible<U*, T*>`进行校验，在具体实现上，它使用C++11 delegating constructor特性来调用`scoped_refptr(r.ptr_)`，`r.ptr_` 的类型是 `U*`，而constructor `scoped_refptr(T* p)`的入参类型是 `T*`，因此此处就涉及pointer conversion，由于前面做过了static check，因此这个conversion是可以成功的，下面是简化的例子:
+
+```C++
+#include <algorithm>
+#include <iostream>
+#include <type_traits>
+template <class T>
+class scoped_refptr
+{
+public:
+	scoped_refptr(T* p) : ptr_(p) {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	template<typename U, typename = typename std::enable_if<std::is_convertible<U*, T*>::value>::type>
+	scoped_refptr(const scoped_refptr<U>& p) : scoped_refptr(p.ptr_) {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+
+	~scoped_refptr() {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		delete ptr_;
+	}
+protected:
+	T* ptr_ = nullptr;
+private:
+	// Friend required for move constructors that set r.ptr_ to null.
+	// 如果不加这个friend声明，则会产生如下编译报错:
+	// test.cpp:12:68: error: ‘Derived* scoped_refptr<Derived>::ptr_’ is protected within this context
+	// 12 | st scoped_refptr<U>&p) : scoped_refptr(p.ptr_)
+	template <typename U>
+	friend class scoped_refptr;
+};
+class Base {};
+class Derived :public Base {};
+int main()
+{
+	auto ptr0 = scoped_refptr<Derived>(new Derived);
+	auto ptr1 = scoped_refptr<Base>(ptr0);
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall 
+```
+
+输出如下:
+
+```C++
+scoped_refptr<T>::scoped_refptr(T*) [with T = Derived]
+scoped_refptr<T>::scoped_refptr(T*) [with T = Base]
+scoped_refptr<T>::scoped_refptr(const scoped_refptr<U>&) [with U = Derived; <template-parameter-2-2> = void; T = Base]
+scoped_refptr<T>::~scoped_refptr() [with T = Base]
+scoped_refptr<T>::~scoped_refptr() [with T = Derived]
+free(): double free detected in tcache 2
+Aborted (core dumped)
+```
+
+上述导致double free的原因非常简单。
 
 #### Move constructor
 
@@ -235,6 +289,8 @@ scoped_refptr(const scoped_refptr<U>& r) : scoped_refptr(r.ptr_) {}
 // constructor below.
 scoped_refptr(scoped_refptr&& r) noexcept : ptr_(r.ptr_) { r.ptr_ = nullptr; }
 ```
+
+可以看到，move constructor的实现非常简单，就是简单的pointer assignment: `ptr_(r.ptr_)`。
 
 #### Move conversion constructor
 
@@ -249,9 +305,71 @@ scoped_refptr(scoped_refptr<U>&& r) noexcept : ptr_(r.ptr_) {
 }
 ```
 
+"Move conversion constructor"的实现也是非常简单的，它在move constructor的基础上增加了`std::is_convertible`的检查，需要注意的是: 它本质上也是直接的pointer assignment。
+
 ### Assignment operator
 
-"assignment"其实也就意味着要将current object进行替换(swap)，因此它的implementation中往往涉及swap。
+"assignment"其实也就意味着要将current object替换为(replace)为它右边的，current object管理着resource的时候，往往需要分配、deep copy、release，这就诞生了"unified assignment operator"，它是典型的使用copy-and-swap-idiom的，下面是对`scoped_refptr`的简化，以更好地理解它的运行原理:
+
+```C++
+#include <algorithm>
+#include <iostream>
+template <class T>
+class scoped_refptr
+{
+public:
+	scoped_refptr(T* p) : ptr_(p) {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	// Move constructor.
+	scoped_refptr(scoped_refptr&& r) noexcept : ptr_(r.ptr_) {
+		r.ptr_ = nullptr;
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+	}
+	scoped_refptr& operator=(T* p) {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		return *this = scoped_refptr(p);
+	}
+	// Unified assignment operator.
+	scoped_refptr& operator=(scoped_refptr r) noexcept {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		swap(r);
+		return *this;
+	}
+	void swap(scoped_refptr& r) noexcept {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		std::swap(ptr_, r.ptr_);
+	}
+	~scoped_refptr() {
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		delete ptr_;
+	}
+protected:
+	T* ptr_ = nullptr;
+};
+int main()
+{
+	auto ptr = scoped_refptr<int>(new int{ 1 });
+	ptr = new int{ 2 };
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall 
+```
+
+它的输出如下:
+
+```C++
+scoped_refptr<T>::scoped_refptr(T*) [with T = int]
+scoped_refptr<T>& scoped_refptr<T>::operator=(T*) [with T = int]
+scoped_refptr<T>::scoped_refptr(T*) [with T = int]
+scoped_refptr<T>& scoped_refptr<T>::operator=(scoped_refptr<T>) [with T = int]
+void scoped_refptr<T>::swap(scoped_refptr<T>&) [with T = int]
+scoped_refptr<T>::~scoped_refptr() [with T = int]
+scoped_refptr<T>::~scoped_refptr() [with T = int]
+```
+
+1、通过上述输出可以看到 `scoped_refptr& operator=(T* p)` 的实现是依赖于 `scoped_refptr& operator=(scoped_refptr r) noexcept` 的。
+
+2、另外一个值得关注的是: `scoped_refptr& operator=(T* p)` 在调用 `scoped_refptr& operator=(scoped_refptr r) noexcept` ，第二个函数的入参是不涉及move constructor的。为了验证这，我特地加了move constructor的，从输出来看，它是未被调用的。
 
 #### Unified assignment operator
 
@@ -263,7 +381,9 @@ scoped_refptr& operator=(scoped_refptr r) noexcept {
 }
 ```
 
-它是典型的使用copy-and-swap-idiom的。
+1、它是典型的使用copy-and-swap-idiom的
+
+2、第二个值得关注的是: 它是 `noexcept` 的
 
 #### from raw pointer
 
@@ -271,7 +391,54 @@ scoped_refptr& operator=(scoped_refptr r) noexcept {
 scoped_refptr& operator=(T* p) { return *this = scoped_refptr(p); }
 ```
 
+#### from `std::nullptr_t`
 
+```C++
+  scoped_refptr& operator=(std::nullptr_t) {
+    reset();
+    return *this;
+  }
+```
+
+### `reset`
+
+````C++
+  // Sets managed object to null and releases reference to the previous managed
+  // object, if it existed.
+  void reset() { scoped_refptr().swap(*this); }
+````
+
+这个实现也是比较巧妙的: "default constructor + swap"。
+
+### `release()`: release ownership
+
+```C++
+// Returns the owned pointer (if any), releasing ownership to the caller. The
+// caller is responsible for managing the lifetime of the reference.
+T* release() WARN_UNUSED_RESULT;
+template <typename T>
+T* scoped_refptr<T>::release() {
+  T* ptr = ptr_;
+  ptr_ = nullptr;
+  return ptr;
+}
+```
+
+
+
+### `friend class scoped_refptr`
+
+在类中有如下声明: 
+
+```C++
+  // Friend required for move constructors that set r.ptr_ to null.
+  template <typename U>
+  friend class scoped_refptr;
+```
+
+它是做什么的呢？一开始我并没有明白，在编译"Copy conversion constructor"节的例子的时候我找到了答案:
+
+在 copy conversion constructor、move conversion constructor中，入参的类型是 `scoped_refptr<U>` 而不是 `scoped_refptr<T>` ，显然它们不是相同的类型，而在 `scoped_refptr<T>` 中要访问 `scoped_refptr<U>` 的protected member `ptr_`，如果不添加上述friend 声明的话，显然是会导致编译报错的。
 
 ## `shared_ptr` vs `scoped_ptr`
 

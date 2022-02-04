@@ -1,7 +1,7 @@
 nav:
     - Introduction: index.md
     - drdobbs-Andrew-Koenig-Object-Swapping: drdobbs-Andrew-Koenig-Object-Swapping
-    - Swappable-concept-and-swap-value-idiom: Swappable-concept-and-swap-value-idiom    
+    - Swappable-concept&swap-value-idiom: Swappable-concept&swap-value-idiom    
     - Non-throwing-swap-idiom: Non-throwing-swap-idiom
     - std-swap: std-swap
 

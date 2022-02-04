@@ -57,7 +57,7 @@ int main()
 > std::vector<int>().swap (v);
 > ```
 >
-> 
+> default constructor + swap
 
 ### 11.0.5 Solution in C++14
 
