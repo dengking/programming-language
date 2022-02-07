@@ -74,11 +74,42 @@ A callback with no unbound input parameters (`base::OnceCallback<void()>`) is ca
 
 > NOTE: 这一段其实是在描述parameter passing和ownership，它其实和`std::unique_ptr` 、`std::shared_ptr` 的规则非常类似
 
-When you pass a `base::{Once,Repeating}Callback` object to a function parameter, use `std::move()` if you don't need to keep a reference to it, otherwise, pass the object directly.
+Pass `base::{Once,Repeating}Callback` objects by value if ownership is transferred; otherwise, pass it by const-reference.
 
 > NOTE: 
 >
 > 这段话总结的非常好的，它其实对应的是move ownership
+
+```C++
+// |Foo| just refers to |cb| but doesn't store it nor consume it.
+bool Foo(const base::OnceCallback<void(int)>& cb) {
+  return cb.is_null();
+}
+
+// |Bar| takes the ownership of |cb| and stores |cb| into |g_cb|.
+base::RepeatingCallback<void(int)> g_cb;
+void Bar(base::RepeatingCallback<void(int)> cb) {
+  g_cb = std::move(cb);
+}
+
+// |Baz| takes the ownership of |cb| and consumes |cb| by Run().
+void Baz(base::OnceCallback<void(int)> cb) {
+  std::move(cb).Run(42);
+}
+
+// |Qux| takes the ownership of |cb| and transfers ownership to PostTask(),
+// which also takes the ownership of |cb|.
+void Qux(base::RepeatingCallback<void(int)> cb) {
+  PostTask(FROM_HERE, base::BindOnce(cb, 42));
+  PostTask(FROM_HERE, base::BindOnce(std::move(cb), 43));
+}
+```
+
+
+
+When you pass a `base::{Once,Repeating}Callback` object to a function parameter, use `std::move()` if you don't need to keep a reference to it, otherwise, pass the object directly.
+
+
 
 ### Chaining callbacks
 
