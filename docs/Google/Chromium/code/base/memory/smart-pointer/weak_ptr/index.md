@@ -1,4 +1,8 @@
-# github [chromium/base/memory/weak_ptr.h](https://github.com/chromium/chromium/blob/master/base/memory/weak_ptr.h)
+# chromium `weakptr`
+
+[chromium/base/memory/weak_ptr.h](https://github.com/chromium/chromium/blob/master/base/memory/weak_ptr.h)
+
+[chromium](https://github.com/chromium/chromium/tree/master)/[base](https://github.com/chromium/chromium/tree/master/base)/[memory](https://github.com/chromium/chromium/tree/master/base/memory)/[**weak_ptr.cc**](https://github.com/chromium/chromium/blob/master/base/memory/weak_ptr.cc)
 
 极好的避免dangling。
 
