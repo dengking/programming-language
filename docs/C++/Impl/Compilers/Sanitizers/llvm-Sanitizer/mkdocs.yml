@@ -2,3 +2,5 @@ nav:
     - Introduction: index.md
     - UndefinedBehaviorSanitizer: UndefinedBehaviorSanitizer
     - AddressSanitizer: AddressSanitizer
+    - LeakSanitizer: LeakSanitizer
+    - SanitizerCoverage: SanitizerCoverage    
