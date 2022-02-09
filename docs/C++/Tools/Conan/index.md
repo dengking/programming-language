@@ -27,3 +27,5 @@ A package is defined by a “conanfile.py”. This is a file that defines the pa
 guorongfei [C++包管理器——conan](http://blog.guorongfei.com/2018/04/23/conan-tutorial/)
 
 这篇文章非常好
+
+stackoverflow [What is the difference between conanfile.py, conanfile.txt, conanprofile and settings.yml?](https://stackoverflow.com/questions/69739319/what-is-the-difference-between-conanfile-py-conanfile-txt-conanprofile-and-set)
