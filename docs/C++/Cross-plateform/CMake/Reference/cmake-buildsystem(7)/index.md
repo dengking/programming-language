@@ -28,6 +28,8 @@ add_executable(zipapp zipapp.cpp)
 target_link_libraries(zipapp archive)
 ```
 
+
+
 ## [Build Specification and Usage Requirements](https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#id22)
 
 
@@ -47,3 +49,12 @@ target_link_libraries(zipapp archive)
 
 
 The contents of the [`INTERFACE_INCLUDE_DIRECTORIES`](https://cmake.org/cmake/help/latest/prop_tgt/INTERFACE_INCLUDE_DIRECTORIES.html#prop_tgt:INTERFACE_INCLUDE_DIRECTORIES), [`INTERFACE_COMPILE_DEFINITIONS`](https://cmake.org/cmake/help/latest/prop_tgt/INTERFACE_COMPILE_DEFINITIONS.html#prop_tgt:INTERFACE_COMPILE_DEFINITIONS) and [`INTERFACE_COMPILE_OPTIONS`](https://cmake.org/cmake/help/latest/prop_tgt/INTERFACE_COMPILE_OPTIONS.html#prop_tgt:INTERFACE_COMPILE_OPTIONS) target properties are *Usage Requirements* -- they specify content which consumers must use to correctly compile and link with the target they appear on. For any binary target, the contents of each `INTERFACE_` property on each target specified in a [`target_link_libraries()`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html#command:target_link_libraries) command is consumed:
+
+
+
+## 补充: leimao [CMake: Public VS Private VS Interface](https://leimao.github.io/blog/CMake-Public-Private-Interface/)
+
+> NOTE: 
+>
+> 类比C++ public、private、protected specifier
+

@@ -5,4 +5,4 @@ nav:
     - cmake-variables(7): cmake-variables(7)
     - cmake-packages(7): cmake-packages(7)
     - cmake-modules(7): cmake-modules(7)
-    
+    - cmake-commands(7): cmake-commands(7)

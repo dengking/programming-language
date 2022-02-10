@@ -59,28 +59,4 @@ command: [project](https://cmake.org/cmake/help/latest/command/project.html)
 
 
 
-## leimao [CMake: Public VS Private VS Interface](https://leimao.github.io/blog/CMake-Public-Private-Interface/)
 
-> NOTE: 
->
-> 类比C++ public、private、protected specifier
-
-
-
-## variable
-
-### `PROJECT_BINARY_DIR`
-
-参见: 
-
-1、Step 1: A Basic Starting Point[¶](https://cmake.org/cmake/help/latest/guide/tutorial/A Basic Starting Point.html#step-1-a-basic-starting-point)
-
-binary tree
-
-## command
-
-### `configure_file`
-
-让CMake去configure一个文件，参见:
-
-1、Step 1: A Basic Starting Point[¶](https://cmake.org/cmake/help/latest/guide/tutorial/A Basic Starting Point.html#step-1-a-basic-starting-point)
