@@ -18,7 +18,7 @@ command: [project](https://cmake.org/cmake/help/latest/command/project.html)
 
 
 
-二、通过command来控制property
+二、通过command来控制target property
 
 比如:
 
