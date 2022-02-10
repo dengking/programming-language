@@ -1,6 +1,10 @@
 # CMake
 
-一、描述如何构建一个project:
+
+
+## CMake概述
+
+一、CMake描述如何构建一个project:
 
 1、project
 
@@ -18,13 +22,17 @@ command: [project](https://cmake.org/cmake/help/latest/command/project.html)
 
 比如:
 
-1、[add_compile_options](https://cmake.org/cmake/help/latest/command/add_compile_options.html#add-compile-options) command adds options to the [`COMPILE_OPTIONS`](https://cmake.org/cmake/help/latest/prop_dir/COMPILE_OPTIONS.html#prop_dir:COMPILE_OPTIONS) directory property.
+1、options: 
+
+[add_compile_options](https://cmake.org/cmake/help/latest/command/add_compile_options.html#add-compile-options) command adds options to the [`COMPILE_OPTIONS`](https://cmake.org/cmake/help/latest/prop_dir/COMPILE_OPTIONS.html#prop_dir:COMPILE_OPTIONS) directory property.
 
 [add_link_options](https://cmake.org/cmake/help/latest/command/add_link_options.html)
 
 2、[add_compile_definitions](https://cmake.org/cmake/help/latest/command/add_compile_definitions.html#add-compile-definitions) 
 
 3、[add_definitions](https://cmake.org/cmake/help/latest/command/add_definitions.html)
+
+
 
 三、定义target、向project中添加target
 
@@ -36,18 +44,18 @@ command: [project](https://cmake.org/cmake/help/latest/command/project.html)
 
 
 
-| 阶段          |                              |                                                           |                              | 参考                                                         |
-| ------------- | ---------------------------- | --------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------ |
-| preprocessing | `target_include_directories` | `INCLUDE_DIRECTORIES` <br>`INTERFACE_INCLUDE_DIRECTORIES` | `<PRIVATE|PUBLIC|INTERFACE>` | leimao [CMake: Public VS Private VS Interface](https://leimao.github.io/blog/CMake-Public-Private-Interface/)  <br> |
-| compile       |                              |                                                           |                              |                                                              |
-| link          |                              |                                                           |                              |                                                              |
-|               |                              |                                                           |                              |                                                              |
+四、cmake中 [Project Commands](https://cmake.org/cmake/help/v3.21/manual/cmake-commands.7.html#id4)[¶](https://cmake.org/cmake/help/v3.21/manual/cmake-commands.7.html#project-commands) 用于对project、target进行控制
 
-## cmake-document
 
-### [cmake-commands(7)](https://cmake.org/cmake/help/latest/manual/cmake-commands.7.html#id2)[¶](https://cmake.org/cmake/help/latest/manual/cmake-commands.7.html#cmake-commands-7)
 
-### [cmake-variables(7)](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#id1)
+| 阶段       |                              |                                                           |                              | 参考                                                         |
+| ---------- | ---------------------------- | --------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------ |
+| preprocess | `target_include_directories` | `INCLUDE_DIRECTORIES` <br>`INTERFACE_INCLUDE_DIRECTORIES` | `<PRIVATE|PUBLIC|INTERFACE>` | leimao [CMake: Public VS Private VS Interface](https://leimao.github.io/blog/CMake-Public-Private-Interface/)  <br> |
+| compile    |                              |                                                           |                              |                                                              |
+| link       |                              |                                                           |                              |                                                              |
+| install    |                              |                                                           |                              |                                                              |
+
+## [cmake](https://cmake.org/)
 
 
 

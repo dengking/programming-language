@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
-    - Android-NDK: Android-NDK
-    - Android-studio: Android-studio
+    - Android-studio: Android-studio    
+    - NDK: NDK
+    - Gradle: Gradle
     

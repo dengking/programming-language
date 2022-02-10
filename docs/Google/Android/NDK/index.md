@@ -1,6 +1,8 @@
-# [Android NDK](https://developer.android.com/ndk)
+# Android  NDK
 
-## [Get started with the NDK](https://developer.android.com/ndk/guides)
+## [Android NDK](https://developer.android.com/ndk)
+
+### [Get started with the NDK](https://developer.android.com/ndk/guides)
 
 The Native Development Kit (NDK) is a set of tools that allows you to use C and C++ code with Android, and provides [platform libraries](https://developer.android.com/ndk/guides/stable_apis) you can use to manage native activities and access physical device components, such as sensors and touch input. 
 
@@ -32,7 +34,7 @@ Using [Android Studio 2.2 and higher](https://developer.android.com/studio), you
 
 
 
-## Writing C/C++Code
+### Writing C/C++Code
 
 
 
@@ -46,5 +48,14 @@ Using [Android Studio 2.2 and higher](https://developer.android.com/studio), you
 >
 > 
 
-### C++ library support
+#### C++ library support
 
+
+
+## 素材
+
+下面是涉及Android Studio中使用 C/C++ 代码的一些素材: 
+
+1、csdn [Android Studio build.gradle 中配置 cmake，及各 arguments 详解](https://blog.csdn.net/afei__/article/details/81271594)
+
+2、developer [Add C and C++ code to your project](https://developer.android.com/studio/projects/add-native-code)

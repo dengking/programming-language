@@ -1,0 +1,1 @@
+# [cmake-variables(7)](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#id1)[¶](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#cmake-variables-7)

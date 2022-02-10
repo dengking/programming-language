@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
+    - Reference: Reference
+    - Guides: Guides
     - CMake-AddressSanitizer: CMake-AddressSanitizer
     
