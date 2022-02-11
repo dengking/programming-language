@@ -17,9 +17,7 @@ nav:
     
     - OOM: OOM
     
-    - Stack-overflow: Stack-overflow
-    
-    - Buffer-overflow: Buffer-overflow
+    - Overflow: Overflow
     
     - Memory-leak: Memory-leak
     

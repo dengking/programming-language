@@ -1,10 +1,12 @@
-# wikipedia [Stack overflow](https://en.wikipedia.org/wiki/Stack_overflow)
+# Stack overflow
+
+## wikipedia [Stack overflow](https://en.wikipedia.org/wiki/Stack_overflow)
 
 In software, a **stack overflow** occurs if the [call stack](https://en.wikipedia.org/wiki/Call_stack) pointer exceeds the [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) bound. The call stack may consist of a limited amount of [address space](https://en.wikipedia.org/wiki/Address_space), often determined at the start of the program. The size of the **call stack** depends on many factors, including the programming language, machine architecture, multi-threading, and amount of available memory. When a program attempts to use more space than is available on the call stack (that is, when it attempts to access memory beyond the call stack's bounds, which is essentially a [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)), the stack is said to *overflow*, typically resulting in a program crash.[[1\]](https://en.wikipedia.org/wiki/Stack_overflow#cite_note-fortran1-1)
 
 
 
-## Infinite recursion
+### Infinite recursion
 
 Main article: [Infinite recursion](https://en.wikipedia.org/wiki/Infinite_recursion)
 
@@ -23,7 +25,7 @@ The function *foo*, when it is invoked, continues to invoke itself, allocating a
 
 Some C compiler options will effectively enable [tail-call optimization](https://en.wikipedia.org/wiki/Tail-call_optimization); for example, compiling the above simple program using [gcc](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) with `-O1` will result in a segmentation fault, but not when using `-O2` or `-O3`, since these optimization levels imply the `-foptimize-sibling-calls` compiler option[[4\]](https://en.wikipedia.org/wiki/Stack_overflow#cite_note-4). Other languages, such as [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)), require all implementations to include tail-recursion as part of the language standard.[[5\]](https://en.wikipedia.org/wiki/Stack_overflow#cite_note-5)
 
-## Very deep recursion
+### Very deep recursion
 
 A **recursive function** that terminates in theory but causes a call stack buffer overflow in practice can be fixed by transforming the **recursion** into a **loop** and storing the function arguments in an explicit stack (rather than the implicit use of the call stack). This is always possible, because the class of [primitive recursive functions](https://en.wikipedia.org/wiki/Primitive_recursive_function) is equivalent to the class of LOOP computable functions. Consider this example in [C++](https://en.wikipedia.org/wiki/C%2B%2B)-like pseudocode:
 
@@ -112,9 +114,9 @@ Notice that the function on the left must store in its stack `exp` number of int
 
 
 
-## Very large stack variables
+### Very large stack variables
 
-The other major cause of a stack overflow results from an attempt to allocate more memory on the stack than will fit, for example by creating local array variables that are too large. For this reason some authors recommend that arrays larger than a few kilobytes should be [allocated dynamically](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation) instead of as a local variable.[[6\]](https://en.wikipedia.org/wiki/Stack_overflow#cite_note-onlamp-6)
+The other major cause of a stack overflow results from an attempt to allocate more memory on the stack than will fit, for example by creating local array variables that are too large. For this reason some authors recommend that arrays larger than a few kilobytes should be [allocated dynamically](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation) instead of as a local variable.
 
 An example of a very large stack variable in [C](https://en.wikipedia.org/wiki/C_(programming_language)):
 
@@ -127,7 +129,5 @@ int foo()
 
 On a C implementation with 8 byte [double-precision floats](https://en.wikipedia.org/wiki/Double-precision_floating-point_format), the declared array consumes 8 [mebibytes](https://en.wikipedia.org/wiki/Mebibytes) of data; if this is more memory than is available on the stack (as set by thread creation parameters or operating system limits), a stack overflow will occur.
 
-Stack overflows are made worse by anything that reduces the effective stack size of a given program. For example, the same program being run **without** multiple threads might work fine, but as soon as multi-threading is enabled the program will crash. This is because most programs with threads have less stack space per thread than a program with no threading support. Because kernels are generally multi-threaded, people new to [kernel](https://en.wikipedia.org/wiki/Kernel_(computer_science)) development are usually discouraged from using recursive algorithms or large stack buffers.[[7\]](https://en.wikipedia.org/wiki/Stack_overflow#cite_note-apple1-7)
-
-## See also
+Stack overflows are made worse by anything that reduces the effective stack size of a given program. For example, the same program being run **without** multiple threads might work fine, but as soon as multi-threading is enabled the program will crash. This is because most programs with threads have less stack space per thread than a program with no threading support. Because kernels are generally multi-threaded, people new to [kernel](https://en.wikipedia.org/wiki/Kernel_(computer_science)) development are usually discouraged from using recursive algorithms or large stack buffers.
 

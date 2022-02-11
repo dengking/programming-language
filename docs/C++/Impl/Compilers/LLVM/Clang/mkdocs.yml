@@ -2,7 +2,6 @@ nav:
     - Features&Goals: Features&Goals
     - doc: doc
     - static-analyzer: static-analyzer
-    - compiler-rt: compiler-rt    
     - Application: Application
 
     
