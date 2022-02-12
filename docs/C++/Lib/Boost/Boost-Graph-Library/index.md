@@ -28,13 +28,7 @@ Like the STL, there are three ways in which the BGL is generic.
 >
 > 更多的parameter，能够带来BGL的genericity，同时它也带来了实现的复杂、使用的复杂。
 
-### Algorithms
-
-> NOTE: core algorithm pattern是基础的algorithm，它是其他几种algorithm的building block。
 
 
-
-### Data Structures
-
-> NOTE: 本段所描述的是如何来存储图
+## [A Quick Tour of the Boost Graph Library](https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/quick_tour.html)
 
