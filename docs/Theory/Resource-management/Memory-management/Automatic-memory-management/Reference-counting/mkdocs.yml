@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - Automatic-Reference-Counting: Automatic-Reference-Counting.md
-    - Implement-reference-count-use-std-atomic: Implement-reference-count-use-std-atomic
+    - Impl-use-std-atomic: Impl-use-std-atomic

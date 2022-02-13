@@ -8,8 +8,6 @@ Reference counting的优势:
 
 计数，并且当count归0的时候，就执行某个操作，这在computer science中有着非常广泛的application:
 
-
-
 ### Automatic resource management
 
 本节标题的含义是: 自动资源管理。
@@ -94,14 +92,13 @@ spdlog使用`std::shared_ptr`来实现reference counting。
 
 ### 那如何使用`std::atomic`来实现呢？
 
-参见 `Implement-reference-count-use-std-atomic` 章节。
+参见 `Impl-use-std-atomic` 章节。
 
 
 
 ## TODO
 
-
-
 mortoray [What is reference counting?](https://mortoray.com/2012/01/08/what-is-reference-counting/)
 
+wikipedia [Automatic Reference Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 

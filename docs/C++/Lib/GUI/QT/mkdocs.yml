@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
+    - Qt-Core: Qt-Core
     - QT-code-generator: QT-code-generator
+    
