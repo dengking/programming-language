@@ -40,14 +40,6 @@ Container adaptors provide a different interface for sequential containers.
 
 ## Common issue
 
-参见 `./Common-issue` 章节，涉及到的主题有:
-
-1 Iterator invalidation
-
-2 Thread safety
-
-3 ......
-
-
+参见 `./Common-issue` 章节。
 
 

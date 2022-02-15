@@ -3,6 +3,6 @@ nav:
     - Memory-management: Memory-management
     - Iterator-invalidation: Iterator-invalidation
     - Thread-safety: Thread-safety
-  
+    - size_type: size_type
     - Generic-container-printer: Generic-container-printer
     - Concept: Concept
