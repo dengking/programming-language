@@ -4,3 +4,6 @@ nav:
     - AddressSanitizer: AddressSanitizer
     - LeakSanitizer: LeakSanitizer
     - SanitizerCoverage: SanitizerCoverage    
+    - Control-Flow-Integrity: Control-Flow-Integrity
+    
+    
