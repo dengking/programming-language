@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
-    - build.gradle-CMake: build.gradle-CMake
+    - Gradle-CMake: Gradle-CMake
+    - Conditional-dependency: Conditional-dependency
     

@@ -1,6 +1,7 @@
 nav:
     - Introduction: index.md
     - Android-studio: Android-studio    
+    - Android-Clang-LLVM: Android-Clang-LLVM    
     - NDK: NDK
     - Gradle: Gradle
     
