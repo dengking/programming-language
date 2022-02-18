@@ -16,7 +16,9 @@ Due to constant over inlining, we now have plugins to the clang compiler which c
 >
 > 非常值得一读
 
+Constructors and destructors are often much larger and more complex than programmers think. They are also implicitly defined in each translation unit if you don't declare them. This can have a cascading effect if a class has member variables that have inlined/implicitly declared constructors/destructors, or are templates.
 
+> 
 
 ## [Virtual Method Out-of-lining](https://www.chromium.org/developers/coding-style/chromium-style-checker-errors/#virtual-method-out-of-lining)
 
