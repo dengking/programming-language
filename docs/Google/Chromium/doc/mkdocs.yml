@@ -1,8 +1,7 @@
 nav:
     - Introduction: index.md
     - Developers: Developers
-    - Design-pattern: Design-pattern        
-    - Chromium-C++style-guide: Chromium-C++style-guide    
+    - Design-pattern: Design-pattern          
     - Static-Initializers: Static-Initializers
 
     

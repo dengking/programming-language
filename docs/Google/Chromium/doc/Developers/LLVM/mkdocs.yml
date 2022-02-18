@@ -3,6 +3,8 @@ nav:
     - Chromium-clang: Chromium-clang
     - Clang-Static-Analyzer&Clang-Tidy: Clang-Static-Analyzer&Clang-Tidy
     - Clang-plugin: Clang-plugin
+    - Clang-tool: Clang-tool
+    - Code-Coverage: Code-Coverage
     - AddressSanitizer(ASan): AddressSanitizer(ASan)    
     - LeakSanitizer(LSan): LeakSanitizer(LSan)    
     
