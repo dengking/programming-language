@@ -16,3 +16,6 @@ D:\NetEase\G2\nertcsdk\src\lite\wrapper\android\.externalNativeBuild\cmake\debug
 
 
 
+## 素材
+
+stackoverflow [How can I pass specific arguments (example: opencv_dir) to CMake through gradle externaNativeTool?](https://stackoverflow.com/questions/42715120/how-can-i-pass-specific-arguments-example-opencv-dir-to-cmake-through-gradle)

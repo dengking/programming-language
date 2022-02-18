@@ -73,3 +73,8 @@ def test():
 
 ```
 
+
+
+## extend Python enum
+
+stackoverflow [How to extend Python Enum?](https://stackoverflow.com/questions/33679930/how-to-extend-python-enum)

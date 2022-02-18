@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - google-sanitizers: google-sanitizers
     - llvm-Sanitizer: llvm-Sanitizer
     - gcc-Sanitizer: gcc-Sanitizer
     - MSVC-sanitizer: MSVC-sanitizer

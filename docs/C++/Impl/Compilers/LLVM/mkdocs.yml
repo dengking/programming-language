@@ -5,4 +5,5 @@ nav:
     - Clang: Clang
     - compiler-rt: compiler-rt    
     - Assembling-a-Complete-Toolchain: Assembling-a-Complete-Toolchain    
+    - LLVM-python-binding: LLVM-python-binding
     

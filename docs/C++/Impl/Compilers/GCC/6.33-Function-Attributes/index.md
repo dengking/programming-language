@@ -1,0 +1,1 @@
+# [6.33 Declaring Attributes of Functions](https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html#Function-Attributes)

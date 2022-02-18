@@ -19,7 +19,9 @@ set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fs
 set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 ```
 
-
+> NOTE: 
+>
+> 上面这种方式经过验证是可行的
 
 ## Linux
 
