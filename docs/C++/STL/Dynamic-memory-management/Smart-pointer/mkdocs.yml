@@ -1,0 +1,17 @@
+nav:
+    - Introduction: index.md
+    - std-unique_ptr: std-unique_ptr
+    - std-shared_ptr: std-shared_ptr
+    - std-default_delete: std-default_delete
+    - auto_ptr: auto_ptr.md
+    - CppCoreGuidelines-Passing-Smart-Pointers: CppCoreGuidelines-Passing-Smart-Pointers    
+    - Guideline-strong-exception-safety: Guideline-strong-exception-safety
+    - Guideline-Incomplete-type: Guideline-Incomplete-type
+    - Guideline-deep-copy: Guideline-deep-copy
+    - Guideline-covariance: Guideline-covariance
+    - Guideline-subtyping-polymorphism: Guideline-subtyping-polymorphism
+    - Guideline-overhead: Guideline-overhead
+    - Guideline-custom-deleter: Guideline-custom-deleter
+    - swap-reset-release: swap-reset-release
+    - TODO-pointer_cast: TODO-pointer_cast.md
+    

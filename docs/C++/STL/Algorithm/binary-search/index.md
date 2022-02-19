@@ -29,6 +29,4 @@ bool binary_search(ForwardIt first, ForwardIt last, const T& value)
 
 
 
-
-
 ## stackoverflow [lower_bound to perform binary search](https://stackoverflow.com/questions/30352231/lower-bound-to-perform-binary-search)

@@ -1,10 +1,6 @@
 nav:
     - Introduction: index.md
-
     - std-function: std-function
-    
-    - C++23-std-move_only_function: C++23-std-move_only_function
-    
     - std-bind: std-bind
-    
-    - STL-Functor: STL-Functor
+    - Operator-function-object: Operator-function-object
+    - What-is-functor: What-is-functor

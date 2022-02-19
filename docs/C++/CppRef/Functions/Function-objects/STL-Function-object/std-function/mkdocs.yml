@@ -2,4 +2,4 @@ nav:
     - Introduction: index.md
     - Examples: Examples.md
     - impl: impl
-    
+    - C++23-std-move_only_function: C++23-std-move_only_function    

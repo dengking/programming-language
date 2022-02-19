@@ -1,5 +1,9 @@
 # cppreference [Utility library#Function objects](https://en.cppreference.com/w/cpp/utility/functional)
 
+> NOTE: 
+>
+> 一、STL通过function object实现了first class function
+
 ## Function wrappers
 
 > NOTE: 关于wrapper，参见`C-and-C++\Wrapper`
@@ -19,12 +23,10 @@
 
 ## Operator function objects
 
-> NOTE: 参见`STL-Functor`
+> NOTE: 参见`Operator-function-object`
 
 
 
 ## TODO
-
-
 
 oopscenities [C++11: std::function and std::bind](https://oopscenities.net/2012/02/24/c11-stdfunction-and-stdbind/)
