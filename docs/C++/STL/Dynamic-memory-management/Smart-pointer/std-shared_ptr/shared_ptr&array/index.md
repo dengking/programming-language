@@ -1,6 +1,18 @@
 # `std::shared_ptr` and array
 
-## 测试程序
+## custom deleter
+
+当使用`std::shared_ptr` to array的时候，需要custom deleter来释放array。
+
+### `array_deleter` function object
+
+
+
+参考:
+
+1、stackoverflow [shared_ptr to an array : should it be used?](https://stackoverflow.com/questions/13061979/shared-ptr-to-an-array-should-it-be-used)
+
+测试程序如下:
 
 ```C++
 #include <memory>
@@ -44,8 +56,7 @@ int main()
 
 ```
 
+### `std::default_delete`
 
+参见 cppreference [std::default_delete](https://en.cppreference.com/w/cpp/memory/default_delete)，其中给出了example。
 
-## 参考:
-
-1、stackoverflow [shared_ptr to an array : should it be used?](https://stackoverflow.com/questions/13061979/shared-ptr-to-an-array-should-it-be-used)
