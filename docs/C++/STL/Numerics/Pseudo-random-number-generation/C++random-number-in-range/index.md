@@ -223,3 +223,6 @@ int main()
 // g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -Werror
 ```
 
+
+
+### stackoverflow [Random number between 1 to 10 using C++](https://stackoverflow.com/questions/12580820/random-number-between-1-to-10-using-c)
