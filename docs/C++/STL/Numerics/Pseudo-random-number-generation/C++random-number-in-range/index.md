@@ -160,7 +160,7 @@ int main()
 
 ## `rand()%range + min`
 
-
+相比于上面的写法，这种写法非常简单易记。
 
 ### cnblogs [C++指定范围生成随机数](https://www.cnblogs.com/vathena/articles/4356646.html)
 
@@ -198,5 +198,28 @@ srand((unsigned)time(null));
 [low,up) #define Random (rand()%(up-low)) + low
 (low,up] #define Random (rand()%(up-low))+ low + 1
 [low,up] #define Random (rand()%(up-low+1)) + low
+```
+
+
+
+### java2blog [How to generate random number between 1 and 10 in C++](https://java2blog.com/random-number-between-1-and-10-cpp/)
+
+
+
+```C++
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+int main() 
+{   
+  srand(time(0));  // Initialize random number generator.
+ 
+  cout<<"Random numbers generated between 1 and 10:"<<endl;
+  for(int i=0;i<10;i++)
+      cout << (rand() % 10) + 1<<" ";  
+  return 0; 
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -Werror
 ```
 
