@@ -1,10 +1,6 @@
 # chromium LLVM
 
-chromium充分运用了LLVM toolchain，为此本章将LLVM的相关内容全部收录整理进来: 
-
-[Testing and infrastructure](https://sites.google.com/a/chromium.org/dev/developers/testing)
-
-
+chromium充分运用了LLVM toolchain，为此本章将LLVM的相关内容全部收录整理进来。
 
 ## [chromium docs](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/) # [Clang](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/#clang)
 
@@ -52,7 +48,7 @@ chromium充分运用了LLVM toolchain，为此本章将LLVM的相关内容全部
 
 [clangd.md](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/clangd.md)
 
-
+[Toolchain support](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/toolchain_support.md) 
 
 ### chromium clang
 
@@ -121,3 +117,6 @@ chromium充分运用了LLVM toolchain，为此本章将LLVM的相关内容全部
 github [chromium](https://github.com/chromium/chromium)/[tools](https://github.com/chromium/chromium/tree/main/tools)/[**clang**](https://github.com/chromium/chromium/tree/main/tools/clang)/
 
 github [chromium](https://github.com/chromium/chromium)/[tools](https://github.com/chromium/chromium/tree/main/tools)/[clang](https://github.com/chromium/chromium/tree/main/tools/clang)/[**plugins**](https://github.com/chromium/chromium/tree/main/tools/clang/plugins)/
+
+## [Testing and infrastructure](https://sites.google.com/a/chromium.org/dev/developers/testing)
+
