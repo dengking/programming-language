@@ -2,4 +2,5 @@ nav:
     - Introduction: index.md
     - LLVM: LLVM    
     - Coding-style: Coding-style
+    - depot_tools: depot_tools
     
