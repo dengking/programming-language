@@ -12,6 +12,8 @@ llvm提供了编写clang tool的library:
 
 1、LibFormat[¶](https://clang.llvm.org/docs/LibFormat.html#libformat)
 
+## docs [LibTooling](https://clang.llvm.org/docs/LibTooling.html)
+
 
 
 ## docs [Tutorial for building tools using LibTooling and LibASTMatchers](https://clang.llvm.org/docs/LibASTMatchersTutorial.html#tutorial-for-building-tools-using-libtooling-and-libastmatchers)
@@ -22,3 +24,4 @@ llvm提供了编写clang tool的library:
 
 
 
+## docs [How To Setup Clang Tooling For LLVM](https://clang.llvm.org/docs/HowToSetupToolingForLLVM.html#how-to-setup-clang-tooling-for-llvm)

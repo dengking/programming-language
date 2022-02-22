@@ -118,5 +118,19 @@ github [chromium](https://github.com/chromium/chromium)/[tools](https://github.c
 
 github [chromium](https://github.com/chromium/chromium)/[tools](https://github.com/chromium/chromium/tree/main/tools)/[clang](https://github.com/chromium/chromium/tree/main/tools/clang)/[**plugins**](https://github.com/chromium/chromium/tree/main/tools/clang/plugins)/
 
-## [Testing and infrastructure](https://sites.google.com/a/chromium.org/dev/developers/testing)
+### Scripts
+
+[chromium](https://github.com/chromium/chromium)/[tools](https://github.com/chromium/chromium/tree/main/tools)/[clang](https://github.com/chromium/chromium/tree/main/tools/clang)/[**scripts**](https://github.com/chromium/chromium/tree/main/tools/clang/scripts)/
+
+## 术语
+
+### clang roll
+
+官方文档 [Configurations supported by the toolchain team](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/toolchain_support.md): 
+
+> If a toolchain update (“clang roll”) broke you, here's how you can file a bug that we can act on the quickest
+
+## 其他素材
+
+[Testing and infrastructure](https://sites.google.com/a/chromium.org/dev/developers/testing)
 

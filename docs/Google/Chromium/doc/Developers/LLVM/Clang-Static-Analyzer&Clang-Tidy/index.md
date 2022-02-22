@@ -85,3 +85,42 @@ Chromium globally enables a subset of all of clang-tidy's checks (see `${chromiu
 > 一、chromium的clang-tidy配置文件:
 >
 > https://github.com/chromium/chromium/blob/main/.clang-tidy
+
+
+
+## How chromium use clang- tidy
+
+### [chromium](https://github.com/chromium/chromium)/[tools](https://github.com/chromium/chromium/tree/main/tools)/[clang](https://github.com/chromium/chromium/tree/main/tools/clang)/[scripts](https://github.com/chromium/chromium/tree/main/tools/clang/scripts)/[**clang_tidy_tool.py**](https://github.com/chromium/chromium/blob/main/tools/clang/scripts/clang_tidy_tool.py)
+
+> Automatically fetch, build, and run clang-tidy from source.
+>
+> This script seeks to automate the steps detailed in docs/clang_tidy.md.
+>
+> Example: the following command disables clang-tidy's default checks (`-*`) and enables the clang static analyzer checks.
+>
+> ```shell
+> tools/clang/scripts/clang_tidy_tool.py \\
+>        --checks='-*,clang-analyzer-*,-clang-analyzer-alpha*' \\
+>        --header-filter='.*' \\
+>        out/Release chrome
+> ```
+>
+> The same, but checks the changes only.
+>
+> ```shell
+> git diff -U5 | tools/clang/scripts/clang_tidy_tool.py \\
+> --diff \\
+> --checks='-*,clang-analyzer-*,-clang-analyzer-alpha*' \\
+> --header-filter='.*' \\
+> out/Release chrome
+> ```
+>
+> 
+
+其中调用的:
+
+1、run-clang-tidy.py
+
+2、clang-tidy-diff.py
+
+[llvm-project](https://github.com/llvm/llvm-project)/[clang-tools-extra](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra)/[clang-tidy](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy)/[**tool**](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy/tool)/
