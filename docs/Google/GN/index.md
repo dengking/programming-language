@@ -24,7 +24,9 @@ gn gen out/my_build
 gn args out/my_build
 ```
 
-
+> NOTE: 
+>
+> 会被保存到 `args.gn` 中
 
 ```sh
 gn args --list out/my_build
@@ -37,3 +39,8 @@ gn args --list out/my_build
 
 
 ## googlesource [How GN handles cross-compiling](https://chromium.googlesource.com/chromium/src/tools/gn/+/48062805e19b4697c5fbd926dc649c78b6aaa138/docs/cross_compiles.md)
+
+
+
+## googlesource [GN Reference](https://gn.googlesource.com/gn/+/master/docs/reference.md)
+
