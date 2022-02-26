@@ -119,8 +119,18 @@ Chromium globally enables a subset of all of clang-tidy's checks (see `${chromiu
 
 其中调用的:
 
+一、
+
 1、run-clang-tidy.py
 
 2、clang-tidy-diff.py
 
 [llvm-project](https://github.com/llvm/llvm-project)/[clang-tools-extra](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra)/[clang-tidy](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy)/[**tool**](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy/tool)/
+
+二、`generate_compdb.py`
+
+这是在同级目录定义的文件
+
+三、`build_clang_tools_extra.py`
+
+这是在同级目录定义的文件

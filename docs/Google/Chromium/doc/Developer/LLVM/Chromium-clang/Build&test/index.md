@@ -12,6 +12,12 @@ https://ci.chromium.org/p/chromium/g/chromium.clang/console
 
 四、结合 文档 和 程序来进行理解
 
+五、chromium是在install的时候，下载llvm toolchain的
+
+![](./chromium-download-llvm-on-install.png)
+
+
+
 ## chromium doc [Configurations supported by the toolchain team](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/toolchain_support.md)
 
 > NOTE: 
