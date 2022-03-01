@@ -4,6 +4,7 @@ nav:
     - LLVM-Core: LLVM-Core
     - Clang: Clang
     - compiler-rt: compiler-rt    
-    - Assembling-a-Complete-Toolchain: Assembling-a-Complete-Toolchain    
+    - Assembling-a-Complete-Toolchain: Assembling-a-Complete-Toolchain  
+    - LLD: LLD  
     - LLVM-python-binding: LLVM-python-binding
     
