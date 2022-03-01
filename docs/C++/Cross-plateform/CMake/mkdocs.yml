@@ -3,4 +3,5 @@ nav:
     - Reference: Reference
     - Guides: Guides
     - CMake-AddressSanitizer: CMake-AddressSanitizer
+    - CMake-toolchain: CMake-toolchain
     
