@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - GN: GN    
+    - CMake: CMake
+    - Ninja: Ninja
+    - Compilation-database: Compilation-database
+            
