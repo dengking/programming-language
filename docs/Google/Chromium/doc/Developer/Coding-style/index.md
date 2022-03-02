@@ -108,3 +108,4 @@ The `CHECK()` macro will cause an immediate crash if its condition is not met.
 >
 > 总结得非常好
 
+## doc [Modern C++ use in Chromium](https://chromium.googlesource.com/chromium/src/+/HEAD/styleguide/c++/c++-features.md)
