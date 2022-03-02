@@ -1,12 +1,10 @@
-# Fold 
+# Fold、reduce
 
 
 
-## infogalactic [Fold (higher-order function)](https://infogalactic.com/info/Fold_(higher-order_function))
+## wikipedia [Fold (higher-order function)](https://en.wikipedia.org/wiki/Fold_(higher-order_function))
 
-In [functional programming](https://infogalactic.com/info/Functional_programming), **fold** – also known variously as **reduce**, **accumulate**, **aggregate**, **compress**, or **inject** – refers to a family of [higher-order functions](https://infogalactic.com/info/Higher-order_function) that [analyze](https://infogalactic.com/info/Analysis) a [recursive](https://infogalactic.com/info/Recursive_data_type) data structure and through use of a given combining operation, recombine the results of [recursively](https://infogalactic.com/info/Recursion) processing its constituent parts, building up a return value. 
-
-Typically, a fold is presented with a combining [function](https://infogalactic.com/info/Subroutine), a top [node](https://infogalactic.com/info/Node_(computer_science)) of a [data structure](https://infogalactic.com/info/Data_structure), and possibly some default values to be used under certain conditions. The fold then proceeds to combine elements of the data structure's [hierarchy](https://infogalactic.com/info/Hierarchy), using the function in a systematic way.
+In [functional programming](https://en.wikipedia.org/wiki/Functional_programming), **fold** (also termed **reduce**, **accumulate**, **aggregate**, **compress**, or **inject**) refers to a family of [higher-order functions](https://en.wikipedia.org/wiki/Higher-order_function) that [analyze](https://en.wikipedia.org/wiki/Analysis) a [recursive](https://en.wikipedia.org/wiki/Recursive_data_type) data structure and through use of a given combining operation, recombine the results of [recursively](https://en.wikipedia.org/wiki/Recursion) processing its constituent parts, building up a return value. Typically, a fold is presented with a combining [function](https://en.wikipedia.org/wiki/Subroutine), a top [node](https://en.wikipedia.org/wiki/Node_(computer_science)) of a [data structure](https://en.wikipedia.org/wiki/Data_structure), and possibly some default values to be used under certain conditions. The fold then proceeds to combine elements of the data structure's [hierarchy](https://en.wikipedia.org/wiki/Hierarchy), using the function in a systematic way.
 
 ### Folds in various languages
 

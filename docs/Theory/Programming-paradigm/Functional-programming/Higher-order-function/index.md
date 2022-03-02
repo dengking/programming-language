@@ -2,12 +2,13 @@
 
 
 
-## infogalactic [Higher-order function](https://infogalactic.com/info/Higher-order_function)
+## wikipedia [Higher-order function](https://en.wikipedia.org/wiki/Higher-order_function)
 
 In [mathematics](https://infogalactic.com/info/Mathematics) and [computer science](https://infogalactic.com/info/Computer_science), a **higher-order function** (also **functional**, **functional form** or **functor**; not to be confused with the [functor](https://infogalactic.com/info/Functor) concept in [category theory](https://infogalactic.com/info/Category_theory)) is a [function](https://infogalactic.com/info/Function_(mathematics)) that does at least one of the following:
 
-- takes one or more functions as arguments,
-- returns a function as its result.
+1、takes one or more functions as arguments,
+
+2、returns a function as its result.
 
 All other functions are *first-order functions*. 
 
