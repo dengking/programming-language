@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - chromium-style-plugin: chromium-style-plugin
-    
+    - Rvalue-references-in-Chromium: Rvalue-references-in-Chromium
+        

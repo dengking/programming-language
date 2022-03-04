@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Virtual-function-table: Virtual-function-table    
+    - Virtual-table-vtable: Virtual-table-vtable    
     - RTTI: RTTI

@@ -89,6 +89,30 @@ As Scott Meyers pointed out, if you do have to add a destructor for whatever rea
 >
 > 1、一旦用户添加了destructor，则compiler就不再implicit define movable
 
+2、 docs [Chromium Style Checker Errors](https://www.chromium.org/developers/coding-style/chromium-style-checker-errors/)
+
+Usually a compiler would generate a move constructor for your class, making moving objects efficient. This is particularly true for STL containers such as std::map. However, specifying either a copy constructor or a destructor prevents the compiler from generating a move constructor. All in all, you should prefer specifying a move constructor instead of a copy constructor. In cases where your object is used as an rvalue, this will also prevent the error since the compiler will not generate a copy constructor:
+
+```c++
+// In the .h file:
+class ComplexMovableStuff
+{
+public:
+  ComplexMovableStuff();
+
+  ComplexMovableStuff(ComplexMovableStuff &&other);
+
+  ~ComplexMovableStuff();
+
+private:
+  /* complicated members */
+};
+
+// In the .cc file:
+ComplexMovableStuff::ComplexMovableStuff(ComplexMovableStuff &&other) = default;
+
+```
+
 
 
 ## draft: cppreference [The rule of three/five/zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
@@ -158,6 +182,8 @@ When a base class is intended for polymorphic use, its destructor may have to be
 
 ## draft: move disable copy
 
+
+
 ## TODO
 
 
@@ -172,4 +198,3 @@ stackoverflow [Conditions for automatic generation of default/copy/move ctor and
 
 stackoverflow [Why user-defined move-constructor disables the implicit copy-constructor?](https://stackoverflow.com/questions/11255027/why-user-defined-move-constructor-disables-the-implicit-copy-constructor)
 
-> NOTE: 
