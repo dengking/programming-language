@@ -1,3 +1,4 @@
 nav:
-    - Operator-associativity: Operator-associativity.md
-    - Operator-precedence: Operator-precedence.md
+    - Operator-associativity: Operator-associativity
+    - Operator-precedence: Operator-precedence
+    

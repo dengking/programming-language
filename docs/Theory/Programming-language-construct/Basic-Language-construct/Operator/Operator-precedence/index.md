@@ -1,4 +1,6 @@
-# [Order of operations](https://en.wikipedia.org/wiki/Order_of_operations)
+# operator precedence
+
+## wikipedia [Order of operations](https://en.wikipedia.org/wiki/Order_of_operations)
 
 In [mathematics](https://en.wikipedia.org/wiki/Mathematics) and [computer programming](https://en.wikipedia.org/wiki/Computer_programming), the **order of operations** (or **operator precedence**) is a collection of rules that reflect conventions about which procedures to perform first in order to evaluate a given [mathematical expression](https://en.wikipedia.org/wiki/Expression_(mathematics)).
 
