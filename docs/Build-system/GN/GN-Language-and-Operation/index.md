@@ -2,9 +2,33 @@
 
 > NOTE:
 >
-> 补充文档:
+> 一、补充文档:
 >
 > https://blog.csdn.net/u014786330/article/details/84562388
+>
+> 二、gn 和 gni 文件
+>
+> 关于gni文件，在下面章节进行了介绍：
+>
+> 1、 [GN Language and Operation # Templates](https://chromium.googlesource.com/chromium/src/tools/gn/+/48062805e19b4697c5fbd926dc649c78b6aaa138/docs/language.md#Templates) 
+>
+> > Typically your template definition would go in a `.gni` file and users would import that file to see the template definition:
+> >
+> > ```gn
+> > import("//tools/idl_compiler.gni")
+> > 
+> > idl("my_interfaces") {
+> >   sources = [ "a.idl", "b.idl" ]
+> > }
+> > ```
+>
+> 2、[GN Language and Operation # Other features # Imports](https://chromium.googlesource.com/chromium/src/tools/gn/+/48062805e19b4697c5fbd926dc649c78b6aaa138/docs/language.md#imports)
+>
+> > You can import `.gni` files into the current scope with the `import` function. This is *not* an include. The imported file is executed independently and the resulting scope is copied into the current file. This allows the results of the import to be cached, and also prevents some of the more “creative” uses of includes.
+> >
+> > Typically, a `.gni` would define build arguments and templates. See `gn help import` for more.
+>
+> 
 
 ## Introduction
 
