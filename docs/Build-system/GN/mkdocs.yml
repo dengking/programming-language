@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - Using-GN-build: Using-GN-build
     - GN-Language-and-Operation: GN-Language-and-Operation
         
