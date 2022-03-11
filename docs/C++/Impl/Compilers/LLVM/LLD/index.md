@@ -2,7 +2,13 @@
 
 ## LLD - The LLVM Linker[¶](https://lld.llvm.org/#lld-the-llvm-linker)
 
+### Using LLD[¶](https://lld.llvm.org/#using-lld)
 
+If you don’t want to change the system setting, you can use clang’s `-fuse-ld` option. In this way, you want to set `-fuse-ld=lld` to LDFLAGS when building your programs.
+
+> NOTE:
+>
+> chromium就是这样用的
 
 ## source code
 
