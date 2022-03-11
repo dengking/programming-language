@@ -47,7 +47,7 @@
 
 
 
-## 如何指定使用什么compiler？
+## compiler
 
 在官方文档 [Clang](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/clang.md) 中关于 "Using a custom clang binary" 有如下说明
 
@@ -208,7 +208,9 @@ autoninja -C out/Default chrome -v > output
 
 docs llvm-ar - LLVM archiver[¶](https://llvm.org/docs/CommandGuide/llvm-ar.html#llvm-ar-llvm-archiver)
 
+## linker
 
+关于chromium使用的linker，参见 `Google/Chromium/doc/Developer/LLVM` 章节。
 
 ## 复用chromium llvm toolchain
 

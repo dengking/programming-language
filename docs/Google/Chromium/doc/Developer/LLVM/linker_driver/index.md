@@ -120,3 +120,37 @@ The command passed to the `linker_driver.py` should be the **compiler driver inv
 ../../third_party/llvm-build/Release+Asserts/bin/clang++ -shared  -Wl,-install_name,@rpath/"libc++.dylib" -fuse-ld=lld -Wl,-fatal_warnings -Wl,--icf=all -Wl,--color-diagnostics -arch arm64 -no-canonical-prefixes -Wl,-dead_strip -nostdlib++ -isysroot ../../../../../../Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.11.0 -Wl,-ObjC -Wl,-rpath,@loader_path/. -Wl,-rpath,@loader_path/../../.. -Werror -Wl,-U,_sanitizer_options_link_helper -o "./libc++.dylib" "@./libc++.dylib.rsp"
 ```
 
+
+
+## 补充知识
+
+理解上述command是需要一定知识的：
+
+一、`"@./libc++.dylib.rsp"`
+
+Google ninja rsp file，下面是有价值的内容：
+
+1、gitlab.kitware [ninja: please don’t remove response file](https://gitlab.kitware.com/cmake/cmake/-/issues/20277)
+
+从中知道如下内容：
+
+a、 link line response file 
+
+b、
+
+> This is a behavior of `ninja` itself, [implemented here](https://github.com/ninja-build/ninja/blob/v1.10.0/src/build.cc#L1022-L1025).  One can use `ninja -d keeprsp` to keep it around for debugging.
+
+2、doc [The Ninja build system](https://ninja-build.org/manual.html) # `rspfile, rspfile_content`
+
+3、从观察来看，默认情况下，ninja是会将该文件删除的，从我的探索来看，这个文件中会包含所有的用于生成最终产物的 `.o` 文件
+
+4、scivision [Keep Windows .rsp files with Ninja](https://www.scivision.dev/ninja-windows-keep-rsp-files/)
+
+二、`@rpath`
+
+1、krzyzanowskim [@rpath what?](https://blog.krzyzanowskim.com/2018/12/05/rpath-what/)
+
+2、wikipedia [rpath](https://en.wikipedia.org/wiki/Rpath)
+
+3、stackoverflow [how to get Xcode to set LC_RPATH (so that @rpath loads will work)?](https://stackoverflow.com/questions/68596832/how-to-get-xcode-to-set-lc-rpath-so-that-rpath-loads-will-work)
+

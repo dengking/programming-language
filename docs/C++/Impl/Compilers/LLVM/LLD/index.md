@@ -8,7 +8,9 @@ If you don’t want to change the system setting, you can use clang’s `-fuse-l
 
 > NOTE:
 >
-> chromium就是这样用的
+> chromium就是这样用的，关于此，可以参见对应章节。
+>
+> 
 
 ## source code
 
