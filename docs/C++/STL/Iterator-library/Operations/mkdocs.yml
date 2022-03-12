@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - Iterator-to-pointer: Iterator-to-pointer
+    - Iterator-to-index: Iterator-to-index
