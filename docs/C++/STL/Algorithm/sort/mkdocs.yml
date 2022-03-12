@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - std-sort: std-sort
+    - std-is_sorted: std-is_sorted

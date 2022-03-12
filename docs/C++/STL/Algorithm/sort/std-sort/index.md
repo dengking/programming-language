@@ -1,4 +1,4 @@
-# std::sort
+# `std::sort`
 
 ## geeksforgeeks [Sorting a vector in C++](https://www.geeksforgeeks.org/sorting-a-vector-in-c/)
 
@@ -100,6 +100,12 @@ int main()
 
 ## cppreference [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort)
 
+Sorts the elements in the range `[first, last)` in non-descending order. The order of equal elements is not guaranteed to be preserved.
+
+> NOTE:
+>
+> 默认是升序
+
 ### Example
 
 ```C++
@@ -149,5 +155,3 @@ int main()
 ```
 
 
-
-## cppreference [std::is_sorted](https://en.cppreference.com/w/cpp/algorithm/is_sorted)

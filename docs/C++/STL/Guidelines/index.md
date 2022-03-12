@@ -37,3 +37,17 @@
 ## Functional programming: Higher-order function
 
 STL algorithm是典型的使用 FP的Higher-order function。
+
+
+
+## less operator
+
+STL默认使用的是 < ，比如：
+
+1、std::sort 
+
+默认使用的是 <，因此是升序
+
+2、`std::priority_queue`
+
+默认使用的是<，因此是max heap
