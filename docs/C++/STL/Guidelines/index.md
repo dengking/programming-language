@@ -44,10 +44,12 @@ STL algorithm是典型的使用 FP的Higher-order function。
 
 STL默认使用的是 < ，比如：
 
-1、std::sort 
+1、`std::sort` 
 
 默认使用的是 <，因此是升序
 
 2、`std::priority_queue`
 
 默认使用的是<，因此是max heap
+
+3、`std::map`默认是`std::less`
