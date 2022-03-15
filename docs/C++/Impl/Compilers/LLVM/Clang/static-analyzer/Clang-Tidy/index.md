@@ -2,6 +2,8 @@
 
 ## docs [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/)
 
+docs [Clang-Tidy Checks](https://clang.llvm.org/extra/clang-tidy/checks/list.html)
+
 ### [Using clang-tidy](https://clang.llvm.org/extra/clang-tidy/#id2)
 
 For example,
@@ -36,8 +38,6 @@ The `-fix` flag instructs **clang-tidy** to fix found errors if supported by cor
 >
 > 可以看到它时通过注解的方式来进行surpassing的
 
-## docs [Clang-Tidy Checks](https://clang.llvm.org/extra/clang-tidy/checks/list.html)
-
 
 
 ## `.clang-tidy` file
@@ -58,7 +58,9 @@ clang-tidy会去source base dir下找`.clang-tidy` file。
 
 [llvm-project](https://github.com/llvm/llvm-project)/[clang-tools-extra](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra)/[**clang-tidy**](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy)/
 
-### tool
+## tool
+
+https://clang.llvm.org/extra/doxygen/run-clang-tidy_8py_source.html
 
 [llvm-project](https://github.com/llvm/llvm-project)/[clang-tools-extra](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra)/[clang-tidy](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy)/[**tool**](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clang-tidy/tool)/
 
@@ -68,7 +70,11 @@ clang-tidy会去source base dir下找`.clang-tidy` file。
 
 
 
+### [Clang-Tidy3.8# Running clang-tidy on LLVM](https://releases.llvm.org/3.8.0/tools/clang/tools/extra/docs/clang-tidy/index.html#running-clang-tidy-on-llvm)
 
+> NOTE:
+>
+> 其中介绍了 [run-clang-tidy.py](https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py) 的使用
 
 ## clang-apply-replacements
 
