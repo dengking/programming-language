@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    
+    - tricium_clang_tidy: tricium_clang_tidy
     

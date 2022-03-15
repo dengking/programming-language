@@ -75,6 +75,8 @@ Clang-tidy automatically runs on any CL that Chromium committers upload to Gerri
 > > And the code review system there are using: https://code.google.com/p/rietveld/
 >
 > 三、上面介绍了使用clang-tidy的方式
+>
+> 四、它使用的是哪个script？是[tricium_clang_tidy.py](https://chromium.googlesource.com/chromium/tools/build/+/refs/heads/main/recipes/recipe_modules/tricium_clang_tidy/resources/tricium_clang_tidy.py) 还是 
 
 ### Enabled checks
 
@@ -85,6 +87,113 @@ Chromium globally enables a subset of all of clang-tidy's checks (see `${chromiu
 > 一、chromium的clang-tidy配置文件:
 >
 > https://github.com/chromium/chromium/blob/main/.clang-tidy
+>
+> 二、`tricium_clang_tidy.py` 的源代码路径：
+>
+> https://chromium.googlesource.com/chromium/tools/build/+/refs/heads/main/recipes/recipe_modules/tricium_clang_tidy/resources/tricium_clang_tidy.py
+
+To run clang-tidy across all of Chromium, you‘ll need a checkout of Chromium’s [build/](https://chromium.googlesource.com/chromium/tools/build) repository. Once you have that and a Chromium `out/` dir with an `args.gn`, running clang-tidy across all of Chromium is a single command:
+
+```shell
+$ cd ${chromium}/src
+$ ${chromium_build}/recipes/recipe_modules/tricium_clang_tidy/resources/tricium_clang_tidy.py \
+    --base_path $PWD \
+    --out_dir out/Linux \
+    --findings_file all_findings.json \
+    --clang_tidy_binary $PWD/third_party/llvm-build/Release+Asserts/bin/clang-tidy \
+    --all
+```
+
+To only run clang-tidy against certain files, replace the `--all` parameter with the individual file paths.
+
+All clang-tidy checks are run on Linux builds of Chromium, so please set up your `args.gn` to build Linux.
+
+`all_findings.json` is where all of clang-tidy's findings will be dumped. The format of this file is detailed in `tricium_clang_tidy.py`.
+
+**Note** that the above command will use Chromium‘s top-level `.clang-tidy` file (or `.clang-tidy` files scattered throughout `third_party/`, depending on the files we lint. In order to test a *new* check, you’ll have to add it to Chromium's top-level `.clang-tidy` file.
+
+
+
+### But I want to run it locally
+
+**Note** that the local flows with clang-tidy are experimental, and require an LLVM checkout. Tricium is happy to run on WIP CLs, and we strongly encourage its use.
+
+> NOTE:
+>
+> 一、"WIP"的含义是："work in progress"，参见：
+>
+> stackoverflow [GitHub: What is a "wip" branch?](https://stackoverflow.com/questions/15763059/github-what-is-a-wip-branch)
+
+That said, assuming you have the LLVM sources available, you'll need to bring your own `clang-apply-replacements` binary if you want to use the `-fix` option noted below.
+
+4、Run clang-tidy.
+
+```
+<PATH_TO_LLVM_SRC>/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py \
+    -p . \# Set the root project directory, where compile_commands.json is.
+    # Set the clang-tidy binary path, if it's not in your $PATH.
+    -clang-tidy-binary <PATH_TO_LLVM_BUILD>/bin/clang-tidy \
+    # Set the clang-apply-replacements binary path, if it's not in your $PATH
+    # and you are using the `fix` behavior of clang-tidy.
+    -clang-apply-replacements-binary \
+        <PATH_TO_LLVM_BUILD>/bin/clang-apply-replacements \
+    # The checks to employ in the build. Use `-*,...` to omit default checks.
+    -checks=<CHECKS> \
+    -header-filter=<FILTER> \# Optional, limit results to only certain files.
+    -fix \# Optional, used if you want to have clang-tidy auto-fix errors.
+    'chrome/browser/.*' # A regex of the files you want to check.
+
+Copy-Paste Friendly (though you'll still need to stub in the variables):
+<PATH_TO_LLVM_SRC>/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py \
+    -p . \
+    -clang-tidy-binary <PATH_TO_LLVM_BUILD>/bin/clang-tidy \
+    -clang-apply-replacements-binary \
+        <PATH_TO_LLVM_BUILD>/bin/clang-apply-replacements \
+    -checks=<CHECKS> \
+    -header-filter=<FILTER> \
+    -fix \
+    'chrome/browser/.*'
+```
+
+
+
+## github [chromium](https://github.com/chromium/chromium)/[**.clang-tidy**](https://github.com/chromium/chromium/blob/main/.clang-tidy)
+
+
+
+## monorail-prod.appspot [Issue 1153919: Tricium clang-tidy for Chromium doesn't get complete coverage](https://monorail-prod.appspot.com/p/chromium/issues/detail?id=1153919)
+
+> NOTE:
+>
+> 一、这个讨论给我的启发是：对于跨平台项目，在使用Tricium clang-tidy的时候，需要考虑如何保证各个平台的代码都被检查到
+>
+> 二、原文中提及了 CQ 的概念，它的含义是 continuous quality，参见如下文章：
+>
+> techtarget [continuous quality](https://www.techtarget.com/searchsoftwarequality/definition/continuous-quality)
+>
+> 这篇文章非常好，其中提及了CQI的approach，就包括 [Static analysis](https://whatis.techtarget.com/definition/static-analysis)
+>
+> slideshare [Continous Delivery with CQ](https://www.slideshare.net/olimination/continous-delivery-with-cq)
+>
+> 三、这篇文章给我们的一个启发是：chromium将clang-tidy放到了CQ中
+
+
+
+## example
+
+https://chromium-review.googlesource.com/c/chromium/src/+/2893622
+
+https://groups.google.com/a/chromium.org/g/chromium-dev/c/MC3ubeMHFB8
+
+bugs.chromium [Issue 687243: Clang Static Analyzer for Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=687243)
+
+bugs.chromium [Issue 409318: Clang should detect argument order of evaluation issues with smart pointers and std::move](https://bugs.chromium.org/p/chromium/issues/detail?id=409318)
+
+groups.google [Proposing bugprone-use-after-move Clang-tidy check](https://groups.google.com/a/chromium.org/g/cxx/c/IDD4f6Pmnxc)
+
+
+
+## groups.google [Adding more default clang-tidy lints to Chromium](https://groups.google.com/a/chromium.org/g/cxx/c/iZ6-Y9ZhC3Q/m/g-8HzqmbAAAJ)
 
 
 

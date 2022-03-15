@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - doc: doc
+    - Chrome-infrastructure: Chrome-infrastructure
     - code: code
     - Security&safety: Security&safety
-    
