@@ -4,5 +4,5 @@
 
 > NOTE:
 >
-> 这个文件没有其他的dependency
+> 这个文件唯一的外部dependency是yaml
 
