@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - std-max_element-std-min_element: std-max_element-std-min_element
+    

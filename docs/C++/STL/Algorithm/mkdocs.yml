@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - std-copy: std-copy
     - std-transform: std-transform
+    - max-min: max-min
     - std-max_element-min_element-minmax_element: std-max_element-min_element-minmax_element
     - Sum: Sum
     - binary-search: binary-search
