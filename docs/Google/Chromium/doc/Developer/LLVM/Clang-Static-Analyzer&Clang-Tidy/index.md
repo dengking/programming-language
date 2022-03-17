@@ -167,7 +167,13 @@ Copy-Paste Friendly (though you'll still need to stub in the variables):
 >
 > 一、这个讨论给我的启发是：对于跨平台项目，在使用Tricium clang-tidy的时候，需要考虑如何保证各个平台的代码都被检查到
 >
-> 二、原文中提及了 CQ 的概念，它的含义是 continuous quality，参见如下文章：
+> 二、原文中提及了 CQ 的概念，它的含义是 "Commit Queue"，关于此，可以参见：
+>
+> 1、[Commit Queue (CQ)](https://chromium.googlesource.com/infra/infra/+/refs/heads/main/doc/users/services/commit_queue/index.md)
+>
+> 2、[CQ](https://chromium.googlesource.com/chromium/src/+/master/docs/infra/cq.md)
+>
+> continuous quality，参见如下文章：
 >
 > techtarget [continuous quality](https://www.techtarget.com/searchsoftwarequality/definition/continuous-quality)
 >

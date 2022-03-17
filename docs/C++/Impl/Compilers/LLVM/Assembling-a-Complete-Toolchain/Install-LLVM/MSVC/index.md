@@ -2,7 +2,7 @@
 
 
 
-## `clang-cl.exe`
+## compiler driver: `clang-cl.exe`
 
 素材:
 

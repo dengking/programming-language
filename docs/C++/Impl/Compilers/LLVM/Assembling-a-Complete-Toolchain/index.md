@@ -2,7 +2,21 @@
 
 clang仅仅是一个front end，要想完全替代gcc还需要结合本文的内容。
 
-## doc [Assembling a Complete Toolchain](https://clang.llvm.org/docs/Toolchain.html)
+
+
+## compiler driver
+
+下面是一些素材：
+
+1、doc [Assembling a Complete Toolchain](https://clang.llvm.org/docs/Toolchain.html) 
+
+2、[clang-cl What it is, how it works, and how to use it](https://llvm.org/devmtg/2014-04/PDFs/Talks/clang-cl.pdf)
+
+3、[cmake-toolchains(7)](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#id7)[¶](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cmake-toolchains-7)
+
+
+
+## doc [Assembling a Complete Toolchain](https://clang.llvm.org/docs/Toolchain.html) 
 
 ### [Introduction](https://clang.llvm.org/docs/Toolchain.html#id8)[¶](https://clang.llvm.org/docs/Toolchain.html#introduction)
 
@@ -72,5 +86,4 @@ A number of different runtime libraries are required to provide different layers
 #### [C++ ABI library](https://clang.llvm.org/docs/Toolchain.html#id20)[¶](https://clang.llvm.org/docs/Toolchain.html#c-abi-library)
 
 #### [C++ standard library](https://clang.llvm.org/docs/Toolchain.html#id21)[¶](https://clang.llvm.org/docs/Toolchain.html#id6)
-
 

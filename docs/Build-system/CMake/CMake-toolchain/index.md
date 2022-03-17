@@ -1,5 +1,7 @@
 # CMake toolchain
 
+理想的写法应该是如chromium那样，定义专门的toolchain file：
+
 
 
 ## 使用chromium clang来编译
@@ -21,6 +23,18 @@ set(CMAKE_C_COMPILER "/Users/dengkai01/chromium/src/third_party/llvm-build/Relea
 ```
 export CC=/Users/dengkai01/chromium/src/third_party/llvm-build/Release+Asserts/bin/clang export CXX=/Users/dengkai01/chromium/src/third_party/llvm-build/Release+Asserts/bin/clang++
 ```
+
+## docs [cmake-toolchains(7)](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#id7)[¶](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cmake-toolchains-7)
+
+### [Variables and Properties](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#id10)[¶](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#variables-and-properties)
+
+As the linker is invoked by the compiler driver, CMake needs a way to determine which compiler to use to invoke the linker. This is calculated by the [`LANGUAGE`](https://cmake.org/cmake/help/latest/prop_sf/LANGUAGE.html#prop_sf:LANGUAGE) of source files in the target, and in the case of static libraries, the language of the dependent libraries. The choice CMake makes may be overridden with the [`LINKER_LANGUAGE`](https://cmake.org/cmake/help/latest/prop_tgt/LINKER_LANGUAGE.html#prop_tgt:LINKER_LANGUAGE) target property.
+
+### [Cross Compiling using Clang](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#id15)[¶](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-using-clang)
+
+Similarly, some compilers do not ship their own supplementary utilities such as linkers, but provide a way to specify the location of the external toolchain which will be used by the compiler driver. The [`CMAKE_<LANG>_COMPILER_EXTERNAL_TOOLCHAIN`](https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER_EXTERNAL_TOOLCHAIN.html#variable:CMAKE__COMPILER_EXTERNAL_TOOLCHAIN) variable can be set in a toolchain file to pass the path to the compiler driver.
+
+
 
 ## CMake toolchain file
 

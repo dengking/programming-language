@@ -90,6 +90,14 @@ ninja: build stopped: subcommand failed.
 
 显然，通过上述过程就知道了它使用的linker与前面的猜测是一致的。
 
+
+
+
+
+## TOC file
+
+[*.so.TOC files](https://groups.google.com/a/chromium.org/g/chromium-discuss/c/vBMQzOo74rY)
+
 ## TODO
 
 思考：什么地方将它挂载到了build graph上？
