@@ -42,6 +42,10 @@ Similarly, some compilers do not ship their own supplementary utilities such as 
 
 Path to toolchain file supplied to [`cmake(1)`](https://cmake.org/cmake/help/latest/manual/cmake.1.html#manual:cmake(1)).
 
+### 其他素材
+
+github [SX-Aurora](https://github.com/SX-Aurora)/**[CMake-toolchain-file](https://github.com/SX-Aurora/CMake-toolchain-file)**
+
 
 
 ### stackoverflow [CMake: specifying build toolchain](https://stackoverflow.com/questions/5098360/cmake-specifying-build-toolchain)
@@ -60,7 +64,6 @@ cmake /path/to/src -DCMAKE_TOOLCHAIN_FILE=/path/to/toolchain/foo-bar-baz.cmake
 
 
 
+## linker
 
-
-### github [SX-Aurora](https://github.com/SX-Aurora)/**[CMake-toolchain-file](https://github.com/SX-Aurora/CMake-toolchain-file)**
-
+[[LLVMdev] How to change the linker of clang](https://groups.google.com/g/llvm-dev/c/gFVH78ZpCX0)
