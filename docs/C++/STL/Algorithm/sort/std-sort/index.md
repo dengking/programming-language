@@ -154,4 +154,37 @@ int main()
 
 ```
 
+## `std::sort` array
+
+### stackoverflow [How to use std::sort to sort an array in C++](https://stackoverflow.com/questions/5897319/how-to-use-stdsort-to-sort-an-array-in-c)
+
+```C++
+#include <algorithm>
+
+int main(){
+  int v[2000];
+  std::sort(std::begin(v), std::end(v));
+}
+```
+
+
+
+### example
+
+```C++
+#include <algorithm>
+#include <functional>
+#include <array>
+#include <iostream>
+#include <string_view>
+ 
+int main()
+{
+   int s[] = {5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
+ 
+   std::sort(s, s+10);
+   for(auto&& i:s)
+   std::cout<<i<<std::endl;
+}
+```
 
