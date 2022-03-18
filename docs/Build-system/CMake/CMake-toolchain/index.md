@@ -66,4 +66,6 @@ cmake /path/to/src -DCMAKE_TOOLCHAIN_FILE=/path/to/toolchain/foo-bar-baz.cmake
 
 ## linker
 
-[[LLVMdev] How to change the linker of clang](https://groups.google.com/g/llvm-dev/c/gFVH78ZpCX0)
+groups.google [[LLVMdev] How to change the linker of clang](https://groups.google.com/g/llvm-dev/c/gFVH78ZpCX0)
+
+stackoverflow [how to specify alternate linker command when linking with 'cc'](https://stackoverflow.com/questions/40470931/how-to-specify-alternate-linker-command-when-linking-with-cc)
