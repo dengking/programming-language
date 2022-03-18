@@ -97,3 +97,10 @@ venv.bak/
 # mypy
 .mypy_cache/
 docs/C-family-language/C++/Library/Boost/boost_1_73_0.tar.gz
+.cmake
+CMakeFiles
+*.cmake
+docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/build/hello_binary
+*.dylib
+*.cmake
+docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/build/CMakeFiles/Makefile.cmake
