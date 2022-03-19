@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/build",
+  "command": "/Users/dengkai01/chromium/src/third_party/llvm-build/Release+Asserts/bin/clang++ -Dhello_library_EXPORTS -I/Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/include  -fuse-ld=lld -v -g -arch arm64 -isysroot /Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -o CMakeFiles/hello_library.dir/src/Hello.cpp.o -c /Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/src/Hello.cpp",
+  "file": "/Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/src/Hello.cpp"
+},
+{
+  "directory": "/Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/build",
+  "command": "/Users/dengkai01/chromium/src/third_party/llvm-build/Release+Asserts/bin/clang++ -I/Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/include  -fuse-ld=lld -v -g -arch arm64 -isysroot /Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -o CMakeFiles/hello_binary.dir/src/main.cpp.o -c /Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/src/main.cpp",
+  "file": "/Users/dengkai01/github/programming-language/docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/src/main.cpp"
+}
+]

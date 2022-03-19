@@ -83,6 +83,10 @@ aligned = (offset + (align - 1)) & ~(align - 1)
         = (offset + (align - 1)) & -align
 ```
 
+> NOTE:
+>
+> 上述公式其实就是前面的公式的应用。
+
 ## Typical alignment of C structs on x86
 
 [Data structure](https://en.wikipedia.org/wiki/Data_structure) members are stored sequentially in memory so that, in the structure below, the member `Data1` will always precede `Data2`; and `Data2` will always precede `Data3`:
