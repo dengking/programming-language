@@ -5,6 +5,7 @@ nav:
     - Clang: Clang
     - compiler-rt: compiler-rt    
     - Assembling-a-Complete-Toolchain: Assembling-a-Complete-Toolchain  
-    - LLD: LLD  
+    - Linker-LLD: Linker-LLD
+    - Link-Time-Optimization: Link-Time-Optimization  
     - LLVM-python-binding: LLVM-python-binding
     
