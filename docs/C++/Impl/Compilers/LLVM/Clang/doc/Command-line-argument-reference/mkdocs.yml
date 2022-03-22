@@ -1,2 +1,5 @@
 nav:
     - Introduction: index.md
+    - delete-null-pointer-checks: delete-null-pointer-checks
+    - stack-protector: stack-protector
+    
