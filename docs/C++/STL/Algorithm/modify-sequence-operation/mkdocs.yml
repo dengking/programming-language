@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - random: random
+    - std-copy: std-copy
+    - std-transform: std-transform
+    

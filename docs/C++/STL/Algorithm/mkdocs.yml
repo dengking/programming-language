@@ -1,11 +1,8 @@
 nav:
     - Introduction: index.md
-    - std-copy: std-copy
-    - std-transform: std-transform
+    - modify-sequence-operation: modify-sequence-operation
     - max-min: max-min
-    - std-max_element-min_element-minmax_element: std-max_element-min_element-minmax_element
-    - Sum: Sum
     - binary-search: binary-search
-    - C++17-std-sample: C++17-std-sample
     - sort: sort
+    - numeric-operation: numeric-operation
     
