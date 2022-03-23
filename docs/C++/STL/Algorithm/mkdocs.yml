@@ -5,4 +5,6 @@ nav:
     - binary-search: binary-search
     - sort: sort
     - numeric-operation: numeric-operation
+    - permutation: permutation
+    - partition: partition
     
