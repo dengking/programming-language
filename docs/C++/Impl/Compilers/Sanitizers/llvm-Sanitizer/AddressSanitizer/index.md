@@ -2,7 +2,13 @@
 
 > NOTE: 
 >
-> 能够检查出，大多数的memory error
+> 一、这篇文章中介绍的 `ASAN_OPTIONS`，在github [AddressSanitizerFlags](https://github.com/google/sanitizers/wiki/AddressSanitizerFlags) 中，有着更好的描述，它属于 Run-time flags 范畴，下面是简单的介绍：
+>
+> > Most run-time flags are passed to [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer) via `ASAN_OPTIONS` environment variable like this:
+> >
+> > ```shell
+> > ASAN_OPTIONS=verbosity=1:malloc_context_size=20 ./a.out
+> > ```
 >
 > 
 
@@ -69,3 +75,24 @@ AddressSanitizer exits on the first detected error. This is by design:
 1、Fixing bugs becomes unavoidable. AddressSanitizer does not produce false alarms. Once a memory corruption occurs, the program is in an inconsistent state, which could lead to confusing results and potentially misleading subsequent reports.
 
 ## [Symbolizing the Reports](https://clang.llvm.org/docs/AddressSanitizer.html#id4)
+
+> NOTE:
+>
+> 目前还这一段还没有读懂
+
+## [Additional Check](https://clang.llvm.org/docs/AddressSanitizer.html#id5)
+
+### [Initialization order checking](https://clang.llvm.org/docs/AddressSanitizer.html#id6)
+
+> NOTE:
+>
+> 这是典型的static initialization order fiasco
+
+Note that this option is not supported on macOS.
+
+### [Stack Use After Return (UAR)](https://clang.llvm.org/docs/AddressSanitizer.html#id7)
+
+
+
+### [Memory leak detection](https://clang.llvm.org/docs/AddressSanitizer.html#id8)
+
