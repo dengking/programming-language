@@ -5,4 +5,5 @@ nav:
     - gcc-Sanitizer: gcc-Sanitizer
     - MSVC-sanitizer: MSVC-sanitizer
     - Sanitizer-shared-library: Sanitizer-shared-library
-    
+    - CMake-Sanitizer: CMake-Sanitizer
+        

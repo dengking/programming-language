@@ -2,7 +2,6 @@ nav:
     - Introduction: index.md
     - Reference: Reference
     - Guides: Guides
-    - CMake-AddressSanitizer: CMake-AddressSanitizer
     - CMake-toolchain: CMake-toolchain
     - CMake-linker: CMake-linker
     - CMake-flags: CMake-flags
