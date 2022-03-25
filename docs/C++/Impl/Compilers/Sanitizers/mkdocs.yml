@@ -6,4 +6,6 @@ nav:
     - MSVC-sanitizer: MSVC-sanitizer
     - Sanitizer-shared-library: Sanitizer-shared-library
     - CMake-Sanitizer: CMake-Sanitizer
-        
+    - AddressSanitizer: AddressSanitizer
+    - DataFlow-Sanitizer: DataFlow-Sanitizer
+    

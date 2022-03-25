@@ -123,3 +123,11 @@ There are only 9 different values for any aligned 8 bytes of the application mem
 2、All 8 bytes in qword are poisoned (i.e. not addressable). The shadow value is negative.
 
 3、First `k` bytes are unpoisoned, the rest `8-k` are poisoned. The shadow value is `k`. This is guaranteed by the fact that `malloc` returns 8-byte aligned chunks of memory. The only case where different bytes of an aligned qword have different state is the tail of a malloc-ed region. For example, if we call `malloc(13)`, we will have one full unpoisoned qword and one qword where 5 first bytes are unpoisoned.
+
+## 素材
+
+Google "how addresssanitizer works"
+
+1、https://www.bynav.com/en/resource/bywork/healthy-work/393.html
+
+其中介绍了red zone

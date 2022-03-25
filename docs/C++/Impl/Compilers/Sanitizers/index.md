@@ -21,3 +21,10 @@
 ## Expert
 
 [Konstantin Serebryany](https://research.google/people/KonstantinSerebryany/)
+
+
+
+## 素材
+
+https://developers.redhat.com/blog/2021/05/05/memory-error-checking-in-c-and-c-comparing-sanitizers-and-valgrind
+

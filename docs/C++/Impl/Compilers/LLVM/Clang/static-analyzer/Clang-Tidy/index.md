@@ -79,3 +79,9 @@ https://clang.llvm.org/extra/doxygen/run-clang-tidy_8py_source.html
 ## clang-apply-replacements
 
 https://lists.llvm.org/pipermail/cfe-users/2019-April/001505.html
+
+
+
+## 素材
+
+https://devblogs.microsoft.com/cppblog/exploring-clang-tooling-using-build-tools-with-clang-tidy/
