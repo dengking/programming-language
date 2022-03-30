@@ -1,6 +1,12 @@
 # diary yunxin rtc windows plugin
 
-按照在docs [Developing packages & plugins](https://docs.flutter.dev/development/packages-and-plugins/developing-packages) 中的介绍，执行如下命令：
+按照在 docs [Developing packages & plugins](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)  中的介绍，执行如下命令：
+
+```shell
+flutter create --template=plugin --platforms=windows . --org com.netease.nertcflutter
+```
+
+命令执行过程的记录：
 
 ```shell
 PS D:\NetEase\yunxin-sdk-flutter\packages\nertc_core> flutter create --template=plugin --platforms=windows . --org com.netease.nertcflutter
