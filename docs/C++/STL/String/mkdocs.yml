@@ -2,7 +2,6 @@ nav:
     - Introduction: index.md
     - Char: Char    
     - C-string: C-string
-    - C++string: C++string
-
+    - std-string: std-string
     - String-operation: String-operation
     
