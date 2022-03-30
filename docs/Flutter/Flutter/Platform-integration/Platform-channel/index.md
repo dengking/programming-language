@@ -9,6 +9,8 @@
 > 2、serialization and deserialization
 >
 > 3、UI  client、platform host
+>
+> 4、它是以plugin的方式提供的
 
 ## Architectural overview: platform channels
 
