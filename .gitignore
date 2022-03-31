@@ -28,6 +28,7 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+.vscode
 
 # Installer logs
 pip-log.txt
@@ -104,3 +105,4 @@ docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared
 *.dylib
 *.cmake
 docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/build/CMakeFiles/Makefile.cmake
+build

@@ -40,3 +40,8 @@
 
 
 
+
+
+## `class MethodCall`
+
+[**method_call.h**](https://github.com/flutter/engine/blob/main/shell/platform/common/client_wrapper/include/flutter/method_call.h)
