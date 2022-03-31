@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
     - encodable_value: encodable_value
-    
+    - binary_messenger: binary_messenger
