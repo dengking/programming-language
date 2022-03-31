@@ -140,3 +140,11 @@ NDEBUG /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D UNICODE /D _UNICODE /D "CMAKE_INTDIR=
 [ +102 ms]   flutter_window.cpp
 ```
 
+
+
+## 消息传递
+
+1、pigeon的原理
+
+2、dart 和 c++ 类型的对应关系
+
