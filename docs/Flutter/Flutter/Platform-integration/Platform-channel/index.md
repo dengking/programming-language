@@ -9,6 +9,8 @@
 > 2、serialization and deserialization
 >
 > 3、UI  client、platform host
+>
+> 4、它是以plugin的方式提供的，因此这篇文章需要和 [Developing packages & plugins](https://docs.flutter.dev/development/packages-and-plugins/developing-packages) 一起阅读
 
 ## Architectural overview: platform channels
 
