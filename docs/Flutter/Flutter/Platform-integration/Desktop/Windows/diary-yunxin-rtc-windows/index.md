@@ -144,7 +144,62 @@ NDEBUG /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D UNICODE /D _UNICODE /D "CMAKE_INTDIR=
 
 ## 消息传递
 
-1、pigeon的原理
+### pigeon的原理
 
-2、dart 和 c++ 类型的对应关系
+pigeon显然是基于在 [Writing custom platform-specific code](https://docs.flutter.dev/development/platform-integration/platform-channels?tab=type-mappings-c-plus-plus-tab) 中介绍的dart 和 c++ 类型的对应关系而建立的
 
+| Dart                       | C++                                                        |
+| -------------------------- | ---------------------------------------------------------- |
+| null                       | EncodableValue()                                           |
+| bool                       | EncodableValue(bool)                                       |
+| int                        | `EncodableValue(int32_t)`                                  |
+| int, if 32 bits not enough | `EncodableValue(int64_t)`                                  |
+| double                     | `EncodableValue(double)`                                   |
+| String                     | `EncodableValue(std::string)`                              |
+| Uint8List                  | `EncodableValue(std::vector)`                              |
+| Int32List                  | `EncodableValue(std::vector)`                              |
+| Int64List                  | `EncodableValue(std::vector)`                              |
+| Float32List                | `EncodableValue(std::vector)`                              |
+| Float64List                | `EncodableValue(std::vector)`                              |
+| List                       | `EncodableValue(std::vector)`                              |
+| Map                        | `EncodableValue(std::map<EncodableValue, EncodableValue>)` |
+
+可以看到，`Map` 对应的是 `EncodableValue(std::map<EncodableValue, EncodableValue>)`。
+
+pigeon采用的是JSON来作为数据传输的格式，其实所谓JSON，其实就是 `std::map` 。
+
+理论上来说，由于dart是跨平台的，因此在dart端生成的代码，应该是可以维持不变的。
+
+#### serialization and deserialization
+
+`encode` 将dart对象转换为JSON
+
+`decode` 从JSON转换为dart对象 
+
+在Java中，有 `Object` 类型，因此可以使用 `Map<String, Object>` 来统一的描述
+
+在c++中，flutter使用`EncodableValue` 
+
+
+
+#### pigeon支持PC
+
+github [[pigeon] Add support for Windows #73739](https://github.com/flutter/flutter/issues/73739)
+
+github [[pigeon] Add support for macOS #73738](https://github.com/flutter/flutter/issues/73738)
+
+在其中提及了，使用pigeon生成的iOS代码在macOS上是同样可以使用的，只需要进行一点修改即可，关于此，参见 https://github.com/flutter/flutter/issues/73738#issuecomment-903927725 。
+
+github [[pigeon] Add support for Linux #73740](https://github.com/flutter/flutter/issues/73740)
+
+
+
+## flutter windows plugin
+
+betterprogramming [Create a Flutter Plugin To Write Platform-specific Code for Windows](https://betterprogramming.pub/flutter-platform-plugin-windows-1-8b7c0a96fac4)
+
+stackoverflow [Flutter Desktop Windows: How to call native code via Method Channel. (Make api calls in  header file)](https://stackoverflow.com/questions/67460070/flutter-desktop-windows-how-to-call-native-code-via-method-channel-make-api-c)
+
+### examples
+
+[flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding)/[**plugins**](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)/

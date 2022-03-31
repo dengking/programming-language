@@ -39,3 +39,4 @@ Here the visited object (the variant) uses runtime polymorphism (even though wit
 
 
 ## bitbashing [std::visit is everything wrong with modern C++](https://bitbashing.io/std-visit.html)
+
