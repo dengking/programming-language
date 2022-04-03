@@ -6,5 +6,5 @@ nav:
     - CMake-linker: CMake-linker
     - CMake-flags: CMake-flags
     - ttroy50-cmake-examples: ttroy50-cmake-examples
-    
+    - cliutils-Book-Modern-CMake: cliutils-Book-Modern-CMake
     
