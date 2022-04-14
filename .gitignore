@@ -106,3 +106,5 @@ docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared
 *.cmake
 docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared-library/build/CMakeFiles/Makefile.cmake
 build
+*.exe
+*.dll
