@@ -78,7 +78,7 @@ static void ToUpper(std::string& S)
 }
 ```
 
-
+在 cppreference [std::transform](https://en.cppreference.com/w/cpp/algorithm/transform) # Example 中，也有类似的写法。
 
 ### stackoverflow [What does the “::” mean in “::tolower”?](https://stackoverflow.com/questions/5270780/what-does-the-mean-in-tolower) 
 
