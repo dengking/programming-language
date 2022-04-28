@@ -124,31 +124,4 @@ Each time you are creating a **lambda expression**, its implementation creates a
 
 关于此的例子，参见`C++\Language-reference\Functions\std-utility-lib-Function-objects\cppreference-std-function.md`。
 
-
-
-## Capture by reference
-
-
-
-```C++
-#include <iostream>
-
-int main(void)
-{
-	int i = 0;
-	std::cout << &i << std::endl;
-	auto F = [&i]()
-	{
-
-		std::cout<<&i<<std::endl;
-	};
-	F();
-}
-// g++ test.cpp -pedantic -Wall -Wextra --std=c++11
-
-```
-
-从输出来看，两者的地址相等，也就是是同一个object，因此是capture by reference。
-
-## Capture by value
-
+## crascit [Lambdas for lunch](https://crascit.com/2015/03/01/lambdas-for-lunch/)
