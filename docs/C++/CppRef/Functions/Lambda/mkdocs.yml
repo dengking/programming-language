@@ -1,4 +1,3 @@
 nav:
     - Introduction: index.md
-    - C++14-generalized-lambda-capture: C++14-generalized-lambda-capture
-    - C++20-perfect-capture: C++20-perfect-capture
+    - Lambda-capture: Lambda-capture

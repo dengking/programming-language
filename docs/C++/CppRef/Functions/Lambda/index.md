@@ -152,6 +152,3 @@ int main(void)
 
 ## Capture by value
 
-stackoverflow [C++0x lambda capture by value always const?](https://stackoverflow.com/questions/2835626/c0x-lambda-capture-by-value-always-const)
-
-测试程序参见: `./Capture-by-value-const-test-code`
