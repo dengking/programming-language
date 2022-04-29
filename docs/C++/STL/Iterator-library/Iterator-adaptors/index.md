@@ -223,6 +223,66 @@ int main()
 >
 > 
 
+
+
+## fluentcpp [How the STL inserter iterator really works](https://www.fluentcpp.com/2017/10/06/stl-inserter-iterators-work/)
+
+
+
+```c++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main()
+{
+    std::vector<int> v = {1, 2, 3, 4, 5, 6};
+    std::vector<int> newElements = {7, 8, 9, 10};
+
+    std::copy(begin(newElements), end(newElements), std::inserter(v, v.end()));
+
+    for (int i : v)
+        std::cout << i << ' ';
+}
+```
+
+> NOTE: 
+>
+> 输出如下:
+>
+> ```c++
+> 1 2 3 4 5 6 7 8 9 10 
+> ```
+>
+> 上述写法等价于：
+>
+> ```c++
+> 
+> #include <iostream>
+> #include <vector>
+> #include <algorithm>
+> #include <iterator>
+> using namespace std;
+> 
+> int main()
+> {
+>     std::vector<int> v = {1, 2, 3, 4, 5, 6};
+>     std::vector<int> newElements = {7, 8, 9, 10};
+> 
+>     std::copy(begin(newElements), end(newElements), std::back_inserter(v));
+> 
+>     for (int i : v)
+>         std::cout << i << ' ';
+> }
+> ```
+>
+> 
+
+
+
 ## TODO
 
 stackoverflow [Using front_inserter instead of back_inserter](https://stackoverflow.com/questions/16926575/using-front-inserter-instead-of-back-inserter)

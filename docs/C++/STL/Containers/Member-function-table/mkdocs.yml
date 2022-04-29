@@ -4,3 +4,5 @@ nav:
     - Uniform-consistent-API: Uniform-consistent-API
     - std-emplace: std-emplace
     - std-swap: std-swap
+    - std-insert: std-insert
+    
