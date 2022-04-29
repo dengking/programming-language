@@ -136,7 +136,9 @@ And we will see an example of a case where we can’t know in advance how many e
 
 ### Is `std::back_inserter` useful at all then?
 
+Yes again!
 
+It is typically useful for adding into a container the result of any algorithm that does more than `std::copy`. For example `std::copy_if`:
 
 ```C++
 

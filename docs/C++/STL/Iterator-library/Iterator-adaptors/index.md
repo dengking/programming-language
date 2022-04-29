@@ -281,7 +281,159 @@ int main()
 >
 > 
 
+### What it looks like it does
 
+Let’s try to simulate the behaviour we were assuming `std::inserter` had. We take a position inside a container, and repeatedly insert elements at this position:
+
+```c++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main()
+{
+    std::vector<int> v = {1, 2, 3, 4, 5, 6};
+    std::vector<int> newElements = {7, 8, 9, 10};
+
+    auto position = v.end();
+    for (int i : newElements)
+        v.insert(position, i);
+
+    for (int i : v)
+        std::cout << i << ' ';
+}
+```
+
+The following code outputs:
+
+```
+Segmentation fault
+```
+
+Just as we expected. The vector’s buffer is reallocated and `position` is invalidated. The next insertion through it leads to undefined behaviour.
+
+> NOTE: 
+>
+> 一、上面这段话总结地非常好，非常点题。
+>
+> 二、下面是demo程序：
+>
+> demo程序一：
+>
+> ```C++
+> 
+> #include <iostream>
+> #include <vector>
+> #include <algorithm>
+> #include <iterator>
+> using namespace std;
+> 
+> int main()
+> {
+>     std::vector<int> v = {1, 2, 3, 4, 5, 6};
+>     std::vector<int> newElements = {7, 8, 9, 10};
+> 
+>     auto position = v.end();
+>     v.insert(position, 7);
+> 
+>     for (int i : v)
+>         std::cout << i << ' ';
+> }
+> ```
+>
+> 上述程序正常，输出如下:
+>
+> ```C++
+> 1 2 3 4 5 6 7 
+> ```
+>
+> demo程序二：
+>
+> ```c++
+> 
+> #include <iostream>
+> #include <vector>
+> #include <algorithm>
+> #include <iterator>
+> using namespace std;
+> 
+> int main()
+> {
+>     std::vector<int> v = {1, 2, 3, 4, 5, 6};
+>     std::vector<int> newElements = {7, 8, 9, 10};
+> 
+>     auto position = v.end();
+>     v.insert(position, 7);
+>     v.insert(position, 8);
+> 
+>     for (int i : v)
+>         std::cout << i << ' ';
+> }
+> ```
+>
+> 报错如下:
+>
+> ![](./POPO-screenshot-20220429-141206.png)
+
+
+
+Let’s try to work around this by reserving buffer space in advance:
+
+```c++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main()
+{
+    std::vector<int> v = {1, 2, 3, 4, 5, 6};
+    std::vector<int> newElements = {7, 8, 9, 10};
+
+    v.reserve(10);
+    auto position = v.end();
+    for (int i : newElements)
+        v.insert(position, i);
+
+    for (int i : v)
+        std::cout << i << ' ';
+}
+```
+
+> NOTE:
+>
+> 一、上述程序在windows下报错如下:
+>
+> ![](./POPO-screenshot-20220429-141206.png)
+
+### What it actually does
+
+So how does `std::inserter` do to insert the elements in the right order without crashing? **How does it just do the right thing**?
+
+Let’s look into an implementation of the STL to understand what’s going on. Here is the code that actually performs the insertion of an element inside the container:
+
+```c++
+_Self& operator=(const typename _Container::value_type& __val) {
+  _M_iter = container->insert(_M_iter, __val);
+  ++_M_iter;
+  return *this;
+}
+```
+
+`_M_iter` is the position that was passed to `std::inserter`. As you can see, there is more than just an insertion:
+
+1、the position is **refreshed** by using the one returned by the `insert` method. `insert` returns the position of the inserted element. This ensures to always keep `_M_iter` in the vector’s current buffer, even if it was just reallocated.
+
+> NOTE: 
+>
+> 一、这是一种非常好的避免iterator invalidation的方法
+>
+> 二、上述是典型的STL algorithm pattern: 返回一个iterator，然后以这个iterator的下一个作为起点继续。
 
 ## TODO
 
