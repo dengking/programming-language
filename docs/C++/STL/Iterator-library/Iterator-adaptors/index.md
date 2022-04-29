@@ -435,6 +435,8 @@ _Self& operator=(const typename _Container::value_type& __val) {
 >
 > 二、上述是典型的STL algorithm pattern: 返回一个iterator，然后以这个iterator的下一个作为起点继续。
 
+2、the position is incremented. This way each inserted element is positioned right **after** the previous one. This ensures to have the elements inserted in the right order.
+
 ## TODO
 
 stackoverflow [Using front_inserter instead of back_inserter](https://stackoverflow.com/questions/16926575/using-front-inserter-instead-of-back-inserter)
