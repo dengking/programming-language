@@ -54,22 +54,108 @@ So, how can we benefit from this information while inserting into a vector? Just
 
 At initialization of the vector, use the range constructor:
 
-```
+```C++
 std::vector<int> v{begin(newElements), end(newElements)};
 ```
 
 For appending several new elements to an existing vector:
 
-```
+```C++
 v.insert(end(v), begin(newElements), end(newElements));
 ```
 
 Note that these methods also exist for the other STL containers, in particular `std::set` and `std::map`.
 
-Finally, to replace the entire contents of a vector with newElements:
+Finally, to replace the entire contents of a vector with `newElements`:
 
-```
+```C++
 v.assign(begin(newElements), end(newElements));
 ```
 
 After the execution of `assign`, all the previous elements have been replaced by the new ones, regardless of the respective numbers of new and old elements. But for a reason that I didn’t quite understand, the `assign` method does not exist for associative containers such as `std::set` and `std::map`.
+
+
+
+### Is `std::copy` useful at all then?
+
+> NOTE:
+>
+> 标题的意思是： "那么 `std::copy` 有用吗？"
+
+In the above case, `std::copy` was not appropriate because it blindly extended the size of the container. But sometimes, we don’t extend the size of the container, or we can’t know in advance how many elements are to be added.
+
+For instance, if the container already has values, and we want to **overwrite them starting at the beginning**, we would use `std::copy`:
+
+
+
+```c++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main()
+{
+    std::vector<int> v = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
+    std::vector<int> newElements = {1, 2, 3};
+
+    std::copy(begin(newElements), end(newElements), begin(v));
+    // v now contains {1, 2, 3, 5, 5, 5, 5, 5, 5, 5};
+
+    for (int i : v)
+        std::cout << i << ' ';
+}
+```
+
+Another example is writing into a C array:
+
+```c++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main()
+{
+    int a[10] = {};
+    std::vector<int> newElements = {1, 2, 3};
+
+    std::copy(begin(newElements), end(newElements), std::begin(a));
+    // a now contains {1, 2, 3, 0, 0, 0, 0, 0, 0, 0};
+
+    for (int i : a)
+        std::cout << i << ' ';
+}
+```
+
+And we will see an example of a case where we can’t know in advance how many elements are to be added, when we address **stream iterators**, in a dedicated post.
+
+### Is `std::back_inserter` useful at all then?
+
+
+
+```C++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main()
+{
+    std::vector<int> v;
+    std::vector<int> newElements = {1, 3, 2, 4, 3, 2, 2};
+
+    std::copy_if(begin(newElements), end(newElements), std::back_inserter(v), [](int i)
+                 { return i % 2 == 0; });
+
+    for (int i : v)
+        std::cout << i << ' ';
+}
+```
+
