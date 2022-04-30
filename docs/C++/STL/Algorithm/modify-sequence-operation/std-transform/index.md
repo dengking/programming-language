@@ -42,7 +42,7 @@ The signature does not need to have `const &`.
 int main()
 {
 	std::string s("hello");
-	// 转换为大写
+	// 转换为大写，这种写法非常好，它是in-place的改法
 	std::transform(s.begin(), s.end(), s.begin(),
 			[](unsigned char c) -> unsigned char {	return std::toupper(c);});
 
@@ -78,9 +78,40 @@ int main()
 
 ```
 
+> NOTE:
+>
+> 上面还是展示了
 
+#### example 1
+
+```c++
+#include <algorithm>
+#include <cctype>
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main()
+{
+    std::string s("hello");
+    // 转换为大写，这种写法非常好，它是in-place的改法
+    std::transform(s.begin(), s.end(), s.begin(),
+                   [](unsigned char c) -> unsigned char
+                   { return std::toupper(c); } //
+    );
+    std::cout << s << std::endl;
+}
+```
+
+
+
+> NOTE:
+>
+> 上述例子非常好，是典型的inplace写法。
 
 ## fluentcpp [std::transform, a central algorithm](https://www.fluentcpp.com/2017/02/13/transform-central-algorithm/)
+
+
 
 ### `std::transform` on a range
 
