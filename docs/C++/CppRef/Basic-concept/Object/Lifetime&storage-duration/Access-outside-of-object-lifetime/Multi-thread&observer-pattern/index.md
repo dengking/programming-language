@@ -1,6 +1,6 @@
-# Access outside of object lifetime in multi thread application
+# Access outside of object lifetime in multi-thread application
 
-在multi thread application是非常容易出现access outside of object lifetime的，下面分情况讨论，对于每种情况，给出具体的案例、解决方案。
+在multi-thread application是非常容易出现access outside of object lifetime的，下面分情况讨论，对于每种情况，给出具体的案例、解决方案。
 
 ## 问题梳理
 
@@ -157,8 +157,6 @@ process exit的 时候，对destructor的调用顺序是比较复杂的，并且
 显然，从 [Inversion of control principle](https://en.wikipedia.org/wiki/Inversion_of_control) 的角度来思考的话，解决思路是: 当没有thread使用这个pointer的时候，由 [framework](https://en.wikipedia.org/wiki/Software_framework)来将它释放。
 
 虽然C++没有提供GC，但是C++ 11`std::shard_ptr`就正好适用于这种场景，它使用reference counting的技术，来保证pointee的自动释放，从而避免了上诉问题；
-
-
 
 > draft: 这是一个非常重要的主题，在control theory中已经涉及这个topic了，只是没有提供具体的实现案例
 
