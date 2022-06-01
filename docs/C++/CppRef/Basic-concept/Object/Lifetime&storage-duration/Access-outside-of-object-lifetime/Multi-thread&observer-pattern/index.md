@@ -148,8 +148,6 @@ process exit的 时候，对destructor的调用顺序是比较复杂的，并且
 
 
 
-
-
 ## How to resolve总结
 
 ### Automatic memory management
