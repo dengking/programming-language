@@ -62,6 +62,8 @@ In parallel, we’ll be exploring whether we can use a memory safe language for 
 
 That’s why we’re pursuing both strategies in parallel. Watch this space for updates on our adventures in making C++ safer, and efforts to experiment with a new language in Chrome.
 
+## security.googleblog [Retrofitting Temporal Memory Safety on C++](https://security.googleblog.com/2022/05/retrofitting-temporal-memory-safety-on-c.html)
+
 
 
 ## google docs [Safer Usage Of C++](https://docs.google.com/document/d/e/2PACX-1vRZr-HJcYmf2Y76DhewaiJOhRNpjGHCxliAQTBhFxzv1QTae9o8mhBmDl32CRIuaWZLt5kVeH9e9jXv/pub#h.eoikp3r0cwlf)
@@ -81,3 +83,8 @@ That’s why we’re pursuing both strategies in parallel. Watch this space for 
 > 不同于C++，rust语言将resource ownership建立在语言层面了，并且它基于此实现了static memory safety，关于此，可以参见:
 >
 > 1、rust doc [References and Borrowing](https://doc.rust-lang.org/1.8.0/book/references-and-borrowing.html)
+
+
+
+
+
