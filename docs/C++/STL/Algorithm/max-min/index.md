@@ -20,7 +20,21 @@ T max (initializer_list<T> il, Compare comp);
 
 
 
-## `std::max(vector)`?
+## `std::max`、`std::min`
+
+### `std::initializer_list<T>`参数
+
+这种入参，兼职就是语法糖。
+
+leetcode [【中规中矩】Bellman Ford 动态规划两种写法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/zhong-gui-zhong-ju-bellman-ford-dong-tai-gui-hua-l/)
+
+```C++
+dp[v][k] = min({dp[v][k - 1], dp[v][k], dp[u][k - 1] + w});
+```
+
+
+
+#### `std::max(vector)`?
 
 结论：不支持，应该使用`max_element(v.begin(), v.end())`。
 

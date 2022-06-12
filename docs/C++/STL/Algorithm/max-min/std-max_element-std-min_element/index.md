@@ -1,5 +1,7 @@
 # `std::max_element`、`std::min_element`、`std::minmax_element`
 
+
+
 ## stackoverflow [How can I get the max (or min) value in a vector?](https://stackoverflow.com/questions/9874802/how-can-i-get-the-max-or-min-value-in-a-vector)
 
 ### [A](https://stackoverflow.com/a/9874912)
@@ -49,15 +51,70 @@ Oh, and **use [`std::minmax_element(...)`](http://en.cppreference.com/w/cpp/algo
 
 
 
+## max value of `std::map`
+
+stackoverflow [Finding the max value in a map](https://stackoverflow.com/questions/9370945/finding-the-max-value-in-a-map)
+
+techiedelight [Find element with the maximum value in a map in C++](https://www.techiedelight.com/find-element-with-the-maximum-value-in-a-map-in-cpp/)
 
 
-## `std::initializer_list<T>`参数
 
-这种入参，兼职就是语法糖。
+### example code
 
-leetcode [【中规中矩】Bellman Ford 动态规划两种写法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/zhong-gui-zhong-ju-bellman-ford-dong-tai-gui-hua-l/)
+这是LeetCode [424. 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/) 的源代码:
 
 ```C++
-dp[v][k] = min({dp[v][k - 1], dp[v][k], dp[u][k - 1] + w});
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <array>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <variant>
+#include <typeinfo>
+#include <limits>
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+class Solution
+{
+public:
+    int characterReplacement(string s, int k)
+    {
+        std::unordered_map<char, int> cnt;
+        using pair_type = decltype(cnt)::value_type;
+        // https://stackoverflow.com/a/9371137/10173843
+        auto max_of_cnt_func = [&]() -> int
+        {
+            return std::max_element(cnt.begin(), cnt.end(), [](const pair_type &left, const pair_type &right)
+                                    { return left.second < right.second; })
+                ->second;
+        };
+        int ret = 0;
+        int len = s.size();
+        for (int left = 0, right = 0; right < len; ++right)
+        {
+            cnt[s[right]]++;
+            // int window_size = right - left + 1;
+            while (right - left + 1 - max_of_cnt_func() > k)
+            {
+                cnt[s[left++]]--;
+            }
+            ret = max(ret, right - left + 1);
+        }
+        return ret;
+    }
+};
+
+int main()
+{
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra
+
 ```
 
