@@ -4,11 +4,11 @@
 
 在STL中，有如下`insert_iterator`：
 
-| `insert_iterator`                                            | `inserter` function                                          | member function | 插入位置 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | --------------- | -------- |
-| [std::insert_iterator](https://en.cppreference.com/w/cpp/iterator/insert_iterator) | [std::inserter](https://en.cppreference.com/w/cpp/iterator/inserter) | `insert`        | 任意位置 |
-| [std::front_insert_iterator](https://en.cppreference.com/w/cpp/iterator/front_insert_iterator) | [std::front_inserter](https://en.cppreference.com/w/cpp/iterator/front_inserter) | `push_front()`  | front    |
-| [std::back_insert_iterator](https://en.cppreference.com/w/cpp/iterator/back_insert_iterator) | [std::back_inserter](https://en.cppreference.com/w/cpp/iterator/back_inserter) | `push_back()`   | back     |
+| `insert_iterator`                                            | `inserter` function                                          | member function                                              | 插入位置 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
+| [std::insert_iterator](https://en.cppreference.com/w/cpp/iterator/insert_iterator) | [std::inserter](https://en.cppreference.com/w/cpp/iterator/inserter) | [`insert`](https://en.cppreference.com/w/cpp/container/vector/insert) | 任意位置 |
+| [std::front_insert_iterator](https://en.cppreference.com/w/cpp/iterator/front_insert_iterator) | [std::front_inserter](https://en.cppreference.com/w/cpp/iterator/front_inserter) | `push_front()`                                               | front    |
+| [std::back_insert_iterator](https://en.cppreference.com/w/cpp/iterator/back_insert_iterator) | [std::back_inserter](https://en.cppreference.com/w/cpp/iterator/back_inserter) | `push_back()`                                                | back     |
 
 
 

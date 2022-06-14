@@ -47,6 +47,20 @@ V                       V               V   V
 
 As you can see, the half-open equal-range for *n* is [lb(*n*), ub(*n*)).
 
+> NOTE: 
+>
+> 上面这段总结非常好: 
+>
+> 所谓 `lower_bound`，即下限； `>=`
+>
+> 所谓 `upper_bound`，即上限； `<`
+>
+> 符合STL的左边右开惯例
+>
+> STL的sorted container都支持这个function，see also:
+>
+> cppreference [std::map<Key,T,Compare,Allocator>::upper_bound](https://en.cppreference.com/w/cpp/container/map/upper_bound)
+
 Note that both bounds give you meaningful insertion locations for an element of the desired value so that the ordering is maintained, but `lower_bound` has the distinguishing feature that *if* the element already exists, then you get an iterator which actually points to that element. Thus you can use `lower_bound` on an ordered range to implement your own unique-membership *or* multiple-membership container.
 
 ```c++

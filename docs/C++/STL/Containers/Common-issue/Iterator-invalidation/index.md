@@ -38,6 +38,10 @@
 
 2、rehash
 
+### stackoverflow [Iterator invalidation rules](https://stackoverflow.com/questions/6438086/iterator-invalidation-rules)
+
+
+
 ## cppreference [Containers library#Iterator invalidation](https://en.cppreference.com/w/cpp/container)
 
 
@@ -188,9 +192,11 @@ it = vecArr.begin();
 
 
 
-## Example
+## idiom
 
+一、`std::vector::insert` 返回新的iterator，这样就能够避免iterator invalidation，这在如下位置中进行了介绍:
 
+fluentcpp [How the STL inserter iterator really works](https://www.fluentcpp.com/2017/10/06/stl-inserter-iterators-work/)
 
 
 

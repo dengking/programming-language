@@ -108,3 +108,4 @@ docs/Build-system/CMake/CMake-toolchain/practice-use-chromium-toolchain/D-shared
 build
 *.exe
 *.dll
+.DS_Store

@@ -1,1 +1,0 @@
-# stackoverflow [Iterator invalidation rules](https://stackoverflow.com/questions/6438086/iterator-invalidation-rules)

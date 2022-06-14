@@ -2,7 +2,9 @@
 
 1、`std::copy` + `std::back_inserter`、`std::inserter`、`std::front_inserter`
 
+2、insert函数的返回值是new iterator，这样是能够避免iterator invalidation的
 
+3、需要注意的是，insert是insert before而不是insert after
 
 ## fluentcpp [Inserting several elements into an STL container efficiently](https://www.fluentcpp.com/2017/03/28/inserting-several-elements-into-an-stl-container/)
 
@@ -158,6 +160,26 @@ int main()
 
     for (int i : v)
         std::cout << i << ' ';
+}
+```
+
+## cppreference [std::vector<T,Allocator>::insert](https://en.cppreference.com/w/cpp/container/vector/insert)
+
+> NOTE:
+>
+> 一、它的返回值是new iterator，这样说能够避免iterator invalidation的
+>
+> 二、需要注意的是: insert是insert before而不是insert after
+
+### Example
+
+一、fluentcpp [How the STL inserter iterator really works](https://www.fluentcpp.com/2017/10/06/stl-inserter-iterators-work/)
+
+```c++
+_Self& operator=(const typename _Container::value_type& __val) {
+  _M_iter = container->insert(_M_iter, __val);
+  ++_M_iter;
+  return *this;
 }
 ```
 
