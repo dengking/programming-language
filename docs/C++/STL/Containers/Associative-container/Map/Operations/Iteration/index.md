@@ -114,10 +114,22 @@ for (auto const& x : symbolTable)
 }
 ```
 
-使用[Structured binding](https://en.cppreference.com/w/cpp/language/structured_binding)
+#### 使用C++17 [Structured binding](https://en.cppreference.com/w/cpp/language/structured_binding)
 
 ```cpp
 for( auto const& [key, val] : symbolTable )
+{
+    std::cout << key         // string (key)
+              << ':'  
+              << val        // string's value
+              << std::endl ;
+}
+```
+
+
+
+```
+for( auto && [key, val] : symbolTable )
 {
     std::cout << key         // string (key)
               << ':'  

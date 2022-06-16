@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
-    - std-for_each-map: std-for_each-map.md
     - TODO-Emplace: TODO-Emplace
     - Values-like-python-dict: Values-like-python-dict
     - TODO-Erase_if: TODO-Erase_if

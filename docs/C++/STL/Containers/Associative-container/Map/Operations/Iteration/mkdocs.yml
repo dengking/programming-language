@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - std-for_each-map: std-for_each-map.md
     
