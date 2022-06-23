@@ -153,3 +153,8 @@ stackoverflow [How can I pass a variable in a decorator to function's argument i
 
 1、towardsdatascience [Using Class Decorators in Python](https://towardsdatascience.com/using-class-decorators-in-python-2807ef52d273)
 
+
+
+## function logger
+
+### stackoverflow [How to do logging at function entry, inside and exit in Python](https://stackoverflow.com/questions/23435488/how-to-do-logging-at-function-entry-inside-and-exit-in-python)
