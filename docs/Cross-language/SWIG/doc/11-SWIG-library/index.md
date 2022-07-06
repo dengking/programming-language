@@ -1,4 +1,18 @@
-# 11.2 C arrays and pointers
+# 11 SWIG library
+
+
+
+## 11.1 The %include directive and library search path
+
+Library files are included using the `%include` directive.
+
+```shell
+swig -swiglib
+```
+
+
+
+## 11.2 C arrays and pointers
 
 > NOTE: 
 >

@@ -1,8 +1,13 @@
 nav:
     - Introduction: index.md
+    - 2-Introduction: 2-Introduction
+    - 4-Scripting-Languages: 4-Scripting-Languages
+    - 5-SWIG-Basics: 5-SWIG-Basics
     - 6-SWIG-and-C++: 6-SWIG-and-C++
+    - 11-SWIG-library: 11-SWIG-library
     - 11.2-C-arrays-and-pointers: 11.2-C-arrays-and-pointers
     - 13-Typemaps: 13-Typemaps
+    - 19-Working-with-Modules: 19-Working-with-Modules
     - SWIG-director: SWIG-director
     - SWIG-reference-counting: SWIG-reference-counting
     - SWIG-pointer: SWIG-pointer
