@@ -4,6 +4,8 @@
 
 ## 5.1 Running SWIG
 
+
+
 ### 5.1.1 Input format
 
 As input, SWIG expects a file containing ISO C/C++ declarations and special SWIG directives.
@@ -28,6 +30,23 @@ It is important to emphasize that just because you include a declaration in a SW
 >
 > 可以将header file中的include放到 `%{ ... %}` block 中
 
+### **5.1.2 SWIG Output** 
+
+For many target languages SWIG will also generate proxy class files in the target language. The default output directory for these language specific files is the same directory as the generated C/C++ file. This can be modified using the **-outdir** option. For example:
+
+```shell
+$ swig -c++ -python -outdir pyfiles -o cppfiles/example_wrap.cpp example.i
+```
+
+If the directories **cppfiles** and **pyfiles** exist, the following will be generated: 
+
+```shell
+cppfiles/example_wrap.cpp 
+pyfiles/example.py
+```
+
+
+
 ### 5.1.4 C Preprocessor
 
 Like C, SWIG preprocesses all input files through an enhanced version of the C preprocessor. All standard preprocessor features are supported including file inclusion, conditional compilation and macros. However, `#include` statements are ignored unless the `-includeall` command line option has been supplied. The reason for disabling includes is that SWIG is sometimes used to process raw C header files. In this case, you usually only want the extension module to include functions in the supplied header file rather than everything that might be included by that header file (i.e., system headers, C library functions, etc.). It should also be noted that the SWIG preprocessor skips all text enclosed inside a `%{...%}` block. In addition, the preprocessor includes a number of macro handling enhancements that make it more powerful than the normal C preprocessor. These extensions are described in the "Preprocessor" chapter.
@@ -40,6 +59,16 @@ Like C, SWIG preprocesses all input files through an enhanced version of the C p
 
 These directives are used to give SWIG hints or to alter SWIG's parsing behavior in some manner.
 
+```c++
+/* header.h --- Some header file */ 
+/* SWIG directives -- only seen if SWIG is running */ 
+#ifdef SWIG 
+%module foo 
+#endif
+```
+
+
+
 ### 5.1.6 Parser Limitations
 
 > NOTE: 
@@ -50,7 +79,13 @@ These directives are used to give SWIG hints or to alter SWIG's parsing behavior
 
 ## 5.2.1 Basic Type Handling
 
+> NOTE: 这一段所讲的其实是type map
 
+
+
+The `char *` datatype is handled as a **NULL-terminated ASCII string**. SWIG maps this into a 8-bit character string in the target scripting language. SWIG converts character strings in the target language to **NULL terminated strings** before passing them into C/C++. The default handling of these strings does not allow them to have embedded NULL bytes. Therefore, the **`char *`**  datatype is not generally suitable for passing binary data. However, it is possible to change this behavior by defining a SWIG typemap. See the chapter on Typemaps for details about this.
+
+> NOTE: 这段话描述了SWIG默认对" `char *` datatype"的处理。
 
 ### 5.2.2 Global Variables
 
@@ -64,17 +99,55 @@ Starting with SWIG-1.3, all variable declarations, regardless of any use of `con
 
 ### 5.2.5 A cautionary tale of `char *`
 
+> NOTE: 这段话的意思是: 关于 `char *` 的警示故事
+
 Before going any further, there is one bit of caution involving `char *` that must now be mentioned. When strings are passed from a scripting language to a C `char *`, the pointer usually points to string data stored inside the interpreter. It is almost always a really bad idea to modify this data. Furthermore, some languages may explicitly disallow it. For instance, in Python, strings are supposed to be immutable. If you violate this, you will probably receive a vast amount of wrath(愤怒) when you unleash(发布、释放) your module on the world.
+
+
 
 ## 5.3 Pointers and complex objects
 
-
+Most C programs manipulate arrays, structures, and other types of objects. This section discusses the handling of these **datatypes**. 
 
 ### 5.3.1 Simple pointers
 
 > NOTE: 
 >
-> 这一段描述了SWIG的实现细节
+> 这一段描述了SWIG的实现细节，下面highlight了一些内容:
+>
+> 一、"All pointers are treated as opaque objects by SWIG"
+
+Pointers to primitive C datatypes such as 
+
+```c++
+int * 
+double *** 
+char **
+```
+
+are fully supported by SWIG. Rather than trying to convert the data being pointed to into a scripting representation, SWIG simply encodes the pointer itself into a representation that contains the actual value of the pointer and a **type-tag**. Thus, the SWIG representation of the above pointers (in Tcl), might look like this: 
+
+```c++
+_10081012_p_int 
+_1008e124_ppp_double 
+_f8ac_pp_char
+```
+
+> NOTE: 从上述内容可知，SWIG是将pointee的值和它的类型信息组成了一个**字符串**来表示pointer的
+
+A NULL pointer is represented by the string "NULL" or the value 0 encoded with type information. 
+
+All pointers are treated as **opaque objects** by SWIG. Thus, a pointer may be returned by a function and passed around to other C functions as needed. For all practical purposes, the scripting language interface works in exactly the same way as you would use the pointer in a C program. The only difference is that there is no mechanism for dereferencing the pointer since this would require the target language to understand the memory layout of the underlying object. 
+
+> NOTE: 其实在script language中，压根就不知道pointer，所以在其中"dereferencing the pointer"也是没有意义的
+
+### 5.3.2 Run time pointer type checking
+
+> NOTE: 可以实现dynamic type safety
+
+By allowing pointers to be manipulated from a scripting language, extension modules effectively bypass compile-time type checking in the C/C++ compiler. To prevent errors, a type signature is encoded into all pointer values and is used to perform run-time type checking. This type-checking process is an integral part of SWIG and can not be disabled or modified without using typemaps (described in later chapters). 
+
+
 
 ### 5.3.3 Derived types, structs, and classes
 
@@ -133,25 +206,73 @@ In this case `f1`, `f2`, and `buffer` are all opaque objects containing C pointe
 >
 > 一、opaque pointer对应目标语言的opaque object
 
-
+The scripting language representation of a pointer value should never be manipulated directly. 
 
 ### 5.3.4 Undefined datatypes
 
 > NOTE: 
 >
-> 这一节其实是符合前面所提的"Everything else is a pointer"
+> 这一节描述的是SWIG的默认行为，这一节其实是符合前面所提的"Everything else is a pointer"
+
+An important detail to mention is that SWIG will gladly generate wrappers for an interface when there are unspecified type names. However, **all unspecified types are internally handled as pointers to structures or classes!** 
 
 
 
 ### 5.3.5 Typedef
 
-> NOTE: 
->
-> 通过typedef来告诉SWIG，准确的类型是什么
-
 Like C, `typedef` can be used to define new type names in SWIG. For example:
 
+```c++
+typedef unsigned int size_t;
+```
 
+**typedef** definitions appearing in a **SWIG interface** are not propagated to the generated wrapper code. Therefore, they either need to be defined in an included header file or placed in the declarations section like this: 
+
+```c++
+%{
+/* Include in the generated wrapper file */ 
+typedef unsigned int size_t; 
+%}
+/* Tell SWIG about it */ 
+typedef unsigned int size_t;
+```
+
+or 
+
+```c++
+%inline %{ 
+  typedef unsigned int size_t; 
+%}
+```
+
+
+
+> NOTE: 
+>
+> 一、这说明SWIG提供typedef的目的是用来告诉它准确的类型是什么
+>
+> 二、"they either need to be defined in an included header file" 这段话要如何理解？对于include的文件，SWIG不是不解析吗？
+
+In certain cases, you might be able to include other header files to collect type information. For example: 
+
+```c++
+%module example 
+%import "sys/types.h"
+```
+
+In this case, you might run SWIG as follows: 
+
+```shell
+$ swig -I/usr/include -includeall example.i
+```
+
+
+
+It should be noted that your mileage will vary greatly here. System headers are notoriously complicated and may rely upon a variety of non-standard C coding extensions (e.g., such as special directives to GCC). Unless you exactly specify the right include directories and preprocessor symbols, this may not work correctly (you will have to experiment). 
+
+> NOTE: 翻译如下:
+>
+> "需要注意的是，您的里程在这里会有很大差异。众所周知，系统头文件非常复杂，并且可能依赖于各种非标准 C 编码扩展（例如，GCC 的特殊指令）。除非您准确指定正确的包含目录和预处理器符号，否则这可能无法正常工作（您必须进行试验）。"
 
 ## 5.4 Other Practicalities
 
@@ -238,7 +359,13 @@ int a[100][200];
 
 In this case, reading the variable '`a`' returns a pointer of type `int (*)[200]` that points to the first element of the array `&a[0][0]`. Trying to modify '`a`' results in an error. This is because SWIG does not know how to copy data from the target language into the array. To work around this limitation, you may want to write a few simple assist functions like this:
 
+
+
+### 5.4.7 Renaming and ignoring declarations 
+
+
+
 ### 5.4.9 Pointers to functions and callbacks
 
-Although SWIG does not normally allow callback functions to be written in the target language, this can be accomplished with the use of typemaps and other advanced SWIG features. See the Typemaps chapter for more about typemaps and individual target language chapters for more on callbacks. The 'director' feature can be used to make callbacks from C/C++ into the target language, see Callbacks to the target language.
+Although SWIG does not normally allow **callback functions** to be written in the target language, this can be accomplished with the use of typemaps and other advanced SWIG features. See the Typemaps chapter for more about typemaps and individual target language chapters for more on callbacks. The 'director' feature can be used to make callbacks from C/C++ into the target language, see Callbacks to the target language.
 
