@@ -373,3 +373,5 @@ Although SWIG does not normally allow **callback functions** to be written in th
 
 ## 5.5 Structures and unions
 
+### 5.5.6 Adding member functions to C structures 
+
