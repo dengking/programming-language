@@ -15,9 +15,10 @@ class Caller
 {
 private:
     Callback callback_;
-
+    ParamStruct param_{1010,2020};
 public:
-    Caller() {}
+    Caller() {
+    }
     ~Caller() { delCallback(); }
     void delCallback()
     {
@@ -30,6 +31,8 @@ public:
     void call()
     {
         if (callback_)
-            callback_(ParamStruct());
+        {
+            callback_(param_);
+        }
     }
 };

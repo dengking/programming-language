@@ -21,7 +21,7 @@
 #define param(num,type) $typemap(jstype,type) arg ## num
 #define unpack(num,type) arg##num
 // For c++ code.
-#define lvalref(num,type) type&& arg##num
+#define lvalref(num,type) type arg##num
 #define forward(num,type) std::forward<type>(arg##num)
 
 // Macro to provide 'action' for the number of arguments.
