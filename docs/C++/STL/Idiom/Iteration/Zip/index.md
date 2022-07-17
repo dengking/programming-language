@@ -430,3 +430,6 @@ int main()
 
 ```
 
+
+
+## stackoverflow [What's the best way to iterate over two or more containers simultaneously](https://stackoverflow.com/questions/12552277/whats-the-best-way-to-iterate-over-two-or-more-containers-simultaneously)
