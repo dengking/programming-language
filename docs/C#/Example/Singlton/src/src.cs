@@ -1,34 +1,32 @@
 using System;
-class NimApiGlobalPINVOKE
+namespace Outer
 {
-    protected class SWIGExceptionHelper
+    public class OuterClass
     {
-        static SWIGExceptionHelper()
+
+    }
+    namespace Inner
+    {
+        public class InnerClass
         {
-            Console.WriteLine("SWIGExceptionHelper static constructor");
+            private OuterClass memVar;
+            public SetMem(OuterClass mem)
+            {
+                memVar = mem;
+            }
         }
     }
-
-    protected static SWIGExceptionHelper swigExceptionHelper = new SWIGExceptionHelper();
-
-    static NimApiGlobalPINVOKE()
-    {
-        Console.WriteLine("NimApiGlobalPINVOKE static constructor");
-    }
-    public static void Test()
-    {
-        Console.WriteLine("test");
-    }
 }
+
 
 public class MainClass
 {
     public static void Main(String[] args)
     {
         Console.WriteLine("begin main");
-        NimApiGlobalPINVOKE.Test();
-        NimApiGlobalPINVOKE.Test();
-        NimApiGlobalPINVOKE.Test();
+        Outer.OuterClass o = new Outer.OuterClass();
+        Outer.Inner.InnerClass i = new Outer.Inner.InnerClass();
+        i.SetMem(o);
         Console.WriteLine("end main");
     }
 }
