@@ -2,5 +2,6 @@ nav:
     - Introduction: index.md
     - C#attribute: C#attribute
     - C#reflection: C#reflection
-
+    - C#string: C#string
+    - C#delegate&event: C#delegate&event
     
