@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
     - Property: Property
+    - C#Lazy-Initialization: C#Lazy-Initialization
     
     
