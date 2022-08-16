@@ -2,7 +2,17 @@
 
 
 
+素材:
 
+1、zhihu [C++内存管理：shared_ptr/weak_ptr源码（长文预警）](https://zhuanlan.zhihu.com/p/532215950)
+
+> 首先c++不会像python一样提供“部分标记-清除算法”来检测并破除循环引用，这对性能的影响太大。
+
+2、wikipedia [Reference counting # Python](https://en.wikipedia.org/wiki/Reference_counting#Python) 
+
+> [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) also uses reference counting and offers cycle detection as well (and can reclaim them).[[21\]](https://en.wikipedia.org/wiki/Reference_counting#cite_note-21)
+
+3、docs.python [**Extending and Embedding the Python Interpreter**](https://docs.python.org/2.4/ext/refcounts.html)
 
 
 

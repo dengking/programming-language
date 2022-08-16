@@ -56,6 +56,16 @@ Reference counting is also among the simplest forms of memory management to impl
 
 It also allows for effective management of non-memory resources such as operating system objects, which are often much scarcer than memory (tracing garbage collection systems use [finalizers](https://en.wikipedia.org/wiki/Finalizer) for this[*[citation needed](https://en.wikipedia.org/wiki/Wikipedia:Citation_needed)*], but the delayed reclamation may cause problems). [Weighted reference counts](https://en.wikipedia.org/wiki/Reference_counting#Weighted_reference_counting) are a good solution for garbage collecting a distributed system.
 
+
+
+### Graph interpretation
+
+When dealing with garbage collection schemes, it is often helpful to think of the **reference graph**, which is a [directed graph](https://en.wikipedia.org/wiki/Directed_graph) where the [vertices](https://en.wikipedia.org/wiki/Vertex_(graph_theory)) are objects and there is an edge from an object A to an object B if A holds a reference to B. 
+
+
+
+
+
 ## wikipedia [Dealing with reference cycles](https://en.wikipedia.org/wiki/Reference_counting#Dealing_with_reference_cycles)
 
 > NOTE: 第一次阅读的时候，并没有搞清楚reference cycle的含义，原文中的这样的一段话：
