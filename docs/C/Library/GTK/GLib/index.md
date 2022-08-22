@@ -11,3 +11,7 @@
 - GModule
 - GThread
 - [GIO](https://en.wikipedia.org/wiki/GIO_(software))
+
+
+
+## stackoverflow [What exactly are GLib and GObject?](https://stackoverflow.com/questions/11301074/what-exactly-are-glib-and-gobject)
