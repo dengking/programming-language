@@ -1,4 +1,4 @@
-# A list of open source C libraries
+# C library
 
 
 
