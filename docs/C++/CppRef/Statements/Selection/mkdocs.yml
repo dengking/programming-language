@@ -1,4 +1,6 @@
 nav:
-    - If: If.md
-    - Constexpr-if: Constexpr-if.md
+    - Introduction: index.md
+    - If: If
+    - C++17-constexpr-if: C++17-constexpr-if.md
     - Switch: Switch.md
+    
