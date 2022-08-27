@@ -3,7 +3,8 @@ nav:
     # 首先阅读这篇入门文章
     - Course-northwestern-C++Iterators: Course-northwestern-C++Iterators
     - Operations: Operations    
-    - Stream-iterators: Stream-iterators    
-    - Iterator-adaptors: Iterator-adaptors
+    - Stream-iterator: Stream-iterator   
+    - Iterator-adaptor: Iterator-adaptor
     - const_iterator: const_iterator
     - Custom-iterator: Custom-iterator
+    
