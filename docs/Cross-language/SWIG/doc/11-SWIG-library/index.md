@@ -1,6 +1,10 @@
 # 11 SWIG library
 
-
+> NOTE:
+>
+> 一、swig lib path
+>
+> ![](./swig-lib-path.jpg)
 
 ## 11.1 The %include directive and library search path
 
