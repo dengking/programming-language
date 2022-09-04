@@ -152,6 +152,8 @@ Suppose we have a list of 3 elements.
 
 A -> B -> C
 
+### Race condition
+
 If one thread is traversing the list, and another is removing the first element, there is a potential for a race.
 
 1、Thread X reads the `head` pointer for the list and gets a pointer to `A`.
@@ -252,6 +254,97 @@ We therefore need to do something to fix it.
 
 We could use a mutex to protect `head`. This would be more fine-grained than a whole-list mutex, since it would only be held for the brief time when the pointer was being read or changed. However, we don't need to: we can use `std::experimental::atomic_shared_ptr` instead.
 
+
+
+> NOTE:
+>
+> 一、使用mutex的方式: 
+>
+> ```c++
+> #include <thread>
+> #include <mutex>
+> #include <memory>
+> #include <chrono>
+> #include <iostream>
+> #include <functional>
+> 
+> using namespace std;
+> 
+> class MyClass
+> {
+>     int id_{0};
+> 
+> public:
+>     MyClass(int id) : id_(id) {}
+>     void do_stuff()
+>     {
+>         cout << "do_stuff:" << id_ << endl;
+>     }
+> };
+> 
+> class MyList
+> {
+> public:
+>     // constructors etc. omitted.
+>     struct Node
+>     {
+>         MyClass data;
+>         std::shared_ptr<Node> next;
+>         Node(int id) : data{id}
+>         {
+>         }
+>     };
+>     std::mutex m;
+>     std::shared_ptr<Node> head;
+> 
+>     void traverse(std::function<void(MyClass &)> f)
+>     {
+>         std::lock_guard<std::mutex> guard(m);
+>         std::shared_ptr<Node> p = head; // traverse function hold a reference to shared data
+> 
+>         while (p)
+>         {
+>             f(p->data);
+>             p = p->next;
+>         }
+>     }
+>     void pop_front()
+>     {
+>         std::lock_guard<std::mutex> guard(m);
+>         std::shared_ptr<Node> p = head; // pop_front function hold a reference to shared data
+>         if (p)
+>         {
+>             head = std::move(p->next);
+>         }
+>     }
+>     // constructors etc. omitted.
+> };
+> 
+> int main()
+> {
+>     MyList l;
+>     l.head = make_shared<MyList::Node>(1);
+>     l.head->next = make_shared<MyList::Node>(2);
+>     l.head->next->next = make_shared<MyList::Node>(3);
+> 
+>     std::thread thread1([&]()
+>                         { l.traverse([](MyClass &data)
+>                                      { data.do_stuff(); }); });
+>     std::thread thread2([&]()
+>                         { l.pop_front(); });
+>     thread1.join();
+>     thread2.join();
+> }
+> ```
+>
+> 上述版本是能够正常运行的，但是它加锁的scope太大了
+>
+> 二、如何使用更加fine-gained lock呢？
+>
+> 
+
+
+
 The implementation is allowed to use a mutex internally with `atomic_shared_ptr`, in which case we haven't gained anything with respect to performance or concurrency, but we *have* gained by reducing the maintenance load on our code. We don't have to have an explicit mutex data member, and we don't have to remember to lock it and unlock it correctly around every access to `head`. Instead, we can defer all that to the implementation with a single line change:
 
 ```c++
@@ -261,6 +354,8 @@ class MyList{
 ```
 
 Now, the read from `head` no longer races with a store to `head`: the implementation of `atomic_shared_ptr` takes care of ensuring that the load gets either the new value or the old one without problem, and ensuring that the reference count is correctly updated.
+
+
 
 Unfortunately, the code is still not bug free: what if 2 threads try and remove a node at the same time.
 
@@ -278,4 +373,24 @@ As it stands, `pop_front` assumes it is the only modifying thread, which leaves 
 
 So, two threads call `pop_front`, but only one node is removed. That's a bug.
 
-The fix here is to use the ubiquitous `compare_exchange_strong` function, a staple of any programmer who's ever written code that uses atomic variables.
+The fix here is to use the ubiquitous(无处不在的) `compare_exchange_strong` function, a staple of any programmer who's ever written code that uses atomic variables.
+
+```c++
+class MyList{
+    void pop_front(){
+        std::shared_ptr<Node> p=head;
+        while(p &&
+            !head.compare_exchange_strong(p,p->next));
+    }
+};
+```
+
+If `head` has changed since we loaded it, then the call to `compare_exchange_strong` will return `false`, and reload `p` for us. We then loop again, checking that `p` is still non-null.
+
+This will ensure that two calls to `pop_front` removes two nodes (if there are 2 nodes) without problems either with each other, or with a traversing thread.
+
+Experienced lock-free programmers might well be thinking "what about the ABA problem?" right about now. Thankfully, we don't have to worry!
+
+## What no ABA problem?
+
+That's right, `pop_front` does not suffer from the ABA problem. Even assuming we've got a function that adds new values, we can never get a new value of `head` the same as the old one. This is an additional benefit of using `std::shared_ptr`: the old node is kept alive as long as one thread holds a pointer. So, thread X reads `head` and gets a pointer to node A. This node is now kept alive until thread X destroys or reassigns that pointer. That means that no new node can be allocated with the same address, so if `head` is equal to the value `p` then it really must be the same node, and not just some imposter that happens to share the same address.
