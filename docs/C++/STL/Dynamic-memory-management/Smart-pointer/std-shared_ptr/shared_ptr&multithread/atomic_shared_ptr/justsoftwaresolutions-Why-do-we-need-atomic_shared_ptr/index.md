@@ -242,3 +242,40 @@ int main()
 }
 ```
 
+Unfortunately that only fixes that race condition. There is a second race that is just as bad.
+
+## The second race condition
+
+The second **race condition** is on `head` itself. In order to traverse the list, thread `X` has to read `head`. In the mean time, thread `Y` is updating `head`. This is the very definition of a *data race*, and is thus **undefined behaviour**.
+
+We therefore need to do something to fix it.
+
+We could use a mutex to protect `head`. This would be more fine-grained than a whole-list mutex, since it would only be held for the brief time when the pointer was being read or changed. However, we don't need to: we can use `std::experimental::atomic_shared_ptr` instead.
+
+The implementation is allowed to use a mutex internally with `atomic_shared_ptr`, in which case we haven't gained anything with respect to performance or concurrency, but we *have* gained by reducing the maintenance load on our code. We don't have to have an explicit mutex data member, and we don't have to remember to lock it and unlock it correctly around every access to `head`. Instead, we can defer all that to the implementation with a single line change:
+
+```c++
+class MyList{
+    std::experimental::atomic_shared_ptr<Node> head;
+};
+```
+
+Now, the read from `head` no longer races with a store to `head`: the implementation of `atomic_shared_ptr` takes care of ensuring that the load gets either the new value or the old one without problem, and ensuring that the reference count is correctly updated.
+
+Unfortunately, the code is still not bug free: what if 2 threads try and remove a node at the same time.
+
+## Race 3: double removal
+
+As it stands, `pop_front` assumes it is the only modifying thread, which leaves the door wide open for race conditions. If 2 threads call `pop_front` concurrently, we can get the following scenario:
+
+1、Thread X loads `head` and gets a pointer to node A.
+
+2、Thread Y loads `head` and gets a pointer to node A.
+
+3、Thread X replaces `head` with `A->next`, which is node B.
+
+4、Thread Y replaces `head` with `A->next`, which is node B.
+
+So, two threads call `pop_front`, but only one node is removed. That's a bug.
+
+The fix here is to use the ubiquitous `compare_exchange_strong` function, a staple of any programmer who's ever written code that uses atomic variables.
