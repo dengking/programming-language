@@ -6,5 +6,8 @@ nav:
     - shared_ptr&array: shared_ptr&array
     - Assignment-operator: Assignment-operator
     - std-weak_ptr: std-weak_ptr
+    - std-move-std-shared_ptr: std-move-std-shared_ptr
     - Impl: Impl    
     - TODO-aliasing-constructor: TODO-aliasing-constructor
+
+    

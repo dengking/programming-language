@@ -164,3 +164,81 @@ How can we fix it?
 
 The first thing to change is to make all our `std::unique_ptr`s into `std::shared_ptr`s, and have our traversal function take a `std::shared_ptr` copy rather than using a raw pointer. That way, node `A` won't be deleted immediately, since our traversing thread still holds a reference.
 
+
+
+```c++
+#include <thread>
+#include <memory>
+#include <chrono>
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+class MyClass
+{
+    int id_{0};
+
+public:
+    MyClass(int id) : id_(id) {}
+    void do_stuff()
+    {
+        cout << "do_stuff:" << id_ << endl;
+    }
+};
+
+class MyList
+{
+public:
+    // constructors etc. omitted.
+    struct Node
+    {
+        MyClass data;
+        std::shared_ptr<Node> next;
+        Node(int id) : data{id}
+        {
+        }
+    };
+    std::shared_ptr<Node> head;
+
+    void traverse(std::function<void(MyClass &)> f)
+    {
+        std::shared_ptr<Node> p = head; // traverse function hold a reference to shared data
+        while (p)
+        {
+            f(p->data);
+            p = p->next;
+        }
+    }
+    void pop_front()
+    {
+        std::shared_ptr<Node> p = head; // pop_front function hold a reference to shared data
+        if (p)
+        {
+            head = std::move(p->next);
+        }
+    }
+    // constructors etc. omitted.
+};
+
+int main()
+{
+    MyList l;
+    l.head = make_shared<MyList::Node>(1);
+    l.head->next = make_shared<MyList::Node>(2);
+    l.head->next->next = make_shared<MyList::Node>(3);
+
+    std::thread thread1([&]()
+                        { 
+                            l.traverse([](MyClass &data)
+                                     { 
+                                        data.do_stuff(); 
+                                     }); 
+                        });
+    std::thread thread2([&]()
+                        { l.pop_front(); });
+    thread2.join();
+    thread1.join();
+}
+```
+
