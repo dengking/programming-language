@@ -1,4 +1,4 @@
-# justsoftwaresolutions [Why do we need atomic_shared_ptr?](https://www.justsoftwaresolutions.co.uk/threading/why-do-we-need-atomic_shared_ptr.html)
+# justsoftwaresolutions [Why do we need atomic_shared_ptr?](https://www.justsoftwaresolutions.co.uk/threading/why-do-we-need-atomic_shared_ptr.html) 
 
 One of the new class templates provided in the upcoming [Concurrency TS](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4501.html) is [`atomic_shared_ptr`](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4501.html#atomic), along with its counterpart `atomic_weak_ptr`. As you might guess, these are the `std::shared_ptr` and `std::weak_ptr` equivalents of `std::atomic<T*>`, but why would one need them? Doesn't `std::shared_ptr` already have to synchronize the reference count?
 
