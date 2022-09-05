@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
     - Case-example: Case-example
-    - Multi-thread&observer-pattern: Multi-thread&observer-pattern
+    - Access-outside-of-object-lifetime-in-multi-thread-application: Access-outside-of-object-lifetime-in-multi-thread-application
     - Pure-virtual-method-called: Pure-virtual-method-called    
-    # - dangling-pointer-and-control-theory-and-reference-counting: dangling-pointer-and-control-theory-and-reference-counting.md
