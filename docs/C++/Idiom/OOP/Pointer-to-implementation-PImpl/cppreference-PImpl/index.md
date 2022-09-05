@@ -1,4 +1,4 @@
-# cppreference [PImpl](https://en.cppreference.com/w/cpp/language/pimpl)
+# cppreference [PImpl](https://en.cppreference.com/w/cpp/language/pimpl) 
 
 "Pointer to implementation" or "pImpl" is a C++ programming technique[[1\]](https://en.cppreference.com/w/cpp/language/pimpl#cite_note-1) that removes implementation details of a class from its object representation by placing them in a separate class, accessed through an opaque pointer:
 
