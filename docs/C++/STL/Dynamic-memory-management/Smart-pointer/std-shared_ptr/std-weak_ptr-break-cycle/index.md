@@ -34,6 +34,242 @@ Another use for `std::weak_ptr` is to break reference cycles formed by objects m
 >
 > Application二: break reference cycle
 
+### Example
+
+Demonstrates how lock is used to ensure validity of the pointer.
+
+> NOTE:
+>
+> 一、这个例子展示的是使用`std::weak_ptr` 来 "track object lifetime"
+
+```C++
+#include <iostream>
+#include <memory>
+
+std::weak_ptr<int> gw;
+
+void observe()
+{
+    std::cout << "gw.use_count() == " << gw.use_count() << "; ";
+    // we have to make a copy of shared pointer before usage:
+    if (std::shared_ptr<int> spt = gw.lock())
+    {
+        std::cout << "*spt == " << *spt << '\n';
+    }
+    else
+    {
+        std::cout << "gw is expired\n";
+    }
+}
+
+int main()
+{
+    {
+        auto sp = std::make_shared<int>(42);
+        gw = sp;
+
+        observe();
+    }
+
+    observe();
+}
+```
+
 
 
 ## learncpp [M.8 — Circular dependency issues with std::shared_ptr, and std::weak_ptr](https://www.learncpp.com/cpp-tutorial/circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr/)
+
+
+
+```c++
+#include <iostream>
+#include <memory> // for std::shared_ptr
+#include <string>
+
+class Person
+{
+    std::string m_name;
+    std::shared_ptr<Person> m_partner; // initially created empty
+
+public:
+    Person(const std::string &name) : m_name(name)
+    {
+        std::cout << m_name << " created\n";
+    }
+    ~Person()
+    {
+        std::cout << m_name << " destroyed\n";
+    }
+
+    friend bool partnerUp(std::shared_ptr<Person> &p1, std::shared_ptr<Person> &p2)
+    {
+        if (!p1 || !p2)
+            return false;
+
+        p1->m_partner = p2;
+        p2->m_partner = p1;
+
+        std::cout << p1->m_name << " is now partnered with " << p2->m_name << '\n';
+
+        return true;
+    }
+};
+
+int main()
+{
+    auto lucy{std::make_shared<Person>("Lucy")};   // create a Person named "Lucy"
+    auto ricky{std::make_shared<Person>("Ricky")}; // create a Person named "Ricky"
+
+    partnerUp(lucy, ricky); // Make "Lucy" point to "Ricky" and vice-versa
+
+    return 0;
+}
+```
+
+
+
+> NOTE:
+>
+> 一、上述 `partnerUp` 函数的入参`std:shared_ptr` 是pass-by-reference
+>
+> 二、上述程序典型的展示了memory leak
+
+### Circular references
+
+#### A reductive case
+
+```c++
+#include <iostream>
+#include <memory> // for std::shared_ptr
+
+class Resource
+{
+public:
+    std::shared_ptr<Resource> m_ptr{}; // initially created empty
+
+    Resource() { std::cout << "Resource acquired\n"; }
+    ~Resource() { std::cout << "Resource destroyed\n"; }
+};
+
+int main()
+{
+    auto ptr1{std::make_shared<Resource>()};
+
+    ptr1->m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it
+
+    return 0;
+}
+```
+
+> NOTE:
+>
+> 一、上述例子非常好，它是典型的一个节点包含指向自己的circle，它的正确写法如下:
+>
+> ```C++
+> #include <iostream>
+> #include <memory> // for std::shared_ptr and std::weak_ptr
+> 
+> class Resource
+> {
+> public:
+>     std::weak_ptr<Resource> m_ptr{}; // use std::weak_ptr so m_ptr doesn't keep the Resource alive
+> 
+>     Resource() { std::cout << "Resource acquired\n"; }
+>     ~Resource() { std::cout << "Resource destroyed\n"; }
+> };
+> 
+> int main()
+> {
+>     auto ptr1{std::make_shared<Resource>()};
+> 
+>     ptr1->m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it
+> 
+>     return 0;
+> }
+> ```
+>
+> 
+
+### So what is std::weak_ptr for anyway?
+
+
+
+```c++
+#include <iostream>
+#include <memory> // for std::shared_ptr and std::weak_ptr
+#include <string>
+
+class Person
+{
+    std::string m_name;
+    std::weak_ptr<Person> m_partner; // note: This is now a std::weak_ptr
+
+public:
+    Person(const std::string &name) : m_name(name)
+    {
+        std::cout << m_name << " created\n";
+    }
+    ~Person()
+    {
+        std::cout << m_name << " destroyed\n";
+    }
+
+    friend bool partnerUp(std::shared_ptr<Person> &p1, std::shared_ptr<Person> &p2)
+    {
+        if (!p1 || !p2)
+            return false;
+
+        p1->m_partner = p2;
+        p2->m_partner = p1;
+
+        std::cout << p1->m_name << " is now partnered with " << p2->m_name << '\n';
+
+        return true;
+    }
+};
+
+int main()
+{
+    auto lucy{std::make_shared<Person>("Lucy")};
+    auto ricky{std::make_shared<Person>("Ricky")};
+
+    partnerUp(lucy, ricky);
+
+    return 0;
+}
+```
+
+
+
+### Dangling pointers with `std::weak_ptr`
+
+```c++
+// h/t to reader Waldo for this example
+#include <iostream>
+#include <memory>
+
+class Resource
+{
+public:
+    Resource() { std::cerr << "Resource acquired\n"; }
+    ~Resource() { std::cerr << "Resource destroyed\n"; }
+};
+
+auto getWeakPtr()
+{
+    auto ptr{std::make_shared<Resource>()}; // Resource acquired
+
+    return std::weak_ptr{ptr};
+} // ptr goes out of scope, Resource destroyed
+
+int main()
+{
+    std::cerr << "Getting weak_ptr...\n";
+
+    auto ptr{getWeakPtr()}; // dangling
+
+    std::cerr << "Done.\n";
+}
+
+```
+
