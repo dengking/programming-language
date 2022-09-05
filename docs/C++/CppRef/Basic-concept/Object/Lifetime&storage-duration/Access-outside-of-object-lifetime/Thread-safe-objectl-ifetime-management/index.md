@@ -1,4 +1,4 @@
-# Access outside of object lifetime in multi-thread application
+# Thread-safe object lifetime management
 
 在multi-thread application是非常容易出现access outside of object lifetime的，下面分情况讨论，对于每种情况，给出具体的案例、解决方案。
 
@@ -22,9 +22,7 @@
 
 ## Example: observer pattern
 
-Event-driven/network library中，一般采用observer pattern，传入一个object来作为callback。将一个object作为callback传入到另外一个event driven library中的做法是非常不好的，这种情况下，一般涉及multithread，这个object同时被多个thread access，这样的做法有如下劣势就是非常容易access outside of object lifetime。
-
-> NOTE: 这种情况的最最典型的例子是: amust api。
+Event-driven/network library中，一般采用observer pattern，传入一个object来作为callback/observer。将一个object作为callback/observer传入到另外一个event driven library中的做法是非常不好的，这种情况下，一般涉及multithread，这个object同时被多个thread access，这样的做法有如下劣势就是非常容易access outside of object lifetime，比如在外层将observer给释放了，在sdk中还通过pointer去access它，这样就会导致dangling pointer问题。
 
 
 

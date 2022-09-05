@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
     - Case-example: Case-example
-    - Access-outside-of-object-lifetime-in-multi-thread-application: Access-outside-of-object-lifetime-in-multi-thread-application
     - Pure-virtual-method-called: Pure-virtual-method-called    
+    - Thread-safe-objectl-ifetime-management: Thread-safe-objectl-ifetime-management
+    
