@@ -71,7 +71,9 @@ int main()
 
 ```
 
-> NOTE: 使用`weak_ptr`可以有效地避免dangling pointer问题
+> NOTE: 
+>
+> 一、使用`weak_ptr`可以有效地避免dangling pointer问题
 
 In the contrived(人为的) example above, an observer thread periodically checks the value of a *shared_ptr* managed object. The observer thread, however, does not own the object through a *shared_ptr*. It has a *weak_ptr* and periodically tries to acquire a temporary *shared_ptr* from it to access the object. The observer thread quits when it fails to obtain a *shared_ptr*.
 
