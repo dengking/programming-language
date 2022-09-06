@@ -313,11 +313,15 @@ cppreference [`std::atomic_shared_ptr`](https://en.cppreference.com/w/cpp/experi
 
 
 
-3、[`std::atomic_shared_ptr`](https://en.cppreference.com/w/cpp/experimental/atomic_shared_ptr)
+三、[`std::atomic_shared_ptr`](https://en.cppreference.com/w/cpp/experimental/atomic_shared_ptr)
 
 
 
-4、[`std::atomic<std::shared_ptr>`](https://en.cppreference.com/w/cpp/memory/shared_ptr/atomic2) since C++20
+四、[`std::atomic<std::shared_ptr>`](https://en.cppreference.com/w/cpp/memory/shared_ptr/atomic2) since C++20
+
+下面是一些素材:
+
+1、stackoverflow [What is C++20 std::atomic> and std::atomic>? [duplicate]](https://stackoverflow.com/questions/59024560/what-is-c20-stdatomicshared-ptrt-and-stdatomicweak-ptrt)
 
 
 
