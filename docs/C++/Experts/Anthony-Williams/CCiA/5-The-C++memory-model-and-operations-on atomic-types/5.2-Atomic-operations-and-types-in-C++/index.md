@@ -113,3 +113,68 @@ int main()
 }
 ```
 
+
+
+When we look at the memory-ordering semantics, you’ll see how this guarantees the necessary **enforced ordering** that goes with a mutex lock. This example is covered in section 5.3.6.
+
+
+
+## 5.2.3 Operations on `std::atomic<bool>`
+
+The most basic of the atomic integral types is `std::atomic<bool>`. This is a more fullfeatured Boolean flag than `std::atomic_flag`, as you might expect. Although it’s still not copy-constructible or copy-assignable, you can construct it from a nonatomic bool, so it can be initially `true` or `false`, and you can also assign to instances of `std::atomic<bool>` from a nonatomic bool:
+
+```c++
+std::atomic<bool> b(true);
+b=false;
+```
+
+### Assignment operator
+
+One other thing to note about the **assignment operator** from a nonatomic bool is that it differs from the general convention of returning a reference to the object it’s assigned to: it returns a bool with the value assigned instead. This is another common pattern with the atomic types: the **assignment operators** they support return values (of the corresponding nonatomic type) rather than references. If a reference to the atomic variable was returned, any code that depended on the result of the assignment would then have to explicitly load the value, potentially getting the result of a modification
+by another thread. By returning the result of the assignment as a nonatomic value, you can avoid this additional load, and you know that the value obtained is the actual value stored.
+
+### Member function comparison
+
+Rather than using the restrictive `clear()` function of `std::atomic_flag`, writes (of either `true` or `false`) are done by calling `store()`, although the memory-order semantics can still be specified. 
+
+Similarly, `test_and_set()` has been replaced with the more general `exchange()` member function that allows you to replace the stored value with a new one of your choosing and atomically retrieve the original value. `std::atomic<bool>` also supports a plain nonmodifying query of the value with an implicit conversion to plain bool or with an explicit call to `load()`. 
+
+As you might expect, `store()` is a **store** operation, whereas `load()` is a **load** operation. `exchange()` is a **read-modify-write** operation:
+
+```c++
+std::atomic<bool> b;
+bool x=b.load(std::memory_order_acquire);
+b.store(true);
+x=b.exchange(false,std::memory_order_acq_rel);
+```
+
+`exchange()` isn’t the only read-modify-write operation supported by `std::atomic<bool>`; it also introduces an operation to store a new value if the current value is equal to an expected value.
+
+### STORING A NEW VALUE (OR NOT) DEPENDING ON THE CURRENT VALUE
+
+This new operation is called compare/exchange, and it comes in the form of the `compare_exchange_weak()` and `compare_exchange_strong()` member functions. The compare/exchange operation is the cornerstone of programming with atomic types; it compares the value of the atomic variable with a supplied expected value and stores the supplied desired value if they’re equal. If the values aren’t equal, the expected value is updated with the actual value of the atomic variable. The return type of the compare/exchange functions is a bool, which is `true` if the store was performed and `false` otherwise.
+
+#### `compare_exchange_weak()`
+
+For `compare_exchange_weak()`, the store might not be successful even if the original value was equal to the expected value, in which case the value of the variable is unchanged and the return value of `compare_exchange_weak()` is `false`. This is most likely to happen on machines that lack a **single compare-and-exchange instruction**, if the processor can’t guarantee that the operation has been done atomically—possibly because the thread performing the operation was switched out in the middle of the necessary sequence of instructions and another thread scheduled in its place by
+the operating system where there are more threads than processors. This is called a **spurious failure**, because the reason for the failure is a function of timing rather than the values of the variables. Because `compare_exchange_weak()` can fail spuriously, it must typically be used in a loop:
+
+```c++
+bool expected=false;
+extern atomic<bool> b; // set somewhere else
+while(!b.compare_exchange_weak(expected,true) && !expected);
+```
+
+> NOTE:
+>
+> 一、如果设置成功，则 `compare_exchange_weak` 会返回true，则此时上述loop会退出。
+
+In this case, you keep looping as long as expected is still false, indicating that the `compare_exchange_weak()` call failed spuriously.
+
+#### `compare_exchange_strong()`
+
+On the other hand, `compare_exchange_strong()` is guaranteed to return `false` only if the actual value wasn’t equal to the expected value. This can eliminate the need for loops like the one shown where you just want to know whether you successfully changed a variable or whether another thread got there first.
+
+
+
+If you want to change the variable whatever the initial value is (perhaps with an updated value that depends on the current value), the update of `expected` becomes useful; each time through the loop, `expected` is reloaded, so if no other thread modifies the value in the meantime, the `compare_exchange_weak()` or `compare_exchange_strong()` call should be successful the next time around the loop.
