@@ -152,7 +152,39 @@ x=b.exchange(false,std::memory_order_acq_rel);
 
 ### STORING A NEW VALUE (OR NOT) DEPENDING ON THE CURRENT VALUE
 
-This new operation is called compare/exchange, and it comes in the form of the `compare_exchange_weak()` and `compare_exchange_strong()` member functions. The compare/exchange operation is the cornerstone of programming with atomic types; it compares the value of the atomic variable with a supplied expected value and stores the supplied desired value if they’re equal. If the values aren’t equal, the expected value is updated with the actual value of the atomic variable. The return type of the compare/exchange functions is a bool, which is `true` if the store was performed and `false` otherwise.
+This new operation is called compare/exchange, and it comes in the form of the `compare_exchange_weak()` and `compare_exchange_strong()` member functions. The compare/exchange operation is the cornerstone of programming with atomic types; it compares the value of the atomic variable with a supplied `expected` value and stores the supplied desired value if they’re equal. If the values aren’t equal, the `expected` value is updated with the actual value of the atomic variable. The return type of the compare/exchange functions is a bool, which is `true` if the store was performed and `false` otherwise.
+
+> NOTE:
+>
+> 零、一般放在CAS loop中，因此它需要:考虑 
+>
+> 1、stop condition
+>
+> 2、在两次loop之间，其他thread更新了atomic variable value
+>
+> 一、values
+>
+> 0、actual value of the atomic variable
+>
+> 其它所有的value都是对它进行操作
+>
+> 1、return value
+>
+> 2、 `expected` value
+>
+> 3、`desired` value
+>
+> 4、
+>
+> 二、
+>
+> 1、if value ==  `expected` value
+>
+> 2、if value !=  `expected` value
+>
+> "the `expected` value is updated with the actual value of the atomic variable" 有如下价值:
+>
+> 1、stop condition
 
 #### `compare_exchange_weak()`
 
@@ -177,4 +209,5 @@ On the other hand, `compare_exchange_strong()` is guaranteed to return `false` o
 
 
 
-If you want to change the variable whatever the initial value is (perhaps with an updated value that depends on the current value), the update of `expected` becomes useful; each time through the loop, `expected` is reloaded, so if no other thread modifies the value in the meantime, the `compare_exchange_weak()` or `compare_exchange_strong()` call should be successful the next time around the loop.
+If you want to change the variable whatever the initial value is (perhaps with an updated value that depends on the current value), the update of `expected` becomes useful; each time through the loop, `expected` is reloaded, so if no other thread modifies the value in the meantime, the `compare_exchange_weak()` or `compare_exchange_strong()` call should be successful the next time around the loop. If the calculation of the value to be stored is simple, it may be beneficial to use `compare_exchange_weak()` in order to avoid a double loop on platforms where `compare_exchange_weak()` can fail spuriously (and so `compare_exchange_strong()` contains a loop).
+
