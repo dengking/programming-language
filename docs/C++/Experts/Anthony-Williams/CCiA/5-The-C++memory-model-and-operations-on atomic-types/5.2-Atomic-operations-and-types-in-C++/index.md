@@ -203,7 +203,7 @@ while(!b.compare_exchange_weak(expected,true) && !expected);
 >
 > 二、stackoverflow [Understanding std::atomic::compare_exchange_weak() in C++11](https://stackoverflow.com/questions/25199838/understanding-stdatomiccompare-exchange-weak-in-c11) # [Tony D.'s comment](https://stackoverflow.com/questions/25199838/understanding-stdatomiccompare-exchange-weak-in-c11#comment39245734_25200031) 
 >
-> "*Why is !expected in the example?* It is not needed for correctness. Omitting it would yield the same semantics." - not so... if say the first exchange fails because it finds `b` is already `true`, then - with `expected` now `true` - without `&& !expected` it loops and tries another (silly) exchange of `true` and `true` which may well "succeed" trivially breaking from the `while` loop, ***but*** could exhibit meaningfully different behaviour if `b` had meanwhile changed back to `false`, in which case the loop would continue and *may* ultimately set `b` `true` *yet again* before breaking. – [Tony Delroy](https://stackoverflow.com/users/410767/tony-delroy)
+> > "*Why is !expected in the example?* It is not needed for correctness. Omitting it would yield the same semantics." - not so... if say the first exchange fails because it finds `b` is already `true`, then - with `expected` now `true` - without `&& !expected` it loops and tries another (silly) exchange of `true` and `true` which may well "succeed" trivially breaking from the `while` loop, ***but*** could exhibit meaningfully different behaviour if `b` had meanwhile changed back to `false`, in which case the loop would continue and *may* ultimately set `b` `true` *yet again* before breaking. – [Tony Delroy](https://stackoverflow.com/users/410767/tony-delroy)
 >
 > 
 
