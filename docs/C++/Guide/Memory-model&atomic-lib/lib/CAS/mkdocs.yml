@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - std-atomic-compare_exchange_weak: std-atomic-compare_exchange_weak
+    - TODO-herbsutter-write-a-CAS-loop: TODO-herbsutter-write-a-CAS-loop
+    

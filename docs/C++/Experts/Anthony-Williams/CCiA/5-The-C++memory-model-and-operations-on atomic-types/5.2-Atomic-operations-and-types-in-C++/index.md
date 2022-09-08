@@ -200,6 +200,12 @@ while(!b.compare_exchange_weak(expected,true) && !expected);
 > NOTE:
 >
 > 一、如果设置成功，则 `compare_exchange_weak` 会返回true，则此时上述loop会退出。
+>
+> 二、stackoverflow [Understanding std::atomic::compare_exchange_weak() in C++11](https://stackoverflow.com/questions/25199838/understanding-stdatomiccompare-exchange-weak-in-c11) # [Tony D.'s comment](https://stackoverflow.com/questions/25199838/understanding-stdatomiccompare-exchange-weak-in-c11#comment39245734_25200031) 
+>
+> "*Why is !expected in the example?* It is not needed for correctness. Omitting it would yield the same semantics." - not so... if say the first exchange fails because it finds `b` is already `true`, then - with `expected` now `true` - without `&& !expected` it loops and tries another (silly) exchange of `true` and `true` which may well "succeed" trivially breaking from the `while` loop, ***but*** could exhibit meaningfully different behaviour if `b` had meanwhile changed back to `false`, in which case the loop would continue and *may* ultimately set `b` `true` *yet again* before breaking. – [Tony Delroy](https://stackoverflow.com/users/410767/tony-delroy)
+>
+> 
 
 In this case, you keep looping as long as expected is still false, indicating that the `compare_exchange_weak()` call failed spuriously.
 
@@ -207,7 +213,15 @@ In this case, you keep looping as long as expected is still false, indicating th
 
 On the other hand, `compare_exchange_strong()` is guaranteed to return `false` only if the actual value wasn’t equal to the expected value. This can eliminate the need for loops like the one shown where you just want to know whether you successfully changed a variable or whether another thread got there first.
 
+> NOTE:
+>
+> 一、上面这段话的中文翻译如下:
+>
+> "仅当actual value不等于 expected value的时候，`compare_exchange_strong()` 才保证返回`false`"。
+>
+> 上面使用loop的原因: "whether you successfully changed a variable"、"whether another thread got there first"
 
+#### change the variable whatever the initial value is
 
-If you want to change the variable whatever the initial value is (perhaps with an updated value that depends on the current value), the update of `expected` becomes useful; each time through the loop, `expected` is reloaded, so if no other thread modifies the value in the meantime, the `compare_exchange_weak()` or `compare_exchange_strong()` call should be successful the next time around the loop. If the calculation of the value to be stored is simple, it may be beneficial to use `compare_exchange_weak()` in order to avoid a double loop on platforms where `compare_exchange_weak()` can fail spuriously (and so `compare_exchange_strong()` contains a loop).
+If you want to change the variable whatever the initial value is (perhaps with an updated value that depends on the current value), the update of `expected` becomes useful; each time through the loop, `expected` is reloaded, so if no other thread modifies the value in the meantime, the `compare_exchange_weak()` or `compare_exchange_strong()` call should be successful the next time around the loop. If the calculation of the value to be stored is simple, it may be beneficial to use `compare_exchange_weak()` in order to avoid a **double loop** on platforms where `compare_exchange_weak()` can fail spuriously (and so `compare_exchange_strong()` contains a loop).
 
