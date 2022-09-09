@@ -52,9 +52,13 @@ The write of the `data` **happens-before** the write to the `data_ready` flag, a
 
 
 
-![](./Figure-5.2-Enforcing-an-ordering-between-nonatomic-operations-using-atomic-operations.jpg)
+![](./Figure-5.2-Enforce-ordering-between-nonatomic-operation-using-atomic-operations.jpg)
 
 
 
 
+
+All this might seem fairly intuitive: of course the operation that writes a value **happens before** an operation that reads that value! With the default atomic operations, that’s indeed true (which is why this is the default), but it does need spelling out: the atomic operations also have other options for the ordering requirements, which I’ll come to shortly.
+
+Now that you’ve seen **happens-before** and **synchronizes-with** in action, it’s time to look at what they really mean. I’ll start with **synchronizes-with**.
 
