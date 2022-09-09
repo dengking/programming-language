@@ -62,3 +62,34 @@ All this might seem fairly intuitive: of course the operation that writes a valu
 
 Now that you’ve seen **happens-before** and **synchronizes-with** in action, it’s time to look at what they really mean. I’ll start with **synchronizes-with**.
 
+## 5.3.1 The synchronizes-with relationship
+
+The **synchronizes-with** relationship is something that you can get only between operations on **atomic types**. Operations on a data structure (such as locking a mutex) might provide this relationship if the data structure contains atomic types and the operations on that data structure perform the appropriate atomic operations internally, but fundamentally it comes only from operations on **atomic types**.
+
+The basic idea is this: a **suitably tagged atomic write operation** `W` on a variable `x` **synchronizes-with** a **suitably tagged atomic read operation** on `x` that reads the value stored by either that write (`W`), or a subsequent(随后的) **atomic write operation** on `x` by the same thread that performed the initial write `W`, or a sequence of atomic read-modify-write operations on `x` (such as `fetch_add()` or `compare_exchange_weak()`) by any thread, where the value read by the first thread in the sequence is the value written by `W` (see section 5.3.4).
+
+> NOTE:
+>
+> 一、上面这段话要如何理解？
+>
+> 1、对于同一个shared variable `x`
+>
+> 2、write operation W **synchronizes-with** read operation，简而言之: read the write value
+>
+> 3、对`x`所有的operation，现成一个sequence
+>
+> 在 "5.3.4 Release sequences and synchronizes-with" 节对上面这段话的解释如下: 
+>
+> > Back in section 5.3.1, I mentioned that you could get a synchronizes-with relationship between a store to an atomic variable and a load of that atomic variable from another thread, even when there’s a sequence of read-modify-write operations between the store and the load, provided all the operations are suitably tagged.
+
+
+
+Leave the “suitably tagged” part aside for now, because all operations on atomic types are suitably tagged by default. This essentially means what you might expect: if thread A stores a value and thread B reads that value, there’s a synchronizes-with relationship between the store in thread A and the load in thread B, just as in listing 5.2.
+
+As I’m sure you’ve guessed, the nuances(细微差别) are all in the “suitably tagged” part. The C++ memory model allows various ordering constraints to be applied to the operations on atomic types, and this is the tagging to which I refer. The various options for memory ordering and how they relate to the **synchronizes-with relationship** are covered in section 5.3.3. First, let’s step back and look at the **happens-before relationship**.
+
+
+
+## 5.3.4 Release sequences and synchronizes-with
+
+Back in section 5.3.1, I mentioned that you could get a synchronizes-with relationship between a store to an atomic variable and a load of that atomic variable from another thread, even when there’s a sequence of read-modify-write operations between the store and the load, provided all the operations are suitably tagged.
