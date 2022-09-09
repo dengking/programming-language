@@ -225,3 +225,112 @@ On the other hand, `compare_exchange_strong()` is guaranteed to return `false` o
 
 If you want to change the variable whatever the initial value is (perhaps with an updated value that depends on the current value), the update of `expected` becomes useful; each time through the loop, `expected` is reloaded, so if no other thread modifies the value in the meantime, the `compare_exchange_weak()` or `compare_exchange_strong()` call should be successful the next time around the loop. If the calculation of the value to be stored is simple, it may be beneficial to use `compare_exchange_weak()` in order to avoid a **double loop** on platforms where `compare_exchange_weak()` can fail spuriously (and so `compare_exchange_strong()` contains a loop).
 
+## 5.2.4 Operations on `std::atomic<T*>`: pointer arithmetic
+
+> NOTE:
+>
+> 一、
+>
+> 1、load
+>
+> 2、store
+>
+> 3、read-modify-write
+
+### Pointer operation
+
+|                             | `std::atomic<bool>` | `std::atomic<T*>` |
+| --------------------------- | ------------------- | ----------------- |
+| `load()`                    |                     |                   |
+| `store()`                   |                     |                   |
+| `exchange()`                |                     |                   |
+| `compare_exchange_weak()`   |                     |                   |
+| `compare_exchange_strong()` |                     |                   |
+|                             |                     |                   |
+
+
+
+### Pointer arithmetic operations
+
+```c++
+class Foo{};
+Foo some_array[5];
+std::atomic<Foo*> p(some_array);
+Foo* x=p.fetch_add(2);
+assert(x==some_array);
+assert(p.load()==&some_array[2]);
+x=(p-=1);
+assert(x==&some_array[1]);
+assert(p.load()==&some_array[1]);
+```
+
+
+
+## 5.2.5 Operations on standard atomic integral types
+
+
+
+## 5.2.6 The `std::atomic<>` primary class template
+
+
+
+## 5.2.7 Free functions for atomic operations
+
+
+
+
+
+The C++ Standard Library also provides free functions for accessing instances of `std::shared_ptr<>` in an atomic fashion. This is a break from the principle that only the atomic types support atomic operations, because `std::shared_ptr<>` is quite definitely not an atomic type. However, the C++ Standards Committee felt it was sufficiently important to provide these extra functions. The atomic operations available are `load`, `store`, `exchange`, and compare/exchange, which are provided as overloads of the same operations on the standard atomic types, taking a `std::shared_ptr<>*` as
+the first argument:
+
+```c++
+#include <atomic>
+#include <memory>
+#include <iostream>
+
+class my_data
+{
+public:
+    my_data()
+    {
+        std::cout << "my_data()" << std::endl;
+    }
+    ~my_data()
+    {
+        std::cout << "~my_data()" << std::endl;
+    }
+    void foo()
+    {
+    }
+};
+
+void process_data(std::shared_ptr<my_data> &p)
+{
+    if (p)
+    {
+        p->foo();
+    }
+}
+std::shared_ptr<my_data> p;
+
+void process_global_data()
+{
+    std::shared_ptr<my_data> local = std::atomic_load(&p);
+    process_data(local);
+}
+
+void update_global_data()
+{
+    std::shared_ptr<my_data> local(new my_data);
+    std::atomic_store(&p, local);
+}
+
+int main()
+{
+    process_global_data();
+    update_global_data();
+    process_global_data();
+    update_global_data();
+}
+```
+

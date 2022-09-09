@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - 6-Designing-lock-based-concurrent-data-structures: 6-Designing-lock-based-concurrent-data-structures
+    - 5-The-C++memory-model-and-operations-on atomic-types: 5
+    - 6-Designing-lock-based-concurrent-data-structures: 6
