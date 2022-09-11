@@ -112,15 +112,7 @@ Of course, because everything is symmetrical, it could also happen the other way
 >
 > 二、"The `assert` can never fire, because either the store to `x` or the store to `y` must happen first, even though it’s not specified which" 的理解如下:
 >
-> 因为在 `read_x_then_y()`、`read_y_then_x()` 都会首先执行一个while loop，显然如果要退出while loop就需要 "either the store to `x` or the store to `y` must happen first"，这样它们的值才能够为true。需要注意的是:  无法确定 `write_x()`、`write_y()` 执行的先后顺序是没有指定的，系统地来说，有如下两种可能性:
->
-> 1、`write_x()`、`write_y()` 
->
-> 这种情况下，`read_x_then_y()` 会先退出while循环
->
-> 2、`write_y()`、`write_x()` 
->
-> 这种情况下，`read_y_then_x()` 会先退出while循环
+> 因为在 `read_x_then_y()`、`read_y_then_x()` 都会首先执行一个while loop，显然如果要退出while loop就需要 "either the store to `x` or the store to `y` must happen first"，这样它们的值才能够为true。需要注意的是:  无法确定 `write_x()`、`write_y()` 执行的先后顺序是没有指定的。
 >
 > 
 >
@@ -205,7 +197,7 @@ int main()
 
 This time the `assert` can fire, because the load of `x` can read `false`, even though the load of `y` reads `true` and the store of `x` **happens-before** the store of `y`. `x` and `y` are different variables, so there are no ordering guarantees relating to the visibility of values arising from operations on each.
 
-Relaxed operations on different variables can be freely reordered provided they obey any **happens-before** relationships they’re bound by (for example, within the same thread). They don’t introduce **synchronizes-with** relationships. The happens-before relationships from listing 5.5 are shown in figure 5.4, along with a possible outcome. Even though there’s a **happens-before** relationship between the stores and between the loads, there isn’t one between either store and either load, and so the loads can see the stores out of order.
+Relaxed operations on different variables can be freely reordered provided they obey any **happens-before** relationships they’re bound by (for example, within the same thread). They don’t introduce **synchronizes-with** relationships. The **happens-before** relationships from listing 5.5 are shown in figure 5.4, along with a possible outcome. Even though there’s a **happens-before** relationship between the stores and between the loads, there isn’t one between either store and either load, and so the loads can see the stores out of order.
 
 ![](./Figure-5.4-Relaxed-atomics-and-happens-before.jpg)
 
@@ -393,7 +385,47 @@ In this case the `assert` can fire (just like in the **relaxed-ordering** case),
 
 Figure 5.6 shows the **happens-before** relationships from listing 5.7, along with a possible outcome where the two reading threads each have a different view of the world. This is possible because there’s no **happens-before** relationship to force an ordering, as described previously.
 
+![](./Figure-5.6-Acquire-release-and-happens-before.jpg)
 
+> NOTE:
+>
+> 一、需要注意: 由于在 `read_x_then_y` 中 `y.load` 没有使用while loop（`x.load` 使用了while loop），因此它和`write_y()` 其实没有"synchronizes-with"关系，即使两者使用了acquire-release 
+>
+> 二、stackoverflow [Acquire/release semantics with 4 threads](https://stackoverflow.com/questions/48383867/acquire-release-semantics-with-4-threads)
+>
+> Shouldn't the store to `y` also sync with the load in `read_x_then_y`, and the store to `x` sync with the load in `read_y_then_x`? I'm very confused.
+>
+> EDIT:
+>
+> Thank you for your responses, I understand how atomics work and how to use Acquire/Release. I just don't get this specific example. I was trying to figure out IF the assertion fires, then what did each thread do? And why does the assertion never fire if we use sequential consistency.
+>
+> 三、stackoverflow [Will two atomic writes to different locations in different threads always be seen in the same order by other threads?](https://stackoverflow.com/questions/27807118/will-two-atomic-writes-to-different-locations-in-different-threads-always-be-see)
+>
+> ```C++
+> -- Initially --
+> std::atomic<int> x{0};
+> std::atomic<int> y{0};
+> 
+> -- Thread 1 --
+> x.store(1, std::memory_order_release);
+> 
+> -- Thread 2 --
+> y.store(2, std::memory_order_release);
+> 
+> -- Thread 3 --
+> int r1 = x.load(std::memory_order_acquire);   // x first
+> int r2 = y.load(std::memory_order_acquire);
+> 
+> -- Thread 4 --
+> int r3 = y.load(std::memory_order_acquire);   // y first
+> int r4 = x.load(std::memory_order_acquire);
+> ```
+>
+> 
+>
+> [A](https://stackoverflow.com/a/50679223/10173843)
+>
+> This kind of reordering test is called **IRIW (Independent Readers, Independent Writers)**, where we're checking if two readers can see the same pair of stores appear in different orders. Related, maybe a duplicate: [Acquire/release semantics with 4 threads](https://stackoverflow.com/questions/48383867/acquire-release-semantics-with-4-threads)
 
 ### Listing 5.8 Acquire-release operations can impose ordering on relaxed operations
 
@@ -480,4 +512,6 @@ void thread_3()
 }
 
 ```
+
+## DATA DEPENDENCY WITH ACQUIRE-RELEASE ORDERING AND `MEMORY_ORDER_CONSUME`
 
