@@ -1,5 +1,3 @@
-
-
 # 5.2 Atomic operations and types in C++
 
 An atomic operation is an indivisible operation. You can’t observe such an operation half-done from any thread in the system; it’s either done or not done. If the load operation that reads the value of an object is atomic, and all modifications to that object are also atomic, that load will retrieve either the initial value of the object or the value stored by one of the modifications.
@@ -11,11 +9,23 @@ In C++, you need to use an atomic type to get an atomic operation in most cases,
 
 ## 5.2.1 The standard atomic types
 
+The standard atomic types can be found in the `<atomic>` header. All operations on such types are atomic, and only operations on these types are atomic in the sense of the language definition, although you can use mutexes to make other operations appear atomic.
+
 ### `std::atomic_flag`
 
 The only type that doesn’t provide an `is_lock_free()` member function is `std::atomic_flag`. This type is a really simple Boolean flag, and operations on this type are required to be lock-free; once you have a simple lock-free Boolean flag, you can use that to implement a simple lock and thus implement all the other atomic types using that as a basis. When I said really simple, I meant it: objects of type `std::atomic_flag` are initialized to clear, and they can then either be queried and set (with the `test_and_set()` member function) or cleared (with the `clear()` member function). That’s it: no assignment, no copy construction, no test and clear, no other operations at all.
 
-The remaining atomic types are all accessed through specializations of the `std::atomic<>` class template and are a bit more full-featured but may not be lockfree(as explained previously). On most popular platforms it’s expected that the atomic variants of all the built-in types (such as `std::atomic<int>` and `std::atomic<void*>`) are indeed lock-free, but it isn’t required. As you’ll see shortly, the interface of each specialization reflects the properties of the type; bitwise operations such as `&=` aren’t defined for plain pointers, so they aren’t defined for atomic pointers either, for example.
+### The remaining atomic types
+
+The remaining atomic types are all accessed through specializations of the `std::atomic<>` class template and are a bit more full-featured but may not be lock free(as explained previously). On most popular platforms it’s expected that the atomic variants of all the built-in types (such as `std::atomic<int>` and `std::atomic<void*>`) are indeed lock-free, but it isn’t required. As you’ll see shortly, the interface of each specialization reflects the properties of the type; bitwise operations such as `&=` aren’t defined for plain pointers, so they aren’t defined for atomic pointers either, for example.
+
+![](./Table-5.1.jpg)
+
+
+
+
+
+![](./Table-5.2.jpg)
 
 
 
@@ -29,13 +39,41 @@ The standard atomic types are not copyable or assignable in the conventional sen
 
 3、direct `load()` and `store()` member functions,  `exchange()`, `compare_exchange_weak()`, and `compare_exchange_strong()`.
 
-They also support the compound assignment operators where appropriate: `+=`, `-=`, `*=`, `|=`, and so on, and the integral types and `std::atomic<>` specializations for pointers support `++` and `--`. These operators also have corresponding named member functions with the same functionality: `fetch_add()`, `fetch_or()`, and so on. 
+4、They also support the compound assignment operators where appropriate: `+=`, `-=`, `*=`, `|=`, and so on, 
 
-The return value from the **assignment operators** and **member functions** is either the value stored (in the case of the **assignment operators**) or the value prior to the operation (in the case of the **named functions**). This avoids the potential problems that could stem from the usual habit of such **assignment operators** returning a reference to the object being assigned to. In order to get the stored value from such a reference, the code would have to perform a separate read, thus allowing another thread to modify the value between the assignment and the read and opening the door for a race condition.
+5、and the integral types and `std::atomic<>` specializations for pointers support `++` and `--`. 
+
+6、These operators also have corresponding named member functions with the same functionality: `fetch_add()`, `fetch_or()`, and so on. 
+
+
+
+### Return value 
+
+The **return value** from the **assignment operators** and **member functions** is either the value stored (in the case of the **assignment operators**) or the value prior to the operation (in the case of the **named functions**). This avoids the potential problems that could stem from the usual habit of such **assignment operators** returning a reference to the object being assigned to. In order to get the stored value from such a reference, the code would have to perform a separate read, thus allowing another thread to modify the value between the assignment and the read and opening the door for a **race condition**.
 
 > NOTE:
 >
 > 一、"opening the door for a race condition" 如何理解？
+
+### Primary template
+
+The `std::atomic<>` class template isn’t just a set of specializations, though. It does have a primary template that can be used to create an atomic variant of a user-defined type. Because it’s a generic class template, the operations are limited to `load()`, `store()` (and assignment from and conversion to the user-defined type), `exchange()`, `compare_exchange_weak()`, and `compare_exchange_strong()`.
+
+
+
+### Memory-ordering argument
+
+Each of the operations on the atomic types has an optional memory-ordering argument that can be used to specify the required memory-ordering semantics. The precise semantics of the memory-ordering options are covered in section 5.3. For now, it suffices to know that the operations are divided into three categories:
+
+| operation         | memory-ordering argument                                     |
+| ----------------- | ------------------------------------------------------------ |
+| Store             | `memory_order_relaxed`, <br/>`memory_order_release`,<br/>`memory_order_seq_cst` |
+| Load              | `memory_order_relaxed`, <br/>`memory_order_consume`,<br/>`memory_order_acquire`, <br/>`memory_order_seq_cst` |
+| Read-modify-write | `memory_order_relaxed`, <br/>`memory_order_consume`, <br/>`memory_order_acquire`, <br/>`memory_order_release`, <br/>`memory_order_acq_rel`, <br/>`memory_order_seq_cst` |
+
+The default ordering for all operations is `memory_order_seq_cst`.
+
+Let’s now look at the operations you can actually do on each of the standard atomic types, starting with `std::atomic_flag`.
 
 
 
