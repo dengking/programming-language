@@ -33,6 +33,12 @@ Although there are six ordering options, they represent three models:
 > stringent: **sequentially consistent ordering** > **acquire-release ordering** > **relaxed ordering** 
 >
 > cost: **sequentially consistent ordering** < **acquire-release ordering** < **relaxed ordering** 
+>
+> 二、在下面章节中也对此进行了讨论:
+>
+> 1、SEQUENTIALLY CONSISTENT ORDERING
+>
+> 2、本节末尾
 
 These distinct memory-ordering models can have varying costs on different CPU architectures. For example, on systems based on architectures with fine control over the visibility of operations by processors other than the one that made the change, additional **synchronization instructions** can be required for **sequentially consistent ordering** over **acquire-release ordering** or **relaxed ordering** and for **acquire-release ordering** over **relaxed ordering**. If these systems have many processors, these additional synchronization instructions may take a significant amount of time, thus reducing the overall performance of the system. On the other hand, CPUs that use the x86 or x86-64 architectures (such as the Intel and AMD processors common in desktop PCs) don’t require any additional instructions for **acquire-release ordering** beyond those necessary for ensuring atomicity, and even **sequentially-consistent ordering** doesn’t require any special treatment for load operations, although there’s a small additional cost on stores.
 
@@ -59,6 +65,8 @@ The default ordering is named **sequentially consistent** because it implies tha
 > 四、"It also means that operations can’t be reordered; if your code has one operation before another in one thread, that ordering must be seen by all other threads."
 >
 > 由于要求" ***all threads must see the same order of operations*** "，因此一旦发生了reorder，那么就可能导致违背这个前提条件
+>
+> 上述对reorder的解释是非常容易理解的。
 
 
 
@@ -158,7 +166,7 @@ Of course, because everything is symmetrical, it could also happen the other way
 
 
 
-The operations and **happens-before** relationships for the case that `read_x_then_y` sees `x` as true and `y` as `false` are shown in figure 5.3. The dashed line from the load of `y` in `read_x_then_y` to the store to `y` in `write_y` shows the implied ordering relationship required in order to maintain sequential consistency: the load must occur before the store in the global order of `memory_order_seq_cst` operations in order to achieve the outcomes given here.
+The operations and **happens-before** relationships for the case that `read_x_then_y` sees `x` as true and `y` as `false` are shown in figure 5.3. The dashed line from the load of `y` in `read_x_then_y` to the store to `y` in `write_y` shows the implied ordering relationship required in order to maintain **sequential consistency**: the load must occur before the store in the global order of `memory_order_seq_cst` operations in order to achieve the outcomes given here.
 
 
 
@@ -174,7 +182,7 @@ In order to avoid this synchronization cost, you need to step outside the world 
 
 ## NON-SEQUENTIALLY CONSISTENT MEMORY ORDERINGS
 
-Once you step outside the nice **sequentially consistent** world, things start to get complicated. Probably the single biggest issue to come to grips with is the fact that ***there’s no longer a single global order of events***. This means that different threads can see different views of the same operations, and any mental model you have of operations from different threads neatly interleaved one after the other must be thrown away. Not only do you have to account for(考虑) things happening truly concurrently, but threads don’t have to agree on the order of events. In order to write (or even just to understand) any code that uses a **memory ordering** other than the default `memory_order_seq_cst`, it’s absolutely vital to get your head around this. It’s not just that the compiler can reorder the instructions. Even if the threads are running the same bit of code, they can disagree on the order of events because of operations in other threads in the absence of **explicit ordering constraints**, because the different **CPU caches** and **internal buffers** can hold different values for the same memory. It’s so important I’ll say it again: ***threads don’t have to agree on the order of events***.
+Once you step outside the nice **sequentially consistent** world, things start to get complicated. Probably the single biggest issue to come to grips with is the fact that ***there’s no longer a single global order of events***. This means that different threads can see different views of the same operations, and any mental model you have of operations from different threads neatly(仅仅) interleaved one after the other must be thrown away. Not only do you have to account for(考虑) things happening truly concurrently, but threads don’t have to agree on the order of events. In order to write (or even just to understand) any code that uses a **memory ordering** other than the default `memory_order_seq_cst`, it’s absolutely vital to get your head around this. It’s not just that the compiler can reorder the instructions. Even if the threads are running the same bit of code, they can disagree on the order of events because of operations in other threads in the absence of **explicit ordering constraints**, because the different **CPU caches** and **internal buffers** can hold different values for the same memory. It’s so important I’ll say it again: ***threads don’t have to agree on the order of events***.
 
 Not only do you have to throw out mental models based on interleaving operations, you also have to throw out mental models based on the idea of the compiler or processor reordering the instructions. ***In the absence of other ordering constraints, the only requirement is that all threads agree on the modification order of each individual variable***. Operations on distinct variables can appear in different orders on different threads, provided the values seen are consistent with any additional ordering constraints imposed.
 
@@ -184,7 +192,13 @@ Not only do you have to throw out mental models based on interleaving operations
 
 This is best demonstrated by stepping completely outside the **sequentially consistent** world and using `memory_order_relaxed` for all operations. Once you’ve come to grips with that, you can move back to **acquire-release ordering**, which allows you to selectively introduce ordering relationships between operations and claw back some of your sanity.
 
-
+> NOTE:
+>
+> 一、" Once you’ve come to grips with that, you can move back to **acquire-release ordering**, which allows you to selectively introduce ordering relationships between operations and claw back some of your sanity."
+>
+> 上面这段话的翻译如下:
+>
+> "一旦你掌握了，就可以回过头来看 **acquire-release ordering**，它让你选择性地在operations之间引入ordering relationship 并且 夺回一些理性"
 
 ## RELAXED ORDERING
 

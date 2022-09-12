@@ -14,7 +14,11 @@
 >
 > relation: happens-before、synchronizes-with
 >
-> 这在 "5.3 Synchronizing operations and enforcing ordering" 节进行主要描述
+> 这在 "5.3 Synchronizing operations and enforcing ordering" 节进行主要描述。
+>
+> 在 5.3.3 Memory ordering for atomic operations # NON-SEQUENTIALLY CONSISTENT MEMORY ORDERINGS 中有着如下总结:
+>
+> > ***In the absence of other ordering constraints, the only requirement is that all threads agree on the modification order of each individual variable***. Operations on distinct variables can appear in different orders on different threads, provided the values seen are consistent with any additional ordering constraints imposed.
 
 ## 5.1 Memory model basics
 

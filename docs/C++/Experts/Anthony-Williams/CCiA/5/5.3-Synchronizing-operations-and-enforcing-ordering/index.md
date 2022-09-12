@@ -13,6 +13,8 @@
 > 关于它们之间关系的概述: 
 >
 > 在 "Inter-thread happens-before" 节有着很好的概述
+>
+> 
 
 Suppose you have two threads, one of which is populating a data structure to be read by the second. In order to avoid a problematic race condition, the first thread sets a flag to indicate that the data is ready, and the second thread doesn’t read the data until the flag is set. The following listing shows such a scenario.
 
