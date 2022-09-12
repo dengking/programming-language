@@ -1,5 +1,43 @@
 # 5.3.3 Memory ordering for atomic operations
 
+There are six memory ordering options that can be applied to operations on atomic types: 
+
+1、`memory_order_relaxed`
+
+2、`memory_order_consume`
+
+3、`memory_order_acquire`
+
+4、`memory_order_release`
+
+5、`memory_order_acq_rel`
+
+6、`memory_order_seq_cst`
+
+Unless you specify otherwise for a particular operation, the memory-ordering option for all operations on atomic types is `memory_order_seq_cst`, which is the most stringent(严格的、严厉的) of the available options. 
+
+Although there are six ordering options, they represent three models: 
+
+1、**sequentially consistent ordering** (`memory_order_seq_cst`)
+
+2、**acquire-release ordering** (`memory_order_consume`, `memory_order_acquire`, `memory_order_release`, and `memory_order_acq_rel`), 
+
+3、relaxed ordering (`memory_order_relaxed`).
+
+## Cost of memory model
+
+> NOTE:
+>
+> 一、
+>
+> stringent: **sequentially consistent ordering** > **acquire-release ordering** > **relaxed ordering** 
+>
+> cost: **sequentially consistent ordering** < **acquire-release ordering** < **relaxed ordering** 
+
+These distinct memory-ordering models can have varying costs on different CPU architectures. For example, on systems based on architectures with fine control over the visibility of operations by processors other than the one that made the change, additional **synchronization instructions** can be required for **sequentially consistent ordering** over **acquire-release ordering** or **relaxed ordering** and for **acquire-release ordering** over **relaxed ordering**. If these systems have many processors, these additional synchronization instructions may take a significant amount of time, thus reducing the overall performance of the system. On the other hand, CPUs that use the x86 or x86-64 architectures (such as the Intel and AMD processors common in desktop PCs) don’t require any additional instructions for **acquire-release ordering** beyond those necessary for ensuring atomicity, and even **sequentially-consistent ordering** doesn’t require any special treatment for load operations, although there’s a small additional cost on stores.
+
+The availability of the distinct memory-ordering models allows experts to take advantage of the increased performance of the more fine-grained ordering relationships where they’re advantageous while(同时) allowing the use of the default **sequentially consistent ordering** (which is considerably easier to reason about than the others) for those cases that are less critical.
+
 
 
 ## SEQUENTIALLY CONSISTENT ORDERING

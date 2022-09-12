@@ -1,5 +1,19 @@
 # 5.3 Synchronizing operations and enforcing ordering
 
+> NOTE:
+>
+> 一、总结
+>
+> |      | synchronizes-with                        | happens-before                        | inter-thread happens-before           |
+> | ---- | ---------------------------------------- | ------------------------------------- | ------------------------------------- |
+> | 对象 | atomic type                              | 所有type                              |                                       |
+> |      | 5.3.1 The synchronizes-with relationship | 5.3.2 The happens-before relationship | 5.3.2 The happens-before relationship |
+> |      |                                          |                                       |                                       |
+>
+> 关于它们之间关系的概述: 
+>
+> 在 "Inter-thread happens-before" 节有着很好的概述
+
 Suppose you have two threads, one of which is populating a data structure to be read by the second. In order to avoid a problematic race condition, the first thread sets a flag to indicate that the data is ready, and the second thread doesn’t read the data until the flag is set. The following listing shows such a scenario.
 
 ![](./Listing-5.2-Reading-and-writing-variables-from-different-threads.jpg)
@@ -50,6 +64,10 @@ The required enforced ordering comes from the operations on the `std::atomic<boo
 
 The write of the `data` **happens-before** the write to the `data_ready` flag, and the read of the flag **happens-before** the read of the `data`. When the value read from `data_ready` is true, the write **synchronizes-with** that read, creating a **happens-before** relationship. Because **happens-before** is **transitive**, the write to the `data` **happens-before** the write to the flag, which **happens-before** the read of the true value from the flag, which **happens-before** the read of the `data`, and you have an **enforced ordering**: the write of the `data` **happens-before** the read of the `data` and everything is OK. Figure 5.2 shows the important **happens-before** relationships in the two threads. I’ve added a couple of iterations of the while loop from the reader thread.
 
+> NOTE:
+>
+> 一、上面这一段的分析非常好
+
 
 
 ![](./Figure-5.2-Enforce-ordering-between-nonatomic-operation-using-atomic-operations.jpg)
@@ -66,6 +84,10 @@ Now that you’ve seen **happens-before** and **synchronizes-with** in action, i
 
 The **synchronizes-with** relationship is something that you can get only between operations on **atomic types**. Operations on a data structure (such as locking a mutex) might provide this relationship if the data structure contains atomic types and the operations on that data structure perform the appropriate atomic operations internally, but fundamentally it comes only from operations on **atomic types**.
 
+> NOTE:
+>
+> 一、仅限于atomic types
+
 The basic idea is this: a **suitably tagged atomic write operation** `W` on a variable `x` **synchronizes-with** a **suitably tagged atomic read operation** on `x` that reads the value stored by either that write (`W`), or a subsequent(随后的) **atomic write operation** on `x` by the same thread that performed the initial write `W`, or a sequence of atomic read-modify-write operations on `x` (such as `fetch_add()` or `compare_exchange_weak()`) by any thread, where the value read by the first thread in the sequence is the value written by `W` (see section 5.3.4).
 
 > NOTE:
@@ -76,7 +98,7 @@ The basic idea is this: a **suitably tagged atomic write operation** `W` on a va
 >
 > 2、write operation W **synchronizes-with** read operation，简而言之: read the write value
 >
-> 3、对`x`所有的operation，现成一个sequence
+> 3、对`x`所有的operation，形成一个sequence
 >
 > 在 "5.3.4 Release sequences and synchronizes-with" 节对上面这段话的解释如下: 
 >
@@ -119,7 +141,7 @@ int main()
 }
 ```
 
-}
+
 There are circumstances where operations within a single statement are sequenced such as where the built-in comma operator is used or where the result of one expression is used as an argument to another expression. But in general, operations within a single statement are nonsequenced, and there’s no sequenced-before (and thus no happens-before) relationship between them. Of course, all operations in a statement happen before all of the operations in the next statement.
 
 ### Inter-thread happens-before
@@ -139,6 +161,8 @@ This is really just a restatement of the single-threaded sequencing rules you’
 At the basic level, **inter-thread happens-before** is relatively simple and relies on the synchronizes-with relationship introduced in section 5.3.1: if operation A in one thread synchronizes-with operation B in another thread, then A inter-thread happens-before B. It’s also a transitive relation: if A inter-thread happens-before B and B interthread-happens-before C, then A inter-thread happens-before C. You saw this in listing 5.2 as well.
 
 **Inter-thread happens-before** also combines with the **sequenced-before** relation: if operation A is **sequenced before** operation B, and operation B **inter-thread happens-before** operation C, then A **inter-thread happens-before** C. Similarly, if A **synchronizes-with** B and B is **sequenced before** C, then A **inter-thread happens-before** C. These two together mean that if you make a series of changes to data in a single thread, you need only one synchronizes-with relationship for the data to be visible to subsequent operations on the thread that executed C.
+
+## 承上启下
 
 These are the crucial rules that enforce ordering of operations between threads and make everything in listing 5.2 work. There are some additional nuances with data dependency, as you’ll see shortly. In order for you to understand this, I need to cover the memory-ordering tags used for atomic operations and how they relate to the synchronizes-with relation.
 

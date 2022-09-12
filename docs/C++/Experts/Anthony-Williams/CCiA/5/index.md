@@ -13,6 +13,8 @@
 > 2、对不同object的modification之间的相对order
 >
 > relation: happens-before、synchronizes-with
+>
+> 这在 "5.3 Synchronizing operations and enforcing ordering" 节进行主要描述
 
 ## 5.1 Memory model basics
 
