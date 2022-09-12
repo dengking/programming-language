@@ -363,22 +363,68 @@ This is a valid outcome for relaxed operations, but it’s not the only valid ou
 
 ### UNDERSTANDING RELAXED ORDERING
 
-To understand how this works, imagine that each variable is a man in a cubicle with a notepad. On his notepad is a list of values. You can phone him and ask him to give you a value, or you can tell him to write down a new value. If you tell him to write down a new value, he writes it at the bottom of the list. If you ask him for a value, he reads you a number from the list.
+> NOTE:
+>
+> 一、将thread load、store atomic variable比作两个人之间通话
+
+To understand how this works, imagine that each variable is a man in a cubicle(小卧室) with a notepad(笔记本). On his notepad is a list of values. You can phone him and ask him to give you a value, or you can tell him to write down a new value. If you tell him to write down a new value, he writes it at the bottom of the list. If you ask him for a value, he reads you a number from the list.
 
 The first time you talk to this man, if you ask him for a value, he may give you any value from the list he has on his pad at the time. If you then ask him for another value, he may give you the same one again or a value from farther down the list. He’ll never give you a value from farther up the list. If you tell him to write down a number and then subsequently ask him for a value, he’ll give you either the number you told him to write down or a number below that on the list.
+
+> NOTE:
+>
+> 一、list of value记录了atomic variable的变化过程，其实就是前面说的modification order，新值会append to tail of the list，因此，head是最旧的，tail是最新的。
+>
+> 二、在 `5, 10, 23, 3, 1, 2` 中，5是head，2是tail。
+>
+> 三、在进行load的时候，不会load跟旧的值，因此"If you tell him to write down 42, he’ll add it to the end of the list. If you ask him for a number again, he’ll keep telling you “42” until he has another number on his list and he feels like telling it to you"。这就是"It’s like he keeps track of which number he told to whom with a little movable sticky note for each person, like in figure 5.5"
 
 Imagine for a moment that his list starts with the values 5, 10, 23, 3, 1, 2. If you ask for a value, you could get any of those. If he gives you 10, then the next time you ask he could give you 10 again, or any of the later ones, but not 5. If you call him five times, he could say “10, 10, 1, 2, 2,” for example. If you tell him to write down 42, he’ll add it to the end of the list. If you ask him for a number again, he’ll keep telling you “42” until he has another number on his list and he feels like telling it to you.
 
 Now, imagine your friend Carl also has this man’s number. Carl can also phone him and either ask him to write down a number or ask for one, and he applies the same rules to Carl as he does to you. He has only one phone, so he can only deal with one of you at a time, so the list on his pad is a nice straightforward list. However, just because you got him to write down a new number doesn’t mean he has to tell it to Carl, and vice versa. If Carl asked him for a number and was told “23,” then just because you asked the man to write down 42 doesn’t mean he’ll tell that to Carl next time. He may tell Carl any of the numbers 23, 3, 1, 2, 42, or even the 67 that Fred told him to write down after you called. He could very well tell Carl “23, 3, 3, 1, 67” without
 being inconsistent with what he told you. It’s like he keeps track of which number he told to whom with a little movable sticky note for each person, like in figure 5.5.
 
+> NOTE:
+>
+> 一、"movable sticky note"的意思是"移动便签"
 
+![](./Figure-5.5-The-notebook-for-the-man-in-the-cubicle.jpg)
 
+Now imagine that there’s not just one man in a cubicle but a whole cubicle farm, with loads of men with phones and notepads. These are all our **atomic variables**. Each variable has its own **modification order** (the list of values on the pad), but there’s no relationship between them at all. If each caller (you, Carl, Anne, Dave, and Fred) is a thread, then this is what you get when every operation uses `memory_order_relaxed`. There are a few additional things you can tell the man in the cubicle, such as:
 
+1、 “write down this number, and tell me what was at the bottom of the list” (`exchange`) 
+
+2、“write down this number if the number on the bottom of the list is that; otherwise tell me what I should have guessed” (`compare_exchange_strong`), but that doesn’t affect the general principle.
+
+If you think about the program logic from listing 5.5, then `write_x_then_y` is like some guy calling up the man in cubicle `x` and telling him to write `true` and then calling up the man in cubicle `y` and telling him to write true. The thread running `read_y_then_x` repeatedly calls up the man in cubicle `y` asking for a value until he says `true` and then calls the man in cubicle `x` to ask for a value. The man in cubicle `x` is under no obligation to tell you any specific value off his list and is quite within his rights to say `false`.
+
+> NOTE:
+>
+> 一、" The man in cubicle `x` is under no obligation to tell you any specific value off his list and is quite within his rights to say `false`." 的意思是:
+>
+> 在这个小隔间x中的人没有义务告诉你他列表上的任何一个具体的值，并且还有权利说`false`。
+
+This makes relaxed atomic operations difficult to deal with. They must be used in combination with atomic operations that feature stronger ordering semantics in order to be useful for **inter-thread synchronization**. I strongly recommend avoiding relaxed atomic operations unless they’re absolutely necessary and even then using them only with extreme caution. Given the unintuitive results that can be achieved with just two threads and two variables in listing 5.5, it’s not hard to imagine the possible complexity when more threads and more variables are involved. 
+
+> NOTE:
+>
+> 一、"Given the unintuitive results that can be achieved with just two threads and two variables in listing 5.5, it’s not hard to imagine the possible complexity when more threads and more variables are involved. " 的意思是:
+>
+> 在 listing 5.5 中，仅仅是两个线程和两个变量就能够让所得到的结果这样不直观，鉴于此，不难想象涉及到更多thread和更多variable的时候会变得多么复杂。
+
+### 承上启下
+
+One way to achieve additional synchronization without the overhead of full-blown sequential consistency is to use acquire-release ordering.
 
 ## ACQUIRE-RELEASE ORDERING
 
 **Acquire-release ordering** is a step up from **relaxed ordering**; there’s still no **total order** of operations, but it does introduce some **synchronization**. Under this ordering model, **atomic loads** are **acquire operations** (`memory_order_acquire`), **atomic stores** are **release operations** (`memory_order_release`), and atomic read-modify-write operations (such as `fetch_add()` or `exchange()`) are either `acquire`, `release`, or both (`memory_order_acq_rel`). Synchronization is **pairwise**, between the thread that does the **release** and the thread that does the **acquire**. ***A release operation synchronizes-with an acquire operation that reads the value written***. This means that different threads can still see different orderings, but these orderings are restricted. The following listing is a rework of listing 5.4 using **acquire-release semantics** rather than **sequentially consistent** ones.
+
+> NOTE:
+>
+> 一、"**Acquire-release ordering** is a step up from **relaxed ordering**;"的意思是:
+>
+> **Acquire-release ordering** 是 **relaxed ordering** 的进步。
 
 ### Listing 5.7 Acquire-release doesn’t imply a total ordering
 
