@@ -527,7 +527,7 @@ Figure 5.6 shows the **happens-before** relationships from listing 5.7, along wi
 
 ### Listing 5.8 Acquire-release operations can impose ordering on relaxed operations
 
-In order to see the benefit of acquire-release ordering, you need to consider two stores from the same thread, like in listing 5.5. If you change the store to y to use `memory_order_release` and the load from y to use memory_order_acquire like in the following listing, then you actually impose an ordering on the operations on `x`.
+In order to see the benefit of acquire-release ordering, you need to consider two stores from the same thread, like in listing 5.5. If you change the store to `y` to use `memory_order_release` and the load from `y` to use `memory_order_acquire` like in the following listing, then you actually impose an ordering on the operations on `x`.
 
 
 
@@ -564,10 +564,46 @@ int main()
 
 
 
-Eventually, the load from y d will see true as written by the store c. Because the store uses memory_order_release and the load uses `memory_order_acquire`, the store synchronizes-with the load. The store to x B happens-before the store to y c, because they’re in the same thread. Because the store to y synchronizes-with the load from y, the store to x also happens-before the load from y and by extension happens-before
-the load from x e. Thus the load from x must read true, and the assert f can’t fire. If the load from y wasn’t in a while loop, this wouldn’t necessarily be the case; the load from y might read false, in which case there’d be no requirement on the value read from x. In order to provide any synchronization, acquire and release operations must be paired up. The value stored by a release operation must be seen by an acquire operation for either to have any effect. If either the store at c or the load at d was a relaxed operation, there’d be no ordering on the accesses to x, so there’d be no guarantee that the load at e would read true, and the assert could fire.
+Eventually, the load from `y` 3 will see `true` as written by the store 2. Because the store uses `memory_order_release` and the load uses `memory_order_acquire`, the store **synchronizes-with** the load. The store to `x` 1 **happens-before** the store to `y` 2, because they’re in the same thread. Because the store to `y` **synchronizes-with** the load from `y`, the store to `x` also **happens-before** the load from `y` and by extension **happens-before**
+the load from `x` 5. Thus the load from `x` must read true, and the `assert` 6 can’t fire. If the load from `y` wasn’t in a while loop, this wouldn’t necessarily be the case; the load from `y` might read `false`, in which case there’d be no requirement on the value read from `x`. In order to provide any synchronization, acquire and release operations must be paired up. The value stored by a release operation must be seen by an acquire operation for either to have any effect. If either the store at 2 or the load at 3 was a relaxed operation, there’d be no ordering on the accesses to `x`, so there’d be no guarantee that the load at 4 would read `true`, and the `assert` could fire.
 
+> NOTE:
+>
+> 一、"The value stored by a release operation must be seen by an acquire operation for either to have any effect. "
+>
+> 由release operation 存储的值必须被acquire operation 看到，以便两者中的任意一个生效。
 
+### 模拟
+
+You can still think about **acquire-release ordering** in terms of our men with notepads in their cubicles, but you have to add more to the model. First, imagine that every store that’s done is part of some **batch** of updates, so when you call a man to tell him to write down a number, you also tell him which **batch** this update is part of: “Please write down 99, as part of batch 423.” For the **last store** in a batch, you tell this to the man too: “Please write down 147, which is the **last store** in batch 423.” The man in the cubicle will then duly(及时的) write down this information, along with who gave him the value. This models a **store-release operation**. The next time you tell someone to write down a value, you increase the batch number: “Please write down 41, as part of batch 424.”
+
+> NOTE:
+>
+> 一、batch
+>
+> 1、batch number是单调递增的
+>
+> 2、对于last store，需要特别地说明，这样下次的时候，会重新新建一个batch      
+>
+> 3、放到同一个batch的目的是: 维护happens-before关系                                                                                                                                                                                                                                                                                                              
+
+When you ask for a value, you now have a choice: you can either just ask for a value (which is a **relaxed load**), in which case the man just gives you the number, or you can ask for a value and information about whether it’s the last in a **batch** (which models a **load-acquire**). If you ask for the **batch information**, and the value wasn’t the **last** in a batch, the man will tell you something like, “The number is 987, which is just a ‘normal’ value,” whereas if it was the **last** in a batch, he’ll tell you something like “The number is 987, which is the **last** number in batch 956 from Anne.” Now, here’s where the **acquire-release** semantics kick in(开始生效): if you tell the man all the batches you know about when you ask for a value, he’ll look down his list for the last value from any of the batches you know about and either give you that number or one further down the list.
+
+How does this model **acquire-release semantics**? Let’s look at our example and see. First off, thread `a` is running `write_x_then_y` and says to the man in cubicle `x`, “Please write `true` as part of batch 1 from thread `a`,” which he duly(及时的) writes down. Thread `a` then says to the man in cubicle y, “Please write true as the last write of batch 1 from thread `a`,” which he duly(及时的) writes down. In the meantime, thread `b` is running `read_y_then_x`. Thread `b` keeps asking the man in box `y` for a value with batch information until he says “true.” He may have to ask many times, but eventually the man will say “true.” The man in box `y` doesn’t just say “true” though; he also says, “This is the last write in batch 1 from thread a.”
+
+> NOTE:
+>
+> 一、thread a 对 `x`、`y` 的store都放在同一batch中
+
+Now, thread b goes on to ask the man in box x for a value, but this time he says, “Please can I have a value, and by the way I know about batch 1 from thread a.” So now, the man from cubicle x has to look down his list for the last mention of batch 1 from thread a. The only mention he has is the value true, which is also the last value on his list, so he must read out that value; otherwise, he’s breaking the rules of the game.
+
+### 承上启下
+
+If you look at the definition of **inter-thread happens-before** back in section 5.3.2, one of the important properties is that it’s transitive: if A inter-thread happens-before B and B inter-thread happens-before C, then A inter-thread happens-before C. This means that **acquire release ordering** can be used to synchronize data across several threads, even when the “intermediate” threads haven’t actually touched the data.
+
+## TRANSITIVE SYNCHRONIZATION WITH ACQUIRE-RELEASE ORDERING
+
+In order to think about transitive ordering, you need at least three threads. The first thread modifies some shared variables and does a store-release to one of them. A second thread then reads the variable subject to the store-release with a load-acquire and performs a store-release on a second shared variable. Finally, a third thread does a load-acquire on that second shared variable. Provided that the load-acquire operations see the values written by the store-release operations to ensure the synchronizes-with relationships, this third thread can read the values of the other variables stored by the first thread, even if the intermediate thread didn’t touch any of them. This scenario is shown in the next listing.
 
 ### Listing 5.9 Transitive synchronization using acquire and release ordering
 
@@ -610,6 +646,42 @@ void thread_3()
 }
 
 ```
+
+Even though `thread_2` only touches the variables `sync1` c and `sync2` d, this is enough for synchronization between `thread_1` and `thread_3` to ensure that the asserts don’t fire. First off, the stores to data from `thread_1` **happens-before** the store to `sync1` B, because they’re **sequenced-before** it in the same thread. Because the load from `sync1` B is in a while loop, it will eventually see the value stored from `thread_1` and thus form the second half of the **release-acquire** pair. Therefore, the store to `sync1` **happens-before** the final load from `sync1` in the while loop. This load is **sequenced-before** (and thus **happens-before**) the store to `sync2` d, which forms a **release-acquire** pair with the final load from the while loop in `thread_3` e. The store to `sync2` d thus **happens-before** the load e, which **happens-before** the loads from data. Because of the **transitive** nature of **happens-before**, you can chain it all together: the stores to data happen-before the store to sync1 B, which happens-before the load from sync1 c, which happens-before the store to sync2 d, which happens-before the load from sync2 e, which **happens-before** the loads from data. Thus the stores to data in `thread_1` happen-before the loads from data in `thread_3`, and the asserts can’t fire.
+
+In this case, you could combine `sync1` and `sync2` into a single variable by using a read-modify-write operation with `memory_order_acq_rel` in `thread_2`. One option would be to use `compare_exchange_strong()` to ensure that the value is updated only once the store from `thread_1` has been seen:
+
+```c++
+#include <atomic>
+#include <thread>
+#include <assert.h>
+
+std::atomic<int> sync(0);
+void thread_1()
+{
+    // ...
+    sync.store(1, std::memory_order_release);
+}
+void thread_2()
+{
+    int expected = 1;
+    while (!sync.compare_exchange_strong(expected, 2,
+                                         std::memory_order_acq_rel))
+        expected = 1;
+}
+void thread_3()
+{
+    while (sync.load(std::memory_order_acquire) < 2)
+        ;
+    // ...
+}
+int main()
+{
+}
+
+```
+
+
 
 ## DATA DEPENDENCY WITH ACQUIRE-RELEASE ORDERING AND `MEMORY_ORDER_CONSUME`
 
