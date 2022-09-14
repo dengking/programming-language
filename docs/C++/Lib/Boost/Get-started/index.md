@@ -82,8 +82,3 @@ brew install boost
 
 
 
-## Boost environment variable
-
-github [How to set BOOST_LIBRARYDIR or BOOST_ROOT? #123](https://github.com/exercism/cpp/issues/123)
-
-stackoverflow [what is BOOST_ROOT?](https://stackoverflow.com/questions/9697926/what-is-boost-root)
