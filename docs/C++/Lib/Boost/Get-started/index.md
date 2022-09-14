@@ -48,7 +48,8 @@ Here you're expected to imagine replacing the text “*your name*” with your a
 >
 > csdn  [C/C++ Windows环境下 boost 安装使用教程【学习笔记】](C/C++ Windows环境下 boost 安装使用教程[学习笔记])
 >
-> 
+
+
 
 [5.1  Simplified Build From Source](https://www.boost.org/doc/libs/1_80_0/more/getting_started/windows.html#id36)
 
@@ -77,8 +78,4 @@ brew install boost
 > ```shell
 > /opt/homebrew/Cellar/boost
 > ```
-
-
-
-
 
