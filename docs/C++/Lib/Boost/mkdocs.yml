@@ -1,23 +1,15 @@
 nav:
     - Introduction: index.md
-    # boost社区，其中说明了boost库编写的一些内容
-    - Boost-community: Boost-community
-    # data structure    
-    - Boost-Graph-Library: Boost-Graph-Library
-    
-    - Boost-Circular-Buffer: Boost-Circular-Buffer
-    # 多态相关    
-    - Boost-Poly-Collection: Boost-Poly-Collection
-    # generic programming
-    - Boost-Iterator: Boost-Iterator
-    
-    - Boost-TypeErasure: Boost-TypeErasure
-    
-    - Boost-Atomic: Boost-Atomic
-    
-    - Boost-Beast-lib: Boost-Beast-lib
-    
+    - Boost-community: Boost-community # boost社区，其中说明了boost库编写的一些内容
+    - Boost-cmake: Boost-cmake    
+    - Graph-Library: Graph-Library     # data structure    
+    - Circular-Buffer: Circular-Buffer
+    - Poly-Collection: Poly-Collection # 多态相关    
+    - Iterator: Iterator # generic programming
+    - TypeErasure: TypeErasure
+    - Atomic: Atomic
+    - Beast-lib: Beast-lib
     - Boost.Intrusive: Boost.Intrusive
 
-    - Boost-cmake: Boost-cmake
+
     
