@@ -58,6 +58,30 @@ Here you're expected to imagine replacing the text “*your name*” with your a
 
 
 
+## Install boost on macOS
+
+### stackoverflow [How do you install Boost on MacOS?](https://stackoverflow.com/questions/104322/how-do-you-install-boost-on-macos)
+
+#### [A](https://stackoverflow.com/a/9196677)
+
+You can get the latest version of Boost by using [Homebrew](http://brew.sh/).
+
+```shell
+brew install boost
+```
+
+> NOTE:
+>
+> 一、它将被安装于如下路径:
+>
+> ```shell
+> /opt/homebrew/Cellar/boost
+> ```
+
+
+
+
+
 ## Boost environment variable
 
 github [How to set BOOST_LIBRARYDIR or BOOST_ROOT? #123](https://github.com/exercism/cpp/issues/123)
