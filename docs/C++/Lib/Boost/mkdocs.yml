@@ -2,6 +2,7 @@ nav:
     - Introduction: index.md
     - Get-started: Get-started
     - Boost-community: Boost-community # boost社区，其中说明了boost库编写的一些内容
+    - bjam: bjam
     - Boost-cmake: Boost-cmake    
     - Graph-Library: Graph-Library     # data structure    
     - Circular-Buffer: Circular-Buffer
