@@ -1,6 +1,6 @@
 # 6.2.3 A thread-safe queue using fine-grained locks and condition variables
 
-In listings 6.2 and 6.3 you have one protected data item (`data_queue`) and thus one mutex. In order to use finer-grained locking, you need to look inside the queue at its constituent parts and associate one mutex with each distinct data item.
+In listings 6.2 and 6.3 you have one protected data item (`data_queue`) and thus one mutex. In order to use finer-grained locking, you need to look inside the queue at its constituent(组成的) parts and associate one mutex with each distinct data item.
 
 > NOTE:
 >
@@ -37,8 +37,8 @@ private:
         {
         }
     };
-    std::unique_ptr<node> head;
-    node *tail;
+    std::unique_ptr<node> head; // 1
+    node *tail; // 2
 
 public:
     queue()
@@ -65,16 +65,47 @@ public:
         node *const new_tail = p.get();
         if (tail)
         {
-            tail->next = std::move(p);
+            tail->next = std::move(p); // 4
         }
         else
         {
-            head = std::move(p);
+            head = std::move(p); // 5
         }
-        tail = new_tail;
+        tail = new_tail; // 6
     }
 };
 ```
+
+First off, note that listing 6.4 uses `std::unique_ptr<node>` to manage the nodes, because this ensures that they (and the data they refer to) get deleted when they’re no longer needed, without having to write an explicit delete. This **ownership chain** is managed from `head`, with `tail` being a raw pointer to the last node.
+
+> NOTE:
+>
+> 一、如何理解ownership chain？
+>
+> 结合上述代码来说是指: 
+>
+> 1、`std::unique_ptr<node> head; // 1`
+>
+> 2、
+>
+> ```c++
+> struct node
+> {
+>     std::unique_ptr<node> next;
+> }
+> ```
+>
+> 显然，这种写法的妙处就是: "without having to write an explicit delete"。
+>
+> 这种写法蕴含着: 
+>
+> 二、思考: 为什么`tail` 使用raw pointer？
+
+Although this implementation works fine in a single-threaded context, a couple of things will cause you problems if you try to use fine-grained locking in a multithreaded context. Given that you have two data items (`head` 1 and `tail` 2), you could in principle use two mutexes, one to protect `head` and one to protect `tail`, but there are a couple of problems with that.
+
+The most obvious problem is that `push()` can modify both `head` 5 and `tail` 6, so it would have to lock both mutexes. This isn’t too much of a problem, although it’s unfortunate, because locking both mutexes would be possible. The critical problem is that both `push()` and `pop()` access the `next` pointer of a node: `push()` updates `tail->next` 4, and `try_pop()` reads `head->next` 3. If there’s a single item in the queue, then `head==tail`, so both `head->next` and `tail->next` are the same object, which therefore requires protection. Because you can’t tell if it’s the same object with out reading both head and tail, you now have to lock the same mutex in both push() and try_pop(), so you’re no better off than before. Is there a way out of this dilemma?
+
+
 
 
 
