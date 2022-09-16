@@ -116,16 +116,41 @@ public:
 
 > NOTE:
 >
-> 一、显然当需要read、write `head`的时候，是都需要加锁的
+> 一、显然当需要access(read、write) `head`的时候，是都需要加锁的
 >
 > 二、对于`push_front` ，它仅仅需要修改head，因此只需要lock head即可。
 >
-> 三、对于`for_each`，它需要为每个access的node都加上lock
+> 三、由于linked list本质上只支持sequential access，因此每个node都只能够从它的parent/predecessor节点过了，它采用的是"**hand-over-hand locking**": 
+>
+> 1、access node之前必须要将node给lock，因此可以看到上述access node和lock是一起成对出现的，在执行 `current->next` 的时候，必须要将它锁上。
+>
+> 2、node iteration 和 lock iteration是匹配的: current是node iteration、lk是lock iterator。
+>
+> 3、在拿到next后，才将parent/predecessor的lock释放。
+>
+> 四、上述linked- list的实现，使用了**dummy node** technique，它能够避免对空指针进行讨论，使得循环非常简洁。
+>
+> 五、上述对smart pointer的使用非常值得学习
+>
+> 六、
 
-The `threadsafe_list<>` from listing 6.13 is a singly linked list, where each entry is a node structure 1. A default-constructed node is used for the head of the list, which starts with a `NULL` `next` pointer 2. New nodes are added with the `push_front()` function; first a new node is constructed 4, which allocates the stored data on the heap 3, while leaving the next pointer as `NULL`. You then need to acquire the lock on the mutex for the `head` node in order to get the appropriate next value 5 and insert the node at the front of the list by setting `head.next` to point to your new node 6. So far, so good:
-you only need to lock one mutex in order to add a new item to the list, so there’s no risk of **deadlock**. Also, the slow memory allocation happens outside the lock, so the lock is only protecting the update of a couple of pointer values that can’t fail. On to the iterative functions.
+The `threadsafe_list<>` from listing 6.13 is a singly linked list, where each entry is a node structure 1. A default-constructed node is used for the head of the list, which starts with a `NULL` `next` pointer 2. New nodes are added with the `push_front()` function; first a new node is constructed 4, which allocates the stored data on the heap 3, while leaving the next pointer as `NULL`. You then need to acquire the lock on the mutex for the `head` node in order to get the appropriate next value 5 and insert the node at the front of the list by setting `head.next` to point to your new node 6. So far, so good: you only need to lock one mutex in order to add a new item to the list, so there’s no risk of **deadlock**. Also, the slow memory allocation happens outside the lock, so the lock is only protecting the update of a couple of pointer values that can’t fail. On to the iterative functions.
 
 ### `for_each()`
 
 First up, let’s look at `for_each()` 7. This operation takes a `Function` of some type to apply to each element in the list; in common with most standard library algorithms, it takes this function by value and will work with either a genuine function or an object of a type with a function call operator. In this case, the function must accept a value of type `T` as the sole parameter. Here’s where you do the **hand-over-hand locking**. To start with, you lock the mutex on the `head` node 8. It’s then safe to obtain the pointer to the next node (using `get()` because you’re not taking ownership of the pointer). If that pointer isn’t `NULL` 9, you lock the mutex on that node 10 in order to process the data. Once you have the lock on that node, you can release the lock on
 the previous node 11 and call the specified function 12. Once the function completes, you can update the current pointer to the node you just processed and move the ownership of the lock from `next_lk` out to `lk` 13. Because `for_each` passes each data item directly to the supplied Function, you can use this to update the items if necessary or copy them into another container, or whatever. This is entirely safe if the function is well behaved, because the mutex for the node holding the data item is held across the call.
+
+
+
+### `find_first_if()`
+
+`find_first_if()` 14 is similar to `for_each()`; the crucial difference is that the supplied Predicate must return true to indicate a match or false to indicate no match 1%. Once you have a match, you just return the found data 1^ rather than continuing to search. You could do this with for_each(), but it would needlessly continue processing the rest of the list even once a match had been found.
+
+### `remove_if()` 
+
+`remove_if()` 17 is slightly different, because this function has to actually update the list; you can’t use `for_each()` for this. If the `Predicate` returns true 18, you remove the node from the list by updating `current->next` 19. Once you’ve done that, you can release the lock held on the mutex for the `next` node. The node is deleted when the `std::unique_ptr<node>` you moved it into goes out of scope 20. In this case, you don’t update `current` because you need to check the new `next` node. If the `Predicate` returns `false`, you just want to move on as before 21.
+
+### Race condition
+
+So, are there any **deadlocks** or **race conditions** with all these mutexes? The answer here is quite definitely ***no***, provided that the supplied predicates and functions are well behaved. The iteration is always one way, always starting from the `head` node, and always locking the next mutex before releasing the current one, so there’s no possibility of different lock orders in different threads. The only potential candidate for a **race condition** is the deletion of the removed node in `remove_if()` 20 because you do this after you’ve unlocked the mutex (it’s undefined behavior to destroy a locked mutex). However, a few moments’ thought reveals that this is indeed safe, because you still hold the mutex on the previous node (current), so no new thread can try to acquire the lock on the node you’re deleting.
