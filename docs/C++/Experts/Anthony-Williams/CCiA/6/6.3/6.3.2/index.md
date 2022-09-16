@@ -1,5 +1,15 @@
 # 6.3.2 Writing a thread-safe list using locks
 
+## Design tradeoff
+
+> NOTE:
+>
+> 一、下面章节所讨论的是design、tradeoff，作者为iteration提出了两种思路:
+>
+> 1、STL-style iterator
+>
+> 2、Iteration functions such as `for_each` 
+
 A list is one of the most basic data structures, so it should be straightforward to write a thread-safe one, shouldn’t it? Well, that depends on what facilities you’re after, and you need one that offers iterator support, something I shied away from adding to your map on the basis that it was too complicated. The basic issue with STL-style iterator support is that the iterator must hold some kind of reference into the internal data structure of the container. If the container can be modified from another thread, this reference must somehow remain valid, which essentially requires that the **iterator** hold a lock on some part of the structure. Given that the lifetime of an STL-style iterator is completely outside the control of the container, this is a bad idea.
 
 > NOTE:
@@ -153,4 +163,9 @@ the previous node 11 and call the specified function 12. Once the function compl
 
 ### Race condition
 
-So, are there any **deadlocks** or **race conditions** with all these mutexes? The answer here is quite definitely ***no***, provided that the supplied predicates and functions are well behaved. The iteration is always one way, always starting from the `head` node, and always locking the next mutex before releasing the current one, so there’s no possibility of different lock orders in different threads. The only potential candidate for a **race condition** is the deletion of the removed node in `remove_if()` 20 because you do this after you’ve unlocked the mutex (it’s undefined behavior to destroy a locked mutex). However, a few moments’ thought reveals that this is indeed safe, because you still hold the mutex on the previous node (current), so no new thread can try to acquire the lock on the node you’re deleting.
+So, are there any **deadlocks** or **race conditions** with all these mutexes? The answer here is quite definitely ***no***, provided that the supplied predicates and functions are well behaved. The iteration is always one way, always starting from the `head` node, and always locking the next mutex before releasing the current one, so there’s no possibility of different lock orders in different threads. The only potential candidate for a **race condition** is the deletion of the removed node in `remove_if()` 20 because you do this after you’ve unlocked the mutex (it’s **undefined behavior** to destroy a locked mutex). However, a few moments’ thought reveals that this is indeed safe, because you still hold the mutex on the previous node (current), so no new thread can try to acquire the lock on the node you’re deleting.
+
+### Concurrency
+
+What about opportunities for concurrency? The whole point of such fine-grained locking was to improve the possibilities for concurrency over a single mutex, so have you achieved that? Yes, you have: different threads can be working on different nodes in the list at the same time, whether they’re just processing each item with `for_each()`, searching with `find_first_if()`, or removing items with `remove_if()`. But because the mutex for each node must be locked in turn, the threads can’t pass each other. If one thread is spending a long time processing a particular node, other threads will have to wait when they reach that particular node.
+
