@@ -97,19 +97,31 @@ First off, note that listing 6.4 uses `std::unique_ptr<node>` to manage the node
 >
 > 显然，这种写法的妙处就是: "without having to write an explicit delete"。
 >
-> 这种写法蕴含着: 
+> 这种写法蕴含着: 每个node的掌握着它的 `next` 的ownership。
+>
+> 另外需要注意的是: 当只有一个node的时候，head和tail同时指向这个node
 >
 > 二、思考: 为什么`tail` 使用raw pointer？
+>
+> 1、**ownership chain** 是从前往后的，这就是说`tail`是不take ownership的
+>
+> 2、当只有一个node的时候，此时head 和 tail同时指向这个node，由于使用`unique_ptr`，显然只能有一个take ownership
+>
+> 
 
 Although this implementation works fine in a single-threaded context, a couple of things will cause you problems if you try to use fine-grained locking in a multithreaded context. Given that you have two data items (`head` 1 and `tail` 2), you could in principle use two mutexes, one to protect `head` and one to protect `tail`, but there are a couple of problems with that.
 
-The most obvious problem is that `push()` can modify both `head` 5 and `tail` 6, so it would have to lock both mutexes. This isn’t too much of a problem, although it’s unfortunate, because locking both mutexes would be possible. The critical problem is that both `push()` and `pop()` access the `next` pointer of a node: `push()` updates `tail->next` 4, and `try_pop()` reads `head->next` 3. If there’s a single item in the queue, then `head==tail`, so both `head->next` and `tail->next` are the same object, which therefore requires protection. Because you can’t tell if it’s the same object with out reading both head and tail, you now have to lock the same mutex in both push() and try_pop(), so you’re no better off than before. Is there a way out of this dilemma?
+The most obvious problem is that `push()` can modify both `head` 5 and `tail` 6, so it would have to lock both mutexes. This isn’t too much of a problem, although it’s unfortunate, because locking both mutexes would be possible. The critical problem is that both `push()` and `pop()` access the `next` pointer of a node: `push()` updates `tail->next` 4, and `try_pop()` reads `head->next` 3. If there’s a single item in the queue, then `head==tail`, so both `head->next` and `tail->next` are the same object, which therefore requires protection. Because you can’t tell if it’s the same object without reading both `head` and `tail`, you now have to lock the same mutex in both `push()` and `try_pop()`, so you’re no better off than before. Is there a way out of this dilemma?
+
+> NOTE:
+>
+> 一、
 
 
 
+## ENABLING CONCURRENCY BY SEPARATING DATA
 
-
-
+You can solve this problem by preallocating a **dummy node** with no data to ensure that there’s always at least one node in the queue to separate the node being accessed at the head from that being accessed at the tail.  For an empty queue, head and tail now both point to the dummy node rather than being NULL. This is fine, because try_pop() doesn’t access head->next if the queue is empty. If you add a node to the queue (so there’s one real node), then head and tail now point to separate nodes, so there’s no race on head->next and tail->next. The downside is that you have to add an extra level of indirection to store the data by pointer in order to allow the dummy nodes. The following listing shows how the implementation looks now.
 
 
 
