@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
-    
+    - Setting: Setting
+    - Build-missing: Build-missing
     

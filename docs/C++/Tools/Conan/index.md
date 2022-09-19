@@ -30,3 +30,17 @@ guorongfei [C++包管理器——conan](http://blog.guorongfei.com/2018/04/23/co
 
 stackoverflow [What is the difference between conanfile.py, conanfile.txt, conanprofile and settings.yml?](https://stackoverflow.com/questions/69739319/what-is-the-difference-between-conanfile-py-conanfile-txt-conanprofile-and-set)
 
+
+
+## Practice
+
+1、目录:
+
+```shell
+~/.conan
+```
+
+
+
+2、`data` 目录保存库文件
+
