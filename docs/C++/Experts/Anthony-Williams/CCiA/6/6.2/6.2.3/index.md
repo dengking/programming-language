@@ -270,9 +270,33 @@ Let’s look at this code with a critical eye, thinking about the guidelines lis
 
 3、`head==tail` implies an empty list.
 
-4、A single element list has head->next==tail.
+4、A single element list has `head->next==tail`.
 
-5、For each node x in the list, where x!=tail, x->data points to an instance of T and x->next points to the next node in the list. x->next==tail implies x is the
-last node in the list.
+5、For each node `x` in the list, where `x!=tail`, `x->data` points to an instance of `T` and `x->next` points to the `next` node in the list. `x->next==tail` implies `x` is the last node in the list.
 
 6、Following the next nodes from head will eventually yield tail.
+
+
+
+## Broken implementation
+
+It’s also important that the call to `get_tail()` occurs inside the lock on `head_mutex`. If it didn’t, the call to `pop_head()` could be stuck in between the call to `get_tail()` and the lock on the `head_mutex`, because other threads called `try_pop()` (and thus `pop_head()`) and acquired the lock first, thus preventing your initial thread from making progress:
+
+```C++
+std::unique_ptr<node> pop_head() // This is a broken implementation
+{
+    node *const old_tail = get_tail(); // Get old tail value outside lock on head_mutex
+    std::lock_guard<std::mutex> head_lock(head_mutex);
+
+    if (head.get() == old_tail) // 2
+    {
+        return nullptr;
+    }
+    std::unique_ptr<node> old_head = std::move(head);
+    head = std::move(old_head->next); // 3
+    return old_head;
+}
+
+```
+
+In this *broken* scenario, where the call to `get_tail()` 1 is made outside the scope of the lock, you might find that both `head` and `tail` have changed by the time your initial thread can acquire the lock on `head_mutex`, and not only is the returned `tail` node no longer the tail, but it’s no longer even part of the list. This could then mean that the comparison of `head` to `old_tail` 2 fails, even if `head` really is the last node. Consequently, when you update `head` 3 you may end up moving head beyond tail and off the end of the list, destroying the data structure. In the correct implementation from listing 6.6, you keep the call to `get_tail()` inside the lock on `head_mutex`. This ensures that no other threads can change head, and tail only ever moves further away (as new nodes are added in calls to `push()`), which is perfectly safe. head can never pass the value returned from `get_tail()`, so the invariants are upheld(维护).
