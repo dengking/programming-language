@@ -14,17 +14,18 @@ os=Windows
 os_build=Windows
 arch=x86_64
 arch_build=x86_64
-compiler=msvc
-compiler.version=193
-compiler.cppstd=17
-compiler.runtime=dynamic
+compiler=Visual Studio
+compiler.version=17
 build_type=Release
 [options]
 [build_requires]
 [env]
+
 ```
 
+### practice
 
+一般不要修改它。
 
 ### 素材
 
