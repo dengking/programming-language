@@ -1,10 +1,12 @@
 # 6.2.3 A thread-safe queue using fine-grained locks and condition variables
 
-In listings 6.2 and 6.3 you have one protected data item (`data_queue`) and thus one mutex. In order to use finer-grained locking, you need to look inside the queue at its constituent(组成的) parts and associate one mutex with each distinct data item.
+In listings 6.2 and 6.3 you have one protected data item (`data_queue`) and thus one mutex. In order to use finer-grained locking, you need to look inside the queue at its constituent parts and associate one mutex with each distinct data item.
 
 > NOTE:
 >
 > 一、简而言之: 每个元素一个lock
+>
+> 二、constituent的意思是"组成的"
 
 ## *head* pointer
 
