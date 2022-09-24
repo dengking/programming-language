@@ -60,3 +60,11 @@ command: [project](https://cmake.org/cmake/help/latest/command/project.html)
 
 
 
+
+## TODO
+
+### cmake target suffix
+
+stackoverflow [Change Extension of Library?](https://stackoverflow.com/questions/26196926/change-extension-of-library)
+
+[[CMake] Python Extension](https://cmake.org/pipermail/cmake/2006-January/007844.html)
