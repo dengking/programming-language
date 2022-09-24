@@ -24,6 +24,12 @@ CppCoreGuidelines [R: Resource management](https://github.com/isocpp/CppCoreGuid
 
 ### Owning and non-owning  
 
+> NOTE:
+>
+> 一、TODO: C++three-ownership-model
+>
+> 二、C++non-owning-type
+
 这是在 CppCoreGuidelines [R.2: In interfaces, use raw pointers to denote individual objects (only)](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Rr-use-ptr) 的下面这段话: 
 
 > Arrays are best represented by a container type (e.g., `vector` (owning)) or a `span` (non-owning). Such containers and views hold sufficient information to do range checking.
