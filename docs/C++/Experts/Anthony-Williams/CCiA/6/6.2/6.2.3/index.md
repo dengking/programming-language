@@ -136,6 +136,8 @@ The most obvious problem is that `push()` can modify both `head` 5 and `tail` 6,
 > 这样能够保证最大的concurrency，因为它允许两个thread同时分别访问`head`、`tail`。
 >
 > 这种理想情况就是后面会进行介绍的，通过后面的内容可知通过"SEPARATING DATA"可以实现这种理想的情况，完整的demo code在"Listing 6.6 A thread-safe queue with fine-grained locking"中给出。
+>
+> 三、使用两个mutex(head mutex、tail mutex)的目的是为了隔离，多数情况下两者是不会相遇的，但是当linked list只有一个node的时候，此时这个node既是head又是tail，那么此时两个mutex就会相遇，这种情况下是会产生race condition的: 因为`push`、`pop`分别lock的是不同的mutex，因此两者并不会block对方，但是两者操作的是同一个object，这是典型的race condition，所以按照上述实现方式，虽然使用了两个mutex，但是最终的效果和使用一个mutex是相同的。
 
 
 
@@ -193,13 +195,23 @@ public:
 
 ### changes 
 
-The changes to `try_pop()` are fairly minimal. First, you’re comparing `head` against `tail` 3 rather than checking for `NULL`, because the **dummy node** means that `head` is never `NULL`. Because head is a `std::unique_ptr<node>`, you need to call `head.get()` to do the comparison. Second, because the node now stores the data by pointer 1, you can retrieve the pointer directly 4 rather than having to construct a new instance of `T`. The big changes are in `push()`: you must first create a new instance of `T` on the heap and take ownership of it in a `std::shared_ptr<>` 7(note the use of `std::make_shared` to avoid the overhead of a second memory allocation for the reference count). The new node you create is going to be the new **dummy node**, so you don’t need to supply the `new_value` to the constructor 8. Instead, you set the data on the old **dummy node** to your newly allocated copy of the `new_value` 9. Finally, in order to have a **dummy node**, you have to create it in the constructor 2.
+The changes to `try_pop()` are fairly minimal:
+
+1、First, you’re comparing `head` against `tail` 3 rather than checking for `NULL`, because the **dummy node** means that `head` is never `NULL`. Because `head` is a `std::unique_ptr<node>`, you need to call `head.get()` to do the comparison. 
+
+2、Second, because the node now stores the data by pointer 1, you can retrieve the pointer directly 4 rather than having to construct a new instance of `T`. 
+
+The big changes are in `push()`: you must first create a new instance of `T` on the heap and take ownership of it in a `std::shared_ptr<>` 7(note the use of `std::make_shared` to avoid the overhead of a second memory allocation for the reference count). The new node you create is going to be the new **dummy node**, so you don’t need to supply the `new_value` to the constructor 8. Instead, you set the data on the old **dummy node** to your newly allocated copy of the `new_value` 9. Finally, in order to have a **dummy node**, you have to create it in the constructor 2.
 
 ### gains
 
-By now, I’m sure you’re wondering what these changes buy you and how they help with making the queue thread-safe. Well, `push()` now accesses only `tail`, not `head`, which is an improvement. `try_pop()` accesses both `head` and `tail`, but `tail` is needed only for the initial comparison, so the lock is short-lived. The big gain is that the `dummy node` means `try_pop()` and `push()` are never operating on the same node, so you no longer need an overarching(包罗万象) mutex. So, you can have one mutex for `head` and one for `tail`. Where do you put the locks?
+By now, I’m sure you’re wondering what these changes buy you and how they help with making the queue thread-safe. Well, `push()` now accesses only `tail`, not `head`, which is an improvement. `try_pop()` accesses both `head` and `tail`, but `tail` is needed only for the initial comparison, so the lock is short-lived. **The big gain is that the `dummy node` means `try_pop()` and `push()` are never operating on the same node, so you no longer need an overarching mutex. So, you can have one mutex for `head` and one for `tail`.** Where do you put the locks?
 
+> NOTE:
+>
+> 一、overarching 的意思是: 包罗万象的
 
+## Where do you put the locks?
 
 You’re aiming for the maximum opportunities for concurrency, so you want to hold the locks for the smallest possible length of time. `push()` is easy: the mutex needs to be locked across all accesses to `tail`, which means you lock the mutex after the new node is allocated 8 and before you assign the data to the current `tail` node 9. The lock then needs to be held until the end of the function.
 
