@@ -1,4 +1,9 @@
 nav:
     - Introduction: index.md
     - override-annotation: override-annotation
+    - final-annotation: final-annotation
+    - ensure-initialized: ensure-initialized
+    - cached-property: cached-property
+    - function-logger: function-logger
+    - factory-pattern-register: factory-pattern-register
     
