@@ -8,3 +8,60 @@ Algorithms and data structures that use mutexes, condition variables, and future
 
 Data structures and algorithms that don’t use blocking library functions are said to be *nonblocking*. Not all such data structures are *lock-free,* though, so let’s look at the various types of nonblocking data structures.
 
+> NOTE:
+>
+> 一、lock-free 和 nonblocking 之间的关系
+
+## *7.1.1* *Types of nonblocking data structures*
+
+Back in chapter 5, we implemented a basic mutex using `std::atomic_flag` as a spin lock. The code is reproduced in the following listing.
+
+Listing 7.1 Implementation of a spin-lock mutex using **`std::atomic_flag`**
+
+```c++
+class spinlock_mutex
+{
+ std::atomic_flag flag;
+public:
+ spinlock_mutex():
+ flag(ATOMIC_FLAG_INIT)
+ {}
+ void lock()
+ {
+ while(flag.test_and_set(std::memory_order_acquire));
+ }
+ void unlock()
+ {
+ flag.clear(std::memory_order_release);
+ }
+};
+```
+
+Anyway, there are no blocking calls, so any code that uses this mutex to protect shared data is consequently ***nonblocking***. It’s not *lock-free,* though. It’s still a mutex and can still be locked by only one thread at a time. Let’s look at the definition of ***lock-free*** so you can see what kinds of data structures *are* covered.
+
+
+
+## *7.1.2* *Lock-free data structures*
+
+For a data structure to qualify as lock-free, more than one thread must be able to access the data structure concurrently. They don’t have to be able to do the same operations; a lock-free queue might allow one thread to push and one to pop but break if two threads try to push new items at the same time. Not only that, but if one of the threads accessing the data structure is suspended by the scheduler midway through its operation, the other threads must still be able to complete their operations without waiting for the suspended thread.
+
+> NOTE:
+>
+> 一、最后一句是核心所在
+
+Algorithms that use compare/exchange operations on the data structure often have loops in them. The reason for using a compare/exchange operation is that another thread might have modified the data in the meantime, in which case the code will need to redo part of its operation before trying the compare/exchange again. Such code can still be lock-free if the compare/exchange would eventually succeed if the other threads were suspended. If it wouldn’t, you’d essentially have a spin lock,which is nonblocking but not lock-free.
+
+Lock-free algorithms with such loops can result in one thread being subject to ***starvation***. If another thread performs operations with the “wrong” timing, the other thread might make progress while the first thread continually has to retry its operation. Data structures that avoid this problem are wait-free as well as lock-free.
+
+## *7.1.3* *Wait-free data structures*
+
+A wait-free data structure is a lock-free data structure with the additional property that every thread accessing the data structure can complete its operation within a bounded number of steps, regardless of the behavior of other threads. Algorithms that can involve an unbounded number of retries because of clashes with other threads are thus not wait-free.
+
+Writing wait-free data structures correctly is extremely hard. In order to ensure that every thread can complete its operations within a bounded number of steps, you have to ensure that each operation can be performed in a single pass and that the steps performed by one thread don’t cause an operation on another thread to fail. This can make the overall algorithms for the various operations considerably more complex.
+
+Given how hard it is to get a lock-free or wait-free data structure right, you need some pretty good reasons to write one; you need to be sure that the benefit outweighs the cost. Let’s therefore examine the points that affect the balance.
+
+
+
+## *7.1.4* *The pros and cons of lock-free data structures*
+
