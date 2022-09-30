@@ -89,3 +89,8 @@ This is a desirable property to have but hard to achieve. It’s all too easy to
 ### pros: robustness
 
 A second reason to use lock-free data structures is robustness. If a thread dies while holding a lock, that data structure is broken forever. But if a thread dies partway through an operation on a lock-free data structure, nothing is lost except that thread’s data; other threads can proceed normally.
+
+### cons: 
+
+The flip side here is that if you can’t exclude threads from accessing the data structure, then you must be careful to ensure that the invariants are upheld or choose alternative invariants that can be upheld. Also, you must pay attention to the ordering constraints you impose on the operations. To avoid the undefined behavior associated with a data race, you must use atomic operations for the modifications. But that alone isn’t enough; you must ensure that changes become visible to other threads in the correct order. All this means that writing thread-safe data structures without using locks is
+considerably harder than writing them with locks.
