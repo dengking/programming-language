@@ -4,7 +4,12 @@
 
 2、C++ Zero-overhead principle其实就是optimization principle
 
+## zhihu [每个C++工程师都要了解的十个性能陷阱](https://zhuanlan.zhihu.com/p/569174076)
 
+C++“信徒”们常常鼓吹C++的“零成本抽象（Zero Cost Abstraction）”。然而对于“零成本抽象”这个概念存在很多误解。比如有的新手会认为：“使用C++的任何特性都没有成本”。那显然是大错特错的，比如使用模版就会导致编译时间变慢的编译期成本，而且我花了21天时间精通C++的时间成本也是成本啊（狗头）。有些经验的C++程序员会解释为”使用C++的任何特性都没有**运行时**成本“，这也是对C++最常见的误解。C++的创始人Bjarne Stroustrup是这样解释“零成本抽象“的：
+
+1. 你不会为任何你没有使用的特性付出任何成本。
+2. 对于你使用的特性，你只会付出最小运行时成本。
 
 ## isocpp [Big Picture Issues](https://isocpp.org/wiki/faq/big-picture) # [What is the zero-overhead principle?](https://isocpp.org/wiki/faq/big-picture#zero-overhead-principle)
 
@@ -20,11 +25,18 @@ Zero Cost Abstractions means adding higher-level programming concepts, like gene
 
 > NOTE: 
 >
-> 上面这段话是从compile time和run time来进行分析的，显然使用compile time实现的concept是"zero cost abstraction"
+> 一、上面这段话是从compile time和run time来进行分析的，显然使用compile time实现的concept是"zero cost abstraction"
 
 ## cppreference [Zero-overhead principle](https://en.cppreference.com/w/cpp/language/Zero-overhead_principle)
 
+The *zero-overhead principle* is a C++ design principle that states:
 
+1. You don't pay for what you don't use.
+2. What you do use is just as efficient as what you could reasonably write by hand.
+
+In general, this means that no feature should be added to C++ that would impose any overhead, whether in time or space, greater than a programmer would introduce without using the feature.
+
+The only two features in the language that do not follow the zero-overhead principle are [runtime type identification](https://en.cppreference.com/w/cpp/language/typeid) and [exceptions](https://en.cppreference.com/w/cpp/language/exceptions), and are why most compilers include a switch to turn them off.
 
 ## 例证
 
