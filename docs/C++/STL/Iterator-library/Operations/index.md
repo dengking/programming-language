@@ -2,18 +2,6 @@
 
 对应cppreference iterator operation。在阅读akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/)的时候，其中对比了[std::next](https://en.cppreference.com/w/cpp/iterator/next)、[std::advance](https://en.cppreference.com/w/cpp/iterator/advance)。
 
-## cppreference [std::advance](https://en.cppreference.com/w/cpp/iterator/advance)
-
-
-
-## cppreference [std::prev](https://en.cppreference.com/w/cpp/iterator/prev)
-
-
-
-## cppreference [std::next](https://en.cppreference.com/w/cpp/iterator/next)
-
-
-
 ## cppreference [std::distance](https://en.cppreference.com/w/cpp/iterator/distance)
 
 
@@ -53,20 +41,3 @@ constexpr typename std::iterator_traits<It>::difference_type
 1、program to abstraction and polymorphism
 
 
-
-## Value semantic and reference semantic
-
-在akrzemi1 [Value semantics](https://akrzemi1.wordpress.com/2012/02/03/value-semantics/) 的Why we use value semantics段，使用value semantic and reference semantic分析iterator operation，下面总结了使用value semantic and reference semantic来分析上述几种operation：
-
-value semantic：[std::prev](https://en.cppreference.com/w/cpp/iterator/prev)、[std::next](https://en.cppreference.com/w/cpp/iterator/next)
-
-reference semantic：[std::advance](https://en.cppreference.com/w/cpp/iterator/advance)
-
-
-
-```c++
-i = next(i, 1); // value semantic
-advance(i, 1);  // reference semantic
-```
-
-`advance(i, 1)`是pass-by-reference，在它的内部能够就地修改。
