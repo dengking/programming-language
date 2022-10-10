@@ -12,9 +12,7 @@
 
 关于exception，有多个方面的内容需要了解。
 
-## 内容概述
 
-Exception safety: C++是支持exception的，实现strong exception safety具有非常重要的意义，因此如何实现strong exception safety是C++中非常重要的一个topic。
 
 ## cppreference [Exceptions](https://en.cppreference.com/w/cpp/language/exceptions)
 
@@ -28,3 +26,32 @@ Errors that arise during exception handling are handled by [std::terminate](http
 
 
 
+## throw exception
+
+cppreference [`throw` expression](https://en.cppreference.com/w/cpp/language/throw)
+
+
+
+## Function-try-block
+
+cppreference [Function-try-block](https://en.cppreference.com/w/cpp/language/function-try-block)
+
+
+
+## try-block
+
+cppreference [try-block](https://en.cppreference.com/w/cpp/language/try_catch)
+
+
+
+## noexcept
+
+cppreference [noexcept specifier (since C++11)](https://en.cppreference.com/w/cpp/language/noexcept_spec) 
+
+cppreference [noexcept operator (since C++11)](https://en.cppreference.com/w/cpp/language/noexcept) 
+
+
+
+## Dynamic exception specification
+
+cppreference [Dynamic exception specification (until C++17)](https://en.cppreference.com/w/cpp/language/except_spec)

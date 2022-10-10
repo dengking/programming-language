@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
-    - Dynamic-exception-specification: Dynamic-exception-specification.md
+    - Dynamic-exception-specification: Dynamic-exception-specification
     - gotw-A-Pragmatic-Look-at-Exception-Specifications: gotw-A-Pragmatic-Look-at-Exception-Specifications
+    - No-throw-noexcept: No-throw-noexcept
+    
