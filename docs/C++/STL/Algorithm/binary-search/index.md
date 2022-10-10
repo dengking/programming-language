@@ -151,4 +151,11 @@ int main()
 
 
 
-## stackoverflow [lower_bound to perform binary search](https://stackoverflow.com/questions/30352231/lower-bound-to-perform-binary-search)
+### stackoverflow [lower_bound to perform binary search](https://stackoverflow.com/questions/30352231/lower-bound-to-perform-binary-search)
+
+
+
+## cppreference [std::equal_range](https://en.cppreference.com/w/cpp/algorithm/equal_range)
+
+TODO
+

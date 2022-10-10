@@ -8,8 +8,13 @@
 
 C++“信徒”们常常鼓吹C++的“零成本抽象（Zero Cost Abstraction）”。然而对于“零成本抽象”这个概念存在很多误解。比如有的新手会认为：“使用C++的任何特性都没有成本”。那显然是大错特错的，比如使用模版就会导致编译时间变慢的编译期成本，而且我花了21天时间精通C++的时间成本也是成本啊（狗头）。有些经验的C++程序员会解释为”使用C++的任何特性都没有**运行时**成本“，这也是对C++最常见的误解。C++的创始人Bjarne Stroustrup是这样解释“零成本抽象“的：
 
-1. 你不会为任何你没有使用的特性付出任何成本。
-2. 对于你使用的特性，你只会付出最小运行时成本。
+1、你不会为任何你没有使用的特性付出任何成本。
+
+2、对于你使用的特性，你只会付出最小运行时成本。
+
+简单来说，就是C++不会背着你偷偷干坏事（比如垃圾回收），而你指定C++干的活，C++会尽量在编译期做，保证在运行期只会做“最少”的工作。连小学生都应该知道，“最少”并不等于“零”，所以“零成本抽象”其实是一种谎言，Google的C++负责人Chandler Carruth就曾经在CppCon 2019说过：[C++根本不存在”零成本抽象“](https://link.zhihu.com/?target=https%3A//www.youtube.com/watch%3Fv%3DrHIkrotSwcc)。
+
+显然，C++的很多特性是有性能成本的，而且，这些成本往往出现在你“没有写”的代码里，即C++帮你添加的隐形代码。作为C++工程师，我们就必须了解每个特性会带来的性能损耗，在做代码设计时尽量选择损耗小的特性。
 
 ## isocpp [Big Picture Issues](https://isocpp.org/wiki/faq/big-picture) # [What is the zero-overhead principle?](https://isocpp.org/wiki/faq/big-picture#zero-overhead-principle)
 
