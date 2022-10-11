@@ -153,6 +153,34 @@ TODO
 
 ### Formal definition of *potentially-throwing expression*
 
+1、`e` is a function call to a function, pointer to function, or pointer to member function which is *potentially-throwing*, unless `e` is a [core constant expression](https://en.cppreference.com/w/cpp/language/constant_expression) (until C++17)
+
+2、`e` makes an implicit call to a *potentially-throwing* function (such as an overloaded operator, an allocation function in a `new`-expression, a constructor for a function argument, or a destructor if `e` is a full-expression)
+
+3、`e` is a [`throw`-expression](https://en.cppreference.com/w/cpp/language/throw)
+
+4、`e` is a [`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) that casts a polymorphic reference type
+
+5、`e` is a [`typeid`](https://en.cppreference.com/w/cpp/language/typeid) expression applied to a dereferenced pointer to a polymorphic type
+
+6、`e` has an immediate subexpression that is potentially-throwing
+
+### Notes
+
+One of the uses of the constant *expression* is (along with the [`noexcept` operator](https://en.cppreference.com/w/cpp/language/noexcept)) to define function templates that declare `noexcept` for some types but not others.
+
+Note that a `noexcept` specification on a function is not a **compile-time check**; it is merely a method for a programmer to inform the compiler whether or not a function should throw exceptions. The compiler can use this information to enable certain optimizations on **non-throwing functions** as well as enable the [`noexcept` operator](https://en.cppreference.com/w/cpp/language/noexcept), which can check at compile time if a particular expression is declared to throw any exceptions. For example, containers such as [std::vector](https://en.cppreference.com/w/cpp/container/vector) will move their elements if the elements' move constructor is `noexcept`, and copy otherwise (unless the copy constructor is not accessible, but a potentially throwing move constructor is, in which case the strong exception guarantee is waived).
+
+> NOTE:
+>
+> 一、zero-cost-abstraction:
+>
+> 1、use-static-info-to-optimize
+>
+> 二、"waived"的意思是: 抛弃。
+>
+> 
+
 ## stackoverflow [When should I really use noexcept?](https://stackoverflow.com/questions/10787766/when-should-i-really-use-noexcept)
 
 > NOTE:

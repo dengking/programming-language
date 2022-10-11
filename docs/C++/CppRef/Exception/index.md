@@ -18,11 +18,11 @@
 
 When declaring a function, [exception specifications](https://en.cppreference.com/w/cpp/language/except_spec) and [noexcept specifiers](https://en.cppreference.com/w/cpp/language/noexcept_spec) may be provided to limit the types of the exceptions a function may throw.
 
-> NOTE:  [exception specifications](https://en.cppreference.com/w/cpp/language/except_spec) and [noexcept specifiers](https://en.cppreference.com/w/cpp/language/noexcept_spec) 用来说明一个function可能抛出的exception。
+> NOTE:  
+>
+> 一、[exception specifications](https://en.cppreference.com/w/cpp/language/except_spec) and [noexcept specifiers](https://en.cppreference.com/w/cpp/language/noexcept_spec) 用来说明一个function可能抛出的exception，其实  [noexcept specifiers](https://en.cppreference.com/w/cpp/language/noexcept_spec) 也可以归入到exception specification到范畴
 
 Errors that arise during exception handling are handled by [std::terminate](https://en.cppreference.com/w/cpp/error/terminate) and [std::unexpected](https://en.cppreference.com/w/cpp/error/unexpected) (until C++17).
-
-
 
 
 
@@ -44,14 +44,11 @@ cppreference [try-block](https://en.cppreference.com/w/cpp/language/try_catch)
 
 
 
-## noexcept
+## Exception specification
 
-cppreference [noexcept specifier (since C++11)](https://en.cppreference.com/w/cpp/language/noexcept_spec) 
-
-cppreference [noexcept operator (since C++11)](https://en.cppreference.com/w/cpp/language/noexcept) 
+参见 `Exception-specification` 章节。
 
 
 
-## Dynamic exception specification
 
-cppreference [Dynamic exception specification (until C++17)](https://en.cppreference.com/w/cpp/language/except_spec)
+
