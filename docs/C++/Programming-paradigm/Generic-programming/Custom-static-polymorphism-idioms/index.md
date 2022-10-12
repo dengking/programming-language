@@ -52,3 +52,28 @@ fluentcpp [When to Use Enums and When to Use Tag Dispatching in C++](https://www
 
 stackoverflow [Polymorphic Enum in C++](https://stackoverflow.com/questions/3117462/polymorphic-enum-in-c)
 
+
+
+
+
+### draft
+
+含义是: 让compiler选择(statically)正确的实现
+
+例子:
+
+1 multiple dispatch，参见
+
+- `Theory\Programming-paradigm\Object-oriented-programming\Design-pattern\Behavioral-pattern\Visitor-pattern`
+- `C++\Pattern\Visitor-pattern`
+
+2 primary template 和 specialization
+
+当两者处于不同header file的时候，在使用的时候，需要将它们都包含到同一个translation unit中才能够生效。
+
+3 CRTR都是give hint to compiler
+
+它都是generic programming中的技巧，参见 `Generic-programming\Curiously-recurring-template-pattern` 章节。
+
+4 tag dispatch
+

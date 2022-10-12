@@ -18,7 +18,7 @@ C++支持非常强大的static reflection、static polymorphism，这就给予�
 
 polymorphism 的本质目的是选择 "best"，C++的static polymorphism让programmer能够在compile time完成select best。
 
-二、遵循 zero overload principle
+二、遵循 zero overhead principle
 
 static reflection + optimization
 

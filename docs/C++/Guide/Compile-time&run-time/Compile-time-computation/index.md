@@ -4,7 +4,7 @@
 
 2、C++的一个发展方向就是充分发挥compile-time computation。
 
-## wanweibaike [Compile time function execution](https://en.wanweibaike.com/wiki-Compile-time%20function%20execution)
+## wikipedia [Compile time function execution](https://en.wikipedia.org/wiki/Compile-time_function_execution)
 
 > NOTE: 
 >

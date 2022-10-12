@@ -36,8 +36,9 @@ Zero Cost Abstractions means adding higher-level programming concepts, like gene
 
 The *zero-overhead principle* is a C++ design principle that states:
 
-1. You don't pay for what you don't use.
-2. What you do use is just as efficient as what you could reasonably write by hand.
+1、You don't pay for what you don't use.
+
+2、What you do use is just as efficient as what you could reasonably write by hand.
 
 In general, this means that no feature should be added to C++ that would impose any overhead, whether in time or space, greater than a programmer would introduce without using the feature.
 
