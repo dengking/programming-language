@@ -11,8 +11,6 @@
 
 
 
-
-
 ## cppreference [noexcept operator (since C++11)](https://en.cppreference.com/w/cpp/language/noexcept)
 
 The `noexcept` operator performs a compile-time check that returns true if an expression is declared to not throw any exceptions.
@@ -187,4 +185,15 @@ Note that a `noexcept` specification on a function is not a **compile-time check
 >
 > 一、其实按照CppCoreGuidelines中的规范即可解决很多问题
 >
-> 
+
+
+
+
+
+## TODO
+
+stackoverflow [When should I really use noexcept?](https://stackoverflow.com/questions/10787766/when-should-i-really-use-noexcept)
+
+cnblogs [C++11 带来的新特性 （3）—— 关键字noexcept ](https://www.cnblogs.com/sword03/p/10020344.html)
+
+stackoverflow [Disabling C++ exceptions, how can I make any std:: throw() immediately terminate?](https://stackoverflow.com/questions/7249378/disabling-c-exceptions-how-can-i-make-any-std-throw-immediately-terminate)

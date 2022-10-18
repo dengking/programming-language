@@ -8,7 +8,9 @@ That said, let's start with a short disclaimer that "typemaps" are an advanced c
 
 ### 13.1.1 Type conversion
 
-> NOTE: 本节描述的type convention指的是type在源语言和目标语言之间的转换
+> NOTE: 
+>
+> 一、本节描述的type convention指的是type在源语言和目标语言之间的转换
 
 One of the most important problems in wrapper code generation is the conversion or marshalling of datatypes between programming languages. Specifically, for every C/C++ declaration, SWIG must somehow generate wrapper code that allows values to be passed back and forth between languages. Since every programming language represents data differently, this is not a simple of matter of simply linking code together with the C linker. Instead, SWIG has to know something about how data is represented in each language and how it can be manipulated. 
 
@@ -74,3 +76,4 @@ Note that this isn't always the case as some target language modules allow targe
 
 stackoverflow [SWIG: How to map an enum to integer without %including the header?](https://stackoverflow.com/questions/61917132/swig-how-to-map-an-enum-to-integer-without-including-the-header)
 
+stackoverflow [Create SWIG C# wrapper for function that contains void* parameter](https://stackoverflow.com/questions/25310530/create-swig-c-sharp-wrapper-for-function-that-contains-void-parameter)
