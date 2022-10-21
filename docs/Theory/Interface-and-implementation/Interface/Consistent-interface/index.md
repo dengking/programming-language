@@ -22,7 +22,7 @@ Magic function其实就是约定好的interface。
 
 
 
-## Design by  contact
+## Design by contact
 
 
 
