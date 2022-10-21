@@ -31,7 +31,7 @@
 
 ## Compatibility
 
-"Compatibility"即"兼容性"，在 `./Compatibility` 章节进行了描述。
+"Compatibility"即"兼容性"，在 `Compatibility` 章节进行了描述。
 
 
 
