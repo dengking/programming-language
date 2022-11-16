@@ -138,7 +138,7 @@ public:
 >
 > 3、在拿到next后，才将parent/predecessor的lock释放。
 >
-> 四、上述linked- list的实现，使用了**dummy node** technique，它能够避免对空指针进行讨论，使得循环非常简洁。
+> 四、上述linked-list的实现，使用了**dummy node** technique，它能够避免对空指针进行讨论，使得循环非常简洁。
 >
 > 五、上述对smart pointer的使用非常值得学习
 >
