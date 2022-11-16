@@ -50,4 +50,5 @@ The **ABA problem** is particularly prevalent in algorithms that use free lists 
 
 ## 7.3.4 Guideline: identify busy-wait loops and help the other thread
 
-In the final queue example you saw how a thread performing a push operation had to wait for another thread also performing a push to complete its operation before it could proceed.
+In the final queue example you saw how a thread performing a push operation had to wait for another thread also performing a push to complete its operation before it could proceed. Left alone, this would have been a busy-wait loop, with the waiting thread wasting CPU time while failing to proceed. If you end up with a **busy-wait loop**, you effectively have a blocking operation and might as well use mutexes and locks. By modifying the algorithm so that the waiting thread performs the incomplete steps if it’s scheduled to run before the original thread completes the operation, you can remove the busy-wait and the operation is no longer blocking. In the queue example this required changing a data member to be an **atomic variable** rather than a nonatomic variable and using **compare/exchange operations** to set it, but in more complex data structures it might require more extensive changes.
+
