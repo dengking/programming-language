@@ -69,7 +69,7 @@ public:
         {
             tail->next = std::move(p); // 4
         }
-        else
+        else // 链表为空
         {
             head = std::move(p); // 5
         }

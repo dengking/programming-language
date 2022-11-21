@@ -14,7 +14,7 @@ A list is one of the most basic data structures, so it should be straightforward
 
 > NOTE:
 >
-> 一、上面描述的本质是iterator invalidation。
+> 一、C++ iterator是object，因此就存在iterator object 和 container object，如果让iterator object也持有lock，那么这个设计将非常复杂。上面描述的本质是iterator invalidation。
 >
 > 
 
