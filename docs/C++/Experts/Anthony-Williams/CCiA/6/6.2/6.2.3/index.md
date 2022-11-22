@@ -1,6 +1,6 @@
 # 6.2.3 A thread-safe queue using fine-grained locks and condition variables
 
-In listings 6.2 and 6.3 you have one protected data item (`data_queue`) and thus one mutex. In order to use finer-grained locking, you need to look inside the queue at its constituent parts and associate one mutex with each distinct data item.
+In listings 6.2 and 6.3 you have one protected data item (`data_queue`) and thus one mutex. In order to use finer-grained locking, you need to look inside the queue at its constituent(组成大) parts and associate one mutex with each distinct data item.
 
 > NOTE:
 >
@@ -18,7 +18,7 @@ The simplest data structure for a queue is a singly linked list, as shown in fig
 
 ## *tail* pointer
 
-Items are added to the queue at the other end. In order to do this, the queue also contains a *tail* pointer, which refers to the last item in the list. New nodes are added by changing the *next* pointer of the last item to point to the new node and then updating the tail pointer to refer to the new item. When the list is empty, both the head and tail pointers are NULL.
+Items are added to the queue at the other end. In order to do this, the queue also contains a *tail* pointer, which refers to the last item in the list. New nodes are added by changing the *next* pointer of the last item to point to the new node and then updating the tail pointer to refer to the new item. When the list is empty, both the head and tail pointers are `NULL`.
 
 ## Listing 6.4 A simple single-threaded queue implementation
 
@@ -27,6 +27,8 @@ The following listing shows a simple implementation of such a queue based on a c
 
 
 ```c++
+#include <memory>
+
 template <typename T>
 class queue
 {
@@ -40,7 +42,7 @@ private:
         }
     };
     std::unique_ptr<node> head; // 1
-    node *tail; // 2
+    node *tail;                 // 2
 
 public:
     queue()
@@ -49,18 +51,23 @@ public:
 
     queue(const queue &other) = delete;
     queue &operator=(const queue &other) = delete;
+    /**
+     *
+     */
     std::shared_ptr<T> try_pop()
     {
-        if (!head)
+        if (!head) // empty linked list
         {
             return std::shared_ptr<T>();
         }
-        std::shared_ptr<T> const res(
-            std::make_shared<T>(std::move(head->data)));
+        std::shared_ptr<T> const res(std::make_shared<T>(std::move(head->data)));
         std::unique_ptr<node> const old_head = std::move(head);
         head = std::move(old_head->next);
         return res;
     }
+    /**
+     *
+     */
     void push(T new_value)
     {
         std::unique_ptr<node> p(new node(std::move(new_value)));
@@ -69,13 +76,19 @@ public:
         {
             tail->next = std::move(p); // 4
         }
-        else // 链表为空
+        else // empty linked list
         {
             head = std::move(p); // 5
         }
         tail = new_tail; // 6
     }
 };
+
+int main()
+{
+    queue<int> q;
+}
+
 ```
 
 First off, note that listing 6.4 uses `std::unique_ptr<node>` to manage the nodes, because this ensures that they (and the data they refer to) get deleted when they’re no longer needed, without having to write an explicit delete. This **ownership chain** is managed from `head`, with `tail` being a raw pointer to the last node.
