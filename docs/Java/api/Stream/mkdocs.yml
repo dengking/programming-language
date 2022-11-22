@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - stackify-A-Guide-to-Java-Streams-in-Java-8: stackify-A-Guide-to-Java-Streams-in-Java-8
+    - Java-8-stream-collect: Java-8-stream-collect
     
