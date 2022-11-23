@@ -1,0 +1,1 @@
+# Daniel Pfeifer’s masterpiece [Effective CMake](https://youtu.be/rLopVhns4Zs).

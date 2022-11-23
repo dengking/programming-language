@@ -1,10 +1,10 @@
 nav:
     - Introduction: index.md
+    - Modern-CMake: Modern-CMake
     - Reference: Reference
     - Guides: Guides
     - CMake-toolchain: CMake-toolchain
     - CMake-linker: CMake-linker
     - CMake-flags: CMake-flags
     - ttroy50-cmake-examples: ttroy50-cmake-examples
-    - cliutils-Book-Modern-CMake: cliutils-Book-Modern-CMake
     
