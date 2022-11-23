@@ -46,3 +46,32 @@ On the other hand, the property **INTERFACE_COMPILE_FEATURES** stores which feat
 Properties can also be specified as **PUBLIC**. Public properties are defined in both **PRIVATE** and **INTERFACE** scopes.
 
 All of this is better understood with an example.
+
+
+
+## libjsonutils
+
+Imagine that you are writing a json utily library, *libjsonutils*, that parses json files from a provided location. Json files can be located on your local file system, as well as accessible via some URL.
+
+The library has the following structure:
+
+```shell
+libjsonutils
+├── CMakeLists.txt
+├── include
+│   └── jsonutils
+│       └── json_utils.h
+├── src
+│   ├── file_utils.h
+│   └── json_utils.cpp
+└── test
+    ├── CMakeLists.txt
+    └── src
+        └── test_main.cpp
+```
+
+We have a single public header, were we define the `loadJson()` function:
+
+```c++
+boost::optional<rapidjson::Document> loadJson(const std::string& url);
+```
