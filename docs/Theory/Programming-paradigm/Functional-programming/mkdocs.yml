@@ -2,7 +2,8 @@ nav:
     - Introduction: index.md
     - Pure-function: Pure-function.md
     - Higher-order-function: Higher-order-function
-    - First-class-function: First-class-function.md
+    - First-class-function: First-class-function
     - Function-composition: Function-composition
     - Algebraic-data-type: Algebraic-data-type
+    - Currying: Currying
     
