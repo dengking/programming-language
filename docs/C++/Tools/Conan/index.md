@@ -1,5 +1,7 @@
 # Conan
 
+
+
 ## 官网 [Conan](https://docs.conan.io/en/latest/introduction.html) 
 
 Conan is a dependency and package manager for C and C++ languages.
@@ -176,6 +178,16 @@ os_build=Macos
 `data` 目录保存库文件
 
 
+
+## build missing
+
+![](./mmexport1663551779517.png)
+
+
+
+```shell
+conan install .. --build=missing
+```
 
 ## Good resource
 
