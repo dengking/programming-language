@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - Generalized-algebraic-data-type: Generalized-algebraic-data-type
     - Tagged-union: Tagged-union    
     

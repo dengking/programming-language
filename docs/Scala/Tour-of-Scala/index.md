@@ -32,7 +32,9 @@ Scala provides a [lightweight syntax](https://docs.scala-lang.org/tour/basics.ht
 
 Scala’s [case classes](https://docs.scala-lang.org/tour/case-classes.html) and its built-in support for [pattern matching](https://docs.scala-lang.org/tour/pattern-matching.html) provide the functionality of algebraic types, which are used in many functional languages. 
 
-> 
+> NOTE:
+>
+> 一、algebraic data type pattern match 是 FP的标配
 
 [Singleton objects](https://docs.scala-lang.org/tour/singleton-objects.html) provide a convenient way to group functions that aren’t members of a class.
 
@@ -41,3 +43,7 @@ Scala’s [case classes](https://docs.scala-lang.org/tour/case-classes.html) and
 > 一、pure OOP
 
 Furthermore, Scala’s notion of pattern matching naturally extends to the [processing of XML data](https://github.com/scala/scala-xml/wiki/XML-Processing) with the help of [right-ignoring sequence patterns](https://docs.scala-lang.org/tour/regular-expression-patterns.html), by way of general extension via [extractor objects](https://docs.scala-lang.org/tour/extractor-objects.html). In this context, [for comprehensions](https://docs.scala-lang.org/tour/for-comprehensions.html) are useful for formulating queries. These features make Scala ideal for developing applications like web services.
+
+
+
+## [Basics](https://docs.scala-lang.org/tour/basics.html)
