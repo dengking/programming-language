@@ -34,7 +34,79 @@ A package is defined by a “conanfile.py”. This is a file that defines the pa
 
 
 
-## [Docs](https://docs.conan.io/en/latest/index.html) # [Getting Started](https://docs.conan.io/en/latest/getting_started.html)
+## [Docs](https://docs.conan.io/en/latest/index.html) # [Getting Started](https://docs.conan.io/en/latest/getting_started.html) 
+
+
+
+```shell
+$ conan search gtest/1.11.0@ --table=file.html -r=conancenter
+$ conan install .. --build=missing
+$ conan inspect poco/1.9.4
+```
+
+
+
+```shell
+$ conan profile new default --detect  # Generates default profile detecting GCC and sets old ABI
+$ conan profile update settings.compiler.libcxx=libstdc++11 default  # Sets libcxx to C++11 ABI
+```
+
+
+
+```shell
+$ mkdir build && cd build
+$ conan install ..
+```
+
+
+
+```shell
+$ conan search "*"
+```
+
+
+
+### Installing Dependencies
+
+The **conan install** command downloads the binary package required for your configuration (detected the first time you ran the command), **together with other (transitively required by Poco) libraries, like OpenSSL and Zlib**. 
+
+It will also create the *conanbuildinfo.cmake* file in the current directory, in which you can see the CMake variables, and a *conaninfo.txt* in which the settings, requirements and optional information is saved.
+
+
+
+It is very important to understand the installation process. When the **conan install** command runs, settings specified on the command line or taken from the defaults in *`<userhome>/.conan/profiles/default`* file are applied.
+
+```shell
+conan install .. --settings os="Linux" --settings compiler="gcc"
+```
+
+
+
+### Building with other configurations
+
+In this example, we have built our project using the default configuration detected by Conan. This configuration is known as the [default profile](https://docs.conan.io/en/latest/reference/config_files/default_profile.html#default-profile).
+
+A profile needs to be available prior to running commands such as **conan install**. When running the command, your settings are automatically detected (compiler, architecture…) and stored as the default profile. You can edit these settings *`~/.conan/profiles/default`* or create new profiles with your desired configuration.
+
+
+
+For example, if we have a profile with a 32-bit GCC configuration in a file called *gcc_x86*, we can run the following:
+
+```shell
+$ conan install .. --profile=gcc_x86
+```
+
+
+
+> We strongly recommend using [Profiles](https://docs.conan.io/en/latest/reference/profiles.html#profiles) and managing them with [conan config install](https://docs.conan.io/en/latest/reference/commands/consumer/config.html#conan-config-install).
+
+
+
+However, the user can always override the profile settings in the **conan install** command using the **--settings** parameter. As an exercise, try building the 32-bit version of the hash calculator project like this:
+
+```shell
+$ conan install .. --settings arch=x86
+```
 
 
 
@@ -66,11 +138,7 @@ Generators are specific components that provide the information of dependencies 
 
 
 
-## [Docs](https://docs.conan.io/en/latest/index.html) » [Reference](https://docs.conan.io/en/latest/reference.html) » [Configuration files](https://docs.conan.io/en/latest/reference/config_files.html)
-
-
-
-### [settings.yml](https://docs.conan.io/en/latest/reference/config_files/settings.yml.html)
+## [Docs](https://docs.conan.io/en/latest/index.html) » [Reference](https://docs.conan.io/en/latest/reference.html) » [Configuration files](https://docs.conan.io/en/latest/reference/config_files.html) » [settings.yml](https://docs.conan.io/en/latest/reference/config_files/settings.yml.html)
 
 > NOTE:
 >
@@ -78,21 +146,19 @@ Generators are specific components that provide the information of dependencies 
 
 
 
-### Default profile
-
-> NOTE:
->
-> 一、practice
->
-> 一般不要修改它。
->
-> 二、素材
->
-> stackoverflow [Conan on windows claims setting isn't set, it is set](https://stackoverflow.com/questions/70587488/conan-on-windows-claims-setting-isnt-set-it-is-set)
->
-> 
+## Profiles
 
 
+
+一、practice
+
+一般不要修改它。
+
+二、素材
+
+stackoverflow [Conan on windows claims setting isn't set, it is set](https://stackoverflow.com/questions/70587488/conan-on-windows-claims-setting-isnt-set-it-is-set)
+
+三、
 
 本机的当前环境信息在用户目录下的 `~/.conan/profiles/default` 文件中记录。您可以通过命令 `conan profile show default` 查看当前本机默认配置信息，如下所示：
 
@@ -122,6 +188,16 @@ $ conan install .. -s os=Macos -s os_build=Macos -s arch=armv8 -s arch_build=arm
 ```
 
 有了 default profile 我们可以尽量简化 conan install 的流程。
+
+### [Docs](https://docs.conan.io/en/latest/index.html) » [Reference](https://docs.conan.io/en/latest/reference.html) » [Profiles](https://docs.conan.io/en/latest/reference/profiles.html) 
+
+
+
+### [Docs](https://docs.conan.io/en/latest/index.html) » [Reference](https://docs.conan.io/en/latest/reference.html) » [Configuration files](https://docs.conan.io/en/latest/reference/config_files.html) » [profiles/default](profiles/default)
+
+
+
+
 
 
 
@@ -186,8 +262,10 @@ os_build=Macos
 
 
 ```shell
-conan install .. --build=missing
+$ conan install .. --build=missing
 ```
+
+
 
 ## Good resource
 
