@@ -1,12 +1,18 @@
 # As-if rule
 
+## zhihu [现代C++的内存模型](https://zhuanlan.zhihu.com/p/382372072)
+
+为什么它们执行了一个不一样的程序，我们竟然不知情？其实，主要原因是编译器和CPU优化都遵循了一个同样的原则（[As-if rule](https://link.zhihu.com/?target=https%3A//en.wikipedia.org/wiki/As-if_rule)），即优化后的代码，[若是单线程执行，要与原有代码行为保持一致](https://link.zhihu.com/?target=https%3A//preshing.com/20120625/memory-ordering-at-compile-time/)。再加之多线程环境我们使用的互斥锁，其对编译器和CPU优化做了很多限制，可以让我们对线程间的执行顺序进行同步，进而保证了即使被优化成了另一个程序，仍然有相同的执行结果。
+
 
 
 ## wikipedia [As-if rule](https://en.wikipedia.org/wiki/As-if_rule)
 
 The [standard](https://en.wikipedia.org/wiki/C%2B%2B_standard) for the [C++](https://en.wikipedia.org/wiki/C%2B%2B) programming language allows [compilers](https://en.wikipedia.org/wiki/Compiler) for this language to apply any [optimizing](https://en.wikipedia.org/wiki/Compiler_optimization)[[1\]](https://en.wikipedia.org/wiki/As-if_rule#cite_note-1) transformation to a program during compilation, provided that such optimizations make no change in the "observable behavior" of the program, as specified in the standard; this mostly means that any actions the program performs on its environment occur in the specified order. This rule is commonly referred to as the **as-if rule**.[[2\]](https://en.wikipedia.org/wiki/As-if_rule#cite_note-2)
 
-> NOTE: 这对于理解很多compiler optimization是非常重要的
+> NOTE: 
+>
+> 这对于理解很多compiler optimization是非常重要的
 
 
 
