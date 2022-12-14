@@ -105,3 +105,42 @@ if( !cond)// check if we guessed wrong
 
 
 从程序员（a programmer-centric approach）的角度，抛开编译器和硬件，也即从语言层面，我们也可以提出合适的模型。现代C++（包括Java）都是使用了SC-DRF(Sequential consistency for data race free)。在SC-DRF模型下，程序员只要不写出[Race Condition](https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/34510/what-is-a-race-condition)的代码，编译器和CPU便能保证程序的执行结果与顺序一致相同。**因而，内存模型就如同程序员与编译器/CPU之间的契约，需要彼此遵守承诺。C++的内存模型默认为SC-DRF，此外还支持更宽松的非SC-DRF的模型。**
+
+
+
+### （2）Happens-before
+
+按代码顺序，若语句A在语句B的前面，则语句A Happens Before 语句B。对同一个线程来说，前面的代码Happens Before后面的代码。线程之间的语句也有Happens Before的关系，这需要借助我们后面讲的synchronizes-with来确定。值得说明的是，[Happens Before](https://link.zhihu.com/?target=https%3A//preshing.com/20130702/the-happens-before-relation/)并不表明语句A一定会在语句B之前执行，例如前面重排（Reordering）的例子。不过这并不影响此概念的引入和使用，后面在具体使用此概念时会看到原因。
+
+
+
+### （3）Synchronizes-with
+
+用于线程间的同步，通常借助原子变量的操作来实现。线程1对原子变量x进行写操作，若线程2对原子变量x进行读操作且读到了线程1的写结果，则线程1的写操作Synchronizes-with线程2的读操作。
+
+假设线程1的原子操作A Synchronizes-with 线程2的原子操作B，则线程1中，所有Happens Before 操作A的其它所有写操作结果（包括原子和非原子），都对线程2中操作B之后的操作可见（也就是被操作B Happens Before的那些操作）。基于Synchronizes-with，我们可以推导出跨线程的Happens Before关系。
+
+> NOTE:
+>
+> 一、inter-thread-happens-before=happens-before+synchronizes-with
+
+
+
+### Acquire and Release Semantics
+
+多线程编程，临界区是一个很重要的概念。我们对此再做进一步的认识。
+
+对于临界区区内的语句，显而易见，我们不能将其移出临界区，如图5所示，编译器和CPU都不会做这种移出临界区的优化：
+
+![img](https://pic4.zhimg.com/80/v2-b98871fbc8c78e36c725ef1613d32cfb_1440w.webp)
+
+但我们可以将临界区区外的代码移进来，如图6所示
+
+![img](https://pic3.zhimg.com/80/v2-b4e18614982ee5c9f9f3222675c967a6_1440w.webp)
+
+图6. 临界区区外代码可以移入临界区
+
+从图5和图6我们可以看出，lock和unlock可以看作两个单方向的屏障，lock对应的屏障，只允许代码往下方向移动，而unlock则只允许上方向移动。
+
+C++内存模型借鉴lock/unlock，引入了两个等效的概念，Acquire（类似lock）和Release（类似unlock），这两个都是单方向的屏障（One-way Barriers: acquire barrier, release barrier）。
+
