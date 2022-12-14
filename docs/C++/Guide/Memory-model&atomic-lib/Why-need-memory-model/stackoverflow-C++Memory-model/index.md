@@ -20,7 +20,9 @@ As I don't know how the internals of multi-threading work, and what memory model
 
 ## [A](https://stackoverflow.com/a/6319356)
 
-> NOTE: 非常好的一篇文章，它解释清楚了如下问题:
+> NOTE: 
+>
+> 一、非常好的一篇文章，它解释清楚了如下问题:
 >
 > 1、为什么引入memory model
 >
@@ -34,7 +36,9 @@ First, you have to learn to think like a Language Lawyer.
 
 The C++ specification does not make reference to any particular compiler, operating system, or CPU. It makes reference to an *abstract machine* that is a generalization of actual systems. In the Language Lawyer world, the job of the programmer is to write code for the abstract machine; the job of the compiler is to actualize that code on a concrete machine. By coding rigidly to the spec, you can be certain that your code will compile and run without modification on any system with a compliant C++ compiler, whether today or 50 years from now.
 
-> NOTE: 显然，programming language是"design to an abstraction"；
+> NOTE: 
+>
+> 一、显然，programming language是"design to an abstraction"；
 >
 > 关于上面这段话中的思想、相关内容，参见 `Theory\Programming-language\Design-of-programming-language` 章节
 
@@ -71,6 +75,8 @@ Under C++98/C++03, this is not even Undefined Behavior; the question itself is *
 
 Under C++11, the result is Undefined Behavior, because loads and stores need not be atomic in general. Which may not seem like much of an improvement... And by itself, it's not.
 
+### Sequential consistency
+
 But with C++11, you can write this:
 
 ```cpp
@@ -86,9 +92,13 @@ Now things get much more interesting. First of all, the behavior here is *define
 
 What it cannot print is `37 0`, because the default mode for atomic loads/stores in C++11 is to enforce *sequential consistency*. This just means all loads and stores must be "as if" they happened in the order you wrote them within each thread, while operations among threads can be interleaved however the system likes. So the default behavior of atomics provides both *atomicity* and *ordering* for loads and stores.
 
-> NOTE: 通过上述例子，我们理解了sequential consistency;
+> NOTE: 
+>
+> 一、通过上述例子，我们理解了sequential consistency;
 >
 > "So the default behavior of atomics provides both *atomicity* and *ordering* for loads and stores"，体现了C++ atomic library的强大。
+
+### Relaxed
 
 Now, on a modern CPU, ensuring **sequential consistency** can be expensive. In particular, the compiler is likely to emit full-blown(成熟的) memory barriers between every access here. But if your algorithm can tolerate **out-of-order** loads and stores; i.e., if it requires atomicity but not ordering; i.e., if it can tolerate `37 0` as output from this program, then you can write this:
 
@@ -102,6 +112,8 @@ y.store(37,memory_order_relaxed);   cout << x.load(memory_order_relaxed) << endl
 ```
 
 The more modern the CPU, the more likely this is to be faster than the previous example.
+
+### Acquire-release
 
 Finally, if you just need to keep particular loads and stores in order, you can write:
 
@@ -124,7 +136,7 @@ Although to be frank, unless you are an expert and working on some serious low-l
 
 For more on this stuff, see [this blog post](http://bartoszmilewski.wordpress.com/2008/12/01/c-atomics-and-memory-ordering/).
 
-> NOTE: 完整测试程序如下:
+### 完整测试程序如下
 
 ```C++
 #include <iostream>
