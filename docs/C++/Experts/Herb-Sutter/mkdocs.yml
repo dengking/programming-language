@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - Atomic-Weapons-The C++Memory-Model-and-Modern-Hardware: Atomic-Weapons-The C++Memory-Model-and-Modern-Hardware
     - Library-gcpp: Library-gcpp
     - Effective-Concurrency-Serial: Effective-Concurrency-Serial
     - Lock-Free-Programming-or-How-to-Juggle-Razor-Blades: Lock-Free-Programming-or-How-to-Juggle-Razor-Blades

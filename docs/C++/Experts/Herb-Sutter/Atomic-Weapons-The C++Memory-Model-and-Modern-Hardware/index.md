@@ -1,8 +1,4 @@
-# Herb Sutter on C++ Memory Model
-
-
-
-## herbsutter [atomic Weapons: The C++ Memory Model and Modern Hardware](https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/)
+# Herb Sutter [atomic Weapons: The C++ Memory Model and Modern Hardware](https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/)
 
 Most of the talks I gave at [*C++ and Beyond 2012*](http://cppandbeyond.com/) last summer are already online at Channel 9. Here are two more.
 
@@ -34,7 +30,7 @@ It’s a session that includes topics I’ve publicly said for years is Stuff Yo
 >
 > 上面这段话的大致意思是: C++ programmer为了充分发挥hardware的power，这就促使作者写作本文，帮助programmer使用C++来充分发挥hardware的power。
 
-### **Topics Covered:**
+## **Topics Covered:**
 
 1、**The facts:** The **C++11 memory model** and what it requires you to do to make sure your code is correct and stays correct. We’ll include clear answers to several FAQs: “**how do the compiler and hardware cooperate to remember how to respect these rules?**”, “what is a race condition?”, and the ageless(永恒的) one-hand-clapping question “how is a race condition like a debugger?”
 

@@ -1,6 +1,4 @@
 nav:
     - Introduction: index.md
-    - Bjarne-Stroustrup: Bjarne-Stroustrup # 下面这三篇，着重讲的是memory model的意义，从高角度来进行的阐述，阐述了为什么需要memory model
     - stackoverflow-C++Memory-model: stackoverflow-C++Memory-model
-    - Herb-Sutter: Herb-Sutter
    
