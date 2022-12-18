@@ -1,10 +1,14 @@
 # Why need memory model
 
-本章回答"why need memory model"，下面这几篇，从高角度来进行的阐述，阐述了为什么需要memory model、着重讲的是memory model的意义:
+本章回答"why need memory model"，下面这几篇，从高角度来进行的阐述，阐述了为什么需要memory model、着重讲的是memory model的意义，素材:
+
+1、stroustrup C++11FAQ [Memory model](https://www.stroustrup.com/C++11FAQ.html#memory-model) 
+
+2、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g) 
 
 
 
-## stroustrup C++11FAQ [Memory model](https://www.stroustrup.com/C++11FAQ.html#memory-model)
+## stroustrup C++11FAQ [Memory model](https://www.stroustrup.com/C++11FAQ.html#memory-model) 
 
 A **memory model** is an **agreement** between the **machine architects** and the **compiler writers** to ensure that most programmers do not have to think about the details of **modern computer hardware**. Without a **memory model**, few things related to threading, locking, and lock-free programming would make sense.
 
@@ -102,5 +106,7 @@ See also
 
 参考: 
 
-1、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g)
+1、stackoverflow [C++11 introduced a standardized memory model. What does it mean? And how is it going to affect C++ programming?](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g) 
+
+
 

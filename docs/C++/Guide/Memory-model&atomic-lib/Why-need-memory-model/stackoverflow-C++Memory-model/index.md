@@ -234,19 +234,27 @@ The answer is great, but "37 0" example is simply wrong. Sequential consistency 
 
 @hamilyon: You are mistaken. See e.g. [stackoverflow.com/a/14851782](https://stackoverflow.com/a/14851782), or really any tutorial on sequential consistency. By definition, sequential consistency applies to *all* loads and stores, including across multiple memory locations. (It is expensive, not natural, on any modern CPU.) – [Nemo](https://stackoverflow.com/users/768469/nemo) [Jul 6 '20 at 16:04](https://stackoverflow.com/questions/6319146/c11-introduced-a-standardized-memory-model-what-does-it-mean-and-how-is-it-g#comment110984513_6319356)
 
-## TODO: [A](https://stackoverflow.com/a/18520606)
+## [A](https://stackoverflow.com/a/18520606)
 
 I will just give the analogy with which I understand memory consistency models (or memory models, for short). It is inspired by Leslie Lamport's seminal paper ["Time, Clocks, and the Ordering of Events in a Distributed System"](http://dl.acm.org/citation.cfm?id=359545.359563). The analogy is apt(恰当的) and has fundamental significance, but may be overkill(过犹不及，意思是: 太高深了，一般人可能搞不懂) for many people. However, I hope it provides a mental image (a pictorial representation) that facilitates reasoning about memory consistency models.
 
 Let’s view the histories of all memory locations in a **space-time diagram** in which the horizontal(水平的) axis represents the address space (i.e., each memory location is represented by a point on that axis) and the vertical(垂直的) axis represents time (we will see that, in general, there is not a universal notion of time). The history of values held by each memory location is, therefore, represented by a vertical(垂直的) column at that memory address. Each value change is due to one of the threads writing a new value to that location. By a ***memory image***, we will mean the aggregate/combination of values of all memory locations observable ***at a particular time*** by ***a particular thread***.
 
-> NOTE: 这种表示方式是非常好的
+> NOTE: 
+>
+> 一、这种表示方式是非常好的
+>
+> 二、上面最后一句话提出了memory image的概念
 
 Quoting from ["A Primer on Memory Consistency and Cache Coherence"](http://www.morganclaypool.com/doi/abs/10.2200/S00346ED1V01Y201104CAC016)
 
 > The intuitive (and most restrictive) memory model is sequential consistency (SC) in which a multithreaded execution should look like an interleaving of the sequential executions of each constituent thread, as if the threads were time-multiplexed on a single-core processor.
 
-That global memory order can vary from one run of the program to another and may not be known beforehand. The characteristic feature of SC is the set of horizontal(水平) slices(切片) in the address-space-time diagram representing ***planes of simultaneity*** (i.e., memory images). On a given plane, all of its events (or memory values) are simultaneous. There is a notion of *Absolute Time*, in which all threads agree on which memory values are simultaneous. In SC, at every time instant, there is only one memory image shared by all threads. That's, at every instant of time, all processors agree on the memory image (i.e., the aggregate content of memory). Not only does this imply that all threads view the same sequence of values for all memory locations, but also that all processors observe the same *combinations of values* of all variables. This is the same as saying all memory operations (on all memory locations) are observed in the same total order by all threads.
+> NOTE:
+>
+> 一、single-core processor
+
+That global memory order can vary from one run of the program to another and may not be known beforehand. The characteristic feature of SC is the set of horizontal(水平) slices(切片) in the address-space-time diagram representing ***planes of simultaneity*** (i.e., memory images). On a given plane, all of its events (or memory values) are simultaneous. There is a notion of *Absolute Time*, in which all threads agree on which memory values are simultaneous. In SC, at every time instant, there is only one **memory image** shared by all threads. That's, at every instant of time, all processors agree on the memory image (i.e., the aggregate content of memory). Not only does this imply that all threads view the same sequence of values for all memory locations, but also that all processors observe the same *combinations of values* of all variables. This is the same as saying all memory operations (on all memory locations) are observed in the same total order by all threads.
 
 In relaxed memory models, each thread will slice up address-space-time in its own way, the only restriction being that slices of each thread shall not cross each other because all threads must agree on the history of every individual memory location (of course, slices of different threads may, and will, cross each other). There is no universal way to slice it up (no privileged foliation of address-space-time). Slices do not have to be planar (or linear). They can be curved and this is what can make a thread read values written by another thread out of the order they were written in. Histories of different memory locations may slide (or get stretched) arbitrarily relative to each other ***when viewed by any particular thread***. Each thread will have a different sense of which events (or, equivalently, memory values) are simultaneous. The set of events (or memory values) that are simultaneous to one thread are not simultaneous to another. Thus, in a relaxed memory model, all threads still observe the same history (i.e., sequence of values) for each memory location. But they may observe different memory images (i.e., combinations of values of all memory locations). Even if two different memory locations are written by the same thread in sequence, the two newly written values may be observed in different order by other threads.
 
