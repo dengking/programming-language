@@ -156,7 +156,7 @@ thread `d`  没有 synchronize-with thread `a` ，因此，如果没有sequentia
 
 
 
-因此，总的来说，输出结果只有两种可能: 0 或者 1。
+
 
 #### Sequential consistent classic example
 

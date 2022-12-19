@@ -16,7 +16,9 @@
 
 This memory model imposes the strongest **memory order constraints**. In fact, there is more to **sequential consistency** than the **happens before relation** exhibited in Listing 8.2. Broader global synchronizations are implemented, forcing all threads to see all the sequential consistent synchronizations in the program happening in the same order. There is, in a given program, a unique global order of sequentially consistent atomic operations, seen by all the threads in the process.
 
-> NOTE: global synchronization是什么含义？下面也有global order的描述。
+> NOTE: 
+>
+> 一、global synchronization是什么含义？下面也有global order的描述。
 
 #### `memory_order_seq_cst`
 
