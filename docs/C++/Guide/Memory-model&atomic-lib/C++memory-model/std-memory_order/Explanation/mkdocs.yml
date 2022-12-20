@@ -3,7 +3,7 @@ nav:
     - Relaxed-ordering: Relaxed-ordering    
     - Release-Acquire-ordering: Release-Acquire-ordering    
     - Release-Consume-ordering: Release-Consume-ordering
-    - Sequentially-consistent-ordering: Sequentially-consistent-ordering
+    - Sequentially-consistency-ordering: Sequentially-consistency-ordering
     - Summary: Summary
 
         

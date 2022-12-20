@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
-    - std-memory_order: std-memory_order
     - Atomic-Boolean: Atomic-Boolean
     - Fence: Fence
     - CAS: CAS
