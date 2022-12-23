@@ -1,5 +1,13 @@
 # CV type qualifiers
 
+本章对C++的type specifier进行说明，目前C++中有两个type specifier；
+
+本章采用的在`C++\Language-reference\Basic-concept\index.md#Extend to OOP`中总结的思路:
+
+> 首先描述Non-OOP，然后描述OOP
+
+
+
 ## cppreference [cv (const and volatile) type qualifiers](https://en.cppreference.com/w/cpp/language/cv)
 
 > 总结：其实看了这个之后，才发觉自己对c++的type system的认知是浅薄的，原来c++中，通过这些specifier是可以进一步对type进行修饰的，从而可以提供更加丰富的语义。
@@ -59,9 +67,56 @@ To convert a reference or a pointer to a cv-qualified type to a reference or poi
 The `const` qualifier used on a declaration of a non-local non-volatile variable that is not declared `extern` gives it [internal linkage](https://en.cppreference.com/w/cpp/language/storage_duration#Linkage). This is different from C where const file scope variables have external linkage.
 
 
-## supply
+### supply
 
 Note, however, that cv-qualifiers applied to an array type actually apply to its elements.
 
 The cv-qualified and cv-unqualified types are distinct. That is `int` is a distinct type from `const int`
 
+
+
+
+
+## const and non-const
+
+const -> non const是危险的，丢失了CV，可能导致undefined behavior；
+non-const -> const是正常的，不存在问题；
+
+下面是一个典型non-const->const的例子：
+
+```C++
+#include <iostream>
+
+void func(const void* input)
+{
+	const int* i = reinterpret_cast<const int*>(input); // 保持CV
+	std::cout << *i << std::endl;
+}
+int main()
+{
+	const int i = 0;
+	func(&i);
+}
+// g++ test.cpp
+```
+
+
+
+```c++
+#include <iostream>
+
+int main()
+{
+	int i = 3;                 // i is not declared const
+	const int& rci = i;
+	const_cast<int&>(rci) = 4; // OK: modifies i
+	std::cout << "i = " << i << '\n';
+}
+// g++ test.cpp
+```
+
+
+
+## C and C++
+
+C++的CV比C要严格。

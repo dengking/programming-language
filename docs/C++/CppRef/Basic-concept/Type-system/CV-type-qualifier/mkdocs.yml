@@ -2,8 +2,6 @@ nav:
     - Introduction: index.md
 ########## 首先介绍type qualifier的概念，这是通用的概念，然后介绍c++中的type qualifier###########
     - wikipedia-Type-qualifier: wikipedia-Type-qualifier
-########## 目前c++语言支持的type qualifier##########    
-    - CV-type-qualifiers: CV-type-qualifiers
 ########## 下面对这两个qualifier进行更加详细的解释##########    
     - const: const
     - volatile: volatile

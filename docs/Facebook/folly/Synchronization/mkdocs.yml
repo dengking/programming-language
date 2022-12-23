@@ -6,5 +6,6 @@ nav:
     - Synchronized: Synchronized
     - AtomicStruct: AtomicStruct
     - TurnSequencer: TurnSequencer    
+    - Hazptr: Hazptr
     
-    
+

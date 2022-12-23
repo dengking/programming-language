@@ -7,11 +7,11 @@ nav:
     # 类型转换是type system的一个非常重要的内容        
     - Type-conversion: Type-conversion
     
-    - Type-inference&&deduction: Type-inference&&deduction
+    - Type-inference&deduction: Type-inference&deduction
     
     - size_t-and-ptrdiff_t: size_t-and-ptrdiff_t
     
-    - TODO-Type-qualifier: TODO-Type-qualifier
+    - CV-type-qualifier: CV-type-qualifier
     
     - TODO-Type-length: TODO-Type-length
     
