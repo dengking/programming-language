@@ -8,9 +8,15 @@
 
 \1. Relaxed ordering: 在单个线程内，所有原子操作是顺序进行的。按照什么顺序？基本上就是代码顺序（sequenced-before）。这就是唯一的限制了！两个来自不同线程的原子操作是什么顺序？两个字：任意。
 
-\2. Release -- acquire: 来自不同线程的两个原子操作顺序不一定？那怎么能限制一下它们的顺序？这就需要两个线程进行一下同步（synchronize-with）。同步什么呢？同步对一个变量的读写操作。线程 A 原子性地把值写入 x (release), 然后线程 B 原子性地读取 x 的值（acquire）. 这样线程 B 保证读取到 x 的最新值。注意 release -- acquire 有个牛逼的副作用：线程 A 中所有发生在 release x 之前的写操作，对在线程 B acquire x 之后的任何读操作都可见！本来 A, B 间读写操作顺序不定。这么一同步，在 x 这个点前后， A, B 线程之间有了个顺序关系，称作 inter-thread happens-before.
+> NOTE:
+>
+> 一、上面这段话所描述的其实就是as-if-rule
 
-> NOTE: 上面这段话，其实是在使用Release -- acquire来实现thread synchronization，关于此的例子，参见:
+\2. Release -- acquire: 来自不同线程的两个原子操作顺序不一定？那怎么能限制一下它们的顺序？这就需要两个线程进行一下同步（**synchronize-with**）。同步什么呢？同步对一个变量的读写操作。线程 A 原子性地把值写入 x (release), 然后线程 B 原子性地读取 x 的值（acquire）. 这样线程 B 保证读取到 x 的最新值。注意 release -- acquire 有个牛逼的副作用：线程 A 中所有发生在 release x 之前的写操作，对在线程 B acquire x 之后的任何读操作都可见！本来 A, B 间读写操作顺序不定。这么一同步，在 x 这个点前后， A, B 线程之间有了个顺序关系，称作 **inter-thread happens-before**.
+
+> NOTE: 
+>
+> 一、上面这段话，其实是在使用Release -- acquire来实现thread synchronization，关于此的例子，参见:
 >
 > 1、modernescpp [Acquire-Release Fences](https://www.modernescpp.com/index.php/acquire-release-fences)
 
@@ -145,7 +151,9 @@ mov（从寄存器到内存）
 
 那么，如果在A线程当中，`y++`是在`x++`之前执行的，那么我们就可以肯定，对于B线程来说，在`x++`（同步点）之后所有对y的参照，必定能看到A线程执行了`y++`之后的值（注意对y的访问并非原子）
 
-> NOTE: 其实就是建立 happens-before relation
+> NOTE: 
+>
+> 其实就是建立 happens-before relation
 
 ### Memory reordering
 
@@ -164,3 +172,7 @@ mov（从寄存器到内存）
 看到这里还没有晕的话，那么恭喜你，你快要理解什么是**memory order**了。所谓的**memory order**，其实就是限制编译器以及CPU对单线程当中的指令执行顺序进行重排的程度（此外还包括对cache的控制方法）。这种限制，决定了**以atom操作为基准点（边界）**，对其**之前**的**内存访问命令**，以及**之后**的**内存访问命令**，能够在多大的范围内自由重排（或者反过来，需要施加多大的保序限制）。从而形成了**6种模式。它本身与多线程无关，是限制的单一线程当中指令执行顺序。**但是（合理的）指令执行顺序的重排在单线程环境下不会造成逻辑错误而在多线程环境下会，所以这个问题的**目的是为了解决多线程环境下出现的问题**。
 
 > NOTE: 对atomic variable的load、store是基准点，可以对其前后的load、write顺序进行控制
+
+
+
+## [A](https://www.zhihu.com/question/24301047/answer/83422523)
