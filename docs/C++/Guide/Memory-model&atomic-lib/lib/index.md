@@ -1,5 +1,9 @@
 # Atomic operations library
 
+zhihu [现代C++的内存模型](https://zhuanlan.zhihu.com/p/382372072) :
+
+> 原子操作包含load/store/RMW(read-modify-write) 这三类
+
 
 
 ## cppreference [Atomic operations library](https://en.cppreference.com/w/cpp/atomic)
