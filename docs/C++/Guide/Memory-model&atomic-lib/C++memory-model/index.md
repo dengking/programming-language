@@ -42,7 +42,9 @@ A **memory model** is an **agreement** between the **machine architects** and th
 
 The key guarantee is: Two threads of execution can update and access separate memory locations without interfering with each other. But what is a ``memory location?'' A memory location is either an object of **scalar type** or a maximal sequence of adjacent bit-fields all having non-zero width. For example, here **S** has exactly four separate memory locations:
 
-> NOTE: 上面最后一段话是对memory location的解释。下面的`a`就是 **scalar type** ；
+> NOTE: 
+>
+> 一、上面最后一段话是对memory location的解释。下面的`a`就是 **scalar type** ；
 
 ```C++
 	struct S {
@@ -57,7 +59,9 @@ The key guarantee is: Two threads of execution can update and access separate me
 
 Why is this important? Why isn't it obvious? Wasn't this always true? The problem is that when several computations can genuinely(真正的) run in parallel, that is several (apparently) unrelated instructions can execute at the same time, the quirks(差异)of the memory hardware can get exposed. In fact, in the absence of compiler support, issues of instruction and data pipelining and details of cache use *will* be exposed in ways that are completely unmanageable to the applications programmer. This is true even if no two threads have been defined to share data! Consider, two separately compiled ``threads:''
 
-> NOTE: 上面这段话所总结的是C++ memory model所要解决的问题:
+> NOTE: 
+>
+> 一、上面这段话所总结的是C++ memory model所要解决的问题:
 >
 > 现代hardware朝着parallel computing的方向发展，而C++ 语言并没有memory model，这就导致了C++ programmer无法对并行执行的C++ program进行控制。
 
@@ -77,7 +81,9 @@ For greater realism, I could have used the separate compilation (within each thr
 
 A linker might allocate **c** and **b** right next to each other (in the same word) -- nothing in the C or C++ 1990s standards says otherwise. In that, C++ resembles all languages not designed with real concurrent hardware in mind. However, most modern processors cannot read or write a single character, it must read or write a whole **word**, so the assignment to **c** really is read the word containing **c**, replace the **c** part, and write the word back again.'' Since the assignment to **b** is similar, there are plenty of opportunities for the two threads to clobber(击倒) each other even though the threads do not (according to their source text) share data!
 
-> NOTE: 上面所描述的其实是stackoverflow [is assignment operator '=' atomic?](https://stackoverflow.com/questions/8290768/is-assignment-operator-atomic)中列举的一个例子，其中的解释是更加详细的，在工程hardware的CPU-`memory-access\Atomic\Memory-access-unit-and-atomic`章节中，收录了这篇文章；在其中，将这个问题称为: "byte-granular update"。
+> NOTE: 
+>
+> 上面所描述的其实是stackoverflow [is assignment operator '=' atomic?](https://stackoverflow.com/questions/8290768/is-assignment-operator-atomic)中列举的一个例子，其中的解释是更加详细的，在工程hardware的CPU-`memory-access\Atomic\Memory-access-unit-and-atomic`章节中，收录了这篇文章；在其中，将这个问题称为: "byte-granular update"。
 
 So, C++11 guarantees that no such problems occur for "**separate memory locations**". More precisely: **A memory location cannot be safely accessed by two threads without some form of locking unless they are both read accesses**. Note that different bitfields within a single word are not separate memory locations, so don't share structs with bitfields among threads without some form of locking. Apart from that caveat, the C++ memory model is simply ""**as everyone would expect**''.
 
@@ -105,6 +111,16 @@ See also
 - Paul E. McKenney, Hans-J. Boehm, and Lawrence Crowl: [C++ Data-Dependency Ordering: Atomics and Memory Model](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2556.html). N2556==08-0066.
 - Hans-J. Boehm: [Threads basics](http://www.hpl.hp.com/techreports/2009/HPL-2009-259html.html), HPL technical report 2009-259. ``what every programmer should know about memory model issues.''
 - Hans-J. Boehm and Paul McKenney: [A slightly dated FAQ on C++ memory model issues](http://www.hpl.hp.com/personal/Hans_Boehm/c++mm/user-faq.html).
+
+
+
+### write-order-to-shared-data-different-in-different-processor-thread
+
+是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
+
+> NOTE: 
+>
+> tag-order of write to shared data may be different among different threads
 
 
 
@@ -153,6 +169,20 @@ See also
 ## Multiple-level-memory-model
 
 `Multiple-level-memory-model` 对多层次的C++ memory model进行详细的讨论。
+
+
+
+## 素材
+
+关于各种memory model的描述；
+
+本章概述C++ memory model，主要参考:
+
+1、sciencedirect Victor Alessandrini, in [Shared Memory Application Programming](https://www.sciencedirect.com/book/9780128037614/shared-memory-application-programming), 2016
+
+2、zhihu [如何理解 C++11 的六种 memory order？](https://www.zhihu.com/question/24301047)
+
+3、modernescpp [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model) 
 
 
 

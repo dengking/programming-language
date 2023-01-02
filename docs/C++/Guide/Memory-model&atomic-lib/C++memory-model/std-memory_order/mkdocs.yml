@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
     - Formal-description: Formal-description
-    - Explanation: Explanation
     - Happens-before: Happens-before
+    - Multiple-level-memory-model: Multiple-level-memory-model

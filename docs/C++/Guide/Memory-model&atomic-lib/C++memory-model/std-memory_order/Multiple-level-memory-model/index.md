@@ -1,14 +1,77 @@
-# sciencedirect Victor Alessandrini, in [Shared Memory Application Programming](https://www.sciencedirect.com/book/9780128037614/shared-memory-application-programming), 2016
+# Multiple-level-memory-model
+
+本节标题的含义是: 多层次的memory model，它能够帮助我们建立对C++ memory model高屋建瓴的认识。
+
+## cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # Explanation
+
+
+
+### Constants
+
+
+
+#### `memory_order_acq_rel`
+
+A **read-modify-write** operation with this memory order is both an *acquire operation* and a *release operation*. 
+
+> NOTE: 
+>
+> 只能够用于 **read-modify-write** operation 。
+
+No memory reads or writes in the current thread can be reordered before or after this store. 
+
+> NOTE: 显然，同时施加 *acquire operation* 和 *release operation*:
+>
+> 1、*acquire operation*: reads can not be reordered before 
+>
+> 2、*release operation*: writes can not be reordered after 
+
+All writes in other threads that release the same atomic variable are visible before the modification and the modification is visible in other threads that acquire the same atomic variable.
+
+> NOTE: 这描述的是实现的效果
+
+
+
+> NOTE: 
+>
+> 1、Relaxed ordering
+>
+> 2、Release-Acquire ordering
+>
+> 3、Release-Acquire ordering
+>
+> 4、Sequentially-consistent ordering
+>
+> 
+
+
+
+cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order) # `Explanation` 段中给出了四种:
+
+|                                                              | 章节                               |
+| ------------------------------------------------------------ | ---------------------------------- |
+| [Relaxed ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) | `Relaxed-ordering`                 |
+| [Release-Consume ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Release-Consume_ordering) | `Release-Acquire-ordering`         |
+| [Release-Acquire ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Release-Acquire_ordering) | `Release-Consume-ordering`         |
+| [Sequentially-consistent ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Sequentially-consistent_ordering) | `Sequentially-consistent-ordering` |
+
+由强到弱
+
+
+
+## sciencedirect Victor Alessandrini, in [Shared Memory Application Programming](https://www.sciencedirect.com/book/9780128037614/shared-memory-application-programming), 2016
 
 链接为: https://www.sciencedirect.com/topics/computer-science/sequential-consistency
 
 
 
-## 8.4.1 Memory Models and Memory Ordering Options
+### 8.4.1 Memory Models and Memory Ordering Options
 
 **Three** memory models proposed by C++11, which, together with the **memory ordering options** that can be used in each one of them, are described next. **Memory order options** are **symbolic constants** passed as second argument to the **atomic class member functions**. As stated before, the same **memory models** are implemented in TBB and Windows, with minor implementation differences.
 
-> NOTE: TBB指的是[Threading Building Blocks](https://en.wikipedia.org/wiki/Threading_Building_Blocks):
+> NOTE: 
+>
+> 一、TBB指的是[Threading Building Blocks](https://en.wikipedia.org/wiki/Threading_Building_Blocks):
 >
 > > **Threading Building Blocks** (**TBB**) is a [C++](https://en.wikipedia.org/wiki/C%2B%2B) [template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)) [library](https://en.wikipedia.org/wiki/Library_(computer_science)) developed by [Intel](https://en.wikipedia.org/wiki/Intel) for [parallel programming](https://en.wikipedia.org/wiki/Parallel_programming) on [multi-core processors](https://en.wikipedia.org/wiki/Multi-core_processor). Using TBB, a computation is broken down into [tasks](https://en.wikipedia.org/wiki/Task_parallelism) that can run in parallel. The library manages and [schedules](https://en.wikipedia.org/wiki/Scheduling_(computing)) [threads](https://en.wikipedia.org/wiki/Thread_(computing)) to execute these tasks.
 
@@ -96,3 +159,8 @@ The rest of this section provides a very qualitative(高质量的) discussion of
 
 
 
+
+
+## Relationship with `volatile`
+
+TODO
