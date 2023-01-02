@@ -264,3 +264,9 @@ b、`control_block_ptr`是**payload**
 
 3、[chromium](https://github.com/chromium/chromium)/[base](https://github.com/chromium/chromium/tree/master/base)/**[atomic_ref_count.h](https://github.com/chromium/chromium/blob/master/base/atomic_ref_count.h)**
 
+
+
+### spdlog
+
+spdlog使用`std::shared_ptr`来实现reference counting。
+
