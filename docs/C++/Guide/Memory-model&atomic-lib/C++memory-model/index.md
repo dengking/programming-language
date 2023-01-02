@@ -118,11 +118,9 @@ See also
 
 是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
 
-> NOTE: 
->
-> tag-order of write to shared data may be different among different threads
+在下面文章中对此进行了讨论:
 
-
+1、cppreference [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)
 
 
 

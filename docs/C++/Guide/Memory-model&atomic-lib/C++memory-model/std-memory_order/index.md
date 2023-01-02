@@ -2,8 +2,6 @@
 
 
 
-
-
 ## since C++11 until C++20
 
 ```C++
@@ -49,7 +47,9 @@ The default behavior of all atomic operations in the library provides for *seque
 
 ## Constants
 
-> NOTE: 将原文中的这部分内容放到了 `Explanation` 章节中
+> NOTE: 
+>
+> 一、将原文中的这部分内容放到了 `Multiple-level-memory-model` 章节中 
 
 ## Formal description
 

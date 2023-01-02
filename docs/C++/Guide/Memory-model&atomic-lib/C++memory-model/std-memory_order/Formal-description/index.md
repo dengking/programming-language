@@ -10,9 +10,9 @@
 
 > NOTE: 
 >
-> 1、理解本节内容的前提条件是对C++ expression evaluation有一个较好的认知，参见 `C++Order-of-evaluation` 章节
+> 一、理解本节内容的前提条件是对C++ expression evaluation有一个较好的认知，参见 `C++Order-of-evaluation` 章节
 >
-> ### 手段 和 目标
+> 二、手段 和 目标
 >
 > 需要搞清楚**主被**、**因果**关系
 >
@@ -20,11 +20,11 @@
 >
 > 从control theory的角度来看: **Inter-thread synchronization** and **memory ordering** 是**手段**，下面的这些是**目标**；
 >
-> ### Inter-thread synchronization 
+> 三、Inter-thread synchronization 
 >
 > 在下面的章节中，有总结。
 >
-> ### 如何理解side effect？
+> 四、如何理解side effect？
 >
 > 可以简单地理解: 
 >
@@ -88,15 +88,17 @@ b) if A is the left operand of the built-in `&&`, `||`, `?:`, or `,` operators.
 
 ## Modification order
 
-All modifications to any particular atomic variable occur in a total order that is specific to this one atomic variable.
+All modifications to any particular atomic variable occur in a **total order** that is specific to this one atomic variable.
 
-> NOTE: 翻译如下: 
+> NOTE: 
+>
+> 一、翻译如下: 
 >
 > " 对任何特定原子变量的所有修改都按照特定于这个原子变量的总顺序进行。"
 >
 > 本节内容非常重要，它是理解后续内容的基石，csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) 中，有着非常好的描述。
 >
-> ### 我的理解
+> 二、我的理解
 >
 > 1、上面这段话中的"one atomic variable"就是shared data，显然会有多个thread同时对它进行read、write，因此就需要站在全局的角度对所有这些read、write进行分析
 >
@@ -118,7 +120,7 @@ All modifications to any particular atomic variable occur in a total order that 
 >
 > 
 >
-> ### csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.3 Modification order
+> 三、csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.3 Modification order
 >
 > Modification order，字面意思是"修改顺序"，这个是针对原子变量的一个概念，对于c++里的原子变量，有个很重要的保证，那就是：对于任意特定的原子变量的所有修改操作都会以一个特定于该原子变量的**全序**发生，因此也保证了原子变量的操作在各线程之间有如下四个一致性（为了描述简洁下面说的读写都是针对某一个特定的原子变量）：
 >
@@ -132,7 +134,7 @@ All modifications to any particular atomic variable occur in a total order that 
 >
 > happens-before是内存序里很重要的一种关系，下面会详细阐述，这里只需要记住，如果A Happens-before B，那么A对内存的修改将会在B操作之前对B可见。上面四条规则，看上去很复杂和繁琐，但阐述的内容其实很好理解。
 >
-> ### 如何理解coherence？
+> 四、如何理解coherence？
 >
 > 可以看到，下面的四个requirement都是以"coherence"来进行命名的，第一次阅读的时候，我觉得它是cache coherence，现在想来这种认知是错误的，分析如下:
 >
@@ -158,7 +160,7 @@ The following four requirements are guaranteed for all atomic operations:
 
 > NOTE: 
 >
-> ### csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.3 Modification order
+> 一、csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.3 Modification order
 >
 > Release sequence，指的是某个原子变量M上由一个release operation开始的一个序列，正式定义如下：
 >
@@ -166,7 +168,7 @@ The following four requirements are guaranteed for all atomic operations:
 >
 > 对应的，有一个比较重要的release sequence rule，能够保证特定情况下多个acquire线程对单个release操作后面展开讲release acquire语义的时候会详细讲下，暂时了解Release sequence这个概念就行。
 >
-> ### 思考
+> 二、思考
 >
 > 为什么要建立release sequence这个概念？在下面的 "Dependency-ordered before" 章节中，使用了这个概念。
 
@@ -184,7 +186,7 @@ is known as *release sequence headed by A*
 
 > NOTE: 
 >
-> ### csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.6 Dependency-ordered before
+> 一、csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.6 Dependency-ordered before
 >
 > 这个关系是针对consume来的，对于分属不同线程的赋值A和赋值B，如果他们之间有以下关系之一：
 >
@@ -261,11 +263,11 @@ Regardless of threads, evaluation A *happens-before* evaluation B if any of the 
 
 > NOTE: 
 >
-> ### happens-before relation的脑图
+> 一、happens-before relation的脑图
 >
 > ![](./C++happens-before-relation.png)
 >
-> ### 综合 *sequenced-before* 和  *inter-thread happens before*
+> 二、综合 *sequenced-before* 和  *inter-thread happens before*
 >
 > intra-thread: sequenced-before
 >
@@ -273,7 +275,7 @@ Regardless of threads, evaluation A *happens-before* evaluation B if any of the 
 >
 > 
 >
-> ### Happens-before VS Inter-thread happens-before VS Sequenced-before
+> 三、Happens-before VS Inter-thread happens-before VS Sequenced-before
 >
 > stackoverflow [Why is there a distinct “inter-thread happens before” relation defined in ISO/IEC 14882:2011?](https://stackoverflow.com/questions/17768718/why-is-there-a-distinct-inter-thread-happens-before-relation-defined-in-iso-ie) 
 >
@@ -287,7 +289,83 @@ Regardless of threads, evaluation A *happens-before* evaluation B if any of the 
 >
 > "happens before" combines the two.
 >
-> > NOTE: 这个回答总结的非常好
+> 三、stackoverflow [Confusion about happens before relationship in concurrency](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency)
+>
+> Below is an example given in **Concurrency in Action** , and the author says the `assert` may fire, but I don't understand why.
+>
+> ```cpp
+> #include <atomic>
+> #include <thread>
+> #include <assert.h>
+> std::atomic<bool> x,y;
+> std::atomic<int> z;
+> void write_x_then_y()
+> {
+>   x.store(true,std::memory_order_relaxed);
+>   y.store(true,std::memory_order_relaxed);
+> }
+> void read_y_then_x()
+> {
+>   while(!y.load(std::memory_order_relaxed));
+>   if(x.load(std::memory_order_relaxed))
+>   ++z;
+> }
+> int main()
+> {
+>   x=false;
+>   y=false;
+>   z=0;
+>   std::thread a(write_x_then_y);
+>   std::thread b(read_y_then_x);
+>   a.join();
+>   b.join();
+>   assert(z.load()!=0);
+> }
+> ```
+>
+> > NOTE:  `read_y_then_x()` 中，`while(!y.load(std::memory_order_relaxed));` 表明它需要等待 `y`，即它依赖`y`
+>
+> As far as I know, in each single thread, `sequenced before` also means `happens before`. So in thread `a` the store to `x` happens before `y`, which means `x` should be modified before `y` and the result `x.store` should be visible before `y` is modified.
+>
+> But in this example the author says that the store between `x` and `y` could be reordered, why? Does that violate the rule of `sequenced before` and `happens before`?
+>
+> **comments**
+>
+> This might explain things about **relaxed ordering** [en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) – [Sami Kuhmonen](https://stackoverflow.com/users/1806780/sami-kuhmonen) [Jul 29 '18 at 13:54](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90127305_51580966)
+>
+> @SamiKuhmonen **sequenced before** relationship does not prevent reordering? Then what's the usage of sequenced before? – [scottxiao](https://stackoverflow.com/users/9133378/scottxiao) [Jul 29 '18 at 14:13](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90127596_51580966)
+>
+> `x.store` happens-before `y.store` and `y.load` happens-before `x.load` - but `x.store` doesn't happen-before `x.load`. Happens-before relationship is not necessarily transitive in the presence of relaxed operations; that's kind of their whole point. – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 14:20](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90127697_51580966)
+>
+> > NOTE: 上述happens-before relation是从源程序中抽象出来的
+>
+> @IgorTandetnik but `y.store` happens before `while(!y.load(std::memory_order_relaxed))` , so `x.store` hapeens before `x.load`? – [scottxiao](https://stackoverflow.com/users/9133378/scottxiao) [Jul 29 '18 at 14:21](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90127709_51580966)
+>
+> > NOTE: 并不能保证 : `y.store` happens before `while(!y.load(std::memory_order_relaxed))` 
+>
+> The conclusion doesn't follow from the premise(前提). Yes, `y.store` happens-before `y.load`. No, `x.store` does not happen-before `x.load`. You have a sequentially-consistent model of execution in your head - but relaxed operations violate that model; that's why they are called "relaxed", and that's why they are difficult to reason about. – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 14:23](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90127735_51580966) 
+>
+> @IgorTandetnik since `y.store` happens before `y.load==true`, and happens before relationship is trasitive, why doesn't `x.store` happens before `x.load`? – [scottxiao](https://stackoverflow.com/users/9133378/scottxiao) [Jul 29 '18 at 14:38](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90127998_51580966)
+>
+> Again, happens-before relationship is **not** in general transitive. In particular, it is not transitive in the presence of relaxed operations. Would it be too much to ask for you to read a comment in full before responding? – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 14:58](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90128326_51580966) 
+>
+> The **Concurrency in Action** says "It’s also a transitive relation: if A **inter-thread happens-before** B and B inter-thread happens-before C, then A inter-thread happens-before C.". – [scottxiao](https://stackoverflow.com/users/9133378/scottxiao) [Jul 29 '18 at 15:02](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90128383_51580966) 
+>
+> *happens-before* and *inter-thread happens-before* are two different relations. Here, `y.load` does not inter-thread happens-before `x.load` (since both are on the same thread). – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 15:14](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90128578_51580966) 
+>
+> @IgorTandetnik What's the differences between happens before and inter-thread happens before? – [scottxiao](https://stackoverflow.com/users/9133378/scottxiao) [Jul 29 '18 at 15:41](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90129053_51580966)
+>
+> [eel.is/c++draft/intro.multithread#intro.races-10](http://eel.is/c++draft/intro.multithread#intro.races-10) – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 15:45](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90129122_51580966)
+>
+> @IgorTandetnik Your linkage says they are not different relations, inter-thread happens before belongs to happens before. – [scottxiao](https://stackoverflow.com/users/9133378/scottxiao) [Jul 29 '18 at 16:14](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90129628_51580966)
+>
+> They are different relations, where one is a subset of the other. The subset is transitive; the superset is not. In particular, if `A` inter-thread happens-before `B` and `B` is sequenced-before `C`, this doesn't necessarily mean that `A` happens-before `C` (even though `A` happens-before `B` and `B` happens-before `C`). – [Igor Tandetnik](https://stackoverflow.com/users/1670129/igor-tandetnik) [Jul 29 '18 at 16:23](https://stackoverflow.com/questions/51580966/confusion-about-happens-before-relationship-in-concurrency#comment90129770_51580966)
+>
+> **[A](https://stackoverflow.com/a/65337588)**
+>
+> From thread `a` perspective, it looks as if `x.store` happens before `y.store`. However, from thread b perspective, it can look as if they are reordered. https://koheiotsuka701.medium.com/memory-model-basic-d8b5f8fddd5f
+>
+> 
 
 ### Acyclic
 
@@ -301,11 +379,13 @@ The implementation is required to ensure that the *happens-before* relation is a
 
 If one evaluation modifies a memory location, and the other reads or modifies the same memory location, and if at least one of the evaluations is not an atomic operation, the behavior of the program is undefined (the program has a [data race](https://en.cppreference.com/w/cpp/language/memory_model)) unless there exists a *happens-before* relationship between these two evaluations.
 
+
+
 ## Visible side-effects
 
 > NOTE: 
 >
-> ### csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.9 Visible side-effects
+> 一、csdn [在 C++ memory order循序渐进（二）—— C++ memory order基本定义和形式化描述所需术语关系详解](https://blog.csdn.net/wxj1992/article/details/103656486) # 2.9 Visible side-effects
 >
 > 可见副作用，通俗地讲就是写能被读看见，正式定义如下：
 > 有对同一标量对象（float、int、指针枚举等）M的写A和读B，如果满足同时满足下述两个条件那么A的副作用对B可见：
