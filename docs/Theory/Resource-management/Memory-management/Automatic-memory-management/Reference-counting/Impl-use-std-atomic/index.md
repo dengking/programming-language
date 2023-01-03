@@ -1,22 +1,55 @@
 # Implement reference count use `std::atomic`
 
-在阅读 cppreference [std::memory_order # Relaxed ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) 时，其中有关于实现counter的描述:
+Basic requirement: 
 
-> Typical use for relaxed memory ordering is incrementing counters, such as the reference counters of [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), since this only requires atomicity, but not ordering or synchronization (note that decrementing the `shared_ptr` counters requires acquire-release synchronization with the destructor)
+a、atomic increment、decrement
 
-阅读了这段话，我的疑问如下:
+b、在`refs`为0的时候，释放资源
 
-1、如何实现呢? 
+Sample code: 
 
-2、why？为什么increment的时候，可以使用relaxed memory ordering？为什么decrement的时候，需要使用acquire-release synchronization ？
+```c++
+// Thread A:
+// smart_ptr copy ctor
+smart_ptr(const smart_ptr& other) {
+  ...
+  control_block_ptr = other->control_block_ptr;
+  control_block_ptr->refs.fetch_add(1, memory_order_relaxed);
+  ...
+}
+
+// Thread D:
+// smart_ptr destructor
+~smart_ptr() {
+  if (control_block_ptr->refs.fetch_sub(1, memory_order_acq_rel) == 1) {
+    delete control_block_ptr;
+  }
+}
+```
+
+上述code源自 stackoverflow [How can memory_order_relaxed work for incrementing atomic reference counts in smart pointers?](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm) 
+
+理解的难点:
+
+1、为什么constructor increment可以使用 `memory_order_relaxed`:
+
+ ```c++
+ control_block_ptr->refs.fetch_add(1, memory_order_relaxed)
+ ```
+
+2、为什么destructor decrement使用 `memory_order_acq_rel`:
+
+```c++
+if (control_block_ptr->refs.fetch_sub(1, memory_order_acq_rel) == 1) {
+    delete control_block_ptr;
+}
+```
 
 
 
-于是我Google: c++ atomic reference counting，下面是一些非常好的资源:
+## 素材
 
-
-
-## stackoverflow [How can memory_order_relaxed work for incrementing atomic reference counts in smart pointers?](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm)
+### stackoverflow [How can memory_order_relaxed work for incrementing atomic reference counts in smart pointers?](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm) 
 
 Consider the following code snippet taken from Herb Sutter's talk on atomics:
 
@@ -41,11 +74,13 @@ smart_ptr(const smart_ptr& other) {
 }
 ```
 
-> NOTE: 上述是一个比较分散的实现
+
 
 Herb Sutter says the increment of **refs** in Thread A can use `memory_order_relaxed` because "nobody does anything based on the action". Now as I understand `memory_order_relaxed`, if **refs** equals N at some point and two threads A and B execute the following code:
 
-> NOTE: "nobody does anything based on the action"意味这不需要synchronization
+> NOTE:
+>
+> 一、"nobody does anything based on the action"意味这不需要synchronization，这是比较符合 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 的观点的，其实这段话是从一个非常高的角度来解释为什么使用 `memory_order_relaxed`
 
 ```cpp
 control_block_ptr->refs.fetch_add(1, memory_order_relaxed);
@@ -75,33 +110,35 @@ What is the value of **refs** observed by Thread 2 before the call to `fetch_add
 
 ### COMMENTS
 
-So the only reason we need memory_order_acq_rel in the destructor is so that when the following is run: `delete control_block_ptr`; it does not run before `refs` is set to 0? – [CppNoob](https://stackoverflow.com/users/422131/cppnoob) [Dec 24 '14 at 3:50](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm/27716387#comment43682821_27631173) 
+So the only reason we need `memory_order_acq_rel` in the destructor is so that when the following is run: `delete control_block_ptr`; it does not run before `refs` is set to 0? – [CppNoob](https://stackoverflow.com/users/422131/cppnoob) [Dec 24 '14 at 3:50](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm/27716387#comment43682821_27631173) 
 
 
 
-### [A](https://stackoverflow.com/a/27716387)
+#### [A](https://stackoverflow.com/a/27716387)
 
 Boost.Atomic library that emulates `std::atomic` provides [similar reference counting example and explanation](http://www.boost.org/doc/libs/1_57_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters), and it may help your understanding.
 
->NOTE: 原文引用的内容，下面收录了，因此这里copy。
+>NOTE: 
+>
+>一、原文引用的内容，下面收录了
 
-### [A](https://stackoverflow.com/a/44867508)
+#### [A](https://stackoverflow.com/a/44867508)
 
 From C++ reference on [`std::memory_order`](http://en.cppreference.com/w/cpp/atomic/memory_order):
 
-> memory_order_relaxed: Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation's atomicity is guaranteed
+> `memory_order_relaxed`: Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation's atomicity is guaranteed
 
 There is also an example [below on that page](http://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering).
 
 So basically, `std::atomic::fetch_add()` is still atomic, even when with `std::memory_order_relaxed`, therefore concurrent `refs.fetch_add(1, std::memory_order_relaxed)` from 2 different threads will always increment `refs` by 2. The point of the memory order is how other non-atomic or `std::memory_order_relaxed` atomic operations can be reordered around the current atomic operation with memory order specified.
 
-> NOTE: 始终谨记: memory order只能怪控制single thread的ordering
 
-## [Boost.Atomic](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic.html) # [Usage examples](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html) # [Reference counting](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters)
+
+### [Boost.Atomic](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic.html) # [Usage examples](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html) # [Reference counting](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters)
 
 The purpose of a *reference counter* is to count the number of pointers to an object. The object can be destroyed as soon as the **reference counter** reaches zero.
 
-### [Implementation](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters.implementation)
+#### [Implementation](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters.implementation)
 
 ```C++
 #include <boost/intrusive_ptr.hpp>
@@ -128,15 +165,17 @@ private:
 };
 ```
 
-> NOTE: intrusive的意思是: 侵入的
+> NOTE: 
+>
+> 一、intrusive的意思是: 侵入的
 
-### [Usage](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters.usage)
+#### [Usage](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters.usage)
 
 ```C++
 X::pointer x = new X;
 ```
 
-### [Discussion](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters.discussion)
+#### [Discussion](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters.discussion)
 
 Increasing the reference counter can always be done with `memory_order_relaxed`: New references to an object can only be formed from an existing reference, and passing an existing reference from one thread to another must already provide any required synchronization.
 
@@ -174,7 +213,7 @@ It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation
 >
 > 
 
-## medium [C++ atomic 的例子：為何 reference count -1 的時候要用 memory_order_acq_rel](https://medium.com/@fcamel/c-atomic-%E6%93%8D%E4%BD%9C%E7%9A%84%E4%BE%8B%E5%AD%90-c85295b08af4)
+### medium [C++ atomic 的例子：為何 reference count -1 的時候要用 memory_order_acq_rel](https://medium.com/@fcamel/c-atomic-%E6%93%8D%E4%BD%9C%E7%9A%84%E4%BE%8B%E5%AD%90-c85295b08af4)
 
 > NOTE: 原文是使用繁体中文写的
 
@@ -206,29 +245,69 @@ It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation
 
 
 
-## SUMMARY
+### cppreference [std::memory_order # Relaxed ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) 
 
-1、`refs` 是shared data
+> Typical use for relaxed memory ordering is incrementing counters, such as the reference counters of [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), since this only requires atomicity, but not ordering or synchronization (note that decrementing the `shared_ptr` counters requires acquire-release synchronization with the destructor)
 
-2、是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。
+## 解释
 
-> NOTE: tag-order of write to shared data may be different among different threads
+`refs` 是shared data。是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。始终谨记: memory order只能够控制single thread的ordering，对于 `control_block_ptr->refs.fetch_add(1, memory_order_relaxed)` ，它是允许memory reordering在它的周围发生的，后面会进行总结。
 
-3、在它是实现中，并没有使用acquire-release来实现inter-thread happens before，对于reference counting而言，它并不需要inter-thread happens before，它只需要
 
-a、atomic increment、decrement
 
-b、在`refs`为0的时候，释放资源，因此，需要使用acquire、release来控制ordering
 
-### 为什么increment的时候，可以使用`memory_order_relaxed`？
+
+### construtor increment `memory_order_relaxed`？
 
 increment使用的是`control_block_ptr->refs.fetch_add(1, memory_order_relaxed)`，显然这是atomic operation，因此是free of data race的，需要注意的是: 
 
 1、`memory_order_relaxed`是指能够out of order execution，但是它的结果还是可以准确的更新到**share variable**即`refs`上的，即另外一个thread能够看到更新后的value，因此它还是能够保证reference count的运行正常
 
-2、reordering发生于一个函数内，在 `increment` 中，它的上下文没有依赖它的，因此它可以使用relaxed、
+2、reordering发生于一个函数内，在 `increment` 中，它的上下文没有依赖它的，因此它允许reorder的方式，因此可以使用relaxed
 
-### decrement的实现
+
+
+### destructor decrement decrement `memory_order_acq_rel`
+
+destructor是可以使用 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 中总结的模型来进行理解:
+
+```c++
+void SendTestMessage(void* param)
+{
+    // Copy to shared memory using non-atomic stores.
+    g_payload.tick  = clock();
+    g_payload.str   = "TestMessage";
+    g_payload.param = param;
+    
+    // Perform an atomic write-release to indicate that the message is ready.
+    g_guard.store(1, std::memory_order_release);
+}
+
+bool TryReceiveMessage(Message& result)
+{
+    // Perform an atomic read-acquire to check whether the message is ready.
+    int ready = g_guard.load(std::memory_order_acquire);
+    
+    if (ready != 0)
+    {
+        // Yes. Copy from shared memory using non-atomic loads.
+        result.tick  = g_payload.tick;
+        result.str   = g_payload.str;
+        result.param = g_payload.param;
+        
+        return true;
+    }
+    
+    // No.
+    return false;
+}
+```
+
+a、`refs`是 **guard variable** 
+
+b、`control_block_ptr`是**payload**
+
+即: 当 `refs` 是0的时候，需要将 `control_block_ptr` 给释放掉，对于这种情况，显然需要使用acquire-release，它的特殊之处是它是多个thread执行同一个函数，而不是像 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 所给的例子各个thread执行不同的函数，这样可以将acquire-release拆分开来，另外一个不同点是: 上述使用的是read-modify-write操作。
 
 
 
@@ -238,7 +317,7 @@ increment使用的是`control_block_ptr->refs.fetch_add(1, memory_order_relaxed)
 
 3、`refs`是shared variable，因此会有多个thread同时对它进行read、write；
 
-由于`delete control_block_ptr`是依赖于`refs`的，因此按照preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/)中的说法:
+由于`delete control_block_ptr`是依赖于`refs`的，因此按照 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 中的说法:
 
 a、`refs`是 **guard variable** 
 
@@ -251,6 +330,8 @@ b、`control_block_ptr`是**payload**
 > It is important to enforce any possible access to the object in one thread (through an existing reference) to **happen before** deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
 
 让"reference count == 0 " happens-before "deleting the object"
+
+
 
 
 
