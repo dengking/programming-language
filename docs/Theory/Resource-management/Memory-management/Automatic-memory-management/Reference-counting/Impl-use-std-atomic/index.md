@@ -195,63 +195,31 @@ Increasing the reference counter can always be done with `memory_order_relaxed`:
 
 It is important to enforce(强制) any possible access to the object in one thread (through an **existing reference**) to *happen before* deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
 
+> NOTE:
+>
+> 一、上面这段话是需要结合 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 中总结的模型来进行理解的，reference counting 类比 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 中给出的 guard-variable-playload 模型: 
+>
+> guard-variable: reference count
+>
+> playload: object
+>
+> "any possible access to the object in one thread (through an existing reference) to *happen before* deleting the object in a different thread"
+>
+> 使用write-release-read-acquire来实现happen-before relation
+
 It would be possible to use `memory_order_acq_rel` for the `fetch_sub` operation, but this results in unneeded "acquire" operations when the reference counter does not yet reach zero and may impose a performance penalty.
 
-> NOTE: 阅读了上面这段话，我的想法有:
+> NOTE:
 >
-> 1、"any possible access to the object in one thread (through an existing reference) to *happen before* deleting the object in a different thread"
->
-> 使用write-release-read-acquire来实现happen-before relation,显然，这是为了保证正确的运行
->
-> 2、"This is achieved by a "release" operation after dropping a reference"
->
-> 此处"release"是非常好理解的，具体可以参加 "aristeia-C++and-the-Perils-of-Double-Checked-Locking"，其中有非常好的解释
->
-> 3、"an "acquire" operation before deleting the object"
->
-> "acquire"要如何理解呢？
->
-> 
-
-### medium [C++ atomic 的例子：為何 reference count -1 的時候要用 memory_order_acq_rel](https://medium.com/@fcamel/c-atomic-%E6%93%8D%E4%BD%9C%E7%9A%84%E4%BE%8B%E5%AD%90-c85295b08af4)
-
-> NOTE: 原文是使用繁体中文写的
-
-這是 Herb Sutter 在 《C++ and Beyond 2012: atomic<> Weapons》介紹的例子：
-
-不懂為何在 -1 的時候要用 `memory_order_acq_rel`。
-
-> NOTE: 
-
-[在這裡查到說明](http://stackoverflow.com/a/27716387/278456)：
-
-> NOTE: 上述链接到的如下内容:
->
-> stackoverflow [How can memory_order_relaxed work for incrementing atomic reference counts in smart pointers?](https://stackoverflow.com/questions/27631173/how-can-memory-order-relaxed-work-for-incrementing-atomic-reference-counts-in-sm)
->
-> 前面已经包含了，此处不再重复
-
-
-
-在 -1 的时候分两个情況讨论：
-
-1、n > 1: 确保释放object前的更新能被其它 thread 看到，需要 release。
-
-2、n = 1: 确保有看到其它 thread 的更新，需要 acquire。
-
-> NOTE: 上述解释是有误的，上述实现中对acquire、release的使用，并没有上面描述的修改，上述实现中对acquire、release，在 [Boost.Atomic](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic.html) # [Usage examples](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html) # [Reference counting](https://www.boost.org/doc/libs/1_75_0/doc/html/atomic/usage_examples.html#boost_atomic.usage_examples.example_reference_counters) 中已经说得很清楚了。
-
-除了演讲[投影片中提到的例子](https://onedrive.live.com/?authkey=!AMtj_EflYn2507c&cid=4E86B0CF20EF15AD&id=4E86B0CF20EF15AD!24884&parId=4E86B0CF20EF15AD!180&o=OneUp) (影片中沒有细讲)，Boost  也有提供一些 [atomic 的使用例子](http://www.boost.org/doc/libs/1_57_0/doc/html/atomic/usage_examples.html)。要用的時候，还是多看些例子，看看能否直接拿來用 (C++11 应该和 Boost 的 API 差不多吧，有需要再来确认，還有查其它 C++11 的例子)，或是借此确认观念正确再來用 atomic。
-
-
+> 一、上面这段话中描述的点对于reference counting而言是不可避免的，因为每次更新了reference counting后它都需要检查
 
 ### cppreference [std::memory_order # Relaxed ordering](https://en.cppreference.com/w/cpp/atomic/memory_order#Relaxed_ordering) 
 
-> Typical use for relaxed memory ordering is incrementing counters, such as the reference counters of [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), since this only requires atomicity, but not ordering or synchronization (note that decrementing the `shared_ptr` counters requires acquire-release synchronization with the destructor)
+Typical use for relaxed memory ordering is incrementing counters, such as the reference counters of [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), since this only requires atomicity, but not ordering or synchronization (note that decrementing the `shared_ptr` counters requires acquire-release synchronization with the destructor)
 
 ## 解释
 
-`refs` 是shared data。是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。始终谨记: memory order只能够控制single thread的ordering，对于 `control_block_ptr->refs.fetch_add(1, memory_order_relaxed)` ，它是允许memory reordering在它的周围发生的，后面会进行总结。
+`refs` 是shared data。是否会存在不同thread对shared data的修改没有同步过来而导致看到了旧数据？这是一个容易陷入的误区，事实是: 不同thread对shared data的修改，其他的thread是能够看到的，不同thread可能看到的不同的是: memory order的不同，正是由于order的不同，而导致了在lock free情况下会出现问题。因此需要使用memory order进行控制。始终谨记: memory order只能够控制single thread的ordering。
 
 
 
@@ -307,7 +275,20 @@ a、`refs`是 **guard variable**
 
 b、`control_block_ptr`是**payload**
 
-即: 当 `refs` 是0的时候，需要将 `control_block_ptr` 给释放掉，对于这种情况，显然需要使用acquire-release，它的特殊之处是它是多个thread执行同一个函数，而不是像 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 所给的例子各个thread执行不同的函数，这样可以将acquire-release拆分开来，另外一个不同点是: 上述使用的是read-modify-write操作。
+
+
+| preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) | reference counting                      |                   |
+| ------------------------------------------------------------ | --------------------------------------- | ----------------- |
+| `SendMessage`                                                | --reference count                       | **write-release** |
+| `ReceiveMessage`                                             | if reference count == 0: delete object; | **read-acquire**  |
+
+
+
+reference counting的特殊之处:
+
+1、多个thread执行同一个函数，而不是像 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 所给的例子各个thread执行不同的函数，这样可以将acquire-release拆分开来，另外一个不同点是: 上述使用的是read-modify-write操作。
+
+2、正是由于多个thread执行同一个函数，因此它的**write-release-read-acquire**放到了同一个函数中进行实现
 
 
 
@@ -316,22 +297,6 @@ b、`control_block_ptr`是**payload**
 2、`~smart_ptr()`的实现能够保证只有一个thread 在执行判断`== 1`的时候，条件满足，然后执行`delete`，因此保证了thread safe，不可能发生double delete；
 
 3、`refs`是shared variable，因此会有多个thread同时对它进行read、write；
-
-由于`delete control_block_ptr`是依赖于`refs`的，因此按照 preshing [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/) 中的说法:
-
-a、`refs`是 **guard variable** 
-
-b、`control_block_ptr`是**payload**
-
-由于`delete control_block_ptr`的执行，是依赖于`refs`的，因此对它的decrement(write)是需要release operation的；
-
-那为什么在`delete control_block_ptr`之前还需要acquire operation呢？是需要建立如下所述的happen before relation: 
-
-> It is important to enforce any possible access to the object in one thread (through an existing reference) to **happen before** deleting the object in a different thread. This is achieved by a "release" operation after dropping a reference (any access to the object through this reference must obviously happened before), and an "acquire" operation before deleting the object.
-
-让"reference count == 0 " happens-before "deleting the object"
-
-
 
 
 

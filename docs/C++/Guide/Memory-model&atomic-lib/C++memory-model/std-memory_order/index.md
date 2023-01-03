@@ -95,7 +95,7 @@ C++还提供了对memory order的控制。
 
 2、zhihu [如何理解 C++11 的六种 memory order？](https://www.zhihu.com/question/24301047) # [A](https://www.zhihu.com/question/24301047/answer/1193956492) : "限制编译器以及CPU对单线程当中的指令执行顺序进行重排的程度"
 
-
+3、如果它被多个thread同时执行，所有的thread都需要遵循它指定的memory ordering
 
 ### 可以使用memory order进行控制的对象
 
@@ -155,7 +155,6 @@ C++还提供了对memory order的控制。
 multiple-producer-multiple-consumer需要sequential consistency
 
 acquire release 能否实现multiple-producer-multiple-consumer？
-
 
 
 
