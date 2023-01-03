@@ -196,7 +196,7 @@ is known as *release sequence headed by A*
 >
 > 我们就说 A dependency-ordered before B。
 >
-> ### 参见
+> 二、参见
 >
 > 在下面文章中，也对 Dependency-ordered before 进行了描述:
 >
@@ -301,29 +301,31 @@ Regardless of threads, evaluation A *happens-before* evaluation B if any of the 
 > std::atomic<int> z;
 > void write_x_then_y()
 > {
->   x.store(true,std::memory_order_relaxed);
->   y.store(true,std::memory_order_relaxed);
+> x.store(true,std::memory_order_relaxed);
+> y.store(true,std::memory_order_relaxed);
 > }
 > void read_y_then_x()
 > {
->   while(!y.load(std::memory_order_relaxed));
->   if(x.load(std::memory_order_relaxed))
->   ++z;
+> while(!y.load(std::memory_order_relaxed));
+> if(x.load(std::memory_order_relaxed))
+> ++z;
 > }
 > int main()
 > {
->   x=false;
->   y=false;
->   z=0;
->   std::thread a(write_x_then_y);
->   std::thread b(read_y_then_x);
->   a.join();
->   b.join();
->   assert(z.load()!=0);
+> x=false;
+> y=false;
+> z=0;
+> std::thread a(write_x_then_y);
+> std::thread b(read_y_then_x);
+> a.join();
+> b.join();
+> assert(z.load()!=0);
 > }
 > ```
 >
-> > NOTE:  `read_y_then_x()` 中，`while(!y.load(std::memory_order_relaxed));` 表明它需要等待 `y`，即它依赖`y`
+> > NOTE:  
+> >
+> > 一、`read_y_then_x()` 中，`while(!y.load(std::memory_order_relaxed));` 表明它需要等待 `y`，即它依赖`y`
 >
 > As far as I know, in each single thread, `sequenced before` also means `happens before`. So in thread `a` the store to `x` happens before `y`, which means `x` should be modified before `y` and the result `x.store` should be visible before `y` is modified.
 >

@@ -97,6 +97,10 @@ C++还提供了对memory order的控制。
 
 3、如果它被多个thread同时执行，所有的thread都需要遵循它指定的memory ordering
 
+4、zhihu [现代C++的内存模型](https://zhuanlan.zhihu.com/p/382372072)
+
+> 现代C++的内存模型，其实主要表现在对原子变量进行操作时，通过指定memory order（内存顺序）的参数，来控制线程间同步。
+
 ### 可以使用memory order进行控制的对象
 
 1、`std::atomic`
@@ -150,6 +154,22 @@ C++还提供了对memory order的控制。
 
 
 
+### Full  VS One-way memory barrier/fence
+
+素材：
+
+1、zhihu [现代C++的内存模型](https://zhuanlan.zhihu.com/p/382372072)
+
+> C++默认的SC-DRF对应为memory_order_seq_cst，使用该默认模型的操作，上移下移都不被允许，相当于双向屏障，可以用图8稍作总结。
+>
+> ![img](./v2-4f469e7c62c43a4ccd3acc31af5f0def_1440w.png)
+>
+> 图8. 三种屏障 （可下移、可上移、不能跨越）
+
+2、stackoverflow [How to understand acquire and release semantics?](https://stackoverflow.com/questions/24565540/how-to-understand-acquire-and-release-semantics) # [A](https://stackoverflow.com/a/24565699)
+
+
+
 #### 基于producer-consumer来进行分析
 
 multiple-producer-multiple-consumer需要sequential consistency
@@ -159,6 +179,8 @@ acquire release 能否实现multiple-producer-multiple-consumer？
 
 
 
+
+zhihu [如何理解 C++11 的六种 memory order？](https://www.zhihu.com/question/24301047) # [A](https://www.zhihu.com/question/24301047/answer/85844428)
 
 
 
