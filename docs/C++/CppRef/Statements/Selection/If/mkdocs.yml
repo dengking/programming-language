@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - C++17-If-Statements-with-Initializer: C++17-If-Statements-with-Initializer
+    
