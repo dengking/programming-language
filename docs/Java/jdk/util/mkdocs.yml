@@ -1,6 +1,4 @@
 nav:
     - Introduction: index.md
-    - function: function
     - Data-structure: Data-structure
-    - Stream: Stream
     - Optional: Optional

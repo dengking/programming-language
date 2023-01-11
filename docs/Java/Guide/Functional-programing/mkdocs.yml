@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - lambda-expression: lambda-expression
+    - Stream: Stream
+    - Consumer: Consumer
+    
