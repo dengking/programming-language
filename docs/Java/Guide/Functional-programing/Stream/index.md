@@ -1,10 +1,10 @@
 # Stream
 
-## docs.oracle [Interface Stream<T>](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html)
+## docs.oracle [Interface `Stream<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html)
 
 
 
-## medium [How to use map, filter, and collect methods in Java Stream? Example Tutorial](https://medium.com/javarevisited/how-to-use-streams-map-filter-and-collect-methods-in-java-1e13609a318b)
+## medium [How to use map, filter, and collect methods in Java Stream? Example Tutorial](https://medium.com/javarevisited/how-to-use-streams-map-filter-and-collect-methods-in-java-1e13609a318b) 
 
 ```java
 package tool;

@@ -108,7 +108,7 @@ This illustration shows the parts of a lambda:
 
 
 
-### Passing Lambda Expressions with `std::function`
+## Passing Lambda Expressions with `std::function`
 
 在drdobbs [Lambdas in C++11](https://www.drdobbs.com/cpp/lambdas-in-c11/240168241)中有如下描述：
 
@@ -123,5 +123,7 @@ Each time you are creating a **lambda expression**, its implementation creates a
 
 
 关于此的例子，参见`C++\Language-reference\Functions\std-utility-lib-Function-objects\cppreference-std-function.md`。
+
+
 
 ## crascit [Lambdas for lunch](https://crascit.com/2015/03/01/lambdas-for-lunch/)

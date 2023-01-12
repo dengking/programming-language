@@ -24,3 +24,9 @@
 
 
 
+### baeldung [How to Find an Element in a List with Java](https://www.baeldung.com/find-list-element-java)
+
+
+
+### stackoverflow [Java List.contains(Object with field value equal to x)](https://stackoverflow.com/questions/18852059/java-list-containsobject-with-field-value-equal-to-x)
+

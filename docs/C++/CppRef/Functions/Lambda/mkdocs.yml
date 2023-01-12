@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Generic-lambdas: Generic-lambdas
     - Lambda-capture: Lambda-capture

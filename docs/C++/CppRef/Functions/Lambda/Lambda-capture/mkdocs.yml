@@ -2,6 +2,5 @@ nav:
     - Introduction: index.md
     - Capture-by-value-const-mutable: Capture-by-value-const-mutable
     - Capture-this: Capture-this
-    - C++14-generalized-lambda-capture: C++14-generalized-lambda-capture
     - C++20-perfect-capture: C++20-perfect-capture
     
