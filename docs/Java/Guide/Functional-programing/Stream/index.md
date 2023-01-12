@@ -1,6 +1,6 @@
 # Stream
 
-## docs.oracle [Interface Stream<T>](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html)
+## docs.oracle [Interface `Stream<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html)
 
 
 

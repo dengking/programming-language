@@ -4,7 +4,7 @@ nav:
     - Generic-programming: Generic-programming
     - TMP: TMP
     - AOP: AOP
-    - FP: FP
+    - Functional-programming: Functional-programming
     # 总结c++中polymorphism的实现
     - Polymorphism: Polymorphism    
     - Polymorphic-value-type: Polymorphic-value-type
