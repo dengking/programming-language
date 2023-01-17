@@ -1,6 +1,10 @@
 # Type inference and deduction
 
-1、C++中，deduction特指: template argument deduction；inference特指: auto
+1、C++中:
+
+deduction特指: template argument deduction；
+
+inference特指: auto
 
 2、本章主要讨论type inference，type deduction放到了`C++\Language-reference\Template`章节
 
@@ -8,7 +12,9 @@
 
 In C++03 (and C), to use a variable, its type must be specified explicitly. However, with the advent of **template types** and **template metaprogramming** techniques, the type of something, particularly the well-defined **return value of a function**, may not be easily expressed. Thus, storing intermediates in variables is difficult, possibly needing knowledge of the internals of a given metaprogramming library.
 
-> NOTE: 上面描述的难以描述type的问题，在wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)中描述了这种情况的一个典型的案例:
+> NOTE: 
+>
+> 一、上面描述的难以描述type的问题，在wikipedia [decltype](https://en.wikipedia.org/wiki/Decltype)中描述了这种情况的一个典型的案例:
 >
 > It is sometimes desirable to write a **generic forwarding function** that returns the same type as the wrapped function, regardless of the type it is instantiated with. Without `decltype`, it is not generally possible to accomplish this.[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8) An example, which also utilizes the *[trailing-return-type](https://en.wikipedia.org/wiki/Trailing-return-type)*:[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8)
 >
@@ -129,11 +135,9 @@ int main()
 
 C++14 return type deduction for function 特性，参见: 
 
-1、[C++14](https://en.cppreference.com/w/cpp/14) # [return type deduction for functions](https://en.cppreference.com/w/cpp/language/function#Return_type_deduction_.28since_C.2B.2B14.29)
+1、[C++14](https://en.cppreference.com/w/cpp/14)  [return type deduction for functions](https://en.cppreference.com/w/cpp/language/function#Return_type_deduction_.28since_C.2B.2B14.29) 
 
-C++14 `decltype(auto)`
-
-对C++ 11 `auto` + `decltype` + trailing return type的简化，参见`./decltype`。
+[C++14](https://en.cppreference.com/w/cpp/14)  [return type deduction for functions](https://en.cppreference.com/w/cpp/language/function#Return_type_deduction_.28since_C.2B.2B14.29)  `decltype(auto)` 是 对C++ 11 `auto` + `decltype` + trailing return type的简化，参见`decltype` 章节。
 
 
 
@@ -151,6 +155,8 @@ C++17 新增 "Use of auto as the type for a non-type template parameter"，参�
 
 2、wikipedia C++17
 
+
+
 ## 为什么需要type inference? 
 
 从上面的**发展概述**来看，C++的一个非常重要的方向是对"type inference"的增强，那我们就需要思考: "为什么需要type inference"。
@@ -165,7 +171,7 @@ C++17 新增 "Use of auto as the type for a non-type template parameter"，参�
 >
 > One of the cited main motivations for the `decltype` proposal was the ability to write **perfect [forwarding function](https://en.wikipedia.org/wiki/Wrapper_function) templates**.[[8\]](https://en.wikipedia.org/wiki/Decltype#cite_note-n1705-8) 
 
-2) `./decltype`
+2) `decltype` 章节
 
 一个典型的需求就是: **perfect forwarding function template**。
 

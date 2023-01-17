@@ -1,5 +1,7 @@
 # auto
 
+
+
 ## cppreference [C++ keywords: auto](https://en.cppreference.com/w/cpp/keyword/auto)
 
 | 版本        | Usage                                                        |      |
@@ -8,22 +10,6 @@
 | since C++11 | [`auto` placeholder type specifier](https://en.cppreference.com/w/cpp/language/auto) |      |
 |             | [function declaration](https://en.cppreference.com/w/cpp/language/function) with trailing return type |      |
 | since C++17 | [structured binding declaration](https://en.cppreference.com/w/cpp/language/structured_binding) |      |
-
-从上面可以看出 `auto` 的 application:
-
-1、Return type deduction
-
-2、auto + trailing return type
-
-3、type inference
-
-
-
-## microsoft [`auto` (C++)](https://docs.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-160)
-
-
-
-
 
 
 
@@ -59,4 +45,10 @@ int main()
 }
 
 ```
+
+
+
+# see also
+
+1、microsoft [`auto` (C++)](https://docs.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-160)
 
