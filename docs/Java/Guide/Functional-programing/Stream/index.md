@@ -4,7 +4,7 @@
 
 
 
-## medium [How to use map, filter, and collect methods in Java Stream? Example Tutorial](https://medium.com/javarevisited/how-to-use-streams-map-filter-and-collect-methods-in-java-1e13609a318b)
+## medium [How to use map, filter, and collect methods in Java Stream? Example Tutorial](https://medium.com/javarevisited/how-to-use-streams-map-filter-and-collect-methods-in-java-1e13609a318b) 
 
 ```java
 package tool;

@@ -1,4 +1,5 @@
 nav:
-    - Comparison-operators: Comparison-operators.md
+    - Comparison-operators: Comparison-operators
     - Increment-decrement-operators: Increment-decrement-operators
     - Pow-operator: Pow-operator
+    
