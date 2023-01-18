@@ -20,20 +20,6 @@ Distinguished Leader who founded and scaled critical infrastructure including [L
 
 
 
-## zhihu [LLVM创始人Chris Lattner回顾展望编译器](https://zhuanlan.zhihu.com/p/502828729)
-
-
-
-## zhihu [LLVM之父Chris Lattner：编译器的黄金时代](https://zhuanlan.zhihu.com/p/502730940)
-
-
-
-## zhihu [现在是不是编译器行业的风口时期？](https://www.zhihu.com/question/471096068/answer/1990950901)&#x20;
-
-
-
-## weixin [两大图灵奖得主力作：计算机架构的新黄金时代](https://mp.weixin.qq.com/s/5ruauCn1vQswyo7lIrp6BQ)
-
 
 
 ## [Modular AI](https://www.modular.ai/)
