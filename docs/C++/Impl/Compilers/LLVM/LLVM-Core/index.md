@@ -1,3 +1,0 @@
-# LLVM Core
-
-The **LLVM Core** libraries provide a modern source- and target-independent [optimizer](http://llvm.org/docs/Passes.html), along with [code generation support](http://llvm.org/docs/CodeGenerator.html) for many popular CPUs (as well as some less common ones!) These libraries are built around a [well specified](http://llvm.org/docs/LangRef.html) code representation known as the **LLVM intermediate representation** ("**LLVM IR**"). The **LLVM Core libraries** are [well documented](http://llvm.org/docs/), and it is particularly easy to invent your own language (or port an existing compiler) to use [LLVM as an optimizer and code generator](http://llvm.org/docs/tutorial/).
