@@ -9,3 +9,6 @@ Therefore, for backward compatibility, **the JVM disables assertion validation b
 ```bash
 java -ea com.baeldung.assertion.Assertion
 ```
+
+
+

@@ -80,3 +80,12 @@ Which would print:
 
 
 
+## groupby
+
+
+
+### baeldung [Guide to Java 8 groupingBy Collector](https://www.baeldung.com/java-groupingby-collector)
+
+The Java 8 *Stream* API lets us process collections of data in a **declarative way**.
+
+The static factory methods *Collectors.groupingBy()* and *Collectors.groupingByConcurrent()* provide us with functionality similar to the ‘*GROUP BY'* clause in the SQL language. **We use them for grouping objects by some property and storing results in a *Map* instance.**
