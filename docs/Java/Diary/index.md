@@ -12,3 +12,10 @@ java -ea com.baeldung.assertion.Assertion
 
 
 
+## Java resource management
+
+
+
+### baeldung [Is There a Destructor in Java?](https://www.baeldung.com/java-destructor)
+
+### cnblogs [浅谈 Java 中的 AutoCloseable 接口 ](https://www.cnblogs.com/vivotech/p/13886291.html)
