@@ -85,3 +85,22 @@ stackoverflow [How can I turn a List of Lists into a List in Java 8?](https://st
 ## Java generic programming
 
 docs.oracle [Restrictions on Generics](https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html)
+
+
+
+## Mac install java
+
+
+
+### stackoverflow [How to install Java 8 on Mac](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac) 
+
+[A](https://stackoverflow.com/a/28635465)
+
+```SHELL
+brew tap adoptopenjdk/openjdk
+brew install --cask adoptopenjdk8
+```
+
+
+
+[A](https://stackoverflow.com/a/32811065)
