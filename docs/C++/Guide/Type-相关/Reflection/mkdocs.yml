@@ -2,6 +2,6 @@ nav:
     - Introduction: index.md
     - paper-N3996-Static-reflection: paper-N3996-Static-reflection
     - vollmann-Metaclasses-and-Reflection-in-C++: vollmann-Metaclasses-and-Reflection-in-C++
-    - thegreenplace-Parsing-C++in-Python-with-Clang: thegreenplace-Parsing-C++in-Python-with-Clang
+    - Eli-Bendersky-thegreenplace-Parsing-C++in-Python-with-Clang: Eli-Bendersky-thegreenplace-Parsing-C++in-Python-with-Clang
     - Library-rttr: Library-rttr
     - struct-RTTI: struct-RTTI

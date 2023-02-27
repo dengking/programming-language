@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
-    - thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries: thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries
+    - Eli-Bendersky-thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries: Eli-Bendersky-thegreenplace-Position-Independent-Code(PIC)-in-shared-libraries
+    

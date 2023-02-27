@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
-    - thegreenplace-CRTP-in-C++: thegreenplace-CRTP-in-C++
+    - Eli-Bendersky-thegreenplace-CRTP-in-C++: Eli-Bendersky-thegreenplace-CRTP-in-C++
     - Variadic-CRTP: Variadic-CRTP
     - Derived-class-template-CRTP: Derived-class-template-CRTP
+    

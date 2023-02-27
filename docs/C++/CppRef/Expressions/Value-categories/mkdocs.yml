@@ -4,5 +4,6 @@ nav:
     - paper-stroustrup-“New”-Value-Terminology: paper-stroustrup-“New”-Value-Terminology
 # 然后介绍标准中关于value category的描述    
     - cppreference-Value-categories: cppreference-Value-categories
-    - TODO-thegreenplace-Understanding-lvalues-and-rvalues: TODO-thegreenplace-Understanding-lvalues-and-rvalues
+    - Eli-Bendersky-thegreenplace-Understanding-lvalues-and-rvalues: Eli-Bendersky-thegreenplace-Understanding-lvalues-and-rvalues
     - TODO-prvalues: TODO-prvalues.md
+    

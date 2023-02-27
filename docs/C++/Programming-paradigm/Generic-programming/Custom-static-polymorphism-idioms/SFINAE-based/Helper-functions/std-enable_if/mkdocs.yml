@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - boost-enable_if: boost-enable_if
-    - thegreenplace-SFINAE-and-enable_if: thegreenplace-SFINAE-and-enable_if
+    - Eli-Bendersky-thegreenplace-SFINAE-and-enable_if: Eli-Bendersky-thegreenplace-SFINAE-and-enable_if
     
     
