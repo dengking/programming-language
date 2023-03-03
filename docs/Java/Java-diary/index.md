@@ -38,7 +38,26 @@ stackoverflow [Create a directory if it does not exist and then create the files
 
 ## Java stream
 
+### stream to map
+
+
+
 geeksforgeeks [How to convert a Stream into a Map in Java](https://www.geeksforgeeks.org/how-to-convert-a-stream-into-a-map-in-java/)
+
+
+
+### Java 8 写法
+
+
+
+```java
+List<T> list;
+list.parallelStream()
+                .collect(Collectors.toMap(
+                        section -> section,
+                        section -> getNearbySections(searcher, section)
+                ));
+```
 
 
 
