@@ -1,8 +1,10 @@
-# `resize` and `reserve`
+# std::vector `resize` 、`reserve`、constructor
 
 
 
 ## Example
+
+一、
 
 ```C++
 #include <iostream>
@@ -30,7 +32,24 @@ int main()
 
 
 
+二、stackoverflow [Constant-sized vector](https://stackoverflow.com/questions/11134497/constant-sized-vector)  # [A](https://stackoverflow.com/a/31009108) 
 
+> The std::vector can always grow dynamically, but there are two ways you can allocate an initial size:
+>
+> This allocates initial size and fills the elements with zeroes:
+>
+> ```cpp
+> std::vector<int> v(10);
+> v.size(); //returns 10
+> ```
+>
+> This allocates an initial size but does not populate the array with zeroes:
+>
+> ```cpp
+> std::vector<int> v;
+> v.reserve(10);
+> v.size(); //returns 0
+> ```
 
 ## stackoverflow [std::vector::resize() vs. std::vector::reserve()](https://stackoverflow.com/questions/13029299/stdvectorresize-vs-stdvectorreserve)
 
