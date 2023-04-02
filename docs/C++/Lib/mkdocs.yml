@@ -6,7 +6,6 @@ nav:
     - Abseil: Abseil
     - Log: Log
     - fmt: fmt
-    - Math-library: Math-library
     - Partow: Partow
     - Configuration: Configuration
     - Unit-testing: Unit-testing
