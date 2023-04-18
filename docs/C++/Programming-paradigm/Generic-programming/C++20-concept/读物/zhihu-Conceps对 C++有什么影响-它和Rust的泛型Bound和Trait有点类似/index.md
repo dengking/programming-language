@@ -1,0 +1,1 @@
+# zhihu [Concept 对 C++ 有什么影响，它和 Rust 的泛型 Bound 和 Trait 有点类似？](https://www.zhihu.com/question/33222324) 
