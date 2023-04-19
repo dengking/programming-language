@@ -699,6 +699,14 @@ How does this work? When I try to instantiate `has_foo<T>::value`, that will cau
 
 
 
+## TODO
+
+一、需要补充concept、constrain:
+
+cppreference [Constraints and concepts (since C++20)](https://en.cppreference.com/w/cpp/language/constraints)
+
+> Violations of constraints are detected at compile time, early in the template instantiation process, which leads to easy to follow error messages
+
 ## TO READ
 
 bytefreaks [C++: “undefined reference to” templated class function](https://bytefreaks.net/programming-2/c/c-undefined-reference-to-templated-class-function)
