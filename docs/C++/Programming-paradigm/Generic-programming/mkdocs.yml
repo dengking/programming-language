@@ -3,9 +3,7 @@ nav:
     - Template-is-behavior-based: Template-is-behavior-based
     - Concepts: Concepts
     - Named-requirements: Named-requirements
-    - Pre-C++20-concept: Pre-C++20-concept
-    # concept是c++20引入的一个非常重要的特性    
-    - C++20-concept: C++20-concept
+
     - Custom-static-polymorphism-idioms: Custom-static-polymorphism-idioms
 
     

@@ -2,4 +2,6 @@ nav:
     - Introduction: index.md
     # 这是Bjarne Stroustrup的文章    
     - stroustrup-paper-Concepts-The-Future-of-Generic-Programming: stroustrup-paper-Concepts-The-Future-of-Generic-Programming
-    
+    - Pre-C++20-concept: Pre-C++20-concept
+    # concept是c++20引入的一个非常重要的特性    
+    - C++20-concept: C++20-concept    

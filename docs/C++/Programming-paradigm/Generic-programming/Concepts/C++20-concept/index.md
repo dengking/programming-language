@@ -142,6 +142,10 @@ concept Error2 = true; // Error: the requires-clause attempts to constrain a con
 
 ### [Constraints](https://en.cppreference.com/w/cpp/language/constraints#Constraints)
 
+> NOTE:
+>
+> 一、`requires` constrains
+
 A constraint is a sequence of logical operations and operands that specifies requirements on template arguments. They can appear within [requires expressions](https://en.cppreference.com/w/cpp/language/requires) or directly as bodies of concepts.
 
 There are three types of constraints:
@@ -155,6 +159,17 @@ There are three types of constraints:
 
 
 #### Conjunctions
+
+The conjunction of two constraints is formed by using the `&&` operator in the constraint expression:
+
+```c++
+template<class T>
+concept Integral = std::is_integral<T>::value;
+template<class T>
+concept SignedIntegral = Integral<T> && std::is_signed<T>::value;
+template<class T>
+concept UnsignedIntegral = Integral<T> && !SignedIntegral<T>;
+```
 
 
 
@@ -170,7 +185,11 @@ There are three types of constraints:
 
 
 
-### [Requires clauses](https://en.cppreference.com/w/cpp/language/constraints#Requires_clauses)
+### [Requires clauses](https://en.cppreference.com/w/cpp/language/constraints#Requires_clauses) 
+
+The keyword [`requires`](https://en.cppreference.com/w/cpp/keyword/requires) is used to introduce a *requires-clause*, which specifies constraints on template arguments or on a function declaration.
+
+
 
 ### [Requires expressions](https://en.cppreference.com/w/cpp/language/constraints#Requires_expressions)
 

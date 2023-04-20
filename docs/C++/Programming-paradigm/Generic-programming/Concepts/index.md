@@ -57,7 +57,9 @@ The main uses of concepts are:
 
 3) Selecting **function template overloads** and **class template specializations** based on type properties
 
-> NOTE: static polymorphism，能够替代SFINAE
+> NOTE: 
+>
+> 一、static polymorphism，能够替代SFINAE
 
 4) Constraining automatic type deduction
 
@@ -137,6 +139,8 @@ Concepts may be used instead of the unconstrained type deduction placeholder `au
 auto     x1 = f(y); // the type of x1 is deduced to whatever f returns
 Sortable auto x2 = f(y); // the type of x2 is deduced, but only compiles if it satisfies Sortable
 ```
+
+
 
 ## TO READ
 
