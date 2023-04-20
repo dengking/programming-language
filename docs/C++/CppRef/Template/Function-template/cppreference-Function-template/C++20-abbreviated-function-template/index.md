@@ -1,5 +1,15 @@
 # Abbreviated function template(since C++20)
 
+function with auto parameter 相当于 function template
+
+
+
+素材:
+
+1、cppstories [20 Smaller yet Handy C++20 Features](https://www.cppstories.com/2022/20-smaller-cpp20-features/) 
+
+2、microsoft [Abbreviated Function Templates and Constrained Auto](https://devblogs.microsoft.com/cppblog/abbreviated-function-templates-and-constrained-auto/) 
+
 
 
 ## cppstories [20 Smaller yet Handy C++20 Features](https://www.cppstories.com/2022/20-smaller-cpp20-features/) 
