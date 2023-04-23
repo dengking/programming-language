@@ -81,12 +81,15 @@ gcc [6 Extensions to the C Language Family](https://gcc.gnu.org/onlinedocs/gcc/C
 
 
 
-## microsoft [Attributes in C++](https://docs.microsoft.com/en-us/cpp/cpp/attributes?view=msvc-160)
-
-### C++ Standard Attributes
-
-### `[[noreturn]]`
 
 
+## cppreference [C++ attribute: noreturn (since C++11)](https://en.cppreference.com/w/cpp/language/attributes/noreturn)
 
-### `[[carries_dependency]]`
+> NOTE:
+>
+> 一、在 zhihu [A Tour to C++ Attribute](https://zhuanlan.zhihu.com/p/64493524) 中给出了非常好的例子
+
+Indicates that the function will not return control flow to the calling function after it finishes (e.g. functions that terminate the application, throw exceptions, loop indefinitely, etc.)
+
+This attribute applies to the name of the function being declared in function declarations only. The behavior is undefined if the function with this attribute actually returns.
+
