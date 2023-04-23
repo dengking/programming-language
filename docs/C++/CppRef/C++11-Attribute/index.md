@@ -6,7 +6,9 @@
 
 C++11 provides a standardized syntax for compiler/tool extensions to the language. Such extensions were traditionally specified using `#pragma` directive or vendor-specific keywords (like `__attribute__` for GNU and `__declspec` for Microsoft). With the new syntax, added information can be specified in a form of an attribute enclosed in double square brackets. 
 
-> NOTE: 提供uniform syntax
+> NOTE: 
+>
+> 一、提供uniform syntax
 
 An attribute can be applied to various elements of source code:
 
@@ -76,6 +78,8 @@ clang [Attributes in Clang](https://clang.llvm.org/docs/AttributeReference.html)
 #### gcc
 
 gcc [6 Extensions to the C Language Family](https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html#C-Extensions)
+
+
 
 ## microsoft [Attributes in C++](https://docs.microsoft.com/en-us/cpp/cpp/attributes?view=msvc-160)
 
