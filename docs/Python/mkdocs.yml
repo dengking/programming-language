@@ -8,7 +8,7 @@ nav:
     - Guide: Guide
     - Paradigm: Paradigm # python的编程范式
     - Pattern: Pattern # python设计模式
-    - Programming-tool: Programming-tool # 编程工具
+    - Tools: Tools # 编程工具
     - Glossary: Glossary
     - Package: Package
     
