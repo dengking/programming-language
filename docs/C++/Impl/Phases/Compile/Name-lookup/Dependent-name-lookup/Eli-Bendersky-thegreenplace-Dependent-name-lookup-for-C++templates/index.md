@@ -1,4 +1,4 @@
-# thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)
+# thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) 
 
 ## A simple problem and a solution
 
@@ -50,7 +50,7 @@ The intention of `Derived<T>::g` is to call `Base<T>::f`, but what the compiler 
 > 
 > ```
 >
-> 2、由于`f`没有再`struct Derived`中定义，因此，compiler会在 `Base<T>` 中进行查找，而由于 `Base<T>` 是一个class template，因此，`f`就是一个dependent name，而上述程序的写法是不符合dependent name的用法的。
+> 2、由于`f`没有在 `struct Derived` 中定义，因此，compiler会在 `Base<T>` 中进行查找，而由于 `Base<T>` 是一个class template，因此，`f`就是一个dependent name，而上述程序的写法是不符合dependent name的用法的。
 
 First, let's see how to fix this. It's easy. All you have to do is to make the compiler understand that the call `f` depends on the template parameter `T`. A couple of ways to do this are replacing `f()` with `Base<T>::f()`, or with `this->f()` (since `this` is implicitly dependent on `T`). For example:
 
@@ -173,9 +173,11 @@ To make this work, the C++ standard defines a "two-phase name lookup" rule for n
 | *Dependent*     | names that depend on the template parameters but aren't declared within the template. |         |
 | *Non-dependent* | names that don't depend on the template parameters, plus the name of the template itself and names declared within it. |         |
 
-When the compiler tries to resolve some name in the code, it first decides whether the name is **dependent** or not, and the resolution process stems from this distinction（解析过程就是根据这种区别进行的）. While **non-dependent names** are resolved "normally" - when the template is defined, the resolution for **dependent names** happens at the point of the **template's *instantiation***. This is what ensures that a specialization can be noticed correctly in the example above.
+When the compiler tries to resolve some name in the code, it first decides whether the name is **dependent** or not, and the resolution process stems from this distinction（解析过程就是根据这种区别进行的）. While **non-dependent names** are resolved "normally" - when the template is defined, the resolution for **dependent names** happens at the point of the **template's instantiation**. This is what ensures that a specialization can be noticed correctly in the example above.
 
-> NOTE: 关于template instantiation，参见`C++\Language-reference\Template\Implementation\index.md`
+> NOTE: 
+>
+> 一、关于template instantiation，参见`C++\Language-reference\Template\Implementation\index.md`
 
 ### 非常好的解释
 
@@ -191,13 +193,15 @@ On the other hand, when we explicitly make the lookup of `f` dependent by callin
 
 ## Disambiguating dependent type names
 
-> NOTE: “disambiguate” 即 “消除歧义”
+> NOTE: 
+>
+> 一、“disambiguate” 即 “消除歧义”
 
 I've mentioned above that to fix the problem and make the lookup of `f` dependent, we can either say `this->f()` or `Base<T>::f()`. While this works for **identifiers** like **member names**, it doesn't work with types. Consider this code snippet:
 
 > NOTE: 
 >
-> dependent name可以有如下三种:
+> 一、dependent name可以有如下三种:
 >
 > | dependent name | example                                                      | how to disambiguate                                          |
 > | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |

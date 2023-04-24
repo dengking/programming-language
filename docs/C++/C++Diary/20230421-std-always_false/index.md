@@ -1,6 +1,6 @@
 # `std::always_false`
 
-如果使用 `static_assert(false, "error message!")`，那么肯定会导致编译失败，从实践来看，即使这个template没有被使用，编译器仍然会触发这个`static_assert(false)` 进而导致编译失败，在 stackoverflow [Forbids functions with `static_assert`](https://stackoverflow.com/questions/34745581/forbids-functions-with-static-assert) 中对此进行了讨论，下面是例子:
+一、如果使用 `static_assert(false, "error message!")`，那么肯定会导致编译失败，从实践来看，即使这个template没有被使用，编译器仍然会触发这个`static_assert(false)` 进而导致编译失败，在 stackoverflow [Forbids functions with `static_assert`](https://stackoverflow.com/questions/34745581/forbids-functions-with-static-assert) 中对此进行了讨论，下面是例子:
 
 ```c++
 #include <string>
@@ -23,7 +23,36 @@ int main() {
     static_assert(false, "You should not use this!");
 ```
 
+二、思路: 将non-dependent name转化为dependent name
 
+
+
+## stackoverflow [Is it possible to implement always_false in the C++ standard library?](https://stackoverflow.com/questions/57787666/is-it-possible-to-implement-always-false-in-the-c-standard-library) 
+
+There are cases where one uses an `always_false` helper to e.g. cause unconditional `static_assert` failure if instantiation of some template is attempted:
+
+```cpp
+template <class... T> struct always_false : std::false_type {};
+
+template<class T>
+struct UsingThisShouldBeAnError {
+  static_assert(always_false<T>::value, "You should not use this!");
+};
+```
+
+
+
+### [A](https://stackoverflow.com/a/57788465) 
+
+To paraphrase Jarod's idea, It could be something like
+
+```cpp
+template <class... T> struct always_false : std::false_type {};
+
+template <> struct always_false</* implementation defined */> : std::true_type{};
+```
+
+Where `/* implementation defined */` can be filled by `std::_ReservedIdentifer`. User code can't access it, since the identifier is reserved to the library, but there exists a specialization that is `true`. That should avoid questions about the ODR and lambdas in specializations.
 
 ## stackoverflow [Forbids functions with `static_assert`](https://stackoverflow.com/questions/34745581/forbids-functions-with-static-assert)
 
@@ -48,6 +77,8 @@ I agree with others that you shouldn't use `static_assert` for this at all and m
 > 一、作者的上面这段话其实不怎么准确，准确的是: 
 >
 > 编译器是会parse template的，如果它碰到 `static_assert(false)` 它是会报不易错误的，但是如果 `static_assert(condition)` condition是一个template，那么在parse阶段它是不会去evaluate这个assertion，而是在instantiation阶段，所以如果这个template没有被使用，那么这个assertion也就不会被evaluate。
+>
+> 这其实就是two-phase name lookup，下面实现方式的思路: 将dependent-name-lookup转化为non-dependent-name-lookup，这在artificial-mind [`always_false<T>`](https://artificial-mind.net/blog/2020/10/03/always-false) 中进行了介绍 
 
 ```cpp
 template <typename...>
@@ -93,3 +124,11 @@ int main() {
 ```
 
 This helper is necessary because a template definition must (at least theoretically) have at least one set of template parameters for which a valid specialization can be produced in order for the program to be well-formed:
+
+
+
+
+
+
+
+## artificial-mind [always_false`<T>`](https://artificial-mind.net/blog/2020/10/03/always-false)

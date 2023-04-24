@@ -2,7 +2,9 @@
 
 对于template，C++ compiler有着特殊的处理，这是本章讨论的问题。
 
-## thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)
+## 入门读物
+
+一、thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)
 
 1、参见 `thegreenplace-Dependent-name-lookup-for-C++templates` 章节。
 
@@ -14,20 +16,25 @@ b、如何使用
 
 
 
-## TO READ
-
-- stackoverflow [Two phase lookup - explanation needed](https://stackoverflow.com/questions/7767626/two-phase-lookup-explanation-needed)
-- microsoft [Two-phase name lookup support comes to MSVC](https://devblogs.microsoft.com/cppblog/two-phase-name-lookup-support-comes-to-msvc/)
-
 ## cppreference [Two-phase name lookup](https://en.cppreference.com/w/cpp/language/two-phase_lookup)
 
-
+> NOTE:
+>
+> 一、two-phase name lookup: 
+>
+> 1、non-dependent name lookup(template's definition)
+>
+> 2、dependent name lookup(template's instantiation)
+>
+> 关于此，参见: thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates) 
 
 ## cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name)
 
 Inside the definition of a [template](https://en.cppreference.com/w/cpp/language/templates) (both [class template](https://en.cppreference.com/w/cpp/language/class_template) and [function template](https://en.cppreference.com/w/cpp/language/function_template)), the meaning of some constructs may differ from one instantiation to another. In particular, types and expressions may depend on types of type template parameters and values of non-type template parameters.
 
-> NOTE: 下面是对最后一句话的理解：
+> NOTE: 
+>
+> 一、下面是对最后一句话的理解：
 >
 > | template parameter           |       |
 > | ---------------------------- | ----- |
@@ -87,7 +94,9 @@ int main()
 
 ```
 
-> NOTE: 上述程序的输出如下:
+> NOTE: 
+>
+> 一、上述程序的输出如下:
 >
 > ```c++
 > g(int)
@@ -109,7 +118,9 @@ As discussed in [lookup](https://en.cppreference.com/w/cpp/language/lookup), the
 
 (in other words, adding a new function declaration after template definition does not make it visible, except via ADL).
 
-> NOTE: 综合上面描述的compiler进行lookup的两个规则，可知：
+> NOTE: 
+>
+> 一、综合上面描述的compiler进行lookup的两个规则，可知：
 >
 > |                                                              | *template definition* context | *template instantiation* context |
 > | ------------------------------------------------------------ | ----------------------------- | -------------------------------- |
@@ -178,13 +189,15 @@ int main()
 
 ```
 
-> NOTE: 上述程序编译报错，报错如下:
+> NOTE: 
+>
+> 一、上述程序编译报错，报错如下:
 >
 > ```C++
 > test.cpp: In instantiation of ‘void E::writeObject(const T&) [with T = std::vector<int>]’:
 > test.cpp:27:18:   required from here
 > test.cpp:10:26: 错误：无法将左值‘std::basic_ostream<char>’绑定到‘std::basic_ostream<char>&&’
->   std::cout << "Value = " << t << '\n';
+> std::cout << "Value = " << t << '\n';
 > 
 > ```
 >
@@ -500,11 +513,18 @@ int main()
 >
 > 1、这部分内容移到了 `The-template-disambiguator-for-dependent-names` 章节
 
+
+
 ## TO READ
 
-- deque [Why template parameters of dependent type names cannot be deduced, and what to do about it](https://deque.blog/2017/10/12/why-template-parameters-of-dependent-type-names-cannot-be-deduced-and-what-to-do-about-it/)
-- stackoverflow [How do you understand dependent names in C++](https://stackoverflow.com/questions/1527849/how-do-you-understand-dependent-names-in-c)
-- gcc [14.7.2 Name Lookup, Templates, and Accessing Members of Base Classes](https://gcc.gnu.org/onlinedocs/gcc/Name-lookup.html)
-- stackoverflow [Where and why do I have to put the “template” and “typename” keywords?](https://stackoverflow.com/questions/610245/where-and-why-do-i-have-to-put-the-template-and-typename-keywords)
+deque [Why template parameters of dependent type names cannot be deduced, and what to do about it](https://deque.blog/2017/10/12/why-template-parameters-of-dependent-type-names-cannot-be-deduced-and-what-to-do-about-it/)
 
+stackoverflow [How do you understand dependent names in C++](https://stackoverflow.com/questions/1527849/how-do-you-understand-dependent-names-in-c)
 
+gcc [14.7.2 Name Lookup, Templates, and Accessing Members of Base Classes](https://gcc.gnu.org/onlinedocs/gcc/Name-lookup.html)
+
+stackoverflow [Where and why do I have to put the “template” and “typename” keywords?](https://stackoverflow.com/questions/610245/where-and-why-do-i-have-to-put-the-template-and-typename-keywords)
+
+stackoverflow [Two phase lookup - explanation needed](https://stackoverflow.com/questions/7767626/two-phase-lookup-explanation-needed)
+
+microsoft [Two-phase name lookup support comes to MSVC](https://devblogs.microsoft.com/cppblog/two-phase-name-lookup-support-comes-to-msvc/) 
