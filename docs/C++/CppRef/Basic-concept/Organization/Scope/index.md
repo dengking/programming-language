@@ -14,8 +14,6 @@ C++中的很多dynamic、runtime内容，其实可以使用scope来进行理解�
 
 ## cppreference [Scope](https://en.cppreference.com/w/cpp/language/scope)
 
-> NOTE: 
-
 Each [name](https://en.cppreference.com/w/cpp/language/name) that appears in a C++ program is only valid in some possibly discontiguous(不连接的) portion of the source code called its *scope*.
 
 
