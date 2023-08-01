@@ -96,7 +96,13 @@ if (int count = IsInitialized() ? CalcCount() : (CalcExpectedCount() + CalcOldCo
 
 ## cppreference [if statement](https://en.cppreference.com/w/cpp/language/if) # If Statements with Initializer (since C++17)
 
-
+> NOTE:
+>
+> 一、skebanga [C++17 If statement with initializer](https://skebanga.github.io/if-with-initializer/)
+>
+> > Introduced under proposal [P00305r0](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0305r0.html), **If statement with initializer** give us the ability to initialize a variable within an `if` statement, and then, once initialized, perform the actual conditional check.
+>
+> 
 
 ```c++
 #include <map>
