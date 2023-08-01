@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - Assignment-operator-in-If-statements: Assignment-operator-in-If-statements
     - C++17-If-Statements-with-Initializer: C++17-If-Statements-with-Initializer
     

@@ -1,3 +1,5 @@
 nav:
     - Introduction: index.md
-    - Map: Map
+    - std-map: std-map
+    - std-multimap: std-multimap
+    
