@@ -1,4 +1,14 @@
-# binary search
+# Binary search
+
+下表整理了C++ binary search相关的函数: 
+
+|function|comment|
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+|[binary_search](https://en.cppreference.com/w/cpp/algorithm/binary_search)|determines if an element exists in a partially-ordered range<br/>(function template)|
+| [equal_range](https://en.cppreference.com/w/cpp/algorithm/equal_range) | returns range of elements matching a specific key (function template) |
+| [lower_bound](https://en.cppreference.com/w/cpp/algorithm/lower_bound) | returns an iterator to the first element *not less* than the given value (function template) |
+| [upper_bound](https://en.cppreference.com/w/cpp/algorithm/upper_bound) | returns an iterator to the first element *greater* than a certain value (function template) |
+| [ranges::binary_search](https://en.cppreference.com/w/cpp/algorithm/ranges/binary_search)(C++20) | determines if an element exists in a partially-ordered range (niebloid) |
 
 
 
@@ -16,62 +26,6 @@ bool binary_search(ForwardIt first, ForwardIt last, const T& value)
 {
     first = std::lower_bound(first, last, value);
     return (!(first == last) && !(value < *first));
-}
-```
-
-## `std::lower_bound` vs `std::upper_bound`
-
-### stackoverflow [lower_bound == upper_bound](https://stackoverflow.com/questions/12158948/lower-bound-upper-bound)
-
-A
-
-1、lower bound: first element that is greater-or-equal.
-
-2、Upper bound: first element that is strictly greater.
-
-**Example:**
-
-```
-+- lb(2) == ub(2)       +- lb(6)        +- lb(8)
-|        == begin()     |  == ub(6)     |   +- ub(8) == end()
-V                       V               V   V
-+---+---+---+---+---+---+---+---+---+---+---+
-| 3 | 4 | 4 | 4 | 4 | 5 | 7 | 7 | 7 | 7 | 8 |
-+---+---+---+---+---+---+---+---+---+---+---+
-    ^               ^                       ^
-    |               |                       |
-    +- lb(4)        +- ub(4)                +- lb(9) == ub(9) == end()
-
-    |- eq-range(4) -|
-```
-
-As you can see, the half-open equal-range for *n* is [lb(*n*), ub(*n*)).
-
-> NOTE: 
->
-> 上面这段总结非常好: 
->
-> 所谓 `lower_bound`，即下限； `>=`
->
-> 所谓 `upper_bound`，即上限； `<`
->
-> 符合STL的左边右开惯例
->
-> STL的sorted container都支持这个function，see also:
->
-> cppreference [std::map<Key,T,Compare,Allocator>::upper_bound](https://en.cppreference.com/w/cpp/container/map/upper_bound)
-
-Note that both bounds give you meaningful insertion locations for an element of the desired value so that the ordering is maintained, but `lower_bound` has the distinguishing feature that *if* the element already exists, then you get an iterator which actually points to that element. Thus you can use `lower_bound` on an ordered range to implement your own unique-membership *or* multiple-membership container.
-
-```c++
-void insert(Container & c, T const & t)
-{
-    auto it = std::lower_bound(c.begin(), c.end(), t);
-
-    // if unique container:
-    if (it != c.end() && *it == t) { /* error, element exists! */ return; }
-
-    c.insert(it, t);
 }
 ```
 
@@ -147,6 +101,64 @@ int main()
 
 ```
 3 at index 1
+```
+
+
+
+## `std::lower_bound` vs `std::upper_bound`
+
+### stackoverflow [lower_bound == upper_bound](https://stackoverflow.com/questions/12158948/lower-bound-upper-bound)
+
+A
+
+1、lower bound: first element that is greater-or-equal.
+
+2、Upper bound: first element that is strictly greater.
+
+**Example:**
+
+```
++- lb(2) == ub(2)       +- lb(6)        +- lb(8)
+|        == begin()     |  == ub(6)     |   +- ub(8) == end()
+V                       V               V   V
++---+---+---+---+---+---+---+---+---+---+---+
+| 3 | 4 | 4 | 4 | 4 | 5 | 7 | 7 | 7 | 7 | 8 |
++---+---+---+---+---+---+---+---+---+---+---+
+    ^               ^                       ^
+    |               |                       |
+    +- lb(4)        +- ub(4)                +- lb(9) == ub(9) == end()
+
+    |- eq-range(4) -|
+```
+
+As you can see, the half-open equal-range for *n* is [lb(*n*), ub(*n*)).
+
+> NOTE: 
+>
+> 上面这段总结非常好: 
+>
+> 所谓 `lower_bound`，即下限； `>=`
+>
+> 所谓 `upper_bound`，即上限； `<`
+>
+> 符合STL的左边右开惯例
+>
+> STL的sorted container都支持这个function，see also:
+>
+> cppreference [std::map<Key,T,Compare,Allocator>::upper_bound](https://en.cppreference.com/w/cpp/container/map/upper_bound)
+
+Note that both bounds give you meaningful insertion locations for an element of the desired value so that the ordering is maintained, but `lower_bound` has the distinguishing feature that *if* the element already exists, then you get an iterator which actually points to that element. Thus you can use `lower_bound` on an ordered range to implement your own unique-membership *or* multiple-membership container.
+
+```c++
+void insert(Container & c, T const & t)
+{
+    auto it = std::lower_bound(c.begin(), c.end(), t);
+
+    // if unique container:
+    if (it != c.end() && *it == t) { /* error, element exists! */ return; }
+
+    c.insert(it, t);
+}
 ```
 
 
