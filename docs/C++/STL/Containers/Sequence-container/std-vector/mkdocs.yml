@@ -1,4 +1,5 @@
 nav:
+    - Introduction: index.md
     - std-vector-bool: std-vector-bool
     - std-vector-resize-vs-reserve-vs-constructor: std-vector-resize-vs-reserve-vs-constructor
     - std-vector-end: std-vector-end

@@ -2,21 +2,25 @@
 
 
 
+## cppreference [std::vector](https://en.cppreference.com/w/cpp/container/vector)
+
+`std::vector` (for `T` other than bool) meets the requirements of [*Container*](https://en.cppreference.com/w/cpp/named_req/Container), [*AllocatorAwareContainer*](https://en.cppreference.com/w/cpp/named_req/AllocatorAwareContainer) (since C++11), [*SequenceContainer*](https://en.cppreference.com/w/cpp/named_req/SequenceContainer), [*ContiguousContainer*](https://en.cppreference.com/w/cpp/named_req/ContiguousContainer) (since C++17) and [*ReversibleContainer*](https://en.cppreference.com/w/cpp/named_req/ReversibleContainer).
+
+
+
 ## cppreference [`std::vector<bool>`](https://en.cppreference.com/w/cpp/container/vector_bool) 
 
 
 
 ## `std::vector<bool>` is not a container
 
-在阅读[boost iterator](https://www.boost.org/doc/libs/1_73_0/libs/iterator/doc/index.html)的[Standard Proposal For New-Style Iterators](https://www.boost.org/doc/libs/release/libs/iterator/doc/new-iter-concepts.html) ([PDF](https://www.boost.org/doc/libs/release/libs/iterator/doc/new-iter-concepts.pdf))时，其中有关于`std::vector<bool>` 的这样的描述：
+在阅读 [boost iterator](https://www.boost.org/doc/libs/1_73_0/libs/iterator/doc/index.html) 的 [Standard Proposal For New-Style Iterators](https://www.boost.org/doc/libs/release/libs/iterator/doc/new-iter-concepts.html) ([PDF](https://www.boost.org/doc/libs/release/libs/iterator/doc/new-iter-concepts.pdf)) 时，其中有关于`std::vector<bool>` 的这样的描述：
 
 > For example, `vector<bool>::iterator` is almost a random access iterator, but the return type is not `bool&` (see [issue 96](http://www.open-std.org/JTC1/SC22/WG21/docs/lwg-active.html#96) and Herb Sutter's paper J16/99-0008 = WG21 N1185). Therefore, the iterators of `vector<bool>` only meet the requirements of input iterator and output iterator.
 
-
-
 在下面文章中对此进行了解释：
 
-### stackoverflow [Why is vector not a STL container?](https://stackoverflow.com/questions/17794569/why-is-vectorbool-not-a-stl-container)
+一、stackoverflow [Why is vector not a STL container?](https://stackoverflow.com/questions/17794569/why-is-vectorbool-not-a-stl-container)
 
 > For space-optimization reasons, the C++ standard (as far back as C++98) explicitly calls out `vector<bool>` as a special standard container where each bool uses only one bit of space rather than one byte as a normal bool would (implementing a kind of "dynamic bitset"). In exchange for this optimization it doesn't offer all the capabilities and interface of a normal standard container.
 >
@@ -26,8 +30,6 @@
 >
 > Finally note that the MS standard library implementation is (arguably) suboptimal in that it uses a small chunk size for deques, which means that using deque as a substitute isn't always the right answer.
 
-### [When Is a Container Not a Container?](http://www.gotw.ca/publications/mill09.htm)
+二、gotw [When Is a Container Not a Container?](http://www.gotw.ca/publications/mill09.htm)
 
-
-
-## [On `vector<bool>` -- Howard Hinnant](https://isocpp.org/blog/2012/11/on-vectorbool)
+三、isocpp [On `vector<bool>` -- Howard Hinnant](https://isocpp.org/blog/2012/11/on-vectorbool)
