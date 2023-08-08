@@ -52,3 +52,18 @@ here's another alternative using `vector::assign`:
 ```cpp
 theVector.assign(theSet.begin(), theSet.end());
 ```
+
+
+
+二、stackoverflow [Vector of Vectors to create matrix](https://stackoverflow.com/questions/12375591/vector-of-vectors-to-create-matrix)
+
+[A](https://stackoverflow.com/a/12377502)
+
+You have to initialize the vector of vectors to the appropriate size before accessing any elements. You can do it like this:
+
+```cpp
+// assumes using std::vector for brevity
+vector<vector<int>> matrix(RR, vector<int>(CC));
+```
+
+This creates a vector of `RR` size `CC` vectors, filled with `0`.
