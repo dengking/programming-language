@@ -51,8 +51,6 @@ enum、constexpr都可以用于in-class static constant
 
 
 
-
-
 ## Application
 
 主要用于compile time，参见`C-and-C++\Compile-time-and-run-time`，其中非常重要的一点是：static polymorphism。

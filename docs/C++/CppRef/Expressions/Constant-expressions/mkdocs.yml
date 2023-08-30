@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
     - Constant-in-C++: Constant-in-C++
-    - Constant-expressions: Constant-expressions
     - C++11-constexpr: C++11-constexpr
     - C++20-consteval: C++20-consteval
+    
