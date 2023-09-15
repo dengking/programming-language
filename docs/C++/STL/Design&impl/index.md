@@ -36,13 +36,13 @@ The STL was created as the first library of generic algorithms and data structur
 
 > NOTE: 
 >
-> 1、composition能够实现`N * M` code reuse
+> 1、composition 能够实现`N * M` code reuse
 >
 > 2、下面展示了composition
 >
 > stroustrup [C++ in 2005](http://www.stroustrup.com/DnE2005.pdf)
 >
-> ![](E:./DnE2005-composition.jpg)
+> ![](./DnE2005-composition.jpg)
 
 #### Containers
 
