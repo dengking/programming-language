@@ -57,22 +57,22 @@ T random(T range_from, T range_to) {
 > 一、更好的做法如下:
 >
 > ```C++
-> #include <vector>
 > #include <algorithm>
 > #include <random>
 > #include <iostream>
 > 
 > template<typename T>
 > T random(T range_from, T range_to) {
->     static std::random_device                  rand_dev;
->     static std::mt19937                        generator(rand_dev());
->     static std::uniform_int_distribution<T>    distr(range_from, range_to);
+>     static std::random_device rand_dev;
+>     static std::mt19937 generator(rand_dev());
+>     static std::uniform_int_distribution<T> distr(range_from, range_to);
 >     return distr(generator);
 > }
 > 
-> int main()
-> {
-> 	std::cout << random(1, 2) << std::endl;
+> int main() {
+>     for (int i = 0; i < 50; ++i)
+>         std::cout << random(0, 9) << std::endl;
+> 
 > }
 > 
 > // g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -Werror
