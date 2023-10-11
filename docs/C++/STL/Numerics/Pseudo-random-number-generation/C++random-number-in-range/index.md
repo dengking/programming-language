@@ -54,7 +54,7 @@ T random(T range_from, T range_to) {
 
 > NOTE: 
 >
-> 一、更好的做法如下:
+> 一、下面是一种写法:
 >
 > ```C++
 > #include <algorithm>
@@ -79,11 +79,11 @@ T random(T range_from, T range_to) {
 > 
 > ```
 >
-> 
+> 需要注意的是，这种写法是有问题的，会导致生成的随机数不在预期的范围内。
 
 #### Other random generators
 
-The [`header](http://en.cppreference.com/w/cpp/numeric/random) offers innumerable other random number generators with different kind of distributions including Bernoulli, Poisson and normal.
+The [header](http://en.cppreference.com/w/cpp/numeric/random) offers innumerable other random number generators with different kind of distributions including Bernoulli, Poisson and normal.
 
 #### How can I shuffle a container?
 

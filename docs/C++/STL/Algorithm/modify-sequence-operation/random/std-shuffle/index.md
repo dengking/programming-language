@@ -8,8 +8,6 @@
 
 
 
-
-
 Note that the implementation is not dictated by the standard, so even if you use exactly the same `RandomFunc` or `URBG` (Uniform Random Number Generator) you may get different results with different standard library implementations.
 
 The reason for removing `std::random_shuffle` in C++17 is that the iterator-only version usually depends on [std::rand](https://en.cppreference.com/w/cpp/numeric/random/rand), which is now also discussed for deprecation. ([std::rand](https://en.cppreference.com/w/cpp/numeric/random/rand) should be replaced with the classes of the [<`random`>](https://en.cppreference.com/w/cpp/header/random) header, as [std::rand](https://en.cppreference.com/w/cpp/numeric/random/rand) is *considered harmful*.) In addition, the iterator-only `std::random_shuffle` version usually depends on a global state. The `std::shuffle`'s shuffle algorithm is the preferred replacement, as it uses a `URBG` as its 3rd parameter.
