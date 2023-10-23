@@ -55,3 +55,4 @@ stackoverflow [Uniform initialization of references](https://stackoverflow.com/q
 
 microsoft Microsoft [Brace initialization](https://docs.microsoft.com/en-us/cpp/cpp/initializing-classes-and-structs-without-constructors-cpp?view=vs-2019)
 
+stackoverflow [What are the advantages of list initialization (using curly braces)?](https://stackoverflow.com/questions/18222926/what-are-the-advantages-of-list-initialization-using-curly-braces)

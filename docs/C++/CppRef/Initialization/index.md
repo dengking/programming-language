@@ -22,7 +22,7 @@
 
 1、[List initialization (since C++11)](https://en.cppreference.com/w/cpp/language/list_initialization)
 
-统一了syntax、消除了syntax ambiguity，进行了simplify。
+它又被称为uniform initialization，它统一了syntax、消除了syntax ambiguity，进行了simplify。
 
 ## 思路
 
@@ -71,7 +71,7 @@ Let's get pedantic, because there are differences that can actually affect your 
 Sometimes the memory returned by the new operator will be initialized, and sometimes it won't depending on whether the type you're newing up is a [POD (plain old data)](https://stackoverflow.com/questions/146452/what-are-pod-types-in-c), or if it's a class that contains POD members and is using a compiler-generated default constructor.
 
 - In C++1998 there are 2 types of initialization: zero and default
-- In C++2003 a 3rd type of initialization, value initialization was added.
+- In C++2003 a 3rd type of initialization, **value initialization** was added.
 
 Assume:
 
@@ -129,6 +129,6 @@ cppreference [Direct initialization](https://en.cppreference.com/w/cpp/language/
 
 
 
-### TODO
+### 素材
 
 stackoverflow [What do the following phrases mean in C++: zero-, default- and value-initialization?](https://stackoverflow.com/questions/1613341/what-do-the-following-phrases-mean-in-c-zero-default-and-value-initializat)
