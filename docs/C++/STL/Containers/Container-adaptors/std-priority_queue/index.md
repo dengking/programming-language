@@ -94,7 +94,9 @@ int main() {
 
 ## 最小堆
 
-leetcode [787. c++简单易懂的Dijkstra算法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/cjian-dan-yi-dong-de-dijkstrasuan-fa-by-w05aa/) 
+### 方式一: custom comparator by lambda
+
+[LeetCode-787. c++简单易懂的Dijkstra算法](https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/solution/cjian-dan-yi-dong-de-dijkstrasuan-fa-by-w05aa/) 
 
 ```C++
 class Solution {
@@ -150,7 +152,64 @@ public:
 
 ```
 
+### 方式二: `std::greater`
 
+[LeetCode-703. 数据流中的第 K 大元素-简单](https://leetcode.cn/problems/kth-largest-element-in-a-stream/)
+
+```c++
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+class KthLargest
+{
+    std::priority_queue<int, std::vector<int>, std::greater<int>> q; // 最小堆
+    int k;
+
+public:
+    KthLargest(int k, vector<int> &nums)
+    {
+        this->k = k;
+        for (auto &&num : nums)
+        {
+            addImpl(num);
+        }
+    }
+
+    int add(int val)
+    {
+        addImpl(val);
+        return q.top();
+    }
+
+private:
+    void addImpl(int val)
+    {
+        if (q.size() < k || val > q.top())
+        {
+            if (q.size() == k)
+            {
+                q.pop();
+            }
+            q.push(val);
+        }
+    }
+};
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest* obj = new KthLargest(k, nums);
+ * int param_1 = obj->add(val);
+ */
+
+int main()
+{
+}
+// g++ test.cpp --std=c++11 -pedantic -Wall -Wextra -g
+
+```
 
 
 
