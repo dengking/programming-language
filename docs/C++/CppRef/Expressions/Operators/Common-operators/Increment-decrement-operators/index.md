@@ -6,6 +6,158 @@
 
 
 
+| Operator name  | Syntax | [Overloadable](https://en.cppreference.com/w/cpp/language/operators) |                         |                          |
+| :------------: | :----: | :----------------------------------------------------------: | :---------------------: | ------------------------ |
+|                |        |                                                              | Inside class definition | Outside class definition |
+| pre-increment  | `++a`  |                             Yes                              |   T& T::operator++();   | T& operator++(T& a);     |
+| pre-decrement  | `--a`  |                             Yes                              |   T& T::operator--();   | T& operator--(T& a);     |
+| post-increment | `a++`  |                             Yes                              |  T T::operator++(int);  | T operator++(T& a, int); |
+| post-decrement | `a--`  |                             Yes                              |  T T::operator--(int);  | T operator--(T& a, int); |
+
+一、Prefix versions of the built-in operators return *references* and postfix versions return *values*, and typical [user-defined overloads](https://en.cppreference.com/w/cpp/language/operators) follow the pattern so that the user-defined operators can be used in the same manner as the built-ins. However, in a user-defined operator overload, any type can be used as return type (including void).
+
+> NOTE:
+>
+> 一、对于最后一段话的验证如下:
+>
+> Example 1: return object
+>
+> ```c++
+> #include <algorithm>
+> #include <vector>
+> #include <iostream>
+> 
+> class Foo
+> {
+> public:
+>     int i = 0;
+>     Foo &operator++()
+>     {
+>         std::cout << "prefix-increment-operator" << std::endl;
+>         ++i;
+>         return *this;
+>     }
+>     Foo operator++(int)
+>     {
+>         std::cout << "postfix-increment-operator" << std::endl;
+>         ++i;
+>         return *this;
+>     }
+> };
+> int main()
+> {
+>     Foo f;
+>     ++f;
+>     std::cout << f.i << std::endl;
+>     f++;
+>     std::cout << f.i << std::endl;
+> }
+> ```
+>
+> Example 2: return void
+>
+> ```c++
+> #include <algorithm>
+> #include <vector>
+> #include <iostream>
+> 
+> class Foo
+> {
+> public:
+>     int i = 0;
+>     void operator++()
+>     {
+>         std::cout << "prefix-increment-operator" << std::endl;
+>         ++i;
+>     }
+>     void operator++(int)
+>     {
+>         std::cout << "postfix-increment-operator" << std::endl;
+>         ++i;
+>     }
+> };
+> int main()
+> {
+>     Foo f;
+>     ++f;
+>     std::cout << f.i << std::endl;
+>     f++;
+>     std::cout << f.i << std::endl;
+> }
+> ```
+>
+> Example 2: return int
+>
+> ```c++
+> #include <algorithm>
+> #include <vector>
+> #include <iostream>
+> 
+> class Foo
+> {
+> public:
+>     int i = 0;
+>     int &operator++()
+>     {
+>         std::cout << "prefix-increment-operator" << std::endl;
+>         return ++i;
+>     }
+>     int operator++(int)
+>     {
+>         std::cout << "postfix-increment-operator" << std::endl;
+>         return ++i;
+>     }
+> };
+> int main()
+> {
+>     Foo f;
+>     ++f;
+>     std::cout << f.i << std::endl;
+>     f++;
+>     std::cout << f.i << std::endl;
+> }
+> ```
+>
+> 
+
+二、The int parameter is a **dummy parameter** used to differentiate between prefix and postfix versions of the operators. When the user-defined postfix operator is called, the value passed in that parameter is always zero, although it may be changed by calling the operator using function call notation (e.g., a.operator++(2) or operator++(a, 2)).
+
+### Notes
+
+Because of the side-effects involved, built-in increment and decrement operators must be used with care to avoid **undefined behavior** due to violations of [sequencing rules](https://en.cppreference.com/w/cpp/language/eval_order).
+
+> NOTE:
+>
+> 一、关于上面这段话，在 stackoverflow [Post-increment and Pre-increment concept?](https://stackoverflow.com/questions/4445706/post-increment-and-pre-increment-concept) # [A](https://stackoverflow.com/a/4445841) 中有着详细的说明:
+>
+> Believing that "urban legend" has led many a novice (and professional) astray, to wit, the endless stream of questions about Undefined Behavior in expressions.
+>
+> So.
+>
+> For the built-in C++ prefix operator,
+>
+> ```cpp
+> ++x
+> ```
+>
+> increments `x` and produces (as the expression's result) `x` as an lvalue, while
+>
+> ```cpp
+> x++
+> ```
+>
+> increments `x` and produces (as the expression's result) the original value of `x`.
+>
+> In particular, for `x++` there is no *no time ordering* implied for the increment and production of original value of `x`. The compiler is free to emit machine code that produces the original value of `x`, e.g. it might be present in some register, and that delays the increment until the end of the expression (next sequence point).
+>
+> Folks who incorrectly believe the increment must come first, and they are many, often conclude from that certain expressions must have well defined effect, when they actually have Undefined Behavior.
+
+Because a **temporary copy** of the object is constructed during post-increment and post-decrement, *pre-increment* or *pre-decrement* operators are usually more efficient in contexts where the returned value is not used.
+
+> NOTE: 
+>
+> 一、上面这段话是从efficiency的角度来比较两种operator
+
 ## creference [Increment/decrement operators](Increment/decrement operators)
 
 Increment/decrement operators are unary operators that increment/decrement the value of a variable by 1.
