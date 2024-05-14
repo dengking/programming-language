@@ -1,2 +1,5 @@
 nav:
     - Introduction: index.md
+    - GC: GC
+    - Bytecode: Bytecode
+    
