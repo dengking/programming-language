@@ -533,3 +533,13 @@ https://www.netdata.cloud/
 ### 参考
 
 https://grafana.com/blog/2020/06/25/monitoring-java-applications-with-the-prometheus-jmx-exporter-and-grafana/
+
+
+
+### How to get jvm info in java
+
+### java.lang.management package
+
+https://javadoc.scijava.org/Java6/java/lang/management/package-use.html
+
+https://docs.oracle.com/javase/8/docs/api/java/lang/management/package-summary.html
