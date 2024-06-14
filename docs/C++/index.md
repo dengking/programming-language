@@ -10,10 +10,6 @@
 
 
 
-## C++发展方向
-
-参见 `C++\What-is-new-in-C++` 章节，其中对此进行了深入分析。
-
 ## Useful resources
 
 | Resource                                                     | 简介                            |
