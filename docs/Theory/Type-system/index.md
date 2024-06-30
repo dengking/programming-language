@@ -25,7 +25,7 @@
 
 2) OOP中，class is type
 
-关于此，参见`OOP-and-type-system.md`。
+关于此，参见`OOP-and-type-system`。
 
 
 

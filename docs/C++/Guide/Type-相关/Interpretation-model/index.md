@@ -1,10 +1,12 @@
 # Interpretion model
 
-1、 [ISA](https://en.wikipedia.org/wiki/Instruction_set_architecture) serves as the [interface](https://en.wikipedia.org/wiki/Interface_(computing)) between [software](https://en.wikipedia.org/wiki/Software) and [hardware](https://en.wikipedia.org/wiki/Computer_hardware). 
+1. [ISA](https://en.wikipedia.org/wiki/Instruction_set_architecture) serves as the [interface](https://en.wikipedia.org/wiki/Interface_(computing)) between [software](https://en.wikipedia.org/wiki/Software) and [hardware](https://en.wikipedia.org/wiki/Computer_hardware). 
 
-2、在advanced programming language中有着严格的type system
+2. 在advanced programming language中有着严格的type system
 
-3、那么advanced programming language中的type和机器指令之间的对应关系是什么呢？
+3. 那么advanced programming language中的type和机器指令之间的对应关系是什么呢？
+
+   
 
 本文就对这个问题进行探讨:
 
@@ -20,19 +22,23 @@
 
 2) 根据type来决定使用何种运算指令
 
-显然，对于浮点类型，compiler会选择浮点运算指令，对于整形，则会选择简单指令。
-
-> NOTE: 这是符合"type determine everything"观点的，参见`Theory\Type-system`章节。
+3) type决定了数据存储的格式、运算器; CPU对于不同类型的数据采用不同的存储方式([Computer number format](https://en.wikipedia.org/wiki/Computer_number_format))、使用不同的运算单元([ALU](https://en.wikipedia.org/wiki/Arithmetic_logic_unit)、[FPU](https://en.wikipedia.org/wiki/Floating-point_unit));显然，对于浮点类型，compiler会选择浮点运算指令，对于整形，则会选择简单指令。
 
 上述分析非常重要 ，它是理解C，C++中pointer conversion、aliasing、type punning的基础，这个model非常重要，它可以帮助分析：
 
-\- object representation
+- object representation
 
-\- union
+- union
 
-\- aliasing
+- aliasing
 
-我将此作成为**interpretation model**。
+
+
+我将此作成为**interpretation model**，这个model非常重要，它融会贯通了如下内容:
+
+- 高级programming language
+- compiler
+- CPU
 
 ## wikipedia [Type system](https://en.wikipedia.org/wiki/Type_system) 中关于"interpretion model"的内容
 
@@ -190,8 +196,4 @@ C++支持两种方式来实现alias to an existing object：
 
 - `rereinterpret_cast`: `C++\Language-reference\Basic-concept\Type-system\Type-conversion\Cast-operator`
 - reference: `C++\Language-reference\Reference`
-
-### 20210110
-
-interpretation model主要描述的是compiler的行为。
 
