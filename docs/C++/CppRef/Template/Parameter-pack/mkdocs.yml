@@ -1,7 +1,6 @@
 nav:
     - Introduction: index.md
     - cppreference-Parameter-pack: cppreference-Parameter-pack
-    - Eli-Bendersky-Variadic-templates: Eli-Bendersky-Variadic-templates
     - Operations: Operations
 
     
