@@ -2,7 +2,6 @@ nav:
     - Introduction: index.md
     - Modern-CMake: Modern-CMake
     - Reference: Reference
-    - Guides: Guides
     - CMake-toolchain: CMake-toolchain
     - CMake-linker: CMake-linker
     - CMake-flags: CMake-flags
