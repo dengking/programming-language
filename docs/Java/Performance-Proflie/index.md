@@ -29,3 +29,13 @@ https://en.wikipedia.org/wiki/JDK_Flight_Recorder
 ## async-profiler
 
 https://github.com/async-profiler
+
+
+
+## Java Performance - The Definitive Guide
+
+https://www.amazon.com/Java-Performance-Definitive-Guide-Getting/dp/1449358454
+
+https://github.com/leemuncon/book-1/blob/master/%5BJAVA%5D%5BJava%20Performance%20-%20The%20Definitive%20Guide%5D.pdf
+
+https://book.douban.com/subject/26740520/
