@@ -4,7 +4,7 @@
 
 - Compile time checking of dependency types and task orchestration(编排) wiring(连接).
 
-  > NOTE: 这是什么意思？因为graph不是在运行时动态构建的，而是在程序中构建的，因此compiler可以在compile time进行检查
+  > NOTE: 这是什么意思？因为graph不是在运行时动态构建的，而是在程序编译之前构建的，因此compiler可以在compile time进行检查
 
 
 
@@ -57,6 +57,12 @@ Here are some useful constraints that should be applied to task implementations:
 
 
 
+
+
+#### `ExecType`
+
+
+
 ### ResponseContext
 
 > NOTE:
@@ -67,7 +73,7 @@ The response context is a class owned by each task that records data associated 
 
 Data managed by this class:
 
-- **Profiler data** \- The **profiler decorator**(`ProfileDecorator`) records how long the task takes to complete along with the time spent waiting for its dependencies. It also contains the tasks that consume the output of the task's Callable method. This allows the **task dependency graph** to be visualized in the profilerview tool(可视化依赖图).
+- **Profiler data** \- The **profiler decorator**(`ProfileDecorator`) records how long the task takes to complete along with the time spent waiting for its dependencies. It also contains the tasks that consume the output of the task's `Callable` method. This allows the **task dependency graph** to be visualized in the profilerview tool(可视化依赖图).
 - Diagnostic data(诊断数据)
 - Tracking data 
 - Errors recorded during task processing
@@ -83,6 +89,10 @@ Defines the interface of a task. Extends Java Callable interface with these meth
 - `waitForDependencies` - used by the `ProfileDecorator` to time how long the task blocks for its dependencies to complete before executing. The default implementation of this method is to block for all the task's dependencies to complete but it does allow for custom implementations. E.g. if a task has a critical dependency but has other dependencies it doesn't have to wait for.
 
   > NOTE: 最后一句话如何理解?
+
+
+
+
 
 ### ProfileDecorator
 
@@ -105,8 +115,46 @@ Implementation of the Java Future interface that calls the corresponding ICallab
 
 ### ICallableTaskFuture
 
-This extension of the Java Future interface which adds an additional get(ICallableTask<?> caller) method that allows the underlying task to keep track of consumers of its result in the ResponseContext. This enables the profilerview tool to visually represent the DAG of tasks. There is also an accessor method for the underlying ICallableTask.
+This extension of the Java `Future` interface which adds an additional `get(ICallableTask<?> caller)` method that allows the underlying task to keep track of consumers of its result in the ResponseContext. This enables the profilerview tool to visually represent the DAG of tasks. There is also an accessor method for the underlying `ICallableTask`.
+
+> NOTE:
+>
+> task 和 future的关系: task是promise，future表示task的返回值，最能够体现它们之间关系的是:
+>
+> ```java
+> /**
+>  * Simple interface for submitting tasks to an executor.
+>  */
+> public interface ICallableTaskExecutor {
+> 
+>     /**
+>      * Submits a task to the executor.  Wraps the task in a profile decorator.
+>      */
+>     <T> ICallableTaskFuture<T> addTask(ICallableTask<T> task);
+>     
+>     /**
+>      * Fetch a task by name.
+>      */
+>     <T> ICallableTaskFuture<T> getTask(String name);
+> }
+> ```
+>
+> 显然，增加一个task后，就能够拿到它的future
 
 
 
 ## Workflow
+
+While the Callable Executor interfaces and classes offer useful extensions to basic Java concurrency patterns they don't solve the problem of managing complex applications that can have graphs of hundreds of dependent tasks. The Workflow patterns address this by providing a way to encapsulate groups of tasks into coherent, reusable components of business logic.
+
+
+
+
+
+## TODO
+
+`class Task`  和 `interface ICallableTask` 具有如下相同接口: 
+
+- `waitForDependencies` 
+- `getDependencies`
+
