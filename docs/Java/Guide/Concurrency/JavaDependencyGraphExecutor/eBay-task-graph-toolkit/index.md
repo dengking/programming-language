@@ -33,7 +33,9 @@ public class NumberTask extends Task implements ICallableTask<Integer>
 
 ### Task
 
-> NOTE: 相当于graph的node
+> NOTE: 
+>
+> 相当于graph的node，在例子中，root task `TaskTest` 中将 `ICallableTaskExecutor` 作为构造函数的入参数，每个构建的task都需要通过调用 `executor.addTask` 加入到 executor 中 
 
 ```java
 public abstract class Task
@@ -149,6 +151,45 @@ While the Callable Executor interfaces and classes offer useful extensions to ba
 
 
 
+task: 
+
+`ITaskFactory`: Interface for creating tasks 
+
+`TaskInstance`  
+
+`TaskInstanceHolder` 
+
+workflow:
+
+`IWorkflow` 
+
+`IWorkflowFactory`: 需要自定义，比如 `TestWorkflowFactory` 
+
+`WorkflowTask`: Task that creates a workflow, calls the workflow executor and then collects the response contexts of tasks executed，它是一个task，通过它应该能够找到 `Workflow`  和 `Task` 之间的关系，它一般作为root 
+
+`Workflow` 
+
+`IWorkflowBuilder`: Interface used by task factories to add their tasks to a workflow. 
+
+`IWorkflowExecutor`: 比如 `WaitForCriticalDataOnlyExecutor`，模板参数的类型为 Response 的类型 
+
+
+
+需要自定义 IWorkflowFactory、IWorkflowExecutor、IWorkflowBuilder 
+
+
+
+首先构建一个 `WorkflowTask` 对象，它作为root task，它的构造函数参数有:
+
+- `IWorkflowExecutor`
+- `IWorkflowFactory`
+
+显然，root task是没有dependency的，然后调用 `task.call()` 驱动整个graph的执行，root task是 `WorkflowTask` 对象，在它的call中，会首先创建一个
+
+top level workflow相当于
+
+
+
 
 
 ## TODO
@@ -157,4 +198,15 @@ While the Callable Executor interfaces and classes offer useful extensions to ba
 
 - `waitForDependencies` 
 - `getDependencies`
+
+
+
+`ExecutorTest` 中，第219行，为什么 `four` 没有加入到executor中？
+
+```java
+ICallableTaskFuture<Integer> one = executor.addTask(new NumberTask(taskConfig, 1));
+ICallableTaskFuture<Integer> two = executor.addTask(new NumberTask(taskConfig, 2));
+ICallableTaskFuture<Integer> three = executor.addTask(new NumberTask(taskConfig, 3));
+ICallableTaskFuture<Integer> four = new CallableTaskResultNull<Integer>();
+```
 
