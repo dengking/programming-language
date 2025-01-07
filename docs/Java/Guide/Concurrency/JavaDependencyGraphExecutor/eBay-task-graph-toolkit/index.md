@@ -1,4 +1,4 @@
-# [eBay](https://github.com/eBay)/**[task-graph-toolkit](https://github.com/eBay/task-graph-toolkit)**
+# [eBay](https://github.com/eBay)/**[task-graph-toolkit](https://github.com/eBay/task-graph-toolkit)** 
 
 
 
@@ -194,14 +194,14 @@ top level workflow相当于
 
 ## TODO
 
-`class Task`  和 `interface ICallableTask` 具有如下相同接口: 
+1 `class Task`  和 `interface ICallableTask` 具有如下相同接口: 
 
 - `waitForDependencies` 
 - `getDependencies`
 
 
 
-`ExecutorTest` 中，第219行，为什么 `four` 没有加入到executor中？
+2 `ExecutorTest` 中，第219行，为什么 `four` 没有加入到executor中？
 
 ```java
 ICallableTaskFuture<Integer> one = executor.addTask(new NumberTask(taskConfig, 1));
@@ -209,4 +209,14 @@ ICallableTaskFuture<Integer> two = executor.addTask(new NumberTask(taskConfig, 2
 ICallableTaskFuture<Integer> three = executor.addTask(new NumberTask(taskConfig, 3));
 ICallableTaskFuture<Integer> four = new CallableTaskResultNull<Integer>();
 ```
+
+
+
+3 `TestWorkflowFactory` 的 `create` 方法中为每个新创建的 `Workflow` 都构建了一个新的 `JavaCallableTaskExecutor` 
+
+
+
+
+
+
 
