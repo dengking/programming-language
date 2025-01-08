@@ -1,5 +1,9 @@
 # Concurrency
 
+docs.oracle [The Java™ Tutorials # Concurrency](https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html) 
+
+
+
 ## java concurrent programming book
 
 If you're looking for books on Java concurrent programming, there are several excellent resources that cover various aspects of concurrency, threading, and parallelism in Java. Here are some highly recommended books:

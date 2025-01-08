@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
-    - lambda-expression: lambda-expression
+    - Functional-interface&lambda-expression: Functional-interface&lambda-expression
     - Stream: Stream
-    - Consumer: Consumer
     
