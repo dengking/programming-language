@@ -30,6 +30,8 @@ d、相比于C++ template behavior based的implicit，java interface是explicit�
 
 1、wikipedia [Interface (Java)](https://en.wikipedia.org/wiki/Interface_(Java))
 
+
+
 ### Java Generics
 
 仅仅使用Java interface还不足以完全地实现generic programming，Java还有generics特性，借助这个特性，Java能够更加完整的实现generic programming。
@@ -48,3 +50,6 @@ d、相比于C++ template behavior based的implicit，java interface是explicit�
 
 
 
+## Can void be used as type parameter
+
+In Java, `void` cannot be used as a type parameter. Type parameters in Java generics must be reference types, and `void` is not a reference type; it is a keyword that indicates the absence of a return value for methods.
