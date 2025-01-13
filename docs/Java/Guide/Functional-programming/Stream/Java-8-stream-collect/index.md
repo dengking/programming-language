@@ -11,3 +11,7 @@ stackoverflow [How to convert a Java 8 Stream to an Array?](https://stackoverflo
 
 
 digitalocean [Java Stream collect() Method Examples](https://www.digitalocean.com/community/tutorials/java-stream-collect-method-examples)
+
+
+
+## docs.oracle [Collectors](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html) 
