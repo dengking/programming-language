@@ -21,7 +21,7 @@ Interface是一种抽象，显然interface principle，其实遵循了[Abstracti
 
 ### Interface principle make C++ generic and extensible
 
-维基百科[Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
+wikipedia [Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/wiki/Argument-dependent_name_lookup#Interfaces)：
 
 > Functions found by ADL are considered part of a class's interface. In the C++ Standard Library, several algorithms use unqualified calls to `swap` from within the `std` namespace. As a result, the generic `std::swap` function is used if nothing else is found, but if these algorithms are used with a third-party class, `Foo`, found in another namespace that also contains `swap(Foo&, Foo&)`, that overload of `swap` will be used.
 

@@ -115,7 +115,7 @@ Argument-dependent lookup, also known as ADL, or Koenig lookup, is the set of ru
 >
 > 1、ADL: namespace of their argument
 >
-> 2、ordinary lookup: scope and namespace considered by the usual [unqualified name lookup](lookup.html)（可能包含当前scope）
+> 2、ordinary lookup: scope and namespace considered by the usual [unqualified name lookup](lookup.html)（可能包含当前scope、global scope）
 >
 > 三、次序
 >
@@ -159,6 +159,12 @@ int main()
 ### Details
 
 > NOTE: 原文的一段，冗长且没有例子，难以阅读；
+
+First, the argument-dependent lookup is not considered if the lookup set produced by usual [unqualified lookup](https://en.cppreference.com/w/cpp/language/lookup) contains any of the following:
+
+1) a declaration of a class member.
+2) a declaration of a function at block scope (that's not a [using declaration](https://en.cppreference.com/w/cpp/language/namespace#Using-declarations)).
+3) any declaration that is not a function or a function template (e.g. a function object or another variable whose name conflicts with the name of the function that's being looked up).
 
 Otherwise, for every argument in a function call expression its type is examined to determine the *associated set of namespaces and classes* that it will add to the lookup.
 
