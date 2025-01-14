@@ -1,7 +1,5 @@
 # C++
 
-
-
 ## [cppreference C++ language](https://en.cppreference.com/w/cpp/language)
 
 

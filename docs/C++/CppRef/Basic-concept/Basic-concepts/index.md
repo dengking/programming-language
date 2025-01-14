@@ -8,15 +8,13 @@
 
 ## cppreference [Basic concepts](https://en.cppreference.com/w/cpp/language/basic_concepts)
 
-
-
-A C++ program is a sequence of text files (typically header and source files) that contain [declarations](https://en.cppreference.com/w/cpp/language/declarations). They undergo [translation](https://en.cppreference.com/w/cpp/language/translation_phases) to become an executable program, which is executed when the C++ implementation calls its [main function](https://en.cppreference.com/w/cpp/language/main_function).
+C++ program is a sequence of text files (typically header and source files) that contain [declarations](https://en.cppreference.com/w/cpp/language/declarations). They undergo [translation](https://en.cppreference.com/w/cpp/language/translation_phases) to become an executable program, which is executed when the C++ implementation calls its [main function](https://en.cppreference.com/w/cpp/language/main_function).
 
 Certain words in a C++ program have special meaning, and these are known as [keywords](https://en.cppreference.com/w/cpp/keyword). Others can be used as [identifiers](https://en.cppreference.com/w/cpp/language/identifiers). [Comments](https://en.cppreference.com/w/cpp/comment) are ignored during translation. Certain characters in the program have to be represented with [escape sequences](https://en.cppreference.com/w/cpp/language/escape).
 
 The *entities* of a C++ program are values, [objects](https://en.cppreference.com/w/cpp/language/objects), [references](https://en.cppreference.com/w/cpp/language/reference), [structured bindings](https://en.cppreference.com/w/cpp/language/structured_binding) (since C++17), [functions](https://en.cppreference.com/w/cpp/language/functions), [enumerators](https://en.cppreference.com/w/cpp/language/enum), [types](https://en.cppreference.com/w/cpp/language/type), class members, [templates](https://en.cppreference.com/w/cpp/language/templates), [template specializations](https://en.cppreference.com/w/cpp/language/template_specialization), [namespaces](https://en.cppreference.com/w/cpp/language/namespace), and [parameter packs](https://en.cppreference.com/w/cpp/language/parameter_pack). Preprocessor [macros](https://en.cppreference.com/w/cpp/preprocessor/replace) are not C++ entities.
 
-> NOTE: 
+> NOTE: X
 >
 > 原文的上述三段在向我们解释“C++ program”，包括what is C++ program、C++ program的组成。
 >

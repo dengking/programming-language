@@ -1,6 +1,18 @@
 # 关于本章
 
-本章探讨C++ ABI，重点介绍给广泛采用的: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)。
+本章探讨C++ ABI，重点介绍给广泛采用的: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html):
+
+
+
+cppreference [Useful resources](https://en.cppreference.com/w/cpp/links) 
+
+> C++ ABIs
+>
+> - [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) - De-facto C++ ABI standard, adopted by
+>   - [System V ABI](https://github.com/hjl-tools/x86-psABI/wiki/X86-psABI)
+>   - [ARM C++ ABI](https://github.com/ARM-software/abi-aa/blob/main/cppabi64/cppabi64.rst)
+
+
 
 ## oracle [Stability of the C++ ABI: Evolution of a Programming Language](https://www.oracle.com/technical-resources/articles/it-infrastructure/stable-cplusplus-abi.html)
 
@@ -8,7 +20,6 @@
 >
 > 这篇文章对C++ ABI涉及的内容进行了非常好的论述
 >
-> 
 
 ### The C ABI
 
@@ -57,5 +68,6 @@ The C++ ABI includes the C ABI. In addition, it covers the following features:
 10、Some details of the standard library:
 
 - Implementation-defined details
+
 - typeinfo and run-time type information
 - Inline function access to members
