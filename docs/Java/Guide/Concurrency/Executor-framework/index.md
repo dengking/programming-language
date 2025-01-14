@@ -201,6 +201,10 @@ dzone [Deep Dive Into Java Executor Framework](https://dzone.com/articles/deep-d
 
 ### docs.oracle 8 [Interface Executor](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executor.html) 
 
+### docs.oracle [Executors.newFixedThreadPool](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executors.html#newFixedThreadPool-int-) 
+
+Creates a thread pool that reuses a fixed number of threads operating off a **shared unbounded queue**. 
+
 
 
 ## Future
