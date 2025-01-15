@@ -57,10 +57,6 @@
 
 
 
-
-
-
-
 ## Overload resolution and template function
 
 > NOTE: 
@@ -98,12 +94,6 @@ Function template的resolution算法，在文章thegreenplace  [SFINAE and enabl
 > while looking for the best overload, all candidates have to be considered. 
 
 正如这篇文章中所讲述的，为了寻找到best overload，compiler采用了SFINAE策略，即它会尝试所有的candidate，关于SFINAE，参见`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if`章节。
-
-
-
-
-
-
 
 
 
