@@ -1,6 +1,6 @@
 # Java executor framework
 
-
+在thread pool的queue空闲的时候，一旦提交了新的task，那么它将会立即被执行。
 
 ## gpt-4o-mini Java Executor Framework
 

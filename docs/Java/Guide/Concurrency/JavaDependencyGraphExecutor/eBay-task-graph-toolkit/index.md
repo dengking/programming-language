@@ -13,6 +13,8 @@
 - Task decorator profiles time taken by task processing along with time spent blocking for its dependencies.
 - Profiler data model that allows task processing times and dependencies to be visualized in the profilerview node module. Task graphs and profiling images in the documentation are screenshots from the tool that displays various views of the profiling data.
 
+
+
 ## Documentation
 
 
@@ -79,6 +81,29 @@ Data managed by this class:
 - Diagnostic data(诊断数据)
 - Tracking data 
 - Errors recorded during task processing
+
+
+
+字段值: 
+
+```
+"name": 
+"startTime": 
+"duration": 
+"children": 
+"data": 
+```
+
+
+
+```json
+"name": "dependencies",
+"value": "SumTask"
+```
+
+你是谁的依赖、你被谁依赖
+
+
 
 ### ICallableTask
 
@@ -197,7 +222,9 @@ top level workflow相当于
 1 `class Task`  和 `interface ICallableTask` 具有如下相同接口: 
 
 - `waitForDependencies` 
-- `getDependencies`
+- `getDependencies` 
+
+`class Task`  的是对 `interface ICallableTask` 的实现 
 
 
 
@@ -215,6 +242,18 @@ ICallableTaskFuture<Integer> four = new CallableTaskResultNull<Integer>();
 3 `TestWorkflowFactory` 的 `create` 方法中为每个新创建的 `Workflow` 都构建了一个新的 `JavaCallableTaskExecutor` 
 
 
+
+显然task graph中，是需要一个root node的，这个root node作为入口管理所有的task node，典型的例子就是 `ExecutorTest` 中的`TaskTest`，它负责构建computational/dependent graph。沿着依赖关系逆向执行，那这是如何实现的呢？以`SumTask`为例子来进行说明: 它的dependency都是以future的方式传入的，显然当它获取它的dependency的值时，就会触发它的dependency被执行
+
+task默认是async的。
+
+task 和 executor之间的关系: `ICallableTaskFuture<Integer> one = executor.addTask(new NumberTask(taskConfig, 1))` 
+
+workflow: "The Workflow patterns address this by providing a way to encapsulate groups of tasks into coherent, reusable components of business logic" 将一些列的task打包为group
+
+`Workflow` 的 owning task
+
+`Workflow`  和 Task 之间的关系
 
 
 
