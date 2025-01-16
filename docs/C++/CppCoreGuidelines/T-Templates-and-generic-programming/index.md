@@ -169,7 +169,55 @@ template<typename T>
 using PFT2 = int (*)(T);   // OK
 ```
 
-### [T.44: Use function templates to deduce class template argument types (where feasible)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t44-use-function-templates-to-deduce-class-template-argument-types-where-feasible)
+### [T.44: Use function templates to deduce class template argument types (where feasible)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t44-use-function-templates-to-deduce-class-template-argument-types-where-feasible) 
+
+> NOTE: 这其实是 [object generator idiom](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Object_Generator) 
+
+##### Reason
+
+Writing the template argument types explicitly can be tedious and unnecessarily verbose.
+
+##### Example
+
+```c++
+tuple<int, string, double> t1 = {1, "Hamlet", 3.14};   // explicit type
+auto t2 = make_tuple(1, "Ophelia"s, 3.14);         // better; deduced type
+```
+
+Note the use of the `s` suffix to ensure that the string is a `std::string`, rather than a C-style string.
+
+
+
+### [T.46: Require template arguments to be at least semiregular](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t46-require-template-arguments-to-be-at-least-semiregular)
+
+> NOTE: [std::semiregular](https://en.cppreference.com/w/cpp/concepts/semiregular) 
+
+##### Reason
+
+ Readability. Preventing surprises and errors. Most uses support that anyway.
+
+##### Example
+
+```C++
+class X {
+public:
+    explicit X(int);
+    X(const X&);            // copy
+    X operator=(const X&);
+    X(X&&) noexcept;        // move
+    X& operator=(X&&) noexcept;
+    ~X();
+    // ... no more constructors ...
+};
+
+X x {1};              // fine
+X y = x;              // fine
+std::vector<X> v(10); // error: no default constructor
+```
+
+##### Note
+
+Semiregular requires default constructible.
 
 
 
