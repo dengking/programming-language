@@ -243,7 +243,19 @@ ICallableTaskFuture<Integer> four = new CallableTaskResultNull<Integer>();
 
 
 
-显然task graph中，是需要一个root node的，这个root node作为入口管理所有的task node，典型的例子就是 `ExecutorTest` 中的`TaskTest`，它负责构建computational/dependent graph。沿着依赖关系逆向执行，那这是如何实现的呢？以`SumTask`为例子来进行说明: 它的dependency都是以future的方式传入的，显然当它获取它的dependency的值时，就会触发它的dependency被执行
+显然task graph中，是需要一个root node的，这个root node作为入口管理所有的task node，典型的例子就是 `ExecutorTest` 中的`TaskTest`，它负责构建computational/dependent graph。沿着依赖关系逆向执行，那这是如何实现的呢？以`SumTask`为例子来进行说明: 它的dependency都是以future的方式传入的，显然当它获取它的dependency的值时，就会触发它的dependency被执行；需要注意: 一个task只有通过 `JavaCallableTaskExecutor` 的`addTask` 添加executor中，它才会被装饰上  `ProfileDecorator`(其中会进行打点计时)、`TaskThreadLoggingDecorator`(其中会获取task所执行的线程)，由于root node没有通过 `JavaCallableTaskExecutor` 的`addTask` 添加executor中，因此它无法被profile，它不会出现在 `JavaCallableTaskExecutor` 的 `tasks` 成员变量中。
+
+需要将 `JavaCallableTaskExecutor` 中的所有的tasks都添加到root node的context中，这是在`ICallableTaskExecutor.collectResponseContext` 中实现的。
+
+`ResponseContext` 包含如下内容: 
+
+```java
+diagnostic, profiler, tracking, error
+```
+
+在`ICallableTaskExecutor.collectResponseContext` 中对 `ResponseContext` 进行合并的时候也是逐一进行合并。
+
+
 
 task默认是async的。
 
@@ -258,4 +270,6 @@ workflow: "The Workflow patterns address this by providing a way to encapsulate 
 
 
 
+
+`wait_deps` 是可以去除的
 
