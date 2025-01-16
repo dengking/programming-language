@@ -219,7 +219,33 @@ std::vector<X> v(10); // error: no default constructor
 
 Semiregular requires default constructible.
 
+### [T.48: If your compiler does not support concepts, fake them with `enable_if`](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t48-if-your-compiler-does-not-support-concepts-fake-them-with-enable_if)
 
+##### Reason
+
+Because that’s the best we can do without direct concept support. `enable_if` can be used to conditionally define functions and to select among a set of functions.
+
+##### Example
+
+```c++
+template<typename T>
+enable_if_t<is_integral_v<T>>
+f(T v)
+{
+    // ...
+}
+
+// Equivalent to:
+template<Integral T>
+void f(T v)
+{
+    // ...
+}
+```
+
+##### Note
+
+Beware of [complementary constraints](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rt-not). Faking concept overloading using `enable_if` sometimes forces us to use that error-prone design technique.
 
 ## Template and hierarchy rule summary:
 
@@ -262,6 +288,85 @@ public:
 List<int> li;
 List<string> ls;
 ```
+
+## [T.concepts.def: Concept definition rules](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#tconceptsdef-concept-definition-rules)
+
+Defining good concepts is non-trivial. 
+
+> 翻译: 定义好的概念是非常重要的
+
+Concepts are meant to represent fundamental concepts in an application domain (hence the name “concepts”). Similarly throwing together a set of syntactic constraints to be used for the arguments for a single class or algorithm is not what concepts were designed for and will not give the full benefits of the mechanism.
+
+Obviously, defining concepts is most useful for code that can use an implementation (e.g., C++20 or later) but defining concepts is in itself a useful design technique and help catch conceptual errors and clean up the concepts (sic!) of an implementation.
+
+### [T.25: Avoid complementary constraints](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t25-avoid-complementary-constraints)
+
+##### Reason
+
+Clarity(清晰). Maintainability(可维护). Functions with complementary requirements expressed using negation are brittle(不牢固的、脆弱的).
+
+##### Example
+
+Initially, people will try to define functions with complementary requirements:
+
+```c++
+template<typename T>
+    requires !C<T>    // bad
+void f();
+
+template<typename T>
+    requires C<T>
+void f();
+```
+
+This is better:
+
+```c++
+template<typename T>   // general template
+    void f();
+
+template<typename T>   // specialization by concept
+    requires C<T>
+void f();
+```
+
+The compiler will choose the unconstrained template only when `C<T>` is unsatisfied. If you do not want to (or cannot) define an unconstrained version of `f()`, then delete it.
+
+```c++
+template<typename T>
+void f() = delete;
+```
+
+The compiler will select the overload, or emit an appropriate error.
+
+##### Note
+
+Complementary constraints are unfortunately common in `enable_if` code:
+
+```c++
+template<typename T>
+enable_if<!C<T>, void>   // bad
+f();
+
+template<typename T>
+enable_if<C<T>, void>
+f();
+```
+
+##### Note
+
+Complementary requirements on one requirement is sometimes (wrongly) considered manageable. However, for two or more requirements the number of definitions needs can go up exponentially (2,4,8,16,…):
+
+
+
+```
+C1<T> && C2<T>
+!C1<T> && C2<T>
+C1<T> && !C2<T>
+!C1<T> && !C2<T>
+```
+
+Now the opportunities for errors multiply.
 
 ## Other template rules summary:
 
