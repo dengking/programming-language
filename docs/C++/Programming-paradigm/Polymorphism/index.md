@@ -4,14 +4,6 @@
 
 ## Classification
 
-对C++ polymorphism进行分类，采用的分类标准:
-
-1、Static or dynamic
-
-2、External or internal
-
-
-
 下面根据static/dynamic进行分类：
 
 | static                    | dynamic                     |
@@ -31,7 +23,7 @@
 
 > NOTE: 这段话在 `Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism\Implementation` 中也有使用 。
 
-Function overload、template specialization、OOP subclass都是对某种“特殊情况的说明”，compiler在进行选择(select)/派发(dispatch)/resolve的时候，应该选择**最最特殊的实现**: 
+Function overload、template specialization、OOP subclass都是对某种“特殊情况的说明”，compiler在进行选择(select)/派发(dispatch)/resolve的时候，应该选择**最最特殊/合适的实现**: 
 
 | Type of polymorphism  | 最最特殊的                      | 样例                                                         |
 | --------------------- | ------------------------------- | ------------------------------------------------------------ |
@@ -79,9 +71,17 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 在`C++\Language-reference\Classes\Implementation`章节对此进行深入分析。
 
+
+
 ## Mix static polymorphism and dynamic polymorphism
 
-需要注意的是，C++并没有绝对地区分 static 和 dynamic，C++是允许 mix static polymorphism and dynamic polymorphism，这增加了C++的 power同时不可避免的增加了C++的complexity。下面是mix static polymorphism and dynamic polymorphism的方式: 
+[CppCoreGuidelines T.5: Combine generic and OO techniques to amplify(放大) their strengths, not their costs](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t5-combine-generic-and-oo-techniques-to-amplify-their-strengths-not-their-costs)  
+
+需要注意的是，C++并没有绝对地区分 static 和 dynamic，C++是允许 mix static polymorphism and dynamic polymorphism，这增加了C++的 power同时不可避免的增加了C++的complexity。
+
+
+
+下面是mix static polymorphism and dynamic polymorphism的方式: 
 
 ### Overload of virtual function
 
@@ -98,6 +98,8 @@ b、`C++\Pattern\Visitor-pattern`
 ### Virtual function in class template
 
 参见 `Template-and-virtual` 章节。
+
+### OOP interface+template implementation
 
 
 
@@ -125,5 +127,5 @@ This pattern capitalizes on both c++ features and on other basic patterns (Adapt
 
 2、External-Polymorphism
 
-参见 `wiki.c2-External-Polymorphism` 章节。
+参见 `External-Polymorphism` 章节。
 
