@@ -24,6 +24,18 @@ c、CppCoreGuidelines [T.83: Do not declare a member function template virtual](
 
 C++ does not support that. If it did, vtbls could not be generated until link time. And in general, implementations must deal with dynamic linking.
 
+**Example, don't**
+
+```c++
+class Shape {
+    // ...
+    template<class T>
+    virtual bool intersect(T* p);   // error: template cannot be virtual
+};
+```
+
+
+
 > NOTE: 
 >
 > 1、当前，virtual table是compile time生成的；如果支持template virtual function，那么virtual table需要直到link time才能够生成，并且还需要支持dynamic linking。

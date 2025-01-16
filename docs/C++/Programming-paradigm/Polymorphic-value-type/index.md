@@ -12,10 +12,6 @@ open-std [A polymorphic value-type for `C++`](http://www.open-std.org/jtc1/sc22/
 
 Polymorphic value type的implementation主要使用type earsure technique，所以，参见 `Type-Erasure`。
 
-
-
-
-
 ### 一些library
 
 [jbcoe](https://github.com/jbcoe)/**[polymorphic_value](https://github.com/jbcoe/polymorphic_value)**

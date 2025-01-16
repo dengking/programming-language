@@ -2,6 +2,16 @@
 
 在`Theory\Programming-paradigm\Abstraction-and-polymorphism\Polymorphism`中讨论了各种polymorphism，本章讨论C++中如何实现polymorphism，这是一个较大的话题。C++中提供了多种polymorphism:
 
+## Classification
+
+对C++ polymorphism进行分类，采用的分类标准:
+
+1、Static or dynamic
+
+2、External or internal
+
+
+
 下面根据static/dynamic进行分类：
 
 | static                    | dynamic                     |
@@ -15,6 +25,7 @@
 | [**Ad hoc polymorphism**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism) | overload                 |
 | [**Parametric polymorphism**](https://en.wikipedia.org/wiki/Parametric_polymorphism) | template                 |
 | [**Subtyping**](https://en.wikipedia.org/wiki/Subtyping)     | subtype / virtual method |
+| External polymorphism                                        |                          |
 
 无论是哪种实现方式，都需要考虑one-to-many的问题，即需要考虑从set  of candidates中的选择哪一个来作为最终的实现。显然这有一个**比较**/**排序**的过程，通俗来讲，选择最“**合适**” 的那一个，那到底哪个最**合适**呢？不同的polymorphism有不同的标准。
 
@@ -62,6 +73,8 @@ SFINAE是C++实现"通过**template metaprogramming**(编写metaprogram)来对**
 
 2、`Specialization-and-overload`
 
+
+
 ## Implementation of dynamic polymorphism
 
 在`C++\Language-reference\Classes\Implementation`章节对此进行深入分析。
@@ -85,3 +98,32 @@ b、`C++\Pattern\Visitor-pattern`
 ### Virtual function in class template
 
 参见 `Template-and-virtual` 章节。
+
+
+
+## External Polymorphism and Internal Polymorphism
+
+Google了一下，发现下面这篇文章的介绍是比较好的。
+
+
+
+1、agnihotris [External Polymorphism (Adapter Design pattern) vs InternalPolymorphism](https://agnihotris.wordpress.com/2013/09/22/external-polymorphism-design-pattern-vs-internalpolymorphism/)
+
+**Internal Polymorphism :-** When you call a function based on its dynamic type of objects by using virtual table or vtable . The only methods declared as virtual are polymorphic in c++.
+
+In internal polymorphism function bindings are part of class definition of the object .
+
+> NOTE: internal polymorphism是指C++ programming language内置支持的
+
+**External polymorphism :-** Here functions and their bindings are  defined independently of a class.
+
+This allows classes which are not related by inheritance and/or have no virtual methods to be treated polymorphically. Thus unrelated classes can be treated in common manner by s/w that uses them.
+
+> NOTE: external polymorphism其实是custom polymorphism，是由programmer自己创建的
+
+This pattern capitalizes on both c++ features and on other basic patterns (Adapter or Decorator) to give appearance of polymorphic behavior of otherwise unrelated class.
+
+2、External-Polymorphism
+
+参见 `wiki.c2-External-Polymorphism` 章节。
+

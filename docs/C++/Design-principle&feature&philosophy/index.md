@@ -49,7 +49,7 @@ c++提供了极大的选择空间，这就意味着它需要提供各种各样�
 
 ### Prefer introducing new features via the standard library
 
-c++语言是在不断地演进的，那c++标准委员会的专家们是以什么样的原则来不断地更新这么语言呢？这个问题在isocpp What specific design goals guided the committee? [¶](https://isocpp.org/wiki/faq/cpp11#cpp11-specific-goals) [Δ](https://isocpp.org/wiki/faq/cpp11#)中给出了答案，在维基百科[C++11](https://en.wikipedia.org/wiki/C%2B%2B11)的[Design goals](https://en.wikipedia.org/wiki/C%2B%2B11#Design_goals)章节也引用了这个答案，我觉得其中非常重要的一点是：
+c++语言是在不断地演进的，那c++标准委员会的专家们是以什么样的原则来不断地更新这么语言呢？这个问题在isocpp What specific design goals guided the committee? [¶](https://isocpp.org/wiki/faq/cpp11#cpp11-specific-goals) [Δ](https://isocpp.org/wiki/faq/cpp11#)中给出了答案，在wikipedia [C++11](https://en.wikipedia.org/wiki/C%2B%2B11)的[Design goals](https://en.wikipedia.org/wiki/C%2B%2B11#Design_goals)章节也引用了这个答案，我觉得其中非常重要的一点是：
 
 > Prefer introducing new features via the standard library, rather than extending the core language
 
@@ -288,7 +288,7 @@ change_speed(23m / 10s); // meters per second
 >
 > 1、上述“stated”的含义是“说明、描述、表述”
 >
-> 2、在阅读维基百科[smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)时，其中提及了smart pointer属于[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)，显然smart pointer是典型的express intent。
+> 2、在阅读wikipedia [smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)时，其中提及了smart pointer属于[intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)，显然smart pointer是典型的express intent。
 
 #### Example: Use language construct properly + prefer library
 
@@ -518,7 +518,7 @@ Code clarity and performance. You don't need to write error handlers for errors 
 
 #### Note
 
- Enforcing [the lifetime safety profile](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-lifetime) eliminates leaks. When combined with resource safety provided by [RAII](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii), it eliminates the need for “garbage collection” (by generating no garbage). Combine this with enforcement of [the type and bounds profiles](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-force) and you get complete type- and resource-safety, guaranteed by tools.
+Enforcing [the lifetime safety profile](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-lifetime) eliminates leaks. When combined with resource safety provided by [RAII](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii), it eliminates the need for “garbage collection” (by generating no garbage). Combine this with enforcement of [the type and bounds profiles](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#SS-force) and you get complete type- and resource-safety, guaranteed by tools.
 
 > NOTE: 
 >

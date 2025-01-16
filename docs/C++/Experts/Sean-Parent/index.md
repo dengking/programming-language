@@ -4,7 +4,7 @@
 
 2、提出了Polymorphic Value Types
 
-## 个人网站[Sean Parent](https://sean-parent.stlab.cc/)
+## 个人网站 [Sean Parent](https://sean-parent.stlab.cc/)
 
 ### [Papers and Presentations](https://sean-parent.stlab.cc/papers-and-presentations/)
 

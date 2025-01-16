@@ -50,6 +50,6 @@ The only two features in the language that do not follow the zero-overhead princ
 
 二、static polymorphism
 
-## 素材
+## See also
 
 quora [**What are zero-cost abstractions in programming languages?**](https://www.quora.com/What-are-zero-cost-abstractions-in-programming-languages)

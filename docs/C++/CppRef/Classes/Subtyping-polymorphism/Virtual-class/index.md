@@ -6,7 +6,7 @@
 
 In [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), a **virtual class** is a nested [inner class](https://en.wikipedia.org/wiki/Inner_class) whose functions and member variables can be overridden and redefined by [subclasses](https://en.wikipedia.org/wiki/Subclass_(computer_science)) of an outer class.[[1\]](https://en.wikipedia.org/wiki/Virtual_class#cite_note-1) Virtual classes are analogous to [virtual functions](https://en.wikipedia.org/wiki/Virtual_function).
 
-The run time type of a virtual class depends on the run time type of an object of the outer class. (Just like the run time type of an object decides which virtual function should be used.)
+The run time type of a **virtual class** depends on the run time type of an object of the **outer class**. (Just like the run time type of an object decides which virtual function should be used.)
 
 > NOTE: 由他的outer class的dynamic type决定
 
