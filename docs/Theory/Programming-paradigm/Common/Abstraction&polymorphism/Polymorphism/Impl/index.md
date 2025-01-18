@@ -1,6 +1,10 @@
 # Implementation of polymorphism
 
-需要注意的是: 本文所描述的implementation并不局限于某种特定的programing language，而是对implementation of polymorphism中可能涉及的问题、解决方案的总结。现代programming language，往往支持多种programming paradigm，并且再加上它们的实现方式的特殊，导致了它们的polymorphism的implementation是存在巨大差异的，因此很难进行统一的、简单的描述。
+如何实现 [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) ? 各种Polymorphism 的实现机制是不同的(具体的实现机制一般是在 [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface) 中进行了说明，比如C++ Ad hoc polymorphism的实现机制是[Name mangling](https://en.wikipedia.org/wiki/Name_mangling)、subtyping的实现方式是[Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table) )。
+
+本文所描述的implementation并不局限于某种特定的programing language，而是对implementation of polymorphism中可能涉及的问题、解决方案的总结。现代programming language，往往支持多种programming paradigm，并且再加上它们的实现方式的特殊，导致了它们的polymorphism的implementation是存在巨大差异的，因此很难进行统一的、简单的描述。
+
+
 
 ## Common issue 
 
@@ -12,7 +16,7 @@
 
 2 dynamic: runtime
 
-在`./Static-and-dynamic-polymorphism`中进行了总结。
+在`Static-and-dynamic-polymorphism`中进行了总结。
 
 ### Relationship between abstract and concrete
 
@@ -32,7 +36,7 @@
 
 Abstraction 和 polymorphism是现代programming language的核心，因此无论使用何种programming language，当我们按照"program to abstraction"原则进行开发的时候，都需要描述(one)abstract和(multiple)concrete/implementation，因此都涉及描述abstract和concrete/implementation之间的relationship(关系)，或者说: 如何将multiple concrete/implementation 聚集在一起。不同的programming language、不同的polymorphism采用不同的方式，本节对此进行总结。
 
-触发我思考这个问题的是下面这篇文章，其中描述了behavior-based、inheritance-based，我基于其中提出的behavior-based、inheritance-based，综合考虑了一些其他类型的polymorphism，进一步进行了整理。
+触发我思考这个问题的是下面这篇文章，其中描述了**behavior-based**、**inheritance-based**，我基于其中提出的**behavior-based**、**inheritance-based**，综合考虑了一些其他类型的polymorphism，进一步进行了整理。
 
 
 
@@ -42,17 +46,15 @@ Abstraction 和 polymorphism是现代programming language的核心，因此无�
 
 When we wish to select from a set of classes at **runtime**, C++ requires that those classes be related by **inheritance**. When we wish to select from a set of types at **compile time**, the relationship between those types is more subtle(难以捉摸的、微妙的). The types need be related only indirectly, and only by their **behavior**.
 
-> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism.md`中，我们已经知道了“[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**”。上面这一段中描述的使用template实现的polymorphism和使用duck type实现的polymorphism非常类似。
+> NOTE: 在`Theory\Programming-paradigm\Object-oriented-programming\Polymorphism\Polymorphism`中，我们已经知道了“[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) **types**”。上面这一段中描述的使用template实现的polymorphism和使用duck type实现的polymorphism非常类似。
 
 The C++ community does not have a generally accepted term for this kind of **behavior-based relationship** between types. Accordingly, people first learning about C++ generic programming are tempted to think that **inheritance** is involved somehow, just as it is for **object-oriented programming**. For example, on several occasions we have seen questions such as "Why isn't a **bidirectional iterator** derived from a **forward iterator**?" A student who asks that question has probably already formed a significant misconception about how templates deal with types.
 
 > NOTE: 上面这段话的意思是：当人们刚开始学习C++ generic programming 的时候，会和object-oriented programming混淆，OOP是基于inheritance的，即要求“classes be related by **inheritance**”；而generic programming是基于duck type的，即“types need be related only indirectly, and only by their **behavior**”
-
-
-
-2) wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++)
-
-> This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
+>
+> 在 wikipedia [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) # [Templates in C++](https://en.wikipedia.org/wiki/Generic_programming#Templates_in_C++) 中有着类似描述: 
+>
+> > This works whether the arguments `x` and `y` are integers, strings, or any other type for which the expression `x < y` is sensible, or more specifically, for any type for which operator`<` is defined. Common inheritance is not needed for the set of types that can be used, and so it is very similar to [duck typing](https://en.wikipedia.org/wiki/Duck_typing#Templates_or_generic_types). 
 
 
 
@@ -136,16 +138,6 @@ C++ Template也是behavior-based，参见:
 |                      | ad hoc(function overload) | function                       |
 |                      | Parametric                | template specialization        |
 | **Python**           | subtyping/duck typing     | attribute(method、member data) |
-
-
-
-## Substitution的含义
-
-一个抽象符号，可以被多种符合条件的具体符号替换。
-
-依然符合"一种抽象多种实现"。
-
-
 
 
 
@@ -261,17 +253,11 @@ Python polymorphism: 基于class hierarchy；
 
 具体参见各programming language中的描述。
 
-## draft
 
 
+## Substitution的含义
 
-### 如何实现[Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
+一个抽象符号，可以被多种符合条件的具体符号替换。
 
-各种Polymorphism 的实现机制是不同的，实现机制在[Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)中进行了说明
-
-Ad hoc polymorphism的实现机制是[Name mangling](https://en.wikipedia.org/wiki/Name_mangling)
-
-Subtyping的实现方式是[Virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table)
-
-[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) for polymorphism without (static) types
+依然符合"一种抽象多种实现"。
 

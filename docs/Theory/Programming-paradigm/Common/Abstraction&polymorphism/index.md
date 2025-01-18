@@ -20,7 +20,9 @@
 
 Abstraction and polymorphism是现代programming language的核心所在，本节对它们进行概述。
 
-1) 作为software engineer，我们需要解决现实世界中的各种问题，这个过程其实是: **abstraction**(抽象) 并 **model**(建模)，然后使用**programming language**来实现/描述conceptual model，最后将此model应用于实际，从而使实际问题得解;
+### 1 abstraction、model、conceptual model
+
+作为software engineer，我们需要解决现实世界中的各种问题，这个过程其实是: **abstraction**(抽象) 并 **model**(建模)，然后使用**programming language**来实现/描述conceptual model，最后将此model应用于实际，从而使实际问题得解;
 
 **如何来描述concept？**
 
@@ -34,9 +36,9 @@ Abstraction and polymorphism是现代programming language的核心所在，本�
 
 - Design to abstraction
 
+### 2 concrete/implementation
 
-
-2) 一个abstraction可以有多个concrete/implementation;
+一个abstraction可以有多个concrete/implementation;
 
 Concrete的一些例子: 
 
@@ -45,9 +47,13 @@ Concrete的一些例子:
 
 Implementation: 实现抽象的概念
 
-3) Dispatch: 从abstract到concrete/implementation的过程
+### 3 dispatch
 
-4) Polymorphism: dispatch to concrete/implementation **automatically**
+Dispatch: 从abstract到concrete/implementation的过程
+
+### 4 polymorphism
+
+Polymorphism: dispatch to concrete/implementation **automatically**
 
 Polymorphism是现代programming language内置了dispatch机制，能够自动进行dispatch，从而选择最最**具体**(**concrete**)的/**合适**的**实现**(implementation)，从而大大增加了研发效率;
 
@@ -59,7 +65,7 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 
 1) **Program to an abstraction and polymorphism**
 
-这是我们遵循"Program to an abstraction"的原因，在`./Program to an abstraction` 章节中会对此进行详细说明。
+这是我们遵循"Program to an abstraction"的原因，在`Program-to-an-abstraction` 章节中会对此进行详细说明。
 
 2) Polymorphism是实现conceptual model/abstraction model的基础
 
@@ -70,8 +76,6 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 > NOTE: 本节从programming language的发展史来思考abstraction。
 
 参见`Theory\Programming-language`的"Abstraction in programming language history"章节。
-
-
 
 
 
@@ -91,40 +95,34 @@ Polymorphism是现代programming language内置了dispatch机制，能够自动�
 使用`class`来描述[concept](https://en.wikipedia.org/wiki/Concept)，这几个[concept](https://en.wikipedia.org/wiki/Concept)之间是[Is-a](https://en.wikipedia.org/wiki/Is-a)关系，那么可以使用inheritance，下面是一个`c++`实现的demo：
 
 ```c++
-class KernelControlPath
-{
-    
-}
-	
+class KernelControlPath {
 
-class SystemCallKernelControlPath public: KernelControlPath
-{
-    
-}
+};
 
-class InterruptKernelControlPath public: KernelControlPath
-{
-    
-}
+class SystemCallKernelControlPath : public KernelControlPath {
+
+};
+
+class InterruptKernelControlPath : public KernelControlPath {
+
+};
 
 ```
 
 kernel control path的一个**特征**就是它能够被suspend、resume，使用面向对象的方式来进行描述就是：
 
 ```c++
-void suspend(KernelControlPath& kernel_control_path)
-{
-    
-}
-	
+void suspend(KernelControlPath &kernel_control_path) {
 
-void resume(KernelControlPath& kernel_control_path)
-{
-    
+}
+
+
+void resume(KernelControlPath &kernel_control_path) {
+
 }
 ```
 
-面向对象的[Polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))（多态性）表明`suspend`和`resume`的入参可以为`SystemCallKernelControlPath`、`InterruptKernelControlPath`类型的对象，这其实就体现了：
+面向对象的 [Polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))（多态性）表明`suspend`和`resume`的入参可以为`SystemCallKernelControlPath`、`InterruptKernelControlPath`类型的对象，这其实就体现了：
 
 > 当一个表述中使用kernel control path的时候，我们就知道它可以是system call kernel control path、也可以是interrupt handler kernel control path
 
@@ -152,8 +150,6 @@ class ThreadTask(Task):
 参见：维基百科[Abstract type](https://en.wikipedia.org/wiki/Abstract_type)
 
 参见：工程[programming-language](https://dengking.github.io/programming-language)的文章[Introduction to Objects](https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Thinking-in-java/Introduction-to-objects)
-
-
 
 
 

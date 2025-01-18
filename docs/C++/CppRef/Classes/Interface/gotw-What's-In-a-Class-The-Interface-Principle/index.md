@@ -27,7 +27,7 @@ wikipedia [Argument-dependent name lookup#Interfaces](https://en.wikipedia.org/w
 
 
 
-## gotw [What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm)
+## gotw [What's In a Class? - The Interface Principle](http://www.gotw.ca/publications/mill02.htm) 
 
 I'll start off with a deceptively（看似） simple question:
 

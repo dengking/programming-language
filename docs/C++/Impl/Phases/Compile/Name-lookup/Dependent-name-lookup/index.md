@@ -301,6 +301,8 @@ int main() {
 
 ```
 
+
+
 #### Example: operator and argument in different namespace
 
 Note: this rule makes it impractical to overload operators for standard library types
@@ -460,8 +462,6 @@ int main() {
 // g++ --std=c++11 test.cpp
 
 ```
-
-
 
 
 
