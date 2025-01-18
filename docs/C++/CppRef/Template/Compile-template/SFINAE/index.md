@@ -28,8 +28,6 @@ SFINAE 是 compiler 编译机制(或者说: 原理)，它保证了compiler会对
 
 
 
-
-
 ## SFINAE的前提是有substitution
 
 1、SFINAE的前提是必要有substitution，如果没有substitution，那么就无法使用SFINAE，这是在使用SFINAE-base custom static polymorphism的时候，非常容易犯下的错误，在 `Custom-static-polymorphism\SFINAE-based` 章节中，对此进行了总结。

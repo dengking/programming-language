@@ -93,15 +93,13 @@ cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)�
 
 1) called(被调用)
 
-借助于Lazyness of template instantiation，我们可以实现conditional compiling，这在`C-family-language\C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE.md#SFINAE and conditional compiling`中进行了详细介绍。
+借助于Lazyness of template instantiation，我们可以实现conditional compiling，这在`C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE.md#SFINAE and conditional compiling`中进行了详细介绍。
 
 > NOTE: Lazyness of template instantiation让我联想到了维基百科[Type system#Static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)中关于`if <complex test> then <do something> else <signal that there is a type error>`的讨论，显然，它是一种run-time lazy；Lazyness of template instantiation是一种compile-time lazy。
 
 #### CRTP
 
 CRTP是充分运用Lazyness of template instantiation特性的，关于此在wikipedia [Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism) 中给出的了详细的介绍，通过CRTP的学习，我们能够进一步地反过来思考Lazyness of template instantiation特性。在`Generic-programming\Curiously-recurring-template-pattern`章节中收录了wikipedia [Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism) ，其中对这个话题进行了深入的分析。
-
-
 
 
 
@@ -192,7 +190,7 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 
 如果存在template specialization，则将根据Primary Class Template得到的**template parameter list**代入到template specialization中，如果template specialization能够匹配**template parameter list**，那么它就是一个有效的，在后面的比较中，会考虑这个template specialization。需要注意的是: compiler会根据**template parameter list**来推导出template specialization的template argument，这个过程非常重要( 典型的案例是 stackoverflow [Check if a class has a member function of a given signature](https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature) # [A](https://stackoverflow.com/a/16824239)  )。将template parameter list代入到template specialization中，然后进行匹配的过程，是需要结合具体的案例来进行理解的，后面的"案例学习: template specialization and trait"章节中，就收录非常具有代表性的例子。
 
-3、优先级顺序是：Specialized Class Template specialization > Primary Class Template specialization，即compiler会优先选择 "Specialized Class Template specialization"，这就是一次多态
+3、优先级顺序是: Specialized Class Template specialization > Primary Class Template specialization，即compiler会优先选择 "Specialized Class Template specialization"，这就是一次多态
 
 > 参见: cppreference [Partial template specialization#Partial ordering](https://en.cppreference.com/w/cpp/language/partial_specialization#Partial_ordering)
 

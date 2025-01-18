@@ -229,6 +229,8 @@ In the following contexts **ADL-only lookup** (that is, lookup in associated nam
 - the [dependent name lookup](dependent_name.html#Lookup_rules) from the point of **template instantiation**.
 - the lookup of non-member function `get` performed by [structured binding declaration](structured_binding.html) for tuple-like types (since C++17)
 
+## hackingcpp [Argument Dependent Lookup](https://hackingcpp.com/cpp/lang/adl.html) 
+
 
 
 ## ADL的重要意义
@@ -314,7 +316,7 @@ _NODISCARD constexpr const _Elem* end(initializer_list<_Elem> _Ilist) noexcept {
 
 
 
-### [Swappable idiom](https://en.cppreference.com/w/cpp/named_req/Swappable)  
+### [Swappable idiom](https://en.cppreference.com/w/cpp/named_req/Swappable)=ADL+fallback  
 
 在`C++\Idiom\OOP\Non-throwing-swap`中给出的例子，就展示了ADL：
 
@@ -608,6 +610,8 @@ CStructRtti GetRttiByType() {
 ### ADL&dependent name lookup
 
 参见 cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) 
+
+
 
 ## TODO
 
