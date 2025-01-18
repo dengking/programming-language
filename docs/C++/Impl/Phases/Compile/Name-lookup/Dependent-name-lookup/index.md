@@ -16,6 +16,8 @@ Names inside template are divided into two classes:
 
 它们的主要区别在于执行lookup的时机
 
+两种name(dependent、non-dependent)、两种lookup(ADL、non-ADL)、template的两种context(definition、instantiation)，所以本文花了很大的篇幅来讨论dependent name lookup和ADL之间的关系。
+
 ## 入门读物
 
 一、thegreenplace [Dependent name lookup for C++ templates](https://eli.thegreenplace.net/2012/02/06/dependent-name-lookup-for-c-templates)
@@ -47,7 +49,7 @@ Two-phase name lookup is the process by which a template is instantiated.
 
 Some compilers do not fully support the first phase, and instead delay nearly all the work until encountering the point of **instantiation**.
 
-## cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name)
+## cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) 
 
 Inside the definition of a [template](https://en.cppreference.com/w/cpp/language/templates) (both [class template](https://en.cppreference.com/w/cpp/language/class_template) and [function template](https://en.cppreference.com/w/cpp/language/function_template)), the meaning of some constructs may differ from one instantiation to another. In particular, **types and expressions** may depend on types of **type template parameters** and values of **non-type template parameters**.
 
@@ -83,31 +85,27 @@ Name lookup and binding are different for *dependent names* and non-*dependent n
 
 ```c++
 #include <iostream>
-void g(double)
-{
-	std::cout << "g(double)\n";
+
+void g(double) {
+    std::cout << "g(double)\n";
 }
 
 template<class T>
-struct S
-{
-	void f() const
-	{
-		g(1); // "g" is a non-dependent name, bound now
-	}
+struct S {
+    void f() const {
+        g(1); // "g" is a non-dependent name, bound now
+    }
 };
 
-void g(int)
-{
-	std::cout << "g(int)\n";
+void g(int) {
+    std::cout << "g(int)\n";
 }
 
-int main()
-{
-	g(1); // calls g(int)
+int main() {
+    g(1); // calls g(int)
 
-	S<int> s;
-	s.f(); // calls g(double)
+    S<int> s;
+    s.f(); // calls g(double)
 }
 // g++ test.cpp
 
@@ -135,7 +133,7 @@ As discussed in [lookup](https://en.cppreference.com/w/cpp/language/lookup), the
 
 2、[ADL](https://en.cppreference.com/w/cpp/language/adl) examines function declarations with external linkage that are visible from either the *template definition* context or the *template instantiation* context
 
-(in other words, adding a new function declaration after **template definition** does not make it visible, except via ADL(在template definition后添加的function declaration只有通过ADL才能够让template看到，否则不行)).
+(in other words, adding a new function declaration after **template definition** does not make it visible, except via ADL(在template definition后添加的function declaration只有通过ADL才能够让template看到，否则不行，在前面展示了这种例子)).
 
 > NOTE: 
 >
@@ -152,7 +150,19 @@ As discussed in [lookup](https://en.cppreference.com/w/cpp/language/lookup), the
 
 (in other words, adding a new function declaration after **template definition** does not make it visible, except via ADL).
 
-#### Non-ADL lookup example
+
+
+#### Dependent name&ADL lookup&std
+
+> NOTE: 
+>
+> 其实原文这里花了很大的篇幅讨论"dependent name&ADL lookup&std"，在 cppreference [ADL](https://en.cppreference.com/w/cpp/language/adl) 中对此有着如下描述:
+>
+> > Name lookup rules make it impractical(不切实际的) to declare operators in global or user-defined namespace that operate on types from the **`std` namespace**, e.g. a custom `operator>>` or `operator+` for [std::vector](https://en.cppreference.com/w/cpp/container/vector) or for [std::pair](https://en.cppreference.com/w/cpp/utility/pair) (unless the element types of the vector/pair are **user-defined types**, which would add their namespace to **ADL**). Such operators would not be looked up from template instantiations, such as the standard library algorithms. See [dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) for further details.
+>
+> 
+
+##### Non-ADL lookup example
 
 The purpose of this rule is to help guard against violations of the [ODR](https://en.cppreference.com/w/cpp/language/definition#One_Definition_Rule) for template instantiations:
 
@@ -222,7 +232,7 @@ int main() {
 
 In the above example, if non-ADL lookup for `operator<<` were allowed from the instantiation context, the instantiation of `E::writeObject<vector<int>>` would have two different definitions: one using `P1::operator<<` and one using `P2::operator<<`. Such ODR violation may not be detected by the linker, leading to one or the other being used in both instances.
 
-#### ADL example
+##### ADL example
 
 To make ADL examine a user-defined namespace, either `std::vector` should be replaced by a user-defined class or its element type should be a user-defined class:
 
@@ -303,7 +313,7 @@ int main() {
 
 
 
-#### Example: operator and argument in different namespace
+##### Example: operator and argument in different namespace
 
 Note: this rule makes it impractical to overload operators for standard library types
 

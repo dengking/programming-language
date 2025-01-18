@@ -473,7 +473,7 @@ swap(a, b);
 
 
 
-### `get_rtti`
+### Function template: `get_rtti`
 
 我已经使用了C++ ADL了，`get_rtti`就是一个例子。下面是简化的代码：
 
@@ -604,6 +604,10 @@ CStructRtti GetRttiByType() {
 ```
 
 
+
+### ADL&dependent name lookup
+
+参见 cppreference [Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) 
 
 ## TODO
 

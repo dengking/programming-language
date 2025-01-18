@@ -211,7 +211,7 @@ C++ Template也是behavior-based，参见:
 
 > NOTE: dispatch的过程可以看做是"搜索和排序"。
 
-无论是哪种polymorphism，在实现的时候都需要考虑one-to-many的问题，即需要考虑从set  of candidates(concrete/implementation)中的选择哪一个来作为最终的实现。
+无论是哪种polymorphism，在实现的时候都需要考虑one-to-many的问题，即需要考虑从set  of candidates(concrete/implementation) 中的选择哪一个来作为最终的实现。
 
 显然，dispatch的过程**可能**涉及到了如下步骤:
 
