@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
-    - Abstraction&&polymorphism: Abstraction&&polymorphism
-    - Behavior-based&&interface: Behavior-based&&interface
+    - Abstraction&polymorphism: Abstraction&polymorphism
+    - Behavior-based&interface: Behavior-based&interface
     - Code-reuse: Code-reuse
+    

@@ -1,4 +1,4 @@
-# 关于本章
+# Compile template
 
 编译器如何编译template？这个问题其实是在探讨编译器是如何实现模板的，本章对这个问题进行展开，描述C++ template的实现。理解template的实现，对于掌握、运用template至关重要。
 
@@ -22,11 +22,15 @@ Template is a kind of static polymorphism，对于这个结论，我们需要从
 
 - 它运用的是static type info
 
-## Specialization and instantiation of template
+## Template definition&specialization&instantiation 
 
-本节描述Specialization and instantiation of template，下面是涉及这个主题的素材。
+"definition": "定义"
 
-"specialization"的含义是"特化"，"instantiation"的含义是"实例化"。
+"specialization": "特化"
+
+"instantiation": "实例化"
+
+下面是涉及这个主题的素材: 
 
 ### cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)
 

@@ -14,7 +14,7 @@ nav:
     # 下面描述每种programming language都会涉及到的内容
     - Type-system: Type-system
     # 很多programming language都支持reflection，reflection和type system密切相关，两者最好放在一起
-    - Reflection&&introspection: Reflection&&introspection
+    - Reflection&introspection: Reflection&introspection
     
 
 ###################################################重要概念################################################    
@@ -35,7 +35,7 @@ nav:
     # Invariant是进行判别的一个非常重要的概念
     - Design-by-contract: Design-by-contract
     # 
-    - Compile-time-and-run-time: Compile-time-and-run-time
+    - Compile-time&run-time: Compile-time&run-time
     # 大多数programming language都会涉及error handling
     - Error-handling: Error-handling
 

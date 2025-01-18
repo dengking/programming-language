@@ -1,5 +1,4 @@
 nav:
     - Introduction: index.md
     - Eli-Bendersky-thegreenplace-Dependent-name-lookup-for-C++templates: Eli-Bendersky-thegreenplace-Dependent-name-lookup-for-C++templates
-    - Template-disambiguator-for-dependent-names: Template-disambiguator-for-dependent-names
     - Compile-errors: Compile-errors

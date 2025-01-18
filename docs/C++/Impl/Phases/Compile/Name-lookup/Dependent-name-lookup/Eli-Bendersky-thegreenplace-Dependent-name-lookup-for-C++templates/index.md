@@ -5,25 +5,23 @@
 ```c++
 #include <iostream>
 
-template<typename T> struct Base
-{
-	void f()
-	{
-		std::cerr << "Base<T>::f\n";
-	}
+template<typename T>
+struct Base {
+    void f() {
+        std::cerr << "Base<T>::f\n";
+    }
 };
 
-template<typename T> struct Derived: Base<T>
-{
-	void g()
-	{
-		std::cerr << "Derived<T>::g\n  ";
-		f();
-	}
+template<typename T>
+struct Derived : Base<T> {
+    void g() {
+        std::cerr << "Derived<T>::g\n  ";
+        f();
+    }
 };
-int main()
-{
-	Derived<int> D;
+
+int main() {
+    Derived<int> D;
 }
 // g++ test.cpp
 
@@ -173,7 +171,7 @@ To make this work, the C++ standard defines a "two-phase name lookup" rule for n
 | *Dependent*     | names that depend on the template parameters but aren't declared within the template. |         |
 | *Non-dependent* | names that don't depend on the template parameters, plus the name of the template itself and names declared within it. |         |
 
-When the compiler tries to resolve some name in the code, it first decides whether the name is **dependent** or not, and the resolution process stems from this distinction（解析过程就是根据这种区别进行的）. While **non-dependent names** are resolved "normally" - when the template is defined, the resolution for **dependent names** happens at the point of the **template's instantiation**. This is what ensures that a specialization can be noticed correctly in the example above.
+When the compiler tries to resolve some name in the code, it first decides whether the name is **dependent** or not, and the resolution process stems from this distinction(解析过程就是根据这种区别进行的). While **non-dependent names** are resolved "normally" - when the template is defined, the resolution for **dependent names** happens at the point of the **template's instantiation**. This is what ensures that a **specialization** can be noticed correctly in the example above(dependent name lookup保证能够找到**specialization**).
 
 > NOTE: 
 >
