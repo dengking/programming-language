@@ -4,9 +4,7 @@
 
 ## cppreference [Template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction)
 
-
-
-Template argument deduction takes place after the function template [name lookup](https://en.cppreference.com/w/cpp/language/lookup) (which may involve [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)) and before [template argument substitution](https://en.cppreference.com/w/cpp/language/function_template#Template_argument_substitution) (which may involve [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae)) and [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution).
+**Template argument deduction** takes place after the function template [name lookup](https://en.cppreference.com/w/cpp/language/lookup) (which may involve [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)) and before [template argument substitution](https://en.cppreference.com/w/cpp/language/function_template#Template_argument_substitution) (which may involve [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae)) and [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution).
 
 > NOTE: 需要将这些流程给串联起来
 
@@ -30,11 +28,11 @@ If there are multiple parameters, each `P/A` pair is deduced **separately** and 
 >
 > thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)，其中对`std::forward`的实现的分析中有如下描述：
 >
-> > Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous（多余的）. It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
+> > Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous(多余的). It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
 >
 > 这让我思考：如何来强制不进行deduction。
 >
-> 在某些情况下，programmer是不想启用deduction的，所以C++提供了给了programmer这种控制能力，这是C++灵活性的体现。
+> 在某些情况下，programmer是不想启用deduction的，所以C++提供给了programmer这种控制能力，这是C++灵活性的体现。
 >
 > ## Disable argument-based template parameter deduction for functions
 >

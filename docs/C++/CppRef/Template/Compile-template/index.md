@@ -127,6 +127,10 @@ CRTP是充分运用Lazyness of template instantiation特性的，关于此在wik
 
 在后面的"5 Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) "章节中，收录了这篇文章
 
+3、cppreference [Template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction)
+
+> **Template argument deduction** takes place after the function template [name lookup](https://en.cppreference.com/w/cpp/language/lookup) (which may involve [argument-dependent lookup](https://en.cppreference.com/w/cpp/language/adl)) and before [template argument substitution](https://en.cppreference.com/w/cpp/language/function_template#Template_argument_substitution) (which may involve [SFINAE](https://en.cppreference.com/w/cpp/language/sfinae)) and [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution).
+
 ## 0 Template name lookup
 
 compiler对template的name lookup采用了特殊的策略，参见: 
