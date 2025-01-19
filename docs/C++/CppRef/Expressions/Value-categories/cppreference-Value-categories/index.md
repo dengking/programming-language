@@ -267,7 +267,7 @@ Properties:
 - A prvalue cannot have [incomplete type](https://en.cppreference.com/w/cpp/language/type#Incomplete_type) (except for type void, see below, or when used in [decltype specifier](https://en.cppreference.com/w/cpp/language/decltype))
 - A prvalue cannot have [abstract class type](https://en.cppreference.com/w/cpp/language/abstract_class) or an array thereof.
 
-### xvalue
+### xvalue(将亡值)
 
 The following expressions are *xvalue expressions*:
 

@@ -99,7 +99,7 @@ The assignment `mymap[10]` works because the non-const overload of `std::map::op
 
 Initially when lvalues were defined for C, it literally meant "values suitable for left-hand-side of assignment". Later, however, when ISO C added the `const` keyword, this definition had to be refined. After all:
 
-```
+```c++
 const int a = 10; // 'a' is an lvalue
 a = 10;           // but it can't be assigned!
 ```
@@ -131,7 +131,7 @@ int* p = &arr[0];
 *(p + 1) = 10;   // OK: p + 1 is an rvalue, but *(p + 1) is an lvalue
 ```
 
-***SUMMARY*** : 注意，`p+1`和`*(p + 1)`是两个不同的表达式
+> NOTE: 注意，`p+1`和`*(p + 1)`是两个不同的表达式
 
 Conversely, the unary address-of operator `'&'` takes an lvalue argument and produces an rvalue:
 
@@ -192,24 +192,25 @@ The second call in `main` actually calls the `foo () const` method of `A`, becau
 
 ### Rvalue references (C++11)
 
-Rvalue references and the related concept of *move semantics* is one of the most powerful new features the C++11 standard introduces to the language. A full discussion of the feature is way beyond the scope of this humble article [[3\]](https://eli.thegreenplace.net/2011/12/15/understanding-lvalues-and-rvalues-in-c-and-c/#id8), but I still want to provide a simple example, because I think it's a good place to demonstrate how an understanding of what lvalues and rvalues are aids our ability to reason about non-trivial language concepts.
+**Rvalue references** and the related concept of ***move semantics*** is one of the most powerful new features the C++11 standard introduces to the language. A full discussion of the feature is way beyond the scope of this humble article [[3\]](https://eli.thegreenplace.net/2011/12/15/understanding-lvalues-and-rvalues-in-c-and-c/#id8), but I still want to provide a simple example, because I think it's a good place to demonstrate how an understanding of what lvalues and rvalues are aids our ability to reason about non-trivial language concepts.
 
 I've just spent a good part of this article explaining that one of the main differences between lvalues and rvalues is that lvalues can be modified, and rvalues can't. Well, C++11 adds a crucial twist to this distinction, by allowing us to have references to rvalues and thus modify them, in some special circumstances.
 
 As an example, consider a simplistic implementation of a dynamic "integer vector". I'm showing just the relevant methods here:
 
 ```c++
-class Intvec
-{
+#include <iostream>
+
+using namespace std;
+
+class Intvec {
 public:
     explicit Intvec(size_t num = 0)
-        : m_size(num), m_data(new int[m_size])
-    {
+            : m_size(num), m_data(new int[m_size]) {
         log("constructor");
     }
 
-    ~Intvec()
-    {
+    ~Intvec() {
         log("destructor");
         if (m_data) {
             delete[] m_data;
@@ -217,30 +218,28 @@ public:
         }
     }
 
-    Intvec(const Intvec& other)
-        : m_size(other.m_size), m_data(new int[m_size])
-    {
+    Intvec(const Intvec &other)
+            : m_size(other.m_size), m_data(new int[m_size]) {
         log("copy constructor");
         for (size_t i = 0; i < m_size; ++i)
             m_data[i] = other.m_data[i];
     }
 
-    Intvec& operator=(const Intvec& other)
-    {
+    Intvec &operator=(const Intvec &other) {
         log("copy assignment operator");
         Intvec tmp(other);
         std::swap(m_size, tmp.m_size);
         std::swap(m_data, tmp.m_data);
         return *this;
     }
+
 private:
-    void log(const char* msg)
-    {
+    void log(const char *msg) {
         cout << "[" << this << "] " << msg << "\n";
     }
 
     size_t m_size;
-    int* m_data;
+    int *m_data;
 };
 
 ```
@@ -336,69 +335,62 @@ Also, in the new C++ spec this topic becomes even more important, because C++11'
 
 using namespace std;
 
-class Intvec
-{
+class Intvec {
 public:
-	explicit Intvec(size_t num = 0) :
-					m_size(num), m_data(new int[m_size])
-	{
-		log("constructor");
-	}
+    explicit Intvec(size_t num = 0) :
+            m_size(num), m_data(new int[m_size]) {
+        log("constructor");
+    }
 
-	~Intvec()
-	{
-		log("destructor");
-		if (m_data)
-		{
-			delete[] m_data;
-			m_data = 0;
-		}
-	}
+    ~Intvec() {
+        log("destructor");
+        if (m_data) {
+            delete[] m_data;
+            m_data = 0;
+        }
+    }
 
-	Intvec(const Intvec &other) :
-					m_size(other.m_size), m_data(new int[m_size])
-	{
-		log("copy constructor");
-		for (size_t i = 0; i < m_size; ++i)
-			m_data[i] = other.m_data[i];
-	}
+    Intvec(const Intvec &other) :
+            m_size(other.m_size), m_data(new int[m_size]) {
+        log("copy constructor");
+        for (size_t i = 0; i < m_size; ++i)
+            m_data[i] = other.m_data[i];
+    }
 
-	Intvec& operator=(const Intvec &other)
-	{
-		log("copy assignment operator");
-		Intvec tmp(other);
-		std::swap(m_size, tmp.m_size);
-		std::swap(m_data, tmp.m_data);
-		return *this;
-	}
-	Intvec& operator=(Intvec &&other)
-	{
-		log("move assignment operator");
-		std::swap(m_size, other.m_size);
-		std::swap(m_data, other.m_data);
-		return *this;
-	}
+    Intvec &operator=(const Intvec &other) {
+        log("copy assignment operator");
+        Intvec tmp(other);
+        std::swap(m_size, tmp.m_size);
+        std::swap(m_data, tmp.m_data);
+        return *this;
+    }
+
+    Intvec &operator=(Intvec &&other) {
+        log("move assignment operator");
+        std::swap(m_size, other.m_size);
+        std::swap(m_data, other.m_data);
+        return *this;
+    }
+
 private:
-	void log(const char *msg)
-	{
-		cout << "[" << this << "] " << msg << "\n";
-	}
+    void log(const char *msg) {
+        cout << "[" << this << "] " << msg << "\n";
+    }
 
-	size_t m_size;
-	int *m_data;
+    size_t m_size;
+    int *m_data;
 };
 
-int main()
-{
-	Intvec v1(20);
-	Intvec v2;
+int main() {
+    Intvec v1(20);
+    Intvec v2;
 
-	cout << "assigning lvalue...\n";
-	v2 = v1;
-	cout << "ended assigning lvalue...\n";
-	cout << "assigning rvalue...\n";
-	v2 = Intvec(33);
-	cout << "ended assigning rvalue...\n";
+    cout << "assigning lvalue...\n";
+    v2 = v1;
+    cout << "ended assigning lvalue...\n";
+    cout << "assigning rvalue...\n";
+    v2 = Intvec(33);
+    cout << "ended assigning rvalue...\n";
 }
 // g++  test.cpp --std=c++11
 
