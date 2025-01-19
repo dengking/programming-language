@@ -10,9 +10,7 @@ forwarding reference是function generic programming的基础:
 
 ## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) # Forwarding references (since C++11)
 
-
-
-**Forwarding references** are a special kind of references that preserve the value category of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). Forwarding references are either:
+**Forwarding references** are a special kind of references that preserve the **value category** of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). Forwarding references are either:
 
 ### 1)
 

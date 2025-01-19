@@ -2,7 +2,7 @@
 
 An expression is a sequence of *operators* and their *operands*, that specifies a **computation**.
 
-> NOTE: 上述定义是从数学expression的角度出发来给出的定义，关于此可以参见`Theory\Programming-language-construct\Basic-Language-construct\Operator-expression-statement.md`，其中对这个话题进行了详细分析。
+> NOTE: 上述定义是从数学expression的角度出发来给出的定义，关于此可以参见`Theory\Programming-language-construct\Basic-Language-construct\Operator-expression-statement`，其中对这个话题进行了详细分析。
 >
 > 那c++语言中的expression是否仅限于此呢？不是的，在cppreference [Value categories](https://en.cppreference.com/w/cpp/language/value_category)中给出了详细的说明：
 >
@@ -23,6 +23,8 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 > NOTE: python中没有value categories一说，相比之下，python的data model是简单地多的。其他的相关问题，python中都有。
 
 > NOTE: 上述后三条在原文中和前两条不在一起，我觉得它们是所有的operator都会涉及到的问题，所以我将它们放到了一起。
+
+
 
 ## Operators
 
@@ -55,19 +57,27 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 >
 >   在原文的[Unevaluated expressions](https://en.cppreference.com/w/cpp/language/expressions)章节对此进行了说明。
 
+
+
 ### Common operators
 
-> NOTE： python中assignment的含义是bind。
+> NOTE: python中assignment的含义是bind。
 
-> NOTE : python中叫做Attribute references[¶](https://docs.python.org/3.3/reference/expressions.html#attribute-references)，`c++`中叫做member access。
+> NOTE: python中叫做Attribute references[¶](https://docs.python.org/3.3/reference/expressions.html#attribute-references)，`c++`中叫做member access。
+
+
 
 ### Special operators
 
 > NOTE: 下面是对special operator的分类。
 
+
+
 #### Conversions
 
 > NOTE: 放到了type system章节，参见`C++\Language-reference\Basic-concept\Type-system\Type-conversion`。
+
+
 
 #### Memory allocation
 
@@ -86,8 +96,6 @@ An expression is a sequence of *operators* and their *operands*, that specifies 
 | [`alignof`](https://en.cppreference.com/w/cpp/language/alignof) | 参见: <br/>- “Unevaluated expressions”                       |
 | [`typeid`](https://en.cppreference.com/w/cpp/language/typeid) | 参见: <br/>- “Unevaluated expressions”                       |
 | [throw-expression](https://en.cppreference.com/w/cpp/language/throw) |                                                              |
-
-
 
 
 
@@ -123,6 +131,8 @@ Any expression in parentheses is also classified as a **primary expression**: th
 >
 > 通过上述错误，能够加深我们对primary expression的理解。
 
+
+
 ### Literals
 
 **Literals** are the tokens of a C++ program that represent constant values embedded in the source code.
@@ -157,16 +167,18 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 >
 > ```c++
 > #include <iostream>
+> 
 > int i = 1;
-> void F(int i)
-> {
-> std::cout<<i<<std::endl;
+> 
+> void F(int i) {
+>     std::cout << i << std::endl;
 > }
-> int main()
-> {
-> int i = 1;
-> F(i+1);
+> 
+> int main() {
+>     int i = 1;
+>     F(i + 1);
 > }
+> 
 > ```
 >
 > 上述程序的输出为`2`，显然function-call operator的operand `i+1`被evaluated了，它是run-time的。
@@ -182,6 +194,8 @@ The **operands** of the operators [`typeid`](https://en.cppreference.com/w/cpp/l
 > `decltype` 的 operand 可以是build-in comma operator构成的expression，build-in comma operator的第一个operand是discard value的，说明它是被evaluated的，那这要如何来进行理解呢？
 
 > NOTE: 上面这一段提示了我们：有些operator在compile-time进行计算的，而有些是在run-time进行计算的，可以将此作为对operator的分类方法；上面这一段对[`typeid`](https://en.cppreference.com/w/cpp/language/typeid)进行了特殊说明，它表示`typeid`也可能是run-time。
+
+
 
 ### Unevaluated operands are *full expressions*  (since C++14)
 
@@ -209,6 +223,8 @@ c++中有哪些operator？下面对此进行枚举：
 
 在cppreference [C++ Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence)中枚举了几乎所有的c++ operator。
 
+
+
 ## Supplement: id-expression
 
 原文没有对id-expression进行深入说明，下面是对它的补充说明:
@@ -223,40 +239,38 @@ id-expression中的id的含义是[identifier](https://en.cppreference.com/w/cpp/
 
 - cppreference [Non-static member functions](https://en.cppreference.com/w/cpp/language/member_functions)
 
+
+
 ### Example 1
 
 stackoverflow [Why user-defined conversion is not implicitly taking place on the calling object](https://stackoverflow.com/questions/44699176/why-user-defined-conversion-is-not-implicitly-taking-place-on-the-calling-object)
 
 ```c++
 #include <iostream>
-class A
-{
+
+class A {
 public:
-	void func() const
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
+    void func() const {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
 };
 
-class B
-{
+class B {
 public:
-	// user-defined conversion operator to A
-	operator A() const
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return a_;
-	}
+    // user-defined conversion operator to A
+    operator A() const {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+        return a_;
+    }
+
 private:
-	A a_;
+    A a_;
 };
 
-int main()
-{
-	B b;
-	static_cast<A>(b).func(); // call func() on temporary instance of A
-	B b;
-	// b.func(); // <-- error: 'class B' has no member named 'func'
+int main() {
+    B b;
+    static_cast<A>(b).func(); // call func() on temporary instance of A
+    // b.func(); // <-- error: 'class B' has no member named 'func'
 }
 // g++  test.cpp
 
@@ -271,6 +285,8 @@ int main()
 Here the *id-expression* is `func()`
 
 So the compiler considers that `func` must be a member of `B` or a class that `B` derives from. Implicit conversion to other types that might have a `func` member is not considered.
+
+
 
 ### Example 2
 
