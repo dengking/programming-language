@@ -1,6 +1,6 @@
 # Compile time execution
 
-1、在`Theory\Compile-time-and-run-time`中，我们知道了compile time function execution的概念，本文对C++ compile time function execution进行总结。
+1、在`Theory\Compile-time&run-time`中，我们知道了compile time function execution的概念，本文对C++ compile time function execution进行总结。
 
 2、C++的一个发展方向就是充分发挥compile-time computation。
 
@@ -10,7 +10,7 @@
 >
 > 这篇文章在 `Theory\Compile-time-and-run-time` 中也收录了
 
-**Compile-time function execution** (or **compile time function evaluation**, or **general constant expressions**) is the ability of a [compiler](https://en.wanweibaike.com/wiki-Compiler), that would normally compile a function to machine code and execute it at [run time](https://en.wanweibaike.com/wiki-Run_time_(program_lifecycle_phase)), to execute the function at [compile time](https://en.wanweibaike.com/wiki-Compile_time). This is possible if the arguments to the function are known at compile time, and the function does not make any reference to or attempt to modify any global state (is a [pure function](https://en.wanweibaike.com/wiki-Pure_function)).
+**Compile-time function execution** (or **compile time function evaluation**, or **general constant expressions**) is the ability of a [compiler](https://en.wanweibaike.com/wiki-Compiler), that would normally compile a function to machine code and execute it at [run time](https://en.wanweibaike.com/wiki-Run_time_(program_lifecycle_phase)), to execute the function at [compile time](https://en.wanweibaike.com/wiki-Compile_time). This is possible if the arguments to the function are known at **compile time**, and the function does not make any reference to or attempt to modify any **global state** (is a [pure function](https://en.wanweibaike.com/wiki-Pure_function)).
 
 ## 方式
 
@@ -38,7 +38,7 @@ TMP metaprogram可以以如下方式来实现compile time function execution:
 
 ## 发展概述
 
-C++的一个发展发现就是充分发挥compile-time computation。
+C++的一个发展趋势就是充分发挥compile-time computation。
 
 | feature                                                      | 引入版本 | 章节                                                         | 说明  |
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | ----- |
@@ -53,8 +53,6 @@ Compile time function execution给予了C++非常强大的灵活性、安全性�
 方式 1) `constexp` function 与 C++ program使用的是相同的language，定义、调用就像是普通C++ function，因此非常容易使用；它是更加接近于Python metaprogram的，因为Python metaprogram和Python program也是使用的相同的Python language。
 
 方式 2) TMP metaprogram，其实可以看做是使用的另外一种language，它的定义、调用都有着比较特殊grammar，不是非常容易使用，需要进行特殊的学习；
-
-
 
 
 

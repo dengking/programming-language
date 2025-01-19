@@ -22,7 +22,25 @@ polymorphism 的本质目的是选择 "best"，C++的static polymorphism让progr
 
 static reflection + optimization
 
-三、这是遵循的cppcoreguideline中的move runtime to compile time
+三、这是遵循 [CppCoreGuidelines Per.11: Move computation from run time to compile time](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rper-Comp)
+
+简而言之: move runtime to compile time
+
+```c++
+double square(double d) { return d * d; }
+
+static double s2 = square(2);    // old-style: dynamic initialization
+
+// assume 0 <= n
+constexpr double ntimes(double d, int n) {
+    double m = 1;
+    while (n--) m *= d;
+    return m;
+}
+
+constexpr double s3{ntimes(2, 3)};  // modern-style: compile-time initialization
+
+```
 
 
 
@@ -42,32 +60,30 @@ To make the [strong exception guarantee](https://en.cppreference.com/w/cpp/langu
 
 ```C++
 template<typename RspFieldType>
-struct RspFieldUnpackerBase: RspUnpackerBase
-{
+struct RspFieldUnpackerBase : RspUnpackerBase {
 private:
-	using BaseClass = RspUnpackerBase;
+    using BaseClass = RspUnpackerBase;
 protected:
-	RspFieldUnpackerBase(CRspMsg &RspMsg) :
-					BaseClass { RspMsg }
-	{
-		if (this->m_RspMsg.IsResponse()) 
-		{
-			this->m_Rsp = reinterpret_cast<RspFieldType*>(this->m_RspMsg.m_lpMsgReader->GetBizFixed());
-		}
-	}
-	RspFieldType *m_Rsp { nullptr };
+    RspFieldUnpackerBase(CRspMsg &RspMsg) :
+            BaseClass{RspMsg} {
+        if (this->m_RspMsg.IsResponse()) {
+            this->m_Rsp = reinterpret_cast<RspFieldType *>(this->m_RspMsg.m_lpMsgReader->GetBizFixed());
+        }
+    }
+
+    RspFieldType *m_Rsp{nullptr};
 public:
-	/**
-	 * @brief 获得响应字段
-	 *
-	 * @return
-	 */
-	RspFieldType* Get()
-	{
-		return this->m_Rsp;
-	}
+    /**
+     * @brief 获得响应字段
+     *
+     * @return
+     */
+    RspFieldType *Get() {
+        return this->m_Rsp;
+    }
 
 };
+
 /**
  * @brief 对response field进行解包
  *
@@ -75,49 +91,45 @@ public:
  * @tparam Enable
  */
 template<typename RspFieldType, typename Enable = void>
-struct RspFieldUnpacker: RspFieldUnpackerBase<RspFieldType>
-{
+struct RspFieldUnpacker : RspFieldUnpackerBase<RspFieldType> {
 private:
-	using BaseClass = RspFieldUnpackerBase<RspFieldType>;
+    using BaseClass = RspFieldUnpackerBase<RspFieldType>;
 public:
-	RspFieldUnpacker(CRspMsg &RspMsg) :
-					BaseClass { RspMsg }
-	{
-	}
+    RspFieldUnpacker(CRspMsg &RspMsg) :
+            BaseClass{RspMsg} {
+    }
 };
 
 template<typename RspFieldType>
-struct RspFieldUnpacker<RspFieldType, typename std::enable_if<has_member_ErrorMsg<RspFieldType>::value && has_member_ErrorID<RspFieldType>::value>::type> : virtual RspFieldUnpackerBase<RspFieldType>
-{
+struct RspFieldUnpacker<RspFieldType, typename std::enable_if<
+        has_member_ErrorMsg<RspFieldType>::value && has_member_ErrorID<RspFieldType>::value>::type>
+        : virtual RspFieldUnpackerBase<RspFieldType> {
 private:
-	using BaseClass = RspFieldUnpackerBase<RspFieldType>;
+    using BaseClass = RspFieldUnpackerBase<RspFieldType>;
 public:
-	RspFieldUnpacker(CRspMsg &RspMsg) :
-					BaseClass { RspMsg }
-	{
-		/**
-		 * 只有在ErrorID 非0，即存在错误的情况下，才进行转换
-		 */
-		if (m_RspField.ErrorID != 0)
-		{
-			/**
-			 * 需要进行一次deep copy
-			 */
-			m_RspField = *(this->m_Rsp);
-			int Ret = GbkToUtf8(this->m_Rsp->ErrorMsg, std::strlen(this->m_Rsp->ErrorMsg), m_RspField.ErrorMsg, sizeof(m_RspField.ErrorMsg));
-			if (Ret == 0)
-			{
-				LOG_DEBUG("GBK->UTF8转换成功");
-			}
-			else
-			{
-				LOG_ERROR("GBK->UTF8转换失败");
-			}
-			this->m_Rsp = &m_RspField;
-		}
-	}
+    RspFieldUnpacker(CRspMsg &RspMsg) :
+            BaseClass{RspMsg} {
+        /**
+         * 只有在ErrorID 非0，即存在错误的情况下，才进行转换
+         */
+        if (m_RspField.ErrorID != 0) {
+            /**
+             * 需要进行一次deep copy
+             */
+            m_RspField = *(this->m_Rsp);
+            int Ret = GbkToUtf8(this->m_Rsp->ErrorMsg, std::strlen(this->m_Rsp->ErrorMsg), m_RspField.ErrorMsg,
+                                sizeof(m_RspField.ErrorMsg));
+            if (Ret == 0) {
+                LOG_DEBUG("GBK->UTF8转换成功");
+            } else {
+                LOG_ERROR("GBK->UTF8转换失败");
+            }
+            this->m_Rsp = &m_RspField;
+        }
+    }
+
 private:
-	RspFieldType m_RspField;
+    RspFieldType m_RspField;
 };
 
 ```
