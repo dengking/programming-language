@@ -95,7 +95,7 @@ cppreference [Templates](https://en.cppreference.com/w/cpp/language/templates)�
 
 借助于Lazyness of template instantiation，我们可以实现conditional compiling，这在`C++\Idiom\Template-metaprogramming\SFINAE-trait-enable-if\SFINAE.md#SFINAE and conditional compiling`中进行了详细介绍。
 
-> NOTE: Lazyness of template instantiation让我联想到了维基百科[Type system#Static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)中关于`if <complex test> then <do something> else <signal that there is a type error>`的讨论，显然，它是一种run-time lazy；Lazyness of template instantiation是一种compile-time lazy。
+> NOTE: Lazyness of template instantiation让我联想到了wikipedia [Type system#Static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)中关于`if <complex test> then <do something> else <signal that there is a type error>`的讨论，显然，它是一种run-time lazy；Lazyness of template instantiation是一种compile-time lazy。
 
 #### CRTP
 
@@ -106,6 +106,8 @@ CRTP是充分运用Lazyness of template instantiation特性的，关于此在wik
 ## 完整的编译过程
 
 需要对template的完整的编译过程有一个高屋建瓴的理解，目前还没有遇到专门描述的文章；可以肯定的是：这个完整的过程，包含了前面描述的一些步骤，但是compiler需要考虑的问题，比上面描述的要多得多。下面是我总结的描述这个问题的内容: 
+
+0、template name lookup
 
 1、deduce 
 
@@ -125,19 +127,28 @@ CRTP是充分运用Lazyness of template instantiation特性的，关于此在wik
 
 在后面的"5 Example: riptutorial [C++ `void_t`](https://riptutorial.com/cplusplus/example/3778/void-t) "章节中，收录了这篇文章
 
+## 0 Template name lookup
+
+compiler对template的name lookup采用了特殊的策略，参见: 
+
+- [cppreference Two-phase name lookup](https://en.cppreference.com/w/cpp/language/two-phase_lookup)
+- [cppreference Dependent names](https://en.cppreference.com/w/cpp/language/dependent_name) 
+- [cppreference Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup) 
+
 ## 1 先deduce 然后 substitute
 
 “先deduce 然后 substitute”是我在阅读stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)时所总结的，显然它描述了compiler实现template的一个重要过程。
 
 ### Parameter-list and argument-list
 
-在cppreference中，并没有给出parameter-list、argument-list的专门定义，而是在**template syntax**中提及了它们，为了便于后面的描述，现对它们两者进行说明，下面是引用cppreference [Partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)中的描述:
+在cppreference中，并没有给出**parameter-list**、**argument-list**的专门定义，而是在**template syntax**中提及了它们，为了便于后面的描述，现对它们两者进行说明，下面是引用cppreference [Partial template specialization](https://en.cppreference.com/w/cpp/language/partial_specialization)中的描述:
 
 ```C++
-template < parameter-list > class-key class-head-name < argument-list > declaration
+template < parameter-list > 
+class-key class-head-name < argument-list > declaration
 ```
 
-从上面的描述可以看到：parameter-list、argument-list。
+从上面的描述可以看到：**parameter-list**、**argument-list**。
 
 
 
@@ -161,7 +172,7 @@ template < parameter-list > class-key class-head-name < argument-list > declarat
 
 ### Substitution: argument->parameter
 
-本节标题的含有是：将template argument 赋给 template parameter的过程，在C++ template的世界中，一般叫做 **substitution**。
+本节标题的含义是: 将 **template argument** 赋给 **template parameter** 的过程，在C++ template的世界中，一般叫做 **substitution**。
 
 substitution是compiler编译template的过程中的非常重要的一个环节，它其实就是template specialization过程；
 
@@ -178,17 +189,17 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 
 ## 2 Primary template and template specializaiton
 
-最最简单的情况是，仅仅存在**primary template**，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是：当存在多个specialization of template的时候，compiler如何选择set  of candidates中的哪个specialization of template进行instantiation？这就是“How dose compiler select from a set of candidates？”。
+最最简单的情况是，仅仅存在**primary template**，此时compiler仅仅根据primary template进行instantiation of template即可。比较复杂的情况是: 当存在多个specialization of template的时候，compiler如何选择set  of candidates中的哪个specialization of template进行instantiation？这就是“How dose compiler select from a set of candidates？”。
 
 这个过程还是比较复杂的，目前还没有遇到专门描述的文章。
 
 在stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)中有所涉及，下面是阅读该文章的一些总结：
 
-1、compiler会逐个substitute Primary Class Template、Specialized Class Template
+1、compiler会逐个substitute(替换) **Primary Class Template**、**Specialized Class Template**
 
-2、首先根据Primary Class Template的替换结果，得到**template parameter list**，然后使用它；
+2、首先根据**Primary Class Template**的替换结果，得到**template parameter list**，然后使用它；
 
-如果存在template specialization，则将根据Primary Class Template得到的**template parameter list**代入到template specialization中，如果template specialization能够匹配**template parameter list**，那么它就是一个有效的，在后面的比较中，会考虑这个template specialization。需要注意的是: compiler会根据**template parameter list**来推导出template specialization的template argument，这个过程非常重要( 典型的案例是 stackoverflow [Check if a class has a member function of a given signature](https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature) # [A](https://stackoverflow.com/a/16824239)  )。将template parameter list代入到template specialization中，然后进行匹配的过程，是需要结合具体的案例来进行理解的，后面的"案例学习: template specialization and trait"章节中，就收录非常具有代表性的例子。
+如果存在**template specialization**，则将根据**Primary Class Template**得到的**template parameter list**代入到**template specialization**中，如果**template specialization**能够匹配**template parameter list**，那么它就是一个有效的，在后面的比较中，会考虑这个template specialization。需要注意的是: compiler会根据**template parameter list**来推导出**template specialization**的**template argument list**，这个过程非常重要( 典型的案例是 stackoverflow [Check if a class has a member function of a given signature](https://stackoverflow.com/questions/87372/check-if-a-class-has-a-member-function-of-a-given-signature) # [A](https://stackoverflow.com/a/16824239)  )。将template parameter list代入到template specialization中，然后进行匹配的过程，是需要结合具体的案例来进行理解的，后面的"案例学习: template specialization and trait"章节中，就收录非常具有代表性的例子。
 
 3、优先级顺序是: Specialized Class Template specialization > Primary Class Template specialization，即compiler会优先选择 "Specialized Class Template specialization"，这就是一次多态
 
@@ -200,7 +211,7 @@ substitution是compiler编译template的过程中的非常重要的一个环节�
 
 #### cppreference [Partial template specialization#Name lookup](https://en.cppreference.com/w/cpp/language/partial_specialization#Name_lookup)
 
-Partial template specializations are not found by name lookup. Only if the primary template is found by name lookup, its partial specializations are considered. In particular, a `using` declaration that makes a primary template visible, makes partial specializations visible as well.
+**Partial template specializations** are not found by **name lookup**. Only if the **primary template** is found by name lookup, its **partial specializations** are considered. In particular, a `using` declaration that makes a **primary template** visible, makes **partial specializations** visible as well.
 
 > NOTE: 上面这段话的意思，翻译为白话就是: compiler只有在看见了primary template的时候，才会考虑partial template specialization，因此可以认为，partial template specialization是primary template的附庸，在素材: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work)中还会涉及到这个问题。
 
@@ -209,37 +220,30 @@ Partial template specializations are not found by name lookup. Only if the prima
 ```c++
 #include<iostream>
 
-namespace N
-{
-// primary template
-template<class T1, class T2> class Z
-{
-public:
-	Z()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
-};
-
+namespace N {
+    // primary template
+    template<class T1, class T2>
+    class Z {
+    public:
+        Z() {
+            std::cout << __PRETTY_FUNCTION__ << std::endl;
+        }
+    };
 }
 using N::Z; // refers to the primary template
-namespace N
-{
-// partial specialization    
-template<class T> class Z<T, T*>
-{
-public:
-	Z()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
-};
-
+namespace N {
+    // partial specialization
+    template<class T>
+    class Z<T, T *> {
+    public:
+        Z() {
+            std::cout << __PRETTY_FUNCTION__ << std::endl;
+        }
+    };
 }
-Z<int, int*> z; // name lookup finds N::Z (the primary template),
-				// the partial specialization with T = int is then used
-int main()
-{
+Z<int, int *> z; // name lookup finds N::Z (the primary template),
+// the partial specialization with T = int is then used
+int main() {
 
 }
 // g++ test.cpp
@@ -262,101 +266,94 @@ int main()
 
 When a class or variable (since C++14) template is instantiated, and there are partial specializations available, the compiler has to decide if the **primary template** is going to be used or one of its **partial specializations**.
 
-1) If only one specialization matches the template arguments, that specialization is used
+1) If only one **specialization** matches the **template arguments**, that **specialization** is used 
 
-2) If more than one specialization matches, partial order rules are used to determine which specialization is more **specialized**. The most specialized specialization is used, if it is unique (if it is not unique, the program cannot be compiled)
+2) If more than one **specialization** matches, **partial order rules** are used to determine which **specialization** is more **specialized**. The most specialized specialization is used, if it is unique (if it is not unique, the program cannot be compiled) 
 
-3) If no specializations match, the primary template is used
+3) If no **specializations** match, the **primary template** is used 
 
 ```C++
 // primary template
 template<class T1, class T2, int I>
-class A
-{
+class A {
 };
 
 // #1: partial specialization where T2 is a pointer to T1
 template<class T, int I>
-class A<T, T*, I>
-{
+class A<T, T *, I> {
 };
 
 // #2: partial specialization where T1 is a pointer
 template<class T, class T2, int I>
-class A<T*, T2, I>
-{
+class A<T *, T2, I> {
 };
 
 // #3: partial specialization where T1 is int, I is 5,
 //     and T2 is a pointer
 template<class T>
-class A<int, T*, 5>
-{
+class A<int, T *, 5> {
 };
 
 // #4: partial specialization where T2 is a pointer
 template<class X, class T, int I>
-class A<X, T*, I>
-{
+class A<X, T *, I> {
 };
-int main()
-{
-	// given the template A as defined above
-	A<int, int, 1> a1;   // no specializations match, uses primary template
-	A<int, int*, 1> a2;  // uses partial specialization #1 (T=int, I=1)
-	A<int, char*, 5> a3; // uses partial specialization #3, (T=char)
-	A<int, char*, 1> a4; // uses partial specialization #4, (X=int, T=char, I=1)
-	// A<int*, int*, 2> a5; // error: matches #2 (T=int, T2=int*, I=2)
-						 //        matches #4 (X=int*, T=int, I=2)
-						 // neither one is more specialized than the other
+
+int main() {
+    // given the template A as defined above
+    A<int, int, 1> a1;   // no specializations match, uses primary template
+    A<int, int *, 1> a2;  // uses partial specialization #1 (T=int, I=1)
+    A<int, char *, 5> a3; // uses partial specialization #3, (T=char)
+    A<int, char *, 1> a4; // uses partial specialization #4, (X=int, T=char, I=1)
+    // A<int*, int*, 2> a5; // error: matches #2 (T=int, T2=int*, I=2)
+    //        matches #4 (X=int*, T=int, I=2)
+    // neither one is more specialized than the other
 }
 // g++ test.cpp
 
 ```
 
-
-
 Informally "A is more specialized than B" means "A accepts a subset of the types that B accepts".
 
-Formally, to establish **more-specialized-than relationship** between partial specializations, each is first converted to a fictitious function template as follows:
+Formally, to establish **more-specialized-than relationship** between **partial specializations**, each is first converted to a **fictitious function template** as follows:
 
-1、the first function template has the same template parameters as the first partial specialization and has just one function parameter, whose type is a class template specialization with all the template arguments from the first partial specialization
+1、the first **function template** has the same **template parameters** as the first **partial specialization** and has just one **function parameter** whose type is a **class template specialization** with all the template arguments from the first partial specialization
 
-2、the second function template has the same template parameters as the second partial specialization and has just one function parameter whose type is a class template specialization with all the template arguments from the second partial specialization.
+2、the second **function template** has the same **template parameters** as the second **partial specialization** and has just one **function parameter** whose type is a **class template specialization** with all the template arguments from the second partial specialization.
 
-The function templates are then ranked as if for [function template overloading](https://en.cppreference.com/w/cpp/language/function_template#Function_template_overloading).
+The **function templates** are then ranked as if for [function template overloading](https://en.cppreference.com/w/cpp/language/function_template#Function_template_overloading).
 
 ```c++
 #include <iostream>
+
 // primary template
-template<int I, int J, class T> struct X
-{
+template<int I, int J, class T>
+struct X {
 };
 // partial specialization #1
-template<int I, int J> struct X<I, J, int>
-{
-	static const int s = 1;
+template<int I, int J>
+struct X<I, J, int> {
+    static const int s = 1;
 };
 // fictitious function template for #1 is
 // template<int I, int J> void f(X<I, J, int>); #A
 
 // partial specialization #2
-template<int I> struct X<I, I, int>
-{
-	static const int s = 2;
+template<int I>
+struct X<I, I, int> {
+    static const int s = 2;
 };
 // fictitious function template for #2 is
 // template<int I>        void f(X<I, I, int>); #B
 
-int main()
-{
-	X<2, 2, int> x; // both #1 and #2 match
+int main() {
+    X<2, 2, int> x; // both #1 and #2 match
 // partial ordering for function templates:
 // #A from #B: void(X<I,J,int>) from void(X<U1, U1, int>): deduction ok
 // #B from #A: void(X<I,I,int>) from void(X<U1, U2, int>): deduction fails
 // #B is more specialized
 // #2 is the specialization that is instantiated
-	std::cout << x.s << '\n'; // prints 2
+    std::cout << x.s << '\n'; // prints 2
 }
 // g++ test.cpp
 
@@ -374,25 +371,22 @@ int main()
 #include <iostream>
 
 template<typename T>
-struct is_pointer
-{
-	static const bool value = false;
+struct is_pointer {
+    static const bool value = false;
 };
 
 template<typename T>
-struct is_pointer<T*>
-{
-	static const bool value = true;
+struct is_pointer<T *> {
+    static const bool value = true;
 };
 
-int main()
-{
-	// for any type T other than void, the
-	// class is derived from false_type
-	std::cout << is_pointer<char>::value << '\n';
-	// but when T is void, the class is derived
-	// from true_type
-	std::cout << is_pointer<void*>::value << '\n';
+int main() {
+    // for any type T other than void, the
+    // class is derived from false_type
+    std::cout << is_pointer<char>::value << '\n';
+    // but when T is void, the class is derived
+    // from true_type
+    std::cout << is_pointer<void *>::value << '\n';
 }
 
 ```

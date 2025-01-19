@@ -22,13 +22,13 @@ int main()
 >
 > template 42
 
-What do you think a call to `foo(42)` would print? The answer is `"template 42"`, and the reason for this is that integer literals are signed by default (they only become unsigned with the `U` suffix).
+What do you think a call to `foo(42)` would print? The answer is `"template 42"`, and the reason for this is that integer literals are **signed** by default (they only become unsigned with the `U` suffix).
 
 ## SFINAE
 
 The standard states:
 
-> If a substitution results in an invalid type or expression, type deduction fails. An invalid type or expression is one that would be ill-formed if written using the **substituted arguments**. Only invalid types and expressions in the **immediate context** of the function type and its template parameter types can result in a **deduction failure**.
+> If a substitution results in an invalid type or expression, **type deduction** fails. An invalid type or expression is one that would be ill-formed if written using the **substituted arguments**. Only invalid types and expressions in the **immediate context** of the **function type** and its **template parameter types** can result in a **deduction failure**.
 
 > NOTE: 上面这段话的意思是：如果使用模板实参（**substituted arguments**）替换模板形参而生成的code是ill-formed的，那么这就是invalid type or expression。在上一篇的[The enable_if templates](https://www.boost.org/doc/libs/1_73_0/libs/core/doc/html/core/enable_if.html#core.enable_if.the_enable_if_templates)中对此进行了介绍
 
@@ -43,7 +43,7 @@ void negate(const T& t) {
 }
 ```
 
-If **type deduction** matches this overload for some fundamental type, we'll actually get a compile error due to the `T::value_type` inside the function body. This is outside of the "immediate context of the function type and its template parameter types" mentioned by the standard. The lesson here is that if we want to write a template that only makes sense for some types, we must make it fail deduction for invalid types right in the declaration, to cause substitution failure. If the invalid type sneaks past the overload candidate selection phase, the program won't compile.
+If **type deduction** matches this overload for some **fundamental type**, we'll actually get a compile error due to the `T::value_type` inside the function body. This is outside of the "immediate context of the function type and its template parameter types" mentioned by the standard. The lesson here is that if we want to write a template that only makes sense for some types, we must make it fail deduction for invalid types right in the **declaration**, to cause **substitution failure**. If the invalid type sneaks past the overload candidate selection phase, the program won't compile.
 
 > NOTE: 上面这段话没有搞得很懂，但是它的意思大概是：Only invalid types and expressions in the **immediate context** of the function type and its template parameter types can result in a **deduction failure**，所以如果we want to write a template that only makes sense for some types, we must make it fail deduction for invalid types right in the declaration, to cause substitution failure. If the invalid type sneaks past the overload candidate selection phase, the program won't compile. 关于如何实现这个，在下一段中对此进行了介绍：
 
@@ -114,7 +114,7 @@ void do_stuff(T& t) {
 
 ## Uses of `enable_if`
 
-`enable_if` is an extremely useful tool. There are hundreds of references to it in the C++11 standard template library. It's so useful because it's a key part in using *type traits*, a way to restrict templates to types that have certain properties. Without `enable_if`, templates are a rather blunt "catch-all" tool. If we define a function with a template argument, this function will be invoked on all possible types. Type traits and `enable_if` let us create different functions that act on different kinds of types, while still remaining generic [[3\]](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/#id7).
+`enable_if` is an extremely useful tool. There are hundreds of references to it in the C++11 standard template library. It's so useful because it's a key part in using *type traits*, a way to restrict templates to types that have certain properties. Without `enable_if`, templates are a rather blunt(迟钝的) "catch-all" tool. If we define a function with a template argument, this function will be invoked on all possible types. Type traits and `enable_if` let us create different functions that act on different kinds of types, while still remaining generic [[3\]](https://eli.thegreenplace.net/2014/sfinae-and-enable_if/#id7).
 
 One usage example I like is the two-argument constructor of `std::vector`:
 
