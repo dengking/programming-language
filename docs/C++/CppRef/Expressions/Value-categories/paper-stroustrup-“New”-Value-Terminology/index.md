@@ -165,7 +165,7 @@ C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，
 
 引入了xvalue的概念，xvalue既可以归入glvalue，也可以归入rvalue，通过`std::move`，programmer告诉compiler将其当做rvalue来使用，以充分发挥**move semantic**。
 
-为了支持上述的转换: 将xvalue作为rvalue来使用，C++添加了reference collapsing规则（在`C++\Language-reference\Reference`中对这些规则进行了详细介绍）；
+为了支持上述的转换: 将xvalue作为rvalue来使用，C++添加了**reference collapsing(折叠)**规则（在`C++\Language-reference\Reference`中对这些规则进行了详细介绍）；
 
 需要注意的是：C++中，只允许programmer**引用**rvalue。
 

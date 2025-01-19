@@ -1,4 +1,4 @@
-# 关于本章
+# Reference
 
 本章描述C++ reference。其中重点描述C++11的新特性：
 
@@ -21,7 +21,7 @@
 
 ## Reference and value category and const
 
-在stackoverflow [What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics)的[回答](https://stackoverflow.com/a/11540204)中的总结：
+在 stackoverflow [What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics) # [A](https://stackoverflow.com/a/11540204) 中的总结：
 
 ```c++
             lvalue   const lvalue   rvalue   const rvalue
@@ -44,18 +44,18 @@ const X&&                           yes      yes
 
 ```C++
 #include<iostream>
-using std::cout;
-using std::endl;
-void print(int &a)
-{
-	cout << a << endl;
+
+using namespace std;
+
+void print(int &a) {
+    cout << a << endl;
 }
-int main()
-{
-	int a = 10;
-	const int &ra = a;
-	print(ra); //传入常左值引用
-	return 0;
+
+int main() {
+    int a = 10;
+    const int &ra = a;
+    print(ra); //传入常左值引用
+    return 0;
 }
 // g++ test.cpp
 
@@ -77,18 +77,18 @@ test.cpp:4:6: 错误：在传递‘void print(int&)’的第 1 个实参时
 
 ```C++
 #include<iostream>
-using std::cout;
-using std::endl;
-void print(const int &a)
-{
-	cout << a << endl;
+
+using namespace std;
+
+void print(const int &a) {
+    cout << a << endl;
 }
-int main()
-{
-	int a = 10;
-	const int &ra = a;
-	print(ra); //传入常左值引用
-	return 0;
+
+int main() {
+    int a = 10;
+    const int &ra = a;
+    print(ra); //传入常左值引用
+    return 0;
 }
 // g++ test.cpp
 
