@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Type-alias: Type-alias
-    - Template-alias: Template-alias
+    - Type-alias&alias-template: Type-alias&alias-template
+    

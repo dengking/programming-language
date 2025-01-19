@@ -216,8 +216,6 @@ namespace nlohmann {
 
 
 
-
-
 ### C++17 [alias templates](https://en.cppreference.com/w/cpp/language/type_alias) 
 
 ```C++
