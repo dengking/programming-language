@@ -46,28 +46,27 @@ SFINAE 是 compiler 编译机制(或者说: 原理)，它保证了compiler会对
 
 ```c++
 #include <iostream>
-struct Test
-{
-	typedef int foo;
+
+struct Test {
+    typedef int foo;
 };
+
 // Definition #1
 template<typename T>
-void f(typename T::foo)
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-}
-// Definition #2
-template<typename T>
-void f(T)
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+void f(typename T::foo) {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
-int main()
-{
-	f<Test>(10);  // Call #1.
-	f<int>(10);   // Call #2. Without error (even though there is no int::foo)
-				  // thanks to SFINAE.
+// Definition #2
+template<typename T>
+void f(T) {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+
+int main() {
+    f<Test>(10);  // Call #1.
+    f<int>(10);   // Call #2. Without error (even though there is no int::foo)
+    // thanks to SFINAE.
 }
 // g++ test.cpp
 ```
@@ -82,47 +81,46 @@ int main()
 >
 > 
 
-Although SFINAE was initially introduced to avoid creating ill-formed programs when unrelated template declarations were visible (e.g., through the inclusion of a header file), many developers later found the behavior useful for **compile-time introspection**. Specifically, it allows a template to determine certain properties of its **template arguments** at instantiation time.
+Although SFINAE was initially introduced to avoid creating ill-formed programs when unrelated template declarations were visible (e.g., through the inclusion of a header file), many developers later found the behavior useful for **compile-time introspection**. Specifically, it allows a template to determine certain properties of its **template arguments** at **instantiation** time.
 
 > NOTE: 
 >
 > 1、**compile-time introspection**是C++20的[concept](https://en.cppreference.com/w/cpp/language/constraints)所要解决的。
 >
 > 2、static reflection
+>
+> 3、发生在template instantiation?
 
 ```c++
 #include <iostream>
 
 template<typename T>
-struct has_typedef_foobar
-{
-	// Types "yes" and "no" are guaranteed to have different sizes,
-	// specifically sizeof(yes) == 1 and sizeof(no) == 2.
-	typedef char yes[1];
-	typedef char no[2];
+struct has_typedef_foobar {
+    // Types "yes" and "no" are guaranteed to have different sizes,
+    // specifically sizeof(yes) == 1 and sizeof(no) == 2.
+    typedef char yes[1];
+    typedef char no[2];
 
-	template<typename C>
-	static yes& test(typename C::foobar*);
+    template<typename C>
+    static yes &test(typename C::foobar *);
 
-	template<typename >
-	static no& test(...);
+    template<typename>
+    static no &test(...);
 
-	// If the "sizeof" of the result of calling test<T>(nullptr) is equal to
-	// sizeof(yes), the first overload worked and T has a nested type named
-	// foobar.
-	static const bool value = sizeof(test<T>(nullptr)) == sizeof(yes);
+    // If the "sizeof" of the result of calling test<T>(nullptr) is equal to
+    // sizeof(yes), the first overload worked and T has a nested type named
+    // foobar.
+    static const bool value = sizeof(test<T>(nullptr)) == sizeof(yes);
 };
 
-struct foo
-{
-	typedef float foobar;
+struct foo {
+    typedef float foobar;
 };
 
-int main()
-{
-	std::cout << std::boolalpha;
-	std::cout << has_typedef_foobar<int>::value << std::endl;  // Prints false
-	std::cout << has_typedef_foobar<foo>::value << std::endl;  // Prints true
+int main() {
+    std::cout << std::boolalpha;
+    std::cout << has_typedef_foobar<int>::value << std::endl;  // Prints false
+    std::cout << has_typedef_foobar<foo>::value << std::endl;  // Prints true
 }
 // g++ --std=c++11 test.cpp
 
@@ -146,25 +144,21 @@ template<typename ... Ts>
 using void_t = void;
 
 template<typename T, typename = void>
-struct has_typedef_foobar: std::false_type
-{
+struct has_typedef_foobar : std::false_type {
 };
 
 template<typename T>
-struct has_typedef_foobar<T, void_t<typename T::foobar>> : std::true_type
-{
+struct has_typedef_foobar<T, void_t<typename T::foobar>> : std::true_type {
 };
 
-struct foo
-{
-	using foobar = float;
+struct foo {
+    using foobar = float;
 };
 
-int main()
-{
-	std::cout << std::boolalpha;
-	std::cout << has_typedef_foobar<int>::value << std::endl;
-	std::cout << has_typedef_foobar<foo>::value << std::endl;
+int main() {
+    std::cout << std::boolalpha;
+    std::cout << has_typedef_foobar<int>::value << std::endl;
+    std::cout << has_typedef_foobar<foo>::value << std::endl;
 }
 // g++ --std=c++11 test.cpp
 
