@@ -391,7 +391,7 @@ int main() {
 
 ```
 
-1、`is_pointer<void*>` 根据 primary template 得到的 template parameter list是: `void*`
+1、`is_pointer<void*>` 根据 primary template 得到的 template parameter list 是: `void*`
 
 2、将template parameter list `void*` 代入到template specialization中，能够正常匹配因此，这个specialization是一个有效的specialization。
 
@@ -406,30 +406,28 @@ struct is_pointer<T*>
 
 ```C++
 #include<type_traits>
+
 template<class T>
-struct is_member_function_pointer_helper: std::false_type
-{
+struct is_member_function_pointer_helper : std::false_type {
 };
 
 template<class T, class U>
-struct is_member_function_pointer_helper<T U::*> : std::is_function<T>
-{
+struct is_member_function_pointer_helper<T U::*> : std::is_function<T> {
 };
 
 template<class T>
-struct is_member_function_pointer: is_member_function_pointer_helper<typename std::remove_cv<T>::type>
-{
+struct is_member_function_pointer : is_member_function_pointer_helper<typename std::remove_cv<T>::type> {
 };
+
 class A {
 public:
-    void member() { }
+    void member() {}
 };
- 
-int main()
-{
+
+int main() {
     // fails at compile time if A::member is a data member and not a function
     static_assert(std::is_member_function_pointer<decltype(&A::member)>::value,
-                  "A::member is not a member function."); 
+                  "A::member is not a member function.");
 }
 ```
 
@@ -448,51 +446,45 @@ int main()
 // We could leave it undefined if we didn't care.
 
 template<typename, typename T>
-struct has_serialize
-{
-	static_assert(std::integral_constant<T, false>::value, "Second template parameter needs to be of function type.");
+struct has_serialize {
+    static_assert(std::integral_constant<T, false>::value, "Second template parameter needs to be of function type.");
 };
 
 // specialization that does the checking
 template<typename C, typename Ret, typename ... Args>
-struct has_serialize<C, Ret(Args...)>
-{
+struct has_serialize<C, Ret(Args...)> {
 private:
-	template<typename T>
-	static constexpr auto check(T*) -> typename
-	std::is_same<
-	decltype( std::declval<T>().serialize( std::declval<Args>()... ) ),
-	Ret    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-					>::type;// attempt to call it and see if the return type is correct
+    template<typename T>
+    static constexpr auto check(T *) -> typename
+    std::is_same<
+            decltype(std::declval<T>().serialize(std::declval<Args>()...)),
+            Ret    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    >::type;// attempt to call it and see if the return type is correct
 
-	template<typename >
-	static constexpr std::false_type check(...);
+    template<typename>
+    static constexpr std::false_type check(...);
 
-	typedef decltype(check<C>(0)) type;
+    typedef decltype(check<C>(0)) type;
 
 public:
-	static constexpr bool value = type::value;
+    static constexpr bool value = type::value;
 };
 
-struct X
-{
-	int serialize(const std::string&)
-	{
-		return 42;
-	}
+struct X {
+    int serialize(const std::string &) {
+        return 42;
+    }
 };
 
-struct Y: X
-{
+struct Y : X {
 };
 
-struct Z
-{
+struct Z {
 };
-int main()
-{
-	std::cout << has_serialize<Y, int(const std::string&)>::value << std::endl; // will print 1
-	std::cout << has_serialize<Z, int(const std::string&)>::value << std::endl; // will print 1
+
+int main() {
+    std::cout << has_serialize<Y, int(const std::string &)>::value << std::endl; // will print 1
+    std::cout << has_serialize<Z, int(const std::string &)>::value << std::endl; // will print 1
 }
 // g++ --std=c++11 test.cpp
 
@@ -522,7 +514,7 @@ SFINAE是C++ template的重要机制，在`SFINAE`章节中对SFINAE进行了深
 
 ## 4 Example: stackoverflow [How does `void_t` work](https://stackoverflow.com/questions/27687389/how-does-void-t-work) # [A](https://stackoverflow.com/a/27688405)
 
-> 這是我在学习`void_t`的实现的時候，遇到的一篇讲解的比较详细的、涉及template的实现的文章，我覺得非常好，遂收录在此。它结合了一个具体的案例对这个过程进行描述，非常好。
+> 这是我在学习`void_t`的实现的时候，遇到的一篇讲解的比较详细的、涉及template的实现的文章，我覺得非常好，遂收录在此。它结合了一个具体的案例对这个过程进行描述，非常好。
 
 
 
@@ -531,32 +523,29 @@ Given a simple **variable template** that evaluates to `void` if all template ar
 ```c++
 #include <type_traits> // std::true_type
 
-template<class ... >
+template<class ...>
 using void_t = void;
 // primary template
 template<class, class = void>
-struct has_member: std::false_type
-{
+struct has_member : std::false_type {
 };
 
 // specialized as has_member< T , void > or discarded (sfinae)
 template<class T>
-struct has_member<T, void_t<decltype( T::member )> > : std::true_type
-{
-};
-class A
-{
-public:
-	int member;
+struct has_member<T, void_t<decltype(T::member)> > : std::true_type {
 };
 
-class B
-{
+class A {
+public:
+    int member;
 };
-int main()
-{
-	static_assert( has_member< A >::value , "A" );
-	static_assert( has_member< B >::value , "B" );
+
+class B {
+};
+
+int main() {
+    static_assert(has_member<A>::value, "A");
+    static_assert(has_member<B>::value, "B");
 }
 
 // g++ --std=c++11 test.cpp
@@ -703,7 +692,7 @@ cppreference [Constraints and concepts (since C++20)](https://en.cppreference.co
 
 > Violations of constraints are detected at compile time, early in the template instantiation process, which leads to easy to follow error messages
 
-## TO READ
+## See also
 
 bytefreaks [C++: “undefined reference to” templated class function](https://bytefreaks.net/programming-2/c/c-undefined-reference-to-templated-class-function)
 
@@ -733,7 +722,7 @@ https://accu.org/index.php/journals/427
 
 
 
-为了便于区分，primary template、Specialized template
+为了便于区分，primary template、specialized template
 
 compiler肯定会substitute所有的template，替换后的的template叫什么名字？叫做specialization of  template
 
