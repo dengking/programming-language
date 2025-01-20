@@ -101,7 +101,7 @@ b、`C++\Pattern\Visitor-pattern`
 
 ### OOP interface+template implementation
 
-
+TODO: [CppCoreGuidelines T.5: Combine generic and OO techniques to amplify(放大) their strengths, not their costs](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#t5-combine-generic-and-oo-techniques-to-amplify-their-strengths-not-their-costs) 中给出了例子
 
 ## External Polymorphism and Internal Polymorphism
 

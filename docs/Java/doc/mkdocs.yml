@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - JProfiler: JProfiler
+    - Java-agent: Java-agent
     

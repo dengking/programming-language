@@ -35,6 +35,8 @@ class ConcreteCommand : public Command {
 > 上述模式的tag-OOP-interface+template-implementation=virtual-base+template-derived-subclass，下面是它的use case:
 >
 > - type erasure
+>
+> 上面这段话中的static polymorphism指的是template class `ConcreteCommand` 
 
 ##### Example
 
