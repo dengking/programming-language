@@ -6,7 +6,7 @@
 
 ## wikipedia [Curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
 
-The **curiously recurring template pattern** (**CRTP**) is an idiom in [C++](https://en.wikipedia.org/wiki/C%2B%2B) in which a class `X` derives from a class [template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)) instantiation using `X` itself as template argument.[[1\]](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#cite_note-1) More generally it is known as **F-bound polymorphism**, and it is a form of [*F*-bounded quantification](https://en.wikipedia.org/wiki/F-bounded_quantification).
+The **curiously recurring template pattern** (**CRTP**) is an idiom in [C++](https://en.wikipedia.org/wiki/C%2B%2B) in which a class `X` derives from a class [template](https://en.wikipedia.org/wiki/Template_(C%2B%2B)) instantiation using `X` itself as template argument.[[1\]](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#cite_note-1) More generally it is known as **F-bound polymorphism**, and it is a form of [*F*-bounded quantification(量化)](https://en.wikipedia.org/wiki/F-bounded_quantification).
 
 > NOTE: 关于 **F-bound polymorphism**，参见 `Theory\Programming-paradigm\Generic-programming\Implementation\Type-requirement\Generics` 章节。
 
@@ -14,15 +14,14 @@ The **curiously recurring template pattern** (**CRTP**) is an idiom in [C++](htt
 
 ```C++
 // The Curiously Recurring Template Pattern (CRTP)
-template <class T>
-class Base
-{
+template<class T>
+class Base {
     // methods within Base can use template to access members of Derived
 };
-class Derived : public Base<Derived>
-{
+class Derived : public Base<Derived> {
     // ...
 };
+
 ```
 
 
@@ -35,40 +34,30 @@ Typically, the base class template will take advantage of the fact that **member
 #include <iostream>
 
 template<class T>
-struct Base
-{
-	void interface()
-	{
-		// ...
-		static_cast<T*>(this)->implementation();
-		// ...
-	}
+struct Base {
+    void interface() {
+        // ...
+        static_cast<T *>(this)->implementation();
+        // ...
+    }
 
-	static void static_func()
-	{
-		// ...
-		T::static_sub_func();
-		// ...
-	}
+    static void static_func() {
+        // ...
+        T::static_sub_func();
+        // ...
+    }
 };
 
-struct Derived: Base<Derived>
-{
-	void implementation()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
-	static void static_sub_func()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
+struct Derived : Base<Derived> {
+    void implementation() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
+    static void static_sub_func() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
 };
-int main()
-{
-	Derived d;
 
-	d.interface();
-	d.static_sub_func();
+int main() {
+    Derived d;
+
+    d.interface();
+    d.static_sub_func();
 }
 // g++ test.cpp
 
@@ -82,9 +71,11 @@ int main()
 >
 > 上述`static_cast<T*>(this)`对应的是cppreference [static_cast conversion](https://en.cppreference.com/w/cpp/language/static_cast)中的`2)`。
 
-In the above example, note in particular that the function `Base<Derived>::interface()`, though *declared* before the existence of the `struct Derived` is known by the compiler (i.e., before `Derived` is declared), is not actually *instantiated* by the compiler until it is actually ***called*** by some later code which occurs ***after*** the declaration of `Derived` (not shown in the above example), so that at the time the function "`implementation`" is **instantiated**, the declaration of `Derived::implementation()` is known.
+In the above example, note in particular that the function `Base<Derived>::interface()`, though ***declared*** before the existence of the `struct Derived` is known by the compiler (i.e., before `Derived` is declared), is not actually *instantiated* by the compiler until it is actually ***called*** by some later code which occurs ***after*** the declaration of `Derived` (not shown in the above example), so that at the time the function "`implementation`" is **instantiated**, the declaration of `Derived::implementation()` is known.
 
 > NOTE: 
+>
+> 尽管在 `Base<Derived>::interface()` 中使用了在它之后声明的 `struct Derived`  中的方法，实际上它直到被调用的时候compiler才会实例化它
 >
 > CRTP是充分运用compiler的:
 >
@@ -92,7 +83,7 @@ In the above example, note in particular that the function `Base<Derived>::inter
 >
 > 关于"Lazyness of template instantiation"特性，参见 `C++\Language-reference\Template\Implementation` 章节
 >
-> 2) optimization原则: 当compiler instance `interface()` member method的时候，它已经知道了`Derived` 的完整的type info，所以compiler会选择`Derived`的implementation。
+> 2) optimization原则: 当compiler instantiate `interface()` member method的时候，它已经知道了`Derived` 的完整的type info，所以compiler会选择`Derived`的implementation。
 >
 > 关于 optimization原则，参见 `C-and-C++\From-source-code-to-exec\Compile\Optimization` 章节。
 >
@@ -116,56 +107,50 @@ However, if base class member functions use CRTP for all member function calls, 
 #include <iostream>
 
 template<typename T>
-struct counter
-{
-	static int objects_created;
-	static int objects_alive;
+struct counter {
+    static int objects_created;
+    static int objects_alive;
 
-	counter()
-	{
+    counter() {
 
-		++objects_created;
-		++objects_alive;
-		std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
-	}
+        ++objects_created;
+        ++objects_alive;
+        std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
+    }
 
-	counter(const counter&)
-	{
+    counter(const counter &) {
 
-		++objects_created;
-		++objects_alive;
-		std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
-	}
+        ++objects_created;
+        ++objects_alive;
+        std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
+    }
+
 protected:
-	~counter() // objects should never be removed through pointers of this type
-	{
-		--objects_alive;
-		std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
-	}
+    ~counter() // objects should never be removed through pointers of this type
+    {
+        --objects_alive;
+        std::cout << __PRETTY_FUNCTION__ << " " << objects_created << " " << objects_alive << std::endl;
+    }
 };
-template<typename T> int counter<T>::objects_created(0);
-template<typename T> int counter<T>::objects_alive(0);
+template<typename T>
+int counter<T>::objects_created(0);
+template<typename T>
+int counter<T>::objects_alive(0);
 
-class X: counter<X>
-{
-	// ...
-};
-
-class Y: counter<Y>
-{
-	// ...
+class X : counter<X> {
+    // ...
 };
 
-int main()
-{
-	{
-		X x1, x2, x3, x4, x5;
-	}
-	{
-		Y y1, y2, y3, y4, y5;
-	}
+class Y : counter<Y> {
+    // ...
+};
+
+int main() {
+    { X x1, x2, x3, x4, x5; }
+    { Y y1, y2, y3, y4, y5; }
 }
 // g++ test.cpp
+
 ```
 
 > NOTE: 上述程序的输出:
@@ -561,40 +546,31 @@ d、.....
 ### Factory method
 
 ```c++
+#include <utility>
 template<typename DerivedClass>
-class CUstApiMixin
-{
+class CUstApiMixin {
 public:
-	/**
-	 * 工厂方法
-	 * @param WorkDir
-	 * @return
-	 */
-	template<typename ...Args>
-	static DerivedClass* Factory(Args &&...args)
-	{
-		return new DerivedClass(std::forward<Args>(args)...);
-	}
+    /**
+     * 工厂方法
+     * @param WorkDir
+     * @return
+     */
+    template<typename... Args>
+    static DerivedClass *Factory(Args &&...args) {
+        return new DerivedClass(std::forward<Args>(args)...);
+    }
 };
 ```
 
 
 
-## fluentcpp [The Curiously Recurring Template Pattern (CRTP)](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)
+## See also
 
+fluentcpp [The Curiously Recurring Template Pattern (CRTP)](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/) 
 
-
-
-
-
-
-## TO READ
-
-
+https://stackoverflow.com/a/4173298 
 
 这个回答中的例子非常好
-
-https://stackoverflow.com/a/4173298
 
 https://www.geeksforgeeks.org/curiously-recurring-template-pattern-crtp-2/
 
