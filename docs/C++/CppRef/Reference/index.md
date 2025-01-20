@@ -7,15 +7,15 @@
 
 本章，采用的是在`Theory\Programming-language\How-to-master-programming-language`的”What's new in the programming language“章节中描述的方法来学习这两个新特性：
 
-1、rvalue reference用于move semantic；
+1、**rvalue reference**用于**move semantic**；
 
-2、forwarding reference用于perfect forwarding；
+2、**forwarding reference**用于**perfect forwarding**；
 
 这两个特性，为C++语言带来了较大的改变。
 
 
 
-本章先描述perfect forwarding，然后描述move semantic，因为在move semantic会涉及perfect forwarding中的内容，然后描述cppreference中关于reference的描述；
+本章先描述**perfect forwarding**，然后描述**move semantic**，因为在move semantic会涉及perfect forwarding中的内容，然后描述cppreference中关于reference的描述；
 
 
 
@@ -115,17 +115,13 @@ Sub(int ReSubTimes, std::chrono::seconds& ReSubInterval)
 
 ```c++
 #include<chrono>
-void Sub(int ReSubTimes, std::chrono::seconds& ReSubInterval)
-{
 
+void Sub(int ReSubTimes, std::chrono::seconds &ReSubInterval) {}
 
-}
-
-int main(){
-std::chrono::seconds t(3);
-Sub(3,t);
-Sub(3,std::chrono::seconds(3));
-
+int main() {
+    std::chrono::seconds t(3);
+    Sub(3, t);
+    Sub(3, std::chrono::seconds(3));
 }
 ```
 
@@ -145,8 +141,6 @@ test.cpp:2:6: 错误：在传递‘void Sub(int, std::chrono::seconds&)’的第
 
 
 
-
-
 ## Rvalue reference VS forwarding reference
 
 [cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes):
@@ -160,5 +154,9 @@ test.cpp:2:6: 错误：在传递‘void Sub(int, std::chrono::seconds&)’的第
 | rvalue reference     | [std::move](https://en.cppreference.com/w/cpp/utility/move)  |
 | forwarding reference | [std::forward](https://en.cppreference.com/w/cpp/utility/forward) |
 
-## TODO: isocpp faq [References](https://isocpp.org/wiki/faq/references) 
+
+
+## See also
+
+isocpp faq [References](https://isocpp.org/wiki/faq/references) 
 

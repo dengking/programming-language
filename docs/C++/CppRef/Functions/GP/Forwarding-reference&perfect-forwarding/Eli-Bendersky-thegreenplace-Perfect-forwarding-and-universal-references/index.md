@@ -1,4 +1,4 @@
-# thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c)
+# thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 
 
 ## The perfect forwarding problem
 
@@ -22,6 +22,8 @@ void wrapper(T1 e1, T2 e2) {
 ```
 
 This will obviously not work if `func` accepts its parameters by **reference**, since `wrapper` introduces a **by-value** passing step. If `func` modifies its **by-reference** parameter, it won't be visible in the caller of `wrapper` (only the copy created by `wrapper` itself will be affected).
+
+> NOTE: `wrapper` 需要实现perfect forwarding，也就是它要将它接收的入参 `e1`、`e2` 原封不动地传入函数 `func`，但是函数`func` 是pass-by-value，显然这就引入了一次copy，显然此时函数 `func` 的入参已经不是原本传入的了
 
 ### Second approach: pass-by-reference
 
@@ -64,17 +66,17 @@ template <typename T1, typename T2>
 void wrapper(const T1& e1, const T2& e2)    { func(e1, e2); }
 ```
 
-Exponential explosion. You can imagine how much fun this becomes when we want to cover some reasonable amount of function parameters. To make things worse, C++11 adds **rvalue references** to the mix (which we'd also want to **forward** correctly), and this clearly isn't a scalable solution.
+Exponential explosion(指数爆炸). You can imagine how much fun this becomes when we want to cover some reasonable amount of function parameters. To make things worse, C++11 adds **rvalue references** to the mix (which we'd also want to **forward** correctly), and this clearly isn't a scalable solution.
 
 
 
 ## Reference collapsing and special type deduction for rvalues
 
-To explain how C++11 solves the **perfect forwarding** problem, we have to first understand two new rules that were added to the language.
+To explain how `C++`11 solves the **perfect forwarding** problem, we have to first understand two new rules that were added to the language.
 
 ### Reference collapsing rule
 
-**Reference collapsing** is the easier one to explain, so let's start with it. Taking a reference to a reference is illegal in C++. However, it can sometimes arise in the context of templates and type deduction:
+**Reference collapsing** is the easier one to explain, so let's start with it. Taking a reference to a reference is illegal in `C++`. However, it can sometimes arise in the context of templates and type deduction:
 
 ```c++
 template <typename T>
@@ -90,18 +92,18 @@ int ii = 4;
 baz<int&>(ii);
 ```
 
-In the template instantiation, `T` is explicitly set to `int&`. So what is the type of `k` inside? What the compiler "sees" is `int& &` - while this isn't something the user is allowed to write in code, the compiler simply infers a single reference from this. In fact, prior to C++11 this wasn't standardized, but many compilers accepted such code anyway because these cases occasionally arise in template metaprogramming. With the addition of [rvalue references](http://eli.thegreenplace.net/2011/12/15/understanding-lvalues-and-rvalues-in-c-and-c) in C++11, it became important to define what happens when various **reference types** augment (e.g. what does `int&& &` mean?).
+In the template instantiation, `T` is explicitly set to `int&`. So what is the type of `k` inside? What the compiler "sees" is `int& &` - while this isn't something the user is allowed to write in code, the compiler simply infers(推断) a single reference from this. In fact, prior to C++11 this wasn't standardized, but many compilers accepted such code anyway because these cases occasionally arise in template metaprogramming. With the addition of [rvalue references](http://eli.thegreenplace.net/2011/12/15/understanding-lvalues-and-rvalues-in-c-and-c) in C++11, it became important to define what happens when various **reference types** augment (e.g. what does `int&& &` mean?).
 
-
-
-The result is the *reference collapsing* rule. The rule is very simple. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges from collapsing is `&& &&`. You can think of it as a logical-OR, with `&` being 1 and `&&` being 0.
+The result is the *reference collapsing* rule. The rule is very simple. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges(出现) from collapsing is `&& &&`. You can think of it as a logical-OR, with `&` being 1 and `&&` being 0.
 
 > NOTE: 在 https://stackoverflow.com/a/40835219 中，对其的总结如下：
 >
 > - `&& && = &&`
 > - `&& & = &`
 > - `& && = &`
-> - `& & = &`
+> - `& & = &` 
+
+
 
 ### Special type deduction rules for rvalue references 
 
@@ -129,43 +131,38 @@ int bar(int i) {
 }
 ```
 
-> NOTE:   
->
-> ## Example
->
-> 上面的例子不够详细，在 https://stackoverflow.com/a/40835219 中给出了一个更加详细的例子:
+> NOTE:   上面的例子不够详细，在 https://stackoverflow.com/a/40835219 中给出了一个更加详细的例子:
 >
 > ```c++
-> #include <iostream>
+>#include <iostream>
 > 
-> template<class T>
-> void foo(T&& t)
-> {
-> 	std::cout << t << std::endl;
+>template<class T>
+> void foo(T &&t) {
+>     std::cout << __PRETTY_FUNCTION__ << std::endl;
 > }
-> int main()
-> {
-> 	//...
-> 	const int i = 42;
-> 	foo(i); // the compiler will defines T = const int &
-> 			//          T&&  = const int & && = const int &
-> 			// => the compiler instantiates void foo<const int &>(const int &);
-> 	foo(6 * 7);	         // the compiler will defines T = int
-> 						 //          T&&  = int &&
-> 						 // the compiler instantiates  void foo<int>(int &&);
+> 
+> int main() {
+>     //...
+>     const int i = 42;
+>     foo(i); // the compiler will defines T = const int &
+>     //          T&&  = const int & && = const int &
+>     // => the compiler instantiates void foo<const int &>(const int &);
+>     foo(6 * 7);             // the compiler will defines T = int
+>     //          T&&  = int &&
+>     // the compiler instantiates  void foo<int>(int &&);
 > }
 > // g++ --std=c++11  test.cpp
 > ```
->
+> 
 > 输出如下:
->
-> ```
-> 42
-> 42
+> 
+> ```c++
+> void foo(T &&) [T = const int &]
+>void foo(T &&) [T = int]
 > ```
 >
 > 上述例子中，`t`就是所谓的**forwarding reference**，通过上述例子可以看出，`t`既可以bind to lvalue，也可以bind to rvalue，通过上述例子可以看出，**forwarding reference**的实现是有赖于前面提到的reference collapsing rule、special type deduction rules for rvalue references ，这就是在**内容梳理**中总结的：
->
+> 
 > > forwarding reference = reference collapsing rule + special type deduction rules for rvalue references；
 
 
@@ -188,6 +185,8 @@ void wrapper(T1&& e1, T2&& e2) {
 And this is `forward`:
 
 ```c++
+#include <type_traits>
+
 /**
  *  @brief  Forward an lvalue.
  *  @return The parameter cast to the specified type.
@@ -195,10 +194,10 @@ And this is `forward`:
  *  This function is used to implement "perfect forwarding".
  */
 template<class T>
-T&& forward(typename std::remove_reference<T>::type& t) noexcept
-{
-	return static_cast<T&&>(t);
+T &&forward(typename std::remove_reference<T>::type &t) noexcept {
+    return static_cast<T &&>(t);
 }
+
 /**
  *  @brief  Forward an rvalue.
  *  @return The parameter cast to the specified type.
@@ -206,9 +205,8 @@ T&& forward(typename std::remove_reference<T>::type& t) noexcept
  *  This function is used to implement "perfect forwarding".
  */
 template<class T>
-T&& forward(typename std::remove_reference<T>::type&& t) noexcept
-{
-	return static_cast<T&&>(t);
+T &&forward(typename std::remove_reference<T>::type &&t) noexcept {
+    return static_cast<T &&>(t);
 }
 
 ```
@@ -268,25 +266,22 @@ int&& forward(int&& t) noexcept {
 #include <utility>
 
 template<class T1, typename T2>
-void func(T1&& t1, T2&& t2)
-{
-	std::cout << t1 << " " << t2 << std::endl;
+void func(T1 &&t1, T2 &&t2) {
+    std::cout << t1 << " " << t2 << std::endl;
 }
 
 template<typename T1, typename T2>
-void wrapper(T1&& e1, T2&& e2)
-{
-	func(std::forward<T1>(e1), std::forward<T2>(e2));
+void wrapper(T1 &&e1, T2 &&e2) {
+    func(std::forward<T1>(e1), std::forward<T2>(e2));
 }
 
-int main()
-{
-	// forwarding lvalue
-	int ii = 42;
-	float ff = 3.14;
-	wrapper(ii, ff);
-	// forwarding rvalue
-	wrapper(42, 3.14f);
+int main() {
+    // forwarding lvalue
+    int ii = 42;
+    float ff = 3.14;
+    wrapper(ii, ff);
+    // forwarding rvalue
+    wrapper(42, 3.14f);
 }
 // g++ --std=c++11  test.cpp
 ```
@@ -298,26 +293,23 @@ int main()
 #include <utility>
 
 template<class T1, typename T2>
-void func(T1&& t1, T2&& t2)
-{
-	std::cout << t1 << " " << t2 << std::endl;
+void func(T1 &&t1, T2 &&t2) {
+    std::cout << t1 << " " << t2 << std::endl;
 }
 
 template<typename T1, typename T2>
-void wrapper(T1&& e1, T2&& e2)
-{
-	func(e1, e2);
-	// func(std::forward<T1>(e1), std::forward<T2>(e2));
+void wrapper(T1 &&e1, T2 &&e2) {
+    func(e1, e2);
+    // func(std::forward<T1>(e1), std::forward<T2>(e2));
 }
 
-int main()
-{
-	// forwarding lvalue
-	int ii = 42;
-	float ff = 3.14;
-	wrapper(ii, ff);
-	// forwarding rvalue
-	wrapper(42, 3.14f);
+int main() {
+    // forwarding lvalue
+    int ii = 42;
+    float ff = 3.14;
+    wrapper(ii, ff);
+    // forwarding rvalue
+    wrapper(42, 3.14f);
 }
 // g++ --std=c++11  test.cpp
 
@@ -331,7 +323,7 @@ One can see `forward` as a pretty wrapper around `static_cast<T&&>(t)` when `T` 
 
 The `forward` template exists in C++11, in the `<utility>` header, as `std::forward`.
 
-Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous（多余的）. It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
+Another thing I want to mention is the use of `std::remove_reference<T>`. In fact, if you think about it, `forward` could do without it. **Reference collapsing** does the job already, so `std::remove_reference<T>` is superfluous(多余的). It's there to turn the `T& t` into a **non-deducing context** (according to the C++ standard, section 14.8.2.5), thus forcing us to explicitly specify the **template parameter** when calling `std::forward`.
 
 > NOTE: 关于 **non-deducing context** ，参见cppreference [Template argument deduction#Non-deduced contexts](https://en.cppreference.com/w/cpp/language/template_argument_deduction#Non-deduced_contexts)，显然`std::forward`符合第一条：
 >

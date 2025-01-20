@@ -9,3 +9,8 @@
 后面会对它们进行专门介绍。
 
 二、forwarding是和value category相关的。
+
+## Perfect forwarding
+
+Perfect forwarding = reference collapsing rule( `std::forward` 的实现有赖于此) + special type deduction rules for rvalue references
+

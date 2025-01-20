@@ -1,4 +1,6 @@
-# cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)
+# cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) 
+
+
 
 ## 导读
 
@@ -70,6 +72,35 @@ Note that only xvalues are really new; the rest is just due to renaming and grou
 
 Declares a named variable as a reference, that is, an alias to an already-existing object or function.
 
+### Reference Types
+
+let's clarify the types of references in `C++`:
+
+1. **Lvalue Reference**: A reference that can bind to an lvalue (an object that has a persistent address).
+
+   ```c++
+   int x = 10;
+   int& lref = x; // lref is an lvalue reference to x
+   ```
+
+2. **Rvalue Reference**: A reference that can bind to an rvalue (a temporary object).
+
+   ```c++
+   int&& rref = 20; // rref is an rvalue reference to a temporary integer
+   ```
+
+
+3. **Universal Reference (Forwarding Reference)**: A reference that can bind to both **lvalues** and **rvalues**, typically found in template code. It is declared as `T&&` where `T` is a template type that is deduced.
+
+   ```c++
+   template<typename T>
+   void func(T&& arg); // arg is a universal reference
+   ```
+
+
+
+
+
 ## Syntax
 
 **Reference types** cannot be [cv-qualified](https://en.cppreference.com/w/cpp/language/cv) at the top level; there is no syntax for that in declaration, and if a qualification is added to a typedef-name or [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) specifier, or type template parameter, it is ignored.
@@ -101,7 +132,73 @@ int& &r;   // error: **references** to references
 
 ## Reference collapsing(since C++11)
 
-> NOTE: 支持reference collapsing的目的是什么？支持perfect forward，后面章节中会进行介绍
+thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 
+
+### Q: gpt-4o-mini C++ 11 reference collapsing(折叠) rule
+
+简而言之: 引入reference collapsing的目的是什么？
+
+In C++11, the concept of **reference collapsing** is introduced as part of the language's support for **rvalue references** and **move semantics**. Reference collapsing rules determine how references behave when they are combined or nested, particularly when dealing with template types and forwarding references.
+
+#### Reference Types
+
+Before diving into reference collapsing, let's clarify the types of references in C++:
+
+1. **Lvalue Reference**: A reference that can bind to an lvalue (an object that has a persistent address).
+   ```cpp
+   int x = 10;
+   int& lref = x; // lref is an lvalue reference to x
+   ```
+
+2. **Rvalue Reference**: A reference that can bind to an rvalue (a temporary object).
+   ```cpp
+   int&& rref = 20; // rref is an rvalue reference to a temporary integer
+   ```
+
+3. **Universal Reference (Forwarding Reference)**: A reference that can bind to both lvalues and rvalues, typically found in template code. It is declared as `T&&` where `T` is a template type that is deduced.
+   
+   ```cpp
+   template<typename T>
+   void func(T&& arg); // arg is a universal reference
+   ```
+
+#### Reference Collapsing Rules
+
+The reference collapsing rules specify how references interact when they are combined. The rules are as follows:
+
+1. **lvalue reference + lvalue reference**:
+   - `T& &` collapses to `T&`
+   
+2. **lvalue reference + rvalue reference**:
+   - `T& &&` collapses to `T&`
+   
+3. **rvalue reference + rvalue reference**:
+   - `T&& &&` collapses to `T&&`
+   
+4. **lvalue reference + universal reference**:
+   - `T& &&` collapses to `T&`
+   - `T& &` collapses to `T&`
+   
+5. **rvalue reference + universal reference**:
+   - `T&& &&` collapses to `T&&`
+   - `T& &&` collapses to `T&`
+
+6. **universal reference + universal reference**:
+   - `T&& &&` collapses to `T&&`
+   - `T& &&` collapses to `T&`
+   - `T& &` collapses to `T&`
+
+
+
+#### Conclusion
+
+The reference collapsing rules in C++11 are crucial for understanding how references interact, especially in the context of templates and move semantics. They help ensure that the types are correctly deduced and that the intended semantics of lvalue and rvalue references are preserved. Understanding these rules is essential for writing effective and efficient C++ code, particularly when dealing with **generic programming** and **resource management**.
+
+
+
+
+
+### cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) # Reference collapsing(since C++11)
 
 ```C++
 typedef int&  lref;
@@ -122,6 +219,30 @@ rref&& r4 = 1; // type of r4 is int&&
 > NOTE: 
 >
 > 其实这段话揭示了 [std::forward](https://en.cppreference.com/w/cpp/utility/forward) 的实现原理
+
+
+
+### Mnemonic
+
+thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 
+
+> The result is the *reference collapsing* rule. The rule is very simple. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges(出现) from collapsing is `&& &&`. You can think of it as a logical-OR, with `&` being 1 and `&&` being 0.
+>
+> > NOTE: 在 https://stackoverflow.com/a/40835219 中，对其的总结如下：
+> >
+> > - `&& && = &&`
+> > - `&& & = &`
+> > - `& && = &`
+> > - `& & = &` 
+>
+
+
+
+### `std::forward` 和 reference collapsing
+
+
+
+
 
 ## Lvalue references
 
