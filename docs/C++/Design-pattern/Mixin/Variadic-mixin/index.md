@@ -19,3 +19,4 @@
 2、fluentcpp [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/) 中提出的: 
 
 [`NamedType`](http://github.com/joboccara/NamedType) library
+

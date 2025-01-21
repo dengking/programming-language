@@ -22,15 +22,10 @@ On its most basic description, the technical definition of the CRTP is a class t
 
 ```C++
 template<typename Derived>
-class Base
-{
-    
-};
+class Base {};
 
-class X : public Base<X>
-{
-    
-};
+class X : public Base<X> {};
+
 ```
 
 If you’re not familiar with the CRTP, take a moment to wrap your head around the above code.
@@ -39,21 +34,19 @@ Now beyond the technical definition, what is [the point of the CRTP](https://www
 
 ```c++
 template<typename Derived>
-class ExtraFeature
-{
+class ExtraFeature {
 public:
-    void extraMethod()
-    {
-        auto derived = static_cast<Derived&>(*this);
+    void extraMethod() {
+        auto derived = static_cast<Derived &>(*this);
         derived.basicMethod();
     }
 };
 
-class X : public ExtraFeature<X>
-{
+class X : public ExtraFeature<X> {
 public:
     void basicMethod() {}
 };
+
 ```
 
 By inheriting from `ExtraFeature`, the class `X` has indeed gained a new feature: `extraMethod`. Indeed, it is now part of the public interface of `X`, and we can write this call:
@@ -79,21 +72,28 @@ But if you’d like to add an unrelated feature, it would make more sense to pac
 
 ```c++
 template<typename Derived>
-class ExtraFeature2
-{
+class ExtraFeature {
 public:
-    void extraMethod2()
-    {
-        auto derived = static_cast<Derived&>(*this);
+    void extraMethod() {
+        auto derived = static_cast<Derived &>(*this);
+        derived.basicMethod();
+    }
+};
+
+template<typename Derived>
+class ExtraFeature2 {
+public:
+    void extraMethod2() {
+        auto derived = static_cast<Derived &>(*this);
         // does something else with derived.basicMethod() ...
     }
 };
 
-class X : public ExtraFeature<X>, public ExtraFeature2<X>
-{
+class X : public ExtraFeature<X>, public ExtraFeature2<X> {
 public:
     void basicMethod() {}
 };
+
 ```
 
 Now `X` has been augmented with both `extraMethod` and `extraMethod2`.
@@ -254,53 +254,37 @@ One aspect to pay attention to is when there are many extra features, or if the 
 ```C++
 #include <iostream>
 template<typename Derived>
-class ExtraFeature
-{
+class ExtraFeature {
 public:
-	void extraMethod()
-	{
-		auto derived = static_cast<Derived&>(*this);
-		derived.basicMethod();
-	}
+    void extraMethod() {
+        auto derived = static_cast<Derived &>(*this);
+        derived.basicMethod();
+    }
 };
 
 template<typename Derived>
-class ExtraFeature2
-{
+class ExtraFeature2 {
 public:
-	void extraMethod2()
-	{
-		auto derived = static_cast<Derived&>(*this);
-		// does something else with derived.basicMethod() ...
-	}
+    void extraMethod2() {
+        auto derived = static_cast<Derived &>(*this);
+        // does something else with derived.basicMethod() ...
+    }
 };
 
-//class X: public ExtraFeature<X>, public ExtraFeature2<X>
-//{
-//public:
-//	void basicMethod()
-//	{
-//	}
-//};
 
-template<template<typename > class... Skills>
-class X: public Skills<X<Skills...>> ...
-{
+template<template<typename> class... Skills>
+class X : public Skills<X<Skills...>>... {
 public:
-	void basicMethod()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-	}
+    void basicMethod() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
 };
-int main()
-{
-	using X2 = X<ExtraFeature2>;
-	X2 x;
-	x.extraMethod2();
-	using X12 = X<ExtraFeature, ExtraFeature2>;
-	X12 x12;
-	x12.extraMethod();
-	x12.extraMethod2();
+int main() {
+    using X2 = X<ExtraFeature2>;
+    X2 x;
+    x.extraMethod2();
+    using X12 = X<ExtraFeature, ExtraFeature2>;
+    X12 x12;
+    x12.extraMethod();
+    x12.extraMethod2();
 }
 // g++ --std=c++11 test.cpp
 

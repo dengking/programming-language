@@ -12,65 +12,51 @@ C++是允许的，下面是example。
 #include <iostream>
 
 template<typename UstTag, typename SpiType>
-class CUstApi
-{
+class CUstApi {
 protected:
-	template<typename ServiceImpl, typename ServiceTrait>
-	struct CServiceRspBase
-	{
-	public:
-		CServiceRspBase()
-		{
-
-		}
-		int Run()
-		{
-			std::cout << __PRETTY_FUNCTION__ << std::endl;
-			// 回调
-			return static_cast<ServiceImpl*>(this)->CallBack();
-		}
-	};
+    template<typename ServiceImpl, typename ServiceTrait>
+    struct CServiceRspBase {
+    public:
+        CServiceRspBase() {}
+        int Run() {
+            std::cout << __PRETTY_FUNCTION__ << std::endl;
+            // 回调
+            return static_cast<ServiceImpl *>(this)->CallBack();
+        }
+    };
 };
 
 template<typename UstTag, typename SpiType>
-class CUstApiImpl: public CUstApi<UstTag, SpiType>
-{
+class CUstApiImpl : public CUstApi<UstTag, SpiType> {
 protected:
-	template<typename ServiceTrait>
-	struct CServiceMultiSpanRsp: CUstApi<UstTag, SpiType>::template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>, ServiceTrait>
-	{
-		using Base = typename CUstApi<UstTag, SpiType>:: template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>, ServiceTrait>;
-		friend Base;
-	protected:
-		int CallBack()
-		{
-			std::cout << __PRETTY_FUNCTION__ << std::endl;
-			return 0;
-		}
+    template<typename ServiceTrait>
+    struct CServiceMultiSpanRsp
+        : CUstApi<UstTag, SpiType>::template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>, ServiceTrait> {
+        using Base = typename CUstApi<UstTag, SpiType>::template CServiceRspBase<CServiceMultiSpanRsp<ServiceTrait>,
+                                                                                 ServiceTrait>;
+        friend Base;
 
-	};
+    protected:
+        int CallBack() {
+            std::cout << __PRETTY_FUNCTION__ << std::endl;
+            return 0;
+        }
+    };
+
 public:
-	class CTestServiceTrait
-	{
-	};
-	void Test()
-	{
-		CServiceMultiSpanRsp<CTestServiceTrait> s;
-		s.Run();
-	}
+    class CTestServiceTrait {};
+    void Test() {
+        CServiceMultiSpanRsp<CTestServiceTrait> s;
+        s.Run();
+    }
 };
 
-struct TestUstTag
-{
-};
-struct TestSpiType
-{
-};
+struct TestUstTag {};
+struct TestSpiType {};
 
-int main()
-{
-	CUstApiImpl<TestUstTag, TestSpiType> Api;
-	Api.Test();
+int main() {
+    CUstApiImpl<TestUstTag, TestSpiType> Api;
+    Api.Test();
 }
 // g++ test.cpp -Wall -pedantic
 
@@ -98,33 +84,26 @@ I read the [Wikipedia article](http://en.wikipedia.org/wiki/Curiously_Recurring_
 #include <iostream>
 
 template<typename derived_t>
-class base
-{
+class base {
 public:
-	typedef typename derived_t::value_type value_type;
-	value_type foo()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return static_cast<derived_t*>(this)->foo();
-	}
+    using value_type = typename derived_t::value_type;
+    value_type foo() {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+        return static_cast<derived_t *>(this)->foo();
+    }
 };
 
 template<typename T>
-class derived: public base<derived<T> >
-{
+class derived : public base<derived<T>> {
 public:
-	typedef T value_type;
-	value_type foo()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return T(); //return some T object (assumes T is default constructable)
-	}
+    using value_type = T;
+    value_type foo() {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+        return T(); // return some T object (assumes T is default constructable)
+    }
 };
 
-int main()
-{
-	derived<int> a;
-}
+int main() { derived<int> a; }
 // g++ test.cpp -Wall -pedantic
 
 ```
@@ -168,46 +147,42 @@ class derived : public base<derived<T>,T> { ... };
 > #include <iostream>
 > 
 > template<typename derived_t, typename value_type>
-> class base
-> {
+> class base {
 > public:
-> 	value_type foo()
-> 	{
-> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-> 		return static_cast<derived_t*>(this)->foo_impl();
-> 	}
+>     value_type foo() {
+>         std::cout << __PRETTY_FUNCTION__ << std::endl;
+>         return static_cast<derived_t *>(this)->foo_impl();
+>     }
 > };
 > 
 > template<typename T>
-> class derived: public base<derived<T>, T>
-> {
-> 	friend class base<derived<T>, T> ;
+> class derived : public base<derived<T>, T> {
+>     friend class base<derived<T>, T>;
+> 
 > protected:
-> 	typedef T value_type;
-> 	value_type foo_impl()
-> 	{
-> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-> 		return T(); //return some T object (assumes T is default constructable)
-> 	}
+>     typedef T value_type;
+>     value_type foo_impl() {
+>         std::cout << __PRETTY_FUNCTION__ << std::endl;
+>         return T(); // return some T object (assumes T is default constructable)
+>     }
 > };
 > 
-> int main()
-> {
-> 	derived<int> a;
-> 	a.foo();
+> int main() {
+>     derived<int> a;
+>     a.foo();
 > }
 > // g++ test.cpp -Wall -pedantic
 > 
 > ```
->
-> 输出如下:
->
-> ```C++
-> value_type base<derived_t, value_type>::foo() [with derived_t = derived<int>; value_type = int]
-> derived<T>::value_type derived<T>::foo_impl() [with T = int; derived<T>::value_type = int]
 > 
-> ```
+> 输出如下:
+> 
+> ```C++
+>value_type base<derived_t, value_type>::foo() [with derived_t = derived<int>; value_type = int]
+> derived<T>::value_type derived<T>::foo_impl() [with T = int; derived<T>::value_type = int]
 >
+> ```
+> 
 > 
 
 #### [A](https://stackoverflow.com/a/6006629)
@@ -225,45 +200,36 @@ struct base_traits;
 
 // Define the base class that uses the traits:
 template<typename derived_t>
-struct base
-{
-	typedef typename base_traits<derived_t>::value_type value_type;
-	value_type base_foo()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return base_traits<derived_t>::call_foo(static_cast<derived_t*>(this));
-	}
+struct base {
+    typedef typename base_traits<derived_t>::value_type value_type;
+    value_type base_foo() {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+        return base_traits<derived_t>::call_foo(static_cast<derived_t *>(this));
+    }
 };
 
 // Define the derived class; it can use the traits too:
 template<typename T>
-struct derived: base<derived<T> >
-{
-	typedef typename base_traits<derived>::value_type value_type;
+struct derived : base<derived<T>> {
+    typedef typename base_traits<derived>::value_type value_type;
 
-	value_type derived_foo()
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return value_type();
-	}
+    value_type derived_foo() {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+        return value_type();
+    }
 };
 
 // Declare and define a base_traits specialization for derived:
 template<typename T>
-struct base_traits<derived<T> >
-{
-	typedef T value_type;
+struct base_traits<derived<T>> {
+    typedef T value_type;
 
-	static value_type call_foo(derived<T> *x)
-	{
-		return x->derived_foo();
-	}
+    static value_type call_foo(derived<T> *x) { return x->derived_foo(); }
 };
 
-int main()
-{
-	derived<int> d;
-	d.base_foo();
+int main() {
+    derived<int> d;
+    d.base_foo();
 }
 // g++ test.cpp -Wall -pedantic
 
@@ -309,45 +275,41 @@ This works because the deduction of the return type of `base::foo` is delayed un
 > #include <iostream>
 > 
 > template<typename derived_t>
-> class base
-> {
+> class base {
 > public:
-> 	auto foo()
-> 	{
-> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-> 		return static_cast<derived_t*>(this)->foo_impl();
-> 	}
+>     auto foo() {
+>         std::cout << __PRETTY_FUNCTION__ << std::endl;
+>         return static_cast<derived_t *>(this)->foo_impl();
+>     }
 > };
 > 
 > template<typename T>
-> class derived: public base<derived<T>>
-> {
-> 	friend class base<derived<T>> ;
+> class derived : public base<derived<T>> {
+>     friend class base<derived<T>>;
+> 
 > protected:
-> 	typedef T value_type;
-> 	value_type foo_impl()
-> 	{
-> 		std::cout << __PRETTY_FUNCTION__ << std::endl;
-> 		return T(); //return some T object (assumes T is default constructable)
-> 	}
+>     using value_type = T;
+>     value_type foo_impl() {
+>         std::cout << __PRETTY_FUNCTION__ << std::endl;
+>         return T(); // return some T object (assumes T is default constructable)
+>     }
 > };
 > 
-> int main()
-> {
-> 	derived<int> a;
-> 	a.foo();
+> int main() {
+>     derived<int> a;
+>     a.foo();
 > }
 > // g++ --std=c++14 test.cpp -Wall -pedantic
 > 
 > ```
->
+> 
 > 输出如下:
->
+> 
 > ```C++
-> auto base<derived_t>::foo() [with derived_t = derived<int>]
+>auto base<derived_t>::foo() [with derived_t = derived<int>]
 > derived<T>::value_type derived<T>::foo_impl() [with T = int; derived<T>::value_type = int]
-> ```
->
+>```
+> 
 > 
 
 
@@ -357,31 +319,22 @@ This works because the deduction of the return type of `base::foo` is delayed un
 One small drawback of using traits is that you have to declare one for each derived class. You can write a less verbose and redondant workaround like this :
 
 ```cpp
-template<template<typename > class Derived, typename T>
-class base
-{
+template<template<typename> class Derived, typename T>
+class base {
 public:
-	typedef T value_type;
-	value_type foo()
-	{
-		return static_cast<Derived<T>*>(this)->foo();
-	}
+    typedef T value_type;
+    value_type foo() { return static_cast<Derived<T> *>(this)->foo(); }
 };
 
 template<typename T>
-class Derived: public base<Derived, T>
-{
+class Derived : public base<Derived, T> {
 public:
-	typedef T value_type;
-	value_type foo()
-	{
-		return T(); //return some T object (assumes T is default constructable)
-	}
+    typedef T value_type;
+    value_type foo() {
+        return T(); // return some T object (assumes T is default constructable)
+    }
 };
 
-int main()
-{
-	Derived<int> a;
-}
+int main() { Derived<int> a; }
 
 ```
