@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-    - Constants: Constants
+    - std-integral_constant&std-true_type&std-false_type: std-integral_constant&std-true_type&std-false_type
     - Relationships: Relationships
     - Type-modifications: Type-modifications
     - Type-transformations: Type-transformations

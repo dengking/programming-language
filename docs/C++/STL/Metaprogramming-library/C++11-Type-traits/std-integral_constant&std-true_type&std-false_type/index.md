@@ -1,8 +1,8 @@
-# std::integral_constant
+# Base classes
 
-是在阅读维基百科[Substitution failure is not an error#C++11 simplification](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error#C++11_simplification)，其中的例子使用`std::false_type`、`std::true_type`，后来查阅文档方知它们是是`typedef`
+是在阅读维基百科 [wikipedia Substitution failure is not an error#C++11 simplification](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error#C++11_simplification)，其中的例子使用`std::false_type`、`std::true_type`，后来查阅文档方知它们是是`typedef` 
 
-## cppreference [std::integral_constant](https://en.cppreference.com/w/cpp/types/integral_constant)
+## [cppreference std::integral_constant](https://en.cppreference.com/w/cpp/types/integral_constant)
 
 **std::integral_constant** wraps a static constant of specified type. It is the base class for the C++ type traits.
 
@@ -49,17 +49,13 @@ struct integral_constant {
 >
 > 典型的使用 template user defined conversion member function
 
-## `std::true_type` and `std::false_type`
-
-### stackoverflow [What is std::false_type or std::true_type?](https://stackoverflow.com/questions/58694521/what-is-stdfalse-type-or-stdtrue-type)
-
-> NOTE: 介绍的一般
 
 
 
-## `std::integral_constant` over `constexpr`
 
-### stackoverflow [When would I use std::integral_constant over constexpr?](https://stackoverflow.com/questions/20368187/when-would-i-use-stdintegral-constant-over-constexpr)
+### `std::integral_constant` over `constexpr`
+
+#### stackoverflow [When would I use std::integral_constant over constexpr?](https://stackoverflow.com/questions/20368187/when-would-i-use-stdintegral-constant-over-constexpr)
 
 ```c++
 #include <iostream>
@@ -119,4 +115,13 @@ int main()
 }
 // g++ test.cpp --std=c++17 -pedantic -Wall -Wextra
 ```
+
+
+
+## `std::true_type` and `std::false_type`
+
+### stackoverflow [What is std::false_type or std::true_type?](https://stackoverflow.com/questions/58694521/what-is-stdfalse-type-or-stdtrue-type)
+
+> NOTE: 介绍的一般
+
 

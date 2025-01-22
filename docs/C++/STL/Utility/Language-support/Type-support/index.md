@@ -51,13 +51,7 @@
 >
 > 参见 `C++11-Type-traits` 章节
 
-#### Miscellaneous transformations
 
-> NOTE: 这些transformation是非常有用的；
-
-#### Operations on traits
-
-> NOTE: variadic logical AND/OR/NOT metafunction
 
 #### Helper classes
 
