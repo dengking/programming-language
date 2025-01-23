@@ -169,6 +169,42 @@ C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，
 
 需要注意的是：C++中，只允许programmer**引用**rvalue。
 
+#### stackoverflow [What are move semantics?](https://stackoverflow.com/questions/3106110/what-are-move-semantics) # [part two](https://stackoverflow.com/a/11540204) # Xvalues
+
+Note that even though `std::move(a)` is an rvalue, its evaluation does *not* create a **temporary object**. This conundrum(难题) forced the committee to introduce a third **value category**. Something that can be bound to an **rvalue reference**, even though it is not an **rvalue** in the traditional sense, is called an ***xvalue*** (eXpiring value). The traditional rvalues were renamed to ***prvalues*** (Pure rvalues).
+
+> NOTE: 
+>
+> 1、eXpiring 的 含义是 “到期”，“eXpiring value”即“将亡值”。
+>
+> 2、这一段前面所讲的内容中的rvalue其实是**prvalues**
+>
+> 3、
+>
+> rvalue reference可以bind to rvalues(xvalue-prvalue)
+>
+> lvalue reference可以bind to glvalues(lvalue-xvalue)
+
+Both **prvalues** and **xvalues** are **rvalues**. Xvalues and lvalues are both *glvalues* (Generalized lvalues). The relationships are easier to grasp with a diagram:
+
+```cpp
+        expressions
+          /     \
+         /       \
+        /         \
+    glvalues   rvalues
+      /  \       /  \
+     /    \     /    \
+    /      \   /      \
+lvalues   xvalues   prvalues
+```
+
+Note that only xvalues are really new; the rest is just due to renaming and grouping.
+
+> C++98 rvalues are known as prvalues in C++11. Mentally replace all occurrences of "rvalue" in the preceding paragraphs with "prvalue".
+
+
+
 ### Literal类prvalue
 
 在`C++\CppRef\Expressions\Value-categories\cppreference-Value-categories`中总结了literal类prvalue，感觉使用stroustrup [“New” Value Terminology](http://www.stroustrup.com/terminology.pdf)中的分类法无法将它们也归入prvalue，但是使用传统的rvalue不能处于assignment operator的左边则可以。在cnblogs [Lvalues and Rvalues](https://www.cnblogs.com/areliang/archive/2011/11/16/2251480.html)中，对此有着更加好的解释:
@@ -197,3 +233,7 @@ C++11给予programmer可以引用prvalue的权利，这就是rvalue reference，
 > ```
 >
 > 
+
+
+
+

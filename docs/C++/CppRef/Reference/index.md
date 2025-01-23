@@ -1,25 +1,230 @@
 # Reference
 
-本章描述C++ reference。其中重点描述C++11的新特性：
+## What is reference?
 
+C++的reference本质上是**alias**，不是**object**。想要理解reference的本质，可以思考它和pointer的差别，这在 `Pointer-VS-reference`章节进行了讨论。
+
+> 关于alias，参见`C++\Language-reference\Alias`。
+
+
+
+## Referenceable and non-referenceable type
+
+
+
+### [cppreference Metaprogramming library (since C++11)](https://en.cppreference.com/w/cpp/meta) # Definitions
+
+> NOTE: 这是 cppreference 中对"*referenceable types*"的正式定义
+
+The following types are collectively called *referenceable types*:
+
+- [object types](https://en.cppreference.com/w/cpp/language/type#Object_type)
+- [function types](https://en.cppreference.com/w/cpp/language/function#Function_type) without *cv* and *ref* (在 stackoverflow [Is only “void” a non-referenceable type?](https://stackoverflow.com/questions/59367341/is-only-void-a-non-referenceable-type) # [A](https://stackoverflow.com/a/59367376/23877800) 中给出了验证)
+- [reference types](https://en.cppreference.com/w/cpp/language/reference) (创建引用的引用)
+
+For any referenceable type `T`, a reference to it can be created[[1\]](https://en.cppreference.com/w/cpp/meta#cite_note-1).
+
+1. [↑](https://en.cppreference.com/w/cpp/meta#cite_ref-1) For reference types, this can be done via [reference collapsing](https://en.cppreference.com/w/cpp/language/reference#Reference_collapsing).
+
+
+
+### Type trait: `is_referenceable` 
+
+写法1:
+
+```c++
+#include <iostream>
+#include <type_traits>
+
+// Primary template for is_referenceable
+template<typename T, typename = void>
+struct is_referenceable : std::false_type {};
+
+// Specialization for lvalue references
+template<typename T>
+struct is_referenceable<T, std::void_t<T &>> : std::true_type {};
+
+// Specialization for rvalue references
+template<typename T>
+struct is_referenceable<T, std::void_t<T &&>> : std::true_type {};
+
+// Helper variable template
+template<typename T>
+inline constexpr bool is_referenceable_v = is_referenceable<T>::value;
+
+// Test function
+template<typename T>
+void test_referenceable() {
+    std::cout << "Is referenceable: " << std::boolalpha << is_referenceable_v<T> << "\n";
+}
+
+int main() {
+    test_referenceable<int>(); // Should be true
+    test_referenceable<int &>(); // Should be true
+    test_referenceable<int &&>(); // Should be true
+    test_referenceable<void>(); // Should be false
+    test_referenceable<void *>(); // Should be true
+    test_referenceable<void (&)()>(); // Should be false (function type)
+    test_referenceable<int (*)()>(); // Should be false (function pointer)
+    test_referenceable<int[5]>(); // Should be false (array type)
+    test_referenceable<int[]>(); // Should be false (incomplete type)
+
+    return 0;
+}
+
+```
+
+编译报错:
+
+```c++
+Struct is_referenceable<T, std::void_t<T &&>> has already been defined or declare
+```
+
+写法2:
+
+尝试加上reference
+
+```c++
+#include <iostream>
+#include <type_traits>
+namespace detail {
+    template<class T>
+    struct type_identity {
+        using type = T;
+    }; // or use std::type_identity (since C++20)
+
+    template<class T> // Note that “cv void&” is a substitution failure
+    auto try_add_lvalue_reference(int) -> type_identity<T &>;
+    template<class T> // Handle T = cv void case
+    auto try_add_lvalue_reference(...) -> type_identity<T>;
+
+    template<class T>
+    auto try_add_rvalue_reference(int) -> type_identity<T &&>;
+    template<class T>
+    auto try_add_rvalue_reference(...) -> type_identity<T>;
+} // namespace detail
+
+template<class T>
+struct add_lvalue_reference : decltype(detail::try_add_lvalue_reference<T>(0)) {};
+
+template<class T>
+struct add_rvalue_reference : decltype(detail::try_add_rvalue_reference<T>(0)) {};
+
+
+// Helper variable template
+template<typename T>
+inline constexpr bool is_l_referenceable_v = !std::is_same_v<std::add_lvalue_reference_t<T>, T>;
+
+template<typename T>
+inline constexpr bool is_r_referenceable_v = !std::is_same_v<std::add_rvalue_reference_t<T>, T>;
+
+
+// Helper variable template
+template<typename T>
+inline constexpr bool is_referenceable_v = is_l_referenceable_v<T> || is_r_referenceable_v<T>;
+
+// Test function
+template<typename T>
+void test_referenceable() {
+    std::cout << "Is referenceable: " << std::boolalpha << is_referenceable_v<T> << "\n";
+}
+
+int main() {
+    test_referenceable<int>(); // Should be true
+    test_referenceable<int &>(); // Should be true
+    test_referenceable<int &&>(); // Should be true
+    test_referenceable<void>(); // Should be false
+    test_referenceable<void *>(); // Should be true
+    test_referenceable<void (&)()>(); // Should be false (function type)
+    test_referenceable<int (*)()>(); // Should be false (function pointer)
+    test_referenceable<int[5]>(); // Should be false (array type)
+    test_referenceable<int[]>(); // Should be false (incomplete type)
+
+    return 0;
+}
+
+```
+
+
+
+
+
+### Example
+
+stackoverflow [Is only “void” a non-referenceable type?](https://stackoverflow.com/questions/59367341/is-only-void-a-non-referenceable-type) # [A](https://stackoverflow.com/a/59367376/23877800) 
+
+```c++
+#include <iostream>
+using std::add_lvalue_reference_t;
+using std::add_rvalue_reference_t;
+using std::boolalpha;
+using std::cout;
+using std::endl;
+using std::is_reference_v;
+
+int main(void) {
+
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<int>> << endl; // true
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<int &>> << endl; // true
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<int &&>> << endl; // true
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<void>> << endl; // false
+
+    cout << boolalpha << is_reference_v<add_lvalue_reference_t<void()>> << endl; // true
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<void() const>> << endl; // false
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<void() volatile>> << endl; // false
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<void() const volatile>> << endl; // false
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<void() &>> << endl; // false
+    cout << boolalpha << is_reference_v<add_rvalue_reference_t<void() &&>> << endl; // false
+
+    return 0;
+}
+
+```
+
+
+
+## Reference classification
+
+### 分类方式1: value category 
+
+let's clarify the types of references in `C++`:
+
+1. **Lvalue Reference**: A reference that can bind to an lvalue (an object that has a persistent address).
+
+   ```c++
+   int x = 10;
+   int& lref = x; // lref is an lvalue reference to x
+   ```
+
+2. **Rvalue Reference**: A reference that can bind to an rvalue (a temporary object).
+
+   ```c++
+   int&& rref = 20; // rref is an rvalue reference to a temporary integer
+   ```
+
+
+3. **Universal Reference (Forwarding Reference)**: A reference that can bind to both **lvalues** and **rvalues**, typically found in template code. It is declared as `T&&` where `T` is a template type that is deduced.
+
+   ```c++
+   template<typename T>
+   void func(T&& arg); // arg is a universal reference
+   ```
+
+简而言之:
+
+- lvalue reference
 - rvalue reference
-- forward reference
+- forwarding reference/universal reference
 
-本章，采用的是在`Theory\Programming-language\How-to-master-programming-language`的”What's new in the programming language“章节中描述的方法来学习这两个新特性：
+使用准确的value category语言来进行描述:
 
-1、**rvalue reference**用于**move semantic**；
+1) `&`是左值(glvalues)的alias
 
-2、**forwarding reference**用于**perfect forwarding**；
-
-这两个特性，为C++语言带来了较大的改变。
+2) `&&`是右值(rvalues)的alias
 
 
 
-本章先描述**perfect forwarding**，然后描述**move semantic**，因为在move semantic会涉及perfect forwarding中的内容，然后描述cppreference中关于reference的描述；
-
-
-
-## Reference and value category and const
+#### Reference & value category & const
 
 在 stackoverflow [What is move semantics?](https://stackoverflow.com/questions/3106110/what-is-move-semantics) # [A](https://stackoverflow.com/a/11540204) 中的总结：
 
@@ -36,7 +241,7 @@ const X&&                           yes      yes
 
 上述表格总结得非常好，基本上涵盖了reference、value category and const的所有可能的组合，下面结合具体的例子来对它进行仔细的说明:
 
-### 1) `const X&`  to lvalue
+##### 1) `const X&`  to lvalue
 
 来源: csdn [【C++数据类型】const 引用的几点用法](https://blog.csdn.net/hyman_c/article/details/52700094)
 
@@ -94,11 +299,11 @@ int main() {
 
 ```
 
-### 2) `const X&` to const lvalue
+##### 2) `const X&` to const lvalue
 
 关于此的一个典型的例子就是在const-qualified member function中，所有的member data都是const-qualified的，如果想要reference，必须要使用`const X&` ，在`C++\Language-reference\Classes\Members\Non-static-member\Function-member`中给出了典型的例子。
 
-### 3) `const X&`  to rvalue
+##### 3) `const X&`  to rvalue
 
 下面是一个小例子: 
 
@@ -141,7 +346,22 @@ test.cpp:2:6: 错误：在传递‘void Sub(int, std::chrono::seconds&)’的第
 
 
 
-## Rvalue reference VS forwarding reference
+#### Rvalue reference VS forwarding reference
+
+这两个特性，为C++语言带来了较大的改变: 
+
+1、**rvalue reference**用于**move semantic**；
+
+2、**forwarding reference**用于**perfect forwarding**；
+
+
+
+| reference类型        |                                                              |
+| -------------------- | ------------------------------------------------------------ |
+| rvalue reference     | [std::move](https://en.cppreference.com/w/cpp/utility/move)  |
+| forwarding reference | [std::forward](https://en.cppreference.com/w/cpp/utility/forward) |
+
+
 
 [cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes):
 
@@ -149,10 +369,61 @@ test.cpp:2:6: 错误：在传递‘void Sub(int, std::chrono::seconds&)’的第
 
 上面这段话给我的感觉是：forwarding reference是一种特殊的rvalue reference。
 
-| reference类型        |                                                              |
-| -------------------- | ------------------------------------------------------------ |
-| rvalue reference     | [std::move](https://en.cppreference.com/w/cpp/utility/move)  |
-| forwarding reference | [std::forward](https://en.cppreference.com/w/cpp/utility/forward) |
+
+
+### 分类方式2: referenced
+
+Declares a named variable as a reference, that is, an alias to an already-existing **object** or **function**.
+
+1) alias to **already-existing** object
+
+2) alias to **already-existing** function
+
+
+
+## Type traits
+
+
+
+[std::is_lvalue_reference](https://en.cppreference.com/w/cpp/types/is_lvalue_reference) 
+
+```c++
+#include <type_traits>
+template<class T>
+struct is_lvalue_reference : std::false_type {};
+template<class T>
+struct is_lvalue_reference<T &> : std::true_type {};
+
+```
+
+
+
+[std::is_rvalue_reference](https://en.cppreference.com/w/cpp/types/is_rvalue_reference) 
+
+```c++
+#include <type_traits>
+
+template<class T>
+struct is_rvalue_reference : std::false_type {};
+template<class T>
+struct is_rvalue_reference<T &&> : std::true_type {};
+
+```
+
+
+
+[std::is_reference](https://en.cppreference.com/w/cpp/types/is_reference) 
+
+```c++
+#include <type_traits>
+template<class T>
+struct is_reference : std::false_type {};
+template<class T>
+struct is_reference<T &> : std::true_type {};
+template<class T>
+struct is_reference<T &&> : std::true_type {};
+
+```
 
 
 
