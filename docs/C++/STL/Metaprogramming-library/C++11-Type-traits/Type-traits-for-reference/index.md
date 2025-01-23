@@ -297,3 +297,47 @@ Is referenceable: true
 
 ### 写法3: SFINAE
 
+
+
+
+
+## [std::is_lvalue_reference](https://en.cppreference.com/w/cpp/types/is_lvalue_reference) 
+
+```c++
+#include <type_traits>
+template<class T>
+struct is_lvalue_reference : std::false_type {};
+template<class T>
+struct is_lvalue_reference<T &> : std::true_type {};
+
+```
+
+
+
+## [std::is_rvalue_reference](https://en.cppreference.com/w/cpp/types/is_rvalue_reference) 
+
+```c++
+#include <type_traits>
+
+template<class T>
+struct is_rvalue_reference : std::false_type {};
+template<class T>
+struct is_rvalue_reference<T &&> : std::true_type {};
+
+```
+
+
+
+## [std::is_reference](https://en.cppreference.com/w/cpp/types/is_reference) 
+
+```c++
+#include <type_traits>
+template<class T>
+struct is_reference : std::false_type {};
+template<class T>
+struct is_reference<T &> : std::true_type {};
+template<class T>
+struct is_reference<T &&> : std::true_type {};
+
+```
+

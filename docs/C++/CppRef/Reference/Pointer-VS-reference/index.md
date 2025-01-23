@@ -4,11 +4,15 @@
 
 ## Pointer is an object, while reference is not
 
-这一点是在阅读cppreference [Pointer declaration#Pointer to function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions)中下面这一段时受启发而想到的:
+cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) 
+
+> References are not objects; they do not necessarily occupy storage, although the compiler may allocate storage if it is necessary to implement the desired semantics (e.g. a non-static data member of reference type usually increases the size of the class by the amount necessary to store a memory address).
+
+cppreference [Pointer declaration#Pointer to function](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions)中下面这一段时受启发而想到的:
 
 > Unlike functions or references to functions, pointers to functions are objects and thus can be stored in arrays, copied, assigned, etc.
 
-在cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中，也对此进行了说明:
+cppreference [Object](https://en.cppreference.com/w/cpp/language/object)中，也对此进行了说明:
 
 > The following entities are not objects: value, reference, function
 

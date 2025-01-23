@@ -6,7 +6,9 @@ C++的reference本质上是**alias**，不是**object**。想要理解reference�
 
 > 关于alias，参见`C++\Language-reference\Alias`。
 
+cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) 
 
+> References are not objects; they do not necessarily occupy storage, although the compiler may allocate storage if it is necessary to implement the desired semantics (e.g. a non-static data member of reference type usually increases the size of the class by the amount necessary to store a memory address).
 
 ## Referenceable and non-referenceable type
 
@@ -20,7 +22,7 @@ The following types are collectively called *referenceable types*:
 
 - [object types](https://en.cppreference.com/w/cpp/language/type#Object_type)
 - [function types](https://en.cppreference.com/w/cpp/language/function#Function_type) without *cv* and *ref* (在 stackoverflow [Is only “void” a non-referenceable type?](https://stackoverflow.com/questions/59367341/is-only-void-a-non-referenceable-type) # [A](https://stackoverflow.com/a/59367376/23877800) 中给出了验证)
-- [reference types](https://en.cppreference.com/w/cpp/language/reference) (创建引用的引用)
+- [reference types](https://en.cppreference.com/w/cpp/language/reference) (需要注意的是这是通过 [reference collapsing](https://en.cppreference.com/w/cpp/language/reference#Reference_collapsing) 来实现的，根据 cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)  章节的内容可知，这仅仅在"It is permitted to form references to references through type manipulations in templates or typedefs, in which case the *reference collapsing* rules apply")
 
 For any referenceable type `T`, a reference to it can be created[[1\]](https://en.cppreference.com/w/cpp/meta#cite_note-1).
 
@@ -28,124 +30,26 @@ For any referenceable type `T`, a reference to it can be created[[1\]](https://e
 
 
 
+### Non-referenceable type
+
+#### void
+
+因为void就是表示无，stackoverflow [Is only “void” a non-referenceable type?](https://stackoverflow.com/questions/59367341/is-only-void-a-non-referenceable-type) # [A](https://stackoverflow.com/a/78410179/23877800)  
+
+We will also need the definition of *object types* (link above):
+
+> - object types are (possibly cv-qualified) types that are not function types, reference types, or possibly cv-qualified `void` (see also [`std::is_object`](https://en.cppreference.com/w/cpp/types/is_object));
+
+| Type                                 | Object type? |
+| ------------------------------------ | ------------ |
+| fundamental types / `void`           | void type    |
+| fundamental types / `std::nullptr_t` | object type  |
+
+
+
 ### Type trait: `is_referenceable` 
 
-写法1:
-
-```c++
-#include <iostream>
-#include <type_traits>
-
-// Primary template for is_referenceable
-template<typename T, typename = void>
-struct is_referenceable : std::false_type {};
-
-// Specialization for lvalue references
-template<typename T>
-struct is_referenceable<T, std::void_t<T &>> : std::true_type {};
-
-// Specialization for rvalue references
-template<typename T>
-struct is_referenceable<T, std::void_t<T &&>> : std::true_type {};
-
-// Helper variable template
-template<typename T>
-inline constexpr bool is_referenceable_v = is_referenceable<T>::value;
-
-// Test function
-template<typename T>
-void test_referenceable() {
-    std::cout << "Is referenceable: " << std::boolalpha << is_referenceable_v<T> << "\n";
-}
-
-int main() {
-    test_referenceable<int>(); // Should be true
-    test_referenceable<int &>(); // Should be true
-    test_referenceable<int &&>(); // Should be true
-    test_referenceable<void>(); // Should be false
-    test_referenceable<void *>(); // Should be true
-    test_referenceable<void (&)()>(); // Should be false (function type)
-    test_referenceable<int (*)()>(); // Should be false (function pointer)
-    test_referenceable<int[5]>(); // Should be false (array type)
-    test_referenceable<int[]>(); // Should be false (incomplete type)
-
-    return 0;
-}
-
-```
-
-编译报错:
-
-```c++
-Struct is_referenceable<T, std::void_t<T &&>> has already been defined or declare
-```
-
-写法2:
-
-尝试加上reference
-
-```c++
-#include <iostream>
-#include <type_traits>
-namespace detail {
-    template<class T>
-    struct type_identity {
-        using type = T;
-    }; // or use std::type_identity (since C++20)
-
-    template<class T> // Note that “cv void&” is a substitution failure
-    auto try_add_lvalue_reference(int) -> type_identity<T &>;
-    template<class T> // Handle T = cv void case
-    auto try_add_lvalue_reference(...) -> type_identity<T>;
-
-    template<class T>
-    auto try_add_rvalue_reference(int) -> type_identity<T &&>;
-    template<class T>
-    auto try_add_rvalue_reference(...) -> type_identity<T>;
-} // namespace detail
-
-template<class T>
-struct add_lvalue_reference : decltype(detail::try_add_lvalue_reference<T>(0)) {};
-
-template<class T>
-struct add_rvalue_reference : decltype(detail::try_add_rvalue_reference<T>(0)) {};
-
-
-// Helper variable template
-template<typename T>
-inline constexpr bool is_l_referenceable_v = !std::is_same_v<std::add_lvalue_reference_t<T>, T>;
-
-template<typename T>
-inline constexpr bool is_r_referenceable_v = !std::is_same_v<std::add_rvalue_reference_t<T>, T>;
-
-
-// Helper variable template
-template<typename T>
-inline constexpr bool is_referenceable_v = is_l_referenceable_v<T> || is_r_referenceable_v<T>;
-
-// Test function
-template<typename T>
-void test_referenceable() {
-    std::cout << "Is referenceable: " << std::boolalpha << is_referenceable_v<T> << "\n";
-}
-
-int main() {
-    test_referenceable<int>(); // Should be true
-    test_referenceable<int &>(); // Should be true
-    test_referenceable<int &&>(); // Should be true
-    test_referenceable<void>(); // Should be false
-    test_referenceable<void *>(); // Should be true
-    test_referenceable<void (&)()>(); // Should be false (function type)
-    test_referenceable<int (*)()>(); // Should be false (function pointer)
-    test_referenceable<int[5]>(); // Should be false (array type)
-    test_referenceable<int[]>(); // Should be false (incomplete type)
-
-    return 0;
-}
-
-```
-
-
+参见 `Type-traits-for-reference` 章节
 
 
 
@@ -381,51 +285,156 @@ Declares a named variable as a reference, that is, an alias to an already-existi
 
 
 
+## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference)  
+
+Declares a named variable as a reference, that is, an alias to an already-existing object or function.
+
+### Syntax
+
+A reference is required to be initialized to refer to a valid object or function: see [reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization).
+
+> NOTE: 在声明的时候就需要初始化
+
+The type “reference to (possibly cv-qualified) void” cannot be formed.
+
+> NOTE: void是non-referenceable type
+
+**Reference types** cannot be [cv-qualified](https://en.cppreference.com/w/cpp/language/cv) at the top level; there is no syntax for that in declaration, and if a qualification(限制) is added to a typedef-name or [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) specifier, or type template parameter, it is ignored.
+
+> NOTE: 上面这段话如何理解呢？
+>
+> This means that you cannot declare a **reference type** as `const T&` or `volatile T&` in a way that the reference itself is considered `const` or `volatile`. Instead, the `const` and `volatile` qualifiers apply to the type being referenced, not to the reference itself.
+>
+> When you declare a **reference type**, such as `int&`, the **reference** itself cannot be `const` or `volatile`. For example, `const int&` means that the object being referred to cannot be modified through that **reference**, but the reference itself is not `const`.
+>
+> 下面是一个例子，需要注意: `void func(const T &param)`
+>
+> ```c++
+> #include <iostream>
+> template<typename T>
+> void func(const T &param) // T cannot be cv-qualified at the top level
+> {
+>     std::cout << param << std::endl;
+>     // param += 1;
+> }
+> 
+> template<typename T>
+> void func(T &param) // T cannot be cv-qualified at the top level
+> {
+>     std::cout << param << std::endl;
+>     param += 1;
+> }
+> 
+> int main() {
+>     int a = 0;
+>     func(a);
+>     std::cout << a << std::endl;
+> }
+> 
+> ```
+>
+> 输出如下:
+>
+> ```
+> 0
+> 1
+> ```
+>
+> 
+
+
+
+References are not **objects**; they do not necessarily occupy storage, although the compiler may allocate storage if it is necessary to implement the desired semantics (e.g. a **non-static data member** of reference type usually increases the size of the class by the amount necessary to store a memory address).
+
+> NOTE: 不同的compiler有不同的implementation
+
+Because references are not **objects**, there are no **arrays** of references, no **pointers** to references, and no **references** to references:
+
+```C++
+int& a[3]; // error: **arrays** of references
+int&* p;   // error: **pointers** to references
+int& &r;   // error: **references** to references
+```
+
+> NOTE: 上面这段话中的"no **references** to references"和"[cppreference Metaprogramming library (since C++11)](https://en.cppreference.com/w/cpp/meta) # Definitions"中的" *referenceable types* "定义不同
+
+
+
+### Reference collapsing(since C++11)
+
+It is permitted to form references to references through type manipulations in templates or typedefs, in which case the *reference collapsing* rules apply: rvalue reference to rvalue reference collapses to rvalue reference, all other combinations form **lvalue reference**(后面有主记符来帮助记录):
+
+```C++
+typedef int&  lref;
+typedef int&& rref;
+int n;
+lref&  r1 = n; // type of r1 is int&
+lref&& r2 = n; // type of r2 is int&
+rref&  r3 = n; // type of r3 is int&
+rref&& r4 = 1; // type of r4 is int&&
+```
+
+(This, along with special rules for [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction) when `T&&` is used in a function template(这其实是forwarding reference), forms the rules that make [std::forward](https://en.cppreference.com/w/cpp/utility/forward) possible.)
+
+> NOTE: 上面括号中的这段话这段话揭示了 [std::forward](https://en.cppreference.com/w/cpp/utility/forward) 的实现原理，在thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中对这个topic进行了讨论
+>
+
+> NOTE: 
+>
+> **Mnemonic**: 在 thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中给出了很好的助记符:
+>
+> > The result is the *reference collapsing* rule. The rule is very simple. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges(出现) from collapsing is `&& &&`. You can think of it as a logical-OR, with `&` being 1 and `&&` being 0.
+>
+
+
+
+### Lvalue references
+
+Lvalue references can be used to alias an existing object (optionally with different cv-qualification):
+
+#### Reference to `const`
+
+```C++
+#include <iostream>
+#include <string>
+ 
+int main() {
+    std::string s = "Ex";
+    std::string& r1 = s;
+    const std::string& r2 = s;
+ 
+    r1 += "ample";           // modifies s
+//  r2 += "!";               // error: cannot modify through reference to const
+    std::cout << r2 << '\n'; // prints s, which now holds "Example"
+}
+```
+
+
+
+#### Pass-by-reference semantics
+
+
+
+```C++
+#include <iostream>
+#include <string>
+ 
+void double_string(std::string& s) {
+    s += s; // 's' is the same object as main()'s 'str'
+}
+ 
+int main() {
+    std::string str = "Test";
+    double_string(str);
+    std::cout << str << '\n';
+}
+```
+
+
+
 ## Type traits
 
-
-
-[std::is_lvalue_reference](https://en.cppreference.com/w/cpp/types/is_lvalue_reference) 
-
-```c++
-#include <type_traits>
-template<class T>
-struct is_lvalue_reference : std::false_type {};
-template<class T>
-struct is_lvalue_reference<T &> : std::true_type {};
-
-```
-
-
-
-[std::is_rvalue_reference](https://en.cppreference.com/w/cpp/types/is_rvalue_reference) 
-
-```c++
-#include <type_traits>
-
-template<class T>
-struct is_rvalue_reference : std::false_type {};
-template<class T>
-struct is_rvalue_reference<T &&> : std::true_type {};
-
-```
-
-
-
-[std::is_reference](https://en.cppreference.com/w/cpp/types/is_reference) 
-
-```c++
-#include <type_traits>
-template<class T>
-struct is_reference : std::false_type {};
-template<class T>
-struct is_reference<T &> : std::true_type {};
-template<class T>
-struct is_reference<T &&> : std::true_type {};
-
-```
-
-
+参见 `Type-traits-for-reference` 章节
 
 ## See also
 
