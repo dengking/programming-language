@@ -45,7 +45,9 @@ We will also need the definition of *object types* (link above):
 | fundamental types / `void`           | void type    |
 | fundamental types / `std::nullptr_t` | object type  |
 
+#### TODO
 
+需要再补充
 
 ### Type trait: `is_referenceable` 
 
@@ -342,7 +344,7 @@ The type “reference to (possibly cv-qualified) void” cannot be formed.
 >
 > 
 
-
+#### References are not **objects**
 
 References are not **objects**; they do not necessarily occupy storage, although the compiler may allocate storage if it is necessary to implement the desired semantics (e.g. a **non-static data member** of reference type usually increases the size of the class by the amount necessary to store a memory address).
 
@@ -357,34 +359,6 @@ int& &r;   // error: **references** to references
 ```
 
 > NOTE: 上面这段话中的"no **references** to references"和"[cppreference Metaprogramming library (since C++11)](https://en.cppreference.com/w/cpp/meta) # Definitions"中的" *referenceable types* "定义不同
-
-
-
-### Reference collapsing(since C++11)
-
-It is permitted to form references to references through type manipulations in templates or typedefs, in which case the *reference collapsing* rules apply: rvalue reference to rvalue reference collapses to rvalue reference, all other combinations form **lvalue reference**(后面有主记符来帮助记录):
-
-```C++
-typedef int&  lref;
-typedef int&& rref;
-int n;
-lref&  r1 = n; // type of r1 is int&
-lref&& r2 = n; // type of r2 is int&
-rref&  r3 = n; // type of r3 is int&
-rref&& r4 = 1; // type of r4 is int&&
-```
-
-(This, along with special rules for [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction) when `T&&` is used in a function template(这其实是forwarding reference), forms the rules that make [std::forward](https://en.cppreference.com/w/cpp/utility/forward) possible.)
-
-> NOTE: 上面括号中的这段话这段话揭示了 [std::forward](https://en.cppreference.com/w/cpp/utility/forward) 的实现原理，在thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中对这个topic进行了讨论
->
-
-> NOTE: 
->
-> **Mnemonic**: 在 thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中给出了很好的助记符:
->
-> > The result is the *reference collapsing* rule. The rule is very simple. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges(出现) from collapsing is `&& &&`. You can think of it as a logical-OR, with `&` being 1 and `&&` being 0.
->
 
 
 
@@ -429,6 +403,261 @@ int main() {
     std::cout << str << '\n';
 }
 ```
+
+
+
+### Rvalue references (since C++11)
+
+
+
+#### [Extend the lifetimes](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) of temporary objects 
+
+**Rvalue references** can be used to [extend the lifetimes](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) of **temporary objects** (note, lvalue references to `const` can extend the lifetimes of **temporary objects** too, but they are not modifiable through them):
+
+```C++
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string s1 = "Test";
+//  std::string&& r1 = s1;           // error: can't bind to lvalue
+
+    const std::string &r2 = s1 + s1; // okay: lvalue reference to const extends lifetime
+//  r2 += "Test";                    // error: can't modify through reference to const
+
+    std::string &&r3 = s1 + s1;      // okay: rvalue reference extends lifetime
+    r3 += "Test";                    // okay: can modify through reference to non-const
+    std::cout << r3 << '\n';
+}
+
+// g++ --std=c++11 test.cpp
+```
+
+> NOTE: 运行结果如下:
+>
+> ```
+> TestTestTest
+> ```
+
+
+
+#### Rvalue reference and lvalue reference overloads
+
+More importantly, when a function has both **rvalue reference** and **lvalue reference** [overloads](https://en.cppreference.com/w/cpp/language/overload_resolution), the **rvalue reference overload** binds to **rvalues** (including both **prvalues** and **xvalues**), while the **lvalue reference overload** binds to **lvalues**.
+
+> NOTE: 在 [cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes) 中对此也有说明: 
+>
+> > The functions that accept rvalue reference parameters (including [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment operators](https://en.cppreference.com/w/cpp/language/move_operator), and regular member functions such as `std::vector::push_back`) are selected, by [overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution), when called with [rvalue](https://en.cppreference.com/w/cpp/language/value_category) arguments (either [prvalues](https://en.cppreference.com/w/cpp/language/value_category) such as a temporary object or [xvalues](https://en.cppreference.com/w/cpp/language/value_category) such as the one produced by `std::move`).
+
+
+
+```c++
+#include <iostream>
+#include <utility> // std::move
+
+void f(int &x) {
+    std::cout << "lvalue reference overload f(" << x << ")\n";
+}
+
+void f(const int &x) {
+    std::cout << "lvalue reference to const overload f(" << x << ")\n";
+}
+
+void f(int &&x) {
+    std::cout << "rvalue reference overload f(" << x << ")\n";
+}
+
+int main() {
+    int i = 1;
+    const int ci = 2;
+    f(i);  // calls f(int&)
+    f(ci); // calls f(const int&)
+    f(3);  // calls f(int&&)
+    // would call f(const int&) if f(int&&) overload wasn't provided
+    f(std::move(i)); // calls f(int&&)
+
+    // rvalue reference variables are lvalues when used in expressions
+    int &&x = 1;
+    f(x);            // calls f(int& x)
+    f(std::move(x)); // calls f(int&& x)
+}
+// g++ --std=c++11 test.cpp
+
+/**
+上述程序输入如下：
+lvalue reference overload f(1)
+lvalue reference to const overload f(2)
+rvalue reference overload f(3)
+rvalue reference overload f(1)
+lvalue reference overload f(1)
+rvalue reference overload f(1)
+**/
+```
+
+> NOTE: 
+>
+> 上述程序的一个非常重要的点是: "**rvalue reference variables** are lvalues when used in expressions"，并且它对应的overload function是:
+>
+> ```c++
+> void f(int &x) {
+>     std::cout << "lvalue reference overload f(" << x << ")\n";
+> }
+> ```
+>
+> 我们需要更加深入地思考：为什么"rvalue reference variables are **lvalues** when used in expressions"？回答这个问题，需要我们理解rvalue reference的本质：本质上来说，rvalue reference是reference，是alias，所以我们可以认为rvalue reference就是一个alias to temporary object，显然它表示的就是temporary object，我们可以将它看做是temporary object，所以rvalue reference object是一个rvlaue。
+>
+> 在 [cppreference std::move#Notes](https://en.cppreference.com/w/cpp/utility/move#Notes) 中对此进行了说明:
+>
+> > Names of [rvalue reference](https://en.cppreference.com/w/cpp/language/reference) variables are [lvalues](https://en.cppreference.com/w/cpp/language/value_category) and have to be converted to [xvalues](https://en.cppreference.com/w/cpp/language/value_category) to be bound to the function overloads that accept **rvalue reference parameters**, which is why [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor) and [move assignment operators](https://en.cppreference.com/w/cpp/language/move_operator) typically use `std::move`:
+>
+> ```
+> // Simple move constructor
+> A(A&& arg) : member(std::move(arg.member)) // the expression "arg.member" is lvalue
+> {} 
+> // Simple move assignment operator
+> A& operator=(A&& other) {
+>      member = std::move(other.member);
+>      return *this;
+> }
+> ```
+>
+> 
+
+This allows [move constructors](https://en.cppreference.com/w/cpp/language/move_constructor), [move assignment](https://en.cppreference.com/w/cpp/language/move_assignment) operators, and other move-aware functions (e.g. [std::vector::push_back()](https://en.cppreference.com/w/cpp/container/vector/push_back)) to be automatically selected when suitable.
+
+
+
+#### Rvalue references can bind to xvalues
+
+Because **rvalue references** can bind to **xvalues**, they can refer to **non-temporary objects**:
+
+```c++
+#include <iostream>
+#include <utility> // std::move
+
+void f(int &x) {
+    std::cout << "lvalue reference overload f(" << x << ")\n";
+}
+
+void f(const int &x) {
+    std::cout << "lvalue reference to const overload f(" << x << ")\n";
+}
+
+void f(int &&x) {
+    std::cout << "rvalue reference overload f(" << x << ")\n";
+}
+
+int main() {
+    int i2 = 42;
+    int &&rri = std::move(i2); // binds directly to i2
+    f(rri);
+}
+
+// g++ --std=c++11 test.cpp
+```
+
+> NOTE: 上述程序输出：
+>
+> ```
+> lvalue reference overload f(42)
+> ```
+>
+> 
+
+This makes it possible to move out of an object in scope that is no longer needed:
+
+```C++
+#include <vector>
+#include <utility> // std::move
+
+int main() {
+    std::vector<int> v{1, 2, 3, 4, 5};
+    std::vector<int> v2(std::move(v)); // binds an rvalue reference to v
+    assert(v.empty());
+}
+// g++ --std=c++11 test.cpp
+
+```
+
+
+
+### Reference collapsing(since C++11)
+
+It is permitted to form references to references through type manipulations in **templates** or **typedefs**, in which case the *reference collapsing* rules apply: rvalue reference to rvalue reference collapses to rvalue reference, all other combinations form **lvalue reference**(后面有主记符来帮助记录):
+
+```C++
+typedef int&  lref;
+typedef int&& rref;
+int n;
+lref&  r1 = n; // type of r1 is int&
+lref&& r2 = n; // type of r2 is int&
+rref&  r3 = n; // type of r3 is int&
+rref&& r4 = 1; // type of r4 is int&&
+```
+
+(This, along with special rules for [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction) when `T&&` is used in a function template(这其实是forwarding reference), forms the rules that make [std::forward](https://en.cppreference.com/w/cpp/utility/forward) possible.)
+
+> NOTE: 上面括号中的这段话这段话揭示了 [std::forward](https://en.cppreference.com/w/cpp/utility/forward) 的实现原理，在thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中对这个topic进行了讨论
+
+> NOTE: 
+>
+> **Mnemonic**: 在 thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中给出了很好的助记符:
+>
+> > The result is the *reference collapsing* rule. The rule is very simple. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges(出现) from collapsing is `&& &&`. You can think of it as a logical-OR, with `&` being 1 and `&&` being 0.
+
+
+
+### Forwarding references (since C++11)
+
+> NOTE: 
+>
+> forwarding reference是function generic programming的基础:
+>
+> 1 `auto&&`解决的是函数的返回值
+>
+> 2 `template &&`解决的函数的入参
+>
+> 原文的这部分内容也收录到了 `C++\CppReference\Functions\GP` 章节。
+>
+
+**Forwarding references** are a special kind of references that preserve the value category of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). Forwarding references are either:
+
+1 function parameter of a function template declared as rvalue reference to cv-unqualified [type template parameter](https://en.cppreference.com/w/cpp/language/template_parameters#Type_template_parameter) of that same function template:
+
+```c++
+#include <utility>
+
+template<class T>
+int g(const T &&x); // x is not a forwarding reference: const T is not cv-unqualified
+
+template<class T>
+int f(T &&x)                      // x is a forwarding reference
+{
+    return g(std::forward<T>(x)); // and so can be forwarded
+}
+
+int main() {
+    int i;
+    f(i); // argument is lvalue, calls f<int&>(int&), std::forward<int&>(x) is lvalue
+    f(0); // argument is rvalue, calls f<int>(int&&), std::forward<int>(x) is rvalue
+}
+
+
+template<class T>
+struct A {
+    template<class U>
+    A(T &&x, U &&y, int *p); // x is not a forwarding reference: T is not a
+    // type template parameter of the constructor,
+    // but y is a forwarding reference
+};
+
+```
+
+
+
+### Dangling references
+
+> NOTE: 关于 [lifetime](https://en.cppreference.com/w/cpp/language/lifetime) ，参见`C++\Language-reference\Basic-concept\Object\Lifetime-and-storage-duration`章节。
 
 
 

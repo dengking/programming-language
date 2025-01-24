@@ -1,7 +1,5 @@
 nav:
     - Introduction: index.md
-    - C++11-forwarding-reference: C++11-forwarding-reference
-    - Eli-Bendersky-thegreenplace-Perfect-forwarding-and-universal-references: Eli-Bendersky-thegreenplace-Perfect-forwarding-and-universal-references
     - Perfect-forwarding-parameter: Perfect-forwarding-parameter
     - auto&&: auto&&
     
