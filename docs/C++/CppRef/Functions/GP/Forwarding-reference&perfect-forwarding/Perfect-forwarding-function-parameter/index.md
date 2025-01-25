@@ -463,126 +463,123 @@ void wrapper(T&& arg) {
 #include <string>
 #include <utility>
 
-void foo(std::string && s)
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	std::cout << s << std::endl;
+void foo(std::string&& s) {
+  std::cout << __PRETTY_FUNCTION__ << std::endl;
+  std::cout << s << std::endl;
 }
 
-void foo(std::string & s)
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	std::cout << s << std::endl;
+void foo(std::string& s) {
+  std::cout << __PRETTY_FUNCTION__ << std::endl;
+  std::cout << s << std::endl;
 }
 
-void foo(const std::string & s)
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	std::cout << s << std::endl;
+void foo(const std::string& s) {
+  std::cout << __PRETTY_FUNCTION__ << std::endl;
+  std::cout << s << std::endl;
 }
 
-template<class T>
-void wrapper(T&& arg)
-{
-	// arg is always lvalue
-	foo(std::forward<T>(arg)); // Forward as lvalue or as rvalue, depending on T
+template <class T>
+void wrapper(T&& arg) {
+  // arg is always lvalue
+  foo(std::forward<T>(arg));  // Forward as lvalue or as rvalue, depending on T
 }
 
-int main()
-{
-	std::cout << "lvalue:" << std::endl;
-	std::string s1 = "hello world";
-	wrapper(s1);
-	std::cout << "const lvalue:" << std::endl;
-	const std::string s2 = "hello world";
-	wrapper(s2);
-	std::cout << "rvalue:" << std::endl;
-	wrapper("hello world");
-
+int main() {
+  std::cout << "lvalue:" << std::endl;
+  std::string s1 = "hello world";
+  wrapper(s1);
+  std::cout << "const lvalue:" << std::endl;
+  const std::string s2 = "hello world";
+  wrapper(s2);
+  std::cout << "rvalue:" << std::endl;
+  wrapper("hello world");
 }
 // g++ --std=c++11 test.cpp
+
+/**
+输出如下:
+lvalue:
+void foo(std::string&)
+hello world
+const lvalue:
+void foo(const string&)
+hello world
+rvalue:
+void foo(std::string&&)
+hello world
+**/
 ```
 
-> NOTE: 输出如下:
->
-> ```c++
-> lvalue:
-> void foo(std::string&)
-> hello world
-> const lvalue:
-> void foo(const string&)
-> hello world
-> rvalue:
-> void foo(std::string&&)
-> hello world
-> ```
->
-> 
+
 
 #### 2 Forward rvalues 
 
-Forwards rvalues as rvalues and prohibits forwarding of rvalues as lvalues
+```c++
+template <class T>
+T&& forward(typename std::remove_reference<T>::type&& t) noexcept;
+template <class T>
+constexpr T&& forward(std::remove_reference_t<T>&& t) noexcept;
+```
 
-This overload makes it possible to forward a **result** of an expression (such as function call), which may be rvalue or lvalue, as the original value category of a forwarding reference argument.
+Forwards **rvalues** as **rvalues** and prohibits forwarding of rvalues as lvalues
 
-> NOTE: 需要结合下面的例子来理解上面这段话：函数`foo`的入参的value category是由`T`决定的，而不是由**result** of an function call决定的；
+This overload makes it possible to forward a **result** of an expression (such as **function call**), which may be rvalue or lvalue, as the original value category of a **forwarding reference argument**.
+
+> NOTE: 需要结合下面的例子来理解上面这段话:
+>
+> `struct Arg` 的 `get` 系列函数是"reference-qualified-member-function-overload-based-on-value-category"，`std::forward<T>(arg).get()` 能够实现perfect forwarding:
+>
+> - 如果传入函数 `wrapper` 的是lvalue，那么`int& get() &` 被调用 
+> - 如果传入函数 `wrapper` 的是rvalue，那么`int& get() &&` 被调用 
+>
+> 由于`struct Arg` 的 `get` 系列函数的返回值是`int &`，所以它是lvalue，所以 `void foo(int& i)`  被调用。
 
 ```c++
 #include <iostream>
 #include <utility>
-void foo(int& i)
-{
-	std::cout << __PRETTY_FUNCTION__ << " " << i << std::endl;
-}
+void foo(int& i) { std::cout << __PRETTY_FUNCTION__ << " " << i << std::endl; }
 
-void foo(int&& i)
-{
-	std::cout << __PRETTY_FUNCTION__ << " " << i << std::endl;
-}
+void foo(int&& i) { std::cout << __PRETTY_FUNCTION__ << " " << i << std::endl; }
 // transforming wrapper
-template<class T>
-void wrapper(T&& arg)
-{
-	foo(std::forward<decltype(std::forward<T>(arg).get())>(std::forward<T>(arg).get()));
+template <class T>
+void wrapper(T&& arg) {
+  using type = decltype(std::forward<T>(arg).get());
+  foo(std::forward<type>(std::forward<T>(arg).get()));
 }
 
-struct Arg
-{
-	int i = 1;
-	int& get() &&
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return i;
-	} // call to this overload is rvalue
-	int& get() &
-	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
-		return i;
-	} // call to this overload is lvalue
+struct Arg {
+    int i = 1;
+    int& get() && {
+      std::cout << __PRETTY_FUNCTION__ << std::endl;
+      return i;
+    }  // call to this overload is rvalue
+    int& get() & {
+      std::cout << __PRETTY_FUNCTION__ << std::endl;
+      return i;
+    }  // call to this overload is lvalue
 };
 
-int main()
-{
-	std::cout << "lvalue reference:" << std::endl;
-	Arg a;
-	wrapper(a);
-	std::cout << "rvalue reference:" << std::endl;
-	wrapper(Arg());
+int main() {
+  std::cout << "lvalue reference:" << std::endl;
+  Arg a;
+  wrapper(a);
+  std::cout << "rvalue reference:" << std::endl;
+  wrapper(Arg());
 }
 
 // g++ --std=c++11 test.cpp
+/**
+输出如下:
+lvalue reference:
+int &Arg::get() &
+void foo(int &) 1
+rvalue reference:
+int &Arg::get() &&
+void foo(int &) 1
+**/
 ```
 
-> NOTE: 输出如下
->
-> ```c++
-> lvalue reference:
-> int& Arg::get() &
-> void foo(int&) 1
-> rvalue reference:
-> int& Arg::get() &&
-> void foo(int&) 1
-> ```
+
 
 
 
@@ -593,75 +590,68 @@ int main()
 #include <memory>
 #include <utility>
 
-struct A
-{
-	A(int&& n)
-	{
-		std::cout << __PRETTY_FUNCTION__ << ", n=" << n << "\n";
-	}
-	A(int& n)
-	{
-		std::cout << __PRETTY_FUNCTION__ << ", n=" << n << "\n";
-	}
+struct A {
+    A(int&& n) { std::cout << "rvalue overload, n=" << n << '\n'; }
+    A(int& n) { std::cout << "lvalue overload, n=" << n << '\n'; }
 };
 
-class B
-{
-public:
-	template<class T1, class T2, class T3>
-	B(T1&& t1, T2&& t2, T3&& t3)
-			:
-					a1_ { std::forward<T1>(t1) },
-					a2_ { std::forward<T2>(t2) },
-					a3_ { std::forward<T3>(t3) }
-	{
-	}
+class B {
+  public:
+    template <class T1, class T2, class T3>
+    B(T1&& t1, T2&& t2, T3&& t3) : a1_{std::forward<T1>(t1)}, a2_{std::forward<T2>(t2)}, a3_{std::forward<T3>(t3)} {}
 
-private:
-	A a1_, a2_, a3_;
+  private:
+    A a1_, a2_, a3_;
 };
 
-template<class T, class U>
-std::unique_ptr<T> make_unique1(U&& u)
-{
-	return std::unique_ptr<T>(new T(std::forward<U>(u)));
+template <class T, class U>
+std::unique_ptr<T> make_unique1(U&& u) {
+  return std::unique_ptr<T>(new T(std::forward<U>(u)));
 }
 
-template<class T, class ... U>
-std::unique_ptr<T> make_unique2(U&&... u)
-{
-	return std::unique_ptr<T>(new T(std::forward<U>(u)...));
+template <class T, class... U>
+std::unique_ptr<T> make_unique2(U&&... u) {
+  return std::unique_ptr<T>(new T(std::forward<U>(u)...));
 }
 
-int main()
+auto make_B(auto&&... args)  // since C++20
 {
-	auto p1 = make_unique1<A>(2); // rvalue
-	int i = 1;
-	auto p2 = make_unique1<A>(i); // lvalue
-
-	std::cout << "B\n";
-	auto t = make_unique2<B>(2, i, 3);
+  return B(std::forward<decltype(args)>(args)...);
 }
 
-// g++ --std=c++11 test.cpp
+int main() {
+  auto p1 = make_unique1<A>(2);  // rvalue
+  int i = 1;
+  auto p2 = make_unique1<A>(i);  // lvalue
+
+  std::cout << "B\n";
+  auto t = make_unique2<B>(2, i, 3);
+
+  std::cout << "make_B\n";
+  [[maybe_unused]] B b = make_B(4, i, 5);
+}
+
+/**
+输入如下: 
+rvalue overload, n=2
+lvalue overload, n=1
+B
+rvalue overload, n=2
+lvalue overload, n=1
+rvalue overload, n=3
+make_B
+rvalue overload, n=4
+lvalue overload, n=1
+rvalue overload, n=5
+
+**/
 ```
 
-> NOTE: 输入如下:
->
-> ```c++
-> A::A(int&&), n=2
-> A::A(int&), n=1
-> B
-> A::A(int&&), n=2
-> A::A(int&), n=1
-> A::A(int&&), n=3
-> ```
->
-> 
+
 
 ### Implementation
 
-### libstdc++
+#### libstdc++
 
 [gcc](https://github.com/gcc-mirror/gcc)/[libstdc++-v3](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3)/[include](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include)/[bits](https://github.com/gcc-mirror/gcc/tree/master/libstdc%2B%2B-v3/include/bits)/[move.h](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/bits/move.h)
 
@@ -714,7 +704,7 @@ thegreenplace [Perfect forwarding and universal references in C++](https://eli.t
 
 #### Stop at compile time attempts to convert from an `rvalue` to an `lvalue` 
 
-The `static_assert` is there to stop at compile time attempts to convert from an `rvalue` to an `lvalue` (that would have the dangling reference problem: a reference pointing to a temporary long gone). This is explained in more details in [N2835](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2835.html), but the gist is:
+The `static_assert` is there to stop at compile time attempts to convert from an `rvalue` to an `lvalue` (that would have the **dangling reference problem**: a reference pointing to a temporary long gone). This is explained in more details in [N2835](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2835.html), but the gist is:
 
 ```c++
 forward<const Y&>(Y()); // does not compile
@@ -736,11 +726,9 @@ Some non-obvious properties of `std::forward` are that the return value can be m
 
 
 
-
-
 ## Examples
 
-#### 一般形式
+### 一般形式
 
 stackoverflow [What are the main purposes of using std::forward and which problems it solves?](https://stackoverflow.com/questions/3582001/what-are-the-main-purposes-of-using-stdforward-and-which-problems-it-solves)
 
@@ -772,7 +760,7 @@ int main() {
 
 
 
-#### [variadic templates](http://eli.thegreenplace.net/2014/variadic-templates-in-c/) and perfect forwarding 
+### Perfect forwarding [variadic templates](http://eli.thegreenplace.net/2014/variadic-templates-in-c/)  
 
 
 

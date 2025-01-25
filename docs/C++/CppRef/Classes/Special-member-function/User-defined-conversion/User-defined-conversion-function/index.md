@@ -152,3 +152,6 @@ Example1: overload conversion operator for custom type to `std::string`:
 
 
 
+## TODO template user-defined conversion function
+
+[std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper) 
