@@ -233,7 +233,7 @@ int& && forward(int& t) noexcept {
 }
 ```
 
-Now it's time to apply the reference collapsing rule:
+Now it's time to apply the **reference collapsing rule**:
 
 ```c++
 int& forward(int& t) noexcept {
@@ -258,6 +258,8 @@ int&& forward(int&& t) noexcept {
     return static_cast<int&&>(t);
 }
 ```
+
+
 
 ### Source code
 

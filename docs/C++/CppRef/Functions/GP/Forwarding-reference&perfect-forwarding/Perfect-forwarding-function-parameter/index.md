@@ -361,9 +361,11 @@ template <class T>
 constexpr T&& forward(std::remove_reference_t<T>& t) noexcept;
 ```
 
-Forwards lvalues as either lvalues or as rvalues, depending on T
+Forwards lvalues as either lvalues or as rvalues, depending on `T`
 
-When `t` is a [forwarding reference](https://en.cppreference.com/w/cpp/language/reference#Forwarding_references) (a function argument that is declared as an rvalue reference to a cv-unqualified function template parameter), this overload forwards the argument to another function with the [value category](https://en.cppreference.com/w/cpp/language/value_category) it had when passed to the calling function.
+When `t` is a [forwarding reference](https://en.cppreference.com/w/cpp/language/reference#Forwarding_references) (a function argument that is declared as an rvalue reference to a cv-unqualified function template parameter), this overload forwards the argument to another function(结合下来的例子来说，就是 `foo` 函数) with the [value category](https://en.cppreference.com/w/cpp/language/value_category) it had when passed to the calling function.
+
+
 
 For example, if used in a wrapper such as the following, the template behaves as described below:
 
@@ -377,9 +379,82 @@ void wrapper(T&& arg) {
 
 ```
 
-- If a call to `wrapper()` passes an rvalue `std::string`, then `T` is deduced to `std::string` (not `std::string&`, `const std::string&`, or `std::string&&`), and `std::forward` ensures that an rvalue reference is passed to `foo`.
+- If a call to `wrapper()` passes an **rvalue** `std::string`, then `T` is deduced to `std::string` (not `std::string&`, `const std::string&`, or `std::string&&`), and `std::forward` ensures that an **rvalue reference** is passed to `foo`. 
+- If a call to `wrapper()` passes a **const lvalue** `std::string`, then `T` is deduced to `const std::string&`, and `std::forward` ensures that a **const lvalue reference** is passed to `foo`.
+- If a call to `wrapper()` passes a **non-const lvalue** `std::string`, then `T` is deduced to `std::string&`, and `std::forward` ensures that a **non-const lvalue reference** is passed to `foo`.
 
-  
+> NOTE: 阅读上述内容比较容易有如下疑惑: 
+>
+> Q: `std::forward`所实现的perfect forwarding指的什么? 
+>
+> A:  `std::forward` 的perfect forwarding指的是它能够保证的是传入函数`foo`中的参数的value category和传入函数`wrapper`中的参数的value category保持一致，这正是上述三条所解释的
+>
+> Q: 标题中的**lvalues**指的是什么? 它和上述三条中的 **rvalue** 、 **const lvalue** 、 **non-const lvalue** 有什么关系?
+>
+> A: 标题中的**lvalues**指的是`arg`，`arg`是**forwarding reference**，显然在函数 `wrapper` 内它是lvalue:
+>
+> - 如果它bind到lvalue，显然`arg`就是lvalue
+> - 如果它bind到rvalue，由于named rvalue reference是lvalue，所以它依然是lvalue
+>
+> Q: 上述三条给出了结论，那能否结合`std::forward`的实现代码来解释它的原理呢？
+>
+> A: `T`的具体类型是由"Special deduction rule for forwarding reference"决定的，知道了这个事实就能够理解上述三条中关于 `T` 的deduction的描述。在 thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 中给出了结合`std::forward`的实现代码的解释，但是需要解释的是这篇文章的标题"Perfect forwarding lvalue"、"Perfect forwarding rvalue"中的"lvalue"、"rvalue"指的是传入函数`wrapper`中的入参数的value category，而不是在函数`wrapper`内的`e1`、`e2`的value category: 
+>
+>
+> > ### Perfect forwarding lvalue
+> >
+> > ```c++
+> > template <typename T1, typename T2>
+> > void wrapper(T1&& e1, T2&& e2) {
+> >  func(forward<T1>(e1), forward<T2>(e2));
+> > }
+> > ```
+> >
+> > Let's say we call:
+> >
+> > ```c++
+> > int ii ...;
+> > float ff ...;
+> > wrapper(ii, ff);
+> > ```
+> >
+> > Examining the first argument (since the second is handled similarly): `ii` is an lvalue, so `T1` is deduced to `int&` following the special deduction rules. We get the call `func(forward<int&>(e1), ...)`. Therefore, `forward` is instantiated with `int&` and we get this version of it:
+> >
+> > ```c++
+> > int& && forward(int& t) noexcept {
+> >  return static_cast<int& &&>(t);
+> > }
+> > ```
+> >
+> > Now it's time to apply the **reference collapsing rule**:
+> >
+> > ```c++
+> > int& forward(int& t) noexcept {
+> >  return static_cast<int&>(t);
+> > }
+> > ```
+> >
+> > In other words, the argument is passed on by reference to `func`, as needed for lvalues.
+> >
+> > ### Perfect forwarding rvalue
+> >
+> > The other case to handle is:
+> >
+> > ```c++
+> > wrapper(42, 3.14f);
+> > ```
+> >
+> > Here the arguments are rvalues, so `T1` is deduced to `int`. We get the call `func(forward<int>(e1), ...)`. Therefore, `forward` is instantiated with `int` and we get this version of it [[3\]](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c#id7):
+> >
+> > ```c++
+> > int&& forward(int&& t) noexcept {
+> >  return static_cast<int&&>(t);
+> > }
+> > ```
+> >
+> > 
+
+
 
 > NOTE: `std::forward`的入参是lvalue，它的返回值的类型是lvalue还是rvalue，取决于`T`，这就是perfect forwarding
 
