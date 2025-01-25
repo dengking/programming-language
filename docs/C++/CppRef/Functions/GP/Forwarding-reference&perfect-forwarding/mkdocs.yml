@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Perfect-forwarding-parameter: Perfect-forwarding-parameter
+    - Perfect-forwarding-function-parameter: Perfect-forwarding-function-parameter
     - auto&&: auto&&
     
