@@ -6,6 +6,38 @@
 
 参见 `C++11-forwarding-reference` 章节。
 
+```c++
+#include <algorithm>
+#include <initializer_list>
+#include <iterator>
+#include <type_traits>
+#include <vector>  // std::vector
+
+std::vector<int> foo() { return {1, 2, 3, 4}; }
+std::vector<int> f() { return {1, 2, 3, 4}; }
+template <class T>
+int g(T&& x) {  // x is a forwarding reference
+  return 0;
+}
+
+int main() {
+  auto&& vec = foo();                   // foo() may be lvalue or rvalue, vec is a forwarding reference
+  auto i = std::begin(vec);             // works either way
+  (*i)++;                               // works either way
+  g(std::forward<decltype(vec)>(vec));  // forwards, preserving value category
+
+  for (auto&& x : f()) {
+    // x is a forwarding reference; this is the safest way to use range for loops
+  }
+
+  auto&& z = {1, 2, 3};  // *not* a forwarding reference (special case for initializer lists)
+}
+
+// g++ --std=c++11 test.cpp
+```
+
+
+
 ## stackoverflow [What does auto&& tell us?](https://stackoverflow.com/questions/13230480/what-does-auto-tell-us)
 
 

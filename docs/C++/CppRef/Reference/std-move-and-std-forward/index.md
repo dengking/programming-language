@@ -166,3 +166,5 @@ void func(my_type&& t) {
 }
 ```
 
+std::forward应该作用于forwarding reference，而上述例子却将它作用于rvalue reference。
+

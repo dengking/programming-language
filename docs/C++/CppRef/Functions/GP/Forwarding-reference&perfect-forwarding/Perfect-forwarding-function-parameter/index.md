@@ -1,4 +1,4 @@
-# C++11 forwarding reference and perfect forwarding
+# Perfect forwarding function arguments
 
 参考素材:
 
@@ -6,19 +6,11 @@ thegreenplace [Perfect forwarding and universal references in C++](https://eli.t
 
 stackoverflow [Advantages of using forward](https://stackoverflow.com/questions/3582001/advantages-of-using-forward) # [A](https://stackoverflow.com/a/3582313) 
 
+open-std jtc1 [The Forwarding Problem: Arguments](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm) 
 
 
-## Perfect forwarding function arguments内容梳理
 
-一、C++11 forwarding reference是function generic programming的基础:
-
-1、`auto&&`解决的是函数的返回值
-
-2、`template &&`解决的函数的参数
-
-二、forwarding是和value category相关的。
-
-
+## 内容梳理
 
 ### What is perfect forwarding function arguments
 
@@ -28,7 +20,9 @@ stackoverflow [Advantages of using forward](https://stackoverflow.com/questions/
 
   > Why is this useful? Because combined we maintain the ability to keep track of the value category of a type: if it was an **lvalue**, we have an **lvalue-reference parameter**, otherwise we have an **rvalue-reference parameter**.
 
-- open-std jtc1 [The Forwarding Problem: Arguments](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm)
+- open-std jtc1 [The Forwarding Problem: Arguments](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm) 
+
+
 
 ### Pre C++11 perfect forwarding function arguments的困难
 
@@ -93,30 +87,53 @@ void wrapper(const T1& e1, const T2& e2)    { func(e1, e2); }
 
 显然，对于这种困难，需要在语言层面进行解决，这是下部分的内容。
 
+
+
 ### C++11 perfect forwarding function arguments的实现
 
 C++11在语言层面对perfect forwarding进行实现，它主要依赖于如下两个方面：
 
-| C++11新特性                                        | application                      |
-| -------------------------------------------------- | -------------------------------- |
-| Reference collapsing(折叠) rule                    | 主要用于实现`std::forward`       |
-| Special type deduction rules for rvalue references | 主要用于实现forwarding reference |
+- Reference collapsing(折叠) rule
+- Special type deduction rules for rvalue references
+- forwarding reference
 
-上述两者，在文章thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 的"Reference collapsing and special type deduction for rvalues"中进行了总结；
+在下面文章中对上述两者进行了解释:
 
-实现perfect forwarding: perfect forwarding = forwarding reference + `std::forward`；
+- thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c) 的"Reference collapsing and special type deduction for rvalues"章节
 
 
+
+### 总结
+
+- perfect forwarding的实现 = reference collapsing(折叠) rule + forwarding reference + special type deduction rules for forwarding references + `std::forward`；
+
+- 只能够perfect forwarding "forwarding reference"，这段话是"cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) # Forwarding references (since C++11)"的例子中给出的:
+
+  ```c++
+  template<class T>
+  int f(T&& x)                      // x is a forwarding reference
+  {
+      return g(std::forward<T>(x)); // and so can be forwarded
+  }
+  ```
 
 
 
 ## cppreference [Reference declaration](https://en.cppreference.com/w/cpp/language/reference) # Forwarding references (since C++11)
 
-**Forwarding references** are a special kind of references that preserve the **value category** of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). Forwarding references are either:
+**Forwarding references** are a special kind of references that preserve the **value category** of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). 
+
+> NOTE: 通过后面的例子可知: forwarding reference能够按照function argument的value category来准确的生成reference，简而言之: **forwarding reference**既可以bind to lvalue也可以bind to rvalue同时保持CV-qualification
+
+**Forwarding references** are either:
 
 ### 1)
 
 function parameter of a function template declared as **rvalue reference** to **cv-unqualified** [type template parameter](https://en.cppreference.com/w/cpp/language/template_parameters) of that same function template:
+
+
+
+#### Example
 
 ```c++
 #include <utility> // std::forward
@@ -144,8 +161,6 @@ int main() {
     f(0); // argument is rvalue, calls f<int>(int&&), std::forward<int>(x) is rvalue
 }
 
-
-
 // g++ --std=c++11 test.cpp
 
 /**
@@ -153,11 +168,14 @@ int main() {
 int g(const T&) [with T = int]  100
 int g(const T&&) [with T = int]  0
 **/
+
 ```
 
 > NOTE: 从上述程序的输出可以看出: 函数 `f` 内部调用函数 `g`，入参数是通过 `std::forward<T>(x)` 实现的，它实现了"preserve value category"
 
 
+
+#### Example
 
 ```c++
 template<class T> struct A {
@@ -200,7 +218,8 @@ template<class T> struct A {
 > }
 > ```
 >
-> 
+
+
 
 ##### cppreference [Template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction) 
 
@@ -240,7 +259,9 @@ int f(T &&) [T = int]
 **/
 ```
 
-##### CV的例子
+
+
+#### Example: CV-qualified的例子
 
 下面是补充说明的另外一个例子:
 
@@ -272,64 +293,23 @@ stackoverflow [Is this a forwarding reference?](https://stackoverflow.com/questi
 > **/
 > ```
 
-上述例子中，`t`就是所谓的**forwarding reference**，通过上述例子可以看出，`t`既可以bind to lvalue，也可以bind to rvalue，通过上述例子可以看出，**forwarding reference**的实现是有赖于前面提到的:
+
+
+#### 总结
+
+通过上述例子可以看出 **forwarding reference**既可以bind to lvalue也可以bind to rvalue同时保持CV-qualification，通过上述例子可以看出，**forwarding reference**的实现是有赖于前面提到的:
 
 - reference collapsing rule
 
 - special type deduction rules for rvalue references 
 
-这就是在**内容梳理**中总结的：
-
-> forwarding reference = reference collapsing rule + special type deduction rules for rvalue references；
-
 
 
 ### 2)
 
-`auto&&` except when deduced from a brace-enclosed initializer list:
+这部分内容放到了 `auto&&` 章节。
 
-```c++
-#include <algorithm>
-#include <initializer_list>
-#include <iterator>
-#include <type_traits>
-#include <vector> // std::vector
 
-std::vector<int> foo()
-{
-	return
-	{	1,2,3,4};
-}
-std::vector<int> f()
-{
-	return
-	{	1,2,3,4};
-}
-template<class T>
-int g(T&& x)
-{                    // x is a forwarding reference
-	return 0;
-}
-
-int main()
-{
-	auto&& vec = foo();       // foo() may be lvalue or rvalue, vec is a forwarding reference
-	auto i = std::begin(vec); // works either way
-	(*i)++;                   // works either way
-	g(std::forward<decltype(vec)>(vec)); // forwards, preserving value category
-
-	for (auto&& x : f())
-	{
-		// x is a forwarding reference; this is the safest way to use range for loops
-	}
-
-	auto&& z = { 1, 2, 3 }; // *not* a forwarding reference (special case for initializer lists)
-}
-
-// g++ --std=c++11 test.cpp
-```
-
-See also [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction#Deduction_from_a_function_call) and [std::forward](https://en.cppreference.com/w/cpp/utility/forward).
 
 ## Forwarding reference=universal reference
 
@@ -337,67 +317,69 @@ forwarding reference既可以reference **lvalue**又可以reference **rvalue**�
 
 
 
-## Perfect forwarding function arguments 
-
-Perfect forwarding = reference collapsing rule( `std::forward` 的实现有赖于此) + special type deduction rules for forwarding references
-
-
-
-### Examples
-
-#### 一般形式
-
-stackoverflow [What are the main purposes of using std::forward and which problems it solves?](https://stackoverflow.com/questions/3582001/what-are-the-main-purposes-of-using-stdforward-and-which-problems-it-solves)
-
-```cpp
-template <typename T1, typename T2>
-void outer(T1&& t1, T2&& t2) 
-{
-    inner(std::forward<T1>(t1), std::forward<T2>(t2));
-}
-```
-
-cpppatterns [Perfect forwarding](https://cpppatterns.com/patterns/perfect-forwarding.html)
-
-```c++
-#include <iostream>
-#include <utility>
-
-template <typename T, typename U>
-std::pair<T, U> make_pair_wrapper(T&& t, U&& u) {
-  return std::make_pair(std::forward<T>(t), std::forward<U>(u));
-}
-
-int main() {
-  auto p = make_pair_wrapper(1, 2);
-  std::cout << p.first << " " << p.second << std::endl;
-}
-// g++ --std=c++11  test.cpp
-```
-
-
-
-#### [variadic templates](http://eli.thegreenplace.net/2014/variadic-templates-in-c/) and perfect forwarding 
-
-
-
-- `emplace_back`，在thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)中，将它作为引言
-- [`std::make_unique`](http://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique)
-- [`std::make_shared`](http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared) 
-
-
-
-
-
-# std::forward
+## std::forward
 
 在 [Reference declaration](https://en.cppreference.com/w/cpp/language/reference#Reference_collapsing) # [Reference collapsing](https://en.cppreference.com/w/cpp/language/reference#Reference_collapsing) 中有这样的介绍:
 
 > (This(指的是 [Reference collapsing](https://en.cppreference.com/w/cpp/language/reference#Reference_collapsing) ), along with special rules for [template argument deduction](https://en.cppreference.com/w/cpp/language/template_argument_deduction) when `T&&` is used in a function template, forms the rules that make [std::forward](https://en.cppreference.com/w/cpp/utility/forward) possible.)
 
-## cppreference [`std::forward`](https://en.cppreference.com/w/cpp/utility/forward) 
 
-1) Forwards lvalues as either lvalues or as rvalues, depending on T
+
+### cppreference [`std::forward`](https://en.cppreference.com/w/cpp/utility/forward) 
+
+C++11
+
+```c++
+#include <type_traits>
+template <class T>
+T&& forward(typename std::remove_reference<T>::type& t) noexcept;
+
+template <class T>
+T&& forward(typename std::remove_reference<T>::type&& t) noexcept;
+```
+
+C++14
+
+```C++
+#include <type_traits>
+template <class T>
+constexpr T&& forward(std::remove_reference_t<T>& t) noexcept;
+
+template <class T>
+constexpr T&& forward(std::remove_reference_t<T>&& t) noexcept;
+```
+
+
+
+#### 1 forward lvalues
+
+```c++
+template <class T>
+T&& forward(typename std::remove_reference<T>::type& t) noexcept;
+
+template <class T>
+constexpr T&& forward(std::remove_reference_t<T>& t) noexcept;
+```
+
+Forwards lvalues as either lvalues or as rvalues, depending on T
+
+When `t` is a [forwarding reference](https://en.cppreference.com/w/cpp/language/reference#Forwarding_references) (a function argument that is declared as an rvalue reference to a cv-unqualified function template parameter), this overload forwards the argument to another function with the [value category](https://en.cppreference.com/w/cpp/language/value_category) it had when passed to the calling function.
+
+For example, if used in a wrapper such as the following, the template behaves as described below:
+
+```c++
+#include <utility>
+template <class T>
+void wrapper(T&& arg) {
+  // arg is always lvalue
+  foo(std::forward<T>(arg));  // Forward as lvalue or as rvalue, depending on T
+}
+
+```
+
+- If a call to `wrapper()` passes an rvalue `std::string`, then `T` is deduced to `std::string` (not `std::string&`, `const std::string&`, or `std::string&&`), and `std::forward` ensures that an rvalue reference is passed to `foo`.
+
+  
 
 > NOTE: `std::forward`的入参是lvalue，它的返回值的类型是lvalue还是rvalue，取决于`T`，这就是perfect forwarding
 
@@ -462,9 +444,9 @@ int main()
 >
 > 
 
+#### 2 Forward rvalues 
 
-
-2) Forwards rvalues as rvalues and prohibits forwarding of rvalues as lvalues
+Forwards rvalues as rvalues and prohibits forwarding of rvalues as lvalues
 
 This overload makes it possible to forward a **result** of an expression (such as function call), which may be rvalue or lvalue, as the original value category of a forwarding reference argument.
 
@@ -529,7 +511,7 @@ int main()
 
 
 
-### Example
+#### Example
 
 ```c++
 #include <iostream>
@@ -602,7 +584,7 @@ int main()
 >
 > 
 
-## Implementation
+### Implementation
 
 ### libstdc++
 
@@ -671,8 +653,57 @@ Some non-obvious properties of `std::forward` are that the return value can be m
 
 
 
-## `std::forward` does not **forward**
+### `std::forward` does not **forward**
 
 在bajamircea [C++ std::move and std::forward](http://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)中，有这样的描述：
 
 > C++ `std::move` does not **move** and `std::forward` does not **forward**.
+
+
+
+
+
+## Examples
+
+#### 一般形式
+
+stackoverflow [What are the main purposes of using std::forward and which problems it solves?](https://stackoverflow.com/questions/3582001/what-are-the-main-purposes-of-using-stdforward-and-which-problems-it-solves)
+
+```cpp
+template <typename T1, typename T2>
+void outer(T1&& t1, T2&& t2) 
+{
+    inner(std::forward<T1>(t1), std::forward<T2>(t2));
+}
+```
+
+cpppatterns [Perfect forwarding](https://cpppatterns.com/patterns/perfect-forwarding.html)
+
+```c++
+#include <iostream>
+#include <utility>
+
+template <typename T, typename U>
+std::pair<T, U> make_pair_wrapper(T&& t, U&& u) {
+  return std::make_pair(std::forward<T>(t), std::forward<U>(u));
+}
+
+int main() {
+  auto p = make_pair_wrapper(1, 2);
+  std::cout << p.first << " " << p.second << std::endl;
+}
+// g++ --std=c++11  test.cpp
+```
+
+
+
+#### [variadic templates](http://eli.thegreenplace.net/2014/variadic-templates-in-c/) and perfect forwarding 
+
+
+
+- `emplace_back`，在thegreenplace [Perfect forwarding and universal references in C++](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)中，将它作为引言
+- [`std::make_unique`](http://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique)
+- [`std::make_shared`](http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared) 
+
+
+
