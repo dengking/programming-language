@@ -622,37 +622,6 @@ rref&& r4 = 1; // type of r4 is int&&
 
 **Forwarding references** are a special kind of references that preserve the value category of a function argument, making it possible to *forward* it by means of [std::forward](https://en.cppreference.com/w/cpp/utility/forward). Forwarding references are either:
 
-1 function parameter of a function template declared as rvalue reference to cv-unqualified [type template parameter](https://en.cppreference.com/w/cpp/language/template_parameters#Type_template_parameter) of that same function template:
-
-```c++
-#include <utility>
-
-template<class T>
-int g(const T &&x); // x is not a forwarding reference: const T is not cv-unqualified
-
-template<class T>
-int f(T &&x)                      // x is a forwarding reference
-{
-    return g(std::forward<T>(x)); // and so can be forwarded
-}
-
-int main() {
-    int i;
-    f(i); // argument is lvalue, calls f<int&>(int&), std::forward<int&>(x) is lvalue
-    f(0); // argument is rvalue, calls f<int>(int&&), std::forward<int>(x) is rvalue
-}
-
-
-template<class T>
-struct A {
-    template<class U>
-    A(T &&x, U &&y, int *p); // x is not a forwarding reference: T is not a
-    // type template parameter of the constructor,
-    // but y is a forwarding reference
-};
-
-```
-
 
 
 ### Dangling references

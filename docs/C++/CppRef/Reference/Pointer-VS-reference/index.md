@@ -150,8 +150,6 @@ RAII is one of the central concepts of C++, but it interacts non-trivially with 
 
 
 
-
-
 ## [LeetBook C++ 面试突击](https://leetcode-cn.com/leetbook/detail/cpp-interview-highlights/) # 指针和引用的区别？
 
 1、指针所指向的内存空间在程序运行过程中可以改变，而引用所绑定的对象一旦绑定就不能改变。（是否可变）
