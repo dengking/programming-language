@@ -1,4 +1,6 @@
 nav:
     - Introduction: index.md
     - JProfiler: JProfiler
+    - arthas: arthas
+    
     
