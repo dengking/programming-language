@@ -16,58 +16,68 @@
 
 The compiler is allowed to make one implicit conversion to resolve the parameters to a function. What this means is that the compiler can use constructors callable with a **single parameter** to convert from one type to another in order to get the right type for a parameter.
 
-Here's an example class with a constructor that can be used for implicit conversions:
+Here's an example with ***converting constructors*** that shows how it works:
 
 ```C++
 #include <iostream>
 
-class Foo
-{
-public:
-	// single parameter constructor, can be used as an implicit conversion
-	Foo(int foo)
-			: m_foo(foo)
-	{
-	}
+class Foo {
+  public:
+    // single parameter constructor, can be used as an implicit conversion
+    Foo(int foo) : m_foo(foo) { std::cout << __PRETTY_FUNCTION__ << std::endl; }
 
-	int GetFoo()
-	{
-		return m_foo;
-	}
+    int GetFoo() { return m_foo; }
 
-private:
-	int m_foo;
+  private:
+    int m_foo;
 };
 
-void DoBar(Foo foo)
-{
-	int i = foo.GetFoo();
-	std::cout << i << std::endl;
+void DoBar(Foo foo) {
+  int i = foo.GetFoo();
+  std::cout << i << std::endl;
 }
-int main()
-{
-	DoBar(42);
-}
+int main() { DoBar(42); }
 // g++ --std=c++11 test.cpp
+
+/**
+输出如下:
+Foo::Foo(int)
+42
+**/
 ```
 
-> NOTE:  
+> NOTE: 上述是典型的 implicit conversion + copy initialization + converting constructor 
 >
-> 1、输出如下：
->
-> ```
-> 42
-> ```
->
-> 2、上述是典型的 implicit conversion + copy initialization + converting constructor 
 
-The argument is not a `Foo` object, but an `int`. However, there exists a constructor for `Foo` that takes an `int` so this constructor can be used to convert the parameter to the correct type.
+```c++
+#include <iostream>
+struct Foo {
+    // Single parameter constructor, can be used as an implicit conversion.
+    // Such a constructor is called "converting constructor".
+    Foo(int x) { std::cout << __PRETTY_FUNCTION__ << std::endl; }
+};
+struct Faz {
+    // Also a converting constructor.
+    Faz(Foo foo) { std::cout << __PRETTY_FUNCTION__ << std::endl; }
+};
 
-The compiler is allowed to do this once for each parameter.
+// The parameter is of type Foo, not of type int, so it looks like
+// we have to pass a Foo.
+void bar(Foo foo){};
 
-Prefixing the `explicit` keyword to the constructor prevents the compiler from using that constructor for implicit conversions. Adding it to the above class will create a compiler error at the function call `DoBar (42)`. It is now necessary to call for conversion explicitly with `DoBar (Foo (42))`
+int main() {
+  // However, the converting constructor allows us to pass an int.
+  bar(42);
+  // Also allowed thanks to the converting constructor.
+  Foo foo = 42;
+  // Error! This would require two conversions (int -> Foo -> Faz).
+  // Faz faz = 42;
+}
+```
 
-The reason you might want to do this is to avoid accidental construction that can hide bugs. Contrived example:
+Prefixing the `explicit` keyword to the constructor prevents the compiler from using that constructor for **implicit conversions**. Adding it to the above class will create a compiler error at the function call `DoBar (42)`. It is now necessary to call for conversion explicitly with `DoBar (Foo (42))`. 
+
+The reason you might want to do this is to avoid accidental construction that can hide bugs. Contrived example(特定的例子):
 
 1、You have a `MyString(int size)` class with a constructor that constructs a string of the given size. You have a function `print(const MyString&)`, and you call `print(3)` (when you *actually* intended to call `print("3")`). You expect it to print "3", but it prints an empty string of length 3 instead.
 
@@ -76,74 +86,53 @@ The reason you might want to do this is to avoid accidental construction that ca
 ```c++
 #include <iostream>
 
-class Foo
-{
-public:
-	// single parameter constructor, can be used as an implicit conversion
-	explicit Foo(int foo)
-			: m_foo(foo)
-	{
-	}
+class Foo {
+  public:
+    // single parameter constructor, can be used as an implicit conversion
+    explicit Foo(int foo) : m_foo(foo) {}
 
-	int GetFoo()
-	{
-		return m_foo;
-	}
+    int GetFoo() { return m_foo; }
 
-private:
-	int m_foo;
+  private:
+    int m_foo;
 };
 
-void DoBar(Foo foo)
-{
-	int i = foo.GetFoo();
-	std::cout << i << std::endl;
+void DoBar(Foo foo) {
+  int i = foo.GetFoo();
+  std::cout << i << std::endl;
 }
-int main()
-{
-	DoBar( { 42 });
-}
+int main() { DoBar({42}); }
 // g++ --std=c++11 test.cpp
+
+/**
+编译报错如下:
+test.cpp: 在函数‘int main()’中:
+test.cpp:28:15: 错误：从初始化列表转换为‘Foo’将使用显式构造函数‘Foo::Foo(int)’
+DoBar( { 42 });
+**/
 ```
 
-> NOTE: 编译报错如下：
->
-> ```c++
-> test.cpp: 在函数‘int main()’中:
-> test.cpp:28:15: 错误：从初始化列表转换为‘Foo’将使用显式构造函数‘Foo::Foo(int)’
-> DoBar( { 42 });
-> ```
+
 
 ```c++
 #include <iostream>
 
-class Foo
-{
-public:
-	// single parameter constructor, can be used as an implicit conversion
-	explicit Foo(int foo)
-			: m_foo(foo)
-	{
-	}
+class Foo {
+  public:
+    // single parameter constructor, can be used as an implicit conversion
+    explicit Foo(int foo) : m_foo(foo) {}
 
-	int GetFoo()
-	{
-		return m_foo;
-	}
+    int GetFoo() { return m_foo; }
 
-private:
-	int m_foo;
+  private:
+    int m_foo;
 };
 
-void DoBar(Foo foo)
-{
-	int i = foo.GetFoo();
-	std::cout << i << std::endl;
+void DoBar(Foo foo) {
+  int i = foo.GetFoo();
+  std::cout << i << std::endl;
 }
-int main()
-{
-	DoBar(Foo { 42 });
-}
+int main() { DoBar(Foo{42}); }
 
 ```
 
