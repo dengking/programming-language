@@ -1,0 +1,7 @@
+nav:
+    - Introduction: index.md
+    - Monitoring-and-Management-Guide: Monitoring-and-Management-Guide
+    - Troubleshooting-Guide: Troubleshooting-Guide
+    - JDK-Mission-Control(JMC): JDK-Mission-Control(JMC)
+    - Java-Management-Extensions: Java-Management-Extensions
+    

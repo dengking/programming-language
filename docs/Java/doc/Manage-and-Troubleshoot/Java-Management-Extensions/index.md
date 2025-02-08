@@ -67,3 +67,7 @@ Enabling JMX (Java Management Extensions) for a Java Virtual Machine (JVM) allow
    Once JMX is enabled and properly configured, you can connect to the JVM using tools like JConsole, VisualVM, or any other JMX-compliant tool. You'll need to provide the hostname (or IP address) and the JMX port to establish the connection.
 
 Remember that exposing JMX without proper security measures can be a significant security risk, as it could allow unauthorized access to your application's internals. Always secure your JMX connections, especially when running in production environments.
+
+
+
+## [Java Management Extensions Guide](https://docs.oracle.com/en/java/javase/11/jmx/introduction-jmx-technology.html)

@@ -1,0 +1,1 @@
+# [Oracle JDK Mission Control and Java Flight Recorder: Advanced Java Diagnostics and Monitoring without Performance Overhead](https://www.oracle.com/docs/tech/java/java-mission-control-technical-brief.pdf) (White Paper)

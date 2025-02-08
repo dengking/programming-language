@@ -1,5 +1,4 @@
 nav:
     - Introduction: index.md
-    - GC: GC
-    - Bytecode: Bytecode
+    - LMAX-Disruptor: LMAX-Disruptor
     
