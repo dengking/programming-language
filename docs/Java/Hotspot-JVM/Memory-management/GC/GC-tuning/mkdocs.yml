@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - HotSpot-Virtual-Machine-Garbage-Collection-Tuning-Guide: HotSpot-Virtual-Machine-Garbage-Collection-Tuning-Guide
     

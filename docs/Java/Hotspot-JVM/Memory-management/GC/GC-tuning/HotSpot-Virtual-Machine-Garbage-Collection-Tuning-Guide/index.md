@@ -1,0 +1,7 @@
+# [HotSpot Virtual Machine Garbage Collection Tuning Guide](https://docs.oracle.com/en/java/javase/11/gctuning/introduction-garbage-collection-tuning.html)
+
+## [1 Introduction to Garbage Collection Tuning](https://docs.oracle.com/en/java/javase/11/gctuning/introduction-garbage-collection-tuning.html#GUID-326EB4CF-8C8C-4267-8355-21AB04F0D304)
+
+A wide variety of applications, from small applets on desktops to web services on large servers, use the Java Platform, Standard Edition (Java SE). In support of this diverse range of deployments, the Java HotSpot VM provides multiple **garbage collectors**, each designed to satisfy different requirements. Java SE selects the most appropriate **garbage collector** based on the class of the computer on which the application is run. However, this selection may not be optimal for every application. Users, developers, and administrators with strict performance goals or other requirements may need to explicitly select the **garbage collector** and tune certain parameters to achieve the desired level of performance. This document provides information to help with these tasks.
+
+First, general features of a **garbage collector** and basic tuning options are described in the context of the serial, stop-the-world collector. Then specific features of the other collectors are presented along with factors to consider when selecting a collector.
