@@ -331,4 +331,3 @@ G1 GC is particularly well-suited for applications that require large heaps with
 
 As with any garbage collector, the best way to determine if G1 GC is suitable for a particular application is through thorough testing and performance tuning.
 
-
