@@ -51,3 +51,10 @@ There are also various plug-ins available, such as:
 
 
 
+
+
+## Example
+
+[baeldung Monitoring Java Applications with Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring)
+
+[juejin Java性能优化（二）——JFR（Java Flight Recorder）使用教程](https://juejin.cn/post/6959405798556434440)

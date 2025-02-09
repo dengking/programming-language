@@ -11,3 +11,7 @@
 [baeldung What Is a TLAB or Thread-Local Allocation Buffer in Java?](https://www.baeldung.com/java-jvm-tlab)
 
 [juejin 全网最硬核 JVM TLAB 分析（单篇版不包含额外加菜）｜牛气冲天新年征文](https://juejin.cn/post/6925217498723778568)
+
+[juejin 全网最硬核 JVM TLAB 分析(额外加菜) 8. 通过 JFR 监控 TLAB](https://juejin.cn/post/6925218412893306894)
+
+[juejin 通过 JFR 与日志深入探索 JVM - TLAB 原理详解](https://juejin.cn/post/6921147623713800206?searchId=202502081115080952EE3C5DE6B77465C5)
