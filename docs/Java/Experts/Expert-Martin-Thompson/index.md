@@ -32,6 +32,10 @@ When you understand how a system is designed to be used, you can align with the 
 
 Resources: [The LMAX Architecture and Mechanical Sympathy](https://martinfowler.com/articles/lmax.html?ref=wellarchitected#QueuesAndTheirLackOfMechanicalSympathy)
 
+
+
+
+
 ## Posts
 
 [infoq Evolution of Financial Exchange Architectures](https://www.infoq.com/presentations/financial-exchange-architecture/)
