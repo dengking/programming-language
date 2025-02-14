@@ -8,9 +8,8 @@ Flight Recorder: 飞行记录仪
 
 这个系列对JFR讲解得较深入
 
-
-
 ## wikipedia [JDK Flight Recorder](https://en.wikipedia.org/wiki/JDK_Flight_Recorder)
 
 Analysis and visualization of flight recordings are normally done using [JDK Mission Control](https://en.wikipedia.org/wiki/JDK_Mission_Control).
+
 

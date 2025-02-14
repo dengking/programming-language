@@ -2,7 +2,7 @@
 
 [wikipedia Application performance management](https://en.wikipedia.org/wiki/Application_performance_management)
 
-[juejin【JVM】Java agent超详细知识梳理](https://juejin.cn/post/7157684112122183693)
+[juejin【JVM】Java agent超详细知识梳理](https://juejin.cn/post/7157684112122183693) 
 
 [oracle-The JVM Tool Interface (JVM TI): How VM Agents Work](https://www.oracle.com/technical-resources/articles/javase/jvm-tool-interface.html) 
 
@@ -14,6 +14,8 @@ Java Agent探针技术介绍
 
 ## 实现方式
 
+
+
 ### Agent library based on [JVMTI](https://docs.oracle.com/en/java/javase/23/docs/specs/jvmti.html)
 
 TODO:
@@ -22,7 +24,7 @@ agent library的说法是源自 [oracle-The JVM Tool Interface (JVM TI): How VM 
 
 ### [Instrument API](https://docs.oracle.com/en/java/javase/23/docs/api/java.instrument/module-summary.html)
 
- 
+
 
 ## 加载agent时机/方式
 
@@ -33,6 +35,8 @@ agent library的说法是源自 [oracle-The JVM Tool Interface (JVM TI): How VM 
 - [jolokia JVM Agent](https://jolokia.org/reference/html/manual/agents/jvm.html)
 
 - ......
+
+ 
 
 ### 静态加载/JVM启动时
 
