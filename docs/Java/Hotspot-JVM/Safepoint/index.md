@@ -102,8 +102,6 @@ Below are few reasons for HotSpot JVM to initiate a safepoint:
 
 ### SafePoint 如何实现的？
 
-
-
 ## deepseek R1
 
 思考过程：
@@ -204,7 +202,9 @@ Safe point，中文通常翻译为“安全点”，是JVM中一个重要的概�
   -XX:+UseCountedLoopSafepoints   # 在计数循环中插入安全点
   -XX:GuaranteedSafepointInterval=1000  # 强制每N毫秒进入安全点（默认无限制）
   ```
+
 - **代码优化**：
+  
   - 避免无安全点的长循环（如循环体内调用空方法强制插入安全点）。
   - 使用`-XX:+PrintSafepointStatistics`分析安全点日志。
 
