@@ -8,6 +8,4 @@
 
 ### [Papers and Presentations](https://sean-parent.stlab.cc/papers-and-presentations/)
 
-
-
 ## github [Sean Parent](https://github.com/sean-parent)
