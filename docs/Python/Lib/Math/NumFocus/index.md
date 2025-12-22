@@ -1,2 +1,0 @@
-# [numfocus](https://numfocus.org/)
-

@@ -1,7 +1,0 @@
-nav:
-    - Introduction: index.md
-    - numpy: numpy
-    - scikit-learn: scikit-learn
-    - matplotlib: matplotlib
-    - scipy: scipy
-        
