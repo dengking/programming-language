@@ -110,3 +110,4 @@ build
 *.dll
 .DS_Store
 *.pdf
+/docs/Python/Lib/Math/PyMathProject/.idea
